@@ -74,8 +74,6 @@ public:
     int LowEconomy = 0;
 };
 
-
-
 void FixAreaExits(std::shared_ptr<Area> tarea);
 void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filename);
 void SortArea(std::shared_ptr<Area> pArea, bool proto);

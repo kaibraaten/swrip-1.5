@@ -17,7 +17,7 @@ void do_aassign(Character *ch, std::string argument)
 
     if (argument.empty())
     {
-        ch->Echo("Syntax: aassign <filename.are>\r\n");
+        ch->Echo("Syntax: aassign <filename.lua>\r\n");
         return;
     }
 

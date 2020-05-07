@@ -1,199 +1,203 @@
 -- kashyyyk
--- Last saved Wednesday 06-May-2020 12:59:10
+-- Last saved Thursday 07-May-2020 14:47:57
 
 AreaEntry
 {
-   Filename = "kashyyyk.lua", 
    Rooms = 
    {
       [28672] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28672, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28671, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28672, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28671, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28673] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28673, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28671, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28673, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "northwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28671, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28674] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28674, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28675, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28676, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28677, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28674, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28675, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28676, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28677, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28675] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28675, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28674, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28675, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28674, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28676] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28676, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28674, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28676, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-      }, 
-      [28677] = 
-      {
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28677, 
-         Sector = "city", 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28674, 
+               Direction = "west", 
                Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28674, 
                Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
+      }, 
+      [28677] = 
+      {
+         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28677, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
                Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28674, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
+               Keyword = "crack", 
+               Direction = "somewhere", 
+               Description = "", 
                Flags = 
                {
                   [16] = "CanClimb", 
@@ -201,547 +205,579 @@ AreaEntry
                   [11] = "Hidden", 
                   [7] = "Climb", 
                }, 
-               Keyword = "crack", 
+               Distance = 0, 
                DestinationVnum = 28678, 
-               Description = "", 
                Key = -1, 
-               Direction = "somewhere", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28678] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28678, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28678, 
-         Sector = "city", 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
                Flags = 
                {
                   [16] = "CanClimb", 
                   [7] = "Climb", 
                }, 
-               Keyword = "", 
+               Distance = 0, 
                DestinationVnum = 28652, 
-               Description = "", 
                Key = -1, 
-               Direction = "up", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28679] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28679, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28679, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28680] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28680, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28680, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28681] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28681, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28681, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28682] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28682, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28682, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28683] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28683, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28683, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28684] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28684, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28684, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28685] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28685, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28685, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28686] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28686, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28686, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28687] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28687, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28687, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28688] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28688, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28688, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28689] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28689, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28689, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28690] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28690, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28690, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28691] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28691, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28691, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28692] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28692, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28692, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28693] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28693, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28693, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28694] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28694, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28694, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28695] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28695, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28695, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28696] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28696, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28696, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28697] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28697, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28697, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28698] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28698, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28698, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28699] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28699, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28699, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28600] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Northern Nursery Ring", 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "You are in the northernmost side of Rwookrrorro's nursery ring.  This is\
 where  all young Wookiees start thier lives.  Baby Wookiee's are being\
 nursed here and slightly larger Wookiee children are sleeping here. You\
 also here soothing music being played over an intercom. \
 ", 
          Vnum = 28600, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28601, 
+               Key = -1, 
+            }, 
+         }, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
-               MudProgType = "rand_prog", 
                Code = "mpechoat $n The music soothes you into a light slumber.\
 mpforce $n sleep\
 mpdream $n You dream of little sheep hopping fences, awwwww!\
 feel cure critical $n\
 ", 
+               MudProgType = "rand_prog", 
+               Arguments = "100", 
             }, 
          }, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28601, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Name = "Northern Nursery Ring", 
       }, 
       [28601] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28601, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Central Nursery Ring", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28600, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28602, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28608, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "You are standing in the central nursery ring.  This is where Wookiee\
 toddlers are allowed to stumble around.  The floors and walls are padded\
 to prevent injury.  Elderly Wookiee ladies are here to comfort the\
@@ -750,89 +786,51 @@ branches which have been bolted into the floor to allow young Wookiees to\
 test their climbing ability.  Younger Wookiees rest to the North and Older\
 ones perfect their climbing to the South.\
 ", 
-         Vnum = 28601, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28600, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28602, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28608, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Name = "Central Nursery Ring", 
       }, 
       [28602] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Southern Nursery Ring", 
-         TeleVnum = 0, 
-         Vnum = 28602, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28602, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28601, 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28601, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28604, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28604, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Distance = 0, 
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
                Flags = 
                {
                   [16] = "CanClimb", 
                }, 
-               Keyword = "", 
+               Distance = 0, 
                DestinationVnum = 28603, 
-               Description = "", 
                Key = -1, 
-               Direction = "up", 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "You are standing in the southernmost nursery ring where Wookiee children\
 are perfecting their climbing skills.  All around you, small Wookiees are\
@@ -842,34 +840,34 @@ should they fall. You can Climb up with the Wookiee children, you can go\
 north the the toddler's area, or you can go South to a lift which will\
 take you to Rwookrrorro's lower  levels.\
 ", 
+         Name = "Southern Nursery Ring", 
       }, 
       [28603] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Upper level of the Nursery Climbing Area", 
-         TeleVnum = 0, 
-         Vnum = 28603, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28603, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
                Flags = 
                {
                   [16] = "CanClimb", 
                   [7] = "Climb", 
                }, 
-               Keyword = "", 
+               Distance = 0, 
                DestinationVnum = 28602, 
-               Description = "", 
                Key = -1, 
-               Direction = "down", 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "You are holding tightly to a high branch above the nursery ring's climbing\
 practice area.  All around you Wookiee children hang from branches, well\
@@ -877,175 +875,175 @@ most of them hang, a few have already fallen and had to be caught by the\
 strong Wookiees standing below.  You just hope you have the strength to\
 keep yourself  up.  The only exit is down, to the lower practice area.\
 ", 
+         Name = "Upper level of the Nursery Climbing Area", 
       }, 
       [28604] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28604, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Litfcar", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28602, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28605, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "You are in a liftcar at the top level of Rwookrrorro.  This level is\
 dedicated to the nursery rings where young Wookiees are nursed and live\
 until they can  climb and walk well enough to get around the city\
 themselves.  You can exit to  the nursery rings to the north or you can\
 ride the lift down.\
 ", 
-         Vnum = 28604, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28602, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28605, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Name = "Litfcar", 
       }, 
       [28605] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Liftcar", 
-         TeleVnum = 0, 
-         Vnum = 28605, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28605, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28610, 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28610, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28604, 
-               Description = "", 
-               Key = -1, 
                Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28604, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28606, 
-               Description = "", 
-               Key = -1, 
                Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28606, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "You are in a liftcar at the middle level of Rwookrrorro.  This level is\
 primarily residential.  As you look out of the lift you can see many doors\
 carved into the main city's wroshyr tree to the west.  You can go North to\
 the residential area or ride the liftcar up or down.\
 ", 
+         Name = "Liftcar", 
       }, 
       [28606] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Liftcar", 
-         TeleVnum = 0, 
-         Vnum = 28606, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28606, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28611, 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28611, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28605, 
-               Description = "", 
-               Key = -1, 
                Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28605, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28607, 
-               Description = "", 
-               Key = -1, 
                Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28607, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "You are in a liftcar at the lowest level of the city of Rwookrrorro.  This\
 level has a large commercial area as well as a residential area and access\
 to the landing pad.  You can exit the liftcar to the east or you can ride\
 the liftcar up or down. \
 ", 
+         Name = "Liftcar", 
       }, 
       [28607] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Liftcar", 
-         TeleVnum = 0, 
-         Vnum = 28607, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28607, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28638, 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28638, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28606, 
-               Description = "", 
-               Key = -1, 
                Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28606, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "You are in a liftcar below the lowest level of Rwookrrorro.  From here you\
 have an amazing view, well two amazing views really.  One below you, into\
@@ -1056,38 +1054,38 @@ spiderweb like patterns  because of their unique bonding properties, when\
 two branches meet, they bond and send out more branches in new directions.\
  You can only ride the liftcar up.\
 ", 
+         Name = "Liftcar", 
       }, 
       [28608] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The \"Corner\"", 
-         TeleVnum = 0, 
-         Vnum = 28608, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28608, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28601, 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28601, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28609, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28609, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "You are standing in the naughty children's corner.  Have you been\
 naughty?? Bad little Wookiee children stand here facing the wall.\
@@ -1097,29 +1095,29 @@ wall with his claw: it says,\"There once was a man from Corellia.\" The rest\
 is too scuffed up to read.  From here you can go east to the Middle Nursery\
 ring or south to the classroom.\
 ", 
+         Name = "The \"Corner\"", 
       }, 
       [28609] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Classroom", 
-         TeleVnum = 0, 
-         Vnum = 28609, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28609, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28608, 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28608, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "You stand in the middle of a room filled with chairs.  One wall is\
 almost entirely covered by an electronic chalkboard.  This is where\
@@ -1127,38 +1125,38 @@ the young Wookiees are taught to read and write.  Some children run\
 around the room playing tag.  A teacher stands at the front of the room\
 trying to settle down the children.\
 ", 
+         Name = "The Classroom", 
       }, 
       [28610] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Residential Area", 
-         TeleVnum = 0, 
-         Vnum = 28610, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28610, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28619, 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28619, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28605, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28605, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "The residential area is, obviously, loaded with houses of the wookiee\
 people they are made from the natural material that surrounds the entire\
@@ -1167,47 +1165,47 @@ Wookiees pass you by, not to surprisingly this place is fairly crowded\
 with wookiees and the wookiee children running about  seem to be playing a\
 game of hide and seak with each other.\
 ", 
+         Name = "Residential Area", 
       }, 
       [28611] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Commercial Area", 
-         TeleVnum = 0, 
-         Vnum = 28611, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28611, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28612, 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28612, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28618, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28618, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28606, 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28606, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "This place is crawling with wookiees as well as some other forms of beings,\
 they seem to be to busy to even notice you getting off the lift car even\
@@ -1216,38 +1214,38 @@ interested with thier lives to have to pay any attention to you and your\
 petty adventure through their home world. A word of advice, don't get them\
 angry. \
 ", 
+         Name = "Commercial Area", 
       }, 
       [28612] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Commercial Area", 
-         TeleVnum = 0, 
-         Vnum = 28612, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28612, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28613, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28613, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28611, 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28611, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "This place is crawling with wookiees as well as some other forms of beings,\
 they seem to be to busy to even notice you getting off the lift car even\
@@ -1256,38 +1254,38 @@ interested with thier lives to have to pay any attention to you and your\
 petty adventure through their home world. A word of advice, don't get them\
 angry. \
 ", 
+         Name = "Commercial Area", 
       }, 
       [28613] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Landing Pad", 
-         TeleVnum = 0, 
-         Vnum = 28613, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28613, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28612, 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28612, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28639, 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28639, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "The landing pad is not to crowded, but it does have the odd technician\
 working on ships that are in dire need of repair or tune ups. The place\
@@ -1297,38 +1295,38 @@ livable. The walls that partially surround  the pad have the tools that\
 the techs use for the repairs as well as some pictures of female wookiees\
 in compromising positions. The only way out is back the way you came.\
 ", 
+         Name = "Landing Pad", 
       }, 
       [28614] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Commercial Area", 
-         TeleVnum = 0, 
-         Vnum = 28614, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28614, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28616, 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28616, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28615, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28615, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "This place seems to be crawling with wookiees as well as some other forms\
 of beings, they seem to be to busy to even notice you enter the area even\
@@ -1339,14 +1337,34 @@ petty adventure through their home world. A word of advice, don't get them\
 angery. The place is starting to get the smell of some freshly cooked food\
 comeing from the south of here.\
 ", 
+         Name = "Commercial Area", 
       }, 
       [28615] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28615, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Delicious Foods and Drinks", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28614, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "The shop has a very pleasent odur to it. With the carcuses of freshly\
 skined animals packed on ice under the glass counter and some dried foods\
 lining the walls you start to hear your stomach rumble with hunger. The\
@@ -1354,67 +1372,47 @@ wookiee behind the glass counter is very large andfor all you know he\
 could be packing heat just in case someone like you decided to come in\
 here and \"borrow\" some of her goods.\
 ", 
-         Vnum = 28615, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28614, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "Delicious Foods and Drinks", 
       }, 
       [28616] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Commercial Area", 
-         TeleVnum = 0, 
-         Vnum = 28616, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28616, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28618, 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28618, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28614, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28614, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28617, 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28617, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "This place is crawling with wookiees as well as some other forms of beings,\
 they seem to be to busy to even notice you getting off the lift car even\
@@ -1423,14 +1421,34 @@ interested with thier lives to have to pay any attention to you and your\
 petty adventure through their home world. A word of advice, don't get them\
 angry.\
 ", 
+         Name = "Commercial Area", 
       }, 
       [28617] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28617, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "The Cocked Bowcaster", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28616, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "You stand in the cocked bowcaster, where bowcasters are the specialty and\
 they don't come cheap. the walls are lined with many of the wookiee's\
 preferd weapon and there are different colours as well as different shapes\
@@ -1439,58 +1457,38 @@ barreled ones they look powerful as well as expensive. The owner has one\
 straped onto his waist and has his hand resting  easily on the hair\
 trigger. \
 ", 
-         Vnum = 28617, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28616, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "The Cocked Bowcaster", 
       }, 
       [28618] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Commercial Area", 
-         TeleVnum = 0, 
-         Vnum = 28618, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28618, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28611, 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28611, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28616, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28616, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "This place is crawling with wookiees as well as some other forms of beings,\
 they seem to be to busy to even notice you getting off the lift car even\
@@ -1499,65 +1497,65 @@ interested with thier lives to have to pay any attention to you and your\
 petty adventure through their home world. A word of advice, don't get them\
 angry. \
 ", 
+         Name = "Commercial Area", 
       }, 
       [28619] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Residential Area", 
-         TeleVnum = 0, 
-         Vnum = 28619, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28619, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28625, 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28625, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28620, 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28620, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28626, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28626, 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28610, 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28610, 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28627, 
-               Description = "", 
-               Key = -1, 
                Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28627, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "The residential area is, obviously, loaded with houses of the wookiee\
 people they are made from the natural material that surrounds the entire\
@@ -1566,74 +1564,74 @@ Wookiees pass you by, not to surprisingly this place is fairly crowded\
 with wookiees and the wookiee children running about  seem to be playing a\
 game of hide and seak with each other. \
 ", 
+         Name = "Residential Area", 
       }, 
       [28620] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Residential Area", 
-         TeleVnum = 0, 
-         Vnum = 28620, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28620, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28622, 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28622, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28624, 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28624, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28621, 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28621, 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28619, 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28619, 
+               Key = -1, 
             }, 
             [5] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28623, 
-               Description = "", 
-               Key = -1, 
                Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28623, 
+               Key = -1, 
             }, 
             [6] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28635, 
-               Description = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28635, 
+               Key = -1, 
             }, 
+         }, 
+         ExtraDescriptions = 
+         {
          }, 
          Description = "The residential area is, obviously, loaded with houses of the wookiee\
 people they are made from the natural material that surrounds the entire\
@@ -1642,316 +1640,337 @@ Wookiees pass you by, not to surprisingly this place is fairly crowded\
 with wookiees and the wookiee children running about  seem to be playing a\
 game of hide and seak with each other. \
 ", 
+         Name = "Residential Area", 
       }, 
       [28621] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28621, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Worshyr Guests Trees House", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28620, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28628, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
 been shed over the funiture, which looks like it can fit a giant due to\
 the size of them The place is well lit and has the cool breeze from teh\
 open windows blowing through. There are stairs to this house which lead\
 up.\
 ", 
-         Vnum = 28621, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28620, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28628, 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "Worshyr Guests Trees House", 
       }, 
       [28622] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28622, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Worshyr Tree House", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28620, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28629, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
 been shed over the funiture, which looks like it can fit a giant due to\
 the size of them The place is well lit and has the cool breeze from teh\
 open windows blowing through. There are stairs to this house which lead\
 up.\
 ", 
-         Vnum = 28622, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28620, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28629, 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "Worshyr Tree House", 
       }, 
       [28623] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28623, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Worshyr Tree House", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28630, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28620, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
 been shed over the funiture, which looks like it can fit a giant due to\
 the size of them The place is well lit and has the cool breeze from teh\
 open windows blowing through. There are stairs to this house which lead\
 up.\
 ", 
-         Vnum = 28623, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28630, 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28620, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "Worshyr Tree House", 
       }, 
       [28624] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28624, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Worshyr Tree House", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28620, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28631, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
 been shed over the funiture, which looks like it can fit a giant due to\
 the size of them The place is well lit and has the cool breeze from teh\
 open windows blowing through. There are stairs to this house which lead\
 up.\
 ", 
-         Vnum = 28624, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28620, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28631, 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "Worshyr Tree House", 
       }, 
       [28625] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28625, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Worshyr Tree House", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28619, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28632, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
 been shed over the funiture, which looks like it can fit a giant due to\
 the size of them The place is well lit and has the cool breeze from teh\
 open windows blowing through. There are stairs to this house which lead\
 up.\
 ", 
-         Vnum = 28625, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28619, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28632, 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "Worshyr Tree House", 
       }, 
       [28626] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Worshyr Tree House", 
-         Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
-been shed over the funiture, which looks like it can fit a giant due to\
-the size of them The place is well lit and has the cool breeze from teh\
-open windows blowing through. There are stairs to this house which lead\
-up.\
-", 
-         Vnum = 28626, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28619, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28633, 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28626, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-      }, 
-      [28627] = 
-      {
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Worshyr Tree House", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28619, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28633, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
 been shed over the funiture, which looks like it can fit a giant due to\
 the size of them The place is well lit and has the cool breeze from teh\
 open windows blowing through. There are stairs to this house which lead\
 up.\
 ", 
-         Vnum = 28627, 
+         Name = "Worshyr Tree House", 
+      }, 
+      [28627] = 
+      {
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28634, 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28619, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28627, 
          Flags = 
          {
             [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28634, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28619, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
+been shed over the funiture, which looks like it can fit a giant due to\
+the size of them The place is well lit and has the cool breeze from teh\
+open windows blowing through. There are stairs to this house which lead\
+up.\
+", 
+         Name = "Worshyr Tree House", 
       }, 
       [28628] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28628, 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Guests room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28621, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "The room, like downstairs is very well lit from the outside lights. The\
 branches from the trees leave haunting shadows on the walls as well as tap\
 on the window once in awhile. The room has a large bed that can fit at\
@@ -1960,71 +1979,34 @@ comfortably. The bed like the funiture downstairs is covered with shed fur\
 but other then that it is made and looks inviting. Other then the bedroom\
 funiture the room is empty. \
 ", 
-         Vnum = 28628, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28621, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [3] = "Indoors", 
-         }, 
+         Name = "Guests room", 
       }, 
       [28629] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Upstairs Room", 
-         Description = "The room, like downstairs is very well lit from the outside lights. The\
-branches from the trees leave haunting shadows on the walls as well as tap\
-on the window once in awhile. The room has a large bed that can fit at\
-least 6 human sized people comfortabley and probably two wookiees\
-comfortably. The bed like the funiture downstairs is covered with shed fur\
-but other then that it is made and looks inviting. Other then the bedroom\
-funiture the room is empty.\
-", 
-         Vnum = 28629, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28622, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28629, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-      }, 
-      [28630] = 
-      {
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "An Empty Apartment", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28622, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "The room, like downstairs is very well lit from the outside lights. The\
 branches from the trees leave haunting shadows on the walls as well as tap\
 on the window once in awhile. The room has a large bed that can fit at\
@@ -2033,22 +2015,15 @@ comfortably. The bed like the funiture downstairs is covered with shed fur\
 but other then that it is made and looks inviting. Other then the bedroom\
 funiture the room is empty.\
 ", 
-         Vnum = 28630, 
+         Name = "Upstairs Room", 
+      }, 
+      [28630] = 
+      {
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28623, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28630, 
          Flags = 
          {
             [23] = "Hotel", 
@@ -2056,92 +2031,21 @@ funiture the room is empty.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [28631] = 
-      {
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "&zA fortified outpost", 
-         Description = "The room, like downstairs is very well lit from the outside lights. The\
-branches from the trees leave haunting shadows on the walls as well as tap\
-on the window once in awhile. The room has a large bed that can fit at\
-least 6 human sized people comfortabley and probably two wookiees\
-comfortably. The bed like the funiture downstairs is covered with shed fur\
-but other then that it is made and looks inviting. Other then the bedroom\
-funiture the room is empty. \
-", 
-         Vnum = 28631, 
-         Sector = "city", 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28624, 
-               Description = "", 
-               Key = -1, 
                Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28623, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [23] = "Hotel", 
-            [3] = "Indoors", 
-         }, 
-      }, 
-      [28632] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "An Empty Apartment", 
-         Description = "The room, like downstairs is very well lit from the outside lights. The\
-branches from the trees leave haunting shadows on the walls as well as tap\
-on the window once in awhile. The room has a large bed that can fit at\
-least 6 human sized people comfortabley and probably two wookiees\
-comfortably. The bed like the funiture downstairs is covered with shed fur\
-but other then that it is made and looks inviting. Other then the bedroom\
-funiture the room is empty. \
-", 
-         Vnum = 28632, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28625, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-            [21] = "EmptyHome", 
-            [26] = "Factory", 
-            [23] = "Hotel", 
-         }, 
-      }, 
-      [28633] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Dowager's Estate", 
          Description = "The room, like downstairs is very well lit from the outside lights. The\
 branches from the trees leave haunting shadows on the walls as well as tap\
 on the window once in awhile. The room has a large bed that can fit at\
@@ -2150,37 +2054,36 @@ comfortably. The bed like the funiture downstairs is covered with shed fur\
 but other then that it is made and looks inviting. Other then the bedroom\
 funiture the room is empty.\
 ", 
-         Vnum = 28633, 
+         Name = "An Empty Apartment", 
+      }, 
+      [28631] = 
+      {
+         TeleDelay = 0, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28626, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28631, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [23] = "Hotel", 
-            [26] = "Factory", 
             [3] = "Indoors", 
          }, 
-      }, 
-      [28634] = 
-      {
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Upstairs Room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28624, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "The room, like downstairs is very well lit from the outside lights. The\
 branches from the trees leave haunting shadows on the walls as well as tap\
 on the window once in awhile. The room has a large bed that can fit at\
@@ -2189,1556 +2092,2133 @@ comfortably. The bed like the funiture downstairs is covered with shed fur\
 but other then that it is made and looks inviting. Other then the bedroom\
 funiture the room is empty. \
 ", 
-         Vnum = 28634, 
+         Name = "&zA fortified outpost", 
+      }, 
+      [28632] = 
+      {
+         TeleDelay = 0, 
          Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 28632, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+            [21] = "EmptyHome", 
+            [26] = "Factory", 
+            [23] = "Hotel", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28627, 
-               Description = "", 
-               Key = -1, 
                Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28625, 
+               Key = -1, 
             }, 
          }, 
+         Description = "The room, like downstairs is very well lit from the outside lights. The\
+branches from the trees leave haunting shadows on the walls as well as tap\
+on the window once in awhile. The room has a large bed that can fit at\
+least 6 human sized people comfortabley and probably two wookiees\
+comfortably. The bed like the funiture downstairs is covered with shed fur\
+but other then that it is made and looks inviting. Other then the bedroom\
+funiture the room is empty. \
+", 
+         Name = "An Empty Apartment", 
+      }, 
+      [28633] = 
+      {
+         TeleDelay = 0, 
+         Sector = "city", 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28633, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [26] = "Factory", 
+            [3] = "Indoors", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28626, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "The room, like downstairs is very well lit from the outside lights. The\
+branches from the trees leave haunting shadows on the walls as well as tap\
+on the window once in awhile. The room has a large bed that can fit at\
+least 6 human sized people comfortabley and probably two wookiees\
+comfortably. The bed like the funiture downstairs is covered with shed fur\
+but other then that it is made and looks inviting. Other then the bedroom\
+funiture the room is empty.\
+", 
+         Name = "The Dowager's Estate", 
+      }, 
+      [28634] = 
+      {
+         TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28634, 
          Flags = 
          {
             [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28627, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "The room, like downstairs is very well lit from the outside lights. The\
+branches from the trees leave haunting shadows on the walls as well as tap\
+on the window once in awhile. The room has a large bed that can fit at\
+least 6 human sized people comfortabley and probably two wookiees\
+comfortably. The bed like the funiture downstairs is covered with shed fur\
+but other then that it is made and looks inviting. Other then the bedroom\
+funiture the room is empty. \
+", 
+         Name = "Upstairs Room", 
       }, 
       [28635] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28635, 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Worshyr Tree House", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28636, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28620, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
 been shed over the funiture, which looks like it can fit a giant due to\
 the size of them The place is well lit and has the cool breeze from teh\
 open windows blowing through. There are stairs to this house which lead\
 up.\
 ", 
-         Vnum = 28635, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28636, 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28620, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [3] = "Indoors", 
-         }, 
+         Name = "Worshyr Tree House", 
       }, 
       [28636] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28636, 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Upstairs Room", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28635, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "This place has the smell of wookiees in as well as tons of wookiee fur has\
 been shed over the funiture, which looks like it can fit a giant due to\
 the size of them The place is well lit and has the cool breeze from teh\
 open windows blowing through. There are stairs to this house which lead\
 up.\
 ", 
-         Vnum = 28636, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28635, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [3] = "Indoors", 
-         }, 
+         Name = "Upstairs Room", 
       }, 
       [28637] = 
       {
          TeleDelay = 0, 
+         Sector = "city", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28637, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Prison Net", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Flags = 
+               {
+                  [21] = "Searchable", 
+                  [11] = "Hidden", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 28638, 
+               Key = -1, 
+            }, 
+         }, 
          Description = "You have been placed into a Kashyyk Prison Net. The rope is created from a\
 a laser and blaster proof twine. Unfortunetly there seems to be no way\
 down from these traps. As you glance across the horizon you notice that\
 Kashyyyk is an incredibly attractive planet. To bad (unless you find\
 someone to let you down) you will spend the rest of your life here.\
 ", 
-         Vnum = 28637, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Flags = 
-               {
-                  [21] = "Searchable", 
-                  [11] = "Hidden", 
-               }, 
-               Keyword = "", 
-               DestinationVnum = 28638, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
+         Name = "Prison Net", 
       }, 
       [28638] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Tree Branch Covering", 
-         Description = "You are standing on tree branches that have grown years and years toghther\
-to create a rather strong branch floor. As you look up you can see a small\
-rope prison left here apparently by the ruling force here.\
-", 
-         Vnum = 28638, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28607, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28638, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-      }, 
-      [28639] = 
-      {
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Landing Pad", 
-         Description = "", 
-         Vnum = 28639, 
-         Sector = "city", 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
                Keyword = "", 
-               DestinationVnum = 28613, 
+               Direction = "west", 
                Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28607, 
                Key = -1, 
-               Direction = "east", 
             }, 
          }, 
+         Description = "You are standing on tree branches that have grown years and years toghther\
+to create a rather strong branch floor. As you look up you can see a small\
+rope prison left here apparently by the ruling force here.\
+", 
+         Name = "Tree Branch Covering", 
+      }, 
+      [28639] = 
+      {
+         TeleDelay = 0, 
+         Sector = "city", 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28639, 
          Flags = 
          {
             [4] = "CanLand", 
             [5] = "CanFly", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28613, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Landing Pad", 
       }, 
       [28640] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28640, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28641, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28640, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28641, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28641] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28641, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28640, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28642, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28641, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28640, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28642, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28642] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28642, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28643, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28646, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28641, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28642, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28643, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28646, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28641, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28643] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28643, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28642, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28644, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28643, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28642, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28644, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28644] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28644, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28645, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28643, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28644, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28645, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28643, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28645] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28645, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28644, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28645, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28644, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28646] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28646, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28647, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28642, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28646, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "southeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28647, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28642, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28647] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28647, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28648, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28662, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28655, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28646, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28647, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28648, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28662, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28655, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Direction = "northwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28646, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28648] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28648, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28649, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28647, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28651, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28652, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28648, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28649, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28647, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28651, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Direction = "northwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28652, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28649] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28649, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28650, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28648, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28674, 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28649, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28650, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28648, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28674, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28650] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28650, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28654, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28649, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28653, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28651, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-            }, 
-            [5] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28652, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28650, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28654, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28649, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28653, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Direction = "southeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28651, 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28652, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28651] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28651, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28650, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28648, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28651, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "northwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28650, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28648, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28652] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28652, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28650, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28648, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28652, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28650, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "southeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28648, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28653] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28653, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28650, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28653, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28650, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28654] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28654, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28650, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28654, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28650, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28655] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28655, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28647, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28661, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28659, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28656, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-            }, 
-            [5] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28660, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28655, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28647, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28661, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28659, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Direction = "northwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28656, 
+               Key = -1, 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Direction = "southeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28660, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28656] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28656, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28657, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28655, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28656, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28657, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "southeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28655, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28657] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28657, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28656, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28658, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28657, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28656, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28658, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28658] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28658, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28657, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28659, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28658, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28657, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28659, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28659] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28659, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28655, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28660, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28658, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28659, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28655, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28660, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28658, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28660] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28660, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28661, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28659, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28655, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28662, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28660, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28661, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28659, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "northwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28655, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28662, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28661] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28661, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28660, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28655, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28661, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28660, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28655, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28662] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28662, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28663, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28647, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28660, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28662, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28663, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28647, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28660, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28663] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28663, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28664, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28662, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28663, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28664, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28662, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28664] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28664, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28668, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28671, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28665, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28663, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28664, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28668, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28671, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28665, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28663, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28665] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28665, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28664, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28666, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28667, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28665, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28664, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28666, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28667, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28666] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28666, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28665, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28666, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28665, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28667] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28667, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28665, 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28667, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28665, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28668] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28668, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28669, 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28664, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28670, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28668, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28669, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28664, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28670, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28669] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28669, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28668, 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28669, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28668, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28670] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28670, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28668, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28670, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28668, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
       [28671] = 
       {
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Description = "", 
-         Vnum = 28671, 
          Sector = "city", 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28664, 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-            [2] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28672, 
-               Description = "", 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-            [3] = 
-            {
-               Distance = 0, 
-               Keyword = "", 
-               DestinationVnum = 28673, 
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 28671, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28664, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28672, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Direction = "southeast", 
+               Description = "", 
+               Distance = 0, 
+               DestinationVnum = 28673, 
+               Key = -1, 
+            }, 
+         }, 
+         Description = "", 
+         Name = "Floating in a void", 
       }, 
    }, 
-   Name = "kashyyyk", 
+   HighEconomy = 0, 
+   Author = "Thrawn", 
+   ResetFrequency = 20, 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         Low = 2, 
+         High = 103, 
+      }, 
+      Hard = 
+      {
+         Low = 2, 
+         High = 103, 
+      }, 
+   }, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28601, 
+         Command = "M", 
+      }, 
+      [2] = 
+      {
+         Arg2 = 6, 
+         MiscData = 1, 
+         Arg1 = 28604, 
+         Arg3 = 28602, 
+         Command = "M", 
+      }, 
+      [3] = 
+      {
+         Arg2 = 6, 
+         MiscData = 1, 
+         Arg1 = 28604, 
+         Arg3 = 28602, 
+         Command = "M", 
+      }, 
+      [4] = 
+      {
+         Arg2 = 6, 
+         MiscData = 1, 
+         Arg1 = 28604, 
+         Arg3 = 28602, 
+         Command = "M", 
+      }, 
+      [5] = 
+      {
+         Arg2 = 6, 
+         MiscData = 1, 
+         Arg1 = 28604, 
+         Arg3 = 28602, 
+         Command = "M", 
+      }, 
+      [6] = 
+      {
+         Arg2 = 6, 
+         MiscData = 1, 
+         Arg1 = 28604, 
+         Arg3 = 28602, 
+         Command = "M", 
+      }, 
+      [7] = 
+      {
+         Arg2 = 6, 
+         MiscData = 1, 
+         Arg1 = 28604, 
+         Arg3 = 28602, 
+         Command = "M", 
+      }, 
+      [8] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28602, 
+         Arg3 = 28609, 
+         Command = "M", 
+      }, 
+      [9] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [10] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [11] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [12] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [13] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [14] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [15] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [16] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [17] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [18] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [19] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [20] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28610, 
+         Command = "M", 
+      }, 
+      [21] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [22] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [23] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [24] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [25] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [26] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [27] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [28] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [29] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [30] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [31] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [32] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Arg3 = 28611, 
+         Command = "M", 
+      }, 
+      [33] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28608, 
+         Arg3 = 28615, 
+         Command = "M", 
+      }, 
+      [34] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 305, 
+         Command = "G", 
+      }, 
+      [35] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32261, 
+         Command = "G", 
+      }, 
+      [36] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31522, 
+         Command = "G", 
+      }, 
+      [37] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10314, 
+         Command = "G", 
+      }, 
+      [38] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28605, 
+         Command = "G", 
+      }, 
+      [39] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28600, 
+         Arg3 = 28617, 
+         Command = "M", 
+      }, 
+      [40] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28603, 
+         Command = "G", 
+      }, 
+      [41] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28600, 
+         Command = "G", 
+      }, 
+      [42] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28602, 
+         Command = "G", 
+      }, 
+      [43] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28601, 
+         Command = "G", 
+      }, 
+      [44] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28606, 
+         Arg3 = 28629, 
+         Command = "M", 
+      }, 
+      [45] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28602, 
+         Arg3 = 12, 
+         Command = "E", 
+      }, 
+      [46] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10424, 
+         Arg3 = 17, 
+         Command = "E", 
+      }, 
+      [47] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28602, 
+         Command = "G", 
+      }, 
+      [48] = 
+      {
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 28601, 
+         Arg3 = 0, 
+         Command = "P", 
+      }, 
+      [49] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28600, 
+         Arg3 = 16, 
+         Command = "E", 
+      }, 
+      [50] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28607, 
+         Arg3 = 28634, 
+         Command = "M", 
+      }, 
+      [51] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28602, 
+         Arg3 = 12, 
+         Command = "E", 
+      }, 
+      [52] = 
+      {
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 28601, 
+         Arg3 = 0, 
+         Command = "P", 
+      }, 
+      [53] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28600, 
+         Arg3 = 16, 
+         Command = "E", 
+      }, 
+      [54] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32229, 
+         Arg3 = 19, 
+         Command = "E", 
+      }, 
+      [55] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28605, 
+         Arg3 = 28636, 
+         Command = "M", 
+      }, 
+      [56] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10424, 
+         Arg3 = 17, 
+         Command = "E", 
+      }, 
+      [57] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28610, 
+         Arg3 = 28638, 
+         Command = "M", 
+      }, 
+      [58] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 90, 
+         Arg3 = 28612, 
+         Command = "O", 
+      }, 
+      [59] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28607, 
+         Arg3 = 28619, 
+         Command = "O", 
+      }, 
+   }, 
    Objects = 
    {
       [28610] = 
       {
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Name = "Corpse of Kueshlin", 
-         ActionDescription = "", 
-         ShortDescr = "The corpse of Kueshlin", 
+         Cost = 0, 
+         Weight = 300, 
          ItemType = "trash", 
+         ShortDescr = "The corpse of Kueshlin", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 28610, 
+         Description = "The corpse of Kueshlin lies here.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3748,54 +4228,32 @@ rope prison left here apparently by the ruling force here.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Weight = 300, 
          Layers = 0, 
-         Description = "The corpse of Kueshlin lies here.", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         Name = "Corpse of Kueshlin", 
       }, 
       [28600] = 
       {
+         Cost = 4100, 
+         Weight = 10, 
+         ItemType = "weapon", 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
-               MudProgType = "wear_prog", 
                Code = "if race($n) != wookiee\
 mpechoat $n Only wookiees can handle bowcasters.\
 mpechoaround $n $n tries to figure out what to do with a bowcaster.\
 mpforce $n remove bowcaster\
 endif\
 ", 
+               MudProgType = "wear_prog", 
+               Arguments = "100", 
             }, 
          }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Weight = 10, 
-         Name = "bowcaster", 
-         ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         ShortDescr = "a bowcaster", 
-         ItemType = "weapon", 
-         Vnum = 28600, 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 7, 
-            [3] = 9, 
-            [4] = 110, 
-            [5] = 110, 
-            [0] = 12, 
-         }, 
-         Cost = 4100, 
          Affects = 
          {
             [1] = 
@@ -3809,28 +4267,44 @@ endif\
                Modifier = 1, 
             }, 
          }, 
+         ShortDescr = "a bowcaster", 
+         ExtraDescriptions = 
+         {
+         }, 
+         ActionDescription = "", 
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 7, 
+            [3] = 9, 
+            [4] = 110, 
+            [5] = 110, 
+            [0] = 12, 
+         }, 
+         Vnum = 28600, 
          Description = "A crossbow type weapon has been carelessly left here.", 
          Layers = 0, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-      }, 
-      [28601] = 
-      {
          WearFlags = 
          {
             [0] = "Take", 
-            [14] = "Hold", 
+            [13] = "Wield", 
          }, 
-         Name = "quarrel", 
-         ActionDescription = "", 
+         Name = "bowcaster", 
+      }, 
+      [28601] = 
+      {
+         Cost = 50, 
+         Weight = 1, 
+         ItemType = "bolt", 
+         ShortDescr = "a quarrel", 
          ExtraDescriptions = 
          {
          }, 
-         ShortDescr = "a quarrel", 
-         ItemType = "bolt", 
-         Vnum = 28601, 
+         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 500, 
@@ -3840,41 +4314,25 @@ endif\
             [5] = 100, 
             [0] = 100, 
          }, 
-         Cost = 50, 
-         Weight = 1, 
+         Vnum = 28601, 
          Description = "A bowcaster quarrel is here.", 
          Layers = 0, 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-      }, 
-      [28602] = 
-      {
          WearFlags = 
          {
             [0] = "Take", 
-            [10] = "About", 
+            [14] = "Hold", 
          }, 
-         Weight = 1, 
-         Name = "bandolier", 
-         ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         ShortDescr = "a wookiee bandolier", 
-         ItemType = "container", 
-         Vnum = 28602, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
-         }, 
+         Name = "quarrel", 
+      }, 
+      [28602] = 
+      {
          Cost = 0, 
+         Weight = 1, 
+         ItemType = "container", 
          Affects = 
          {
             [1] = 
@@ -3898,6 +4356,21 @@ endif\
                Modifier = 8, 
             }, 
          }, 
+         ShortDescr = "a wookiee bandolier", 
+         ExtraDescriptions = 
+         {
+         }, 
+         ActionDescription = "", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
+         }, 
+         Vnum = 28602, 
          Description = "A wookiee bandolier has been dropped here.", 
          Layers = 32, 
          Flags = 
@@ -3905,47 +4378,32 @@ endif\
             [19] = "LargeSize", 
             [13] = "Inventory", 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
+         Name = "bandolier", 
       }, 
       [28603] = 
       {
+         Cost = 5000, 
+         Weight = 10, 
+         ItemType = "weapon", 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
-               MudProgType = "wear_prog", 
                Code = "if race($n) != wookiee\
 mpechoat $n Only wookiees can handle this bowcaster!\
 mpechoaround $n $n tries to figure out what to do with a bowcster.\
 mpforce $n remove bowcaster\
 endif\
 ", 
+               MudProgType = "wear_prog", 
+               Arguments = "100", 
             }, 
          }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Weight = 10, 
-         Name = "dual double barreled bowcaster", 
-         ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         ShortDescr = "double barreled bowcaster", 
-         ItemType = "weapon", 
-         Vnum = 28603, 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 8, 
-            [3] = 9, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 12, 
-         }, 
-         Cost = 5000, 
          Affects = 
          {
             [1] = 
@@ -3959,21 +4417,46 @@ endif\
                Modifier = 1, 
             }, 
          }, 
+         ShortDescr = "double barreled bowcaster", 
+         ExtraDescriptions = 
+         {
+         }, 
+         ActionDescription = "", 
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 8, 
+            [3] = 9, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 12, 
+         }, 
+         Vnum = 28603, 
          Description = "A large and wierd looking bowcaster is lying here.", 
          Layers = 0, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         Name = "dual double barreled bowcaster", 
       }, 
       [28604] = 
       {
+         Cost = 0, 
          Weight = 1, 
-         Name = "worshyr seed", 
-         ActionDescription = "", 
-         ShortDescr = "a worshyr tree seed", 
          ItemType = "government", 
+         ShortDescr = "a worshyr tree seed", 
+         ActionDescription = "", 
          Vnum = 28604, 
+         Description = "The seed to a worshyr tree is lying here.", 
+         ExtraDescriptions = 
+         {
+         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3983,24 +4466,21 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Layers = 0, 
-         Description = "The seed to a worshyr tree is lying here.", 
+         Name = "worshyr seed", 
       }, 
       [28605] = 
       {
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Name = "smoked gundar meat", 
-         ActionDescription = "", 
-         ShortDescr = "smoked gundar", 
+         Cost = 20, 
+         Weight = 1, 
          ItemType = "food", 
+         ShortDescr = "smoked gundar", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          Vnum = 28605, 
+         Description = "A piece of smoked gundar meat is attracting flies ", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4010,50 +4490,53 @@ endif\
             [5] = 0, 
             [0] = 15, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 20, 
-         Weight = 1, 
          Layers = 0, 
-         Description = "A piece of smoked gundar meat is attracting flies ", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         Name = "smoked gundar meat", 
       }, 
       [28606] = 
       {
+         Cost = 0, 
+         Weight = 1, 
+         ItemType = "container", 
+         ShortDescr = "a package addressed to the wookiee Ralra", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 28606, 
+         Description = "A package is here for the wookiee known as Ralra on Kashyyyk.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Layers = 0, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
          Name = "package ralra", 
-         ActionDescription = "", 
-         ShortDescr = "a package addressed to the wookiee Ralra", 
-         ItemType = "container", 
-         Vnum = 28606, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A package is here for the wookiee known as Ralra on Kashyyyk.", 
       }, 
       [28607] = 
       {
+         Cost = 0, 
          Weight = 1, 
-         Name = "&bA Fountain&R&W", 
-         ActionDescription = "", 
-         ShortDescr = "&bA Fountain&R&W", 
          ItemType = "fountain", 
+         ShortDescr = "&bA Fountain&R&W", 
+         ActionDescription = "", 
          Vnum = 28607, 
+         Description = "&bA Fountain is hollowed out of a tree trunk here.&R&W", 
+         ExtraDescriptions = 
+         {
+         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4063,90 +4546,39 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
          Layers = 0, 
-         Description = "&bA Fountain is hollowed out of a tree trunk here.&R&W", 
+         Name = "&bA Fountain&R&W", 
       }, 
    }, 
-   FileFormatVersion = 1, 
-   HighEconomy = 0, 
-   Author = "Thrawn", 
-   LowEconomy = 120920818, 
    ResetMessage = "The wind blows throw the leaves of the Worshyr trees.", 
    Mobiles = 
    {
       [28608] = 
       {
-         ArmorClass = 20, 
-         Weight = 0, 
-         LongDescr = "A wookiee female minds the shop.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         DamRoll = 4, 
-         Vnum = 28608, 
-         Stats = 
-         {
-            Dexterity = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Intelligence = 13, 
-            Strength = 18, 
-         }, 
          HitChance = 
          {
-            HitNoDice = 8, 
             HitSizeDice = 10, 
             HitPlus = 400, 
+            HitNoDice = 8, 
          }, 
+         Credits = 200, 
+         DefaultPosition = "standing", 
+         Level = 40, 
+         Height = 0, 
+         Alignment = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [25] = "NoKill", 
          }, 
-         Languages = 
+         Immune = 
          {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
+            [20] = "magic", 
+            [11] = "charm", 
          }, 
          Shop = 
          {
-            KeeperShortDescr = "a female wookiee", 
-            KeeperVnum = 28608, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -4156,32 +4588,128 @@ endif\
                [0] = "food", 
             }, 
             ProfitSell = 90, 
+            ProfitBuy = 120, 
+            KeeperShortDescr = "a female wookiee", 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
          }, 
-         Height = 0, 
-         Name = "female wookiee shop owner", 
          VipFlags = 
          {
             [1] = "Kashyyyk", 
          }, 
-         Race = "Wookiee", 
-         Level = 40, 
-         ShortDescr = "a female wookiee", 
-         Credits = 200, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
-         Sex = "male", 
-         Immune = 
+         Name = "female wookiee shop owner", 
+         Damage = 
          {
-            [20] = "magic", 
-            [11] = "charm", 
+            DamPlus = 0, 
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
          }, 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+            }, 
+         }, 
+         Race = "Wookiee", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         ArmorClass = 20, 
+         ShortDescr = "a female wookiee", 
+         DamRoll = 4, 
+         LongDescr = "A wookiee female minds the shop.\
+", 
          Position = "standing", 
+         Vnum = 28608, 
+         Description = "", 
+         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Intelligence = 13, 
+            Dexterity = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Force = 0, 
+            Strength = 18, 
+            Wisdom = 13, 
+            Constitution = 13, 
+         }, 
+         Sex = "male", 
          HitRoll = 4, 
       }, 
       [28610] = 
       {
-         ArmorClass = -162, 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 1050, 
+            HitNoDice = 21, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Level = 105, 
+         Height = 0, 
+         Alignment = 0, 
+         Resistant = 
+         {
+            [5] = "pierce", 
+            [6] = "slash", 
+            [11] = "charm", 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [27] = "NoCorpse", 
+         }, 
+         Race = "Wookiee", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 329\
+mpforce mobslave mpoload 28610\
+mpforce mobslave drop all\
+mppurge mobslav\
+", 
+               MudProgType = "death_prog", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Name = "Kueshlin", 
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+         }, 
          Weight = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+            }, 
+         }, 
          AttackFlags = 
          {
             [1] = "claws", 
@@ -4189,160 +4717,63 @@ endif\
             [5] = "kick", 
             [0] = "bite", 
          }, 
-         LongDescr = "A fierce wookie lurks near the tree trunk.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-         }, 
-         DamRoll = 21, 
-         Vnum = 28610, 
-         HitChance = 
-         {
-            HitNoDice = 21, 
-            HitSizeDice = 10, 
-            HitPlus = 1050, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [27] = "NoCorpse", 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "100", 
-               MudProgType = "death_prog", 
-               Code = "mpmload 329\
-mpforce mobslave mpoload 28610\
-mpforce mobslave drop all\
-mppurge mobslav\
-", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-            }, 
-         }, 
-         Resistant = 
-         {
-            [5] = "pierce", 
-            [6] = "slash", 
-            [11] = "charm", 
-         }, 
-         Height = 0, 
-         Name = "Kueshlin", 
          SaveVs = 
          {
             Wand = 0, 
             PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
+         ArmorClass = -162, 
+         ShortDescr = "Kueshlin", 
+         DamRoll = 21, 
+         LongDescr = "A fierce wookie lurks near the tree trunk.\
+", 
+         Position = "standing", 
+         Vnum = 28610, 
+         Description = "", 
+         NumberOfAttacks = 2, 
          Stats = 
          {
-            Dexterity = 25, 
-            Luck = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 25, 
-            Charisma = 10, 
             Intelligence = 10, 
+            Dexterity = 25, 
+            Charisma = 10, 
+            Luck = 10, 
+            Force = 0, 
             Strength = 25, 
+            Wisdom = 10, 
+            Constitution = 25, 
          }, 
-         Level = 105, 
-         ShortDescr = "Kueshlin", 
-         Credits = 0, 
-         NumberOfAttacks = 2, 
-         Alignment = 0, 
          Sex = "undistinguished", 
-         Race = "Wookiee", 
-         Position = "standing", 
          HitRoll = 21, 
       }, 
       [28600] = 
       {
-         ArmorClass = 20, 
-         Weight = 0, 
-         LongDescr = "A rather large wookiee is behind the counter here.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-         }, 
-         DamRoll = 8, 
-         Vnum = 28600, 
-         Stats = 
-         {
-            Dexterity = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Intelligence = 13, 
-            Strength = 18, 
-         }, 
          HitChance = 
          {
-            HitNoDice = 8, 
             HitSizeDice = 10, 
             HitPlus = 400, 
+            HitNoDice = 8, 
          }, 
+         Credits = 200, 
+         DefaultPosition = "standing", 
+         Level = 40, 
+         Height = 0, 
+         Alignment = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [25] = "NoKill", 
          }, 
-         Languages = 
+         Immune = 
          {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-            }, 
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Wand = 0, 
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
+            [20] = "magic", 
+            [11] = "charm", 
          }, 
          Shop = 
          {
-            KeeperShortDescr = "a wookiee shop owner", 
-            KeeperVnum = 28600, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -4352,54 +4783,99 @@ mppurge mobslav\
                [0] = "none", 
             }, 
             ProfitSell = 90, 
+            ProfitBuy = 120, 
+            KeeperShortDescr = "a wookiee shop owner", 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
          }, 
-         Height = 0, 
-         Name = "Wookiee shop owner", 
          VipFlags = 
          {
             [1] = "Kashyyyk", 
          }, 
-         Race = "Wookiee", 
-         Level = 40, 
-         ShortDescr = "a wookiee shop owner", 
-         Credits = 200, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
-         Sex = "male", 
-         Immune = 
+         Name = "Wookiee shop owner", 
+         Damage = 
          {
-            [20] = "magic", 
-            [11] = "charm", 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
          }, 
+         Weight = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [0] = "basic", 
+            }, 
+         }, 
+         Race = "Wookiee", 
+         SaveVs = 
+         {
+            Wand = 0, 
+            PoisonDeath = 0, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         ArmorClass = 20, 
+         ShortDescr = "a wookiee shop owner", 
+         DamRoll = 8, 
+         LongDescr = "A rather large wookiee is behind the counter here.\
+", 
          Position = "standing", 
+         Vnum = 28600, 
+         Description = "", 
+         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Intelligence = 13, 
+            Dexterity = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Force = 0, 
+            Strength = 18, 
+            Wisdom = 13, 
+            Constitution = 13, 
+         }, 
+         Sex = "male", 
          HitRoll = 8, 
       }, 
       [28601] = 
       {
-         ArmorClass = 67, 
-         Weight = 0, 
-         LongDescr = "A female wookiee is walking around.\
-", 
-         Description = "", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 120, 
+            HitNoDice = 2, 
+         }, 
+         Credits = 20, 
          DefaultPosition = "standing", 
+         Level = 10, 
+         Height = 0, 
+         Alignment = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         VipFlags = 
+         {
+            [1] = "Kashyyyk", 
+         }, 
+         Name = "wookiee female", 
          Damage = 
          {
             DamPlus = 2, 
             DamSizeDice = 4, 
             DamNoDice = 1, 
          }, 
-         DamRoll = 2, 
-         Vnum = 28601, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 120, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
+         Weight = 0, 
          Languages = 
          {
             Speaks = 
@@ -4411,63 +4887,51 @@ mppurge mobslav\
                [1] = "shyriiwook", 
             }, 
          }, 
+         Race = "Wookiee", 
          SaveVs = 
          {
             Wand = 0, 
             PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         Height = 0, 
-         Name = "wookiee female", 
+         ArmorClass = 67, 
+         ShortDescr = "a female wookiee ", 
+         DamRoll = 2, 
+         LongDescr = "A female wookiee is walking around.\
+", 
+         Position = "standing", 
+         Vnum = 28601, 
+         Description = "", 
+         NumberOfAttacks = 0, 
          Stats = 
          {
-            Dexterity = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
             Intelligence = 13, 
+            Dexterity = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Force = 0, 
             Strength = 19, 
+            Wisdom = 13, 
+            Constitution = 13, 
          }, 
-         VipFlags = 
-         {
-            [1] = "Kashyyyk", 
-         }, 
-         Level = 10, 
-         ShortDescr = "a female wookiee ", 
-         Credits = 20, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
          Sex = "undistinguished", 
-         Race = "Wookiee", 
-         Position = "standing", 
          HitRoll = 0, 
       }, 
       [28602] = 
       {
-         ArmorClass = 0, 
-         Weight = 0, 
-         LongDescr = "A teacher stands here trying to make the rowdy children learn something.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DamRoll = 0, 
-         Vnum = 28602, 
          HitChance = 
          {
-            HitNoDice = 0, 
             HitSizeDice = 0, 
             HitPlus = 0, 
+            HitNoDice = 0, 
          }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Level = 50, 
+         Height = 0, 
+         Alignment = 0, 
          Flags = 
          {
             [0] = "Npc", 
@@ -4477,16 +4941,28 @@ mppurge mobslav\
          {
             [1] = 
             {
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
                Code = "if race($n) == wookiee\
 say Hello $n, Are you ready for your lessons?\
 else\
 say I'm sorry $n I only teach my people\
 endif\
 ", 
+               MudProgType = "all_greet_prog", 
+               Arguments = "100", 
             }, 
          }, 
+         VipFlags = 
+         {
+            [1] = "Kashyyyk", 
+         }, 
+         Name = "A Wookiee Teacher", 
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+         }, 
+         Weight = 0, 
          Languages = 
          {
             Speaks = 
@@ -4499,67 +4975,67 @@ endif\
                [1] = "shyriiwook", 
             }, 
          }, 
+         Race = "Wookiee", 
          SaveVs = 
          {
             Wand = 0, 
             PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         Height = 0, 
-         Name = "A Wookiee Teacher", 
+         ArmorClass = 0, 
+         ShortDescr = "A Wookiee Teacher", 
+         DamRoll = 0, 
+         LongDescr = "A teacher stands here trying to make the rowdy children learn something.\
+", 
+         Position = "standing", 
+         Vnum = 28602, 
+         Description = "", 
+         NumberOfAttacks = 0, 
          Stats = 
          {
-            Dexterity = 13, 
-            Luck = 13, 
-            Wisdom = 21, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
             Intelligence = 21, 
+            Dexterity = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Force = 0, 
             Strength = 19, 
+            Wisdom = 21, 
+            Constitution = 13, 
+         }, 
+         Sex = "female", 
+         HitRoll = 0, 
+      }, 
+      [28603] = 
+      {
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 120, 
+            HitNoDice = 2, 
+         }, 
+         Credits = 20, 
+         DefaultPosition = "standing", 
+         Level = 10, 
+         Height = 0, 
+         Alignment = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
          }, 
          VipFlags = 
          {
             [1] = "Kashyyyk", 
          }, 
-         Level = 50, 
-         ShortDescr = "A Wookiee Teacher", 
-         Credits = 0, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
-         Sex = "female", 
-         Race = "Wookiee", 
-         Position = "standing", 
-         HitRoll = 0, 
-      }, 
-      [28603] = 
-      {
-         ArmorClass = 67, 
-         Weight = 0, 
-         LongDescr = "A wookiee male is looking around here.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
+         Name = "wookiee male", 
          Damage = 
          {
             DamPlus = 2, 
             DamSizeDice = 4, 
             DamNoDice = 1, 
          }, 
-         DamRoll = 0, 
-         Vnum = 28603, 
-         HitChance = 
-         {
-            HitNoDice = 2, 
-            HitSizeDice = 10, 
-            HitPlus = 120, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
+         Weight = 0, 
          Languages = 
          {
             Speaks = 
@@ -4571,68 +5047,68 @@ endif\
                [1] = "shyriiwook", 
             }, 
          }, 
+         Race = "Wookiee", 
          SaveVs = 
          {
             Wand = 0, 
             PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         Height = 0, 
-         Name = "wookiee male", 
+         ArmorClass = 67, 
+         ShortDescr = "a wookiee male", 
+         DamRoll = 0, 
+         LongDescr = "A wookiee male is looking around here.\
+", 
+         Position = "standing", 
+         Vnum = 28603, 
+         Description = "", 
+         NumberOfAttacks = 0, 
          Stats = 
          {
-            Dexterity = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
             Intelligence = 13, 
+            Dexterity = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Force = 0, 
             Strength = 19, 
+            Wisdom = 13, 
+            Constitution = 13, 
+         }, 
+         Sex = "undistinguished", 
+         HitRoll = 0, 
+      }, 
+      [28604] = 
+      {
+         HitChance = 
+         {
+            HitSizeDice = 1, 
+            HitPlus = 30, 
+            HitNoDice = 1, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Level = 1, 
+         Height = 0, 
+         Alignment = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [7] = "Wimpy", 
          }, 
          VipFlags = 
          {
             [1] = "Kashyyyk", 
          }, 
-         Level = 10, 
-         ShortDescr = "a wookiee male", 
-         Credits = 20, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
-         Sex = "undistinguished", 
-         Race = "Wookiee", 
-         Position = "standing", 
-         HitRoll = 0, 
-      }, 
-      [28604] = 
-      {
-         ArmorClass = 0, 
-         Weight = 0, 
-         LongDescr = "A wookiee child is playing around here.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
+         Name = "wookiee child", 
          Damage = 
          {
             DamPlus = 3, 
             DamSizeDice = 3, 
             DamNoDice = 1, 
          }, 
-         DamRoll = 0, 
-         Vnum = 28604, 
-         HitChance = 
-         {
-            HitNoDice = 1, 
-            HitSizeDice = 1, 
-            HitPlus = 30, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [7] = "Wimpy", 
-         }, 
+         Weight = 0, 
          Languages = 
          {
             Speaks = 
@@ -4645,63 +5121,51 @@ endif\
                [1] = "shyriiwook", 
             }, 
          }, 
+         Race = "Wookiee", 
          SaveVs = 
          {
             Wand = 0, 
             PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         Height = 0, 
-         Name = "wookiee child", 
+         ArmorClass = 0, 
+         ShortDescr = "a wookiee child", 
+         DamRoll = 0, 
+         LongDescr = "A wookiee child is playing around here.\
+", 
+         Position = "standing", 
+         Vnum = 28604, 
+         Description = "", 
+         NumberOfAttacks = 1, 
          Stats = 
          {
-            Dexterity = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
             Intelligence = 13, 
+            Dexterity = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Force = 0, 
             Strength = 13, 
+            Wisdom = 13, 
+            Constitution = 13, 
          }, 
-         VipFlags = 
-         {
-            [1] = "Kashyyyk", 
-         }, 
-         Level = 1, 
-         ShortDescr = "a wookiee child", 
-         Credits = 0, 
-         NumberOfAttacks = 1, 
-         Alignment = 0, 
          Sex = "male", 
-         Race = "Wookiee", 
-         Position = "standing", 
          HitRoll = 0, 
       }, 
       [28605] = 
       {
-         ArmorClass = -125, 
-         Weight = 0, 
-         LongDescr = "The wookiee Ralra is here.\
-", 
-         Description = "", 
-         DefaultPosition = "standing", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 4, 
-            DamNoDice = 11, 
-         }, 
-         DamRoll = 17, 
-         Vnum = 28605, 
          HitChance = 
          {
-            HitNoDice = 18, 
             HitSizeDice = 10, 
             HitPlus = 900, 
+            HitNoDice = 18, 
          }, 
+         Credits = 450, 
+         DefaultPosition = "standing", 
+         Level = 90, 
+         Height = 0, 
+         Alignment = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -4712,17 +5176,15 @@ endif\
          {
             [1] = 
             {
-               Arguments = "100", 
-               MudProgType = "death_prog", 
                Code = "mpecho Ralra clasps his chest as he falls to the ground.\
 mpecho As he hits the ground something rolls out from his open hand\
 mpoload 28604\
 ", 
+               MudProgType = "death_prog", 
+               Arguments = "100", 
             }, 
             [2] = 
             {
-               Arguments = "package", 
-               MudProgType = "act_prog", 
                Code = "if ovnuminv(28606) >= 1\
 say Thank you.\
 mpwithdraw 2500\
@@ -4736,8 +5198,22 @@ endif\
 mpat 10299 drop all\
 mpat 10299 mppurge\
 ", 
+               MudProgType = "act_prog", 
+               Arguments = "package", 
             }, 
          }, 
+         VipFlags = 
+         {
+            [1] = "Kashyyyk", 
+         }, 
+         Name = "Ralra", 
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamSizeDice = 4, 
+            DamNoDice = 11, 
+         }, 
+         Weight = 0, 
          Languages = 
          {
             Speaks = 
@@ -4750,68 +5226,68 @@ mpat 10299 mppurge\
                [0] = "basic", 
             }, 
          }, 
+         Race = "Wookiee", 
          SaveVs = 
          {
             Wand = 0, 
             PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         Height = 0, 
-         Name = "Ralra", 
+         ArmorClass = -125, 
+         ShortDescr = "Ralra", 
+         DamRoll = 17, 
+         LongDescr = "The wookiee Ralra is here.\
+", 
+         Position = "standing", 
+         Vnum = 28605, 
+         Description = "", 
+         NumberOfAttacks = 0, 
          Stats = 
          {
-            Dexterity = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
             Intelligence = 13, 
+            Dexterity = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Force = 0, 
             Strength = 21, 
+            Wisdom = 13, 
+            Constitution = 13, 
          }, 
-         VipFlags = 
-         {
-            [1] = "Kashyyyk", 
-         }, 
-         Level = 90, 
-         ShortDescr = "Ralra", 
-         Credits = 450, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
          Sex = "male", 
-         Race = "Wookiee", 
-         Position = "standing", 
          HitRoll = 18, 
       }, 
       [28606] = 
       {
-         ArmorClass = -76, 
-         Weight = 0, 
-         LongDescr = "The wookiee Rwookrrorro is sitting here.\
-", 
-         Description = "", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 900, 
+            HitNoDice = 18, 
+         }, 
+         Credits = 420, 
          DefaultPosition = "standing", 
+         Level = 90, 
+         Height = 0, 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         VipFlags = 
+         {
+            [1] = "Kashyyyk", 
+         }, 
+         Name = "Rwookrrorro", 
          Damage = 
          {
             DamPlus = 0, 
             DamSizeDice = 4, 
             DamNoDice = 11, 
          }, 
-         DamRoll = 0, 
-         Vnum = 28606, 
-         HitChance = 
-         {
-            HitNoDice = 18, 
-            HitSizeDice = 10, 
-            HitPlus = 900, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
+         Weight = 0, 
          Languages = 
          {
             Speaks = 
@@ -4823,68 +5299,68 @@ mpat 10299 mppurge\
                [1] = "shyriiwook", 
             }, 
          }, 
+         Race = "Wookiee", 
          SaveVs = 
          {
             Wand = 0, 
             PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         Height = 0, 
-         Name = "Rwookrrorro", 
+         ArmorClass = -76, 
+         ShortDescr = "Rwookrrorro", 
+         DamRoll = 0, 
+         LongDescr = "The wookiee Rwookrrorro is sitting here.\
+", 
+         Position = "standing", 
+         Vnum = 28606, 
+         Description = "", 
+         NumberOfAttacks = 0, 
          Stats = 
          {
-            Dexterity = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
             Intelligence = 13, 
+            Dexterity = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Force = 0, 
             Strength = 21, 
+            Wisdom = 13, 
+            Constitution = 13, 
          }, 
-         VipFlags = 
-         {
-            [1] = "Kashyyyk", 
-         }, 
-         Level = 90, 
-         ShortDescr = "Rwookrrorro", 
-         Credits = 420, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
          Sex = "male", 
-         Race = "Wookiee", 
-         Position = "standing", 
          HitRoll = 0, 
       }, 
       [28607] = 
       {
-         ArmorClass = -76, 
-         Weight = 0, 
-         LongDescr = "Chenlembec is standing here.\
-", 
-         Description = "", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 900, 
+            HitNoDice = 18, 
+         }, 
+         Credits = 420, 
          DefaultPosition = "standing", 
+         Level = 90, 
+         Height = 0, 
+         Alignment = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         VipFlags = 
+         {
+            [1] = "Kashyyyk", 
+         }, 
+         Name = "Chenlembec", 
          Damage = 
          {
             DamPlus = 0, 
             DamSizeDice = 4, 
             DamNoDice = 11, 
          }, 
-         DamRoll = 17, 
-         Vnum = 28607, 
-         HitChance = 
-         {
-            HitNoDice = 18, 
-            HitSizeDice = 10, 
-            HitPlus = 900, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
+         Weight = 0, 
          Languages = 
          {
             Speaks = 
@@ -4896,506 +5372,59 @@ mpat 10299 mppurge\
                [1] = "shyriiwook", 
             }, 
          }, 
+         Race = "Wookiee", 
          SaveVs = 
          {
             Wand = 0, 
             PoisonDeath = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         Height = 0, 
-         Name = "Chenlembec", 
+         ArmorClass = -76, 
+         ShortDescr = "Chenlembec", 
+         DamRoll = 17, 
+         LongDescr = "Chenlembec is standing here.\
+", 
+         Position = "standing", 
+         Vnum = 28607, 
+         Description = "", 
+         NumberOfAttacks = 0, 
          Stats = 
          {
-            Dexterity = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
             Intelligence = 13, 
+            Dexterity = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Force = 0, 
             Strength = 21, 
+            Wisdom = 13, 
+            Constitution = 13, 
          }, 
-         VipFlags = 
-         {
-            [1] = "Kashyyyk", 
-         }, 
-         Level = 90, 
-         ShortDescr = "Chenlembec", 
-         Credits = 420, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
          Sex = "male", 
-         Race = "Wookiee", 
-         Position = "standing", 
          HitRoll = 18, 
       }, 
    }, 
-   ResetFrequency = 20, 
-   Resets = 
+   Filename = "kashyyyk.lua", 
+   LowEconomy = 120920818, 
+   VnumRanges = 
    {
-      [1] = 
+      Mob = 
       {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28601, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
+         First = 28600, 
+         Last = 28610, 
       }, 
-      [2] = 
+      Object = 
       {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28602, 
-         Arg1 = 28604, 
-         Arg2 = 6, 
+         First = 28600, 
+         Last = 28610, 
       }, 
-      [3] = 
+      Room = 
       {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28602, 
-         Arg1 = 28604, 
-         Arg2 = 6, 
-      }, 
-      [4] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28602, 
-         Arg1 = 28604, 
-         Arg2 = 6, 
-      }, 
-      [5] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28602, 
-         Arg1 = 28604, 
-         Arg2 = 6, 
-      }, 
-      [6] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28602, 
-         Arg1 = 28604, 
-         Arg2 = 6, 
-      }, 
-      [7] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28602, 
-         Arg1 = 28604, 
-         Arg2 = 6, 
-      }, 
-      [8] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28609, 
-         Arg1 = 28602, 
-         Arg2 = 1, 
-      }, 
-      [9] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [10] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [11] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [12] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [13] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [14] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [15] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [16] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [17] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [18] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [19] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [20] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28610, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [21] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [22] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [23] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [24] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [25] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [26] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [27] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [28] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [29] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [30] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [31] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28601, 
-         Arg2 = 13, 
-      }, 
-      [32] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28611, 
-         Arg1 = 28603, 
-         Arg2 = 12, 
-      }, 
-      [33] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28615, 
-         Arg1 = 28608, 
-         Arg2 = 1, 
-      }, 
-      [34] = 
-      {
-         Arg1 = 305, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [35] = 
-      {
-         Arg1 = 32261, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [36] = 
-      {
-         Arg1 = 31522, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [37] = 
-      {
-         Arg1 = 10314, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [38] = 
-      {
-         Arg1 = 28605, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [39] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28617, 
-         Arg1 = 28600, 
-         Arg2 = 1, 
-      }, 
-      [40] = 
-      {
-         Arg1 = 28603, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [41] = 
-      {
-         Arg1 = 28600, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [42] = 
-      {
-         Arg1 = 28602, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [43] = 
-      {
-         Arg1 = 28601, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [44] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28629, 
-         Arg1 = 28606, 
-         Arg2 = 1, 
-      }, 
-      [45] = 
-      {
-         MiscData = 1, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg1 = 28602, 
-         Arg2 = 1, 
-      }, 
-      [46] = 
-      {
-         MiscData = 1, 
-         Command = "E", 
-         Arg3 = 17, 
-         Arg1 = 10424, 
-         Arg2 = 1, 
-      }, 
-      [47] = 
-      {
-         Arg1 = 28602, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [48] = 
-      {
-         MiscData = 0, 
-         Command = "P", 
-         Arg3 = 0, 
-         Arg1 = 28601, 
-         Arg2 = 1, 
-      }, 
-      [49] = 
-      {
-         MiscData = 1, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg1 = 28600, 
-         Arg2 = 1, 
-      }, 
-      [50] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28634, 
-         Arg1 = 28607, 
-         Arg2 = 1, 
-      }, 
-      [51] = 
-      {
-         MiscData = 1, 
-         Command = "E", 
-         Arg3 = 12, 
-         Arg1 = 28602, 
-         Arg2 = 1, 
-      }, 
-      [52] = 
-      {
-         MiscData = 0, 
-         Command = "P", 
-         Arg3 = 0, 
-         Arg1 = 28601, 
-         Arg2 = 1, 
-      }, 
-      [53] = 
-      {
-         MiscData = 1, 
-         Command = "E", 
-         Arg3 = 16, 
-         Arg1 = 28600, 
-         Arg2 = 1, 
-      }, 
-      [54] = 
-      {
-         MiscData = 1, 
-         Command = "E", 
-         Arg3 = 19, 
-         Arg1 = 32229, 
-         Arg2 = 1, 
-      }, 
-      [55] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28636, 
-         Arg1 = 28605, 
-         Arg2 = 1, 
-      }, 
-      [56] = 
-      {
-         MiscData = 1, 
-         Command = "E", 
-         Arg3 = 17, 
-         Arg1 = 10424, 
-         Arg2 = 1, 
-      }, 
-      [57] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 28638, 
-         Arg1 = 28610, 
-         Arg2 = 1, 
-      }, 
-      [58] = 
-      {
-         MiscData = 1, 
-         Command = "O", 
-         Arg3 = 28612, 
-         Arg1 = 90, 
-         Arg2 = 1, 
-      }, 
-      [59] = 
-      {
-         MiscData = 1, 
-         Command = "O", 
-         Arg3 = 28619, 
-         Arg1 = 28607, 
-         Arg2 = 1, 
+         First = 28600, 
+         Last = 28699, 
       }, 
    }, 
+   FileFormatVersion = 1, 
+   Name = "kashyyyk", 
 }

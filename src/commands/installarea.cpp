@@ -61,8 +61,6 @@ void do_installarea(Character *ch, std::string argument)
             }
 
             top_area++;
-            ch->Echo("Writing area.lst...\r\n");
-            WriteAreaList();
             ch->Echo("Resetting new area.\r\n");
             num = tarea->NumberOfPlayers;
             tarea->NumberOfPlayers = 0;

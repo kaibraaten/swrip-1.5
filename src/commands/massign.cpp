@@ -5,6 +5,9 @@
 
 void do_massign( Character *ch, std::string argument )
 {
+#if 1
+    ch->Echo("This command is deprecated. Use VASSIGN instead.\r\n");
+#else
   std::string arg1;
   std::string arg2;
   std::string arg3;
@@ -47,5 +50,6 @@ void do_massign( Character *ch, std::string argument )
   ch->Echo("Done.\r\n");
   victim->Echo("%s has assigned you the monster vnum range %ld - %ld.\r\n",
                ch->Name.c_str(), m_lo, m_hi );
+#endif
 }
 

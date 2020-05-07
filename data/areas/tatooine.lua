@@ -1,21 +1,951 @@
 -- Tatooine
--- Last saved Wednesday 06-May-2020 12:59:11
+-- Last saved Thursday 07-May-2020 14:47:57
 
 AreaEntry
 {
-   Filename = "tatooine.lua", 
-   Name = "Tatooine", 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31500, 
+         Command = "M", 
+         Arg3 = 31767, 
+      }, 
+      [2] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31500, 
+         Command = "E", 
+         Arg3 = 0, 
+      }, 
+      [3] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31501, 
+         Command = "O", 
+         Arg3 = 31756, 
+      }, 
+      [4] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31501, 
+         Command = "O", 
+         Arg3 = 31756, 
+      }, 
+      [5] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31500, 
+         Command = "M", 
+         Arg3 = 31756, 
+      }, 
+      [6] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31500, 
+         Command = "E", 
+         Arg3 = 0, 
+      }, 
+      [7] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31501, 
+         Command = "O", 
+         Arg3 = 31759, 
+      }, 
+      [8] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31501, 
+         Command = "O", 
+         Arg3 = 31758, 
+      }, 
+      [9] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31501, 
+         Command = "O", 
+         Arg3 = 31758, 
+      }, 
+      [10] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31501, 
+         Command = "O", 
+         Arg3 = 31758, 
+      }, 
+      [11] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31502, 
+         Command = "O", 
+         Arg3 = 31588, 
+      }, 
+      [12] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31502, 
+         Command = "O", 
+         Arg3 = 31588, 
+      }, 
+      [13] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31502, 
+         Command = "O", 
+         Arg3 = 31588, 
+      }, 
+      [14] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31503, 
+         Command = "O", 
+         Arg3 = 31806, 
+      }, 
+      [15] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31503, 
+         Command = "O", 
+         Arg3 = 31806, 
+      }, 
+      [16] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31502, 
+         Command = "M", 
+         Arg3 = 31806, 
+      }, 
+      [17] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31504, 
+         Command = "E", 
+         Arg3 = 0, 
+      }, 
+      [18] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31505, 
+         Command = "E", 
+         Arg3 = 6, 
+      }, 
+      [19] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31505, 
+         Command = "M", 
+         Arg3 = 31831, 
+      }, 
+      [20] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31508, 
+         Command = "O", 
+         Arg3 = 31833, 
+      }, 
+      [21] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31511, 
+         Command = "M", 
+         Arg3 = 31837, 
+      }, 
+      [22] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31511, 
+         Command = "M", 
+         Arg3 = 31837, 
+      }, 
+      [23] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31511, 
+         Command = "M", 
+         Arg3 = 31837, 
+      }, 
+      [24] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31511, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [25] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31510, 
+         Command = "M", 
+         Arg3 = 31838, 
+      }, 
+      [26] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31508, 
+         Command = "O", 
+         Arg3 = 31831, 
+      }, 
+      [27] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31514, 
+         Command = "O", 
+         Arg3 = 31612, 
+      }, 
+      [28] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31517, 
+         Command = "M", 
+         Arg3 = 31847, 
+      }, 
+      [29] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31516, 
+         Command = "E", 
+         Arg3 = 6, 
+      }, 
+      [30] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31515, 
+         Command = "E", 
+         Arg3 = 13, 
+      }, 
+      [31] = 
+      {
+         Arg2 = 5, 
+         MiscData = 1, 
+         Arg1 = 31850, 
+         Command = "D", 
+         Arg3 = 2, 
+      }, 
+      [32] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31518, 
+         Command = "M", 
+         Arg3 = 31851, 
+      }, 
+      [33] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31517, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [34] = 
+      {
+         Arg2 = 4, 
+         MiscData = 1, 
+         Arg1 = 31515, 
+         Command = "M", 
+         Arg3 = 31852, 
+      }, 
+      [35] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31515, 
+         Command = "M", 
+         Arg3 = 31852, 
+      }, 
+      [36] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31515, 
+         Command = "M", 
+         Arg3 = 31852, 
+      }, 
+      [37] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31515, 
+         Command = "M", 
+         Arg3 = 31852, 
+      }, 
+      [38] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31515, 
+         Command = "M", 
+         Arg3 = 31852, 
+      }, 
+      [39] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31515, 
+         Command = "M", 
+         Arg3 = 31852, 
+      }, 
+      [40] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31512, 
+         Command = "M", 
+         Arg3 = 31715, 
+      }, 
+      [41] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31512, 
+         Command = "M", 
+         Arg3 = 31715, 
+      }, 
+      [42] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31513, 
+         Command = "M", 
+         Arg3 = 31715, 
+      }, 
+      [43] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31514, 
+         Command = "M", 
+         Arg3 = 31715, 
+      }, 
+      [44] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31513, 
+         Command = "M", 
+         Arg3 = 31715, 
+      }, 
+      [45] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31516, 
+         Command = "M", 
+         Arg3 = 31715, 
+      }, 
+      [46] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31516, 
+         Command = "M", 
+         Arg3 = 31715, 
+      }, 
+      [47] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31519, 
+         Command = "O", 
+         Arg3 = 31853, 
+      }, 
+      [48] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31519, 
+         Command = "M", 
+         Arg3 = 31863, 
+      }, 
+      [49] = 
+      {
+         Arg2 = 100, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "O", 
+         Arg3 = 31863, 
+      }, 
+      [50] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31871, 
+      }, 
+      [51] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31871, 
+      }, 
+      [52] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31871, 
+      }, 
+      [53] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31871, 
+      }, 
+      [54] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31871, 
+      }, 
+      [55] = 
+      {
+         Arg2 = 12, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31871, 
+      }, 
+      [56] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31501, 
+         Command = "M", 
+         Arg3 = 31817, 
+      }, 
+      [57] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31509, 
+         Command = "E", 
+         Arg3 = 12, 
+      }, 
+      [58] = 
+      {
+         Arg1 = 10314, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+      }, 
+      [59] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31861, 
+      }, 
+      [60] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31527, 
+         Command = "M", 
+         Arg3 = 31861, 
+      }, 
+      [61] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31507, 
+         Command = "M", 
+         Arg3 = 31861, 
+      }, 
+      [62] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31526, 
+         Command = "M", 
+         Arg3 = 31862, 
+      }, 
+      [63] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31521, 
+         Command = "M", 
+         Arg3 = 31862, 
+      }, 
+      [64] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31524, 
+         Command = "M", 
+         Arg3 = 31862, 
+      }, 
+      [65] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31525, 
+         Command = "M", 
+         Arg3 = 31857, 
+      }, 
+      [66] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31506, 
+         Command = "M", 
+         Arg3 = 31857, 
+      }, 
+      [67] = 
+      {
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 31527, 
+         Command = "M", 
+         Arg3 = 31854, 
+      }, 
+      [68] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31523, 
+         Command = "M", 
+         Arg3 = 31854, 
+      }, 
+      [69] = 
+      {
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 31525, 
+         Command = "M", 
+         Arg3 = 31854, 
+      }, 
+      [70] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31528, 
+         Command = "M", 
+         Arg3 = 31854, 
+      }, 
+      [71] = 
+      {
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 31526, 
+         Command = "M", 
+         Arg3 = 31856, 
+      }, 
+      [72] = 
+      {
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 31528, 
+         Command = "M", 
+         Arg3 = 31856, 
+      }, 
+      [73] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31529, 
+         Command = "M", 
+         Arg3 = 31858, 
+      }, 
+      [74] = 
+      {
+         Arg2 = 13, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31855, 
+      }, 
+      [75] = 
+      {
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 31524, 
+         Command = "M", 
+         Arg3 = 31855, 
+      }, 
+      [76] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31503, 
+         Command = "M", 
+         Arg3 = 31653, 
+      }, 
+      [77] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31514, 
+         Command = "O", 
+         Arg3 = 31840, 
+      }, 
+      [78] = 
+      {
+         Arg2 = 19, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31870, 
+      }, 
+      [79] = 
+      {
+         Arg2 = 19, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31870, 
+      }, 
+      [80] = 
+      {
+         Arg2 = 19, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31870, 
+      }, 
+      [81] = 
+      {
+         Arg2 = 19, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31870, 
+      }, 
+      [82] = 
+      {
+         Arg2 = 19, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31870, 
+      }, 
+      [83] = 
+      {
+         Arg2 = 19, 
+         MiscData = 1, 
+         Arg1 = 31520, 
+         Command = "M", 
+         Arg3 = 31870, 
+      }, 
+      [84] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31521, 
+         Command = "O", 
+         Arg3 = 31830, 
+      }, 
+      [85] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31531, 
+         Command = "M", 
+         Arg3 = 31875, 
+      }, 
+      [86] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31601, 
+      }, 
+      [87] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31602, 
+      }, 
+      [88] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31603, 
+      }, 
+      [89] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31604, 
+      }, 
+      [90] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31819, 
+      }, 
+      [91] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31821, 
+      }, 
+      [92] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31822, 
+      }, 
+      [93] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31824, 
+      }, 
+      [94] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31828, 
+      }, 
+      [95] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31829, 
+      }, 
+      [96] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31830, 
+      }, 
+      [97] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31832, 
+      }, 
+      [98] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31834, 
+      }, 
+      [99] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31835, 
+      }, 
+      [100] = 
+      {
+         Arg2 = 100, 
+         MiscData = 0, 
+         Arg1 = 31504, 
+         Command = "M", 
+         Arg3 = 31837, 
+      }, 
+      [101] = 
+      {
+         Arg2 = 20, 
+         MiscData = 0, 
+         Arg1 = 31503, 
+         Command = "M", 
+         Arg3 = 31601, 
+      }, 
+      [102] = 
+      {
+         Arg2 = 20, 
+         MiscData = 0, 
+         Arg1 = 31503, 
+         Command = "M", 
+         Arg3 = 31602, 
+      }, 
+      [103] = 
+      {
+         Arg2 = 20, 
+         MiscData = 0, 
+         Arg1 = 31503, 
+         Command = "M", 
+         Arg3 = 31603, 
+      }, 
+      [104] = 
+      {
+         Arg2 = 20, 
+         MiscData = 0, 
+         Arg1 = 31503, 
+         Command = "M", 
+         Arg3 = 31604, 
+      }, 
+      [105] = 
+      {
+         Arg2 = 20, 
+         MiscData = 0, 
+         Arg1 = 31503, 
+         Command = "M", 
+         Arg3 = 31653, 
+      }, 
+      [106] = 
+      {
+         Arg2 = 20, 
+         MiscData = 0, 
+         Arg1 = 31503, 
+         Command = "M", 
+         Arg3 = 31840, 
+      }, 
+      [107] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31532, 
+         Command = "M", 
+         Arg3 = 31883, 
+      }, 
+      [108] = 
+      {
+         Arg2 = 1, 
+         MiscData = 0, 
+         Arg1 = 328, 
+         Command = "M", 
+         Arg3 = 31863, 
+      }, 
+      [109] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 55, 
+         Command = "E", 
+         Arg3 = 16, 
+      }, 
+      [110] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31900, 
+         Command = "M", 
+         Arg3 = 31905, 
+      }, 
+      [111] = 
+      {
+         Arg1 = 10323, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+      }, 
+      [112] = 
+      {
+         Arg1 = 10324, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+      }, 
+      [113] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31525, 
+         Command = "O", 
+         Arg3 = 31899, 
+      }, 
+      [114] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31526, 
+         Command = "O", 
+         Arg3 = 31900, 
+      }, 
+   }, 
+   VnumRanges = 
+   {
+      Room = 
+      {
+         Last = 31999, 
+         First = 31500, 
+      }, 
+      Object = 
+      {
+         Last = 31999, 
+         First = 31500, 
+      }, 
+      Mob = 
+      {
+         Last = 31999, 
+         First = 31500, 
+      }, 
+   }, 
    Objects = 
    {
       [31520] = 
       {
+         Vnum = 31520, 
          Flags = 
          {
             [0] = "Glow", 
          }, 
-         Name = "Drink Machine", 
-         ItemType = "furniture", 
-         Layers = 0, 
+         Description = "A large and complex drink machine sits here. It is used by Wuher\
+\13to dispense drinks.", 
+         Cost = 0, 
+         ShortDescr = "a large drink machine", 
          ObjectValues = 
          {
             [1] = 1, 
@@ -26,21 +956,20 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
+         Name = "Drink Machine", 
+         ItemType = "furniture", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 0, 
-         Description = "A large and complex drink machine sits here. It is used by Wuher\
-\13to dispense drinks.", 
-         Vnum = 31520, 
-         ShortDescr = "a large drink machine", 
+         Layers = 0, 
          Weight = 5, 
       }, 
       [31521] = 
       {
-         Name = "Bed", 
-         ItemType = "trash", 
-         Layers = 0, 
+         Vnum = 31521, 
+         Description = "A comfortable bed lays here. Maybe laying down would not hurt you.", 
+         Cost = 0, 
+         ShortDescr = "a bed", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -51,24 +980,24 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A comfortable bed lays here. Maybe laying down would not hurt you.", 
+         Name = "Bed", 
+         ItemType = "trash", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31521, 
-         ShortDescr = "a bed", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31522] = 
       {
-         Name = "Bantha rib", 
-         ItemType = "food", 
-         Layers = 0, 
+         Vnum = 31522, 
+         Description = "A bantha rib is here for your enjoyment.", 
+         Cost = 10, 
+         ShortDescr = "a bantha rib", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -79,24 +1008,24 @@ AreaEntry
             [0] = 3, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 10, 
-         Description = "A bantha rib is here for your enjoyment.", 
+         Name = "Bantha rib", 
+         ItemType = "food", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31522, 
-         ShortDescr = "a bantha rib", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31523] = 
       {
-         Name = "Banthaburger", 
-         ItemType = "food", 
-         Layers = 0, 
+         Vnum = 31523, 
+         Description = "A banthaburger site here ready to eat.", 
+         Cost = 15, 
+         ShortDescr = "a banthaburger", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -107,24 +1036,24 @@ AreaEntry
             [0] = 5, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 15, 
-         Description = "A banthaburger site here ready to eat.", 
+         Name = "Banthaburger", 
+         ItemType = "food", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31523, 
-         ShortDescr = "a banthaburger", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31524] = 
       {
-         Name = "Grilled Womp Rat", 
-         ItemType = "food", 
-         Layers = 0, 
+         Vnum = 31524, 
+         Description = "Some grilled womp rat is here ready to be snatched up.", 
+         Cost = 16, 
+         ShortDescr = "some grilled womp rat", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -135,24 +1064,24 @@ AreaEntry
             [0] = 4, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 16, 
-         Description = "Some grilled womp rat is here ready to be snatched up.", 
+         Name = "Grilled Womp Rat", 
+         ItemType = "food", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31524, 
-         ShortDescr = "some grilled womp rat", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31525] = 
       {
-         Name = "hologram projector", 
-         ItemType = "trash", 
-         Layers = 0, 
+         Vnum = 31525, 
+         Description = "A hologram projector is here.", 
+         Cost = 0, 
+         ShortDescr = "a hologram projector", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -163,6 +1092,8 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
+         Name = "hologram projector", 
+         ItemType = "trash", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -173,17 +1104,15 @@ AreaEntry
                Keyword = "hologram projector", 
             }, 
          }, 
-         Cost = 0, 
-         Vnum = 31525, 
-         Description = "A hologram projector is here.", 
-         ShortDescr = "a hologram projector", 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31526] = 
       {
-         Name = "worn couch", 
-         ItemType = "furniture", 
-         Layers = 0, 
+         Vnum = 31526, 
+         Description = "A worn couch is here.", 
+         Cost = 0, 
+         ShortDescr = "a worn couch", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -194,6 +1123,8 @@ AreaEntry
             [0] = 3, 
          }, 
          ActionDescription = "", 
+         Name = "worn couch", 
+         ItemType = "furniture", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -204,17 +1135,15 @@ AreaEntry
                Keyword = "worn couch", 
             }, 
          }, 
-         Cost = 0, 
-         Vnum = 31526, 
-         Description = "A worn couch is here.", 
-         ShortDescr = "a worn couch", 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31999] = 
       {
-         Name = "lastobject", 
-         ItemType = "trash", 
-         Layers = 0, 
+         Vnum = 31999, 
+         Description = "Some god dropped a newly created lastobject here.", 
+         Cost = 0, 
+         ShortDescr = "a newly created lastobject", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -225,25 +1154,25 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
+         Name = "lastobject", 
+         ItemType = "trash", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 0, 
-         Vnum = 31999, 
-         Description = "Some god dropped a newly created lastobject here.", 
-         ShortDescr = "a newly created lastobject", 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31500] = 
       {
+         Vnum = 31500, 
          Flags = 
          {
             [0] = "Glow", 
             [10] = "AntiEvil", 
          }, 
-         Name = "candle", 
-         ItemType = "light", 
-         Layers = 0, 
+         Description = "A candle rests here.", 
+         Cost = 0, 
+         ShortDescr = "a small white candle", 
          ObjectValues = 
          {
             [1] = 1, 
@@ -254,32 +1183,32 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
          Affects = 
          {
             [1] = 
             {
-               Location = 18, 
                Modifier = 1, 
+               Location = 18, 
             }, 
          }, 
-         Cost = 0, 
-         Description = "A candle rests here.", 
-         Vnum = 31500, 
-         ShortDescr = "a small white candle", 
+         Name = "candle", 
+         ItemType = "light", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31501] = 
       {
+         Vnum = 31501, 
          Flags = 
          {
             [0] = "Glow", 
          }, 
-         Name = "brain jar", 
-         ItemType = "container", 
-         Layers = 0, 
+         Description = "A large jar containing a sacred brain lies here. ", 
+         Cost = 0, 
+         ShortDescr = "a large brain jar with flashing lights", 
          ObjectValues = 
          {
             [1] = 1, 
@@ -290,6 +1219,8 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
+         Name = "brain jar", 
+         ItemType = "container", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -298,17 +1229,15 @@ AreaEntry
                Keyword = "", 
             }, 
          }, 
-         Cost = 0, 
-         Description = "A large jar containing a sacred brain lies here. ", 
-         Vnum = 31501, 
-         ShortDescr = "a large brain jar with flashing lights", 
+         Layers = 0, 
          Weight = 3, 
       }, 
       [31502] = 
       {
-         Name = "corpse dead Jawa", 
-         ItemType = "corpse", 
-         Layers = 0, 
+         Vnum = 31502, 
+         Description = "A dead Jawa lies motionless on the ground here.", 
+         Cost = 0, 
+         ShortDescr = "a dead Jawa", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -319,6 +1248,8 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
+         Name = "corpse dead Jawa", 
+         ItemType = "corpse", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -328,21 +1259,19 @@ AreaEntry
                Keyword = "look jawa", 
             }, 
          }, 
-         Cost = 0, 
-         Vnum = 31502, 
-         Description = "A dead Jawa lies motionless on the ground here.", 
-         ShortDescr = "a dead Jawa", 
+         Layers = 0, 
          Weight = 100, 
       }, 
       [31503] = 
       {
+         Vnum = 31503, 
          Flags = 
          {
             [12] = "NoRemove", 
          }, 
-         Name = "Egg", 
-         ItemType = "trash", 
-         Layers = 0, 
+         Description = "A large egg lays here, falling over every once in a while.", 
+         Cost = 0, 
+         ShortDescr = "a large egg", 
          ObjectValues = 
          {
             [1] = 97000, 
@@ -352,8 +1281,21 @@ AreaEntry
             [5] = 0, 
             [0] = 100000, 
          }, 
-         Cost = 0, 
          ActionDescription = "", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 0, 
+               Location = 9, 
+            }, 
+         }, 
+         Name = "Egg", 
+         ItemType = "trash", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -363,28 +1305,15 @@ AreaEntry
                Keyword = "look egg", 
             }, 
          }, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Location = 9, 
-               Modifier = 0, 
-            }, 
-         }, 
-         Description = "A large egg lays here, falling over every once in a while.", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Vnum = 31503, 
-         ShortDescr = "a large egg", 
+         Layers = 0, 
          Weight = 2, 
       }, 
       [31504] = 
       {
-         Name = "Shiny krayt crystal", 
-         ItemType = "light", 
-         Layers = 0, 
+         Vnum = 31504, 
+         Description = "A shiny krayt crystal lays here.", 
+         Cost = 0, 
+         ShortDescr = "a shiny krayt crystal", 
          ObjectValues = 
          {
             [1] = 9000, 
@@ -394,37 +1323,37 @@ AreaEntry
             [5] = 0, 
             [0] = 100000, 
          }, 
-         Cost = 0, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
          Affects = 
          {
             [1] = 
             {
-               Location = 17, 
                Modifier = 5, 
+               Location = 17, 
             }, 
          }, 
-         Description = "A shiny krayt crystal lays here.", 
+         Name = "Shiny krayt crystal", 
+         ItemType = "light", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31504, 
-         ShortDescr = "a shiny krayt crystal", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31505] = 
       {
+         Vnum = 31505, 
          Flags = 
          {
             [0] = "Glow", 
          }, 
-         Name = "Pearl", 
-         ItemType = "armor", 
-         Layers = 0, 
+         Description = "A glowing pearl lays here.", 
+         Cost = 0, 
+         ShortDescr = "a krayt pearl", 
          ObjectValues = 
          {
             [1] = 2000, 
@@ -435,24 +1364,24 @@ AreaEntry
             [0] = 10000, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A glowing pearl lays here.", 
+         Name = "Pearl", 
+         ItemType = "armor", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31505, 
-         ShortDescr = "a krayt pearl", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31506] = 
       {
-         Name = "Canteen", 
-         ItemType = "drink_container", 
-         Layers = 0, 
+         Vnum = 31506, 
+         Description = "A canteen rests here, waiting to be picked up.", 
+         Cost = 0, 
+         ShortDescr = "a canteen", 
          ObjectValues = 
          {
             [1] = 10, 
@@ -463,24 +1392,24 @@ AreaEntry
             [0] = 10, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A canteen rests here, waiting to be picked up.", 
+         Name = "Canteen", 
+         ItemType = "drink_container", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31506, 
-         ShortDescr = "a canteen", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 2, 
       }, 
       [31507] = 
       {
-         Name = "jug", 
-         ItemType = "drink_container", 
-         Layers = 0, 
+         Vnum = 31507, 
+         Description = "A jug of water rests here.", 
+         Cost = 0, 
+         ShortDescr = "a jug of water", 
          ObjectValues = 
          {
             [1] = 15, 
@@ -491,24 +1420,24 @@ AreaEntry
             [0] = 15, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A jug of water rests here.", 
+         Name = "jug", 
+         ItemType = "drink_container", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31507, 
-         ShortDescr = "a jug of water", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 5, 
       }, 
       [31508] = 
       {
-         Name = "Circuit", 
-         ItemType = "circuit", 
-         Layers = 0, 
+         Vnum = 31508, 
+         Description = "A torn up circuit lies here, waiting to be picked up.", 
+         Cost = 0, 
+         ShortDescr = "a torn up circuit", 
          ObjectValues = 
          {
             [1] = 1, 
@@ -519,29 +1448,29 @@ AreaEntry
             [0] = 10, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A torn up circuit lies here, waiting to be picked up.", 
+         Name = "Circuit", 
+         ItemType = "circuit", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31508, 
-         ShortDescr = "a torn up circuit", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31509] = 
       {
+         Vnum = 31509, 
          Flags = 
          {
             [0] = "Glow", 
             [18] = "SmallSize", 
          }, 
-         Name = "Jawa Robe", 
-         ItemType = "armor", 
-         Layers = 0, 
+         Description = "A Jawa robe is here, waiting to be taken.", 
+         Cost = 0, 
+         ShortDescr = "a dirty Jawa robe", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -552,28 +1481,28 @@ AreaEntry
             [0] = 1, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
          Affects = 
          {
             [1] = 
             {
-               Location = 5, 
                Modifier = 0, 
+               Location = 5, 
             }, 
          }, 
-         Cost = 0, 
-         Description = "A Jawa robe is here, waiting to be taken.", 
-         Vnum = 31509, 
-         ShortDescr = "a dirty Jawa robe", 
+         Name = "Jawa Robe", 
+         ItemType = "armor", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 3, 
       }, 
       [31510] = 
       {
-         Name = "Wire", 
-         ItemType = "trash", 
-         Layers = 0, 
+         Vnum = 31510, 
+         Description = "Some wire is here, waiting to be taken", 
+         Cost = 0, 
+         ShortDescr = "some wire", 
          ObjectValues = 
          {
             [1] = 15, 
@@ -584,24 +1513,24 @@ AreaEntry
             [0] = 10, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "Some wire is here, waiting to be taken", 
+         Name = "Wire", 
+         ItemType = "trash", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31510, 
-         ShortDescr = "some wire", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 2, 
       }, 
       [31511] = 
       {
-         Name = "Jawa Blaster", 
-         ItemType = "weapon", 
-         Layers = 0, 
+         Vnum = 31511, 
+         Description = "A elegant little blaster lays here on the ground.", 
+         Cost = 0, 
+         ShortDescr = "a Jawa Blaster", 
          ObjectValues = 
          {
             [1] = 5, 
@@ -611,38 +1540,38 @@ AreaEntry
             [5] = 0, 
             [0] = 7200, 
          }, 
-         Cost = 0, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
          Affects = 
          {
             [1] = 
             {
-               Location = 18, 
                Modifier = 0, 
+               Location = 18, 
             }, 
          }, 
-         Description = "A elegant little blaster lays here on the ground.", 
+         Name = "Jawa Blaster", 
+         ItemType = "weapon", 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Vnum = 31511, 
-         ShortDescr = "a Jawa Blaster", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 6, 
       }, 
       [31512] = 
       {
+         Vnum = 31512, 
          Flags = 
          {
             [0] = "Glow", 
          }, 
-         Name = "Glimmering Belt", 
-         ItemType = "armor", 
-         Layers = 0, 
+         Description = "A powerful godly belt lays on the ground here.", 
+         Cost = 0, 
+         ShortDescr = "Satin's Glimmering Belt.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -652,8 +1581,61 @@ AreaEntry
             [5] = 0, 
             [0] = 200, 
          }, 
-         Cost = 0, 
          ActionDescription = "", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 0, 
+               Location = 1, 
+            }, 
+            [2] = 
+            {
+               Modifier = 10, 
+               Location = 2, 
+            }, 
+            [3] = 
+            {
+               Modifier = 10, 
+               Location = 3, 
+            }, 
+            [4] = 
+            {
+               Modifier = 10, 
+               Location = 4, 
+            }, 
+            [5] = 
+            {
+               Modifier = 10, 
+               Location = 5, 
+            }, 
+            [6] = 
+            {
+               Modifier = 20, 
+               Location = 9, 
+            }, 
+            [7] = 
+            {
+               Modifier = 500, 
+               Location = 18, 
+            }, 
+            [8] = 
+            {
+               Modifier = 500, 
+               Location = 19, 
+            }, 
+            [9] = 
+            {
+               Modifier = 0, 
+               Location = 19, 
+            }, 
+         }, 
+         Name = "Glimmering Belt", 
+         ItemType = "armor", 
+         WearFlags = 
+         {
+            [11] = "Waist", 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -662,68 +1644,15 @@ AreaEntry
                Keyword = "look belt", 
             }, 
          }, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Location = 1, 
-               Modifier = 0, 
-            }, 
-            [2] = 
-            {
-               Location = 2, 
-               Modifier = 10, 
-            }, 
-            [3] = 
-            {
-               Location = 3, 
-               Modifier = 10, 
-            }, 
-            [4] = 
-            {
-               Location = 4, 
-               Modifier = 10, 
-            }, 
-            [5] = 
-            {
-               Location = 5, 
-               Modifier = 10, 
-            }, 
-            [6] = 
-            {
-               Location = 9, 
-               Modifier = 20, 
-            }, 
-            [7] = 
-            {
-               Location = 18, 
-               Modifier = 500, 
-            }, 
-            [8] = 
-            {
-               Location = 19, 
-               Modifier = 500, 
-            }, 
-            [9] = 
-            {
-               Location = 19, 
-               Modifier = 0, 
-            }, 
-         }, 
-         Description = "A powerful godly belt lays on the ground here.", 
-         WearFlags = 
-         {
-            [11] = "Waist", 
-         }, 
-         Vnum = 31512, 
-         ShortDescr = "Satin's Glimmering Belt.", 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31513] = 
       {
-         Name = "Stick", 
-         ItemType = "treasure", 
-         Layers = 0, 
+         Vnum = 31513, 
+         Description = "A large stick of the Wise Storyteller lays here.", 
+         Cost = 0, 
+         ShortDescr = "a large stick", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -734,24 +1663,24 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A large stick of the Wise Storyteller lays here.", 
+         Name = "Stick", 
+         ItemType = "treasure", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31513, 
-         ShortDescr = "a large stick", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 1, 
       }, 
       [31514] = 
       {
-         Name = "large oak desk", 
-         ItemType = "furniture", 
-         Layers = 0, 
+         Vnum = 31514, 
+         Description = "A large oak desk collects dust on the ground here.", 
+         Cost = 0, 
+         ShortDescr = "a large oak desk", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -762,24 +1691,24 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
+         Name = "large oak desk", 
+         ItemType = "furniture", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 0, 
-         Vnum = 31514, 
-         Description = "A large oak desk collects dust on the ground here.", 
-         ShortDescr = "a large oak desk", 
+         Layers = 0, 
          Weight = 150, 
       }, 
       [31515] = 
       {
+         Vnum = 31515, 
          Flags = 
          {
             [31] = "HumanSize", 
          }, 
-         Name = "Belt", 
-         ItemType = "armor", 
-         Layers = 0, 
+         Description = "A mechanics belt lays here waiting to be used.", 
+         Cost = 0, 
+         ShortDescr = "a mechanics belt", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -789,37 +1718,37 @@ AreaEntry
             [5] = 0, 
             [0] = 2, 
          }, 
-         Cost = 0, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
          Affects = 
          {
             [1] = 
             {
-               Location = 4, 
                Modifier = 0, 
+               Location = 4, 
             }, 
          }, 
-         Description = "A mechanics belt lays here waiting to be used.", 
+         Name = "Belt", 
+         ItemType = "armor", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31515, 
-         ShortDescr = "a mechanics belt", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 4, 
       }, 
       [31516] = 
       {
+         Vnum = 31516, 
          Flags = 
          {
             [31] = "HumanSize", 
          }, 
-         Name = "Hat", 
-         ItemType = "armor", 
-         Layers = 0, 
+         Description = "A mechanics hat collects dust on the ground.", 
+         Cost = 0, 
+         ShortDescr = "a mechanics hat", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -829,33 +1758,33 @@ AreaEntry
             [5] = 0, 
             [0] = 2, 
          }, 
-         Cost = 0, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
          Affects = 
          {
             [1] = 
             {
-               Location = 2, 
                Modifier = 0, 
+               Location = 2, 
             }, 
          }, 
-         Description = "A mechanics hat collects dust on the ground.", 
+         Name = "Hat", 
+         ItemType = "armor", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31516, 
-         ShortDescr = "a mechanics hat", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 2, 
       }, 
       [31517] = 
       {
-         Name = "Ionization Gun", 
-         ItemType = "weapon", 
-         Layers = 0, 
+         Vnum = 31517, 
+         Description = "A Jawa ionization gun has been foolishly left behind.", 
+         Cost = 0, 
+         ShortDescr = "a Jawa ionization gun", 
          ObjectValues = 
          {
             [1] = 6, 
@@ -866,25 +1795,25 @@ AreaEntry
             [0] = 7200, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A Jawa ionization gun has been foolishly left behind.", 
+         Name = "Ionization Gun", 
+         ItemType = "weapon", 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Vnum = 31517, 
-         ShortDescr = "a Jawa ionization gun", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 8, 
       }, 
       [31518] = 
       {
-         Name = "key", 
-         ItemType = "key", 
-         Layers = 0, 
+         Vnum = 31518, 
+         Description = "A small key crafted from hide", 
+         Cost = 0, 
+         ShortDescr = "a small hide Key", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -895,24 +1824,24 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Description = "A small key crafted from hide", 
+         Name = "key", 
+         ItemType = "key", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Vnum = 31518, 
-         ShortDescr = "a small hide Key", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
          Weight = 5, 
       }, 
       [31519] = 
       {
-         Name = "Detector", 
-         ItemType = "furniture", 
-         Layers = 0, 
+         Vnum = 31519, 
+         Description = "A droid detector is mounted on the wall here.", 
+         Cost = 0, 
+         ShortDescr = "a droid detector", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -923,13 +1852,12 @@ AreaEntry
             [0] = 0, 
          }, 
          ActionDescription = "", 
+         Name = "Detector", 
+         ItemType = "furniture", 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 0, 
-         Vnum = 31519, 
-         Description = "A droid detector is mounted on the wall here.", 
-         ShortDescr = "a droid detector", 
+         Layers = 0, 
          Weight = 900, 
       }, 
    }, 
@@ -937,127 +1865,107 @@ AreaEntry
    {
       [31744] = 
       {
+         Vnum = 31744, 
+         Description = "You can smell an odour developing around you.\
+", 
+         Sector = "mountain", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31745, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31745, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31743, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31743, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You can smell an odour developing around you.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31744, 
          Name = "Wastes", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "mountain", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31745] = 
       {
+         Vnum = 31745, 
+         Description = "You stand on a hard rocky surface. The air around you is very unpleasant.\
+", 
+         Sector = "mountain", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31744, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31744, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You stand on a hard rocky surface. The air around you is very unpleasant.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31745, 
          Name = "Wastes", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "mountain", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31746] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31747, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31735, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31746, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "You are walking down a long, narrow hallway which turns at the end.\
 ", 
-         TeleDelay = 0, 
-         Name = "Long Hallway", 
-         Vnum = 31746, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31747] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31748, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31747, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31746, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31735, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Long Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31747] = 
+      {
+         Vnum = 31747, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1065,39 +1973,39 @@ AreaEntry
          Description = "You are walking down a hallway. It is old and there is a rather digusting\
 smell all around you.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway Through Jabba's Palace", 
-         Vnum = 31747, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31748] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31749, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31748, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31747, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31746, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Hallway Through Jabba's Palace", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31748] = 
+      {
+         Vnum = 31748, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1105,39 +2013,39 @@ smell all around you.\
          Description = "You are standing in a hallway. To each side all along the hall there are\
 small individual rooms.\
 ", 
-         TeleDelay = 0, 
-         Name = "Long Hallway in Jabba's Palace", 
-         Vnum = 31748, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31749] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31750, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31749, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31748, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31747, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Long Hallway in Jabba's Palace", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31749] = 
+      {
+         Vnum = 31749, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1145,57 +2053,39 @@ small individual rooms.\
          Description = "You are coming to the end of the hallway which curves both to the east and\
 to the west.\
 ", 
-         TeleDelay = 0, 
-         Name = "Long Hallway End", 
-         Vnum = 31749, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31750] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31751, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31750, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31749, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31748, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31770, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31788, 
-               Description = "", 
-               Direction = "up", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Long Hallway End", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31750] = 
+      {
+         Vnum = 31750, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1205,57 +2095,57 @@ surprising considering what creatures and animals have lived here in the past\
 and even now. The ground is cool and hard full of ripples as if never crafted\
 or taken care of.\
 ", 
-         TeleDelay = 0, 
-         Name = "Narrow Hallway", 
-         Vnum = 31750, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31751] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31768, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31751, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31752, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31749, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31769, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31770, 
+               Distance = 0, 
             }, 
             [4] = 
             {
-               DestinationVnum = 31750, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 31788, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Narrow Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31751] = 
+      {
+         Vnum = 31751, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1265,57 +2155,57 @@ the end you can see different colored lights flashing in the dimness and the\
 darkness. The ground is rough and the air is hot and heavy. Above a burnt out\
 glowpanel lays motionless but you can still see pretty well.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway Facing A Dark Room", 
-         Vnum = 31751, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31752] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31766, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31768, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31753, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31752, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31767, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31769, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [4] = 
             {
-               DestinationVnum = 31751, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31750, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Hallway Facing A Dark Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31752] = 
+      {
+         Vnum = 31752, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1323,57 +2213,57 @@ glowpanel lays motionless but you can still see pretty well.\
          Description = "You are walking down a narrow hallway. To each side there are very small rooms\
 which are vacant.\
 ", 
-         TeleDelay = 0, 
-         Name = "Narrow Hallway ", 
-         Vnum = 31752, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31753] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31764, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31766, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31754, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31753, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31765, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31767, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [4] = 
             {
-               DestinationVnum = 31752, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31751, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Narrow Hallway ", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31753] = 
+      {
+         Vnum = 31753, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1383,57 +2273,57 @@ to be guarded or have a door in place. The ground beneath you is hard and full\
 of cracks and uneven places. The air is heavy and hot but nothing that cannot\
 be lived with.\
 ", 
-         TeleDelay = 0, 
-         Name = "A Long Hallway ", 
-         Vnum = 31753, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31754] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31762, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31764, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31755, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31754, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31763, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31765, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [4] = 
             {
-               DestinationVnum = 31753, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31752, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "A Long Hallway ", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31754] = 
+      {
+         Vnum = 31754, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1443,57 +2333,57 @@ take. To you sides you continually see small occupied rooms. The ground\
 beneath your feet is rough and uneven making you feet ache all over. The\
 lighting here is minimal but you can still see down the hall.\
 ", 
-         TeleDelay = 0, 
-         Name = "End Of Hallway Before A Large Room", 
-         Vnum = 31754, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31755] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31760, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31762, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31756, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31755, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31761, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31763, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [4] = 
             {
-               DestinationVnum = 31754, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31753, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "End Of Hallway Before A Large Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31755] = 
+      {
+         Vnum = 31755, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1502,48 +2392,57 @@ lighting here is minimal but you can still see down the hall.\
 The entrance used to have doors but as you can see they have been removed for\
 all that remains is the hinges.\
 ", 
-         TeleDelay = 0, 
-         Name = "In Front Of A Large Room", 
-         Vnum = 31755, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31756] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31759, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31760, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31757, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31756, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31755, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31761, 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31754, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "In Front Of A Large Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31756] = 
+      {
+         Vnum = 31756, 
          Flags = 
          {
             [0] = "Dark", 
@@ -1555,39 +2454,48 @@ is softer in here as if taken care of, there is not one ripple in the whole\
 surface showing grace and care from the person or people that finished this\
 room.\
 ", 
-         TeleDelay = 0, 
-         Name = "Brain Jar Room", 
-         Vnum = 31756, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31757] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31758, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31759, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31756, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31757, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31755, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Brain Jar Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31757] = 
+      {
+         Vnum = 31757, 
          Flags = 
          {
             [0] = "Dark", 
@@ -1598,30 +2506,39 @@ As they scream the lights on the jars change color indicating that they are\
 not calm at all. In front of you there is a row of containing shelves with\
 jars gently placed on them.\
 ", 
-         TeleDelay = 0, 
-         Name = "Brain Room", 
-         Vnum = 31757, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31758] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31757, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31758, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31756, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Brain Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31758] = 
+      {
+         Vnum = 31758, 
          Flags = 
          {
             [0] = "Dark", 
@@ -1632,30 +2549,30 @@ all species of the galaxy. These jars seem to be a bit calmer for their lights\
 are not flaring off when you pass by them. this shows they are mature and\
 prepared to be put into a body of some sort, most likely a spiderwalker.\
 ", 
-         TeleDelay = 0, 
-         Name = "Brain Compartment", 
-         Vnum = 31758, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31759] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31756, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31757, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Brain Compartment", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31759] = 
+      {
+         Vnum = 31759, 
          Flags = 
          {
             [0] = "Dark", 
@@ -1666,30 +2583,30 @@ placed carefully to ensure that they are safe and will not fall to the ground\
 and break. The air is crisp and provides stability as you stare longly at the\
 large amounts of jars.\
 ", 
-         TeleDelay = 0, 
-         Name = "Row Of Jars", 
-         Vnum = 31759, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31760] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31755, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31756, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Row Of Jars", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31760] = 
+      {
+         Vnum = 31760, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1697,30 +2614,30 @@ large amounts of jars.\
          Description = "You are standing in small room which was initially designed to home a person.\
 It has a window facing the sun.\
 ", 
-         TeleDelay = 0, 
-         Name = "Old Room", 
-         Vnum = 31760, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31761] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31755, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31755, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Old Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31761] = 
+      {
+         Vnum = 31761, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1728,60 +2645,60 @@ It has a window facing the sun.\
          Description = "You are standing in room. It has dust all over it for it has not been used\
 for many, many years.\
 ", 
-         TeleDelay = 0, 
-         Name = "Dusty Old Room", 
-         Vnum = 31761, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31762] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31754, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31755, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Dusty Old Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31762] = 
+      {
+         Vnum = 31762, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "This is a larger room. It was probably designed to hold a larger species.\
 ", 
-         TeleDelay = 0, 
-         Name = "Large Guest Room", 
-         Vnum = 31762, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31763] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31754, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31754, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Large Guest Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31763] = 
+      {
+         Vnum = 31763, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1790,30 +2707,30 @@ for many, many years.\
 corner and an old bedframe in the corner which seems to have been destroyed by\
 small rodents.\
 ", 
-         TeleDelay = 0, 
-         Name = "Old Small Calibered Room", 
-         Vnum = 31763, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31764] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31753, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31754, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Old Small Calibered Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31764] = 
+      {
+         Vnum = 31764, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1821,30 +2738,30 @@ small rodents.\
          Description = "You are standing in an extremely small room that was designed to hold a\
 cleaning droid or two.\
 ", 
-         TeleDelay = 0, 
-         Name = "Storage Compartment For Droids", 
-         Vnum = 31764, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31765] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31753, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31753, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Storage Compartment For Droids", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31765] = 
+      {
+         Vnum = 31765, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1852,30 +2769,30 @@ cleaning droid or two.\
          Description = "You are in a large room. It was made for a larger type species. It is used to\
 house and for sleeping. This room has a very disgusting odour.\
 ", 
-         TeleDelay = 0, 
-         Name = "Large Specimen Room", 
-         Vnum = 31765, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31766] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31752, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31753, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Large Specimen Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31766] = 
+      {
+         Vnum = 31766, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1883,30 +2800,30 @@ house and for sleeping. This room has a very disgusting odour.\
          Description = "You are standing in a small room with a window facing the great sand dune\
 sea.\
 ", 
-         TeleDelay = 0, 
-         Name = "Small Unused Room", 
-         Vnum = 31766, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31767] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31752, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31752, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Small Unused Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31767] = 
+      {
+         Vnum = 31767, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1914,30 +2831,30 @@ sea.\
          Description = "You are standing in a room which seems to be habitated. There is a small bed\
 in the corner with a window mounted on the wall which looks outside.\
 ", 
-         TeleDelay = 0, 
-         Name = "Habitated Room", 
-         Vnum = 31767, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31768] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31751, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31752, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Habitated Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31768] = 
+      {
+         Vnum = 31768, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -1945,69 +2862,60 @@ in the corner with a window mounted on the wall which looks outside.\
          Description = "You are in a room of small caliber. You feel enclosed as you look around the\
 room.\
 ", 
-         TeleDelay = 0, 
-         Name = "Small Enclosed Room", 
-         Vnum = 31768, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31769] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31751, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31751, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Small Enclosed Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31769] = 
+      {
+         Vnum = 31769, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "You are standing in a bedroom. It is not habitated but could be.\
 ", 
-         TeleDelay = 0, 
-         Name = "Unhabitated Room", 
-         Vnum = 31769, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31770] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31750, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31771, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31751, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Unhabitated Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31770] = 
+      {
+         Vnum = 31770, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2017,39 +2925,39 @@ provides discomfort for your feet. To each side you can see some small and\
 large rooms all with different uses. There is a glowpanel above your head\
 barely functioning providing the dimmest of light all over.\
 ", 
-         TeleDelay = 0, 
-         Name = "Long Hallway", 
-         Vnum = 31770, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31771] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31770, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31750, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31772, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31771, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Long Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31771] = 
+      {
+         Vnum = 31771, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2059,57 +2967,39 @@ surface, it has ripples all along it and provides not much for heat or for\
 comfort. There is no lighting here but you can still see down the gloomy\
 hallway but not always with ease.\
 ", 
-         TeleDelay = 0, 
-         Name = "A Hallway Passage", 
-         Vnum = 31771, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31772] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31782, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31770, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31771, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31784, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31773, 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31772, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "A Hallway Passage", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31772] = 
+      {
+         Vnum = 31772, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2119,57 +3009,57 @@ rather unpleasant one, but having been in this palace it is no surprise that\
 this smell is located here. The hallway is gloomy and the floor has a rough\
 texture as if never smoothed out.\
 ", 
-         TeleDelay = 0, 
-         Name = "Dense Hallway", 
-         Vnum = 31772, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31773] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31780, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31782, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31772, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31771, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31781, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31784, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [4] = 
             {
-               DestinationVnum = 31774, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31773, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Dense Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31773] = 
+      {
+         Vnum = 31773, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2179,57 +3069,57 @@ still cool in the day the stone is what covers all the palace floors. You can\
 see the end of the hallway just ahead of yourself. Large and without any\
 features. Just a simple stone wall.\
 ", 
-         TeleDelay = 0, 
-         Name = "Long Narrowed Hallway", 
-         Vnum = 31773, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31774] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31778, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31780, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31773, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31772, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31779, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31781, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [4] = 
             {
-               DestinationVnum = 31775, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31774, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Long Narrowed Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31774] = 
+      {
+         Vnum = 31774, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2242,48 +3132,57 @@ rather unusual thing for this palace. To both sides there are rooms of\
 different caliber. There is a great stone wall stopping the end of the hall\
 just ahead.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway Leading To Individual Rooms", 
-         Vnum = 31774, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31775] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31776, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31778, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31774, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31773, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31777, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31779, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [4] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31775, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Hallway Leading To Individual Rooms", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31775] = 
+      {
+         Vnum = 31775, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2292,30 +3191,48 @@ just ahead.\
 before you covering your way further down the hallway. The stone wall is\
 thick and rough with different textures all over its surface.\
 ", 
-         TeleDelay = 0, 
-         Name = "End Of A Long Hallway", 
-         Vnum = 31775, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31776] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31775, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31776, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31774, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31777, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "End Of A Long Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31776] = 
+      {
+         Vnum = 31776, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2323,30 +3240,30 @@ thick and rough with different textures all over its surface.\
          Description = "You are standing in room of very small caliber. It was probably constructed to\
 hold extra blankets. There are closets all along the walls.\
 ", 
-         TeleDelay = 0, 
-         Name = "Extra Small Compartment Room", 
-         Vnum = 31776, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31777] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31775, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31775, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Extra Small Compartment Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31777] = 
+      {
+         Vnum = 31777, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2354,60 +3271,60 @@ hold extra blankets. There are closets all along the walls.\
          Description = "You are in a large room. It was probably used as a sleeping quarter. There is\
 a small bed in the corner which has been chewed away at by a small rodent.\
 ", 
-         TeleDelay = 0, 
-         Name = "Large Old Room", 
-         Vnum = 31777, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31778] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31774, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31775, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Large Old Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31778] = 
+      {
+         Vnum = 31778, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "You are in a well sized room. It was used as a living quarters in the past.\
 ", 
-         TeleDelay = 0, 
-         Name = "Well Sized Room", 
-         Vnum = 31778, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31779] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31774, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31774, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Well Sized Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31779] = 
+      {
+         Vnum = 31779, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2415,60 +3332,60 @@ a small bed in the corner which has been chewed away at by a small rodent.\
          Description = "You are standing in a living quarters. It is currently habitated. You can\
 tell because of food on the floor.\
 ", 
-         TeleDelay = 0, 
-         Name = "Habitated Living Quarters", 
-         Vnum = 31779, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31780] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31773, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31774, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Habitated Living Quarters", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31780] = 
+      {
+         Vnum = 31780, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "You are standing in a small room used to store extra supplies.\
 ", 
-         TeleDelay = 0, 
-         Name = "Supply Storage", 
-         Vnum = 31780, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31781] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31773, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31773, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Supply Storage", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31781] = 
+      {
+         Vnum = 31781, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2476,60 +3393,60 @@ tell because of food on the floor.\
          Description = "You are in a very large room. It was made as a living quaters. There is a\
 large window in front of you.\
 ", 
-         TeleDelay = 0, 
-         Name = "Large Living Quarters", 
-         Vnum = 31781, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31782] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31772, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31773, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Large Living Quarters", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31782] = 
+      {
+         Vnum = 31782, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "You are in a smaller room. It can be used for any purpose.\
 ", 
-         TeleDelay = 0, 
-         Name = "Small Room", 
-         Vnum = 31782, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31784] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31772, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31772, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Small Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31784] = 
+      {
+         Vnum = 31784, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2537,39 +3454,30 @@ large window in front of you.\
          Description = "You are standing in a large room. There is a bed that can hold any species\
 and a large window on the back wall.\
 ", 
-         TeleDelay = 0, 
-         Name = "Large Room", 
-         Vnum = 31784, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31788] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31789, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31750, 
-               Description = "", 
-               Direction = "down", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31772, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Large Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31788] = 
+      {
+         Vnum = 31788, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2578,39 +3486,39 @@ and a large window on the back wall.\
 hallway. Along the hallway many prison cells are there because Jabba use them\
 for keeping people of unimportance.\
 ", 
-         TeleDelay = 0, 
-         Name = "Top Of Staircase", 
-         Vnum = 31788, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31789] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31788, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31789, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31790, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "down", 
+               DestinationVnum = 31750, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Top Of Staircase", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31789] = 
+      {
+         Vnum = 31789, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2618,57 +3526,39 @@ for keeping people of unimportance.\
          Description = "You are walking down the hallway. As you walk along you notice that all of\
 the doors have been removed.\
 ", 
-         TeleDelay = 0, 
-         Name = "Prison Hallway", 
-         Vnum = 31789, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31790] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31789, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31788, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31794, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31791, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31790, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31795, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Prison Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31790] = 
+      {
+         Vnum = 31790, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2676,48 +3566,57 @@ the doors have been removed.\
          Description = "You are in the hallway. It ends just up ahead making it a rather short\
 corridor.\
 ", 
-         TeleDelay = 0, 
-         Name = "Prison Hallway", 
-         Vnum = 31790, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31791] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31790, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31789, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31792, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31794, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31793, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31791, 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31795, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Prison Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31791] = 
+      {
+         Vnum = 31791, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2725,30 +3624,48 @@ corridor.\
          Description = "You have come to the end of the hall. A stone wall lays in front of you,\
 preventing you from advancing.\
 ", 
-         TeleDelay = 0, 
-         Name = "Prison Hallway End", 
-         Vnum = 31791, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31792] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31791, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31790, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31792, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31793, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Prison Hallway End", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31792] = 
+      {
+         Vnum = 31792, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2757,30 +3674,30 @@ preventing you from advancing.\
 across the wall. All around you the only furniture in this cell is a prison\
 bed.\
 ", 
-         TeleDelay = 0, 
-         Name = "Small Prison Cell", 
-         Vnum = 31792, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31793] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31791, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31791, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Small Prison Cell", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31793] = 
+      {
+         Vnum = 31793, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2788,30 +3705,30 @@ bed.\
          Description = "You are standing in a large prison cell. This cell was used for larger\
 specimens. It has a toilet and a small bunk in the corner.\
 ", 
-         TeleDelay = 0, 
-         Name = "Large Prison Cell", 
-         Vnum = 31793, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31794] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31790, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31791, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Large Prison Cell", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31794] = 
+      {
+         Vnum = 31794, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2819,30 +3736,30 @@ specimens. It has a toilet and a small bunk in the corner.\
          Description = "You are standing in the smallest cell. This cell was used to hold very small\
 specimens of life.\
 ", 
-         TeleDelay = 0, 
-         Name = "Extremely Small Cell", 
-         Vnum = 31794, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31795] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31790, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31790, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Extremely Small Cell", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31795] = 
+      {
+         Vnum = 31795, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2850,21 +3767,30 @@ specimens of life.\
          Description = "You are standing in a very large prison cell. It scares you to think what was\
 kept in here. There is an awful smell.\
 ", 
-         TeleDelay = 0, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31790, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Very Large Prison Cell", 
-         Vnum = 31795, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31796] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 31796, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -2873,60 +3799,42 @@ kept in here. There is an awful smell.\
 disgusting smell. This room is immense. To the north is the smaller\
 compartment the rancor was kept in while his cage was cleaned.\
 ", 
-         TeleDelay = 0, 
-         Name = "Rancor's Pit", 
-         Vnum = 31796, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31797] = 
-      {
          Exits = 
          {
          }, 
+         Name = "Rancor's Pit", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31797] = 
+      {
+         Vnum = 31797, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
          Description = "You get crushed by gate and die(d.t)\
 ", 
-         TeleDelay = 0, 
+         Sector = "inside", 
+         Exits = 
+         {
+         }, 
          Name = "DT", 
-         Vnum = 31797, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31798] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31799, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31733, 
-               Description = "", 
-               Direction = "up", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31798, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -2935,78 +3843,69 @@ compartment the rancor was kept in while his cage was cleaned.\
 room and has a very foul odour to it. To the north the smaller room lays which\
 the rancor was put when the cage was cleaned.\
 ", 
-         TeleDelay = 0, 
-         Name = "Rancor's Cage", 
-         Vnum = 31798, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31799] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31798, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31799, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 31733, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Rancor's Cage", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31799] = 
+      {
+         Vnum = 31799, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "EDIT\
 ", 
-         TeleDelay = 0, 
-         Name = "DT", 
-         Vnum = 31799, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31800] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31733, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31802, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31801, 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31798, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "DT", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31800] = 
+      {
+         Vnum = 31800, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -3014,30 +3913,48 @@ the rancor was put when the cage was cleaned.\
          Description = "You are standing in front of hallway which leads down into the rancor pit. To\
 the south is the kitchen. To continue down the hall go east.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway to Rancor Pit", 
-         Vnum = 31800, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31801] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31800, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31733, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31802, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31801, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Hallway to Rancor Pit", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31801] = 
+      {
+         Vnum = 31801, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -3047,39 +3964,30 @@ disgusting foods. There is a table in the center of the room with a cutting\
 board and extra utensils. On the wall there are many shelves and utensils\
 layed everywhere.\
 ", 
-         TeleDelay = 0, 
-         Name = "Jabba's Palace's Kitchen", 
-         Vnum = 31801, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31802] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31803, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
                DestinationVnum = 31800, 
-               Description = "", 
-               Direction = "west", 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Jabba's Palace's Kitchen", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31802] = 
+      {
+         Vnum = 31802, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -3087,51 +3995,69 @@ layed everywhere.\
          Description = "You are walking down a hall which passes the docking bay and many living\
 quarters.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway Past Docking Bay", 
-         Vnum = 31802, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31803] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31802, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31803, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31800, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Hallway Past Docking Bay", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31803] = 
+      {
+         Vnum = 31803, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "You are standing in front of one of many rooms located on the bottom level.\
 ", 
-         TeleDelay = 0, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31802, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Hallway Past A Room", 
-         Vnum = 31803, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31804] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 31804, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -3139,478 +4065,469 @@ quarters.\
          Description = "You are standing on a rather small sized landing pad. It can be used to keep\
 smaller sized vehicles of any origin.\
 ", 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
          Name = "Landing Pad 6", 
-         Vnum = 31804, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "city", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31805] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31589, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31806, 
-               Description = "", 
-               Direction = "up", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31805, 
          Description = "You are standing at the top of a high cliff. As you look downwards it is not a\
 far drop but what scares you is that you would land on sharp jagged stones of\
 all shapes and sizes. As you look the other way there is a steep cliff. If you\
 can climb it go ahead.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31805, 
-         Name = "Rocky Cliff", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31806] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31805, 
-               Description = "", 
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31589, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 31806, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Rocky Cliff", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31806] = 
+      {
+         Vnum = 31806, 
          Description = "You are standing in the middle of a Krayt Dragon's nest. It does not smell\
 particularly good. A large female krayt towers over you here wondering what\
 you are doing.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31806, 
-         Name = "Krayt Nest", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31807] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31501, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31808, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "down", 
+               DestinationVnum = 31805, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Krayt Nest", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31807] = 
+      {
+         Vnum = 31807, 
          Description = "All around you is sand and shiny dunes piling as high as you can see. As far\
 as you can guess anything could be behind there. The towering sand dunes make\
 you feel scared as you are so small and enclosed by the towering heaps of\
 sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31807, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31808] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31809, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31501, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31807, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31812, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31808, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31808] = 
+      {
+         Vnum = 31808, 
          Description = "You are walking along the hot sand heated by the twin suns of Tatooine. The\
 ground beneath you is hardening gradually as you walk over it or is it just\
 your imagination?\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31808, 
-         Name = "Deserty Path", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31809] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31814, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31809, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31808, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31807, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31810, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31812, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Deserty Path", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31809] = 
+      {
+         Vnum = 31809, 
          Description = "You walk along a large area covered with sand. This sand seems to have\
 hardened gradually over the years and is now almost of the consistency of\
 sandstone. To the west the sand slopes downward in many directions. \
 ", 
-         TeleDelay = 0, 
-         Vnum = 31809, 
-         Name = "Hard Sandy Area", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31810] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31809, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31814, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31811, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31808, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31810, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Hard Sandy Area", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31810] = 
+      {
+         Vnum = 31810, 
          Description = "You are standing on top of very hard sand, yet maybe even rock covered with\
 sand. As you look westwards you see the dune sea stop abruptly and plummet\
 downwards. I wonder why.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31810, 
-         Name = "Sandy Surface", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31811] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31810, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31809, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31811, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Sandy Surface", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31811] = 
+      {
+         Vnum = 31811, 
          Description = "You are standing on the edge of a very steep drop that falls directly into the\
 heart of what looks to be a colony of some sorts. You would not want to fall\
 down this cliff for it is a ways down.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31811, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31810, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Overseeing A Small Colony.", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31812] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31808, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31813, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31812, 
          Description = "You are walking on one of the only things on this planet. Sand. It is nice and\
 soft but some patches of hardened sand can bee seen all around.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31812, 
-         Name = "Flat Area", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31813] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31812, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31808, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "You look about, look from the direction you came, nothing, nothing at all but\
-sand. You wonder how much of this stuff could there possibly be?\
-", 
-         TeleDelay = 0, 
-         Vnum = 31813, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31814] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31815, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31809, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31813, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Flat Area", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31813] = 
+      {
+         Vnum = 31813, 
+         Description = "You look about, look from the direction you came, nothing, nothing at all but\
+sand. You wonder how much of this stuff could there possibly be?\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31812, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31814] = 
+      {
+         Vnum = 31814, 
          Description = "As the ground beaneath your feet is in a transition from sand to rock\
 it seems to be versatile and flakes away in some areas with every\
 step that you take on it. Northward you see all the sand is no longer\
 there but it is totally a rock surface.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31814, 
-         Name = "Unstable Ground", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31815] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31814, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31815, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31816, 
-               Description = "", 
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31809, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Unstable Ground", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31815] = 
+      {
+         Vnum = 31815, 
          Description = "The texture beneath your feet is no longer primarily sand but totally\
 rock. The rock continues for twenty or thirty feet ahead of you but\
 then stops abruptly and becomes sand once again. Downwards a cliff\
 slopes downwards. This side is still very steep but you can perceive\
 that it is very possible to go up and down of it.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31815, 
-         Name = "Rocky Area", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31816] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31817, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31814, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31815, 
-               Description = "", 
-               Direction = "up", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31818, 
+               Keyword = "", 
                Description = "", 
                Direction = "down", 
+               DestinationVnum = 31816, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Rocky Area", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31816] = 
+      {
+         Vnum = 31816, 
          Description = "You are on a pathway facing a severe angle which makes it so that\
 there is not much room to move around without falling downwards\
 towards flat ground. To the east there is a small cave in the side of\
 a cliff. If you continue downwards you will be entering the city.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31816, 
-         Name = "Side Of Steep Path", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31817] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31816, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31817, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 31815, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "down", 
+               DestinationVnum = 31818, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Side Of Steep Path", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31817] = 
+      {
+         Vnum = 31817, 
          Flags = 
          {
             [10] = "Safe", 
@@ -3624,48 +4541,30 @@ drastically and therefore makes this place a good one to stay in for\
 long periods of time especially when both suns are up, sending rays of\
 heat onto you. \
 ", 
-         TeleDelay = 0, 
-         Name = "Water Shack", 
-         Vnum = 31817, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31818] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31819, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31870, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
                DestinationVnum = 31816, 
-               Description = "", 
-               Direction = "up", 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Water Shack", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31818] = 
+      {
+         Vnum = 31818, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -3674,57 +4573,48 @@ heat onto you. \
 around tere are small shops and tents set up quickly used for\
 merchandising goods to any passers.\
 ", 
-         TeleDelay = 0, 
-         Name = "Entering The City", 
-         Vnum = 31818, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31819] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31818, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31819, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31849, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31870, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31820, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31851, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 31816, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Entering The City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31819] = 
+      {
+         Vnum = 31819, 
          Description = "You are walking down a wide path in the middle of this small city\
 seemingly belonging to the Jawas. It has been used frequently and\
 you can tell this for the rock is shaved away by weight and the path\
@@ -3732,39 +4622,57 @@ is full of marks. Straight ahead also there is a huge fortress of\
 some sorts. It is simply constructed and seems old, but that is\
 probably because of the wind and the scorching suns of Tatooine. \
 ", 
-         TeleDelay = 0, 
-         Vnum = 31819, 
-         Name = "Path In The City", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31820] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31819, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31818, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31821, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31849, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31820, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [4] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31851, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Path In The City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31820] = 
+      {
+         Vnum = 31820, 
          Description = "You walk along a wide dusty path between two of the most popular\
 places in this small veritable city. All around Jawas and small\
 creatures of likes you do not want to be aquainted with. As you\
@@ -3773,134 +4681,121 @@ fortress growing with every step you take, seemingly growing to an \
 endless extent. Although it is rather large it seems to be of simple\
 construction and not very complicated.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31820, 
-         Name = "Dusty Path", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31821] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31820, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31819, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31822, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31821, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Dusty Path", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31821] = 
+      {
+         Vnum = 31821, 
          Description = "You walk along a wide path seemingly wider than you think because of\
 the reflection and glare of the two twin suns of Tatooine. In front\
 of you the Jawa fortress stands immensely with not much architectural\
 design to it. You can continue down this road towards the fortress or\
 turn off into one of the side streets leading to who knows where.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31821, 
-         Name = "Path", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31822] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31821, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31820, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31823, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31822, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
             }, 
          }, 
+         Name = "Path", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31822] = 
+      {
+         Vnum = 31822, 
          Description = "You are standing directly in front of the Jawa Fortress. It seems rather\
 large from this viewpoint but is limited to levels and interior space\
 due to its design. there are some small designs on the fortress but\
 they seem to not have been part of the original plans of the fortress\
 but added in by certain individuals. \
 ", 
-         TeleDelay = 0, 
-         Vnum = 31822, 
-         Name = "Directly In Front Of The Jawa Fortress", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31823] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31822, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31821, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31827, 
-               Description = "", 
-               Direction = "east", 
+               DestinationVnum = 31823, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31824, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Directly In Front Of The Jawa Fortress", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31823] = 
+      {
+         Vnum = 31823, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -3910,39 +4805,52 @@ and there are no signs of art even from their own culture in this\
 room. There are some narrow corridors in many directions leading to\
 different parts of the fortress.\
 ", 
-         TeleDelay = 0, 
-         Name = "Entrance To Jawa Fortress", 
-         Vnum = 31823, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31824] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31823, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 31822, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31825, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31827, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31824, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Entrance To Jawa Fortress", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31824] = 
+      {
+         Vnum = 31824, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -3953,39 +4861,39 @@ inoperative or malfunctioning. Further down the hallway, the hallway\
 come to an abrupt stop and turn off. The ground you walk on is rough\
 but the lack of sunlight keeps its moisture and color well. \
 ", 
-         TeleDelay = 0, 
-         Name = "A Narrow Hallway", 
-         Vnum = 31824, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31825] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31824, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31823, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31829, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31825, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "A Narrow Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31825] = 
+      {
+         Vnum = 31825, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -3996,39 +4904,39 @@ fortress. The glow panels above flicker as if running out of energy.\
 Directly in front of you the hallway splits off with a sharp turn\
 towards the south. \
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway", 
-         Vnum = 31825, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31827] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31828, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31824, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31823, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31829, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31827] = 
+      {
+         Vnum = 31827, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4039,78 +4947,69 @@ ground is not as rough as straight rock. There is no lighting in this\
 room but you can still make your way around. The air is cool and crisp\
 making it a little easier to breathe. \
 ", 
-         TeleDelay = 0, 
-         Name = "A Large Room", 
-         Vnum = 31827, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31828] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31827, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31828, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31823, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "A Large Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31828] = 
+      {
+         Vnum = 31828, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "You are standing in room #31828.\
 ", 
-         TeleDelay = 0, 
-         Name = "A room", 
-         Vnum = 31828, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31829] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31825, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31832, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31830, 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31827, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "A room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31829] = 
+      {
+         Vnum = 31829, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4120,53 +5019,48 @@ and all sorts of small things all over the room layed about. There\
 are a few Jawas young and old roaming these hallways. This here room\
 is used for more of a storage place and not for eating.\
 ", 
-         TeleDelay = 0, 
-         Name = "Large Room", 
-         Vnum = 31829, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31830] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31829, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31825, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31831, 
-               Description = "", 
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31832, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31876, 
-               Description = "", 
-               Direction = "somewhere", 
-               Distance = 0, 
-               Keyword = "bed", 
                Key = -1, 
-               Flags = 
-               {
-                  [17] = "CanEnter", 
-                  [11] = "Hidden", 
-               }, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31830, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Large Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31830] = 
+      {
+         Vnum = 31830, 
          Flags = 
          {
             [23] = "Hotel", 
@@ -4181,30 +5075,53 @@ safe with guard in pretty much all directions.\
  \
 You may safely quit from here.\
 ", 
-         TeleDelay = 0, 
-         Name = "Quarters", 
-         Vnum = 31830, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31831] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31830, 
-               Description = "", 
-               Direction = "up", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31829, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "down", 
+               DestinationVnum = 31831, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "bed", 
+               Description = "", 
+               Direction = "somewhere", 
+               Flags = 
+               {
+                  [17] = "CanEnter", 
+                  [11] = "Hidden", 
+               }, 
+               DestinationVnum = 31876, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Quarters", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31831] = 
+      {
+         Vnum = 31831, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4215,39 +5132,30 @@ goods that are probably useless to the everyday person. There is a jawa\
 guard half asleep here watching over the items. This room does not seem to\
 have been dug out yet was put here by nature.\
 ", 
-         TeleDelay = 0, 
-         Name = "Small Room", 
-         Vnum = 31831, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31832] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31833, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31829, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 31830, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Small Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31832] = 
+      {
+         Vnum = 31832, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4257,48 +5165,39 @@ posed no problem to the people that built it. It is extremely dark in here and\
 not much is visible to the plain eye. The ground is cold and stiff and makes\
 your feet feel cold as you walk over it.\
 ", 
-         TeleDelay = 0, 
-         Name = "Entrance", 
-         Vnum = 31832, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31833] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31832, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31833, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31839, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31834, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31829, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Entrance", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31833] = 
+      {
+         Vnum = 31833, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4306,39 +5205,48 @@ your feet feel cold as you walk over it.\
          Description = "You are at an intersection. You may go either east or west and explore this\
 vast place. In both directions the small corridors lighten up further down.\
 ", 
-         TeleDelay = 0, 
-         Name = "Intersection", 
-         Vnum = 31833, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31834] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31833, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31832, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31835, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31839, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31834, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Intersection", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31834] = 
+      {
+         Vnum = 31834, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4348,39 +5256,39 @@ the sounds of discussion and occasional laughter. The ground is cool and soft\
 for it is not dried by the everydays suns of Tatooine. The hallway is a gloomy\
 place and makes you think twice before you do anything.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway", 
-         Vnum = 31834, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31835] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31834, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31833, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31836, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31835, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31835] = 
+      {
+         Vnum = 31835, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4389,39 +5297,39 @@ place and makes you think twice before you do anything.\
 guardians discussing near a heavily guarded door leading into a large room\
 with someone, or something, important inside of it.\
 ", 
-         TeleDelay = 0, 
-         Name = "End Of Hallway", 
-         Vnum = 31835, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31836] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31837, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31834, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31835, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31836, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "End Of Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31836] = 
+      {
+         Vnum = 31836, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4432,30 +5340,39 @@ disturb anyone. The ground is more of a sand color and is quite soft\
 and hot. Upwards there is an oppening in the roof letting sunlight in\
 and momentarily blinding you.\
 ", 
-         TeleDelay = 0, 
-         Name = "Opening", 
-         Vnum = 31836, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31837] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31836, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31837, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31835, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Opening", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31837] = 
+      {
+         Vnum = 31837, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4466,34 +5383,30 @@ cause no harm to their master. The room has a large crack in the\
 ceiling and it is rather hot in here. The way you see it staying in this\
 fortress is not a bad idea. \
 ", 
-         TeleDelay = 0, 
-         Name = "Entrance", 
-         Vnum = 31837, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31838] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31837, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31836, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
             }, 
          }, 
+         Name = "Entrance", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31838] = 
+      {
+         Vnum = 31838, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4504,30 +5417,34 @@ exist. Maybe you should try to understand him before coming to any\
 conclusions for he may able to help you, or to teach you something of\
 use. \
 ", 
-         TeleDelay = 0, 
-         Name = "Chambers", 
-         Vnum = 31838, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31839] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31833, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 31837, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Chambers", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31839] = 
+      {
+         Vnum = 31839, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4536,120 +5453,107 @@ use. \
 the hallway itself curves toward the south leaving only two way to go, south\
 and back from where you came.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway", 
-         Vnum = 31839, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31840] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31653, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31833, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31840] = 
+      {
+         Vnum = 31840, 
          Description = "You are standing on a large pile of junk. People throw things they dont need\
 here just to get rid of it. But for some people this place is where they can\
 get everything they need to start out. Everything from scrap metal to blasters\
 are here waiting for anyone to pick them up.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31840, 
-         Name = "Neighberhood Junk Pile", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31841] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31872, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31842, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31653, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31605, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Neighberhood Junk Pile", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31841] = 
+      {
+         Vnum = 31841, 
          Description = "You are standing in front of the infamous Dockingbay 94. From here Han Solo\
 and the Millenium Falcon escaped with their newly acquired passengers for a\
 trip to Alderaan. There is a large entrance into the docking bay. All the\
 ground beneath you is made of stone and sand. The air is warm yet lighter\
 here for it is sheltered by the docking bay.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31841, 
-         Name = "Entrance To Docking Bay 94", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31842] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31841, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31872, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31843, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31842, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [3] = 
+            {
                Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31605, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Entrance To Docking Bay 94", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31842] = 
+      {
+         Vnum = 31842, 
          Description = "You are standing in front of a large sliding door. When opened you can enter\
 the docking bay with ease and embark on a ship to go to other places in the\
 galaxy. The door is made of metal and has blaster scorching all over it from\
@@ -4657,43 +5561,43 @@ when the imperials chased Han Solo and Chewbacca in a race to capture the\
 droid R2-D2 and return him to Darth Vader. The ground is hard and covered with\
 sand as most of this planet is and the air is rather refreshing.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31842, 
-         Name = "Inside The Entrance To Docking Bay 92", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31843] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31842, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31841, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31847, 
-               Description = "", 
-               Direction = "west", 
+               DestinationVnum = 31843, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Inside The Entrance To Docking Bay 92", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31843] = 
+      {
+         Vnum = 31843, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4705,50 +5609,63 @@ The air in here is cool and refreshing and gives you a warm sensation. There\
 are ships comming and leaving here continually and make it so that the air\
 smells of fumes and exhaust.\
 ", 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 31842, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31847, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Inside Docking Bay 92", 
-         Vnum = 31843, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "city", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31846] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 31846, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
          Description = "", 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
          Name = "Floating in a void", 
-         Vnum = 31846, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "city", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31847] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31843, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31847, 
          Flags = 
          {
             [4] = "CanLand", 
@@ -4760,43 +5677,30 @@ outside in the sun, but smells of ships. On the walls there are blaster\
 bolts. Extra tools lay on the ground for a mechanic that walks around\
 here.   \
 ", 
-         TeleDelay = 0, 
-         Name = "Docking Bay 92", 
-         Vnum = 31847, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31849] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31850, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31843, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31819, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Docking Bay 92", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31849] = 
+      {
+         Vnum = 31849, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4807,34 +5711,43 @@ price is right. There is a small workstation in the corner and a\
 entry to a room near the back of the store. The store is pretty run\
 down but serves it's purpose.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hundo's Shop", 
-         Vnum = 31849, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31850] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31849, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31850, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31819, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Hundo's Shop", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31850] = 
+      {
+         Vnum = 31850, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -4845,76 +5758,76 @@ dirty and has a rather disturbing smell to it. The ground is smooth and cold\
 being made of stone. The air is fresher in here than most parts of this city\
 and it makes you want to stay here.\
 ", 
-         TeleDelay = 0, 
-         Name = "Back Of The Shop", 
-         Vnum = 31850, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31851] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31819, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31852, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31849, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Back Of The Shop", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31851] = 
+      {
+         Vnum = 31851, 
          Description = "You are standing in front of some large fences. Inside these fences are kept\
 many rontos, the animal that Jawas ride to go to different areas. There is a\
 rather tall Jawa at the gate entry with an ionization gun ready to shoot any\
 thieves or trespassers.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31851, 
-         Name = "In Front Of A Large Keeping Area", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31852] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31851, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31819, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31852, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "In Front Of A Large Keeping Area", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31852] = 
+      {
+         Vnum = 31852, 
          Description = "You are standing inside a large pen sourrounded by gates that are filled with\
 rontos. These rontos have been trained to a certain degree so it is not\
 likely that they will try to escape. The ground is rough and is filled with\
@@ -4922,39 +5835,34 @@ cracks for the weight of these beasts is quite surprising. The sun shines down\
 all day long and makes it warm here but the rontos have adjusted to the\
 temperature.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31852, 
-         Name = "Ronto Keeping Area", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31853] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31655, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31854, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "east", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 31851, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Ronto Keeping Area", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31853] = 
+      {
+         Vnum = 31853, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -4964,48 +5872,39 @@ temperature.\
 filthiest and richest scum hang around. Watch your step. Mounted on the wall is\
 a droid detector. For here in this cantina they do not serve their kind.\
 ", 
-         TeleDelay = 0, 
-         Name = "Entrance To The Cantina.", 
-         Vnum = 31853, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31854] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31853, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31655, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31855, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31856, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31854, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Entrance To The Cantina.", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31854] = 
+      {
+         Vnum = 31854, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5015,48 +5914,48 @@ people talking. Wuher slowly pours drinks for his customers being careful not\
 to get hurt. The floor is poorly covered and the walls filled with blaster\
 marks and other such things from fights and encounters.\
 ", 
-         TeleDelay = 0, 
-         Name = "Interior Of The Cantina", 
-         Vnum = 31854, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31855] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31858, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31853, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31859, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31855, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31854, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31856, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Interior Of The Cantina", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31855] = 
+      {
+         Vnum = 31855, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5066,48 +5965,48 @@ cantina. For the other part there is a few tables with some stools and chairs\
 but for the most part they are empty as for people seem to have adopted a\
 liking towards the booths.\
 ", 
-         TeleDelay = 0, 
-         Name = "Large Open Way", 
-         Vnum = 31855, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31856] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31854, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31858, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31861, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31859, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31857, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31854, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Large Open Way", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31856] = 
+      {
+         Vnum = 31856, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5118,30 +6017,48 @@ people all along this large area of the Cantina. The air is full of\
 smoke from hookas being used all along. There is some broke glass on\
 the floor. As you walk over it it cracks and makes you shiver.\
 ", 
-         TeleDelay = 0, 
-         Name = "A Large Section Of The Cantina", 
-         Vnum = 31856, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31857] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31856, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31854, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31861, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31857, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "A Large Section Of The Cantina", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31857] = 
+      {
+         Vnum = 31857, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5152,30 +6069,30 @@ holes all over it, vandalized over and over. This booth has less lighting in\
 it for the glow panel has shorted out and makes it relaxing with the change in\
 temperature from the outdoors.\
 ", 
-         TeleDelay = 0, 
-         Name = "A Small Booth", 
-         Vnum = 31857, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31858] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31855, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31856, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "A Small Booth", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31858] = 
+      {
+         Vnum = 31858, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5186,39 +6103,30 @@ bounty hunter. There is a large table in the middle of the booth. The seats\
 are dirty and the table even more so. There is a hookah on the table but it\
 seems to be stuck to it.\
 ", 
-         TeleDelay = 0, 
-         Name = "A Large Double Booth", 
-         Vnum = 31858, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31859] = 
-      {
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
                DestinationVnum = 31855, 
-               Description = "", 
-               Direction = "north", 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31860, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "A Large Double Booth", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31859] = 
+      {
+         Vnum = 31859, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5228,30 +6136,39 @@ small corner booths towards the west. The floor is dirty, filled with blood in\
 some places from a recent fight. The air is full of smoke as people walk\
 around you, some smoking hookahs.\
 ", 
-         TeleDelay = 0, 
-         Name = "A Section Of The Cantina", 
-         Vnum = 31859, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31860] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31859, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31855, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31860, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "A Section Of The Cantina", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31860] = 
+      {
+         Vnum = 31860, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5262,56 +6179,30 @@ good shape but the table is in horrible condition. The ground is\
 cracked and makes you feel you will fall through the floor. The air\
 is dirty and heavy here and makes you want to leave.\
 ", 
-         TeleDelay = 0, 
-         Name = "A Very Small Booth", 
-         Vnum = 31860, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31861] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31856, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
+               Key = -1, 
                Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31863, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "Counter", 
-               Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-                  [17] = "CanEnter", 
-                  [18] = "CanLeave", 
-                  [26] = "CanLook", 
-                  [23] = "BashProof", 
-               }, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31862, 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31859, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "A Very Small Booth", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31861] = 
+      {
+         Vnum = 31861, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5321,30 +6212,56 @@ stands. Chairs all around filled with different people and different species.\
 The chairs themselves are rather dirty and so most people stand. The smell\
 here is not too bad but not a beautiful one neither.\
 ", 
-         TeleDelay = 0, 
-         Name = "Section Of The Cantina", 
-         Vnum = 31861, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31862] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31861, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31856, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "Counter", 
                Description = "", 
                Direction = "east", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+                  [17] = "CanEnter", 
+                  [18] = "CanLeave", 
+                  [26] = "CanLook", 
+                  [23] = "BashProof", 
+               }, 
+               DestinationVnum = 31863, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [3] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31862, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Section Of The Cantina", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31862] = 
+      {
+         Vnum = 31862, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5355,44 +6272,30 @@ The chairs on the other hand are worn down to the nub. The air here is less\
 filthy for many people whom do not want to be bothered by the smoke sit\
 here.\
 ", 
-         TeleDelay = 0, 
-         Name = "A Corner Booth", 
-         Vnum = 31862, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31863] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31861, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "counter", 
                Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-               }, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31618, 
-               Description = "", 
-               Direction = "up", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31861, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "A Corner Booth", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31863] = 
+      {
+         Vnum = 31863, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5401,39 +6304,44 @@ here.\
 The beverage machine is very large and complex but seems to be efficient in\
 the way it works. AS he sees you he gets angry. Maybe you should run.\
 ", 
-         TeleDelay = 0, 
-         Name = "Inside The Bar", 
-         Vnum = 31863, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31870] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31818, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "counter", 
+               Description = "", 
+               Direction = "west", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+               }, 
+               DestinationVnum = 31861, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31871, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 31618, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Inside The Bar", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31870] = 
+      {
+         Vnum = 31870, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -5446,30 +6354,39 @@ the only other places are inside the city of Mos Eisley where they\
 will most likely be prosecuted. The ground is hard and has little to\
 no sand on it. This place is sure a break to the outdoors.\
 ", 
-         TeleDelay = 0, 
-         Name = "Inside A Large Cave", 
-         Vnum = 31870, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31871] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31870, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31818, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31871, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Inside A Large Cave", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31871] = 
+      {
+         Vnum = 31871, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -5482,30 +6399,30 @@ womp rat mess. There is a particular smell in here from the mess but\
 nothing to be concerned about if you do not stay in this cave for an\
 extended period of time.\
 ", 
-         TeleDelay = 0, 
-         Name = "In The Back Of A Cave", 
-         Vnum = 31871, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31872] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31841, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31870, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "In The Back Of A Cave", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31872] = 
+      {
+         Vnum = 31872, 
          Description = "You are standing on a platform where the public busses land every so\
 often. You can access different planets using these busses. Although\
 the busses are slow they are a means of transportation. The only\
@@ -5513,57 +6430,30 @@ reason they are slow is because they are provided to the public for\
 free. Thinking about this it makes it hard to maintain the busses\
 without enough resources.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31872, 
-         Name = "The Bus Stop", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31873] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31875, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31881, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31882, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31655, 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31841, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "The Bus Stop", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31873] = 
+      {
+         Vnum = 31873, 
          Description = "You walk along a path inside the well known city of Mos Eisley. The\
 ground here is hard yet made fully of sand. As you walk over it, it is\
 hot and sharp. The wind blows in your face, sometimes bringing\
@@ -5573,30 +6463,57 @@ planet. The heat makes the air heavier and harder to breath yet you\
 move on. Ahead you can see a corner that curves into a store of some\
 kind. On the front it says \"Spaceport Speeders\".\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31873, 
-         Name = "Walking Through The City", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31874] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31655, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31875, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31881, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31882, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [4] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31655, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Walking Through The City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31874] = 
+      {
+         Vnum = 31874, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -5609,30 +6526,30 @@ numbers making you ache all over. The air is hot, not as hot as the\
 rest of the city because the street is covered in shade, but it is\
 still hot. The air is also lighter and makes you relax as you walk.\
 ", 
-         TeleDelay = 0, 
-         Name = "Walking Down A Side Street", 
-         Vnum = 31874, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31875] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31873, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31655, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Walking Down A Side Street", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31875] = 
+      {
+         Vnum = 31875, 
          Description = "You are standing just inside the entrance to the spaceport speeders.\
 Here you can help yourself by buying or getting a droid fixed. The\
 people that work here are experienced and can offer you what is\
@@ -5643,35 +6560,55 @@ front room for helping out the customers. The intensity of the heat\
 is not covered here as the air recycling system is not working to\
 well.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31875, 
-         Name = "Inside The Spaceport Speeders", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31876] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31830, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31873, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Inside The Spaceport Speeders", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31876] = 
+      {
+         Vnum = 31876, 
+         Description = "Here in this bed hot steam rises from the cushions making your tense\
+muscles relax. As they heat your body you start to feel better. The\
+atmosphere is very moisturized with a lot of heat surrounding you\
+also. The bed is made of a comfortable looking material but has been\
+chewed at by small rodents making the bed kind of ugly looking. \
+", 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "somewhere", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [11] = "Hidden", 
                }, 
+               DestinationVnum = 31830, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "On A Bed", 
          MudProgs = 
          {
             [1] = 
@@ -5683,45 +6620,16 @@ emote Vapors slowly seep into your body helping you relax.\
                MudProgType = "rand_prog", 
             }, 
          }, 
-         Description = "Here in this bed hot steam rises from the cushions making your tense\
-muscles relax. As they heat your body you start to feel better. The\
-atmosphere is very moisturized with a lot of heat surrounding you\
-also. The bed is made of a comfortable looking material but has been\
-chewed at by small rodents making the bed kind of ugly looking. \
-", 
-         TeleDelay = 0, 
-         Vnum = 31876, 
-         Name = "On A Bed", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "city", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31878] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31601, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31879, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31878, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -5733,39 +6641,39 @@ get at it very well because the cliff covers the sand from being swept\
 away by the gusting winds. The sun is also not so intense here but it is\
 still very warm and just as dry as the rest of the planet.\
 ", 
-         TeleDelay = 0, 
-         Name = "Along The Bottom Of The Cliff", 
-         Vnum = 31878, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31879] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31878, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31601, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31880, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31879, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Along The Bottom Of The Cliff", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31879] = 
+      {
+         Vnum = 31879, 
          Description = "You are walking along the bottom of the cliff. High above you see the edge\
 of the cliff and you think about how much it would hurt to fall from\
 there. The sand here is much harder than normal as for the wind does not\
@@ -5773,30 +6681,39 @@ get at it very well because the cliff covers the sand from being swept\
 away by the gusting winds. The sun is also not so intense here but it is\
 still very warm and just as dry as the rest of the planet.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31879, 
-         Name = "Nearing The Curve In The Cliff", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31880] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31879, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31878, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31880, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Nearing The Curve In The Cliff", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31880] = 
+      {
+         Vnum = 31880, 
          Description = "You are walking along the bottom of the cliff. High above you see the edge\
 of the cliff and you think about how much it would hurt to fall from\
 there. As you think of that you notice some blood splatter on the sand.\
@@ -5804,39 +6721,30 @@ Then you look up to see a large chunk of the cliff missing as if someone\
 had fell from there taking a large portion of the side of the cliff with\
 them. \
 ", 
-         TeleDelay = 0, 
-         Vnum = 31880, 
-         Name = "On The Curve Of The Cliff", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31881] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 6600, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31873, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31879, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "On The Curve Of The Cliff", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31881] = 
+      {
+         Vnum = 31881, 
          Description = "You walk along a path inside the well known city of Mos Eisley. The ground\
 here is hard yet made fully of sand. As you walk over it, it is hot and\
 sharp. The wind blows in your face, sometimes bringing particles of sand\
@@ -5845,39 +6753,39 @@ is very warm, heated by the twin suns of the planet. The heat makes the\
 air heavier and harder to breath yet you move on. To the north you can see\
 a scattering of buildings.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31881, 
-         Name = "On A Path In The City", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31882] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31873, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 6600, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31883, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31873, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "On A Path In The City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31882] = 
+      {
+         Vnum = 31882, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -5890,30 +6798,39 @@ heated by the twin suns of the planet. The heat makes the air heavier and\
 harder to breath yet you move on. To the west you see smoke coming from\
 freshly cooked meat and food. \
 ", 
-         TeleDelay = 0, 
-         Name = "In The Depths Of The City", 
-         Vnum = 31882, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31883] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31882, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31873, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31883, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "In The Depths Of The City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31883] = 
+      {
+         Vnum = 31883, 
          Description = "You are standing in front of an old man. Here he makes his own food to sell\
 to people passing by. He has a large selection, everything from\
 banthaburgers to dewbak ribs depending on how carnivorous your appetite\
@@ -5921,30 +6838,30 @@ is. His booth is made of old junk probably scavenged or bought from the\
 Jawas. His cooking supplies are rather disgusting to look at and when you\
 think of what you are eating from it makes your stomach churn.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31883, 
-         Name = "Gep's Grill", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31898] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 106, 
-               Description = "", 
-               Direction = "northeast", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31882, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Gep's Grill", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31898] = 
+      {
+         Vnum = 31898, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -5969,39 +6886,30 @@ think of what you are eating from it makes your stomach churn.\
  \
  \
 ", 
-         TeleDelay = 0, 
-         Name = "Satin's Place", 
-         Vnum = 31898, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31899] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31904, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31900, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "northeast", 
+               DestinationVnum = 106, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Satin's Place", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31899] = 
+      {
+         Vnum = 31899, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -6010,48 +6918,39 @@ think of what you are eating from it makes your stomach churn.\
 that someone maintains it. There's no sewage flowing here, rather the ground\
 is quite dry.\
 ", 
-         TeleDelay = 0, 
-         Name = "A Hidden Passage In The Sewers", 
-         Vnum = 31899, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31900] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31899, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31904, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31901, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31902, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31900, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "A Hidden Passage In The Sewers", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31900] = 
+      {
+         Vnum = 31900, 
          Flags = 
          {
             [10] = "Safe", 
@@ -6060,117 +6959,135 @@ is quite dry.\
          Description = "This circular area seems to be a simple common room, complete with cheap\
 furniture and some faded posters on the walls.\
 ", 
-         TeleDelay = 0, 
-         Name = "Common Room", 
-         Vnum = 31900, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31901] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31900, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-         }, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [3] = "Indoors", 
-         }, 
-         Description = "", 
-         TeleDelay = 0, 
-         Name = "Kitchen", 
-         Vnum = 31901, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-      }, 
-      [31902] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31900, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31899, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31903, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31901, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31905, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31902, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31906, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Common Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31901] = 
+      {
+         Vnum = 31901, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
          Description = "", 
-         TeleDelay = 0, 
-         Name = "Hallway", 
-         Vnum = 31902, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31903] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31902, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31900, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Kitchen", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31902] = 
+      {
+         Vnum = 31902, 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31900, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31903, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31905, 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31906, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31903] = 
+      {
+         Vnum = 31903, 
          Flags = 
          {
             [23] = "Hotel", 
@@ -6178,34 +7095,30 @@ furniture and some faded posters on the walls.\
             [3] = "Indoors", 
          }, 
          Description = "", 
-         TeleDelay = 0, 
-         Name = "Sleeping Quarters", 
-         Vnum = 31903, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31904] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31899, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-               Flags = 
-               {
-                  [11] = "Hidden", 
-               }, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31902, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Sleeping Quarters", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31904] = 
+      {
+         Vnum = 31904, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -6216,7 +7129,24 @@ catwalk about a meter above it, running along one wall. Old grime is covering\
 the walls. There's a nasty smell in the air, making it uncomfortable to\
 breath, even for a Gamorrean.\
 ", 
-         TeleDelay = 0, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               Flags = 
+               {
+                  [11] = "Hidden", 
+               }, 
+               DestinationVnum = 31899, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Mos Eisley Sewers", 
          MudProgs = 
          {
             [1] = 
@@ -6229,59 +7159,46 @@ endif\
                MudProgType = "entry_prog", 
             }, 
          }, 
-         Name = "Mos Eisley Sewers", 
-         Vnum = 31904, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31905] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31902, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31905, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
          Description = "", 
-         TeleDelay = 0, 
-         Name = "Teacher", 
-         Vnum = 31905, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31906] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31902, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31902, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Teacher", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31906] = 
+      {
+         Vnum = 31906, 
          Flags = 
          {
             [16] = "Silence", 
@@ -6290,21 +7207,30 @@ endif\
             [3] = "Indoors", 
          }, 
          Description = "", 
-         TeleDelay = 0, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31902, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Workshop", 
-         Vnum = 31906, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31999] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 31999, 
          Flags = 
          {
             [16] = "Silence", 
@@ -6313,2324 +7239,2306 @@ endif\
             [10] = "Safe", 
          }, 
          Description = "", 
-         TeleDelay = 0, 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
          Name = "Floating in a void", 
-         Vnum = 31999, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "city", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31500] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31501, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31557, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31500, 
          Description = "The dunes around you are normal as you walk over the endless amount of sand.\
 The sea of rippling sand still surrounds you with overwhelming greatness. The\
 sand has a reflective shine to it assisted by the sunrays of the heating suns.\
 You feel enclosed because the dunes tower over you greatly.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31500, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31501] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31507, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31501, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31500, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31557, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31807, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31501] = 
+      {
+         Vnum = 31501, 
          Description = "You are walking along the soft sand in the desert of Tatooine. Just ahead of\
 you you can see the dune sea developping. Behind you the small city diminishes\
 into only a spot. With every step you take the city becomes smaller and\
 smaller.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31501, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31507] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31509, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31507, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31508, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31500, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31501, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31807, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31507] = 
+      {
+         Vnum = 31507, 
          Description = "You are standing on a hard sandy surface, there is nothing around you unless\
 you turn back. In all directions you can see but sand. The dunes in the sea\
 are enourmous and grow with every step that you take.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31507, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31508] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31555, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31509, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31507, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31508, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31501, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31508] = 
+      {
+         Vnum = 31508, 
          Description = "All around you is sand and shiny dunes piling as high as you can see. As far\
 as you can guess anything could be behind there. The towering sand dunes make\
 you feel scared as you are so small and enclosed by the towering heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31508, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31509] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31510, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31555, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31507, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31507, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31509] = 
+      {
+         Vnum = 31509, 
          Description = "You are surrounded by sand from all possible directions. You can still see a\
 glimpse of the city behind you but once you leave the city the land is yours\
 to explore.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31509, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31510] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31511, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31510, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31513, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31509, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31507, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31510] = 
+      {
+         Vnum = 31510, 
          Description = "Around you there is only sand as far as you can see. The direction is not\
 noticable and civilization is far away. If you wander too far be careful\
 of where you end up.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31510, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31511] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31512, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31511, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31510, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31513, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31509, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31511] = 
+      {
+         Vnum = 31511, 
          Description = "The sand is soft and is still all around you. It is high and shinning in your\
 face as you repeatidly walk over endless amounts of sand. You feel enclosed\
 because of their great mass. As you walk forward, with every step you take the\
 sand dunes grow in size and proportion.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31511, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31512] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31511, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31512, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31510, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31512] = 
+      {
+         Vnum = 31512, 
          Description = "The sand is soft and is still all around you. It is high and shinning in your\
 face as you repeatidly walk over endless amounts of sand. You feel enclosed\
 because of their great mass. As you walk forward, with every step you take\
 the sand dunes grow in size and proportion.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31512, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31513] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31514, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31511, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31510, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31513] = 
+      {
+         Vnum = 31513, 
          Description = "The sand is soft and is still all around you. The sun is high and shining in\
 your face as you repeatedly walk over endless amounts of sand. You feel\
 enclosed because of their great mass. As you walk forward, with every step you\
 take the sand dunes grow in size and proportion.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31513, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31514] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31513, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31514, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31515, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31510, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31514] = 
+      {
+         Vnum = 31514, 
          Description = "The sand is soft and is still all around you. It is high and shining in your\
 face as you repeatidly walk over endless amounts of sand. You feel enclosed\
 because of their great mass. As you walk forward, with every step you take\
 the sand dunes grow in size and proportion.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31514, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31515] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31514, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31513, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31516, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31515, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31515] = 
+      {
+         Vnum = 31515, 
          Description = "All around you is sand and shiny dunes piling as high as you can see. As far\
 as you can guess anything could be behind there. The towering sand dunes make\
 you feel scared as you are so small and enclosed by the towering heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31515, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31514, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31516, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31516] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31515, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31517, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31516, 
          Description = "You are on the top of a sand dune and you can see across the whole dune sea.\
 It is just a great sight to see. The sand dunes dip in and out of the ground.\
 The immense amount of sand frightens you as you look across the great sand\
 dune sea of Tatooine.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31516, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31515, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31517, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31517] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31516, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31518, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31517, 
          Description = "You are heading down the side of a sand a dune entering another valley of\
 dunes. With every step you take the sand seems to be increasing.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31517, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31518] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31519, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31516, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31517, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31522, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31518, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31518] = 
+      {
+         Vnum = 31518, 
          Description = "You are on the top of a sand dune and you can see across the whole dune sea.\
 It is just a great sight to see. The sand dunes dip in and out of the ground.\
 The immense amount of sand frightens you as you look across the great sand\
 dune sea of Tatooine.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31518, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31519] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31520, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31519, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31518, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31517, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31522, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31519] = 
+      {
+         Vnum = 31519, 
          Description = "The sand is soft and is still all around you. It is high and shining in your\
 face as you repeatedly walk over endless amounts of sand. You feel enclosed\
 because of their great mass. As you walk forward, with every step you take the\
 sand dunes grow in size and proportion.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31519, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31520] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31521, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31520, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31519, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31518, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31520] = 
+      {
+         Vnum = 31520, 
          Description = "You are on the top of a sand dune and you can see across the whole dune sea.\
 It is just a great sight to see. The sand dunes dip in and out of the ground.\
 The immense amount of sand frightens you as you look across the great sand dune\
 sea of Tatooine.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31520, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31521] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31520, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31521, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31519, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31521] = 
+      {
+         Vnum = 31521, 
          Description = "You are on the top of a sand dune and you can see across the whole dune sea.\
 It is just a great sight to see. The sand dunes dip in and out of the ground.\
 The immense amount of sand frightens you as you look across the great sand\
 dune sea of Tatooine.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31521, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31522] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31518, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31523, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31520, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31524, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31522] = 
+      {
+         Vnum = 31522, 
          Description = "The sand is soft and is still all around you. It is high and shining in your\
 face as you repeatedly walk over endless amounts of sand. You feel enclosed\
 because of their great mass. As you walk forward, with every step you take the\
 sand dunes grow in size and proportion.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31522, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31523] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31522, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31518, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31523, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31524, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31523] = 
+      {
+         Vnum = 31523, 
          Description = "The dunes around you are normal as you walk over the endless amount of dunes.\
 The sea of dunes still surrounds you with overwhelming greatness. The sand has\
 a reflective shine to it assisted by the sunrays of the heating suns.  You feel\
 enclosed because the dunes tower over you greatly.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31523, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31524] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31525, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
                DestinationVnum = 31522, 
-               Description = "", 
-               Direction = "east", 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31524] = 
+      {
+         Vnum = 31524, 
          Description = "All around you is sand and you are The dunes around you are normal as you walk\
 over the endless amount of dunes. The sea of dunes still surrounds you with\
 overwhelming greatness. The sand has a reflective shine to it assisted by the\
 sunrays of the heating suns. You feel enclosed because the dunes tower over\
 you greatly.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31524, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31525] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31526, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31525, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31524, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31522, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31525] = 
+      {
+         Vnum = 31525, 
          Description = "The dunes around you are normal as you walk over the endless amount of dunes.\
 The sea of dunes still surrounds you with overwhelming greatness. The sand has\
 a reflective shine to it assisted by the sunrays of the heating suns. You feel\
 enclosed because the dunes tower over you greatly.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31525, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31526, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31524, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31526] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31527, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31525, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31526, 
          Description = "All around you is sand and shiny dunes piling as high as you can see. As far\
 as you can guess anything could be behind there. The towering sand dunes make\
 you feel scared as you are so small and enclosed by the towering heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31526, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31527, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31525, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31527] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31528, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31536, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31526, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31527, 
          Description = "All around you is sand and shiny dunes piling as high as you can see. As far\
 as you can guess anything could be behind there. The towering sand dunes make\
 you feel scared as you are so small and enclosed by the towering heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31527, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31528] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31529, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31528, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31527, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31536, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31530, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31526, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31528] = 
+      {
+         Vnum = 31528, 
          Description = "You start walking over the tip of a dune an can see something in the far sea\
 of dunes. All around you is sand and shiny dunes piling as high as you can\
 see. As far as you can guess anything could be behind there. The towering sand\
 dunes make you feel scared as you are so small and enclosed by the towering\
 heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31528, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31529] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31528, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31529, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31531, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31527, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31530, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31529] = 
+      {
+         Vnum = 31529, 
          Description = "The dunes around you are normal as you walk over the endless amount of dunes.\
 The sea of dunes still surrounds you with overwhelming greatness. The sand has\
 a reflective shine to it assisted by the sunrays of the heating suns. You feel\
 enclosed because the dunes tower over you greatly.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31529, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31528, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31531, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31530] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31528, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31537, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31530, 
          Description = "All around you is sand and shiny dunes piling as high as you can see. As far\
 as you can guess anything could be behind there. The towering sand dunes make\
 you feel scared as you are so small and enclosed by the towering heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31530, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31528, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31537, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31531] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31529, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31532, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31531, 
          Description = "All around you is sand and shiny dunes piling as high as you can see. As far\
 as you can guess anything could be behind there. The towering sand dunes make\
 you feel scared as you are so small and enclosed by the towering heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31531, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31532] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31531, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31529, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31533, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31532, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31532] = 
+      {
+         Vnum = 31532, 
          Description = "The sand is soft and is still all around you. It is high and shinning in your\
 face as you repeatidly walk over endless amounts of sand. You feel enclosed\
 because of their great mass. As you walk forward, with every step you take the\
 sand dunes grow in size and proportion.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31532, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31531, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31533, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Opening", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31533] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31534, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31532, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31533, 
          Description = "You are traveling along the side of the large opening and can see something in\
 the center of the opening.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31533, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31534, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31532, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Opening", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31534] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31533, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31535, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31534, 
          Description = "You are standing infront of a very large opening in the ground that seems to\
 have endless turns inside itself. To explore this hold continue to the west.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31534, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31533, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31535, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Opening", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31535] = 
       {
+         Vnum = 31535, 
+         Description = "This is a D.T(To be edited)\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31534, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31534, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "This is a D.T(To be edited)\
-", 
-         TeleDelay = 0, 
-         Vnum = 31535, 
          Name = "Sarlacc", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31536] = 
       {
+         Vnum = 31536, 
+         Description = "You are in the middle of the sea of dunes and are hopelessly lost.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31527, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31527, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are in the middle of the sea of dunes and are hopelessly lost.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31536, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31537] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31530, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31538, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31537, 
          Description = "You can now perceive that the object that you are walking towars is a metallic\
 form of some sort.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31537, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31530, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31538, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31538] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31539, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31537, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31538, 
          Description = "You are very close to the object and you can now identify it in the sand. It\
 is a very old shipwreck plowed into the top of a dune.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31538, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31539, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31537, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31539] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31540, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31538, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31552, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31539, 
          Description = "You are infront of the shipwreck and it seems to be habitible. To explore it\
 continue north up the hatch.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31539, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31540] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31547, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31540, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31542, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31538, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31539, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31552, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31540] = 
+      {
+         Vnum = 31540, 
+         Description = "You are inside the hatch of a ship which seems very new and cared for.\
+", 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31547, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31542, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31539, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [4] = 
             {
-               DestinationVnum = 31541, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31541, 
+               Distance = 0, 
             }, 
          }, 
-         Description = "You are inside the hatch of a ship which seems very new and cared for.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31540, 
          Name = "Hatch", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31541] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31540, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-            }, 
-         }, 
+         Vnum = 31541, 
          Description = "You are standing infront of an immense cargo room containing many\
 crates of items.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31541, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 31540, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Cargo Hold", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31542] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31543, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31540, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31542, 
          Description = "You are in a small room with lots of wiring and you can see the maintenance\
 tunnel in front of you.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31542, 
-         Name = "Tunnel", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31543] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31544, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31542, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31543, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31540, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Tunnel", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31543] = 
+      {
+         Vnum = 31543, 
          Description = "You are inside the maintenance tunnel. It is a very small space so you must\
 crawl inside the tunnel to move.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31543, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31544, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 31542, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Mainentance Tunnel", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31544] = 
       {
+         Vnum = 31544, 
+         Description = "You are crawling through the tunnel and can see an opening to the west.\
+", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31543, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31543, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31545, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31545, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are crawling through the tunnel and can see an opening to the west.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31544, 
          Name = "Tunnel", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31545] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31546, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31544, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31545, 
          Description = "You enter a small compartment room filled with electronic equipment. It seems\
 to be an interrogation room of some sort. You can see computers mounted the\
 wall.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31545, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31546, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31544, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Secret Compartment", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31546] = 
       {
+         Vnum = 31546, 
+         Description = "You are in a room containing nothing but an assault droid in the corner.\
+", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31545, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31545, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are in a room containing nothing but an assault droid in the corner.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31546, 
          Name = "Death", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31547] = 
       {
+         Vnum = 31547, 
+         Description = "You are walking down a corridor and can see a ladder at the end of the hall.\
+", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31540, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31540, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31548, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "up", 
+               DestinationVnum = 31548, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are walking down a corridor and can see a ladder at the end of the hall.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31547, 
          Name = "Corridor", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31548] = 
       {
+         Vnum = 31548, 
+         Description = "You are heading up a ladder headed towards the top portion of the ship.\
+", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31550, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31550, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31551, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31551, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31549, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31549, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [4] = 
             {
-               DestinationVnum = 31547, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "down", 
+               DestinationVnum = 31547, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are heading up a ladder headed towards the top portion of the ship.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31548, 
          Name = "Ladder", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31549] = 
       {
+         Vnum = 31549, 
+         Description = "You enter a passenger compartment that seems to have been inhabitated.\
+", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31548, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31548, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You enter a passenger compartment that seems to have been inhabitated.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31549, 
          Name = "Passenger Compartment", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31550] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31548, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31550, 
          Description = "You are in the pilot compartment and you look out the viewer console to see\
 sand covering it. The computer equipment seems to be usable and undamaged.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31550, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31548, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Pilot Compartment", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31551] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31548, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31551, 
          Description = "This room contains nothing in it besides a viewer console and\
 seems very strange.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31551, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31548, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Room", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31552] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31539, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31553, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31552, 
          Description = "You walk around the immense shuttle to the top of a dune and continue exploring\
 the dune sea of Tatooine. It tower around you fromm all directions.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31552, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31539, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31553, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31553] = 
       {
+         Vnum = 31553, 
+         Description = "The shuttle starts to get smaller and you can see only sand in front of you.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31554, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31554, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31552, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31552, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "The shuttle starts to get smaller and you can see only sand in front of you.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31553, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31554] = 
       {
+         Vnum = 31554, 
+         Description = "You walk slowly and exhausted to find nothing here.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31553, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31553, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You walk slowly and exhausted to find nothing here.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31554, 
          Name = "Desert ", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31555] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31508, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31556, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31555, 
          Description = "All around you is sand and shiny dunes piling as high as you can see. As far\
 as you can guess anything could be behind there. The towering sand dunes make\
 you feel scared as you are so small and enclosed by the towering heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31555, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31508, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31556, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31556] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31555, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31556, 
          Description = "All around you is sand and shiny dunes piling as high as you can see. As far\
 as you can guess anything could be behind there. The towering sand dunes make\
 you feel scared as you are so small and enclosed by the towering heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31556, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31557] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31500, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31558, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31555, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31592, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31557] = 
+      {
+         Vnum = 31557, 
          Description = "All around you is sand and shiny dunes piling as high as you can see.\
 As far as you can guess anything could be behind there. The towering\
 sand dunes make you  eel scared as you are so small and enclosed by\
 the towering heaps of sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31557, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31558] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31559, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31500, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31557, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31558, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31592, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31558] = 
+      {
+         Vnum = 31558, 
          Description = "You are on the top of a sand dune and you can see across the whole dune sea.\
 It is just a great sight to see. The sand dunes dip in and out of the ground.\
 The immense amount of sand frightens you as you look across the great sand\
 dune sea of Tatooine.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31558, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31559] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31560, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31559, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31565, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31558, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31557, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31559] = 
+      {
+         Vnum = 31559, 
          Description = "The sand is soft and is still all around you. It is high and shinning in your\
 face as you repeatedly walk over endless amounts of sand. You feel enclosed\
 because of their great mass. As you walk forward, with every step you take the\
 sand dunes grow in size and proportion.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31559, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31560] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31561, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31559, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "The dunes you are walking on are reaching a few feet high now and you are\
-approaching the greater dunes at a rather fast pace.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31560, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31561] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31560, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31562, 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31560, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31565, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31564, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31558, 
+               Distance = 0, 
             }, 
          }, 
-         Description = "You are on a large dune right now and you can see dunes for a long way.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31561, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31560] = 
+      {
+         Vnum = 31560, 
+         Description = "The dunes you are walking on are reaching a few feet high now and you are\
+approaching the greater dunes at a rather fast pace.\
+", 
          Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31561, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31559, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31561] = 
+      {
+         Vnum = 31561, 
+         Description = "You are on a large dune right now and you can see dunes for a long way.\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31560, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31562, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31564, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31562] = 
       {
+         Vnum = 31562, 
+         Description = "You are heading into the sea of dunes. Be careful where you go or you might not come back.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31563, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31563, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31561, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31561, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are heading into the sea of dunes. Be careful where you go or you might not come back.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31562, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31563] = 
       {
+         Vnum = 31563, 
+         Description = "The dunes under you appear to be growing with every step that you take.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31569, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31569, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31562, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31562, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "The dunes under you appear to be growing with every step that you take.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31563, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31564] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31561, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31571, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31564, 
          Description = "You are on a large dune heading further and further away from the grasp of\
 civilization.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31564, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31565] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31559, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31561, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31566, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31571, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31565] = 
+      {
+         Vnum = 31565, 
          Description = "You are walking on the rippling surface of the sand which has been\
 exposed to extreme heat over the many years. The sand is very warm and\
 stings your face as the wind blows it up onto your soft skin. The air\
 is thick and very heavy to breathe, but living with it is something you\
 accepted when you entered the desert.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31565, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31566] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31565, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31559, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31567, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31566, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31566] = 
+      {
+         Vnum = 31566, 
          Description = "The hard sand beneath your feet is hot and you can only see the same things\
 for miles to come. You are walking on the rippling surface of the sand\
 which has been exposed to extreme heat over the many years. The sand is\
@@ -8638,765 +9546,765 @@ very warm and stings your face as the wind blows it up onto your soft\
 skin. The air is thick and very heavy to breathe, but living with it\
 something you accepted when you entered the desert. \
 ", 
-         TeleDelay = 0, 
-         Vnum = 31566, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31565, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31567, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31567] = 
       {
+         Vnum = 31567, 
+         Description = "The sand is hard and hot but you continue to explore this vast area.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31566, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31566, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31568, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31568, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "The sand is hard and hot but you continue to explore this vast area.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31567, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31568] = 
       {
+         Vnum = 31568, 
+         Description = "The hard sand is getting softer as you walk endlessly.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31567, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31567, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "The hard sand is getting softer as you walk endlessly.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31568, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31569] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31563, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31570, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31569, 
          Description = "You are walking up and down endless amounts of sound shaped into great dunes\
 trying to find something in this vast sea.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31569, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31563, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31570, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31570] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31569, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31570, 
          Description = "The sand dunes seem to get bigger and higher but it only seems this way from\
 exhaustion.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31570, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31569, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31571] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31564, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31572, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31571, 
          Description = "The pummeling dunes are passing under your feet at an alarming rate. Yet there\
 is nothing else in sight but sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31571, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31564, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31572, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31572] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31571, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31573, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31572, 
          Description = "You walk down to the base of one of the largest dunes you have climbed in your\
 trip through the great sea of Tatooine.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31572, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31571, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31573, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31573] = 
       {
+         Vnum = 31573, 
+         Description = "You turn at the bottom of a dune and start climbing a rather small one.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31574, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31574, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31572, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31572, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You turn at the bottom of a dune and start climbing a rather small one.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31573, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31574] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31575, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31577, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31573, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31574, 
          Description = "The dune you just climbed was a rather small one but when you look down off of\
 the dune you realize you are heading down into a valley.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31574, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31575] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31576, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31575, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31574, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31577, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31573, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31575] = 
+      {
+         Vnum = 31575, 
          Description = "You walk through the valley of sand dunes slowly. The harsh conditions are\
 slowing you down gradually over the course of many minutes, hours or even days\
 depending on how long you last before you find civilization.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31575, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31576, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31574, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31576] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31575, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31576, 
          Description = "The sand dunes around you are making you nautious on what is still left\
 to climb over.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31576, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31575, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31577] = 
       {
+         Vnum = 31577, 
+         Description = "You are walking and walking through the treacherous sea of never ending sand.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31574, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31574, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31578, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31578, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are walking and walking through the treacherous sea of never ending sand.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31577, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31578] = 
       {
+         Vnum = 31578, 
+         Description = "You look on but can only see endless amounts of sand but nothing else.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31577, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31577, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31582, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31582, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31579, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31579, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You look on but can only see endless amounts of sand but nothing else.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31578, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31579] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31578, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31580, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31579, 
          Description = "The great sea starts becoming a blur after looking at the bare sands\
 for many long hours now.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31579, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31578, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31580, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31580] = 
       {
+         Vnum = 31580, 
+         Description = "The sea of dunes is making a great impression on what you think of Tatooine.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31579, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31579, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31581, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31581, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "The sea of dunes is making a great impression on what you think of Tatooine.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31580, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31581] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31580, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31590, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31581, 
          Description = "You are coming up to a rise of harder sand than all around. The flat\
 continues to the west.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31581, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31580, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31590, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31582] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31583, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31578, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31582, 
          Description = "The sand is plunging downwards and all of the sea seems to be heading to\
 a point of falling.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31582, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31583, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31578, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31583] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31584, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31582, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31583, 
          Description = "You are standing on the last dune before the entry point and can see what\
 is developed inside.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31583, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31584] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31585, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31584, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31583, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31582, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31584] = 
+      {
+         Vnum = 31584, 
          Description = "You are heading down a slope towards a rocky assortment of caves once lived\
 in by the native race of this planet. The Jundland Wastes are very large and\
 you can see many things from here.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31584, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31585, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31583, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31585] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31584, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31586, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31585, 
          Description = "You can see immense caves all around you and feel enclosed by the high walls\
 of the caves.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31585, 
-         Name = "Wastes", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31586] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31738, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31584, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31589, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31586, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31587, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31585, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Wastes", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31586] = 
+      {
+         Vnum = 31586, 
          Description = "You are walking down a rocky path that passes many old caves. To the south you\
 see a cave that is still in pretty good condition. All around there is a\
 distinct odour.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31586, 
-         Name = "Wastes", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31587] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31586, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31738, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31588, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31589, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31587, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [4] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31585, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Wastes", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31587] = 
+      {
+         Vnum = 31587, 
          Flags = 
          {
             [0] = "Dark", 
@@ -9404,30 +10312,39 @@ distinct odour.\
          Description = "You are inside a dark cave which has a strong odour of some sort. The cave\
 continues to the south.\
 ", 
-         TeleDelay = 0, 
-         Name = "Cave", 
-         Vnum = 31587, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31588] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31587, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31586, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31588, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Cave", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31588] = 
+      {
+         Vnum = 31588, 
          Flags = 
          {
             [0] = "Dark", 
@@ -9437,197 +10354,179 @@ habitat. On the floor in the corner you are appaled when seing three dead\
 Jawas. There are some blaster scars on the walls and big gashes everywhere.\
 Only one thing could have done this... Sand people.\
 ", 
-         TeleDelay = 0, 
-         Name = "Cave", 
-         Vnum = 31588, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31589] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31805, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31587, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31742, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31586, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Cave", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31589] = 
+      {
+         Vnum = 31589, 
          Description = "You see many things in the rocks around you but the camp seems lifless in many\
 ways. The ground is hard and dry for with the twin suns no moisture can be\
 kept in the ground.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31589, 
-         Name = "Dry Area", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31590] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31581, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-         }, 
-         Description = "D.T(to be edited)\
-", 
-         TeleDelay = 0, 
-         Vnum = 31590, 
-         Name = "Teeth", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31592] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31557, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31805, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31593, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31742, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31586, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Dry Area", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31590] = 
+      {
+         Vnum = 31590, 
+         Description = "D.T(to be edited)\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31581, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Teeth", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31592] = 
+      {
+         Vnum = 31592, 
          Description = "You are walking along a hardened sand path which seems to be headed to a\
 cliff. The towering sand dunes make you feel scared as you are so small\
 and enclosed by the towering heaps of sand. The sun is too warm and is\
 getting to you as you tread towards what is to be seen.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31592, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31593] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31592, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31557, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31594, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31593, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31593] = 
+      {
+         Vnum = 31593, 
          Description = "You are coming to the end of the path as far as you can see. The cliff is\
 right ahead of you. The sand blows slowly into your face stinging your\
 eyes and the rest of your face. The sun pounds down onto your back making\
 you feel twice as heavy as usual. At some points down this way it gets\
 steep and you slip a little landing right on your behind.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31593, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31594] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31593, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31592, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31595, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31597, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31594, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31594] = 
+      {
+         Vnum = 31594, 
          Description = "You are standing on the edge of a cliff. It overlooks the great city of Mos\
 Eisley. It is a great sight. To the east you see the path curve down the\
 side of the cliff. The sand blows slowly into your face stinging your eyes\
@@ -9636,39 +10535,48 @@ feel twice as heavy as usual. As you walk slowly down the side of the\
 cliff the sand gets sharper and if you are not wearing foot gear it could\
 get painful.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31594, 
-         Name = "The Cliff", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31595] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31596, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31593, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31594, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31595, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31597, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "The Cliff", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31595] = 
+      {
+         Vnum = 31595, 
          Description = "Still walking along the cliff you start curving down the side of a\
 mountain. You are walking down a hard sand path filled with sharp\
 minerals that hurt your feet as you walk over the sand. The heat is\
@@ -9677,39 +10585,39 @@ air is hot and heavy lacking moisture. As the sand blows slowly against\
 your face you wish you had something to protect it as shards or sand start\
 stinging against your face.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31595, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31596] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31601, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31596, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31595, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31594, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31596] = 
+      {
+         Vnum = 31596, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -9722,96 +10630,87 @@ moisture. As the sand blows slowly against your face you wish you had\
 something to protect it as shards or sand start stinging against your\
 face.\
 ", 
-         TeleDelay = 0, 
-         Name = "Desert End", 
-         Vnum = 31596, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31597] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31600, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31601, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31594, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31598, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31595, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert End", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31597] = 
+      {
+         Vnum = 31597, 
          Description = "You are walking along the edge of the cliff. Be careful where you go. The\
 sand blows slowly into your face, stinging your eyes and the rest of your\
 face. The sand flies into your eyes like annoying bugs stinging your eyes\
 until the point where you are going to cry. The sun pounds down onto your\
 back making you feel twice as heavy as usual.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31597, 
-         Name = "Cliff", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31598] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31667, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31600, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31597, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31594, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31599, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31598, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Cliff", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31598] = 
+      {
+         Vnum = 31598, 
          Description = "You are very near the edge and should return. Be careful. As you walk down\
 the edge of the cliff you see chunks of sand falling down the side of the\
 cliff. Seconds later you hear the thumping of the sand hitting the ground\
@@ -9819,43 +10718,48 @@ far below. The sand blows slowly into your face stinging your eyes and the\
 rest of your face. To the south the sand looks very unstable. It would be\
 advisable not to go there.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31598, 
-         Name = "Cliff", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31599] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31598, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31667, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31880, 
-               Description = "", 
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-               Flags = 
-               {
-                  [11] = "Hidden", 
-               }, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31597, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31599, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Cliff", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31599] = 
+      {
+         Vnum = 31599, 
          Flags = 
          {
             [24] = "NoFloor", 
@@ -9863,83 +10767,78 @@ advisable not to go there.\
          Description = "Aaah, you are loosing your grip! Looking down would not be a good idea as for\
 you're about to fall!\
 ", 
-         TeleDelay = 0, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31598, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "down", 
+               Flags = 
+               {
+                  [11] = "Hidden", 
+               }, 
+               DestinationVnum = 31880, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Cliffside", 
-         Vnum = 31599, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31600] = 
       {
+         Vnum = 31600, 
+         Description = "You are walking along the flat sands of Tatooine.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31658, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31658, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31597, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31597, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are walking along the flat sands of Tatooine.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31600, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31601] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31596, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31602, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31878, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31601, 
          Description = "You walk into the city, it is a large places with many uses. The thugs of\
 the galaxy hang around this town. You are walking down a hard sand path\
 filled with sharp minerals that hurt your feet as you walk over the sand.\
@@ -9948,39 +10847,48 @@ skin, the air is hot and heavy lacking moisture. As the sand blows slowly\
 against your face you wish you had something to protect it as shards or\
 sand start stinging against your face.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31601, 
-         Name = "City", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31602] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31601, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31596, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31603, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31602, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [3] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31878, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31602] = 
+      {
+         Vnum = 31602, 
          Description = "You are walking towards the inner town of Mos Eisley and towards the\
 spaceport. The market is also in the vicinity of the inner city. You are\
 walking down a hard sand path filled with sharp minerals that hurt your\
@@ -9990,39 +10898,39 @@ moisture. As the sand blows slowly against your face you wish you had\
 something to protect it as shards or sand start stinging against your\
 face.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31602, 
-         Name = "City", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31603] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31602, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31601, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31604, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31603, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31603] = 
+      {
+         Vnum = 31603, 
          Description = "You are approaching an intersection which will bring you to different parts\
 of the city. You are walking down a hard sand path filled with sharp\
 minerals that hurt your feet as you walk over the sand. The heat is\
@@ -10031,48 +10939,39 @@ air is hot and heavy lacking moisture. As the sand blows slowly against\
 your face you wish you had something to protect it as shards or sand start\
 stinging against your face.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31603, 
-         Name = "City", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31604] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31603, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31602, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31653, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31605, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31604, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31604] = 
+      {
+         Vnum = 31604, 
          Description = "You are walking down the path heading directly to the Spaceport. You are\
 walking through the large, scum filled city of Mos Eisley. You are\
 walking down a hard sand path filled with sharp minerals that hurt your\
@@ -10082,188 +10981,175 @@ moisture. As the sand blows slowly against your face you wish you had\
 something to protect it as shards or sand start stinging against your\
 face.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31604, 
-         Name = "City", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31605] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31604, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31603, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31841, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31653, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31606, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31605, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31605] = 
+      {
+         Vnum = 31605, 
          Description = "You are walking down a path to the control center. There they watch the\
 activities of vessels from all parts of the galaxy. It is not a very large\
 building but is suitable for its purpose. The ground beneath your feet is\
 hardening as you approach the centre and the air is continuasly heavy and\
 warm.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31605, 
-         Name = "Pathway To Control Center", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31606] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31605, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31604, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31607, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31841, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31606, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Pathway To Control Center", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31606] = 
+      {
+         Vnum = 31606, 
          Description = "You are in front of the control center for the spaceport. Inside this building\
 many descisions are made to decide who should be allowed to land on this\
 planet and not to cause air havoc.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31606, 
-         Name = "Pathway To Control Center", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31607] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31606, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31605, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31608, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31607, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
             }, 
          }, 
+         Name = "Pathway To Control Center", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31607] = 
+      {
+         Vnum = 31607, 
          Description = "You are in front of the doors to the spaceport control center. To enter it go\
 to the west. At many times of the year this building is just chained up and\
 locked. Left here abandoned for the law here is not really kept up tight. The\
 door is of solid wood and looks very strong.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31607, 
-         Name = "In Front Of The Control Center", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31608] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31609, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31606, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31607, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31613, 
-               Description = "", 
-               Direction = "south", 
+               DestinationVnum = 31608, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31615, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "In Front Of The Control Center", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31608] = 
+      {
+         Vnum = 31608, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10274,39 +11160,61 @@ here on the main level of the building. The ground is hard and seems to be\
 made of stone. The air is crisp and relaxing in here for it is shielded from\
 the twin suns of Tatooine.\
 ", 
-         TeleDelay = 0, 
-         Name = "Inside The Control Center", 
-         Vnum = 31608, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31609] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31608, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31609, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31610, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 31607, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31613, 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31615, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Inside The Control Center", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31609] = 
+      {
+         Vnum = 31609, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10315,56 +11223,39 @@ the twin suns of Tatooine.\
 hall. There are doors placed on both sides of the hall leading into individual\
 offices.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway", 
-         Vnum = 31609, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31610] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31611, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31608, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31609, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31612, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31610, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31610] = 
+      {
+         Vnum = 31610, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10375,34 +11266,56 @@ made of stone and the illumination is poor as for only one glowpanel remains\
 to light up this entire hallway. The air is relaxing and constantly flooding\
 your lungs for it is a change towards the hot and heavy air outdoors.\
 ", 
-         TeleDelay = 0, 
-         Name = "In The Hallway", 
-         Vnum = 31610, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31611] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31610, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31611, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31609, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 31612, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "In The Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31611] = 
+      {
+         Vnum = 31611, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10411,34 +11324,34 @@ your lungs for it is a change towards the hot and heavy air outdoors.\
 decorated. It is used for conferences because of its size but there are not\
 many conferences because of the slackness of law on this planet.\
 ", 
-         TeleDelay = 0, 
-         Name = "Large Conference Room", 
-         Vnum = 31611, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31612] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31610, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31610, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Large Conference Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31612] = 
+      {
+         Vnum = 31612, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10448,43 +11361,34 @@ rather large office with many vents in it to allow the entrance of crisp air\
 to enter the room. There is a large desk made from oak in the middle of the\
 room stacked up with 3 pieces of paper.\
 ", 
-         TeleDelay = 0, 
-         Name = "Manager's Office", 
-         Vnum = 31612, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31613] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31608, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31614, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31610, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Manager's Office", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31613] = 
+      {
+         Vnum = 31613, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10492,34 +11396,43 @@ room stacked up with 3 pieces of paper.\
          Description = "This hallway heads towards the rooms with the generating and computer\
 equipment of the control center.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway", 
-         Vnum = 31613, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31614] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31613, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31608, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31614, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31614] = 
+      {
+         Vnum = 31614, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10527,44 +11440,34 @@ equipment of the control center.\
          Description = "This room contains all of the power generating equipment for the spaceport.\
 The generators and computer systems are all mounted on the walls.\
 ", 
-         TeleDelay = 0, 
-         Name = "Generator Room", 
-         Vnum = 31614, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31615] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31608, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31616, 
-               Description = "", 
-               Direction = "up", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Flags = 
                {
                   [0] = "IsDoor", 
-                  [5] = "PickProof", 
                }, 
+               DestinationVnum = 31613, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Generator Room", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31615] = 
+      {
+         Vnum = 31615, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10572,44 +11475,44 @@ The generators and computer systems are all mounted on the walls.\
          Description = "This is the lobby of the control center. In the corner a secretary takes\
 messages and allows passage to the tower.\
 ", 
-         TeleDelay = 0, 
-         Name = "Lobby", 
-         Vnum = 31615, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31616] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31617, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31608, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31615, 
-               Description = "", 
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "up", 
                Flags = 
                {
                   [0] = "IsDoor", 
                   [5] = "PickProof", 
                }, 
+               DestinationVnum = 31616, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Lobby", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31616] = 
+      {
+         Vnum = 31616, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10617,30 +11520,44 @@ messages and allows passage to the tower.\
          Description = "You are standing in the control tower. Most of the tower is run by droids and\
 computers. The only living creatures are humans.\
 ", 
-         TeleDelay = 0, 
-         Name = "Tower", 
-         Vnum = 31616, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31617] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31616, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31617, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "down", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+               }, 
+               DestinationVnum = 31615, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Tower", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31617] = 
+      {
+         Vnum = 31617, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -10649,30 +11566,30 @@ computers. The only living creatures are humans.\
 peer through it you can see many different species of life from all across the\
 galaxy.\
 ", 
-         TeleDelay = 0, 
-         Name = "Viewscreen", 
-         Vnum = 31617, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31618] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31863, 
-               Description = "", 
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31616, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Viewscreen", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31618] = 
+      {
+         Vnum = 31618, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -10687,87 +11604,78 @@ This would be a good place to rest for a while. You may quit and reenter\
 the game from here.\
  \
 ", 
-         TeleDelay = 0, 
-         Name = "Upstairs In The Cantina", 
-         Vnum = 31618, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31653] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31840, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31654, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31604, 
                Description = "", 
-               Direction = "west", 
+               Direction = "down", 
+               DestinationVnum = 31863, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Upstairs In The Cantina", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31653] = 
+      {
+         Vnum = 31653, 
          Description = "You are walking down one of the main roads in Mos Eisley. As you walk by you\
 notice a huge pile of junk where people deposit their goods. The ground you\
 walk on is hard and sharp and the air continues to remain the same, heavy and\
 warm. The air seems to be getting to you with every step you take but you can\
 manage it, after all it's only air.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31653, 
-         Name = "Large Pathway Through The City", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31654] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31655, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31840, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31653, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31654, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31604, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Large Pathway Through The City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31654] = 
+      {
+         Vnum = 31654, 
          Description = "You are walking through the city. To explore other parts of the city\
 turn down any one of the number of roads and paths. The ground here is\
 hot and sandy as most of this planet is. But as it is a city it is\
@@ -10779,57 +11687,39 @@ someone is there slapping you. Just keep your head down and hope your\
 goggles can withstand the many sand storms this planet has to deal\
 with.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31654, 
-         Name = "City Road", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31655] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31874, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31655, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31873, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31853, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31654, 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31653, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "City Road", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31655] = 
+      {
+         Vnum = 31655, 
          Description = "You are still continuing down the path through Mos Eisley. Just ahead\
 you can see the famous cantina. If you would like to enter it veer to\
 the south. But beware this place is dangerous. The ground is hot and\
@@ -10839,39 +11729,57 @@ places that are around you look interesting and some may be of use. \
 There is some active life all around you and it scares you at how\
 many dirty people can be in one place. \
 ", 
-         TeleDelay = 0, 
-         Vnum = 31655, 
-         Name = "City", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "city", 
-      }, 
-      [31658] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31659, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31874, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31600, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31873, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31853, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [4] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31654, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "City", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31658] = 
+      {
+         Vnum = 31658, 
          Description = "You are standing on the harsh sand of Tatooine. You are walking on the\
 rippling surface of the sand which has been exposed to extreme heat over\
 the many years. The sand is very warm and stings your face as the wind\
@@ -10879,834 +11787,852 @@ blows it up onto your soft skin. The air is thick and very heavy to\
 breathe, but living with it something you accepted when you entered the\
 desert.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31658, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31659, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31600, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31659] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31660, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31658, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31659, 
          Description = "You are on the hard sand of Tatooine. All around you you can see sand for\
 miles unless you look back.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31659, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31660, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31658, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31660] = 
       {
+         Vnum = 31660, 
+         Description = "You are standing on the thickening sand of Tatooine.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31661, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31661, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31659, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31659, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are standing on the thickening sand of Tatooine.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31660, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31661] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31660, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31662, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31661, 
          Description = "The sand under you is still hard and glowing. As you look around all you can\
 see is shiny sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31661, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31660, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31662, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31662] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31661, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31663, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31662, 
          Description = "You walk on the sand of Tatooine. As you walk over it your feet sink into the\
 ground leaving an everlasting mark.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31662, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31661, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31663, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31663] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31662, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31664, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31663, 
          Description = "You are walking on the sand of Tatooine. The sand gradually hardens with\
 every minute exposed to the sun.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31663, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31662, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31664, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31664] = 
       {
+         Vnum = 31664, 
+         Description = "The sand under you is feeling hotter with rays of the sun beaming down on it.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31663, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31663, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31665, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31665, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "The sand under you is feeling hotter with rays of the sun beaming down on it.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31664, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31665] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31664, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31666, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31665, 
          Description = "You are standing on the great sands of Tatooine. Far away in the distance you\
 can see the developing sea of sand dunes.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31665, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31664, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31666, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31666] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31683, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31665, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31666, 
          Description = "You are heading towards the great sand dunes, yet it is still a long journey\
 to reach the sand dune sea.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31666, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31683, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31665, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31667] = 
       {
+         Vnum = 31667, 
+         Description = "You are headed towards the great dune sea, leaving civilization behind.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31668, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31668, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31598, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31598, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are headed towards the great dune sea, leaving civilization behind.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31667, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31668] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31669, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31667, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31668, 
          Description = "You are standing on the hard sand of the planet which has been exposed to\
 harsh sun rays.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31668, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31669, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31667, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31669] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31670, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31668, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31669, 
          Description = "The sand under you is continually getting softer every step you take towards\
 the great sea of sand dunes.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31669, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31670, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31668, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31670] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31671, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31669, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31670, 
          Description = "You can now clearly make out the sand dunes ahead of you, but they are still\
 very far away.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31670, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31671, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31669, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31671] = 
       {
+         Vnum = 31671, 
+         Description = "You are nearing the great sea of sand dunes with every step you take.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31672, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31672, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31670, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31670, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are nearing the great sea of sand dunes with every step you take.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31671, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31672] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31673, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31671, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31672, 
          Description = "You are approaching the sand dunes quickly now and will be there soon. With\
 every step you take the sand seems to be getting softer and thicker.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31672, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31673, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31671, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31673] = 
       {
+         Vnum = 31673, 
+         Description = "You are only but feet of in reach of the great sea.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31674, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31674, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31672, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31672, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are only but feet of in reach of the great sea.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31673, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31674] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31675, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31673, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31674, 
          Description = "You are nearing the bottom of the first sand dune in sight. All of a sudden\
 they seem much bigger than before. They also seem to be growing with every\
 step you take.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31674, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31675, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31673, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31675] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31676, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31674, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31675, 
          Description = "The great dune sea now seems so vast and enormous with every step you take.\
 In all directions there are sand dunes towering around and over you.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31675, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31676, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31674, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31676] = 
       {
+         Vnum = 31676, 
+         Description = "You are surrounded by sand, the dunes extend as far as you can see.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31675, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31675, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31677, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31677, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are surrounded by sand, the dunes extend as far as you can see.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31676, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31677] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31676, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31678, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31677, 
          Description = "You walk endlessly on the sand beneath you. It towers all around and\
 makes you feel enclosed.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31677, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31676, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31678, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31678] = 
       {
+         Vnum = 31678, 
+         Description = "You are walking on a dune. It is shaped by the everlasting winds of Tatooine.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31677, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31677, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31679, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31679, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are walking on a dune. It is shaped by the everlasting winds of Tatooine.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31678, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31679] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31678, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31680, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31679, 
          Description = "The sand around you is thick and hot. In the daytime the sunrays make the\
 sand extremely hot.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31679, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31680] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31679, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31678, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31681, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31680, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are walking on the sand dunes of the great sea. They tower around you in\
-all directions.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31680, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
-      [31681] = 
+      [31680] = 
       {
+         Vnum = 31680, 
+         Description = "You are walking on the sand dunes of the great sea. They tower around you in\
+all directions.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31680, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31679, 
                Distance = 0, 
-               Keyword = "", 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31681, 
+               Distance = 0, 
             }, 
          }, 
-         Description = "You are walking though the thick sand. It covers your feet and makes you feel\
-enclosed.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31681, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31681] = 
+      {
+         Vnum = 31681, 
+         Description = "You are walking though the thick sand. It covers your feet and makes you feel\
+enclosed.\
+", 
          Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31680, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31682] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 31682, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -11714,74 +12640,56 @@ enclosed.\
          Description = "You walk on the sand dunes of the great sea of Tatooine. They shimmer around\
 you in the daylight.\
 ", 
-         TeleDelay = 0, 
+         Sector = "desert", 
+         Exits = 
+         {
+         }, 
          Name = "Desert", 
-         Vnum = 31682, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31683] = 
       {
+         Vnum = 31683, 
+         Description = "You are standing on the thickening sand of the desert.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31684, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31684, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31666, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31666, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are standing on the thickening sand of the desert.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31683, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31684] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31685, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31683, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31684, 
          Description = "You are nearing the first of many sand dunes. All around you can now\
 see the sand dunes of the great sea. You can already feel the wind\
 blowing the sharp sand into your face. The sand is very sharp so\
@@ -11790,1162 +12698,1162 @@ the planet are pounding heat onto your back as you walk slowly\
 through the drifts of sand. Your lungs are hurting because this heavy\
 air is making their job two times harder. \
 ", 
-         TeleDelay = 0, 
-         Vnum = 31684, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31685, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31683, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31685] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31686, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31698, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31684, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31694, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31685, 
          Description = "You are at the step of the first sand dune. You can enter the sand dune sea\
 of Tatooine to the north, the west and the east.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31685, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31686, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31698, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31684, 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31694, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31686] = 
       {
+         Vnum = 31686, 
+         Description = "You are on one of many large sand dunes in this vast sea.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31687, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31687, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31685, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31685, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are on one of many large sand dunes in this vast sea.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31686, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31687] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31688, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31686, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31687, 
          Description = "All around you are large sand dunes. If you would like to stay out of the sea\
 turn back now.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31687, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31688, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31686, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31688] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31689, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31687, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31688, 
          Description = "You are inside a small valley of sand dunes. All around you shimmering sand\
 dunes tower over you.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31688, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31689, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31687, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31689] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31688, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31690, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31689, 
          Description = "You are now in the great sea. The only thing you will find is this great sea\
 is probably death.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31689, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31688, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31690, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31690] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31689, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31691, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31690, 
          Description = "You are standing on a vast sand dune which is high enough for you to see\
 clearly across the sea.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31690, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31689, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31691, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31691] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31690, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31692, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31691, 
          Description = "You are among many sand dunes. All around you the great sand dunes tower over\
 you and you now wonder what you're doing here.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31691, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31690, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31692, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31692] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31691, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31693, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31692, 
          Description = "The vast sand dunes around you make you feel enclosed. For as far as you can\
 see there is only sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31692, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31691, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31693, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31693] = 
       {
+         Vnum = 31693, 
+         Description = "You are going endlessly over sand dunes wondering why you are here.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31692, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31692, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are going endlessly over sand dunes wondering why you are here.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31693, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31694] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31685, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31695, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31694, 
          Description = "You are standing in front of a largely spaced sea of sand dunes which seems\
 never ending.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31694, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31685, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31695, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31695] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31694, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31696, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31695, 
          Description = "You are leaving any hopes of finding civilization behind. The only thing you\
 shall find out here is certain death.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31695, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31694, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31696, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31696] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31702, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31695, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31697, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31696, 
          Description = "You are looking endlessly at the sand around you. You are but only a small\
 figure compared to the sand surrounding you.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31696, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31702, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31695, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31697, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31697] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31706, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31696, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31711, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31697, 
          Description = "You are on a sand dune. You can glare far out into the dune sea, but all you\
 can see is sand, sand and more sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31697, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31698] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31699, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31685, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "You are standing in front of a sand dune. In all directions but the one you\
-came are sand dunes.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31698, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31699] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31700, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31698, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "The sand is thicker now that you are on the sand dunes. The great sea is\
-greater than you thought and it might be wise to turn back now.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31699, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31700] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31701, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31699, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "You are on a sand dune. As you look the sand dunes never end in this vast sea.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31700, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31701] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31700, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "You are in the endless sea of sand dunes. All around you all you can see is\
-sand.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31701, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31702] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31703, 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31706, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
                DestinationVnum = 31696, 
-               Description = "", 
-               Direction = "south", 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "You are still in the endless sea of sand dunes. As you peer around yourself\
-it feels hopeless in regards to where you are.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31702, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31703] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31704, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31702, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "You are in between many sand dunes. They are around you from every angle and\
-you feel enclosed because of their height.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31703, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31704] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31705, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31703, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "You are on the side of a sand dune. You look around you and there are still\
-no traces of life.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31704, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31705] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31704, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
-         Description = "All around you all you can see is sand. The towering sand dunes are all\
-around you and you cannot figure out where you are.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31705, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-      }, 
-      [31706] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31707, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31697, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31714, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31711, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are standing on soft sand. With sand dunes surrounding you, you just\
-keep on walking.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31706, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
-      [31707] = 
+      [31698] = 
       {
+         Vnum = 31698, 
+         Description = "You are standing in front of a sand dune. In all directions but the one you\
+came are sand dunes.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31708, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31699, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31706, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31685, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31699] = 
+      {
+         Vnum = 31699, 
+         Description = "The sand is thicker now that you are on the sand dunes. The great sea is\
+greater than you thought and it might be wise to turn back now.\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31700, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31698, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31700] = 
+      {
+         Vnum = 31700, 
+         Description = "You are on a sand dune. As you look the sand dunes never end in this vast sea.\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31701, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31699, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31701] = 
+      {
+         Vnum = 31701, 
+         Description = "You are in the endless sea of sand dunes. All around you all you can see is\
+sand.\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31700, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31702] = 
+      {
+         Vnum = 31702, 
+         Description = "You are still in the endless sea of sand dunes. As you peer around yourself\
+it feels hopeless in regards to where you are.\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31703, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31696, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31703] = 
+      {
+         Vnum = 31703, 
+         Description = "You are in between many sand dunes. They are around you from every angle and\
+you feel enclosed because of their height.\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31704, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31702, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31704] = 
+      {
+         Vnum = 31704, 
+         Description = "You are on the side of a sand dune. You look around you and there are still\
+no traces of life.\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31705, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31703, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31705] = 
+      {
+         Vnum = 31705, 
+         Description = "All around you all you can see is sand. The towering sand dunes are all\
+around you and you cannot figure out where you are.\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31704, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31706] = 
+      {
+         Vnum = 31706, 
+         Description = "You are standing on soft sand. With sand dunes surrounding you, you just\
+keep on walking.\
+", 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31707, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31697, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31714, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31707] = 
+      {
+         Vnum = 31707, 
          Description = "You are walking on a sand dune. All around you there are sand dunes. They\
 tower high over you until you reach the top of one and start heading back\
 down.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31707, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31708, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31706, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31708] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31709, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31707, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31718, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31708, 
          Description = "You are standing on the top of a sand dune. And as you hope for something all\
 you can see is the voyage down the side of yet another sand dune.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31708, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31709, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31707, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31718, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31709] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31710, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31708, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31709, 
          Description = "You are heading down the side of a dune. Its size makes you feel tired for it\
 only makes the journey longer.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31709, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31710, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31708, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31710] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31709, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31710, 
          Description = "You are surrounded by sand dunes and as they tower over you, you feel\
 enclosed.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31710, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31709, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31711] = 
       {
+         Vnum = 31711, 
+         Description = "You are enlosed by many sand dunes which lay around you.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31697, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31697, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31712, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31712, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are enlosed by many sand dunes which lay around you.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31711, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31712] = 
       {
+         Vnum = 31712, 
+         Description = "You are on a sand dune. You can only see sand and formations of dunes in your range of vision.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31711, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31711, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31713, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31713, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are on a sand dune. You can only see sand and formations of dunes in your range of vision.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31712, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31713] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31712, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31713, 
          Description = "You are standing on the top of a sand dune. You feel bigger when you reach the\
 top of a sand dune but there is always the way down to think about.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31713, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31712, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31714] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31706, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31715, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31714, 
          Description = "You are walking down the side of a sand dune. All around you is sand as far\
 as you can see.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31714, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31715] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31714, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31706, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31716, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31715, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31715] = 
+      {
+         Vnum = 31715, 
          Description = "The dunes around you are normal as you walk over the endless amount of sand.\
 The sea of rippling sand still surrounds you with overwhelming greatness. The\
 sand has a reflective shine to it assisted by the sunrays of the heating suns.\
 You feel enclosed because the dunes tower over you greatly.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31715, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31716] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31715, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31714, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31717, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31716, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31716] = 
+      {
+         Vnum = 31716, 
          Description = "You are on the side of a dune. It is a large dune so walking down it only to\
 walk up another is starting to bother you. The dunes around you are normal as\
 you walk over the endless amount of sand. The sea of rippling sand still\
@@ -12953,465 +13861,461 @@ surrounds you with overwhelming greatness. The sand has a reflective shine to\
 it assisted by the sunrays of the heating suns. You feel enclosed because the\
 dunes tower over you greatly.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31716, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31715, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31717, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31717] = 
       {
+         Vnum = 31717, 
+         Description = "You are standing in between various sand dunes of all sizes and shapes.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31716, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31716, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are standing in between various sand dunes of all sizes and shapes.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31717, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31718] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31708, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31719, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31718, 
          Description = "You are walking on soft sand. The sand dunes tower around you from all\
 directions.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31718, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31708, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31719, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31719] = 
       {
+         Vnum = 31719, 
+         Description = "You are on the side of a sand dune approaching the top.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31718, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31718, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31720, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31720, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are on the side of a sand dune approaching the top.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31719, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31720] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31719, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31721, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31720, 
          Description = "You are on the top edge of a sand dune. As you peer around you there is only\
 sand.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31720, 
-         Name = "Desert", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "desert", 
-      }, 
-      [31721] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31722, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31719, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31720, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31721, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Desert", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31721] = 
+      {
+         Vnum = 31721, 
          Description = "You are standing on the side of the sharply shaped sand dune. You are\
 approaching the bottom once again so that you can continue with your\
 journey.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31721, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31722, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31720, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31722] = 
       {
+         Vnum = 31722, 
+         Description = "You are on a large sand dune. All around you can see sand.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31723, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31723, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31721, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31721, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are on a large sand dune. All around you can see sand.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31722, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31723] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31722, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31724, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31723, 
          Description = "You are walking on the side of a sand dune. All around you sand dunes tower\
 over you.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31723, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31722, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31724, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31724] = 
       {
+         Vnum = 31724, 
+         Description = "You are standing on the top of a sand dune. All around you there is sand.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31725, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31725, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31723, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31723, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are standing on the top of a sand dune. All around you there is sand.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31724, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31725] = 
       {
+         Vnum = 31725, 
+         Description = "You are surrounded by sand from all sides and feel enclosed.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31724, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31724, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31726, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31726, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are surrounded by sand from all sides and feel enclosed.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31725, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31726] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31725, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31727, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31726, 
          Description = "You are standing on the top of a sand dune. You can see what seems to be a\
 palace of some sort in the side of a sand dune just ahead.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31726, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31725, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31727, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31727] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31728, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31726, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31727, 
          Description = "You are standing in front of what you now recognize as Jabba the Hutt's former\
 home.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31727, 
+         Sector = "desert", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31728, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31726, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Desert", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31728] = 
       {
+         Vnum = 31728, 
+         Description = "You are in front of a large door. It seems to not have been opened in years.\
+", 
+         Sector = "desert", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31729, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               DestinationVnum = 31729, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31727, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31727, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are in front of a large door. It seems to not have been opened in years.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31728, 
          Name = "In Front Of Jabba's Palace", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "desert", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31729] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31730, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31728, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-            }, 
-         }, 
+         Vnum = 31729, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -13419,39 +14323,43 @@ home.\
          Description = "You are standing in a large opening surrounded by large walls which tower\
 around you. It is very dark in here and you can only continue to the north.\
 ", 
-         TeleDelay = 0, 
-         Name = "Entrance To Jabba's Palace", 
-         Vnum = 31729, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31730] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31731, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31730, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31729, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               DestinationVnum = 31728, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Entrance To Jabba's Palace", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31730] = 
+      {
+         Vnum = 31730, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -13459,57 +14367,39 @@ around you. It is very dark in here and you can only continue to the north.\
          Description = "You are walking down a corridor towards the what seems to be a large room.\
 The air around you is thick and has a foul odor.\
 ", 
-         TeleDelay = 0, 
-         Name = "Hallway In Jabba's Palace", 
-         Vnum = 31730, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31731] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31732, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31731, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31733, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-            [3] = 
-            {
-               DestinationVnum = 31730, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31729, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [4] = 
-            {
-               DestinationVnum = 31734, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
+         Name = "Hallway In Jabba's Palace", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31731] = 
+      {
+         Vnum = 31731, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -13518,75 +14408,84 @@ The air around you is thick and has a foul odor.\
 hold many people including dancing girls, bands and tables full of people.\
 But, since the Monks took over the palace it has not been used.\
 ", 
-         TeleDelay = 0, 
-         Name = "In Front Of Audience Chamber", 
-         Vnum = 31731, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31732] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31731, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-         }, 
-         Description = "You are standing on Jabba the Hutt's former Dais. It is a very large area\
-which has an exellent view of the audience chamber.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31732, 
-         Name = "Jabba's Dais", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-      }, 
-      [31733] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31800, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31732, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31731, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31733, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31798, 
-               Description = "", 
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31730, 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31734, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "In Front Of Audience Chamber", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31732] = 
+      {
+         Vnum = 31732, 
+         Description = "You are standing on Jabba the Hutt's former Dais. It is a very large area\
+which has an exellent view of the audience chamber.\
+", 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31731, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Jabba's Dais", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31733] = 
+      {
+         Vnum = 31733, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -13594,48 +14493,48 @@ which has an exellent view of the audience chamber.\
          Description = "You are standing directly on the trapdoor that was used to feed traitors to\
 the Rancor which was killed by Luke Skywalker.\
 ", 
-         TeleDelay = 0, 
-         Name = "Trapdoor", 
-         Vnum = 31733, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31734] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31736, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31800, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31731, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31731, 
+               Distance = 0, 
             }, 
             [3] = 
             {
-               DestinationVnum = 31735, 
-               Description = "", 
-               Direction = "up", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "down", 
+               DestinationVnum = 31798, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Trapdoor", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31734] = 
+      {
+         Vnum = 31734, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -13643,39 +14542,48 @@ the Rancor which was killed by Luke Skywalker.\
          Description = "You are in the audience chambers of the palace. You can go up the stairs\
 towards some of the living quarters of the monks.\
 ", 
-         TeleDelay = 0, 
-         Name = "Audience Chambers", 
-         Vnum = 31734, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31735] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31746, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "north", 
+               DestinationVnum = 31736, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31734, 
-               Description = "", 
-               Direction = "down", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31731, 
+               Distance = 0, 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "up", 
+               DestinationVnum = 31735, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Audience Chambers", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31735] = 
+      {
+         Vnum = 31735, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -13683,30 +14591,39 @@ towards some of the living quarters of the monks.\
          Description = "You are on the upper level of the palace that is now inhabited by mainly\
 boormir monks and spiderwalkers.\
 ", 
-         TeleDelay = 0, 
-         Name = "Upper Level Entrance", 
-         Vnum = 31735, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "inside", 
-      }, 
-      [31736] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31734, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31746, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "down", 
+               DestinationVnum = 31734, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Upper Level Entrance", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31736] = 
+      {
+         Vnum = 31736, 
          Flags = 
          {
             [3] = "Indoors", 
@@ -13714,1279 +14631,366 @@ boormir monks and spiderwalkers.\
          Description = "You are standing beside the Dais of the former Jabba the Hutt. From here you\
 cannot see very well but you are very near the Dais.\
 ", 
-         TeleDelay = 0, 
+         Sector = "inside", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31734, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Beside The Dais", 
-         Vnum = 31736, 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31737] = 
       {
+         Vnum = 31737, 
+         Description = "You are standing beside the Dais. From here you have a good view of the chambers.\
+", 
+         Sector = "inside", 
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31733, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "south", 
+               DestinationVnum = 31733, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You are standing beside the Dais. From here you have a good view of the chambers.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31737, 
          Name = "Beside The Dais", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31738] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31739, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31586, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31738, 
          Description = "You are standing on a flat rocky surface. As you peer around you see that the\
 Jundland Wastes are very large.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31738, 
+         Sector = "mountain", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31739, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31586, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Wastes", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "mountain", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31739] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31740, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31738, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31739, 
          Description = "You walk around the Jundland Wastes. All around you there is a very\
 strong odour.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31739, 
+         Sector = "mountain", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31740, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31738, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Wastes", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "mountain", 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [31740] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31741, 
-               Description = "", 
-               Direction = "north", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-            [2] = 
-            {
-               DestinationVnum = 31739, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-            }, 
-         }, 
+         Vnum = 31740, 
          Description = "You stand on rock. It is a very large area you are about to explore. The odour\
 is still strong around you.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31740, 
-         Name = "Wastes", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31741] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31740, 
-               Description = "", 
-               Direction = "south", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-            }, 
-         }, 
-         Description = "You can see lots of rocks and cliffs of many different shapes and sizes all\
-around you. The odour is still all around you.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31741, 
-         Name = "Wastes", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "mountain", 
-      }, 
-      [31742] = 
-      {
-         Exits = 
-         {
-            [1] = 
-            {
-               DestinationVnum = 31743, 
-               Description = "", 
-               Direction = "east", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 31741, 
+               Distance = 0, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31589, 
-               Description = "", 
-               Direction = "west", 
-               Distance = 0, 
-               Keyword = "", 
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31739, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Wastes", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31741] = 
+      {
+         Vnum = 31741, 
+         Description = "You can see lots of rocks and cliffs of many different shapes and sizes all\
+around you. The odour is still all around you.\
+", 
+         Sector = "mountain", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 31740, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Wastes", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31742] = 
+      {
+         Vnum = 31742, 
          Description = "You are walking through the Jundland Wastes. All around you there is a\
 distinct odour. Things and small creatures many dead lay here but cannot be\
 taken without effort, they must not be worth anything.\
 ", 
-         TeleDelay = 0, 
-         Vnum = 31742, 
-         Name = "Vague Area", 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Sector = "mountain", 
-      }, 
-      [31743] = 
-      {
          Exits = 
          {
             [1] = 
             {
-               DestinationVnum = 31744, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "east", 
+               DestinationVnum = 31743, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
             [2] = 
             {
-               DestinationVnum = 31742, 
+               Key = -1, 
+               Keyword = "", 
                Description = "", 
                Direction = "west", 
+               DestinationVnum = 31589, 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
             }, 
          }, 
-         Description = "You walk down a path through the wastes. All around you the odour thickens.\
-", 
-         TeleDelay = 0, 
-         Vnum = 31743, 
-         Name = "Wastes", 
+         Name = "Vague Area", 
          Tunnel = 0, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [31743] = 
+      {
+         Vnum = 31743, 
+         Description = "You walk down a path through the wastes. All around you the odour thickens.\
+", 
          Sector = "mountain", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 31744, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 31742, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Wastes", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
    }, 
-   Resets = 
-   {
-      [1] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31767, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31500, 
-      }, 
-      [2] = 
-      {
-         MiscData = 1, 
-         Arg3 = 0, 
-         Arg2 = 100, 
-         Command = "E", 
-         Arg1 = 31500, 
-      }, 
-      [3] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31756, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31501, 
-      }, 
-      [4] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31756, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31501, 
-      }, 
-      [5] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31756, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31500, 
-      }, 
-      [6] = 
-      {
-         MiscData = 1, 
-         Arg3 = 0, 
-         Arg2 = 100, 
-         Command = "E", 
-         Arg1 = 31500, 
-      }, 
-      [7] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31759, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31501, 
-      }, 
-      [8] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31758, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31501, 
-      }, 
-      [9] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31758, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31501, 
-      }, 
-      [10] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31758, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31501, 
-      }, 
-      [11] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31588, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31502, 
-      }, 
-      [12] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31588, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31502, 
-      }, 
-      [13] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31588, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31502, 
-      }, 
-      [14] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31806, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31503, 
-      }, 
-      [15] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31806, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31503, 
-      }, 
-      [16] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31806, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31502, 
-      }, 
-      [17] = 
-      {
-         MiscData = 1, 
-         Arg3 = 0, 
-         Arg2 = 100, 
-         Command = "E", 
-         Arg1 = 31504, 
-      }, 
-      [18] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6, 
-         Arg2 = 100, 
-         Command = "E", 
-         Arg1 = 31505, 
-      }, 
-      [19] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31831, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31505, 
-      }, 
-      [20] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31833, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31508, 
-      }, 
-      [21] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31837, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31511, 
-      }, 
-      [22] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31837, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31511, 
-      }, 
-      [23] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31837, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31511, 
-      }, 
-      [24] = 
-      {
-         MiscData = 1, 
-         Arg3 = 16, 
-         Arg2 = 100, 
-         Command = "E", 
-         Arg1 = 31511, 
-      }, 
-      [25] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31838, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31510, 
-      }, 
-      [26] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31831, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31508, 
-      }, 
-      [27] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31612, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31514, 
-      }, 
-      [28] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31847, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31517, 
-      }, 
-      [29] = 
-      {
-         MiscData = 1, 
-         Arg3 = 6, 
-         Arg2 = 100, 
-         Command = "E", 
-         Arg1 = 31516, 
-      }, 
-      [30] = 
-      {
-         MiscData = 1, 
-         Arg3 = 13, 
-         Arg2 = 100, 
-         Command = "E", 
-         Arg1 = 31515, 
-      }, 
-      [31] = 
-      {
-         MiscData = 1, 
-         Arg3 = 2, 
-         Arg2 = 5, 
-         Command = "D", 
-         Arg1 = 31850, 
-      }, 
-      [32] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31851, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31518, 
-      }, 
-      [33] = 
-      {
-         MiscData = 1, 
-         Arg3 = 16, 
-         Arg2 = 100, 
-         Command = "E", 
-         Arg1 = 31517, 
-      }, 
-      [34] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31852, 
-         Arg2 = 4, 
-         Command = "M", 
-         Arg1 = 31515, 
-      }, 
-      [35] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31852, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31515, 
-      }, 
-      [36] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31852, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31515, 
-      }, 
-      [37] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31852, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31515, 
-      }, 
-      [38] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31852, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31515, 
-      }, 
-      [39] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31852, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31515, 
-      }, 
-      [40] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31715, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31512, 
-      }, 
-      [41] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31715, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31512, 
-      }, 
-      [42] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31715, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31513, 
-      }, 
-      [43] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31715, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31514, 
-      }, 
-      [44] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31715, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31513, 
-      }, 
-      [45] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31715, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31516, 
-      }, 
-      [46] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31715, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31516, 
-      }, 
-      [47] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31853, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31519, 
-      }, 
-      [48] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31863, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31519, 
-      }, 
-      [49] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31863, 
-         Arg2 = 100, 
-         Command = "O", 
-         Arg1 = 31520, 
-      }, 
-      [50] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31871, 
-         Arg2 = 12, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [51] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31871, 
-         Arg2 = 12, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [52] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31871, 
-         Arg2 = 12, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [53] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31871, 
-         Arg2 = 12, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [54] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31871, 
-         Arg2 = 12, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [55] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31871, 
-         Arg2 = 12, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [56] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31817, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31501, 
-      }, 
-      [57] = 
-      {
-         MiscData = 1, 
-         Arg3 = 12, 
-         Arg2 = 1, 
-         Command = "E", 
-         Arg1 = 31509, 
-      }, 
-      [58] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg1 = 10314, 
-      }, 
-      [59] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31861, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [60] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31861, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31527, 
-      }, 
-      [61] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31861, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31507, 
-      }, 
-      [62] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31862, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31526, 
-      }, 
-      [63] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31862, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31521, 
-      }, 
-      [64] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31862, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31524, 
-      }, 
-      [65] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31857, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31525, 
-      }, 
-      [66] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31857, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31506, 
-      }, 
-      [67] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31854, 
-         Arg2 = 2, 
-         Command = "M", 
-         Arg1 = 31527, 
-      }, 
-      [68] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31854, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31523, 
-      }, 
-      [69] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31854, 
-         Arg2 = 2, 
-         Command = "M", 
-         Arg1 = 31525, 
-      }, 
-      [70] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31854, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31528, 
-      }, 
-      [71] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31856, 
-         Arg2 = 2, 
-         Command = "M", 
-         Arg1 = 31526, 
-      }, 
-      [72] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31856, 
-         Arg2 = 2, 
-         Command = "M", 
-         Arg1 = 31528, 
-      }, 
-      [73] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31858, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31529, 
-      }, 
-      [74] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31855, 
-         Arg2 = 13, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [75] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31855, 
-         Arg2 = 2, 
-         Command = "M", 
-         Arg1 = 31524, 
-      }, 
-      [76] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31653, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31503, 
-      }, 
-      [77] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31840, 
-         Arg2 = 1, 
-         Command = "O", 
-         Arg1 = 31514, 
-      }, 
-      [78] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31870, 
-         Arg2 = 19, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [79] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31870, 
-         Arg2 = 19, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [80] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31870, 
-         Arg2 = 19, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [81] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31870, 
-         Arg2 = 19, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [82] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31870, 
-         Arg2 = 19, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [83] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31870, 
-         Arg2 = 19, 
-         Command = "M", 
-         Arg1 = 31520, 
-      }, 
-      [84] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31830, 
-         Arg2 = 1, 
-         Command = "O", 
-         Arg1 = 31521, 
-      }, 
-      [85] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31875, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31531, 
-      }, 
-      [86] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31601, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [87] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31602, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [88] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31603, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [89] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31604, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [90] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31819, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [91] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31821, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [92] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31822, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [93] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31824, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [94] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31828, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [95] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31829, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [96] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31830, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [97] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31832, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [98] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31834, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [99] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31835, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [100] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31837, 
-         Arg2 = 100, 
-         Command = "M", 
-         Arg1 = 31504, 
-      }, 
-      [101] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31601, 
-         Arg2 = 20, 
-         Command = "M", 
-         Arg1 = 31503, 
-      }, 
-      [102] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31602, 
-         Arg2 = 20, 
-         Command = "M", 
-         Arg1 = 31503, 
-      }, 
-      [103] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31603, 
-         Arg2 = 20, 
-         Command = "M", 
-         Arg1 = 31503, 
-      }, 
-      [104] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31604, 
-         Arg2 = 20, 
-         Command = "M", 
-         Arg1 = 31503, 
-      }, 
-      [105] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31653, 
-         Arg2 = 20, 
-         Command = "M", 
-         Arg1 = 31503, 
-      }, 
-      [106] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31840, 
-         Arg2 = 20, 
-         Command = "M", 
-         Arg1 = 31503, 
-      }, 
-      [107] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31883, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31532, 
-      }, 
-      [108] = 
-      {
-         MiscData = 0, 
-         Arg3 = 31863, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 328, 
-      }, 
-      [109] = 
-      {
-         MiscData = 1, 
-         Arg3 = 16, 
-         Arg2 = 1, 
-         Command = "E", 
-         Arg1 = 55, 
-      }, 
-      [110] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31905, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 31900, 
-      }, 
-      [111] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg1 = 10323, 
-      }, 
-      [112] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg1 = 10324, 
-      }, 
-      [113] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31899, 
-         Arg2 = 1, 
-         Command = "O", 
-         Arg1 = 31525, 
-      }, 
-      [114] = 
-      {
-         MiscData = 1, 
-         Arg3 = 31900, 
-         Arg2 = 1, 
-         Command = "O", 
-         Arg1 = 31526, 
-      }, 
-   }, 
+   HighEconomy = 0, 
    Mobiles = 
    {
       [31500] = 
       {
          Vnum = 31500, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 100, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 22, 
-         ShortDescr = "a short monk", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [2] = "Scavenger", 
             [6] = "StayArea", 
          }, 
-         Name = "monk", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A monk wanders around the palace.\
+", 
+         Race = "Human", 
+         Alignment = 100, 
+         ShortDescr = "a short monk", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 22, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A monk wanders around the palace.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "monk", 
          Description = "This is a aged monk. He has lived here for many years and has small scars on\
 his body.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
-         Credits = 0, 
-      }, 
-      [31501] = 
-      {
-         Description = "This jawa seems fierce and old. He has a small pouch where he keeps his money\
-and change for customers willing to purchase something.\
-", 
-         HitRoll = 0, 
+         Sex = "male", 
          HitChance = 
          {
             HitSizeDice = 0, 
-            HitPlus = 0, 
             HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+      }, 
+      [31501] = 
+      {
+         Vnum = 31501, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+            [7] = "Wimpy", 
+         }, 
+         LongDescr = "A large, mean looking Jawa sits in his chair comfortably here selling liquids for journeys out into the great dune sea.\
+", 
+         Race = "Human", 
+         Alignment = 111, 
+         ShortDescr = "a large Jawa", 
+         Stats = 
+         {
+            Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 25, 
+            Dexterity = 13, 
          }, 
          Position = "standing", 
-         Credits = 30000, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Shop = 
-         {
-            ProfitSell = 0, 
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            BuyTypes = 
-            {
-               [1] = "container", 
-               [2] = "armor", 
-               [3] = "trash", 
-               [4] = "none", 
-               [0] = "light", 
-            }, 
-            ProfitBuy = 110, 
-            KeeperShortDescr = "a large Jawa", 
-            KeeperVnum = 31501, 
-         }, 
-         Level = 35, 
+         DamRoll = 0, 
+         Height = 0, 
+         ArmorClass = 0, 
          MudProgs = 
          {
             [1] = 
@@ -14998,92 +15002,76 @@ say ... you've come to the right place.\
                MudProgType = "all_greet_prog", 
             }, 
          }, 
-         ShortDescr = "a large Jawa", 
-         Weight = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-            [7] = "Wimpy", 
-         }, 
-         AffectedBy = 
-         {
-            [7] = "Sanctuary", 
-         }, 
-         Stats = 
-         {
-            Strength = 25, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Wisdom = 13, 
-         }, 
-         Alignment = 111, 
-         NumberOfAttacks = 0, 
-         Race = "Human", 
-         LongDescr = "A large, mean looking Jawa sits in his chair comfortably here selling liquids for journeys out into the great dune sea.\
+         Description = "This jawa seems fierce and old. He has a small pouch where he keeps his money\
+and change for customers willing to purchase something.\
 ", 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitBuy = 110, 
+            ProfitSell = 0, 
+            KeeperShortDescr = "a large Jawa", 
+            BuyTypes = 
+            {
+               [1] = "container", 
+               [2] = "armor", 
+               [3] = "trash", 
+               [4] = "none", 
+               [0] = "light", 
+            }, 
+         }, 
+         NumberOfAttacks = 0, 
+         HitRoll = 0, 
+         Name = "water jawa", 
          Languages = 
          {
+            Speaking = 
+            {
+               [17] = "jawaese", 
+            }, 
             Speaks = 
             {
                [0] = "basic", 
                [17] = "jawaese", 
             }, 
-            Speaking = 
-            {
-               [17] = "jawaese", 
-            }, 
          }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Level = 35, 
          Sex = "male", 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Name = "water jawa", 
-         DamRoll = 0, 
-         Height = 0, 
-         Vnum = 31501, 
-      }, 
-      [31502] = 
-      {
-         Description = "This ferocious creature is rare but very valuble to many people throughout\
-this galaxy. As it eyes you, you wonder what to do.\
-", 
-         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [7] = "Sanctuary", 
+         }, 
          HitChance = 
          {
             HitSizeDice = 0, 
-            HitPlus = 0, 
             HitNoDice = 0, 
+            HitPlus = 0, 
          }, 
-         Position = "standing", 
-         Credits = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 100, 
-         ShortDescr = "a large krayt dragon", 
+         Credits = 30000, 
+         DefaultPosition = "standing", 
          Weight = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
+      }, 
+      [31502] = 
+      {
+         Vnum = 31502, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -15092,211 +15080,219 @@ this galaxy. As it eyes you, you wonder what to do.\
             [5] = "Aggressive", 
             [6] = "StayArea", 
          }, 
+         LongDescr = "A large krayt stands here towering over you, staring you in the eye.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a large krayt dragon", 
+         Stats = 
+         {
+            Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = -170, 
+         Description = "This ferocious creature is rare but very valuble to many people throughout\
+this galaxy. As it eyes you, you wonder what to do.\
+", 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         NumberOfAttacks = 0, 
+         HitRoll = 0, 
+         Name = "Krayt dragon", 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [17] = "jawaese", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Level = 100, 
+         Sex = "female", 
          AffectedBy = 
          {
             [7] = "Sanctuary", 
          }, 
-         Stats = 
+         HitChance = 
          {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Wisdom = 13, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
          }, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Race = "Human", 
-         LongDescr = "A large krayt stands here towering over you, staring you in the eye.\
-", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [17] = "jawaese", 
-            }, 
-         }, 
-         Sex = "female", 
-         ArmorClass = -170, 
+         Credits = 0, 
          DefaultPosition = "standing", 
-         Name = "Krayt dragon", 
-         DamRoll = 0, 
-         Height = 0, 
-         Vnum = 31502, 
+         Weight = 0, 
       }, 
       [31503] = 
       {
          Vnum = 31503, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 10, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 1, 
-         ShortDescr = "a small womp Rat", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [2] = "Scavenger", 
             [6] = "StayArea", 
          }, 
-         Name = "womp rat", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A womp rat hops by.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a small womp Rat", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 97, 
+         Level = 1, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A womp rat hops by.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         Name = "womp rat", 
          Description = "This creature does not look to be of one of the more appreciated kind.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+            HitPlus = 10, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31504] = 
       {
          Vnum = 31504, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 115, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 3, 
-         ShortDescr = "a young Jawa", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [2] = "Scavenger", 
             [6] = "StayArea", 
          }, 
-         Name = "Young Jawa", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A young Jawa walks around here.\
+", 
+         Race = "Human", 
+         Alignment = 115, 
+         ShortDescr = "a young Jawa", 
          Stats = 
          {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
             Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 3, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [17] = "jawaese", 
-            }, 
             Speaking = 
             {
                [17] = "jawaese", 
             }, 
+            Speaks = 
+            {
+               [17] = "jawaese", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A young Jawa walks around here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Young Jawa", 
          Description = "This creature is not one of the more respectable species but manages to live\
 on its own. This Jawa is a very young and untrained.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31505] = 
       {
          Vnum = 31505, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 150, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 25, 
-         ShortDescr = "a Jawa guard", 
-         Weight = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -15304,380 +15300,360 @@ on its own. This Jawa is a very young and untrained.\
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         Name = "jawa guard", 
-         NumberOfAttacks = 0, 
+         LongDescr = "The Jawa guard stands here guarding something.\
+", 
+         Race = "Human", 
+         Alignment = 150, 
+         ShortDescr = "a Jawa guard", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 25, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "The Jawa guard stands here guarding something.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "jawa guard", 
          Description = "This is not a regular filthy creature. This Jawa is trained and armed to the\
 teeth. Consider it before you attack him.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31506] = 
       {
          Vnum = 31506, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 3, 
-         ShortDescr = "a scavenger", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [2] = "Scavenger", 
             [6] = "StayArea", 
          }, 
-         Name = "Scavenger", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A scavenger walks around here picking up anything he can see.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a scavenger", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 3, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A scavenger walks around here picking up anything he can see.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Scavenger", 
          Description = "This scavenger is a small animal whom which no attention is regarded.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31507] = 
       {
          Vnum = 31507, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 140, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 9, 
-         ShortDescr = "a moisture farmer", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [2] = "Scavenger", 
             [6] = "StayArea", 
          }, 
-         Name = "Moisture Farmer", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A moisture farmer walks around here, trying to find his destination.\
+", 
+         Race = "Human", 
+         Alignment = 140, 
+         ShortDescr = "a moisture farmer", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 9, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A moisture farmer walks around here, trying to find his destination.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Moisture Farmer", 
          Description = "You are looking at one of the ancestors of this planet. They have been here\
 ever since the Dowager Queen crashed into the planet.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31508] = 
       {
          Vnum = 31508, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 8, 
-         ShortDescr = "a square power droid", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         Name = "Power droid", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A power droid moves around on the ground here, humming.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a square power droid", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 8, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A power droid moves around on the ground here, humming.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Power droid", 
          Description = "This power droid is rather old and has been used for many different purposes\
 over the years of its existence. Although it is still functional it is almost\
 ready to be trashed. Small wires and shorted connections are sprawled out on\
 different parts of the droids surface.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31509] = 
       {
          Vnum = 31509, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 15, 
-         ShortDescr = "an astromech droid", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         Name = "Astromech droid.", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A small astromech droid stands around here chirping away.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "an astromech droid", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 15, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A small astromech droid stands around here chirping away.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Astromech droid.", 
          Description = "This droid, when speaking, makes no sense to you. Throught its beeps and\
 sounds its trying to say something to you but you have no clue what. This\
 droid seems to have been used before but is in excellent shape.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
-         Credits = 0, 
-      }, 
-      [31510] = 
-      {
-         Description = "This Jawa has studied the ways of this world for many years, and if you pay\
-attention can teach you may things of many uses. Be careful not to attack him\
-for he has great powers.\
-", 
-         HitRoll = 0, 
+         Sex = "undistinguished", 
          HitChance = 
          {
             HitSizeDice = 0, 
-            HitPlus = 0, 
             HitNoDice = 0, 
+            HitPlus = 0, 
          }, 
-         Position = "standing", 
          Credits = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 45, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         ShortDescr = "a wise Jawa", 
+         DefaultPosition = "standing", 
          Weight = 0, 
-         Stats = 
-         {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 15, 
-            Wisdom = 19, 
-         }, 
+      }, 
+      [31510] = 
+      {
+         Vnum = 31510, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -15685,62 +15661,107 @@ for he has great powers.\
             [9] = "Train", 
             [6] = "StayArea", 
          }, 
-         AffectedBy = 
+         LongDescr = "A wise Jawa stands here ready to teach you skills.\
+", 
+         Race = "Human", 
+         Alignment = 210, 
+         ShortDescr = "a wise Jawa", 
+         Stats = 
          {
-            [7] = "Sanctuary", 
+            Wisdom = 19, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 15, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Description = "This Jawa has studied the ways of this world for many years, and if you pay\
+attention can teach you may things of many uses. Be careful not to attack him\
+for he has great powers.\
+", 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
          VipFlags = 
          {
             [8] = "Tatooine", 
          }, 
-         Alignment = 210, 
+         DamRoll = 0, 
          NumberOfAttacks = 0, 
-         Race = "Human", 
-         LongDescr = "A wise Jawa stands here ready to teach you skills.\
-", 
+         HitRoll = 0, 
+         Name = "Wise Jawa", 
          Languages = 
          {
+            Speaking = 
+            {
+               [17] = "jawaese", 
+            }, 
             Speaks = 
             {
                [0] = "basic", 
                [17] = "jawaese", 
             }, 
-            Speaking = 
-            {
-               [17] = "jawaese", 
-            }, 
          }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Level = 45, 
          Sex = "undistinguished", 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Name = "Wise Jawa", 
-         DamRoll = 0, 
-         Height = 0, 
-         Vnum = 31510, 
-      }, 
-      [31511] = 
-      {
-         Description = "This is no mere guard. He too has developed many skills and is powerful. You\
-should consider attacking him, wisely.\
-", 
-         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [7] = "Sanctuary", 
+         }, 
          HitChance = 
          {
             HitSizeDice = 0, 
-            HitPlus = 0, 
             HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+      }, 
+      [31511] = 
+      {
+         Vnum = 31511, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         LongDescr = "A guardian stands here watching over The Wise One.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a guardian", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
          Position = "standing", 
-         Credits = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 40, 
+         Height = 0, 
+         ArmorClass = 0, 
          MudProgs = 
          {
             [1] = 
@@ -15761,80 +15782,83 @@ mpat $n mpechoaround $n $n is ushered into the chamber.\
                MudProgType = "speech_prog", 
             }, 
          }, 
-         ShortDescr = "a guardian", 
-         Weight = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         AffectedBy = 
-         {
-            [7] = "Sanctuary", 
-         }, 
-         Stats = 
-         {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Race = "Human", 
-         LongDescr = "A guardian stands here watching over The Wise One.\
+         Description = "This is no mere guard. He too has developed many skills and is powerful. You\
+should consider attacking him, wisely.\
 ", 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         NumberOfAttacks = 0, 
+         HitRoll = 0, 
+         Name = "Guardian", 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Level = 40, 
          Sex = "male", 
-         ArmorClass = 0, 
+         AffectedBy = 
+         {
+            [7] = "Sanctuary", 
+         }, 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Credits = 0, 
          DefaultPosition = "standing", 
-         Name = "Guardian", 
-         DamRoll = 0, 
-         Height = 0, 
-         Vnum = 31511, 
+         Weight = 0, 
       }, 
       [31512] = 
       {
          Vnum = 31512, 
-         HitRoll = 0, 
-         HitChance = 
+         Flags = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+            [2] = "Scavenger", 
+            [6] = "StayArea", 
+         }, 
+         LongDescr = "A Tusken Rauder watches you waiting for the right moment to attack.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a Tusken Raider", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
          Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 23, 
+         Height = 0, 
+         ArmorClass = 0, 
          MudProgs = 
          {
             [1] = 
@@ -15846,303 +15870,275 @@ swear $n\
                MudProgType = "all_greet_prog", 
             }, 
          }, 
-         ShortDescr = "a Tusken Raider", 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Flags = 
+         Level = 23, 
+         SaveVs = 
          {
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-            [2] = "Scavenger", 
-            [6] = "StayArea", 
-         }, 
-         Name = "Sand person tusken raider", 
-         Stats = 
-         {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
          VipFlags = 
          {
             [8] = "Tatooine", 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A Tusken Rauder watches you waiting for the right moment to attack.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Sand person tusken raider", 
          Description = "This species has adapted to the ways of living in the desert. He is strong in\
 mind and is very vicious. Be careful what you do.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31513] = 
       {
          Vnum = 31513, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 30, 
-         ShortDescr = "a Tusken Raider storyteller.", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [2] = "Scavenger", 
             [6] = "StayArea", 
          }, 
-         Name = "Sand people tusken raider Storyteller.", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A Wise Tusken Raider sits here telling a story.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a Tusken Raider storyteller.", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 30, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A Wise Tusken Raider sits here telling a story.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Sand people tusken raider Storyteller.", 
          Description = "This Tusken Raider has survived years of training and memory. To become what\
 he is he cannot make any mistakes or alter in any way a story told from the\
 past or he will be killed, for the Sand People believe that once told a story\
 can never be altered in any way.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31514] = 
       {
          Vnum = 31514, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 25, 
-         ShortDescr = "a storyteller in training", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [2] = "Scavenger", 
             [6] = "StayArea", 
          }, 
-         Name = "Storyteller training.", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A storyteller in training listens carefully here so that he may remember every story with precision and awe.      \
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a storyteller in training", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 25, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A storyteller in training listens carefully here so that he may remember every story with precision and awe.      \
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Storyteller training.", 
          Description = "This is one of the younger, wiser Sand People. He is being trained to become\
 the next Storyteller of the Sand People. He just hopes in his mind that he\
 will remember and remember well every story precisely.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31515] = 
       {
          Vnum = 31515, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 45, 
-         ShortDescr = "a ronto", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         Name = "Ronto", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A ronto stands here towering over you.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a ronto", 
          Stats = 
          {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
             Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 45, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [17] = "jawaese", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [17] = "jawaese", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A ronto stands here towering over you.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Ronto", 
          Description = "This creature is rather tame but when provoked can be aggressive and\
 dangerous. Watch your step.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31516] = 
       {
          Vnum = 31516, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 35, 
-         ShortDescr = "a bantha", 
-         Weight = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -16150,72 +16146,98 @@ dangerous. Watch your step.\
             [5] = "Aggressive", 
             [6] = "StayArea", 
          }, 
-         Name = "Bantha", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A bantha walks around here slowly, waiting for its master.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a bantha", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 35, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "A bantha walks around here slowly, waiting for its master.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Bantha", 
          Description = "This is a large furry creature which is rumored to have crushed people with\
 one step. Be careful for he does not like people who are not his master.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31517] = 
       {
          Vnum = 31517, 
-         HitRoll = 0, 
-         HitChance = 
+         Flags = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            [1] = "Sentinel", 
+            [2] = "Scavenger", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         LongDescr = "A mechanic waits here to be hired.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a mechanic", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
          Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 14, 
-         ShortDescr = "a mechanic", 
-         Weight = 0, 
+         Height = 0, 
+         ArmorClass = 0, 
          MudProgs = 
          {
             [1] = 
@@ -16226,6 +16248,54 @@ one step. Be careful for he does not like people who are not his master.\
                MudProgType = "all_greet_prog", 
             }, 
          }, 
+         Level = 14, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Mechanic", 
+         Description = "This mechanic is rather young, he has marks and wrinkles from work and\
+possibly war. He seems to be calm and will stay away from you unless you\
+need something which he may sometimes have.\
+", 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+      }, 
+      [31518] = 
+      {
+         Vnum = 31518, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -16233,73 +16303,25 @@ one step. Be careful for he does not like people who are not his master.\
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         Name = "Mechanic", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A tall jawa stands here protecting his Rontos.\
+", 
+         Race = "Human", 
+         Alignment = 140, 
+         ShortDescr = "a tall Jawa", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Sex = "male", 
-         LongDescr = "A mechanic waits here to be hired.\
-", 
-         DefaultPosition = "standing", 
-         Description = "This mechanic is rather young, he has marks and wrinkles from work and\
-possibly war. He seems to be calm and will stay away from you unless you\
-need something which he may sometimes have.\
-", 
-         DamRoll = 0, 
-         Height = 0, 
-         Credits = 0, 
-      }, 
-      [31518] = 
-      {
-         Vnum = 31518, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
          Position = "standing", 
-         Alignment = 140, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 19, 
-         ShortDescr = "a tall Jawa", 
-         Weight = 0, 
+         Height = 0, 
+         ArmorClass = 0, 
          MudProgs = 
          {
             [1] = 
@@ -16312,6 +16334,53 @@ nudge $n\
                MudProgType = "all_greet_prog", 
             }, 
          }, 
+         Level = 19, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "tall jawa", 
+         Description = "This Jawa is probably the tallest Jawa ever. Although he is still smaller than\
+you he looks tough, and with that gun I would be scared.\
+", 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+      }, 
+      [31519] = 
+      {
+         Vnum = 31519, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -16319,80 +16388,44 @@ nudge $n\
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         Name = "tall jawa", 
-         NumberOfAttacks = 0, 
+         LongDescr = "Wuher stands here serving people their drinks.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "Wuher", 
          Stats = 
          {
-            Strength = 10, 
+            Wisdom = 13, 
+            Charisma = 13, 
             Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Sex = "male", 
-         LongDescr = "A tall jawa stands here protecting his Rontos.\
-", 
-         DefaultPosition = "standing", 
-         Description = "This Jawa is probably the tallest Jawa ever. Although he is still smaller than\
-you he looks tough, and with that gun I would be scared.\
-", 
-         DamRoll = 0, 
-         Height = 0, 
-         Credits = 0, 
-      }, 
-      [31519] = 
-      {
-         Vnum = 31519, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
          }, 
          Position = "standing", 
-         Alignment = 0, 
+         Height = 0, 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            ParaPetri = 0, 
-            Wand = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
             SpellStaff = 0, 
+            Wand = 0, 
             PoisonDeath = 0, 
          }, 
          Level = 65, 
-         ShortDescr = "Wuher", 
-         Weight = 0, 
          Shop = 
          {
-            ProfitSell = 100, 
             BusinessHours = 
             {
                Open = 1, 
                Close = 23, 
             }, 
+            ProfitBuy = 105, 
+            ProfitSell = 100, 
+            KeeperShortDescr = "Wuher", 
             BuyTypes = 
             {
                [1] = "container", 
@@ -16401,298 +16434,286 @@ you he looks tough, and with that gun I would be scared.\
                [4] = "none", 
                [0] = "drink_container", 
             }, 
-            ProfitBuy = 105, 
-            KeeperShortDescr = "Wuher", 
-            KeeperVnum = 31519, 
          }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [2] = "Scavenger", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Name = "Wuher", 
+         DamRoll = 0, 
+         HitRoll = 0, 
          NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Wisdom = 13, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
                [17] = "jawaese", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "Wuher stands here serving people their drinks.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Wuher", 
          Description = "This man is rather old and has been working here for many years as bartender.\
 Be careful though, he still has his same old edge.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31520] = 
       {
          Vnum = 31520, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 0, 
-         ShortDescr = "a small womp rat", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [24] = "NoAssist", 
          }, 
-         Name = "small Womp Rat", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A small womp rat walks around here.\
+", 
+         Race = "Jawa", 
+         Alignment = 0, 
+         ShortDescr = "a small womp rat", 
          Stats = 
          {
-            Strength = 1, 
-            Force = 0, 
-            Dexterity = 1, 
-            Constitution = 1, 
-            Charisma = 1, 
-            Luck = 1, 
-            Intelligence = 1, 
             Wisdom = 1, 
+            Charisma = 1, 
+            Force = 0, 
+            Intelligence = 1, 
+            Luck = 1, 
+            Constitution = 1, 
+            Strength = 1, 
+            Dexterity = 1, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Jawa", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [17] = "jawaese", 
-            }, 
             Speaking = 
             {
                [17] = "jawaese", 
             }, 
+            Speaks = 
+            {
+               [17] = "jawaese", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A small womp rat walks around here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "small Womp Rat", 
          Description = "A small womp rat walk around here seeking shelter.\
 ", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31521] = 
       {
          Vnum = 31521, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 9, 
-         ShortDescr = "a small thief", 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [24] = "NoAssist", 
          }, 
-         Name = "Small Thief", 
+         LongDescr = "A small thief Walks about trying to pick your pocket.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a small thief", 
          Stats = 
          {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
             Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Level = 9, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
          AttackFlags = 
          {
             [5] = "kick", 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A small thief Walks about trying to pick your pocket.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Small Thief", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31522] = 
       {
          Vnum = 31522, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 11, 
-         ShortDescr = "a large thief", 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [24] = "NoAssist", 
          }, 
-         Name = "Large thief", 
+         LongDescr = "A large thief walks about here.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a large thief", 
          Stats = 
          {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
             Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Level = 11, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
          AttackFlags = 
          {
             [4] = "punch", 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A large thief walks about here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Large thief", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31523] = 
       {
          Vnum = 31523, 
-         HitRoll = 0, 
-         HitChance = 
+         Flags = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+         }, 
+         LongDescr = "A skillful thief walks about here.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a skillful thief", 
+         Stats = 
+         {
+            Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
          }, 
          Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 17, 
+         Height = 0, 
+         ArmorClass = 0, 
          MudProgs = 
          {
             [1] = 
@@ -16703,172 +16724,161 @@ Be careful though, he still has his same old edge.\
                MudProgType = "rand_prog", 
             }, 
          }, 
-         ShortDescr = "a skillful thief", 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Flags = 
+         Level = 17, 
+         SaveVs = 
          {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-         }, 
-         Name = "skillful thief", 
-         Stats = 
-         {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Wisdom = 13, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
          AttackFlags = 
          {
             [4] = "punch", 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
+            Speaking = 
+            {
+               [17] = "jawaese", 
+            }, 
             Speaks = 
             {
                [0] = "basic", 
                [17] = "jawaese", 
             }, 
-            Speaking = 
-            {
-               [17] = "jawaese", 
-            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A skillful thief walks about here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "skillful thief", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31524] = 
       {
          Vnum = 31524, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 18, 
-         ShortDescr = "a smuggler", 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [24] = "NoAssist", 
          }, 
-         Name = "Smuggler", 
+         LongDescr = "A smuggler sits at a table watching.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a smuggler", 
          Stats = 
          {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
             Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Level = 18, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
          AttackFlags = 
          {
             [4] = "punch", 
             [5] = "kick", 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A smuggler sits at a table watching.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Smuggler", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31525] = 
       {
          Vnum = 31525, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 26, 
-         ShortDescr = "an experienced smuggler", 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Name = "Experienced Smuggler", 
+         LongDescr = "An experienced smuggler waits for his contact here.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "an experienced smuggler", 
          Stats = 
          {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
             Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Level = 26, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
          AttackFlags = 
          {
@@ -16876,333 +16886,344 @@ Be careful though, he still has his same old edge.\
             [6] = "_06", 
             [9] = "_09", 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "An experienced smuggler waits for his contact here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Experienced Smuggler", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31526] = 
       {
          Vnum = 31526, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 14, 
-         ShortDescr = "an Ithorian", 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [24] = "NoAssist", 
          }, 
-         Name = "Ithorian", 
+         LongDescr = "An Ithorian drinks his liquors here.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "an Ithorian", 
          Stats = 
          {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
             Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Level = 14, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
          AttackFlags = 
          {
             [6] = "_06", 
             [5] = "kick", 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "An Ithorian drinks his liquors here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Ithorian", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31527] = 
       {
          Vnum = 31527, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 6, 
-         ShortDescr = "a female citizen", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Name = "Female citizen", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A female citizen minds her own buisness here.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a female citizen", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 6, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A female citizen minds her own buisness here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Female citizen", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31528] = 
       {
          Vnum = 31528, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 13, 
-         ShortDescr = "a male citizen", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Name = "Male citizen", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A male citizen walks around here.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a male citizen", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 13, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A male citizen walks around here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Male citizen", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31529] = 
       {
          Vnum = 31529, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 9, 
-         ShortDescr = "a Rodian", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Name = "Rodian", 
-         NumberOfAttacks = 0, 
+         LongDescr = "A Rodian sits here contemplating his navel.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a Rodian", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 9, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "A Rodian sits here contemplating his navel.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Rodian", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31530] = 
       {
          Vnum = 31530, 
-         HitRoll = 0, 
-         HitChance = 
+         Flags = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         LongDescr = "Merth walks around here.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "Merth", 
+         Stats = 
+         {
+            Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
          }, 
          Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 103, 
+         Height = 0, 
+         ArmorClass = 0, 
          MudProgs = 
          {
             [1] = 
@@ -17221,100 +17242,85 @@ wield blaster\
                MudProgType = "fight_prog", 
             }, 
          }, 
-         ShortDescr = "Merth", 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Flags = 
+         Level = 103, 
+         SaveVs = 
          {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Name = "Merth", 
-         Stats = 
-         {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Wisdom = 13, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
          AttackFlags = 
          {
             [9] = "_09", 
             [5] = "kick", 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "Merth walks around here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Merth", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31531] = 
       {
          Vnum = 31531, 
-         HitRoll = 6, 
-         HitChance = 
+         Flags = 
          {
-            HitSizeDice = 10, 
-            HitPlus = 320, 
-            HitNoDice = 6, 
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         LongDescr = "Wioslea tends to her customers need.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "Wioslea", 
+         Stats = 
+         {
+            Wisdom = 13, 
+            Charisma = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+            Luck = 13, 
+            Constitution = 13, 
+            Strength = 13, 
+            Dexterity = 13, 
          }, 
          Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
+         VipFlags = 
          {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
+            [8] = "Tatooine", 
          }, 
-         Shop = 
-         {
-            ProfitSell = 0, 
-            BusinessHours = 
-            {
-               Open = 1, 
-               Close = 23, 
-            }, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitBuy = 120, 
-            KeeperShortDescr = "Wioslea", 
-            KeeperVnum = 31531, 
-         }, 
-         Level = 32, 
+         Height = 0, 
+         ArmorClass = 20, 
          MudProgs = 
          {
             [1] = 
@@ -17326,88 +17332,25 @@ grin\
                MudProgType = "all_greet_prog", 
             }, 
          }, 
-         ShortDescr = "Wioslea", 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Name = "Wioslea", 
-         Stats = 
-         {
-            Strength = 13, 
-            Force = 0, 
-            Dexterity = 13, 
-            Constitution = 13, 
-            Charisma = 13, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Wisdom = 13, 
-         }, 
-         VipFlags = 
-         {
-            [8] = "Tatooine", 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 3, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 20, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Sex = "undistinguished", 
-         LongDescr = "Wioslea tends to her customers need.\
-", 
-         DefaultPosition = "standing", 
-         Description = "", 
-         DamRoll = 6, 
-         Height = 0, 
-         Credits = 0, 
-      }, 
-      [31532] = 
-      {
-         Vnum = 31532, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
+         Level = 32, 
          SaveVs = 
          {
-            ParaPetri = 0, 
-            Wand = 0, 
             Breath = 0, 
+            ParaPetri = 0, 
             SpellStaff = 0, 
+            Wand = 0, 
             PoisonDeath = 0, 
          }, 
-         Level = 1, 
          Shop = 
          {
-            ProfitSell = 100, 
             BusinessHours = 
             {
                Open = 1, 
                Close = 23, 
             }, 
+            ProfitBuy = 120, 
+            ProfitSell = 0, 
+            KeeperShortDescr = "Wioslea", 
             BuyTypes = 
             {
                [1] = "none", 
@@ -17416,12 +17359,76 @@ grin\
                [4] = "none", 
                [0] = "none", 
             }, 
-            ProfitBuy = 110, 
-            KeeperShortDescr = "Gep", 
-            KeeperVnum = 31532, 
          }, 
-         ShortDescr = "Gep", 
+         DamRoll = 6, 
+         HitRoll = 6, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 3, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         Name = "Wioslea", 
+         Description = "", 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 6, 
+            HitPlus = 320, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Weight = 0, 
+      }, 
+      [31532] = 
+      {
+         Vnum = 31532, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         LongDescr = "Gep Stands here selling you food for your travels.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "Gep", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
          MudProgs = 
          {
             [1] = 
@@ -17433,81 +17440,17 @@ say I have everything you need just type \"list\".\
                MudProgType = "all_greet_prog", 
             }, 
          }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Name = "Gep", 
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Wisdom = 10, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         ArmorClass = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Sex = "undistinguished", 
-         LongDescr = "Gep Stands here selling you food for your travels.\
-", 
-         DefaultPosition = "standing", 
-         Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
-         Credits = 0, 
-      }, 
-      [31900] = 
-      {
-         Vnum = 31900, 
-         HitRoll = 20, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 15000, 
-            HitNoDice = 20, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
+         Level = 1, 
          Shop = 
          {
-            ProfitSell = 90, 
             BusinessHours = 
             {
-               Open = 0, 
+               Open = 1, 
                Close = 23, 
             }, 
+            ProfitBuy = 110, 
+            ProfitSell = 100, 
+            KeeperShortDescr = "Gep", 
             BuyTypes = 
             {
                [1] = "none", 
@@ -17516,9 +17459,74 @@ say I have everything you need just type \"list\".\
                [4] = "none", 
                [0] = "none", 
             }, 
-            ProfitBuy = 120, 
-            KeeperShortDescr = "Zim the Failed Jedi", 
-            KeeperVnum = 31900, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "Gep", 
+         Description = "", 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+      }, 
+      [31900] = 
+      {
+         Vnum = 31900, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [17] = "NoWander", 
+            [10] = "Practice", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+            [9] = "Train", 
+         }, 
+         LongDescr = "Zim the Failed Jedi stands here before you.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "Zim the Failed Jedi", 
+         Stats = 
+         {
+            Wisdom = 25, 
+            Charisma = 25, 
+            Force = 0, 
+            Intelligence = 25, 
+            Luck = 25, 
+            Constitution = 25, 
+            Strength = 25, 
+            Dexterity = 25, 
+         }, 
+         Position = "standing", 
+         AttackFlags = 
+         {
+            [4] = "punch", 
+            [5] = "kick", 
          }, 
          MudProgs = 
          {
@@ -17560,67 +17568,64 @@ endif\
                MudProgType = "rand_prog", 
             }, 
          }, 
+         Height = 0, 
+         ArmorClass = -150, 
          Level = 100, 
-         NumberOfAttacks = 0, 
-         ShortDescr = "Zim the Failed Jedi", 
-         Weight = 0, 
-         Stats = 
+         SaveVs = 
          {
-            Strength = 25, 
-            Force = 0, 
-            Dexterity = 25, 
-            Constitution = 25, 
-            Charisma = 25, 
-            Luck = 25, 
-            Intelligence = 25, 
-            Wisdom = 25, 
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
          }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [17] = "NoWander", 
-            [10] = "Practice", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
-            [9] = "Train", 
-         }, 
-         Name = "zim failed jedi", 
          DefenseFlags = 
          {
             [1] = "dodge", 
             [0] = "parry", 
          }, 
-         AttackFlags = 
+         Shop = 
          {
-            [4] = "punch", 
-            [5] = "kick", 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "Zim the Failed Jedi", 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 10, 
-         }, 
-         Race = "Human", 
-         ArmorClass = -150, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
             Speaks = 
             {
                [1] = "shyriiwook", 
                [0] = "basic", 
                [17] = "jawaese", 
             }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
          }, 
-         Sex = "male", 
-         LongDescr = "Zim the Failed Jedi stands here before you.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         Name = "zim failed jedi", 
          Description = "Zim is a middle-aged male human with silvery stripes in his dark brown hair.\
 His stomach is bulging over a leather belt that has a lightsaber hanging from\
 it. \
@@ -17630,83 +17635,104 @@ Jedi Master. Unfortunately Zim never quite had the talent to pass the Jedi\
 trials, and when Order 66 was issued, he was somehow overlooked. Since then\
 he's been in hiding, seeking to pass on what little he learned. \
 ", 
-         DamRoll = 20, 
-         Height = 0, 
+         Sex = "male", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+            HitPlus = 15000, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [31999] = 
       {
          Vnum = 31999, 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Position = "standing", 
-         Alignment = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Level = 1, 
-         ShortDescr = "a newly created lastmob", 
-         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Name = "lastmob", 
-         NumberOfAttacks = 0, 
+         LongDescr = "Some god abandoned a newly created lastmob here.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a newly created lastmob", 
          Stats = 
          {
-            Strength = 10, 
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Charisma = 10, 
-            Luck = 10, 
-            Intelligence = 10, 
             Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
+         Position = "standing", 
+         Height = 0, 
          ArmorClass = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Sex = "undistinguished", 
-         LongDescr = "Some god abandoned a newly created lastmob here.\
-", 
-         DefaultPosition = "standing", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Name = "lastmob", 
          Description = "", 
-         DamRoll = 0, 
-         Height = 0, 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
          Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
+      }, 
+   }, 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         Low = 0, 
+         High = 0, 
+      }, 
+      Hard = 
+      {
+         Low = 0, 
+         High = 103, 
       }, 
    }, 
    ResetMessage = "", 
-   LowEconomy = 30141878, 
-   FileFormatVersion = 1, 
-   HighEconomy = 0, 
    ResetFrequency = 0, 
+   LowEconomy = 30141878, 
+   Name = "Tatooine", 
    Author = "Satin", 
+   Filename = "tatooine.lua", 
+   FileFormatVersion = 1, 
 }

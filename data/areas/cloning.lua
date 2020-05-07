@@ -1,276 +1,51 @@
 -- Cloning Station
--- Last saved Wednesday 06-May-2020 12:59:10
+-- Last saved Thursday 07-May-2020 14:47:57
 
 AreaEntry
 {
    ResetMessage = "&CThe filtered air carries the distinct scent of medicine.", 
-   FileFormatVersion = 1, 
-   Author = "Durga", 
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg3 = 10001, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10009, 
-      }, 
-      [2] = 
-      {
-         Arg3 = 10010, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10001, 
-      }, 
-      [3] = 
-      {
-         Arg3 = 10010, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10002, 
-      }, 
-      [4] = 
-      {
-         Arg3 = 10010, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10003, 
-      }, 
-      [5] = 
-      {
-         Arg3 = 10007, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10005, 
-      }, 
-      [6] = 
-      {
-         Command = "G", 
-         Arg2 = 1, 
-         Arg1 = 10424, 
-         MiscData = 1, 
-      }, 
-      [7] = 
-      {
-         Command = "G", 
-         Arg2 = 1, 
-         Arg1 = 10314, 
-         MiscData = 1, 
-      }, 
-      [8] = 
-      {
-         Arg3 = 10009, 
-         Command = "M", 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10004, 
-      }, 
-      [9] = 
-      {
-         Command = "G", 
-         Arg2 = 1, 
-         Arg1 = 10004, 
-         MiscData = 1, 
-      }, 
-      [10] = 
-      {
-         Command = "G", 
-         Arg2 = 1, 
-         Arg1 = 10004, 
-         MiscData = 1, 
-      }, 
-      [11] = 
-      {
-         Command = "G", 
-         Arg2 = 1, 
-         Arg1 = 10004, 
-         MiscData = 1, 
-      }, 
-      [12] = 
-      {
-         Arg3 = 10009, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10001, 
-      }, 
-   }, 
    HighEconomy = 0, 
-   Objects = 
-   {
-      [10000] = 
-      {
-         Cost = 0, 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "Some god dropped a newly created bookend here.", 
-         Weight = 1, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Layers = 0, 
-         ShortDescr = "a newly created bookend", 
-         Vnum = 10000, 
-         Name = "bookend", 
-      }, 
-      [10001] = 
-      {
-         Cost = 0, 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A sparti cloning cylinder is here.", 
-         Weight = 1, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Layers = 0, 
-         ShortDescr = "a sparti cloning cylinder", 
-         Vnum = 10001, 
-         Name = "sparti cloning cylinder", 
-      }, 
-      [10002] = 
-      {
-         Cost = 0, 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "Some god dropped a newly created desc here.", 
-         Weight = 1, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Layers = 0, 
-         ShortDescr = "a newly created desc", 
-         Vnum = 10002, 
-         Name = "desc", 
-      }, 
-      [10003] = 
-      {
-         Cost = 0, 
-         ItemType = "government", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "OOooOOoo the deed to the cloning facilities is here.", 
-         Weight = 1, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Layers = 0, 
-         ShortDescr = "the deed", 
-         Vnum = 10003, 
-         Name = "facility deed ", 
-      }, 
-      [10004] = 
-      {
-         Cost = 0, 
-         ItemType = "armor", 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "leggings", 
-               Description = "These leggings will offer good protection until you can get better. They\
-\13can be found at the Darkhaven Academy.\
-\13", 
-            }, 
-         }, 
-         Description = "White hospital scrubs have been discarded in a pile here.", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-         }, 
-         Weight = 3, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
-         ShortDescr = "White hospital scrubs", 
-         Layers = 0, 
-         Vnum = 10004, 
-         Name = "Hospital Scrubs", 
-      }, 
-      [10009] = 
-      {
-         Cost = 0, 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "Some god dropped a newly created sparti cloning cylinder here.", 
-         Weight = 1, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Layers = 0, 
-         ShortDescr = "a newly created sparti cloning cylinder", 
-         Vnum = 10009, 
-         Name = "sparti cloning cylinder", 
-      }, 
-   }, 
-   ResetFrequency = 0, 
-   Filename = "cloning.lua", 
-   LowEconomy = 130048569, 
+   Author = "Durga", 
    Rooms = 
    {
       [10000] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 10000, 
          TeleDelay = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "act_prog", 
+               Arguments = "enters", 
+               Code = "mpat 122 mpecho $n enters from a cloning chamber.\
+", 
+            }, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [18] = "CanLeave", 
+                  [11] = "Hidden", 
+               }, 
+               Distance = 0, 
+               Direction = "somewhere", 
+               DestinationVnum = 10009, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
+         Name = "Inside a Sparti Cloning Cylinder", 
          Flags = 
          {
             [2] = "NoMob", 
@@ -287,45 +62,30 @@ your original has died.\
  \
 &WRemember to clone again. You might regret it if you don't.\
 ", 
+      }, 
+      [10001] = 
+      {
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 10001, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               DestinationVnum = 10009, 
                Distance = 0, 
-               Keyword = "", 
+               Direction = "west", 
+               DestinationVnum = 10007, 
                Key = -1, 
-               Flags = 
-               {
-                  [18] = "CanLeave", 
-                  [11] = "Hidden", 
-               }, 
-               Direction = "somewhere", 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "act_prog", 
-               Arguments = "enters", 
-               Code = "mpat 122 mpecho $n enters from a cloning chamber.\
-", 
-            }, 
-         }, 
-         Vnum = 10000, 
-         Name = "Inside a Sparti Cloning Cylinder", 
-      }, 
-      [10001] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Pay Counter", 
          Flags = 
          {
             [2] = "NoMob", 
@@ -335,30 +95,30 @@ your original has died.\
 pay the clerk, sign a few papers and give a tissue sample. (To do this\
 type \"clone\")\
 ", 
+      }, 
+      [10002] = 
+      {
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 10002, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10007, 
                Direction = "west", 
+               DestinationVnum = 10003, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 10001, 
-         Name = "Pay Counter", 
-      }, 
-      [10002] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "In a Small Sterile Room", 
          Flags = 
          {
             [2] = "NoMob", 
@@ -370,30 +130,48 @@ where blood and tissue samples are taken, as well as where new clones are\
 examined. There are several medical instruments hanging on hooks on the\
 walls.  Some of them look to horrible to even imagine their use.\
 ", 
+      }, 
+      [10003] = 
+      {
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 10003, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
+               Direction = "east", 
+               DestinationVnum = 10002, 
                Key = -1, 
-               DestinationVnum = 10003, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Direction = "south", 
+               DestinationVnum = 10007, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
                Direction = "west", 
+               DestinationVnum = 10004, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 10002, 
-         Name = "In a Small Sterile Room", 
-      }, 
-      [10003] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "A Clinic Hallway", 
          Flags = 
          {
             [2] = "NoMob", 
@@ -403,48 +181,48 @@ walls.  Some of them look to horrible to even imagine their use.\
 locked blastdoors.  To the east is a small doctor's office.  To the west\
 is a large room filled with exercise equipment.\
 ", 
+      }, 
+      [10004] = 
+      {
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 10004, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
+               Direction = "north", 
+               DestinationVnum = 10005, 
                Key = -1, 
-               DestinationVnum = 10002, 
-               Direction = "east", 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
+               Direction = "east", 
+               DestinationVnum = 10003, 
                Key = -1, 
-               DestinationVnum = 10007, 
-               Direction = "south", 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
+               Direction = "south", 
+               DestinationVnum = 10009, 
                Key = -1, 
-               DestinationVnum = 10004, 
-               Direction = "west", 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 10003, 
-         Name = "A Clinic Hallway", 
-      }, 
-      [10004] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Exercise Room.", 
          Flags = 
          {
             [2] = "NoMob", 
@@ -456,48 +234,30 @@ accustomed to their new forms after gestation and an accelerated growth\
 period. All of the equipment has gauges to monitor the progress and vital\
 signs of the clones.\
 ", 
+      }, 
+      [10005] = 
+      {
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 10005, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10005, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10003, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10009, 
                Direction = "south", 
+               DestinationVnum = 10004, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 10004, 
-         Name = "Exercise Room.", 
-      }, 
-      [10005] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Rest Area", 
          Flags = 
          {
             [23] = "Hotel", 
@@ -511,30 +271,39 @@ curtain at the back hides a few cots for those who are tired.\
  \
 You may quit and re-enter the game from here.\
 ", 
+      }, 
+      [10006] = 
+      {
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 10006, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
+               Direction = "north", 
+               DestinationVnum = 10007, 
                Key = -1, 
-               DestinationVnum = 10004, 
-               Direction = "south", 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               Direction = "east", 
+               DestinationVnum = 32297, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 10005, 
-         Name = "Rest Area", 
-      }, 
-      [10006] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "Desert Landing Pad", 
          Flags = 
          {
             [2] = "NoMob", 
@@ -545,39 +314,57 @@ You may quit and re-enter the game from here.\
 in the core worlds. Dense jungle surrounds this clearing, and the only\
 manmade structure visible is a small building to the north. \
 ", 
+      }, 
+      [10007] = 
+      {
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 10007, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10007, 
                Direction = "north", 
+               DestinationVnum = 10003, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 32297, 
                Direction = "east", 
+               DestinationVnum = 10008, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               Direction = "south", 
+               DestinationVnum = 10006, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               Direction = "west", 
+               DestinationVnum = 10010, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 10006, 
-         Name = "Desert Landing Pad", 
-      }, 
-      [10007] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "The cloning Facilities", 
          Flags = 
          {
             [2] = "NoMob", 
@@ -590,80 +377,13 @@ under your feet. The owners of this establishment have salvaged a couple\
 of cloning cylinders, found after the cloning wars, and turned them into a\
 small but profitable business.\
 ", 
-         Tunnel = 0, 
-         Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10003, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10008, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10006, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10010, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Vnum = 10007, 
-         Name = "The cloning Facilities", 
       }, 
       [10008] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Description = "You stand in a long line waiting for your turn to be cloned.\
-There is nothing to do but stand here and wait.\
-", 
-         Tunnel = 0, 
-         Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10007, 
-               Direction = "west", 
-            }, 
-         }, 
          TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 10008, 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
@@ -676,15 +396,55 @@ mptransfer $n 10001\
 ", 
             }, 
          }, 
-         Vnum = 10008, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Direction = "west", 
+               DestinationVnum = 10007, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
          Name = "Standing in Line", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Description = "You stand in a long line waiting for your turn to be cloned.\
+There is nothing to do but stand here and wait.\
+", 
       }, 
       [10009] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 10009, 
          TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               Direction = "north", 
+               DestinationVnum = 10004, 
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
+         Name = "The Cloning Chamber", 
          Flags = 
          {
             [2] = "NoMob", 
@@ -695,30 +455,30 @@ rumors you have heard, there must be many more below this level. Many\
 pipes and wires run haphazardly from the cylinders.   There is no way to\
 enter the cloning chambers from here.  You must go stand in line.\
 ", 
+      }, 
+      [10010] = 
+      {
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Vnum = 10010, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
                Distance = 0, 
-               Keyword = "", 
+               Direction = "east", 
+               DestinationVnum = 10007, 
                Key = -1, 
-               DestinationVnum = 10004, 
-               Direction = "north", 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 10009, 
-         Name = "The Cloning Chamber", 
-      }, 
-      [10010] = 
-      {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Name = "The Office", 
          Flags = 
          {
             [10] = "Safe", 
@@ -727,165 +487,414 @@ enter the cloning chambers from here.  You must go stand in line.\
 expensive looking paintings. There is a small tree in one corner of the\
 room and a large bookcase on one wall.\
 ", 
-         Tunnel = 0, 
-         Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               DestinationVnum = 10007, 
-               Direction = "east", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Vnum = 10010, 
-         Name = "The Office", 
       }, 
       [10011] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Vnum = 10011, 
          TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Storage Chamber", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
          Description = "", 
-         Tunnel = 0, 
-         Sector = "city", 
-         Exits = 
+      }, 
+   }, 
+   FileFormatVersion = 1, 
+   VnumRanges = 
+   {
+      Room = 
+      {
+         Last = 10011, 
+         First = 10000, 
+      }, 
+      Mob = 
+      {
+         Last = 10009, 
+         First = 10000, 
+      }, 
+      Object = 
+      {
+         Last = 10009, 
+         First = 10000, 
+      }, 
+   }, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg1 = 10009, 
+         Arg2 = 1, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10001, 
+      }, 
+      [2] = 
+      {
+         Arg1 = 10001, 
+         Arg2 = 1, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10010, 
+      }, 
+      [3] = 
+      {
+         Arg1 = 10002, 
+         Arg2 = 1, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10010, 
+      }, 
+      [4] = 
+      {
+         Arg1 = 10003, 
+         Arg2 = 1, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10010, 
+      }, 
+      [5] = 
+      {
+         Arg1 = 10005, 
+         Arg2 = 1, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10007, 
+      }, 
+      [6] = 
+      {
+         Arg1 = 10424, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+      }, 
+      [7] = 
+      {
+         Arg1 = 10314, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+      }, 
+      [8] = 
+      {
+         Arg1 = 10004, 
+         Arg2 = 1, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10009, 
+      }, 
+      [9] = 
+      {
+         Arg1 = 10004, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+      }, 
+      [10] = 
+      {
+         Arg1 = 10004, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+      }, 
+      [11] = 
+      {
+         Arg1 = 10004, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
+      }, 
+      [12] = 
+      {
+         Arg1 = 10001, 
+         Arg2 = 1, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10009, 
+      }, 
+   }, 
+   Objects = 
+   {
+      [10000] = 
+      {
+         ShortDescr = "a newly created bookend", 
+         ExtraDescriptions = 
          {
          }, 
-         TeleVnum = 0, 
-         Vnum = 10011, 
-         Name = "Storage Chamber", 
+         Vnum = 10000, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "bookend", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Description = "Some god dropped a newly created bookend here.", 
+      }, 
+      [10001] = 
+      {
+         ShortDescr = "a sparti cloning cylinder", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 10001, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "sparti cloning cylinder", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Description = "A sparti cloning cylinder is here.", 
+      }, 
+      [10002] = 
+      {
+         ShortDescr = "a newly created desc", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 10002, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "desc", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Description = "Some god dropped a newly created desc here.", 
+      }, 
+      [10003] = 
+      {
+         ShortDescr = "the deed", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 10003, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "government", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "facility deed ", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Description = "OOooOOoo the deed to the cloning facilities is here.", 
+      }, 
+      [10004] = 
+      {
+         ShortDescr = "White hospital scrubs", 
+         ExtraDescriptions = 
+         {
+            [1] = 
+            {
+               Keyword = "leggings", 
+               Description = "These leggings will offer good protection until you can get better. They\
+\13can be found at the Darkhaven Academy.\
+\13", 
+            }, 
+         }, 
+         Cost = 0, 
+         Vnum = 10004, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
+         ItemType = "armor", 
+         Weight = 3, 
+         Layers = 0, 
+         Name = "Hospital Scrubs", 
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
+         }, 
+         Description = "White hospital scrubs have been discarded in a pile here.", 
+      }, 
+      [10009] = 
+      {
+         ShortDescr = "a newly created sparti cloning cylinder", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Vnum = 10009, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "sparti cloning cylinder", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Description = "Some god dropped a newly created sparti cloning cylinder here.", 
+      }, 
+   }, 
+   Filename = "cloning.lua", 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         Low = 0, 
+         High = 103, 
+      }, 
+      Hard = 
+      {
+         Low = 0, 
+         High = 103, 
       }, 
    }, 
    Mobiles = 
    {
       [10000] = 
       {
-         NumberOfAttacks = 0, 
          ShortDescr = "a newly created firstmob", 
-         Sex = "undistinguished", 
-         Description = "", 
-         Weight = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         ArmorClass = 0, 
-         Name = "firstmob", 
-         Credits = 0, 
-         Level = 1, 
-         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Stats = 
          {
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Strength = 10, 
             Wisdom = 10, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Luck = 10, 
             Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Intelligence = 10, 
          }, 
-         HitRoll = 0, 
-         Height = 0, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Weight = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
          LongDescr = "Some god abandoned a newly created firstmob here.\
 ", 
-         Race = "Human", 
+         Credits = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         DamRoll = 0, 
+         ArmorClass = 0, 
          Damage = 
          {
             DamSizeDice = 0, 
             DamNoDice = 0, 
             DamPlus = 0, 
          }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Position = "standing", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
+         Race = "Human", 
+         Height = 0, 
          Alignment = 0, 
+         Level = 1, 
          DefaultPosition = "standing", 
          Vnum = 10000, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Name = "firstmob", 
+         Position = "standing", 
+         Description = "", 
       }, 
       [10001] = 
       {
-         NumberOfAttacks = 0, 
          ShortDescr = "Doctor Bnokkt", 
-         Sex = "male", 
-         Description = "", 
-         Weight = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         ArmorClass = -25, 
-         Name = "doctor Bnokkt", 
-         Credits = 1000, 
-         Level = 50, 
-         DamRoll = 10, 
+         HitRoll = 10, 
+         NumberOfAttacks = 0, 
          Stats = 
          {
-            Force = 0, 
-            Luck = 13, 
-            Charisma = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Strength = 13, 
             Wisdom = 13, 
+            Constitution = 13, 
+            Charisma = 13, 
+            Luck = 13, 
             Dexterity = 13, 
+            Strength = 13, 
+            Force = 0, 
+            Intelligence = 13, 
          }, 
-         HitRoll = 10, 
-         Height = 0, 
-         LongDescr = "Doctor Bnokkt is the head of the cloning facilities.\
-", 
-         Race = "Human", 
-         Damage = 
+         HitChance = 
          {
-            DamSizeDice = 4, 
-            DamNoDice = 5, 
-            DamPlus = 2, 
+            HitNoDice = 10, 
+            HitPlus = 500, 
+            HitSizeDice = 10, 
          }, 
+         Weight = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [25] = "NoKill", 
          }, 
-         Position = "standing", 
          Languages = 
          {
             Speaks = 
@@ -897,21 +906,65 @@ room and a large bookcase on one wall.\
                [0] = "basic", 
             }, 
          }, 
+         LongDescr = "Doctor Bnokkt is the head of the cloning facilities.\
+", 
+         Credits = 1000, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         DamRoll = 10, 
+         ArmorClass = -25, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Race = "Human", 
+         Height = 0, 
          Alignment = 0, 
+         Level = 50, 
          DefaultPosition = "standing", 
          Vnum = 10001, 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
+         Sex = "male", 
+         Name = "doctor Bnokkt", 
+         Position = "standing", 
+         Description = "", 
       }, 
       [10002] = 
       {
-         NumberOfAttacks = 0, 
          ShortDescr = "a c-7hp64 personal assistant droid", 
-         Sex = "undistinguished", 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Luck = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 10, 
+            HitPlus = 5000, 
+            HitSizeDice = 10, 
+         }, 
+         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [26] = "Droid", 
+         }, 
          MudProgs = 
          {
             [1] = 
@@ -922,50 +975,75 @@ room and a large bookcase on one wall.\
 ", 
             }, 
          }, 
-         Description = "", 
-         Weight = 0, 
-         SaveVs = 
+         Languages = 
          {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         ArmorClass = -25, 
-         Name = "c-7hp64 personal assistant droid", 
-         Credits = 0, 
-         Level = 50, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-         }, 
-         HitRoll = 0, 
-         Height = 0, 
          LongDescr = "A c-7hp64 personal assistant droid is here.\
 ", 
-         Race = "Human", 
+         Credits = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         DamRoll = 0, 
+         ArmorClass = -25, 
          Damage = 
          {
             DamSizeDice = 4, 
             DamNoDice = 1, 
             DamPlus = 2, 
          }, 
+         Race = "Human", 
+         Height = 0, 
+         Alignment = 0, 
+         Level = 50, 
+         DefaultPosition = "standing", 
+         Vnum = 10002, 
+         Sex = "undistinguished", 
+         Name = "c-7hp64 personal assistant droid", 
+         Position = "standing", 
+         Description = "", 
+      }, 
+      [10003] = 
+      {
+         ShortDescr = "a facility guard", 
+         HitRoll = 20, 
+         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Wisdom = 13, 
+            Constitution = 13, 
+            Charisma = 13, 
+            Luck = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Force = 0, 
+            Intelligence = 13, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 20, 
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+         }, 
+         Weight = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
-            [26] = "Droid", 
          }, 
-         Position = "standing", 
          Languages = 
          {
             Speaks = 
@@ -977,90 +1055,65 @@ room and a large bookcase on one wall.\
                [0] = "basic", 
             }, 
          }, 
-         Alignment = 0, 
-         DefaultPosition = "standing", 
-         Vnum = 10002, 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 5000, 
-         }, 
-      }, 
-      [10003] = 
-      {
-         NumberOfAttacks = 0, 
-         ShortDescr = "a facility guard", 
-         Sex = "undistinguished", 
-         Description = "", 
-         Weight = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         ArmorClass = -150, 
-         Name = "facility guard", 
-         Credits = 0, 
-         Level = 100, 
-         DamRoll = 20, 
-         Stats = 
-         {
-            Force = 0, 
-            Luck = 13, 
-            Charisma = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Dexterity = 13, 
-         }, 
-         HitRoll = 20, 
-         Height = 0, 
          LongDescr = "A Facility guard stands at attention.\
 ", 
-         Race = "Human", 
+         Credits = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         DamRoll = 20, 
+         ArmorClass = -150, 
          Damage = 
          {
             DamSizeDice = 4, 
             DamNoDice = 10, 
             DamPlus = 2, 
          }, 
+         Race = "Human", 
+         Height = 0, 
+         Alignment = 0, 
+         Level = 100, 
+         DefaultPosition = "standing", 
+         Vnum = 10003, 
+         Sex = "undistinguished", 
+         Name = "facility guard", 
+         Position = "standing", 
+         Description = "", 
+      }, 
+      [10004] = 
+      {
+         ShortDescr = "a shapely nurse", 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Luck = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Weight = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
+            [25] = "NoKill", 
          }, 
-         Position = "standing", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         DefaultPosition = "standing", 
-         Vnum = 10003, 
-         HitChance = 
-         {
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-         }, 
-      }, 
-      [10004] = 
-      {
-         NumberOfAttacks = 0, 
-         ShortDescr = "a shapely nurse", 
-         Sex = "undistinguished", 
          MudProgs = 
          {
             [1] = 
@@ -1101,50 +1154,6 @@ endif\
 ", 
             }, 
          }, 
-         Description = "", 
-         Weight = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         ArmorClass = 0, 
-         Name = "Cloning Nurse", 
-         Credits = 0, 
-         Level = 1, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Dexterity = 10, 
-         }, 
-         HitRoll = 0, 
-         Height = 0, 
-         LongDescr = "A shapely nurse is standing here, handing out hospital clothes.\
-", 
-         Race = "Human", 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         Position = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1186,30 +1195,120 @@ endif\
                [0] = "basic", 
             }, 
          }, 
+         LongDescr = "A shapely nurse is standing here, handing out hospital clothes.\
+", 
+         Credits = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         DamRoll = 0, 
+         ArmorClass = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Race = "Human", 
+         Height = 0, 
          Alignment = 0, 
+         Level = 1, 
          DefaultPosition = "standing", 
          Vnum = 10004, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Name = "Cloning Nurse", 
+         Position = "standing", 
+         Description = "", 
       }, 
       [10005] = 
       {
-         NumberOfAttacks = 0, 
          ShortDescr = "A vending machine", 
-         Sex = "undistinguished", 
-         Description = "", 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Luck = 10, 
+            Dexterity = 25, 
+            Strength = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
          Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         DamRoll = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [26] = "falleen", 
+               [27] = "binary", 
+               [28] = "yevethan", 
+               [29] = "gand", 
+               [30] = "durese", 
+               [31] = "coyn", 
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [27] = "binary", 
+            }, 
+         }, 
+         LongDescr = "A vending machine rests against the wall here.\
+", 
+         Credits = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
          Shop = 
          {
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -1219,150 +1318,59 @@ endif\
                [0] = "none", 
             }, 
             ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
             KeeperShortDescr = "A vending machine", 
-            KeeperVnum = 10005, 
             ProfitBuy = 120, 
          }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
          ArmorClass = 0, 
-         Name = "A Vending Machine", 
-         Credits = 0, 
-         Level = 1, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Dexterity = 25, 
-         }, 
-         HitRoll = 0, 
-         Height = 0, 
-         LongDescr = "A vending machine rests against the wall here.\
-", 
-         Race = "Astromech", 
          Damage = 
          {
             DamSizeDice = 0, 
             DamNoDice = 0, 
             DamPlus = 0, 
          }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         Position = "standing", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [26] = "falleen", 
-               [27] = "binary", 
-               [28] = "yevethan", 
-               [29] = "gand", 
-               [30] = "durese", 
-               [31] = "coyn", 
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [27] = "binary", 
-            }, 
-         }, 
+         Race = "Astromech", 
+         Height = 0, 
          Alignment = 0, 
+         Level = 1, 
          DefaultPosition = "standing", 
          Vnum = 10005, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Name = "A Vending Machine", 
+         Position = "standing", 
+         Description = "", 
       }, 
       [10009] = 
       {
-         NumberOfAttacks = 0, 
          ShortDescr = "a clerk", 
-         Sex = "undistinguished", 
-         Description = "", 
-         Weight = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            SpellStaff = 0, 
-            Breath = 0, 
-         }, 
-         ArmorClass = 0, 
-         Name = "clerk", 
-         Credits = 0, 
-         Level = 1, 
-         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Stats = 
          {
-            Force = 0, 
-            Luck = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Strength = 10, 
             Wisdom = 10, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Luck = 10, 
             Dexterity = 10, 
+            Strength = 10, 
+            Force = 0, 
+            Intelligence = 10, 
          }, 
-         HitRoll = 0, 
-         Height = 0, 
-         LongDescr = "A clerk is here to take your payment.\
-", 
-         Race = "Human", 
-         Damage = 
+         HitChance = 
          {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
          }, 
+         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Position = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1374,16 +1382,38 @@ endif\
                [0] = "basic", 
             }, 
          }, 
+         LongDescr = "A clerk is here to take your payment.\
+", 
+         Credits = 0, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+         }, 
+         DamRoll = 0, 
+         ArmorClass = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Race = "Human", 
+         Height = 0, 
          Alignment = 0, 
+         Level = 1, 
          DefaultPosition = "standing", 
          Vnum = 10009, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Name = "clerk", 
+         Position = "standing", 
+         Description = "", 
       }, 
    }, 
    Name = "Cloning Station", 
+   LowEconomy = 130048569, 
+   ResetFrequency = 0, 
 }

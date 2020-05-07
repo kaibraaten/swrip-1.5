@@ -1,171 +1,167 @@
 -- Grand Towers Appartments
--- Last saved Wednesday 06-May-2020 12:59:10
+-- Last saved Thursday 07-May-2020 14:47:57
 
 AreaEntry
 {
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg1 = 5099, 
-         Command = "O", 
-         Arg2 = 1, 
-         Arg3 = 5001, 
-         MiscData = 1, 
-      }, 
-   }, 
-   FileFormatVersion = 1, 
-   ResetFrequency = 0, 
    Filename = "grand_towers.lua", 
-   HighEconomy = 0, 
-   Author = "Durga", 
+   Name = "Grand Towers Appartments", 
    Mobiles = 
    {
       [5000] = 
       {
-         Race = "Human", 
-         Weight = 0, 
+         Description = "", 
+         Name = "dummy", 
          Vnum = 5000, 
-         DefaultPosition = "standing", 
-         Languages = 
+         Weight = 0, 
+         Credits = 0, 
+         Flags = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
+            [0] = "Npc", 
          }, 
+         ShortDescr = "a newly created dummy", 
          HitChance = 
          {
             HitSizeDice = 0, 
             HitPlus = 0, 
             HitNoDice = 0, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         HitRoll = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Credits = 0, 
-         ShortDescr = "a newly created dummy", 
-         ArmorClass = 0, 
-         Description = "", 
-         Height = 0, 
-         DamRoll = 0, 
-         Alignment = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Name = "dummy", 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Strength = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Charisma = 10, 
-         }, 
          LongDescr = "Some god abandoned a newly created dummy here.\
 ", 
-         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Race = "Human", 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         Height = 0, 
+         Alignment = 0, 
          NumberOfAttacks = 0, 
          Level = 1, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+         }, 
+         ArmorClass = 0, 
+         Sex = "undistinguished", 
+         Position = "standing", 
       }, 
       [5099] = 
       {
-         Race = "Human", 
-         Weight = 0, 
+         Description = "", 
+         Name = "dummy", 
          Vnum = 5099, 
-         DefaultPosition = "standing", 
-         Languages = 
+         Weight = 0, 
+         Credits = 0, 
+         Flags = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
+            [0] = "Npc", 
          }, 
+         ShortDescr = "a newly created dummy", 
          HitChance = 
          {
             HitSizeDice = 0, 
             HitPlus = 0, 
             HitNoDice = 0, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         HitRoll = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Credits = 0, 
-         ShortDescr = "a newly created dummy", 
-         ArmorClass = 0, 
-         Description = "", 
-         Height = 0, 
-         DamRoll = 0, 
-         Alignment = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Name = "dummy", 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Strength = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Charisma = 10, 
-         }, 
          LongDescr = "Some god abandoned a newly created dummy here.\
 ", 
-         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Race = "Human", 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         Height = 0, 
+         Alignment = 0, 
          NumberOfAttacks = 0, 
          Level = 1, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+         }, 
+         ArmorClass = 0, 
+         Sex = "undistinguished", 
+         Position = "standing", 
       }, 
    }, 
-   Name = "Grand Towers Appartments", 
+   Resets = 
+   {
+      [1] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 5099, 
+         Arg3 = 5001, 
+      }, 
+   }, 
    Rooms = 
    {
       [5000] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5000, 
-         Tunnel = 0, 
          Flags = 
          {
             [23] = "Hotel", 
@@ -173,497 +169,497 @@ AreaEntry
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Name = "The Guest Room", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Guest Room", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5001, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5001] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5001, 
-         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Name = "The Lobby", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Lobby", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5002, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 303, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5011, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5002] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5002, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Turbolift: Main Lobby", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Turbolift: Main Lobby", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5001, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "up", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5003, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5003] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5003, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Turbolift: Floor 100", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Turbolift: Floor 100", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5016, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "up", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5004, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "down", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5002, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5004] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5004, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Turbolift: Floor 200", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Turbolift: Floor 200", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5021, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "up", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5005, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "down", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5003, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5005] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5005, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Turbolift: Floor 300", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Turbolift: Floor 300", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5026, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "up", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5006, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "down", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5004, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5006] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5006, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Turbolift: Floor 400", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Turbolift: Floor 400", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5031, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "up", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5007, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "down", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5005, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5007] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5007, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Turbolift: Floor 500", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Turbolift: Floor 500", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5036, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "up", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5008, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "down", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5006, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5008] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5008, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Turbolift: Floor 600", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Turbolift: Floor 600", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5099, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "up", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5009, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "down", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5007, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5009] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5009, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Turbolift: Floor 700", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Turbolift: Floor 700", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5100, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5113, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5104, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5108, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [5] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "up", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5010, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [6] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "down", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5008, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5010] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5010, 
-         Tunnel = 0, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "A Turbolift: Floor 800", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Turbolift: Floor 800", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "down", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5009, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5011] = 
       {
@@ -671,58 +667,58 @@ AreaEntry
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5011, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5040, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5001, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5041, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5012, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5012] = 
       {
@@ -730,58 +726,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5012, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5043, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5011, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5042, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5013, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5013] = 
       {
@@ -789,58 +785,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5013, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5045, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5012, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5044, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5014, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5014] = 
       {
@@ -848,58 +844,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5014, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5047, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5013, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5046, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5015, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5015] = 
       {
@@ -907,58 +903,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5015, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5049, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5014, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5048, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5098, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5016] = 
       {
@@ -966,49 +962,49 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5016, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5003, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5096, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5017, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5017] = 
       {
@@ -1016,58 +1012,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5017, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5051, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5016, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5050, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5018, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5018] = 
       {
@@ -1075,58 +1071,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5018, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5052, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5017, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5053, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5019, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5019] = 
       {
@@ -1134,58 +1130,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5019, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5055, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5018, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5054, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5020, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5020] = 
       {
@@ -1193,58 +1189,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5020, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5057, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5019, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5056, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5097, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5021] = 
       {
@@ -1252,49 +1248,49 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5021, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5004, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5094, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5022, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5022] = 
       {
@@ -1302,58 +1298,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5022, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5059, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5021, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5058, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5023, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5023] = 
       {
@@ -1361,58 +1357,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5023, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5061, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5022, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5060, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5024, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5024] = 
       {
@@ -1420,58 +1416,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5024, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5063, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5023, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5062, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5025, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5025] = 
       {
@@ -1479,58 +1475,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5025, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5065, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5024, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5064, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5095, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5026] = 
       {
@@ -1538,49 +1534,49 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5026, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5005, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5092, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5027, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5027] = 
       {
@@ -1588,58 +1584,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5027, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5067, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5026, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5066, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5028, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5028] = 
       {
@@ -1647,58 +1643,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5028, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5069, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5027, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5068, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5029, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5029] = 
       {
@@ -1706,58 +1702,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5029, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5071, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5028, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5070, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5030, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5030] = 
       {
@@ -1765,58 +1761,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5030, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5073, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5029, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5072, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5093, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5031] = 
       {
@@ -1824,49 +1820,49 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5031, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5006, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5090, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5032, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5032] = 
       {
@@ -1874,58 +1870,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5032, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5074, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5031, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5075, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5033, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5033] = 
       {
@@ -1933,58 +1929,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5033, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5077, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5032, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5076, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5034, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5034] = 
       {
@@ -1992,58 +1988,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5034, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5079, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5033, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5078, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5035, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5035] = 
       {
@@ -2051,58 +2047,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5035, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5081, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5034, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5080, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5091, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5036] = 
       {
@@ -2110,49 +2106,49 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5036, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5007, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5089, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5037, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5037] = 
       {
@@ -2160,58 +2156,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5037, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5083, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5036, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5082, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5038, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5038] = 
       {
@@ -2219,58 +2215,58 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5038, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5085, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5037, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5084, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5039, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5039] = 
       {
@@ -2278,66 +2274,66 @@ floor. The doors are spaced evenly apart and are all numbered.\
 decorated. The walls are a redish wood and a plush brown carpet lines the\
 floor. The doors are spaced evenly apart and are all numbered.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5039, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hallway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hallway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5086, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5038, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5087, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5088, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5040] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5040, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2345,33 +2341,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Iluk Meklin's Pad", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Iluk Meklin's Pad", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5011, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5041] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5041, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2379,33 +2375,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "A small office", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A small office", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5011, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5042] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5042, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2413,33 +2409,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Star field", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Star field", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5012, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5043] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5043, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2447,33 +2443,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&RKaze &YLives &GHere &R&W", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&RKaze &YLives &GHere &R&W", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5012, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5044] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5044, 
-         Tunnel = 0, 
          Flags = 
          {
             [10] = "Safe", 
@@ -2482,44 +2478,44 @@ touches to make it feel more like home and less like a hotel room.\
             [26] = "Factory", 
             [23] = "Hotel", 
          }, 
-         Name = "&YA Puddle&R&W", 
-         TeleVnum = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
          MudProgs = 
          {
             [1] = 
             {
                Arguments = "100", 
+               MudProgType = "rand_prog", 
                Code = "mpechoat $n The healing warmth of the bacta spreads over your body.\
 feel heal $n\
 ", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
          TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         Name = "&YA Puddle&R&W", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5013, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5045] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5045, 
-         Tunnel = 0, 
          Flags = 
          {
             [1] = "_Reserved", 
@@ -2528,33 +2524,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Verazths Apartment", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Verazths Apartment", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5013, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5046] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5046, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2562,33 +2558,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Crimson's House", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Crimson's House", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5014, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5047] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5047, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2596,33 +2592,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&RJarik's Domain", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&RJarik's Domain", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5014, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5048] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5048, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2630,33 +2626,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&zA dark place&W.", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&zA dark place&W.", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5015, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5049] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5049, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2664,33 +2660,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Stormie's Apartment", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Stormie's Apartment", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5015, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5050] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5050, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2698,33 +2694,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Tash's home", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Tash's home", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5017, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5051] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5051, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2732,33 +2728,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "WyrmsLair", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "WyrmsLair", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5017, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5052] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5052, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2766,33 +2762,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Era's Lovely Suite", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Era's Lovely Suite", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5018, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5053] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5053, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2800,33 +2796,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Sho's home", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Sho's home", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5018, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5054] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5054, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2834,33 +2830,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Hidden Smackdom", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Hidden Smackdom", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5019, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5055] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5055, 
-         Tunnel = 0, 
          Flags = 
          {
             [10] = "Safe", 
@@ -2869,33 +2865,33 @@ touches to make it feel more like home and less like a hotel room.\
             [26] = "Factory", 
             [23] = "Hotel", 
          }, 
-         Name = "&Y Itoo Engineering Systems Inc. &W", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&Y Itoo Engineering Systems Inc. &W", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5019, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5056] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5056, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2903,33 +2899,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Palleon's Command Bunker", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Palleon's Command Bunker", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5020, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5057] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5057, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2937,33 +2933,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&RV's domain", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&RV's domain", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5020, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5058] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5058, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -2971,33 +2967,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&rhell", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&rhell", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5022, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5059] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5059, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3005,33 +3001,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&z Dark &P Room", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&z Dark &P Room", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5022, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5060] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5060, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3039,33 +3035,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "A Dark Cave", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Dark Cave", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5023, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5061] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5061, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3073,33 +3069,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&PThe B&glade&Pm&gasters &PRoom&G", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&PThe B&glade&Pm&gasters &PRoom&G", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5023, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5062] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5062, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3107,33 +3103,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Zinth's Pad", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Zinth's Pad", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5024, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5063] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5063, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3141,33 +3137,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Palim's Place", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Palim's Place", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5024, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5064] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5064, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3175,33 +3171,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&GCag&ggi&Gn&g'&Gs Sh&gac&Gk&R&W", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&GCag&ggi&Gn&g'&Gs Sh&gac&Gk&R&W", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5025, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5065] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5065, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3209,33 +3205,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&bThe &BCourts &bof &bChaos&w", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&bThe &BCourts &bof &bChaos&w", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5025, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5066] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5066, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3243,33 +3239,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Andross's Humble abode", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Andross's Humble abode", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5027, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5067] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5067, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3277,33 +3273,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Esok's Getaway", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Esok's Getaway", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5027, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5068] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5068, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3311,33 +3307,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "the dark palace", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "the dark palace", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5028, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5069] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5069, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3345,33 +3341,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "HENS HUMBLE BATCHELOR PAD", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "HENS HUMBLE BATCHELOR PAD", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5028, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5070] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5070, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3379,33 +3375,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Remi Traver's Appartment", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Remi Traver's Appartment", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5029, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5071] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5071, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3413,33 +3409,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Moo, tastes like chicken", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Moo, tastes like chicken", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5029, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5072] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5072, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3447,33 +3443,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "The Armory", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Armory", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5030, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5073] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5073, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3481,33 +3477,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Simon's Corp. Office", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Simon's Corp. Office", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5030, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5074] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5074, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3515,33 +3511,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Altian's Quarters", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Altian's Quarters", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5032, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5075] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5075, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3549,33 +3545,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&BG&boraxe's &zGeTaWaY &W", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&BG&boraxe's &zGeTaWaY &W", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5032, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5076] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5076, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3583,33 +3579,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Shuruga's Den of Solitude", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Shuruga's Den of Solitude", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5033, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5077] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5077, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3617,33 +3613,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Gorags Den", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Gorags Den", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5033, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5078] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5078, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3651,33 +3647,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&cThe Office of Jae K'Sunis&w", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&cThe Office of Jae K'Sunis&w", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5034, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5079] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5079, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3685,33 +3681,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Zorgos' Chambers", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Zorgos' Chambers", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5034, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5080] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5080, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3719,33 +3715,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Jade Incorp.", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Jade Incorp.", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5035, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5081] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5081, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3753,33 +3749,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&rA Portal to Hell", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&rA Portal to Hell", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5035, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5082] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5082, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3787,33 +3783,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "An Imperial Soldier's Home", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "An Imperial Soldier's Home", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5037, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5083] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5083, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3821,33 +3817,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Raichle's G-Spot", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Raichle's G-Spot", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5037, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5084] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5084, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3855,33 +3851,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Hadin's little refuge", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Hadin's little refuge", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5038, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5085] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5085, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3889,33 +3885,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Phycos Party palace and reflection chamber", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Phycos Party palace and reflection chamber", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5038, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5086] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5086, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3923,33 +3919,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&pZerack's Sanctuary ", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&pZerack's Sanctuary ", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5039, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5087] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5087, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3957,33 +3953,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Phaeton's Palace", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Phaeton's Palace", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5039, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5088] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5088, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -3991,33 +3987,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Roquepertuse's Abode", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Roquepertuse's Abode", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5039, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5089] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5089, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -4025,33 +4021,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Elden's Sanctum", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Elden's Sanctum", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5036, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5090] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5090, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -4059,33 +4055,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&RJ&rarik's &RD&romain", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&RJ&rarik's &RD&romain", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5031, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5091] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5091, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -4093,33 +4089,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&bAcer's &gTwinky &OHouse&G", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&bAcer's &gTwinky &OHouse&G", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5035, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5092] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5092, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -4127,33 +4123,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "Simon's Bus. Office", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Simon's Bus. Office", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5026, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5093] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5093, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -4161,63 +4157,63 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "The Humble Den of \"Spawn\"", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Humble Den of \"Spawn\"", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5030, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5094] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 5094, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [23] = "Hotel", 
          }, 
-         Name = "The Pit", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Pit", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5021, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5095] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5095, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -4225,33 +4221,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "&BK&biahlin&B'&bs &BK&beep&w", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&BK&biahlin&B'&bs &BK&beep&w", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5025, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5096] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5096, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -4259,33 +4255,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "The Wanderer's Den", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Wanderer's Den", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5016, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5097] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5097, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -4293,33 +4289,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "An Engineer's Shop", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "An Engineer's Shop", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5020, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5098] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5098, 
-         Tunnel = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -4327,33 +4323,33 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
-         Name = "A Hunters Hideout", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hunters Hideout", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5015, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [5099] = 
       {
          Description = "This is a small but comfortable room. However it could use a few personal\
 touches to make it feel more like home and less like a hotel room.\
 ", 
+         TeleVnum = 0, 
          Vnum = 5099, 
-         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -4362,40 +4358,52 @@ touches to make it feel more like home and less like a hotel room.\
             [10] = "Safe", 
             [23] = "Hotel", 
          }, 
-         Name = "&RK&rtang &BG&brenade &YH&yold", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "&RK&rtang &BG&brenade &YH&yold", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 5008, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
    }, 
-   LowEconomy = 130050000, 
+   LevelRanges = 
+   {
+      Hard = 
+      {
+         Low = 0, 
+         High = 103, 
+      }, 
+      Soft = 
+      {
+         Low = 0, 
+         High = 103, 
+      }, 
+   }, 
    Objects = 
    {
       [5000] = 
       {
-         Description = "Some god dropped a newly created dummy here.", 
-         ShortDescr = "a newly created dummy", 
-         Weight = 1, 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
+         ActionDescription = "", 
          Name = "dummy", 
+         Vnum = 5000, 
+         Weight = 1, 
+         ShortDescr = "a newly created dummy", 
+         Description = "Some god dropped a newly created dummy here.", 
+         ItemType = "trash", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4405,21 +4413,21 @@ touches to make it feel more like home and less like a hotel room.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 5000, 
       }, 
       [5099] = 
       {
-         Description = "A plant sits in the corner.", 
-         ShortDescr = "a plant", 
-         Weight = 1, 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
+         ActionDescription = "", 
          Name = "plant", 
+         Vnum = 5099, 
+         Weight = 1, 
+         ShortDescr = "a plant", 
+         Description = "A plant sits in the corner.", 
+         ItemType = "trash", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4429,11 +4437,34 @@ touches to make it feel more like home and less like a hotel room.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 5099, 
       }, 
    }, 
+   HighEconomy = 0, 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         Last = 5099, 
+         First = 5000, 
+      }, 
+      Room = 
+      {
+         Last = 5099, 
+         First = 5000, 
+      }, 
+      Object = 
+      {
+         Last = 5099, 
+         First = 5000, 
+      }, 
+   }, 
+   ResetFrequency = 0, 
    ResetMessage = "", 
+   FileFormatVersion = 1, 
+   LowEconomy = 130050000, 
+   Author = "Durga", 
 }

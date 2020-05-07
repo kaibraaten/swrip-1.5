@@ -1,39 +1,38 @@
 -- Some Hunter Spacecraft
--- Last saved Wednesday 06-May-2020 12:59:10
+-- Last saved Thursday 07-May-2020 14:47:57
 
 AreaEntry
 {
-   Filename = "hunter_ships.lua", 
    Rooms = 
    {
       [6400] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Boarding Slave 1", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "You stand upon in the boarding hatch of on of the most famous\
 ships of all time.  A bounty hunters Customized KDY Firespray\
 built for speed and firepower.  As you enter you must pass through \
 a series of security detectors and camaras.\
 ", 
-         Vnum = 6400, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6401, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6400, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -42,11 +41,9 @@ a series of security detectors and camaras.\
       }, 
       [6401] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "Having passed through the various security checks you \
 finally stand in the hallway of slave 1.  This ships odd \
 design means things arn't normally where they should be.  \
@@ -55,58 +52,60 @@ cargo hold and south of you looks like someones living area.\
 A small hatch in the floor rumbles with the vibrations from \
 the engines.\
 ", 
-         Vnum = 6401, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6402, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6404, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6400, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6403, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [5] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6406, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6401, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -114,41 +113,41 @@ the engines.\
       }, 
       [6402] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Cargo Hold", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This ship has a fairly small cargo hold.  Most of the old \
 holds area has been taken over in the modifications of the\
 engines and shields.  There is still room for about a \
 months worth of supplys for the ships single crew memeber.\
 ", 
-         Vnum = 6402, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6401, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6405, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6402, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -156,32 +155,32 @@ months worth of supplys for the ships single crew memeber.\
       }, 
       [6403] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Bridge", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The bridge of slave 1 is very cramped, however everything is within easy\
 reach of the comfortable captains chair.  all systems may be monitored\
 from this room including prisoner status and even the boading area. \
 Controls for various  modifications made on the ship are all located here.\
 ", 
-         Vnum = 6403, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6401, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6403, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -189,23 +188,13 @@ Controls for various  modifications made on the ship are all located here.\
       }, 
       [6404] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Crew Quarters", 
-         Description = "Like most of the rest of the ship even the crew quaters\
-have been taken over with ship modifications.  The area \
-that use to sleep 6 comfortably now holds room for 1 and \
-in a pinch sleep up to 4 people.\
-", 
-         Vnum = 6404, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
                MudProgType = "rand_prog", 
+               Arguments = "100", 
                Code = "feel heal $n\
 feel heal $n\
 feel refresh $n\
@@ -215,21 +204,31 @@ you.\
 ", 
             }, 
          }, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "Like most of the rest of the ship even the crew quaters\
+have been taken over with ship modifications.  The area \
+that use to sleep 6 comfortably now holds room for 1 and \
+in a pinch sleep up to 4 people.\
+", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6401, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6404, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -238,32 +237,32 @@ you.\
       }, 
       [6405] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Prisoner Hold", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This modified cargo hold is used for the ships main cargo,\
 bounties.  Force shielded and reinforced cages line the \
 walls.  Six seperate cages are in the room each with room\
 for 1 person.\
 ", 
-         Vnum = 6405, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6402, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6405, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -271,32 +270,32 @@ for 1 person.\
       }, 
       [6406] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Engine Room", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "In this room you can clearly see 2 of the largest modifications\
 to this ship the old engine and generator have been replaced by\
 the massive KES-F31 drive engine and XF-16 power generator.\
 Giving this large ship the speed and agility of a y-wing.\
 ", 
-         Vnum = 6406, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6401, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6406, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -304,38 +303,38 @@ Giving this large ship the speed and agility of a y-wing.\
       }, 
       [6407] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Boarding Bay", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "You stand in the turbolift of one of the greatest starships\
 ever made a CR90 Corellian \"Blockade Runner\". This ship\
 is known for its ability to be easily modified to fit its \
 current role in a campaign, anything from troop transport\
 to front line fighter is in this ships awsome repetoir.\
 ", 
-         Vnum = 6407, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               DestinationVnum = 6408, 
+               Key = -1, 
                Distance = 0, 
+               Direction = "somewhere", 
                Flags = 
                {
                   [19] = "Auto", 
                   [11] = "Hidden", 
                }, 
-               Keyword = "olympus", 
-               DestinationVnum = 6408, 
                Description = "", 
-               Key = -1, 
-               Direction = "somewhere", 
+               Keyword = "olympus", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6407, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -344,73 +343,73 @@ to front line fighter is in this ships awsome repetoir.\
       }, 
       [6408] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Stairwell", 
-         Description = "", 
-         Vnum = 6408, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6419, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6433, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6422, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6438, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [5] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6407, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [6] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6456, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6408, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -418,46 +417,46 @@ to front line fighter is in this ships awsome repetoir.\
       }, 
       [6409] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Stairwell", 
-         Description = "", 
-         Vnum = 6409, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6420, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6412, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6423, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6409, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -465,55 +464,55 @@ to front line fighter is in this ships awsome repetoir.\
       }, 
       [6410] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6410, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6421, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6447, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6456, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6442, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6410, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -521,40 +520,40 @@ to front line fighter is in this ships awsome repetoir.\
       }, 
       [6411] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Kitchen", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The level one hallway is built for war not plesentry so  \
 it is bare metal walls and very little show, a metal walkway\
 with emergancy lighting along it lead around this level.\
 ", 
-         Vnum = 6411, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6424, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6429, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6411, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -562,46 +561,46 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6412] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6412, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6458, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6435, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6409, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6412, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -609,37 +608,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6413] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Crew recreation center", 
-         Description = "", 
-         Vnum = 6413, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6414, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6428, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6413, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -648,37 +647,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6414] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Crew recreation center", 
-         Description = "", 
-         Vnum = 6414, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6429, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6413, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6414, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -687,28 +686,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6415] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Crew Barracks", 
-         Description = "", 
-         Vnum = 6415, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6439, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6415, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -717,28 +716,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6416] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Crew Barracks", 
-         Description = "", 
-         Vnum = 6416, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6439, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6416, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -747,28 +746,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6417] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "A new, nonoperational turret", 
-         Description = "", 
-         Vnum = 6417, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6432, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6417, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -776,28 +775,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6418] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "A new, nonoperational turret", 
-         Description = "", 
-         Vnum = 6418, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6432, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6418, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -805,55 +804,55 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6419] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6419, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6420, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6436, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6408, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6437, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6419, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -861,46 +860,46 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6420] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6420, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6409, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6419, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6435, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6420, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -908,55 +907,55 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6421] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6421, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6423, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6445, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6410, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6451, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6421, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -964,28 +963,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6422] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Main engineering", 
-         Description = "", 
-         Vnum = 6422, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6408, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6422, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -993,55 +992,55 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6423] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Stairwell", 
-         Description = "", 
-         Vnum = 6423, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6427, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6421, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6409, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6429, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6423, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1049,37 +1048,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6424] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Mess Hall", 
-         Description = "", 
-         Vnum = 6424, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6411, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6428, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6424, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1087,46 +1086,46 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6425] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Stairwell", 
-         Description = "", 
-         Vnum = 6425, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6426, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6456, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6431, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6425, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1134,55 +1133,55 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6426] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6426, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6428, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6450, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6425, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6449, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6426, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1190,37 +1189,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6427] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "The main cargo bay", 
-         Description = "", 
-         Vnum = 6427, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6423, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6444, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6427, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1229,55 +1228,55 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6428] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6428, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6429, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6424, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6426, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6413, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6428, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1285,73 +1284,73 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6429] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Stairwell", 
-         Description = "", 
-         Vnum = 6429, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6444, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6411, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6428, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6414, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [5] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6423, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [6] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6440, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6429, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1359,28 +1358,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6430] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Stairwell", 
-         Description = "", 
-         Vnum = 6430, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6409, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6430, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1388,37 +1387,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6431] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6431, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6432, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6425, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6431, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1426,64 +1425,64 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6432] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6432, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6439, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6417, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6431, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6418, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [5] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6441, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6432, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1491,28 +1490,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6433] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "A small cargo bay", 
-         Description = "", 
-         Vnum = 6433, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6408, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6433, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1521,28 +1520,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6434] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Turret", 
-         Description = "", 
-         Vnum = 6434, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6458, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6434, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1550,37 +1549,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6435] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Turret", 
-         Description = "", 
-         Vnum = 6435, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6412, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6420, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6435, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1588,28 +1587,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6436] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Ship docking port", 
-         Description = "", 
-         Vnum = 6436, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6419, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6436, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1617,28 +1616,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6437] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Ship docking port", 
-         Description = "", 
-         Vnum = 6437, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6419, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6437, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1646,28 +1645,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6438] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "A small cargo bay", 
-         Description = "", 
-         Vnum = 6438, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6408, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6438, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1676,55 +1675,55 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6439] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6439, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6440, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6415, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6432, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6416, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6439, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1732,37 +1731,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6440] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6440, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6439, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6429, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6440, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1770,28 +1769,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6441] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Ventral-mounted turbolaser", 
-         Description = "", 
-         Vnum = 6441, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6432, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6441, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -1800,37 +1799,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6442] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Second Officer's Quarters", 
-         Description = "", 
-         Vnum = 6442, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6410, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6443, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6442, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1838,28 +1837,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6443] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Bedroom", 
-         Description = "", 
-         Vnum = 6443, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6442, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6443, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1868,37 +1867,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6444] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Lower cargo bay access", 
-         Description = "", 
-         Vnum = 6444, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6429, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6427, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6444, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1906,37 +1905,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6445] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "First Officer's Quarters", 
-         Description = "", 
-         Vnum = 6445, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6446, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6421, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6445, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1944,28 +1943,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6446] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Bedroom", 
-         Description = "", 
-         Vnum = 6446, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6445, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6446, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -1974,37 +1973,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6447] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Engineer's Quarters", 
-         Description = "", 
-         Vnum = 6447, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6448, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6410, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6447, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2012,28 +2011,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6448] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Bedroom", 
-         Description = "", 
-         Vnum = 6448, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6447, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6448, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2043,37 +2042,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6449] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "A large workshop", 
-         Description = "", 
-         Vnum = 6449, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6426, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6453, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6449, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [26] = "Factory", 
@@ -2082,37 +2081,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6450] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "A large workshop", 
-         Description = "", 
-         Vnum = 6450, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6454, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6426, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6450, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [26] = "Factory", 
@@ -2121,37 +2120,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6451] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Captains Quaters", 
-         Description = "", 
-         Vnum = 6451, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6421, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6452, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6451, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2159,28 +2158,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6452] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Bedroom", 
-         Description = "", 
-         Vnum = 6452, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6451, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6452, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2189,28 +2188,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6453] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "A dark refinery", 
-         Description = "", 
-         Vnum = 6453, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6449, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6453, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [0] = "Dark", 
@@ -2221,28 +2220,28 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6454] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "A dark refinery", 
-         Description = "", 
-         Vnum = 6454, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6450, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6454, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [0] = "Dark", 
@@ -2252,19 +2251,19 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6455] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6455, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
          }, 
-         TeleVnum = 0, 
+         Vnum = 6455, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -2273,46 +2272,46 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6456] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Stairwell", 
-         Description = "", 
-         Vnum = 6456, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6410, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6408, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6425, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6456, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2320,19 +2319,19 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6457] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6457, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
          }, 
-         TeleVnum = 0, 
+         Vnum = 6457, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -2341,55 +2340,55 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6458] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "The bridge", 
-         Description = "", 
-         Vnum = 6458, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6412, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6434, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6460, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "northeast", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6459, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "northwest", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6458, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2397,37 +2396,37 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6459] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Pilot's chair", 
-         Description = "", 
-         Vnum = 6459, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6460, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6458, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "southeast", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6459, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2435,41 +2434,41 @@ with emergancy lighting along it lead around this level.\
       }, 
       [6460] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Copilot's chair", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The walls of this room are painted a mild blue. A large viewport is located\
 on the south  wall allowing passengers to look out into space. A small\
 wetbar and fridge are here for  the passengers convienince as well as a\
 com to the kitchen.  \
 ", 
-         Vnum = 6460, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6459, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6458, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "southwest", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6460, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
@@ -2478,28 +2477,28 @@ com to the kitchen.  \
       }, 
       [6461] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hatchway", 
-         Description = "", 
-         Vnum = 6461, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6462, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6461, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2507,46 +2506,46 @@ com to the kitchen.  \
       }, 
       [6462] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Main Hallway", 
-         Description = "", 
-         Vnum = 6462, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6463, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6464, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6461, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6462, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2554,55 +2553,55 @@ com to the kitchen.  \
       }, 
       [6463] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Main Hallway", 
-         Description = "", 
-         Vnum = 6463, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6465, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6471, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6462, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6470, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6463, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2610,64 +2609,64 @@ com to the kitchen.  \
       }, 
       [6464] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Main Hallway", 
-         Description = "", 
-         Vnum = 6464, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6462, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6472, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6467, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6468, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [5] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6466, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6464, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2675,32 +2674,32 @@ com to the kitchen.  \
       }, 
       [6465] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Cockpit", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The cockpit of this ship is a comfortable  2 seater although everything can\
 easily be controlled by a single pilot. A modified YV-666 freighter this\
 ship has more than enough power to run with the fighters, and enough\
 shielding and weapons to fight with small cruisers.\
 ", 
-         Vnum = 6465, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6463, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6465, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2708,32 +2707,32 @@ shielding and weapons to fight with small cruisers.\
       }, 
       [6466] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Engine Room", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The powerhouse of this small freigheter is located here. powering both\
 shields and Engines from this room make maintenance easy. The modified\
 engine allows this ship extra speed beyoynd what a normal frieghter can\
 handle.\
 ", 
-         Vnum = 6466, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6464, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6466, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2741,31 +2740,31 @@ handle.\
       }, 
       [6467] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Crew Quarters", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "A sparse living quarters is here.  Designed to be use when travlling on the\
 hunt this ship has very little for creature comforts and is more bare bone\
 to make you finish all that much sooner. \
 ", 
-         Vnum = 6467, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6464, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6467, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2774,31 +2773,31 @@ to make you finish all that much sooner. \
       }, 
       [6468] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Laser Turret", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "A small bucket seat pivots inside a gyroscopic frame.  In front of the seat\
 is the butterfly grip of a laser turret. Targeting controls light up a\
 touch monitor in front of the seat. \
 ", 
-         Vnum = 6468, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6464, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6468, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2806,19 +2805,19 @@ touch monitor in front of the seat. \
       }, 
       [6469] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Cargo Hold", 
-         Description = "", 
-         Vnum = 6469, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
          }, 
-         TeleVnum = 0, 
+         Vnum = 6469, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -2827,31 +2826,31 @@ touch monitor in front of the seat. \
       }, 
       [6470] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Prisoner Room", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The prisoner bays of the ship is set up for easy access at all times \
 camaras and sensor waths the prisoners who are in one of 4 force sealed\
 cages. Once inside no one gets out until they are let out. \
 ", 
-         Vnum = 6470, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6463, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6470, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2859,31 +2858,31 @@ cages. Once inside no one gets out until they are let out. \
       }, 
       [6471] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Prisoner Room", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The prisoner bays of the ship is set up for easy access at all times \
 camaras and sensor waths the prisoners who are in one of 4 force sealed\
 cages. Once inside no one gets out until they are let out.\
 ", 
-         Vnum = 6471, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6463, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6471, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2891,31 +2890,31 @@ cages. Once inside no one gets out until they are let out.\
       }, 
       [6472] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Training Room", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "Around this room is various training equipment, designed for helping to\
 keep in top form or even help in the recovery of wounds, this is the ideal\
 place to stay in shape. \
 ", 
-         Vnum = 6472, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6464, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6472, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2923,40 +2922,40 @@ place to stay in shape. \
       }, 
       [6473] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Boarding Ramp", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This boarding ramp leads inside the modified YV-667 freighter, The Gleaming\
 Fang.  The entrance to the cockpit is to the north, and the rest of the\
 ship is down the hallway south.\
 ", 
-         Vnum = 6473, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6474, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6475, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6473, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2964,31 +2963,31 @@ ship is down the hallway south.\
       }, 
       [6474] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Cockpit", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The cockpit is quite spacious. There is a pilot and co-pilot seat, but the\
 control panel is modified to be easily accessible to the pilot. The\
 controls have been rebuilt, so a Trandoshan pilot can manipulate them.\
 ", 
-         Vnum = 6474, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6473, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6474, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -2996,78 +2995,78 @@ controls have been rebuilt, so a Trandoshan pilot can manipulate them.\
       }, 
       [6475] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This main hallway runs the length of the ship. Emergency lighting and\
 security systems are mounted on the walls at regular intervals. The door\
 to the west leads to the galley, and the door to the east leads to the\
 'fresher station'. A small ladder provides access to the dorsal and\
 ventral turrets, and the hallway continues south.\
 ", 
-         Vnum = 6475, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6473, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6484, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6478, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6488, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [5] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6476, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [6] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6477, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6475, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3075,30 +3074,30 @@ ventral turrets, and the hallway continues south.\
       }, 
       [6476] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Dorsal Turret", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This is the dorsal turret. There is a small targeting computer here, and a\
 headset connecting the gunner to the shipboard com system. \
 ", 
-         Vnum = 6476, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6475, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6476, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3106,30 +3105,30 @@ headset connecting the gunner to the shipboard com system. \
       }, 
       [6477] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Ventral Turret", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This is the ventral turret. There is a small targeting computer here, and a\
 headset connecting the gunner to the shipboard com system. \
 ", 
-         Vnum = 6477, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6475, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6477, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -3138,59 +3137,59 @@ headset connecting the gunner to the shipboard com system. \
       }, 
       [6478] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This main hallway runs the length of the ship. Emergency lighting and\
 security systems are mounted on the walls at regular intervals. The door\
 to the west leads to the Captain's quarters. The door to the east leads to\
 the crew quarters, and the hallway continues south. \
 ", 
-         Vnum = 6478, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6475, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6489, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6479, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6483, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6478, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3198,49 +3197,49 @@ the crew quarters, and the hallway continues south. \
       }, 
       [6479] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This main hallway runs the length of the ship. Emergency lighting and\
 security systems are mounted on the walls are regular intervals. A ladder\
 leads down to the large cargo bay, and holding cells are to the south.\
 ", 
-         Vnum = 6479, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6478, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6480, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6485, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6479, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3248,11 +3247,9 @@ leads down to the large cargo bay, and holding cells are to the south.\
       }, 
       [6480] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Skinning Room", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This room has all the equipment needed to skin and preserve hides. There is\
 a long gleaming table in the middle of the room.  A groove runs down one\
 side of the table to drain blood and other fluids into a waste disposal\
@@ -3260,52 +3257,54 @@ unit. A dipping tank for curing hides is a one end of the table, and there\
 is a skinning apparatus mounted above the table. There are two holding\
 cells here. The main hallway is to the north.\
 ", 
-         Vnum = 6480, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6479, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
+               DestinationVnum = 6482, 
+               Key = 20504, 
                Distance = 0, 
+               Direction = "southeast", 
                Flags = 
                {
                   [1] = "Closed", 
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Keyword = "", 
-               DestinationVnum = 6482, 
                Description = "", 
-               Key = 20504, 
-               Direction = "southeast", 
+               Keyword = "", 
             }, 
             [3] = 
             {
+               DestinationVnum = 6481, 
+               Key = 20504, 
                Distance = 0, 
+               Direction = "southwest", 
                Flags = 
                {
                   [1] = "Closed", 
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Keyword = "", 
-               DestinationVnum = 6481, 
                Description = "", 
-               Key = 20504, 
-               Direction = "southwest", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6480, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3313,36 +3312,36 @@ cells here. The main hallway is to the north.\
       }, 
       [6481] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Holding Cell #1", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This holding cell is magnetically sealed. It would be nearly impossible to\
 escape without outside help. There is a tiny sensor mounted in the ceiling\
 that automatically triggers the release of a nerve agent should the\
 occupant struggle. \
 ", 
-         Vnum = 6481, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               DestinationVnum = 6480, 
+               Key = 20504, 
                Distance = 0, 
+               Direction = "northeast", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-               Keyword = "", 
-               DestinationVnum = 6480, 
                Description = "", 
-               Key = 20504, 
-               Direction = "northeast", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6481, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3351,36 +3350,36 @@ occupant struggle. \
       }, 
       [6482] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Holding Cell #2", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This holding cell is magnetically sealed. It would be nearly impossible to\
 escape without outside help. There is a tiny sensor mounted in the ceiling\
 that automatically triggers the release of a nerve agent should the\
 occupant struggle.\
 ", 
-         Vnum = 6482, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               DestinationVnum = 6480, 
+               Key = 20504, 
                Distance = 0, 
+               Direction = "northwest", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-               Keyword = "", 
-               DestinationVnum = 6480, 
                Description = "", 
-               Key = 20504, 
-               Direction = "northwest", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6482, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3389,22 +3388,13 @@ occupant struggle.\
       }, 
       [6483] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Captain's Quarters", 
-         Description = "There is a large bunk on one side of the captain's room. On the other side\
-of the room, there is a large storage locker. A small desk littered with\
-paperwork is against the wall between the bunk and the locker.\
-", 
-         Vnum = 6483, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "25 ", 
                MudProgType = "rand_prog", 
+               Arguments = "25 ", 
                Code = "mpecho The bacta heals your wounds.\
 feel heal $n\
 feel heal $n\
@@ -3413,21 +3403,30 @@ feel heal $n\
 ", 
             }, 
          }, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "There is a large bunk on one side of the captain's room. On the other side\
+of the room, there is a large storage locker. A small desk littered with\
+paperwork is against the wall between the bunk and the locker.\
+", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6478, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6483, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3436,21 +3435,13 @@ feel heal $n\
       }, 
       [6484] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "The Refresher", 
-         Description = "This is a standard refresher unit. There is just barely enough room inside\
-for a Trandoshan.\
-", 
-         Vnum = 6484, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "70", 
                MudProgType = "rand_prog", 
+               Arguments = "70", 
                Code = "feel heal $n\
 feel heal $n\
 feel refresh $n\
@@ -3459,21 +3450,29 @@ mpecho &cYou wash around your troubles.\
 ", 
             }, 
          }, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "This is a standard refresher unit. There is just barely enough room inside\
+for a Trandoshan.\
+", 
+         TeleVnum = 0, 
          Tunnel = 1, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6475, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6484, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3481,41 +3480,41 @@ mpecho &cYou wash around your troubles.\
       }, 
       [6485] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Cargo Bay", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The stock cargo bay on a YV-667 is quite large, but a large portion of this\
 cargo bay has been converted into a landing bay for a scout craft. There\
 is a ladder leading up to the main hallway and the engine room is to the\
 south.\
 ", 
-         Vnum = 6485, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6487, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6479, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6485, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3523,49 +3522,49 @@ south.\
       }, 
       [6486] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Lounge", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "the lounge of this ship serves dual purpose, it is ment for the\
 entertainment of guests as well as for meetings between the captain and\
 crew or prospective employers. \
 ", 
-         Vnum = 6486, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6498, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6494, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6495, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6486, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3573,32 +3572,32 @@ crew or prospective employers. \
       }, 
       [6487] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Engine Room", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The engines on this ship have been heavily upgraded to provide  energy to\
 the power draining modifications that have been added to the ship. There\
 are blinking readouts a shipboard com station here. There is a small tool\
 locker mounted on one bulkhead. \
 ", 
-         Vnum = 6487, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6485, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6487, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3606,44 +3605,44 @@ locker mounted on one bulkhead. \
       }, 
       [6488] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Galley", 
-         Description = "The ship's galley may be small, but it is efficiently designed. There is a\
-sink and a small food-prep station here. Food storage compartments have\
-been mounted overhead to save space. There is a small table and four\
-chairs in the middle of the room. \
-", 
-         Vnum = 6488, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "food ration", 
                MudProgType = "speech_prog", 
+               Arguments = "food ration", 
                Code = "mpoload 10313\
 mpecho A packaged ration pops from the station.\
 drop all\
 ", 
             }, 
          }, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "The ship's galley may be small, but it is efficiently designed. There is a\
+sink and a small food-prep station here. Food storage compartments have\
+been mounted overhead to save space. There is a small table and four\
+chairs in the middle of the room. \
+", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6475, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6488, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3651,30 +3650,30 @@ drop all\
       }, 
       [6489] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Crew Quarters", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This room has three small bunks attached to the far bulkhead. There are\
 also three small storage lockers mounted to the northern bulkhead.\
 ", 
-         Vnum = 6489, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6478, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6489, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3684,39 +3683,39 @@ also three small storage lockers mounted to the northern bulkhead.\
       }, 
       [6490] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Crew Quaters", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "A spare crew quarters is located here. Rows of bunks with foot lockers line\
 the walls and a door on the noth wall leads into the captains quarters.\
 ", 
-         Vnum = 6490, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6489, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6475, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6490, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3725,40 +3724,40 @@ the walls and a door on the noth wall leads into the captains quarters.\
       }, 
       [6491] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Passenger Quaters", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "A large passenger area is here for the live cargo all freighters are force\
 to carry sometimes. Even though it's not built for comfort it is more\
 comfortable than the captains and crews quarters.\
 ", 
-         Vnum = 6491, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6492, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6476, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6491, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3767,31 +3766,31 @@ comfortable than the captains and crews quarters.\
       }, 
       [6492] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Passenger Quaters", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "A large passenger area is here for the live cargo all freighters are force\
 to carry sometimes. Even though it's not built for comfort it is more\
 comfortable than the captains and crews quarters. \
 ", 
-         Vnum = 6492, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6491, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6492, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3800,41 +3799,41 @@ comfortable than the captains and crews quarters. \
       }, 
       [6493] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Bridge Hatch", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "A small hatchway leads from the main ship into the cockpit of the ship.\
 this is one of the many changes made fron the old YV-1300 into this newer\
 model. Micro-electronics has allowed for minaturizatin of controlls and\
 systems  making this hallway an ideal like to all the ships systems.\
 ", 
-         Vnum = 6493, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6478, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6499, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6493, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3842,31 +3841,31 @@ systems  making this hallway an ideal like to all the ships systems.\
       }, 
       [6494] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Top Turrent", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This room is bare except for a small targeting computer and a pair of\
 lasers. Designed for combat and not comfort you hope the stay in here\
 isn't too long. \
 ", 
-         Vnum = 6494, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6486, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6494, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3874,31 +3873,31 @@ isn't too long. \
       }, 
       [6495] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Bottom Turrent", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "This room is bare except for a small targeting computer and a pair of\
 lasers. Designed for combat and not comfort you hope the stay in here\
 isn't too long. \
 ", 
-         Vnum = 6495, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6486, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6495, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3906,49 +3905,49 @@ isn't too long. \
       }, 
       [6496] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The hallway is a simple grey metel with various emergency lighting\
 around.\
 It leads in a circular path around the ship.\
 ", 
-         Vnum = 6496, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6499, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6482, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6474, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "southwest", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6496, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3956,28 +3955,28 @@ It leads in a circular path around the ship.\
       }, 
       [6497] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6497, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6498, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6497, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -3985,58 +3984,58 @@ It leads in a circular path around the ship.\
       }, 
       [6498] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The hallway is a simple grey metel with various emergency lighting\
 around.\
 It leads in a circular path around the ship.\
 ", 
-         Vnum = 6498, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6486, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6497, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6499, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "northwest", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6476, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "southwest", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6498, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4044,57 +4043,57 @@ It leads in a circular path around the ship.\
       }, 
       [6499] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
+         TeleDelay = 0, 
+         Sector = "city", 
          Description = "The hallway is a simple grey metel with various emergency lighting around.\
 It leads in a circular path around the ship.\
 ", 
-         Vnum = 6499, 
-         Sector = "city", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6493, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6496, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6473, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6498, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "southeast", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6499, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4102,28 +4101,28 @@ It leads in a circular path around the ship.\
       }, 
       [6500] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Cockpit", 
-         Description = "", 
-         Vnum = 6500, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6501, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6500, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4131,79 +4130,79 @@ It leads in a circular path around the ship.\
       }, 
       [6501] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6501, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6502, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6512, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6500, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6514, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [5] = 
             {
+               DestinationVnum = 6513, 
+               Key = -1, 
                Distance = 0, 
+               Direction = "down", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                   [11] = "Hidden", 
                }, 
-               Keyword = "", 
-               DestinationVnum = 6513, 
                Description = "", 
-               Key = -1, 
-               Direction = "down", 
+               Keyword = "", 
             }, 
             [6] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6515, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "northwest", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6501, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4211,46 +4210,46 @@ It leads in a circular path around the ship.\
       }, 
       [6502] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Spice Lady Lounge", 
-         Description = "", 
-         Vnum = 6502, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6503, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6505, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6501, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6502, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4258,37 +4257,37 @@ It leads in a circular path around the ship.\
       }, 
       [6503] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Equipment Bay", 
-         Description = "", 
-         Vnum = 6503, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6502, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6504, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6503, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4296,28 +4295,28 @@ It leads in a circular path around the ship.\
       }, 
       [6504] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Engineroom", 
-         Description = "", 
-         Vnum = 6504, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6503, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6504, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4325,46 +4324,46 @@ It leads in a circular path around the ship.\
       }, 
       [6505] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6505, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6507, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6506, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6502, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6505, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4372,37 +4371,37 @@ It leads in a circular path around the ship.\
       }, 
       [6506] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Sleeping Quarters", 
-         Description = "", 
-         Vnum = 6506, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6505, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6508, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6506, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4411,37 +4410,37 @@ It leads in a circular path around the ship.\
       }, 
       [6507] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Cargo Bay", 
-         Description = "", 
-         Vnum = 6507, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6509, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6505, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6507, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4449,28 +4448,28 @@ It leads in a circular path around the ship.\
       }, 
       [6508] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Sleeping Quarters", 
-         Description = "", 
-         Vnum = 6508, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6506, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6508, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4479,37 +4478,37 @@ It leads in a circular path around the ship.\
       }, 
       [6509] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Cargo bay", 
-         Description = "", 
-         Vnum = 6509, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6510, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "south", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6507, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6509, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4517,37 +4516,37 @@ It leads in a circular path around the ship.\
       }, 
       [6510] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Cargo Bay", 
-         Description = "", 
-         Vnum = 6510, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6509, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "north", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6511, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "southwest", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6510, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4555,37 +4554,37 @@ It leads in a circular path around the ship.\
       }, 
       [6511] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6511, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6512, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6510, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "northeast", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6511, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4593,55 +4592,55 @@ It leads in a circular path around the ship.\
       }, 
       [6512] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hallway", 
-         Description = "", 
-         Vnum = 6512, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6511, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [2] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6501, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "west", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [3] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6517, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
             [4] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6516, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6512, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4649,33 +4648,33 @@ It leads in a circular path around the ship.\
       }, 
       [6513] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Smuggler's Compartment", 
-         Description = "", 
-         Vnum = 6513, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               DestinationVnum = 6501, 
+               Key = -1, 
                Distance = 0, 
+               Direction = "up", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Keyword = "", 
-               DestinationVnum = 6501, 
                Description = "", 
-               Key = -1, 
-               Direction = "up", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6513, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4683,28 +4682,28 @@ It leads in a circular path around the ship.\
       }, 
       [6514] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Boarding Ramp", 
-         Description = "", 
-         Vnum = 6514, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6501, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "east", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6514, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4712,28 +4711,28 @@ It leads in a circular path around the ship.\
       }, 
       [6515] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Hanger", 
-         Description = "", 
-         Vnum = 6515, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6501, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "southeast", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6515, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4741,28 +4740,28 @@ It leads in a circular path around the ship.\
       }, 
       [6516] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Turret", 
-         Description = "", 
-         Vnum = 6516, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6512, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "up", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6516, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4770,28 +4769,28 @@ It leads in a circular path around the ship.\
       }, 
       [6517] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Turret", 
-         Description = "", 
-         Vnum = 6517, 
+         TeleDelay = 0, 
          Sector = "city", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Distance = 0, 
-               Keyword = "", 
                DestinationVnum = 6512, 
-               Description = "", 
                Key = -1, 
+               Distance = 0, 
                Direction = "down", 
+               Description = "", 
+               Keyword = "", 
             }, 
          }, 
-         TeleVnum = 0, 
+         Vnum = 6517, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4799,19 +4798,19 @@ It leads in a circular path around the ship.\
       }, 
       [6518] = 
       {
-         TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "Spice Lady A-wing", 
-         Description = "", 
-         Vnum = 6518, 
+         TeleDelay = 0, 
          Sector = "field", 
+         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
          Exits = 
          {
          }, 
-         TeleVnum = 0, 
+         Vnum = 6518, 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [29] = "Spacecraft", 
@@ -4821,20 +4820,92 @@ It leads in a circular path around the ship.\
       }, 
    }, 
    Name = "Some Hunter Spacecraft", 
+   LowEconomy = 31277379, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg1 = 6400, 
+         Arg3 = 6460, 
+         Command = "M", 
+         MiscData = 0, 
+         Arg2 = 1, 
+      }, 
+      [2] = 
+      {
+         Arg1 = 6401, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+      }, 
+      [3] = 
+      {
+         Arg1 = 6400, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+      }, 
+      [4] = 
+      {
+         Arg1 = 53, 
+         Arg2 = 1, 
+         MiscData = 1, 
+         Command = "G", 
+      }, 
+      [5] = 
+      {
+         Arg1 = 6480, 
+         Arg3 = 2, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 8, 
+      }, 
+      [6] = 
+      {
+         Arg1 = 6480, 
+         Arg3 = 2, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 9, 
+      }, 
+      [7] = 
+      {
+         Arg1 = 5190, 
+         Arg3 = 6411, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 17, 
+      }, 
+      [8] = 
+      {
+         Arg1 = 204, 
+         Arg3 = 6407, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 92, 
+      }, 
+      [9] = 
+      {
+         Arg1 = 204, 
+         Arg3 = 6407, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 92, 
+      }, 
+      [10] = 
+      {
+         Arg1 = 204, 
+         Arg3 = 6407, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 92, 
+      }, 
+   }, 
    Objects = 
    {
       [6400] = 
       {
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [12] = "Wrist", 
-         }, 
          Name = "Wrist comlink", 
-         ActionDescription = "", 
-         ShortDescr = "wrist comlink", 
-         ItemType = "comlink", 
-         Vnum = 6400, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4844,24 +4915,64 @@ It leads in a circular path around the ship.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Cost = 50, 
+         Description = "A funny looking wristband lies here.", 
+         Layers = 0, 
+         ActionDescription = "", 
+         Weight = 2, 
+         ShortDescr = "wrist comlink", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [12] = "Wrist", 
+         }, 
+         Vnum = 6400, 
          ExtraDescriptions = 
          {
          }, 
-         Cost = 50, 
-         Weight = 2, 
-         Layers = 0, 
-         Description = "A funny looking wristband lies here.", 
+         ItemType = "comlink", 
       }, 
       [6401] = 
       {
+         Name = "sniper scope", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
+         Cost = 1000, 
+         Description = "A small scope is in the dirt here.", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 2, 
+               Location = 18, 
+            }, 
+            [2] = 
+            {
+               Modifier = 1, 
+               Location = 19, 
+            }, 
+         }, 
+         Layers = 0, 
+         ActionDescription = "", 
+         Weight = 2, 
+         ShortDescr = "A sniper scope.", 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Weight = 2, 
-         Name = "sniper scope", 
-         ActionDescription = "", 
+         Vnum = 6401, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4871,104 +4982,82 @@ It leads in a circular path around the ship.\
                Keyword = "sniper scope", 
             }, 
          }, 
-         ShortDescr = "A sniper scope.", 
          ItemType = "scope", 
-         Vnum = 6401, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 1000, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Location = 18, 
-               Modifier = 2, 
-            }, 
-            [2] = 
-            {
-               Location = 19, 
-               Modifier = 1, 
-            }, 
-         }, 
-         Description = "A small scope is in the dirt here.", 
-         Layers = 0, 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
       }, 
    }, 
-   FileFormatVersion = 1, 
-   HighEconomy = 0, 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         Last = 6400, 
+         First = 6400, 
+      }, 
+      Object = 
+      {
+         Last = 6401, 
+         First = 6400, 
+      }, 
+      Room = 
+      {
+         Last = 6518, 
+         First = 6400, 
+      }, 
+   }, 
    Author = "Bleeds", 
-   LowEconomy = 31277379, 
+   HighEconomy = 0, 
    ResetMessage = "", 
+   ResetFrequency = 0, 
    Mobiles = 
    {
       [6400] = 
       {
-         ArmorClass = 0, 
-         Weight = 0, 
-         LongDescr = "A shadey looking character is here.\
-", 
-         Description = "Dressed in a conservitive suit and always looking around suspisiously. This\
-character has got to be upto something.\
-", 
-         DefaultPosition = "standing", 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         DamRoll = 0, 
+         Height = 0, 
          Vnum = 6400, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
          Flags = 
          {
             [0] = "Npc", 
             [25] = "NoKill", 
          }, 
+         DefaultPosition = "standing", 
+         Alignment = 0, 
+         Description = "Dressed in a conservitive suit and always looking around suspisiously. This\
+character has got to be upto something.\
+", 
+         ArmorClass = 0, 
          SaveVs = 
          {
-            Wand = 0, 
             PoisonDeath = 0, 
-            SpellStaff = 0, 
             ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
             Breath = 0, 
          }, 
-         Languages = 
+         Credits = 0, 
+         HitChance = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
          }, 
+         NumberOfAttacks = 0, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         LongDescr = "A shadey looking character is here.\
+", 
+         Position = "standing", 
          Shop = 
          {
-            KeeperShortDescr = "Weapons Dealer", 
-            KeeperVnum = 6400, 
+            ProfitSell = 50, 
             BusinessHours = 
             {
                Close = 23, 
                Open = 0, 
             }, 
+            KeeperShortDescr = "Weapons Dealer", 
             ProfitBuy = 150, 
             BuyTypes = 
             {
@@ -4978,116 +5067,57 @@ character has got to be upto something.\
                [4] = "none", 
                [0] = "grenade", 
             }, 
-            ProfitSell = 50, 
          }, 
-         Height = 0, 
+         Level = 1, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
          Name = "Weapons Dealer", 
          Stats = 
          {
-            Dexterity = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
-            Force = 0, 
             Constitution = 10, 
-            Charisma = 10, 
-            Intelligence = 10, 
             Strength = 10, 
+            Luck = 10, 
+            Intelligence = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Dexterity = 10, 
+            Wisdom = 10, 
          }, 
-         Race = "Human", 
-         Level = 1, 
+         DamRoll = 0, 
+         HitRoll = 0, 
          ShortDescr = "Weapons Dealer", 
-         Credits = 0, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
+         Weight = 0, 
+         Race = "Human", 
          Sex = "undistinguished", 
          Immune = 
          {
             [20] = "magic", 
             [11] = "charm", 
          }, 
-         Position = "standing", 
-         HitRoll = 0, 
       }, 
    }, 
-   ResetFrequency = 0, 
-   Resets = 
+   LevelRanges = 
    {
-      [1] = 
+      Hard = 
       {
-         MiscData = 0, 
-         Command = "M", 
-         Arg3 = 6460, 
-         Arg1 = 6400, 
-         Arg2 = 1, 
+         High = 103, 
+         Low = 0, 
       }, 
-      [2] = 
+      Soft = 
       {
-         Arg1 = 6401, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [3] = 
-      {
-         Arg1 = 6400, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [4] = 
-      {
-         Arg1 = 53, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [5] = 
-      {
-         MiscData = 0, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg1 = 6480, 
-         Arg2 = 8, 
-      }, 
-      [6] = 
-      {
-         MiscData = 0, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg1 = 6480, 
-         Arg2 = 9, 
-      }, 
-      [7] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 6411, 
-         Arg1 = 5190, 
-         Arg2 = 17, 
-      }, 
-      [8] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 6407, 
-         Arg1 = 204, 
-         Arg2 = 92, 
-      }, 
-      [9] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 6407, 
-         Arg1 = 204, 
-         Arg2 = 92, 
-      }, 
-      [10] = 
-      {
-         MiscData = 1, 
-         Command = "M", 
-         Arg3 = 6407, 
-         Arg1 = 204, 
-         Arg2 = 92, 
+         High = 0, 
+         Low = 0, 
       }, 
    }, 
+   FileFormatVersion = 1, 
+   Filename = "hunter_ships.lua", 
 }

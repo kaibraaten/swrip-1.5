@@ -1,4762 +1,34 @@
 -- Coruscant - The City Streets
--- Last saved Wednesday 06-May-2020 12:59:10
+-- Last saved Thursday 07-May-2020 14:47:57
 
 AreaEntry
 {
-   Author = "Darrik", 
-   Name = "Coruscant - The City Streets", 
-   ResetFrequency = 5, 
-   FileFormatVersion = 1, 
-   Filename = "coruscant_streets.lua", 
-   LowEconomy = 21119304, 
-   ResetMessage = "", 
-   Mobiles = 
+   LevelRanges = 
    {
-      [320] = 
+      Soft = 
       {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 320, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
+         Low = 0, 
+         High = 0, 
       }, 
-      [321] = 
+      Hard = 
       {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 321, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 10, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [322] = 
-      {
-         ShortDescr = "a begger", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A small child begs for money.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 322, 
-         Sex = "undistinguished", 
-         Name = "begger child", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 2, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-         ArmorClass = 95, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [323] = 
-      {
-         ShortDescr = "a gamorrean guard", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "&G A big gamorrean guard is here watching the refinery entrance. &x\
-", 
-         HitRoll = 10, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 323, 
-         Sex = "undistinguished", 
-         Name = "gamorrean guard", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-            HitNoDice = 10, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 5, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [14] = "gamorrese", 
-            }, 
-            Speaks = 
-            {
-               [14] = "gamorrese", 
-            }, 
-         }, 
-         DamRoll = 10, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 50, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = -25, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [324] = 
-      {
-         ShortDescr = "a Hutt", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Hutt", 
-         LongDescr = "A hutt is here looking over his profit reports.\
-", 
-         HitRoll = 20, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 324, 
-         Sex = "undistinguished", 
-         Name = "hutt", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 10, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "if ovnuminv(7315) >= 1\
-evil $n\
-' ahhh most excellent , my supplies have arrived.\
-mpwithdraw 2000\
-give 2000 credits $n\
-mpgain $n 4 2000\
-mpat 10299 drop package \
-else \
-' fool this isn't what i orderd\
-endif\
-mppurge package\
-", 
-               MudProgType = "give_prog", 
-               Arguments = "package", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [4] = "huttese", 
-            }, 
-            Speaks = 
-            {
-               [4] = "huttese", 
-            }, 
-         }, 
-         DamRoll = 20, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 400, 
-         Alignment = 0, 
-         Level = 100, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [10] = "Practice", 
-            [30] = "Prototype", 
-         }, 
-         ArmorClass = -150, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [325] = 
-      {
-         ShortDescr = "Toodan", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human tries to hide his face from you.\
-", 
-         HitRoll = 10, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 325, 
-         Sex = "undistinguished", 
-         Name = "Toodan", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-            HitNoDice = 10, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 5, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 329\
-mpforce mobslave mpoload 10212\
-mpforce mobslave drop all\
-mppurge mobslave\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 10, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = -1000, 
-         Level = 50, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [30] = "Prototype", 
-            [27] = "NoCorpse", 
-         }, 
-         ArmorClass = -25, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [326] = 
-      {
-         ShortDescr = "NokTok", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A scrawny humanoid lurks in the shadows.\
-", 
-         HitRoll = 14, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 326, 
-         Sex = "undistinguished", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 329\
-mpforce mobslave mpoload 10213\
-mpforce mobslave drop all\
-mppurge mobslave\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Name = "Noktok", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 700, 
-            HitNoDice = 14, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 7, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         DamRoll = 14, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         Credits = 0, 
-         Alignment = -1000, 
-         Level = 70, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [27] = "NoCorpse", 
-         }, 
-         ArmorClass = -75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [327] = 
-      {
-         ShortDescr = "pleebo", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A dangerous looking rodian glares at you.\
-", 
-         HitRoll = 20, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 327, 
-         Sex = "undistinguished", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 329\
-mpforce mobslave mpoload 10214\
-mpforce mobslave drop all\
-mppurge mobslave\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Name = "Pleebo", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 10, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-               [3] = "rodese", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [3] = "rodese", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         DamRoll = 20, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 100, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [27] = "NoCorpse", 
-         }, 
-         ArmorClass = -150, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [328] = 
-      {
-         ShortDescr = "Sleejat", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Defel", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 329\
-mpforce mobslave mpoload 10216\
-mpforce mobslave drop all\
-mppurge mobslave\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         LongDescr = "&RA pair of red eyes stare at you from the shadows.\
-", 
-         AffectedBy = 
-         {
-            [16] = "Hide", 
-            [9] = "Infrared", 
-            [13] = "Protect", 
-            [15] = "Sneak", 
-            [7] = "Sanctuary", 
-         }, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 328, 
-         Sex = "undistinguished", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-               [21] = "defel", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [21] = "defel", 
-            }, 
-         }, 
-         Name = "Sleejat", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1050, 
-            HitNoDice = 21, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 10, 
-         }, 
-         Height = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         HitRoll = 21, 
-         DamRoll = 21, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         Level = 105, 
-         Alignment = 0, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [12] = "Deadly", 
-            [10] = "Practice", 
-            [27] = "NoCorpse", 
-         }, 
-         ArmorClass = -162, 
-         Credits = 0, 
-         Position = "standing", 
-      }, 
-      [329] = 
-      {
-         ShortDescr = "a mouse droid", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A mouse droid tries to avoid being crushed.\
-", 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
-         }, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 329, 
-         Sex = "undistinguished", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpgoto 10299\
-say purge\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Name = "mobslave", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1050, 
-            HitNoDice = 21, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 10, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         DamRoll = 21, 
-         HitRoll = 21, 
-         Level = 105, 
-         Alignment = 0, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [21] = "Secretive", 
-            [30] = "Prototype", 
-         }, 
-         ArmorClass = -162, 
-         Credits = 0, 
-         Position = "standing", 
-      }, 
-      [400] = 
-      {
-         ShortDescr = "a prostitute", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A prostitute is giving you the time of your life.\
-", 
-         HitRoll = 3, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 400, 
-         Sex = "female", 
-         Name = "prostitute woman", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 150, 
-            HitNoDice = 3, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "if rand(5)\
-  french $r\
-else\
-  if rand(10)\
-    grope $r\
-  else\
-    if rand(15)\
-      lick $r\
-    else\
-      if rand(20)\
-        moan\
-      else\
-        if rand(25)\
-          swoon\
-        else\
-          if rand(30)\
-            fondle prost\
-          else\
-            if rand(35)\
-              pounce $r\
-            else\
-              kiss $r\
-            endif\
-          endif\
-        endif\
-      endif\
-    endif\
-  endif\
-endif\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 3, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 15, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         ArmorClass = 62, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [401] = 
-      {
-         ShortDescr = "a prostitute", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A young woman is wearing a very skimpy outfit.\
-", 
-         HitRoll = 3, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 401, 
-         Sex = "female", 
-         Name = "young prostitute woman girl wp1", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 150, 
-            HitNoDice = 3, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "flirt $n\
-Say 50 credits and I'll show you a really good time.\
-", 
-               MudProgType = "all_greet_prog", 
-               Arguments = "100", 
-            }, 
-            [2] = 
-            {
-               Code = "mpechoat $n A prostitute escorts you to a small brothel.\
-mpechoaround $n $n leaves with a prostitute.\
-mptransfer $n 462\
-mpgoto 461\
-", 
-               MudProgType = "bribe_prog", 
-               Arguments = "50", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 3, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 15, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 62, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [499] = 
-      {
-         ShortDescr = "a newly created bookend", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "Some god abandoned a newly created bookend here.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 499, 
-         Sex = "undistinguished", 
-         Name = "bookend", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 1, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [403] = 
-      {
-         ShortDescr = "a young man", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A young man is wearing only a g-string and a cutoff t-shirt.\
-", 
-         HitRoll = 8, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 403, 
-         Sex = "female", 
-         Name = "prostitute young man ", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 400, 
-            HitNoDice = 8, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 4, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "if rand(5)\
-  french $r\
-else\
-  if rand(10)\
-    grope $r\
-  else\
-    if rand(15)\
-      lick $r\
-    else\
-      if rand(20)\
-        moan\
-      else\
-        if rand(25)\
-          swoon\
-        else\
-          if rand(30)\
-            fondle prost\
-          else\
-            if rand(35)\
-              pounce $r\
-            else\
-              kiss $r\
-            endif\
-          endif\
-        endif\
-      endif\
-    endif\
-  endif\
-endif\
-wake $n\
-stand\
-if ovnumhere(30) < 1\
-mpoload 30\
-drop fire\
-endif\
-aid $n\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "100", 
-            }, 
-            [2] = 
-            {
-               Code = "mpmload 403\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-            [3] = 
-            {
-               Code = "peace\
-open w\
-open e\
-open s\
-open n\
-open d\
-open u\
-mpforce $n flee\
-mpforce $n flee\
-mpforce $n flee\
-mpforce $n flee\
-flee\
-flee\
-flee\
-", 
-               MudProgType = "fight_prog", 
-               Arguments = "100", 
-            }, 
-            [4] = 
-            {
-               Code = "mpmload 403\
-mpforce man mpecho He returns fully healed.\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 8, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 40, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
-         }, 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [404] = 
-      {
-         ShortDescr = "a young man", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A young man is wearing only a g-string and a cutoff t-shirt.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 404, 
-         Sex = "female", 
-         Name = "male prostitute young man ymp", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 150, 
-            HitNoDice = 3, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "flirt $n\
-Say 50 credits and I'll show you a really good time.\
-", 
-               MudProgType = "all_greet_prog", 
-               Arguments = "100", 
-            }, 
-            [2] = 
-            {
-               Code = "mpechoat $n A prostitute escorts you to a small brothel.\
-mpechoaround $n $n leaves with a male prostitute.\
-mptransfer $n 463\
-mpgoto 461\
-", 
-               MudProgType = "bribe_prog", 
-               Arguments = "50", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 15, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 62, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [405] = 
-      {
-         ShortDescr = "a granite slug", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A granite slug edges its way across the rock.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 405, 
-         Sex = "undistinguished", 
-         Name = "granite slug", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 10, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         SpecFuns = 
-         {
-            [1] = "spec_fido", 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 1, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-         }, 
-         ArmorClass = 97, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [406] = 
-      {
-         ShortDescr = "a Trandoshan guard", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Trandoshan", 
-         LongDescr = "A Trandoshan guard stands by the westernmost door.\
-", 
-         HitRoll = 15, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 406, 
-         Sex = "undistinguished", 
-         Name = "Trandoshan Guard", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 750, 
-            HitNoDice = 15, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 7, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [22] = "dosh", 
-            }, 
-            Speaks = 
-            {
-               [22] = "dosh", 
-            }, 
-         }, 
-         DamRoll = 15, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 100, 
-         Alignment = 0, 
-         Level = 75, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = -87, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [407] = 
-      {
-         ShortDescr = "a Rodian", 
-         Description = "Rodians are well known throughout the galaxy as deadly bounty hunters. They\
-are easily disdinguished by their tapered snouts, large eyes, green skin,\
-crested heads and suction copped fingers.  \
-", 
-         Weight = 0, 
-         Race = "Rodian", 
-         LongDescr = "A rodian looks up and down the street as if looking for somebody.\
-", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 407, 
-         Sex = "male", 
-         Name = "rodian", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-            HitNoDice = 4, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 2, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [3] = "rodese", 
-            }, 
-            Speaks = 
-            {
-               [3] = "rodese", 
-            }, 
-         }, 
-         DamRoll = 4, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 100, 
-         Alignment = 0, 
-         Level = 20, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-         ArmorClass = 50, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [408] = 
-      {
-         ShortDescr = "a human police officer", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A police officer patrolls the city streets.\
-", 
-         HitRoll = 5, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 408, 
-         Sex = "male", 
-         SpecFuns = 
-         {
-            [1] = "spec_guardian", 
-            [2] = "spec_police_attack", 
-         }, 
-         Name = "human police officer cop", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 250, 
-            HitNoDice = 5, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 2, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 5, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 25, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-         ArmorClass = 37, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [409] = 
-      {
-         ShortDescr = "a Mon Calamarian cop", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Mon Calamari", 
-         LongDescr = "A police officer patrolls the city streets.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 409, 
-         Sex = "male", 
-         SpecFuns = 
-         {
-            [1] = "spec_guardian", 
-         }, 
-         Name = "mon calamarian police officer cop", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 250, 
-            HitNoDice = 5, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 2, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 25, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 37, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [410] = 
-      {
-         ShortDescr = "an old wookiee woman", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Wookiee", 
-         LongDescr = "An old wookiee woman limps by.\
-", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 410, 
-         Sex = "female", 
-         Name = "old wookiee woman", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 120, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-            }, 
-         }, 
-         DamRoll = 2, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 20, 
-         Alignment = 0, 
-         Level = 12, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 70, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [411] = 
-      {
-         ShortDescr = "a junkie", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         Shop = 
-         {
-            KeeperVnum = 411, 
-            KeeperShortDescr = "a junkie", 
-            ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "spice", 
-            }, 
-            ProfitSell = 90, 
-         }, 
-         LongDescr = "A junkie wanders the streets in serch of a fix.\
-", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 411, 
-         Sex = "undistinguished", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "say Got any spice?\
-", 
-               MudProgType = "all_greet_prog", 
-               Arguments = "30", 
-            }, 
-         }, 
-         Name = "junkie human", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-            HitNoDice = 4, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 2, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         DamRoll = 4, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Credits = 20, 
-         Alignment = 0, 
-         Level = 20, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [7] = "Wimpy", 
-         }, 
-         ArmorClass = 50, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [412] = 
-      {
-         ShortDescr = "a self defence trainer", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A self defence trainer can give you a few lessons.\
-", 
-         HitRoll = 20, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 412, 
-         Sex = "undistinguished", 
-         Name = "Self Defence Trainer", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 10, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 20, 
-         Stats = 
-         {
-            Charisma = 9, 
-            Strength = 25, 
-            Wisdom = 9, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 9, 
-            Constitution = 18, 
-            Dexterity = 20, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 100, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [9] = "Train", 
-            [10] = "Practice", 
-            [28] = "_28", 
-         }, 
-         ArmorClass = -150, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [413] = 
-      {
-         ShortDescr = "a target", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A target hangs on the wall here.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 413, 
-         Sex = "undistinguished", 
-         Name = "target", 
-         HitChance = 
-         {
-            HitSizeDice = 1, 
-            HitPlus = 0, 
-            HitNoDice = 1, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 413\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 1, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [26] = "Droid", 
-         }, 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [414] = 
-      {
-         ShortDescr = "a student", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A fellow student wants to spar with you.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 414, 
-         Sex = "male", 
-         Name = "student sparring partner", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 10, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 1, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [25] = "NoKill", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 97, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [415] = 
-      {
-         ShortDescr = "a student", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A fellow student wants to spar with you.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 415, 
-         Sex = "male", 
-         Name = "student sparring partner", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 2, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [25] = "NoKill", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 95, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [416] = 
-      {
-         ShortDescr = "a student", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A fellow student wants to spar with you.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 416, 
-         Sex = "male", 
-         Name = "student sparring partner", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 30, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 3, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [25] = "NoKill", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 92, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [417] = 
-      {
-         ShortDescr = "a student", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A fellow student wants to spar with you.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 417, 
-         Sex = "male", 
-         Name = "student sparring partner", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 40, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 4, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [25] = "NoKill", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 90, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [418] = 
-      {
-         ShortDescr = "a student", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A fellow student wants to spar with you.\
-", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 418, 
-         Sex = "male", 
-         Name = "student sparring partner", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 50, 
-            HitNoDice = 1, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 1, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 5, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [25] = "NoKill", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 87, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [419] = 
-      {
-         ShortDescr = "a remote", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 419, 
-         Sex = "undistinguished", 
-         Name = "training remote", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 10, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 419\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 1, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 97, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [420] = 
-      {
-         ShortDescr = "a remote", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 420, 
-         Sex = "undistinguished", 
-         Name = "training remote", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 420\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 2, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 95, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [421] = 
-      {
-         ShortDescr = "a remote", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 421, 
-         Sex = "undistinguished", 
-         Name = "training remote", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 30, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 421\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 3, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 92, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [422] = 
-      {
-         ShortDescr = "a remote", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 422, 
-         Sex = "undistinguished", 
-         Name = "training remote", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 40, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 422\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 4, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 90, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [423] = 
-      {
-         ShortDescr = "a remote", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A training remote hovers nearby.\
-", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 423, 
-         Sex = "undistinguished", 
-         Name = "training remote", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 50, 
-            HitNoDice = 1, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpmload 423\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 1, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 5, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 87, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [424] = 
-      {
-         ShortDescr = "a shopkeeper", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A shopkeeper is here ready to assist you.\
-", 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 424, 
-         Sex = "male", 
-         Shop = 
-         {
-            KeeperVnum = 424, 
-            KeeperShortDescr = "a shopkeeper", 
-            ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-         }, 
-         Name = "shopkeeper", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-            HitNoDice = 4, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 2, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         DamRoll = 4, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 20, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         ArmorClass = 50, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [425] = 
-      {
-         ShortDescr = "Masoc", 
-         Description = "Masoc is a short, ugly human with shifty eyes.\
-He is sitting behind a small desk littered with papers\
-He is wearing a cheap suit.\
-", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A shady looking character named Masoc sits here.\
-", 
-         HitRoll = 20, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 425, 
-         Sex = "male", 
-         Name = "Masoc", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 10, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "if ovnumcarry(22502)\
-mpecho Masoc's eyes light up as you hand him the package.\
-say You have done well to get this to me.\
-mpgain $n 4 40000\
-mpwithdraw 10000\
-give 10000 credits $n\
-mpat 10299 drop all\
-mpat 10299 purge package\
-else\
-say This isn't for me\
-frown\
-drop all\
-endif\
-", 
-               MudProgType = "act_prog", 
-               Arguments = "gives", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 20, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 25, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 100, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         ArmorClass = -150, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [426] = 
-      {
-         ShortDescr = "Craftsman Jim Woodwiess", 
-         Description = "Average Bob Vila lookalike..one would almost think he could be..his CLONE.\
-", 
-         Shop = 
-         {
-            KeeperVnum = 426, 
-            KeeperShortDescr = "Craftsman Jim Woodwiess", 
-            ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-         }, 
-         Weight = 0, 
-         Race = "Human", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [18] = "_clan", 
-            }, 
-         }, 
-         LongDescr = "Craftsman Jim Woodwiess is selling supplies to assist in product development.\
-", 
-         HitRoll = 20, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 426, 
-         Sex = "male", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Name = "Craftsman Jim Woodwiess", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamPlus = 100, 
-            DamNoDice = 10, 
-         }, 
-         Height = 0, 
-         Stats = 
-         {
-            Charisma = 25, 
-            Strength = 25, 
-            Wisdom = 25, 
-            Force = 0, 
-            Luck = 25, 
-            Intelligence = 25, 
-            Constitution = 25, 
-            Dexterity = 25, 
-         }, 
-         Immune = 
-         {
-            [1] = "cold", 
-            [2] = "electricity", 
-            [3] = "energy", 
-            [5] = "pierce", 
-            [6] = "slash", 
-            [7] = "acid", 
-            [8] = "poison", 
-            [9] = "drain", 
-            [10] = "sleep", 
-            [11] = "charm", 
-            [12] = "hold", 
-            [13] = "nonmagic", 
-            [20] = "magic", 
-            [21] = "paralysis", 
-            [0] = "fire", 
-         }, 
-         DamRoll = 20, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         Credits = 0, 
-         Alignment = 1000, 
-         Level = 100, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [24] = "NoAssist", 
-            [25] = "NoKill", 
-            [27] = "NoCorpse", 
-            [6] = "StayArea", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = -150, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [299] = 
-      {
-         ShortDescr = "the receptionist", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "Roxie the receptionist sits behind a desk.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 299, 
-         Sex = "female", 
-         Name = "Roxie the receptionist", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 1, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [300] = 
-      {
-         ShortDescr = "a newly created bookend", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "Some god abandoned a newly created bookend here.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 300, 
-         Sex = "undistinguished", 
-         Name = "bookend", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 1, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [301] = 
-      {
-         ShortDescr = "a human", 
-         Description = "This young human man is in his early twenties. He is dressed in the latest\
-fashions and is clean cut. He is probably a student at the university.\
-", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A young man is walking by.\
-", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 301, 
-         Sex = "male", 
-         Name = "A young human man.", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 0, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 2, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 10, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [302] = 
-      {
-         ShortDescr = "the waitress", 
-         Description = "The waitress is an older human woman who doesn't look overly impressed with\
-the thought of having to serve you. You imagine that she probably doesn't\
-enjoy her job. \
-", 
-         Shop = 
-         {
-            KeeperVnum = 302, 
-            KeeperShortDescr = "the waitress", 
-            ProfitBuy = 120, 
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-         }, 
-         Weight = 0, 
-         Race = "Human", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpechoat $n A waitress greets you as you enter and escorts you to a table.\
-mpechoaround $n $n takes a seat at a table.\
-say What can I get you?\
-", 
-               MudProgType = "all_greet_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         LongDescr = "A waitress is waiting to take your order.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 302, 
-         Sex = "undistinguished", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [14] = "gamorrese", 
-               [17] = "jawaese", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [26] = "falleen", 
-               [27] = "binary", 
-               [0] = "basic", 
-            }, 
-         }, 
-         Name = "waitress", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         DamRoll = 0, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 1, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
-         }, 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [303] = 
-      {
-         ShortDescr = "a young woman", 
-         Description = "This young human woman is in her early twenties. She is very attractive and\
-dressed in the latest fashions. She is probably a student at the\
-university. \
-", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A young woman walks by.\
-", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 303, 
-         Sex = "female", 
-         Name = "young human woman ym1", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 120, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 0, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 2, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 12, 
-         Alignment = 0, 
-         Level = 12, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 70, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [304] = 
-      {
-         ShortDescr = "a business man", 
-         Description = "There is nothing unusual about this guy at all. He is one of millions of\
-middle aged business people found in the enormous governemnt city. Funny\
-how they all seem to look the same.\
-", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A man in a suit walks quickly by.\
-", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 304, 
-         Sex = "male", 
-         Name = "businessman man human", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 80, 
-            HitNoDice = 1, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 1, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 14, 
-         Alignment = 0, 
-         Level = 8, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 80, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [305] = 
-      {
-         ShortDescr = "a business woman", 
-         Description = "There is nothing unusual about this woman at all. She is one of millions of\
-middle aged business people found in the enormous governemnt city. Funny\
-how they all seem to look the same.\
-", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A woman in a suit outfit walks quickly by.\
-", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 305, 
-         Sex = "female", 
-         Name = "businesswomanman woman human", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 70, 
-            HitNoDice = 1, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 1, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 11, 
-         Alignment = 0, 
-         Level = 7, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 82, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [306] = 
-      {
-         ShortDescr = "a Chadra-Fan", 
-         Description = "Chadra-fan area race of small rodent like humanoids coming from the planet\
-Chad. This one smiles at you as she walks by. \
-", 
-         Weight = 0, 
-         Race = "Chadra-Fan", 
-         LongDescr = "A young Chadra-Fan woman is here.\
-", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 306, 
-         Sex = "female", 
-         Name = "chadra-fan woman", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 50, 
-            HitNoDice = 1, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [23] = "chadra-fan", 
-            }, 
-            Speaks = 
-            {
-               [23] = "chadra-fan", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 1, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 18, 
-         Alignment = 0, 
-         Level = 5, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-         }, 
-         ArmorClass = 87, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [307] = 
-      {
-         ShortDescr = "a Verpine", 
-         Description = "The verpine are a very intelligent race of bipedal insectoids. The have\
-large eyes short snouts and 2 antennea coming out of the sides of their\
-heads. Their bodies are thin and stick like.\
-", 
-         Weight = 0, 
-         Race = "Verpine", 
-         LongDescr = "A young Verpine man is here.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 307, 
-         Sex = "male", 
-         Name = "verpine man", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 0, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [20] = "verpine", 
-            }, 
-            Speaks = 
-            {
-               [20] = "verpine", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 19, 
-         Alignment = 0, 
-         Level = 5, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-         }, 
-         ArmorClass = 90, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [308] = 
-      {
-         ShortDescr = "a verpine woman", 
-         Description = "The verpine are a very intelligent race of bipedal insectoids. The have\
-large eyes short snouts and 2 antennea coming out of the sides of their\
-heads. Their bodies are thin and stick like.\
-", 
-         Weight = 0, 
-         Race = "Verpine", 
-         LongDescr = "Verpine woman is here.\
-", 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 308, 
-         Sex = "male", 
-         Name = "verpine woman", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 50, 
-            HitNoDice = 1, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [20] = "verpine", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [20] = "verpine", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 1, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 9, 
-         Alignment = 0, 
-         Level = 5, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-         }, 
-         ArmorClass = 87, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [309] = 
-      {
-         ShortDescr = "the pawnbroker", 
-         Description = "", 
-         Shop = 
-         {
-            KeeperVnum = 309, 
-            KeeperShortDescr = "the pawnbroker", 
-            ProfitBuy = 150, 
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            BuyTypes = 
-            {
-               [1] = "armor", 
-               [2] = "container", 
-               [3] = "smut", 
-               [4] = "device", 
-               [0] = "weapon", 
-            }, 
-            ProfitSell = 50, 
-         }, 
-         Weight = 0, 
-         Race = "Human", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpoload 325\
-", 
-               MudProgType = "death_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         LongDescr = "A pawnbroker will buy almost anything.\
-", 
-         HitRoll = 20, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 309, 
-         Sex = "male", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Name = "pawn broker", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 10, 
-         }, 
-         Height = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         DamRoll = 20, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Credits = 20, 
-         Alignment = 0, 
-         Level = 100, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         ArmorClass = -150, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [310] = 
-      {
-         ShortDescr = "an automatic defence laser", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "An automated defence system is installed on the wall.\
-", 
-         AffectedBy = 
-         {
-            [1] = "Invisible", 
-            [16] = "Hide", 
-         }, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 310, 
-         Sex = "undistinguished", 
-         Name = "automated defence system", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1050, 
-            HitNoDice = 21, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 10, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         DamRoll = 21, 
-         HitRoll = 21, 
-         Level = 105, 
-         Alignment = 0, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [12] = "Deadly", 
-            [26] = "Droid", 
-            [0] = "Npc", 
-         }, 
-         ArmorClass = -162, 
-         Credits = 0, 
-         Position = "standing", 
-      }, 
-      [311] = 
-      {
-         ShortDescr = "a taurill", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "Taurills are a Hutts best friend.. try calling him.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         Vnum = 311, 
-         Sex = "undistinguished", 
-         Name = "taurill", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpechoat $n A taurill hops up onto your chest.\
-mpechoaround $n A taurill hops up onto $ns chest.\
-mpoload 328\
-give taurill $n\
-mpforce $n wear taurill\
-mpgoto 7\
-say ok purge me\
-", 
-               MudProgType = "speech_prog", 
-               Arguments = "here", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 10, 
-            Strength = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Luck = 10, 
-            Intelligence = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 1, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [21] = "Secretive", 
-         }, 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [312] = 
-      {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 2, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 312, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 2, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [313] = 
-      {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 313, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [314] = 
-      {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 314, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [315] = 
-      {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 315, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [316] = 
-      {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 316, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [317] = 
-      {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 317, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [318] = 
-      {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 318, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
-      }, 
-      [319] = 
-      {
-         ShortDescr = "a human citizen", 
-         Description = "", 
-         Weight = 0, 
-         Race = "Human", 
-         LongDescr = "A human citizen walks quickly down the street.\
-", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Vnum = 319, 
-         Sex = "male", 
-         Name = "human citizen", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 20, 
-            HitNoDice = 2, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 1, 
-         }, 
-         Height = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
-         Stats = 
-         {
-            Charisma = 13, 
-            Strength = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Luck = 13, 
-            Intelligence = 13, 
-            Constitution = 13, 
-            Dexterity = 13, 
-         }, 
-         Credits = 0, 
-         Alignment = 0, 
-         Level = 10, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ArmorClass = 75, 
-         DefaultPosition = "standing", 
-         Position = "standing", 
+         Low = 0, 
+         High = 103, 
       }, 
    }, 
+   ResetFrequency = 5, 
    Rooms = 
    {
       [256] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 256, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4766,18 +38,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 256, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [257] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 257, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4787,18 +59,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 257, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [258] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 258, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4808,18 +80,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 258, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [259] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 259, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4829,18 +101,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 259, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [260] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 260, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4850,18 +122,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 260, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [261] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 261, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4871,18 +143,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 261, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [262] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 262, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4892,18 +164,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 262, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [263] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 263, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4913,18 +185,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 263, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [264] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 264, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4934,18 +206,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 264, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [265] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 265, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4955,18 +227,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 265, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [266] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 266, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4976,18 +248,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 266, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [267] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 267, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -4997,18 +269,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 267, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [268] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 268, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -5018,18 +290,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 268, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [269] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 269, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -5039,18 +311,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 269, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [270] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 270, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -5060,18 +332,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 270, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [271] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 271, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -5081,18 +353,18 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 271, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [272] = 
       {
-         Name = "A Shop", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Shop", 
+         Vnum = 272, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -5102,31 +374,28 @@ say ok purge me\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 272, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [273] = 
       {
-         Name = "&BKera's Shop&R&W", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "&BKera's Shop&R&W", 
+         Vnum = 273, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 291, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 291, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5135,31 +404,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 273, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [274] = 
       {
-         Name = "Hemini's Shop", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Hemini's Shop", 
+         Vnum = 274, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 291, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 291, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5168,31 +437,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 274, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [275] = 
       {
-         Name = "Rasha's bargain bin", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Rasha's bargain bin", 
+         Vnum = 275, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 291, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 291, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5201,31 +470,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 275, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [276] = 
       {
-         Name = "&WThe Engineering Associates Outlet&R&W", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "&WThe Engineering Associates Outlet&R&W", 
+         Vnum = 276, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 292, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 292, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5234,31 +503,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 276, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [277] = 
       {
-         Name = "-=&RWare Shop&R&W=-", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "-=&RWare Shop&R&W=-", 
+         Vnum = 277, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 292, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 292, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5267,31 +536,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 277, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [278] = 
       {
-         Name = "&R&BKrythos' Hero Emporium&R&W", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "&R&BKrythos' Hero Emporium&R&W", 
+         Vnum = 278, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 293, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 293, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5300,31 +569,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 278, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [279] = 
       {
-         Name = "IFS Outlet Shop", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "IFS Outlet Shop", 
+         Vnum = 279, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 293, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 293, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5333,31 +602,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 279, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [280] = 
       {
-         Name = "Thorchukka's Bits and Pieces", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Thorchukka's Bits and Pieces", 
+         Vnum = 280, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 293, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 293, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5366,31 +635,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 280, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [281] = 
       {
-         Name = "A Shop", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Shop", 
+         Vnum = 281, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 294, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 294, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5399,31 +668,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 281, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [282] = 
       {
-         Name = "&zD&beath's &zH&bead &zA&bppliance &zS&bhop&R&W", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "&zD&beath's &zH&bead &zA&bppliance &zS&bhop&R&W", 
+         Vnum = 282, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 294, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 294, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5432,64 +701,64 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 282, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [283] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "&R&W&RDamia's Confectionary.&R&W", 
+         Vnum = 283, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 296, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [28] = "PlayerShop", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares.'   \
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 296, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [28] = "PlayerShop", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 283, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [284] = 
       {
-         Name = "A Shop", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Shop", 
+         Vnum = 284, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 296, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 296, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5498,31 +767,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 284, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [285] = 
       {
-         Name = "A Shop", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Shop", 
+         Vnum = 285, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 296, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 296, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5531,31 +800,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 285, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [286] = 
       {
-         Name = "&RThe Triad Emporium&R&W", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "&RThe Triad Emporium&R&W", 
+         Vnum = 286, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 297, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 297, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5564,31 +833,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 286, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [287] = 
       {
-         Name = "Imperial Resale Shop", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Imperial Resale Shop", 
+         Vnum = 287, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 297, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 297, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5597,31 +866,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 287, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [288] = 
       {
-         Name = "A large shop", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A large shop", 
+         Vnum = 288, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 295, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 295, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5630,31 +899,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 288, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [289] = 
       {
-         Name = "A Shop", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Shop", 
+         Vnum = 289, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 295, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 295, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5663,31 +932,31 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 289, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [290] = 
       {
-         Name = "The Verpine Engineering Shop", 
-         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
-stand in rows.  If the shop has been bought, there will be a  shopkeeper\
-here to sell you his wares. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "The Verpine Engineering Shop", 
+         Vnum = 290, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 295, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 295, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5696,60 +965,58 @@ here to sell you his wares. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 290, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "Shelves line the walls of this shop, and several high quality glass  cases\
+stand in rows.  If the shop has been bought, there will be a  shopkeeper\
+here to sell you his wares. \
+", 
       }, 
       [291] = 
       {
-         Name = "Manarai Marketplace", 
-         Description = "The Marketplace contains private shops used by citizens from around  the\
-galaxy. You can find many things from many species you may not  have even\
-heard of before. Enclosed in steel walls, it has the potential to be very\
-drab. However, shopkeepers and nearby residents  have worked together to\
-create gardens and bright signs that  make the whole place lively.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Manarai Marketplace", 
+         Vnum = 291, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 275, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 275, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 274, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 274, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 273, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 273, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 292, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 292, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5757,69 +1024,69 @@ create gardens and bright signs that  make the whole place lively.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 291, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The Marketplace contains private shops used by citizens from around  the\
+galaxy. You can find many things from many species you may not  have even\
+heard of before. Enclosed in steel walls, it has the potential to be very\
+drab. However, shopkeepers and nearby residents  have worked together to\
+create gardens and bright signs that  make the whole place lively.\
+", 
       }, 
       [292] = 
       {
-         Name = "Manarai Marketplace", 
-         Description = "The Marketplace contains private shops used by citizens from around  the\
-galaxy. You can find many things from many species you may not  have even\
-heard of before. Enclosed in steel walls, it has the potential to be very\
-drab. However, shopkeepers and nearby residents  have worked together to\
-create gardens and bright signs that  make the whole place lively.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Manarai Marketplace", 
+         Vnum = 292, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 276, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 276, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 277, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 277, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 291, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 291, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 293, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 293, 
+               Description = "", 
             }, 
             [5] = 
             {
                Keyword = "", 
-               DestinationVnum = 301, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northwest", 
+               DestinationVnum = 301, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5827,130 +1094,130 @@ create gardens and bright signs that  make the whole place lively.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 292, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The Marketplace contains private shops used by citizens from around  the\
+galaxy. You can find many things from many species you may not  have even\
+heard of before. Enclosed in steel walls, it has the potential to be very\
+drab. However, shopkeepers and nearby residents  have worked together to\
+create gardens and bright signs that  make the whole place lively.\
+", 
       }, 
       [293] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Manarai Marketplace", 
+         Vnum = 293, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 278, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 280, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 279, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 294, 
+               Description = "", 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "up", 
+               DestinationVnum = 292, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "The Marketplace contains private shops used by citizens from around  the\
 galaxy. You can find many things from many species you may not  have even\
 heard of before. Enclosed in steel walls, it has the potential to be very\
 drab. However, shopkeepers and nearby residents  have worked together to\
 create gardens and bright signs that  make the whole place lively.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 278, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 280, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 279, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 294, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-            [5] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 292, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "up", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 293, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [294] = 
       {
-         Name = "Manarai Marketplace", 
-         Description = "The Marketplace contains private shops used by citizens from around  the\
-galaxy. You can find many things from many species you may not  have even\
-heard of before. Enclosed in steel walls, it has the potential to be very\
-drab. However, shopkeepers and nearby residents have worked together to\
-create gardens and bright signs that  make the whole place lively.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Manarai Marketplace", 
+         Vnum = 294, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 281, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 281, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 293, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 293, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 282, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 282, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 296, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 296, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -5958,60 +1225,60 @@ create gardens and bright signs that  make the whole place lively.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 294, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The Marketplace contains private shops used by citizens from around  the\
+galaxy. You can find many things from many species you may not  have even\
+heard of before. Enclosed in steel walls, it has the potential to be very\
+drab. However, shopkeepers and nearby residents have worked together to\
+create gardens and bright signs that  make the whole place lively.\
+", 
       }, 
       [295] = 
       {
-         Name = "Manarai Marketplace", 
-         Description = "The Marketplace contains private shops used by citizens from around the\
-galaxy. You can find many things from many species you may not have even\
-heard of before. Enclosed in steel walls, it has the potential to be very\
-drab. However, shopkeepers and nearby residents have worked together to\
-create gardens and bright signs that  make the whole place lively.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Manarai Marketplace", 
+         Vnum = 295, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 288, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 288, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 290, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 290, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 289, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 289, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 297, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 297, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -6019,69 +1286,139 @@ create gardens and bright signs that  make the whole place lively.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 295, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The Marketplace contains private shops used by citizens from around the\
+galaxy. You can find many things from many species you may not have even\
+heard of before. Enclosed in steel walls, it has the potential to be very\
+drab. However, shopkeepers and nearby residents have worked together to\
+create gardens and bright signs that  make the whole place lively.\
+", 
       }, 
       [296] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Manarai Marketplace", 
+         Vnum = 296, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 283, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 294, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 285, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 284, 
+               Description = "", 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "up", 
+               DestinationVnum = 297, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "The Marketplace contains private shops used by citizens from around  the\
 galaxy. You can find many things from many species you may not  have even\
 heard of before. Enclosed in steel walls, it has the potential to be very\
 drab. However, shopkeepers and nearby residents have worked together to\
 create gardens and bright signs that  make the whole place lively.\
 ", 
-         Sector = "city", 
+      }, 
+      [297] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Marketplace", 
+         Vnum = 297, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 283, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "north", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 287, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 294, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "east", 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 286, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 285, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "south", 
+               Key = -1, 
+               Direction = "up", 
+               DestinationVnum = 295, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 284, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "west", 
+               Key = -1, 
+               Direction = "down", 
+               DestinationVnum = 296, 
+               Description = "", 
             }, 
             [5] = 
             {
                Keyword = "", 
-               DestinationVnum = 297, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "up", 
+               Key = -1, 
+               Direction = "northeast", 
+               DestinationVnum = 301, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -6089,85 +1426,31 @@ create gardens and bright signs that  make the whole place lively.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 296, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [297] = 
-      {
-         Name = "Marketplace", 
          Description = "The Marketplace contains private shops used by citizens from around the\
 galaxy. You can find many things from many species you may not have even\
 heard of before. Enclosed in steel walls, it has the potential to be very\
 drab. However, shopkeepers and nearby residents have worked together to\
 create gardens and bright signs that  make the whole place lively.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 287, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 286, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 295, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "up", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 296, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "down", 
-            }, 
-            [5] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 301, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "northeast", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 297, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [298] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "A Turbolift", 
-         Description = "", 
+         Vnum = 298, 
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
          MudProgs = 
          {
             [1] = 
@@ -6178,44 +1461,33 @@ mpechoaround $n The doors open and $n steps out.\
 mptransfer $n 299\
 mpat 299 mpechoaround $n $n steps out of the turbolift.\
 ", 
-               MudProgType = "speech_prog", 
                Arguments = "1 lobby", 
+               MudProgType = "speech_prog", 
             }, 
          }, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
          TeleDelay = 0, 
-         Vnum = 298, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [299] = 
       {
-         Name = "Blacksun HQ Lobby", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Blacksun HQ Lobby", 
+         Vnum = 299, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 298, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 298, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -6223,14 +1495,81 @@ mpat 299 mpechoaround $n $n steps out of the turbolift.\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 299, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [300] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "A Cheap Hotel", 
+         Vnum = 300, 
+         Sector = "city", 
+         Flags = 
+         {
+            [31] = "Auction", 
+            [23] = "Hotel", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 420, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southeast", 
+               DestinationVnum = 301, 
+               Description = "", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpat 122 mpecho $n arrives in the cheap hotel.\
+mpat 101 mpecho $n arrives in the Cheap Hotel.\
+", 
+               Arguments = "arrives", 
+               MudProgType = "act_prog", 
+            }, 
+            [2] = 
+            {
+               Code = "mpat 122 mpecho $n leaves the cheap hotel.\
+mpat 101 mpecho $n leaves the Cheap Hotel.\
+", 
+               Arguments = "leaves", 
+               MudProgType = "act_prog", 
+            }, 
+            [3] = 
+            {
+               Code = "mpat 122 mpecho $n if flying around the cheap hotel\
+", 
+               Arguments = "flys", 
+               MudProgType = "act_prog", 
+            }, 
+            [4] = 
+            {
+               Code = "mpat 122 mpecho $n hails a taxi to the Cheap Hotel.\
+mpat 101 mpecho $n hails a taxi to the Cheap Hotel.\
+", 
+               Arguments = "p arrives on a speederbike, gets off and pays the driver before it leaves.", 
+               MudProgType = "act_prog", 
+            }, 
+         }, 
+         TeleDelay = 0, 
          Description = "This old hotel looks to be relatively safe, if not clean.  The rates are\
 cheap at least.   The walls are made of a synthetic wood material, and the\
 floor is covered with a dirty brown carpet. Behind an old fashioned desk\
@@ -6240,80 +1579,84 @@ is an assortment of keycards sealed behind a more modern energy shield.   \
 re-enter the game from here.\
 \
 ", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpat 122 mpecho $n arrives in the cheap hotel.\
-mpat 101 mpecho $n arrives in the Cheap Hotel.\
-", 
-               MudProgType = "act_prog", 
-               Arguments = "arrives", 
-            }, 
-            [2] = 
-            {
-               Code = "mpat 122 mpecho $n leaves the cheap hotel.\
-mpat 101 mpecho $n leaves the Cheap Hotel.\
-", 
-               MudProgType = "act_prog", 
-               Arguments = "leaves", 
-            }, 
-            [3] = 
-            {
-               Code = "mpat 122 mpecho $n if flying around the cheap hotel\
-", 
-               MudProgType = "act_prog", 
-               Arguments = "flys", 
-            }, 
-            [4] = 
-            {
-               Code = "mpat 122 mpecho $n hails a taxi to the Cheap Hotel.\
-mpat 101 mpecho $n hails a taxi to the Cheap Hotel.\
-", 
-               MudProgType = "act_prog", 
-               Arguments = "p arrives on a speederbike, gets off and pays the driver before it leaves.", 
-            }, 
-         }, 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [301] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 420, 
+               Distance = 5, 
                Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "north", 
+               DestinationVnum = 310, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 301, 
+               Distance = 2, 
                Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 304, 
                Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
                Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 210, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 2, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 308, 
+               Description = "", 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "northwest", 
+               DestinationVnum = 300, 
+               Description = "", 
+            }, 
+            [6] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Direction = "southeast", 
+               DestinationVnum = 292, 
+               Description = "", 
+            }, 
+            [7] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southwest", 
+               DestinationVnum = 297, 
+               Description = "", 
             }, 
          }, 
-         Flags = 
-         {
-            [31] = "Auction", 
-            [23] = "Hotel", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
+         Tunnel = 0, 
+         Name = "&R&GIntersection&R&W - &R&GManarai Spaceport Entrance&R&W/&R&GCoruscant Streets Entrance&R&W.", 
+         Vnum = 301, 
          TeleDelay = 0, 
-         Vnum = 300, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [301] = 
-      {
-         Name = "&R&GIntersection&R&W - &R&GManarai Spaceport Entrance&R&W/&R&GCoruscant Streets Entrance&R&W.", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The intersection connecting Manarai Spaceport to the rest of Coruscant and\
 vice versa is completely overcrowded with hundreds of various species and\
 races intermixing to form a large mobile crowd, each citizen going their\
@@ -6334,141 +1677,114 @@ population. \
 A &Rred&R&W holovid sign northeast reads. \"&RHarloch's Cantina&R&W.\"\
 \
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [302] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 310, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 311, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 304, 
+               Distance = 3, 
                Key = -1, 
-               Description = "", 
-               Distance = 2, 
                Direction = "east", 
+               DestinationVnum = 308, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 210, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 10219, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 308, 
+               Distance = 5, 
                Key = -1, 
-               Description = "", 
-               Distance = 2, 
                Direction = "west", 
-            }, 
-            [5] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 300, 
-               Key = -1, 
+               DestinationVnum = 303, 
                Description = "", 
-               Distance = 0, 
-               Direction = "northwest", 
-            }, 
-            [6] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 292, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southeast", 
-            }, 
-            [7] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 297, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southwest", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "A City Street", 
+         Vnum = 302, 
          TeleDelay = 0, 
-         Vnum = 301, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [302] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City. The street is suspended\
 high above  the ground and is dwarfed on all sides by massive skyscrapers.\
 Looking over the high  railing at the edge of the road you can see other\
 similar streets many stories below  and several more up above. All around\
 the city is bustling with activity. \
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [303] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 311, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 312, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 308, 
+               Distance = 5, 
                Key = -1, 
-               Description = "", 
-               Distance = 3, 
                Direction = "east", 
+               DestinationVnum = 302, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 10219, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 10244, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 303, 
+               Distance = 0, 
                Key = -1, 
-               Description = "", 
-               Distance = 5, 
                Direction = "west", 
+               DestinationVnum = 5001, 
+               Description = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "A City Street", 
+         Vnum = 303, 
          TeleDelay = 0, 
-         Vnum = 302, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [303] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground and is dwarfed on all sides by\
@@ -6476,115 +1792,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories below and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 312, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 302, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 10244, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 5001, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 303, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [304] = 
       {
-         Name = "A City Street", 
-         Description = "You stand at a street corner in Government City (also known as Imperial\
-City). The enormous city covers almost all of the planet Coruscant. The\
-street is suspended high above the ground as is dwarfed on all sides by\
-massive skyscrapers. Looking over the high railing at the edge of the road\
-you can see other similar streets many stories bellow and several more up\
-above. All around the city is bustling with activity.\
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 10251, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 10251, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 305, 
-               Key = -1, 
-               Description = "", 
                Distance = 3, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 305, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 10201, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 10201, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 301, 
-               Key = -1, 
-               Description = "", 
                Distance = 2, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 301, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 304, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [305] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -6592,61 +1850,61 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [305] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 309, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 309, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 306, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 306, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               DestinationVnum = 10239, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "south", 
+               DestinationVnum = 10239, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 304, 
-               Key = -1, 
-               Description = "", 
                Distance = 3, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 304, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 305, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [306] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -6654,23 +1912,25 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [306] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 313, 
-               Key = -1, 
-               Description = "", 
                Distance = 3, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 313, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "door house", 
+               Distance = 0, 
+               Key = -1, 
                Flags = 
                {
                   [1] = "Closed", 
@@ -6678,49 +1938,105 @@ above. All around the city is bustling with activity.\
                   [11] = "Hidden", 
                   [3] = "Secret", 
                }, 
-               DestinationVnum = 400, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "east", 
+               DestinationVnum = 400, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 472, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 472, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 305, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 305, 
+               Description = "", 
             }, 
             [5] = 
             {
                Keyword = "", 
-               DestinationVnum = 443, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 443, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 306, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "You stand at a street corner in Government City (also known as Imperial\
+City). The enormous city covers almost all of the planet Coruscant. The\
+street is suspended high above the ground as is dwarfed on all sides by\
+massive skyscrapers. Looking over the high railing at the edge of the road\
+you can see other similar streets many stories bellow and several more up\
+above. All around the city is bustling with activity.\
+", 
       }, 
       [307] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 320, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 499, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 2, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 313, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 309, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 307, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City).  The city is enormous, and almost covers the planet of Coruscant.\
 The street is wide and long.  The many smells of the city assail your\
@@ -6728,57 +2044,48 @@ senses.  You can see your reflection in several transparisteel windows as\
 you pass by.  In between the many towers you can see down into the depths\
 of the lower city.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [308] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 320, 
+               Distance = 0, 
                Key = -1, 
-               Description = "", 
-               Distance = 5, 
                Direction = "north", 
+               DestinationVnum = 10200, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 499, 
+               Distance = 2, 
                Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "east", 
+               DestinationVnum = 301, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 313, 
+               Distance = 3, 
                Key = -1, 
-               Description = "", 
-               Distance = 2, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 309, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
                Direction = "west", 
+               DestinationVnum = 302, 
+               Description = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "A City Street", 
+         Vnum = 308, 
          TeleDelay = 0, 
-         Vnum = 307, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [308] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground and is dwarfed on all sides by\
@@ -6786,104 +2093,104 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories below and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [309] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 10200, 
+               Distance = 5, 
                Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "north", 
+               DestinationVnum = 318, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 301, 
+               Distance = 5, 
                Key = -1, 
-               Description = "", 
-               Distance = 2, 
                Direction = "east", 
+               DestinationVnum = 307, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 302, 
+               Distance = 5, 
                Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 305, 
                Description = "", 
-               Distance = 3, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 310, 
+               Description = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "A City Street", 
+         Vnum = 309, 
          TeleDelay = 0, 
-         Vnum = 308, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [309] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City).  The city is enormous, and almost covers the planet of Coruscant.\
 The street is suspended high above the ground, and is dwarfed on all sides\
 by massive skyscrapers.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [310] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 318, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
-               Direction = "north", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 309, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 307, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
-               Direction = "east", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 301, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 305, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 310, 
                Key = -1, 
-               Description = "", 
-               Distance = 5, 
                Direction = "west", 
+               DestinationVnum = 311, 
+               Description = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         Name = "A City Street", 
+         Vnum = 310, 
          TeleDelay = 0, 
-         Vnum = 309, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [310] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at the street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet of Coruscant. The\
 street is suspended high above the ground and is dwarfed on all sides by\
@@ -6891,48 +2198,57 @@ massive skyscrapers. Looking over the high railing at the edge of the\
 road, you can see other simliar streets, many stories below and several\
 more above. All around, the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 309, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 301, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 311, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 310, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [311] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 325, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 310, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 302, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 315, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 311, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -6940,57 +2256,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 325, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 310, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 302, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 315, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 311, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [312] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 315, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 4, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 303, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 312, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -6998,39 +2296,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 315, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 303, 
-               Key = -1, 
-               Description = "", 
-               Distance = 4, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 312, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [313] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 2, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 307, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 468, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 3, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 306, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 313, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7038,79 +2345,30 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 307, 
-               Key = -1, 
-               Description = "", 
-               Distance = 2, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 468, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 306, 
-               Key = -1, 
-               Description = "", 
-               Distance = 3, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 313, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [314] = 
       {
-         Name = "A City Street", 
-         Description = "You stand at a street corner in Government City (also known as Imperial\
-City). The enormous city covers almost all of the planet Coruscant. The\
-street is suspended high above the ground as is dwarfed on all sides by\
-massive skyscrapers. Looking over the high railing at the edge of the road\
-you can see other similar streets many stories bellow and several more up\
-above. All around the city is bustling with activity.\
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 327, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 327, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 314, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [315] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7118,57 +2376,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [315] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 326, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 326, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 311, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 311, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 312, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 312, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 10250, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 10250, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 315, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [316] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7176,9 +2434,17 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
+      }, 
+      [316] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A City Street", 
+         Vnum = 316, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -7187,14 +2453,37 @@ above. All around the city is bustling with activity.\
             [2] = "NoMob", 
          }, 
          TeleDelay = 0, 
-         Vnum = 316, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "You stand at a street corner in Government City (also known as Imperial\
+City). The enormous city covers almost all of the planet Coruscant. The\
+street is suspended high above the ground as is dwarfed on all sides by\
+massive skyscrapers. Looking over the high railing at the edge of the road\
+you can see other similar streets many stories bellow and several more up\
+above. All around the city is bustling with activity.\
+", 
       }, 
       [317] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 441, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 317, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7202,30 +2491,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 441, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 317, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [318] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 336, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 320, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 309, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 318, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7233,48 +2540,30 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 336, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 320, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 309, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 318, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [319] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 322, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 319, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7282,30 +2571,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 322, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 319, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [320] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 335, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 307, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 318, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 320, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7313,48 +2620,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 335, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 307, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 318, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 320, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [321] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 342, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 340, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 341, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 321, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7362,48 +2669,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 342, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 340, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 341, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 321, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [322] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 333, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 319, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 323, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 322, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7411,48 +2718,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 333, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 319, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 323, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 322, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [323] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 332, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 322, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 324, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 323, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7460,48 +2767,30 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 332, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 322, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 324, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 323, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [324] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 323, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 324, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7509,30 +2798,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 323, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 324, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [325] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 330, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 311, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 326, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 325, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7540,48 +2847,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 330, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 311, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 326, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 325, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [326] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 329, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 325, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 315, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 326, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7589,48 +2896,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 329, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 325, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 315, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 326, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [327] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 328, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 314, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 327, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7638,79 +2936,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 328, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 314, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 327, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [328] = 
       {
-         Name = "A City Street", 
-         Description = "You stand at a street corner in Government City (also known as Imperial\
-City). The enormous city covers almost all of the planet Coruscant. The\
-street is suspended high above the ground as is dwarfed on all sides by\
-massive skyscrapers. Looking over the high railing at the edge of the road\
-you can see other similar streets many stories bellow and several more up\
-above. All around the city is bustling with activity.\
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 341, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 341, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 327, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 327, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 328, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [329] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7718,61 +2976,110 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [329] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 461, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 461, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 330, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 330, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 326, 
-               Key = -1, 
-               Description = "", 
                Distance = 5, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 326, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               DestinationVnum = 10210, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "west", 
+               DestinationVnum = 10210, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 329, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "You stand at a street corner in Government City (also known as Imperial\
+City). The enormous city covers almost all of the planet Coruscant. The\
+street is suspended high above the ground as is dwarfed on all sides by\
+massive skyscrapers. Looking over the high railing at the edge of the road\
+you can see other similar streets many stories bellow and several more up\
+above. All around the city is bustling with activity.\
+", 
       }, 
       [330] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 337, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 325, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 329, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 330, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7780,48 +3087,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 337, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 325, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 329, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 330, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [331] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 332, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 330, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 331, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7829,39 +3127,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 332, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 330, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 331, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [332] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 323, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 331, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 332, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7869,39 +3167,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 323, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 331, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 332, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [333] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 334, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 322, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 333, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7909,49 +3207,17 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 334, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 322, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 333, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [334] = 
       {
-         Name = "A City Street", 
-         Description = "You stand at a street corner in Government City (also known as Imperial\
-City). The enormous city covers almost all of the planet Coruscant. The\
-street is suspended high above the ground as is dwarfed on all sides by\
-massive skyscrapers. Looking over the high railing at the edge of the road\
-you can see other similar streets many stories bellow and several more up\
-above. All around the city is bustling with activity.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A City Street", 
+         Vnum = 334, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -7960,14 +3226,55 @@ above. All around the city is bustling with activity.\
             [2] = "NoMob", 
          }, 
          TeleDelay = 0, 
-         Vnum = 334, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "You stand at a street corner in Government City (also known as Imperial\
+City). The enormous city covers almost all of the planet Coruscant. The\
+street is suspended high above the ground as is dwarfed on all sides by\
+massive skyscrapers. Looking over the high railing at the edge of the road\
+you can see other similar streets many stories bellow and several more up\
+above. All around the city is bustling with activity.\
+", 
       }, 
       [335] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 10211, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 320, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 336, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 335, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -7975,48 +3282,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 10211, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 320, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 336, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 335, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [336] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 335, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 318, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 337, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 336, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8024,48 +3331,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 335, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 318, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 337, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 336, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [337] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 9001, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 336, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 5, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 330, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 337, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8073,48 +3380,30 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 9001, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 336, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 330, 
-               Key = -1, 
-               Description = "", 
-               Distance = 5, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 337, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [338] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 337, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 338, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8122,40 +3411,17 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 337, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 338, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [339] = 
       {
-         Name = "A City Street", 
-         Description = "You stand at a street corner in Government City (also known as Imperial\
-City). The enormous city covers almost all of the planet Coruscant. The\
-street is suspended high above the ground as is dwarfed on all sides by\
-massive skyscrapers. Looking over the high railing at the edge of the road\
-you can see other similar streets many stories bellow and several more up\
-above. All around the city is bustling with activity.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A City Street", 
+         Vnum = 339, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -8164,14 +3430,46 @@ above. All around the city is bustling with activity.\
             [2] = "NoMob", 
          }, 
          TeleDelay = 0, 
-         Vnum = 339, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "You stand at a street corner in Government City (also known as Imperial\
+City). The enormous city covers almost all of the planet Coruscant. The\
+street is suspended high above the ground as is dwarfed on all sides by\
+massive skyscrapers. Looking over the high railing at the edge of the road\
+you can see other similar streets many stories bellow and several more up\
+above. All around the city is bustling with activity.\
+", 
       }, 
       [340] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 321, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southeast", 
+               DestinationVnum = 401, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 340, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8179,39 +3477,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 321, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 401, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southeast", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 340, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [341] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 343, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 321, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 328, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 341, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8219,48 +3526,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 343, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 321, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 328, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 341, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [342] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 344, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 345, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 339, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 321, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 342, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8268,57 +3584,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 344, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 345, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 339, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 321, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 342, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [343] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 344, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 341, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southeast", 
+               DestinationVnum = 412, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 343, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8326,48 +3633,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 344, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 341, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 412, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southeast", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 343, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [344] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 342, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 343, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 344, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8375,39 +3673,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 342, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 343, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 344, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [345] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 346, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 342, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 345, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8415,39 +3713,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 346, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 342, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 345, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [346] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 347, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 337, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 345, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 346, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8455,48 +3762,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 347, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 337, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 345, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 346, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [347] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 348, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 346, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 347, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8504,39 +3802,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 348, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 346, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 347, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [348] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 335, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 347, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southwest", 
+               DestinationVnum = 414, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 348, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8544,48 +3851,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 335, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 347, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 414, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southwest", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 348, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [349] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 351, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 350, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 349, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8593,39 +3891,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 351, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 350, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 349, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [350] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 352, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 349, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 350, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8633,39 +3931,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 352, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 349, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 350, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [351] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 354, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 10250, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 349, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 431, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 351, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8673,57 +3989,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 354, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 10250, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 349, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 431, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 351, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [352] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 355, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 353, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 350, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 352, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8731,48 +4038,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 355, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 353, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 350, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 352, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [353] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 357, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 352, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 353, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8780,39 +4078,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 357, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 352, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 353, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [354] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 360, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 355, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 351, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "northeast", 
+               DestinationVnum = 406, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 354, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8820,57 +4136,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 360, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 355, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 351, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 406, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "northeast", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 354, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [355] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 361, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 356, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 352, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 354, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 355, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8878,57 +4194,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 361, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 356, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 352, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 354, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 355, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [356] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 362, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 357, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 355, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 356, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8936,48 +4243,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 362, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 357, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 355, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 356, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [357] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 363, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 358, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 353, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 356, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 357, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -8985,57 +4301,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 363, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 358, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 353, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 356, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 357, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [358] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 364, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 359, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 357, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "northwest", 
+               DestinationVnum = 409, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 358, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9043,57 +4359,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 364, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 359, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 357, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 409, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "northwest", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 358, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [359] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 365, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 358, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 359, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9101,39 +4399,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 365, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 358, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 359, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [360] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 366, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 354, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 360, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9141,39 +4439,66 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 366, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 354, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 360, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [361] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 367, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 362, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 355, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 5001, 
+               Description = "", 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "northeast", 
+               DestinationVnum = 433, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 361, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9181,66 +4506,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 367, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 362, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 355, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 5001, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-            [5] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 433, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "northeast", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 361, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [362] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 368, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 363, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 356, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 361, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 362, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9248,57 +4564,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 368, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 363, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 356, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 361, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 362, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [363] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 369, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 364, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 357, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 362, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 363, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9306,57 +4622,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 369, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 364, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 357, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 362, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 363, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [364] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 370, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 365, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 358, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 363, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 364, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9364,57 +4680,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 370, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 365, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 358, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 363, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 364, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [365] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 359, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 364, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 365, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9422,39 +4720,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 359, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 364, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 365, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [366] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 367, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 360, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southeast", 
+               DestinationVnum = 400, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 366, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9462,48 +4769,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 367, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 360, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 400, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southeast", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 366, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [367] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 368, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 361, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 366, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 367, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9511,48 +4818,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 368, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 361, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 366, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 367, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [368] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 369, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 362, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 367, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 368, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9560,48 +4867,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 369, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 362, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 367, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 368, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [369] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 370, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 363, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 368, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 369, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9609,48 +4916,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 370, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 363, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 368, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 369, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [370] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 364, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 369, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southwest", 
+               DestinationVnum = 403, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 370, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9658,48 +4965,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 364, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 369, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 403, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southwest", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 370, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [371] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 372, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 390, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southeast", 
+               DestinationVnum = 413, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 371, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9707,48 +5014,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 372, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 390, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 413, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southeast", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 371, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [372] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 375, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 371, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 372, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9756,39 +5054,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 375, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 371, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 372, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [373] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 374, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 376, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 373, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9796,39 +5094,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 374, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 376, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 373, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [374] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 388, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 373, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southwest", 
+               DestinationVnum = 415, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 374, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9836,48 +5143,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 388, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 373, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 415, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southwest", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 374, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [375] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 372, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 376, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 377, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 375, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9885,48 +5192,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 372, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 376, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 377, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 375, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [376] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 373, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 375, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 376, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9934,39 +5232,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 373, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 375, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 376, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [377] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 375, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 397, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 379, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 390, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 377, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -9974,57 +5290,66 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 375, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 397, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 379, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 390, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 377, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [378] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 439, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 387, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 397, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "northwest", 
+               DestinationVnum = 468, 
+               Description = "", 
+            }, 
+            [5] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "southwest", 
+               DestinationVnum = 405, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 378, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10032,66 +5357,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 439, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 387, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 397, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 468, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "northwest", 
-            }, 
-            [5] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 405, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "southwest", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 378, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [379] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 377, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 380, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 379, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10099,39 +5397,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 377, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 380, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 379, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [380] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 379, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 396, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 381, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 392, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 380, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10139,57 +5455,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 379, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 396, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 381, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 392, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 380, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [381] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 380, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 382, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 395, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 381, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10197,48 +5504,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 380, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 382, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 395, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 381, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [382] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 383, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 394, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 381, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 382, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10246,48 +5553,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 383, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 394, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 381, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 382, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [383] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 389, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 398, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 382, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 396, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 383, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10295,57 +5611,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 389, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 398, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 382, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 396, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 383, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [384] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 391, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 393, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 384, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10353,39 +5651,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 391, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 393, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 384, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [385] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 393, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 395, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 461, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 385, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10393,48 +5700,30 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 393, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 395, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 461, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 385, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [386] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 394, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 386, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10442,30 +5731,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 394, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 386, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [387] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 378, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 388, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 472, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 389, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 387, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10473,57 +5789,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 378, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 388, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 472, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 389, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 387, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [388] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 374, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 387, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 388, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10531,39 +5829,39 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 374, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 387, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 388, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [389] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 387, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 383, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 389, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10571,39 +5869,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 387, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 383, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 389, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [390] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 371, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 377, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 391, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 390, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10611,48 +5918,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 371, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 377, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 391, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 390, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [391] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 390, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 392, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 384, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 391, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10660,48 +5967,57 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 390, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 392, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 384, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 391, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [392] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 380, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 393, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 391, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "northeast", 
+               DestinationVnum = 408, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 392, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10709,106 +6025,48 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 380, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 393, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "south", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 391, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 408, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "northeast", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 392, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [393] = 
       {
-         Name = "A City Street", 
-         Description = "You stand at a street corner in Government City (also known as Imperial\
-City). The enormous city covers almost all of the planet Coruscant. The\
-street is suspended high above the ground as is dwarfed on all sides by\
-massive skyscrapers. Looking over the high railing at the edge of the road\
-you can see other similar streets many stories bellow and several more up\
-above. All around the city is bustling with activity.\
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 392, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 392, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 385, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 385, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 384, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 384, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 393, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [394] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10816,66 +6074,66 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [394] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 382, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 382, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 386, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 386, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 395, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 395, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 419, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 419, 
+               Description = "", 
             }, 
             [5] = 
             {
                Keyword = "", 
-               DestinationVnum = 10211, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northwest", 
+               DestinationVnum = 10211, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 394, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [395] = 
-      {
-         Name = "A City Street", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10883,57 +6141,106 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [395] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 381, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 381, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 394, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 394, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 385, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 385, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 417, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northwest", 
+               DestinationVnum = 417, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 395, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "You stand at a street corner in Government City (also known as Imperial\
+City). The enormous city covers almost all of the planet Coruscant. The\
+street is suspended high above the ground as is dwarfed on all sides by\
+massive skyscrapers. Looking over the high railing at the edge of the road\
+you can see other similar streets many stories bellow and several more up\
+above. All around the city is bustling with activity.\
+", 
       }, 
       [396] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 397, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 383, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 380, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 396, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -10941,97 +6248,88 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 397, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 383, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 380, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 396, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [397] = 
       {
-         Name = "A City Street", 
-         Description = "You stand at a street corner in Government City (also known as Imperial\
-City). The enormous city covers almost all of the planet Coruscant. The\
-street is suspended high above the ground as is dwarfed on all sides by\
-massive skyscrapers. Looking over the high railing at the edge of the road\
-you can see other similar streets many stories bellow and several more up\
-above. All around the city is bustling with activity.\
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 378, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 378, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 396, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 396, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 377, 
-               Key = -1, 
-               Description = "", 
                Distance = 6, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 377, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A City Street", 
          Vnum = 397, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "You stand at a street corner in Government City (also known as Imperial\
+City). The enormous city covers almost all of the planet Coruscant. The\
+street is suspended high above the ground as is dwarfed on all sides by\
+massive skyscrapers. Looking over the high railing at the edge of the road\
+you can see other similar streets many stories bellow and several more up\
+above. All around the city is bustling with activity.\
+", 
       }, 
       [398] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 6, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 383, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "northwest", 
+               DestinationVnum = 411, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 398, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -11039,39 +6337,25 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 383, 
-               Key = -1, 
-               Description = "", 
-               Distance = 6, 
-               Direction = "west", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 411, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "northwest", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 398, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [399] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "A City Street", 
+         Vnum = 399, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         TeleDelay = 0, 
          Description = "You stand at a street corner in Government City (also known as Imperial\
 City). The enormous city covers almost all of the planet Coruscant. The\
 street is suspended high above the ground as is dwarfed on all sides by\
@@ -11079,69 +6363,14 @@ massive skyscrapers. Looking over the high railing at the edge of the road\
 you can see other similar streets many stories bellow and several more up\
 above. All around the city is bustling with activity.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 399, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [400] = 
       {
-         Name = "A dirty home", 
-         Description = "Dirty cloths are piled up immediately in front of the partially  open door.\
- Empty bottles lie stacked up next to it, prohibiting  the door's free\
-range of movement.  What looks to have started out  as an expensive couch\
-bears many liquid stains and tears. An old  holo-projector stands in a\
-corner, flickering half-heartedly.  The main feature of the room is a\
-large wooden shelf with many  compartments in its base.  A bottle opener\
-and several small  glasses sit on top of the shelf. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 401, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               DestinationVnum = 306, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
+         Name = "A dirty home", 
          Vnum = 400, 
+         Sector = "city", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -11192,26 +6421,30 @@ and several small  glasses sit on top of the shelf. \
 \13", 
             }, 
          }, 
-      }, 
-      [401] = 
-      {
-         Name = "A bedroom", 
-         Description = "The large room's walls have been papered with flowery designs and  soft\
-colors.  A wardrobe stands to the west wall. \
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 400, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "north", 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 401, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Direction = "west", 
+               DestinationVnum = 306, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11220,7 +6453,22 @@ colors.  A wardrobe stands to the west wall. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
+         Description = "Dirty cloths are piled up immediately in front of the partially  open door.\
+ Empty bottles lie stacked up next to it, prohibiting  the door's free\
+range of movement.  What looks to have started out  as an expensive couch\
+bears many liquid stains and tears. An old  holo-projector stands in a\
+corner, flickering half-heartedly.  The main feature of the room is a\
+large wooden shelf with many  compartments in its base.  A bottle opener\
+and several small  glasses sit on top of the shelf. \
+", 
+      }, 
+      [401] = 
+      {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Name = "A bedroom", 
          Vnum = 401, 
+         Sector = "city", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -11241,38 +6489,57 @@ colors.  A wardrobe stands to the west wall. \
 \13", 
             }, 
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 400, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Description = "The large room's walls have been papered with flowery designs and  soft\
+colors.  A wardrobe stands to the west wall. \
+", 
       }, 
       [402] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 402, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 401, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 401, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 421, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 421, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11281,42 +6548,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 402, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [403] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 403, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 404, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 404, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 370, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 370, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11325,51 +6592,51 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 403, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [404] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 404, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 403, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 403, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 405, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 405, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 336, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 336, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11378,51 +6645,51 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 404, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [405] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 405, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 404, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 404, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 423, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 423, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 378, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 378, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11431,42 +6698,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 405, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [406] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 406, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 407, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 407, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 354, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 354, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11475,51 +6742,51 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 406, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [407] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 407, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 406, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 406, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 408, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 408, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 326, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 326, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11528,51 +6795,51 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 407, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [408] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 408, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 407, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 407, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 425, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 425, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 392, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 392, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11581,42 +6848,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 408, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [409] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 409, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 410, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 410, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 358, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southeast", 
+               DestinationVnum = 358, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11625,51 +6892,51 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 409, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [410] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 410, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 409, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 409, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 411, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 411, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 322, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southeast", 
+               DestinationVnum = 322, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11678,51 +6945,51 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 410, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [411] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 411, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 410, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 410, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 427, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 427, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 398, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southeast", 
+               DestinationVnum = 398, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11731,42 +6998,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 411, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [412] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 412, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 413, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 413, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 343, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northwest", 
+               DestinationVnum = 343, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11775,42 +7042,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 412, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [413] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 413, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 412, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 412, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 371, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northwest", 
+               DestinationVnum = 371, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11819,42 +7086,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 413, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [414] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 414, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 415, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 415, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 348, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 348, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11863,42 +7130,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 414, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [415] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 415, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 414, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 414, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 374, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 374, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11907,42 +7174,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 415, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [416] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 416, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 417, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 417, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 302, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southeast", 
+               DestinationVnum = 302, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11951,42 +7218,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 416, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [417] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 417, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 416, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 416, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 395, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southeast", 
+               DestinationVnum = 395, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -11995,42 +7262,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 417, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [418] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 418, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 419, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 419, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 304, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 304, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12039,51 +7306,51 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 418, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [419] = 
-      {
-         Name = "A Turbolift", 
          Description = "This is one of many turbolifts found throughout Imperial City (or\
 Government City) on Coruscant. It runs up and down connecting several\
 levels of streets. Most people travel only on the upper levels of the city\
 and on most of these lifts the bottom levels have been disabled\
 completely. \
 ", 
-         Sector = "city", 
+      }, 
+      [419] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 419, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 418, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 418, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 429, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 429, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 394, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 394, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12092,76 +7359,76 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 419, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [420] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Hotel Cafeteria", 
+         Vnum = 420, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 300, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "The hotel cafeteria isnt very fancy, or even that clean, but the aroma of\
 food coming from the kitchen is mouth-watering.   There are several tables\
 scattered about the room.  A few plants hang from the ceiling and some\
 pretty tasteless pictures hang on the walls.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 300, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 420, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [421] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 421, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 402, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 402, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 422, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 422, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12170,33 +7437,33 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 421, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [422] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 422, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 421, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 421, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12205,42 +7472,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 422, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [423] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 423, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 405, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 405, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 424, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 424, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12249,33 +7516,33 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 423, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [424] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 424, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 423, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 423, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12284,42 +7551,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 424, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [425] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 425, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 408, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 408, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 426, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 426, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12328,33 +7595,33 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 425, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [426] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 426, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 425, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 425, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12363,42 +7630,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 426, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [427] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 427, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 411, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 411, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 428, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 428, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12407,33 +7674,33 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 427, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [428] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 428, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 427, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 427, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12442,42 +7709,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 428, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [429] = 
       {
-         Name = "A Turbolift", 
-         Description = "This is one of many turbolifts found throughout Imperial City (or\
-Government City) on Coruscant. It runs up and down connecting several\
-levels of streets. Most people travel only on the upper levels of the city\
-and on most of these lifts the bottom levels have been disabled\
-completely. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 429, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 419, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 419, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 430, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "down", 
+               DestinationVnum = 430, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12486,42 +7753,42 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 429, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [430] = 
-      {
-         Name = "A Turbolift", 
          Description = "This is one of many turbolifts found throughout Imperial City (or\
 Government City) on Coruscant. It runs up and down connecting several\
 levels of streets. Most people travel only on the upper levels of the city\
 and on most of these lifts the bottom levels have been disabled\
 completely. \
 ", 
-         Sector = "city", 
+      }, 
+      [430] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Turbolift", 
+         Vnum = 430, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 429, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 429, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 460, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 460, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12529,73 +7796,75 @@ completely. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 430, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This is one of many turbolifts found throughout Imperial City (or\
+Government City) on Coruscant. It runs up and down connecting several\
+levels of streets. Most people travel only on the upper levels of the city\
+and on most of these lifts the bottom levels have been disabled\
+completely. \
+", 
       }, 
       [431] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Skydome Transit Station", 
+         Vnum = 431, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 351, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 432, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "This Transit station is one of many interconnected turbocar stations\
 running through Government City. Its probably the easiest fasted and\
 cheapest way to get around the enormous city and thus is a favoured means \
 of transportation. \
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 351, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 432, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 431, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [432] = 
       {
-         Name = "Ticket booth", 
-         Description = "For one small fee you can ride the turbocar transit system to almost\
-anywhere throught Imperial City. The turnstile allows one person through\
-at a time as they pay the droid on duty. The cost is 5 credits.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ticket booth", 
+         Vnum = 432, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 431, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 431, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12603,41 +7872,40 @@ at a time as they pay the droid on duty. The cost is 5 credits.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 432, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "For one small fee you can ride the turbocar transit system to almost\
+anywhere throught Imperial City. The turnstile allows one person through\
+at a time as they pay the droid on duty. The cost is 5 credits.\
+", 
       }, 
       [433] = 
       {
-         Name = "Grand Towers Transit Station", 
-         Description = "This transit station is one of many interconnected turbocar stations\
-running through Government City. Its probably the easiest fasted and\
-cheapest way to get around the enormous city and thus is a favoured means \
-of transportation. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Grand Towers Transit Station", 
+         Vnum = 433, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 434, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 434, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 361, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 361, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12645,31 +7913,32 @@ of transportation. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 433, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This transit station is one of many interconnected turbocar stations\
+running through Government City. Its probably the easiest fasted and\
+cheapest way to get around the enormous city and thus is a favoured means \
+of transportation. \
+", 
       }, 
       [434] = 
       {
-         Name = "Ticket Booth", 
-         Description = "For one small fee you can ride the turbocar transit system to almost\
-anywhere throught Imperial City. The turnstile allows one person through\
-at a time as they pay the droid on duty. The cost is 5 credits.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ticket Booth", 
+         Vnum = 434, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 433, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 433, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12677,32 +7946,31 @@ at a time as they pay the droid on duty. The cost is 5 credits.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 434, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "For one small fee you can ride the turbocar transit system to almost\
+anywhere throught Imperial City. The turnstile allows one person through\
+at a time as they pay the droid on duty. The cost is 5 credits.\
+", 
       }, 
       [435] = 
       {
-         Name = "Grandis Mon Transit Station", 
-         Description = "This transit station is one of many interconnected turbocar stations\
-running through Government City. Its probably the easiest fasted and\
-cheapest way to get around the enormous city and thus is a favoured means \
-of transportation. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Grandis Mon Transit Station", 
+         Vnum = 435, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 436, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 436, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12710,31 +7978,32 @@ of transportation. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 435, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This transit station is one of many interconnected turbocar stations\
+running through Government City. Its probably the easiest fasted and\
+cheapest way to get around the enormous city and thus is a favoured means \
+of transportation. \
+", 
       }, 
       [436] = 
       {
-         Name = "Ticket Booth", 
-         Description = "For one small fee you can ride the turbocar transit system to almost\
-anywhere throught Imperial City. The turnstile allows one person through\
-at a time as they pay the droid on duty. The cost is 5 credits.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ticket Booth", 
+         Vnum = 436, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 435, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 435, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12742,41 +8011,40 @@ at a time as they pay the droid on duty. The cost is 5 credits.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 436, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "For one small fee you can ride the turbocar transit system to almost\
+anywhere throught Imperial City. The turnstile allows one person through\
+at a time as they pay the droid on duty. The cost is 5 credits.\
+", 
       }, 
       [437] = 
       {
-         Name = "Palace Transit Station", 
-         Description = "This transit station is one of many interconnected turbocar stations\
-running through Government City. Its probably the easiest fasted and\
-cheapest way to get around the enormous city and thus is a favoured means \
-of transportation. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Palace Transit Station", 
+         Vnum = 437, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 438, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 438, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 449, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 449, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12784,31 +8052,32 @@ of transportation. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 437, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This transit station is one of many interconnected turbocar stations\
+running through Government City. Its probably the easiest fasted and\
+cheapest way to get around the enormous city and thus is a favoured means \
+of transportation. \
+", 
       }, 
       [438] = 
       {
-         Name = "Ticket Booth", 
-         Description = "For one small fee you can ride the turbocar transit system to almost\
-anywhere throught Imperial City. The turnstile allows one person through\
-at a time as they pay the droid on duty. The cost is 5 credits.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ticket Booth", 
+         Vnum = 438, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 437, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 437, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12816,32 +8085,31 @@ at a time as they pay the droid on duty. The cost is 5 credits.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 438, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "For one small fee you can ride the turbocar transit system to almost\
+anywhere throught Imperial City. The turnstile allows one person through\
+at a time as they pay the droid on duty. The cost is 5 credits.\
+", 
       }, 
       [439] = 
       {
-         Name = "Museum Transit Station", 
-         Description = "This transit station is one of many interconnected turbocar stations\
-running through Government City. Its probably the easiest fasted and\
-cheapest way to get around the enormous city and thus is a favoured means \
-of transportation. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Museum Transit Station", 
+         Vnum = 439, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 378, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 378, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12849,31 +8117,32 @@ of transportation. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 439, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This transit station is one of many interconnected turbocar stations\
+running through Government City. Its probably the easiest fasted and\
+cheapest way to get around the enormous city and thus is a favoured means \
+of transportation. \
+", 
       }, 
       [440] = 
       {
-         Name = "Ticket Booth", 
-         Description = "For one small fee you can ride the turbocar transit system to almost\
-anywhere throught Imperial City. The turnstile allows one person through\
-at a time as they pay the droid on duty. The cost is 5 credits.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ticket Booth", 
+         Vnum = 440, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 439, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 439, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12881,32 +8150,31 @@ at a time as they pay the droid on duty. The cost is 5 credits.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 440, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "For one small fee you can ride the turbocar transit system to almost\
+anywhere throught Imperial City. The turnstile allows one person through\
+at a time as they pay the droid on duty. The cost is 5 credits.\
+", 
       }, 
       [441] = 
       {
-         Name = "College Transit Station", 
-         Description = "This transit station is one of many interconnected turbocar stations\
-running through Government City. Its probably the easiest fasted and\
-cheapest way to get around the enormous city and thus is a favoured means \
-of transportation. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "College Transit Station", 
+         Vnum = 441, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 317, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 317, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12914,31 +8182,32 @@ of transportation. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 441, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This transit station is one of many interconnected turbocar stations\
+running through Government City. Its probably the easiest fasted and\
+cheapest way to get around the enormous city and thus is a favoured means \
+of transportation. \
+", 
       }, 
       [442] = 
       {
-         Name = "Ticket Booth", 
-         Description = "For one small fee you can ride the turbocar transit system to almost\
-anywhere throught Imperial City. The turnstile allows one person through\
-at a time as they pay the droid on duty. The cost is 5 credits.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ticket Booth", 
+         Vnum = 442, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 441, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 441, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12946,41 +8215,40 @@ at a time as they pay the droid on duty. The cost is 5 credits.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 442, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "For one small fee you can ride the turbocar transit system to almost\
+anywhere throught Imperial City. The turnstile allows one person through\
+at a time as they pay the droid on duty. The cost is 5 credits.\
+", 
       }, 
       [443] = 
       {
-         Name = "Zoo Transit Station", 
-         Description = "This transit station is one of many interconnected turbocar stations\
-running through Government City. Its probably the easiest fasted and\
-cheapest way to get around the enormous city and thus is a favoured means \
-of transportation. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Zoo Transit Station", 
+         Vnum = 443, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 444, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 444, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 306, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 306, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -12988,31 +8256,32 @@ of transportation. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 443, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This transit station is one of many interconnected turbocar stations\
+running through Government City. Its probably the easiest fasted and\
+cheapest way to get around the enormous city and thus is a favoured means \
+of transportation. \
+", 
       }, 
       [444] = 
       {
-         Name = "Ticket Booth", 
-         Description = "For one small fee you can ride the turbocar transit system to almost\
-anywhere throught Imperial City. The turnstile allows one person through\
-at a time as they pay the droid on duty. The cost is 5 credits.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ticket Booth", 
+         Vnum = 444, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 443, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 443, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13020,41 +8289,40 @@ at a time as they pay the droid on duty. The cost is 5 credits.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 444, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "For one small fee you can ride the turbocar transit system to almost\
+anywhere throught Imperial City. The turnstile allows one person through\
+at a time as they pay the droid on duty. The cost is 5 credits.\
+", 
       }, 
       [445] = 
       {
-         Name = "Dometown Transit Station", 
-         Description = "This transit station is one of many interconnected turbocar stations\
-running through Government City. Its probably the easiest fasted and\
-cheapest way to get around the enormous city and thus is a favoured means \
-of transportation. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Dometown Transit Station", 
+         Vnum = 445, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 446, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 446, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 460, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 460, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13062,31 +8330,32 @@ of transportation. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 445, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This transit station is one of many interconnected turbocar stations\
+running through Government City. Its probably the easiest fasted and\
+cheapest way to get around the enormous city and thus is a favoured means \
+of transportation. \
+", 
       }, 
       [446] = 
       {
-         Name = "Ticket Booth", 
-         Description = "For one small fee you can ride the turbocar transit system to almost\
-anywhere throught Imperial City. The turnstile allows one person through\
-at a time as they pay the droid on duty. The cost is 5 credits.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ticket Booth", 
+         Vnum = 446, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 445, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 445, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13094,32 +8363,64 @@ at a time as they pay the droid on duty. The cost is 5 credits.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 446, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "For one small fee you can ride the turbocar transit system to almost\
+anywhere throught Imperial City. The turnstile allows one person through\
+at a time as they pay the droid on duty. The cost is 5 credits.\
+", 
       }, 
       [447] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Plaza Transit Station", 
+         Vnum = 447, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 448, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "This transit station is one of many interconnected turbocar stations\
 running through Government City. Its probably the easiest fasted and\
 cheapest way to get around the enormous city and thus is a favoured means \
 of transportation. \
 ", 
-         Sector = "city", 
+      }, 
+      [448] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ticket Booth", 
+         Vnum = 448, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 448, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "south", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 447, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13127,158 +8428,129 @@ of transportation. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 447, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [448] = 
-      {
-         Name = "Ticket Booth", 
          Description = "For one small fee you can ride the turbocar transit system to almost\
 anywhere throught Imperial City. The turnstile allows one person through\
 at a time as they pay the droid on duty. The cost is 5 credits.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 447, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 448, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [449] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 450, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 437, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "Government Road", 
+         Vnum = 449, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand on government road which is located at the heart of Imperial City\
 (or Government City) on Coruscant. To the north of you looms the\
 enormous imperial palace, the governing seat of the Galactic Empire.\
 To your west lies the now defunct Senate Hall where all the leaders of the\
 galaxy came together monthly and discuss issues of galactic importance.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 450, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 437, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 449, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [450] = 
       {
-         Name = "Government Road", 
-         Description = "You stand on government road which is located at the heart of Imperial City\
-(or Government City) on Coruscant. To the north of you looms the\
-enormous imperial palace, the governing seat of the Galactic Empire.\
-To your west lies the now defunct Senate Hall where all the leaders of the\
-galaxy came together monthly and discuss issues of galactic importance.\
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 451, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 451, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 449, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 449, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Government Road", 
          Vnum = 450, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [451] = 
-      {
-         Name = "Government Road", 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "You stand on government road which is located at the heart of Imperial City\
 (or Government City) on Coruscant. To the north of you looms the\
 enormous imperial palace, the governing seat of the Galactic Empire.\
 To your west lies the now defunct Senate Hall where all the leaders of the\
 galaxy came together monthly and discuss issues of galactic importance.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
+      }, 
+      [451] = 
+      {
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 450, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 450, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Government Road", 
          Vnum = 451, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "You stand on government road which is located at the heart of Imperial City\
+(or Government City) on Coruscant. To the north of you looms the\
+enormous imperial palace, the governing seat of the Galactic Empire.\
+To your west lies the now defunct Senate Hall where all the leaders of the\
+galaxy came together monthly and discuss issues of galactic importance.\
+", 
       }, 
       [452] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 452, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -13288,121 +8560,49 @@ galaxy came together monthly and discuss issues of galactic importance.\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 452, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [460] = 
       {
-         Name = "Dometown", 
-         Description = "", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 445, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 445, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 430, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northeast", 
+               DestinationVnum = 430, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Dometown", 
          Vnum = 460, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Description = "", 
       }, 
       [461] = 
       {
-         Name = "A Brothel", 
-         Description = "The brothel seems once have been the lobby of an old hotel that has since\
-been taken over by a less respected organization. The old furnishings that\
-surround the room are torn and stained the walls are chipped and peeling\
-in places and the carpets are extreemly dirty. Not the nicest place but\
-most clients don't seem to mind.\
- \
-&RA sign has been placed here. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [24] = "NoMob", 
-                  [11] = "Hidden", 
-                  [3] = "Secret", 
-               }, 
-               DestinationVnum = 467, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [24] = "NoMob", 
-               }, 
-               DestinationVnum = 329, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [24] = "NoMob", 
-                  [11] = "Hidden", 
-                  [3] = "Secret", 
-               }, 
-               DestinationVnum = 466, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 464, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
+         Name = "A Brothel", 
          Vnum = 461, 
+         Sector = "city", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -13412,56 +8612,95 @@ most clients don't seem to mind.\
 \13", 
             }, 
          }, 
-      }, 
-      [462] = 
-      {
-         Name = "A Bedroom", 
-         Description = "This bedroom is plain and small. It is completely unfirnished except for a\
-large bed that semms to be the focus of the room. The carpet is covered in\
-stains as are the sheets. The wallpaper is peeling off in spots as well...\
-but at this point, who cares. \
-", 
-         MudProgs = 
+         Exits = 
          {
             [1] = 
             {
-               Code = "mpechoat $n After a while you leave the bedroom.\
-mpechoat $n You feel strong and refreshed.\
-feel heal $n\
-feel heal $n\
-feel heal $n\
-mptransfer $n 461\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "100", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Flags = 
+               {
+                  [24] = "NoMob", 
+                  [11] = "Hidden", 
+                  [3] = "Secret", 
+               }, 
+               Direction = "north", 
+               DestinationVnum = 467, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Flags = 
+               {
+                  [24] = "NoMob", 
+               }, 
+               Direction = "east", 
+               DestinationVnum = 329, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Flags = 
+               {
+                  [24] = "NoMob", 
+                  [11] = "Hidden", 
+                  [3] = "Secret", 
+               }, 
+               Direction = "south", 
+               DestinationVnum = 466, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 464, 
+               Description = "", 
             }, 
          }, 
-         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Description = "The brothel seems once have been the lobby of an old hotel that has since\
+been taken over by a less respected organization. The old furnishings that\
+surround the room are torn and stained the walls are chipped and peeling\
+in places and the carpets are extreemly dirty. Not the nicest place but\
+most clients don't seem to mind.\
+ \
+&RA sign has been placed here. \
+", 
+      }, 
+      [462] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
-         Exits = 
-         {
-         }, 
+         Name = "A Bedroom", 
+         Vnum = 462, 
+         Sector = "city", 
          Flags = 
          {
             [10] = "Safe", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleDelay = 0, 
-         Vnum = 462, 
          ExtraDescriptions = 
          {
          }, 
-      }, 
-      [463] = 
-      {
-         Name = "A Bedroom", 
-         Description = "This bedroom is plain and small. It is completely unfirnished except for a\
-large bed that semms to be the focus of the room. The carpet is covered in\
-stains as are the sheets. The wallpaper is peeling off in spots as well...\
-but at this point, who cares.  \
-", 
+         Exits = 
+         {
+         }, 
          MudProgs = 
          {
             [1] = 
@@ -13473,45 +8712,74 @@ feel heal $n\
 feel heal $n\
 mptransfer $n 461\
 ", 
-               MudProgType = "rand_prog", 
                Arguments = "100", 
+               MudProgType = "rand_prog", 
             }, 
          }, 
-         Sector = "city", 
+         TeleDelay = 0, 
+         Description = "This bedroom is plain and small. It is completely unfirnished except for a\
+large bed that semms to be the focus of the room. The carpet is covered in\
+stains as are the sheets. The wallpaper is peeling off in spots as well...\
+but at this point, who cares. \
+", 
+      }, 
+      [463] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
-         Exits = 
-         {
-         }, 
+         Name = "A Bedroom", 
+         Vnum = 463, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [10] = "Safe", 
          }, 
-         TeleDelay = 0, 
-         Vnum = 463, 
          ExtraDescriptions = 
          {
          }, 
+         Exits = 
+         {
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpechoat $n After a while you leave the bedroom.\
+mpechoat $n You feel strong and refreshed.\
+feel heal $n\
+feel heal $n\
+feel heal $n\
+mptransfer $n 461\
+", 
+               Arguments = "100", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Description = "This bedroom is plain and small. It is completely unfirnished except for a\
+large bed that semms to be the focus of the room. The carpet is covered in\
+stains as are the sheets. The wallpaper is peeling off in spots as well...\
+but at this point, who cares.  \
+", 
       }, 
       [464] = 
       {
-         Name = "A Hallway", 
-         Description = "This hallway is a literal assault on your senses. Your eyes are filled with\
-the sight of torn wallpaper, stains and small pieces of leftover wrappers.\
-Your nose is filled with the smells of the sweat and other bodily\
-secretions of 100 different species of creatures. Your ears are filled\
-with the sounds of banging, squeeking, grunting, moaning, screaming, and\
-the low hum of whispered thoughts.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Hallway", 
+         Vnum = 464, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Flags = 
                {
                   [1] = "Closed", 
@@ -13519,24 +8787,24 @@ the low hum of whispered thoughts.\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               DestinationVnum = 464, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "north", 
+               DestinationVnum = 464, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 461, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 461, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Flags = 
                {
                   [1] = "Closed", 
@@ -13544,15 +8812,15 @@ the low hum of whispered thoughts.\
                   [0] = "IsDoor", 
                   [23] = "BashProof", 
                }, 
-               DestinationVnum = 464, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "south", 
+               DestinationVnum = 464, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
+               Distance = 0, 
+               Key = 310, 
                Flags = 
                {
                   [1] = "Closed", 
@@ -13561,11 +8829,9 @@ the low hum of whispered thoughts.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               DestinationVnum = 465, 
-               Key = 310, 
-               Description = "", 
-               Distance = 0, 
                Direction = "west", 
+               DestinationVnum = 465, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13573,14 +8839,42 @@ the low hum of whispered thoughts.\
             [2] = "NoMob", 
          }, 
          TeleDelay = 0, 
-         Vnum = 464, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This hallway is a literal assault on your senses. Your eyes are filled with\
+the sight of torn wallpaper, stains and small pieces of leftover wrappers.\
+Your nose is filled with the smells of the sweat and other bodily\
+secretions of 100 different species of creatures. Your ears are filled\
+with the sounds of banging, squeeking, grunting, moaning, screaming, and\
+the low hum of whispered thoughts.\
+", 
       }, 
       [465] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Direction = "east", 
+               DestinationVnum = 464, 
+               Description = "", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Name = "An Office", 
+         Vnum = 465, 
+         TeleDelay = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Description = "The smells and sounds of the brothel fill this office, but it all seems\
 more pleasant here in this nicely furnished office. A large wooden desk is\
 the focus of the room. It is around the walls of the room are a few\
@@ -13589,68 +8883,40 @@ large. The room is decorated with an intersting assortment of unusual\
 sexual aids. Some of which you can't even begin to imagine what they could\
 possibly be used for.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               DestinationVnum = 464, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 465, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [466] = 
       {
-         Name = "A Hidden Passage", 
-         Description = "This hallway is a literal assault on your senses. Your eyes are filled with\
-the sight of torn wallpaper, stains and small pieces of leftover wrappers.\
-Your nose is filled with the smells of the sweat and other bodily\
-secretions of 100 different species of creatures. Your ears are filled\
-with the sounds of banging, squeeking, grunting, moaning, screaming, and\
-the low hum of whispered thoughts. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Hidden Passage", 
+         Vnum = 466, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 461, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 461, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               DestinationVnum = 463, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "west", 
+               DestinationVnum = 463, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13658,47 +8924,47 @@ the low hum of whispered thoughts. \
             [2] = "NoMob", 
          }, 
          TeleDelay = 0, 
-         Vnum = 466, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This hallway is a literal assault on your senses. Your eyes are filled with\
+the sight of torn wallpaper, stains and small pieces of leftover wrappers.\
+Your nose is filled with the smells of the sweat and other bodily\
+secretions of 100 different species of creatures. Your ears are filled\
+with the sounds of banging, squeeking, grunting, moaning, screaming, and\
+the low hum of whispered thoughts. \
+", 
       }, 
       [467] = 
       {
-         Name = "A Hidden Passage", 
-         Description = "This hallway is a literal assault on your senses. Your eyes are filled with\
-the sight of torn wallpaper, stains and small pieces of leftover wrappers.\
-Your nose is filled with the smells of the sweat and other bodily\
-secretions of 100 different species of creatures. Your ears are filled\
-with the sounds of banging, squeeking, grunting, moaning, screaming, and\
-the low hum of whispered thoughts. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Hidden Passage", 
+         Vnum = 467, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 461, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 461, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               DestinationVnum = 462, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "west", 
+               DestinationVnum = 462, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13706,41 +8972,43 @@ the low hum of whispered thoughts. \
             [2] = "NoMob", 
          }, 
          TeleDelay = 0, 
-         Vnum = 467, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This hallway is a literal assault on your senses. Your eyes are filled with\
+the sight of torn wallpaper, stains and small pieces of leftover wrappers.\
+Your nose is filled with the smells of the sweat and other bodily\
+secretions of 100 different species of creatures. Your ears are filled\
+with the sounds of banging, squeeking, grunting, moaning, screaming, and\
+the low hum of whispered thoughts. \
+", 
       }, 
       [468] = 
       {
-         Name = "A Pawnshop", 
-         Description = "The pawn shop is cluttered with all kinds of devices for sale. He will buy\
-all sorts of devices and especially weapons and armor at a fair price. The\
-pervert also trades in rare pornography... some of it fetches a good\
-profit on some worlds. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Pawnshop", 
+         Vnum = 468, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 313, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 313, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 469, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "northwest", 
+               DestinationVnum = 469, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13749,40 +9017,41 @@ profit on some worlds. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 468, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The pawn shop is cluttered with all kinds of devices for sale. He will buy\
+all sorts of devices and especially weapons and armor at a fair price. The\
+pervert also trades in rare pornography... some of it fetches a good\
+profit on some worlds. \
+", 
       }, 
       [469] = 
       {
-         Name = "A Hallway", 
-         Description = "The hallway is narrow and dimly lit. The walls are smudged with dark\
-fingerprints and the floor is covered with dirt. A light switch on the\
-wall is broken.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Hallway", 
+         Vnum = 469, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 470, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 470, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 468, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "southeast", 
+               DestinationVnum = 468, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13792,14 +9061,39 @@ wall is broken.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 469, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The hallway is narrow and dimly lit. The walls are smudged with dark\
+fingerprints and the floor is covered with dirt. A light switch on the\
+wall is broken.\
+", 
       }, 
       [470] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Back Storage Room", 
+         Vnum = 470, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 469, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "A small amount of light creeping in from the front of the shop reveales\
 this room to be a store room. Most of the items here seem to be useless or\
 in a state of disrepair. There are several boxes lying around as well as a\
@@ -13808,69 +9102,14 @@ couple crates of magazines. \
 If you search carefully you might find something useful.\
  \
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 469, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 470, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [471] = 
       {
-         Name = "A Workshop", 
-         Description = "This room is dusty but relatively organized. There is a large table and\
-many tools for working on small projects. There are several power outlets\
-as well some with controlled output. It would be an excellent place to\
-build some equipment. \
-", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho The Hardware store owner comes and empties the bin.\
-mppurge recycle\
-mpecho The Hardware store owner walks away, muttering obscenities.\
-mpoload 450\
-drop bin\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "1", 
-            }, 
-         }, 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 499, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
+         Name = "A Workshop", 
+         Vnum = 471, 
+         Sector = "city", 
          Flags = 
          {
             [16] = "Silence", 
@@ -13881,42 +9120,132 @@ drop bin\
             [30] = "Prototype", 
             [31] = "Auction", 
          }, 
-         TeleDelay = 0, 
-         Vnum = 471, 
          ExtraDescriptions = 
          {
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 499, 
+               Description = "", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpecho The Hardware store owner comes and empties the bin.\
+mppurge recycle\
+mpecho The Hardware store owner walks away, muttering obscenities.\
+mpoload 450\
+drop bin\
+", 
+               Arguments = "1", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Description = "This room is dusty but relatively organized. There is a large table and\
+many tools for working on small projects. There are several power outlets\
+as well some with controlled output. It would be an excellent place to\
+build some equipment. \
+", 
       }, 
       [472] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Refinery Entrance", 
+         Vnum = 472, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 306, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 473, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "The smell of spice fills your nose as you enter the side of this old\
 building. The floor is dirty and strewn with garbage as you move along you\
 catch the sight of a few small creatures that quickly scurry out of\
 sight.\
 ", 
-         Sector = "city", 
+      }, 
+      [473] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Refinery Lobby", 
+         Vnum = 473, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 306, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 472, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 473, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 475, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 474, 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 476, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -13925,60 +9254,246 @@ sight.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 472, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [473] = 
-      {
-         Name = "Refinery Lobby", 
          Description = "The lobby is a large, mostly empty room. There are a few chairs along one\
 of the walls.  The strong smell of spice overpowers the odor of garbage,\
 which is the biggest visual feature of the room. Whoever owns this place\
 isn't big on housekeeping. \
 ", 
-         Sector = "city", 
+      }, 
+      [474] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "A Dark Hallway", 
+         Vnum = 474, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 472, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 473, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 475, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 478, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 474, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 479, 
+               Description = "", 
             }, 
             [4] = 
             {
                Keyword = "", 
-               DestinationVnum = 476, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 477, 
+               Description = "", 
             }, 
+         }, 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Description = "The hallway is cold and dark. Triple sets of dark thick curtains cover each\
+of the exits making it almost impossible for light to pass between them.\
+The smell of spice is incredibly strong making your eyes water. \
+", 
+      }, 
+      [475] = 
+      {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Name = "An Office", 
+         Vnum = 475, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 473, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Description = "This large office is equipped with a large crescent shaped desk. There is\
+also a large filing cabinet but no other furniture. The room is dirty and\
+unkempt. The desk has a small computer terminal resting on it as well as a\
+large glass bowl containing some black frog-like creatures.\
+", 
+      }, 
+      [476] = 
+      {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Name = "An Office", 
+         Vnum = 476, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 473, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Description = "This office is slightly cleaner than what you've seen of the rest of the\
+refinery... at least the floor is free of trash. The room is furnished\
+with a large desk littered with datapads and disks. \
+", 
+      }, 
+      [477] = 
+      {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Name = "Refining Area", 
+         Vnum = 477, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 474, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [25] = "Refinery", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Description = "This room is pitch black. \
+", 
+      }, 
+      [478] = 
+      {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Name = "Refining Area", 
+         Vnum = 478, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 474, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [25] = "Refinery", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Description = "This room is pitch black. \
+", 
+      }, 
+      [479] = 
+      {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Name = "A Cold Storage Room", 
+         Vnum = 479, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 474, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Description = "This room is cold and dry. There are many crates and bags stacked on\
+shelves or on the floor almost entirely filling the room. If you search\
+here carefully you might find something useful in one of the crates.\
+", 
+      }, 
+      [480] = 
+      {
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Name = "Mountain School of Self Defence", 
+         Vnum = 480, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
          }, 
          Flags = 
          {
@@ -13986,298 +9501,51 @@ isn't big on housekeeping. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 473, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [474] = 
-      {
-         Name = "A Dark Hallway", 
-         Description = "The hallway is cold and dark. Triple sets of dark thick curtains cover each\
-of the exits making it almost impossible for light to pass between them.\
-The smell of spice is incredibly strong making your eyes water. \
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 473, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 478, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 479, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 477, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 474, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [475] = 
-      {
-         Name = "An Office", 
-         Description = "This large office is equipped with a large crescent shaped desk. There is\
-also a large filing cabinet but no other furniture. The room is dirty and\
-unkempt. The desk has a small computer terminal resting on it as well as a\
-large glass bowl containing some black frog-like creatures.\
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 473, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 475, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [476] = 
-      {
-         Name = "An Office", 
-         Description = "This office is slightly cleaner than what you've seen of the rest of the\
-refinery... at least the floor is free of trash. The room is furnished\
-with a large desk littered with datapads and disks. \
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 473, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 476, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [477] = 
-      {
-         Name = "Refining Area", 
-         Description = "This room is pitch black. \
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 474, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [25] = "Refinery", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 477, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [478] = 
-      {
-         Name = "Refining Area", 
-         Description = "This room is pitch black. \
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 474, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [25] = "Refinery", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 478, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [479] = 
-      {
-         Name = "A Cold Storage Room", 
-         Description = "This room is cold and dry. There are many crates and bags stacked on\
-shelves or on the floor almost entirely filling the room. If you search\
-here carefully you might find something useful in one of the crates.\
-", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 474, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 479, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [480] = 
-      {
-         Name = "Mountain School of Self Defence", 
          Description = "The Mountain School of Self Defence is a small school that teaches basic\
 self defense techinques in both armed and unarmed combat situations. The\
 entrance area is well lit. The floor is a bare polished white imitation\
 stone tile. A rack of pamphlets rests against one wall and a desk is up\
 against another. \
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 480, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [481] = 
       {
-         Name = "Corridor in the Self Defense School", 
-         Description = "The Mountain School of Self Defense is a small school that teaches basic\
-self defense techniques in both armed and unarmed combat situations. The\
-floor is a bare, polished white imitation stone tile.  There are several\
-archaic weapons hung on the walls as decorations.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Corridor in the Self Defense School", 
+         Vnum = 481, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 485, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 485, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 498, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 498, 
+               Description = "", 
             }, 
             [3] = 
             {
                Keyword = "", 
-               DestinationVnum = 10223, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 10223, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14285,41 +9553,92 @@ archaic weapons hung on the walls as decorations.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 481, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The Mountain School of Self Defense is a small school that teaches basic\
+self defense techniques in both armed and unarmed combat situations. The\
+floor is a bare, polished white imitation stone tile.  There are several\
+archaic weapons hung on the walls as decorations.\
+", 
       }, 
       [482] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Corridor in the Self Defence School", 
+         Vnum = 482, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 483, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 10223, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "The Mountain School of Self Defence is a small school that teaches basic\
 self defense techinques in both armed and unarmed combat situations. The\
 floor is a bare polished white imitation stone tile. There are several\
 archaic weapons hung on the walls as decorations. \
 ", 
-         Sector = "city", 
+      }, 
+      [483] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Corridor in the Self Defence School", 
+         Vnum = 483, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 483, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "east", 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 493, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 10223, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 484, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 482, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14327,50 +9646,41 @@ archaic weapons hung on the walls as decorations. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 482, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [483] = 
-      {
-         Name = "Corridor in the Self Defence School", 
          Description = "The Mountain School of Self Defence is a small school that teaches basic\
 self defense techinques in both armed and unarmed combat situations. The\
 floor is a bare polished white imitation stone tile. There are several\
 archaic weapons hung on the walls as decorations.  \
 ", 
-         Sector = "city", 
+      }, 
+      [484] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Level 1 Sparring Room", 
+         Vnum = 484, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 493, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 489, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 484, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 482, 
                Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "west", 
+               DestinationVnum = 483, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14378,42 +9688,51 @@ archaic weapons hung on the walls as decorations.  \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 483, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [484] = 
-      {
-         Name = "Level 1 Sparring Room", 
          Description = "The floor of this large room is covered in several large circular mats.\
 Students use these rooms to spar with one another and practice their\
 aquired skills. Around the  perimeter of the room stretches a long bench\
 broken only by the room exits. There are several towel hooks above the\
 bench as well as cubby holes underneath for storing shoes.\
 ", 
-         Sector = "city", 
+      }, 
+      [485] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Corridor in the Self Defense School", 
+         Vnum = 485, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 489, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 486, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 483, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "west", 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 488, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 481, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14421,50 +9740,45 @@ bench as well as cubby holes underneath for storing shoes.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 484, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [485] = 
-      {
-         Name = "Corridor in the Self Defense School", 
          Description = "The Mountain School of Self Defense is a small school that teaches basic\
 self defense techniques in both armed and unarmed combat situations. The\
 floor is a bare, polished white imitation stone tile.  There are several\
 archaic weapons hung on the walls as decorations.\
 ", 
-         Sector = "city", 
+      }, 
+      [486] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Ranged Weapons Room", 
+         Vnum = 486, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 486, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "north", 
+               Key = -1, 
+               Flags = 
+               {
+                  [25] = "Window", 
+               }, 
+               Direction = "east", 
+               DestinationVnum = 487, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 488, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 481, 
                Key = -1, 
-               Description = "", 
-               Distance = 0, 
                Direction = "south", 
+               DestinationVnum = 485, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14472,64 +9786,22 @@ archaic weapons hung on the walls as decorations.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 485, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [486] = 
-      {
-         Name = "Ranged Weapons Room", 
          Description = "This room is used for practicing throwing as well as ranged weapons such as\
 blasters. A target is hung to the east. To hit it, scan to the east and\
 then use snipe or throw to hit it. (note snipe and throw are both skills\
 that need to be practiced before you can use them)\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Flags = 
-               {
-                  [25] = "Window", 
-               }, 
-               DestinationVnum = 487, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 485, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 486, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [487] = 
       {
-         Name = "Target", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Target", 
+         Vnum = 487, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -14539,75 +9811,70 @@ that need to be practiced before you can use them)\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 487, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [488] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Personal Instruction Room", 
+         Vnum = 488, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 485, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "This room is large and mostly empty, except for a few benches pushed\
 against the walls. The floor is firm but has a bit of give to it, making\
 falling less painful.  It is here that instructors teach individuals or\
 small groups of people.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 485, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 488, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [489] = 
       {
-         Name = "Level 2 Sparring Room", 
-         Description = "The floor of this large room is covered in several large circular mats.\
-Students use these rooms to spar with one another and practice their\
-aquired skills. Around the  perimeter of the room stretches a long bench\
-broken only by the room exits. There are several towel hooks above the\
-bench as well as cubby holes underneath for storing shoes.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Level 2 Sparring Room", 
+         Vnum = 489, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 490, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 490, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 484, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 484, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14615,42 +9882,42 @@ bench as well as cubby holes underneath for storing shoes.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 489, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The floor of this large room is covered in several large circular mats.\
+Students use these rooms to spar with one another and practice their\
+aquired skills. Around the  perimeter of the room stretches a long bench\
+broken only by the room exits. There are several towel hooks above the\
+bench as well as cubby holes underneath for storing shoes.\
+", 
       }, 
       [490] = 
       {
-         Name = "Level 3 Sparring Room", 
-         Description = "The floor of this large room is covered in several large circular mats.\
-Students use these rooms to spar with one another and practice their\
-aquired skills. Around the  perimeter of the room stretches a long bench\
-broken only by the room exits. There are several towel hooks above the\
-bench as well as cubby holes underneath for storing shoes.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Level 3 Sparring Room", 
+         Vnum = 490, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 491, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 491, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 489, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 489, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14658,42 +9925,42 @@ bench as well as cubby holes underneath for storing shoes.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 490, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The floor of this large room is covered in several large circular mats.\
+Students use these rooms to spar with one another and practice their\
+aquired skills. Around the  perimeter of the room stretches a long bench\
+broken only by the room exits. There are several towel hooks above the\
+bench as well as cubby holes underneath for storing shoes.\
+", 
       }, 
       [491] = 
       {
-         Name = "Level 4 Sparring Room", 
-         Description = "The floor of this large room is covered in several large circular mats.\
-Students use these rooms to spar with one another and practice their\
-aquired skills. Around the  perimeter of the room stretches a long bench\
-broken only by the room exits. There are several towel hooks above the\
-bench as well as cubby holes underneath for storing shoes.\
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Level 4 Sparring Room", 
+         Vnum = 491, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 492, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 492, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 490, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 490, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14701,33 +9968,33 @@ bench as well as cubby holes underneath for storing shoes.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 491, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [492] = 
-      {
-         Name = "Level 5 Sparring Room", 
          Description = "The floor of this large room is covered in several large circular mats.\
 Students use these rooms to spar with one another and practice their\
 aquired skills. Around the  perimeter of the room stretches a long bench\
 broken only by the room exits. There are several towel hooks above the\
 bench as well as cubby holes underneath for storing shoes.\
 ", 
-         Sector = "city", 
+      }, 
+      [492] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Level 5 Sparring Room", 
+         Vnum = 492, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 491, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 491, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14735,83 +10002,84 @@ bench as well as cubby holes underneath for storing shoes.\
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 492, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "The floor of this large room is covered in several large circular mats.\
+Students use these rooms to spar with one another and practice their\
+aquired skills. Around the  perimeter of the room stretches a long bench\
+broken only by the room exits. There are several towel hooks above the\
+bench as well as cubby holes underneath for storing shoes.\
+", 
       }, 
       [493] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "Remote Training - Level 1", 
+         Vnum = 493, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 494, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 483, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "This room is large enough to move around and dodge quite freely. It is\
 completely empty except for a droid recharge station. The floors and walls\
 are covered in scuff marks. A sign advises that only one student at a time\
 use this room.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 494, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 483, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "south", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 493, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [494] = 
       {
-         Name = "Remote Training - Level 2", 
-         Description = "This room is large enough to move around and dodge quite freely. It is\
-completely empty except for a droid recharge station. The floors and walls\
-are covered in scuff marks. A sign advises that only one student at a time\
-use this room. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Remote Training - Level 2", 
+         Vnum = 494, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 495, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 495, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 493, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 493, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14819,41 +10087,41 @@ use this room. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 494, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This room is large enough to move around and dodge quite freely. It is\
+completely empty except for a droid recharge station. The floors and walls\
+are covered in scuff marks. A sign advises that only one student at a time\
+use this room. \
+", 
       }, 
       [495] = 
       {
-         Name = "Remote Training - Level 3", 
-         Description = "This room is large enough to move around and dodge quite freely. It is\
-completely empty except for a droid recharge station. The floors and walls\
-are covered in scuff marks. A sign advises that only one student at a time\
-use this room. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Remote Training - Level 3", 
+         Vnum = 495, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 496, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 496, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 494, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 494, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14861,41 +10129,41 @@ use this room. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 495, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This room is large enough to move around and dodge quite freely. It is\
+completely empty except for a droid recharge station. The floors and walls\
+are covered in scuff marks. A sign advises that only one student at a time\
+use this room. \
+", 
       }, 
       [496] = 
       {
-         Name = "Remote Training - Level 4", 
-         Description = "This room is large enough to move around and dodge quite freely. It is\
-completely empty except for a droid recharge station. The floors and walls\
-are covered in scuff marks. A sign advises that only one student at a time\
-use this room. \
-", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Remote Training - Level 4", 
+         Vnum = 496, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 497, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 497, 
+               Description = "", 
             }, 
             [2] = 
             {
                Keyword = "", 
-               DestinationVnum = 495, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 495, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14903,32 +10171,32 @@ use this room. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 496, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [497] = 
-      {
-         Name = "Remote Training - Level 5", 
          Description = "This room is large enough to move around and dodge quite freely. It is\
 completely empty except for a droid recharge station. The floors and walls\
 are covered in scuff marks. A sign advises that only one student at a time\
 use this room. \
 ", 
-         Sector = "city", 
+      }, 
+      [497] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Remote Training - Level 5", 
+         Vnum = 497, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 496, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 496, 
+               Description = "", 
             }, 
          }, 
          Flags = 
@@ -14936,93 +10204,97 @@ use this room. \
             [3] = "Indoors", 
          }, 
          TeleDelay = 0, 
-         Vnum = 497, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "This room is large enough to move around and dodge quite freely. It is\
+completely empty except for a droid recharge station. The floors and walls\
+are covered in scuff marks. A sign advises that only one student at a time\
+use this room. \
+", 
       }, 
       [498] = 
       {
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Name = "School Shop", 
+         Vnum = 498, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 481, 
+               Description = "", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
          Description = "The school shop sells several martial arts related items. There are are a\
 few weapons on display as well as several books and some martial arts\
 clothing (similar to what the instructors as well as most students are\
 wearing). \
 ", 
-         Sector = "city", 
+      }, 
+      [499] = 
+      {
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Hardware Shop", 
+         Vnum = 499, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
             {
                Keyword = "", 
-               DestinationVnum = 481, 
-               Key = -1, 
-               Description = "", 
                Distance = 0, 
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 471, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 307, 
+               Description = "", 
             }, 
          }, 
          Flags = 
          {
-            [3] = "Indoors", 
+            [2] = "NoMob", 
          }, 
          TeleDelay = 0, 
-         Vnum = 498, 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [499] = 
-      {
-         Name = "Hardware Shop", 
          Description = "A small shop, squashed among the richer and more fancy skyscrapers, this\
 hardware store survives only because its ability to provide basic\
 supplies. You can depend upon the storeowner to have what you need to make\
 containers, goods and equipment.\
 ", 
-         Sector = "city", 
-         TeleVnum = 0, 
-         Tunnel = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 471, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               DestinationVnum = 307, 
-               Key = -1, 
-               Description = "", 
-               Distance = 0, 
-               Direction = "west", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         TeleDelay = 0, 
-         Vnum = 499, 
-         ExtraDescriptions = 
-         {
-         }, 
       }, 
       [250] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 250, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -15032,18 +10304,18 @@ containers, goods and equipment.\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 250, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [251] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 251, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -15053,18 +10325,18 @@ containers, goods and equipment.\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 251, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [252] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 252, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -15074,18 +10346,18 @@ containers, goods and equipment.\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 252, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [253] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 253, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -15095,18 +10367,18 @@ containers, goods and equipment.\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 253, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [254] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 254, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -15116,18 +10388,18 @@ containers, goods and equipment.\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 254, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
       [255] = 
       {
-         Name = "Floating in a void", 
-         Description = "", 
-         Sector = "city", 
          TeleVnum = 0, 
          Tunnel = 0, 
+         Name = "Floating in a void", 
+         Vnum = 255, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
          }, 
@@ -15137,35 +10409,19 @@ containers, goods and equipment.\
             [30] = "Prototype", 
          }, 
          TeleDelay = 0, 
-         Vnum = 255, 
-         ExtraDescriptions = 
-         {
-         }, 
+         Description = "", 
       }, 
    }, 
-   HighEconomy = 0, 
+   Filename = "coruscant_streets.lua", 
+   Name = "Coruscant - The City Streets", 
    Objects = 
    {
       [320] = 
       {
-         ItemType = "armor", 
-         Layers = 48, 
-         ShortDescr = "a police uniform bottom", 
-         Description = "Part of a police uniform is here.", 
-         Cost = 0, 
-         Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 27, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 48, 
          ObjectValues = 
          {
             [1] = 3, 
@@ -15175,26 +10431,47 @@ containers, goods and equipment.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 1, 
+               Location = 27, 
+            }, 
+         }, 
+         Name = "coruscant police moisture suit pants", 
+         Vnum = 320, 
+         Cost = 0, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Name = "coruscant police moisture suit pants", 
-         Vnum = 320, 
+         ItemType = "armor", 
+         ShortDescr = "a police uniform bottom", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [5] = "Legs", 
          }, 
+         Description = "Part of a police uniform is here.", 
       }, 
       [321] = 
       {
-         ItemType = "armor", 
+         ExtraDescriptions = 
+         {
+         }, 
          Layers = 0, 
-         ShortDescr = "some very pointy high healed shoes", 
-         Description = "Don't get kicked by some very pointy high healed shoes.", 
-         Cost = 0, 
-         Weight = 1, 
+         ObjectValues = 
+         {
+            [1] = 1, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          Affects = 
          {
             [1] = 
@@ -15213,39 +10490,39 @@ containers, goods and equipment.\
                Location = 19, 
             }, 
          }, 
+         Name = "pointy high heals ", 
+         Vnum = 321, 
+         Cost = 0, 
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
+         ItemType = "armor", 
+         ShortDescr = "some very pointy high healed shoes", 
+         Weight = 1, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [6] = "Feet", 
+         }, 
+         Description = "Don't get kicked by some very pointy high healed shoes.", 
+      }, 
+      [322] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 2, 
          ObjectValues = 
          {
-            [1] = 1, 
+            [1] = 0, 
             [2] = 0, 
             [3] = 0, 
             [4] = 0, 
             [5] = 0, 
             [0] = 0, 
          }, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         Name = "pointy high heals ", 
-         Vnum = 321, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [6] = "Feet", 
-         }, 
-      }, 
-      [322] = 
-      {
-         ItemType = "armor", 
-         Layers = 2, 
-         ShortDescr = "some beads", 
-         Description = "Some beads would lookk nice in your hair.", 
-         Cost = 5, 
-         Weight = 1, 
          Affects = 
          {
             [1] = 
@@ -15259,10 +10536,28 @@ containers, goods and equipment.\
                Location = 25, 
             }, 
          }, 
+         Name = "beads", 
+         Vnum = 322, 
+         Cost = 5, 
+         ItemType = "armor", 
+         ShortDescr = "some beads", 
+         Weight = 1, 
          ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [8] = "Arms", 
+            [2] = "Neck", 
+            [11] = "Waist", 
+         }, 
+         Description = "Some beads would lookk nice in your hair.", 
+      }, 
+      [323] = 
+      {
          ExtraDescriptions = 
          {
          }, 
+         Layers = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -15272,24 +10567,6 @@ containers, goods and equipment.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Name = "beads", 
-         Vnum = 322, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [8] = "Arms", 
-            [2] = "Neck", 
-            [11] = "Waist", 
-         }, 
-      }, 
-      [323] = 
-      {
-         ItemType = "armor", 
-         Layers = 1, 
-         ShortDescr = "a g-string", 
-         Description = "Oooo... a g-string was left here.", 
-         Cost = 20, 
-         Weight = 1, 
          Affects = 
          {
             [1] = 
@@ -15303,43 +10580,30 @@ containers, goods and equipment.\
                Location = 31, 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
+         Name = "g-string", 
+         Vnum = 323, 
+         Cost = 20, 
          Flags = 
          {
             [31] = "HumanSize", 
          }, 
-         Name = "g-string", 
-         Vnum = 323, 
+         ItemType = "armor", 
+         ShortDescr = "a g-string", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [11] = "Waist", 
          }, 
+         Description = "Oooo... a g-string was left here.", 
       }, 
       [324] = 
       {
-         ItemType = "lens", 
-         Layers = 0, 
-         ShortDescr = "a lens", 
-         Description = "An eyepiece lens from a baster scope could be possibly be useful.", 
-         Cost = 100, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -15351,25 +10615,23 @@ containers, goods and equipment.\
          }, 
          Name = "eyepiece lens", 
          Vnum = 324, 
+         Cost = 100, 
+         ItemType = "lens", 
+         ShortDescr = "a lens", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "An eyepiece lens from a baster scope could be possibly be useful.", 
       }, 
       [325] = 
       {
-         ItemType = "government", 
-         Layers = 0, 
-         ShortDescr = "the pawn shop account card", 
-         Description = "The pawn shop account card will bring much wealth.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "pawn shop account card", 
-         Vnum = 325, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -15379,19 +10641,21 @@ containers, goods and equipment.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "pawn shop account card", 
+         Vnum = 325, 
+         Cost = 0, 
+         ItemType = "government", 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "the pawn shop account card", 
+         Description = "The pawn shop account card will bring much wealth.", 
       }, 
       [326] = 
       {
-         ItemType = "rawspice", 
-         Layers = 0, 
-         ShortDescr = "some unrefined ryll", 
-         Description = "Some mid-grade unrefined ryll is here.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 50, 
@@ -15403,23 +10667,23 @@ containers, goods and equipment.\
          }, 
          Name = "medium grade unrefined ryll spice", 
          Vnum = 326, 
+         Cost = 0, 
+         ItemType = "rawspice", 
+         ShortDescr = "some unrefined ryll", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "Some mid-grade unrefined ryll is here.", 
       }, 
       [327] = 
       {
-         ItemType = "rawspice", 
-         Layers = 0, 
-         ShortDescr = "some unrefined andris", 
-         Description = "Some unrefined andris looks to be of poor quality.", 
-         Cost = 2000, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 25, 
@@ -15431,42 +10695,23 @@ containers, goods and equipment.\
          }, 
          Name = "low grade unrefined andris spice", 
          Vnum = 327, 
+         Cost = 2000, 
+         ItemType = "rawspice", 
+         ShortDescr = "some unrefined andris", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "Some unrefined andris looks to be of poor quality.", 
       }, 
       [328] = 
       {
-         ItemType = "armor", 
-         Layers = 0, 
-         ShortDescr = "a tuarill", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mppurge taurill\
-mpmload 311\
-", 
-               MudProgType = "drop_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Description = "A tuarill looks dead.", 
-         Cost = 0, 
-         Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 19, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 3, 
@@ -15476,12 +10721,36 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 1, 
+               Location = 19, 
+            }, 
+         }, 
+         ActionDescription = "", 
+         Name = "taurill", 
+         Vnum = 328, 
+         Cost = 0, 
          Flags = 
          {
             [3] = "HuttSize", 
          }, 
-         Name = "taurill", 
-         Vnum = 328, 
+         ItemType = "armor", 
+         ShortDescr = "a tuarill", 
+         Weight = 1, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mppurge taurill\
+mpmload 311\
+", 
+               Arguments = "100", 
+               MudProgType = "drop_prog", 
+            }, 
+         }, 
          WearFlags = 
          {
             [0] = "Take", 
@@ -15490,15 +10759,23 @@ mpmload 311\
             [14] = "Hold", 
             [11] = "Waist", 
          }, 
+         Description = "A tuarill looks dead.", 
       }, 
       [329] = 
       {
-         ItemType = "armor", 
+         ExtraDescriptions = 
+         {
+         }, 
          Layers = 0, 
-         ShortDescr = "some macrobinoculars", 
-         Description = "Where would the galaxy be without macrobinoculars.", 
-         Cost = 400, 
-         Weight = 1, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          Affects = 
          {
             [1] = 
@@ -15507,39 +10784,26 @@ mpmload 311\
                Location = 26, 
             }, 
          }, 
-         ActionDescription = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
          Name = "macrobinoculars", 
          Vnum = 329, 
+         Cost = 400, 
+         ItemType = "armor", 
+         ShortDescr = "some macrobinoculars", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [17] = "Eyes", 
          }, 
+         Description = "Where would the galaxy be without macrobinoculars.", 
       }, 
       [330] = 
       {
-         ItemType = "staff", 
-         Layers = 0, 
-         ShortDescr = "a staff", 
-         Description = "One could make something out of this staff.", 
-         Cost = 50, 
-         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -15549,30 +10813,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "staff", 
+         Vnum = 330, 
+         Cost = 50, 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         Name = "staff", 
-         Vnum = 330, 
+         ItemType = "staff", 
+         ShortDescr = "a staff", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
+         Description = "One could make something out of this staff.", 
       }, 
       [331] = 
       {
-         ItemType = "armor", 
-         Layers = 16, 
-         ShortDescr = "a fashionable jacket", 
-         Description = "A nice jacket was left in the dirt.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 16, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -15584,24 +10848,24 @@ mpmload 311\
          }, 
          Name = "a fashionable jacket", 
          Vnum = 331, 
+         Cost = 0, 
+         ItemType = "armor", 
+         ShortDescr = "a fashionable jacket", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [10] = "About", 
          }, 
+         Description = "A nice jacket was left in the dirt.", 
       }, 
       [332] = 
       {
-         ItemType = "armor", 
-         Layers = 0, 
-         ShortDescr = "Some rags", 
-         Description = "Some rags offer scant protection.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 3, 
@@ -15613,24 +10877,24 @@ mpmload 311\
          }, 
          Name = "rags", 
          Vnum = 332, 
+         Cost = 0, 
+         ItemType = "armor", 
+         ShortDescr = "Some rags", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
+         Description = "Some rags offer scant protection.", 
       }, 
       [333] = 
       {
-         ItemType = "armor", 
-         Layers = 0, 
-         ShortDescr = "a spiked helmet", 
-         Description = "A spiked helmet was dropped here.", 
-         Cost = 50, 
-         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -15640,30 +10904,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "a spiked helmet", 
+         Vnum = 333, 
+         Cost = 50, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Name = "a spiked helmet", 
-         Vnum = 333, 
+         ItemType = "armor", 
+         ShortDescr = "a spiked helmet", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [4] = "Head", 
          }, 
+         Description = "A spiked helmet was dropped here.", 
       }, 
       [334] = 
       {
-         ItemType = "armor", 
-         Layers = 0, 
-         ShortDescr = "a studded wristband", 
-         Description = "A studded wristband was dropped here.", 
-         Cost = 30, 
-         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -15673,30 +10937,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "studded wristband", 
+         Vnum = 334, 
+         Cost = 30, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Name = "studded wristband", 
-         Vnum = 334, 
+         ItemType = "armor", 
+         ShortDescr = "a studded wristband", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [12] = "Wrist", 
          }, 
+         Description = "A studded wristband was dropped here.", 
       }, 
       [335] = 
       {
-         ItemType = "armor", 
-         Layers = 8, 
-         ShortDescr = "a leather arm brace", 
-         Description = "A leather arm brace was dropped here.", 
-         Cost = 40, 
-         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 8, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -15706,30 +10970,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "leather arm brace", 
+         Vnum = 335, 
+         Cost = 40, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Name = "leather arm brace", 
-         Vnum = 335, 
+         ItemType = "armor", 
+         ShortDescr = "a leather arm brace", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [8] = "Arms", 
          }, 
+         Description = "A leather arm brace was dropped here.", 
       }, 
       [336] = 
       {
-         ItemType = "armor", 
-         Layers = 16, 
-         ShortDescr = "a large studded belt", 
-         Description = "A large studded belt was dropped here.", 
-         Cost = 20, 
-         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 16, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -15739,30 +11003,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "large studded belt", 
+         Vnum = 336, 
+         Cost = 20, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Name = "large studded belt", 
-         Vnum = 336, 
+         ItemType = "armor", 
+         ShortDescr = "a large studded belt", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [11] = "Waist", 
          }, 
+         Description = "A large studded belt was dropped here.", 
       }, 
       [337] = 
       {
-         ItemType = "armor", 
-         Layers = 64, 
-         ShortDescr = "some big boots", 
-         Description = "Some big boots were dropped here.", 
-         Cost = 100, 
-         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 64, 
          ObjectValues = 
          {
             [1] = 6, 
@@ -15772,30 +11036,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "some big boots", 
+         Vnum = 337, 
+         Cost = 100, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Name = "some big boots", 
-         Vnum = 337, 
+         ItemType = "armor", 
+         ShortDescr = "some big boots", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [6] = "Feet", 
          }, 
+         Description = "Some big boots were dropped here.", 
       }, 
       [338] = 
       {
-         ItemType = "armor", 
-         Layers = 32, 
-         ShortDescr = "a big leather skirt", 
-         Description = "A big leather skirt was dropped here.", 
-         Cost = 50, 
-         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 32, 
          ObjectValues = 
          {
             [1] = 6, 
@@ -15805,26 +11069,39 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "a big leather skirt", 
+         Vnum = 338, 
+         Cost = 50, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Name = "a big leather skirt", 
-         Vnum = 338, 
+         ItemType = "armor", 
+         ShortDescr = "a big leather skirt", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [5] = "Legs", 
          }, 
+         Description = "A big leather skirt was dropped here.", 
       }, 
       [339] = 
       {
-         ItemType = "armor", 
+         ExtraDescriptions = 
+         {
+         }, 
          Layers = 64, 
-         ShortDescr = "a plasteel chest plate", 
-         Description = "A large plasteel chest plate was dropped here.", 
-         Cost = 1000, 
-         Weight = 1, 
+         ObjectValues = 
+         {
+            [1] = 10, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          Affects = 
          {
             [1] = 
@@ -15838,40 +11115,26 @@ mpmload 311\
                Location = 48, 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 10, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
+         Name = "a large plasteel chest plate", 
+         Vnum = 339, 
+         Cost = 1000, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Name = "a large plasteel chest plate", 
-         Vnum = 339, 
+         ItemType = "armor", 
+         ShortDescr = "a plasteel chest plate", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
+         Description = "A large plasteel chest plate was dropped here.", 
       }, 
       [340] = 
       {
-         ItemType = "trash", 
-         Layers = 0, 
-         ShortDescr = "a pile of clothes", 
-         Description = "A large pile of clothes stands in front of the door.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -15883,6 +11146,7 @@ mpmload 311\
 \13", 
             }, 
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -15894,20 +11158,19 @@ mpmload 311\
          }, 
          Name = "pile of clothes", 
          Vnum = 340, 
+         Cost = 0, 
+         ItemType = "trash", 
+         ShortDescr = "a pile of clothes", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "A large pile of clothes stands in front of the door.", 
       }, 
       [341] = 
       {
-         ItemType = "drink_container", 
-         Layers = 0, 
-         ShortDescr = "an alderaanian brand cognac bottle (empty) ", 
-         Description = "", 
-         Cost = 100, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -15918,6 +11181,7 @@ mpmload 311\
 \13", 
             }, 
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -15929,26 +11193,24 @@ mpmload 311\
          }, 
          Name = "cognac bottle", 
          Vnum = 341, 
+         Cost = 100, 
+         ItemType = "drink_container", 
+         ShortDescr = "an alderaanian brand cognac bottle (empty) ", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
+         Description = "", 
       }, 
       [499] = 
       {
-         ItemType = "trash", 
-         Layers = 0, 
-         ShortDescr = "a newly created bookend", 
-         Description = "Some god dropped a newly created bookend here.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "bookend", 
-         Vnum = 499, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -15958,27 +11220,21 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "bookend", 
+         Vnum = 499, 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "a newly created bookend", 
+         Description = "Some god dropped a newly created bookend here.", 
       }, 
       [450] = 
       {
-         ItemType = "container", 
-         Layers = 0, 
-         ShortDescr = "Recycle Bin", 
-         Description = "A Recycling Bin is off to the side of the room.", 
-         Cost = 0, 
-         Weight = 5000, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
-         Flags = 
-         {
-            [1] = "Hum", 
-            [0] = "Glow", 
-            [12] = "NoRemove", 
-         }, 
-         Name = "Recycle Bin", 
-         Vnum = 450, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -15988,69 +11244,75 @@ mpmload 311\
             [5] = 0, 
             [0] = 10000, 
          }, 
+         Name = "Recycle Bin", 
+         Vnum = 450, 
+         Flags = 
+         {
+            [1] = "Hum", 
+            [0] = "Glow", 
+            [12] = "NoRemove", 
+         }, 
+         Cost = 0, 
+         ItemType = "container", 
+         Weight = 5000, 
+         ActionDescription = "", 
+         ShortDescr = "Recycle Bin", 
+         Description = "A Recycling Bin is off to the side of the room.", 
       }, 
       [403] = 
       {
-         ItemType = "trash", 
-         Layers = 0, 
-         ShortDescr = "Doh", 
-         Description = "Doh", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
+         }, 
+         Layers = 0, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
          Name = "Doh", 
          Vnum = 403, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "Doh", 
+         Description = "Doh", 
       }, 
       [400] = 
       {
-         ItemType = "trash", 
-         Layers = 0, 
-         ShortDescr = "the suggestions board", 
-         Description = "The suggestions board is here.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
+         }, 
+         Layers = 0, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
          }, 
          Name = "Suggestions board", 
          Vnum = 400, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "the suggestions board", 
+         Description = "The suggestions board is here.", 
       }, 
       [300] = 
       {
-         ItemType = "trash", 
-         Layers = 0, 
-         ShortDescr = "a newly created bookend", 
-         Description = "Some god dropped a newly created bookend here.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "bookend", 
-         Vnum = 300, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -16060,19 +11322,21 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "bookend", 
+         Vnum = 300, 
+         Cost = 0, 
+         ItemType = "trash", 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "a newly created bookend", 
+         Description = "Some god dropped a newly created bookend here.", 
       }, 
       [301] = 
       {
-         ItemType = "drink_container", 
-         Layers = 0, 
-         ShortDescr = "a glass of water", 
-         Description = "A glass of water is a good cheap drink.", 
-         Cost = 2, 
-         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -16082,29 +11346,29 @@ mpmload 311\
             [5] = 0, 
             [0] = 2, 
          }, 
+         Name = "glass of water", 
+         Vnum = 301, 
+         Cost = 2, 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         Name = "glass of water", 
-         Vnum = 301, 
+         ItemType = "drink_container", 
+         ShortDescr = "a glass of water", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "A glass of water is a good cheap drink.", 
       }, 
       [302] = 
       {
-         ItemType = "food", 
-         Layers = 0, 
-         ShortDescr = "some fried nerf", 
-         Description = "Fried nerf is a delicay... strange that its here.", 
-         Cost = 20, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -16116,23 +11380,23 @@ mpmload 311\
          }, 
          Name = "fried nerf", 
          Vnum = 302, 
+         Cost = 20, 
+         ItemType = "food", 
+         ShortDescr = "some fried nerf", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "Fried nerf is a delicay... strange that its here.", 
       }, 
       [303] = 
       {
-         ItemType = "food", 
-         Layers = 0, 
-         ShortDescr = "poached hawk-bat eggs", 
-         Description = "Some poached hawk-bat eggs are a bit chewy.", 
-         Cost = 5, 
-         Weight = 1, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 20, 
@@ -16142,29 +11406,29 @@ mpmload 311\
             [5] = 0, 
             [0] = 20, 
          }, 
+         Name = "poached hawk-bat eggs", 
+         Vnum = 303, 
+         Cost = 5, 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
-         Name = "poached hawk-bat eggs", 
-         Vnum = 303, 
+         ItemType = "food", 
+         ShortDescr = "poached hawk-bat eggs", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "Some poached hawk-bat eggs are a bit chewy.", 
       }, 
       [304] = 
       {
-         ItemType = "drink_container", 
-         Layers = 0, 
-         ShortDescr = "a cup of spiced ryll coffee", 
-         Description = "This coffee has a strong ryll aroma.", 
-         Cost = 3, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -16176,23 +11440,23 @@ mpmload 311\
          }, 
          Name = "spiced ryll coffee", 
          Vnum = 304, 
+         Cost = 3, 
+         ItemType = "drink_container", 
+         ShortDescr = "a cup of spiced ryll coffee", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "This coffee has a strong ryll aroma.", 
       }, 
       [305] = 
       {
-         ItemType = "food", 
-         Layers = 0, 
-         ShortDescr = "some fruit salad", 
-         Description = "Some fruit salad is delicious.", 
-         Cost = 7, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -16204,20 +11468,19 @@ mpmload 311\
          }, 
          Name = "fruit salad", 
          Vnum = 305, 
+         Cost = 7, 
+         ItemType = "food", 
+         ShortDescr = "some fruit salad", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "Some fruit salad is delicious.", 
       }, 
       [306] = 
       {
-         ItemType = "furniture", 
-         Layers = 0, 
-         ShortDescr = "a sign", 
-         Description = "A sign points to the southeast", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -16227,8 +11490,7 @@ mpmload 311\
 \13", 
             }, 
          }, 
-         Name = "sign", 
-         Vnum = 306, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -16238,15 +11500,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "sign", 
+         Vnum = 306, 
+         Cost = 0, 
+         ItemType = "furniture", 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "a sign", 
+         Description = "A sign points to the southeast", 
       }, 
       [307] = 
       {
-         ItemType = "armor", 
+         ExtraDescriptions = 
+         {
+         }, 
          Layers = 8, 
-         ShortDescr = "a light green blouse", 
-         Description = "A green blouse was left here.", 
-         Cost = 30, 
-         Weight = 1, 
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          Affects = 
          {
             [1] = 
@@ -16255,10 +11532,30 @@ mpmload 311\
                Location = 18, 
             }, 
          }, 
+         Name = "green blouse", 
+         Vnum = 307, 
+         Cost = 30, 
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
+         ItemType = "armor", 
+         ShortDescr = "a light green blouse", 
+         Weight = 1, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         Description = "A green blouse was left here.", 
+      }, 
+      [308] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 8, 
          ObjectValues = 
          {
             [1] = 2, 
@@ -16268,26 +11565,6 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         Name = "green blouse", 
-         Vnum = 307, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-      }, 
-      [308] = 
-      {
-         ItemType = "armor", 
-         Layers = 8, 
-         ShortDescr = "a light green skirt", 
-         Description = "A green skirt was left here.", 
-         Cost = 30, 
-         Weight = 1, 
          Affects = 
          {
             [1] = 
@@ -16296,45 +11573,30 @@ mpmload 311\
                Location = 19, 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
+         Name = "green skirt", 
+         Vnum = 308, 
+         Cost = 30, 
          Flags = 
          {
             [31] = "HumanSize", 
          }, 
-         Name = "green skirt", 
-         Vnum = 308, 
+         ItemType = "armor", 
+         ShortDescr = "a light green skirt", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [5] = "Legs", 
          }, 
+         Description = "A green skirt was left here.", 
       }, 
       [309] = 
       {
-         ItemType = "government", 
-         Layers = 0, 
-         ShortDescr = "some files", 
-         Description = "The brothel accounts files contain all of their financial information.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "brothel acounts files", 
-         Vnum = 309, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -16344,19 +11606,21 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "brothel acounts files", 
+         Vnum = 309, 
+         Cost = 0, 
+         ItemType = "government", 
+         Weight = 1, 
+         ActionDescription = "", 
+         ShortDescr = "some files", 
+         Description = "The brothel accounts files contain all of their financial information.", 
       }, 
       [310] = 
       {
-         ItemType = "key", 
-         Layers = 0, 
-         ShortDescr = "a keycard on a chain", 
-         Description = "A keycard is attached to a short chain.", 
-         Cost = 0, 
-         Weight = 1, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -16368,23 +11632,23 @@ mpmload 311\
          }, 
          Name = "keycard chain", 
          Vnum = 310, 
+         Cost = 0, 
+         ItemType = "key", 
+         ShortDescr = "a keycard on a chain", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
+         Description = "A keycard is attached to a short chain.", 
       }, 
       [311] = 
       {
-         ItemType = "armor", 
-         Layers = 24, 
-         ShortDescr = "a padded shirt", 
-         Description = "A padded shirt was left here", 
-         Cost = 200, 
-         Weight = 5, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 24, 
          ObjectValues = 
          {
             [1] = 6, 
@@ -16394,30 +11658,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "padded shirt", 
+         Vnum = 311, 
+         Cost = 200, 
          Flags = 
          {
             [31] = "HumanSize", 
          }, 
-         Name = "padded shirt", 
-         Vnum = 311, 
+         ItemType = "armor", 
+         ShortDescr = "a padded shirt", 
+         Weight = 5, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
+         Description = "A padded shirt was left here", 
       }, 
       [312] = 
       {
-         ItemType = "armor", 
-         Layers = 24, 
-         ShortDescr = "some padded pants", 
-         Description = "Some padded pants were left here.", 
-         Cost = 300, 
-         Weight = 5, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 24, 
          ObjectValues = 
          {
             [1] = 6, 
@@ -16427,26 +11691,39 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "padded pants", 
+         Vnum = 312, 
+         Cost = 300, 
          Flags = 
          {
             [31] = "HumanSize", 
          }, 
-         Name = "padded pants", 
-         Vnum = 312, 
+         ItemType = "armor", 
+         ShortDescr = "some padded pants", 
+         Weight = 5, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [5] = "Legs", 
          }, 
+         Description = "Some padded pants were left here.", 
       }, 
       [313] = 
       {
-         ItemType = "armor", 
+         ExtraDescriptions = 
+         {
+         }, 
          Layers = 1, 
-         ShortDescr = "a perferated t-shirt", 
-         Description = "A perferated t-shirt was left here.", 
-         Cost = 50, 
-         Weight = 1, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          Affects = 
          {
             [1] = 
@@ -16460,39 +11737,39 @@ mpmload 311\
                Location = 40, 
             }, 
          }, 
+         Name = "perferated t-shirt", 
+         Vnum = 313, 
+         Cost = 50, 
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
+         ItemType = "armor", 
+         ShortDescr = "a perferated t-shirt", 
+         Weight = 1, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         Description = "A perferated t-shirt was left here.", 
+      }, 
+      [314] = 
+      {
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 96, 
          ObjectValues = 
          {
-            [1] = 0, 
+            [1] = 10, 
             [2] = 0, 
             [3] = 0, 
             [4] = 0, 
             [5] = 0, 
             [0] = 0, 
          }, 
-         Flags = 
-         {
-            [31] = "HumanSize", 
-         }, 
-         Name = "perferated t-shirt", 
-         Vnum = 313, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-      }, 
-      [314] = 
-      {
-         ItemType = "armor", 
-         Layers = 96, 
-         ShortDescr = "a blast shielded vest", 
-         Description = "A blast shielded vest would make a nice christmas present.", 
-         Cost = 800, 
-         Weight = 10, 
          Affects = 
          {
             [1] = 
@@ -16511,51 +11788,30 @@ mpmload 311\
                Location = 52, 
             }, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 10, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
+         Name = "blast shielded vest", 
+         Vnum = 314, 
+         Cost = 800, 
          Flags = 
          {
             [31] = "HumanSize", 
          }, 
-         Name = "blast shielded vest", 
-         Vnum = 314, 
+         ItemType = "armor", 
+         ShortDescr = "a blast shielded vest", 
+         Weight = 10, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
+         Description = "A blast shielded vest would make a nice christmas present.", 
       }, 
       [315] = 
       {
-         ItemType = "weapon", 
-         Layers = 0, 
-         ShortDescr = "an enhanced force pike", 
-         Description = "An enhanced force pike was dropped here.", 
-         Cost = 3600, 
-         Weight = 12, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -2, 
-               Location = 18, 
-            }, 
-         }, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 9, 
@@ -16565,34 +11821,34 @@ mpmload 311\
             [5] = 1000, 
             [0] = 0, 
          }, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = -2, 
+               Location = 18, 
+            }, 
+         }, 
          Name = "enhanced force pike", 
          Vnum = 315, 
+         Cost = 3600, 
+         ItemType = "weapon", 
+         ShortDescr = "an enhanced force pike", 
+         Weight = 12, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
+         Description = "An enhanced force pike was dropped here.", 
       }, 
       [316] = 
       {
-         ItemType = "weapon", 
-         Layers = 0, 
-         ShortDescr = "a Blastech Persuader Holdout Blaster", 
-         Description = "A holdout blaster might come in handy.", 
-         Cost = 2500, 
-         Weight = 4, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -1, 
-               Location = 19, 
-            }, 
-         }, 
-         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 7, 
@@ -16602,26 +11858,34 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = -1, 
+               Location = 19, 
+            }, 
+         }, 
          Name = "blastech persuader holdout blaster", 
          Vnum = 316, 
+         Cost = 2500, 
+         ItemType = "weapon", 
+         ShortDescr = "a Blastech Persuader Holdout Blaster", 
+         Weight = 4, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
+         Description = "A holdout blaster might come in handy.", 
       }, 
       [317] = 
       {
-         ItemType = "armor", 
-         Layers = 0, 
-         ShortDescr = "a vest", 
-         Description = "A vest was dropped here.", 
-         Cost = 800, 
-         Weight = 10, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 4, 
@@ -16631,30 +11895,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "vest", 
+         Vnum = 317, 
+         Cost = 800, 
          Flags = 
          {
             [31] = "HumanSize", 
          }, 
-         Name = "vest", 
-         Vnum = 317, 
+         ItemType = "armor", 
+         ShortDescr = "a vest", 
+         Weight = 10, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
+         Description = "A vest was dropped here.", 
       }, 
       [318] = 
       {
-         ItemType = "armor", 
-         Layers = 0, 
-         ShortDescr = "some short pants", 
-         Description = "Some short pants were left here.", 
-         Cost = 300, 
-         Weight = 5, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 5, 
@@ -16664,38 +11928,30 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Name = "short pants", 
+         Vnum = 318, 
+         Cost = 300, 
          Flags = 
          {
             [31] = "HumanSize", 
          }, 
-         Name = "short pants", 
-         Vnum = 318, 
+         ItemType = "armor", 
+         ShortDescr = "some short pants", 
+         Weight = 5, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [5] = "Legs", 
          }, 
+         Description = "Some short pants were left here.", 
       }, 
       [319] = 
       {
-         ItemType = "armor", 
-         Layers = 48, 
-         ShortDescr = "a police uniform top", 
-         Description = "Part of a police uniform is here.", 
-         Cost = 0, 
-         Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 27, 
-            }, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
-         ActionDescription = "", 
+         Layers = 48, 
          ObjectValues = 
          {
             [1] = 3, 
@@ -16705,4574 +11961,9344 @@ mpmload 311\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Modifier = 1, 
+               Location = 27, 
+            }, 
+         }, 
+         Name = "coruscant police moisture suit top", 
+         Vnum = 319, 
+         Cost = 0, 
          Flags = 
          {
             [19] = "LargeSize", 
          }, 
-         Name = "coruscant police moisture suit top", 
-         Vnum = 319, 
+         ItemType = "armor", 
+         ShortDescr = "a police uniform top", 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [3] = "Body", 
          }, 
+         Description = "Part of a police uniform is here.", 
       }, 
    }, 
+   VnumRanges = 
+   {
+      Room = 
+      {
+         Last = 499, 
+         First = 250, 
+      }, 
+      Mob = 
+      {
+         Last = 499, 
+         First = 299, 
+      }, 
+      Object = 
+      {
+         Last = 499, 
+         First = 300, 
+      }, 
+   }, 
+   LowEconomy = 21119304, 
+   Mobiles = 
+   {
+      [320] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 320, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [321] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 321, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 10, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [322] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "begger child", 
+         Vnum = 322, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [10] = "Practice", 
+         }, 
+         ArmorClass = 95, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 2, 
+         LongDescr = "A small child begs for money.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a begger", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [323] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "gamorrean guard", 
+         Vnum = 323, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = -25, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 50, 
+         LongDescr = "&G A big gamorrean guard is here watching the refinery entrance. &x\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [14] = "gamorrese", 
+            }, 
+            Speaking = 
+            {
+               [14] = "gamorrese", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 10, 
+         HitRoll = 10, 
+         ShortDescr = "a gamorrean guard", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [324] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Hutt", 
+         Name = "hutt", 
+         Vnum = 324, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [10] = "Practice", 
+            [30] = "Prototype", 
+         }, 
+         ArmorClass = -150, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 100, 
+         LongDescr = "A hutt is here looking over his profit reports.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [4] = "huttese", 
+            }, 
+            Speaking = 
+            {
+               [4] = "huttese", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "if ovnuminv(7315) >= 1\
+evil $n\
+' ahhh most excellent , my supplies have arrived.\
+mpwithdraw 2000\
+give 2000 credits $n\
+mpgain $n 4 2000\
+mpat 10299 drop package \
+else \
+' fool this isn't what i orderd\
+endif\
+mppurge package\
+", 
+               Arguments = "package", 
+               MudProgType = "give_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         ShortDescr = "a Hutt", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 400, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [325] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "Toodan", 
+         Vnum = 325, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [30] = "Prototype", 
+            [27] = "NoCorpse", 
+         }, 
+         ArmorClass = -25, 
+         Sex = "undistinguished", 
+         Alignment = -1000, 
+         Level = 50, 
+         LongDescr = "A human tries to hide his face from you.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 329\
+mpforce mobslave mpoload 10212\
+mpforce mobslave drop all\
+mppurge mobslave\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 10, 
+         HitRoll = 10, 
+         ShortDescr = "Toodan", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [326] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "Noktok", 
+         Vnum = 326, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [27] = "NoCorpse", 
+         }, 
+         ArmorClass = -75, 
+         Sex = "undistinguished", 
+         Alignment = -1000, 
+         Level = 70, 
+         LongDescr = "A scrawny humanoid lurks in the shadows.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 329\
+mpforce mobslave mpoload 10213\
+mpforce mobslave drop all\
+mppurge mobslave\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 14, 
+         HitRoll = 14, 
+         ShortDescr = "NokTok", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 7, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 700, 
+            HitSizeDice = 10, 
+            HitNoDice = 14, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [327] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "Pleebo", 
+         Vnum = 327, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [27] = "NoCorpse", 
+         }, 
+         ArmorClass = -150, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 100, 
+         LongDescr = "A dangerous looking rodian glares at you.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [3] = "rodese", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+               [3] = "rodese", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 329\
+mpforce mobslave mpoload 10214\
+mpforce mobslave drop all\
+mppurge mobslave\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         ShortDescr = "pleebo", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [328] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Defel", 
+         Name = "Sleejat", 
+         Vnum = 328, 
+         AffectedBy = 
+         {
+            [16] = "Hide", 
+            [9] = "Infrared", 
+            [13] = "Protect", 
+            [15] = "Sneak", 
+            [7] = "Sanctuary", 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [12] = "Deadly", 
+            [10] = "Practice", 
+            [27] = "NoCorpse", 
+         }, 
+         ArmorClass = -162, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 105, 
+         LongDescr = "&RA pair of red eyes stare at you from the shadows.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [21] = "defel", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+               [21] = "defel", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 329\
+mpforce mobslave mpoload 10216\
+mpforce mobslave drop all\
+mppurge mobslave\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 21, 
+         HitRoll = 21, 
+         ShortDescr = "Sleejat", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
+            HitNoDice = 21, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [329] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "mobslave", 
+         Vnum = 329, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [21] = "Secretive", 
+            [30] = "Prototype", 
+         }, 
+         ArmorClass = -162, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 105, 
+         LongDescr = "A mouse droid tries to avoid being crushed.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpgoto 10299\
+say purge\
+", 
+               Arguments = "100", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 21, 
+         HitRoll = 21, 
+         ShortDescr = "a mouse droid", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
+            HitNoDice = 21, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [400] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "prostitute woman", 
+         Vnum = 400, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         ArmorClass = 62, 
+         Sex = "female", 
+         Alignment = 0, 
+         Level = 15, 
+         LongDescr = "A prostitute is giving you the time of your life.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "if rand(5)\
+  french $r\
+else\
+  if rand(10)\
+    grope $r\
+  else\
+    if rand(15)\
+      lick $r\
+    else\
+      if rand(20)\
+        moan\
+      else\
+        if rand(25)\
+          swoon\
+        else\
+          if rand(30)\
+            fondle prost\
+          else\
+            if rand(35)\
+              pounce $r\
+            else\
+              kiss $r\
+            endif\
+          endif\
+        endif\
+      endif\
+    endif\
+  endif\
+endif\
+", 
+               Arguments = "100", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 3, 
+         HitRoll = 3, 
+         ShortDescr = "a prostitute", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 150, 
+            HitSizeDice = 10, 
+            HitNoDice = 3, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [401] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "young prostitute woman girl wp1", 
+         Vnum = 401, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 62, 
+         Sex = "female", 
+         Alignment = 0, 
+         Level = 15, 
+         LongDescr = "A young woman is wearing a very skimpy outfit.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "flirt $n\
+Say 50 credits and I'll show you a really good time.\
+", 
+               Arguments = "100", 
+               MudProgType = "all_greet_prog", 
+            }, 
+            [2] = 
+            {
+               Code = "mpechoat $n A prostitute escorts you to a small brothel.\
+mpechoaround $n $n leaves with a prostitute.\
+mptransfer $n 462\
+mpgoto 461\
+", 
+               Arguments = "50", 
+               MudProgType = "bribe_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 3, 
+         HitRoll = 3, 
+         ShortDescr = "a prostitute", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 150, 
+            HitSizeDice = 10, 
+            HitNoDice = 3, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [499] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "bookend", 
+         Vnum = 499, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 0, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 1, 
+         LongDescr = "Some god abandoned a newly created bookend here.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a newly created bookend", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [403] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "prostitute young man ", 
+         Vnum = 403, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+         }, 
+         ArmorClass = 0, 
+         Sex = "female", 
+         Alignment = 0, 
+         Level = 40, 
+         LongDescr = "A young man is wearing only a g-string and a cutoff t-shirt.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "if rand(5)\
+  french $r\
+else\
+  if rand(10)\
+    grope $r\
+  else\
+    if rand(15)\
+      lick $r\
+    else\
+      if rand(20)\
+        moan\
+      else\
+        if rand(25)\
+          swoon\
+        else\
+          if rand(30)\
+            fondle prost\
+          else\
+            if rand(35)\
+              pounce $r\
+            else\
+              kiss $r\
+            endif\
+          endif\
+        endif\
+      endif\
+    endif\
+  endif\
+endif\
+wake $n\
+stand\
+if ovnumhere(30) < 1\
+mpoload 30\
+drop fire\
+endif\
+aid $n\
+", 
+               Arguments = "100", 
+               MudProgType = "rand_prog", 
+            }, 
+            [2] = 
+            {
+               Code = "mpmload 403\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+            [3] = 
+            {
+               Code = "peace\
+open w\
+open e\
+open s\
+open n\
+open d\
+open u\
+mpforce $n flee\
+mpforce $n flee\
+mpforce $n flee\
+mpforce $n flee\
+flee\
+flee\
+flee\
+", 
+               Arguments = "100", 
+               MudProgType = "fight_prog", 
+            }, 
+            [4] = 
+            {
+               Code = "mpmload 403\
+mpforce man mpecho He returns fully healed.\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 8, 
+         HitRoll = 8, 
+         ShortDescr = "a young man", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 4, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 400, 
+            HitSizeDice = 10, 
+            HitNoDice = 8, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [404] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "male prostitute young man ymp", 
+         Vnum = 404, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 62, 
+         Sex = "female", 
+         Alignment = 0, 
+         Level = 15, 
+         LongDescr = "A young man is wearing only a g-string and a cutoff t-shirt.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "flirt $n\
+Say 50 credits and I'll show you a really good time.\
+", 
+               Arguments = "100", 
+               MudProgType = "all_greet_prog", 
+            }, 
+            [2] = 
+            {
+               Code = "mpechoat $n A prostitute escorts you to a small brothel.\
+mpechoaround $n $n leaves with a male prostitute.\
+mptransfer $n 463\
+mpgoto 461\
+", 
+               Arguments = "50", 
+               MudProgType = "bribe_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a young man", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 150, 
+            HitSizeDice = 10, 
+            HitNoDice = 3, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [405] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "granite slug", 
+         Vnum = 405, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+         }, 
+         ArmorClass = 97, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 1, 
+         LongDescr = "A granite slug edges its way across the rock.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SpecFuns = 
+         {
+            [1] = "spec_fido", 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a granite slug", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 10, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [406] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Trandoshan", 
+         Name = "Trandoshan Guard", 
+         Vnum = 406, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = -87, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 75, 
+         LongDescr = "A Trandoshan guard stands by the westernmost door.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [22] = "dosh", 
+            }, 
+            Speaking = 
+            {
+               [22] = "dosh", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 15, 
+         HitRoll = 15, 
+         ShortDescr = "a Trandoshan guard", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 7, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 750, 
+            HitSizeDice = 10, 
+            HitNoDice = 15, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 100, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [407] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Rodian", 
+         Name = "rodian", 
+         Vnum = 407, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [10] = "Practice", 
+         }, 
+         ArmorClass = 50, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 20, 
+         LongDescr = "A rodian looks up and down the street as if looking for somebody.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [3] = "rodese", 
+            }, 
+            Speaking = 
+            {
+               [3] = "rodese", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 4, 
+         HitRoll = 4, 
+         ShortDescr = "a Rodian", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 200, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 100, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "Rodians are well known throughout the galaxy as deadly bounty hunters. They\
+are easily disdinguished by their tapered snouts, large eyes, green skin,\
+crested heads and suction copped fingers.  \
+", 
+      }, 
+      [408] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human police officer cop", 
+         Vnum = 408, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [10] = "Practice", 
+         }, 
+         ArmorClass = 37, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 25, 
+         LongDescr = "A police officer patrolls the city streets.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SpecFuns = 
+         {
+            [1] = "spec_guardian", 
+            [2] = "spec_police_attack", 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 5, 
+         HitRoll = 5, 
+         ShortDescr = "a human police officer", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 250, 
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [409] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Mon Calamari", 
+         Name = "mon calamarian police officer cop", 
+         Vnum = 409, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 37, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 25, 
+         LongDescr = "A police officer patrolls the city streets.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
+         }, 
+         SpecFuns = 
+         {
+            [1] = "spec_guardian", 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a Mon Calamarian cop", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 250, 
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [410] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Wookiee", 
+         Name = "old wookiee woman", 
+         Vnum = 410, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 70, 
+         Sex = "female", 
+         Alignment = 0, 
+         Level = 12, 
+         LongDescr = "An old wookiee woman limps by.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 2, 
+         HitRoll = 2, 
+         ShortDescr = "an old wookiee woman", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 120, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 20, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [411] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "junkie human", 
+         Vnum = 411, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "spice", 
+            }, 
+            ProfitSell = 90, 
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            KeeperShortDescr = "a junkie", 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [7] = "Wimpy", 
+         }, 
+         ArmorClass = 50, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 20, 
+         LongDescr = "A junkie wanders the streets in serch of a fix.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "say Got any spice?\
+", 
+               Arguments = "30", 
+               MudProgType = "all_greet_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         DamRoll = 4, 
+         HitRoll = 4, 
+         ShortDescr = "a junkie", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 200, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 20, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [412] = 
+      {
+         Stats = 
+         {
+            Charisma = 9, 
+            Wisdom = 9, 
+            Dexterity = 20, 
+            Constitution = 18, 
+            Luck = 13, 
+            Strength = 25, 
+            Intelligence = 9, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "Self Defence Trainer", 
+         Vnum = 412, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [9] = "Train", 
+            [10] = "Practice", 
+            [28] = "_28", 
+         }, 
+         ArmorClass = -150, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 100, 
+         LongDescr = "A self defence trainer can give you a few lessons.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         ShortDescr = "a self defence trainer", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [413] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "target", 
+         Vnum = 413, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [26] = "Droid", 
+         }, 
+         ArmorClass = 0, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 1, 
+         LongDescr = "A target hangs on the wall here.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 413\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a target", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 1, 
+            HitNoDice = 1, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [414] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "student sparring partner", 
+         Vnum = 414, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [25] = "NoKill", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 97, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 1, 
+         LongDescr = "A fellow student wants to spar with you.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a student", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 10, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [415] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "student sparring partner", 
+         Vnum = 415, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [25] = "NoKill", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 95, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 2, 
+         LongDescr = "A fellow student wants to spar with you.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a student", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [416] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "student sparring partner", 
+         Vnum = 416, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [25] = "NoKill", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 92, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 3, 
+         LongDescr = "A fellow student wants to spar with you.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a student", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 30, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [417] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "student sparring partner", 
+         Vnum = 417, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [25] = "NoKill", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 90, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 4, 
+         LongDescr = "A fellow student wants to spar with you.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a student", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 40, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [418] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "student sparring partner", 
+         Vnum = 418, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [25] = "NoKill", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 87, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 5, 
+         LongDescr = "A fellow student wants to spar with you.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 1, 
+         HitRoll = 1, 
+         ShortDescr = "a student", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [419] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "training remote", 
+         Vnum = 419, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 97, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 1, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 419\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a remote", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 10, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [420] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "training remote", 
+         Vnum = 420, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 95, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 2, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 420\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a remote", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [421] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "training remote", 
+         Vnum = 421, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 92, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 3, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 421\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a remote", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 30, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [422] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "training remote", 
+         Vnum = 422, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 90, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 4, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 422\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a remote", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 40, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [423] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "training remote", 
+         Vnum = 423, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 87, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 5, 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpmload 423\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 1, 
+         HitRoll = 1, 
+         ShortDescr = "a remote", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [424] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "shopkeeper", 
+         Vnum = 424, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            KeeperShortDescr = "a shopkeeper", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         ArmorClass = 50, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 20, 
+         LongDescr = "A shopkeeper is here ready to assist you.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         DamRoll = 4, 
+         HitRoll = 4, 
+         ShortDescr = "a shopkeeper", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 200, 
+            HitSizeDice = 10, 
+            HitNoDice = 4, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [425] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 25, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "Masoc", 
+         Vnum = 425, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         ArmorClass = -150, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 100, 
+         LongDescr = "A shady looking character named Masoc sits here.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "if ovnumcarry(22502)\
+mpecho Masoc's eyes light up as you hand him the package.\
+say You have done well to get this to me.\
+mpgain $n 4 40000\
+mpwithdraw 10000\
+give 10000 credits $n\
+mpat 10299 drop all\
+mpat 10299 purge package\
+else\
+say This isn't for me\
+frown\
+drop all\
+endif\
+", 
+               Arguments = "gives", 
+               MudProgType = "act_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         ShortDescr = "Masoc", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "Masoc is a short, ugly human with shifty eyes.\
+He is sitting behind a small desk littered with papers\
+He is wearing a cheap suit.\
+", 
+      }, 
+      [426] = 
+      {
+         Stats = 
+         {
+            Charisma = 25, 
+            Wisdom = 25, 
+            Dexterity = 25, 
+            Constitution = 25, 
+            Luck = 25, 
+            Strength = 25, 
+            Intelligence = 25, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "Craftsman Jim Woodwiess", 
+         Vnum = 426, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            KeeperShortDescr = "Craftsman Jim Woodwiess", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [24] = "NoAssist", 
+            [25] = "NoKill", 
+            [27] = "NoCorpse", 
+            [6] = "StayArea", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = -150, 
+         Sex = "male", 
+         Alignment = 1000, 
+         Level = 100, 
+         LongDescr = "Craftsman Jim Woodwiess is selling supplies to assist in product development.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [18] = "_clan", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         Immune = 
+         {
+            [1] = "cold", 
+            [2] = "electricity", 
+            [3] = "energy", 
+            [5] = "pierce", 
+            [6] = "slash", 
+            [7] = "acid", 
+            [8] = "poison", 
+            [9] = "drain", 
+            [10] = "sleep", 
+            [11] = "charm", 
+            [12] = "hold", 
+            [13] = "nonmagic", 
+            [20] = "magic", 
+            [21] = "paralysis", 
+            [0] = "fire", 
+         }, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         ShortDescr = "Craftsman Jim Woodwiess", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 100, 
+            DamSizeDice = 10, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "Average Bob Vila lookalike..one would almost think he could be..his CLONE.\
+", 
+      }, 
+      [299] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "Roxie the receptionist", 
+         Vnum = 299, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         ArmorClass = 0, 
+         Sex = "female", 
+         Alignment = 0, 
+         Level = 1, 
+         LongDescr = "Roxie the receptionist sits behind a desk.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "the receptionist", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [300] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "bookend", 
+         Vnum = 300, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 0, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 1, 
+         LongDescr = "Some god abandoned a newly created bookend here.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a newly created bookend", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [301] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "A young human man.", 
+         Vnum = 301, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A young man is walking by.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 2, 
+         HitRoll = 2, 
+         ShortDescr = "a human", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 0, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 10, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "This young human man is in his early twenties. He is dressed in the latest\
+fashions and is clean cut. He is probably a student at the university.\
+", 
+      }, 
+      [302] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "waitress", 
+         Vnum = 302, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitSell = 90, 
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            KeeperShortDescr = "the waitress", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+         }, 
+         ArmorClass = 0, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 1, 
+         LongDescr = "A waitress is waiting to take your order.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpechoat $n A waitress greets you as you enter and escorts you to a table.\
+mpechoaround $n $n takes a seat at a table.\
+say What can I get you?\
+", 
+               Arguments = "100", 
+               MudProgType = "all_greet_prog", 
+            }, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [14] = "gamorrese", 
+               [17] = "jawaese", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [26] = "falleen", 
+               [27] = "binary", 
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "the waitress", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "The waitress is an older human woman who doesn't look overly impressed with\
+the thought of having to serve you. You imagine that she probably doesn't\
+enjoy her job. \
+", 
+      }, 
+      [303] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "young human woman ym1", 
+         Vnum = 303, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 70, 
+         Sex = "female", 
+         Alignment = 0, 
+         Level = 12, 
+         LongDescr = "A young woman walks by.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 2, 
+         HitRoll = 2, 
+         ShortDescr = "a young woman", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 0, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 120, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 12, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "This young human woman is in her early twenties. She is very attractive and\
+dressed in the latest fashions. She is probably a student at the\
+university. \
+", 
+      }, 
+      [304] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "businessman man human", 
+         Vnum = 304, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 80, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 8, 
+         LongDescr = "A man in a suit walks quickly by.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 1, 
+         HitRoll = 1, 
+         ShortDescr = "a business man", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 80, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 14, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "There is nothing unusual about this guy at all. He is one of millions of\
+middle aged business people found in the enormous governemnt city. Funny\
+how they all seem to look the same.\
+", 
+      }, 
+      [305] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "businesswomanman woman human", 
+         Vnum = 305, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 82, 
+         Sex = "female", 
+         Alignment = 0, 
+         Level = 7, 
+         LongDescr = "A woman in a suit outfit walks quickly by.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 1, 
+         HitRoll = 1, 
+         ShortDescr = "a business woman", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 70, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 11, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "There is nothing unusual about this woman at all. She is one of millions of\
+middle aged business people found in the enormous governemnt city. Funny\
+how they all seem to look the same.\
+", 
+      }, 
+      [306] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Chadra-Fan", 
+         Name = "chadra-fan woman", 
+         Vnum = 306, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+         }, 
+         ArmorClass = 87, 
+         Sex = "female", 
+         Alignment = 0, 
+         Level = 5, 
+         LongDescr = "A young Chadra-Fan woman is here.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [23] = "chadra-fan", 
+            }, 
+            Speaking = 
+            {
+               [23] = "chadra-fan", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 1, 
+         HitRoll = 1, 
+         ShortDescr = "a Chadra-Fan", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 18, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "Chadra-fan area race of small rodent like humanoids coming from the planet\
+Chad. This one smiles at you as she walks by. \
+", 
+      }, 
+      [307] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Verpine", 
+         Name = "verpine man", 
+         Vnum = 307, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+         }, 
+         ArmorClass = 90, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 5, 
+         LongDescr = "A young Verpine man is here.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [20] = "verpine", 
+            }, 
+            Speaking = 
+            {
+               [20] = "verpine", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a Verpine", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 0, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 19, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "The verpine are a very intelligent race of bipedal insectoids. The have\
+large eyes short snouts and 2 antennea coming out of the sides of their\
+heads. Their bodies are thin and stick like.\
+", 
+      }, 
+      [308] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Verpine", 
+         Name = "verpine woman", 
+         Vnum = 308, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+         }, 
+         ArmorClass = 87, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 5, 
+         LongDescr = "Verpine woman is here.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [20] = "verpine", 
+            }, 
+            Speaking = 
+            {
+               [20] = "verpine", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 1, 
+         HitRoll = 1, 
+         ShortDescr = "a verpine woman", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+            HitNoDice = 1, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 9, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "The verpine are a very intelligent race of bipedal insectoids. The have\
+large eyes short snouts and 2 antennea coming out of the sides of their\
+heads. Their bodies are thin and stick like.\
+", 
+      }, 
+      [309] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "pawn broker", 
+         Vnum = 309, 
+         Shop = 
+         {
+            BuyTypes = 
+            {
+               [1] = "armor", 
+               [2] = "container", 
+               [3] = "smut", 
+               [4] = "device", 
+               [0] = "weapon", 
+            }, 
+            ProfitSell = 50, 
+            ProfitBuy = 150, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            KeeperShortDescr = "the pawnbroker", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         ArmorClass = -150, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 100, 
+         LongDescr = "A pawnbroker will buy almost anything.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpoload 325\
+", 
+               Arguments = "100", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         ShortDescr = "the pawnbroker", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 20, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [310] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "automated defence system", 
+         Vnum = 310, 
+         AffectedBy = 
+         {
+            [1] = "Invisible", 
+            [16] = "Hide", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [12] = "Deadly", 
+            [26] = "Droid", 
+            [0] = "Npc", 
+         }, 
+         ArmorClass = -162, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 105, 
+         LongDescr = "An automated defence system is installed on the wall.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 21, 
+         HitRoll = 21, 
+         ShortDescr = "an automatic defence laser", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
+            HitNoDice = 21, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [311] = 
+      {
+         Stats = 
+         {
+            Charisma = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Constitution = 10, 
+            Luck = 10, 
+            Strength = 10, 
+            Intelligence = 10, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "taurill", 
+         Vnum = 311, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [21] = "Secretive", 
+         }, 
+         ArmorClass = 0, 
+         Sex = "undistinguished", 
+         Alignment = 0, 
+         Level = 1, 
+         LongDescr = "Taurills are a Hutts best friend.. try calling him.\
+", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpechoat $n A taurill hops up onto your chest.\
+mpechoaround $n A taurill hops up onto $ns chest.\
+mpoload 328\
+give taurill $n\
+mpforce $n wear taurill\
+mpgoto 7\
+say ok purge me\
+", 
+               Arguments = "here", 
+               MudProgType = "speech_prog", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a taurill", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [312] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 312, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 2, 
+         HitRoll = 2, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [313] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 313, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [314] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 314, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [315] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 315, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [316] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 316, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [317] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 317, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [318] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 318, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+      [319] = 
+      {
+         Stats = 
+         {
+            Charisma = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Constitution = 13, 
+            Luck = 13, 
+            Strength = 13, 
+            Intelligence = 13, 
+            Force = 0, 
+         }, 
+         Race = "Human", 
+         Name = "human citizen", 
+         Vnum = 319, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ArmorClass = 75, 
+         Sex = "male", 
+         Alignment = 0, 
+         Level = 10, 
+         LongDescr = "A human citizen walks quickly down the street.\
+", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         ShortDescr = "a human citizen", 
+         Weight = 0, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Credits = 0, 
+         Position = "standing", 
+         DefaultPosition = "standing", 
+         Description = "", 
+      }, 
+   }, 
+   HighEconomy = 0, 
+   FileFormatVersion = 1, 
+   Author = "Darrik", 
    Resets = 
    {
       [1] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 345, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 345, 
       }, 
       [2] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 340, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 340, 
       }, 
       [3] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 335, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 335, 
       }, 
       [4] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 330, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 330, 
       }, 
       [5] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 325, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 325, 
       }, 
       [6] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 320, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 320, 
       }, 
       [7] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 315, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 315, 
       }, 
       [8] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 305, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 305, 
       }, 
       [9] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 368, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 368, 
       }, 
       [10] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 369, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 369, 
       }, 
       [11] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [12] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [13] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 359, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 359, 
       }, 
       [14] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [15] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [16] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 358, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 358, 
       }, 
       [17] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [18] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [19] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 357, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 357, 
       }, 
       [20] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [21] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [22] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 347, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 347, 
       }, 
       [23] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [24] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [25] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 348, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 348, 
       }, 
       [26] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [27] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [28] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 349, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 349, 
       }, 
       [29] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [30] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [31] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 339, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 339, 
       }, 
       [32] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [33] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [34] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 338, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 338, 
       }, 
       [35] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [36] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [37] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 328, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 328, 
       }, 
       [38] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [39] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [40] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 329, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 329, 
       }, 
       [41] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [42] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [43] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 307, 
-         Command = "M", 
          Arg1 = 303, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 307, 
       }, 
       [44] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 308, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [45] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 307, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [46] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 384, 
-         Command = "O", 
          Arg1 = 306, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 384, 
       }, 
       [47] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 303, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 303, 
       }, 
       [48] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 313, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 313, 
       }, 
       [49] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 312, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 312, 
       }, 
       [50] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 324, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 324, 
       }, 
       [51] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 334, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 334, 
       }, 
       [52] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 332, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 332, 
       }, 
       [53] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 342, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 342, 
       }, 
       [54] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 341, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 341, 
       }, 
       [55] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 351, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 351, 
       }, 
       [56] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 353, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 353, 
       }, 
       [57] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 352, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 352, 
       }, 
       [58] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 362, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 362, 
       }, 
       [59] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 361, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 361, 
       }, 
       [60] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 363, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 363, 
       }, 
       [61] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 370, 
-         Command = "M", 
          Arg1 = 304, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 370, 
       }, 
       [62] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 369, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 369, 
       }, 
       [63] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 361, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 361, 
       }, 
       [64] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 364, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 364, 
       }, 
       [65] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 354, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 354, 
       }, 
       [66] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 344, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 344, 
       }, 
       [67] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 343, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 343, 
       }, 
       [68] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 341, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 341, 
       }, 
       [69] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 330, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 330, 
       }, 
       [70] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 320, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 320, 
       }, 
       [71] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 321, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 321, 
       }, 
       [72] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 324, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 324, 
       }, 
       [73] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 314, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 314, 
       }, 
       [74] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 315, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 315, 
       }, 
       [75] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 305, 
-         Command = "M", 
          Arg1 = 305, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 305, 
       }, 
       [76] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 306, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 306, 
       }, 
       [77] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 314, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 314, 
       }, 
       [78] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 329, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 329, 
       }, 
       [79] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 332, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 332, 
       }, 
       [80] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 335, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 335, 
       }, 
       [81] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 338, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 338, 
       }, 
       [82] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 340, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 340, 
       }, 
       [83] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 344, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 344, 
       }, 
       [84] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 347, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 347, 
       }, 
       [85] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 349, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 349, 
       }, 
       [86] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 350, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 350, 
       }, 
       [87] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 353, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 353, 
       }, 
       [88] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 357, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 357, 
       }, 
       [89] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 360, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 360, 
       }, 
       [90] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 363, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 363, 
       }, 
       [91] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 366, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 366, 
       }, 
       [92] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 369, 
-         Command = "M", 
          Arg1 = 306, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 369, 
       }, 
       [93] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 370, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 370, 
       }, 
       [94] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 369, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 369, 
       }, 
       [95] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 368, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 368, 
       }, 
       [96] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 366, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 366, 
       }, 
       [97] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 364, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 364, 
       }, 
       [98] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 363, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 363, 
       }, 
       [99] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 362, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 362, 
       }, 
       [100] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 361, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 361, 
       }, 
       [101] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 360, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 360, 
       }, 
       [102] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 359, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 359, 
       }, 
       [103] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 358, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 358, 
       }, 
       [104] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 357, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 357, 
       }, 
       [105] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 356, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 356, 
       }, 
       [106] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 355, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 355, 
       }, 
       [107] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 354, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 354, 
       }, 
       [108] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 353, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 353, 
       }, 
       [109] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 352, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 352, 
       }, 
       [110] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 351, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 351, 
       }, 
       [111] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 350, 
-         Command = "M", 
          Arg1 = 307, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 350, 
       }, 
       [112] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 370, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 370, 
       }, 
       [113] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 369, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 369, 
       }, 
       [114] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 368, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 368, 
       }, 
       [115] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 366, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 366, 
       }, 
       [116] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 364, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 364, 
       }, 
       [117] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 363, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 363, 
       }, 
       [118] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 362, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 362, 
       }, 
       [119] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 361, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 361, 
       }, 
       [120] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 360, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 360, 
       }, 
       [121] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 359, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 359, 
       }, 
       [122] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 358, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 358, 
       }, 
       [123] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 357, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 357, 
       }, 
       [124] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 356, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 356, 
       }, 
       [125] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 355, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 355, 
       }, 
       [126] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 354, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 354, 
       }, 
       [127] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 353, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 353, 
       }, 
       [128] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 352, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 352, 
       }, 
       [129] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 351, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 351, 
       }, 
       [130] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 350, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 350, 
       }, 
       [131] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 349, 
-         Command = "M", 
          Arg1 = 308, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 349, 
       }, 
       [132] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 465, 
-         Command = "O", 
          Arg1 = 309, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 465, 
       }, 
       [133] = 
       {
-         Arg2 = 1, 
-         MiscData = 0, 
-         Arg3 = 1, 
-         Command = "D", 
          Arg1 = 465, 
+         MiscData = 0, 
+         Arg2 = 1, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
       [134] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 372, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 372, 
       }, 
       [135] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 373, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 373, 
       }, 
       [136] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 374, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 374, 
       }, 
       [137] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 375, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 375, 
       }, 
       [138] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 376, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 376, 
       }, 
       [139] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 377, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 377, 
       }, 
       [140] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 378, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 378, 
       }, 
       [141] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 379, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 379, 
       }, 
       [142] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 380, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 380, 
       }, 
       [143] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 381, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 381, 
       }, 
       [144] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 382, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 382, 
       }, 
       [145] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 383, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 383, 
       }, 
       [146] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 384, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 384, 
       }, 
       [147] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 385, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 385, 
       }, 
       [148] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 386, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 386, 
       }, 
       [149] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 387, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 387, 
       }, 
       [150] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 388, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 388, 
       }, 
       [151] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 389, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 389, 
       }, 
       [152] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 390, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 390, 
       }, 
       [153] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 391, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 391, 
       }, 
       [154] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 392, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 392, 
       }, 
       [155] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 393, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 393, 
       }, 
       [156] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 394, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 394, 
       }, 
       [157] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 395, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 395, 
       }, 
       [158] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 396, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 396, 
       }, 
       [159] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 397, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 397, 
       }, 
       [160] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 398, 
-         Command = "M", 
          Arg1 = 405, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 398, 
       }, 
       [161] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 371, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 371, 
       }, 
       [162] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [163] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [164] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [165] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 373, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 373, 
       }, 
       [166] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [167] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [168] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [169] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 375, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 375, 
       }, 
       [170] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [171] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [172] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [173] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 377, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 377, 
       }, 
       [174] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [175] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [176] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [177] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 379, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 379, 
       }, 
       [178] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [179] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [180] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [181] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 381, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 381, 
       }, 
       [182] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [183] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [184] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [185] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 383, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 383, 
       }, 
       [186] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [187] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [188] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [189] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 384, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 384, 
       }, 
       [190] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [191] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [192] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [193] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 385, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 385, 
       }, 
       [194] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [195] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [196] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [197] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 388, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 388, 
       }, 
       [198] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [199] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [200] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [201] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 391, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 391, 
       }, 
       [202] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [203] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [204] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [205] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 393, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 393, 
       }, 
       [206] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [207] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [208] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [209] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 395, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 395, 
       }, 
       [210] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [211] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [212] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [213] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 397, 
-         Command = "M", 
          Arg1 = 407, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 397, 
       }, 
       [214] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 317, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [215] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 318, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [216] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [217] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 305, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 305, 
       }, 
       [218] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [219] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 315, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 315, 
       }, 
       [220] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [221] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 320, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 320, 
       }, 
       [222] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [223] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 325, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 325, 
       }, 
       [224] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [225] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 330, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 330, 
       }, 
       [226] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [227] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 335, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 335, 
       }, 
       [228] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [229] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 340, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 340, 
       }, 
       [230] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [231] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 345, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 345, 
       }, 
       [232] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [233] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 350, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 350, 
       }, 
       [234] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [235] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 355, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 355, 
       }, 
       [236] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [237] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 360, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 360, 
       }, 
       [238] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [239] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 370, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 370, 
       }, 
       [240] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [241] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 375, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 375, 
       }, 
       [242] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [243] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 380, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 380, 
       }, 
       [244] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [245] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 390, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 390, 
       }, 
       [246] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [247] = 
       {
-         Arg2 = 200, 
-         MiscData = 0, 
-         Arg3 = 395, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 0, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 395, 
       }, 
       [248] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [249] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 351, 
-         Command = "M", 
          Arg1 = 409, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 351, 
       }, 
       [250] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 320, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [251] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 319, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [252] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [253] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 356, 
-         Command = "M", 
          Arg1 = 409, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 356, 
       }, 
       [254] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 320, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [255] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 319, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [256] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [257] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 361, 
-         Command = "M", 
          Arg1 = 409, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 361, 
       }, 
       [258] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 320, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [259] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 319, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [260] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [261] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 366, 
-         Command = "M", 
          Arg1 = 409, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 366, 
       }, 
       [262] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 320, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [263] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 319, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [264] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [265] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 464, 
-         Command = "M", 
          Arg1 = 406, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 464, 
       }, 
       [266] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 310, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [267] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 315, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [268] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 313, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [269] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 312, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [270] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 311, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [271] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 314, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [272] = 
       {
-         Arg2 = 0, 
-         MiscData = 0, 
-         Arg3 = 2, 
-         Command = "D", 
          Arg1 = 464, 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Command = "D", 
+         Arg3 = 2, 
       }, 
       [273] = 
       {
-         Arg2 = 2, 
-         MiscData = 0, 
-         Arg3 = 2, 
-         Command = "D", 
          Arg1 = 464, 
+         MiscData = 0, 
+         Arg2 = 2, 
+         Command = "D", 
+         Arg3 = 2, 
       }, 
       [274] = 
       {
-         Arg2 = 3, 
-         MiscData = 0, 
-         Arg3 = 2, 
-         Command = "D", 
          Arg1 = 464, 
+         MiscData = 0, 
+         Arg2 = 3, 
+         Command = "D", 
+         Arg3 = 2, 
       }, 
       [275] = 
       {
-         Arg2 = 30, 
-         MiscData = 0, 
-         Arg3 = 373, 
-         Command = "M", 
          Arg1 = 410, 
+         MiscData = 0, 
+         Arg2 = 30, 
+         Command = "M", 
+         Arg3 = 373, 
       }, 
       [276] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 6, 
-         Command = "E", 
          Arg1 = 322, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 6, 
       }, 
       [277] = 
       {
-         Arg2 = 30, 
-         MiscData = 0, 
-         Arg3 = 377, 
-         Command = "M", 
          Arg1 = 410, 
+         MiscData = 0, 
+         Arg2 = 30, 
+         Command = "M", 
+         Arg3 = 377, 
       }, 
       [278] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 6, 
-         Command = "E", 
          Arg1 = 322, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 6, 
       }, 
       [279] = 
       {
-         Arg2 = 30, 
-         MiscData = 0, 
-         Arg3 = 387, 
-         Command = "M", 
          Arg1 = 410, 
+         MiscData = 0, 
+         Arg2 = 30, 
+         Command = "M", 
+         Arg3 = 387, 
       }, 
       [280] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 6, 
-         Command = "E", 
          Arg1 = 322, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 6, 
       }, 
       [281] = 
       {
-         Arg2 = 30, 
-         MiscData = 0, 
-         Arg3 = 383, 
-         Command = "M", 
          Arg1 = 410, 
+         MiscData = 0, 
+         Arg2 = 30, 
+         Command = "M", 
+         Arg3 = 383, 
       }, 
       [282] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 6, 
-         Command = "E", 
          Arg1 = 322, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 6, 
       }, 
       [283] = 
       {
-         Arg2 = 30, 
-         MiscData = 0, 
-         Arg3 = 393, 
-         Command = "M", 
          Arg1 = 410, 
+         MiscData = 0, 
+         Arg2 = 30, 
+         Command = "M", 
+         Arg3 = 393, 
       }, 
       [284] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 6, 
-         Command = "E", 
          Arg1 = 322, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 6, 
       }, 
       [285] = 
       {
-         Arg2 = 30, 
-         MiscData = 0, 
-         Arg3 = 373, 
-         Command = "M", 
          Arg1 = 410, 
+         MiscData = 0, 
+         Arg2 = 30, 
+         Command = "M", 
+         Arg3 = 373, 
       }, 
       [286] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 6, 
-         Command = "E", 
          Arg1 = 322, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 6, 
       }, 
       [287] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 379, 
-         Command = "M", 
          Arg1 = 411, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 379, 
       }, 
       [288] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 389, 
-         Command = "M", 
          Arg1 = 411, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 389, 
       }, 
       [289] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 398, 
-         Command = "M", 
          Arg1 = 411, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 398, 
       }, 
       [290] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 388, 
-         Command = "M", 
          Arg1 = 411, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 388, 
       }, 
       [291] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 378, 
-         Command = "M", 
          Arg1 = 411, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 378, 
       }, 
       [292] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 374, 
-         Command = "M", 
          Arg1 = 411, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 374, 
       }, 
       [293] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 384, 
-         Command = "M", 
          Arg1 = 411, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 384, 
       }, 
       [294] = 
       {
-         Arg2 = 50, 
-         MiscData = 0, 
-         Arg3 = 394, 
-         Command = "M", 
          Arg1 = 411, 
+         MiscData = 0, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 394, 
       }, 
       [295] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 487, 
-         Command = "M", 
          Arg1 = 413, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 487, 
       }, 
       [296] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 488, 
-         Command = "M", 
          Arg1 = 412, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 488, 
       }, 
       [297] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 470, 
-         Command = "O", 
          Arg1 = 324, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 470, 
       }, 
       [298] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 484, 
-         Command = "M", 
          Arg1 = 414, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 484, 
       }, 
       [299] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 484, 
-         Command = "M", 
          Arg1 = 414, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 484, 
       }, 
       [300] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 484, 
-         Command = "M", 
          Arg1 = 414, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 484, 
       }, 
       [301] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 484, 
-         Command = "M", 
          Arg1 = 414, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 484, 
       }, 
       [302] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 484, 
-         Command = "M", 
          Arg1 = 414, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 484, 
       }, 
       [303] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 489, 
-         Command = "M", 
          Arg1 = 415, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 489, 
       }, 
       [304] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 489, 
-         Command = "M", 
          Arg1 = 415, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 489, 
       }, 
       [305] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 489, 
-         Command = "M", 
          Arg1 = 415, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 489, 
       }, 
       [306] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 489, 
-         Command = "M", 
          Arg1 = 415, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 489, 
       }, 
       [307] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 489, 
-         Command = "M", 
          Arg1 = 415, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 489, 
       }, 
       [308] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 490, 
-         Command = "M", 
          Arg1 = 416, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 490, 
       }, 
       [309] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 490, 
-         Command = "M", 
          Arg1 = 416, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 490, 
       }, 
       [310] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 490, 
-         Command = "M", 
          Arg1 = 416, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 490, 
       }, 
       [311] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 490, 
-         Command = "M", 
          Arg1 = 416, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 490, 
       }, 
       [312] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 490, 
-         Command = "M", 
          Arg1 = 416, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 490, 
       }, 
       [313] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 491, 
-         Command = "M", 
          Arg1 = 417, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 491, 
       }, 
       [314] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 491, 
-         Command = "M", 
          Arg1 = 417, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 491, 
       }, 
       [315] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 491, 
-         Command = "M", 
          Arg1 = 417, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 491, 
       }, 
       [316] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 491, 
-         Command = "M", 
          Arg1 = 417, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 491, 
       }, 
       [317] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 491, 
-         Command = "M", 
          Arg1 = 417, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 491, 
       }, 
       [318] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 492, 
-         Command = "M", 
          Arg1 = 418, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 492, 
       }, 
       [319] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 492, 
-         Command = "M", 
          Arg1 = 418, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 492, 
       }, 
       [320] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 492, 
-         Command = "M", 
          Arg1 = 418, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 492, 
       }, 
       [321] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 492, 
-         Command = "M", 
          Arg1 = 418, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 492, 
       }, 
       [322] = 
       {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 492, 
-         Command = "M", 
          Arg1 = 418, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Command = "M", 
+         Arg3 = 492, 
       }, 
       [323] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 493, 
-         Command = "M", 
          Arg1 = 419, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 493, 
       }, 
       [324] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 494, 
-         Command = "M", 
          Arg1 = 420, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 494, 
       }, 
       [325] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 495, 
-         Command = "M", 
          Arg1 = 421, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 495, 
       }, 
       [326] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 496, 
-         Command = "M", 
          Arg1 = 422, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 496, 
       }, 
       [327] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 497, 
-         Command = "M", 
          Arg1 = 423, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 497, 
       }, 
       [328] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 303, 
-         Command = "M", 
          Arg1 = 312, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 303, 
       }, 
       [329] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [330] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 304, 
-         Command = "M", 
          Arg1 = 312, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 304, 
       }, 
       [331] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [332] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 305, 
-         Command = "M", 
          Arg1 = 312, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 305, 
       }, 
       [333] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [334] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 306, 
-         Command = "M", 
          Arg1 = 312, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 306, 
       }, 
       [335] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [336] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 307, 
-         Command = "M", 
          Arg1 = 312, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 307, 
       }, 
       [337] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [338] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 312, 
-         Command = "M", 
          Arg1 = 313, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 312, 
       }, 
       [339] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [340] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 313, 
-         Command = "M", 
          Arg1 = 313, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 313, 
       }, 
       [341] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [342] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 314, 
-         Command = "M", 
          Arg1 = 313, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 314, 
       }, 
       [343] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [344] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 315, 
-         Command = "M", 
          Arg1 = 313, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 315, 
       }, 
       [345] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [346] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 320, 
-         Command = "M", 
          Arg1 = 313, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 320, 
       }, 
       [347] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [348] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 321, 
-         Command = "M", 
          Arg1 = 314, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 321, 
       }, 
       [349] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [350] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 324, 
-         Command = "M", 
          Arg1 = 314, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 324, 
       }, 
       [351] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [352] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 325, 
-         Command = "M", 
          Arg1 = 314, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 325, 
       }, 
       [353] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [354] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 326, 
-         Command = "M", 
          Arg1 = 314, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 326, 
       }, 
       [355] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [356] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 327, 
-         Command = "M", 
          Arg1 = 314, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 327, 
       }, 
       [357] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [358] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 328, 
-         Command = "M", 
          Arg1 = 314, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 328, 
       }, 
       [359] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [360] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 329, 
-         Command = "M", 
          Arg1 = 314, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 329, 
       }, 
       [361] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [362] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 329, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 329, 
       }, 
       [363] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [364] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 330, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 330, 
       }, 
       [365] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [366] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 332, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 332, 
       }, 
       [367] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [368] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 333, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 333, 
       }, 
       [369] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [370] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 334, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 334, 
       }, 
       [371] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [372] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 335, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 335, 
       }, 
       [373] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [374] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 336, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 336, 
       }, 
       [375] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [376] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 337, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 337, 
       }, 
       [377] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [378] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 338, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 338, 
       }, 
       [379] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [380] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 339, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 339, 
       }, 
       [381] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [382] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 340, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 340, 
       }, 
       [383] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [384] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 341, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 341, 
       }, 
       [385] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [386] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 342, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 342, 
       }, 
       [387] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [388] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 343, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 343, 
       }, 
       [389] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [390] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 344, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 344, 
       }, 
       [391] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [392] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 345, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 345, 
       }, 
       [393] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [394] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 346, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 346, 
       }, 
       [395] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [396] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 347, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 347, 
       }, 
       [397] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [398] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 348, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 348, 
       }, 
       [399] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [400] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 349, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 349, 
       }, 
       [401] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [402] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 350, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 350, 
       }, 
       [403] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [404] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 351, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 351, 
       }, 
       [405] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [406] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 352, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 352, 
       }, 
       [407] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [408] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 353, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 353, 
       }, 
       [409] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [410] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 354, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 354, 
       }, 
       [411] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [412] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 355, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 355, 
       }, 
       [413] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [414] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 356, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 356, 
       }, 
       [415] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [416] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 357, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 357, 
       }, 
       [417] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [418] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 358, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 358, 
       }, 
       [419] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [420] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 359, 
-         Command = "M", 
          Arg1 = 317, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 359, 
       }, 
       [421] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [422] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 360, 
-         Command = "M", 
          Arg1 = 318, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 360, 
       }, 
       [423] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [424] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 361, 
-         Command = "M", 
          Arg1 = 318, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 361, 
       }, 
       [425] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [426] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 362, 
-         Command = "M", 
          Arg1 = 318, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 362, 
       }, 
       [427] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [428] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 363, 
-         Command = "M", 
          Arg1 = 318, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 363, 
       }, 
       [429] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [430] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 364, 
-         Command = "M", 
          Arg1 = 318, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 364, 
       }, 
       [431] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [432] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 366, 
-         Command = "M", 
          Arg1 = 318, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 366, 
       }, 
       [433] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [434] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 367, 
-         Command = "M", 
          Arg1 = 318, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 367, 
       }, 
       [435] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [436] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 368, 
-         Command = "M", 
          Arg1 = 318, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 368, 
       }, 
       [437] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [438] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 369, 
-         Command = "M", 
          Arg1 = 318, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 369, 
       }, 
       [439] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [440] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 370, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 370, 
       }, 
       [441] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [442] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 371, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 371, 
       }, 
       [443] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [444] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 372, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 372, 
       }, 
       [445] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [446] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 373, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 373, 
       }, 
       [447] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [448] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 374, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 374, 
       }, 
       [449] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [450] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 375, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 375, 
       }, 
       [451] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [452] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 376, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 376, 
       }, 
       [453] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [454] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 377, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 377, 
       }, 
       [455] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [456] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 378, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 378, 
       }, 
       [457] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [458] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 379, 
-         Command = "M", 
          Arg1 = 319, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 379, 
       }, 
       [459] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [460] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 380, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 380, 
       }, 
       [461] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [462] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 381, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 381, 
       }, 
       [463] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [464] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 382, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 382, 
       }, 
       [465] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [466] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 383, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 383, 
       }, 
       [467] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [468] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 384, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 384, 
       }, 
       [469] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [470] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 385, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 385, 
       }, 
       [471] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [472] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 386, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 386, 
       }, 
       [473] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [474] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 387, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 387, 
       }, 
       [475] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [476] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 388, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 388, 
       }, 
       [477] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [478] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 389, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 389, 
       }, 
       [479] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [480] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 390, 
-         Command = "M", 
          Arg1 = 320, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 390, 
       }, 
       [481] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [482] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 391, 
-         Command = "M", 
          Arg1 = 321, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 391, 
       }, 
       [483] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [484] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 392, 
-         Command = "M", 
          Arg1 = 321, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 392, 
       }, 
       [485] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [486] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 393, 
-         Command = "M", 
          Arg1 = 321, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 393, 
       }, 
       [487] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [488] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 394, 
-         Command = "M", 
          Arg1 = 321, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 394, 
       }, 
       [489] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [490] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 395, 
-         Command = "M", 
          Arg1 = 321, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 395, 
       }, 
       [491] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [492] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 396, 
-         Command = "M", 
          Arg1 = 321, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 396, 
       }, 
       [493] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [494] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 397, 
-         Command = "M", 
          Arg1 = 321, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 397, 
       }, 
       [495] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [496] = 
       {
-         Arg2 = 100, 
-         MiscData = 0, 
-         Arg3 = 398, 
-         Command = "M", 
          Arg1 = 321, 
+         MiscData = 0, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 398, 
       }, 
       [497] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [498] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 479, 
-         Command = "O", 
          Arg1 = 326, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 479, 
       }, 
       [499] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 479, 
-         Command = "O", 
          Arg1 = 327, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 479, 
       }, 
       [500] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 479, 
-         Command = "O", 
          Arg1 = 32276, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 479, 
       }, 
       [501] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 478, 
-         Command = "O", 
          Arg1 = 32230, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 478, 
       }, 
       [502] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 477, 
-         Command = "O", 
          Arg1 = 10487, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 477, 
       }, 
       [503] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 472, 
-         Command = "M", 
          Arg1 = 323, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 472, 
       }, 
       [504] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 6, 
-         Command = "E", 
          Arg1 = 333, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 6, 
       }, 
       [505] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 14, 
-         Command = "E", 
          Arg1 = 334, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 14, 
       }, 
       [506] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 13, 
-         Command = "E", 
          Arg1 = 336, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 13, 
       }, 
       [507] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 8, 
-         Command = "E", 
          Arg1 = 337, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 8, 
       }, 
       [508] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 7, 
-         Command = "E", 
          Arg1 = 338, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 7, 
       }, 
       [509] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 5, 
-         Command = "E", 
          Arg1 = 339, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 5, 
       }, 
       [510] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 10, 
-         Command = "E", 
          Arg1 = 335, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 10, 
       }, 
       [511] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 32200, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [512] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 475, 
-         Command = "M", 
          Arg1 = 324, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 475, 
       }, 
       [513] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 468, 
-         Command = "M", 
          Arg1 = 309, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 468, 
       }, 
       [514] = 
       {
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg3 = 468, 
-         Command = "M", 
          Arg1 = 310, 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Command = "M", 
+         Arg3 = 468, 
       }, 
       [515] = 
       {
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg3 = 468, 
-         Command = "M", 
          Arg1 = 310, 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Command = "M", 
+         Arg3 = 468, 
       }, 
       [516] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 300, 
-         Command = "O", 
          Arg1 = 90, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 300, 
       }, 
       [517] = 
       {
-         Arg2 = 1, 
-         MiscData = 0, 
-         Arg3 = 305, 
-         Command = "M", 
          Arg1 = 326, 
+         MiscData = 0, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 305, 
       }, 
       [518] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 32280, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [519] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 32234, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [520] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 10577, 
-         Command = "O", 
          Arg1 = 23030, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 10577, 
       }, 
       [521] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 10242, 
-         Command = "O", 
          Arg1 = 881, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 10242, 
       }, 
       [522] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 476, 
-         Command = "M", 
          Arg1 = 425, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 476, 
       }, 
       [523] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 309, 
-         Command = "M", 
          Arg1 = 312, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 309, 
       }, 
       [524] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [525] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 309, 
-         Command = "M", 
          Arg1 = 312, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 309, 
       }, 
       [526] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [527] = 
       {
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg3 = 309, 
-         Command = "M", 
          Arg1 = 327, 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Command = "M", 
+         Arg3 = 309, 
       }, 
       [528] = 
       {
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg3 = 309, 
-         Command = "M", 
          Arg1 = 327, 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Command = "M", 
+         Arg3 = 309, 
       }, 
       [529] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 309, 
-         Command = "M", 
          Arg1 = 313, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 309, 
       }, 
       [530] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [531] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 309, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 309, 
       }, 
       [532] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [533] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 498, 
-         Command = "M", 
          Arg1 = 424, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 498, 
       }, 
       [534] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 10488, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [535] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 10312, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [536] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 59, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [537] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 310, 
-         Command = "M", 
          Arg1 = 313, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 310, 
       }, 
       [538] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [539] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 310, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 310, 
       }, 
       [540] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [541] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 310, 
-         Command = "M", 
          Arg1 = 314, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 310, 
       }, 
       [542] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [543] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 310, 
-         Command = "M", 
          Arg1 = 313, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 310, 
       }, 
       [544] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [545] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 310, 
-         Command = "M", 
          Arg1 = 314, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 310, 
       }, 
       [546] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [547] = 
       {
-         Arg2 = 200, 
-         MiscData = 1, 
-         Arg3 = 310, 
-         Command = "M", 
          Arg1 = 408, 
+         MiscData = 1, 
+         Arg2 = 200, 
+         Command = "M", 
+         Arg3 = 310, 
       }, 
       [548] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-         Command = "E", 
          Arg1 = 60, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 16, 
       }, 
       [549] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 310, 
-         Command = "M", 
          Arg1 = 315, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 310, 
       }, 
       [550] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [551] = 
       {
-         Arg2 = 50, 
-         MiscData = 1, 
-         Arg3 = 310, 
-         Command = "M", 
          Arg1 = 301, 
+         MiscData = 1, 
+         Arg2 = 50, 
+         Command = "M", 
+         Arg3 = 310, 
       }, 
       [552] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 310, 
-         Command = "M", 
          Arg1 = 316, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 310, 
       }, 
       [553] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [554] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 32234, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [555] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 32280, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [556] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 10494, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [557] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 400, 
-         Command = "O", 
          Arg1 = 340, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 400, 
       }, 
       [558] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 400, 
-         Command = "O", 
          Arg1 = 341, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 400, 
       }, 
       [559] = 
       {
-         Arg2 = 3, 
-         MiscData = 0, 
-         Arg3 = 1, 
-         Command = "D", 
          Arg1 = 400, 
+         MiscData = 0, 
+         Arg2 = 3, 
+         Command = "D", 
+         Arg3 = 1, 
       }, 
       [560] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 401, 
-         Command = "O", 
          Arg1 = 23027, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 401, 
       }, 
       [561] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 471, 
-         Command = "O", 
          Arg1 = 450, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 471, 
       }, 
       [562] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 301, 
-         Command = "M", 
          Arg1 = 325, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+         Arg3 = 301, 
       }, 
       [563] = 
       {
-         Arg2 = 100, 
-         MiscData = 1, 
-         Arg3 = 301, 
-         Command = "M", 
          Arg1 = 313, 
+         MiscData = 1, 
+         Arg2 = 100, 
+         Command = "M", 
+         Arg3 = 301, 
       }, 
       [564] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 12, 
-         Command = "E", 
          Arg1 = 331, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "E", 
+         Arg3 = 12, 
       }, 
       [565] = 
       {
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg3 = 420, 
-         Command = "M", 
          Arg1 = 302, 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Command = "M", 
+         Arg3 = 420, 
       }, 
       [566] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 301, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [567] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 302, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [568] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 303, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [569] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 304, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [570] = 
       {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "G", 
          Arg1 = 305, 
+         MiscData = 1, 
+         Command = "G", 
+         Arg2 = 1, 
       }, 
       [571] = 
       {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 420, 
-         Command = "O", 
          Arg1 = 301, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Command = "O", 
+         Arg3 = 420, 
       }, 
    }, 
+   ResetMessage = "", 
 }

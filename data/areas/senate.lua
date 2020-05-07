@@ -1,1003 +1,1611 @@
 -- The Senate Hall
--- Last saved Wednesday 06-May-2020 12:59:10
+-- Last saved Thursday 07-May-2020 14:47:57
 
 AreaEntry
 {
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10199, 
+         Command = "O", 
+         Arg3 = 10107, 
+      }, 
+      [2] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10102, 
+         Command = "M", 
+         Arg3 = 10192, 
+      }, 
+      [3] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10103, 
+         Command = "M", 
+         Arg3 = 10193, 
+      }, 
+      [4] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10101, 
+         Command = "M", 
+         Arg3 = 10119, 
+      }, 
+      [5] = 
+      {
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 10104, 
+         Command = "M", 
+         Arg3 = 10102, 
+      }, 
+      [6] = 
+      {
+         Arg2 = 2, 
+         MiscData = 1, 
+         Arg1 = 10104, 
+         Command = "M", 
+         Arg3 = 10102, 
+      }, 
+   }, 
+   VnumRanges = 
+   {
+      Room = 
+      {
+         Last = 10199, 
+         First = 10100, 
+      }, 
+      Object = 
+      {
+         Last = 10199, 
+         First = 10101, 
+      }, 
+      Mob = 
+      {
+         Last = 10199, 
+         First = 10100, 
+      }, 
+   }, 
+   Objects = 
+   {
+      [10112] = 
+      {
+         Vnum = 10112, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10113] = 
+      {
+         Vnum = 10113, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10114] = 
+      {
+         Vnum = 10114, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10115] = 
+      {
+         Vnum = 10115, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10116] = 
+      {
+         Vnum = 10116, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10117] = 
+      {
+         Vnum = 10117, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10118] = 
+      {
+         Vnum = 10118, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10119] = 
+      {
+         Vnum = 10119, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10120] = 
+      {
+         Vnum = 10120, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10121] = 
+      {
+         Vnum = 10121, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10199] = 
+      {
+         Vnum = 10199, 
+         Description = "An Imperial Information Terminal is here.", 
+         Cost = 0, 
+         ShortDescr = "The Imperial Terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "The Imperial Terminal", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10198] = 
+      {
+         Vnum = 10198, 
+         Description = "The senate shuttle flys back and forth from the senate hall.", 
+         Cost = 0, 
+         ShortDescr = "a newly created the senate shuttle", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "the senate shuttle", 
+         ItemType = "spacecraft", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10101] = 
+      {
+         Vnum = 10101, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "council terminal", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10102] = 
+      {
+         Vnum = 10102, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "council terminal", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10103] = 
+      {
+         Vnum = 10103, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10104] = 
+      {
+         Vnum = 10104, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10105] = 
+      {
+         Vnum = 10105, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10106] = 
+      {
+         Vnum = 10106, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10107] = 
+      {
+         Vnum = 10107, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10108] = 
+      {
+         Vnum = 10108, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10109] = 
+      {
+         Vnum = 10109, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10110] = 
+      {
+         Vnum = 10110, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+      [10111] = 
+      {
+         Vnum = 10111, 
+         Description = "This terminal is used for communicating with your council representatives.", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Name = "", 
+         ItemType = "furniture", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+         Weight = 1, 
+      }, 
+   }, 
    Rooms = 
    {
       [10112] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10111, 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10118, 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10113, 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10116, 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
+         Vnum = 10112, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10112, 
-         Name = "The Main Hallway", 
-         TeleVnum = 0, 
-      }, 
-      [10113] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10112, 
-               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 10111, 
+               Distance = 0, 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10118, 
                Distance = 0, 
-               DestinationVnum = 10114, 
+            }, 
+            [3] = 
+            {
                Key = -1, 
-               Direction = "southeast", 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 10113, 
+               Distance = 0, 
+            }, 
+            [4] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10116, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10113] = 
+      {
+         Vnum = 10113, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques. \
 ", 
-         Tunnel = 0, 
-         Vnum = 10113, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "north", 
+               DestinationVnum = 10112, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "southeast", 
+               DestinationVnum = 10114, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10114] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10115, 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10113, 
-               Key = -1, 
-               Direction = "northwest", 
-            }, 
-         }, 
+         Vnum = 10114, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10114, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10115, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "northwest", 
+               DestinationVnum = 10113, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10115] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10106, 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10114, 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
+         Vnum = 10115, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10115, 
-         Name = "The Main Hallway", 
-         TeleVnum = 0, 
-      }, 
-      [10116] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10112, 
-               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 10106, 
+               Distance = 0, 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10117, 
-               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 10114, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10116] = 
+      {
+         Vnum = 10116, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This hallway leads from the senate hall to a small shuttle bay. On the\
 walls are various plaques and pictures telling the history of the senate\
 and the senate hall.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10116, 
-         Name = "Hallway to Senate Shuttle Bay", 
-         TeleVnum = 0, 
-      }, 
-      [10117] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10116, 
-               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 10112, 
+               Distance = 0, 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10196, 
-               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 10117, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Hallway to Senate Shuttle Bay", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10117] = 
+      {
+         Vnum = 10117, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This hallway leads from the senate hall to a small shuttle bay. On the\
 walls are various plaques and pictures telling the history of the senate\
 and the senate hall. \
 ", 
-         Tunnel = 0, 
-         Vnum = 10117, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10116, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10196, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Hallway to Senate Shuttle Bay", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10118] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10119, 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10112, 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
+         Vnum = 10118, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway is carpeted in white. It mus be increadibly hard to keep\
 clean but whoever does it seems to be consistantly successful. The walls\
 are covered in a speckled gold surface. A holographic sign reads senators\
 only beyond this point.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10118, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10119, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10112, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Bellow the Senate Chamber", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10119] = 
       {
+         Vnum = 10119, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "This long hallway is carpeted in white. It mus be increadibly hard to keep\
+clean but whoever does it seems to be consistantly successful. The walls\
+are covered in a speckled gold surface. A holographic sign reads senators\
+only beyond this point.\
+", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10120, 
-               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 10120, 
+               Distance = 0, 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10118, 
-               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 10118, 
+               Distance = 0, 
             }, 
             [3] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10121, 
-               Key = -1, 
                Direction = "up", 
+               DestinationVnum = 10121, 
+               Distance = 0, 
             }, 
          }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "Stairs To the Senate Chamber", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "This long hallway is carpeted in white. It mus be increadibly hard to keep\
-clean but whoever does it seems to be consistantly successful. The walls\
-are covered in a speckled gold surface. A holographic sign reads senators\
-only beyond this point.\
-", 
-         Tunnel = 0, 
-         Vnum = 10119, 
-         Name = "Stairs To the Senate Chamber", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10120] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10102, 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10119, 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
+         Vnum = 10120, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway is carpeted in white. It mus be increadibly hard to keep\
 clean but whoever does it seems to be consistantly successful. The walls\
 are covered in a speckled gold surface. A holographic sign reads senators\
 only beyond this point.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10120, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10102, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10119, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Bellow the Senate Chamber", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10121] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10119, 
-               Key = -1, 
-               Direction = "down", 
-            }, 
-         }, 
+         Vnum = 10121, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "down", 
+               DestinationVnum = 10119, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "The Senate", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10121, 
-         Name = "The Senate", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10122] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10122, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Coruscant Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10122, 
-         Name = "Coruscant Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10123] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10123, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Corellia Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10123, 
-         Name = "Corellia Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10124] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10124, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Mon Calamari Council of Quarrens", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10124, 
-         Name = "Mon Calamari Council of Quarrens", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10125] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10125, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Mon Calamari Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10125, 
-         Name = "Mon Calamari Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10126] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10126, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10126, 
-         Name = "Floating in a void", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10127] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10127, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Duinduogwuin Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10127, 
-         Name = "Duinduogwuin Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10128] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10128, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Chad Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10128, 
-         Name = "Chad Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10129] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10129, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Af'El Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10129, 
-         Name = "Af'El Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10130] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10130, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Trandosh Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10130, 
-         Name = "Trandosh Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10131] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10131, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Endor Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10131, 
-         Name = "Endor Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10132] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10132, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Roch Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10132, 
-         Name = "Roch Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10133] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10133, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Honoghr Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10133, 
-         Name = "Honoghr Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10134] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10134, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Kashyyyk Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10134, 
-         Name = "Kashyyyk Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10135] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10135, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Nal Hutta Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10135, 
-         Name = "Nal Hutta Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10136] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10136, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Tatooine Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10136, 
-         Name = "Tatooine Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10137] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10137, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Ryloth Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10137, 
-         Name = "Ryloth Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10138] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10138, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Rodia Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10138, 
-         Name = "Rodia Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10139] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10139, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Adari Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10139, 
-         Name = "Adari Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10140] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10140, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Bonadan Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10140, 
-         Name = "Bonadan Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10141] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10141, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Byss Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10141, 
-         Name = "Byss Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10142] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10142, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Gamorr Council", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10142, 
-         Name = "Gamorr Council", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10143] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10143, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "too many", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10143, 
-         Name = "too many", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10144] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10144, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10144, 
-         Name = "Floating in a void", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10199] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10199, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10199, 
-         Name = "Floating in a void", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10198] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10198, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This small shuttle first class shuttle is very comfortable. It is decorated\
 in the traditional senatorial white.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10198, 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
          Name = "Senate Shuttle", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10197] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10197, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "YOU SHOULDN\"T BE HERE :P", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10197, 
-         Name = "YOU SHOULDN\"T BE HERE :P", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10196] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10117, 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-         }, 
+         Vnum = 10196, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This landing pad is used exclusively by a shuttle that travels to and from\
 the outer limits of the system. As some senators feel uncomfortable\
 bringing their ships in close to coruscant this gives them the opertunity\
@@ -1005,989 +1613,969 @@ to land further out and provides them with a direct route to the hall. It\
 also saves them the trouble of having to walk through the streets of\
 coruscant.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10196, 
-         Name = "Senate Shuttle Landing Pad - Senate Hall", 
-         TeleVnum = 0, 
-      }, 
-      [10195] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10194, 
-               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 10117, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Senate Shuttle Landing Pad - Senate Hall", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10195] = 
+      {
+         Vnum = 10195, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The shuttle that flys to the senate hall on coruscant lands here. It is a\
 quick flight so your wait shouldn't be long.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10195, 
-         Name = "Senate Shuttle Landing Pad - Outer System", 
-         TeleVnum = 0, 
-      }, 
-      [10194] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10193, 
-               Key = -1, 
                Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
+               DestinationVnum = 10194, 
                Distance = 0, 
-               DestinationVnum = 10195, 
-               Key = -1, 
-               Direction = "west", 
             }, 
          }, 
+         Name = "Senate Shuttle Landing Pad - Outer System", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [10194] = 
+      {
+         Vnum = 10194, 
          Description = "This walkway is surrounded in glass giving you a nice view of the cratered\
 planetoid the station is situated on as well as the beautiful galactic\
 starscape.  \
 ", 
-         Vnum = 10194, 
-         Name = "West Walkway", 
-         TeleVnum = 0, 
-      }, 
-      [10193] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10191, 
-               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 10193, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10195, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "West Walkway", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [10193] = 
+      {
+         Vnum = 10193, 
          Description = "All confiscated weapons may be picked up here. Unfortunately however\
 security on this end is rather lapse and more often than not people take\
 home a few extra weapons than they came with or none at all.\
 ", 
-         Vnum = 10193, 
-         Name = "Exit Checkpoint", 
-         TeleVnum = 0, 
-      }, 
-      [10192] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10191, 
                Distance = 0, 
-               DestinationVnum = 10189, 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10194, 
-               Key = -1, 
-               Direction = "west", 
             }, 
          }, 
+         Name = "Exit Checkpoint", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [10192] = 
+      {
+         Vnum = 10192, 
          Description = "As no wepons are allowed into the senate hall a guard is positioned here to\
 search for and confiscate any that they find. They may be picked up on\
 your way out of the area. (so long as somebody hasn't already beat you to\
 it)\
 ", 
-         Vnum = 10192, 
-         Name = "Entrance Checkpoint", 
-         TeleVnum = 0, 
-      }, 
-      [10191] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
+               Direction = "north", 
+               DestinationVnum = 10189, 
                Distance = 0, 
-               DestinationVnum = 10190, 
-               Key = -1, 
-               Direction = "east", 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10192, 
-               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 10194, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Entrance Checkpoint", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [10191] = 
+      {
+         Vnum = 10191, 
          Description = "This walkway is surrounded in glass giving you a nice view of the cratered\
 planetoid the station is situated on as well as the beautiful galactic\
 starscape. \
 ", 
-         Vnum = 10191, 
-         Name = "East Walkway", 
-         TeleVnum = 0, 
-      }, 
-      [10190] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10190, 
                Distance = 0, 
-               DestinationVnum = 10191, 
+            }, 
+            [2] = 
+            {
                Key = -1, 
+               Keyword = "", 
+               Description = "", 
                Direction = "west", 
+               DestinationVnum = 10192, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "East Walkway", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
+      }, 
+      [10190] = 
+      {
+         Vnum = 10190, 
          Description = "This landing area is used mostly by senators not wishing to have to enter\
 the core of the corusant system or to have to drive through government\
 city. A seperate shutle that lands to the west flys directly to the senate\
 hall. \
 ", 
-         Vnum = 10190, 
-         Name = "Outer System Landing Area", 
-         TeleVnum = 0, 
-      }, 
-      [10189] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10191, 
                Distance = 0, 
-               DestinationVnum = 10192, 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10193, 
-               Key = -1, 
-               Direction = "southeast", 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10194, 
-               Key = -1, 
-               Direction = "southwest", 
             }, 
          }, 
+         Name = "Outer System Landing Area", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10189] = 
+      {
+         Vnum = 10189, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This small spaceport provides a pit stop for weary travellers on their way\
 to the senate halls. More often than it not also provides a few quick\
 drinks. \
 ", 
-         Tunnel = 0, 
-         Vnum = 10189, 
-         Name = "Spaceport Entrance", 
-         TeleVnum = 0, 
-      }, 
-      [10188] = 
-      {
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
          Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10188, 
-         Name = "Floating in a void", 
-         TeleVnum = 0, 
-      }, 
-      [10187] = 
-      {
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10187, 
-         Name = "Floating in a void", 
-         TeleVnum = 0, 
-      }, 
-      [10186] = 
-      {
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10186, 
-         Name = "Floating in a void", 
-         TeleVnum = 0, 
-      }, 
-      [10185] = 
-      {
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10185, 
-         Name = "Floating in a void", 
-         TeleVnum = 0, 
-      }, 
-      [10184] = 
-      {
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10184, 
-         Name = "Floating in a void", 
-         TeleVnum = 0, 
-      }, 
-      [10183] = 
-      {
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10183, 
-         Name = "Floating in a void", 
-         TeleVnum = 0, 
-      }, 
-      [10182] = 
-      {
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10182, 
-         Name = "Floating in a void", 
-         TeleVnum = 0, 
-      }, 
-      [10181] = 
-      {
-         Exits = 
-         {
-         }, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10181, 
-         Name = "Floating in a void", 
-         TeleVnum = 0, 
-      }, 
-      [10100] = 
-      {
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
+               Direction = "south", 
+               DestinationVnum = 10192, 
                Distance = 0, 
-               DestinationVnum = 450, 
-               Key = -1, 
-               Direction = "east", 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
+               Direction = "southeast", 
+               DestinationVnum = 10193, 
                Distance = 0, 
-               DestinationVnum = 10101, 
+            }, 
+            [3] = 
+            {
                Key = -1, 
-               Direction = "west", 
+               Keyword = "", 
+               Description = "", 
+               Direction = "southwest", 
+               DestinationVnum = 10194, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Spaceport Entrance", 
          Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
          TeleDelay = 0, 
+      }, 
+      [10188] = 
+      {
+         Vnum = 10188, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Description = "", 
          Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10187] = 
+      {
+         Vnum = 10187, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10186] = 
+      {
+         Vnum = 10186, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10185] = 
+      {
+         Vnum = 10185, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10184] = 
+      {
+         Vnum = 10184, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10183] = 
+      {
+         Vnum = 10183, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10182] = 
+      {
+         Vnum = 10182, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10181] = 
+      {
+         Vnum = 10181, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10100] = 
+      {
+         Vnum = 10100, 
          Description = "You stand outside the enormous Senate Hall on Coruscant where council heads\
 meet once a month to discuss issues of galactic importance. Included in\
 the senate hall is a ring of opinion booths available for citizens to\
 communicate with there senators. To the north the enourmous imperial\
 palace towers over the surrounding area. \
 ", 
-         Vnum = 10100, 
-         Name = "Before The Senate Hall", 
-         TeleVnum = 0, 
-      }, 
-      [10101] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10100, 
-               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 450, 
+               Distance = 0, 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10102, 
-               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 10101, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "Before The Senate Hall", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10101] = 
+      {
+         Vnum = 10101, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "The entrance to the senate hall consists of wide stone steps that lead up\
 to the ancient building. Stone pillars flank the large double doors.\
 Statuettes are carved around the eves.  Inside the doors is a small lobby.\
 Beyond it to the east is the hall of opinions. \
 ", 
-         Tunnel = 0, 
-         Vnum = 10101, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10100, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10102, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "Senate Hall Entrance", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10102] = 
       {
+         Vnum = 10102, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "This long hallway encircles the main floor of the senate. It si decorated\
+in white and gold. The walls are adorned with historical photographs and\
+plaques. \
+", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10103, 
-               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 10103, 
+               Distance = 0, 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10101, 
-               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 10101, 
+               Distance = 0, 
             }, 
             [3] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10104, 
-               Key = -1, 
                Direction = "south", 
+               DestinationVnum = 10104, 
+               Distance = 0, 
             }, 
             [4] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10120, 
-               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 10120, 
+               Distance = 0, 
             }, 
          }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "The Main Hallway", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "This long hallway encircles the main floor of the senate. It si decorated\
-in white and gold. The walls are adorned with historical photographs and\
-plaques. \
-", 
-         Tunnel = 0, 
-         Vnum = 10102, 
-         Name = "The Main Hallway", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10103] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10102, 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10105, 
-               Key = -1, 
-               Direction = "northwest", 
-            }, 
-         }, 
+         Vnum = 10103, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques. \
 ", 
-         Tunnel = 0, 
-         Vnum = 10103, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 10102, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "northwest", 
+               DestinationVnum = 10105, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10104] = 
       {
+         Vnum = 10104, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Description = "This long hallway encircles the main floor of the senate. It si decorated\
+in white and gold. The walls are adorned with historical photographs and\
+plaques. \
+", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10102, 
-               Key = -1, 
                Direction = "north", 
+               DestinationVnum = 10102, 
+               Distance = 0, 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10107, 
-               Key = -1, 
                Direction = "east", 
+               DestinationVnum = 10107, 
+               Distance = 0, 
             }, 
             [3] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10106, 
-               Key = -1, 
                Direction = "southwest", 
+               DestinationVnum = 10106, 
+               Distance = 0, 
             }, 
          }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
+         Name = "The Main Hallway", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "This long hallway encircles the main floor of the senate. It si decorated\
-in white and gold. The walls are adorned with historical photographs and\
-plaques. \
-", 
-         Tunnel = 0, 
-         Vnum = 10104, 
-         Name = "The Main Hallway", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10105] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10109, 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10103, 
-               Key = -1, 
-               Direction = "southeast", 
-            }, 
-         }, 
+         Vnum = 10105, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques. \
 ", 
-         Tunnel = 0, 
-         Vnum = 10105, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10109, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "southeast", 
+               DestinationVnum = 10103, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10106] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10115, 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10104, 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-         }, 
+         Vnum = 10106, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques. \
 ", 
-         Tunnel = 0, 
-         Vnum = 10106, 
-         Name = "The Main Hallway", 
-         TeleVnum = 0, 
-      }, 
-      [10107] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10104, 
-               Key = -1, 
                Direction = "west", 
+               DestinationVnum = 10115, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "northeast", 
+               DestinationVnum = 10104, 
+               Distance = 0, 
             }, 
          }, 
+         Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10107] = 
+      {
+         Vnum = 10107, 
          Flags = 
          {
             [10] = "Safe", 
             [16] = "Silence", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10104, 
+               Distance = 0, 
+            }, 
+         }, 
+         Name = "Imperial Room of Opinions", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10107, 
-         Name = "Imperial Room of Opinions", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10180] = 
       {
-         Exits = 
-         {
-         }, 
+         Vnum = 10180, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Description = "", 
+         Sector = "city", 
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Sector = "city", 
-         Description = "", 
-         Tunnel = 0, 
-         Vnum = 10180, 
-         Name = "Floating in a void", 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10109] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10105, 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10110, 
-               Key = -1, 
-               Direction = "west", 
-            }, 
-         }, 
+         Vnum = 10109, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques. \
 ", 
-         Tunnel = 0, 
-         Vnum = 10109, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10105, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "west", 
+               DestinationVnum = 10110, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
       [10110] = 
       {
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10109, 
-               Key = -1, 
-               Direction = "east", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Distance = 0, 
-               DestinationVnum = 10111, 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
+         Vnum = 10110, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques. \
 ", 
-         Tunnel = 0, 
-         Vnum = 10110, 
-         Name = "The Main Hallway", 
-         TeleVnum = 0, 
-      }, 
-      [10111] = 
-      {
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
+               Direction = "east", 
+               DestinationVnum = 10109, 
                Distance = 0, 
-               DestinationVnum = 10112, 
-               Key = -1, 
-               Direction = "south", 
             }, 
             [2] = 
             {
+               Key = -1, 
                Keyword = "", 
                Description = "", 
+               Direction = "southwest", 
+               DestinationVnum = 10111, 
                Distance = 0, 
-               DestinationVnum = 10110, 
-               Key = -1, 
-               Direction = "northeast", 
             }, 
          }, 
+         Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         TeleDelay = 0, 
+      }, 
+      [10111] = 
+      {
+         Vnum = 10111, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Sector = "city", 
          Description = "This long hallway encircles the main floor of the senate. It si decorated\
 in white and gold. The walls are adorned with historical photographs and\
 plaques.\
 ", 
-         Tunnel = 0, 
-         Vnum = 10111, 
+         Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "south", 
+               DestinationVnum = 10112, 
+               Distance = 0, 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Keyword = "", 
+               Description = "", 
+               Direction = "northeast", 
+               DestinationVnum = 10110, 
+               Distance = 0, 
+            }, 
+         }, 
          Name = "The Main Hallway", 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         TeleDelay = 0, 
       }, 
    }, 
-   Resets = 
-   {
-      [1] = 
-      {
-         Command = "O", 
-         Arg1 = 10199, 
-         Arg3 = 10107, 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [2] = 
-      {
-         Command = "M", 
-         Arg1 = 10102, 
-         Arg3 = 10192, 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [3] = 
-      {
-         Command = "M", 
-         Arg1 = 10103, 
-         Arg3 = 10193, 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [4] = 
-      {
-         Command = "M", 
-         Arg1 = 10101, 
-         Arg3 = 10119, 
-         MiscData = 1, 
-         Arg2 = 1, 
-      }, 
-      [5] = 
-      {
-         Command = "M", 
-         Arg1 = 10104, 
-         Arg3 = 10102, 
-         MiscData = 1, 
-         Arg2 = 2, 
-      }, 
-      [6] = 
-      {
-         Command = "M", 
-         Arg1 = 10104, 
-         Arg3 = 10102, 
-         MiscData = 1, 
-         Arg2 = 2, 
-      }, 
-   }, 
-   FileFormatVersion = 1, 
+   HighEconomy = 0, 
    Mobiles = 
    {
       [10104] = 
       {
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Race = "Human", 
+         Vnum = 10104, 
          Flags = 
          {
             [0] = "Npc", 
             [10] = "Practice", 
          }, 
-         Credits = 0, 
-         Name = "foreign diplomat", 
-         Vnum = 10104, 
+         LongDescr = "A diplomat strolls down the hall.\
+", 
+         Race = "Human", 
          Alignment = 0, 
+         ShortDescr = "a diplomat", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = -25, 
+         Level = 50, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 10, 
+         HitRoll = 10, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -1999,63 +2587,63 @@ plaques.\
                [0] = "basic", 
             }, 
          }, 
-         HitChance = 
-         {
-            HitPlus = 500, 
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 10, 
          Damage = 
          {
             DamNoDice = 5, 
             DamPlus = 2, 
             DamSizeDice = 4, 
          }, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         ArmorClass = -25, 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Position = "standing", 
-         Level = 50, 
-         HitRoll = 10, 
-         LongDescr = "A diplomat strolls down the hall.\
-", 
+         Name = "foreign diplomat", 
          Description = "", 
-         ShortDescr = "a diplomat", 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+            HitPlus = 500, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [10199] = 
       {
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Race = "Human", 
+         Vnum = 10199, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Credits = 0, 
-         Name = "A Senator", 
-         Vnum = 10199, 
+         LongDescr = "Some god abandoned a newly created A Senator here.\
+", 
+         Race = "Human", 
          Alignment = 0, 
+         ShortDescr = "a newly created A Senator", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -2067,63 +2655,63 @@ plaques.\
                [0] = "basic", 
             }, 
          }, 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
          Damage = 
          {
             DamNoDice = 0, 
             DamPlus = 0, 
             DamSizeDice = 0, 
          }, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Position = "standing", 
-         Level = 1, 
-         HitRoll = 0, 
-         LongDescr = "Some god abandoned a newly created A Senator here.\
-", 
+         Name = "A Senator", 
          Description = "", 
-         ShortDescr = "a newly created A Senator", 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [10100] = 
       {
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Race = "Human", 
+         Vnum = 10100, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Credits = 0, 
-         Name = "A Senator", 
-         Vnum = 10100, 
+         LongDescr = "Some god abandoned a newly created A Senator here.\
+", 
+         Race = "Human", 
          Alignment = 0, 
+         ShortDescr = "a newly created A Senator", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = 0, 
+         Level = 1, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -2135,64 +2723,64 @@ plaques.\
                [0] = "basic", 
             }, 
          }, 
-         HitChance = 
-         {
-            HitPlus = 0, 
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-         }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
          Damage = 
          {
             DamNoDice = 0, 
             DamPlus = 0, 
             DamSizeDice = 0, 
          }, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Position = "standing", 
-         Level = 1, 
-         HitRoll = 0, 
-         LongDescr = "Some god abandoned a newly created A Senator here.\
-", 
+         Name = "A Senator", 
          Description = "", 
-         ShortDescr = "a newly created A Senator", 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [10101] = 
       {
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Race = "Human", 
+         Vnum = 10101, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Credits = 0, 
-         Name = "senate guard", 
-         Vnum = 10101, 
+         LongDescr = "A guard watches the entrance to the senate hall.\
+", 
+         Race = "Human", 
          Alignment = 0, 
+         ShortDescr = "the senate guard", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = -150, 
+         Level = 100, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -2204,96 +2792,96 @@ plaques.\
                [0] = "basic", 
             }, 
          }, 
-         HitChance = 
-         {
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 20, 
          Damage = 
          {
             DamNoDice = 10, 
             DamPlus = 2, 
             DamSizeDice = 4, 
          }, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         ArmorClass = -150, 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Position = "standing", 
-         Level = 100, 
-         HitRoll = 20, 
-         LongDescr = "A guard watches the entrance to the senate hall.\
-", 
+         Name = "senate guard", 
          Description = "", 
-         ShortDescr = "the senate guard", 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+            HitPlus = 1000, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [10102] = 
       {
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Race = "Human", 
+         Vnum = 10102, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Credits = 0, 
-         Name = "checkpoint guard", 
-         Vnum = 10102, 
+         LongDescr = "A guard checks for weapons.\
+", 
+         Race = "Human", 
+         Alignment = 0, 
+         ShortDescr = "a checkpoint guard", 
          SpecFuns = 
          {
             [1] = "spec_customs_weapons", 
          }, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
+         }, 
+         Position = "standing", 
+         Height = 0, 
+         ArmorClass = -150, 
          MudProgs = 
          {
             [1] = 
             {
-               Arguments = "100", 
                Code = "say Please empty all bags...\
 mpforce $n get all bag\
 say ... and backpacks.\
 mpforce $n get all back\
 mpforce $n sit\
 ", 
+               Arguments = "100", 
                MudProgType = "all_greet_prog", 
             }, 
             [2] = 
             {
-               Arguments = "rises", 
                Code = "mpat 10193 drop all\
 ", 
+               Arguments = "rises", 
                MudProgType = "act_prog", 
             }, 
             [3] = 
             {
-               Arguments = "leaves", 
                Code = "mpat 10193 drop all\
 ", 
+               Arguments = "leaves", 
                MudProgType = "act_prog", 
             }, 
          }, 
-         Alignment = 0, 
+         Level = 100, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -2305,64 +2893,64 @@ mpforce $n sit\
                [0] = "basic", 
             }, 
          }, 
-         HitChance = 
-         {
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 20, 
          Damage = 
          {
             DamNoDice = 10, 
             DamPlus = 2, 
             DamSizeDice = 4, 
          }, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         ArmorClass = -150, 
-         DefaultPosition = "standing", 
-         Height = 0, 
-         Position = "standing", 
-         Level = 100, 
-         HitRoll = 20, 
-         LongDescr = "A guard checks for weapons.\
-", 
+         Name = "checkpoint guard", 
          Description = "", 
-         ShortDescr = "a checkpoint guard", 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+            HitPlus = 1000, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Weight = 0, 
       }, 
       [10103] = 
       {
-         NumberOfAttacks = 0, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Strength = 10, 
-            Constitution = 10, 
-            Dexterity = 10, 
-         }, 
-         Race = "Human", 
+         Vnum = 10103, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Credits = 0, 
-         Name = "senate checkpoint guard", 
-         Vnum = 10103, 
+         LongDescr = "A guard is asleep at his post.\
+", 
+         Race = "Human", 
          Alignment = 0, 
+         ShortDescr = "a checkpoint guard", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Charisma = 10, 
+            Force = 0, 
+            Intelligence = 10, 
+            Luck = 10, 
+            Constitution = 10, 
+            Strength = 10, 
+            Dexterity = 10, 
+         }, 
+         Position = "sleeping", 
+         Height = 0, 
+         ArmorClass = -150, 
+         Level = 100, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+         }, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -2374,601 +2962,44 @@ mpforce $n sit\
                [0] = "basic", 
             }, 
          }, 
-         HitChance = 
-         {
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-         }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         DamRoll = 0, 
          Damage = 
          {
             DamNoDice = 10, 
             DamPlus = 2, 
             DamSizeDice = 4, 
          }, 
-         Weight = 0, 
-         Sex = "undistinguished", 
-         ArmorClass = -150, 
-         DefaultPosition = "sleeping", 
-         Height = 0, 
-         Position = "sleeping", 
-         Level = 100, 
-         HitRoll = 0, 
-         LongDescr = "A guard is asleep at his post.\
-", 
+         Name = "senate checkpoint guard", 
          Description = "", 
-         ShortDescr = "a checkpoint guard", 
+         Sex = "undistinguished", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+            HitPlus = 1000, 
+         }, 
+         Credits = 0, 
+         DefaultPosition = "sleeping", 
+         Weight = 0, 
       }, 
    }, 
-   HighEconomy = 0, 
-   ResetMessage = "", 
-   Author = "Durga", 
-   Objects = 
+   LevelRanges = 
    {
-      [10112] = 
+      Soft = 
       {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10112, 
+         Low = 0, 
+         High = 0, 
       }, 
-      [10113] = 
+      Hard = 
       {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10113, 
-      }, 
-      [10114] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10114, 
-      }, 
-      [10115] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10115, 
-      }, 
-      [10116] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10116, 
-      }, 
-      [10117] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10117, 
-      }, 
-      [10118] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10118, 
-      }, 
-      [10119] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10119, 
-      }, 
-      [10120] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10120, 
-      }, 
-      [10121] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10121, 
-      }, 
-      [10199] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "The Imperial Terminal", 
-         Weight = 1, 
-         Name = "The Imperial Terminal", 
-         Description = "An Imperial Information Terminal is here.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10199, 
-      }, 
-      [10198] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a newly created the senate shuttle", 
-         Weight = 1, 
-         Name = "the senate shuttle", 
-         Description = "The senate shuttle flys back and forth from the senate hall.", 
-         ItemType = "spacecraft", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10198, 
-      }, 
-      [10101] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "council terminal", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10101, 
-      }, 
-      [10102] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "council terminal", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10102, 
-      }, 
-      [10103] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10103, 
-      }, 
-      [10104] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10104, 
-      }, 
-      [10105] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10105, 
-      }, 
-      [10106] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10106, 
-      }, 
-      [10107] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10107, 
-      }, 
-      [10108] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10108, 
-      }, 
-      [10109] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10109, 
-      }, 
-      [10110] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10110, 
-      }, 
-      [10111] = 
-      {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a terminal", 
-         Weight = 1, 
-         Name = "", 
-         Description = "This terminal is used for communicating with your council representatives.", 
-         ItemType = "furniture", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         Vnum = 10111, 
+         Low = 0, 
+         High = 103, 
       }, 
    }, 
+   ResetMessage = "", 
    ResetFrequency = 0, 
-   Name = "The Senate Hall", 
    LowEconomy = 31250000, 
+   Name = "The Senate Hall", 
+   Author = "Durga", 
    Filename = "senate.lua", 
+   FileFormatVersion = 1, 
 }

@@ -1745,19 +1745,16 @@ void AssignAreaTo(Character *ch)
         && ch->PCData->Build.VnumRanges.Room.First != INVALID_VNUM
         && ch->PCData->Build.VnumRanges.Room.Last != INVALID_VNUM)
     {
-        char buf[MAX_STRING_LENGTH];
-        char buf2[MAX_STRING_LENGTH];
-        char taf[1024];
         bool created = false;
         std::shared_ptr<Area> tarea = ch->PCData->Build.Area;
 
-        sprintf(taf, "%s.are", Capitalize(ch->Name).c_str());
+        auto filename = FormatString("%s.lua", Capitalize(ch->Name).c_str());
 
         if (tarea == nullptr)
         {
             for (auto tmp = Areas->FirstBuild; tmp; tmp = tmp->Next)
             {
-                if (!StrCmp(taf, tmp->Filename))
+                if (!StrCmp(filename, tmp->Filename))
                 {
                     tarea = tmp;
                     break;
@@ -1767,22 +1764,20 @@ void AssignAreaTo(Character *ch)
 
         if (tarea == nullptr)
         {
-            sprintf(buf, "Creating area entry for %s", ch->Name.c_str());
-            Log->LogStringPlus(buf, LOG_NORMAL, ch->TopLevel);
+            auto logBuf = FormatString("Creating area entry for %s", ch->Name.c_str());
+            Log->LogStringPlus(logBuf, LOG_NORMAL, ch->TopLevel);
             tarea = std::make_shared<Area>();
             LINK(tarea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);
-            sprintf(buf, "{PROTO} %s's area in progress", ch->Name.c_str());
-            tarea->Name = buf;
-            tarea->Filename = taf;
-            sprintf(buf2, "%s", ch->Name.c_str());
-            tarea->Author = buf2;
+            tarea->Name = FormatString("{PROTO} %s's area in progress", ch->Name.c_str());
+            tarea->Filename = filename;
+            tarea->Author = ch->Name;
 
             created = true;
         }
         else
         {
-            sprintf(buf, "Updating area entry for %s", ch->Name.c_str());
-            Log->LogStringPlus(buf, LOG_NORMAL, ch->TopLevel);
+            auto logBuf = FormatString("Updating area entry for %s", ch->Name.c_str());
+            Log->LogStringPlus(logBuf, LOG_NORMAL, ch->TopLevel);
         }
 
         tarea->VnumRanges.Room.First = ch->PCData->Build.VnumRanges.Room.First;
@@ -1811,4 +1806,3 @@ void CleanResets(std::shared_ptr<Area> tarea)
     tarea->FirstReset = nullptr;
     tarea->LastReset = nullptr;
 }
-

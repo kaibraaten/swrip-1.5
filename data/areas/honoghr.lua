@@ -1,1488 +1,43 @@
 -- Honoghr
--- Last saved Wednesday 06-May-2020 12:59:10
+-- Last saved Thursday 07-May-2020 14:47:57
 
 AreaEntry
 {
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg1 = 1000, 
-         Command = "M", 
-         Arg2 = 1, 
-         Arg3 = 1046, 
-         MiscData = 1, 
-      }, 
-      [2] = 
-      {
-         Arg1 = 1002, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 14, 
-         MiscData = 1, 
-      }, 
-      [3] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [4] = 
-      {
-         Arg1 = 1001, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 5, 
-         MiscData = 1, 
-      }, 
-      [5] = 
-      {
-         Arg1 = 10424, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 17, 
-         MiscData = 1, 
-      }, 
-      [6] = 
-      {
-         Arg1 = 1007, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 6, 
-         MiscData = 1, 
-      }, 
-      [7] = 
-      {
-         Arg1 = 1009, 
-         Command = "M", 
-         Arg2 = 1, 
-         Arg3 = 1033, 
-         MiscData = 1, 
-      }, 
-      [8] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [9] = 
-      {
-         Arg1 = 1007, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 6, 
-         MiscData = 1, 
-      }, 
-      [10] = 
-      {
-         Arg1 = 1008, 
-         Command = "O", 
-         Arg2 = 1, 
-         Arg3 = 1033, 
-         MiscData = 1, 
-      }, 
-      [11] = 
-      {
-         Arg1 = 1007, 
-         Command = "D", 
-         Arg2 = 2, 
-         Arg3 = 1, 
-         MiscData = 0, 
-      }, 
-      [12] = 
-      {
-         Arg1 = 32201, 
-         Command = "O", 
-         Arg2 = 1, 
-         Arg3 = 1048, 
-         MiscData = 1, 
-      }, 
-      [13] = 
-      {
-         Arg1 = 90, 
-         Command = "O", 
-         Arg2 = 1, 
-         Arg3 = 1049, 
-         MiscData = 1, 
-      }, 
-      [14] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 3, 
-         Arg3 = 1003, 
-         MiscData = 1, 
-      }, 
-      [15] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 3, 
-         Arg3 = 1003, 
-         MiscData = 1, 
-      }, 
-      [16] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 3, 
-         Arg3 = 1003, 
-         MiscData = 1, 
-      }, 
-      [17] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [18] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [19] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [20] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [21] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [22] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [23] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [24] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [25] = 
-      {
-         Arg1 = 1004, 
-         Command = "M", 
-         Arg2 = 19, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [26] = 
-      {
-         Arg1 = 1004, 
-         Command = "M", 
-         Arg2 = 19, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [27] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 7, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [28] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 7, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [29] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 7, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [30] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 7, 
-         Arg3 = 1005, 
-         MiscData = 1, 
-      }, 
-      [31] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [32] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [33] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [34] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [35] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [36] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [37] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [38] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [39] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [40] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [41] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [42] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [43] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [44] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [45] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [46] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [47] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [48] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [49] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 21, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [50] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 21, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [51] = 
-      {
-         Arg1 = 1004, 
-         Command = "M", 
-         Arg2 = 19, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [52] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [53] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 21, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [54] = 
-      {
-         Arg1 = 1004, 
-         Command = "M", 
-         Arg2 = 19, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [55] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [56] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 21, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [57] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 11, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [58] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 11, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [59] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 11, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [60] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 11, 
-         Arg3 = 1012, 
-         MiscData = 1, 
-      }, 
-      [61] = 
-      {
-         Arg1 = 1007, 
-         Command = "M", 
-         Arg2 = 1, 
-         Arg3 = 1008, 
-         MiscData = 1, 
-      }, 
-      [62] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [63] = 
-      {
-         Arg1 = 1008, 
-         Command = "M", 
-         Arg2 = 1, 
-         Arg3 = 1008, 
-         MiscData = 1, 
-      }, 
-      [64] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [65] = 
-      {
-         Arg1 = 1001, 
-         Command = "M", 
-         Arg2 = 1, 
-         Arg3 = 1008, 
-         MiscData = 1, 
-      }, 
-      [66] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [67] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [68] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 15, 
-         Arg3 = 1008, 
-         MiscData = 1, 
-      }, 
-      [69] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 15, 
-         Arg3 = 1008, 
-         MiscData = 1, 
-      }, 
-      [70] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 15, 
-         Arg3 = 1008, 
-         MiscData = 1, 
-      }, 
-      [71] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 15, 
-         Arg3 = 1008, 
-         MiscData = 1, 
-      }, 
-      [72] = 
-      {
-         Arg1 = 1008, 
-         Command = "D", 
-         Arg2 = 0, 
-         Arg3 = 1, 
-         MiscData = 0, 
-      }, 
-      [73] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 16, 
-         Arg3 = 1011, 
-         MiscData = 1, 
-      }, 
-      [74] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 17, 
-         Arg3 = 1010, 
-         MiscData = 1, 
-      }, 
-      [75] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 19, 
-         Arg3 = 1009, 
-         MiscData = 1, 
-      }, 
-      [76] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 19, 
-         Arg3 = 1009, 
-         MiscData = 1, 
-      }, 
-      [77] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 21, 
-         Arg3 = 1022, 
-         MiscData = 1, 
-      }, 
-      [78] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 22, 
-         Arg3 = 1022, 
-         MiscData = 1, 
-      }, 
-      [79] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 22, 
-         Arg3 = 1022, 
-         MiscData = 1, 
-      }, 
-      [80] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 22, 
-         Arg3 = 1022, 
-         MiscData = 1, 
-      }, 
-      [81] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 21, 
-         Arg3 = 1023, 
-         MiscData = 1, 
-      }, 
-      [82] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 21, 
-         Arg3 = 1023, 
-         MiscData = 1, 
-      }, 
-      [83] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 21, 
-         Arg3 = 1023, 
-         MiscData = 1, 
-      }, 
-      [84] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 25, 
-         Arg3 = 1023, 
-         MiscData = 1, 
-      }, 
-      [85] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 25, 
-         Arg3 = 1023, 
-         MiscData = 1, 
-      }, 
-      [86] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 25, 
-         Arg3 = 1023, 
-         MiscData = 1, 
-      }, 
-      [87] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 30, 
-         Arg3 = 1026, 
-         MiscData = 1, 
-      }, 
-      [88] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 30, 
-         Arg3 = 1026, 
-         MiscData = 1, 
-      }, 
-      [89] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 30, 
-         Arg3 = 1026, 
-         MiscData = 1, 
-      }, 
-      [90] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 30, 
-         Arg3 = 1026, 
-         MiscData = 1, 
-      }, 
-      [91] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 30, 
-         Arg3 = 1026, 
-         MiscData = 1, 
-      }, 
-      [92] = 
-      {
-         Arg1 = 1000, 
-         Command = "M", 
-         Arg2 = 1, 
-         Arg3 = 1029, 
-         MiscData = 1, 
-      }, 
-      [93] = 
-      {
-         Arg1 = 1002, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 14, 
-         MiscData = 1, 
-      }, 
-      [94] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [95] = 
-      {
-         Arg1 = 1001, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 5, 
-         MiscData = 1, 
-      }, 
-      [96] = 
-      {
-         Arg1 = 10424, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 17, 
-         MiscData = 1, 
-      }, 
-      [97] = 
-      {
-         Arg1 = 1007, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 6, 
-         MiscData = 1, 
-      }, 
-      [98] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 34, 
-         Arg3 = 1029, 
-         MiscData = 1, 
-      }, 
-      [99] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 34, 
-         Arg3 = 1029, 
-         MiscData = 1, 
-      }, 
-      [100] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 34, 
-         Arg3 = 1029, 
-         MiscData = 1, 
-      }, 
-      [101] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 34, 
-         Arg3 = 1029, 
-         MiscData = 1, 
-      }, 
-      [102] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 38, 
-         Arg3 = 1031, 
-         MiscData = 1, 
-      }, 
-      [103] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 38, 
-         Arg3 = 1031, 
-         MiscData = 1, 
-      }, 
-      [104] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 38, 
-         Arg3 = 1031, 
-         MiscData = 1, 
-      }, 
-      [105] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 38, 
-         Arg3 = 1031, 
-         MiscData = 1, 
-      }, 
-      [106] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 41, 
-         Arg3 = 1034, 
-         MiscData = 1, 
-      }, 
-      [107] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 41, 
-         Arg3 = 1034, 
-         MiscData = 1, 
-      }, 
-      [108] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 41, 
-         Arg3 = 1034, 
-         MiscData = 1, 
-      }, 
-      [109] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 45, 
-         Arg3 = 1036, 
-         MiscData = 1, 
-      }, 
-      [110] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 45, 
-         Arg3 = 1036, 
-         MiscData = 1, 
-      }, 
-      [111] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 45, 
-         Arg3 = 1036, 
-         MiscData = 1, 
-      }, 
-      [112] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 45, 
-         Arg3 = 1036, 
-         MiscData = 1, 
-      }, 
-      [113] = 
-      {
-         Arg1 = 1006, 
-         Command = "M", 
-         Arg2 = 2, 
-         Arg3 = 1000, 
-         MiscData = 1, 
-      }, 
-      [114] = 
-      {
-         Arg1 = 1005, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 10, 
-         MiscData = 1, 
-      }, 
-      [115] = 
-      {
-         Arg1 = 1004, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 7, 
-         MiscData = 1, 
-      }, 
-      [116] = 
-      {
-         Arg1 = 1002, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 14, 
-         MiscData = 1, 
-      }, 
-      [117] = 
-      {
-         Arg1 = 1001, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 5, 
-         MiscData = 1, 
-      }, 
-      [118] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [119] = 
-      {
-         Arg1 = 1006, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 9, 
-         MiscData = 1, 
-      }, 
-      [120] = 
-      {
-         Arg1 = 1007, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 6, 
-         MiscData = 1, 
-      }, 
-      [121] = 
-      {
-         Arg1 = 53, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 16, 
-         MiscData = 1, 
-      }, 
-      [122] = 
-      {
-         Arg1 = 1006, 
-         Command = "M", 
-         Arg2 = 2, 
-         Arg3 = 1000, 
-         MiscData = 1, 
-      }, 
-      [123] = 
-      {
-         Arg1 = 1005, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 10, 
-         MiscData = 1, 
-      }, 
-      [124] = 
-      {
-         Arg1 = 1004, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 7, 
-         MiscData = 1, 
-      }, 
-      [125] = 
-      {
-         Arg1 = 1002, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 14, 
-         MiscData = 1, 
-      }, 
-      [126] = 
-      {
-         Arg1 = 1001, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 5, 
-         MiscData = 1, 
-      }, 
-      [127] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [128] = 
-      {
-         Arg1 = 1006, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 9, 
-         MiscData = 1, 
-      }, 
-      [129] = 
-      {
-         Arg1 = 1007, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 6, 
-         MiscData = 1, 
-      }, 
-      [130] = 
-      {
-         Arg1 = 53, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 16, 
-         MiscData = 1, 
-      }, 
-      [131] = 
-      {
-         Arg1 = 1010, 
-         Command = "M", 
-         Arg2 = 1, 
-         Arg3 = 1020, 
-         MiscData = 1, 
-      }, 
-      [132] = 
-      {
-         Arg1 = 1002, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 14, 
-         MiscData = 1, 
-      }, 
-      [133] = 
-      {
-         Arg1 = 1007, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 6, 
-         MiscData = 1, 
-      }, 
-      [134] = 
-      {
-         Arg1 = 1003, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 12, 
-         MiscData = 1, 
-      }, 
-      [135] = 
-      {
-         Arg1 = 1006, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 9, 
-         MiscData = 1, 
-      }, 
-      [136] = 
-      {
-         Arg1 = 10424, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 17, 
-         MiscData = 1, 
-      }, 
-      [137] = 
-      {
-         Arg1 = 28100, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 16, 
-         MiscData = 1, 
-      }, 
-      [138] = 
-      {
-         Arg1 = 1004, 
-         Command = "M", 
-         Arg2 = 18, 
-         Arg3 = 1020, 
-         MiscData = 1, 
-      }, 
-      [139] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 45, 
-         Arg3 = 1020, 
-         MiscData = 1, 
-      }, 
-      [140] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 20, 
-         Arg3 = 1020, 
-         MiscData = 1, 
-      }, 
-      [141] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 45, 
-         Arg3 = 1020, 
-         MiscData = 1, 
-      }, 
-      [142] = 
-      {
-         Arg1 = 59, 
-         Command = "E", 
-         Arg2 = 1, 
-         Arg3 = 16, 
-         MiscData = 1, 
-      }, 
-      [143] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1020, 
-         MiscData = 1, 
-      }, 
-      [144] = 
-      {
-         Arg1 = 1004, 
-         Command = "M", 
-         Arg2 = 18, 
-         Arg3 = 1018, 
-         MiscData = 1, 
-      }, 
-      [145] = 
-      {
-         Arg1 = 10509, 
-         Command = "M", 
-         Arg2 = 7, 
-         Arg3 = 1018, 
-         MiscData = 1, 
-      }, 
-      [146] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 46, 
-         Arg3 = 1018, 
-         MiscData = 1, 
-      }, 
-      [147] = 
-      {
-         Arg1 = 1006, 
-         Command = "M", 
-         Arg2 = 3, 
-         Arg3 = 1018, 
-         MiscData = 1, 
-      }, 
-      [148] = 
-      {
-         Arg1 = 1011, 
-         Command = "M", 
-         Arg2 = 1, 
-         Arg3 = 1017, 
-         MiscData = 1, 
-      }, 
-      [149] = 
-      {
-         Arg1 = 10313, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [150] = 
-      {
-         Arg1 = 32253, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-      }, 
-      [151] = 
-      {
-         Arg1 = 1004, 
-         Command = "M", 
-         Arg2 = 18, 
-         Arg3 = 1017, 
-         MiscData = 1, 
-      }, 
-      [152] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 20, 
-         Arg3 = 1017, 
-         MiscData = 1, 
-      }, 
-      [153] = 
-      {
-         Arg1 = 1004, 
-         Command = "M", 
-         Arg2 = 18, 
-         Arg3 = 1017, 
-         MiscData = 1, 
-      }, 
-      [154] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 20, 
-         Arg3 = 1017, 
-         MiscData = 1, 
-      }, 
-      [155] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1017, 
-         MiscData = 1, 
-      }, 
-      [156] = 
-      {
-         Arg1 = 1004, 
-         Command = "M", 
-         Arg2 = 18, 
-         Arg3 = 1017, 
-         MiscData = 1, 
-      }, 
-      [157] = 
-      {
-         Arg1 = 1012, 
-         Command = "M", 
-         Arg2 = 46, 
-         Arg3 = 1017, 
-         MiscData = 1, 
-      }, 
-      [158] = 
-      {
-         Arg1 = 1005, 
-         Command = "M", 
-         Arg2 = 27, 
-         Arg3 = 1016, 
-         MiscData = 1, 
-      }, 
-      [159] = 
-      {
-         Arg1 = 1016, 
-         Command = "M", 
-         Arg2 = 1, 
-         Arg3 = 1016, 
-         MiscData = 1, 
-      }, 
-      [160] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 20, 
-         Arg3 = 1016, 
-         MiscData = 1, 
-      }, 
-      [161] = 
-      {
-         Arg1 = 1002, 
-         Command = "M", 
-         Arg2 = 20, 
-         Arg3 = 1016, 
-         MiscData = 1, 
-      }, 
-   }, 
-   FileFormatVersion = 1, 
-   ResetFrequency = 0, 
    Filename = "honoghr.lua", 
-   HighEconomy = 0, 
-   Author = "Thrawn", 
+   Name = "Honoghr", 
    Mobiles = 
    {
       [1008] = 
       {
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
-         Weight = 0, 
-         Vnum = 1008, 
-         DefaultPosition = "standing", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
          Description = "", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 900, 
-            HitNoDice = 18, 
-         }, 
-         VipFlags = 
-         {
-            [6] = "Honoghr", 
-         }, 
-         HitRoll = 16, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 11, 
-         }, 
+         Name = "Ir'Khanim noghri dynast", 
+         Vnum = 1008, 
+         Weight = 0, 
          Credits = 450, 
-         ShortDescr = "Ir'Khanim", 
-         ArmorClass = -125, 
-         DamRoll = 18, 
-         Height = 0, 
-         Alignment = 0, 
-         Race = "Shistavanen", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         Level = 90, 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 13, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
-         }, 
-         LongDescr = "Ir'Khanim, Second Dynast is here.\
-", 
-         Sex = "undistinguished", 
-         NumberOfAttacks = 0, 
-         Name = "Ir'Khanim noghri dynast", 
-      }, 
-      [1009] = 
-      {
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
-         Weight = 0, 
-         Vnum = 1009, 
-         DefaultPosition = "standing", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
+         ShortDescr = "Ir'Khanim", 
          HitChance = 
          {
             HitSizeDice = 10, 
             HitPlus = 900, 
             HitNoDice = 18, 
          }, 
-         Description = "", 
-         HitRoll = 16, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 11, 
-         }, 
-         Credits = 450, 
-         ShortDescr = "Maitrakh, clan Kihm'bar", 
-         ArmorClass = -125, 
-         DamRoll = 18, 
-         Height = 0, 
-         Alignment = 0, 
-         Race = "Shistavanen", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Level = 90, 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 13, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
-         }, 
-         LongDescr = "Maitrakh, clan Kihm'bar is looking at her clan history.\
+         LongDescr = "Ir'Khanim, Second Dynast is here.\
 ", 
-         Sex = "female", 
-         NumberOfAttacks = 0, 
-         Name = "Maitrakh matiark noghri leader", 
-      }, 
-      [1010] = 
-      {
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [3] = "DetectInvis", 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "100", 
-               Code = "get dagger sheath\
-wield dagger\
-", 
-               MudProgType = "fight_prog", 
-            }, 
-         }, 
-         Weight = 0, 
-         Vnum = 1010, 
          DefaultPosition = "standing", 
          Languages = 
          {
-            Speaks = 
+            Speaking = 
             {
                [0] = "basic", 
                [6] = "shistavanen", 
             }, 
-            Speaking = 
+            Speaks = 
             {
                [0] = "basic", 
                [6] = "shistavanen", 
@@ -1490,108 +45,234 @@ wield dagger\
          }, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
+         Sex = "undistinguished", 
+         VipFlags = 
+         {
+            [6] = "Honoghr", 
+         }, 
+         DamRoll = 18, 
+         HitRoll = 16, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Alignment = 0, 
+         Race = "Shistavanen", 
+         Level = 90, 
+         Damage = 
+         {
+            DamNoDice = 11, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = -125, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Position = "standing", 
+      }, 
+      [1009] = 
+      {
          Description = "", 
-         Immune = 
+         Name = "Maitrakh matiark noghri leader", 
+         Vnum = 1009, 
+         Weight = 0, 
+         Credits = 450, 
+         Flags = 
          {
-            [20] = "magic", 
-            [5] = "pierce", 
-            [13] = "nonmagic", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
          }, 
-         DamRoll = 21, 
-         DefenseFlags = 
+         ShortDescr = "Maitrakh, clan Kihm'bar", 
+         HitChance = 
          {
-            [1] = "dodge", 
+            HitSizeDice = 10, 
+            HitPlus = 900, 
+            HitNoDice = 18, 
          }, 
+         LongDescr = "Maitrakh, clan Kihm'bar is looking at her clan history.\
+", 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Sex = "female", 
+         DamRoll = 18, 
+         HitRoll = 16, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Alignment = 0, 
+         Race = "Shistavanen", 
+         Level = 90, 
+         Damage = 
+         {
+            DamNoDice = 11, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = -125, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Position = "standing", 
+      }, 
+      [1010] = 
+      {
+         Description = "", 
+         Name = "Rukh noghri assassin", 
+         Vnum = 1010, 
+         AttackFlags = 
+         {
+            [4] = "punch", 
+            [5] = "kick", 
+         }, 
+         Weight = 0, 
+         Credits = 420, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [9] = "Train", 
+         }, 
+         ShortDescr = "Rukh", 
          HitChance = 
          {
             HitSizeDice = 30, 
             HitPlus = 2000, 
             HitNoDice = 50, 
          }, 
-         Alignment = 0, 
-         HitRoll = 21, 
-         Damage = 
+         MudProgs = 
          {
-            DamPlus = 150, 
-            DamSizeDice = 20, 
-            DamNoDice = 6, 
-         }, 
-         Credits = 420, 
-         ShortDescr = "Rukh", 
-         ArmorClass = -162, 
-         Resistant = 
-         {
-            [20] = "magic", 
-            [13] = "nonmagic", 
-         }, 
-         Height = 0, 
-         AttackFlags = 
-         {
-            [4] = "punch", 
-            [5] = "kick", 
-         }, 
-         Race = "Shistavanen", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [9] = "Train", 
-         }, 
-         Level = 105, 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 25, 
-            Strength = 20, 
-            Intelligence = 19, 
-            Luck = 13, 
-            Wisdom = 18, 
-            Force = 0, 
-            Constitution = 16, 
-            Charisma = 17, 
+            [1] = 
+            {
+               Arguments = "100", 
+               MudProgType = "fight_prog", 
+               Code = "get dagger sheath\
+wield dagger\
+", 
+            }, 
          }, 
          LongDescr = "Rukh, ex-imperial death commando is here watching you.\
 ", 
-         Sex = "male", 
-         NumberOfAttacks = 0, 
-         Name = "Rukh noghri assassin", 
-      }, 
-      [1011] = 
-      {
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
-         Weight = 0, 
-         Vnum = 1011, 
          DefaultPosition = "standing", 
          Languages = 
          {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
             Speaks = 
             {
                [0] = "basic", 
                [6] = "shistavanen", 
             }, 
-            Speaking = 
-            {
-               [6] = "shistavanen", 
-            }, 
          }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [5] = "pierce", 
+            [13] = "nonmagic", 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Sex = "male", 
+         Resistant = 
+         {
+            [20] = "magic", 
+            [13] = "nonmagic", 
+         }, 
+         HitRoll = 21, 
+         DamRoll = 21, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Alignment = 0, 
+         Race = "Shistavanen", 
+         Level = 105, 
+         Damage = 
+         {
+            DamNoDice = 6, 
+            DamSizeDice = 20, 
+            DamPlus = 150, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 16, 
+            Wisdom = 18, 
+            Dexterity = 25, 
+            Strength = 20, 
+            Charisma = 17, 
+            Intelligence = 19, 
+         }, 
+         ArmorClass = -162, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [3] = "DetectInvis", 
+         }, 
+         Position = "standing", 
+      }, 
+      [1011] = 
+      {
          Shop = 
          {
-            KeeperShortDescr = "a noghri cook", 
-            KeeperVnum = 1011, 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
             BuyTypes = 
             {
                [1] = "food", 
@@ -1600,85 +281,114 @@ wield dagger\
                [4] = "none", 
                [0] = "none", 
             }, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
             ProfitSell = 90, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
+            ProfitBuy = 120, 
+            KeeperShortDescr = "a noghri cook", 
          }, 
          Description = "", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 150, 
-            HitNoDice = 3, 
-         }, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         HitRoll = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-         }, 
+         Name = "noghri cook ", 
+         Vnum = 1011, 
+         Weight = 0, 
          Credits = 75, 
-         ShortDescr = "a noghri cook", 
-         ArmorClass = 62, 
-         DamRoll = 0, 
-         Height = 0, 
-         Alignment = 0, 
-         Race = "Shistavanen", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [25] = "NoKill", 
          }, 
-         Level = 15, 
-         Position = "standing", 
-         Stats = 
+         ShortDescr = "a noghri cook", 
+         HitChance = 
          {
-            Dexterity = 13, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
+            HitSizeDice = 10, 
+            HitPlus = 150, 
+            HitNoDice = 3, 
          }, 
          LongDescr = "A noghri cook is here ready to serve you.\
 ", 
-         Sex = "male", 
-         NumberOfAttacks = 0, 
-         Name = "noghri cook ", 
-      }, 
-      [1012] = 
-      {
-         Race = "Shistavanen", 
-         Weight = 0, 
-         Vnum = 1012, 
          DefaultPosition = "standing", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
          Languages = 
          {
+            Speaking = 
+            {
+               [6] = "shistavanen", 
+            }, 
             Speaks = 
             {
                [0] = "basic", 
                [6] = "shistavanen", 
             }, 
-            Speaking = 
-            {
-               [6] = "shistavanen", 
-            }, 
          }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Sex = "male", 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Alignment = 0, 
+         Race = "Shistavanen", 
+         Level = 15, 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = 62, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Position = "standing", 
+      }, 
+      [1012] = 
+      {
+         Description = "", 
+         Name = "a noghri commando", 
+         Vnum = 1012, 
+         Weight = 0, 
+         Credits = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ShortDescr = "a noghri commando", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 600, 
+            HitNoDice = 12, 
+         }, 
+         LongDescr = "A noghri commando is standing here on duty.\
+", 
+         DefaultPosition = "standing", 
          SpecFuns = 
          {
             [1] = "spec_guardian", 
@@ -1689,186 +399,141 @@ wield dagger\
             [1] = 
             {
                Arguments = "100", 
+               MudProgType = "fight_prog", 
                Code = "if ovnumwear(59) < 1\
 mpoload 59\
 wield vibro\
 endif\
 ", 
-               MudProgType = "fight_prog", 
+            }, 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [6] = "shistavanen", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
             }, 
          }, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 600, 
-            HitNoDice = 12, 
-         }, 
-         Description = "", 
-         HitRoll = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 6, 
-         }, 
-         Credits = 0, 
-         ShortDescr = "a noghri commando", 
-         ArmorClass = -50, 
+         Race = "Shistavanen", 
          VipFlags = 
          {
             [6] = "Honoghr", 
          }, 
-         Height = 0, 
          DamRoll = 0, 
+         HitRoll = 0, 
+         Height = 0, 
          Alignment = 0, 
+         NumberOfAttacks = 0, 
+         Level = 60, 
+         Damage = 
+         {
+            DamNoDice = 6, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = -50, 
+         Sex = "male", 
+         Position = "standing", 
+      }, 
+      [1099] = 
+      {
+         Description = "", 
+         Name = "noghri ", 
+         Vnum = 1099, 
+         Weight = 0, 
+         Credits = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         Name = "a noghri commando", 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 13, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
-         }, 
-         LongDescr = "A noghri commando is standing here on duty.\
-", 
-         Sex = "male", 
-         NumberOfAttacks = 0, 
-         Level = 60, 
-      }, 
-      [1099] = 
-      {
-         Race = "Human", 
-         Weight = 0, 
-         Vnum = 1099, 
-         DefaultPosition = "standing", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
+         ShortDescr = "a newly created noghri ", 
          HitChance = 
          {
             HitSizeDice = 0, 
             HitPlus = 0, 
             HitNoDice = 0, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         HitRoll = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-         }, 
-         Credits = 0, 
-         ShortDescr = "a newly created noghri ", 
-         ArmorClass = 0, 
-         Description = "", 
-         Height = 0, 
-         DamRoll = 0, 
-         Alignment = 0, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Name = "noghri ", 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 10, 
-            Strength = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Charisma = 10, 
-         }, 
          LongDescr = "Some god abandoned a newly created noghri  here.\
 ", 
-         Sex = "undistinguished", 
-         NumberOfAttacks = 0, 
-         Level = 1, 
-      }, 
-      [1016] = 
-      {
-         Race = "Human", 
-         Weight = 0, 
-         Vnum = 1016, 
          DefaultPosition = "standing", 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 850, 
-            HitNoDice = 17, 
-         }, 
-         Description = "", 
-         HitRoll = 20, 
+         Race = "Human", 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         Height = 0, 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         Level = 1, 
          Damage = 
          {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 8, 
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
          }, 
-         Credits = 0, 
-         ShortDescr = "A noghri elder", 
-         ArmorClass = -112, 
-         VipFlags = 
+         Stats = 
          {
-            [6] = "Honoghr", 
+            Force = 0, 
+            Luck = 10, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
          }, 
-         Height = 0, 
-         DamRoll = 20, 
-         Alignment = 0, 
+         ArmorClass = 0, 
+         Sex = "undistinguished", 
+         Position = "standing", 
+      }, 
+      [1016] = 
+      {
+         Description = "", 
+         Name = "A noghri elder", 
+         Vnum = 1016, 
+         Weight = 0, 
+         Credits = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1877,367 +542,344 @@ endif\
             [30] = "Prototype", 
             [0] = "Npc", 
          }, 
-         Name = "A noghri elder", 
-         Position = "standing", 
-         Stats = 
+         ShortDescr = "A noghri elder", 
+         HitChance = 
          {
-            Dexterity = 10, 
-            Strength = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Wisdom = 10, 
-            Force = 0, 
-            Constitution = 10, 
-            Charisma = 10, 
+            HitSizeDice = 10, 
+            HitPlus = 850, 
+            HitNoDice = 17, 
          }, 
          LongDescr = "A noghri elder sits here, in front of books\
 ", 
-         Sex = "undistinguished", 
-         NumberOfAttacks = 0, 
-         Level = 85, 
-      }, 
-      [1000] = 
-      {
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
-         Weight = 0, 
-         Vnum = 1000, 
          DefaultPosition = "standing", 
          Languages = 
          {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
             Speaking = 
             {
-               [1] = "shyriiwook", 
                [0] = "basic", 
-               [6] = "shistavanen", 
             }, 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
+            Speaks = 
             {
-               Arguments = "1000", 
-               Code = "get dagger sheath\
-wield dagger\
-", 
-               MudProgType = "fight_prog", 
+               [0] = "basic", 
             }, 
          }, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
+         Race = "Human", 
+         VipFlags = 
+         {
+            [6] = "Honoghr", 
+         }, 
+         DamRoll = 20, 
+         HitRoll = 20, 
+         Height = 0, 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         Level = 85, 
+         Damage = 
+         {
+            DamNoDice = 8, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 10, 
+            Constitution = 10, 
+            Wisdom = 10, 
+            Dexterity = 10, 
+            Strength = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+         }, 
+         ArmorClass = -112, 
+         Sex = "undistinguished", 
+         Position = "standing", 
+      }, 
+      [1000] = 
+      {
          Description = "", 
+         Name = "Noghri male Khabarakh", 
+         Vnum = 1000, 
+         Weight = 0, 
+         Credits = 225, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [10] = "Practice", 
+         }, 
+         ShortDescr = "Khabarakh, clan Kihm'bar", 
          HitChance = 
          {
             HitSizeDice = 9, 
             HitPlus = 450, 
             HitNoDice = 10, 
          }, 
-         VipFlags = 
-         {
-            [6] = "Honoghr", 
-         }, 
-         HitRoll = 7, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 8, 
-            DamNoDice = 3, 
-         }, 
-         Credits = 225, 
-         ShortDescr = "Khabarakh, clan Kihm'bar", 
-         ArmorClass = 52, 
-         DamRoll = 9, 
-         Height = 0, 
-         Alignment = 0, 
-         Race = "Shistavanen", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-         Level = 45, 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 20, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
-         }, 
          LongDescr = "A noghri male is standing here.\
 ", 
-         Sex = "male", 
-         NumberOfAttacks = 3, 
-         Name = "Noghri male Khabarakh", 
-      }, 
-      [1001] = 
-      {
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
-         Weight = 0, 
-         Vnum = 1001, 
          DefaultPosition = "standing", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "1000", 
+               MudProgType = "fight_prog", 
+               Code = "get dagger sheath\
+wield dagger\
+", 
+            }, 
+         }, 
          Languages = 
          {
-            Speaks = 
+            Speaking = 
             {
+               [1] = "shyriiwook", 
                [0] = "basic", 
                [6] = "shistavanen", 
             }, 
-            Speaking = 
+            Speaks = 
             {
+               [1] = "shyriiwook", 
                [0] = "basic", 
                [6] = "shistavanen", 
             }, 
          }, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
-         Description = "", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 900, 
-            HitNoDice = 18, 
-         }, 
+         Sex = "male", 
          VipFlags = 
          {
             [6] = "Honoghr", 
          }, 
-         HitRoll = 16, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 11, 
-         }, 
-         Credits = 450, 
-         ShortDescr = "The Dynast", 
-         ArmorClass = -125, 
-         DamRoll = 18, 
+         DamRoll = 9, 
+         HitRoll = 7, 
+         NumberOfAttacks = 3, 
          Height = 0, 
          Alignment = 0, 
          Race = "Shistavanen", 
+         Level = 45, 
+         Damage = 
+         {
+            DamNoDice = 3, 
+            DamSizeDice = 8, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 20, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = 52, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Position = "standing", 
+      }, 
+      [1001] = 
+      {
+         Description = "", 
+         Name = "the dynast", 
+         Vnum = 1001, 
+         Weight = 0, 
+         Credits = 450, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [6] = "StayArea", 
          }, 
-         Level = 90, 
-         Position = "standing", 
-         Stats = 
+         ShortDescr = "The Dynast", 
+         HitChance = 
          {
-            Dexterity = 13, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
+            HitSizeDice = 10, 
+            HitPlus = 900, 
+            HitNoDice = 18, 
          }, 
          LongDescr = "The Dynast is here keeping control of the clans.\
 ", 
-         Sex = "undistinguished", 
-         NumberOfAttacks = 0, 
-         Name = "the dynast", 
-      }, 
-      [1002] = 
-      {
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
-         Weight = 0, 
-         Vnum = 1002, 
          DefaultPosition = "standing", 
          Languages = 
          {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
             Speaks = 
             {
                [0] = "basic", 
-            }, 
-            Speaking = 
-            {
                [6] = "shistavanen", 
             }, 
          }, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
+         Sex = "undistinguished", 
+         VipFlags = 
+         {
+            [6] = "Honoghr", 
+         }, 
+         DamRoll = 18, 
+         HitRoll = 16, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Alignment = 0, 
+         Race = "Shistavanen", 
+         Level = 90, 
+         Damage = 
+         {
+            DamNoDice = 11, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = -125, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Position = "standing", 
+      }, 
+      [1002] = 
+      {
          Description = "", 
+         Name = "noghri ", 
+         Vnum = 1002, 
+         Weight = 0, 
+         Credits = 75, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ShortDescr = "a noghri", 
          HitChance = 
          {
             HitSizeDice = 10, 
             HitPlus = 150, 
             HitNoDice = 3, 
          }, 
-         VipFlags = 
-         {
-            [6] = "Honoghr", 
-         }, 
-         HitRoll = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-         }, 
-         Credits = 75, 
-         ShortDescr = "a noghri", 
-         ArmorClass = 62, 
-         DamRoll = 1, 
-         Height = 0, 
-         Alignment = 0, 
-         Race = "Shistavanen", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Level = 15, 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 13, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
-         }, 
          LongDescr = "A noghri is walking ever so quietly past you.\
 ", 
-         Sex = "male", 
-         NumberOfAttacks = 0, 
-         Name = "noghri ", 
-      }, 
-      [1003] = 
-      {
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
-         Weight = 0, 
-         Vnum = 1003, 
          DefaultPosition = "standing", 
          Languages = 
          {
+            Speaking = 
+            {
+               [6] = "shistavanen", 
+            }, 
             Speaks = 
             {
                [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-               [6] = "shistavanen", 
             }, 
          }, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
+         Sex = "male", 
+         VipFlags = 
+         {
+            [6] = "Honoghr", 
+         }, 
+         DamRoll = 1, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Alignment = 0, 
+         Race = "Shistavanen", 
+         Level = 15, 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = 62, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Position = "standing", 
+      }, 
+      [1003] = 
+      {
          Description = "", 
+         Name = "noghri child", 
+         Vnum = 1003, 
+         Weight = 0, 
+         Credits = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ShortDescr = "a noghri child", 
          HitChance = 
          {
             HitSizeDice = 10, 
             HitPlus = 50, 
             HitNoDice = 1, 
          }, 
-         VipFlags = 
-         {
-            [6] = "Honoghr", 
-         }, 
-         HitRoll = 1, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         Credits = 0, 
-         ShortDescr = "a noghri child", 
-         ArmorClass = 87, 
-         DamRoll = 1, 
-         Height = 0, 
-         Alignment = 0, 
-         Race = "Shistavanen", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Level = 5, 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 13, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
-         }, 
          LongDescr = "A noghri child is playing ball here.\
 ", 
-         Sex = "undistinguished", 
-         NumberOfAttacks = 0, 
-         Name = "noghri child", 
-      }, 
-      [1004] = 
-      {
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
-         Weight = 0, 
-         Vnum = 1004, 
          DefaultPosition = "standing", 
          Languages = 
          {
-            Speaks = 
+            Speaking = 
             {
+               [0] = "basic", 
                [6] = "shistavanen", 
             }, 
-            Speaking = 
+            Speaks = 
             {
                [0] = "basic", 
                [6] = "shistavanen", 
@@ -2245,110 +887,137 @@ wield dagger\
          }, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
+         Sex = "undistinguished", 
+         VipFlags = 
+         {
+            [6] = "Honoghr", 
+         }, 
+         DamRoll = 1, 
+         HitRoll = 1, 
+         NumberOfAttacks = 0, 
+         Height = 0, 
+         Alignment = 0, 
+         Race = "Shistavanen", 
+         Level = 5, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = 87, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Position = "standing", 
+      }, 
+      [1004] = 
+      {
          Description = "", 
+         Name = "noghri female", 
+         Vnum = 1004, 
+         Weight = 0, 
+         Credits = 75, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         ShortDescr = "a noghri female", 
          HitChance = 
          {
             HitSizeDice = 10, 
             HitPlus = 150, 
             HitNoDice = 3, 
          }, 
+         LongDescr = "A noghri female is silently walking aound the village.\
+", 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
+            Speaks = 
+            {
+               [6] = "shistavanen", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Sex = "female", 
          VipFlags = 
          {
             [6] = "Honoghr", 
          }, 
-         HitRoll = 0, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-         }, 
-         Credits = 75, 
-         ShortDescr = "a noghri female", 
-         ArmorClass = 62, 
          DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
          Height = 0, 
          Alignment = 0, 
          Race = "Shistavanen", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
          Level = 15, 
-         Position = "standing", 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
          Stats = 
          {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
             Dexterity = 13, 
             Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
             Charisma = 13, 
+            Intelligence = 13, 
          }, 
-         LongDescr = "A noghri female is silently walking aound the village.\
-", 
-         Sex = "female", 
-         NumberOfAttacks = 0, 
-         Name = "noghri female", 
+         ArmorClass = 62, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Position = "standing", 
       }, 
       [1005] = 
       {
-         Race = "Human", 
-         Weight = 0, 
-         Vnum = 1005, 
-         DefaultPosition = "standing", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [11] = "barabel", 
-            }, 
-            Speaking = 
-            {
-               [11] = "barabel", 
-            }, 
-         }, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         HitRoll = 0, 
-         Damage = 
-         {
-            DamPlus = 0, 
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-         }, 
-         Credits = 0, 
-         ShortDescr = "a decon droid", 
-         ArmorClass = 88, 
          Description = "This common make of astromech droid is also known as an R2 unit. It is\
 a small wheeled droid designed primarily for ship maintenence and\
 repair. It has an interface apendage to plug into a ships computer as\
 well as several other tools hidden within its domed frame that it\
 uses to preform various functions.\
 ", 
-         Height = 0, 
-         DamRoll = 0, 
-         Alignment = 0, 
+         Name = "decon droid", 
+         Vnum = 1005, 
+         Weight = 0, 
+         Credits = 0, 
          Flags = 
          {
             [0] = "Npc", 
@@ -2356,44 +1025,85 @@ uses to preform various functions.\
             [26] = "Droid", 
             [7] = "Wimpy", 
          }, 
-         Name = "decon droid", 
-         Position = "standing", 
-         Stats = 
+         ShortDescr = "a decon droid", 
+         HitChance = 
          {
-            Dexterity = 13, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+            HitNoDice = 0, 
          }, 
          LongDescr = "A decon droid is cleaning the soil here.\
 ", 
-         Sex = "undistinguished", 
-         NumberOfAttacks = 0, 
-         Level = 5, 
-      }, 
-      [1006] = 
-      {
-         Race = "Shistavanen", 
-         Weight = 0, 
-         Vnum = 1006, 
          DefaultPosition = "standing", 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
             Speaking = 
             {
-               [0] = "basic", 
-               [6] = "shistavanen", 
+               [11] = "barabel", 
+            }, 
+            Speaks = 
+            {
+               [11] = "barabel", 
             }, 
          }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Race = "Human", 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         Height = 0, 
+         Alignment = 0, 
+         NumberOfAttacks = 0, 
+         Level = 5, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamSizeDice = 4, 
+            DamPlus = 0, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = 88, 
+         Sex = "undistinguished", 
+         Position = "standing", 
+      }, 
+      [1006] = 
+      {
+         Description = "", 
+         Name = "a noghri commando", 
+         Vnum = 1006, 
+         Weight = 0, 
+         Credits = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         ShortDescr = "a noghri commando", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitPlus = 1000, 
+            HitNoDice = 20, 
+         }, 
+         LongDescr = "A noghri commando is standing here on duty.\
+", 
+         DefaultPosition = "standing", 
          SpecFuns = 
          {
             [1] = "spec_guardian", 
@@ -2404,125 +1114,74 @@ uses to preform various functions.\
             [1] = 
             {
                Arguments = "100", 
+               MudProgType = "fight_prog", 
                Code = "if ovnumwear(59) < 1\
 mpoload 59\
 wield vibro\
 endif\
 ", 
-               MudProgType = "fight_prog", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-         }, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-            HitNoDice = 20, 
-         }, 
-         Description = "", 
-         HitRoll = 20, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-         }, 
-         Credits = 0, 
-         ShortDescr = "a noghri commando", 
-         ArmorClass = -152, 
-         VipFlags = 
-         {
-            [6] = "Honoghr", 
-         }, 
-         Height = 0, 
-         DamRoll = 20, 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Name = "a noghri commando", 
-         Position = "standing", 
-         Stats = 
-         {
-            Dexterity = 13, 
-            Strength = 13, 
-            Intelligence = 13, 
-            Luck = 13, 
-            Wisdom = 13, 
-            Force = 0, 
-            Constitution = 13, 
-            Charisma = 13, 
-         }, 
-         LongDescr = "A noghri commando is standing here on duty.\
-", 
-         Sex = "male", 
-         NumberOfAttacks = 0, 
-         Level = 101, 
-      }, 
-      [1007] = 
-      {
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
-         Weight = 0, 
-         Vnum = 1007, 
-         DefaultPosition = "standing", 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-               [6] = "shistavanen", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
                [6] = "shistavanen", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
          }, 
          SaveVs = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
-         Description = "", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 900, 
-            HitNoDice = 18, 
-         }, 
+         Race = "Shistavanen", 
          VipFlags = 
          {
             [6] = "Honoghr", 
          }, 
-         HitRoll = 16, 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-            DamNoDice = 11, 
-         }, 
-         Credits = 450, 
-         ShortDescr = "Vork'Corkh ", 
-         ArmorClass = -125, 
-         DamRoll = 18, 
+         DamRoll = 20, 
+         HitRoll = 20, 
          Height = 0, 
          Alignment = 0, 
-         Race = "Shistavanen", 
+         NumberOfAttacks = 0, 
+         Level = 101, 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 13, 
+            Wisdom = 13, 
+            Dexterity = 13, 
+            Strength = 13, 
+            Charisma = 13, 
+            Intelligence = 13, 
+         }, 
+         ArmorClass = -152, 
+         Sex = "male", 
+         Position = "standing", 
+      }, 
+      [1007] = 
+      {
+         Description = "", 
+         Name = "Vor'corkh noghri dynast", 
+         Vnum = 1007, 
+         Weight = 0, 
+         Credits = 450, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -2530,27 +1189,1363 @@ endif\
             [9] = "Train", 
             [6] = "StayArea", 
          }, 
-         Level = 90, 
-         Position = "standing", 
-         Stats = 
+         ShortDescr = "Vork'Corkh ", 
+         HitChance = 
          {
-            Dexterity = 25, 
-            Strength = 25, 
-            Intelligence = 25, 
-            Luck = 13, 
-            Wisdom = 25, 
-            Force = 0, 
-            Constitution = 25, 
-            Charisma = 25, 
+            HitSizeDice = 10, 
+            HitPlus = 900, 
+            HitNoDice = 18, 
          }, 
          LongDescr = "Vork'Corkh, First Dynast is here.\
 ", 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [6] = "shistavanen", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Wand = 0, 
+            ParaPetri = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
          Sex = "undistinguished", 
+         VipFlags = 
+         {
+            [6] = "Honoghr", 
+         }, 
+         DamRoll = 18, 
+         HitRoll = 16, 
          NumberOfAttacks = 0, 
-         Name = "Vor'corkh noghri dynast", 
+         Height = 0, 
+         Alignment = 0, 
+         Race = "Shistavanen", 
+         Level = 90, 
+         Damage = 
+         {
+            DamNoDice = 11, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Force = 0, 
+            Luck = 13, 
+            Constitution = 25, 
+            Wisdom = 25, 
+            Dexterity = 25, 
+            Strength = 25, 
+            Charisma = 25, 
+            Intelligence = 25, 
+         }, 
+         ArmorClass = -125, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Position = "standing", 
       }, 
    }, 
-   Name = "Honoghr", 
+   Resets = 
+   {
+      [1] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1000, 
+         Arg3 = 1046, 
+      }, 
+      [2] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1002, 
+         Arg3 = 14, 
+      }, 
+      [3] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [4] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1001, 
+         Arg3 = 5, 
+      }, 
+      [5] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 10424, 
+         Arg3 = 17, 
+      }, 
+      [6] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1007, 
+         Arg3 = 6, 
+      }, 
+      [7] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1009, 
+         Arg3 = 1033, 
+      }, 
+      [8] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [9] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1007, 
+         Arg3 = 6, 
+      }, 
+      [10] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1008, 
+         Arg3 = 1033, 
+      }, 
+      [11] = 
+      {
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
+         Arg1 = 1007, 
+         Arg3 = 1, 
+      }, 
+      [12] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32201, 
+         Arg3 = 1048, 
+      }, 
+      [13] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 90, 
+         Arg3 = 1049, 
+      }, 
+      [14] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 1012, 
+         Arg3 = 1003, 
+      }, 
+      [15] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 1012, 
+         Arg3 = 1003, 
+      }, 
+      [16] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 1012, 
+         Arg3 = 1003, 
+      }, 
+      [17] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1005, 
+      }, 
+      [18] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1005, 
+      }, 
+      [19] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1005, 
+      }, 
+      [20] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1005, 
+      }, 
+      [21] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1005, 
+      }, 
+      [22] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1005, 
+      }, 
+      [23] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1005, 
+      }, 
+      [24] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1005, 
+      }, 
+      [25] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 19, 
+         Arg1 = 1004, 
+         Arg3 = 1005, 
+      }, 
+      [26] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 19, 
+         Arg1 = 1004, 
+         Arg3 = 1005, 
+      }, 
+      [27] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+         Arg1 = 1012, 
+         Arg3 = 1005, 
+      }, 
+      [28] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+         Arg1 = 1012, 
+         Arg3 = 1005, 
+      }, 
+      [29] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+         Arg1 = 1012, 
+         Arg3 = 1005, 
+      }, 
+      [30] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+         Arg1 = 1012, 
+         Arg3 = 1005, 
+      }, 
+      [31] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [32] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [33] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [34] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [35] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [36] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [37] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [38] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [39] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [40] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [41] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [42] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [43] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [44] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [45] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [46] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [47] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [48] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [49] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 21, 
+         Arg1 = 1002, 
+         Arg3 = 1012, 
+      }, 
+      [50] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 21, 
+         Arg1 = 1002, 
+         Arg3 = 1012, 
+      }, 
+      [51] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 19, 
+         Arg1 = 1004, 
+         Arg3 = 1012, 
+      }, 
+      [52] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [53] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 21, 
+         Arg1 = 1002, 
+         Arg3 = 1012, 
+      }, 
+      [54] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 19, 
+         Arg1 = 1004, 
+         Arg3 = 1012, 
+      }, 
+      [55] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1012, 
+      }, 
+      [56] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 21, 
+         Arg1 = 1002, 
+         Arg3 = 1012, 
+      }, 
+      [57] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 1012, 
+         Arg3 = 1012, 
+      }, 
+      [58] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 1012, 
+         Arg3 = 1012, 
+      }, 
+      [59] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 1012, 
+         Arg3 = 1012, 
+      }, 
+      [60] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 1012, 
+         Arg3 = 1012, 
+      }, 
+      [61] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1007, 
+         Arg3 = 1008, 
+      }, 
+      [62] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [63] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1008, 
+         Arg3 = 1008, 
+      }, 
+      [64] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [65] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1001, 
+         Arg3 = 1008, 
+      }, 
+      [66] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [67] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [68] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 15, 
+         Arg1 = 1012, 
+         Arg3 = 1008, 
+      }, 
+      [69] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 15, 
+         Arg1 = 1012, 
+         Arg3 = 1008, 
+      }, 
+      [70] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 15, 
+         Arg1 = 1012, 
+         Arg3 = 1008, 
+      }, 
+      [71] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 15, 
+         Arg1 = 1012, 
+         Arg3 = 1008, 
+      }, 
+      [72] = 
+      {
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Arg1 = 1008, 
+         Arg3 = 1, 
+      }, 
+      [73] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 16, 
+         Arg1 = 1012, 
+         Arg3 = 1011, 
+      }, 
+      [74] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 17, 
+         Arg1 = 1012, 
+         Arg3 = 1010, 
+      }, 
+      [75] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 19, 
+         Arg1 = 1012, 
+         Arg3 = 1009, 
+      }, 
+      [76] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 19, 
+         Arg1 = 1012, 
+         Arg3 = 1009, 
+      }, 
+      [77] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 21, 
+         Arg1 = 1002, 
+         Arg3 = 1022, 
+      }, 
+      [78] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 22, 
+         Arg1 = 1012, 
+         Arg3 = 1022, 
+      }, 
+      [79] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 22, 
+         Arg1 = 1012, 
+         Arg3 = 1022, 
+      }, 
+      [80] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 22, 
+         Arg1 = 1012, 
+         Arg3 = 1022, 
+      }, 
+      [81] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 21, 
+         Arg1 = 1002, 
+         Arg3 = 1023, 
+      }, 
+      [82] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 21, 
+         Arg1 = 1002, 
+         Arg3 = 1023, 
+      }, 
+      [83] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 21, 
+         Arg1 = 1002, 
+         Arg3 = 1023, 
+      }, 
+      [84] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 25, 
+         Arg1 = 1012, 
+         Arg3 = 1023, 
+      }, 
+      [85] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 25, 
+         Arg1 = 1012, 
+         Arg3 = 1023, 
+      }, 
+      [86] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 25, 
+         Arg1 = 1012, 
+         Arg3 = 1023, 
+      }, 
+      [87] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 30, 
+         Arg1 = 1012, 
+         Arg3 = 1026, 
+      }, 
+      [88] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 30, 
+         Arg1 = 1012, 
+         Arg3 = 1026, 
+      }, 
+      [89] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 30, 
+         Arg1 = 1012, 
+         Arg3 = 1026, 
+      }, 
+      [90] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 30, 
+         Arg1 = 1012, 
+         Arg3 = 1026, 
+      }, 
+      [91] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 30, 
+         Arg1 = 1012, 
+         Arg3 = 1026, 
+      }, 
+      [92] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1000, 
+         Arg3 = 1029, 
+      }, 
+      [93] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1002, 
+         Arg3 = 14, 
+      }, 
+      [94] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [95] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1001, 
+         Arg3 = 5, 
+      }, 
+      [96] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 10424, 
+         Arg3 = 17, 
+      }, 
+      [97] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1007, 
+         Arg3 = 6, 
+      }, 
+      [98] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 1012, 
+         Arg3 = 1029, 
+      }, 
+      [99] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 1012, 
+         Arg3 = 1029, 
+      }, 
+      [100] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 1012, 
+         Arg3 = 1029, 
+      }, 
+      [101] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 1012, 
+         Arg3 = 1029, 
+      }, 
+      [102] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 38, 
+         Arg1 = 1012, 
+         Arg3 = 1031, 
+      }, 
+      [103] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 38, 
+         Arg1 = 1012, 
+         Arg3 = 1031, 
+      }, 
+      [104] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 38, 
+         Arg1 = 1012, 
+         Arg3 = 1031, 
+      }, 
+      [105] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 38, 
+         Arg1 = 1012, 
+         Arg3 = 1031, 
+      }, 
+      [106] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 41, 
+         Arg1 = 1012, 
+         Arg3 = 1034, 
+      }, 
+      [107] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 41, 
+         Arg1 = 1012, 
+         Arg3 = 1034, 
+      }, 
+      [108] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 41, 
+         Arg1 = 1012, 
+         Arg3 = 1034, 
+      }, 
+      [109] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 1012, 
+         Arg3 = 1036, 
+      }, 
+      [110] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 1012, 
+         Arg3 = 1036, 
+      }, 
+      [111] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 1012, 
+         Arg3 = 1036, 
+      }, 
+      [112] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 1012, 
+         Arg3 = 1036, 
+      }, 
+      [113] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg1 = 1006, 
+         Arg3 = 1000, 
+      }, 
+      [114] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1005, 
+         Arg3 = 10, 
+      }, 
+      [115] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1004, 
+         Arg3 = 7, 
+      }, 
+      [116] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1002, 
+         Arg3 = 14, 
+      }, 
+      [117] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1001, 
+         Arg3 = 5, 
+      }, 
+      [118] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [119] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1006, 
+         Arg3 = 9, 
+      }, 
+      [120] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1007, 
+         Arg3 = 6, 
+      }, 
+      [121] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 53, 
+         Arg3 = 16, 
+      }, 
+      [122] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg1 = 1006, 
+         Arg3 = 1000, 
+      }, 
+      [123] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1005, 
+         Arg3 = 10, 
+      }, 
+      [124] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1004, 
+         Arg3 = 7, 
+      }, 
+      [125] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1002, 
+         Arg3 = 14, 
+      }, 
+      [126] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1001, 
+         Arg3 = 5, 
+      }, 
+      [127] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [128] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1006, 
+         Arg3 = 9, 
+      }, 
+      [129] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1007, 
+         Arg3 = 6, 
+      }, 
+      [130] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 53, 
+         Arg3 = 16, 
+      }, 
+      [131] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1010, 
+         Arg3 = 1020, 
+      }, 
+      [132] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1002, 
+         Arg3 = 14, 
+      }, 
+      [133] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1007, 
+         Arg3 = 6, 
+      }, 
+      [134] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1003, 
+         Arg3 = 12, 
+      }, 
+      [135] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1006, 
+         Arg3 = 9, 
+      }, 
+      [136] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 10424, 
+         Arg3 = 17, 
+      }, 
+      [137] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 28100, 
+         Arg3 = 16, 
+      }, 
+      [138] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 1004, 
+         Arg3 = 1020, 
+      }, 
+      [139] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 1012, 
+         Arg3 = 1020, 
+      }, 
+      [140] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 20, 
+         Arg1 = 1002, 
+         Arg3 = 1020, 
+      }, 
+      [141] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 1012, 
+         Arg3 = 1020, 
+      }, 
+      [142] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 59, 
+         Arg3 = 16, 
+      }, 
+      [143] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1020, 
+      }, 
+      [144] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 1004, 
+         Arg3 = 1018, 
+      }, 
+      [145] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+         Arg1 = 10509, 
+         Arg3 = 1018, 
+      }, 
+      [146] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 46, 
+         Arg1 = 1012, 
+         Arg3 = 1018, 
+      }, 
+      [147] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 1006, 
+         Arg3 = 1018, 
+      }, 
+      [148] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1011, 
+         Arg3 = 1017, 
+      }, 
+      [149] = 
+      {
+         Command = "G", 
+         Arg1 = 10313, 
+         Arg2 = 1, 
+         MiscData = 1, 
+      }, 
+      [150] = 
+      {
+         Command = "G", 
+         Arg1 = 32253, 
+         Arg2 = 1, 
+         MiscData = 1, 
+      }, 
+      [151] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 1004, 
+         Arg3 = 1017, 
+      }, 
+      [152] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 20, 
+         Arg1 = 1002, 
+         Arg3 = 1017, 
+      }, 
+      [153] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 1004, 
+         Arg3 = 1017, 
+      }, 
+      [154] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 20, 
+         Arg1 = 1002, 
+         Arg3 = 1017, 
+      }, 
+      [155] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1017, 
+      }, 
+      [156] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 1004, 
+         Arg3 = 1017, 
+      }, 
+      [157] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 46, 
+         Arg1 = 1012, 
+         Arg3 = 1017, 
+      }, 
+      [158] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 27, 
+         Arg1 = 1005, 
+         Arg3 = 1016, 
+      }, 
+      [159] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 1016, 
+         Arg3 = 1016, 
+      }, 
+      [160] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 20, 
+         Arg1 = 1002, 
+         Arg3 = 1016, 
+      }, 
+      [161] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 20, 
+         Arg1 = 1002, 
+         Arg3 = 1016, 
+      }, 
+   }, 
    Rooms = 
    {
       [1024] = 
@@ -2562,36 +2557,36 @@ center. Probably a place for a different clan family to hold their\
 own meetings that don't need the advice of the Dynast for such\
 small family matters.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1024, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1023, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1025, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1025] = 
       {
@@ -2602,36 +2597,36 @@ center. Probably a place for a different clan family to hold their\
 own meetings that don't need the advice of the Dynast for such\
 small family matters.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1025, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1024, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1026, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1026] = 
       {
@@ -2642,40 +2637,40 @@ center. Probably a place for a different clan family to hold their\
 own meetings that don't need the advice of the Dynast for such\
 small family matters.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1026, 
-         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Road Way", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1025, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1027, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1027] = 
       {
@@ -2686,36 +2681,36 @@ center. Probably a place for a different clan family to hold their\
 own meetings that don't need the advice of the Dynast for such\
 small family matters.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1027, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1026, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1028, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1028] = 
       {
@@ -2726,36 +2721,36 @@ center. Probably a place for a different clan family to hold their\
 own meetings that don't need the advice of the Dynast for such\
 small family matters.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1028, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1027, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1029, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1029] = 
       {
@@ -2768,36 +2763,36 @@ ten heads instead of the two you felt you had in the city since if\
 there are visitors in the city there are almost none who venture\
 to this small village\
 ", 
+         TeleVnum = 0, 
          Vnum = 1029, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1028, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1030, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1030] = 
       {
@@ -2810,36 +2805,36 @@ ten heads instead of the two you felt you had in the city since if\
 there are visitors in the city there are almost none who venture\
 to this small village\
 ", 
+         TeleVnum = 0, 
          Vnum = 1030, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1031, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1029, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1031] = 
       {
@@ -2852,36 +2847,36 @@ ten heads instead of the two you felt you had in the city since if\
 there are visitors in the city there are almost none who venture\
 to this small village\
 ", 
+         TeleVnum = 0, 
          Vnum = 1031, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1032, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1030, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1032] = 
       {
@@ -2894,36 +2889,36 @@ ten heads instead of the two you felt you had in the city since if\
 there are visitors in the city there are almost none who venture\
 to this small village\
 ", 
+         TeleVnum = 0, 
          Vnum = 1032, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1034, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1031, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1033] = 
       {
@@ -2934,45 +2929,45 @@ from further back then the clone wars. In the corner of the Dukha \
 is a small thing that looks almost like a confession booth, only\
 this is made from the same wood that the Dukha itself is made from.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1033, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "The Village Dukha", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Village Dukha", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1034, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
                Flags = 
                {
                   [17] = "CanEnter", 
                   [11] = "Hidden", 
                }, 
-               Keyword = "booth", 
-               Direction = "somewhere", 
-               Distance = 0, 
-               Key = -1, 
                DestinationVnum = 1047, 
+               Distance = 0, 
+               Keyword = "booth", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1034] = 
       {
@@ -2986,45 +2981,45 @@ also rendered farming impossible. Some how the people are \
 surviving without farms and live stock and you wonder how this is \
 possible.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1034, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1032, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1035, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1033, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1035] = 
       {
@@ -3037,36 +3032,36 @@ also rendered farming impossible. Some how the people are \
 surviving without farms and live stock and you wonder how this is \
 possible.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1035, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1036, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1034, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1036] = 
       {
@@ -3080,36 +3075,36 @@ also rendered farming impossible. Some how the people are \
 surviving without farms and live stock and you wonder how this is \
 possible.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1036, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1037, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1035, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1037] = 
       {
@@ -3123,36 +3118,36 @@ also rendered farming impossible. Some how the people are \
 surviving without farms and live stock and you wonder how this is \
 possible.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1037, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1038, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1036, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1038] = 
       {
@@ -3166,36 +3161,36 @@ also rendered farming impossible. Some how the people are \
 surviving without farms and live stock and you wonder how this is \
 possible.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1038, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1039, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1037, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1039] = 
       {
@@ -3209,36 +3204,36 @@ also rendered farming impossible. Some how the people are \
 surviving without farms and live stock and you wonder how this is \
 possible.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1039, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1040, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1038, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1040] = 
       {
@@ -3251,81 +3246,81 @@ has, from what you can see, over run the entire farm lands and has\
 also rendered farming impossible. Some how the people are \
 possible.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1040, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Village Road", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1041, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1043, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1042, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1039, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [5] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "northwest", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1046, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [6] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "southeast", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1044, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [7] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "southwest", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1045, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1041] = 
       {
@@ -3337,31 +3332,31 @@ to the sences. The hut has almost nothing in it except for the \
 sleeping hamocks the are lining the walls and the odd assortment of\
 tools here and there. There is nothing here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1041, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hut", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1040, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1042] = 
       {
@@ -3373,31 +3368,31 @@ to the sences. The hut has almost nothing in it except for the \
 sleeping hamocks the are lining the walls and the odd assortment of\
 tools here and there. There is nothing here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1042, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hut", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1040, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1043] = 
       {
@@ -3409,31 +3404,31 @@ to the sences. The hut has almost nothing in it except for the \
 sleeping hamocks the are lining the walls and the odd assortment of\
 tools here and there. There is nothing here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1043, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hut", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1040, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1044] = 
       {
@@ -3445,31 +3440,31 @@ to the sences. The hut has almost nothing in it except for the \
 sleeping hamocks the are lining the walls and the odd assortment of\
 tools here and there. There is nothing here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1044, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hut", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "northwest", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1040, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1045] = 
       {
@@ -3481,31 +3476,31 @@ to the sences. The hut has almost nothing in it except for the \
 sleeping hamocks the are lining the walls and the odd assortment of\
 tools here and there. There is nothing here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1045, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hut", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "northeast", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1040, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1046] = 
       {
@@ -3517,31 +3512,31 @@ to the sences. The hut has almost nothing in it except for the \
 sleeping hamocks the are lining the walls and the odd assortment of\
 tools here and there. There is nothing here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1046, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "A Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "A Hut", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "southeast", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1040, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1047] = 
       {
@@ -3549,118 +3544,118 @@ tools here and there. There is nothing here worth while.\
 that you can see into the Dukha from. You realize this would be a very\
 good place to spy on the doings in the Dukha. \
 ", 
+         TeleVnum = 0, 
          Vnum = 1047, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "Inside the Booth", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Inside the Booth", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
+               Direction = "east", 
+               Key = -1, 
                Flags = 
                {
                   [25] = "Window", 
                   [11] = "Hidden", 
                }, 
-               Keyword = "screen", 
-               Direction = "east", 
-               Distance = 0, 
-               Key = -1, 
                DestinationVnum = 1033, 
+               Distance = 0, 
+               Keyword = "screen", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
+               Direction = "somewhere", 
+               Key = -1, 
                Flags = 
                {
                   [18] = "CanLeave", 
                   [11] = "Hidden", 
                }, 
-               Keyword = "", 
-               Direction = "somewhere", 
-               Distance = 0, 
-               Key = -1, 
                DestinationVnum = 1033, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1048] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 1048, 
-         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Name = "Communications Booth", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Communications Booth", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1000, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1049, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [1049] = 
       {
          Description = "", 
+         TeleVnum = 0, 
          Vnum = 1049, 
-         Tunnel = 0, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Name = "Suggestions Board", 
-         TeleVnum = 0, 
-         Sector = "city", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Suggestions Board", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1048, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "city", 
       }, 
       [1000] = 
       {
@@ -3672,40 +3667,40 @@ people of honoghr feel safe. The Noghri people are paying \
 their debt to the empire. The Port has very\
 few ships docked in its bays.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1000, 
-         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Name = "Nystao Port", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Nystao Port", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1001, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1048, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1001] = 
       {
@@ -3715,40 +3710,40 @@ his presence felt, or even The Dark Lord himself, Darth Vader, could be\
 here letting the people of honoghr feel safe. The Noghri people are paying\
  their debt to the empire. The Port has very few ships docked in its bays.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1001, 
-         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Name = "Nystao Port", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Nystao Port", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1002, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1000, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1002] = 
       {
@@ -3762,40 +3757,40 @@ you looking at you and some of the children giggle at you as you\
 look at them. Some of the young adults look at you as though you\
 had two heads, since they very rarely get visitors here.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1002, 
-         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Road Way", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1003, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1001, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1003] = 
       {
@@ -3809,40 +3804,40 @@ you looking at you and some of the children giggle at you as you\
 look at them. Some of the young adults look at you as though you\
 had two heads, since they very rarely get visitors here.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1003, 
-         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Road Way", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1004, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1002, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1004] = 
       {
@@ -3856,40 +3851,40 @@ you looking at you and some of the children giggle at you as you\
 look at them. Some of the young adults look at you as though you\
 had two heads, since they very rarely get visitors here.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1004, 
-         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Road Way", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1005, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1003, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1005] = 
       {
@@ -3905,36 +3900,36 @@ younge adults look at you as though you had two heads, since \
 they rarely get visitors here anyone new is going to get\
 look at in a wierd way.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1005, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1006, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1004, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1006] = 
       {
@@ -3950,36 +3945,36 @@ younge adults look at you as though you had two heads, since \
 they rarely get visitors here anyone new is going to get\
 look at in a wierd way.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1006, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1007, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1005, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1007] = 
       {
@@ -3989,59 +3984,59 @@ and as far as you know, the place could be crawling with them.\
 You see that the Grand Dukha is much bigger then all the other buildings \
 that make up the villages.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1007, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1012, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
+               Direction = "south", 
+               Key = -1, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Keyword = "door", 
-               Direction = "south", 
-               Distance = 0, 
-               Key = -1, 
                DestinationVnum = 1008, 
+               Distance = 0, 
+               Keyword = "door", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1006, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "northeast", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1021, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1008] = 
       {
@@ -4053,54 +4048,54 @@ stone, you can't tell which. A wide set of black-and-red-marbled\
 steps lead up to a grey flagstone entrance terrace outside the \
 double doors.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1008, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "The Grand Dukha", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Grand Dukha", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
+               Direction = "north", 
+               Key = -1, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Keyword = "door", 
-               Direction = "north", 
-               Distance = 0, 
-               Key = -1, 
                DestinationVnum = 1007, 
+               Distance = 0, 
+               Keyword = "door", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1009, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1011, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1009] = 
       {
@@ -4112,40 +4107,40 @@ stone, you can't tell which. A wide set of black-and-red-marbled\
 steps lead up to a grey flagstone entrance terrace outside the \
 double doors.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1009, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "The Grand Dukha", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Grand Dukha", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1010, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1008, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1010] = 
       {
@@ -4157,40 +4152,40 @@ stone, you can't tell which. A wide set of black-and-red-marbled\
 steps lead up to a grey flagstone entrance terrace outside the \
 double doors.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1010, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "The Grand Dukha", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Grand Dukha", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1009, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1011, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1011] = 
       {
@@ -4202,40 +4197,40 @@ stone, you can't tell which. A wide set of black-and-red-marbled\
 steps lead up to a grey flagstone entrance terrace outside the \
 double doors.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1011, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "The Grand Dukha", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "The Grand Dukha", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1008, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1010, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1012] = 
       {
@@ -4249,54 +4244,54 @@ have only partialy adopted it into their farming and for their\
 guarding of they Grand Dukha and the port, other then that the Noghri\
 are a very low-tech race of people.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1012, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1013, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1019, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1007, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1020, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1013] = 
       {
@@ -4310,54 +4305,54 @@ have only partialy adopted it into their farming and for their\
 guarding of they Grand Dukha and the port, other then that the Noghri\
 are a very low-tech race of people.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1013, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1018, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1014, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1012, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1017, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1014] = 
       {
@@ -4371,45 +4366,45 @@ have only partialy adopted it into their farming and for their\
 guarding of they Grand Dukha and the port, other then that the Noghri\
 are a very low-tech race of people.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1014, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1015, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1016, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1013, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1015] = 
       {
@@ -4424,31 +4419,31 @@ here worth while.\
 You can safely quit here.\
  \
 ", 
+         TeleVnum = 0, 
          Vnum = 1015, 
-         Tunnel = 0, 
          Flags = 
          {
             [23] = "Hotel", 
          }, 
-         Name = "Noghri Guest House", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Noghri Guest House", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1014, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1016] = 
       {
@@ -4460,27 +4455,27 @@ hut has almost nothing in it, except fot the sleeping hamocks\
 lining the walls and the odd tool here and there, there is nothing\
 here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1016, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1014, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1017] = 
       {
@@ -4492,31 +4487,31 @@ stock and other wild animals the noghri cook happend to have had the luck\
 of stumbling across. Strangly enough though it also has some imported\
 foods, from somewhere.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1017, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "Cook House", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Cook House", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1013, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1018] = 
       {
@@ -4528,31 +4523,31 @@ hut has almost nothing in it, except fot the sleeping hamocks\
 lining the walls and the odd tool here and there, there is nothing\
 here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1018, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Hut", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1013, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1019] = 
       {
@@ -4564,31 +4559,31 @@ hut has almost nothing in it, except fot the sleeping hamocks\
 lining the walls and the odd tool here and there, there is nothing\
 here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1019, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Hut", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1012, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1020] = 
       {
@@ -4599,31 +4594,31 @@ smell which makes it all the more refeshing to the sences. The\
 lining the walls and the odd tool here and there, there is nothing\
 here worth while.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1020, 
-         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Name = "Hut", 
-         TeleVnum = 0, 
-         Sector = "field", 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Name = "Hut", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1012, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1021] = 
       {
@@ -4634,36 +4629,36 @@ center. Probably a place for a different clan family to hold their\
 own meetings that don't need the advice of the Dynast for such\
 small family matters.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1021, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1022, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "southwest", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1007, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1022] = 
       {
@@ -4674,36 +4669,36 @@ center. Probably a place for a different clan family to hold their\
 own meetings that don't need the advice of the Dynast for such\
 small family matters.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1022, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "north", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1021, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "east", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1023, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
       [1023] = 
       {
@@ -4714,52 +4709,55 @@ center. Probably a place for a different clan family to hold their\
 own meetings that don't need the advice of the Dynast for such\
 small family matters.\
 ", 
+         TeleVnum = 0, 
          Vnum = 1023, 
-         Tunnel = 0, 
+         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
          Name = "Road Way", 
-         TeleVnum = 0, 
-         Sector = "field", 
-         TeleDelay = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "south", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1024, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Keyword = "", 
                Direction = "west", 
-               Distance = 0, 
                Key = -1, 
                DestinationVnum = 1022, 
+               Distance = 0, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
+         Sector = "field", 
       }, 
    }, 
-   LowEconomy = 9801790, 
+   LevelRanges = 
+   {
+      Hard = 
+      {
+         Low = 5, 
+         High = 103, 
+      }, 
+      Soft = 
+      {
+         Low = 5, 
+         High = 103, 
+      }, 
+   }, 
    Objects = 
    {
       [1000] = 
       {
-         Description = "A dagger is collecting dust here.", 
-         ShortDescr = "a finely crafted dagger", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Weight = 1, 
-         ItemType = "weapon", 
          Affects = 
          {
             [1] = 
@@ -4778,11 +4776,18 @@ small family matters.\
                Modifier = 5, 
             }, 
          }, 
+         ActionDescription = "", 
+         Name = "dagger", 
+         Vnum = 1000, 
+         Weight = 1, 
+         Description = "A dagger is collecting dust here.", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "dagger", 
+         ShortDescr = "a finely crafted dagger", 
+         Layers = 0, 
+         ItemType = "weapon", 
          ObjectValues = 
          {
             [1] = 1, 
@@ -4792,25 +4797,18 @@ small family matters.\
             [5] = 0, 
             [0] = 12, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1000, 
       }, 
       [1001] = 
       {
-         Description = "A well hidden chest plate is here.", 
-         ShortDescr = "camoflage chest plate", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-         Weight = 3, 
-         ItemType = "armor", 
          Affects = 
          {
             [1] = 
@@ -4819,11 +4817,18 @@ small family matters.\
                Modifier = 3, 
             }, 
          }, 
+         ActionDescription = "", 
+         Name = "chest plate camo", 
+         Vnum = 1001, 
+         Weight = 3, 
+         Description = "A well hidden chest plate is here.", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "chest plate camo", 
+         ShortDescr = "camoflage chest plate", 
+         Layers = 0, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 5, 
@@ -4833,30 +4838,30 @@ small family matters.\
             [5] = 0, 
             [0] = 5, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 500, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1001, 
       }, 
       [1002] = 
       {
-         Description = "A wierd looking sheath has been left here.", 
-         ShortDescr = "a wrist sheath", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [12] = "Wrist", 
-         }, 
+         ActionDescription = "", 
+         Name = "wrist sheath", 
+         Vnum = 1002, 
          Weight = 1, 
-         ItemType = "container", 
+         Description = "A wierd looking sheath has been left here.", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "wrist sheath", 
+         ShortDescr = "a wrist sheath", 
+         Layers = 2, 
+         ItemType = "container", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4866,25 +4871,18 @@ small family matters.\
             [5] = 0, 
             [0] = 2, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [12] = "Wrist", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 0, 
-         Layers = 2, 
-         ActionDescription = "", 
-         Vnum = 1002, 
       }, 
       [1003] = 
       {
-         Description = "A small brown robe has been dumped here.", 
-         ShortDescr = "brown noghri robe", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-         }, 
-         Weight = 1, 
-         ItemType = "armor", 
          Affects = 
          {
             [1] = 
@@ -4893,11 +4891,18 @@ small family matters.\
                Modifier = 10, 
             }, 
          }, 
+         ActionDescription = "", 
+         Name = "robe noghri brown", 
+         Vnum = 1003, 
+         Weight = 1, 
+         Description = "A small brown robe has been dumped here.", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "robe noghri brown", 
+         ShortDescr = "brown noghri robe", 
+         Layers = 16, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 4, 
@@ -4907,25 +4912,18 @@ small family matters.\
             [5] = 0, 
             [0] = 4, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 60, 
-         Layers = 16, 
-         ActionDescription = "", 
-         Vnum = 1003, 
       }, 
       [1004] = 
       {
-         Description = "On the ground you barly notice some leg guards.", 
-         ShortDescr = "camoflage leg guards", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [5] = "Legs", 
-         }, 
-         Weight = 1, 
-         ItemType = "armor", 
          Affects = 
          {
             [1] = 
@@ -4934,11 +4932,18 @@ small family matters.\
                Modifier = 4, 
             }, 
          }, 
+         ActionDescription = "", 
+         Name = "leg camo guards", 
+         Vnum = 1004, 
+         Weight = 1, 
+         Description = "On the ground you barly notice some leg guards.", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "leg camo guards", 
+         ShortDescr = "camoflage leg guards", 
+         Layers = 8, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 5, 
@@ -4948,25 +4953,18 @@ small family matters.\
             [5] = 0, 
             [0] = 5, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [5] = "Legs", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 450, 
-         Layers = 8, 
-         ActionDescription = "", 
-         Vnum = 1004, 
       }, 
       [1005] = 
       {
-         Description = "You barely notice a pair of arm guards on the ground.", 
-         ShortDescr = "camoflage arm guards", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [8] = "Arms", 
-         }, 
-         Weight = 2, 
-         ItemType = "armor", 
          Affects = 
          {
             [1] = 
@@ -4975,11 +4973,18 @@ small family matters.\
                Modifier = 3, 
             }, 
          }, 
+         ActionDescription = "", 
+         Name = "camo arm guards", 
+         Vnum = 1005, 
+         Weight = 2, 
+         Description = "You barely notice a pair of arm guards on the ground.", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "camo arm guards", 
+         ShortDescr = "camoflage arm guards", 
+         Layers = 8, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 3, 
@@ -4989,30 +4994,30 @@ small family matters.\
             [5] = 0, 
             [0] = 3, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [8] = "Arms", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 250, 
-         Layers = 8, 
-         ActionDescription = "", 
-         Vnum = 1005, 
       }, 
       [1006] = 
       {
-         Description = "Two leather gloves are lying on the ground.", 
-         ShortDescr = "a pair of leather gloves", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [7] = "Hands", 
-         }, 
+         ActionDescription = "", 
+         Name = "leather gloves pair", 
+         Vnum = 1006, 
          Weight = 1, 
-         ItemType = "armor", 
+         Description = "Two leather gloves are lying on the ground.", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "leather gloves pair", 
+         ShortDescr = "a pair of leather gloves", 
+         Layers = 0, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 3, 
@@ -5022,30 +5027,30 @@ small family matters.\
             [5] = 0, 
             [0] = 1, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [7] = "Hands", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 100, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1006, 
       }, 
       [1007] = 
       {
-         Description = "A small piece of cloth is blowing around here.", 
-         ShortDescr = "a brown hood", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [4] = "Head", 
-         }, 
+         ActionDescription = "", 
+         Name = "hood brown", 
+         Vnum = 1007, 
          Weight = 1, 
-         ItemType = "armor", 
+         Description = "A small piece of cloth is blowing around here.", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "hood brown", 
+         ShortDescr = "a brown hood", 
+         Layers = 0, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 2, 
@@ -5055,24 +5060,26 @@ small family matters.\
             [5] = 0, 
             [0] = 2, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [4] = "Head", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 10, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1007, 
       }, 
       [1008] = 
       {
-         Description = "A booth is here.", 
-         ShortDescr = "a booth", 
-         Weight = 1, 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
+         ActionDescription = "", 
          Name = "booth", 
+         Vnum = 1008, 
+         Weight = 1, 
+         ShortDescr = "a booth", 
+         Description = "A booth is here.", 
+         ItemType = "trash", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5082,27 +5089,25 @@ small family matters.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1008, 
       }, 
       [1009] = 
       {
-         Description = "A fine blade has been carelessly droped here.", 
-         ShortDescr = "an assassin's dagger", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
+         ActionDescription = "", 
+         Name = "assassin dagger", 
+         Vnum = 1009, 
          Weight = 1, 
-         ItemType = "weapon", 
+         Description = "A fine blade has been carelessly droped here.", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "assassin dagger", 
+         ShortDescr = "an assassin's dagger", 
+         Layers = 0, 
+         ItemType = "weapon", 
          ObjectValues = 
          {
             [1] = 9, 
@@ -5112,25 +5117,18 @@ small family matters.\
             [5] = 0, 
             [0] = 13, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1009, 
       }, 
       [1010] = 
       {
-         Description = "&za chest plate was dropped here", 
-         ShortDescr = "&za chest plate&R&w", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
-         Weight = 1, 
-         ItemType = "armor", 
          Affects = 
          {
             [1] = 
@@ -5144,11 +5142,18 @@ small family matters.\
                Modifier = -20, 
             }, 
          }, 
+         ActionDescription = "", 
+         Name = "&z chest plate", 
+         Vnum = 1010, 
+         Weight = 1, 
+         Description = "&za chest plate was dropped here", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "&z chest plate", 
+         ShortDescr = "&za chest plate&R&w", 
+         Layers = 0, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 10, 
@@ -5158,30 +5163,30 @@ small family matters.\
             [5] = 0, 
             [0] = 20, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 1000, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1010, 
       }, 
       [1011] = 
       {
-         Description = "&za set of arm braces", 
-         ShortDescr = "&za set of arm braces&R&w", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [8] = "Arms", 
-         }, 
+         ActionDescription = "", 
+         Name = "arm brace", 
+         Vnum = 1011, 
          Weight = 1, 
-         ItemType = "armor", 
+         Description = "&za set of arm braces", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "arm brace", 
+         ShortDescr = "&za set of arm braces&R&w", 
+         Layers = 0, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 4, 
@@ -5191,30 +5196,63 @@ small family matters.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [8] = "Arms", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 40, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1011, 
       }, 
       [1012] = 
       {
+         ActionDescription = "", 
+         Name = "hand plates", 
+         Vnum = 1012, 
+         Weight = 3, 
          Description = "&z hand plates&R&w", 
+         Flags = 
+         {
+            [18] = "SmallSize", 
+         }, 
          ShortDescr = "&z hand plates&R&w", 
+         Layers = 0, 
+         ItemType = "armor", 
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          WearFlags = 
          {
             [0] = "Take", 
             [12] = "Wrist", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+      }, 
+      [1013] = 
+      {
+         ActionDescription = "", 
+         Name = "a pair of boots", 
+         Vnum = 1013, 
          Weight = 3, 
-         ItemType = "armor", 
+         Description = "&za pair of boots&R&w", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "hand plates", 
+         ShortDescr = "&za pair of boots&R&w", 
+         Layers = 0, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 6, 
@@ -5224,30 +5262,30 @@ small family matters.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1012, 
-      }, 
-      [1013] = 
-      {
-         Description = "&za pair of boots&R&w", 
-         ShortDescr = "&za pair of boots&R&w", 
          WearFlags = 
          {
             [0] = "Take", 
             [6] = "Feet", 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+      }, 
+      [1014] = 
+      {
+         ActionDescription = "", 
+         Name = "a pair of shoulder plates", 
+         Vnum = 1014, 
          Weight = 3, 
-         ItemType = "armor", 
+         Description = "&za pair of shoulder plates&R&w", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "a pair of boots", 
+         ShortDescr = "&za pair of shoulder plates&R&w", 
+         Layers = 0, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 6, 
@@ -5257,63 +5295,30 @@ small family matters.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1013, 
-      }, 
-      [1014] = 
-      {
-         Description = "&za pair of shoulder plates&R&w", 
-         ShortDescr = "&za pair of shoulder plates&R&w", 
          WearFlags = 
          {
             [0] = "Take", 
             [2] = "Neck", 
          }, 
-         Weight = 3, 
-         ItemType = "armor", 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         Name = "a pair of shoulder plates", 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1014, 
       }, 
       [1015] = 
       {
-         Description = "&zan ammo belt&R&w", 
-         ShortDescr = "&zan ammo belt&R&w", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [11] = "Waist", 
-         }, 
+         ActionDescription = "", 
+         Name = "an ammo belt", 
+         Vnum = 1015, 
          Weight = 3, 
-         ItemType = "container", 
+         Description = "&zan ammo belt&R&w", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "an ammo belt", 
+         ShortDescr = "&zan ammo belt&R&w", 
+         Layers = 0, 
+         ItemType = "container", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5323,30 +5328,63 @@ small family matters.\
             [5] = 0, 
             [0] = 5000, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [11] = "Waist", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1015, 
       }, 
       [1016] = 
       {
+         ActionDescription = "", 
+         Name = "a pair of leg plates", 
+         Vnum = 1016, 
+         Weight = 6, 
          Description = "&za pair of leg plates&R&w", 
+         Flags = 
+         {
+            [18] = "SmallSize", 
+         }, 
          ShortDescr = "&za pair of leg plates&R&w", 
+         Layers = 0, 
+         ItemType = "armor", 
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          WearFlags = 
          {
             [0] = "Take", 
             [5] = "Legs", 
          }, 
-         Weight = 6, 
-         ItemType = "armor", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+      }, 
+      [1017] = 
+      {
+         ActionDescription = "", 
+         Name = "a helmet", 
+         Vnum = 1017, 
+         Weight = 5, 
+         Description = "&za helmet &R&W", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "a pair of leg plates", 
+         ShortDescr = "&za helmet &R&w", 
+         Layers = 0, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 6, 
@@ -5356,63 +5394,30 @@ small family matters.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1016, 
-      }, 
-      [1017] = 
-      {
-         Description = "&za helmet &R&W", 
-         ShortDescr = "&za helmet &R&w", 
          WearFlags = 
          {
             [0] = "Take", 
             [4] = "Head", 
          }, 
-         Weight = 5, 
-         ItemType = "armor", 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         Name = "a helmet", 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1017, 
       }, 
       [1018] = 
       {
-         Description = "&za pair of gloves&R&w", 
-         ShortDescr = "&za pair of gloves&R&w", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [7] = "Hands", 
-         }, 
+         ActionDescription = "", 
+         Name = "a pair of gloves", 
+         Vnum = 1018, 
          Weight = 3, 
-         ItemType = "armor", 
+         Description = "&za pair of gloves&R&w", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "a pair of gloves", 
+         ShortDescr = "&za pair of gloves&R&w", 
+         Layers = 0, 
+         ItemType = "armor", 
          ObjectValues = 
          {
             [1] = 4, 
@@ -5422,25 +5427,18 @@ small family matters.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [7] = "Hands", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1018, 
       }, 
       [1019] = 
       {
-         Description = "&za backpack", 
-         ShortDescr = "&za backpack&R&w", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-         }, 
-         Weight = 6, 
-         ItemType = "container", 
          Affects = 
          {
             [1] = 
@@ -5449,11 +5447,18 @@ small family matters.\
                Modifier = -5, 
             }, 
          }, 
+         ActionDescription = "", 
+         Name = "a backpack", 
+         Vnum = 1019, 
+         Weight = 6, 
+         Description = "&za backpack", 
          Flags = 
          {
             [18] = "SmallSize", 
          }, 
-         Name = "a backpack", 
+         ShortDescr = "&za backpack&R&w", 
+         Layers = 0, 
+         ItemType = "container", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5463,24 +5468,26 @@ small family matters.\
             [5] = 0, 
             [0] = 50, 
          }, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1019, 
       }, 
       [1099] = 
       {
-         Description = "Some god dropped a newly created blaster  here.", 
-         ShortDescr = "a newly created blaster ", 
-         Weight = 1, 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
+         ActionDescription = "", 
          Name = "blaster ", 
+         Vnum = 1099, 
+         Weight = 1, 
+         ShortDescr = "a newly created blaster ", 
+         Description = "Some god dropped a newly created blaster  here.", 
+         ItemType = "trash", 
+         Layers = 0, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5490,11 +5497,34 @@ small family matters.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
          Cost = 0, 
-         Layers = 0, 
-         ActionDescription = "", 
-         Vnum = 1099, 
       }, 
    }, 
+   HighEconomy = 0, 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         Last = 1099, 
+         First = 1000, 
+      }, 
+      Room = 
+      {
+         Last = 1049, 
+         First = 1000, 
+      }, 
+      Object = 
+      {
+         Last = 1099, 
+         First = 1000, 
+      }, 
+   }, 
+   ResetFrequency = 0, 
    ResetMessage = "A warm breeze blows through the kholm grass.", 
+   FileFormatVersion = 1, 
+   LowEconomy = 9801790, 
+   Author = "Thrawn", 
 }
