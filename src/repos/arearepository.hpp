@@ -10,30 +10,23 @@
 class AreaRepository : public Ceris::Repository<std::shared_ptr<Area>>
 {
 public:
+    AreaRepository();
+    virtual ~AreaRepository();
     virtual void Load() = 0;
+    virtual void Load(std::shared_ptr<Area> area) = 0;
     virtual void Save() const = 0;
     virtual void Save(const std::shared_ptr<Area>&) const = 0;
     virtual void Save(const std::shared_ptr<Area>&, bool install) const = 0;
-    
-    // All areas unordered
-    std::shared_ptr<Area> FirstArea;
-    std::shared_ptr<Area> LastArea;
+    virtual std::string GetAreaFilename(std::shared_ptr<Area> area) const = 0;
+    const std::list<std::shared_ptr<Area>> &AreasInProgress() const noexcept;
 
-    // Areas currently being built. Only appears here when the builder/owner is logged in.
-    // Unsure if they also show up in the main area list. Must investigate.
-    // Update: Seems they don't.
-    //
-    // Suggested name: AreasInProgress
-    std::shared_ptr<Area> FirstBuild;
-    std::shared_ptr<Area> LastBuild;
+protected:
+    void OnAdded(std::shared_ptr<Area> &area) override;
+    void OnRemoved(std::shared_ptr<Area> &area) override;
 
-    // Installed areas ordered by room vnum ascending
-    std::shared_ptr<Area> FirstASort;
-    std::shared_ptr<Area> LastASort;
-
-    // Uninstalled areas ordered by room vnum ascending
-    std::shared_ptr<Area> FirstBSort;
-    std::shared_ptr<Area> LastBSort;
+private:
+    struct Impl;
+    std::unique_ptr<Impl> pImpl;
 };
 
 extern std::shared_ptr<AreaRepository> Areas;

@@ -109,7 +109,7 @@ static void ShowMissingHelpsForAreas(const Character *ch)
 
     ch->Echo("&GAreas for which there are no help files:\r\n\r\n");
 
-    for (auto tArea = Areas->FirstArea; tArea; tArea = tArea->Next)
+    for (auto tArea : Areas)
     {
         if (!GetHelpFile(ch, tArea->Name))
         {

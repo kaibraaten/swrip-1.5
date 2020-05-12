@@ -65,12 +65,12 @@ void do_vassign( Character *ch, std::string argument )
 
     if (r_lo == 0)                                /* Scryn 8/12/95 */
     {
-        RemoveBit ( victim->PCData->Build.Area->Status, AREA_LOADED );
-        SetBit( victim->PCData->Build.Area->Status, AREA_DELETED );
+        RemoveBit ( victim->PCData->Build.Area->Status, AreaStatus::Loaded);
+        SetBit( victim->PCData->Build.Area->Status, AreaStatus::Deleted);
     }
     else
     {
-        SetBit( victim->PCData->Build.Area->Status, AREA_LOADED );
-        RemoveBit( victim->PCData->Build.Area->Status, AREA_DELETED );
+        SetBit( victim->PCData->Build.Area->Status, AreaStatus::Loaded);
+        RemoveBit( victim->PCData->Build.Area->Status, AreaStatus::Deleted);
     }
 }

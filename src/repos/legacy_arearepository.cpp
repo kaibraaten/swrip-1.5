@@ -20,6 +20,7 @@
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];
+static std::shared_ptr<Area> lastArea;
 
 static void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filename);
 static void LoadArea(FILE *fp);
@@ -44,13 +45,23 @@ class LegacyAreaRepository : public AreaRepository
 {
 public:
     void Load() override;
+    void Load(std::shared_ptr<Area> area) override;
     void Save() const override;
     void Save(const std::shared_ptr<Area>&) const override;
     void Save(const std::shared_ptr<Area>&, bool install) const override;
-
-private:
-
+    std::string GetAreaFilename(std::shared_ptr<Area> area) const override;
 };
+
+void LegacyAreaRepository::Load(std::shared_ptr<Area> area)
+{
+    lastArea.reset();
+    auto file = GetAreaFilename(area);
+    auto proto = area->Flags.test(Flag::Area::Prototype);
+    area->Flags.reset(Flag::Area::Prototype);
+    LoadAreaFile(area, file);
+    area->Flags[Flag::Area::Prototype] = proto;
+    lastArea.reset();
+}
 
 void LegacyAreaRepository::Load()
 {
@@ -62,6 +73,8 @@ void LegacyAreaRepository::Load()
         exit(1);
     }
 
+    lastArea.reset();
+    
     for (; ; )
     {
         strcpy(strArea, ReadWord(fpList, Log, fBootDb));
@@ -69,15 +82,17 @@ void LegacyAreaRepository::Load()
         if (strArea[0] == '$')
             break;
 
-        LoadAreaFile(Areas->LastArea, strArea);
+        LoadAreaFile(lastArea, strArea);
     }
 
+    lastArea.reset();
+    
     fclose(fpList);
 }
 
 void LegacyAreaRepository::Save() const
 {
-    for(auto area = FirstArea; area; area = area->Next)
+    for(auto area : Areas)
     {
         Save(area);
     }
@@ -90,7 +105,7 @@ void LegacyAreaRepository::Save(const std::shared_ptr<Area> &area) const
 
 static bool IsInstalled(std::shared_ptr<Area> area)
 {
-    for(auto tmp = Areas->FirstBuild; tmp; tmp = tmp->Next)
+    for(auto tmp : Areas->AreasInProgress())
     {
         if(tmp == area)
         {
@@ -609,7 +624,7 @@ static void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filenam
     char buf[MAX_STRING_LENGTH];
 
     if (fBootDb)
-        tarea = Areas->LastArea;
+        tarea = lastArea;
 
     if (!fBootDb && !tarea)
     {
@@ -645,7 +660,7 @@ static void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filenam
             if (fBootDb)
             {
                 LoadArea(fpArea);
-                tarea = Areas->LastArea;
+                tarea = lastArea;
             }
             else
             {
@@ -688,16 +703,13 @@ static void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filenam
 
     if (tarea)
     {
-        if (fBootDb)
-            SortArea(tarea, false);
-        
         fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
                 tarea->Filename.c_str(),
                 tarea->VnumRanges.Room.First, tarea->VnumRanges.Room.Last,
                 tarea->VnumRanges.Object.First, tarea->VnumRanges.Object.Last,
                 tarea->VnumRanges.Mob.First, tarea->VnumRanges.Mob.Last);
 
-        SetBit(tarea->Status, AREA_LOADED);
+        SetBit(tarea->Status, AreaStatus::Loaded);
     }
     else
     {
@@ -716,7 +728,8 @@ static void LoadArea(FILE *fp)
     pArea->LevelRanges.Soft.High = MAX_LEVEL;
     pArea->LevelRanges.Hard.High = MAX_LEVEL;
 
-    LINK(pArea, Areas->FirstArea, Areas->LastArea, Next, Previous);
+    Areas->Add(pArea);
+    lastArea = pArea;
     top_area++;
 }
 
@@ -1840,6 +1853,12 @@ static void RoomProgReadPrograms(FILE *fp, std::shared_ptr<Room> pRoomIndex)
             break;
         }
     }
+}
+
+std::string LegacyAreaRepository::GetAreaFilename(std::shared_ptr<Area> area) const
+{
+    const char *directory = area->Flags.test(Flag::Area::Prototype) ? BUILD_DIR : AREA_DIR;
+    return FormatString("%s%s", directory, area->Filename.c_str());
 }
 
 /////////////////////////////////////

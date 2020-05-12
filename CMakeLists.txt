@@ -524,7 +524,6 @@ src/commands/trust.cpp
 src/commands/typo.cpp
 src/commands/undock.cpp
 src/commands/unfocusalias.cpp
-src/commands/unfoldarea.cpp
 src/commands/unhell.cpp
 src/commands/unjail.cpp
 src/commands/unlock.cpp

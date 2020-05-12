@@ -8,7 +8,6 @@
 void do_savearea(Character *ch, std::string argument)
 {
     std::shared_ptr<Area> tarea;
-    char filename[256];
 
     if (IsNpc(ch) || GetTrustLevel(ch) < LEVEL_AVATAR || !ch->PCData
         || (argument.empty() && !ch->PCData->Build.Area))
@@ -23,44 +22,41 @@ void do_savearea(Character *ch, std::string argument)
     }
     else
     {
-        bool found = false;
-
         if (GetTrustLevel(ch) < LEVEL_GREATER)
         {
             ch->Echo("You can only save your own area.\r\n");
             return;
         }
 
-        for (found = false, tarea = Areas->FirstBuild; tarea; tarea = tarea->Next)
+        for (auto tmp : Areas->AreasInProgress())
         {
-            if (!StrCmp(tarea->Filename, argument))
+            if (!StrCmp(tmp->Filename, argument))
             {
-                found = true;
+                tarea = tmp;
                 break;
             }
         }
 
-        if (!found)
+        if (tarea == nullptr)
         {
             ch->Echo("Area not found.\r\n");
             return;
         }
     }
 
-    if (!tarea)
+    if (tarea == nullptr)
     {
         ch->Echo("No area to save.\r\n");
         return;
     }
 
     /* Ensure not wiping out their area with save before load - Scryn 8/11 */
-    if (!IsBitSet(tarea->Status, AREA_LOADED))
+    if (!IsBitSet(tarea->Status, AreaStatus::Loaded))
     {
         ch->Echo("Your area is not loaded!\r\n");
         return;
     }
 
-    sprintf(filename, "%s%s", BUILD_DIR, tarea->Filename.c_str());
     Areas->Save(tarea);
     ch->Echo("Done.\r\n");
 }

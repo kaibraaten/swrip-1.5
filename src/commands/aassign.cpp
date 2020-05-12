@@ -25,7 +25,7 @@ void do_aassign(Character *ch, std::string argument)
         || !StrCmp("null", argument)
         || !StrCmp("clear", argument))
     {
-        ch->PCData->Build.Area = NULL;
+        ch->PCData->Build.Area = nullptr;
         AssignAreaTo(ch);
 
         if (!ch->PCData->Build.Area)
@@ -44,7 +44,7 @@ void do_aassign(Character *ch, std::string argument)
         || (IsName(argument, ch->PCData->Bestowments)
             && GetTrustLevel(ch) >= SysData.LevelToModifyProto))
     {
-        for (auto tmp = Areas->FirstArea; tmp; tmp = tmp->Next)
+        for (auto tmp : Areas)
         {
             if (!StrCmp(argument, tmp->Filename))
             {
@@ -56,7 +56,7 @@ void do_aassign(Character *ch, std::string argument)
 
     if (!tarea)
     {
-        for (auto tmp = Areas->FirstBuild; tmp; tmp = tmp->Next)
+        for (auto tmp : Areas->AreasInProgress())
         {
             if (!StrCmp(argument, tmp->Filename))
             {

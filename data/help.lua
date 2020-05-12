@@ -4530,7 +4530,7 @@ Syntax:  foldarea all\
 This command is used to save a live (non-prototype) area file, usually after\
 it has been modified.  It should be used with extreme care.\
  \
-See ASET, UNFOLDAREA and INSTALLAREA.\
+See ASET and INSTALLAREA.\
 ", 
 }
 
@@ -12301,19 +12301,6 @@ Smugg.&Y     46+     66+      71+       46+     146+    46+     46+&p \
 Diplo.&Y     32      42       32        32      32      132     82&p\
 Lead.&Y      88      38       38        38      38      88      138&p\
 &R&W\
-", 
-}
-
-HelpEntry
-{
-   Keyword = "UNFOLDAREA", 
-   Level = 101, 
-   Text = "Syntax: unfoldarea <area filename>\
-\
-This command will load up an area file.\
-\
-NOTE: It could be quite dangerous to unfold an area that is already loaded,\
-      or one that has not been tested.\
 ", 
 }
 

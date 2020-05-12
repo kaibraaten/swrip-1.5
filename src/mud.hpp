@@ -825,7 +825,6 @@ DECLARE_CMD_FUN(do_transfer);
 DECLARE_CMD_FUN(do_transship);
 DECLARE_CMD_FUN(do_trust);
 DECLARE_CMD_FUN(do_typo);
-DECLARE_CMD_FUN(do_unfoldarea);
 DECLARE_CMD_FUN(do_unhell);
 DECLARE_CMD_FUN(do_undock);
 DECLARE_CMD_FUN(do_unlock);

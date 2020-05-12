@@ -68,92 +68,15 @@ void FixAreaExits(std::shared_ptr<Area> tarea)
     }
 }
 
-void SortArea(std::shared_ptr<Area> pArea, bool proto)
-{
-    std::shared_ptr<Area> area;
-    std::shared_ptr<Area> first_sort, last_sort;
-    bool found = false;
-
-    if (!pArea)
-    {
-        Log->Bug("%s: NULL pArea", __FUNCTION__);
-        return;
-    }
-
-    if (proto)
-    {
-        first_sort = Areas->FirstBSort;
-        last_sort = Areas->LastBSort;
-    }
-    else
-    {
-        first_sort = Areas->FirstASort;
-        last_sort = Areas->LastASort;
-    }
-
-    pArea->NextSort = NULL;
-    pArea->PreviousSort = NULL;
-
-    if (!first_sort)
-    {
-        pArea->PreviousSort = NULL;
-        pArea->NextSort = NULL;
-        first_sort = pArea;
-        last_sort = pArea;
-        found = true;
-    }
-    else
-    {
-        for (area = first_sort; area; area = area->NextSort)
-        {
-            if (pArea->VnumRanges.Room.First < area->VnumRanges.Room.First)
-            {
-                if (!area->PreviousSort)
-                {
-                    first_sort = pArea;
-                }
-                else
-                {
-                    area->PreviousSort->NextSort = pArea;
-                }
-
-                pArea->PreviousSort = area->PreviousSort;
-                pArea->NextSort = area;
-                area->PreviousSort = pArea;
-                found = true;
-                break;
-            }
-        }
-    }
-
-    if (!found)
-    {
-        pArea->PreviousSort = last_sort;
-        pArea->NextSort = NULL;
-        last_sort->NextSort = pArea;
-        last_sort = pArea;
-    }
-
-    if (proto)
-    {
-        Areas->FirstBSort = first_sort;
-        Areas->LastBSort = last_sort;
-    }
-    else
-    {
-        Areas->FirstASort = first_sort;
-        Areas->LastASort = last_sort;
-    }
-}
-
 std::shared_ptr<Area> GetArea(const std::string &name)
 {
     std::shared_ptr<Area> area;
 
-    for (area = Areas->FirstArea; area; area = area->Next)
+    for (const auto &tmp : Areas)
     {
-        if (!StrCmp(area->Filename, name) || !StrCmp(area->Name, name))
+        if (!StrCmp(tmp->Filename, name) || !StrCmp(tmp->Name, name))
         {
+            area = tmp;
             break;
         }
     }
@@ -166,7 +89,7 @@ std::shared_ptr<Area> GetArea(const std::string &name)
  */
 void AreaUpdate()
 {
-    for (auto area = Areas->FirstArea; area; area = area->Next)
+    for (auto area : Areas)
     {
         int reset_age = area->ResetFrequency ? area->ResetFrequency : 15;
 
@@ -461,8 +384,7 @@ void CloseArea(std::shared_ptr<Area> pArea)
         ereset_next = ereset->Next;
     }
 
-    UNLINK(pArea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);
-    UNLINK(pArea, Areas->FirstASort, Areas->LastASort, NextSort, PreviousSort);
+    Areas->Remove(pArea);
 }
 
 void FreeArea(std::shared_ptr<Area> are)
@@ -482,14 +404,13 @@ void AssignAreaTo(Character *ch)
         && ch->PCData->Build.VnumRanges.Room.First != INVALID_VNUM
         && ch->PCData->Build.VnumRanges.Room.Last != INVALID_VNUM)
     {
-        bool created = false;
         std::shared_ptr<Area> tarea = ch->PCData->Build.Area;
 
         auto filename = FormatString("%s.lua", Capitalize(ch->Name).c_str());
 
         if (tarea == nullptr)
         {
-            for (auto tmp = Areas->FirstBuild; tmp; tmp = tmp->Next)
+            for (auto tmp : Areas)
             {
                 if (!StrCmp(filename, tmp->Filename))
                 {
@@ -504,16 +425,15 @@ void AssignAreaTo(Character *ch)
             auto logBuf = FormatString("Creating area entry for %s", ch->Name.c_str());
             Log->LogStringPlus(logBuf, LOG_NORMAL, ch->TopLevel);
             tarea = std::make_shared<Area>();
-            LINK(tarea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);
+            tarea->Flags.set(Flag::Area::Prototype);
+            Areas->Add(tarea);
             tarea->Name = FormatString("{PROTO} %s's area in progress", ch->Name.c_str());
             tarea->Filename = filename;
             tarea->Author = ch->Name;
-
-            created = true;
         }
         else
         {
-            auto logBuf = FormatString("Updating area entry for %s", ch->Name.c_str());
+auto logBuf = FormatString("Updating area entry for %s", ch->Name.c_str());
             Log->LogStringPlus(logBuf, LOG_NORMAL, ch->TopLevel);
         }
 
@@ -524,11 +444,6 @@ void AssignAreaTo(Character *ch)
         tarea->VnumRanges.Object.Last = ch->PCData->Build.VnumRanges.Object.Last;
         tarea->VnumRanges.Mob.Last = ch->PCData->Build.VnumRanges.Mob.Last;
         ch->PCData->Build.Area = tarea;
-
-        if (created)
-        {
-            SortArea(tarea, true);
-        }
     }
 }
 

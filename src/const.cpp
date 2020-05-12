@@ -2814,7 +2814,7 @@ const std::array<const char * const, MAX_BIT> AreaFlags =
     "NoPkill",
     "_01",
     "Changed",
-    "_03",
+    "Prototype",
     "_04",
     "_05",
     "_06",

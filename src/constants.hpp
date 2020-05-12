@@ -1729,12 +1729,6 @@ constexpr auto CHANNEL_ALLCLAN = BV29;
 
 constexpr auto CHANNEL_CLANTALK = CHANNEL_CLAN;
 
-/* Area defines - Scryn 8/11
- *
- */
-constexpr auto AREA_DELETED = BV00;
-constexpr auto AREA_LOADED = BV01;
-
 /*
  * Liquids.
  */

@@ -12,7 +12,6 @@ void do_check_vnums(Character *ch, std::string argument)
     std::string arg1;
     std::string arg2;
     bool room = false, mob = false, obj = false, all = false, area_conflict = false;
-    int low_range = 0, high_range = 0;
 
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);
@@ -49,8 +48,8 @@ void do_check_vnums(Character *ch, std::string argument)
         return;
     }
 
-    low_range = ToLong(arg2);
-    high_range = ToLong(argument);
+    const vnum_t low_range = ToLong(arg2);
+    const vnum_t high_range = ToLong(argument);
 
     if (low_range < MIN_VNUM || low_range > MAX_VNUM)
     {
@@ -72,22 +71,28 @@ void do_check_vnums(Character *ch, std::string argument)
 
     if (all)
     {
-        sprintf(buf, "room %d %d", low_range, high_range);
+        sprintf(buf, "room %ld %ld", low_range, high_range);
         do_check_vnums(ch, buf);
-        sprintf(buf, "mob %d %d", low_range, high_range);
+        sprintf(buf, "mob %ld %ld", low_range, high_range);
         do_check_vnums(ch, buf);
-        sprintf(buf, "object %d %d", low_range, high_range);
+        sprintf(buf, "object %ld %ld", low_range, high_range);
         do_check_vnums(ch, buf);
         return;
     }
 
     SetCharacterColor(AT_PLAIN, ch);
 
-    for (auto pArea = Areas->FirstASort; pArea; pArea = pArea->NextSort)
+    auto areas = Areas->Entities();
+    areas.sort([](const auto &a, const auto &b)
+                {
+                    return a->VnumRanges.Room.First < b->VnumRanges.Room.First;
+                });
+    
+    for (auto pArea : areas)
     {
         area_conflict = false;
 
-        if (IsBitSet(pArea->Status, AREA_DELETED))
+        if (IsBitSet(pArea->Status, AreaStatus::Deleted))
             continue;
         else if (room)
         {
@@ -161,11 +166,11 @@ void do_check_vnums(Character *ch, std::string argument)
         }
     }
 
-    for (auto pArea = Areas->FirstBSort; pArea; pArea = pArea->NextSort)
+    for (auto pArea : Areas->AreasInProgress())
     {
         area_conflict = false;
 
-        if (IsBitSet(pArea->Status, AREA_DELETED))
+        if (IsBitSet(pArea->Status, AreaStatus::Deleted))
             continue;
         else if (room)
         {

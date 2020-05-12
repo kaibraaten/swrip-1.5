@@ -1,14 +1,18 @@
+#include <filesystem>
 #include <cstring>
 #include <cctype>
 #include <cerrno>
 #include <utility/algorithms.hpp>
 #include "mud.hpp"
+#include "log.hpp"
 #include "character.hpp"
 #include "area.hpp"
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/arearepository.hpp"
+
+namespace fs = std::filesystem;
 
 static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name);
 static void ExtractVictim(Character *victim);
@@ -33,84 +37,39 @@ void do_destroy(Character *ch, std::string victimName)
         ExtractVictim(victim);
     }
 
-    char oldPath[256];
-    char backupPath[256];
-
-    sprintf(oldPath, "%s%c/%s", PLAYER_DIR, tolower(victimName[0]),
-        Capitalize(victimName).c_str());
-    sprintf(backupPath, "%s%c/%s", BACKUP_DIR, tolower(victimName[0]),
-        Capitalize(victimName).c_str());
-
-    if (rename(oldPath, backupPath) == 0)
+    try
     {
-        char godDataPath[256];
+        auto oldPath = FormatString("%s%c/%s", PLAYER_DIR, tolower(victimName[0]),
+                                    Capitalize(victimName).c_str());
+        auto backupPath = FormatString("%s%c/%s", BACKUP_DIR, tolower(victimName[0]),
+                                       Capitalize(victimName).c_str());
+        fs::rename(oldPath, backupPath);
 
-        SetCharacterColor(AT_RED, ch);
-        ch->Echo("Player destroyed. Pfile saved in backup directory.\r\n");
-        sprintf(godDataPath, "%s%s", GOD_DIR, Capitalize(victimName).c_str());
+        auto areaName = FormatString("%s.lua", Capitalize(victimName).c_str());
 
-        if (remove(godDataPath) == 0)
-        {
-            ch->Echo("Player's immortal data destroyed.\r\n");
-        }
-        else if (errno != ENOENT)
-        {
-            ch->Echo("Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
-                errno, strerror(errno));
-            char errorMessage[1024];
-            sprintf(errorMessage, "%s destroying %s", ch->Name.c_str(), godDataPath);
-            perror(errorMessage);
-        }
-
-        char areaName[100];
-        sprintf(areaName, "%s.are", Capitalize(victimName).c_str());
-
-        for (auto pArea = Areas->FirstBuild; pArea; pArea = pArea->Next)
+        for (auto pArea : Areas->AreasInProgress())
         {
             if (!StrCmp(pArea->Filename, areaName))
             {
-                char areaPath[256];
-                sprintf(areaPath, "%s%s", BUILD_DIR, areaName);
-
-                if (IsBitSet(pArea->Status, AREA_LOADED))
+                if (IsBitSet(pArea->Status, AreaStatus::Loaded))
                 {
                     Areas->Save(pArea);
                 }
 
                 CloseArea(pArea);
-                char areaBackupPath[512];
-                sprintf(areaBackupPath, "%s.bak", areaPath);
                 SetCharacterColor(AT_RED, ch); /* Log message changes colors */
-
-                if (!rename(areaPath, areaBackupPath))
-                {
-                    ch->Echo("Player's area data destroyed. Area saved as backup.\r\n");
-                }
-                else if (errno != ENOENT)
-                {
-                    ch->Echo("Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
-                        errno, strerror(errno));
-                    char errorMessage[1024];
-                    sprintf(errorMessage, "%s destroying %s",
-                        ch->Name.c_str(), areaPath);
-                    perror(errorMessage);
-                }
+                fs::rename(Areas->GetAreaFilename(pArea),
+                           Areas->GetAreaFilename(pArea) + ".bak");
+                ch->Echo("Player's area data destroyed. Area saved as backup.\r\n");
             }
         }
     }
-    else if (errno == ENOENT)
+    catch(const fs::filesystem_error &ex)
     {
+        Log->Bug("%s:%d:%s() - %s",
+                 __FILE__, __LINE__, __FUNCTION__, ex.what());
         SetCharacterColor(AT_PLAIN, ch);
         ch->Echo("Player does not exist.\r\n");
-    }
-    else
-    {
-        SetCharacterColor(AT_WHITE, ch);
-        ch->Echo("Unknown error #%d - %s.  Report to Thoric.\r\n",
-            errno, strerror(errno));
-        char errorMessage[1024];
-        sprintf(errorMessage, "%s destroying %s", ch->Name.c_str(), victimName.c_str());
-        perror(errorMessage);
     }
 }
 

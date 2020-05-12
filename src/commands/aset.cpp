@@ -12,7 +12,6 @@ void do_aset(Character *ch, std::string argument)
     std::string arg1;
     std::string arg2;
     std::string arg3;
-    bool found = false;
     int value = 0;
 
     argument = OneArgument(argument, arg1);
@@ -29,30 +28,33 @@ void do_aset(Character *ch, std::string argument)
         return;
     }
 
-    found = false;
-
-    for (tarea = Areas->FirstArea; tarea; tarea = tarea->Next)
+    for (auto tmp : Areas)
+    {
         if (!StrCmp(tarea->Filename, arg1))
         {
-            found = true;
+            tarea = tmp;
             break;
         }
-
-    if (!found)
-        for (tarea = Areas->FirstBuild; tarea; tarea = tarea->Next)
+    }
+    
+    if (tarea == nullptr)
+    {
+        for (auto tmp : Areas->AreasInProgress())
+        {
             if (!StrCmp(tarea->Filename, arg1))
             {
-                found = true;
+                tarea = tmp;
                 break;
             }
-
+        }
+    }
+    
     if (!StrCmp(arg1, "this"))
     {
         tarea = ch->InRoom->Area;
-        found = true;
     }
 
-    if (!found)
+    if (tarea == nullptr)
     {
         ch->Echo("Area not found.\r\n");
         return;

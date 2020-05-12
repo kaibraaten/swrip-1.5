@@ -689,7 +689,7 @@ void AddCharacter(Character *ch)
  */
 static void InitializeEconomy()
 {
-    for (auto tarea = Areas->FirstArea; tarea; tarea = tarea->Next)
+    for (auto tarea : Areas)
     {
         std::shared_ptr<ProtoMobile> mob;
         int idx = 0, gold = 0, rng = 0;
@@ -1482,6 +1482,7 @@ std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr
  * them out of the area files. -- Altrag */
 static void LoadBuildList()
 {
+#if 0
     try
     {
         FILE *fp;
@@ -1599,6 +1600,7 @@ static void LoadBuildList()
     {
         Log->Bug("%s: Could not open god dir: %s", __FUNCTION__, ex.what());
     }
+#endif    
 }
 
 /*
@@ -1608,20 +1610,15 @@ static void LoadBuildList()
 void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
     const std::string &loadst, const std::string &notloadst)
 {
-    std::shared_ptr<Area> first_sort;
+    auto listToUse = proto ? Areas->AreasInProgress() : Areas->Entities();
     int count = 0;
     int loaded = 0;
 
     SetCharacterColor(AT_PLAIN, ch);
 
-    if (proto)
-        first_sort = Areas->FirstBSort;
-    else
-        first_sort = Areas->FirstASort;
-
-    for (auto pArea = first_sort; pArea; pArea = pArea->NextSort)
+    for (auto pArea : listToUse)
     {
-        if (IsBitSet(pArea->Status, AREA_DELETED))
+        if (IsBitSet(pArea->Status, AreaStatus::Deleted))
             continue;
 
         if (pArea->VnumRanges.Room.First < low)
@@ -1630,7 +1627,7 @@ void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool sh
         if (pArea->VnumRanges.Room.Last > high)
             break;
 
-        if (IsBitSet(pArea->Status, AREA_LOADED))
+        if (IsBitSet(pArea->Status, AreaStatus::Loaded))
             loaded++;
         else if (!shownl)
             continue;
@@ -1641,7 +1638,7 @@ void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool sh
             pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
             pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
             pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last,
-            IsBitSet(pArea->Status, AREA_LOADED) ? loadst.c_str() : notloadst.c_str());
+                 IsBitSet(pArea->Status, AreaStatus::Loaded) ? loadst.c_str() : notloadst.c_str());
         count++;
     }
 

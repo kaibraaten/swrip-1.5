@@ -20,6 +20,7 @@
 #include "shop.hpp"
 
 #define AREA_DIR        DATA_DIR "areas/"
+#define BUILD_DIR       DATA_DIR "building/"
 
 namespace fs = std::filesystem;
 
@@ -30,16 +31,16 @@ namespace fs = std::filesystem;
 static constexpr int CURRENT_FILEFORMAT_VERSION = 1;
 static int FILEFORMAT_VERSION_BEING_LOADED = CURRENT_FILEFORMAT_VERSION;
 
-static std::string GetAreaFilename(std::shared_ptr<Area> area);
-
 class LuaAreaRepository : public AreaRepository
 {
 public:
     void Load() override;
+    void Load(std::shared_ptr<Area> area) override;
     void Save() const override;
     void Save(const std::shared_ptr<Area>&) const override;
     void Save(const std::shared_ptr<Area>&, bool install) const override;
-
+    std::string GetAreaFilename(std::shared_ptr<Area> area) const override;
+    
 private:
     void PushMetaData(lua_State*, std::shared_ptr<Area>) const;
     void PushLevelRanges(lua_State *L, std::shared_ptr<Area>) const;
@@ -82,12 +83,22 @@ private:
 
 void LuaAreaRepository::Load()
 {
-    ForEachLuaFileInDir(AREA_DIR, ExecuteAreaFile, NULL);
+    ForEachLuaFileInDir(AREA_DIR, ExecuteAreaFile, nullptr);
+    ForEachLuaFileInDir(BUILD_DIR, ExecuteAreaFile, nullptr);
+}
+
+void LuaAreaRepository::Load(std::shared_ptr<Area> area)
+{
+    auto file = GetAreaFilename(area);
+    auto proto = area->Flags.test(Flag::Area::Prototype);
+    area->Flags.reset(Flag::Area::Prototype);
+    ExecuteAreaFile(file, nullptr);
+    area->Flags[Flag::Area::Prototype] = proto;
 }
 
 void LuaAreaRepository::Save() const
 {
-    for(auto area = FirstArea; area; area = area->Next)
+    for(auto area : Entities())
     {
         Save(area);
     }
@@ -1240,24 +1251,24 @@ int LuaAreaRepository::L_AreaEntry(lua_State *L)
     area->LevelRanges.Hard.High = MAX_LEVEL;
     
     LoadMetaData(L, area);
-    LoadMobiles(L, area);
-    LoadObjects(L, area);
-    LoadRooms(L, area);
-    LoadResets(L, area);
-
     Areas->Add(area);
-    LINK(area, Areas->FirstArea, Areas->LastArea, Next, Previous);
     top_area++;
 
-    SortArea(area, false);
+    if(!area->Flags.test(Flag::Area::Prototype))
+    {
+        LoadMobiles(L, area);
+        LoadObjects(L, area);
+        LoadRooms(L, area);
+        LoadResets(L, area);
+        SetBit(area->Status, AreaStatus::Loaded);
+    }
+    
     fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
             area->Filename.c_str(),
             area->VnumRanges.Room.First, area->VnumRanges.Room.Last,
             area->VnumRanges.Object.First, area->VnumRanges.Object.Last,
             area->VnumRanges.Mob.First, area->VnumRanges.Mob.Last);
 
-    SetBit(area->Status, AREA_LOADED);
-    
     return 0;
 }
 
@@ -1272,7 +1283,7 @@ std::shared_ptr<AreaRepository> NewLuaAreaRepository()
     return std::make_shared<LuaAreaRepository>();
 }
 
-static std::string GetAreaFilename(std::shared_ptr<Area> area)
+std::string LuaAreaRepository::GetAreaFilename(std::shared_ptr<Area> area) const
 {
     std::string filename = area->Filename;
 
@@ -1282,5 +1293,6 @@ static std::string GetAreaFilename(std::shared_ptr<Area> area)
         filename = filename.substr(0, filename.size() - 4);
     }
 
-    return FormatString("%s%s", AREA_DIR, ConvertToLuaFilename(filename).c_str());
+    const char *directory = area->Flags.test(Flag::Area::Prototype) ? BUILD_DIR : AREA_DIR;
+    return FormatString("%s%s", directory, ConvertToLuaFilename(filename).c_str());
 }

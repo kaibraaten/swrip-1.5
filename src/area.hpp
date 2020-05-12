@@ -14,19 +14,22 @@ namespace Flag
         enum : size_t
         {
             NoPkill,
-            _01,
-            Changed
+                _01,
+                Changed,
+                Prototype
         };
     }
 }
 
+namespace AreaStatus
+{
+    constexpr auto Deleted = BV00;
+    constexpr auto Loaded = BV01;
+};
+
 class Area
 {
 public:
-    std::shared_ptr<Area> Next;
-    std::shared_ptr<Area> Previous;
-    std::shared_ptr<Area> NextSort;
-    std::shared_ptr<Area> PreviousSort;
     std::shared_ptr<Reset> FirstReset;
     std::shared_ptr<Reset> LastReset;
     std::shared_ptr<Reset> LastMobReset;
@@ -75,7 +78,6 @@ public:
 };
 
 void FixAreaExits(std::shared_ptr<Area> tarea);
-void SortArea(std::shared_ptr<Area> pArea, bool proto);
 std::shared_ptr<Area> GetArea(const std::string &nameOrFile);
 void AreaUpdate();
 void CloseArea(std::shared_ptr<Area> pArea);

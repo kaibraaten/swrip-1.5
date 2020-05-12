@@ -7,14 +7,7 @@
 
 void do_loadarea(Character *ch, std::string argument)
 {
-#pragma message("do_loadarea must be reimplemented")
-    // Disabled for now because it relies on LoadAreaFile()
-    // which is internal to LegacyAreaRepository. This dependency
-    // must be broken so that this function may be reimplemented.
-#if 0
     std::shared_ptr<Area> tarea;
-    char filename[256];
-    int  tmp = 0;
 
     if (IsNpc(ch) || GetTrustLevel(ch) < LEVEL_AVATAR || !ch->PCData
         || (!argument.empty() && !ch->PCData->Build.Area))
@@ -29,60 +22,56 @@ void do_loadarea(Character *ch, std::string argument)
     }
     else
     {
-        bool found = false;
-
-        for (tarea = Areas->FirstBuild; tarea; tarea = tarea->Next)
+        for(auto tmp : Areas->AreasInProgress())
         {
             if (!StrCmp(tarea->Filename, argument))
             {
-                found = true;
+                tarea = tmp;
                 break;
             }
         }
 
         if (IsNpc(ch)
             || (GetTrustLevel(ch) < LEVEL_GREATER
-                && tarea && !IsName(tarea->Filename, ch->PCData->Bestowments)))
+                && tarea != nullptr && !IsName(tarea->Filename, ch->PCData->Bestowments)))
         {
             ch->Echo("You can only load areas you have permission for.\r\n");
             return;
         }
 
-        if (!found)
+        if (tarea == nullptr)
         {
             ch->Echo("Area not found.\r\n");
             return;
         }
     }
 
-    if (!tarea)
+    if (tarea == nullptr)
     {
         ch->Echo("No area to load.\r\n");
         return;
     }
 
     /* Stops char from loading when already loaded - Scryn 8/11 */
-    if (IsBitSet(tarea->Status, AREA_LOADED))
+    if (IsBitSet(tarea->Status, AreaStatus::Loaded))
     {
         ch->Echo("Your area is already loaded.\r\n");
         return;
     }
 
-    sprintf(filename, "%s%s", BUILD_DIR, tarea->Filename.c_str());
     ch->Echo("Loading...\r\n");
-    LoadAreaFile(tarea, filename);
+    Areas->Load(tarea);
     ch->Echo("Linking exits...\r\n");
     FixAreaExits(tarea);
 
     if (tarea->FirstReset)
     {
-        tmp = tarea->NumberOfPlayers;
+        int numpl = tarea->NumberOfPlayers;
         tarea->NumberOfPlayers = 0;
         ch->Echo("Resetting area...\r\n");
         ResetArea(tarea);
-        tarea->NumberOfPlayers = tmp;
+        tarea->NumberOfPlayers = numpl;
     }
 
     ch->Echo("Done.\r\n");
-#endif
 }

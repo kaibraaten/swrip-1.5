@@ -9,8 +9,6 @@
 void do_astat(Character *ch, std::string argument)
 {
     std::shared_ptr<Area> tarea;
-    bool proto = false;
-    bool found = false;
     std::string filename;
 
     if (!StrCmp(argument, "this"))
@@ -22,23 +20,28 @@ void do_astat(Character *ch, std::string argument)
         filename = argument;
     }
 
-    for (tarea = Areas->FirstArea; tarea; tarea = tarea->Next)
+    for(auto tmp : Areas)
+    {
         if (!StrCmp(tarea->Filename, filename))
         {
-            found = true;
+            tarea = tmp;
             break;
         }
-
-    if (!found)
-        for (tarea = Areas->FirstBuild; tarea; tarea = tarea->Next)
+    }
+    
+    if (tarea == nullptr)
+    {
+        for(auto tmp : Areas->AreasInProgress())
+        {
             if (!StrCmp(tarea->Filename, filename))
             {
-                found = true;
-                proto = true;
+                tarea = tmp;
                 break;
             }
-
-    if (!found)
+        }
+    }
+    
+    if (tarea == nullptr)
     {
         if (!filename.empty())
         {
@@ -54,9 +57,9 @@ void do_astat(Character *ch, std::string argument)
     ch->Echo("Name: %s\r\nFilename: %-20s  Prototype: %s\r\n",
         tarea->Name.c_str(),
         tarea->Filename.c_str(),
-        proto ? "yes" : "no");
+        tarea->Flags.test(Flag::Area::Prototype) ? "yes" : "no");
 
-    if (!proto)
+    if (!tarea->Flags.test(Flag::Area::Prototype))
     {
         ch->Echo("Max players: %d  IllegalPks: %d  Credits Looted: %d\r\n",
             tarea->MaxPlayers,

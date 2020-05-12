@@ -11,7 +11,7 @@ void do_areas(Character *ch, std::string argument)
     ch->Echo("\r\n   Author    |             Area                     | Recommended |  Enforced\r\n");
     ch->Echo("-------------+--------------------------------------+-------------+-----------\r\n");
 
-    for(auto area = Areas->FirstArea; area; area = area->Next)
+    for(auto area : Areas)
     {
         ShowArea(area, ch);
     }

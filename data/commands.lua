@@ -4008,15 +4008,6 @@ CommandEntry
 
 CommandEntry
 {
-   Function = "do_unfoldarea", 
-   Log = "always", 
-   Name = "unfoldarea", 
-   Position = "dead", 
-   Level = 105, 
-}
-
-CommandEntry
-{
    Function = "do_unhell", 
    Log = "high", 
    Name = "unhell", 

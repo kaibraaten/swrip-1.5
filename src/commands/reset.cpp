@@ -15,24 +15,25 @@ void do_reset(Character *ch, std::string argument)
 
     if (GetTrustLevel(ch) > LEVEL_GREATER)
     {
-        char fname[80];
-
-        sprintf(fname, "%s.are", Capitalize(arg).c_str());
-
-        for (pArea = Areas->FirstBuild; pArea; pArea = pArea->Next)
+        for (auto tmp : Areas->AreasInProgress())
         {
-            if (!StrCmp(fname, pArea->Filename))
+            if (!StrCmp(arg, tmp->Filename))
             {
+                pArea = tmp;
                 argument = parg;
                 break;
             }
         }
 
         if (!pArea)
+        {
             pArea = ch->PCData->Build.Area;
-
+        }
+        
         if (!pArea)
+        {
             pArea = ch->InRoom->Area;
+        }
     }
     else
     {
