@@ -1110,8 +1110,7 @@ void WriteComments(const Character *ch, FILE *fp);
 
 /* db.c */
 void ShutdownMud(const std::string &reason);
-void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
-    const std::string &loadst, const std::string &notloadst);
+void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl);
 void AppendFile(const Character *ch, const std::string &file, const std::string &str);
 void ShowFile(const Character *ch, const std::string &filename);
 void BootDatabase(bool fCopyover);
@@ -1139,7 +1138,6 @@ bool DeleteMobile(std::shared_ptr<ProtoMobile> mob);
 void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
 void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
 void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
-void WriteAreaList();
 
 bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room);
 bool CanModifyObject(const Character *ch, const Object *obj);

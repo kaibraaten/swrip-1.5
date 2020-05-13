@@ -2655,32 +2655,19 @@ void RawKill(Character *killer, Character *victim)
             }
         }
 
-        sprintf(buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]), Capitalize(arg).c_str());
-        sprintf(buf2, "%s%c/%s", BACKUP_DIR, tolower(arg[0]), Capitalize(arg).c_str());
+#pragma message("Reimplement this")
+#if 0
+        sprintf(buf, "%s", GetPlayerFilename(victim).c_str());
+        sprintf(buf2, "%s", GetPlayerBackupFilename(victim->Name).c_str());
 
         rename(buf, buf2);
-
+#endif
         sprintf(buf, "%s%c/%s.clone", PLAYER_DIR, tolower(arg[0]),
-            Capitalize(arg).c_str());
+                ToLower(arg).c_str());
         sprintf(buf2, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-            Capitalize(arg).c_str());
+                ToLower(arg).c_str());
 
         rename(buf, buf2);
-
-        sprintf(buf, "%s%s", GOD_DIR, Capitalize(victim->Name).c_str());
-
-        if (!remove(buf))
-        {
-            killer->Echo("Player's immortal data destroyed.\r\n");
-        }
-        else if (errno != ENOENT)
-        {
-            killer->Echo("Unknown error #%d - %s (immortal data). Report to the administration\r\n",
-                errno, strerror(errno));
-            sprintf(buf2, "%s slaying ", killer->Name.c_str());
-            strcpy(buf2, buf);
-            perror(buf2);
-        }
 
         sprintf(buf, "%s%c/%s.home", PLAYER_DIR, tolower(arg[0]),
             Capitalize(arg).c_str());

@@ -7,6 +7,9 @@
 
 void do_loadarea(Character *ch, std::string argument)
 {
+#if 1
+    ch->Echo("This command is deprecated. Prototype areas are always loaded.\r\n");
+#else
     std::shared_ptr<Area> tarea;
 
     if (IsNpc(ch) || GetTrustLevel(ch) < LEVEL_AVATAR || !ch->PCData
@@ -74,4 +77,5 @@ void do_loadarea(Character *ch, std::string argument)
     }
 
     ch->Echo("Done.\r\n");
+#endif
 }

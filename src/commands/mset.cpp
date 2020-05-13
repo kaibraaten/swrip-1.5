@@ -149,7 +149,6 @@ void do_mset( Character *ch, std::string argument )
       ch->Echo("For editing index/prototype mobiles:\r\n");
       ch->Echo("  hitnumdie hitsizedie HitPlus (hit points)\r\n");
       ch->Echo("  damnumdie damsizedie DamPlus (damage roll)\r\n");
-      ch->Echo("To toggle area flag: aloaded\r\n");
       return;
     }
 
@@ -1665,39 +1664,6 @@ void do_mset( Character *ch, std::string argument )
 
     }
 
-
-  if ( !StrCmp( arg2, "aloaded" ) )
-    {
-      if ( IsNpc(victim) )
-        {
-          ch->Echo("Player Characters only.\r\n");
-          return;
-        }
-
-      if ( !CanModifyCharacter( ch, victim ) )
-        return;
-
-      if ( !IsBitSet(victim->PCData->Build.Area->Status, AreaStatus::Loaded))
-        {
-            SetBit( victim->PCData->Build.Area->Status, AreaStatus::Loaded);
-            victim->Echo("Your area set to LOADED!\r\n");
-            
-            if ( ch != victim )
-                ch->Echo("Area set to LOADED!\r\n");
-            
-            return;
-        }
-      else
-        {
-            RemoveBit( victim->PCData->Build.Area->Status, AreaStatus::Loaded);
-            victim->Echo("Your area set to NOT-LOADED!\r\n");
-            
-            if ( ch != victim )
-                ch->Echo("Area set to NON-LOADED!\r\n");
-            
-            return;
-        }
-    }
 
   if ( !StrCmp( arg2, "speaks" ) )
     {

@@ -5,15 +5,17 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
-#define USE_NEW_AREA_FORMAT
+struct CompareArea
+{
+    bool operator()(const std::shared_ptr<Area> &a, const std::shared_ptr<Area> &b) const;
+};
 
-class AreaRepository : public Ceris::Repository<std::shared_ptr<Area>>
+class AreaRepository : public Ceris::Repository<std::shared_ptr<Area>, CompareArea>
 {
 public:
     AreaRepository();
     virtual ~AreaRepository();
     virtual void Load() = 0;
-    virtual void Load(std::shared_ptr<Area> area) = 0;
     virtual void Save() const = 0;
     virtual void Save(const std::shared_ptr<Area>&) const = 0;
     virtual void Save(const std::shared_ptr<Area>&, bool install) const = 0;

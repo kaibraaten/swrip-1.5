@@ -50,13 +50,6 @@ void do_savearea(Character *ch, std::string argument)
         return;
     }
 
-    /* Ensure not wiping out their area with save before load - Scryn 8/11 */
-    if (!IsBitSet(tarea->Status, AreaStatus::Loaded))
-    {
-        ch->Echo("Your area is not loaded!\r\n");
-        return;
-    }
-
     Areas->Save(tarea);
     ch->Echo("Done.\r\n");
 }

@@ -21,12 +21,6 @@ namespace Flag
     }
 }
 
-namespace AreaStatus
-{
-    constexpr auto Deleted = BV00;
-    constexpr auto Loaded = BV01;
-};
-
 class Area
 {
 public:
@@ -40,7 +34,6 @@ public:
     std::string Name;
     std::string Filename;
     std::bitset<Flag::MAX> Flags;
-    short Status = 0;
     short Age = 0;
     short NumberOfPlayers = 0;
     short ResetFrequency = 0;

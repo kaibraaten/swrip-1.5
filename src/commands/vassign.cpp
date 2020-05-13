@@ -1,4 +1,5 @@
 #include <cassert>
+#include "repos/arearepository.hpp"
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
@@ -63,14 +64,5 @@ void do_vassign( Character *ch, std::string argument )
 
     assert(victim->PCData->Build.Area != nullptr);
 
-    if (r_lo == 0)                                /* Scryn 8/12/95 */
-    {
-        RemoveBit ( victim->PCData->Build.Area->Status, AreaStatus::Loaded);
-        SetBit( victim->PCData->Build.Area->Status, AreaStatus::Deleted);
-    }
-    else
-    {
-        SetBit( victim->PCData->Build.Area->Status, AreaStatus::Loaded);
-        RemoveBit( victim->PCData->Build.Area->Status, AreaStatus::Deleted);
-    }
+    Areas->Save(victim->PCData->Build.Area);
 }

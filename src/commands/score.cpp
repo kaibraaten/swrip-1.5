@@ -270,7 +270,6 @@ void do_score(Character *ch, std::string argument)
                      ch->PCData->Build.Area->VnumRanges.Room.First, ch->PCData->Build.Area->VnumRanges.Room.Last,
                      ch->PCData->Build.Area->VnumRanges.Object.First, ch->PCData->Build.Area->VnumRanges.Object.Last,
                      ch->PCData->Build.Area->VnumRanges.Mob.First, ch->PCData->Build.Area->VnumRanges.Mob.Last);
-            ch->Echo("&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->PCData->Build.Area->Status, AreaStatus::Loaded)) ? "yes" : "no");
         }
     }
 

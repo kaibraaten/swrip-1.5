@@ -23,6 +23,5 @@ void do_newzones( Character *ch, std::string argument )
         }
     }
 
-  ShowVnums( ch, low, high, true, false, "", " X" );
+  ShowVnums(ch, low, high, true, false);
 }
-

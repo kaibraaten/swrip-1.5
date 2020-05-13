@@ -8,7 +8,6 @@
 void do_balzhur( Character *ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH];
-  char buf2[MAX_STRING_LENGTH];
   Character *victim = nullptr;
 
   if ( arg.empty() )
@@ -61,23 +60,6 @@ void do_balzhur( Character *ch, std::string arg )
   victim->Mana.Current = victim->Mana.Max;
   victim->Fatigue.Current = victim->Fatigue.Max;
 
-  char victimImmortalFilename[1024];
-  
-  sprintf( victimImmortalFilename, "%s%s", GOD_DIR, Capitalize(victim->Name).c_str() );
-
-  if ( !remove( victimImmortalFilename ) )
-    {
-      ch->Echo( "Player's immortal data destroyed.\r\n" );
-    }
-  else if ( errno != ENOENT )
-    {
-      ch->Echo( "Unknown error #%d - %s (immortal data).  Report to Thoric\r\n",
-                errno, strerror( errno ) );
-      sprintf( buf2, "%s balzhuring %s", ch->Name.c_str(), victimImmortalFilename );
-      perror( buf2 );
-    }
-
-  sprintf( buf2, "%s.are", Capitalize(arg).c_str() );
   MakeWizlist();
   do_help(victim, "M_BALZHUR_" );
   SetCharacterColor( AT_WHITE, victim );

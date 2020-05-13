@@ -309,15 +309,16 @@ char strArea[MAX_INPUT_LENGTH];
  * Local booting procedures.
  */
 static void AllocateRepositories();
-static void LoadBuildList();
 static void InitializeEconomy();
 static void FixExits();
 #if 0
 static int ExitComparator(Exit **xit1, Exit **xit2);
 #endif
 static void SortExits(std::shared_ptr<Room> room);
+#if 0
 static void ToWizFile(const std::string &line);
 static void AddToWizList(const std::string &name, int level);
+#endif
 
 void ShutdownMud(const std::string &reason)
 {
@@ -618,9 +619,6 @@ void BootDatabase(bool fCopyOver)
 
     Log->Boot("Reading in Storerooms");
     LoadStorerooms();
-
-    Log->Boot("Loading buildlist");
-    LoadBuildList();
 
     Log->Boot("Loading boards");
     Boards->Load();
@@ -1058,6 +1056,7 @@ void ShowFile(const Character *ch, const std::string &filename)
     }
 }
 
+#if 0
 /*
  * wizlist builder!                                             -Thoric
  */
@@ -1097,12 +1096,15 @@ static void AddToWizList(const std::string &name, int level)
 #endif
     Wizards.insert(Wizard(name, level));
 }
+#endif
 
 /*
  * Wizlist builder                                              -Thoric
  */
 void MakeWizlist()
 {
+#pragma message("Reimplement this using player directory only.")
+#if 0
     Wizards.clear();
 
     try
@@ -1218,6 +1220,7 @@ void MakeWizlist()
     }
 
     Wizards.clear();
+#endif
 }
 
 /*************************************************************/
@@ -1477,172 +1480,38 @@ std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr
     return pexit;
 }
 
-/* Build list of in_progress areas.  Do not load areas.
- * define AREA_READ if you want it to build area names rather than reading
- * them out of the area files. -- Altrag */
-static void LoadBuildList()
-{
-#if 0
-    try
-    {
-        FILE *fp;
-        char buf[MAX_STRING_LENGTH];
-        char line[81];
-        char word[81];
-        int low, hi;
-        int mlow, mhi, olow, ohi, rlow, rhi;
-        bool badfile = false;
-        int temp;
-
-        //while (dentry)
-        for (const auto &entry : fs::directory_iterator(GOD_DIR))
-        {
-            const std::string filename = entry.path().filename().string();
-
-            if (filename[0] != '.')
-            {
-                sprintf(buf, "%s%s", GOD_DIR, filename.c_str());
-
-                if (!(fp = fopen(buf, "r")))
-                {
-                    Log->Bug("%s: invalid file", __FUNCTION__);
-                    continue;
-                }
-
-                Log->Info("%s", buf);
-                badfile = false;
-                rlow = rhi = olow = ohi = mlow = mhi = 0;
-
-                while (!feof(fp) && !ferror(fp))
-                {
-                    low = 0; hi = 0; word[0] = 0; line[0] = 0;
-
-                    if ((temp = fgetc(fp)) != EOF)
-                        ungetc(temp, fp);
-                    else
-                        break;
-
-                    fgets(line, 80, fp);
-                    sscanf(line, "%s %d %d", word, &low, &hi);
-
-                    if (!StrCmp(word, "Level"))
-                    {
-                        if (low < LEVEL_AVATAR)
-                        {
-                            sprintf(buf, "%s: God file with level %d < %d",
-                                filename.c_str(), low, LEVEL_AVATAR);
-                            badfile = true;
-                        }
-                    }
-                    if (!StrCmp(word, "RoomRange"))
-                        rlow = low, rhi = hi;
-                    else if (!StrCmp(word, "MobRange"))
-                        mlow = low, mhi = hi;
-                    else if (!StrCmp(word, "ObjRange"))
-                        olow = low, ohi = hi;
-                }
-
-                fclose(fp);
-
-                if (rlow && rhi && !badfile)
-                {
-                    sprintf(buf, "%s%s.are", BUILD_DIR, filename.c_str());
-
-                    if (!(fp = fopen(buf, "r")))
-                    {
-                        Log->Bug("%s: cannot open area file for read", __FUNCTION__);
-                        continue;
-                    }
-
-                    strcpy(word, ReadWord(fp, Log, fBootDb));
-
-                    if (word[0] != '#' || StrCmp(&word[1], "AREA"))
-                    {
-                        sprintf(buf, "%s: %s.are: no #AREA found.",
-                            __FUNCTION__, filename.c_str());
-                        fclose(fp);
-                        continue;
-                    }
-
-                    auto pArea = std::make_shared<Area>();
-                    sprintf(buf, "%s.are", filename.c_str());
-                    pArea->Author = filename;
-                    pArea->Filename = buf;
-                    pArea->Name = ReadStringToTilde(fp, Log, fBootDb);
-
-                    sprintf(buf, "{PROTO} %s's area in progress", filename.c_str());
-                    pArea->Name = buf;
-
-                    fclose(fp);
-                    pArea->VnumRanges.Room.First = rlow;
-                    pArea->VnumRanges.Room.Last = rhi;
-                    pArea->VnumRanges.Mob.First = mlow;
-                    pArea->VnumRanges.Mob.Last = mhi;
-                    pArea->VnumRanges.Object.First = olow;
-                    pArea->VnumRanges.Object.Last = ohi;
-                    pArea->LevelRanges.Soft.Low = -1;
-                    pArea->LevelRanges.Soft.High = -1;
-                    pArea->LevelRanges.Hard.Low = -1;
-                    pArea->LevelRanges.Hard.High = -1;
-                    LINK(pArea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);
-                    fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
-                        "Mobs: %5ld - %-5ld\n",
-                        pArea->Filename.c_str(),
-                        pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
-                        pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
-                        pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last);
-                    SortArea(pArea, true);
-                }
-            }
-        }
-    }
-    catch (const fs::filesystem_error &ex)
-    {
-        Log->Bug("%s: Could not open god dir: %s", __FUNCTION__, ex.what());
-    }
-#endif    
-}
-
 /*
  * Display vnums currently assigned to areas            -Altrag & Thoric
  * Sorted, and flagged if loaded.
  */
-void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
-    const std::string &loadst, const std::string &notloadst)
+void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl)
 {
     auto listToUse = proto ? Areas->AreasInProgress() : Areas->Entities();
     int count = 0;
-    int loaded = 0;
 
     SetCharacterColor(AT_PLAIN, ch);
 
     for (auto pArea : listToUse)
     {
-        if (IsBitSet(pArea->Status, AreaStatus::Deleted))
-            continue;
-
         if (pArea->VnumRanges.Room.First < low)
             continue;
 
         if (pArea->VnumRanges.Room.Last > high)
             break;
 
-        if (IsBitSet(pArea->Status, AreaStatus::Loaded))
-            loaded++;
-        else if (!shownl)
+        if (!shownl)
             continue;
 
         ch->Echo("%-22s| Rooms: %10ld - %-10ld"
-            " Objs: %10ld - %-10ld Mobs: %10ld - %-10ld%s\r\n",
-            (!pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)"),
-            pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
-            pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
-            pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last,
-                 IsBitSet(pArea->Status, AreaStatus::Loaded) ? loadst.c_str() : notloadst.c_str());
+                 " Objs: %10ld - %-10ld Mobs: %10ld - %-10ld\r\n",
+                 (!pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)"),
+                 pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
+                 pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
+                 pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last);
         count++;
     }
 
-    ch->Echo("Areas listed: %d  Loaded: %d\r\n", count, loaded);
+    ch->Echo("Areas listed: %d\r\n", count);
 }
 
 /*

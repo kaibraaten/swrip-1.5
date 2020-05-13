@@ -393,6 +393,17 @@ void FreeArea(std::shared_ptr<Area> are)
         FreeReset(are, are->FirstReset);
 }
 
+template<typename SourceT, typename TargetT>
+static void CopyVnumRanges(const SourceT &source, TargetT &target)
+{
+    target.Room.First = source.Room.First;
+    target.Object.First = source.Object.First;
+    target.Mob.First = source.Mob.First;
+    target.Room.Last = source.Room.Last;
+    target.Object.Last = source.Object.Last;
+    target.Mob.Last = source.Mob.Last;
+}
+
 void AssignAreaTo(Character *ch)
 {
     if (IsNpc(ch))
@@ -406,11 +417,11 @@ void AssignAreaTo(Character *ch)
     {
         std::shared_ptr<Area> tarea = ch->PCData->Build.Area;
 
-        auto filename = FormatString("%s.lua", Capitalize(ch->Name).c_str());
+        auto filename = ConvertToLuaFilename(ch->Name);
 
         if (tarea == nullptr)
         {
-            for (auto tmp : Areas)
+            for (auto tmp : Areas->AreasInProgress())
             {
                 if (!StrCmp(filename, tmp->Filename))
                 {
@@ -425,6 +436,7 @@ void AssignAreaTo(Character *ch)
             auto logBuf = FormatString("Creating area entry for %s", ch->Name.c_str());
             Log->LogStringPlus(logBuf, LOG_NORMAL, ch->TopLevel);
             tarea = std::make_shared<Area>();
+            CopyVnumRanges(ch->PCData->Build.VnumRanges, tarea->VnumRanges);
             tarea->Flags.set(Flag::Area::Prototype);
             Areas->Add(tarea);
             tarea->Name = FormatString("{PROTO} %s's area in progress", ch->Name.c_str());
@@ -433,16 +445,10 @@ void AssignAreaTo(Character *ch)
         }
         else
         {
-auto logBuf = FormatString("Updating area entry for %s", ch->Name.c_str());
+            auto logBuf = FormatString("Updating area entry for %s", ch->Name.c_str());
             Log->LogStringPlus(logBuf, LOG_NORMAL, ch->TopLevel);
         }
 
-        tarea->VnumRanges.Room.First = ch->PCData->Build.VnumRanges.Room.First;
-        tarea->VnumRanges.Object.First = ch->PCData->Build.VnumRanges.Object.First;
-        tarea->VnumRanges.Mob.First = ch->PCData->Build.VnumRanges.Mob.First;
-        tarea->VnumRanges.Room.Last = ch->PCData->Build.VnumRanges.Room.Last;
-        tarea->VnumRanges.Object.Last = ch->PCData->Build.VnumRanges.Object.Last;
-        tarea->VnumRanges.Mob.Last = ch->PCData->Build.VnumRanges.Mob.Last;
         ch->PCData->Build.Area = tarea;
     }
 }

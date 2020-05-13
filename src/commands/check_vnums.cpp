@@ -82,19 +82,11 @@ void do_check_vnums(Character *ch, std::string argument)
 
     SetCharacterColor(AT_PLAIN, ch);
 
-    auto areas = Areas->Entities();
-    areas.sort([](const auto &a, const auto &b)
-                {
-                    return a->VnumRanges.Room.First < b->VnumRanges.Room.First;
-                });
-    
-    for (auto pArea : areas)
+    for (auto pArea : Areas)
     {
         area_conflict = false;
 
-        if (IsBitSet(pArea->Status, AreaStatus::Deleted))
-            continue;
-        else if (room)
+        if (room)
         {
             if (low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range)
                 area_conflict = true;
@@ -170,9 +162,7 @@ void do_check_vnums(Character *ch, std::string argument)
     {
         area_conflict = false;
 
-        if (IsBitSet(pArea->Status, AreaStatus::Deleted))
-            continue;
-        else if (room)
+        if (room)
         {
             if (low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range)
                 area_conflict = true;

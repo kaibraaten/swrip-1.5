@@ -22,7 +22,7 @@ void do_astat(Character *ch, std::string argument)
 
     for(auto tmp : Areas)
     {
-        if (!StrCmp(tarea->Filename, filename))
+        if (!StrCmp(tmp->Filename, filename))
         {
             tarea = tmp;
             break;
@@ -33,7 +33,7 @@ void do_astat(Character *ch, std::string argument)
     {
         for(auto tmp : Areas->AreasInProgress())
         {
-            if (!StrCmp(tarea->Filename, filename))
+            if (!StrCmp(tmp->Filename, filename))
             {
                 tarea = tmp;
                 break;

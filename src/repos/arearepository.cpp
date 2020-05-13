@@ -1,5 +1,5 @@
+#include <utility/algorithms.hpp>
 #include "lua_arearepository.hpp"
-#include "legacy_arearepository.hpp"
 #include "area.hpp"
 
 std::shared_ptr<AreaRepository> Areas;
@@ -30,11 +30,12 @@ void AreaRepository::OnAdded(std::shared_ptr<Area> &area)
     if(area->Flags.test(Flag::Area::Prototype))
     {
         Remove(area);
-        pImpl->AreasInProgress.push_back(area);
-        pImpl->AreasInProgress.sort([](const auto &a, const auto &b)
-                                    {
-                                        return a->VnumRanges.Room.First < b->VnumRanges.Room.First;
-                                    });
+
+        if(!Contains(pImpl->AreasInProgress, area))
+        {
+            pImpl->AreasInProgress.push_back(area);
+            pImpl->AreasInProgress.sort(CompareArea());
+        }
     }
 }
 
@@ -45,9 +46,10 @@ void AreaRepository::OnRemoved(std::shared_ptr<Area> &area)
 
 std::shared_ptr<AreaRepository> NewAreaRepository()
 {
-#ifdef USE_NEW_AREA_FORMAT
     return NewLuaAreaRepository();
-#else
-    return NewLegacyAreaRepository();
-#endif
+}
+
+bool CompareArea::operator()(const std::shared_ptr<Area> &a, const std::shared_ptr<Area> &b) const
+{
+    return a->VnumRanges.Room.First < b->VnumRanges.Room.First;
 }

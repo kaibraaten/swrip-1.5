@@ -302,26 +302,6 @@ bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keyword
     return true;
 }
 
-void WriteAreaList()
-{
-#ifndef USE_NEW_AREA_FORMAT
-    FILE *fpout = fopen(AREA_DIR AREA_LIST, "w");
-
-    if (fpout)
-    {
-        for (auto tarea = Areas->FirstArea; tarea; tarea = tarea->Next)
-            fprintf(fpout, "%s\n", tarea->Filename.c_str());
-
-        fprintf(fpout, "$\n");
-        fclose(fpout);
-    }
-    else
-    {
-        Log->Bug("%s: FATAL: cannot open area.lst for writing!\r\n", __FUNCTION__);
-    }
-#endif
-}
-
 /*
  * Parse a reset command string into a reset_data structure
  */

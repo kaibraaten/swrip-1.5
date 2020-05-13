@@ -35,7 +35,6 @@ class LuaAreaRepository : public AreaRepository
 {
 public:
     void Load() override;
-    void Load(std::shared_ptr<Area> area) override;
     void Save() const override;
     void Save(const std::shared_ptr<Area>&) const override;
     void Save(const std::shared_ptr<Area>&, bool install) const override;
@@ -85,15 +84,6 @@ void LuaAreaRepository::Load()
 {
     ForEachLuaFileInDir(AREA_DIR, ExecuteAreaFile, nullptr);
     ForEachLuaFileInDir(BUILD_DIR, ExecuteAreaFile, nullptr);
-}
-
-void LuaAreaRepository::Load(std::shared_ptr<Area> area)
-{
-    auto file = GetAreaFilename(area);
-    auto proto = area->Flags.test(Flag::Area::Prototype);
-    area->Flags.reset(Flag::Area::Prototype);
-    ExecuteAreaFile(file, nullptr);
-    area->Flags[Flag::Area::Prototype] = proto;
 }
 
 void LuaAreaRepository::Save() const
@@ -746,6 +736,7 @@ void LuaAreaRepository::LoadVnumRanges(lua_State *L, std::shared_ptr<Area> area)
 void LuaAreaRepository::LoadMetaData(lua_State *L, std::shared_ptr<Area> area)
 {
     LuaGetfieldInt(L, "FileFormatVersion", &FILEFORMAT_VERSION_BEING_LOADED);
+    LuaGetfieldString(L, "Name", &area->Name);
     LuaGetfieldString(L, "Filename", &area->Filename);
     LuaGetfieldString(L, "Author", &area->Author);
     LuaGetfieldString(L, "ResetMessage", &area->ResetMessage);
@@ -1251,17 +1242,12 @@ int LuaAreaRepository::L_AreaEntry(lua_State *L)
     area->LevelRanges.Hard.High = MAX_LEVEL;
     
     LoadMetaData(L, area);
+    LoadMobiles(L, area);
+    LoadObjects(L, area);
+    LoadRooms(L, area);
+    LoadResets(L, area);
     Areas->Add(area);
     top_area++;
-
-    if(!area->Flags.test(Flag::Area::Prototype))
-    {
-        LoadMobiles(L, area);
-        LoadObjects(L, area);
-        LoadRooms(L, area);
-        LoadResets(L, area);
-        SetBit(area->Status, AreaStatus::Loaded);
-    }
     
     fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
             area->Filename.c_str(),

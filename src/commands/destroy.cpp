@@ -45,17 +45,13 @@ void do_destroy(Character *ch, std::string victimName)
                                        Capitalize(victimName).c_str());
         fs::rename(oldPath, backupPath);
 
-        auto areaName = FormatString("%s.lua", Capitalize(victimName).c_str());
+        auto areaName = ConvertToLuaFilename(victimName);
 
         for (auto pArea : Areas->AreasInProgress())
         {
             if (!StrCmp(pArea->Filename, areaName))
             {
-                if (IsBitSet(pArea->Status, AreaStatus::Loaded))
-                {
-                    Areas->Save(pArea);
-                }
-
+                Areas->Save(pArea);
                 CloseArea(pArea);
                 SetCharacterColor(AT_RED, ch); /* Log message changes colors */
                 fs::rename(Areas->GetAreaFilename(pArea),
