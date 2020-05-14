@@ -1,3 +1,4 @@
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
@@ -19,13 +20,10 @@ void do_buyhome(Character *ch, std::string argument)
 
     auto room = ch->InRoom;
 
-    for (auto pArea : Areas->AreasInProgress())
+    if(Contains(Areas->AreasInProgress(), room->Area))
     {
-        if (room->Area == pArea)
-        {
-            ch->Echo("&RThis area isn't installed yet!\r\n&d");
-            return;
-        }
+        ch->Echo("&RThis area isn't installed yet!\r\n&d");
+        return;
     }
 
     if (!room->Flags.test(Flag::Room::EmptyHome))

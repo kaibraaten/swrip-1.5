@@ -1,3 +1,4 @@
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
@@ -17,7 +18,7 @@ void do_aassign(Character *ch, std::string argument)
 
     if (argument.empty())
     {
-        ch->Echo("Syntax: aassign <filename.lua>\r\n");
+        ch->Echo("Syntax: aassign <filename>\r\n");
         return;
     }
 
@@ -44,34 +45,23 @@ void do_aassign(Character *ch, std::string argument)
         || (IsName(argument, ch->PCData->Bestowments)
             && GetTrustLevel(ch) >= SysData.LevelToModifyProto))
     {
-        for (auto tmp : Areas)
-        {
-            if (!StrCmp(argument, tmp->Filename))
-            {
-                tarea = tmp;
-                break;
-            }
-        }
+        tarea = GetArea(argument);
     }
 
     if (!tarea)
     {
-        for (auto tmp : Areas->AreasInProgress())
+        tarea = Find(Areas->AreasInProgress(),
+                     [argument](const auto &a)
+                     {
+                         return StrCmp(argument, a->Filename);
+                     });
+
+        if (tarea
+            && GetTrustLevel(ch) < LEVEL_GREATER
+            && !IsName(tarea->Filename, ch->PCData->Bestowments))
         {
-            if (!StrCmp(argument, tmp->Filename))
-            {
-                if (GetTrustLevel(ch) >= LEVEL_GREATER
-                    || IsName(tmp->Filename, ch->PCData->Bestowments))
-                {
-                    tarea = tmp;
-                    break;
-                }
-                else
-                {
-                    ch->Echo("You do not have permission to use that area.\r\n");
-                    return;
-                }
-            }
+            ch->Echo("You do not have permission to use that area.\r\n");
+            return;
         }
     }
 

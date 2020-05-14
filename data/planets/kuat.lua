@@ -1,14 +1,14 @@
 -- Kuat
--- Last saved Monday 24-Oct-2016 21:14:28
+-- Last saved Thursday 14-May-2020 13:40:13
 
 PlanetEntry
 {
-   PopulationSupport = 0, 
-   Name = "Kuat", 
-   Spaceobject = "Kuat", 
    BaseValue = 0, 
+   Name = "Kuat", 
    Areas = 
    {
-      [1] = "kuatcity.are", 
+      [1] = "kuatcity.lua", 
    }, 
+   PopulationSupport = 0, 
+   Spaceobject = "Kuat", 
 }

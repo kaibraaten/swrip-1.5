@@ -1,17 +1,17 @@
 -- Byss
--- Last saved Monday 24-Oct-2016 21:14:28
+-- Last saved Thursday 14-May-2020 13:36:44
 
 PlanetEntry
 {
-   PopulationSupport = 0, 
    Name = "Byss", 
-   Spaceobject = "Byss", 
-   BaseValue = 0, 
    Areas = 
    {
-      [1] = "byss_city.are", 
-      [2] = "byss_jail.are", 
-      [3] = "throne_city.are", 
-      [4] = "cloning.are", 
+      [1] = "byss_city.lua", 
+      [2] = "byss_jail.lua", 
+      [3] = "throne_city.lua", 
+      [4] = "cloning.lua", 
    }, 
+   PopulationSupport = 0, 
+   BaseValue = 0, 
+   Spaceobject = "Byss", 
 }

@@ -17,7 +17,7 @@ void do_reset(Character *ch, std::string argument)
     {
         for (auto tmp : Areas->AreasInProgress())
         {
-            if (!StrCmp(arg, tmp->Filename))
+            if (StrCmp(arg, tmp->Filename) == 0)
             {
                 pArea = tmp;
                 argument = parg;

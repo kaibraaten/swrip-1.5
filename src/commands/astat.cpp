@@ -1,4 +1,5 @@
-#include <string.h>
+//#include <cstring>
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "planet.hpp"
@@ -20,25 +21,15 @@ void do_astat(Character *ch, std::string argument)
         filename = argument;
     }
 
-    for(auto tmp : Areas)
-    {
-        if (!StrCmp(tmp->Filename, filename))
-        {
-            tarea = tmp;
-            break;
-        }
-    }
+    tarea = GetArea(filename);
     
     if (tarea == nullptr)
     {
-        for(auto tmp : Areas->AreasInProgress())
-        {
-            if (!StrCmp(tmp->Filename, filename))
-            {
-                tarea = tmp;
-                break;
-            }
-        }
+        tarea = Find(Areas->AreasInProgress(),
+                     [filename](const auto &a)
+                     {
+                         return StrCmp(a->Filename, filename) == 0;
+                     });
     }
     
     if (tarea == nullptr)

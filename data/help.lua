@@ -6174,14 +6174,11 @@ HelpEntry
 {
    Keyword = "INSTALLAREA", 
    Level = 101, 
-   Text = "Syntax:  installarea <area filename> <full area name/title>\
+   Text = "Syntax:  installarea <old area filename> [new filename] [full area name/title]\
  \
-Installs a prototype area into the mud as a non-prototype area.  The\
+Installs a prototype area into the mud as a non-prototype area. The\
 filename can be fixed with aset (don't forget to foldarea afterwards).\
- \
-Installarea renames the installed area file from 'author.are.file' to\
-'author.are.installed' so that the builder may be assigned new vnums.\
- \
+Or you can supply it on the command line.\
 ", 
 }
 
@@ -6205,7 +6202,7 @@ current resets (if any), and create new ones for you.\
 You may optionally specify \"nodoors\" so that door resets will not be\
 created.\
  \
-NOTE:  This command will wipe out any existing resets!  Do not use this\
+NOTE: This command will wipe out any existing resets! Do not use this\
 command after you have added your own resets with 'reset add'.\
 The recommended procedure is to use instazone, then use the 'reset' command\
 to add any special resets, and NOT use instazone again.\

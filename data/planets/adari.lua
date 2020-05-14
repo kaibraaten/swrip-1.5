@@ -1,14 +1,14 @@
 -- Adari
--- Last saved Monday 24-Oct-2016 21:14:28
+-- Last saved Thursday 14-May-2020 13:31:38
 
 PlanetEntry
 {
-   Areas = 
-   {
-      [1] = "adari.are", 
-      [2] = "adari01.are", 
-   }, 
-   BaseValue = 0, 
    Name = "Adari", 
    PopulationSupport = 0, 
+   BaseValue = 0, 
+   Areas = 
+   {
+      [1] = "adari.lua", 
+      [2] = "adari01.lua", 
+   }, 
 }

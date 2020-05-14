@@ -1,19 +1,19 @@
 -- Hoth
--- Last saved Wednesday 29-Apr-2020 19:55:12
+-- Last saved Thursday 14-May-2020 13:39:40
 
 PlanetEntry
 {
-   PopulationSupport = 0, 
-   GovernedBy = "The Rebel Alliance", 
-   Areas = 
-   {
-      [1] = "hoth.are", 
-   }, 
    Flags = 
    {
       [0] = "NoCapture", 
    }, 
-   Spaceobject = "Hoth", 
-   Name = "Hoth", 
    BaseValue = 0, 
+   PopulationSupport = 0, 
+   GovernedBy = "The Rebel Alliance", 
+   Name = "Hoth", 
+   Spaceobject = "Hoth", 
+   Areas = 
+   {
+      [1] = "hoth.lua", 
+   }, 
 }

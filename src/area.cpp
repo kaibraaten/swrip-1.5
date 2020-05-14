@@ -70,18 +70,12 @@ void FixAreaExits(std::shared_ptr<Area> tarea)
 
 std::shared_ptr<Area> GetArea(const std::string &name)
 {
-    std::shared_ptr<Area> area;
-
-    for (const auto &tmp : Areas)
-    {
-        if (!StrCmp(tmp->Filename, name) || !StrCmp(tmp->Name, name))
-        {
-            area = tmp;
-            break;
-        }
-    }
-
-    return area;
+    return Find(Areas->Entities(),
+                [name](const auto &area)
+                {
+                    return StrCmp(area->Filename, name) == 0
+                        || StrCmp(area->Name, name) == 0;
+                });
 }
 
 /*
@@ -421,14 +415,11 @@ void AssignAreaTo(Character *ch)
 
         if (tarea == nullptr)
         {
-            for (auto tmp : Areas->AreasInProgress())
-            {
-                if (!StrCmp(filename, tmp->Filename))
-                {
-                    tarea = tmp;
-                    break;
-                }
-            }
+            tarea = Find(Areas->AreasInProgress(),
+                         [filename](const auto &a)
+                         {
+                             return StrCmp(filename, a->Filename) == 0;
+                         });
         }
 
         if (tarea == nullptr)

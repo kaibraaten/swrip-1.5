@@ -1,13 +1,13 @@
 -- Honoghr
--- Last saved Monday 24-Oct-2016 21:14:28
+-- Last saved Thursday 14-May-2020 13:39:15
 
 PlanetEntry
 {
    Areas = 
    {
-      [1] = "honoghr.are", 
+      [1] = "honoghr.lua", 
    }, 
-   BaseValue = 0, 
-   Name = "Honoghr", 
    PopulationSupport = 0, 
+   Name = "Honoghr", 
+   BaseValue = 0, 
 }

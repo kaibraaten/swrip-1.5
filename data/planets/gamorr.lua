@@ -1,5 +1,5 @@
 -- Gamorr
--- Last saved Friday 21-Sep-2018 13:30:44
+-- Last saved Thursday 14-May-2020 13:38:57
 
 PlanetEntry
 {
@@ -8,7 +8,7 @@ PlanetEntry
    BaseValue = 0, 
    Areas = 
    {
-      [1] = "gamorr.are", 
+      [1] = "gamorr.lua", 
    }, 
    Name = "Gamorr", 
 }

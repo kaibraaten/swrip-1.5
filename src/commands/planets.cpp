@@ -9,7 +9,13 @@ static void ShowEntry(std::shared_ptr<Planet> planet, const Character *ch);
 
 void do_planets(Character *ch, std::string argument)
 {
-    for (auto planet : Planets)
+    auto planetList = Planets->Entities();
+    planetList.sort([](const auto &a, const auto &b)
+                    {
+                        return StrCmp(a->Name, b->Name) < 0;
+                    });
+    
+    for (auto planet : planetList)
     {
         ShowEntry(planet, ch);
     }

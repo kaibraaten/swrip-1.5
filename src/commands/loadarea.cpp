@@ -25,14 +25,11 @@ void do_loadarea(Character *ch, std::string argument)
     }
     else
     {
-        for(auto tmp : Areas->AreasInProgress())
-        {
-            if (!StrCmp(tarea->Filename, argument))
-            {
-                tarea = tmp;
-                break;
-            }
-        }
+        tarea = Find(Areas->AreasInProgress(),
+                     [argument](const auto &a)
+                     {
+                         return StrCmp(a->Filename, argument) == 0;
+                     });
 
         if (IsNpc(ch)
             || (GetTrustLevel(ch) < LEVEL_GREATER

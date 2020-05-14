@@ -1,14 +1,14 @@
 -- Kashyyyk
--- Last saved Monday 24-Oct-2016 21:14:28
+-- Last saved Thursday 14-May-2020 13:39:59
 
 PlanetEntry
 {
    PopulationSupport = 0, 
    Name = "Kashyyyk", 
-   Spaceobject = "Kashyyyk", 
-   BaseValue = 0, 
    Areas = 
    {
-      [1] = "kashyyyk.are", 
+      [1] = "kashyyyk.lua", 
    }, 
+   Spaceobject = "Kashyyyk", 
+   BaseValue = 0, 
 }

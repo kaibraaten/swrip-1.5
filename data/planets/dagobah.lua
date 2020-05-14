@@ -1,14 +1,14 @@
--- dagobah
--- Last saved Sunday 06-Nov-2016 14:00:47
+-- Dagobah
+-- Last saved Thursday 14-May-2020 13:38:25
 
 PlanetEntry
 {
-   PopulationSupport = 0, 
    Name = "Dagobah", 
-   Spaceobject = "Dagobah", 
    BaseValue = 0, 
    Areas = 
    {
-      [1] = "dagobah.are", 
+      [1] = "dagobah.lua", 
    }, 
+   PopulationSupport = 0, 
+   Spaceobject = "Dagobah", 
 }

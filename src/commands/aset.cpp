@@ -1,3 +1,4 @@
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "planet.hpp"
@@ -28,25 +29,15 @@ void do_aset(Character *ch, std::string argument)
         return;
     }
 
-    for (auto tmp : Areas)
-    {
-        if (!StrCmp(tarea->Filename, arg1))
-        {
-            tarea = tmp;
-            break;
-        }
-    }
+    tarea = GetArea(arg1);
     
     if (tarea == nullptr)
     {
-        for (auto tmp : Areas->AreasInProgress())
-        {
-            if (!StrCmp(tarea->Filename, arg1))
-            {
-                tarea = tmp;
-                break;
-            }
-        }
+        tarea = Find(Areas->AreasInProgress(),
+                     [arg1](const auto &a)
+                     {
+                         return StrCmp(a->Filename, arg1) == 0;
+                     });
     }
     
     if (!StrCmp(arg1, "this"))

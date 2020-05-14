@@ -1,3 +1,4 @@
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
@@ -28,14 +29,11 @@ void do_savearea(Character *ch, std::string argument)
             return;
         }
 
-        for (auto tmp : Areas->AreasInProgress())
-        {
-            if (!StrCmp(tmp->Filename, argument))
-            {
-                tarea = tmp;
-                break;
-            }
-        }
+        tarea = Find(Areas->AreasInProgress(),
+                     [argument](const auto &a)
+                     {
+                         return StrCmp(a->Filename, argument) == 0;
+                     });
 
         if (tarea == nullptr)
         {

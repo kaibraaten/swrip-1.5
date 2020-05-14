@@ -1,5 +1,5 @@
 -- Ryloth
--- Last saved Monday 24-Oct-2016 21:14:28
+-- Last saved Thursday 14-May-2020 13:40:56
 
 PlanetEntry
 {
@@ -9,6 +9,6 @@ PlanetEntry
    BaseValue = 0, 
    Areas = 
    {
-      [1] = "ryloth.are", 
+      [1] = "ryloth.lua", 
    }, 
 }

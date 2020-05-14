@@ -1,14 +1,14 @@
 -- Endor
--- Last saved Monday 24-Oct-2016 21:14:28
+-- Last saved Thursday 14-May-2020 13:38:40
 
 PlanetEntry
 {
-   PopulationSupport = 0, 
    Name = "Endor", 
-   Spaceobject = "Endor", 
-   BaseValue = 0, 
    Areas = 
    {
-      [1] = "endor.are", 
+      [1] = "endor.lua", 
    }, 
+   Spaceobject = "Endor", 
+   PopulationSupport = 0, 
+   BaseValue = 0, 
 }

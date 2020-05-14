@@ -20,6 +20,7 @@ public:
     virtual void Save(const std::shared_ptr<Area>&) const = 0;
     virtual void Save(const std::shared_ptr<Area>&, bool install) const = 0;
     virtual std::string GetAreaFilename(std::shared_ptr<Area> area) const = 0;
+    virtual void Install(std::shared_ptr<Area> area, const std::string &newfilename = "") = 0;
     const std::list<std::shared_ptr<Area>> &AreasInProgress() const noexcept;
 
 protected:

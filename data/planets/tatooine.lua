@@ -1,16 +1,16 @@
 -- Tatooine
--- Last saved Monday 24-Oct-2016 21:14:28
+-- Last saved Thursday 14-May-2020 13:41:23
 
 PlanetEntry
 {
    PopulationSupport = -1, 
-   Name = "Tatooine", 
-   Spaceobject = "Tatooine", 
    BaseValue = 0, 
+   Spaceobject = "Tatooine", 
    Areas = 
    {
-      [1] = "tatooine.are", 
-      [2] = "hunters_guild.are", 
-      [3] = "mosespa.are", 
+      [1] = "tatooine.lua", 
+      [2] = "hunters_guild.lua", 
+      [3] = "mosespa.lua", 
    }, 
+   Name = "Tatooine", 
 }

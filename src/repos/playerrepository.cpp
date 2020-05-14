@@ -42,7 +42,6 @@ private:
     static void PushAliases(lua_State *L, const Character *pc);
     static void PushAddictions(lua_State *L, const Character *pc);
     static void PushDrugLevels(lua_State *L, const Character *pc);
-    static void PushBuildData(lua_State *L, const Character *pc);
     static void PushHelled(lua_State *L, const Character *pc);
     static void PushConditions(lua_State *L, const Character *pc);
     static void PushSkills(lua_State *L, const Character *pc);
@@ -64,7 +63,6 @@ private:
     static void LoadDrugLevels(lua_State *L, Character *ch);
     static void LoadAddictions(lua_State *L, Character *ch);
     static void LoadAliases(lua_State *L, Character *ch);
-    static void LoadBuildData(lua_State *L, Character *ch);
 };
 
 void InMemoryPlayerRepository::Load()
@@ -221,7 +219,6 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, Character *ch)
     LoadDrugLevels(L, ch);
     LoadAddictions(L, ch);
     LoadAliases(L, ch);
-    LoadBuildData(L, ch);
 }
 
 void InMemoryPlayerRepository::LoadGuildData(lua_State *L, Character *ch)
@@ -511,39 +508,6 @@ void InMemoryPlayerRepository::LoadAliases(lua_State *L, Character *ch)
     lua_pop(L, 1);
 }
 
-template<typename T>
-static void GetVnumRangeFields(lua_State *L, T &range)
-{
-    LuaGetfieldLong(L, "First", &range->First);
-    LuaGetfieldLong(L, "Last", &range->Last);
-}
-
-void InMemoryPlayerRepository::LoadBuildData(lua_State *L, Character *ch)
-{
-    // Yes, this looks pretty ugly.
-    // I just wanted to try it because the structure matches
-    // the Lua table in the file. Sue me :p
-    LuaLoadTable(L, "Build",
-                 [L](lua_State*, auto &build)
-                 {
-                     LuaLoadTable(L, "VnumRanges",
-                                  [L](lua_State*, auto &ranges)
-                                  {
-                                      LuaLoadTable(L, "Room",
-                                                   GetVnumRangeFields<decltype(ranges->Room)*>,
-                                                   &ranges->Room);
-                                      LuaLoadTable(L, "Mob",
-                                                   GetVnumRangeFields<decltype(ranges->Mob)*>,
-                                                   &ranges->Mob);
-                                      LuaLoadTable(L, "Object",
-                                                   GetVnumRangeFields<decltype(ranges->Object)*>,
-                                                   &ranges->Object);
-                                  },
-                                  &build->VnumRanges);
-                 },
-                 &ch->PCData->Build);
-}
-
 int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
 {
     lua_settop(L, 1);
@@ -663,7 +627,6 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, const Character *pc)
     PushDrugLevels(L, pc);
     PushAddictions(L, pc);
     PushAliases(L, pc);
-    PushBuildData(L, pc);
 }
 
 void InMemoryPlayerRepository::PushAliases(lua_State *L, const Character *pc)
@@ -716,38 +679,6 @@ void InMemoryPlayerRepository::PushDrugLevels(lua_State *L, const Character *pc)
     }
 
     lua_settable(L, -3);
-}
-
-void InMemoryPlayerRepository::PushBuildData(lua_State *L, const Character *pc)
-{
-    const auto &ranges = pc->PCData->Build.VnumRanges;
-    
-    lua_pushstring(L, "Build");
-    lua_newtable(L);
-
-    lua_pushstring(L, "VnumRanges");
-    lua_newtable(L);
-
-    lua_pushstring(L, "Room");
-    lua_newtable(L);
-    LuaSetfieldNumber(L, "First", ranges.Room.First);
-    LuaSetfieldNumber(L, "Last", ranges.Room.Last);
-    lua_settable(L, -3); // Room
-
-    lua_pushstring(L, "Mob");
-    lua_newtable(L);
-    LuaSetfieldNumber(L, "First", ranges.Mob.First);
-    LuaSetfieldNumber(L, "Last", ranges.Mob.Last);
-    lua_settable(L, -3); // Mob
-
-    lua_pushstring(L, "Object");
-    lua_newtable(L);
-    LuaSetfieldNumber(L, "First", ranges.Object.First);
-    LuaSetfieldNumber(L, "Last", ranges.Object.Last);
-    lua_settable(L, -3); // Object
-    
-    lua_settable(L, -3); // VnumRanges
-    lua_settable(L, -3); // Build
 }
 
 void InMemoryPlayerRepository::PushHelled(lua_State *L, const Character *pc)

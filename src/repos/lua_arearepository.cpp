@@ -39,6 +39,7 @@ public:
     void Save(const std::shared_ptr<Area>&) const override;
     void Save(const std::shared_ptr<Area>&, bool install) const override;
     std::string GetAreaFilename(std::shared_ptr<Area> area) const override;
+    void Install(std::shared_ptr<Area> area, const std::string &newfilename) override;
     
 private:
     void PushMetaData(lua_State*, std::shared_ptr<Area>) const;
@@ -80,6 +81,27 @@ private:
     static void ExecuteAreaFile(const std::string& filePath, void* userData);
 };
 
+void LuaAreaRepository::Install(std::shared_ptr<Area> area, const std::string &newfilename)
+{
+    if(area->Flags.test(Flag::Area::Prototype))
+    {
+        fs::rename(GetAreaFilename(area),
+                   GetAreaFilename(area) + ".installed");
+        std::error_code ec;
+        fs::remove(GetAreaFilename(area) + ".bak");
+        Remove(area);
+        area->Flags.reset(Flag::Area::Prototype);
+
+        if(!newfilename.empty())
+        {
+            area->Filename = newfilename;
+        }
+
+        Add(area);
+        Save(area, true);
+    }
+}
+
 void LuaAreaRepository::Load()
 {
     ForEachLuaFileInDir(AREA_DIR, ExecuteAreaFile, nullptr);
@@ -109,7 +131,6 @@ struct SaveData
 
 void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install) const
 {
-#ifndef DO_NOT_SAVE_AREAS
     // Make backup in case something goes wrong while saving.
     try
     {
@@ -125,9 +146,6 @@ void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install) co
     SaveData data(this, area, install);
 
     LuaSaveDataFile(GetAreaFilename(area), PushArea, "area", &data);
-#else
-    Log->Info("Area saving disabled (%s).", area->Filename.c_str());
-#endif
 }
 
 static std::string EnsureProperFilename(std::string filename)
@@ -1247,7 +1265,11 @@ int LuaAreaRepository::L_AreaEntry(lua_State *L)
     LoadRooms(L, area);
     LoadResets(L, area);
     Areas->Add(area);
-    top_area++;
+
+    if(!area->Flags.test(Flag::Area::Prototype))
+    {
+        top_area++;
+    }
     
     fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
             area->Filename.c_str(),

@@ -1,14 +1,14 @@
 -- Corulag
--- Last saved Monday 24-Oct-2016 21:14:28
+-- Last saved Thursday 14-May-2020 13:38:07
 
 PlanetEntry
 {
-   PopulationSupport = 0, 
-   Name = "Corulag", 
-   Spaceobject = "Corulag", 
    BaseValue = 0, 
+   Spaceobject = "Corulag", 
    Areas = 
    {
-      [1] = "corulag.are", 
+      [1] = "corulag.lua", 
    }, 
+   Name = "Corulag", 
+   PopulationSupport = 0, 
 }
