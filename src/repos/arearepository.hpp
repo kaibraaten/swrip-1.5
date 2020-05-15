@@ -22,7 +22,8 @@ public:
     virtual std::string GetAreaFilename(std::shared_ptr<Area> area) const = 0;
     virtual void Install(std::shared_ptr<Area> area, const std::string &newfilename = "") = 0;
     const std::list<std::shared_ptr<Area>> &AreasInProgress() const noexcept;
-
+    virtual void ChangeFilename(std::shared_ptr<Area> area, const std::string &newfilename) = 0;
+    
 protected:
     void OnAdded(std::shared_ptr<Area> &area) override;
     void OnRemoved(std::shared_ptr<Area> &area) override;

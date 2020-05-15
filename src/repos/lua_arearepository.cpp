@@ -40,6 +40,7 @@ public:
     void Save(const std::shared_ptr<Area>&, bool install) const override;
     std::string GetAreaFilename(std::shared_ptr<Area> area) const override;
     void Install(std::shared_ptr<Area> area, const std::string &newfilename) override;
+    void ChangeFilename(std::shared_ptr<Area> area, const std::string &newfilename) override;
     
 private:
     void PushMetaData(lua_State*, std::shared_ptr<Area>) const;
@@ -85,10 +86,10 @@ void LuaAreaRepository::Install(std::shared_ptr<Area> area, const std::string &n
 {
     if(area->Flags.test(Flag::Area::Prototype))
     {
-        fs::rename(GetAreaFilename(area),
-                   GetAreaFilename(area) + ".installed");
         std::error_code ec;
-        fs::remove(GetAreaFilename(area) + ".bak");
+        fs::rename(GetAreaFilename(area),
+                   GetAreaFilename(area) + ".installed", ec);
+        fs::remove(GetAreaFilename(area) + ".bak", ec);
         Remove(area);
         area->Flags.reset(Flag::Area::Prototype);
 
@@ -100,6 +101,17 @@ void LuaAreaRepository::Install(std::shared_ptr<Area> area, const std::string &n
         Add(area);
         Save(area, true);
     }
+}
+
+void LuaAreaRepository::ChangeFilename(std::shared_ptr<Area> area,
+                                       const std::string &newfilename)
+{
+    auto oldpath = GetAreaFilename(area);
+    area->Filename = newfilename;
+    auto newpath = GetAreaFilename(area);
+    std::error_code ec;
+    fs::rename(oldpath, newpath, ec);
+    Save(area);
 }
 
 void LuaAreaRepository::Load()

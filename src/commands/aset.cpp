@@ -81,16 +81,15 @@ void do_aset(Character *ch, std::string argument)
 
     if (!StrCmp(arg2, "filename"))
     {
-        ch->Echo("Operation not supported.\r\n");
-        return;
+        if(tarea->Flags.test(Flag::Area::Prototype))
+        {
+            ch->Echo("Can't rename prototype areas.\r\n");
+            return;
+        }
 
-#if 0
-        tarea->Filename = argument;
-        WriteAreaList();
-        Areas->Save(tarea, true);
+        Areas->ChangeFilename(tarea, argument);
         ch->Echo("Done.\r\n");
         return;
-#endif
     }
 
     if (!StrCmp(arg2, "low_economy"))
