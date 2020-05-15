@@ -71,7 +71,6 @@ public:
 };
 
 void FixAreaExits(std::shared_ptr<Area> tarea);
-std::shared_ptr<Area> GetArea(const std::string &nameOrFile);
 void AreaUpdate();
 void CloseArea(std::shared_ptr<Area> pArea);
 void FreeArea(std::shared_ptr<Area> are);

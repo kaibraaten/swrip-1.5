@@ -5,6 +5,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "spaceobject.hpp"
+#include "repos/arearepository.hpp"
 
 #define PLANET_DIR      DATA_DIR "planets/"
 
@@ -60,7 +61,7 @@ void LuaPlanetRepository::LoadPlanetAreas(lua_State *L, std::shared_ptr<Planet> 
 
         while (lua_next(L, -2))
         {
-            auto area = GetArea(lua_tostring(L, -1));
+            auto area = Areas->Find(lua_tostring(L, -1));
 
             if (area)
             {

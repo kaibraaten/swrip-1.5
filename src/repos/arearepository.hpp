@@ -23,6 +23,10 @@ public:
     virtual void Install(std::shared_ptr<Area> area, const std::string &newfilename = "") = 0;
     const std::list<std::shared_ptr<Area>> &AreasInProgress() const noexcept;
     virtual void ChangeFilename(std::shared_ptr<Area> area, const std::string &newfilename) = 0;
+
+    // Find by filename OR full name.
+    std::shared_ptr<Area> Find(const std::string &name) const;
+    std::shared_ptr<Area> FindProtoArea(const std::string &name) const;
     
 protected:
     void OnAdded(std::shared_ptr<Area> &area) override;

@@ -45,16 +45,12 @@ void do_aassign(Character *ch, std::string argument)
         || (IsName(argument, ch->PCData->Bestowments)
             && GetTrustLevel(ch) >= SysData.LevelToModifyProto))
     {
-        tarea = GetArea(argument);
+        tarea = Areas->Find(argument);
     }
 
     if (!tarea)
     {
-        tarea = Find(Areas->AreasInProgress(),
-                     [argument](const auto &a)
-                     {
-                         return StrCmp(argument, a->Filename);
-                     });
+        tarea = Areas->FindProtoArea(argument);
 
         if (tarea
             && GetTrustLevel(ch) < LEVEL_GREATER
@@ -87,4 +83,3 @@ void do_aassign(Character *ch, std::string argument)
     ch->PCData->Build.Area = tarea;
     ch->Echo("Assigning you: %s\r\n", tarea->Name.c_str());
 }
-

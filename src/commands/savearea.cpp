@@ -29,11 +29,7 @@ void do_savearea(Character *ch, std::string argument)
             return;
         }
 
-        tarea = Find(Areas->AreasInProgress(),
-                     [argument](const auto &a)
-                     {
-                         return StrCmp(a->Filename, argument) == 0;
-                     });
+        tarea = Areas->FindProtoArea(argument);
 
         if (tarea == nullptr)
         {

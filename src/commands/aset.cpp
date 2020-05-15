@@ -29,15 +29,11 @@ void do_aset(Character *ch, std::string argument)
         return;
     }
 
-    tarea = GetArea(arg1);
+    tarea = Areas->Find(arg1);
     
     if (tarea == nullptr)
     {
-        tarea = Find(Areas->AreasInProgress(),
-                     [arg1](const auto &a)
-                     {
-                         return StrCmp(a->Filename, arg1) == 0;
-                     });
+        tarea = Areas->FindProtoArea(arg1);
     }
     
     if (!StrCmp(arg1, "this"))

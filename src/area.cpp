@@ -68,16 +68,6 @@ void FixAreaExits(std::shared_ptr<Area> tarea)
     }
 }
 
-std::shared_ptr<Area> GetArea(const std::string &name)
-{
-    return Find(Areas->Entities(),
-                [name](const auto &area)
-                {
-                    return StrCmp(area->Filename, name) == 0
-                        || StrCmp(area->Name, name) == 0;
-                });
-}
-
 /*
  * Repopulate areas periodically.
  */
@@ -415,11 +405,7 @@ void AssignAreaTo(Character *ch)
 
         if (tarea == nullptr)
         {
-            tarea = Find(Areas->AreasInProgress(),
-                         [filename](const auto &a)
-                         {
-                             return StrCmp(filename, a->Filename) == 0;
-                         });
+            tarea = Areas->FindProtoArea(filename);
         }
 
         if (tarea == nullptr)

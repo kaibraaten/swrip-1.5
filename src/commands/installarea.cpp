@@ -27,11 +27,7 @@ void do_installarea(Character *ch, std::string argument)
         return;
     }
 
-    auto tarea = Find(Areas->AreasInProgress(),
-                      [oldfilename](const auto &a)
-                      {
-                          return StrCmp(a->Filename, oldfilename) == 0;
-                      });
+    auto tarea = Areas->FindProtoArea(oldfilename);
 
     if (tarea != nullptr)
     {
@@ -45,7 +41,7 @@ void do_installarea(Character *ch, std::string argument)
         ch->Echo("Done.\r\n");
 
         /* Fix up author if online */
-        for (Character *author : PlayerCharacters)
+        for (auto &author : PlayerCharacters)
         {
             if (author->PCData->Build.Area == tarea)
             {

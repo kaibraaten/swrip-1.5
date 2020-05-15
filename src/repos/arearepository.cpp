@@ -44,6 +44,28 @@ void AreaRepository::OnRemoved(std::shared_ptr<Area> &area)
     pImpl->AreasInProgress.remove(area);
 }
 
+std::shared_ptr<Area> AreaRepository::Find(const std::string &name) const
+{
+    return ::Find(Entities(),
+                  [name](const auto &area)
+                  {
+                      return StrCmp(area->Filename, name) == 0
+                          || StrCmp(area->Name, name) == 0;
+                  });
+}
+
+std::shared_ptr<Area> AreaRepository::FindProtoArea(const std::string &name) const
+{
+    return ::Find(AreasInProgress(),
+                  [name](const auto &area)
+                  {
+                      return StrCmp(area->Filename, name) == 0
+                          || StrCmp(area->Name, name) == 0;
+                  });
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 std::shared_ptr<AreaRepository> NewAreaRepository()
 {
     return NewLuaAreaRepository();

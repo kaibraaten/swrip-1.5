@@ -21,15 +21,11 @@ void do_astat(Character *ch, std::string argument)
         filename = argument;
     }
 
-    tarea = GetArea(filename);
+    tarea = Areas->Find(filename);
     
     if (tarea == nullptr)
     {
-        tarea = Find(Areas->AreasInProgress(),
-                     [filename](const auto &a)
-                     {
-                         return StrCmp(a->Filename, filename) == 0;
-                     });
+        tarea = Areas->FindProtoArea(filename);
     }
     
     if (tarea == nullptr)
