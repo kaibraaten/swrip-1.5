@@ -6,361 +6,362 @@
 #include "systemdata.hpp"
 #include "repos/clanrepository.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/storeroomrepository.hpp"
 
 static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch);
 static void get_obj( Character *ch, Object *obj, Object *container );
 
 void do_get( Character *ch, std::string argument )
 {
-  std::string arg1;
-  std::string arg2;
-  Object *container = NULL;
-  short number = 0;
-  bool found = false;
-  bool foundowner = false;
-  Character *p = NULL, *p_prev = NULL;
+    std::string arg1;
+    std::string arg2;
+    Object *container = NULL;
+    short number = 0;
+    bool found = false;
+    bool foundowner = false;
+    Character *p = NULL, *p_prev = NULL;
 
-  argument = OneArgument( argument, arg1 );
+    argument = OneArgument( argument, arg1 );
 
-  if ( IsNumber(arg1) )
+    if ( IsNumber(arg1) )
     {
-      number = ToLong(arg1);
+        number = ToLong(arg1);
 
-      if ( number < 1 )
+        if ( number < 1 )
         {
-          ch->Echo( "That was easy...\r\n" );
-          return;
-        }
-
-      if ( (ch->CarryNumber + number) > GetCarryCapacityNumber(ch) )
-        {
-          ch->Echo( "You can't carry that many.\r\n" );
-          return;
-        }
-
-      argument = OneArgument( argument, arg1 );
-    }
-  else
-    {
-      number = 0;
-    }
-
-  argument = OneArgument( argument, arg2 );
-
-  /* munch optional words */
-  if ( !StrCmp( arg2, "from" ) && !argument.empty() )
-    {
-      argument = OneArgument( argument, arg2 );
-    }
-
-  /* Get type. */
-  if ( arg1.empty() )
-    {
-      ch->Echo( "Get what?\r\n" );
-      return;
-    }
-
-  if ( HasMentalStateToFindObject(ch) )
-    {
-      return;
-    }
-
-  if ( ch->InRoom->Flags.test( Flag::Room::PlayerHome )
-       && GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
-    {
-      if ( !ch->PlayerHome || ch->PlayerHome->Vnum != ch->InRoom->Vnum )
-        {
-          for (p = LastCharacter; p ; p = p_prev )
-            {
-              p_prev = p->Previous;
-
-              if ( p->PlayerHome && p->PlayerHome->Vnum == ch->InRoom->Vnum )
-		{
-		  foundowner = true;
-		}
-            }
-
-          if ( !foundowner )
-            {
-              ch->Echo( "You can not do that here.\r\n" );
-              return;
-            }
-        }
-    }
-
-  if ( arg2.empty() )
-    {
-      if ( number <= 1 && StrCmp( arg1, "all" )
-	   && StringPrefix( "all.", arg1 ) )
-        {
-          /* 'get obj' */
-          Object *obj = GetObjectInList( ch, arg1, ch->InRoom->Objects() );
-
-          if ( !obj )
-            {
-              Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), TO_CHAR );
-              return;
-            }
-
-          SeparateOneObjectFromGroup(obj);
-          get_obj( ch, obj, NULL );
-
-          if ( CharacterDiedRecently(ch) )
+            ch->Echo( "That was easy...\r\n" );
             return;
-
-          if ( SysData.SaveFlags.test( Flag::AutoSave::Get ) )
-            {
-              PlayerCharacters->Save( ch );
-
-              if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
-                {
-                  SaveHome (ch );
-                }
-              
-              if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
-                {
-                  SaveStoreroom( ch->InRoom );
-                }
-	    }
         }
-      else
+
+        if ( (ch->CarryNumber + number) > GetCarryCapacityNumber(ch) )
         {
-          short cnt = 0;
-          bool fAll = false;
-          std::string chk;
+            ch->Echo( "You can't carry that many.\r\n" );
+            return;
+        }
 
-          if ( !StrCmp(arg1, "all") )
-            fAll = true;
-          else
-            fAll = false;
+        argument = OneArgument( argument, arg1 );
+    }
+    else
+    {
+        number = 0;
+    }
 
-          if ( number > 1 )
-            chk = arg1;
-          else
-            chk = arg1.size() > 4 ? arg1.substr(4) : "";
+    argument = OneArgument( argument, arg2 );
 
-          /* 'get all' or 'get all.obj' */
-          std::list<Object*> objectsOnGround(ch->InRoom->Objects());
+    /* munch optional words */
+    if ( !StrCmp( arg2, "from" ) && !argument.empty() )
+    {
+        argument = OneArgument( argument, arg2 );
+    }
 
-          for(Object *obj : objectsOnGround)
+    /* Get type. */
+    if ( arg1.empty() )
+    {
+        ch->Echo( "Get what?\r\n" );
+        return;
+    }
+
+    if ( HasMentalStateToFindObject(ch) )
+    {
+        return;
+    }
+
+    if ( ch->InRoom->Flags.test( Flag::Room::PlayerHome )
+         && GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
+    {
+        if ( !ch->PlayerHome || ch->PlayerHome->Vnum != ch->InRoom->Vnum )
+        {
+            for (p = LastCharacter; p ; p = p_prev )
             {
-              if ( ( fAll || NiftyIsName( chk, obj->Name ) )
-                   && CanSeeObject( ch, obj ) )
+                p_prev = p->Previous;
+
+                if ( p->PlayerHome && p->PlayerHome->Vnum == ch->InRoom->Vnum )
                 {
-                  found = true;
+                    foundowner = true;
+                }
+            }
 
-                  if ( number && (cnt + obj->Count) > number )
-                    SplitGroupedObject( obj, number - cnt );
+            if ( !foundowner )
+            {
+                ch->Echo( "You can not do that here.\r\n" );
+                return;
+            }
+        }
+    }
 
-                  cnt += obj->Count;
-                  get_obj( ch, obj, NULL );
+    if ( arg2.empty() )
+    {
+        if ( number <= 1 && StrCmp( arg1, "all" )
+             && StringPrefix( "all.", arg1 ) )
+        {
+            /* 'get obj' */
+            Object *obj = GetObjectInList( ch, arg1, ch->InRoom->Objects() );
 
-                  if ( CharacterDiedRecently(ch)
-                       || ch->CarryNumber >= GetCarryCapacityNumber( ch )
-                       || ch->CarryWeight >= GetCarryCapacityWeight( ch )
-                       || (number && cnt >= number) )
+            if ( !obj )
+            {
+                Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), TO_CHAR );
+                return;
+            }
+
+            SeparateOneObjectFromGroup(obj);
+            get_obj( ch, obj, NULL );
+
+            if ( CharacterDiedRecently(ch) )
+                return;
+
+            if ( SysData.SaveFlags.test( Flag::AutoSave::Get ) )
+            {
+                PlayerCharacters->Save( ch );
+
+                if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                {
+                    SaveHome (ch );
+                }
+
+                if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+                {
+                    SaveStoreroom( ch->InRoom );
+                }
+            }
+        }
+        else
+        {
+            short cnt = 0;
+            bool fAll = false;
+            std::string chk;
+
+            if ( !StrCmp(arg1, "all") )
+                fAll = true;
+            else
+                fAll = false;
+
+            if ( number > 1 )
+                chk = arg1;
+            else
+                chk = arg1.size() > 4 ? arg1.substr(4) : "";
+
+            /* 'get all' or 'get all.obj' */
+            std::list<Object*> objectsOnGround(ch->InRoom->Objects());
+
+            for(Object *obj : objectsOnGround)
+            {
+                if ( ( fAll || NiftyIsName( chk, obj->Name ) )
+                     && CanSeeObject( ch, obj ) )
+                {
+                    found = true;
+
+                    if ( number && (cnt + obj->Count) > number )
+                        SplitGroupedObject( obj, number - cnt );
+
+                    cnt += obj->Count;
+                    get_obj( ch, obj, NULL );
+
+                    if ( CharacterDiedRecently(ch)
+                         || ch->CarryNumber >= GetCarryCapacityNumber( ch )
+                         || ch->CarryWeight >= GetCarryCapacityWeight( ch )
+                         || (number && cnt >= number) )
                     {
-                      if ( SysData.SaveFlags.test( Flag::AutoSave::Get )
-                           && !CharacterDiedRecently(ch) )
+                        if ( SysData.SaveFlags.test( Flag::AutoSave::Get )
+                             && !CharacterDiedRecently(ch) )
                         {
-                          PlayerCharacters->Save( ch );
+                            PlayerCharacters->Save( ch );
 
-                          if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                            if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
                             {
-                              SaveHome (ch );
+                                SaveHome (ch );
                             }
-                          
-			  if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+
+                            if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
                             {
-                              SaveStoreroom( ch->InRoom );
+                                SaveStoreroom( ch->InRoom );
                             }
                         }
 
-                      return;
+                        return;
                     }
                 }
             }
 
-          if ( !found )
+            if ( !found )
             {
-              if ( fAll )
-                ch->Echo( "I see nothing here.\r\n" );
-              else
-                Act( AT_PLAIN, "I see no $T here.", ch, NULL, chk.c_str(), TO_CHAR );
+                if ( fAll )
+                    ch->Echo( "I see nothing here.\r\n" );
+                else
+                    Act( AT_PLAIN, "I see no $T here.", ch, NULL, chk.c_str(), TO_CHAR );
             }
-          else if ( SysData.SaveFlags.test( Flag::AutoSave::Get ) )
-	    {
-	      PlayerCharacters->Save( ch );
+            else if ( SysData.SaveFlags.test( Flag::AutoSave::Get ) )
+            {
+                PlayerCharacters->Save( ch );
 
-	      if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
                 {
-                  SaveHome (ch );
+                    SaveHome (ch );
                 }
-              
-	      if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+
+                if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
                 {
-                  SaveStoreroom( ch->InRoom );
+                    SaveStoreroom( ch->InRoom );
                 }
-	    }
+            }
         }
     }
-  else
+    else
     {
-      /* 'get ... container' */
-      if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
+        /* 'get ... container' */
+        if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
         {
-          ch->Echo( "You can't do that.\r\n" );
-          return;
+            ch->Echo( "You can't do that.\r\n" );
+            return;
         }
 
-      if ( ( container = GetObjectHere( ch, arg2 ) ) == NULL )
+        if ( ( container = GetObjectHere( ch, arg2 ) ) == NULL )
         {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), TO_CHAR );
-          return;
+            Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), TO_CHAR );
+            return;
         }
 
-      switch ( container->ItemType )
+        switch ( container->ItemType )
         {
         default:
-          if ( !IsBitSet( container->Flags, ITEM_COVERING ) )
-	    {
-              ch->Echo( "That's not a container.\r\n" );
-              return;
-            }
-
-          if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )
+            if ( !IsBitSet( container->Flags, ITEM_COVERING ) )
             {
-              ch->Echo( "It's too heavy for you to lift.\r\n" );
-              return;
+                ch->Echo( "That's not a container.\r\n" );
+                return;
             }
 
-          break;
+            if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )
+            {
+                ch->Echo( "It's too heavy for you to lift.\r\n" );
+                return;
+            }
+
+            break;
 
         case ITEM_CONTAINER:
         case ITEM_DROID_CORPSE:
         case ITEM_CORPSE_PC:
         case ITEM_CORPSE_NPC:
-          break;
+            break;
         }
 
-      if ( !IsBitSet( container->Flags, ITEM_COVERING )
-           && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+        if ( !IsBitSet( container->Flags, ITEM_COVERING )
+             && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.",
-               ch, NULL, container->Name.c_str(), TO_CHAR );
-          return;
-        }
-
-      if ( number <= 1 && StrCmp( arg1, "all" )
-	   && StringPrefix( "all.", arg1 ) )
-        {
-          /* 'get obj container' */
-          Object *obj = GetObjectInList( ch, arg1, container->Objects() );
-
-          if ( obj == nullptr )
-            {
-              Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
-                   "I see nothing like that beneath the $T." :
-                   "I see nothing like that in the $T.",
-                   ch, NULL, arg2.c_str(), TO_CHAR );
-              return;
-            }
-
-          SeparateOneObjectFromGroup(obj);
-          get_obj( ch, obj, container );
-
-          CheckObjectForTrap( ch, container, TRAP_GET );
-
-          if ( CharacterDiedRecently(ch) )
+            Act( AT_PLAIN, "The $d is closed.",
+                 ch, NULL, container->Name.c_str(), TO_CHAR );
             return;
-
-          if ( SysData.SaveFlags.test( Flag::AutoSave::Get ) )
-            {
-	      PlayerCharacters->Save( ch );
-
-              if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
-                SaveHome (ch );
-
-              if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
-                SaveStoreroom( ch->InRoom );
-            }
         }
-      else
+
+        if ( number <= 1 && StrCmp( arg1, "all" )
+             && StringPrefix( "all.", arg1 ) )
         {
-          int cnt = 0;
-          bool fAll = false;
-          std::string chk;
+            /* 'get obj container' */
+            Object *obj = GetObjectInList( ch, arg1, container->Objects() );
 
-          if ( !StrCmp(arg1, "all") )
-            fAll = true;
-          else
-            fAll = false;
-
-          if ( number > 1 )
-            chk = arg1;
-          else
-            chk = arg1.size() > 4 ? arg1.substr(4) : "";
-
-          found = false;
-
-          std::list<Object*> contents(container->Objects());
-          
-          for( Object *obj : contents )
+            if ( obj == nullptr )
             {
-              if ( ( fAll || NiftyIsName( chk, obj->Name ) )
-                   &&   CanSeeObject( ch, obj ) )
-                {
-                  found = true;
-
-                  if ( number && (cnt + obj->Count) > number )
-                    SplitGroupedObject( obj, number - cnt );
-
-                  cnt += obj->Count;
-                  get_obj( ch, obj, container );
-
-                  if ( CharacterDiedRecently(ch)
-                       ||   ch->CarryNumber >= GetCarryCapacityNumber( ch )
-                       ||   ch->CarryWeight >= GetCarryCapacityWeight( ch )
-                       ||   (number && cnt >= number) )
-                    return;
-                }
-	    }
-
-          if ( !found )
-            {
-              if ( fAll )
-                Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
-                     "I see nothing beneath the $T." :
-                     "I see nothing in the $T.",
-                     ch, NULL, arg2.c_str(), TO_CHAR );
-              else
                 Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
                      "I see nothing like that beneath the $T." :
                      "I see nothing like that in the $T.",
                      ch, NULL, arg2.c_str(), TO_CHAR );
-            }
-          else
-            {
-              CheckObjectForTrap( ch, container, TRAP_GET );
+                return;
             }
 
-          if ( CharacterDiedRecently(ch) )
+            SeparateOneObjectFromGroup(obj);
+            get_obj( ch, obj, container );
+
+            CheckObjectForTrap( ch, container, TRAP_GET );
+
+            if ( CharacterDiedRecently(ch) )
+                return;
+
+            if ( SysData.SaveFlags.test( Flag::AutoSave::Get ) )
             {
-              return;
+                PlayerCharacters->Save( ch );
+
+                if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                    SaveHome (ch );
+
+                if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+                    SaveStoreroom( ch->InRoom );
             }
+        }
+        else
+        {
+            int cnt = 0;
+            bool fAll = false;
+            std::string chk;
 
-          if ( found && SysData.SaveFlags.test( Flag::AutoSave::Get ) )
+            if ( !StrCmp(arg1, "all") )
+                fAll = true;
+            else
+                fAll = false;
+
+            if ( number > 1 )
+                chk = arg1;
+            else
+                chk = arg1.size() > 4 ? arg1.substr(4) : "";
+
+            found = false;
+
+            std::list<Object*> contents(container->Objects());
+
+            for( Object *obj : contents )
             {
-              PlayerCharacters->Save( ch );
-
-              if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                if ( ( fAll || NiftyIsName( chk, obj->Name ) )
+                     &&   CanSeeObject( ch, obj ) )
                 {
-                  SaveHome( ch );
+                    found = true;
+
+                    if ( number && (cnt + obj->Count) > number )
+                        SplitGroupedObject( obj, number - cnt );
+
+                    cnt += obj->Count;
+                    get_obj( ch, obj, container );
+
+                    if ( CharacterDiedRecently(ch)
+                         ||   ch->CarryNumber >= GetCarryCapacityNumber( ch )
+                         ||   ch->CarryWeight >= GetCarryCapacityWeight( ch )
+                         ||   (number && cnt >= number) )
+                        return;
+                }
+            }
+
+            if ( !found )
+            {
+                if ( fAll )
+                    Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
+                         "I see nothing beneath the $T." :
+                         "I see nothing in the $T.",
+                         ch, NULL, arg2.c_str(), TO_CHAR );
+                else
+                    Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
+                         "I see nothing like that beneath the $T." :
+                         "I see nothing like that in the $T.",
+                         ch, NULL, arg2.c_str(), TO_CHAR );
+            }
+            else
+            {
+                CheckObjectForTrap( ch, container, TRAP_GET );
+            }
+
+            if ( CharacterDiedRecently(ch) )
+            {
+                return;
+            }
+
+            if ( found && SysData.SaveFlags.test( Flag::AutoSave::Get ) )
+            {
+                PlayerCharacters->Save( ch );
+
+                if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                {
+                    SaveHome( ch );
                 }
 
-              if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+                if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
                 {
-                  SaveStoreroom( ch->InRoom );
+                    SaveStoreroom( ch->InRoom );
                 }
             }
         }
@@ -369,94 +370,95 @@ void do_get( Character *ch, std::string argument )
 
 static void get_obj( Character *ch, Object *obj, Object *container )
 {
-  int weight = 0;
+    int weight = 0;
 
-  if ( !IsBitSet( obj->WearFlags, ITEM_TAKE )
-       && (ch->TopLevel < SysData.LevelToGetObjectsWithoutTakeFlag )  )
+    if ( !IsBitSet( obj->WearFlags, ITEM_TAKE )
+         && (ch->TopLevel < SysData.LevelToGetObjectsWithoutTakeFlag )  )
     {
-      ch->Echo( "You can't take that.\r\n" );
-      return;
+        ch->Echo( "You can't take that.\r\n" );
+        return;
     }
 
-  if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE )
-       &&  !CharacterCanTakePrototype( ch ) )
+    if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE )
+         &&  !CharacterCanTakePrototype( ch ) )
     {
-      ch->Echo( "A godly force prevents you from getting close to it.\r\n" );
-      return;
+        ch->Echo( "A godly force prevents you from getting close to it.\r\n" );
+        return;
     }
 
-  if ( ch->CarryNumber + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
+    if ( ch->CarryNumber + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
     {
-      Act( AT_PLAIN, "$d: you can't carry that many items.",
-           ch, NULL, obj->Name.c_str(), TO_CHAR );
-      return;
+        Act( AT_PLAIN, "$d: you can't carry that many items.",
+             ch, NULL, obj->Name.c_str(), TO_CHAR );
+        return;
     }
 
-  if ( IsBitSet( obj->Flags, ITEM_COVERING ) )
-    weight = obj->Weight;
-  else
-    weight = GetObjectWeight( obj );
+    if ( IsBitSet( obj->Flags, ITEM_COVERING ) )
+        weight = obj->Weight;
+    else
+        weight = GetObjectWeight( obj );
 
-  if ( ch->CarryWeight + weight > GetCarryCapacityWeight( ch ) )
+    if ( ch->CarryWeight + weight > GetCarryCapacityWeight( ch ) )
     {
-      Act( AT_PLAIN, "$d: you can't carry that much weight.",
-           ch, NULL, obj->Name.c_str(), TO_CHAR );
-      return;
+        Act( AT_PLAIN, "$d: you can't carry that much weight.",
+             ch, NULL, obj->Name.c_str(), TO_CHAR );
+        return;
     }
 
-  if ( container )
+    if ( container )
     {
-      Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING) ?
-           "You get $p from beneath $P." : "You get $p from $P",
-           ch, obj, container, TO_CHAR );
-      Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING) ?
-           "$n gets $p from beneath $P." : "$n gets $p from $P",
-           ch, obj, container, TO_ROOM );
-      ObjectFromObject( obj );
+        Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING) ?
+             "You get $p from beneath $P." : "You get $p from $P",
+             ch, obj, container, TO_CHAR );
+        Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING) ?
+             "$n gets $p from beneath $P." : "$n gets $p from $P",
+             ch, obj, container, TO_ROOM );
+        ObjectFromObject( obj );
     }
-  else
+    else
     {
-      Act( AT_ACTION, "You get $p.", ch, obj, container, TO_CHAR );
-      Act( AT_ACTION, "$n gets $p.", ch, obj, container, TO_ROOM );
-      ObjectFromRoom( obj );
+        Act( AT_ACTION, "You get $p.", ch, obj, container, TO_CHAR );
+        Act( AT_ACTION, "$n gets $p.", ch, obj, container, TO_ROOM );
+        ObjectFromRoom( obj );
     }
 
-  
-  if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom )
-       && (container == NULL || container->CarriedBy == NULL) )
+
+    if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom )
+         && (container == NULL || container->CarriedBy == NULL) )
     {
-      for(const auto &clan : Clans)
+        for(const auto &clan : Clans)
         {
-          SaveStoreroomForOwnerClan(clan, ch);
+            SaveStoreroomForOwnerClan(clan, ch);
         }
     }
 
-  if ( obj->ItemType != ITEM_CONTAINER )
-    CheckObjectForTrap( ch, obj, TRAP_GET );
+    if ( obj->ItemType != ITEM_CONTAINER )
+        CheckObjectForTrap( ch, obj, TRAP_GET );
 
-  if ( CharacterDiedRecently(ch) )
-    return;
+    if ( CharacterDiedRecently(ch) )
+        return;
 
-  if ( obj->ItemType == ITEM_MONEY )
+    if ( obj->ItemType == ITEM_MONEY )
     {
-      ch->Gold += obj->Value[0];
-      ExtractObject( obj );
+        ch->Gold += obj->Value[0];
+        ExtractObject( obj );
     }
-  else
+    else
     {
-      obj = ObjectToCharacter( obj, ch );
+        obj = ObjectToCharacter( obj, ch );
     }
 
-  if ( CharacterDiedRecently(ch) || IsObjectExtracted(obj) )
-    return;
+    if ( CharacterDiedRecently(ch) || IsObjectExtracted(obj) )
+        return;
 
-  ObjProgGetTrigger(ch, obj);
+    ObjProgGetTrigger(ch, obj);
 }
 
 static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch)
 {
-  if ( clan->Storeroom == ch->InRoom->Vnum )
+    if ( clan->Storeroom == ch->InRoom->Vnum )
     {
-      SaveClanStoreroom(ch, clan);
+        auto room = GetRoom(clan->Storeroom);
+        Storerooms->Save(room);
     }
 }

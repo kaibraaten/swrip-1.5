@@ -65,7 +65,6 @@ public:
 
 constexpr auto GUILD_PRICE = 100000;
 
-void SaveClanStoreroom(Character *ch, const std::shared_ptr<Clan> &clan);
 void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,
     const std::string &format = "");
 std::shared_ptr<Clan> GetClan(const std::string &name);

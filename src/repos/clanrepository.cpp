@@ -250,14 +250,3 @@ std::shared_ptr<ClanRepository> NewClanRepository()
 {
     return std::make_shared<LuaClanRepository>();
 }
-
-/*
- * Save items in a clan storage room                    -Scryn & Thoric
- */
-void SaveClanStoreroom(Character *ch, const std::shared_ptr<Clan> &clan)
-{
-    // See original implementation here:
-    /*
-      https://github.com/kaibraaten/swrip-1.5/blob/9dd6b4a09af43c8dbaf044b581d1693349914108/src/clan.cpp
-    */
-}
