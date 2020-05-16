@@ -585,8 +585,10 @@ src/repos/boardrepository.cpp
 src/repos/bountyrepository.cpp
 src/repos/clanrepository.cpp
 src/repos/descriptorrepository.cpp
+src/repos/dirty.cpp
 src/repos/helprepository.cpp
 src/repos/lua_arearepository.cpp
+src/repos/lua_storeroomrepository.cpp
 src/repos/objectrepository.cpp
 src/repos/planetrepository.cpp
 src/repos/playerrepository.cpp
@@ -596,6 +598,7 @@ src/repos/shuttlerepository.cpp
 src/repos/skillrepository.cpp
 src/repos/socialrepository.cpp
 src/repos/spaceobjectrepository.cpp
+src/repos/storeroomrepository.cpp
 src/special/auth.cpp
 src/special/clanguard.cpp
 src/special/customsalcohol.cpp

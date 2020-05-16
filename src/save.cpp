@@ -21,7 +21,7 @@
  ****************************************************************************/
 
 #ifdef __STRICT_ANSI__
- /* To include the prototype for fchmod() */
+/* To include the prototype for fchmod() */
 #define _DEFAULT_SOURCE
 
 #if defined(__NetBSD__)
@@ -55,15 +55,16 @@ namespace fs = std::filesystem;
 #include "alias.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/objectrepository.hpp"
+#include "repos/storeroomrepository.hpp"
 
 /*
  * Increment with every major format change.
  */
 #define SAVEVERSION     3
 
- /*
-  * Array to keep track of equipment temporarily.                -Thoric
-  */
+/*
+ * Array to keep track of equipment temporarily.                -Thoric
+ */
 Object *save_equipment[MAX_WEAR][8];
 Character *quitting_char = NULL;
 Character *loading_char = NULL;
@@ -95,7 +96,7 @@ void SaveHome(Character *ch)
         short templvl = 0;
 
         sprintf(filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
-            Capitalize(ch->Name).c_str());
+                Capitalize(ch->Name).c_str());
 
         if ((fp = fopen(filename, "w")))
         {
@@ -146,7 +147,7 @@ void DeEquipCharacter(Character *ch)
             if (x == MAX_LAYERS)
             {
                 Log->Bug("%s had on more than %d layers of clothing in one location (%d): %s",
-                    ch->Name.c_str(), MAX_LAYERS, obj->WearLoc, obj->Name.c_str());
+                         ch->Name.c_str(), MAX_LAYERS, obj->WearLoc, obj->Name.c_str());
             }
 
             UnequipCharacter(ch, obj);
@@ -206,7 +207,7 @@ void SaveClone(Character *ch)
 
     ch->PCData->SaveTime = current_time;
     sprintf(strsave, "%s%c/%s.clone", PLAYER_DIR, tolower(ch->Name[0]),
-        Capitalize(ch->Name).c_str());
+            Capitalize(ch->Name).c_str());
 
     /*
      * Auto-backup pfile (can cause lag with high disk access situtations
@@ -214,7 +215,7 @@ void SaveClone(Character *ch)
     if (SysData.SaveFlags.test(Flag::AutoSave::Backup))
     {
         sprintf(strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
-            Capitalize(ch->Name).c_str());
+                Capitalize(ch->Name).c_str());
         rename(strsave, strback);
     }
 
@@ -285,12 +286,12 @@ static void WriteCharacter(const Character *ch, FILE *fp)
     }
 
     fprintf(fp, "Played       %d\n",
-        ch->PCData->Played + (int)(current_time - ch->PCData->Logon));
+            ch->PCData->Played + (int)(current_time - ch->PCData->Logon));
     fprintf(fp, "Room         %ld\n",
-        (ch->InRoom == GetRoom(ROOM_VNUM_LIMBO)
-            && ch->WasInRoom)
-        ? ch->WasInRoom->Vnum
-        : ch->InRoom->Vnum);
+            (ch->InRoom == GetRoom(ROOM_VNUM_LIMBO)
+             && ch->WasInRoom)
+            ? ch->WasInRoom->Vnum
+            : ch->InRoom->Vnum);
 
     if (ch->PlayerHome != NULL)
     {
@@ -298,11 +299,11 @@ static void WriteCharacter(const Character *ch, FILE *fp)
     }
 
     fprintf(fp, "HpManaMove   %d %d 0 0 %d %d\n",
-        ch->HitPoints.Current, ch->HitPoints.Max,
-        ch->Fatigue.Current, ch->Fatigue.Max);
+            ch->HitPoints.Current, ch->HitPoints.Max,
+            ch->Fatigue.Current, ch->Fatigue.Max);
     fprintf(fp, "Force        %d %d %d %d\n",
-        ch->PermStats.Frc, ch->StatMods.Frc,
-        ch->Mana.Current, ch->Mana.Max);
+            ch->PermStats.Frc, ch->StatMods.Frc,
+            ch->Mana.Current, ch->Mana.Max);
     fprintf(fp, "Gold         %d\n", ch->Gold);
     fprintf(fp, "Bank         %ld\n", ch->PCData->Bank);
 
@@ -310,7 +311,7 @@ static void WriteCharacter(const Character *ch, FILE *fp)
         int ability;
         for (ability = 0; ability < MAX_ABILITY; ability++)
             fprintf(fp, "Ability        %d %d %ld\n",
-                ability, GetAbilityLevel(ch, ability), GetAbilityXP(ch, ability));
+                    ability, GetAbilityLevel(ch, ability), GetAbilityXP(ch, ability));
     }
 
     fprintf(fp, "Clones         %d\n", ch->PCData->Clones);
@@ -329,14 +330,14 @@ static void WriteCharacter(const Character *ch, FILE *fp)
     }
 
     fprintf(fp, "Position     %d\n",
-        ch->Position == POS_FIGHTING ? POS_STANDING : ch->Position);
+            ch->Position == POS_FIGHTING ? POS_STANDING : ch->Position);
 
     fprintf(fp, "SavingThrows %d %d %d %d %d\n",
-        ch->Saving.PoisonDeath,
-        ch->Saving.Wand,
-        ch->Saving.ParaPetri,
-        ch->Saving.Breath,
-        ch->Saving.SpellStaff);
+            ch->Saving.PoisonDeath,
+            ch->Saving.Wand,
+            ch->Saving.ParaPetri,
+            ch->Saving.Breath,
+            ch->Saving.SpellStaff);
     fprintf(fp, "Alignment    %d\n", ch->Alignment);
     fprintf(fp, "Hitroll      %d\n", ch->HitRoll);
     fprintf(fp, "Damroll      %d\n", ch->DamRoll);
@@ -469,7 +470,7 @@ static void WriteCharacter(const Character *ch, FILE *fp)
         if (ch->PCData->WantedOn.any())
         {
             fprintf(fp, "Wanted       %d\n",
-                static_cast<int>(ch->PCData->WantedOn.to_ulong()));
+                    static_cast<int>(ch->PCData->WantedOn.to_ulong()));
         }
 
         if (IsImmortal(ch) || ch->PCData->Build.Area)
@@ -479,19 +480,19 @@ static void WriteCharacter(const Character *ch, FILE *fp)
             if (ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last)
             {
                 fprintf(fp, "RoomRange    %ld %ld\n", ch->PCData->Build.VnumRanges.Room.First,
-                    ch->PCData->Build.VnumRanges.Room.Last);
+                        ch->PCData->Build.VnumRanges.Room.Last);
             }
 
             if (ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last)
             {
                 fprintf(fp, "ObjRange     %ld %ld\n", ch->PCData->Build.VnumRanges.Object.First,
-                    ch->PCData->Build.VnumRanges.Object.Last);
+                        ch->PCData->Build.VnumRanges.Object.Last);
             }
 
             if (ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last)
             {
                 fprintf(fp, "MobRange     %ld %ld\n", ch->PCData->Build.VnumRanges.Mob.First,
-                    ch->PCData->Build.VnumRanges.Mob.Last);
+                        ch->PCData->Build.VnumRanges.Mob.Last);
             }
         }
 
@@ -505,7 +506,7 @@ static void WriteCharacter(const Character *ch, FILE *fp)
         if (ch->PCData->ReleaseDate > current_time)
         {
             fprintf(fp, "Helled       %d %s~\n",
-                (int)ch->PCData->ReleaseDate, ch->PCData->HelledBy.c_str());
+                    (int)ch->PCData->ReleaseDate, ch->PCData->HelledBy.c_str());
         }
 
         if (ch->PCData->PKills)
@@ -538,28 +539,28 @@ static void WriteCharacter(const Character *ch, FILE *fp)
         }
 
         fprintf(fp, "AttrPerm     %d %d %d %d %d %d %d\n",
-            ch->PermStats.Str,
-            ch->PermStats.Int,
-            ch->PermStats.Wis,
-            ch->PermStats.Dex,
-            ch->PermStats.Con,
-            ch->PermStats.Cha,
-            ch->PermStats.Lck);
+                ch->PermStats.Str,
+                ch->PermStats.Int,
+                ch->PermStats.Wis,
+                ch->PermStats.Dex,
+                ch->PermStats.Con,
+                ch->PermStats.Cha,
+                ch->PermStats.Lck);
 
         fprintf(fp, "AttrMod      %d %d %d %d %d %d %d\n",
-            ch->StatMods.Str,
-            ch->StatMods.Int,
-            ch->StatMods.Wis,
-            ch->StatMods.Dex,
-            ch->StatMods.Con,
-            ch->StatMods.Cha,
-            ch->StatMods.Lck);
+                ch->StatMods.Str,
+                ch->StatMods.Int,
+                ch->StatMods.Wis,
+                ch->StatMods.Dex,
+                ch->StatMods.Con,
+                ch->StatMods.Cha,
+                ch->StatMods.Lck);
 
         fprintf(fp, "Condition    %d %d %d %d\n",
-            ch->PCData->Condition[0],
-            ch->PCData->Condition[1],
-            ch->PCData->Condition[2],
-            ch->PCData->Condition[3]);
+                ch->PCData->Condition[0],
+                ch->PCData->Condition[1],
+                ch->PCData->Condition[2],
+                ch->PCData->Condition[3]);
 
         if (ch->Desc && !ch->Desc->Remote.Hostname.empty())
         {
@@ -578,22 +579,22 @@ static void WriteCharacter(const Character *ch, FILE *fp)
                 {
                 default:
                     fprintf(fp, "Skill        %d '%s'\n",
-                        ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
+                            ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
                     break;
 
                 case SKILL_SPELL:
                     fprintf(fp, "Spell        %d '%s'\n",
-                        ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
+                            ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
                     break;
 
                 case SKILL_WEAPON:
                     fprintf(fp, "Weapon       %d '%s'\n",
-                        ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
+                            ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
                     break;
 
                 case SKILL_TONGUE:
                     fprintf(fp, "Tongue       %d '%s'\n",
-                        ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
+                            ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
                     break;
                 }
             }
@@ -610,29 +611,29 @@ static void WriteCharacter(const Character *ch, FILE *fp)
         if (paf->Type >= 0 && paf->Type < TYPE_PERSONAL)
         {
             fprintf(fp, "AffectData   '%s' %3d %3d %3d %10d\n",
-                skill->Name.c_str(),
-                paf->Duration,
-                paf->Modifier,
-                paf->Location,
-                paf->AffectedBy
-            );
+                    skill->Name.c_str(),
+                    paf->Duration,
+                    paf->Modifier,
+                    paf->Location,
+                    paf->AffectedBy
+                );
         }
         else
         {
             fprintf(fp, "Affect       %3d %3d %3d %3d %10d\n",
-                paf->Type,
-                paf->Duration,
-                paf->Modifier,
-                paf->Location,
-                paf->AffectedBy
-            );
+                    paf->Type,
+                    paf->Duration,
+                    paf->Modifier,
+                    paf->Location,
+                    paf->AffectedBy
+                );
         }
     }
 
     for_each(ch->PCData->Killed.begin(), ch->PCData->Killed.end(),
-        [fp](auto killed) { fprintf(fp, "Killed       %ld %d\n",
-            killed.Vnum,
-            killed.Count); });
+             [fp](auto killed) { fprintf(fp, "Killed       %ld %d\n",
+                                         killed.Vnum,
+                                         killed.Count); });
 
     ImcSaveCharacter(ch, fp);
 
@@ -801,8 +802,8 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
     if (HasAnyOvalues(obj))
     {
         fprintf(fp, "Values       %d %d %d %d %d %d\n",
-            obj->Value[0], obj->Value[1], obj->Value[2],
-            obj->Value[3], obj->Value[4], obj->Value[5]);
+                obj->Value[0], obj->Value[1], obj->Value[2],
+                obj->Value[3], obj->Value[4], obj->Value[5]);
     }
 
     switch (obj->ItemType)
@@ -812,19 +813,19 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
         if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]))
         {
             fprintf(fp, "Spell 1      '%s'\n",
-                SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name.c_str());
+                    SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name.c_str());
         }
 
         if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]))
         {
             fprintf(fp, "Spell 2      '%s'\n",
-                SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name.c_str());
+                    SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name.c_str());
         }
 
         if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]))
         {
             fprintf(fp, "Spell 3      '%s'\n",
-                SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name.c_str());
+                    SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name.c_str());
         }
         break;
 
@@ -832,7 +833,7 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
         if (IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]))
         {
             fprintf(fp, "Spell 3      '%s'\n",
-                SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name.c_str());
+                    SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name.c_str());
         }
         break;
 
@@ -840,13 +841,13 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
         if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]))
         {
             fprintf(fp, "Spell 4      '%s'\n",
-                SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name.c_str());
+                    SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name.c_str());
         }
 
         if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]))
         {
             fprintf(fp, "Spell 5      '%s'\n",
-                SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name.c_str());
+                    SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name.c_str());
         }
 
         break;
@@ -863,39 +864,39 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
         if (paf->Type < 0 || paf->Type >= TopSN)
         {
             fprintf(fp, "Affect       %d %d %d %d %d\n",
-                paf->Type,
-                paf->Duration,
-                ((paf->Location == APPLY_WEAPONSPELL
-                    || paf->Location == APPLY_WEARSPELL
-                    || paf->Location == APPLY_REMOVESPELL
-                    || paf->Location == APPLY_STRIPSN)
-                    && IS_VALID_SN(paf->Modifier))
-                ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
-                paf->Location,
-                paf->AffectedBy
-            );
+                    paf->Type,
+                    paf->Duration,
+                    ((paf->Location == APPLY_WEAPONSPELL
+                      || paf->Location == APPLY_WEARSPELL
+                      || paf->Location == APPLY_REMOVESPELL
+                      || paf->Location == APPLY_STRIPSN)
+                     && IS_VALID_SN(paf->Modifier))
+                    ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
+                    paf->Location,
+                    paf->AffectedBy
+                );
         }
         else
         {
             fprintf(fp, "AffectData   '%s' %d %d %d %d\n",
-                SkillTable[paf->Type]->Name.c_str(),
-                paf->Duration,
-                ((paf->Location == APPLY_WEAPONSPELL
-                    || paf->Location == APPLY_WEARSPELL
-                    || paf->Location == APPLY_REMOVESPELL
-                    || paf->Location == APPLY_STRIPSN)
-                    && IS_VALID_SN(paf->Modifier))
-                ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
-                paf->Location,
-                paf->AffectedBy
-            );
+                    SkillTable[paf->Type]->Name.c_str(),
+                    paf->Duration,
+                    ((paf->Location == APPLY_WEAPONSPELL
+                      || paf->Location == APPLY_WEARSPELL
+                      || paf->Location == APPLY_REMOVESPELL
+                      || paf->Location == APPLY_STRIPSN)
+                     && IS_VALID_SN(paf->Modifier))
+                    ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
+                    paf->Location,
+                    paf->AffectedBy
+                );
         }
     }
 
     for (auto ed : obj->ExtraDescriptions())
     {
         fprintf(fp, "ExtraDescr   %s~ %s~\n",
-            ed->Keyword.c_str(), ed->Description.c_str());
+                ed->Keyword.c_str(), ed->Description.c_str());
     }
 
     fprintf(fp, "End\n\n");
@@ -944,7 +945,7 @@ void ReadObject(Character *ch, FILE *fp, short os_type)
                     if (sn < 0)
                     {
                         Log->Bug("%s (%d): unknown skill sn %d.",
-                            __FUNCTION__, __LINE__, sn);
+                                 __FUNCTION__, __LINE__, sn);
                     }
                     else
                     {
@@ -1156,7 +1157,7 @@ void ReadObject(Character *ch, FILE *fp, short os_type)
                 else if (sn < 0)
                 {
                     Log->Bug("%s (%d): unknown skill sn %d.",
-                        __FUNCTION__, __LINE__, sn);
+                             __FUNCTION__, __LINE__, sn);
                 }
                 else
                 {
@@ -1386,136 +1387,12 @@ void LoadCorpses()
 
 void LoadStorerooms()
 {
-    try
-    {
-        char buf[MAX_INPUT_LENGTH];
-        falling = 1;
-
-        for(const auto &entry : fs::directory_iterator(STOREROOM_DIR))
-        {
-            std::string filename = entry.path().filename().string();
-
-            if (filename[0] != '.')
-            {
-                sprintf(strArea, "%s%s", STOREROOM_DIR, filename.c_str());
-                fprintf(stderr, "Storeroom -> %s\n", strArea);
-
-                if (!(fpArea = fopen(strArea, "r")))
-                {
-                    perror(strArea);
-                    continue;
-                }
-
-                auto storeroom = GetRoom(atoi(filename.c_str()));
-
-                if (!storeroom)
-                {
-                    fpArea = NULL;
-                    strcpy(strArea, "$");
-                    falling = 0;
-                    return;
-                }
-
-                if (!storeroom->Flags.test(Flag::Room::ClanStoreroom))
-                {
-                    sprintf(buf, "%s%ld", STOREROOM_DIR, storeroom->Vnum);
-                    remove(buf);
-                }
-
-                RoomProgSetSupermob(storeroom);
-
-                for (int iNest = 0; iNest < MAX_NEST; iNest++)
-                {
-                    rgObjNest[iNest] = nullptr;
-                }
-
-                for (; ; )
-                {
-                    const char letter = ReadChar(fpArea, Log, fBootDb);
-
-                    if (letter == '*')
-                    {
-                        ReadToEndOfLine(fpArea, Log, fBootDb);
-                        continue;
-                    }
-
-                    if (letter != '#')
-                    {
-                        Log->Bug("LoadStorerooms: # not found.");
-                        Log->Bug("%s", filename.c_str());
-                        break;
-                    }
-
-                    const char *word = ReadWord(fpArea, Log, fBootDb);
-
-                    if (!StrCmp(word, "OBJECT")) /* Objects      */
-                    {
-                        ReadObject(supermob, fpArea, OS_CARRY);
-                    }
-                    else if (!StrCmp(word, "END"))       /* Done         */
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Log->Bug("LoadStorerooms: bad section.");
-                        Log->Bug("%s", filename.c_str());
-                        break;
-                    }
-                }
-
-                fclose(fpArea);
-
-                std::list<Object*> carriedBySupermob(supermob->Objects());
-
-                for (Object *tobj : carriedBySupermob)
-                {
-                    ObjectFromCharacter(tobj);
-
-                    if (tobj->ItemType != ITEM_MONEY)
-                    {
-                        ObjectToRoom(tobj, storeroom);
-                    }
-                }
-
-                ReleaseSupermob();
-            }
-        }
-    }
-    catch(const fs::filesystem_error&)
-    {
-        Log->Bug("Load_storeroom: can't open STOREROOM_DIR");
-        perror(STOREROOM_DIR);
-    }
-
-    fpArea = NULL;
-    strcpy(strArea, "$");
-    falling = 0;
+    Storerooms->Load();
 }
 
 void SaveStoreroom(std::shared_ptr<Room> room)
 {
-    assert(room != nullptr);
-
-    FILE *fp = NULL;
-    std::string strsave = FormatString("%s%ld", STOREROOM_DIR, room->Vnum);
-
-    if ((fp = fopen(strsave.c_str(), "w")) == NULL)
-    {
-        perror(strsave.c_str());
-        Log->Bug("Save_storeroom: fopen");
-        Log->Bug("%s", strsave.c_str());
-    }
-    else
-    {
-        for (const Object *obj : room->Objects())
-        {
-            WriteObject(nullptr, obj, fp, 0, OS_CARRY);
-        }
-
-        fprintf(fp, "#END\n");
-        fclose(fp);
-    }
+    Storerooms->Save(room);
 }
 
 void LoadVendors()

@@ -2,7 +2,7 @@
 #define _SWRIP_LUA_AREAREPOSITORY_HPP_
 
 // This file should only ever be included by
-// src/repos/arearepository.cpp
+// src/repos/dirty.cpp
 
 #include <memory>
 #include "arearepository.hpp"

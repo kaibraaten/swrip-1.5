@@ -56,6 +56,7 @@ namespace fs = std::filesystem;
 #include "repos/objectrepository.hpp"
 #include "repos/skillrepository.hpp"
 #include "repos/arearepository.hpp"
+#include "repos/storeroomrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
@@ -1557,4 +1558,5 @@ void AllocateRepositories()
     Objects = NewObjectRepository();
     Skills = NewSkillRepository();
     Areas = NewAreaRepository();
+    Storerooms = NewStoreroomRepository();
 }

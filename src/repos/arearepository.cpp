@@ -1,5 +1,5 @@
 #include <utility/algorithms.hpp>
-#include "lua_arearepository.hpp"
+#include "arearepository.hpp"
 #include "area.hpp"
 
 std::shared_ptr<AreaRepository> Areas;
@@ -65,11 +65,6 @@ std::shared_ptr<Area> AreaRepository::FindProtoArea(const std::string &name) con
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
-std::shared_ptr<AreaRepository> NewAreaRepository()
-{
-    return NewLuaAreaRepository();
-}
 
 bool CompareArea::operator()(const std::shared_ptr<Area> &a, const std::shared_ptr<Area> &b) const
 {
