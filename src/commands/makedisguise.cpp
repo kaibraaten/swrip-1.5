@@ -94,8 +94,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
     char buf[MAX_STRING_LENGTH];
     Object *disguise = args->Object;
 
-    SetBit( disguise->WearFlags, ITEM_DISGUISE );
-    SetBit( disguise->WearFlags, ITEM_TAKE );
+    disguise->WearFlags.set(Flag::Wear::Disguise);
+    disguise->WearFlags.set(Flag::Wear::Take);
 
     strcpy( buf, ud->Name.c_str() );
     strcat( buf, " disguise");

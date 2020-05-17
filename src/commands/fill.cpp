@@ -169,7 +169,7 @@ void do_fill( Character *ch, std::string argument )
 
             if (dest_item == ITEM_CONTAINER)
             {
-                if ( !IsBitSet(source->WearFlags, ITEM_TAKE)
+                if ( !source->WearFlags.test(Flag::Wear::Take)
                      || (source->Flags.test(Flag::Obj::Prototype)
                          && !CharacterCanTakePrototype(ch))
                      ||    ch->CarryWeight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
@@ -255,7 +255,7 @@ void do_fill( Character *ch, std::string argument )
         {
         default:        /* put something in container */
             if ( !source->InRoom /* disallow inventory items */
-                 ||   !IsBitSet( source->WearFlags, ITEM_TAKE)
+                 ||   !source->WearFlags.test(Flag::Wear::Take)
                  ||   (source->Flags.test(Flag::Obj::Prototype) && !CharacterCanTakePrototype(ch))
                  ||    ch->CarryWeight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
                  ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->Count)
@@ -331,7 +331,7 @@ void do_fill( Character *ch, std::string argument )
 
             for(Object *otmp : contents)
             {
-                if ( !IsBitSet( otmp->WearFlags, ITEM_TAKE )
+                if ( !otmp->WearFlags.test(Flag::Wear::Take)
                      || (otmp->Flags.test(Flag::Obj::Prototype)
                          && !CharacterCanTakePrototype(ch))
                      || ch->CarryNumber + otmp->Count > GetCarryCapacityNumber(ch)

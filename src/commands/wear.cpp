@@ -7,8 +7,8 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit);
-static bool can_layer( const Character *ch, const Object *obj, short wear_loc );
+static void wear_obj( Character *ch, Object *obj, bool fReplace, int wear_bit);
+static bool can_layer( const Character *ch, const Object *obj, int wear_loc );
 static bool can_dual( const Character *ch );
 static bool could_dual( const Character *ch );
 
@@ -54,7 +54,7 @@ void do_wear( Character *ch, std::string argument )
     }
     else
     {
-        short wear_bit = -1;
+        int wear_bit = -1;
         Object *obj = GetCarriedObject( ch, arg1 );
 
         if ( obj == nullptr )
@@ -78,12 +78,12 @@ void do_wear( Character *ch, std::string argument )
  * Big repetitive code, ick.
  * Restructured a bit to allow for specifying body location     -Thoric
  */
-static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit )
+static void wear_obj( Character *ch, Object *obj, bool fReplace, int wear_bit )
 {
     char buf[MAX_STRING_LENGTH] = {'\0'};
     Object *tmpobj = NULL;
-    short bit = 0;
-    short tmp = 0;
+    int bit = 0;
+    int tmp = 0;
     bool check_size = false;
 
     SeparateOneObjectFromGroup( obj );
@@ -92,17 +92,17 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     {
         bit = wear_bit;
 
-        if ( !IsBitSet( obj->WearFlags, 1 << bit) )
+        if ( !obj->WearFlags.test(bit))
         {
             if ( fReplace )
             {
-                switch( 1 << bit )
+                switch( bit )
                 {
-                case ITEM_HOLD:
+                case Flag::Wear::Hold:
                     ch->Echo("You cannot hold that.\r\n");
                     break;
 
-                case ITEM_WIELD:
+                case Flag::Wear::Wield:
                     ch->Echo("You cannot wield that.\r\n");
                     break;
 
@@ -120,7 +120,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     {
         for ( bit = -1, tmp = 1; tmp < 31; tmp++ )
         {
-            if ( IsBitSet( obj->WearFlags, 1 << tmp) )
+            if (obj->WearFlags.test(tmp))
             {
                 bit = tmp;
                 break;
@@ -129,8 +129,10 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     }
 
 
-    if (  1 << bit == ITEM_WIELD ||   1 << bit == ITEM_HOLD
-          || obj->ItemType == ITEM_LIGHT ||   1 << bit == ITEM_WEAR_SHIELD )
+    if (bit == Flag::Wear::Wield
+        || bit == Flag::Wear::Hold
+        || obj->ItemType == ITEM_LIGHT
+        || bit == Flag::Wear::Shield)
     {
         check_size = false;
     }
@@ -250,7 +252,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         return;
     }
 
-    switch ( 1 << bit )
+    switch ( bit )
     {
     default:
         Log->Bug( "wear_obj: uknown/unused item_wear bit %d", bit );
@@ -260,7 +262,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
         return;
 
-    case ITEM_WEAR_FINGER:
+    case Flag::Wear::Finger:
         if ( GetEquipmentOnCharacter( ch, WEAR_FINGER_L )
              &&   GetEquipmentOnCharacter( ch, WEAR_FINGER_R )
              &&   !RemoveObject( ch, WEAR_FINGER_L, fReplace )
@@ -306,7 +308,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ch->Echo("You already wear something on both fingers.\r\n");
         return;
 
-    case ITEM_WEAR_NECK:
+    case Flag::Wear::Neck:
         if ( GetEquipmentOnCharacter( ch, WEAR_NECK_1 ) != NULL
              &&   GetEquipmentOnCharacter( ch, WEAR_NECK_2 ) != NULL
              &&   !RemoveObject( ch, WEAR_NECK_1, fReplace )
@@ -351,11 +353,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ch->Echo("You already wear two neck items.\r\n");
         return;
 
-    case ITEM_WEAR_BODY:
-        /*
-          if ( !RemoveObject( ch, WEAR_BODY, fReplace ) )
-          return;
-        */
+    case Flag::Wear::Body:
         if ( !can_layer( ch, obj, WEAR_BODY ) )
         {
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
@@ -375,7 +373,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_HEAD:
+    case Flag::Wear::Head:
         if ( ch->Race == RACE_VERPINE || ch->Race == RACE_TWI_LEK )
         {
             ch->Echo("You cant wear anything on your head.\r\n");
@@ -397,7 +395,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_EYES:
+    case Flag::Wear::Eyes:
         if ( !RemoveObject( ch, WEAR_EYES, fReplace ) )
             return;
         if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
@@ -414,7 +412,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_EARS:
+    case Flag::Wear::Ears:
         if ( ch->Race == RACE_VERPINE )
         {
             ch->Echo("What ears?.\r\n");
@@ -437,11 +435,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_LEGS:
-        /*
-          if ( !RemoveObject( ch, WEAR_LEGS, fReplace ) )
-          return;
-        */
+    case Flag::Wear::Legs:
         if ( ch->Race == RACE_HUTT )
         {
             ch->Echo("Hutts don't have legs.\r\n");
@@ -466,11 +460,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_FEET:
-        /*
-          if ( !RemoveObject( ch, WEAR_FEET, fReplace ) )
-          return;
-        */
+    case Flag::Wear::Feet:
         if ( ch->Race == RACE_HUTT )
         {
             ch->Echo("Hutts don't have feet!\r\n");
@@ -495,11 +485,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_HANDS:
-        /*
-          if ( !RemoveObject( ch, WEAR_HANDS, fReplace ) )
-          return;
-        */
+    case Flag::Wear::Hands:
         if ( !can_layer( ch, obj, WEAR_HANDS ) )
         {
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
@@ -519,7 +505,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_ARMS:
+    case Flag::Wear::Arms:
         if ( !can_layer( ch, obj, WEAR_ARMS ) )
         {
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
@@ -539,16 +525,13 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_ABOUT:
-        /*
-          if ( !RemoveObject( ch, WEAR_ABOUT, fReplace ) )
-          return;
-        */
+    case Flag::Wear::About:
         if ( !can_layer( ch, obj, WEAR_ABOUT ) )
         {
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
+        
         if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
             if ( obj->ActionDescription.empty() )
@@ -563,7 +546,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_WAIST:
+    case Flag::Wear::Waist:
         if ( !can_layer( ch, obj, WEAR_WAIST ) )
         {
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
@@ -583,7 +566,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_WRIST:
+    case Flag::Wear::Wrist:
         if ( GetEquipmentOnCharacter( ch, WEAR_WRIST_L )
              &&   GetEquipmentOnCharacter( ch, WEAR_WRIST_R )
              &&   !RemoveObject( ch, WEAR_WRIST_L, fReplace )
@@ -632,7 +615,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ch->Echo("You already wear two wrist items.\r\n");
         return;
 
-    case ITEM_WEAR_SHIELD:
+    case Flag::Wear::Shield:
         if ( !RemoveObject( ch, WEAR_SHIELD, fReplace ) )
             return;
         if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
@@ -649,7 +632,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WIELD:
+    case Flag::Wear::Wield:
         if ( (tmpobj  = GetEquipmentOnCharacter( ch, WEAR_WIELD )) != NULL
              &&   !could_dual(ch) )
         {
@@ -712,7 +695,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_HOLD:
+    case Flag::Wear::Hold:
         if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) )
         {
             ch->Echo("You cannot hold something AND two weapons!\r\n");
@@ -737,7 +720,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         ObjProgWearTrigger( ch, obj );
         return;
 
-    case ITEM_WEAR_FLOATING:
+    case Flag::Wear::Floating:
         if ( !can_layer( ch, obj, WEAR_FLOATING ) )
         {
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
@@ -756,7 +739,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         EquipCharacter( ch, obj, WEAR_FLOATING );
         ObjProgWearTrigger( ch, obj );
         return;
-    case ITEM_WEAR_OVER:
+    case Flag::Wear::Over:
         if ( !RemoveObject( ch, WEAR_OVER, fReplace ) )
             return;
         if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
@@ -779,7 +762,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
  * Check to see if there is room to wear another object on this location
  * (Layered clothing support)
  */
-static bool can_layer( const Character *ch, const Object *obj, short wear_loc )
+static bool can_layer( const Character *ch, const Object *obj, int wear_loc )
 {
     long bitlayers = 0;
     const long objlayers = obj->Prototype->Layers;

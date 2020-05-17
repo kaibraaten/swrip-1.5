@@ -375,7 +375,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
 {
     int weight = 0;
 
-    if ( !IsBitSet( obj->WearFlags, ITEM_TAKE )
+    if ( !obj->WearFlags.test(Flag::Wear::Take)
          && (ch->TopLevel < SysData.LevelToGetObjectsWithoutTakeFlag )  )
     {
         ch->Echo( "You can't take that.\r\n" );

@@ -98,8 +98,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   Object *lightsaber = eventArgs->Object;
   char buf[MAX_STRING_LENGTH];
 
-  SetBit( lightsaber->WearFlags, ITEM_WIELD );
-  SetBit( lightsaber->WearFlags, ITEM_TAKE );
+  lightsaber->WearFlags.set(Flag::Wear::Wield);
+  lightsaber->WearFlags.set(Flag::Wear::Take);
 
   lightsaber->Weight = 5;
 

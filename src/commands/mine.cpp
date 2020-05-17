@@ -39,7 +39,7 @@ void do_mine( Character *ch, std::string arg )
       return;
     }
 
-  if ( !IsBitSet(obj->WearFlags, ITEM_TAKE) )
+  if ( !obj->WearFlags.test(Flag::Wear::Take))
     {
       Act( AT_PLAIN, "You cannot bury $p.", ch, obj, nullptr, TO_CHAR );
       return;

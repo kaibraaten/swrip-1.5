@@ -86,8 +86,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   char buf[MAX_STRING_LENGTH];
   Object *landmine = args->Object;
 
-  SetBit( landmine->WearFlags, ITEM_HOLD );
-  SetBit( landmine->WearFlags, ITEM_TAKE );
+  landmine->WearFlags.set(Flag::Wear::Hold);
+  landmine->WearFlags.set(Flag::Wear::Take);
   landmine->Weight = ud->Weight;
 
   strcpy( buf, ud->ItemName.c_str() );

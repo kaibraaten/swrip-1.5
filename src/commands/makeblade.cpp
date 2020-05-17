@@ -83,8 +83,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Object *weapon = args->Object;
 
   weapon->ItemType = ITEM_WEAPON;
-  SetBit( weapon->WearFlags, ITEM_WIELD );
-  SetBit( weapon->WearFlags, ITEM_TAKE );
+  weapon->WearFlags.set(Flag::Wear::Wield);
+  weapon->WearFlags.set(Flag::Wear::Take);
   weapon->Weight = 3;
 
   strcpy( buf, ud->ItemName.c_str() );

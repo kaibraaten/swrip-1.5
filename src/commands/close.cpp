@@ -68,7 +68,7 @@ void do_close(Character *ch, std::string argument)
     {
         if (obj->ItemType != ITEM_CONTAINER)
         {
-            if (IsBitSet(obj->WearFlags, ITEM_WEAR_OVER))
+            if (obj->WearFlags.test(Flag::Wear::Over))
             {
                 obj->Value[2] = 1;
                 Act(AT_ACTION, "You closes $p.", ch, obj, NULL, TO_CHAR);

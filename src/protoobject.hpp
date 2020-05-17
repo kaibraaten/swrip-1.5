@@ -29,17 +29,17 @@ public:
     std::string ShortDescr;
     std::string Description;
     std::string ActionDescription;
-    vnum_t            Vnum = INVALID_VNUM;
-    int             Level = 0;
-    ItemTypes         ItemType = 0;
+    vnum_t Vnum = INVALID_VNUM;
+    int Level = 0;
+    ItemTypes ItemType = 0;
     std::bitset<Flag::MAX> Flags;
-    int               WearFlags = 0;
-    int             Count = 0;
-    int             Weight = 0;
-    int               Cost = 0;
+    std::bitset<Flag::MAX> WearFlags;
+    int Count = 0;
+    int Weight = 0;
+    int Cost = 0;
     std::array<int, MAX_OVAL> Value;
-    int               Serial = 0;
-    int             Layers = 0;
+    int Serial = 0;
+    int Layers = 0;
 
     MProg mprog;
 

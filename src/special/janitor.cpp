@@ -13,7 +13,7 @@ bool spec_janitor( Character *ch )
     auto itemsToPickUp = Filter(ch->InRoom->Objects(),
                                 [](const auto obj)
                                 {
-                                    return IsBitSet(obj->WearFlags, ITEM_TAKE)
+                                    return obj->WearFlags.test(Flag::Wear::Take)
                                     && !obj->Flags.test(Flag::Obj::Burried)
                                     && (obj->ItemType == ITEM_DRINK_CON
                                         || obj->ItemType == ITEM_TRASH

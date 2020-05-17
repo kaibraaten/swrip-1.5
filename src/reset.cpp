@@ -1279,7 +1279,7 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, const Object *o
        hide is an update reset, not a load-only reset. */
     if (cm == 'O'
         && obj->Flags.test(Flag::Obj::Hidden)
-        && !IsBitSet(obj->WearFlags, ITEM_TAKE))
+        && !obj->WearFlags.test(Flag::Wear::Take))
     {
         AddReset(pArea, 'H', 1, 0, 0, 0);
     }

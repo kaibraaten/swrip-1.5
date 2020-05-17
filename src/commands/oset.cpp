@@ -397,7 +397,7 @@ void do_oset( Character *ch, std::string argument )
             if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
                 ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
             else
-                ToggleBit( obj->WearFlags, 1 << value );
+                obj->WearFlags.flip(value);
         }
 
         if ( obj->Flags.test(Flag::Obj::Prototype) )

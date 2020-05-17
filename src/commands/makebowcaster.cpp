@@ -114,8 +114,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Object *obj = args->Object;
 
   obj->ItemType = ITEM_WEAPON;
-  SetBit( obj->WearFlags, ITEM_WIELD );
-  SetBit( obj->WearFlags, ITEM_TAKE );
+  obj->WearFlags.set(Flag::Wear::Wield);
+  obj->WearFlags.set(Flag::Wear::Take);
   obj->Weight = 2 + obj->Level / 7;
 
   strcpy( buf, ud->ItemName.c_str() );

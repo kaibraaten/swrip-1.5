@@ -57,7 +57,7 @@ void do_auction(Character *ch, std::string argument)
 
           SetCharacterColor( AT_BLUE, ch );
           ch->Echo( "Worn on: %s\r\n",
-                    FlagString(obj->WearFlags -1, WearFlags ).c_str() );
+                    FlagString(obj->WearFlags, WearFlags ).c_str() );
 
           switch ( obj->ItemType )
             {

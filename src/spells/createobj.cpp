@@ -33,7 +33,7 @@ ch_ret spell_create_obj(int sn, int level, Character *ch, void *vo)
     obj->Timer = !skill->Dice.empty() ? ParseDice(ch, level, skill->Dice) : 0;
     SuccessfulCasting(skill, ch, NULL, obj);
 
-    if (IsBitSet(obj->WearFlags, ITEM_TAKE))
+    if (obj->WearFlags.test(Flag::Wear::Take))
         ObjectToCharacter(obj, ch);
     else
         ObjectToRoom(obj, ch->InRoom);

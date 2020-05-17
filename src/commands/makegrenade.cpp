@@ -87,8 +87,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   char buf[MAX_STRING_LENGTH];
   Object *grenade = args->Object;
 
-  SetBit( grenade->WearFlags, ITEM_HOLD );
-  SetBit( grenade->WearFlags, ITEM_TAKE );
+  grenade->WearFlags.set(Flag::Wear::Hold);
+  grenade->WearFlags.set(Flag::Wear::Take);
   grenade->Weight = ud->Weight;
 
   strcpy( buf, ud->ItemName.c_str() );

@@ -1472,7 +1472,7 @@ static Object *LuaLoadObject(lua_State *L)
 
     if (FieldExists(L, "WearFlags"))
     {
-        obj->WearFlags = LuaLoadFlags(L, "WearFlags").to_ulong();
+        obj->WearFlags = LuaLoadFlags(L, "WearFlags");
     }
 
     LuaLoadOvalues(L, obj->Value);

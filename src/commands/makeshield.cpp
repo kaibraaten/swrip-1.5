@@ -96,8 +96,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Object *shield = args->Object;
 
   shield->ItemType = ITEM_ARMOR;
-  SetBit( shield->WearFlags, ITEM_WIELD );
-  SetBit( shield->WearFlags, ITEM_WEAR_SHIELD );
+  shield->WearFlags.set(Flag::Wear::Wield);
+  shield->WearFlags.set(Flag::Wear::Shield);
   shield->Weight = 2;
 
   shield->Name = ud->ItemName + " energy shield";

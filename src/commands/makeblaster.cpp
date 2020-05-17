@@ -98,8 +98,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       ud->Power = 0;
     }
 
-  SetBit( blaster->WearFlags, ITEM_WIELD );
-  SetBit( blaster->WearFlags, ITEM_TAKE );
+  blaster->WearFlags.set(Flag::Wear::Wield);
+  blaster->WearFlags.set(Flag::Wear::Take);
   blaster->Weight = 2 + blaster->Level / 10;
 
   strcpy( buf, ud->ItemName.c_str() );

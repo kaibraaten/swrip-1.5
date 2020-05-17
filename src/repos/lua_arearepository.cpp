@@ -1107,7 +1107,7 @@ void LuaAreaRepository::LoadObject(lua_State *L, std::shared_ptr<ProtoObject> ob
     LuaGetfieldInt(L, "Cost", &obj->Cost);
 
     obj->Flags = LuaLoadFlags(L, "Flags");
-    obj->WearFlags = LuaLoadFlags(L, "WearFlags").to_ulong();
+    obj->WearFlags = LuaLoadFlags(L, "WearFlags");
 
     LoadOvalues(L, obj);
     LuaLoadArray(L, "MudProgs", LoadMudProg, &obj->mprog);

@@ -1391,28 +1391,48 @@ enum
  * Wear flags.
  * Used in #OBJECTS.
  */
-constexpr auto ITEM_TAKE = BV00;
-constexpr auto ITEM_WEAR_FINGER = BV01;
-constexpr auto ITEM_WEAR_NECK = BV02;
-constexpr auto ITEM_WEAR_BODY = BV03;
-constexpr auto ITEM_WEAR_HEAD = BV04;
-constexpr auto ITEM_WEAR_LEGS = BV05;
-constexpr auto ITEM_WEAR_FEET = BV06;
-constexpr auto ITEM_WEAR_HANDS = BV07;
-constexpr auto ITEM_WEAR_ARMS = BV08;
-constexpr auto ITEM_WEAR_SHIELD = BV09;
-constexpr auto ITEM_WEAR_ABOUT = BV10;
-constexpr auto ITEM_WEAR_WAIST = BV11;
-constexpr auto ITEM_WEAR_WRIST = BV12;
-constexpr auto ITEM_WIELD = BV13;
-constexpr auto ITEM_HOLD = BV14;
-constexpr auto ITEM_DUAL_WIELD = BV15;
-constexpr auto ITEM_WEAR_EARS = BV16;
-constexpr auto ITEM_WEAR_EYES = BV17;
-constexpr auto ITEM_MISSILE_WIELD = BV18;
-constexpr auto ITEM_WEAR_FLOATING = BV19;
-constexpr auto ITEM_WEAR_OVER = BV20;
-constexpr auto ITEM_WEAR_DISGUISE = BV21;
+
+namespace Flag
+{
+    namespace Wear
+    {
+        enum : size_t
+        {
+            Take,
+                Finger,
+                Neck,
+                Body,
+                Head,
+                Legs,
+                Feet,
+                Hands,
+                Arms,
+                Shield,
+                About,
+                Waist,
+                Wrist,
+                Wield,
+                Hold,
+                _dual_,
+                Ears,
+                Eyes,
+                _missile_,
+                Floating,
+                Over,
+                Disguise,
+                MaxWear,
+                _23,
+                _24,
+                _25,
+                _26,
+                _27,
+                _28,
+                _29,
+                _30,
+                _31
+        };
+    }
+}
 
 /*
  * Apply types (for affects).

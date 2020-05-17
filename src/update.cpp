@@ -1015,7 +1015,7 @@ static void PerformScavenging(Character *ch)
 
     for (Object *obj : ch->InRoom->Objects())
     {
-        if (IsBitSet(obj->WearFlags, ITEM_TAKE)
+        if (obj->WearFlags.test(Flag::Wear::Take)
             && obj->Cost > max
             && !obj->Flags.test(Flag::Obj::Burried))
         {
@@ -2152,20 +2152,15 @@ static void ObjectUpdate()
         {
             if (obj->InRoom
                 && obj->InRoom->Sector == SECT_AIR
-                && (obj->WearFlags & ITEM_TAKE))
+                && obj->WearFlags.test(Flag::Wear::Take))
             {
-                std::shared_ptr<Exit> xit;
-                const auto &exitIter = Find(obj->InRoom->Exits(),
-                    [](auto ex)
-                {
-                    return ex->Direction == DIR_DOWN;
-                });
+                const auto &xit = Find(obj->InRoom->Exits(),
+                                       [](auto ex)
+                                       {
+                                           return ex->Direction == DIR_DOWN;
+                                       });
 
-                if (exitIter != nullptr)
-                {
-                    xit = exitIter;
-                }
-                else
+                if (xit == nullptr)
                 {
                     continue;
                 }

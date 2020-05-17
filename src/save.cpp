@@ -748,7 +748,7 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
 
     if (obj->WearFlags != obj->Prototype->WearFlags)
     {
-        fprintf(fp, "WearFlags    %d\n", obj->WearFlags);
+        fprintf(fp, "WearFlags    %ld\n", obj->WearFlags.to_ulong());
     }
 
     wear_loc = -1;

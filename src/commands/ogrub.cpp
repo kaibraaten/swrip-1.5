@@ -369,7 +369,7 @@ static bool go_read( const Character *ch, int dis_num, int op_num, int sor_ind,
       r.n[OVNUM]  = px->Vnum;
       r.n[OTYPE]  = po->ItemType;
       r.n[OLEVEL] = po->Level;
-      r.n[OWEAR]  = go_wear_ext( po->WearFlags );
+      r.n[OWEAR]  = go_wear_ext( po->WearFlags.to_ulong() );
       r.n[OAVG]   = (po->ItemType == ITEM_WEAPON) ?
         (po->Value[1] + po->Value[2])/2 : 0;
 

@@ -73,7 +73,7 @@ void do_mpoload(Character *ch, std::string argument)
     obj = CreateObject(pObjIndex, level);
     obj->Timer = timer;
 
-    if (IsBitSet(obj->WearFlags, ITEM_TAKE))
+    if (obj->WearFlags.test(Flag::Wear::Take))
     {
         ObjectToCharacter(obj, ch);
     }

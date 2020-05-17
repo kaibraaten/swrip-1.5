@@ -38,7 +38,7 @@ public:
     std::string ActionDescription;
     ItemTypes ItemType = 0;
     std::bitset<Flag::MAX> Flags;
-    int WearFlags = 0;
+    std::bitset<Flag::MAX> WearFlags;
     int BlasterSetting = 0;
     WearLocation WearLoc = WEAR_NONE;
     int Weight = 1;
