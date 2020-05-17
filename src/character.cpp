@@ -551,9 +551,9 @@ void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
 
     SeparateOneObjectFromGroup(obj);    /* just in case */
 
-    if ((IsBitSet(obj->Flags, ITEM_ANTI_EVIL) && IsEvil(ch))
-        || (IsBitSet(obj->Flags, ITEM_ANTI_GOOD) && IsGood(ch))
-        || (IsBitSet(obj->Flags, ITEM_ANTI_NEUTRAL) && IsNeutral(ch)))
+    if ((obj->Flags.test(Flag::Obj::AntiEvil) && IsEvil(ch))
+        || (obj->Flags.test(Flag::Obj::AntiGood) && IsGood(ch))
+        || (obj->Flags.test(Flag::Obj::AntiNeutral) && IsNeutral(ch)))
     {
         /*
          * Thanks to Morgenes for the bug fix here!
@@ -584,7 +584,8 @@ void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
 
     ch->CarryNumber -= GetObjectCount(obj);
 
-    if (IsBitSet(obj->Flags, ITEM_MAGIC) || obj->WearLoc == WEAR_FLOATING)
+    if (obj->Flags.test(Flag::Obj::Magic)
+        || obj->WearLoc == WEAR_FLOATING)
         ch->CarryWeight -= GetObjectWeight(obj);
 
     for (auto paf : obj->Prototype->Affects())
@@ -615,7 +616,7 @@ void UnequipCharacter(Character *ch, Object *obj)
     }
 
     ch->CarryNumber += GetObjectCount(obj);
-    if (IsBitSet(obj->Flags, ITEM_MAGIC) || obj->WearLoc == WEAR_FLOATING)
+    if (obj->Flags.test(Flag::Obj::Magic) || obj->WearLoc == WEAR_FLOATING)
         ch->CarryWeight += GetObjectWeight(obj);
 
     ch->ArmorClass += GetObjectArmorClass(obj, obj->WearLoc);
@@ -974,7 +975,7 @@ bool CanSeeObject(const Character *ch, const Object *obj)
     if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT))
         return true;
 
-    if (IsBitSet(obj->Flags, ITEM_BURRIED))
+    if (obj->Flags.test(Flag::Obj::Burried))
         return false;
 
     if (IsAffectedBy(ch, AFF_TRUESIGHT))
@@ -983,7 +984,7 @@ bool CanSeeObject(const Character *ch, const Object *obj)
     if (IsAffectedBy(ch, AFF_BLIND))
         return false;
 
-    if (IsBitSet(obj->Flags, ITEM_HIDDEN))
+    if (obj->Flags.test(Flag::Obj::Hidden))
         return false;
 
     if (obj->ItemType == ITEM_LIGHT && obj->Value[OVAL_LIGHT_POWER] != 0)
@@ -992,7 +993,7 @@ bool CanSeeObject(const Character *ch, const Object *obj)
     if (IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, AFF_INFRARED))
         return false;
 
-    if (IsBitSet(obj->Flags, ITEM_INVIS) && !IsAffectedBy(ch, AFF_DETECT_INVIS))
+    if (obj->Flags.test(Flag::Obj::Invis) && !IsAffectedBy(ch, AFF_DETECT_INVIS))
         return false;
 
     return true;
@@ -1003,7 +1004,7 @@ bool CanSeeObject(const Character *ch, const Object *obj)
  */
 bool CanDropObject(const Character *ch, const Object *obj)
 {
-    if (!IsBitSet(obj->Flags, ITEM_NODROP))
+    if (!obj->Flags.test(Flag::Obj::NoDrop))
         return true;
 
     if (!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)

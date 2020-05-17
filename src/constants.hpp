@@ -1263,33 +1263,46 @@ constexpr auto PUT_INSIDE = 4;
  * Extra flags.
  * Used in #OBJECTS.
  */
-constexpr auto ITEM_GLOW = BV00;
-constexpr auto ITEM_HUM = BV01;
-
-constexpr auto ITEM_HUTT_SIZE = BV03;
-constexpr auto ITEM_CONTRABAND = BV04;
-constexpr auto ITEM_INVIS = BV05;
-constexpr auto ITEM_MAGIC = BV06;
-constexpr auto ITEM_NODROP = BV07;
-constexpr auto ITEM_BLESS = BV08;
-constexpr auto ITEM_ANTI_GOOD = BV09;
-constexpr auto ITEM_ANTI_EVIL = BV10;
-constexpr auto ITEM_ANTI_NEUTRAL = BV11;
-constexpr auto ITEM_NOREMOVE = BV12;
-constexpr auto ITEM_INVENTORY = BV13;
-
-constexpr auto ITEM_SMALL_SIZE = BV18;
-constexpr auto ITEM_LARGE_SIZE = BV19;
-
-constexpr auto ITEM_CLANOBJECT = BV21;
-
-constexpr auto ITEM_HIDDEN = BV25;
-constexpr auto ITEM_POISONED = BV26;
-constexpr auto ITEM_COVERING = BV27;
-constexpr auto ITEM_DEATHROT = BV28;
-constexpr auto ITEM_BURRIED = BV29;    /* item is underground */
-constexpr auto ITEM_PROTOTYPE = BV30;
-constexpr auto ITEM_HUMAN_SIZE = BV31;
+namespace Flag
+{
+    namespace Obj
+    {
+        enum : size_t
+        {
+            Glow,
+                Hum,
+                HuttSize,
+                Contraband,
+                Invis,
+                Magic,
+                NoDrop,
+                Bless,
+                AntiGood,
+                AntiEvil,
+                AntiNeutral,
+                NoRemove,
+                Inventory,
+                _14,
+                _15,
+                _16,
+                _17,
+                SmallSize,
+                LargeSize,
+                _20,
+                ClanObject,
+                _22,
+                _23,
+                _24,
+                Hidden,
+                Poisoned,
+                Covering,
+                DeathRot,
+                Burried,
+                Prototype,
+                HumanSize
+        };
+    }
+}
 
 /* Blaster settings - only saves on characters */
 constexpr auto BLASTER_NORMAL = 0;

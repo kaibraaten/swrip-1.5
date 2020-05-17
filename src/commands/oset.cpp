@@ -54,7 +54,7 @@ void do_oset( Character *ch, std::string argument )
          */
         tmpobj = (Object*)ch->spare_ptr;
         
-        if ( IsBitSet( tmpobj->Flags, ITEM_PROTOTYPE ) )
+        if ( tmpobj->Flags.test(Flag::Obj::Prototype))
             ed = SetOExtraProto(tmpobj->Prototype, (char*)ch->dest_buf);
         else
             ed = SetOExtra(tmpobj, (char*)ch->dest_buf);
@@ -85,7 +85,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Description = CopyEditBuffer( ch );
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
         {
             obj->Prototype->Description = obj->Description;
         }
@@ -219,7 +219,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Value[0] = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Value[0] = value;
 
         return;
@@ -232,7 +232,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Value[1] = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Value[1] = value;
 
         return;
@@ -245,7 +245,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Value[2] = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
         {
             obj->Prototype->Value[2] = value;
 
@@ -263,7 +263,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Value[3] = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Value[3] = value;
 
         return;
@@ -276,7 +276,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Value[4] = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Value[4] = value;
 
         return;
@@ -289,7 +289,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Value[5] = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Value[5] = value;
 
         return;
@@ -330,7 +330,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->ItemType = (ItemTypes) value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->ItemType = obj->ItemType;
 
         return;
@@ -360,14 +360,14 @@ void do_oset( Character *ch, std::string argument )
                 ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
             else
             {
-                ToggleBit(obj->Flags, 1 << value);
+                obj->Flags.flip(value);
 
-                if ( 1 << value == ITEM_PROTOTYPE )
+                if ( value == Flag::Obj::Prototype)
                     obj->Prototype->Flags = obj->Flags;
             }
         }
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Flags = obj->Flags;
 
         return;
@@ -400,7 +400,7 @@ void do_oset( Character *ch, std::string argument )
                 ToggleBit( obj->WearFlags, 1 << value );
         }
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->WearFlags = obj->WearFlags;
 
         return;
@@ -422,7 +422,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Weight = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Weight = value;
 
         return;
@@ -435,7 +435,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Cost = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Cost = value;
 
         return;
@@ -446,7 +446,7 @@ void do_oset( Character *ch, std::string argument )
         if ( !CanModifyObject( ch, obj ) )
             return;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Layers = value;
         else
             ch->Echo("Item must have prototype flag to set this value.\r\n");
@@ -470,7 +470,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Name = arg3;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
         {
             obj->Prototype->Name = obj->Name;
         }
@@ -482,7 +482,7 @@ void do_oset( Character *ch, std::string argument )
     {
         obj->ShortDescr = arg3;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
         {
             obj->Prototype->ShortDescr = obj->ShortDescr;
         }
@@ -514,7 +514,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->ActionDescription = arg3;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
         {
             obj->Prototype->ActionDescription = obj->ActionDescription;
         }
@@ -528,7 +528,7 @@ void do_oset( Character *ch, std::string argument )
         {
             obj->Description = arg3;
 
-            if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+            if ( obj->Flags.test(Flag::Obj::Prototype) )
             {
                 obj->Prototype->Description = obj->Description;
             }
@@ -623,7 +623,7 @@ void do_oset( Character *ch, std::string argument )
         paf->Location             = loc;
         paf->Modifier             = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Add(paf);
         else
             obj->Add(paf);
@@ -653,7 +653,7 @@ void do_oset( Character *ch, std::string argument )
 
         count = 0;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
         {
             std::shared_ptr<ProtoObject> pObjIndex = obj->Prototype;
 
@@ -711,7 +711,7 @@ void do_oset( Character *ch, std::string argument )
             return;
         }
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             ed = SetOExtraProto( obj->Prototype, arg3 );
         else
             ed = SetOExtra( obj, arg3 );
@@ -751,7 +751,7 @@ void do_oset( Character *ch, std::string argument )
             return;
         }
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             ed = SetOExtraProto( obj->Prototype, obj->Name );
         else
             ed = SetOExtra( obj, obj->Name );
@@ -783,7 +783,7 @@ void do_oset( Character *ch, std::string argument )
             return;
         }
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
         {
             if ( DelOExtraProto( obj->Prototype, arg3 ) )
                 ch->Echo("Deleted.\r\n");
@@ -1027,7 +1027,7 @@ void do_oset( Character *ch, std::string argument )
 
         obj->Value[tmp] = value;
 
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+        if ( obj->Flags.test(Flag::Obj::Prototype) )
             obj->Prototype->Value[tmp] = value;
 
         return;

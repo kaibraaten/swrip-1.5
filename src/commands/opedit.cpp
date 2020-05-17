@@ -88,7 +88,7 @@ void do_opedit( Character *ch, std::string argument )
     if ( !CanModifyObject( ch, obj ) )
         return;
 
-    if ( !IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+    if ( !obj->Flags.test(Flag::Obj::Prototype))
     {
         ch->Echo("An object must have a prototype flag to be opset.\r\n");
         return;

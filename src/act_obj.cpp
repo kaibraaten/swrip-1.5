@@ -35,13 +35,15 @@ short GetObjectResistance(const Object *obj)
     short resist = NumberFuzzy(MAX_ITEM_IMPACT);
 
     /* magical items are more resistant */
-    if (IsBitSet(obj->Flags, ITEM_MAGIC))
+    if (obj->Flags.test(Flag::Obj::Magic))
         resist += NumberFuzzy(12);
+
     /* blessed objects should have a little bonus */
-    if (IsBitSet(obj->Flags, ITEM_BLESS))
+    if (obj->Flags.test(Flag::Obj::Bless))
         resist += NumberFuzzy(5);
-    /* lets make store inventory pretty tough */
-    if (IsBitSet(obj->Flags, ITEM_INVENTORY))
+
+/* lets make store inventory pretty tough */
+    if (obj->Flags.test(Flag::Obj::Inventory))
         resist += 20;
 
     /* okay... let's add some bonus/penalty for item level... */
@@ -156,7 +158,7 @@ void ObjectFallIfNoFloor(Object *obj, bool through)
 
     if (obj->InRoom->Flags.test(Flag::Room::NoFloor)
         && CAN_GO(obj, DIR_DOWN)
-        && !IsBitSet(obj->Flags, ITEM_MAGIC))
+        && !obj->Flags.test(Flag::Obj::Magic))
     {
         auto pexit = GetExit(obj->InRoom, DIR_DOWN);
         auto to_room = pexit->ToRoom;
@@ -273,7 +275,7 @@ bool RemoveObject(Character *ch, WearLocation iWear, bool fReplace)
     if (!fReplace)
         return false;
 
-    if (IsBitSet(obj->Flags, ITEM_NOREMOVE))
+    if (obj->Flags.test(Flag::Obj::NoRemove))
     {
         Act(AT_PLAIN, "You can't remove $p.", ch, obj, NULL, TO_CHAR);
         return false;

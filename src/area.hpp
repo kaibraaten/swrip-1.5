@@ -14,9 +14,9 @@ namespace Flag
         enum : size_t
         {
             NoPkill,
-                _01,
-                Changed,
-                Prototype
+            _01,
+            Changed,
+            Prototype
         };
     }
 }

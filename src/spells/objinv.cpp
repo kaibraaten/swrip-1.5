@@ -169,14 +169,14 @@ ch_ret spell_obj_inv(int sn, int level, Character* ch, void* vo)
         }
         return rNONE;
     case SA_OBSCURE:                    /* make obj invis */
-        if (IsBitSet(obj->Flags, ITEM_INVIS)
+        if (obj->Flags.test(Flag::Obj::Invis)
             || Chance(ch, !skill->Dice.empty() ? ParseDice(ch, level, skill->Dice) : 20))
         {
             FailedCasting(skill, ch, NULL, NULL);
             return rSPELL_FAILED;
         }
         SuccessfulCasting(skill, ch, NULL, obj);
-        SetBit(obj->Flags, ITEM_INVIS);
+        obj->Flags.set(Flag::Obj::Invis);
         return rNONE;
 
     case SA_CHANGE:

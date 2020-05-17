@@ -76,7 +76,7 @@ static bool IsWieldingPoisonedWeapon(const Character *ch)
 {
     const Object *obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
-    return obj != nullptr && IsBitSet(obj->Flags, ITEM_POISONED);
+    return obj != nullptr && obj->Flags.test(Flag::Obj::Poisoned);
 }
 
 /*
@@ -1001,7 +1001,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
 
     if (wield)
     {
-        if (IsBitSet(wield->Flags, ITEM_MAGIC))
+        if (wield->Flags.test(Flag::Obj::Magic))
         {
             dam = ModifyDamageBasedOnResistance(victim, dam, RIS_MAGIC);
         }
@@ -2700,9 +2700,9 @@ static void CheckObjectAlignmentZapping(Character *ch)
             continue;
         }
 
-        if ((IsBitSet(obj->Flags, ITEM_ANTI_EVIL) && IsEvil(ch))
-            || (IsBitSet(obj->Flags, ITEM_ANTI_GOOD) && IsGood(ch))
-            || (IsBitSet(obj->Flags, ITEM_ANTI_NEUTRAL) && IsNeutral(ch)))
+        if ((obj->Flags.test(Flag::Obj::AntiEvil) && IsEvil(ch))
+            || (obj->Flags.test(Flag::Obj::AntiGood) && IsGood(ch))
+            || (obj->Flags.test(Flag::Obj::AntiNeutral) && IsNeutral(ch)))
         {
             Act(AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR);
             Act(AT_MAGIC, "$n is zapped by $p.", ch, obj, NULL, TO_ROOM);

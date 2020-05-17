@@ -1278,7 +1278,7 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, const Object *o
     /* Only add hide for in-room objects that are hidden and cant be moved, as
        hide is an update reset, not a load-only reset. */
     if (cm == 'O'
-        && IsBitSet(obj->Flags, ITEM_HIDDEN)
+        && obj->Flags.test(Flag::Obj::Hidden)
         && !IsBitSet(obj->WearFlags, ITEM_TAKE))
     {
         AddReset(pArea, 'H', 1, 0, 0, 0);
@@ -1619,7 +1619,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
             {
                 int olevel = GenerateItemLevel(pArea, pObjIndex);
                 obj = CreateObject(pObjIndex, olevel);
-                SetBit(obj->Flags, ITEM_INVENTORY);
+                obj->Flags.set(Flag::Obj::Inventory);
             }
             else
             {
@@ -1841,7 +1841,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
                     !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                     !to_obj->InRoom ||
                     to_obj->InRoom->Area != pArea ||
-                    IsBitSet(to_obj->Flags, ITEM_HIDDEN))
+                    to_obj->Flags.test(Flag::Obj::Hidden))
                 {
                     break;
                 }
@@ -1856,7 +1856,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
                 to_obj = obj;
             }
 
-            SetBit(to_obj->Flags, ITEM_HIDDEN);
+            to_obj->Flags.set(Flag::Obj::Hidden);
             break;
 
         case 'B':

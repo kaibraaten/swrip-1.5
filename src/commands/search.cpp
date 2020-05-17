@@ -136,7 +136,7 @@ void do_search(Character *ch, std::string arg)
     {
         for (Object *hiddenObject : searchList)
         {
-            if (IsBitSet(obj->Flags, ITEM_HIDDEN)
+            if (obj->Flags.test(Flag::Obj::Hidden)
                 && percent < ch->PCData->Learned[gsn_search])
             {
                 obj = hiddenObject;
@@ -154,7 +154,7 @@ void do_search(Character *ch, std::string arg)
     }
 
     SeparateOneObjectFromGroup(obj);
-    RemoveBit(obj->Flags, ITEM_HIDDEN);
+    obj->Flags.reset(Flag::Obj::Hidden);
     Act(AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR);
     Act(AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM);
     LearnFromSuccess(ch, gsn_search);

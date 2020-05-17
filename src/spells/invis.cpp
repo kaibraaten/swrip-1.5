@@ -51,14 +51,14 @@ ch_ret spell_invis(int sn, int level, Character* ch, void* vo)
 
         if (obj)
         {
-            if (IsBitSet(obj->Flags, ITEM_INVIS)
+            if (obj->Flags.test(Flag::Obj::Invis)
                 || Chance(ch, 40 + level / 10))
             {
                 FailedCasting(skill, ch, NULL, NULL);
                 return rSPELL_FAILED;
             }
 
-            SetBit(obj->Flags, ITEM_INVIS);
+            obj->Flags.set(Flag::Obj::Invis);
             Act(AT_MAGIC, "$p fades out of existence.", ch, obj, NULL, TO_CHAR);
             return rNONE;
         }

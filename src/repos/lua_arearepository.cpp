@@ -466,7 +466,7 @@ void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObje
 {
     if (install)
     {
-        RemoveBit(obj->Flags, ITEM_PROTOTYPE);
+        obj->Flags.reset(Flag::Obj::Prototype);
     }
 
     lua_pushinteger(L, obj->Vnum);
@@ -1106,7 +1106,7 @@ void LuaAreaRepository::LoadObject(lua_State *L, std::shared_ptr<ProtoObject> ob
     LuaGetfieldInt(L, "Weight", &obj->Weight);
     LuaGetfieldInt(L, "Cost", &obj->Cost);
 
-    obj->Flags = LuaLoadFlags(L, "Flags").to_ulong();
+    obj->Flags = LuaLoadFlags(L, "Flags");
     obj->WearFlags = LuaLoadFlags(L, "WearFlags").to_ulong();
 
     LoadOvalues(L, obj);

@@ -58,7 +58,7 @@ void do_throw(Character *ch, std::string argument)
         return;
     }
 
-    if (IsBitSet(obj->Flags, ITEM_NOREMOVE))
+    if (obj->Flags.test(Flag::Obj::NoRemove))
     {
         Act(AT_PLAIN, "You can't throw $p.", ch, obj, NULL, TO_CHAR);
         return;

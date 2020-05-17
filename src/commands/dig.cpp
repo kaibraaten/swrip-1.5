@@ -139,7 +139,7 @@ void do_dig(Character *ch, std::string arg)
         obj = *i;
 
         /* twice as hard to find something without a shovel */
-        if (IsBitSet(obj->Flags, ITEM_BURRIED)
+        if (obj->Flags.test(Flag::Obj::Burried)
             && (GetRandomPercent() * (shovel ? 1 : 2)) <
             (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]))
         {
@@ -157,7 +157,7 @@ void do_dig(Character *ch, std::string arg)
     }
 
     SeparateOneObjectFromGroup(obj);
-    RemoveBit(obj->Flags, ITEM_BURRIED);
+    obj->Flags.reset(Flag::Obj::Burried);
     Act(AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, TO_CHAR);
     Act(AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM);
     LearnFromSuccess(ch, gsn_dig);

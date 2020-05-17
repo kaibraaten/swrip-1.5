@@ -223,7 +223,7 @@ void do_get( Character *ch, std::string argument )
         switch ( container->ItemType )
         {
         default:
-            if ( !IsBitSet( container->Flags, ITEM_COVERING ) )
+            if (!container->Flags.test(Flag::Obj::Covering))
             {
                 ch->Echo( "That's not a container.\r\n" );
                 return;
@@ -244,7 +244,7 @@ void do_get( Character *ch, std::string argument )
             break;
         }
 
-        if ( !IsBitSet( container->Flags, ITEM_COVERING )
+        if ( !container->Flags.test(Flag::Obj::Covering)
              && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
             Act( AT_PLAIN, "The $d is closed.",
@@ -260,9 +260,10 @@ void do_get( Character *ch, std::string argument )
 
             if ( obj == nullptr )
             {
-                Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
-                     "I see nothing like that beneath the $T." :
-                     "I see nothing like that in the $T.",
+                Act( AT_PLAIN,
+                     container->Flags.test(Flag::Obj::Covering)
+                     ? "I see nothing like that beneath the $T."
+                     : "I see nothing like that in the $T.",
                      ch, NULL, arg2.c_str(), TO_CHAR );
                 return;
             }
@@ -330,14 +331,16 @@ void do_get( Character *ch, std::string argument )
             if ( !found )
             {
                 if ( fAll )
-                    Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
-                         "I see nothing beneath the $T." :
-                         "I see nothing in the $T.",
+                    Act( AT_PLAIN,
+                         container->Flags.test(Flag::Obj::Covering)
+                         ? "I see nothing beneath the $T."
+                         : "I see nothing in the $T.",
                          ch, NULL, arg2.c_str(), TO_CHAR );
                 else
-                    Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
-                         "I see nothing like that beneath the $T." :
-                         "I see nothing like that in the $T.",
+                    Act( AT_PLAIN,
+                         container->Flags.test(Flag::Obj::Covering)
+                         ? "I see nothing like that beneath the $T."
+                         : "I see nothing like that in the $T.",
                          ch, NULL, arg2.c_str(), TO_CHAR );
             }
             else
@@ -379,7 +382,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
         return;
     }
 
-    if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE )
+    if (obj->Flags.test(Flag::Obj::Prototype)
          &&  !CharacterCanTakePrototype( ch ) )
     {
         ch->Echo( "A godly force prevents you from getting close to it.\r\n" );
@@ -393,7 +396,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
         return;
     }
 
-    if ( IsBitSet( obj->Flags, ITEM_COVERING ) )
+    if (obj->Flags.test(Flag::Obj::Covering))
         weight = obj->Weight;
     else
         weight = GetObjectWeight( obj );
@@ -407,11 +410,13 @@ static void get_obj( Character *ch, Object *obj, Object *container )
 
     if ( container )
     {
-        Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING) ?
-             "You get $p from beneath $P." : "You get $p from $P",
+        Act( AT_ACTION,
+             container->Flags.test(Flag::Obj::Covering)
+             ? "You get $p from beneath $P." : "You get $p from $P",
              ch, obj, container, TO_CHAR );
-        Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING) ?
-             "$n gets $p from beneath $P." : "$n gets $p from $P",
+        Act( AT_ACTION,
+             container->Flags.test(Flag::Obj::Covering)
+             ? "$n gets $p from beneath $P." : "$n gets $p from $P",
              ch, obj, container, TO_ROOM );
         ObjectFromObject( obj );
     }

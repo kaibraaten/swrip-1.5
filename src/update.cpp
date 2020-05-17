@@ -1017,7 +1017,7 @@ static void PerformScavenging(Character *ch)
     {
         if (IsBitSet(obj->WearFlags, ITEM_TAKE)
             && obj->Cost > max
-            && !IsBitSet(obj->Flags, ITEM_BURRIED))
+            && !obj->Flags.test(Flag::Obj::Burried))
         {
             obj_best = obj;
             max = obj->Cost;
@@ -2125,7 +2125,7 @@ static void ObjectUpdate()
         }
 
         /* don't let inventory decay */
-        if (IsBitSet(obj->Flags, ITEM_INVENTORY))
+        if (obj->Flags.test(Flag::Obj::Inventory))
         {
             continue;
         }
@@ -2269,8 +2269,8 @@ static void ObjectUpdate()
             Act(AT_TEMP, message, obj->CarriedBy, obj, NULL, TO_CHAR);
         }
         else if (obj->InRoom
-            && !obj->InRoom->Characters().empty()
-            && !IsBitSet(obj->Flags, ITEM_BURRIED))
+                 && !obj->InRoom->Characters().empty()
+                 && !obj->Flags.test(Flag::Obj::Burried))
         {
             rch = obj->InRoom->Characters().front();
             Act(AT_TEMP, message, rch, obj, NULL, TO_ROOM);

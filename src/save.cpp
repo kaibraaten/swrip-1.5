@@ -680,7 +680,7 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
     /*
      * Castrate storage characters.
      */
-    if (obj->ItemType == ITEM_KEY && !IsBitSet(obj->Flags, ITEM_CLANOBJECT))
+    if (obj->ItemType == ITEM_KEY && !obj->Flags.test(Flag::Obj::ClanObject))
     {
         return;
     }
@@ -696,7 +696,7 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
     /*
      * Do NOT save prototype items!                               -Thoric
      */
-    if (IsBitSet(obj->Flags, ITEM_PROTOTYPE))
+    if (obj->Flags.test(Flag::Obj::Prototype))
     {
         return;
     }
@@ -743,7 +743,7 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
 
     if (obj->Flags != obj->Prototype->Flags)
     {
-        fprintf(fp, "ExtraFlags   %d\n", obj->Flags);
+        fprintf(fp, "ExtraFlags   %ld\n", obj->Flags.to_ulong());
     }
 
     if (obj->WearFlags != obj->Prototype->WearFlags)

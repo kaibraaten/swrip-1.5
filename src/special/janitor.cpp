@@ -7,29 +7,28 @@
 
 bool spec_janitor( Character *ch )
 {
-  if ( !IsAwake(ch) )
-    return false;
+    if ( !IsAwake(ch) )
+        return false;
 
-  std::list<Object*> itemsToPickUp = Filter(ch->InRoom->Objects(),
-                                            [](const auto obj)
-                                            {
-                                              return IsBitSet(obj->WearFlags, ITEM_TAKE)
-                                                && !IsBitSet(obj->Flags, ITEM_BURRIED)
-                                                && (obj->ItemType == ITEM_DRINK_CON
-                                                    || obj->ItemType == ITEM_TRASH
-                                                    || obj->Cost < 10
-                                                    || (obj->Prototype->Vnum == OBJ_VNUM_SHOPPING_BAG
-                                                        && obj->Objects().empty() ));
-                                            });
+    auto itemsToPickUp = Filter(ch->InRoom->Objects(),
+                                [](const auto obj)
+                                {
+                                    return IsBitSet(obj->WearFlags, ITEM_TAKE)
+                                    && !obj->Flags.test(Flag::Obj::Burried)
+                                    && (obj->ItemType == ITEM_DRINK_CON
+                                        || obj->ItemType == ITEM_TRASH
+                                        || obj->Cost < 10
+                                        || (obj->Prototype->Vnum == OBJ_VNUM_SHOPPING_BAG
+                                            && obj->Objects().empty() ));
+                                });
 
-  for(Object *trash : itemsToPickUp)
+    for(auto trash : itemsToPickUp)
     {
-      Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );
-      ObjectFromRoom( trash );
-      ObjectToCharacter( trash, ch );
-      return true;
+        Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );
+        ObjectFromRoom( trash );
+        ObjectToCharacter( trash, ch );
+        return true;
     }
 
-  return false;
+    return false;
 }
-

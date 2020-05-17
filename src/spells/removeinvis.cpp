@@ -20,10 +20,10 @@ ch_ret spell_remove_invis(int sn, int level, Character* ch, void* vo)
 
     if (obj)
     {
-        if (!IsBitSet(obj->Flags, ITEM_INVIS))
+        if (!obj->Flags.test(Flag::Obj::Invis))
             return rSPELL_FAILED;
 
-        RemoveBit(obj->Flags, ITEM_INVIS);
+        obj->Flags.reset(Flag::Obj::Invis);
         Act(AT_MAGIC, "$p becomes visible again.", ch, obj, NULL, TO_CHAR);
 
         ch->Echo("Ok.\r\n");

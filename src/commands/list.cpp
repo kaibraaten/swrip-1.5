@@ -78,10 +78,10 @@ void do_list( Character *ch, std::string argument )
 
                   ch->Echo("[%5d] {%3d} %s%s.\r\n",
                            cost, oref, Capitalize( obj->ShortDescr ).c_str(),
-                             IsBitSet(obj->Flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
-                             ( IsBitSet(obj->Flags, ITEM_LARGE_SIZE) ? " (large)" :
-			       ( IsBitSet(obj->Flags, ITEM_HUMAN_SIZE) ? " (medium)" :
-                                 ( IsBitSet(obj->Flags, ITEM_SMALL_SIZE) ? " (small)" :
+                             obj->Flags.test(Flag::Obj::HuttSize) ? " (hutt size)" :
+                             ( obj->Flags.test(Flag::Obj::LargeSize) ? " (large)" :
+			       ( obj->Flags.test(Flag::Obj::HumanSize) ? " (medium)" :
+                                 ( obj->Flags.test(Flag::Obj::SmallSize) ? " (small)" :
                                    "" ) ) ) );
                 }
             }

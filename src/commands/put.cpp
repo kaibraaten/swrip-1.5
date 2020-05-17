@@ -70,7 +70,7 @@ void do_put( Character *ch, std::string argument )
         save_char = true;
     }
 
-    if ( IsBitSet( container->Flags, ITEM_COVERING ) )
+    if (container->Flags.test(Flag::Obj::Covering))
     {
         if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )
         {
@@ -116,7 +116,7 @@ void do_put( Character *ch, std::string argument )
             return;
         }
 
-        if ( (IsBitSet( container->Flags, ITEM_COVERING )
+        if ( (container->Flags.test(Flag::Obj::Covering)
               && (GetObjectWeight( obj ) / obj->Count)
               > ((GetObjectWeight( container ) / container->Count)
                  -   container->Weight)) )
@@ -144,10 +144,12 @@ void do_put( Character *ch, std::string argument )
 
         int count = obj->Count;
         obj->Count = 1;
-        Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING )
+        Act( AT_ACTION,
+             container->Flags.test(Flag::Obj::Covering)
              ? "$n hides $p beneath $P." : "$n puts $p in $P.",
              ch, obj, container, TO_ROOM );
-        Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING )
+        Act( AT_ACTION,
+             container->Flags.test(Flag::Obj::Covering)
              ? "You hide $p beneath $P." : "You put $p in $P.",
              ch, obj, container, TO_CHAR );
         obj->Count = count;

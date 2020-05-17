@@ -801,9 +801,8 @@ Object *ObjectToCharacter(Object *obj, Character *ch)
     int oweight = GetObjectWeight(obj);
     int onum = GetObjectCount(obj);
     int wear_loc = obj->WearLoc;
-    int Flags = obj->Flags;
 
-    if (IsBitSet(obj->Flags, ITEM_PROTOTYPE))
+    if (obj->Flags.test(Flag::Obj::Prototype))
     {
         if (!IsImmortal(ch)
             && (IsNpc(ch) && !IsBitSet(ch->Flags, ACT_PROTOTYPE)))
@@ -858,7 +857,7 @@ Object *ObjectToCharacter(Object *obj, Character *ch)
         ch->CarryNumber += onum;
         ch->CarryWeight += oweight;
     }
-    else if (!IsBitSet(Flags, ITEM_MAGIC) && wear_loc != WEAR_FLOATING)
+    else if (!obj->Flags.test(Flag::Obj::Magic) && wear_loc != WEAR_FLOATING)
     {
         ch->CarryWeight += oweight;
     }
@@ -883,7 +882,7 @@ void ObjectFromCharacter(Object *obj)
 
     ch->Remove(obj);
 
-    if (IsBitSet(obj->Flags, ITEM_COVERING) && !obj->Objects().empty())
+    if (obj->Flags.test(Flag::Obj::Covering) && !obj->Objects().empty())
         EmptyObjectContents(obj, NULL, NULL);
 
     obj->InRoom = NULL;
@@ -998,7 +997,7 @@ void ObjectFromRoom(Object *obj)
 
     in_room->Remove(obj);
 
-    if (IsBitSet(obj->Flags, ITEM_COVERING) && !obj->Objects().empty())
+    if (obj->Flags.test(Flag::Obj::Covering) && !obj->Objects().empty())
         EmptyObjectContents(obj, NULL, obj->InRoom);
 
     if (obj->ItemType == ITEM_FIRE)
@@ -1101,7 +1100,7 @@ void ObjectFromObject(Object *obj)
 
     obj_from->Remove(obj);
 
-    if (IsBitSet(obj->Flags, ITEM_COVERING) && !obj->Objects().empty())
+    if (obj->Flags.test(Flag::Obj::Covering) && !obj->Objects().empty())
         EmptyObjectContents(obj, obj->InObject, NULL);
 
     obj->InObject = NULL;
@@ -1690,7 +1689,7 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
             return NULL;
         }
 
-        if (!IsBitSet(container->Flags, ITEM_COVERING)
+        if (!container->Flags.test(Flag::Obj::Covering)
             && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
             Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), TO_CHAR);
@@ -1700,9 +1699,10 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
         obj = GetObjectInList(ch, arg1, container->Objects());
 
         if (!obj)
-            Act(AT_PLAIN, IsBitSet(container->Flags, ITEM_COVERING) ?
-                "I see nothing like that beneath $p." :
-                "I see nothing like that in $p.",
+            Act(AT_PLAIN,
+                container->Flags.test(Flag::Obj::Covering)
+                ? "I see nothing like that beneath $p."
+                : "I see nothing like that in $p.",
                 ch, container, NULL, TO_CHAR);
         return obj;
     }
@@ -2086,7 +2086,7 @@ void CleanRoom(std::shared_ptr<Room> room)
         top_exit--;
     }
 
-    room->Flags = 0;
+    room->Flags.reset();
     room->Sector = SECT_CITY;
     room->Light = 0;
 }
@@ -2101,7 +2101,7 @@ void CleanObject(std::shared_ptr<ProtoObject> obj)
     obj->Description.erase();
     obj->ActionDescription.erase();
     obj->ItemType = ITEM_NONE;
-    obj->Flags = 0;
+    obj->Flags.reset();
     obj->WearFlags = 0;
     obj->Count = 0;
     obj->Weight = 0;

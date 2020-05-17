@@ -1319,7 +1319,6 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
         pObjIndex->ShortDescr[0] = CharToLowercase(pObjIndex->ShortDescr[0]);
         pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
         pObjIndex->ItemType = ITEM_TRASH;
-        pObjIndex->Flags = ITEM_PROTOTYPE;
         pObjIndex->Weight = 1;
     }
     else
@@ -1328,7 +1327,7 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
         pObjIndex->Description = cObjIndex->Description;
         pObjIndex->ActionDescription = cObjIndex->ActionDescription;
         pObjIndex->ItemType = cObjIndex->ItemType;
-        pObjIndex->Flags = cObjIndex->Flags | ITEM_PROTOTYPE;
+        pObjIndex->Flags = cObjIndex->Flags;
         pObjIndex->WearFlags = cObjIndex->WearFlags;
 
         pObjIndex->Weight = cObjIndex->Weight;
@@ -1356,6 +1355,7 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
         }
     }
 
+    pObjIndex->Flags.set(Flag::Obj::Prototype);
     int iHash = vnum % MAX_KEY_HASH;
     pObjIndex->Next = ObjectIndexHash[iHash];
     ObjectIndexHash[iHash] = pObjIndex;

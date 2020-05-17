@@ -163,8 +163,8 @@ void do_steal( Character *ch, std::string argument )
     }
 
   if ( !CanDropObject( ch, obj )
-       || IsBitSet( obj->Flags, ITEM_INVENTORY )
-       || IsBitSet( obj->Flags, ITEM_PROTOTYPE ))
+       || obj->Flags.test(Flag::Obj::Inventory)
+       || obj->Flags.test(Flag::Obj::Prototype))
     {
       ch->Echo("You can't manage to pry it away.\r\n");
       LearnFromFailure( ch, gsn_steal );

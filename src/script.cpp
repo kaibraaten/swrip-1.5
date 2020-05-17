@@ -677,7 +677,7 @@ static void LuaPushObject(lua_State *L, const Object *obj, size_t idx)
     /*
      * Castrate storage characters.
      */
-    if (obj->ItemType == ITEM_KEY && !IsBitSet(obj->Flags, ITEM_CLANOBJECT))
+    if (obj->ItemType == ITEM_KEY && !obj->Flags.test(Flag::Obj::ClanObject))
     {
         return;
     }
@@ -693,7 +693,7 @@ static void LuaPushObject(lua_State *L, const Object *obj, size_t idx)
     /*
      * Do NOT save prototype items!                               -Thoric
      */
-    if (IsBitSet(obj->Flags, ITEM_PROTOTYPE))
+    if (obj->Flags.test(Flag::Obj::Prototype))
     {
         return;
     }
@@ -1467,7 +1467,7 @@ static Object *LuaLoadObject(lua_State *L)
 
     if (FieldExists(L, "Flags"))
     {
-        obj->Flags = LuaLoadFlags(L, "Flags").to_ulong();
+        obj->Flags = LuaLoadFlags(L, "Flags");
     }
 
     if (FieldExists(L, "WearFlags"))

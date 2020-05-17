@@ -84,7 +84,7 @@ void do_mine( Character *ch, std::string arg )
 
   ch->Fatigue.Current -= move;
 
-  SetBit( obj->Flags, ITEM_BURRIED );
+  obj->Flags.set(Flag::Obj::Burried);
   SetWaitState( ch, urange( 10, move / 2, 100 ) );
 
   obj->ArmedBy = ch->Name;
