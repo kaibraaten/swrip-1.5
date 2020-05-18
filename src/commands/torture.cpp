@@ -69,7 +69,7 @@ void do_torture( Character *ch, std::string arg )
   SetWaitState( ch, SkillTable[gsn_torture]->Beats );
 
   fail = false;
-  the_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 10, RIS_PARALYSIS );
+  the_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 10, Flag::Ris::Paralysis);
 
   if ( the_chance == 1000 )
     fail = true;

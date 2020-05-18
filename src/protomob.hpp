@@ -43,9 +43,9 @@ public:
     int NumberOfAttacks = 0;
     int Gold = 0;
     int exp = 0;
-    int Resistant = 0;
-    int Immune = 0;
-    int Susceptible = 0;
+    std::bitset<Flag::MAX> Resistant;
+    std::bitset<Flag::MAX> Immune;
+    std::bitset<Flag::MAX> Susceptible;
     int AttackFlags = 0;
     int DefenseFlags = 0;
     int Speaks = 0;

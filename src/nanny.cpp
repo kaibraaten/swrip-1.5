@@ -679,8 +679,8 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
             }
         }
 
-        ch->Resistant += RaceTable[ch->Race].Resistant;
-        ch->Susceptible += RaceTable[ch->Race].Susceptible;
+        ch->Resistant |= RaceTable[ch->Race].Resistant;
+        ch->Susceptible |= RaceTable[ch->Race].Susceptible;
 
         {
             int ability;

@@ -8,13 +8,13 @@ ch_ret spell_weaken(int sn, int level, Character* ch, void* vo)
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC))
+    if (victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
     }
 
-    if (victim->Race == RACE_DROID)
+    if (IsDroid(victim))
         return rSPELL_FAILED;
 
     if (IsAffected(victim, sn) || SaveVsWands(level, victim))

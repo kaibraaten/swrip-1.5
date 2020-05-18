@@ -490,7 +490,7 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
     case APPLY_WEARSPELL:
     case APPLY_REMOVESPELL:
         if (ch->InRoom->Flags.test(Flag::Room::NoMagic)
-            || IsBitSet(ch->Immune, RIS_MAGIC)
+            || ch->Immune.test(Flag::Ris::Magic)
             || saving_char == ch               /* so save/quit doesn't trigger */
             || loading_char == ch)    /* so loading doesn't trigger */
         {

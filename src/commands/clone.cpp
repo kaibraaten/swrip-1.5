@@ -99,7 +99,7 @@ void do_clone(Character *ch, std::string argument)
         if (ch->Ability.Main == HUNTING_ABILITY)
             ch->PermStats.Frc = low_frc;
 
-        if (ch->Race == RACE_DROID)
+        if (IsDroid(ch))
             ch->PermStats.Frc = 0;
 
         if (frc > 0)

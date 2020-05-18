@@ -228,7 +228,10 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
                 +700,
                     0,
-                    RIS_SLEEP + RIS_POISON + RIS_PARALYSIS + RIS_ENERGY,
+                    (1 << Flag::Ris::Sleep)
+                    + (1 << Flag::Ris::Poison)
+                    + (1 << Flag::Ris::Paralysis)
+                    + (1 << Flag::Ris::Energy),
                     0,
                     0,
                     LANG_HUTT,
@@ -293,7 +296,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                 +20,
                     0,
                     0,
-                    RIS_NONMAGIC + RIS_POISON,
+                    (1 << Flag::Ris::NonMagic) + (1 << Flag::Ris::Poison),
                     0,
                     LANG_SHISTAVANEN,
                     false
@@ -325,7 +328,9 @@ const std::array<const Race, MAX_RACE> RaceTable
                 +60,
                     0,
                     0,
-                    RIS_SLEEP + RIS_PARALYSIS + RIS_MAGIC,
+                    (1 << Flag::Ris::Sleep)
+                    + (1 << Flag::Ris::Paralysis)
+                    + (1 << Flag::Ris::Magic),
                     0,
                     LANG_GAMORREAN,
                     false
@@ -772,7 +777,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                 0,
                     0,
                     0,
-                    RIS_SLEEP + RIS_ELECTRICITY,
+                    (1 << Flag::Ris::Sleep) + (1 << Flag::Ris::Electricity),
                     0,
                     LANG_BINARY,
                     false
@@ -803,7 +808,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
                 +40,
                     +1000,
-                    RIS_FIRE,
+                    (1 << Flag::Ris::Fire),
                     0,
                     0,
                     LANG_FIRRERREO,
@@ -1028,8 +1033,8 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
                 0,
                     0,
-                    RIS_POISON,
-                    RIS_SLEEP + RIS_PARALYSIS,
+                    (1 << Flag::Ris::Poison),
+                    (1 << Flag::Ris::Sleep) + (1 << Flag::Ris::Paralysis),
                     0,
                     LANG_HUTT,
                     false
@@ -1060,7 +1065,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
                 +45,
                     0,
-                    RIS_POISON + RIS_COLD,
+                    (1 << Flag::Ris::Poison) + (1 << Flag::Ris::Cold),
                     0,
                     0,
                     LANG_YEVETHAN,
@@ -1189,7 +1194,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                 0,
                     0,
                     0,
-                    RIS_SLEEP + RIS_ELECTRICITY,
+                    (1 << Flag::Ris::Sleep) + (1 << Flag::Ris::Electricity),
                     0,
                     LANG_BINARY,
                     false
@@ -1252,8 +1257,8 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
                 +150,
                     0,
-                    RIS_NONMAGIC,
-                    RIS_SLEEP + RIS_ELECTRICITY,
+                    (1 << Flag::Ris::NonMagic),
+                    (1 << Flag::Ris::Sleep) + (1 << Flag::Ris::Electricity),
                     0,
                     LANG_BINARY,
                     false
@@ -1285,7 +1290,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                 0,
                     0,
                     0,
-                    RIS_SLEEP + RIS_ELECTRICITY,
+                    (1 << Flag::Ris::Sleep) + (1 << Flag::Ris::Electricity),
                     0,
                     LANG_BINARY,
                     false
@@ -1317,7 +1322,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                 0,
                     0,
                     0,
-                    RIS_SLEEP + RIS_ELECTRICITY,
+                    (1 << Flag::Ris::Sleep) + (1 << Flag::Ris::Electricity),
                     0,
                     LANG_BINARY,
                     false
@@ -1349,7 +1354,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                 +2000,
                     +5000,
                     0,
-                    RIS_SLEEP + RIS_ELECTRICITY,
+                    (1 << Flag::Ris::Sleep) + (1 << Flag::Ris::Electricity),
                     0,
                     LANG_COMMON,
                     false

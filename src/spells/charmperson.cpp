@@ -18,21 +18,21 @@ ch_ret spell_charm_person(int sn, int level, Character* ch, void* vo)
         return rSPELL_FAILED;
     }
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC)
-        || IsBitSet(victim->Immune, RIS_CHARM))
+    if (victim->Immune.test(Flag::Ris::Magic)
+        || victim->Immune.test(Flag::Ris::Charm))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
     }
 
-    if ((!IsNpc(victim) && !IsNpc(ch)) || ch->Race == RACE_DROID)
+    if ((!IsNpc(victim) && !IsNpc(ch)) || IsDroid(ch))
     {
         ch->Echo("I don't think so...\r\n");
         victim->Echo("You feel as if someone tried to enter your mind but failed..\r\n");
         return rSPELL_FAILED;
     }
 
-    charm_chance = ModifySavingThrowBasedOnResistance(victim, level, RIS_CHARM);
+    charm_chance = ModifySavingThrowBasedOnResistance(victim, level, Flag::Ris::Charm);
 
     if (IsAffectedBy(victim, AFF_CHARM)
         || charm_chance == 1000

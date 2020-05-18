@@ -21,7 +21,7 @@ ch_ret spell_invis(int sn, int level, Character* ch, void* vo)
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
-        if (IsBitSet(victim->Immune, RIS_MAGIC))
+        if (victim->Immune.test(Flag::Ris::Magic))
         {
             ImmuneCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;

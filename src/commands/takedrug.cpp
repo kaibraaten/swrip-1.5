@@ -93,7 +93,7 @@ static void ApplyRyll(Character *ch, int spiceGrade)
   af = std::make_shared<Affect>();
   af->Type      = -1;
   af->Location  = APPLY_IMMUNE;
-  af->Modifier  = RIS_POISON;
+  af->Modifier  = 1 << Flag::Ris::Poison;
   af->Duration  = urange( 1, 2 * (ch->PCData->DrugLevel[SPICE_RYLL]
                                   - ch->PCData->Addiction[SPICE_RYLL]),
                           2 * spiceGrade );

@@ -387,7 +387,7 @@ void do_cast(Character* ch, std::string argument)
          */
         if ((skill->Target == TAR_CHAR_DEFENSIVE
             || skill->Target == TAR_CHAR_SELF)
-            && victim && IsBitSet(victim->Immune, RIS_MAGIC))
+            && victim && victim->Immune.test(Flag::Ris::Magic))
         {
             ImmuneCasting(skill, ch, victim, NULL);
             retcode = rSPELL_FAILED;

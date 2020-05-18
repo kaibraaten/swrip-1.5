@@ -439,8 +439,8 @@ void ShowCharacterCondition( const Character *ch, const Character *victim )
 
   strcpy( buf, PERS(victim, ch).c_str() );
 
-  if ( (IsNpc ( victim ) && IsBitSet( victim->Flags , ACT_DROID ) ) ||
-       ( victim->Race == RACE_DROID ) )
+  if ((IsNpc(victim) && IsBitSet(victim->Flags, ACT_DROID))
+      || IsDroid(victim))
     {
 
       if ( percent >= 100 ) strcat( buf, " is in perfect condition.\r\n"  );

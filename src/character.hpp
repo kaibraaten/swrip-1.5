@@ -101,9 +101,9 @@ public:
     int Gold = 0;
     int Flags = 0;
     int AffectedBy = 0;
-    int Resistant = 0;
-    int Immune = 0;
-    int Susceptible = 0;
+    std::bitset<Flag::MAX> Resistant;
+    std::bitset<Flag::MAX> Immune;
+    std::bitset<Flag::MAX> Susceptible;
     int AttackFlags = 0;
     int DefenseFlags = 0;
     int Speaks = LANG_COMMON;

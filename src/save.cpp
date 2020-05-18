@@ -353,19 +353,19 @@ static void WriteCharacter(const Character *ch, FILE *fp)
         fprintf(fp, "Deaf         %d\n", ch->Deaf);
     }
 
-    if (ch->Resistant)
+    if (ch->Resistant.any())
     {
-        fprintf(fp, "Resistant    %d\n", ch->Resistant);
+        fprintf(fp, "Resistant    %ld\n", ch->Resistant.to_ulong());
     }
 
-    if (ch->Immune)
+    if (ch->Immune.any())
     {
-        fprintf(fp, "Immune       %d\n", ch->Immune);
+        fprintf(fp, "Immune       %ld\n", ch->Immune.to_ulong());
     }
 
-    if (ch->Susceptible)
+    if (ch->Susceptible.any())
     {
-        fprintf(fp, "Susceptible  %d\n", ch->Susceptible);
+        fprintf(fp, "Susceptible  %ld\n", ch->Susceptible.to_ulong());
     }
 
     if (ch->PCData && ch->PCData->RestoreTime)

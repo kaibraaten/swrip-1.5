@@ -58,7 +58,7 @@ ch_ret spell_remove_invis(int sn, int level, Character* ch, void* vo)
                 return rSPELL_FAILED;
             }
 
-            if (IsBitSet(victim->Immune, RIS_MAGIC))
+            if (victim->Immune.test(Flag::Ris::Magic))
             {
                 ImmuneCasting(skill, ch, victim, NULL);
                 return rSPELL_FAILED;

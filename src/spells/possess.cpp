@@ -36,7 +36,7 @@ ch_ret spell_possess(int sn, int level, Character* ch, void* vo)
         return rSPELL_FAILED;
     }
 
-    if (victim->Race == RACE_DROID)
+    if (IsDroid(victim))
     {
         ch->Echo("The brain of a machine confuses you.\r\n");
         return rSPELL_FAILED;
@@ -48,7 +48,7 @@ ch_ret spell_possess(int sn, int level, Character* ch, void* vo)
         return rSPELL_FAILED;
     }
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC))
+    if (victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;

@@ -9,7 +9,7 @@ ch_ret spell_harm(int sn, int level, Character* ch, void* vo)
     int dam = 0;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC))
+    if (victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;

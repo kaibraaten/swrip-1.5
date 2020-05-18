@@ -7,7 +7,7 @@ ch_ret spell_cure_blindness(int sn, int level, Character* ch, void* vo)
     Character* victim = (Character*)vo;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC))
+    if (victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;

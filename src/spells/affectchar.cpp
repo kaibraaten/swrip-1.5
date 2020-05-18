@@ -49,9 +49,9 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
             ch->Alignment = ch->Alignment - 100;
             ch->Alignment = urange(-1000, ch->Alignment, 1000);
             ApplySithPenalty(ch);
-            aff_chance = ModifySavingThrowBasedOnResistance(victim, level, RIS_POISON);
+            aff_chance = ModifySavingThrowBasedOnResistance(victim, level, Flag::Ris::Poison);
 
-            if (victim->Race == RACE_DROID)
+            if (IsDroid(victim))
             {
                 aff_chance = 1000;
             }
@@ -91,9 +91,9 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
 
         case AFF_SLEEP:
             af->Type = gsn_sleep;
-            aff_chance = ModifySavingThrowBasedOnResistance(victim, level, RIS_SLEEP);
+            aff_chance = ModifySavingThrowBasedOnResistance(victim, level, Flag::Ris::Sleep);
 
-            if (victim->Race == RACE_DROID)
+            if (IsDroid(victim))
             {
                 aff_chance = 1000;
             }
@@ -113,9 +113,9 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
 
         case AFF_CHARM:
             af->Type = gsn_charm_person;
-            aff_chance = ModifySavingThrowBasedOnResistance(victim, level, RIS_CHARM);
+            aff_chance = ModifySavingThrowBasedOnResistance(victim, level, Flag::Ris::Charm);
 
-            if (victim->Race == RACE_DROID)
+            if (IsDroid(victim))
             {
                 aff_chance = 1000;
             }
@@ -150,7 +150,7 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
                 if (ch != victim
                     && victim->HitPoints.Current < victim->HitPoints.Max
                     && af->Modifier > 0
-                    && victim->Race != RACE_DROID)
+                    && IsDroid(victim))
                 {
                     ch->Echo("The noble Jedi use their powers to help others!\r\n");
                     ch->Alignment += 5;
@@ -175,7 +175,7 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
                     return rSPELL_FAILED;
                 }
 
-                if (ch != victim && victim->Race != RACE_DROID)
+                if (ch != victim && !IsDroid(victim))
                 {
                     ch->Echo("The noble Jedi use their powers to help others!\r\n");
                     ch->Alignment += 10;

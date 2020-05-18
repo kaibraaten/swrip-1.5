@@ -152,7 +152,7 @@ ch_ret spell_identify(int sn, int level, Character* ch, void* vo)
     }
     else if ((victim = GetCharacterInRoom(ch, spell_target_name)) != NULL)
     {
-        if (IsBitSet(victim->Immune, RIS_MAGIC))
+        if (victim->Immune.test(Flag::Ris::Magic))
         {
             ImmuneCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;

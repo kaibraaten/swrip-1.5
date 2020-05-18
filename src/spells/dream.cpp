@@ -21,7 +21,7 @@ ch_ret spell_dream(int sn, int level, Character* ch, void* vo)
         ch->Echo("They aren't asleep.\r\n");
         return rSPELL_FAILED;
     }
-    if (victim->Race == RACE_DROID)
+    if (IsDroid(victim))
     {
         ch->Echo("Machines do not dream.\r\n");
         return rSPELL_FAILED;

@@ -57,11 +57,11 @@ void do_steal( Character *ch, std::string argument )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 13)
     + TimesKilled( ch, victim )*7;
 
-  if ( ( IsBitSet( victim->Immune, RIS_STEAL ) )
+  if ( (victim->Immune.test(Flag::Ris::Steal))
        || ( victim->Position != POS_STUNNED
             && (victim->Position == POS_FIGHTING
                 || percent > ( IsNpc(ch) ? 90 : ch->PCData->Learned[gsn_steal] ) ) ) )
-    {
+  {
       /*
        * Failure.
        */

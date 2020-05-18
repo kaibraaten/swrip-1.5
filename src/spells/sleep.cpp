@@ -30,7 +30,7 @@ ch_ret spell_sleep(int sn, int level, Character* ch, void* vo)
     if (IsSafe(ch, victim))
         return rSPELL_FAILED;
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC))
+    if (victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
@@ -43,7 +43,7 @@ ch_ret spell_sleep(int sn, int level, Character* ch, void* vo)
         tmp = level;
 
     if (IsAffectedBy(victim, AFF_SLEEP)
-        || (sleep_chance = ModifySavingThrowBasedOnResistance(victim, tmp, RIS_SLEEP)) == 1000
+        || (sleep_chance = ModifySavingThrowBasedOnResistance(victim, tmp, Flag::Ris::Sleep)) == 1000
         || (victim != ch && victim->InRoom->Flags.test(Flag::Room::Safe))
         || SaveVsSpellStaff(sleep_chance, victim))
     {
@@ -75,13 +75,13 @@ ch_ret spell_sleep(int sn, int level, Character* ch, void* vo)
         ToChannel(log_buf, CHANNEL_MONITOR, "Monitor", umax(LEVEL_IMMORTAL, ch->TopLevel));
     }
 
-    if (IsAwake(victim) && victim->Race != RACE_DROID)
+    if (IsAwake(victim) && !IsDroid(victim))
     {
         Act(AT_MAGIC, "You feel very sleepy ..... zzzzzz.", victim, NULL, NULL, TO_CHAR);
         Act(AT_MAGIC, "$n goes to sleep.", victim, NULL, NULL, TO_ROOM);
         victim->Position = POS_SLEEPING;
     }
-    else if (IsAwake(victim) && victim->Race == RACE_DROID)
+    else if (IsAwake(victim) && IsDroid(victim))
     {
         Act(AT_MAGIC, "You feel a jolt as you are deactivated.", victim, NULL, NULL, TO_CHAR);
         Act(AT_MAGIC, "$n shutsdown.", victim, NULL, NULL, TO_ROOM);

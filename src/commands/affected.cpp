@@ -18,7 +18,7 @@ void do_affected(Character* ch, std::string argument)
         {
             ch->Echo("\r\n");
 
-            if (ch->Resistant > 0)
+            if (ch->Resistant.any())
             {
                 SetCharacterColor(AT_BLUE, ch);
                 ch->Echo("Resistances:  ");
@@ -26,7 +26,7 @@ void do_affected(Character* ch, std::string argument)
                 ch->Echo("%s\r\n", FlagString(ch->Resistant, RisFlags).c_str());
             }
 
-            if (ch->Immune > 0)
+            if (ch->Immune.any())
             {
                 SetCharacterColor(AT_BLUE, ch);
                 ch->Echo("Immunities:   ");
@@ -34,7 +34,7 @@ void do_affected(Character* ch, std::string argument)
                 ch->Echo("%s\r\n", FlagString(ch->Immune, RisFlags).c_str());
             }
 
-            if (ch->Susceptible > 0)
+            if (ch->Susceptible.any())
             {
                 SetCharacterColor(AT_BLUE, ch);
                 ch->Echo("Suscepts:     ");

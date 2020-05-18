@@ -14,7 +14,7 @@ ch_ret spell_energy_drain(int sn, int level, Character* ch, void* vo)
     int drain_chance = 0;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC))
+    if (victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
@@ -25,7 +25,7 @@ ch_ret spell_energy_drain(int sn, int level, Character* ch, void* vo)
     ch->Alignment = urange(-1000, ch->Alignment, 1000);
     ApplySithPenalty(ch);
 
-    drain_chance = ModifySavingThrowBasedOnResistance(victim, victim->TopLevel, RIS_DRAIN);
+    drain_chance = ModifySavingThrowBasedOnResistance(victim, victim->TopLevel, Flag::Ris::Drain);
 
     if (drain_chance == 1000 || SaveVsSpellStaff(drain_chance, victim))
     {

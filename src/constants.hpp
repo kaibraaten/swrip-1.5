@@ -73,27 +73,27 @@ namespace Flag
         enum :size_t
         {
             Coruscant,
-            Kashyyyk,
-            Ryloth,
-            _03,
-            _04,
-            MonCalamari,
-            Honoghr,
-            Gamorr,
-            Tatooine,
-            Adari,
-            Byss,
-            Endor,
-            _12,
-            _13,
-            _14,
-            _15,
-            Corellia,
-            Hoth,
-            _18,
-            _19,
-            Kuat
-        };
+                Kashyyyk,
+                Ryloth,
+                _03,
+                _04,
+                MonCalamari,
+                Honoghr,
+                Gamorr,
+                Tatooine,
+                Adari,
+                Byss,
+                Endor,
+                _12,
+                _13,
+                _14,
+                _15,
+                Corellia,
+                Hoth,
+                _18,
+                _19,
+                Kuat
+                };
     }
 }
 
@@ -220,7 +220,7 @@ constexpr auto OS_CORPSE = 1;
 /*
  * Time and weather stuff.
  */
- /* Sun position */
+/* Sun position */
 enum
 {
     SUN_DARK,
@@ -585,10 +585,10 @@ constexpr auto MAX_NUMBER_OF_TURRETS_IN_SHIP = 10;
  *                                                                         *
  ***************************************************************************/
 
- /*
-  * Well known mob virtual numbers.
-  * Defined in #MOBILES.
-  */
+/*
+ * Well known mob virtual numbers.
+ * Defined in #MOBILES.
+ */
 constexpr vnum_t MOB_VNUM_ANIMATED_CORPSE = 5;
 constexpr vnum_t MOB_VNUM_POLY_WOLF = 10;
 
@@ -697,30 +697,49 @@ constexpr auto AFF_AQUA_BREATH = BV31;
 /*
  * Resistant Immune Susceptible flags
  */
-constexpr auto RIS_FIRE = BV00;
-constexpr auto RIS_COLD = BV01;
-constexpr auto RIS_ELECTRICITY = BV02;
-constexpr auto RIS_ENERGY = BV03;
-constexpr auto RIS_BLUNT = BV04;
-constexpr auto RIS_PIERCE = BV05;
-constexpr auto RIS_SLASH = BV06;
-constexpr auto RIS_ACID = BV07;
-constexpr auto RIS_POISON = BV08;
-constexpr auto RIS_DRAIN = BV09;
-constexpr auto RIS_SLEEP = BV10;
-constexpr auto RIS_CHARM = BV11;
-constexpr auto RIS_HOLD = BV12;
-constexpr auto RIS_NONMAGIC = BV13;
-constexpr auto RIS_PLUS1 = BV14;
-constexpr auto RIS_PLUS2 = BV15;
-constexpr auto RIS_PLUS3 = BV16;
-constexpr auto RIS_PLUS4 = BV17;
-constexpr auto RIS_PLUS5 = BV18;
-constexpr auto RIS_PLUS6 = BV19;
-constexpr auto RIS_MAGIC = BV20;
-constexpr auto RIS_PARALYSIS = BV21;
-constexpr auto RIS_STEAL = BV22;
-/* 21 RIS's*/
+namespace Flag
+{
+    namespace Ris
+    {
+        enum : size_t
+        {
+            Fire,
+                Cold,
+                Electricity,
+                Energy,
+                Blunt,
+                Pierce,
+                Slash,
+                Acid,
+                Poison,
+                Drain,
+                Sleep,
+                Charm,
+                Hold,
+                NonMagic,
+
+                // The Plusx bits have something to do with vs weapon hitroll.
+                Plus1,
+                Plus2,
+                Plus3,
+                Plus4,
+                Plus5,
+                Plus6,
+                Magic,
+                Paralysis,
+                Steal,
+                _23,
+                _24,
+                _25,
+                _26,
+                _27,
+                _28,
+                _29,
+                _30,
+                _31
+                };
+    }
+}
 
 /*
  * Attack types
@@ -891,7 +910,7 @@ enum
  * Sex.
  * Used in #MOBILES.
  */
- /* SexType */
+/* SexType */
 enum
 {
     SEX_NEUTRAL,
@@ -1003,7 +1022,7 @@ constexpr auto NEW_CHARACTER_START_CREDITS = 5000;
  * Item types.
  * Used in #OBJECTS.
  */
- /* ItemTypes */
+/* ItemTypes */
 enum
 {
     ITEM_NONE,
@@ -1298,7 +1317,7 @@ namespace Flag
                 Burried,
                 Prototype,
                 HumanSize
-        };
+                };
     }
 }
 
@@ -1428,7 +1447,7 @@ namespace Flag
                 _29,
                 _30,
                 _31
-        };
+                };
     }
 }
 
@@ -1436,7 +1455,7 @@ namespace Flag
  * Apply types (for affects).
  * Used in #OBJECTS.
  */
- /* ApplyType */
+/* ApplyType */
 enum
 {
     APPLY_NONE,
@@ -1546,7 +1565,7 @@ constexpr vnum_t ROOM_VNUM_CLONING_CLINIC = 10002;
  * Directions.
  * Used in #ROOMS.
  */
- /* DirectionType */
+/* DirectionType */
 enum
 {
     DIR_INVALID = -1,
@@ -1569,7 +1588,7 @@ enum
  * Sector types.
  * Used in #ROOMS.
  */
- /* SectorType */
+/* SectorType */
 enum
 {
     SECT_INVALID = -1,
@@ -1594,7 +1613,7 @@ enum
  * Equpiment wear locations.
  * Used in #RESETS.
  */
- /* WearLocation */
+/* WearLocation */
 enum
 {
     WEAR_NONE = -1,
@@ -1641,10 +1660,10 @@ enum
  *                                                                         *
  ***************************************************************************/
 
- /*
-  * Conditions.
-  */
-  /* ConditionType */
+/*
+ * Conditions.
+ */
+/* ConditionType */
 enum
 {
     COND_DRUNK,
@@ -1657,7 +1676,7 @@ enum
 /*
  * Positions.
  */
- /* PositionType */
+/* PositionType */
 enum
 {
     POS_DEAD,
@@ -1781,7 +1800,7 @@ constexpr auto LIQ_MAX = 39;
  *   'R': randomize room exits
  *   'S': stop (end of list)
  */
- /* Constants for arg2 of 'B' resets. */
+/* Constants for arg2 of 'B' resets. */
 
 constexpr auto BIT_RESET_DOOR = 0;
 constexpr auto BIT_RESET_OBJECT = 1;
@@ -1804,10 +1823,10 @@ constexpr auto TYPE_HIT = 1000;  /* allows for 1000 skills/spells */
 constexpr auto TYPE_HERB = 2000; /* allows for 1000 attack types  */
 constexpr auto TYPE_PERSONAL = 3000; /* allows for 1000 herb types    */
 
- /*
-  *  Target types.
-  */
-  /* SkillTargetType */
+/*
+ *  Target types.
+ */
+/* SkillTargetType */
 enum
 {
     TAR_IGNORE,
@@ -1869,8 +1888,8 @@ constexpr const char *Concat(const char *a, const char *b)
 #define WHO_FILE        DATA_DIR "WHO"          /* Who output file     */
 #define WEBWHO_FILE     DATA_DIR "WEBWHO"       /* WWW Who output file */
 #define USAGE_FILE      LOG_DIR "usage.txt"    /* How many people are on
-                                                     every half hour - trying to
-                                                     determine best reboot time */
+                                                  every half hour - trying to
+                                                  determine best reboot time */
 
 constexpr auto ERROR_PROG = -1;
 constexpr auto ACT_PROG = BV00;

@@ -15,7 +15,7 @@ ch_ret spell_blindness(int sn, int level, Character* ch, void* vo)
     else
         tmp = level;
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC))
+    if (victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;

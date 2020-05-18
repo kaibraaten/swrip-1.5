@@ -1003,11 +1003,11 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
     {
         if (wield->Flags.test(Flag::Obj::Magic))
         {
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_MAGIC);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Magic);
         }
         else
         {
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_NONMAGIC);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::NonMagic);
         }
 
         /*
@@ -1017,7 +1017,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
     }
     else
     {
-        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_NONMAGIC);
+        dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::NonMagic);
     }
 
     /* check for RIS_PLUSx                                        -Thoric */
@@ -1029,23 +1029,23 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
 
         if (plusris != 0)
         {
-            plusris = RIS_PLUS1 << umin(plusris, 7);
+            plusris = (1 << Flag::Ris::Plus1) << umin(plusris, 7);
         }
 
         /* find high ris */
-        for (int i = RIS_PLUS1; i <= RIS_PLUS6; i <<= 1)
+        for (size_t i = Flag::Ris::Plus1; i <= Flag::Ris::Plus6; ++i)
         {
-            if (IsBitSet(victim->Immune, i))
+            if (victim->Immune.test(i))
             {
                 imm = i;
             }
 
-            if (IsBitSet(victim->Resistant, i))
+            if (victim->Resistant.test(i))
             {
                 res = i;
             }
 
-            if (IsBitSet(victim->Susceptible, i))
+            if (victim->Susceptible.test(i))
             {
                 sus = i;
             }
@@ -1120,7 +1120,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
         {
             dam /= 10;
             wield->Value[OVAL_WEAPON_CHARGE] -= 3;
-            int hit_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, COMBAT_ABILITY), RIS_PARALYSIS);
+            int hit_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, COMBAT_ABILITY), Flag::Ris::Paralysis);
             bool fail = false;
 
             if (hit_chance == 1000)
@@ -1335,7 +1335,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
 
     /* weapon spells      -Thoric */
     if (wield != nullptr
-        && !IsBitSet(victim->Immune, RIS_MAGIC)
+        && !victim->Immune.test(Flag::Ris::Magic)
         && !victim->InRoom->Flags.test(Flag::Room::NoMagic))
     {
         for (auto aff : wield->Prototype->Affects())
@@ -1429,13 +1429,13 @@ short ModifyDamageBasedOnResistance(const Character *ch, short dam, int ris)
 {
     short modifier = 10;
 
-    if (IsBitSet(ch->Immune, ris))
+    if (ch->Immune.test(ris))
         modifier -= 10;
 
-    if (IsBitSet(ch->Resistant, ris))
+    if (ch->Resistant.test(ris))
         modifier -= 2;
 
-    if (IsBitSet(ch->Susceptible, ris))
+    if (ch->Susceptible.test(ris))
         modifier += 2;
 
     if (modifier <= 0)
@@ -1511,27 +1511,27 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
     if (dam && dt != TYPE_UNDEFINED)
     {
         if (IS_FIRE(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_FIRE);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Fire);
         else if (IS_COLD(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_COLD);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Cold);
         else if (IS_ACID(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ACID);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Acid);
         else if (IS_ELECTRICITY(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ELECTRICITY);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Electricity);
         else if (IS_ENERGY(dt) || dt == (TYPE_HIT + 6))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ENERGY);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Energy);
         else if (IS_DRAIN(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_DRAIN);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Drain);
         else if (dt == gsn_poison || IS_POISON(dt))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_POISON);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Poison);
         else if (dt == (TYPE_HIT + 7) || dt == (TYPE_HIT + 8))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_BLUNT);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Blunt);
         else if (dt == (TYPE_HIT + 2) || dt == (TYPE_HIT + 11)
             || dt == (TYPE_HIT + 10))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_PIERCE);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Pierce);
         else if (dt == (TYPE_HIT + 1) || dt == (TYPE_HIT + 3)
             || dt == (TYPE_HIT + 4) || dt == (TYPE_HIT + 5))
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_SLASH);
+            dam = ModifyDamageBasedOnResistance(victim, dam, Flag::Ris::Slash);
 
         if (dam == -1)
         {
@@ -1824,7 +1824,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
     if (dam > 0 && dt > TYPE_HIT
         && !IsAffectedBy(victim, AFF_POISON)
         && IsWieldingPoisonedWeapon(ch)
-        && !IsBitSet(victim->Immune, RIS_POISON)
+        && !victim->Immune.test(Flag::Ris::Poison)
         && !SaveVsPoisonDeath(GetAbilityLevel(ch, COMBAT_ABILITY), victim))
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
@@ -1898,7 +1898,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
                 victim, 0, 0, TO_ROOM);
         }
         else if ((IsNpc(victim) && IsBitSet(victim->Flags, ACT_DROID))
-            || (!IsNpc(victim) && victim->Race == RACE_DROID))
+                 || (!IsNpc(victim) && IsDroid(victim)))
         {
             Act(AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM);
         }

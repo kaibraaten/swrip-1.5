@@ -61,44 +61,44 @@ bool IsImmuneToDamageType(const Character* ch, short damtype)
     switch (damtype)
     {
     case SD_FIRE:
-        if (IsBitSet(ch->Immune, RIS_FIRE))
+        if (ch->Immune[Flag::Ris::Fire])
             return true;
         break;
 
     case SD_COLD:
-        if (IsBitSet(ch->Immune, RIS_COLD))
+        if (ch->Immune[Flag::Ris::Cold])
             return true;
         break;
 
     case SD_ELECTRICITY:
-        if (IsBitSet(ch->Immune, RIS_ELECTRICITY))
+        if (ch->Immune[Flag::Ris::Electricity])
             return true;
         break;
 
     case SD_ENERGY:
-        if (IsBitSet(ch->Immune, RIS_ENERGY))
+        if (ch->Immune[Flag::Ris::Energy])
             return true;
         break;
 
     case SD_ACID:
-        if (IsBitSet(ch->Immune, RIS_ACID))
+        if (ch->Immune[Flag::Ris::Acid])
             return true;
         break;
 
     case SD_POISON:
-        if (IsBitSet(ch->Immune, RIS_POISON))
+        if (ch->Immune[Flag::Ris::Poison])
             return true;
 
-        if (ch->Race == RACE_DROID)
+        if (IsDroid(ch))
             return true;
 
         break;
 
     case SD_DRAIN:
-        if (IsBitSet(ch->Immune, RIS_DRAIN))
+        if (ch->Immune[Flag::Ris::Drain])
             return true;
 
-        if (ch->Race == RACE_DROID)
+        if (IsDroid(ch))
             return true;
 
         break;
@@ -313,19 +313,19 @@ int ModifySavingThrowBasedOnResistance(const Character* ch, int save_chance, int
 {
     short modifier = 10;
 
-    if (IsBitSet(ch->Immune, ris))
+    if (ch->Immune[ris])
         modifier -= 10;
 
-    if (ch->Race == RACE_DROID && (ris == SD_POISON || ris == SD_DRAIN))
+    if (IsDroid(ch) && (ris == Flag::Ris::Poison || ris == Flag::Ris::Drain))
         modifier -= 10;
 
-    if (ch->Race == RACE_DROID && ris == RIS_MAGIC)
+    if (IsDroid(ch) && ris == Flag::Ris::Magic)
         modifier -= 5;
 
-    if (IsBitSet(ch->Resistant, ris))
+    if (ch->Resistant[ris])
         modifier -= 2;
 
-    if (IsBitSet(ch->Susceptible, ris))
+    if (ch->Susceptible[ris])
         modifier += 2;
 
     if (modifier <= 0)
@@ -558,7 +558,7 @@ bool SaveVsPoisonDeath(int level, const Character* victim)
 {
     int save = 50 + (victim->TopLevel - level - victim->Saving.PoisonDeath) * 2;
 
-    if (victim->Race == RACE_DROID)
+    if (IsDroid(victim))
     {
         save += 50;
     }
@@ -572,7 +572,7 @@ bool SaveVsWands(int level, const Character* victim)
 {
     int save = 0;
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC))
+    if (victim->Immune[Flag::Ris::Magic])
     {
         return true;
     }
@@ -587,7 +587,7 @@ bool SaveVsParalyze(int level, const Character* victim)
 {
     int save = 50 + (victim->TopLevel - level - victim->Saving.ParaPetri) * 2;
 
-    if (victim->Race == RACE_DROID)
+    if (IsDroid(victim))
     {
         save += 50;
     }
@@ -609,7 +609,7 @@ bool SaveVsSpellStaff(int level, const Character* victim)
 {
     int save = 0;
 
-    if (IsBitSet(victim->Immune, RIS_MAGIC))
+    if (victim->Immune[Flag::Ris::Magic])
     {
         return true;
     }
@@ -621,7 +621,7 @@ bool SaveVsSpellStaff(int level, const Character* victim)
 
     save = 50 + (victim->TopLevel - level - victim->Saving.SpellStaff) * 2;
 
-    if (victim->Race == RACE_DROID)
+    if (IsDroid(victim))
     {
         save += 20;
     }
@@ -888,7 +888,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
         vo = (void*)victim;
 
         if (skill->Type != SKILL_HERB
-            && IsBitSet(victim->Immune, RIS_MAGIC))
+            && victim->Immune[Flag::Ris::Magic])
         {
             ImmuneCasting(skill, ch, victim, NULL);
             return rNONE;
@@ -899,7 +899,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
         vo = (void*)ch;
 
         if (skill->Type != SKILL_HERB
-            && IsBitSet(ch->Immune, RIS_MAGIC))
+            && ch->Immune[Flag::Ris::Magic])
         {
             ImmuneCasting(skill, ch, victim, NULL);
             return rNONE;
