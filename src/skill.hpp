@@ -65,7 +65,7 @@ extern int TopSN;
 extern int TopHerb;
 extern const std::array<const char * const, SKILLTARGETTYPE_MAX> SpellTargetName;
 extern const std::array<const char * const, SAVETYPE_MAX> SpellSaveName;
-extern const std::array<const char * const, MAX_BIT> SpellFlag;
+extern const std::array<const char * const, Flag::MAX> SpellFlag;
 
 /*
  * These are LookupSkill return values for common skills and spells.

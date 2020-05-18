@@ -157,7 +157,7 @@ void do_slookup(Character* ch, std::string arg)
             {
                 strcat(buf, " applies");
 
-                for (size_t x = 0; x < MAX_BIT; x++)
+                for (size_t x = 0; x < AffectFlags.size(); x++)
                 {
                     if (IsBitSet(aff->AffectedBy, 1 << x))
                     {

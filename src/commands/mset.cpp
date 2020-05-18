@@ -1152,7 +1152,7 @@ void do_mset( Character *ch, std::string argument )
           argument = OneArgument( argument, arg3 );
           value = GetAffectFlag( arg3 );
 
-          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= Flag::MAX )
             ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->AffectedBy, 1 << value );
@@ -1299,7 +1299,7 @@ void do_mset( Character *ch, std::string argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
 	  
-          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= Flag::MAX )
             ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->Resistant, 1 << value );
@@ -1331,7 +1331,7 @@ void do_mset( Character *ch, std::string argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
 
-          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= Flag::MAX )
             ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->Immune, 1 << value );
@@ -1397,7 +1397,7 @@ void do_mset( Character *ch, std::string argument )
           argument = OneArgument( argument, arg3 );
           value = GetAttackFlag( arg3 );
 	  
-          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= Flag::MAX )
             ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->AttackFlags, 1 << value );
@@ -1429,7 +1429,7 @@ void do_mset( Character *ch, std::string argument )
           argument = OneArgument( argument, arg3 );
           value = GetDefenseFlag( arg3 );
 	  
-          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= Flag::MAX )
             ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->DefenseFlags, 1 << value );

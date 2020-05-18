@@ -541,7 +541,7 @@ std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argum
             argument = OneArgument(argument, arg4);
             value = GetTrapFlag(arg4);
 
-            if (value >= 0 || value < (int)MAX_BIT)
+            if (value >= 0 || value < (int)Flag::MAX)
             {
                 SetBit(extra, 1 << value);
             }

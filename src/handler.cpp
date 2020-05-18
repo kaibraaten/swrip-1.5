@@ -2191,7 +2191,7 @@ void ShowAffectToCharacter(const Character *ch, std::shared_ptr<Affect> paf)
             sprintf(buf, "Affects %s by",
                 GetAffectLocationName(paf->Location));
 
-            for (size_t x = 0; x < MAX_BIT; x++)
+            for (size_t x = 0; x < AffectFlags.size(); x++)
             {
                 if (IsBitSet(paf->Modifier, 1 << x))
                 {
@@ -2215,7 +2215,7 @@ void ShowAffectToCharacter(const Character *ch, std::shared_ptr<Affect> paf)
             sprintf(buf, "Affects %s by",
                 GetAffectLocationName(paf->Location));
 
-            for (size_t x = 0; x < MAX_BIT; x++)
+            for (size_t x = 0; x < RisFlags.size(); x++)
             {
                 if (IsBitSet(paf->Modifier, 1 << x))
                 {

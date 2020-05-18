@@ -394,7 +394,7 @@ void do_oset( Character *ch, std::string argument )
             argument = OneArgument( argument, arg3 );
             value = GetWearFlag( arg3 );
 
-            if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
+            if ( value < 0 || static_cast<size_t>(value) >= Flag::MAX )
                 ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
             else
                 obj->WearFlags.flip(value);

@@ -63,7 +63,7 @@ std::string FlagString(const std::bitset<Flag::MAX> &flags,
 }
 
 std::string FlagString(int bitvector,
-                       const std::array<const char * const, MAX_BIT> &nameArray)
+                       const std::array<const char * const, Flag::MAX> &nameArray)
 {
     return FlagString(bitvector, nameArray.data());
 }
@@ -2090,7 +2090,7 @@ const char * const RoomSents[SECT_MAX][25] =
 
 };
 
-const std::array<const char * const, MAX_BIT> RoomFlags =
+const std::array<const char * const, Flag::MAX> RoomFlags =
 {
     "Dark",
     "_Reserved",
@@ -2126,7 +2126,7 @@ const std::array<const char * const, MAX_BIT> RoomFlags =
     "Auction"
 };
 
-const std::array<const char * const, MAX_BIT> WearFlags =
+const std::array<const char * const, Flag::MAX> WearFlags =
 {
     "Take",
     "Finger",
@@ -2162,7 +2162,7 @@ const std::array<const char * const, MAX_BIT> WearFlags =
     "_31"
 };
 
-const std::array<const char * const, MAX_BIT> ObjectFlags =
+const std::array<const char * const, Flag::MAX> ObjectFlags =
 {
     "Glow",
     "Hum",
@@ -2198,7 +2198,7 @@ const std::array<const char * const, MAX_BIT> ObjectFlags =
     "HumanSize"
 };
 
-const std::array<const char * const, MAX_BIT> AffectFlags =
+const std::array<const char * const, Flag::MAX> AffectFlags =
 {
     "Blind",
     "Invisible",
@@ -2405,7 +2405,7 @@ const std::array<const char * const, MAX_APPLY_TYPE> AffectTypes =
     "snipe"
 };
 
-const std::array<const char * const, MAX_BIT> MobFlags =
+const std::array<const char * const, Flag::MAX> MobFlags =
 {
     "Npc",
     "Sentinel",
@@ -2441,7 +2441,7 @@ const std::array<const char * const, MAX_BIT> MobFlags =
     "_31"
 };
 
-const std::array<const char * const, MAX_BIT> PlanetFlags =
+const std::array<const char * const, Flag::MAX> PlanetFlags =
 {
     "NoCapture",
     "_01",
@@ -2477,7 +2477,7 @@ const std::array<const char * const, MAX_BIT> PlanetFlags =
     "_31"
 };
 
-const std::array<const char * const, MAX_BIT> WantedFlags =
+const std::array<const char * const, Flag::MAX> WantedFlags =
 {
     "Coruscant",
     "Kashyyyk",
@@ -2557,7 +2557,7 @@ const char *GetSpiceTypeName(size_t type)
     return SpiceTable[type];
 }
 
-const std::array<const char * const, MAX_BIT> PlayerFlags =
+const std::array<const char * const, Flag::MAX> PlayerFlags =
 {
     "Npc",
     "BoughtPet",
@@ -2629,7 +2629,7 @@ const std::array<const char * const, Flag::MAX> PcFlags =
     "_31"
 };
 
-const std::array<const char * const, MAX_BIT> TrapFlags
+const std::array<const char * const, Flag::MAX> TrapFlags
 {
     "Room",
         "Obj",
@@ -2665,7 +2665,7 @@ const std::array<const char * const, MAX_BIT> TrapFlags
         "_31"
         };
 
-const std::array<const char * const, MAX_BIT> RisFlags =
+const std::array<const char * const, Flag::MAX> RisFlags =
 {
     "fire",
     "cold",
@@ -2701,7 +2701,7 @@ const std::array<const char * const, MAX_BIT> RisFlags =
     "_31"
 };
 
-const std::array<const char * const, MAX_BIT> TriggerFlags =
+const std::array<const char * const, Flag::MAX> TriggerFlags =
 {
     "up",
     "unlock",
@@ -2737,7 +2737,7 @@ const std::array<const char * const, MAX_BIT> TriggerFlags =
     "_31"
 };
 
-const std::array<const char * const, MAX_BIT> DefenseFlags =
+const std::array<const char * const, Flag::MAX> DefenseFlags =
 {
     "parry",
     "dodge",
@@ -2773,7 +2773,7 @@ const std::array<const char * const, MAX_BIT> DefenseFlags =
     "_31"
 };
 
-const std::array<const char * const, MAX_BIT> AttackFlags =
+const std::array<const char * const, Flag::MAX> AttackFlags =
 {
     "bite",
     "claws",
@@ -2809,7 +2809,7 @@ const std::array<const char * const, MAX_BIT> AttackFlags =
     "_31"
 };
 
-const std::array<const char * const, MAX_BIT> AreaFlags =
+const std::array<const char * const, Flag::MAX> AreaFlags =
 {
     "NoPkill",
     "_01",
@@ -3013,7 +3013,7 @@ const char *GetCrystalTypeName(size_t type)
  *  hour and time, rand and randiw, speech and speechiw
  *
  */
-const std::array<const char * const, MAX_BIT> mprog_flags =
+const std::array<const char * const, Flag::MAX> mprog_flags =
 {
     "act", "speech", "rand", "fight", "death", "hitprcnt", "entry", "greet",
     "allgreet", "give", "bribe", "hour", "time", "wear", "remove", "sac",
@@ -3021,7 +3021,7 @@ const std::array<const char * const, MAX_BIT> mprog_flags =
     "speechiw", "pull", "push", "sleep", "rest", "leave", "script", "use"
 };
 
-const std::array<const char * const, MAX_BIT> SpellFlag =
+const std::array<const char * const, Flag::MAX> SpellFlag =
 {
     "_00",
     "_01",
@@ -3343,7 +3343,7 @@ int GetAttackType(const std::string &type)
                       StrCmp);
 }
 
-const std::array<const char * const, MAX_BIT> SaveFlags =
+const std::array<const char * const, Flag::MAX> SaveFlags =
 {
     "Death",
     "Kill",
@@ -3455,7 +3455,7 @@ ShipType GetShipType(const std::string &name)
     return (ShipType)GetInArray(name, ShipTypes, StrCmp);
 }
 
-const std::array<const char * const, MAX_BIT> ShipFlags =
+const std::array<const char * const, Flag::MAX> ShipFlags =
 {
     "Permanent",
     "Prototype",
@@ -3496,7 +3496,7 @@ int GetShipFlag(const std::string &flag)
     return GetInArray(flag, ShipFlags, StrCmp);
 }
 
-const std::array<const char * const, MAX_BIT> ChannelNames =
+const std::array<const char * const, Flag::MAX> ChannelNames =
 {
     "Auction",
     "Chat",

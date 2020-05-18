@@ -42,7 +42,7 @@ public:
     const CraftingMaterial *Materials = nullptr;
     int Duration = 0;
     std::shared_ptr<ProtoObject> Prototype;
-    std::bitset<MAX_BIT> Flags;
+    std::bitset<Flag::MAX> Flags;
 };
 
 class FoundMaterial
@@ -89,7 +89,7 @@ static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs 
 CraftingMaterial::CraftingMaterial(ItemTypes type,
     std::initializer_list<size_t> flagBits)
     : ItemType(type),
-    Flags(CreateBitSet<MAX_BIT>(flagBits))
+    Flags(CreateBitSet<Flag::MAX>(flagBits))
 {
 
 }
@@ -233,7 +233,7 @@ CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial *materialList, i
     recipe->Materials = materialList;
     recipe->Duration = duration;
     recipe->Prototype = prototypeObject;
-    recipe->Flags = CreateBitSet<MAX_BIT>(flagBits);
+    recipe->Flags = CreateBitSet<Flag::MAX>(flagBits);
 
     if (Skills->GetSkill(recipe->Skill) == nullptr)
     {

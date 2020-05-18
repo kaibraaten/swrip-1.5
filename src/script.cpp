@@ -203,14 +203,14 @@ void LuaSaveDataFile(const std::string &filename,
 }
 
 void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
-    const std::array<const char * const, MAX_BIT> &nameArray,
+    const std::array<const char * const, Flag::MAX> &nameArray,
     const std::string &key)
 {
     LuaPushFlags(L, flags.to_ulong(), nameArray.data(), key);
 }
 
 void LuaPushFlags(lua_State *L, unsigned long flags,
-    const std::array<const char * const, MAX_BIT> &nameArray,
+    const std::array<const char * const, Flag::MAX> &nameArray,
     const std::string &key)
 {
     LuaPushFlags(L, flags, nameArray.data(), key);
@@ -230,7 +230,7 @@ void LuaPushFlags(lua_State *L, unsigned long flags,
         lua_pushstring(L, key.c_str());
         lua_newtable(L);
 
-        for (size_t bit = 0; bit < MAX_BIT; ++bit)
+        for (size_t bit = 0; bit < Flag::MAX; ++bit)
         {
             unsigned int mask = 1 << bit;
 
@@ -353,7 +353,7 @@ static void LuaPushOneSmaugAffect(lua_State *L, std::shared_ptr<SmaugAffect> aff
 
     if (affect->AffectedBy)
     {
-        for (size_t x = 0; x < MAX_BIT; ++x)
+        for (size_t x = 0; x < AffectFlags.size(); ++x)
         {
             if (IsBitSet(affect->AffectedBy, 1 << x))
             {
@@ -468,7 +468,7 @@ static void LuaPushCharacterAffect(lua_State *L, std::shared_ptr<Affect> affect,
 
     if (affect->AffectedBy)
     {
-        for (size_t x = 0; x < MAX_BIT; ++x)
+        for (size_t x = 0; x < AffectFlags.size(); ++x)
         {
             if (IsBitSet(affect->AffectedBy, 1 << x))
             {
@@ -537,7 +537,7 @@ static void LuaPushObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, in
 
     if (affect->AffectedBy)
     {
-        for (size_t x = 0; x < MAX_BIT; ++x)
+        for (size_t x = 0; x < AffectFlags.size(); ++x)
         {
             if (IsBitSet(affect->AffectedBy, 1 << x))
             {

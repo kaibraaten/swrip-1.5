@@ -63,8 +63,6 @@ constexpr auto BV29 = 1 << 29;
 constexpr auto BV30 = 1 << 30;
 constexpr auto BV31 = 1 << 31;
 /* 32 USED! DO NOT ADD MORE! SB */
-//#define MAX_BIT 32
-constexpr size_t MAX_BIT = 32;
 
 namespace Flag
 {
