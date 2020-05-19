@@ -102,7 +102,7 @@ void do_cset(Character* ch, std::string argument)
         }
         else
         {
-            ToggleBit(SysData.SaveFlags, 1 << x);
+            SysData.SaveFlags.flip(x);
             ch->Echo("Ok.\r\n");
         }
 

@@ -741,68 +741,157 @@ namespace Flag
     }
 }
 
+namespace Flag
+{
+    namespace Attack
+    {
+        enum : size_t
+        {
+            Bite,
+                Claws,
+                Tail,
+                Sting,
+                Punch,
+                Kick,
+                Trip,
+                _07,
+                _08,
+                _09,
+                Backstab,
+                _11,
+                _12,
+                _13,
+                _14,
+                _15,
+                _16,
+                _17,
+                _18,
+                _19,
+                _20,
+                _21,
+                _22,
+                _23,
+                _24,
+                _25,
+                _26,
+                _27,
+                _28,
+                _29,
+                _30,
+                _31
+                };
+    }
+}
+
 /*
  * Attack types
  */
-constexpr auto ATCK_BITE = BV00;
-constexpr auto ATCK_CLAWS = BV01;
-constexpr auto ATCK_TAIL = BV02;
-constexpr auto ATCK_STING = BV03;
-constexpr auto ATCK_PUNCH = BV04;
-constexpr auto ATCK_KICK = BV05;
-constexpr auto ATCK_TRIP = BV06;
-constexpr auto ATCK_BASH = BV07;
-constexpr auto ATCK_STUN = BV08;
-constexpr auto ATCK_GOUGE = BV09;
-constexpr auto ATCK_BACKSTAB = BV10;
-constexpr auto ATCK_FEED = BV11;
-constexpr auto ATCK_DRAIN = BV12;
-constexpr auto ATCK_FIREBREATH = BV13;
-constexpr auto ATCK_FROSTBREATH = BV14;
-constexpr auto ATCK_ACIDBREATH = BV15;
-constexpr auto ATCK_LIGHTNBREATH = BV16;
-constexpr auto ATCK_GASBREATH = BV17;
-constexpr auto ATCK_POISON = BV18;
-constexpr auto ATCK_NASTYPOISON = BV19;
-constexpr auto ATCK_GAZE = BV20;
-constexpr auto ATCK_BLINDNESS = BV21;
-constexpr auto ATCK_CAUSESERIOUS = BV22;
-constexpr auto ATCK_EARTHQUAKE = BV23;
-constexpr auto ATCK_CAUSECRITICAL = BV24;
-constexpr auto ATCK_CURSE = BV25;
-constexpr auto ATCK_FLAMESTRIKE = BV26;
-constexpr auto ATCK_HARM = BV27;
-constexpr auto ATCK_FIREBALL = BV28;
-constexpr auto ATCK_COLORSPRAY = BV29;
-constexpr auto ATCK_WEAKEN = BV30;
-constexpr auto ATCK_SPIRALBLAST = BV31;
+/*
+  constexpr auto ATCK_BITE = BV00;
+  constexpr auto ATCK_CLAWS = BV01;
+  constexpr auto ATCK_TAIL = BV02;
+  constexpr auto ATCK_STING = BV03;
+  constexpr auto ATCK_PUNCH = BV04;
+  constexpr auto ATCK_KICK = BV05;
+  constexpr auto ATCK_TRIP = BV06;
+  constexpr auto ATCK_BASH = BV07;
+  constexpr auto ATCK_STUN = BV08;
+  constexpr auto ATCK_GOUGE = BV09;
+  constexpr auto ATCK_BACKSTAB = BV10;
+  constexpr auto ATCK_FEED = BV11;
+  constexpr auto ATCK_DRAIN = BV12;
+  constexpr auto ATCK_FIREBREATH = BV13;
+  constexpr auto ATCK_FROSTBREATH = BV14;
+  constexpr auto ATCK_ACIDBREATH = BV15;
+  constexpr auto ATCK_LIGHTNBREATH = BV16;
+  constexpr auto ATCK_GASBREATH = BV17;
+  constexpr auto ATCK_POISON = BV18;
+  constexpr auto ATCK_NASTYPOISON = BV19;
+  constexpr auto ATCK_GAZE = BV20;
+  constexpr auto ATCK_BLINDNESS = BV21;
+  constexpr auto ATCK_CAUSESERIOUS = BV22;
+  constexpr auto ATCK_EARTHQUAKE = BV23;
+  constexpr auto ATCK_CAUSECRITICAL = BV24;
+  constexpr auto ATCK_CURSE = BV25;
+  constexpr auto ATCK_FLAMESTRIKE = BV26;
+  constexpr auto ATCK_HARM = BV27;
+  constexpr auto ATCK_FIREBALL = BV28;
+  constexpr auto ATCK_COLORSPRAY = BV29;
+  constexpr auto ATCK_WEAKEN = BV30;
+  constexpr auto ATCK_SPIRALBLAST = BV31;
+*/
 /* 32 USED! DO NOT ADD MORE! SB */
 
 /*
  * Defense types
  */
-constexpr auto DFND_PARRY = BV00;
-constexpr auto DFND_DODGE = BV01;
-constexpr auto DFND_HEAL = BV02;
-constexpr auto DFND_CURELIGHT = BV03;
-constexpr auto DFND_CURESERIOUS = BV04;
-constexpr auto DFND_CURECRITICAL = BV05;
-constexpr auto DFND_DISPELMAGIC = BV06;
-constexpr auto DFND_DISPELEVIL = BV07;
-constexpr auto DFND_SANCTUARY = BV08;
-constexpr auto DFND_FIRESHIELD = BV09;
-constexpr auto DFND_SHOCKSHIELD = BV10;
-constexpr auto DFND_SHIELD = BV11;
-constexpr auto DFND_BLESS = BV12;
-constexpr auto DFND_STONESKIN = BV13;
-constexpr auto DFND_TELEPORT = BV14;
-constexpr auto DFND_MONSUM1 = BV15;
-constexpr auto DFND_MONSUM2 = BV16;
-constexpr auto DFND_MONSUM3 = BV17;
-constexpr auto DFND_MONSUM4 = BV18;
-constexpr auto DFND_DISARM = BV19;
-constexpr auto DFND_ICESHIELD = BV20;
-constexpr auto DFND_GRIP = BV21;
+
+namespace Flag
+{
+    namespace Defense
+    {
+        enum : size_t
+        {
+            Parry,
+                Dodge,
+                _02,
+                _03,
+                _04,
+                _05,
+                _06,
+                _07,
+                _08,
+                _09,
+                _10,
+                _11,
+                _12,
+                _13,
+                _14,
+                _15,
+                _16,
+                _17,
+                _18,
+                Disarm,
+                _20,
+                Grip,
+                _22,
+                _23,
+                _24,
+                _25,
+                _26,
+                _27,
+                _28,
+                _29,
+                _30,
+                _31
+                };
+    }
+}
+
+/*
+  constexpr auto DFND_PARRY = BV00;
+  constexpr auto DFND_DODGE = BV01;
+  constexpr auto DFND_HEAL = BV02;
+  constexpr auto DFND_CURELIGHT = BV03;
+  constexpr auto DFND_CURESERIOUS = BV04;
+  constexpr auto DFND_CURECRITICAL = BV05;
+  constexpr auto DFND_DISPELMAGIC = BV06;
+  constexpr auto DFND_DISPELEVIL = BV07;
+  constexpr auto DFND_SANCTUARY = BV08;
+  constexpr auto DFND_FIRESHIELD = BV09;
+  constexpr auto DFND_SHOCKSHIELD = BV10;
+  constexpr auto DFND_SHIELD = BV11;
+  constexpr auto DFND_BLESS = BV12;
+  constexpr auto DFND_STONESKIN = BV13;
+  constexpr auto DFND_TELEPORT = BV14;
+  constexpr auto DFND_MONSUM1 = BV15;
+  constexpr auto DFND_MONSUM2 = BV16;
+  constexpr auto DFND_MONSUM3 = BV17;
+  constexpr auto DFND_MONSUM4 = BV18;
+  constexpr auto DFND_DISARM = BV19;
+  constexpr auto DFND_ICESHIELD = BV20;
+  constexpr auto DFND_GRIP = BV21;
+*/
 /* 21 def's */
 
 /*

@@ -239,7 +239,7 @@ void do_sset(Character* ch, std::string argument)
                 ch->Echo("Not a spell flag.\r\n");
             else
             {
-                ToggleBit(skill->Flags, 1 << x);
+                skill->Flags.flip(x);
                 ch->Echo("Ok.\r\n");
             }
             return;

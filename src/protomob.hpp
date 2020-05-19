@@ -46,10 +46,10 @@ public:
     std::bitset<Flag::MAX> Resistant;
     std::bitset<Flag::MAX> Immune;
     std::bitset<Flag::MAX> Susceptible;
-    int AttackFlags = 0;
-    int DefenseFlags = 0;
-    int Speaks = 0;
-    int Speaking = 0;
+    std::bitset<Flag::MAX> AttackFlags;
+    std::bitset<Flag::MAX> DefenseFlags;
+    int Speaks = LANG_COMMON;
+    int Speaking = LANG_COMMON;
     PositionType Position = 0;
     PositionType DefaultPosition = 0;
     int Height = 0;

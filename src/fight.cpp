@@ -830,10 +830,9 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
 
         for (;; )
         {
-            int x = GetRandomNumberFromRange(0, 6);
-            attacktype = 1 << x;
+            attacktype = GetRandomNumberFromRange(0, 6);
 
-            if (IsBitSet(ch->AttackFlags, attacktype))
+            if (ch->AttackFlags.test(attacktype))
             {
                 break;
             }
@@ -845,7 +844,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
             }
         }
 
-        if (attacktype == ATCK_BACKSTAB)
+        if (attacktype == Flag::Attack::Backstab)
         {
             attacktype = 0;
         }
@@ -862,24 +861,24 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
 
             /* These used to call empty functions so they were just joined
                together */
-        case ATCK_BITE:
-        case ATCK_CLAWS:
-        case ATCK_TAIL:
-        case ATCK_STING:
+        case Flag::Attack::Bite:
+        case Flag::Attack::Claws:
+        case Flag::Attack::Tail:
+        case Flag::Attack::Sting:
             retcode = global_retcode;
             break;
 
-        case ATCK_PUNCH:
+        case Flag::Attack::Punch:
             do_punch(ch, "");
             retcode = global_retcode;
             break;
 
-        case ATCK_KICK:
+        case Flag::Attack::Kick:
             do_kick(ch, "");
             retcode = global_retcode;
             break;
 
-        case ATCK_TRIP:
+        case Flag::Attack::Trip:
             attacktype = 0;
             break;
         }
@@ -1684,14 +1683,14 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
         if (dt >= TYPE_HIT)
         {
             if (IsNpc(ch)
-                && IsBitSet(ch->AttackFlags, DFND_DISARM)
+                && ch->AttackFlags.test(Flag::Defense::Disarm)
                 && GetRandomPercent() < GetAbilityLevel(ch, COMBAT_ABILITY) / 2)
             {
                 Disarm(ch, victim);
             }
 
             if (IsNpc(ch)
-                && IsBitSet(ch->AttackFlags, ATCK_TRIP)
+                && ch->AttackFlags.test(Flag::Attack::Trip)
                 && GetRandomPercent() < GetAbilityLevel(ch, COMBAT_ABILITY))
             {
                 Trip(ch, victim);

@@ -2583,7 +2583,7 @@ static void AggroUpdate()
                 continue;
             }
 
-            if (IsNpc(ch) && IsBitSet(ch->AttackFlags, ATCK_BACKSTAB))
+            if (IsNpc(ch) && ch->AttackFlags.test(Flag::Attack::Backstab))
             {
                 bool backstabPerformed = PerformBackstab(ch, victim);
 

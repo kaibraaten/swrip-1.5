@@ -154,7 +154,7 @@ bool CheckParry( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsNpc(victim) && !IsBitSet(victim->DefenseFlags, DFND_PARRY) )
+  if ( IsNpc(victim) && !victim->DefenseFlags.test(Flag::Defense::Parry))
     {
       return false;
     }
@@ -214,7 +214,7 @@ bool CheckDodge( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsNpc(victim) && !IsBitSet(victim->DefenseFlags, DFND_DODGE) )
+  if ( IsNpc(victim) && !victim->DefenseFlags.test(Flag::Defense::Dodge))
     {
       return false;
     }
@@ -261,7 +261,7 @@ bool CheckGrip( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsNpc(victim) && !IsBitSet(victim->DefenseFlags, DFND_GRIP) )
+  if ( IsNpc(victim) && !victim->DefenseFlags.test(Flag::Defense::Grip))
     {
       return false;
     }
