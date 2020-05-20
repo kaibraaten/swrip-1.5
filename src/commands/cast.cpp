@@ -31,7 +31,7 @@ void do_cast(Character* ch, std::string argument)
     {
     default:
         /* no ordering charmed mobs to cast spells */
-        if (IsNpc(ch) && IsAffectedBy(ch, AFF_CHARM))
+        if (IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
         {
             ch->Echo("You can't seem to do that right now...\r\n");
             return;

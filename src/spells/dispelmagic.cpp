@@ -17,7 +17,7 @@ ch_ret spell_dispel_magic(int sn, int level, Character* ch, void* vo)
         return rSPELL_FAILED;
     }
 
-    if (victim->AffectedBy && ch == victim)
+    if (victim->AffectedBy.any() && ch == victim)
     {
         SetCharacterColor(AT_MAGIC, ch);
         ch->Echo("You pass your hands around your body...\r\n");
@@ -28,14 +28,13 @@ ch_ret spell_dispel_magic(int sn, int level, Character* ch, void* vo)
         victim->AffectedBy = RaceTable[victim->Race].Affected;
         return rNONE;
     }
-    else
-        if (victim->AffectedBy == RaceTable[victim->Race].Affected
-            || level < victim->TopLevel
-            || SaveVsSpellStaff(level, victim))
-        {
-            FailedCasting(skill, ch, victim, NULL);
-            return rSPELL_FAILED;
-        }
+    else if (victim->AffectedBy.to_ulong() == RaceTable[victim->Race].Affected
+             || level < victim->TopLevel
+             || SaveVsSpellStaff(level, victim))
+    {
+        FailedCasting(skill, ch, victim, NULL);
+        return rSPELL_FAILED;
+    }
 
     if (!IsNpc(victim))
     {
@@ -47,9 +46,11 @@ ch_ret spell_dispel_magic(int sn, int level, Character* ch, void* vo)
 
     for (;; )
     {
-        affected_by = 1 << NumberBits(5);
-        if (IsBitSet(victim->AffectedBy, affected_by))
+        affected_by = NumberBits(5);
+
+        if (victim->AffectedBy.test(affected_by))
             break;
+
         if (cnt++ > 30)
         {
             FailedCasting(skill, ch, victim, NULL);
@@ -57,9 +58,9 @@ ch_ret spell_dispel_magic(int sn, int level, Character* ch, void* vo)
         }
     }
 
-    RemoveBit(victim->AffectedBy, affected_by);
+
+    victim->AffectedBy.reset(affected_by);
     SuccessfulCasting(skill, ch, victim, NULL);
 
     return rNONE;
 }
-

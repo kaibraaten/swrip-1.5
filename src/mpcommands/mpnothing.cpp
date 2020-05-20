@@ -6,12 +6,12 @@
  */
 void do_mpnothing( Character *ch, std::string argument )
 {
-  if ( IsAffectedBy( ch, AFF_CHARM ) )
-    return;
+    if ( IsAffectedBy( ch, Flag::Affect::Charm))
+        return;
 
-  if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
+    if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 }

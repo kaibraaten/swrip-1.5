@@ -26,9 +26,7 @@ void do_save( Character *ch, std::string argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( !IsBitSet( ch->AffectedBy, RaceTable[ch->Race].Affected ) )
-    SetBit( ch->AffectedBy, RaceTable[ch->Race].Affected );
-
+  SetMissingBits(ch->AffectedBy, RaceTable[ch->Race].Affected);
   SetMissingBits(ch->Resistant, RaceTable[ch->Race].Resistant);
   SetMissingBits(ch->Susceptible, RaceTable[ch->Race].Susceptible);
 

@@ -7,79 +7,80 @@
 
 void do_order( Character *ch, std::string argument )
 {
-  std::string arg;
-  Character *victim = NULL;
-  bool fAll = false;
-  std::string argbuf = argument;
-  
-  argument = OneArgument( argument, arg );
+    std::string arg;
+    Character *victim = NULL;
+    bool fAll = false;
+    std::string argbuf = argument;
 
-  if ( arg.empty() || argument.empty() )
+    argument = OneArgument( argument, arg );
+
+    if ( arg.empty() || argument.empty() )
     {
-      ch->Echo("Order whom to do what?\r\n");
-      return;
+        ch->Echo("Order whom to do what?\r\n");
+        return;
     }
 
-  if ( IsAffectedBy( ch, AFF_CHARM ) )
+    if ( IsAffectedBy( ch, Flag::Affect::Charm))
     {
-      ch->Echo("You feel like taking, not giving, orders.\r\n");
-      return;
+        ch->Echo("You feel like taking, not giving, orders.\r\n");
+        return;
     }
 
-  if ( !StrCmp( arg, "all" ) )
+    if ( !StrCmp( arg, "all" ) )
     {
-      fAll = true;
+        fAll = true;
     }
-  else
+    else
     {
-      if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
+        if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
         {
-          ch->Echo("They aren't here.\r\n");
-          return;
+            ch->Echo("They aren't here.\r\n");
+            return;
         }
 
-      if ( victim == ch )
+        if ( victim == ch )
         {
-          ch->Echo("Aye aye, right away!\r\n");
-          return;
+            ch->Echo("Aye aye, right away!\r\n");
+            return;
         }
 
-      if ( !IsAffectedBy(victim, AFF_CHARM) || victim->Master != ch )
+        if ( !IsAffectedBy(victim, Flag::Affect::Charm) || victim->Master != ch )
         {
-          ch->Echo("Do it yourself!\r\n");
-          return;
+            ch->Echo("Do it yourself!\r\n");
+            return;
         }
     }
 
-  if ( !StringPrefix("mp",argument) )
+    if ( !StringPrefix("mp",argument) )
     {
-      ch->Echo("But that's cheating!\r\n");
-      return;
+        ch->Echo("But that's cheating!\r\n");
+        return;
     }
 
-  std::list<Character*> charactersToOrder = Filter(ch->InRoom->Characters(),
-                                                   [ch, fAll, victim](auto och)
-                                                   {
-                                                     return IsAffectedBy(och, AFF_CHARM)
-                                                       && och->Master == ch
-                                                       && ( fAll || och == victim );
-                                                   });
-  
-  if ( !charactersToOrder.empty() )
+    std::list<Character*> charactersToOrder = Filter(ch->InRoom->Characters(),
+                                                     [ch, fAll, victim](auto och)
+                                                     {
+                                                         return IsAffectedBy(och,
+                                                                             Flag::Affect::Charm)
+                                                         && och->Master == ch
+                                                         && ( fAll || och == victim );
+                                                     });
+
+    if ( !charactersToOrder.empty() )
     {
-      for(Character *och : charactersToOrder)
+        for(Character *och : charactersToOrder)
         {
-          Act( AT_ACTION, "$n orders you to '$t'.",
-               ch, argument.c_str(), och, TO_VICT );
-          Interpret( och, argument );
+            Act( AT_ACTION, "$n orders you to '$t'.",
+                 ch, argument.c_str(), och, TO_VICT );
+            Interpret( och, argument );
         }
-      
-      Log->Info("%s: order %s.", ch->Name.c_str(), argbuf.c_str() );
-      ch->Echo("Ok.\r\n");
-      SetWaitState( ch, 12 );
+
+        Log->Info("%s: order %s.", ch->Name.c_str(), argbuf.c_str() );
+        ch->Echo("Ok.\r\n");
+        SetWaitState( ch, 12 );
     }
-  else
+    else
     {
-      ch->Echo("You have no followers here.\r\n");
+        ch->Echo("You have no followers here.\r\n");
     }
 }

@@ -17,7 +17,7 @@ ch_ret spell_flamestrike(int sn, int level, Character* ch, void* vo)
     if (SaveVsSpellStaff(level, victim))
         dam /= 2;
 
-    if (IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch))
+    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         dam -= (int)(dam / 4);
 
     return InflictDamage(ch, victim, dam, sn);

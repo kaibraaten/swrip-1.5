@@ -14,7 +14,7 @@ void do_mptransfer(Character *ch, std::string argument)
     std::shared_ptr<Room> location;
     Character *victim = nullptr;
 
-    if (IsAffectedBy(ch, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
     if (!IsNpc(ch))

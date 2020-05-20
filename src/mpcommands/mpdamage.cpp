@@ -18,7 +18,7 @@ void do_mp_damage( Character *ch, std::string argument )
     Character *victim = nullptr;
     int dam = 0;
 
-    if ( IsAffectedBy( ch, AFF_CHARM ) )
+    if ( IsAffectedBy( ch, Flag::Affect::Charm))
         return;
 
     if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
@@ -132,10 +132,10 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
         /*
          * Damage modifiers.
          */
-        if ( IsAffectedBy(victim, AFF_SANCTUARY) )
+        if ( IsAffectedBy(victim, Flag::Affect::Sanctuary))
             dam /= 2;
 
-        if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )
+        if ( IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch) )
             dam -= (int) (dam / 4);
 
         if ( dam < 0 )
@@ -198,7 +198,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
         break;
 
     case POS_STUNNED:
-        if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
+        if ( !IsAffectedBy( victim, Flag::Affect::Paralysis))
         {
             Act( AT_ACTION, "$n is stunned, but will probably recover.",
                  victim, NULL, NULL, TO_ROOM );
@@ -266,9 +266,9 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     if ( npcvict && dam > 0 )
     {
         if ( ( IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits( 1 ) == 0
-               &&   victim->HitPoints.Current < victim->HitPoints.Max / 2 )
-             ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->Master
-                    &&     victim->Master->InRoom != victim->InRoom ) )
+               && victim->HitPoints.Current < victim->HitPoints.Max / 2 )
+             ||   ( IsAffectedBy(victim, Flag::Affect::Charm) && victim->Master
+                    && victim->Master->InRoom != victim->InRoom ) )
         {
             StartFearing( victim, ch );
             StopHunting( victim );

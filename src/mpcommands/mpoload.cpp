@@ -11,7 +11,7 @@ void do_mpoload(Character *ch, std::string argument)
     int level = 0;
     int timer = 0;
 
-    if (IsAffectedBy(ch, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
     if (!IsNpc(ch))

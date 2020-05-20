@@ -30,6 +30,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <climits>
+#include <bitset>
 #include <utility/utility.hpp>
 
 #ifdef HAVE_ZLIB
@@ -145,7 +146,7 @@ public:
     int Duration = 0;
     int Location = 0;
     int Modifier = 0;
-    int AffectedBy = 0;
+    std::bitset<Flag::MAX> AffectedBy;
 };
 
 /*
@@ -157,7 +158,7 @@ public:
     std::string Duration;
     int Location = 0;
     std::string Modifier;
-    int AffectedBy = 0;
+    std::bitset<Flag::MAX> AffectedBy;
 };
 
 class Timer

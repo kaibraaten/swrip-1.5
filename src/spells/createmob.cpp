@@ -66,7 +66,7 @@ ch_ret spell_create_mob(int sn, int level, Character* ch, void* vo)
     af->Duration = (NumberFuzzy((level + 1) / 3) + 1) * DUR_CONV;
     af->Location = 0;
     af->Modifier = 0;
-    af->AffectedBy = AFF_CHARM;
+    af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Charm });
     AffectToCharacter(mob, af);
     return rNONE;
 }

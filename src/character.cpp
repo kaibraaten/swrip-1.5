@@ -255,13 +255,13 @@ int GetXPWorth(const Character *ch)
     xp += (ch->BareNumDie * ch->BareSizeDie + GetDamageRoll(ch)) * 50;
     xp += GetHitRoll(ch) * ch->TopLevel * 10;
 
-    if (IsAffectedBy(ch, AFF_SANCTUARY))
+    if (IsAffectedBy(ch, Flag::Affect::Sanctuary))
         xp += xp * 1.5;
 
-    if (IsAffectedBy(ch, AFF_FIRESHIELD))
+    if (IsAffectedBy(ch, Flag::Affect::Fireshield))
         xp += xp * 1.2;
 
-    if (IsAffectedBy(ch, AFF_SHOCKSHIELD))
+    if (IsAffectedBy(ch, Flag::Affect::Shockshield))
         xp += xp * 1.2;
 
     xp = urange(MIN_EXP_WORTH, xp, MAX_EXP_WORTH);
@@ -498,9 +498,9 @@ bool IsAffected(const Character *ch, int sn)
     }) != nullptr;
 }
 
-bool IsAffectedBy(const Character *ch, int affected_by_bit)
+bool IsAffectedBy(const Character *ch, size_t affected_by_bit)
 {
-    return IsBitSet(ch->AffectedBy, affected_by_bit);
+    return ch->AffectedBy.test(affected_by_bit);
 }
 
 /*
@@ -903,8 +903,8 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
 
     if (!ch)
     {
-        if (IsAffectedBy(victim, AFF_INVISIBLE)
-            || IsAffectedBy(victim, AFF_HIDE)
+        if (IsAffectedBy(victim, Flag::Affect::Invisible)
+            || IsAffectedBy(victim, Flag::Affect::Hide)
             || IsBitSet(victim->Flags, PLR_WIZINVIS))
             return false;
         else
@@ -933,23 +933,23 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
 
     if (!IsImmortal(ch) && !IsNpc(victim) && !victim->Desc
         && GetTimer(victim, TIMER_RECENTFIGHT) > 0
-        && (!victim->Switched || !IsAffectedBy(victim->Switched, AFF_POSSESS)))
+        && (!victim->Switched || !IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
         return false;
 
     if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT))
         return true;
 
     /* The miracle cure for blindness? -- Altrag */
-    if (!IsAffectedBy(ch, AFF_TRUESIGHT))
+    if (!IsAffectedBy(ch, Flag::Affect::TrueSight))
     {
-        if (IsAffectedBy(ch, AFF_BLIND))
+        if (IsAffectedBy(ch, Flag::Affect::Blind))
             return false;
 
-        if (IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, AFF_INFRARED))
+        if (IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
             return false;
 
-        if (IsAffectedBy(victim, AFF_HIDE)
-            && !IsAffectedBy(ch, AFF_DETECT_HIDDEN)
+        if (IsAffectedBy(victim, Flag::Affect::Hide)
+            && !IsAffectedBy(ch, Flag::Affect::DetectHidden)
             && !victim->Fighting)
         {
             if (ch->Race == RACE_DEFEL && victim->Race == RACE_DEFEL)
@@ -959,8 +959,8 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
         }
 
 
-        if (IsAffectedBy(victim, AFF_INVISIBLE)
-            && !IsAffectedBy(ch, AFF_DETECT_INVIS))
+        if (IsAffectedBy(victim, Flag::Affect::Invisible)
+            && !IsAffectedBy(ch, Flag::Affect::DetectInvis))
             return false;
     }
 
@@ -978,10 +978,10 @@ bool CanSeeObject(const Character *ch, const Object *obj)
     if (obj->Flags.test(Flag::Obj::Burried))
         return false;
 
-    if (IsAffectedBy(ch, AFF_TRUESIGHT))
+    if (IsAffectedBy(ch, Flag::Affect::TrueSight))
         return true;
 
-    if (IsAffectedBy(ch, AFF_BLIND))
+    if (IsAffectedBy(ch, Flag::Affect::Blind))
         return false;
 
     if (obj->Flags.test(Flag::Obj::Hidden))
@@ -990,10 +990,10 @@ bool CanSeeObject(const Character *ch, const Object *obj)
     if (obj->ItemType == ITEM_LIGHT && obj->Value[OVAL_LIGHT_POWER] != 0)
         return true;
 
-    if (IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, AFF_INFRARED))
+    if (IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
         return false;
 
-    if (obj->Flags.test(Flag::Obj::Invis) && !IsAffectedBy(ch, AFF_DETECT_INVIS))
+    if (obj->Flags.test(Flag::Obj::Invis) && !IsAffectedBy(ch, Flag::Affect::DetectInvis))
         return false;
 
     return true;
@@ -1343,10 +1343,10 @@ bool IsBlind(const Character *ch)
     if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT))
         return false;
 
-    if (IsAffectedBy(ch, AFF_TRUESIGHT))
+    if (IsAffectedBy(ch, Flag::Affect::TrueSight))
         return false;
 
-    if (IsAffectedBy(ch, AFF_BLIND))
+    if (IsAffectedBy(ch, Flag::Affect::Blind))
     {
         return true;
     }
@@ -1601,7 +1601,7 @@ void AddReinforcements(Character *ch)
             }
 
             StartFollowing(mob[mob_cnt], ch);
-            SetBit(mob[mob_cnt]->AffectedBy, AFF_CHARM);
+            mob[mob_cnt]->AffectedBy.set(Flag::Affect::Charm);
             do_setblaster(mob[mob_cnt], "full");
         }
     }
@@ -1672,6 +1672,11 @@ const char *HimHerIt(const Character *ch)
 const char *HisHersIts(const Character *ch)
 {
     return ch->Sex == SEX_MALE ? "his" : ch->Sex == SEX_FEMALE ? "hers" : "its";
+}
+
+bool HasPermanentHide(const Character *ch)
+{
+    return ch->Race == RACE_DEFEL;
 }
 
 bool HasPermanentSneak(const Character *ch)

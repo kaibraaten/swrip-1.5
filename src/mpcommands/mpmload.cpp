@@ -10,7 +10,7 @@ void do_mpmload(Character *ch, std::string arg)
     std::shared_ptr<ProtoMobile> pMobIndex;
     Character *victim = nullptr;
 
-    if (IsAffectedBy(ch, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
     if (!IsNpc(ch))

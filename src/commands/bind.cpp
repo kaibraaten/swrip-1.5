@@ -38,7 +38,7 @@ void do_bind( Character *ch, std::string argument )
   if ( IsSafe( ch, victim ) )
     return;
 
-  if ( IsAffectedBy(ch, AFF_CHARM) )
+  if ( IsAffectedBy(ch, Flag::Affect::Charm))
     {
       if ( ch->Master == victim )
         {
@@ -77,13 +77,13 @@ static bool AffParalysis( Character *ch, Character *victim )
 {
   std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
-  if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
+  if ( !IsAffectedBy( victim, Flag::Affect::Paralysis))
     {
       af->Type      = gsn_stun;
       af->Location  = APPLY_AC;
       af->Modifier  = 20;
       af->Duration  = 30;
-      af->AffectedBy = AFF_PARALYSIS;
+      af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Paralysis });
       AffectToCharacter( victim, af );
       UpdatePosition( victim );
 

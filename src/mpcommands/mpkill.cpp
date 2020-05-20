@@ -6,48 +6,48 @@
 
 void do_mpkill( Character *ch, std::string arg )
 {
-  Character *victim = nullptr;
+    Character *victim = nullptr;
 
-  assert(ch != nullptr);
+    assert(ch != nullptr);
 
-  if ( IsAffectedBy( ch, AFF_CHARM ) )
-    return;
+    if ( IsAffectedBy( ch, Flag::Affect::Charm))
+        return;
 
-  if ( !IsNpc( ch ) )
+    if ( !IsNpc( ch ) )
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ProgBug( "MpKill - no argument", ch );
-      return;
+        ProgBug( "MpKill - no argument", ch );
+        return;
     }
 
-  if ( ( victim = GetCharacterInRoomMudProg( ch, arg ) ) == NULL )
+    if ( ( victim = GetCharacterInRoomMudProg( ch, arg ) ) == NULL )
     {
-      ProgBug( "MpKill - Victim not in room", ch );
-      return;
+        ProgBug( "MpKill - Victim not in room", ch );
+        return;
     }
 
-  if ( victim == ch )
+    if ( victim == ch )
     {
-      ProgBug( "MpKill - Bad victim to attack", ch );
-      return;
+        ProgBug( "MpKill - Bad victim to attack", ch );
+        return;
     }
 
-  if ( IsAffectedBy( ch, AFF_CHARM ) && ch->Master == victim )
+    if ( IsAffectedBy( ch, Flag::Affect::Charm ) && ch->Master == victim )
     {
-      ProgBug( "MpKill - Charmed mob attacking master", ch );
-      return;
+        ProgBug( "MpKill - Charmed mob attacking master", ch );
+        return;
     }
 
-  if ( ch->Position == POS_FIGHTING )
+    if ( ch->Position == POS_FIGHTING )
     {
-      ProgBug( "MpKill - Already fighting", ch );
-      return;
+        ProgBug( "MpKill - Already fighting", ch );
+        return;
     }
 
-  HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
+    HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
 }

@@ -657,43 +657,48 @@ constexpr vnum_t ROOM_JAIL_ADARI = 29108;
  * Bits for 'affected_by'.
  / * Used in #MOBILES.
 */
-constexpr auto AFF_NONE = 0;
+namespace Flag
+{
+    namespace Affect
+    {
+        enum : size_t
+        {
+            Blind,
+                Invisible,
+                DetectEvil,
+                DetectInvis,
+                DetectMagic,
+                DetectHidden,
+                Weaken,
+                Sanctuary,
+                FaerieFire,
+                Infrared,
+                Curse,
+                _flaming,
+                Poison,
+                Protect,
+                Paralysis,
+                Sneak,
+                Hide,
+                Sleep,
+                Charm,
+                Flying,
+                PassDoor,
+                Floating,
+                TrueSight,
+                DetectTraps,
+                Scrying,
+                Fireshield,
+                Shockshield,
+                _27,
+                Iceshield,
+                Possess,
+                Berserk,
+                AquaBreath
+                };
+    }
+}
 
-constexpr auto AFF_BLIND = BV00;
-constexpr auto AFF_INVISIBLE = BV01;
-constexpr auto AFF_DETECT_EVIL = BV02;
-constexpr auto AFF_DETECT_INVIS = BV03;
-constexpr auto AFF_DETECT_MAGIC = BV04;
-constexpr auto AFF_DETECT_HIDDEN = BV05;
-constexpr auto AFF_WEAKEN = BV06;
-constexpr auto AFF_SANCTUARY = BV07;
-constexpr auto AFF_FAERIE_FIRE = BV08;
-constexpr auto AFF_INFRARED = BV09;
-constexpr auto AFF_CURSE = BV10;
-constexpr auto AFF_FLAMING = BV11;          /* Unused       */
-constexpr auto AFF_POISON = BV12;
-constexpr auto AFF_PROTECT = BV13;
-constexpr auto AFF_PARALYSIS = BV14;
-constexpr auto AFF_SNEAK = BV15;
-constexpr auto AFF_HIDE = BV16;
-constexpr auto AFF_SLEEP = BV17;
-constexpr auto AFF_CHARM = BV18;
-constexpr auto AFF_FLYING = BV19;
-constexpr auto AFF_PASS_DOOR = BV20;
-constexpr auto AFF_FLOATING = BV21;
-constexpr auto AFF_TRUESIGHT = BV22;
-constexpr auto AFF_DETECTTRAPS = BV23;
-constexpr auto AFF_SCRYING = BV24;
-constexpr auto AFF_FIRESHIELD = BV25;
-constexpr auto AFF_SHOCKSHIELD = BV26;
-constexpr auto AFF_BIND = BV27;
-constexpr auto AFF_ICESHIELD = BV28;
-constexpr auto AFF_POSSESS = BV29;
-constexpr auto AFF_BERSERK = BV30;
-constexpr auto AFF_AQUA_BREATH = BV31;
-
-/* 31 aff's (1 left.. :P) */
-/* make that none - ugh - time for another field? :P */
 /*
  * Resistant Immune Susceptible flags
  */

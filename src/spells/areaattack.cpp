@@ -73,7 +73,7 @@ ch_ret spell_area_attack(int sn, int level, Character* ch, void* vo)
                 dam /= 2;
             }
 
-            if (IsAffectedBy(vch, AFF_PROTECT) && IsEvil(ch))
+            if (IsAffectedBy(vch, Flag::Affect::Protect) && IsEvil(ch))
             {
                 dam -= static_cast<int>(dam / 4);
             }

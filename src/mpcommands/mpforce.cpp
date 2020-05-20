@@ -7,61 +7,61 @@
 
 void do_mpforce( Character *ch, std::string argument )
 {
-  std::string arg;
+    std::string arg;
 
-  if ( IsAffectedBy( ch, AFF_CHARM ) )
-    return;
+    if ( IsAffectedBy( ch, Flag::Affect::Charm))
+        return;
 
-  if ( !IsNpc( ch ) || ch->Desc )
+    if ( !IsNpc( ch ) || ch->Desc )
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  argument = OneArgument( argument, arg );
+    argument = OneArgument( argument, arg );
 
-  if ( arg.empty() || argument.empty() )
+    if ( arg.empty() || argument.empty() )
     {
-      ProgBug( "Mpforce - Bad syntax", ch );
-      return;
+        ProgBug( "Mpforce - Bad syntax", ch );
+        return;
     }
 
-  if ( !StrCmp( arg, "all" ) )
+    if ( !StrCmp( arg, "all" ) )
     {
-      std::list<Character*> charactersToForce(ch->InRoom->Characters());
+        auto charactersToForce = ch->InRoom->Characters();
 
-      for(Character *vch : charactersToForce)
+        for(auto vch : charactersToForce)
         {
-          if ( GetTrustLevel( vch ) < GetTrustLevel( ch ) && CanSeeCharacter( ch, vch ) )
+            if ( GetTrustLevel( vch ) < GetTrustLevel( ch ) && CanSeeCharacter( ch, vch ) )
             {
-              Interpret( vch, argument );
+                Interpret( vch, argument );
             }
         }
     }
-  else
+    else
     {
-      Character *victim = nullptr;
+        Character *victim = nullptr;
 
-      if ( ( victim = GetCharacterInRoomMudProg( ch, arg ) ) == NULL )
+        if ( ( victim = GetCharacterInRoomMudProg( ch, arg ) ) == NULL )
         {
-          ProgBug( "Mpforce - No such victim", ch );
-          return;
+            ProgBug( "Mpforce - No such victim", ch );
+            return;
         }
 
-      if ( victim == ch )
+        if ( victim == ch )
         {
-          ProgBug( "Mpforce - Forcing oneself", ch );
-          return;
+            ProgBug( "Mpforce - Forcing oneself", ch );
+            return;
         }
 
-      if ( !IsNpc( victim )
-           && ( !victim->Desc )
-           && IsImmortal( victim ) )
+        if ( !IsNpc( victim )
+             && ( !victim->Desc )
+             && IsImmortal( victim ) )
         {
-          ProgBug( "Mpforce - Attempting to force link dead immortal", ch );
-          return;
+            ProgBug( "Mpforce - Attempting to force link dead immortal", ch );
+            return;
         }
 
-      Interpret( victim, argument );
+        Interpret( victim, argument );
     }
 }

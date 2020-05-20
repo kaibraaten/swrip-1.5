@@ -5,7 +5,7 @@
 
 void do_oldscore(Character* ch, std::string argument)
 {
-    if (IsAffectedBy(ch, AFF_POSSESS))
+    if (IsAffectedBy(ch, Flag::Affect::Possess))
     {
         ch->Echo("You can't do that in your current state of mind!\r\n");
         return;

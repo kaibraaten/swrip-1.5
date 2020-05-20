@@ -1155,7 +1155,7 @@ void do_mset( Character *ch, std::string argument )
             if ( value < 0 || static_cast<size_t>(value) >= Flag::MAX )
                 ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
             else
-                ToggleBit( victim->AffectedBy, 1 << value );
+                victim->AffectedBy.flip(value);
         }
 
         if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )

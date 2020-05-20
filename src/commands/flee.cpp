@@ -43,7 +43,7 @@ void do_flee(Character *ch, std::string argument)
         if (pexit == nullptr
             || pexit->ToRoom == nullptr
             || (pexit->Flags.test(Flag::Exit::Closed)
-                && !IsAffectedBy(ch, AFF_PASS_DOOR))
+                && !IsAffectedBy(ch, Flag::Affect::PassDoor))
             || (IsNpc(ch)
                 && pexit->ToRoom->Flags.test(Flag::Room::NoMob)))
             continue;
@@ -51,7 +51,7 @@ void do_flee(Character *ch, std::string argument)
         if (!HasPermanentSneak(ch))
         {
             StripAffect(ch, gsn_sneak);
-            RemoveBit(ch->AffectedBy, AFF_SNEAK);
+            ch->AffectedBy.reset(Flag::Affect::Sneak);
         }
 
         if (ch->Mount && ch->Mount->Fighting)

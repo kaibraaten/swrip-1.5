@@ -56,8 +56,8 @@ void do_where(Character *ch, std::string arg)
         {
             if (victim->InRoom
                 && victim->InRoom->Area == ch->InRoom->Area
-                && !IsAffectedBy(victim, AFF_HIDE)
-                && !IsAffectedBy(victim, AFF_SNEAK)
+                && !IsAffectedBy(victim, Flag::Affect::Hide)
+                && !IsAffectedBy(victim, Flag::Affect::Sneak)
                 && CanSeeCharacter(ch, victim)
                 && IsName(arg, victim->Name))
             {

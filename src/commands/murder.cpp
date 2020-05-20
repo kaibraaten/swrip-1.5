@@ -5,60 +5,59 @@
 
 void do_murder( Character *ch, std::string arg )
 {
-  Character *victim = nullptr;
+    Character *victim = nullptr;
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ch->Echo("Murder whom?\r\n");
-      return;
+        ch->Echo("Murder whom?\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
+    if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( victim == ch )
+    if ( victim == ch )
     {
-      ch->Echo("Suicide is a mortal sin.\r\n");
-      return;
+        ch->Echo("Suicide is a mortal sin.\r\n");
+        return;
     }
 
-  if ( IsBitSet(victim->Flags, PLR_AFK))
+    if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      Log->Info("%s just attacked %s with an afk flag on!",
-                ch->Name.c_str(), victim->Name.c_str() );
+        Log->Info("%s just attacked %s with an afk flag on!",
+                  ch->Name.c_str(), victim->Name.c_str() );
     }
 
-  if ( IsSafe( ch, victim ) )
-    return;
+    if ( IsSafe( ch, victim ) )
+        return;
 
-  if ( IsAffectedBy(ch, AFF_CHARM) )
+    if ( IsAffectedBy(ch, Flag::Affect::Charm))
     {
-      if ( ch->Master == victim )
+        if ( ch->Master == victim )
         {
-          Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
-          return;
+            Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
+            return;
         }
     }
 
-  if ( ch->Position == POS_FIGHTING )
+    if ( ch->Position == POS_FIGHTING )
     {
-      ch->Echo("You do the best you can!\r\n");
-      return;
+        ch->Echo("You do the best you can!\r\n");
+        return;
     }
 
-  if ( !IsNpc( victim ) && IsBitSet( ch->Flags, PLR_NICE ) )
+    if ( !IsNpc( victim ) && IsBitSet( ch->Flags, PLR_NICE ) )
     {
-      ch->Echo("You feel too nice to do that!\r\n");
-      return;
+        ch->Echo("You feel too nice to do that!\r\n");
+        return;
     }
 
-  if ( !IsDroid( victim ) )
-    ch->Alignment -= 10;
+    if ( !IsDroid( victim ) )
+        ch->Alignment -= 10;
 
-  SetWaitState( ch, 1 * PULSE_VIOLENCE );
-  HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
+    SetWaitState( ch, 1 * PULSE_VIOLENCE );
+    HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
 }
-

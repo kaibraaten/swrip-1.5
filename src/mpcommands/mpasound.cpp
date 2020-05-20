@@ -11,7 +11,7 @@ void do_mpasound(Character *ch, std::string argument)
 
     assert(ch != nullptr);
 
-    if (IsAffectedBy(ch, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
     if (!IsNpc(ch))

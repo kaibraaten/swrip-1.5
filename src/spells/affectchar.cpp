@@ -2,6 +2,19 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
+static bool IsAffectedBy(const Character *ch, std::bitset<Flag::MAX> &affectedBy)
+{
+    for(size_t i = 0; i < ch->AffectedBy.size(); ++i)
+    {
+        if(ch->AffectedBy.test(i) && affectedBy.test(i))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
 {
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
@@ -26,8 +39,10 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
             victim = static_cast<Character*>(vo);
         }
 
+        af->AffectedBy = saf->AffectedBy;
+        
         /* Check if char has this bitvector already */
-        if ((af->AffectedBy = saf->AffectedBy) != 0
+        if (af->AffectedBy.any()
             && IsAffectedBy(victim, af->AffectedBy)
             && !SPELL_FLAG(skill, SF_ACCUMULATIVE))
         {
@@ -37,13 +52,13 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
         /*
          * necessary for StripAffect to work properly...
          */
-        switch (af->AffectedBy)
+        switch (af->AffectedBy.to_ulong())
         {
         default:
             af->Type = sn;
             break;
 
-        case AFF_POISON:
+        case (1 << Flag::Affect::Poison):
             af->Type = gsn_poison;
             ch->Echo("You feel the hatred grow within you!\r\n");
             ch->Alignment = ch->Alignment - 100;
@@ -81,15 +96,15 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
             victim->MentalState = urange(30, victim->MentalState + 2, 100);
             break;
 
-        case AFF_BLIND:
+        case (1 << Flag::Affect::Blind):
             af->Type = gsn_blindness;
             break;
 
-        case AFF_INVISIBLE:
+        case (1 << Flag::Affect::Invisible):
             af->Type = gsn_invis;
             break;
 
-        case AFF_SLEEP:
+        case (1 << Flag::Affect::Sleep):
             af->Type = gsn_sleep;
             aff_chance = ModifySavingThrowBasedOnResistance(victim, level, Flag::Ris::Sleep);
 
@@ -111,7 +126,7 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
             }
             break;
 
-        case AFF_CHARM:
+        case (1 << Flag::Affect::Charm):
             af->Type = gsn_charm_person;
             aff_chance = ModifySavingThrowBasedOnResistance(victim, level, Flag::Ris::Charm);
 
@@ -133,7 +148,7 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
             }
             break;
 
-        case AFF_POSSESS:
+        case (1 << Flag::Affect::Possess):
             af->Type = gsn_possess;
             break;
         }

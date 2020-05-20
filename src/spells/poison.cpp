@@ -18,14 +18,14 @@ ch_ret spell_poison(int sn, int level, Character* ch, void* vo)
     if (poison_chance == 1000 || SaveVsPoisonDeath(poison_chance, victim))
         return rSPELL_FAILED;
 
-    if (IsAffectedBy(victim, AFF_POISON))
+    if (IsAffectedBy(victim, Flag::Affect::Poison))
         first = false;
 
     af->Type = sn;
     af->Duration = level * DUR_CONV;
     af->Location = APPLY_STR;
     af->Modifier = -2;
-    af->AffectedBy = AFF_POISON;
+    af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Poison });
     JoinAffect(victim, af);
     SetCharacterColor(AT_MAGIC, victim);
     victim->Echo("You feel very sick.\r\n");

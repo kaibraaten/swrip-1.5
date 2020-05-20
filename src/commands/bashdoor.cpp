@@ -120,7 +120,7 @@ void do_bashdoor(Character *ch, std::string arg)
         {
             if (IsAwake(gch)
                 && !gch->Fighting
-                && (IsNpc(gch) && !IsAffectedBy(gch, AFF_CHARM))
+                && (IsNpc(gch) && !IsAffectedBy(gch, Flag::Affect::Charm))
                 && (ch->TopLevel - gch->TopLevel <= 4)
                 && NumberBits(2) == 0)
             {

@@ -34,9 +34,9 @@ ch_ret spell_charm_person(int sn, int level, Character* ch, void* vo)
 
     charm_chance = ModifySavingThrowBasedOnResistance(victim, level, Flag::Ris::Charm);
 
-    if (IsAffectedBy(victim, AFF_CHARM)
+    if (IsAffectedBy(victim, Flag::Affect::Charm)
         || charm_chance == 1000
-        || IsAffectedBy(ch, AFF_CHARM)
+        || IsAffectedBy(ch, Flag::Affect::Charm)
         || level < victim->TopLevel
         || IsFollowingInCircle(victim, ch)
         || SaveVsSpellStaff(charm_chance, victim))
@@ -53,7 +53,7 @@ ch_ret spell_charm_person(int sn, int level, Character* ch, void* vo)
     af->Duration = (NumberFuzzy((level + 1) / 3) + 1) * DUR_CONV;
     af->Location = 0;
     af->Modifier = 0;
-    af->AffectedBy = AFF_CHARM;
+    af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Charm });
     AffectToCharacter(victim, af);
     Act(AT_MAGIC, "Isn't $n just so nice?", ch, NULL, victim, TO_VICT);
     Act(AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, TO_ROOM);

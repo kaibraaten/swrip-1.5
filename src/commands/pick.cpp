@@ -16,7 +16,7 @@ void do_pick(Character *ch, std::string arg)
     std::shared_ptr<Exit> pexit;
     std::shared_ptr<Ship> ship;
 
-    if (IsNpc(ch) && IsAffectedBy(ch, AFF_CHARM))
+    if (IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
     {
         ch->Echo("You can't concentrate enough for that.\r\n");
         return;
@@ -198,11 +198,11 @@ void do_pick(Character *ch, std::string arg)
 
                 if (!IsNpc(victim) && victim->Switched
                     && !IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
-                    && !IsAffectedBy(victim->Switched, AFF_POSSESS))
+                    && !IsAffectedBy(victim->Switched, Flag::Affect::Possess))
                     continue;
                 else if (!IsNpc(victim) && victim->Switched
                     && (IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
-                        || IsAffectedBy(victim->Switched, AFF_POSSESS)))
+                        || IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
                     victim = victim->Switched;
 
                 if (!IsAwake(victim)
@@ -253,11 +253,11 @@ void do_pick(Character *ch, std::string arg)
 
                 if (!IsNpc(victim) && victim->Switched
                     && !IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
-                    && !IsAffectedBy(victim->Switched, AFF_POSSESS))
+                    && !IsAffectedBy(victim->Switched, Flag::Affect::Possess))
                     continue;
                 else if (!IsNpc(victim) && victim->Switched
                     && (IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
-                        || IsAffectedBy(victim->Switched, AFF_POSSESS)))
+                        || IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
                     victim = victim->Switched;
 
                 if (!IsAwake(victim)

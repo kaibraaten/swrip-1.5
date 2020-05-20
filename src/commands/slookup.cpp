@@ -147,19 +147,19 @@ void do_slookup(Character* ch, std::string arg)
                 strcat(buf, " by '");
                 strcat(buf, aff->Modifier.c_str());
 
-                if (aff->AffectedBy)
+                if (aff->AffectedBy.any())
                     strcat(buf, "' and");
                 else
                     strcat(buf, "'");
             }
 
-            if (aff->AffectedBy)
+            if (aff->AffectedBy.any())
             {
                 strcat(buf, " applies");
 
                 for (size_t x = 0; x < AffectFlags.size(); x++)
                 {
-                    if (IsBitSet(aff->AffectedBy, 1 << x))
+                    if (aff->AffectedBy.test(x))
                     {
                         strcat(buf, " ");
                         strcat(buf, AffectFlags[x]);

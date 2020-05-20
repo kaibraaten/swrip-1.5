@@ -14,7 +14,7 @@ void do_berserk( Character *ch, std::string argument )
       return;
     }
 
-  if ( IsAffectedBy(ch, AFF_BERSERK) )
+  if ( IsAffectedBy(ch, Flag::Affect::Berserk))
     {
       ch->Echo( "Your rage is already at its peak!\r\n" );
       return;
@@ -40,7 +40,7 @@ void do_berserk( Character *ch, std::string argument )
      type thing.. */
   af->Location  = APPLY_STR;
   af->Modifier  = 1;
-  af->AffectedBy = AFF_BERSERK;
+  af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Berserk });
   AffectToCharacter(ch, af);
   ch->Echo( "You start to lose control..\r\n" );
   LearnFromSuccess(ch, gsn_berserk);

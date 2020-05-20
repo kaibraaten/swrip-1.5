@@ -194,8 +194,8 @@ bool CharacterFallIfNoFloor(Character *ch, int fall)
 {
     if (ch->InRoom->Flags.test(Flag::Room::NoFloor)
         && CAN_GO(ch, DIR_DOWN)
-        && (!IsAffectedBy(ch, AFF_FLYING)
-            || (ch->Mount && !IsAffectedBy(ch->Mount, AFF_FLYING))))
+        && (!IsAffectedBy(ch, Flag::Affect::Flying)
+            || (ch->Mount && !IsAffectedBy(ch->Mount, Flag::Affect::Flying))))
     {
         if (fall > 80)
         {
@@ -395,7 +395,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
     }
 
     if (pexit->Flags.test(Flag::Exit::Closed)
-        && (!IsAffectedBy(ch, AFF_PASS_DOOR)
+        && (!IsAffectedBy(ch, Flag::Affect::PassDoor)
             || pexit->Flags.test(Flag::Exit::NoPassdoor)))
     {
         if (!pexit->Flags.test(Flag::Exit::Secret)
@@ -436,7 +436,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
     }
 
     if (!fall
-        && IsAffectedBy(ch, AFF_CHARM)
+        && IsAffectedBy(ch, Flag::Affect::Charm)
         && ch->Master
         && in_room == ch->Master->InRoom)
     {
@@ -495,13 +495,13 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
             || to_room->Sector == SECT_AIR
             || pexit->Flags.test(Flag::Exit::Fly))
         {
-            if (ch->Mount && !IsAffectedBy(ch->Mount, AFF_FLYING))
+            if (ch->Mount && !IsAffectedBy(ch->Mount, Flag::Affect::Flying))
             {
                 ch->Echo("Your mount can't fly.\r\n");
                 return rNONE;
             }
 
-            if (!ch->Mount && !IsAffectedBy(ch, AFF_FLYING))
+            if (!ch->Mount && !IsAffectedBy(ch, Flag::Affect::Flying))
             {
                 ch->Echo("You'd need to fly to go there.\r\n");
                 return rNONE;
@@ -515,14 +515,14 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
 
             if (ch->Mount)
             {
-                if (IsAffectedBy(ch->Mount, AFF_FLYING)
-                    || IsAffectedBy(ch->Mount, AFF_FLOATING))
+                if (IsAffectedBy(ch->Mount, Flag::Affect::Flying)
+                    || IsAffectedBy(ch->Mount, Flag::Affect::Floating))
                 {
                     found = true;
                 }
             }
-            else if (IsAffectedBy(ch, AFF_FLYING)
-                || IsAffectedBy(ch, AFF_FLOATING))
+            else if (IsAffectedBy(ch, Flag::Affect::Flying)
+                     || IsAffectedBy(ch, Flag::Affect::Floating))
             {
                 found = true;
             }
@@ -558,9 +558,9 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
         {
             bool found = false;
 
-            if (ch->Mount && IsAffectedBy(ch->Mount, AFF_FLYING))
+            if (ch->Mount && IsAffectedBy(ch->Mount, Flag::Affect::Flying))
                 found = true;
-            else if (IsAffectedBy(ch, AFF_FLYING))
+            else if (IsAffectedBy(ch, Flag::Affect::Flying))
                 found = true;
 
             if (!found && !ch->Mount)
@@ -642,8 +642,8 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
                 break;
             }
 
-            if (!IsAffectedBy(ch->Mount, AFF_FLYING)
-                && !IsAffectedBy(ch->Mount, AFF_FLOATING))
+            if (!IsAffectedBy(ch->Mount, Flag::Affect::Flying)
+                && !IsAffectedBy(ch->Mount, Flag::Affect::Floating))
                 move = MovementLoss[umin(SECT_MAX - 1, in_room->Sector)];
             else
                 move = 1;
@@ -658,8 +658,8 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
         {
             hpmove = 500 / (ch->HitPoints.Current ? ch->HitPoints.Current : 1);
 
-            if (!IsAffectedBy(ch, AFF_FLYING)
-                && !IsAffectedBy(ch, AFF_FLOATING))
+            if (!IsAffectedBy(ch, Flag::Affect::Flying)
+                && !IsAffectedBy(ch, Flag::Affect::Floating))
                 move = hpmove * GetCarryEncumbrance(ch, MovementLoss[umin(SECT_MAX - 1, in_room->Sector)]);
             else
                 move = 1;
@@ -700,7 +700,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
 
     /* check for traps on exit - later */
 
-    if (!IsAffectedBy(ch, AFF_SNEAK)
+    if (!IsAffectedBy(ch, Flag::Affect::Sneak)
         && (IsNpc(ch) || !IsBitSet(ch->Flags, PLR_WIZINVIS)))
     {
         if (fall)
@@ -710,17 +710,17 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
             {
                 if (ch->Mount)
                 {
-                    if (IsAffectedBy(ch->Mount, AFF_FLOATING))
+                    if (IsAffectedBy(ch->Mount, Flag::Affect::Floating))
                         txt = "floats";
                     else
-                        if (IsAffectedBy(ch->Mount, AFF_FLYING))
+                        if (IsAffectedBy(ch->Mount, Flag::Affect::Flying))
                             txt = "flys";
                         else
                             txt = "rides";
                 }
                 else
                 {
-                    if (IsAffectedBy(ch, AFF_FLOATING))
+                    if (IsAffectedBy(ch, Flag::Affect::Floating))
                     {
                         if (drunk)
                             txt = "floats unsteadily";
@@ -728,7 +728,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
                             txt = "floats";
                     }
                     else
-                        if (IsAffectedBy(ch, AFF_FLYING))
+                        if (IsAffectedBy(ch, Flag::Affect::Flying))
                         {
                             if (drunk)
                                 txt = "flys shakily";
@@ -787,7 +787,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
 
     CharacterToRoom(ch, to_room);
 
-    if (!IsAffectedBy(ch, AFF_SNEAK)
+    if (!IsAffectedBy(ch, Flag::Affect::Sneak)
         && (IsNpc(ch) || !IsBitSet(ch->Flags, PLR_WIZINVIS)))
     {
         if (fall)
@@ -796,11 +796,11 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
         }
         else if (ch->Mount)
         {
-            if (IsAffectedBy(ch->Mount, AFF_FLOATING))
+            if (IsAffectedBy(ch->Mount, Flag::Affect::Floating))
             {
                 txt = "floats in";
             }
-            else if (IsAffectedBy(ch->Mount, AFF_FLYING))
+            else if (IsAffectedBy(ch->Mount, Flag::Affect::Flying))
             {
                 txt = "flys in";
             }
@@ -811,7 +811,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
         }
         else
         {
-            if (IsAffectedBy(ch, AFF_FLOATING))
+            if (IsAffectedBy(ch, Flag::Affect::Floating))
             {
                 if (drunk)
                 {
@@ -822,7 +822,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
                     txt = "floats in";
                 }
             }
-            else if (IsAffectedBy(ch, AFF_FLYING))
+            else if (IsAffectedBy(ch, Flag::Affect::Flying))
             {
                 if (drunk)
                 {
@@ -989,8 +989,8 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
     if (!CharacterFallIfNoFloor(ch, fall)
         && fall > 0)
     {
-        if (!IsAffectedBy(ch, AFF_FLOATING)
-            || (ch->Mount && !IsAffectedBy(ch->Mount, AFF_FLOATING)))
+        if (!IsAffectedBy(ch, Flag::Affect::Floating)
+            || (ch->Mount && !IsAffectedBy(ch->Mount, Flag::Affect::Floating)))
         {
             SetCharacterColor(AT_HURT, ch);
             ch->Echo("OUCH! You hit the ground!\r\n");

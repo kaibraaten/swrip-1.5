@@ -250,7 +250,7 @@ static void show_char_to_char_0(Character *victim, Character *ch)
     {
         if (!victim->Switched)
             strcat(buf, "(Link Dead) ");
-        else if (!IsAffectedBy(victim->Switched, AFF_POSSESS))
+        else if (!IsAffectedBy(victim->Switched, Flag::Affect::Possess))
             strcat(buf, "(Switched) ");
     }
 
@@ -269,24 +269,24 @@ static void show_char_to_char_0(Character *victim, Character *ch)
         strcat(buf, buf1);
     }
 
-    if (IsAffectedBy(victim, AFF_INVISIBLE))
+    if (IsAffectedBy(victim, Flag::Affect::Invisible))
         strcat(buf, "(Invis) ");
 
-    if (IsAffectedBy(victim, AFF_HIDE))
+    if (IsAffectedBy(victim, Flag::Affect::Hide))
         strcat(buf, "(Stealth) ");
 
-    if (IsAffectedBy(victim, AFF_PASS_DOOR))
+    if (IsAffectedBy(victim, Flag::Affect::PassDoor))
         strcat(buf, "(Translucent) ");
 
-    if (IsAffectedBy(victim, AFF_FAERIE_FIRE))
+    if (IsAffectedBy(victim, Flag::Affect::FaerieFire))
         strcat(buf, "&P(Pink Aura)&w ");
 
     if (IsEvil(victim)
-        && IsAffectedBy(ch, AFF_DETECT_EVIL))
+        && IsAffectedBy(ch, Flag::Affect::DetectEvil))
         strcat(buf, "&R(Red Aura)&w ");
 
     if ((victim->Fatigue.Current > 10)
-        && (IsAffectedBy(ch, AFF_DETECT_MAGIC) || IsImmortal(ch)))
+        && (IsAffectedBy(ch, Flag::Affect::DetectMagic) || IsImmortal(ch)))
         strcat(buf, "&B(Blue Aura)&w ");
 
     if (!IsNpc(victim) && IsBitSet(victim->Flags, PLR_LITTERBUG))
@@ -476,21 +476,21 @@ static void show_char_to_char_0(Character *victim, Character *ch)
             strcat(buf, " is here before you.");
         else
             if ((victim->InRoom->Sector == SECT_UNDERWATER)
-                && !IsAffectedBy(victim, AFF_AQUA_BREATH) && !IsNpc(victim))
+                && !IsAffectedBy(victim, Flag::Affect::AquaBreath) && !IsNpc(victim))
                 strcat(buf, " is drowning here.");
             else
                 if (victim->InRoom->Sector == SECT_UNDERWATER)
                     strcat(buf, " is here in the water.");
                 else
                     if ((victim->InRoom->Sector == SECT_OCEANFLOOR)
-                        && !IsAffectedBy(victim, AFF_AQUA_BREATH) && !IsNpc(victim))
+                        && !IsAffectedBy(victim, Flag::Affect::AquaBreath) && !IsNpc(victim))
                         strcat(buf, " is drowning here.");
                     else
                         if (victim->InRoom->Sector == SECT_OCEANFLOOR)
                             strcat(buf, " is standing here in the water.");
                         else
-                            if (IsAffectedBy(victim, AFF_FLOATING)
-                                || IsAffectedBy(victim, AFF_FLYING))
+                            if (IsAffectedBy(victim, Flag::Affect::Floating)
+                                || IsAffectedBy(victim, Flag::Affect::Flying))
                                 strcat(buf, " is hovering here.");
                             else
                                 strcat(buf, " is standing here.");
@@ -658,7 +658,7 @@ void show_char_to_char(const std::list<Character*> &list, Character *ch)
             ch->Echo("You see a pair of red eyes staring back at you.\r\n");
         }
         else if (IsRoomDark(ch->InRoom)
-            && IsAffectedBy(rch, AFF_INFRARED))
+                 && IsAffectedBy(rch, Flag::Affect::Infrared))
         {
             SetCharacterColor(AT_BLOOD, ch);
             ch->Echo("The red form of a living creature is here.\r\n");
@@ -670,7 +670,7 @@ static void show_visible_affects_to_char(Character *victim, Character *ch)
 {
     char buf[MAX_STRING_LENGTH];
 
-    if (IsAffectedBy(victim, AFF_CHARM))
+    if (IsAffectedBy(victim, Flag::Affect::Charm))
     {
         SetCharacterColor(AT_MAGIC, ch);
         ch->Echo("%s looks ahead free of expression.\r\n",
@@ -678,7 +678,7 @@ static void show_visible_affects_to_char(Character *victim, Character *ch)
     }
 
     if (!IsNpc(victim) && !victim->Desc
-        &&    victim->Switched && IsAffectedBy(victim->Switched, AFF_POSSESS))
+        && victim->Switched && IsAffectedBy(victim->Switched, Flag::Affect::Possess))
     {
         SetCharacterColor(AT_MAGIC, ch);
         strcpy(buf, PERS(victim, ch).c_str());
@@ -761,7 +761,7 @@ static bool requirements_are_met(Character *ch)
 
     if (!IsNpc(ch)
         && !IsBitSet(ch->Flags, PLR_HOLYLIGHT)
-        && !IsAffectedBy(ch, AFF_TRUESIGHT)
+        && !IsAffectedBy(ch, Flag::Affect::TrueSight)
         && IsRoomDark(ch->InRoom))
     {
         SetCharacterColor(AT_DGREY, ch);
@@ -919,7 +919,7 @@ static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short 
      * Ability to look into the next room                     -Thoric
      */
     if (pexit->ToRoom
-        && (IsAffectedBy(ch, AFF_SCRYING)
+        && (IsAffectedBy(ch, Flag::Affect::Scrying)
             || pexit->Flags.test(Flag::Exit::CanLook)
             || GetTrustLevel(ch) >= LEVEL_IMMORTAL))
     {

@@ -20,7 +20,7 @@ void do_group( Character *ch, std::string arg )
             {
               SetCharacterColor( AT_DGREEN, ch );
 
-              if (IsAffectedBy(gch, AFF_POSSESS))
+              if (IsAffectedBy(gch, Flag::Affect::Possess))
                 ch->Echo( "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                           gch->TopLevel,
                           IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,

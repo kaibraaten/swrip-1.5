@@ -1326,7 +1326,7 @@ void DisplayPrompt(Descriptor *d)
                 if ((!IsNpc(ch) && IsBitSet(ch->Flags, PLR_WIZINVIS)) ||
                     (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOBINVIS)))
                     sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->MobInvis : ch->PCData->WizInvis));
-                else if (IsAffectedBy(ch, AFF_INVISIBLE))
+                else if (IsAffectedBy(ch, Flag::Affect::Invisible))
                     sprintf(pbuf, "(Invis) ");
                 break;
 

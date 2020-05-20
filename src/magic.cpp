@@ -700,7 +700,7 @@ void* LocateSpellTargets(Character* ch, const std::string& arg,
                 }
             }
 
-            if (IsAffectedBy(ch, AFF_CHARM) && ch->Master == *victim)
+            if (IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == *victim)
             {
                 ch->Echo("You can't do that on your own follower.\r\n");
                 return &pAbort;

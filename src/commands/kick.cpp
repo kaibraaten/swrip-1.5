@@ -7,38 +7,36 @@
 
 void do_kick( Character *ch, std::string argument )
 {
-  Character *victim = NULL;
+    Character *victim = NULL;
 
-  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
+    if ( IsNpc(ch) && IsAffectedBy( ch, Flag::Affect::Charm))
     {
-      ch->Echo("You can't concentrate enough for that.\r\n");
-      return;
+        ch->Echo("You can't concentrate enough for that.\r\n");
+        return;
     }
 
-  if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
+    if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
-      ch->Echo("You aren't fighting anyone.\r\n");
-      return;
+        ch->Echo("You aren't fighting anyone.\r\n");
+        return;
     }
 
-  if ( IsBitSet(victim->Flags, PLR_AFK))
+    if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      Log->Info("%s just attacked %s with an afk flag on!"
-                , ch->Name.c_str(), victim->Name.c_str() );
+        Log->Info("%s just attacked %s with an afk flag on!"
+                  , ch->Name.c_str(), victim->Name.c_str() );
     }
 
-  SetWaitState( ch, SkillTable[gsn_kick]->Beats );
+    SetWaitState( ch, SkillTable[gsn_kick]->Beats );
 
-  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_kick] )
+    if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_kick] )
     {
-      LearnFromSuccess( ch, gsn_kick );
-      global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_kick );
+        LearnFromSuccess( ch, gsn_kick );
+        global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_kick );
     }
-  else
+    else
     {
-      LearnFromFailure( ch, gsn_kick );
-      global_retcode = InflictDamage( ch, victim, 0, gsn_kick );
+        LearnFromFailure( ch, gsn_kick );
+        global_retcode = InflictDamage( ch, victim, 0, gsn_kick );
     }
 }
-
-

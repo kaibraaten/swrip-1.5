@@ -31,26 +31,31 @@ ch_ret spell_earthquake(int sn, int level, Character* ch, void* vo)
     for (vch = FirstCharacter; vch; vch = vch_next)
     {
         vch_next = vch->Next;
+        
         if (!vch->InRoom)
             continue;
+        
         if (vch->InRoom == ch->InRoom)
         {
             if (!IsNpc(vch) && IsBitSet(vch->Flags, PLR_WIZINVIS)
                 && vch->PCData->WizInvis >= LEVEL_IMMORTAL)
                 continue;
 
-            if (IsAffectedBy(vch, AFF_FLOATING) || IsAffectedBy(vch, AFF_FLYING))
+            if (IsAffectedBy(vch, Flag::Affect::Floating)
+                || IsAffectedBy(vch, Flag::Affect::Flying))
                 continue;
 
             if (ch == vch)
                 continue;
 
             retcode = InflictDamage(ch, vch, level + RollDice(2, 8), sn);
+            
             if (retcode == rCHAR_DIED || CharacterDiedRecently(ch))
             {
                 ch_died = true;
                 continue;
             }
+            
             if (CharacterDiedRecently(vch))
                 continue;
         }

@@ -1580,7 +1580,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
 
             if (IsRoomDark(pRoomIndex))
             {
-                SetBit(mob->AffectedBy, AFF_INFRARED);
+                mob->AffectedBy.set(Flag::Affect::Infrared);
             }
 
             CharacterToRoom(mob, pRoomIndex);

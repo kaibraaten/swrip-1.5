@@ -17,7 +17,7 @@ void do_dismiss( Character *ch, std::string arg )
       return;
     }
 
-  if ( IsAffectedBy( victim, AFF_CHARM )
+  if ( IsAffectedBy( victim, Flag::Affect::Charm)
        && IsNpc( victim )
        && victim->Master == ch )
     {

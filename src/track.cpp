@@ -536,7 +536,7 @@ static bool MobSnipe(Character *ch, Character *victim)
             return false;
         }
 
-        if (IsAffectedBy(ch, AFF_CHARM) && ch->Master == victim)
+        if (IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
         {
             return false;
         }

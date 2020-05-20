@@ -103,7 +103,7 @@ std::string FormatObjectToCharacter( const Object *obj, const Character *ch, boo
       buf << "(Invis) ";
     }
 
-  if ( ( IsAffectedBy(ch, AFF_DETECT_MAGIC) || IsImmortal(ch) )
+  if ( ( IsAffectedBy(ch, Flag::Affect::DetectMagic) || IsImmortal(ch) )
        && obj->Flags.test(Flag::Obj::Magic))
     {
       buf << "&B(Blue Aura)&w ";
@@ -135,7 +135,7 @@ std::string FormatObjectToCharacter( const Object *obj, const Character *ch, boo
       buf << "(PROTO) ";
     }
 
-  if ( IsAffectedBy(ch, AFF_DETECTTRAPS) && IsObjectTrapped(obj) )
+  if ( IsAffectedBy(ch, Flag::Affect::DetectTraps) && IsObjectTrapped(obj) )
     {
       buf << "(Trap) ";
     }
@@ -307,7 +307,7 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
       if ( obj->WearLoc == WEAR_NONE
            && CanSeeObject( ch, obj )
            && ( !obj->Description.empty() || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT) || IsNpc(ch) ) )
-           && (obj->ItemType != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
+           && (obj->ItemType != ITEM_TRAP || IsAffectedBy(ch, Flag::Affect::DetectTraps) ) )
         {
           std::string pstrShow = FormatObjectToCharacter( obj, ch, fShort );
           fCombine = false;

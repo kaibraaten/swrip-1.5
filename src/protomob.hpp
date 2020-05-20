@@ -31,7 +31,7 @@ public:
     SexType Sex = 0;
     int Level = 0;
     int Flags = 0;
-    int AffectedBy = 0;
+    std::bitset<Flag::MAX> AffectedBy;
     int Alignment = 0;
     int ArmorClass = 0;
     int HitNoDice = 0;

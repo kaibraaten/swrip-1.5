@@ -6,31 +6,32 @@
 
 void do_hide( Character *ch, std::string argument )
 {
-  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
+    if ( IsNpc(ch) && IsAffectedBy( ch, Flag::Affect::Charm))
     {
-      ch->Echo( "You can't concentrate enough for that.\r\n" );
-      return;
+        ch->Echo( "You can't concentrate enough for that.\r\n" );
+        return;
     }
 
-  if ( ch->Mount )
+    if ( ch->Mount )
     {
-      ch->Echo( "You can't do that while mounted.\r\n" );
-      return;
+        ch->Echo( "You can't do that while mounted.\r\n" );
+        return;
     }
 
-  ch->Echo( "You make an attempt at stealth.\r\n" );
+    ch->Echo( "You make an attempt at stealth.\r\n" );
 
-  if ( IsAffectedBy(ch, AFF_HIDE) )
-    RemoveBit(ch->AffectedBy, AFF_HIDE);
-
-  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_hide] )
+    if ( IsAffectedBy(ch, Flag::Affect::Hide))
     {
-      SetBit(ch->AffectedBy, AFF_HIDE);
-      LearnFromSuccess( ch, gsn_hide );
+        ch->AffectedBy.reset(Flag::Affect::Hide);
     }
-  else
+    
+    if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_hide] )
     {
-      LearnFromFailure( ch, gsn_hide );
+        ch->AffectedBy.set(Flag::Affect::Hide);
+        LearnFromSuccess( ch, gsn_hide );
+    }
+    else
+    {
+        LearnFromFailure( ch, gsn_hide );
     }
 }
-

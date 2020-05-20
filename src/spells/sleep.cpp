@@ -42,7 +42,7 @@ ch_ret spell_sleep(int sn, int level, Character* ch, void* vo)
     else
         tmp = level;
 
-    if (IsAffectedBy(victim, AFF_SLEEP)
+    if (IsAffectedBy(victim, Flag::Affect::Sleep)
         || (sleep_chance = ModifySavingThrowBasedOnResistance(victim, tmp, Flag::Ris::Sleep)) == 1000
         || (victim != ch && victim->InRoom->Flags.test(Flag::Room::Safe))
         || SaveVsSpellStaff(sleep_chance, victim))
@@ -63,7 +63,7 @@ ch_ret spell_sleep(int sn, int level, Character* ch, void* vo)
     af->Duration = (4 + level) * DUR_CONV;
     af->Location = APPLY_NONE;
     af->Modifier = 0;
-    af->AffectedBy = AFF_SLEEP;
+    af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Sleep });
     JoinAffect(victim, af);
 
     /* Added by Narn at the request of Dominus. */

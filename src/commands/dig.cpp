@@ -14,7 +14,7 @@ void do_dig(Character *ch, std::string arg)
     switch (ch->SubState)
     {
     default:
-        if (IsNpc(ch) && IsAffectedBy(ch, AFF_CHARM))
+        if (IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
         {
             ch->Echo("You can't concentrate enough for that.\r\n");
             return;

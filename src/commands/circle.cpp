@@ -12,7 +12,7 @@ void do_circle( Character *ch, std::string argument )
   Object *obj = NULL;
   int percent = 0;
 
-  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, Flag::Affect::Charm))
     {
       ch->Echo( "You can't concentrate enough for that.\r\n" );
       return;

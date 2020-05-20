@@ -232,7 +232,7 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
         return;
     }
 
-    if (IsNpc(ch) && IsAffectedBy(ch, AFF_CHARM))
+    if (IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
     {
         if (ch->Master != nullptr)
         {
@@ -594,9 +594,9 @@ void StopFollowing(Character *ch)
         ch->Master->PCData->Pet = NULL;
     }
 
-    if (IsAffectedBy(ch, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
     {
-        RemoveBit(ch->AffectedBy, AFF_CHARM);
+        ch->AffectedBy.reset(Flag::Affect::Charm);
         StripAffect(ch, gsn_charm_person);
     }
 

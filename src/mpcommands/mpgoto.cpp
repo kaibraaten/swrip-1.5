@@ -8,7 +8,7 @@ void do_mpgoto(Character *ch, std::string argument)
     std::string arg;
     std::shared_ptr<Room> location;
 
-    if (IsAffectedBy(ch, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
     if (!IsNpc(ch))

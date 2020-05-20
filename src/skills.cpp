@@ -104,16 +104,16 @@ void Disarm( Character *ch, Character *victim )
  */
 void Trip( Character *ch, Character *victim )
 {
-  if ( IsAffectedBy( victim, AFF_FLYING )
-       ||   IsAffectedBy( victim, AFF_FLOATING ) )
+    if ( IsAffectedBy( victim, Flag::Affect::Flying)
+         || IsAffectedBy( victim, Flag::Affect::Floating))
     {
       return;
     }
 
   if ( victim->Mount )
     {
-      if ( IsAffectedBy( victim->Mount, AFF_FLYING )
-           || IsAffectedBy( victim->Mount, AFF_FLOATING ) )
+        if ( IsAffectedBy( victim->Mount, Flag::Affect::Flying)
+             || IsAffectedBy( victim->Mount, Flag::Affect::Floating))
 	{
 	  return;
 	}

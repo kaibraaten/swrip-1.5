@@ -54,7 +54,7 @@ ch_ret spell_possess(int sn, int level, Character* ch, void* vo)
         return rSPELL_FAILED;
     }
 
-    if (IsAffectedBy(victim, AFF_POSSESS)
+    if (IsAffectedBy(victim, Flag::Affect::Possess)
         || level < (victim->TopLevel + 30)
         || victim->Desc
         || !Chance(ch, 25))
@@ -72,7 +72,7 @@ ch_ret spell_possess(int sn, int level, Character* ch, void* vo)
     af->Duration = 20 + (GetAbilityLevel(ch, FORCE_ABILITY) - victim->TopLevel) / 2;
     af->Location = 0;
     af->Modifier = 0;
-    af->AffectedBy = AFF_POSSESS;
+    af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Possess });
     AffectToCharacter(victim, af);
 
     sprintf(buf, "You have possessed %s!\r\n", victim->ShortDescr.c_str());

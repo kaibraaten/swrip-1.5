@@ -72,9 +72,8 @@ void do_buy(Character *ch, std::string argument)
         ch->Gold -= maxgold;
         BoostEconomy(ch->InRoom->Area, maxgold);
         pet = CreateMobile(pet->Prototype);
-        /* SetBit(ch->act, PLR_BOUGHT_PET); */
         SetBit(pet->Flags, ACT_PET);
-        SetBit(pet->AffectedBy, AFF_CHARM);
+        SetBit(pet->AffectedBy, Flag::Affect::Charm);
 
         argument = OneArgument(argument, arg);
 

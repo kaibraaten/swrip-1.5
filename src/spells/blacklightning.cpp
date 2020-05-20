@@ -8,7 +8,7 @@ ch_ret spell_black_lightning(int sn, int level, Character* ch, void* vo)
     int dam;
 
     dam = 100;
-    if (IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch))
+    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         dam -= (int)(dam / 2);
 
     ch->Echo("You feel the hatred grow within you!\r\n");

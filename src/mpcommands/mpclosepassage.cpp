@@ -18,7 +18,7 @@ void do_mp_close_passage(Character *ch, std::string argument)
     DirectionType exit_num = DIR_INVALID;
     std::shared_ptr<Exit> pexit;
 
-    if (IsAffectedBy(ch, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
     if (!IsNpc(ch) || (ch->Desc && GetTrustLevel(ch) < LEVEL_IMMORTAL))

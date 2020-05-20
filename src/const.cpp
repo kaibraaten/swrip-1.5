@@ -239,7 +239,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* --cmbt, -smg, -80bh, ++lead */
     {
         "Mon Calamari",
-            AFF_AQUA_BREATH,
+            (1 << Flag::Affect::AquaBreath),
             {
                 1,
                     -1,
@@ -271,7 +271,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* -cmbt */
     {
         "Shistavanen",
-            AFF_SNEAK,
+            (1 << Flag::Affect::Sneak),
             {
                 +3,
                     +4,
@@ -464,7 +464,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* -cmbt */
     {
         "Defel",
-            AFF_HIDE + AFF_SNEAK,
+            (1 << Flag::Affect::Hide) + (1 << Flag::Affect::Sneak),
             {
                 +1,
                     +3,
@@ -496,7 +496,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
     {
         "Trandoshan",
-            AFF_INFRARED,
+            (1 << Flag::Affect::Infrared),
             {
                 +3,
                     -1,
@@ -528,7 +528,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* -cmbt(possible) */
     {
         "Chadra-Fan",
-            AFF_INFRARED,
+            (1 << Flag::Affect::Infrared),
             {
                 -3,
                     +3,
@@ -560,7 +560,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
     {
         "Quarren",
-            AFF_AQUA_BREATH + AFF_INFRARED,
+            (1 << Flag::Affect::AquaBreath) + (1 << Flag::Affect::Infrared),
             {
                 -1,
                     +1,
@@ -624,7 +624,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
     {
         "Falleen",
-            AFF_AQUA_BREATH,
+            (1 << Flag::Affect::AquaBreath),
             {
                 0,
                     1,
@@ -720,7 +720,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
     {
         "Gotal",
-            AFF_DETECT_MAGIC,
+            (1 << Flag::Affect::DetectMagic),
             {
                 -1,
                     0,
@@ -752,7 +752,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
     {
         "Droid",
-            AFF_AQUA_BREATH + AFF_INFRARED,
+            (1 << Flag::Affect::AquaBreath) + (1 << Flag::Affect::Infrared),
             {
                 0,
                     -2,
@@ -784,7 +784,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },
     {
         "Firrerreo",
-            AFF_AQUA_BREATH,
+            (1 << Flag::Affect::AquaBreath),
             {
                 +1,
                     -2,
@@ -849,7 +849,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* ++cmbt, -dip/lead */
     {
         "Bothan",
-            AFF_SNEAK | AFF_SCRYING,
+            (1 << Flag::Affect::Sneak) + (1 << Flag::Affect::Scrying),
             {
                 0,
                     +3,
@@ -881,7 +881,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* ++lead/dip, -eng */
     {
         "Togorian",
-            AFF_DETECT_HIDDEN | AFF_SNEAK,
+            (1 << Flag::Affect::DetectHidden) + (1 << Flag::Affect::Sneak),
             {
                 +4,
                     +4,
@@ -913,7 +913,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* ++cmbt,+bh */
     {
         "Dug",
-            AFF_SNEAK,
+            (1 << Flag::Affect::Sneak),
             {
                 -2,
                     +5,
@@ -945,7 +945,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* +cmbt */
     {
         "Kubaz",
-            AFF_SCRYING,
+            (1 << Flag::Affect::Scrying),
             {
                 0,
                     +3,
@@ -1009,7 +1009,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* +combat,--lead/dip/pil */
     {
         "Gran",
-            AFF_INFRARED,
+            (1 << Flag::Affect::Infrared),
             {
                 +2,
                     0,
@@ -1073,7 +1073,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* ++combat,+lead/eng,--dip */
     {
         "Gand",
-            AFF_AQUA_BREATH,
+            (1 << Flag::Affect::AquaBreath),
             {
                 +1,
                     -3,
@@ -1137,7 +1137,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* ++engineer/pilot,--combat, -lead */
     {
         "Coynite",
-            AFF_SNEAK,
+            (1 << Flag::Affect::Sneak),
             {
                 +4,
                     +2,
@@ -1169,7 +1169,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* ++combat/lead, +bh, -piloting/dip */
     {
         "Protocol Droid",
-            AFF_AQUA_BREATH + AFF_INFRARED,
+            (1 << Flag::Affect::AquaBreath) + (1 << Flag::Affect::Infrared),
             {
                 -5,
                     -5,
@@ -1201,7 +1201,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* (+)dip */
     {
         "Assassin Droid",
-            AFF_AQUA_BREATH + AFF_INFRARED,
+            (1 << Flag::Affect::AquaBreath) + (1 << Flag::Affect::Infrared),
             {
                 +4,
                     +3,
@@ -1233,7 +1233,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* ++BH,++combat */
     {
         "Gladiator Droid",
-            AFF_AQUA_BREATH + AFF_INFRARED,
+            (1 << Flag::Affect::AquaBreath) + (1 << Flag::Affect::Infrared),
             {
                 +5,
                     +3,
@@ -1265,7 +1265,7 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* (+)combat */
     {
         "Astromech Droid",
-            AFF_AQUA_BREATH + AFF_INFRARED,
+            (1 << Flag::Affect::AquaBreath) + (1 << Flag::Affect::Infrared),
             {
                 0,
                     -5,
@@ -1297,7 +1297,10 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* (+)pil */
     {
         "Interrogation Droid",
-            AFF_AQUA_BREATH + AFF_INFRARED + AFF_FLYING + AFF_FLOATING,
+            (1 << Flag::Affect::AquaBreath)
+            + (1 << Flag::Affect::Infrared)
+            + (1 << Flag::Affect::Flying)
+            + (1 << Flag::Affect::Floating),
             {
                 0,
                     +4,
@@ -1329,7 +1332,10 @@ const std::array<const Race, MAX_RACE> RaceTable
                     },/* (+)lead */
     {
         "God",
-            AFF_AQUA_BREATH + AFF_INFRARED + AFF_FLYING + AFF_FLOATING,
+            (1 << Flag::Affect::AquaBreath)
+            + (1 << Flag::Affect::Infrared)
+            + (1 << Flag::Affect::Flying)
+            + (1 << Flag::Affect::Floating),
             {
                 +5,
                     +5,

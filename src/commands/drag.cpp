@@ -232,8 +232,8 @@ void do_drag(Character *ch, std::string argument)
         nogo = true;
     }
     else if (pexit->Flags.test(Flag::Exit::Closed)
-        && (!IsAffectedBy(victim, AFF_PASS_DOOR)
-            || pexit->Flags.test(Flag::Exit::NoPassdoor)))
+             && (!IsAffectedBy(victim, Flag::Affect::PassDoor)
+                 || pexit->Flags.test(Flag::Exit::NoPassdoor)))
     {
         nogo = true;
     }

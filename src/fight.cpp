@@ -274,7 +274,7 @@ void ViolenceUpdate()
 
         Character *victim = GetFightingOpponent(ch);
 
-        if (victim == nullptr || IsAffectedBy(ch, AFF_PARALYSIS))
+        if (victim == nullptr || IsAffectedBy(ch, Flag::Affect::Paralysis))
         {
             continue;
         }
@@ -350,9 +350,9 @@ void ViolenceUpdate()
                 /*
                  * PC's auto-assist others in their group.
                  */
-                if (!IsNpc(ch) || IsAffectedBy(ch, AFF_CHARM))
+                if (!IsNpc(ch) || IsAffectedBy(ch, Flag::Affect::Charm))
                 {
-                    if ((!IsNpc(rch) || IsAffectedBy(rch, AFF_CHARM))
+                    if ((!IsNpc(rch) || IsAffectedBy(rch, Flag::Affect::Charm))
                         && IsInSameGroup(ch, rch))
                     {
                         HitMultipleTimes(rch, victim, TYPE_UNDEFINED);
@@ -364,7 +364,7 @@ void ViolenceUpdate()
                 /*
                  * NPCs assist NPCs of same type or 12.5% chance regardless.
                  */
-                if (IsNpc(rch) && !IsAffectedBy(rch, AFF_CHARM)
+                if (IsNpc(rch) && !IsAffectedBy(rch, Flag::Affect::Charm)
                     && !IsBitSet(rch->Flags, ACT_NOASSIST))
                 {
                     if (CharacterDiedRecently(ch))
@@ -505,7 +505,7 @@ ch_ret HitMultipleTimes(Character *ch, Character *victim, int dt)
     /* -- Altrag */
     int hit_chance = IsNpc(ch) ? 100 : (ch->PCData->Learned[gsn_berserk] * 5 / 2);
 
-    if (IsAffectedBy(ch, AFF_BERSERK) && GetRandomPercent() < hit_chance)
+    if (IsAffectedBy(ch, Flag::Affect::Berserk) && GetRandomPercent() < hit_chance)
     {
         retcode = HitOnce(ch, victim, dt);
 
@@ -609,8 +609,8 @@ ch_ret HitMultipleTimes(Character *ch, Character *victim, int dt)
     {
         int move = 0;
 
-        if (!IsAffectedBy(ch, AFF_FLYING)
-            && !IsAffectedBy(ch, AFF_FLOATING))
+        if (!IsAffectedBy(ch, Flag::Affect::Flying)
+            && !IsAffectedBy(ch, Flag::Affect::Floating))
         {
             move = GetCarryEncumbrance(ch, MovementLoss[umin(SECT_MAX - 1, ch->InRoom->Sector)]);
         }
@@ -1158,14 +1158,14 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
                 Act(AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT);
                 StopFighting(victim, true);
 
-                if (!IsAffectedBy(victim, AFF_PARALYSIS))
+                if (!IsAffectedBy(victim, Flag::Affect::Paralysis))
                 {
                     std::shared_ptr<Affect> af = std::make_shared<Affect>();
                     af->Type = gsn_stun;
                     af->Location = APPLY_AC;
                     af->Modifier = 20;
                     af->Duration = 7;
-                    af->AffectedBy = AFF_PARALYSIS;
+                    af->AffectedBy = CreateBitSet<Flag::MAX>({Flag::Affect::Paralysis});
                     AffectToCharacter(victim, af);
                     UpdatePosition(victim);
 
@@ -1375,8 +1375,8 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
     /*
      * magic shields that retaliate                               -Thoric
      */
-    if (IsAffectedBy(victim, AFF_FIRESHIELD)
-        && !IsAffectedBy(ch, AFF_FIRESHIELD))
+    if (IsAffectedBy(victim, Flag::Affect::Fireshield)
+        && !IsAffectedBy(ch, Flag::Affect::Fireshield))
     {
         retcode = spell_fireball(gsn_fireball, GetOffensiveShieldLevelModifier(victim, ch), victim, ch);
     }
@@ -1388,8 +1388,8 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
         return retcode;
     }
 
-    if (IsAffectedBy(victim, AFF_SHOCKSHIELD)
-        && !IsAffectedBy(ch, AFF_SHOCKSHIELD))
+    if (IsAffectedBy(victim, Flag::Affect::Shockshield)
+        && !IsAffectedBy(ch, Flag::Affect::Shockshield))
     {
         retcode = spell_lightning_bolt(gsn_lightning_bolt, GetOffensiveShieldLevelModifier(victim, ch), victim, ch);
     }
@@ -1452,8 +1452,8 @@ static void WimpOut(Character* ch, Character* victim, int dam)
     {
         if ((IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits(1) == 0
                 && victim->HitPoints.Current < victim->HitPoints.Max / 2)
-            || (IsAffectedBy(victim, AFF_CHARM) && victim->Master
-                &&     victim->Master->InRoom != victim->InRoom))
+            || (IsAffectedBy(victim, Flag::Affect::Charm) && victim->Master
+                && victim->Master->InRoom != victim->InRoom))
         {
             StartFearing(victim, ch);
             StopHunting(victim);
@@ -1623,10 +1623,10 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
              */
             if (IsNpc(ch)
                 && IsNpc(victim)
-                &&   IsAffectedBy(victim, AFF_CHARM)
+                && IsAffectedBy(victim, Flag::Affect::Charm)
                 && victim->Master
-                &&   victim->Master->InRoom == ch->InRoom
-                &&   NumberBits(3) == 0)
+                && victim->Master->InRoom == ch->InRoom
+                && NumberBits(3) == 0)
             {
                 StopFighting(ch, false);
                 retcode = HitMultipleTimes(ch, victim->Master, TYPE_UNDEFINED);
@@ -1645,29 +1645,29 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
         /*
          * Inviso attacks ... not.
          */
-        if (IsAffectedBy(ch, AFF_INVISIBLE))
+        if (IsAffectedBy(ch, Flag::Affect::Invisible))
         {
             StripAffect(ch, gsn_invis);
             StripAffect(ch, gsn_mass_invis);
-            RemoveBit(ch->AffectedBy, AFF_INVISIBLE);
+            ch->AffectedBy.reset(Flag::Affect::Invisible);
             Act(AT_MAGIC, "$n fades into existence.", ch, nullptr, nullptr, TO_ROOM);
         }
 
         /* Take away Hide */
-        if (IsAffectedBy(ch, AFF_HIDE) && ch->Race != RACE_DEFEL)
+        if (IsAffectedBy(ch, Flag::Affect::Hide) && ch->Race != RACE_DEFEL)
         {
-            RemoveBit(ch->AffectedBy, AFF_HIDE);
+            ch->AffectedBy.reset(Flag::Affect::Hide);
         }
 
         /*
          * Damage modifiers.
          */
-        if (IsAffectedBy(victim, AFF_SANCTUARY))
+        if (IsAffectedBy(victim, Flag::Affect::Sanctuary))
         {
             dam /= 2;
         }
 
-        if (IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch))
+        if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         {
             dam -= (int)(dam / 4);
         }
@@ -1821,7 +1821,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
     }
 
     if (dam > 0 && dt > TYPE_HIT
-        && !IsAffectedBy(victim, AFF_POISON)
+        && !IsAffectedBy(victim, Flag::Affect::Poison)
         && IsWieldingPoisonedWeapon(ch)
         && !victim->Immune.test(Flag::Ris::Poison)
         && !SaveVsPoisonDeath(GetAbilityLevel(ch, COMBAT_ABILITY), victim))
@@ -1832,7 +1832,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
         af->Duration = 20;
         af->Location = APPLY_STR;
         af->Modifier = -2;
-        af->AffectedBy = AFF_POISON;
+        af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Poison });
         JoinAffect(victim, af);
         ch->MentalState = urange(20, ch->MentalState + 2, 100);
     }
@@ -1862,7 +1862,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
         break;
 
     case POS_STUNNED:
-        if (!IsAffectedBy(victim, AFF_PARALYSIS))
+        if (!IsAffectedBy(victim, Flag::Affect::Paralysis))
         {
             Act(AT_ACTION, "$n is stunned, but will probably recover.",
                 victim, NULL, NULL, TO_ROOM);
@@ -1937,7 +1937,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
      * Sleep spells and extremely wounded folks.
      */
     if (!IsAwake(victim)                /* lets make NPC's not slaughter PC's */
-        && !IsAffectedBy(victim, AFF_PARALYSIS))
+        && !IsAffectedBy(victim, Flag::Affect::Paralysis))
     {
         if (victim->Fighting
             && victim->Fighting->Who->HHF.Hunting
@@ -2204,14 +2204,14 @@ bool CanLootVictim(const Character *ch, const Character *victim)
 
 static void ApplyWantedFlags(Character *ch, const Character *victim)
 {
-    if (IsBitSet(ch->AffectedBy, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
     {
         if (!ch->Master)
         {
             Log->Bug("%s: %s bad AFF_CHARM",
                 __FUNCTION__, IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str());
             StripAffect(ch, gsn_charm_person);
-            RemoveBit(ch->AffectedBy, AFF_CHARM);
+            ch->AffectedBy.reset(Flag::Affect::Charm);
             return;
         }
 
@@ -2236,14 +2236,14 @@ static void ApplyWantedFlags(Character *ch, const Character *victim)
 
 static void UpdateKillStats(Character *ch, Character *victim)
 {
-    if (IsBitSet(ch->AffectedBy, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
     {
         if (!ch->Master)
         {
             Log->Bug("%s: %s bad AFF_CHARM",
                 __FUNCTION__, IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str());
             StripAffect(ch, gsn_charm_person);
-            RemoveBit(ch->AffectedBy, AFF_CHARM);
+            ch->AffectedBy.reset(Flag::Affect::Charm);
             return;
         }
 
@@ -2298,7 +2298,7 @@ void UpdatePosition(Character *victim)
             victim->Position = POS_STANDING;
         }
 
-        if (IsAffectedBy(victim, AFF_PARALYSIS))
+        if (IsAffectedBy(victim, Flag::Affect::Paralysis))
         {
             victim->Position = POS_STUNNED;
         }
@@ -2341,7 +2341,7 @@ void UpdatePosition(Character *victim)
     }
 
     if (victim->Position > POS_STUNNED
-        && IsAffectedBy(victim, AFF_PARALYSIS))
+        && IsAffectedBy(victim, Flag::Affect::Paralysis))
     {
         victim->Position = POS_STUNNED;
     }
@@ -2367,7 +2367,7 @@ void StartFighting(Character *ch, Character *victim)
         return;
     }
 
-    if (IsAffectedBy(ch, AFF_SLEEP))
+    if (IsAffectedBy(ch, Flag::Affect::Sleep))
     {
         StripAffect(ch, gsn_sleep);
     }
@@ -2393,7 +2393,7 @@ void StartFighting(Character *ch, Character *victim)
     ch->Position = POS_FIGHTING;
     victim->NumFighting++;
 
-    if (victim->Switched && IsAffectedBy(victim->Switched, AFF_POSSESS))
+    if (victim->Switched && IsAffectedBy(victim->Switched, Flag::Affect::Possess))
     {
         victim->Switched->Echo("You are disturbed!\r\n");
         do_return(victim->Switched, "");
@@ -2440,7 +2440,7 @@ void FreeFight(Character *ch)
     }
 
     /* Berserk wears off after combat. -- Altrag */
-    if (IsAffectedBy(ch, AFF_BERSERK))
+    if (IsAffectedBy(ch, Flag::Affect::Berserk))
     {
         StripAffect(ch, gsn_berserk);
         SetCharacterColor(AT_WEAROFF, ch);
@@ -3108,7 +3108,7 @@ static bool SprintForCover(Character *ch)
         if (pexit == nullptr
             || !pexit->ToRoom
             || (pexit->Flags.test(Flag::Exit::Closed)
-                && !IsAffectedBy(ch, AFF_PASS_DOOR))
+                && !IsAffectedBy(ch, Flag::Affect::PassDoor))
             || (IsNpc(ch)
                 && pexit->ToRoom->Flags.test(Flag::Room::NoMob)))
         {
@@ -3116,7 +3116,7 @@ static bool SprintForCover(Character *ch)
         }
 
         StripAffect(ch, gsn_sneak);
-        RemoveBit(ch->AffectedBy, AFF_SNEAK);
+        ch->AffectedBy.reset(Flag::Affect::Sneak);
 
         if (ch->Mount && ch->Mount->Fighting)
         {

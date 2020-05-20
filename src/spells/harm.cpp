@@ -27,7 +27,7 @@ ch_ret spell_harm(int sn, int level, Character* ch, void* vo)
         dam = umin(50, dam / 4);
     dam = umin(100, dam);
 
-    if (IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch))
+    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         dam -= (int)(dam / 4);
 
     return InflictDamage(ch, victim, dam, sn);

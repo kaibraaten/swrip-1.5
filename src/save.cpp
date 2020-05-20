@@ -324,9 +324,9 @@ static void WriteCharacter(const Character *ch, FILE *fp)
         fprintf(fp, "Act          %d\n", ch->Flags);
     }
 
-    if (ch->AffectedBy)
+    if (ch->AffectedBy.any())
     {
-        fprintf(fp, "AffectedBy   %d\n", ch->AffectedBy);
+        fprintf(fp, "AffectedBy   %ld\n", ch->AffectedBy.to_ulong());
     }
 
     fprintf(fp, "Position     %d\n",
@@ -610,22 +610,22 @@ static void WriteCharacter(const Character *ch, FILE *fp)
 
         if (paf->Type >= 0 && paf->Type < TYPE_PERSONAL)
         {
-            fprintf(fp, "AffectData   '%s' %3d %3d %3d %10d\n",
+            fprintf(fp, "AffectData   '%s' %3d %3d %3d %10ld\n",
                     skill->Name.c_str(),
                     paf->Duration,
                     paf->Modifier,
                     paf->Location,
-                    paf->AffectedBy
+                    paf->AffectedBy.to_ulong()
                 );
         }
         else
         {
-            fprintf(fp, "Affect       %3d %3d %3d %3d %10d\n",
+            fprintf(fp, "Affect       %3d %3d %3d %3d %10ld\n",
                     paf->Type,
                     paf->Duration,
                     paf->Modifier,
                     paf->Location,
-                    paf->AffectedBy
+                    paf->AffectedBy.to_ulong()
                 );
         }
     }
@@ -863,7 +863,7 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
          */
         if (paf->Type < 0 || paf->Type >= TopSN)
         {
-            fprintf(fp, "Affect       %d %d %d %d %d\n",
+            fprintf(fp, "Affect       %d %d %d %d %ld\n",
                     paf->Type,
                     paf->Duration,
                     ((paf->Location == APPLY_WEAPONSPELL
@@ -873,12 +873,12 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
                      && IS_VALID_SN(paf->Modifier))
                     ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
                     paf->Location,
-                    paf->AffectedBy
+                    paf->AffectedBy.to_ulong()
                 );
         }
         else
         {
-            fprintf(fp, "AffectData   '%s' %d %d %d %d\n",
+            fprintf(fp, "AffectData   '%s' %d %d %d %ld\n",
                     SkillTable[paf->Type]->Name.c_str(),
                     paf->Duration,
                     ((paf->Location == APPLY_WEAPONSPELL
@@ -888,7 +888,7 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
                      && IS_VALID_SN(paf->Modifier))
                     ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
                     paf->Location,
-                    paf->AffectedBy
+                    paf->AffectedBy.to_ulong()
                 );
         }
     }

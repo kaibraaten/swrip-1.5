@@ -456,7 +456,7 @@ static int GainHitPoints(const Character *ch)
         }
     }
 
-    if (IsAffectedBy(ch, AFF_POISON))
+    if (IsAffectedBy(ch, Flag::Affect::Poison))
     {
         gain /= 4;
     }
@@ -516,7 +516,7 @@ static int GainMana(const Character *ch)
         }
     }
 
-    if (IsAffectedBy(ch, AFF_POISON))
+    if (IsAffectedBy(ch, Flag::Affect::Poison))
     {
         gain /= 4;
     }
@@ -573,7 +573,7 @@ static int GainMove(const Character *ch)
         }
     }
 
-    if (IsAffectedBy(ch, AFF_POISON))
+    if (IsAffectedBy(ch, Flag::Affect::Poison))
     {
         gain /= 4;
     }
@@ -583,56 +583,56 @@ static int GainMove(const Character *ch)
 
 static void AffectCharacterWithGlitterstim(Character *ch, int drug)
 {
-    if (!IsAffectedBy(ch, AFF_BLIND))
+    if (!IsAffectedBy(ch, Flag::Affect::Blind))
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
         af->Type = gsn_blindness;
         af->Location = APPLY_AC;
         af->Modifier = 10;
         af->Duration = ch->PCData->Addiction[drug];
-        af->AffectedBy = AFF_BLIND;
+        af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Blind });
         AffectToCharacter(ch, af);
     }
 }
 
 static void AffectCharacterWithCarsanum(Character *ch, int drug)
 {
-    if (!IsAffectedBy(ch, AFF_WEAKEN))
+    if (!IsAffectedBy(ch, Flag::Affect::Weaken))
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
         af->Type = -1;
         af->Location = APPLY_DAMROLL;
         af->Modifier = -10;
         af->Duration = ch->PCData->Addiction[drug];
-        af->AffectedBy = AFF_WEAKEN;
+        af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Weaken });
         AffectToCharacter(ch, af);
     }
 }
 
 static void AffectCharacterWithRyll(Character *ch, int drug)
 {
-    if (!IsAffectedBy(ch, AFF_WEAKEN))
+    if (!IsAffectedBy(ch, Flag::Affect::Weaken))
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
         af->Type = -1;
         af->Location = APPLY_DEX;
         af->Modifier = -5;
         af->Duration = ch->PCData->Addiction[drug];
-        af->AffectedBy = AFF_WEAKEN;
+        af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Weaken });
         AffectToCharacter(ch, af);
     }
 }
 
 static void AffectCharacterWithAndris(Character *ch, int drug)
 {
-    if (!IsAffectedBy(ch, AFF_WEAKEN))
+    if (!IsAffectedBy(ch, Flag::Affect::Weaken))
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
         af->Type = -1;
         af->Location = APPLY_CON;
         af->Modifier = -5;
         af->Duration = ch->PCData->Addiction[drug];
-        af->AffectedBy = AFF_WEAKEN;
+        af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Weaken });
         AffectToCharacter(ch, af);
     }
 }
@@ -962,8 +962,8 @@ static bool NpcShouldNotBeUpdated(const Character *ch)
 {
     return IsNpc(ch)
         && (!ch->InRoom
-            || IsAffectedBy(ch, AFF_CHARM)
-            || IsAffectedBy(ch, AFF_PARALYSIS));
+            || IsAffectedBy(ch, Flag::Affect::Charm)
+            || IsAffectedBy(ch, Flag::Affect::Paralysis));
 }
 
 static bool IsReadyToPerformSpecFun(const Character *ch)
@@ -1123,7 +1123,7 @@ static void MobileUpdate()
             continue;
         }
 
-        if (IsAnimatedCorpse(ch) && !IsAffectedBy(ch, AFF_CHARM))
+        if (IsAnimatedCorpse(ch) && !IsAffectedBy(ch, Flag::Affect::Charm))
         {
             CleanUpAnimatedCorpse(ch);
             continue;
@@ -1826,7 +1826,7 @@ static void CharacterUpdate()
              *   MUST NOT refer to ch after damage taken,
              *   as it may be lethal damage (on NPC).
              */
-            if (IsAffectedBy(ch, AFF_POISON))
+            if (IsAffectedBy(ch, Flag::Affect::Poison))
             {
                 Act(AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM);
                 Act(AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR);
@@ -2391,7 +2391,7 @@ static void CharacterCheck()
             if ((ch->InRoom && ch->InRoom->Sector == SECT_UNDERWATER)
                 || (ch->InRoom && ch->InRoom->Sector == SECT_OCEANFLOOR))
             {
-                if (!IsAffectedBy(ch, AFF_AQUA_BREATH))
+                if (!IsAffectedBy(ch, Flag::Affect::AquaBreath))
                 {
                     if (GetTrustLevel(ch) < LEVEL_IMMORTAL)
                     {
@@ -2423,9 +2423,9 @@ static void CharacterCheck()
                 && ((ch->InRoom->Sector == SECT_WATER_NOSWIM)
                     || (ch->InRoom->Sector == SECT_WATER_SWIM)))
             {
-                if (!IsAffectedBy(ch, AFF_FLYING)
-                    && !IsAffectedBy(ch, AFF_FLOATING)
-                    && !IsAffectedBy(ch, AFF_AQUA_BREATH)
+                if (!IsAffectedBy(ch, Flag::Affect::Flying)
+                    && !IsAffectedBy(ch, Flag::Affect::Floating)
+                    && !IsAffectedBy(ch, Flag::Affect::AquaBreath)
                     && !ch->Mount)
                 {
                     if (!IsImmortal(ch))
@@ -2543,7 +2543,7 @@ static void AggroUpdate()
 
         if (!IsNpc(ch)
             || ch->Fighting
-            || IsAffectedBy(ch, AFF_CHARM)
+            || IsAffectedBy(ch, Flag::Affect::Charm)
             || !IsAwake(ch)
             || IsBitSet(ch->Flags, ACT_WIMPY)
             || !IsBitSet(ch->Flags, ACT_AGGRESSIVE)

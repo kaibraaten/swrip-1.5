@@ -21,7 +21,7 @@ ch_ret spell_blindness(int sn, int level, Character* ch, void* vo)
         return rSPELL_FAILED;
     }
 
-    if (IsAffectedBy(victim, AFF_BLIND) || SaveVsSpellStaff(tmp, victim))
+    if (IsAffectedBy(victim, Flag::Affect::Blind) || SaveVsSpellStaff(tmp, victim))
     {
         FailedCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
@@ -31,7 +31,7 @@ ch_ret spell_blindness(int sn, int level, Character* ch, void* vo)
     af->Location = APPLY_HITROLL;
     af->Modifier = -4;
     af->Duration = (1 + (level / 3)) * DUR_CONV;
-    af->AffectedBy = AFF_BLIND;
+    af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Blind });
     AffectToCharacter(victim, af);
     SetCharacterColor(AT_MAGIC, victim);
     victim->Echo("You are blinded!\r\n");

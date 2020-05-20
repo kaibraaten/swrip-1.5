@@ -100,7 +100,7 @@ public:
     int NumberOfAttacks = 0;
     int Gold = 0;
     int Flags = 0;
-    int AffectedBy = 0;
+    std::bitset<Flag::MAX> AffectedBy;
     std::bitset<Flag::MAX> Resistant;
     std::bitset<Flag::MAX> Immune;
     std::bitset<Flag::MAX> Susceptible;
@@ -295,7 +295,7 @@ bool IsAffected(const Character *ch, int sn);
 /*
  * Return true if a certain ch->affected_by bit is set.
  */
-bool IsAffectedBy(const Character *ch, int affected_by_bit);
+bool IsAffectedBy(const Character *ch, size_t affected_by_bit);
 
 /*
  * Find a piece of eq on a character.
@@ -438,6 +438,8 @@ void AddReinforcements(Character *ch);
 void SetCharacterTitle(Character *ch, const std::string &title);
 
 bool HasPermanentSneak(const Character *ch);
+
+bool HasPermanentHide(const Character *ch);
 
 unsigned int GetKillTrackCount(const Character *ch);
 

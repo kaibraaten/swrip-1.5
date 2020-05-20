@@ -47,7 +47,7 @@ void do_sit( Character *ch, std::string argument )
   switch (ch->Position)
     {
     case POS_SLEEPING:
-      if (IsAffectedBy(ch,AFF_SLEEP))
+        if (IsAffectedBy(ch, Flag::Affect::Sleep))
         {
           ch->Echo("You can't wake up!\r\n");
           return;

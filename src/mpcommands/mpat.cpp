@@ -10,7 +10,7 @@ void do_mpat(Character *ch, std::string argument)
     std::shared_ptr<Room> original;
     Character *wch = nullptr;
 
-    if (IsAffectedBy(ch, AFF_CHARM))
+    if (IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
     if (!IsNpc(ch))

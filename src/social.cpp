@@ -80,7 +80,7 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
         Act(AT_SOCIAL, social->VictimFound, ch, NULL, victim, TO_VICT);
 
         if (!IsNpc(ch) && IsNpc(victim)
-            && !IsAffectedBy(victim, AFF_CHARM)
+            && !IsAffectedBy(victim, Flag::Affect::Charm)
             && IsAwake(victim)
             && !IsBitSet(victim->Prototype->mprog.progtypes, ACT_PROG))
         {

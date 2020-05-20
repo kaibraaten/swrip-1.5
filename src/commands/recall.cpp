@@ -39,7 +39,7 @@ void do_recall(Character *ch, std::string argument)
         return;
     }
 
-    if (IsBitSet(ch->AffectedBy, AFF_CURSE))
+    if (IsAffectedBy(ch, Flag::Affect::Curse))
     {
         ch->Echo("You are cursed and cannot recall!\r\n");
         return;

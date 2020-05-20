@@ -303,7 +303,8 @@ static std::shared_ptr<SmaugAffect> LuaLoadOneSmaugAffect(lua_State *L)
     LuaGetfieldString(L, "AffectedBy",
                       [affect](const std::string &value)
                       {
-                          affect->AffectedBy = GetAffectFlag(value);
+                          unsigned long bit = GetAffectFlag(value);
+                          affect->AffectedBy = CreateBitSet<Flag::MAX>({ bit });
                       });
     return affect;
 }
@@ -351,11 +352,11 @@ static void LuaPushOneSmaugAffect(lua_State *L, std::shared_ptr<SmaugAffect> aff
         LuaSetfieldString(L, "Modifier", affect->Modifier);
     }
 
-    if (affect->AffectedBy)
+    if (affect->AffectedBy.any())
     {
         for (size_t x = 0; x < AffectFlags.size(); ++x)
         {
-            if (IsBitSet(affect->AffectedBy, 1 << x))
+            if (affect->AffectedBy.test(x))
             {
                 LuaSetfieldString(L, "AffectedBy", AffectFlags[x]);
                 break;
@@ -466,11 +467,11 @@ static void LuaPushCharacterAffect(lua_State *L, std::shared_ptr<Affect> affect,
         LuaSetfieldNumber(L, "Type", affect->Type);
     }
 
-    if (affect->AffectedBy)
+    if (affect->AffectedBy.any())
     {
         for (size_t x = 0; x < AffectFlags.size(); ++x)
         {
-            if (IsBitSet(affect->AffectedBy, 1 << x))
+            if (affect->AffectedBy.test(x))
             {
                 LuaSetfieldString(L, "AffectedBy", AffectFlags[x]);
                 break;
@@ -535,11 +536,11 @@ static void LuaPushObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, in
         LuaSetfieldNumber(L, "Type", affect->Type);
     }
 
-    if (affect->AffectedBy)
+    if (affect->AffectedBy.any())
     {
         for (size_t x = 0; x < AffectFlags.size(); ++x)
         {
-            if (IsBitSet(affect->AffectedBy, 1 << x))
+            if (affect->AffectedBy.test(x))
             {
                 LuaSetfieldString(L, "AffectedBy", AffectFlags[x]);
                 break;
@@ -1278,7 +1279,7 @@ static std::shared_ptr<Affect> LuaLoadCharacterAffect(lua_State *L)
         return nullptr;
     }
 
-    affect.AffectedBy = LuaLoadFlags(L, "AffectedBy").to_ulong();
+    affect.AffectedBy = LuaLoadFlags(L, "AffectedBy");
 
     return std::make_shared<Affect>(affect);
 }
@@ -1291,7 +1292,6 @@ static std::shared_ptr<Affect> LuaLoadProtoObjectAffect(lua_State *L)
     LuaGetfieldInt(L, "Modifier", &affect.Modifier);
     affect.Type = -1;
     affect.Duration = -1;    
-    affect.AffectedBy = 0;
 
     if (affect.Location == APPLY_WEAPONSPELL
         || affect.Location == APPLY_WEARSPELL
@@ -1336,7 +1336,7 @@ static std::shared_ptr<Affect> LuaLoadObjectAffect(lua_State *L)
         return nullptr;
     }
 
-    affect.AffectedBy = LuaLoadFlags(L, "AffectedBy").to_ulong();
+    affect.AffectedBy = LuaLoadFlags(L, "AffectedBy");
 
     if (affect.Location == APPLY_WEAPONSPELL
         || affect.Location == APPLY_WEARSPELL
@@ -1594,11 +1594,11 @@ void LuaLoadCharacter(lua_State *L, Character *ch,
     LoadCurrentAndMax(L, "ForcePoints", ch->Mana);
     LoadCurrentAndMax(L, "Fatigue", ch->Fatigue);
 
-    ch->AffectedBy = LuaLoadFlags(L, "AffectFlags").to_ulong();
+    ch->AffectedBy = LuaLoadFlags(L, "AffectFlags");
     ch->Deaf = LuaLoadFlags(L, "IgnoreChannels").to_ulong();
-    ch->Resistant = LuaLoadFlags(L, "Resistant").to_ulong();
-    ch->Immune = LuaLoadFlags(L, "Immune").to_ulong();
-    ch->Susceptible = LuaLoadFlags(L, "Susceptible").to_ulong();
+    ch->Resistant = LuaLoadFlags(L, "Resistant");
+    ch->Immune = LuaLoadFlags(L, "Immune");
+    ch->Susceptible = LuaLoadFlags(L, "Susceptible");
 
     LuaLoadCharacterAbilities(L, ch);
     LuaLoadCharacterSaves(L, ch);

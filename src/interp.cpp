@@ -432,7 +432,7 @@ void Interpret(Character *ch, std::string argument)
                 && pexit->Flags.test(Flag::Exit::Auto))
             {
                 if (pexit->Flags.test(Flag::Exit::Closed)
-                    && (!IsAffectedBy(ch, AFF_PASS_DOOR)
+                    && (!IsAffectedBy(ch, Flag::Affect::PassDoor)
                         || pexit->Flags.test(Flag::Exit::NoPassdoor)))
                 {
                     if (!pexit->Flags.test(Flag::Exit::Secret))
@@ -469,7 +469,7 @@ void Interpret(Character *ch, std::string argument)
     /* Berserk check for flee.. maybe add drunk to this?.. but too much
        hardcoding is annoying.. -- Altrag */
     if (!StrCmp(cmd->Name, "flee")
-        && IsAffectedBy(ch, AFF_BERSERK))
+        && IsAffectedBy(ch, Flag::Affect::Berserk))
     {
         ch->Echo("You aren't thinking very clearly...\r\n");
         return;

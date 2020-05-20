@@ -9,56 +9,56 @@
 
 void do_mpjunk( Character *ch, std::string arg )
 {
-  if ( IsAffectedBy( ch, AFF_CHARM ) )
-    return;
+    if ( IsAffectedBy( ch, Flag::Affect::Charm))
+        return;
 
-  if ( !IsNpc( ch ) )
+    if ( !IsNpc( ch ) )
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ProgBug( "Mpjunk - No argument", ch );
-      return;
+        ProgBug( "Mpjunk - No argument", ch );
+        return;
     }
 
-  if ( StrCmp( arg, "all" ) && StringPrefix( "all.", arg ) )
+    if ( StrCmp( arg, "all" ) && StringPrefix( "all.", arg ) )
     {
-      Object *obj = GetWornObject(ch, arg);
-      
-      if ( obj != nullptr )
+        Object *obj = GetWornObject(ch, arg);
+
+        if ( obj != nullptr )
         {
-          UnequipCharacter( ch, obj );
-          ExtractObject( obj );
+            UnequipCharacter( ch, obj );
+            ExtractObject( obj );
         }
-      else
+        else
         {
-          obj = GetCarriedObject(ch, arg);
+            obj = GetCarriedObject(ch, arg);
 
-          if(obj != nullptr)
+            if(obj != nullptr)
             {
-              ExtractObject( obj );
+                ExtractObject( obj );
             }
         }
     }
-  else
+    else
     {
-      std::list<Object*> objectsToExtract = Filter(ch->Objects(),
-                                                   [arg](auto obj)
-                                                   {
-                                                     return arg[3] == '\0'
-                                                       || IsName(arg.substr( 4 ), obj->Name);
-                                                   });
-      for(Object *obj : objectsToExtract)
+        std::list<Object*> objectsToExtract = Filter(ch->Objects(),
+                                                     [arg](auto obj)
+                                                     {
+                                                         return arg[3] == '\0'
+                                                         || IsName(arg.substr( 4 ), obj->Name);
+                                                     });
+        for(Object *obj : objectsToExtract)
         {
-          if ( obj->WearLoc != WEAR_NONE)
+            if ( obj->WearLoc != WEAR_NONE)
             {
-              UnequipCharacter( ch, obj );
+                UnequipCharacter( ch, obj );
             }
-          
-          ExtractObject( obj );
+
+            ExtractObject( obj );
         }
     }
 }

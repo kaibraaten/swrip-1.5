@@ -46,7 +46,7 @@ ch_ret spell_remove_invis(int sn, int level, Character* ch, void* vo)
             if (victim->Race == RACE_DEFEL)
                 return rSPELL_FAILED;
 
-            if (!IsAffectedBy(victim, AFF_INVISIBLE))
+            if (!IsAffectedBy(victim, Flag::Affect::Invisible))
             {
                 ch->Echo("They are not invisible!\r\n");
                 return rSPELL_FAILED;
@@ -83,7 +83,7 @@ ch_ret spell_remove_invis(int sn, int level, Character* ch, void* vo)
 
             StripAffect(victim, gsn_invis);
             StripAffect(victim, gsn_mass_invis);
-            RemoveBit(victim->AffectedBy, AFF_INVISIBLE);
+            victim->AffectedBy.reset(Flag::Affect::Invisible);
             ch->Echo("Ok.\r\n");
             return rNONE;
         }

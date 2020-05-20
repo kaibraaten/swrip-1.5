@@ -27,7 +27,7 @@ ch_ret spell_invis(int sn, int level, Character* ch, void* vo)
             return rSPELL_FAILED;
         }
 
-        if (IsAffectedBy(victim, AFF_INVISIBLE))
+        if (IsAffectedBy(victim, Flag::Affect::Invisible))
         {
             FailedCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;
@@ -38,7 +38,7 @@ ch_ret spell_invis(int sn, int level, Character* ch, void* vo)
         af->Duration = ((level / 4) + 12) * DUR_CONV;
         af->Location = APPLY_NONE;
         af->Modifier = 0;
-        af->AffectedBy = AFF_INVISIBLE;
+        af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Invisible });
         AffectToCharacter(victim, af);
         Act(AT_MAGIC, "You fade out of existence.", victim, NULL, NULL, TO_CHAR);
         return rNONE;

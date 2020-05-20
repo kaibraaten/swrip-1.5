@@ -665,8 +665,10 @@ src/spells/weaken.cpp)
 if(WIN32)
   target_link_libraries(swrip utility colorparser lua WS2_32)
   set(BUILD_SHARED_LIBS ON)
+  set(PYTHON py)
 else()
   target_link_libraries(swrip utility colorparser lua stdc++fs dl)
+  set(PYTHON python3)
 endif()
 
 target_compile_features(mud PUBLIC cxx_std_17)
@@ -702,7 +704,7 @@ add_subdirectory(test)
 
 # Generate src/tables.cpp file.
 add_custom_command(OUTPUT src/tables.cpp
-                   COMMAND python3 make_lookup_table.py src/tables.cpp
+                   COMMAND ${PYTHON} make_lookup_table.py src/tables.cpp
                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_target(tables_cpp ALL
                   COMMAND rm src/tables.cpp

@@ -392,7 +392,7 @@ void do_sset(Character* ch, std::string argument)
             std::string modifier;
             std::string duration;
             std::string bitvector;
-            int loc = 0, bit = 0, tmpbit = 0;
+            int loc = 0, bits = 0;
             std::shared_ptr<SmaugAffect> aff;
 
             argument = OneArgument(argument, location);
@@ -411,16 +411,15 @@ void do_sset(Character* ch, std::string argument)
                 return;
             }
 
-            bit = 0;
-
             while (!argument.empty())
             {
                 argument = OneArgument(argument, bitvector);
-
-                if ((tmpbit = GetAffectFlag(bitvector)) == -1)
-                    ch->Echo("Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector.c_str());
+                int tmpbit = GetAffectFlag(bitvector);
+                
+                if (tmpbit == -1)
+                    ch->Echo("Unknown bitvector: %s. See AFFECTED_BY\r\n", bitvector.c_str());
                 else
-                    bit |= (1 << tmpbit);
+                    bits |= (1 << tmpbit);
             }
 
             aff = std::make_shared<SmaugAffect>();
@@ -434,7 +433,7 @@ void do_sset(Character* ch, std::string argument)
             aff->Duration = duration;
             aff->Location = loc;
             aff->Modifier = modifier;
-            aff->AffectedBy = bit;
+            aff->AffectedBy = bits;
             skill->Affects.push_front(aff);
             ch->Echo("Ok.\r\n");
             return;

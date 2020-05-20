@@ -11,7 +11,7 @@ void do_backstab( Character *ch, std::string arg )
   Object *obj = nullptr;
   int percent = 0;
 
-  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, Flag::Affect::Charm))
     {
       ch->Echo( "You can't do that right now.\r\n" );
       return;

@@ -1021,7 +1021,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
         }
         else if (!StrCmp(chck, "ischarmed"))
         {
-            return IsAffectedBy(chkchar, AFF_CHARM);
+            return IsAffectedBy(chkchar, Flag::Affect::Charm);
         }
         else if (!StrCmp(chck, "isfollow"))
         {
@@ -1751,7 +1751,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
     bool ifstate[MAX_IFS][DO_ELSE + 1];
     static int prog_nest = 0;
 
-    if (IsAffectedBy(mob, AFF_CHARM))
+    if (IsAffectedBy(mob, Flag::Affect::Charm))
     {
         return;
     }

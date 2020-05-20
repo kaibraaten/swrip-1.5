@@ -87,7 +87,8 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     }
 
     if (IsNpc(ch)
-        && (IsAffectedBy(ch, AFF_CHARM) || IsAffectedBy(ch, AFF_POSSESS)))
+        && (IsAffectedBy(ch, Flag::Affect::Charm)
+            || IsAffectedBy(ch, Flag::Affect::Possess)))
     {
         ch->Echo("For some reason, you seem unable to perform that...\r\n");
         Act(AT_GREY, "$n looks around.", ch, NULL, NULL, TO_ROOM);
