@@ -86,3 +86,5 @@ Testing
 /out
 src/tables.cpp
 *.bak
+/libs/3rdparty/lua/out
+/libs/colorparser/out

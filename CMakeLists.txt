@@ -674,7 +674,6 @@ endif()
 target_compile_features(mud PUBLIC cxx_std_17)
 target_compile_options(mud
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
-  #PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4996 /wd6262 /wd26451 /wd4267 /wd4244 /wd4018 /we4805 /we4305>
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4244>
   )
 
@@ -703,10 +702,11 @@ add_subdirectory(libs/3rdparty/lua)
 add_subdirectory(test)
 
 # Generate src/tables.cpp file.
-add_custom_command(OUTPUT src/tables.cpp
-                   COMMAND ${PYTHON} make_lookup_table.py src/tables.cpp
+add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp
+                   COMMAND rm -f ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp
                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_target(tables_cpp ALL
-                  COMMAND rm src/tables.cpp
-                  DEPENDS src/tables.cpp)
+                  COMMAND ${PYTHON} make_lookup_table.py ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp
+                  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_dependencies(mud tables_cpp)
