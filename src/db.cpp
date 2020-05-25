@@ -65,31 +65,6 @@ namespace fs = std::filesystem;
 #include "systemdata.hpp"
 #include "exit.hpp"
 
-/*
- * Globals.
- */
-
- /*
-  * Structure used to build wizlist
-  */
-class Wizard
-{
-public:
-    Wizard(const std::string &name, short level) : Name(name), Level(level) { }
-    std::string Name;
-    short Level = 0;
-};
-
-struct CompareWizard
-{
-    bool operator()(const Wizard &lhv, const Wizard &rhv) const
-    {
-        return lhv.Level > rhv.Level;
-    }
-};
-
-std::set<Wizard, CompareWizard> Wizards;
-
 time_t last_restore_all_time = 0;
 
 std::shared_ptr<TeleportData> FirstTeleport;
@@ -316,10 +291,6 @@ static void FixExits();
 static int ExitComparator(Exit **xit1, Exit **xit2);
 #endif
 static void SortExits(std::shared_ptr<Room> room);
-#if 0
-static void ToWizFile(const std::string &line);
-static void AddToWizList(const std::string &name, int level);
-#endif
 
 void ShutdownMud(const std::string &reason)
 {
@@ -376,7 +347,7 @@ void BootDatabase(bool fCopyOver)
 
     Log->Boot("Making wizlist");
     MakeWizlist();
-
+    
     fBootDb = true;
     SysData.MaxPlayersThisBoot = 0;
 
@@ -1057,173 +1028,6 @@ void ShowFile(const Character *ch, const std::string &filename)
     }
 }
 
-#if 0
-/*
- * wizlist builder!                                             -Thoric
- */
-static void ToWizFile(const std::string &line)
-{
-    char outline[MAX_STRING_LENGTH] = { '\0' };
-
-    if (!line.empty())
-    {
-        int filler = 78 - line.size();
-
-        if (filler < 1)
-            filler = 1;
-
-        filler /= 2;
-
-        for (int xx = 0; xx < filler; xx++)
-            strcat(outline, " ");
-
-        strcat(outline, line.c_str());
-    }
-
-    strcat(outline, "\r\n");
-    FILE *wfp = fopen(WIZLIST_FILE, "a");
-
-    if (wfp)
-    {
-        fputs(outline, wfp);
-        fclose(wfp);
-    }
-}
-
-static void AddToWizList(const std::string &name, int level)
-{
-#ifdef DEBUG
-    Log->Info("Adding to wizlist...");
-#endif
-    Wizards.insert(Wizard(name, level));
-}
-#endif
-
-/*
- * Wizlist builder                                              -Thoric
- */
-void MakeWizlist()
-{
-#pragma message("Reimplement this using player directory only.")
-#if 0
-    Wizards.clear();
-
-    try
-    {
-        for (const auto &entry : fs::directory_iterator(GOD_DIR))
-        {
-            const auto &path = entry.path();
-            std::string filename = path.filename().string();
-
-            if (entry.is_regular_file()
-                && filename[0] != '.')
-            {
-                FILE *gfp = fopen(path.string().c_str(), "r");
-
-                if (gfp)
-                {
-                    const char *word = feof(gfp) ? "End" : ReadWord(gfp, Log, fBootDb);
-                    int ilevel = ReadInt(gfp, Log, fBootDb);
-
-                    ReadToEndOfLine(gfp, Log, fBootDb);
-                    word = feof(gfp) ? "End" : ReadWord(gfp, Log, fBootDb);
-
-                    int iflags = 0;
-
-                    if (!StrCmp(word, "Pcflags"))
-                        iflags = ReadInt(gfp, Log, fBootDb);
-                    else
-                        iflags = 0;
-
-                    fclose(gfp);
-
-                    if (IsBitSet(iflags, 1 << Flag::PCData::Retired))
-                        ilevel = MAX_LEVEL - 4;
-
-                    if (IsBitSet(iflags, 1 << Flag::PCData::Guest))
-                        ilevel = MAX_LEVEL - 4;
-
-                    AddToWizList(filename, ilevel);
-                }
-            }
-        }
-    }
-    catch (const fs::filesystem_error &ex)
-    {
-        Log->Bug("%s: Couldn't open god directory: %s", __FUNCTION__, ex.what());
-        return;
-    }
-
-    unlink(WIZLIST_FILE);
-    ToWizFile(" Masters of Star Wars: Rise in Power!");
-    int ilevel = 65535;
-    char buf[MAX_STRING_LENGTH] = { '\0' };
-
-    for (const auto &wiz : Wizards)
-    {
-        if (wiz.Level > LEVEL_AVATAR)
-        {
-            if (wiz.Level < ilevel)
-            {
-                if (buf[0])
-                {
-                    ToWizFile(buf);
-                    buf[0] = '\0';
-                }
-
-                ToWizFile("");
-                ilevel = wiz.Level;
-
-                switch (ilevel)
-                {
-                case MAX_LEVEL - 0:
-                    ToWizFile(" Implementors ");
-                    break;
-
-                case MAX_LEVEL - 1:
-                    ToWizFile(" Head Administrator ");
-                    break;
-
-                case MAX_LEVEL - 2:
-                    ToWizFile(" Administrators ");
-                    break;
-
-                case MAX_LEVEL - 4:
-                    ToWizFile(" Lower Immortals ");
-                    break;
-
-                default:
-                    ToWizFile(" Builders");
-                    break;
-                }
-            }
-
-            if (strlen(buf) + wiz.Name.size() > 76)
-            {
-                ToWizFile(buf);
-                buf[0] = '\0';
-            }
-
-            strcat(buf, " ");
-            strcat(buf, wiz.Name.c_str());
-
-            if (strlen(buf) > 70)
-            {
-                ToWizFile(buf);
-                buf[0] = '\0';
-            }
-        }
-    }
-
-    if (buf[0])
-    {
-        ToWizFile(buf);
-    }
-
-    Wizards.clear();
-#endif
-}
-
 /*************************************************************/
 /* Function to delete a room index.  Called from do_rdelete in build.c
    Narn, May/96
@@ -1559,4 +1363,12 @@ void AllocateRepositories()
     Skills = NewSkillRepository();
     Areas = NewAreaRepository();
     Storerooms = NewStoreroomRepository();
+}
+
+void MakeWizlist()
+{
+    std::string wizlist = PlayerCharacters->MakeWizlist();
+    std::error_code ec;
+    fs::remove(WIZLIST_FILE, ec);
+    AppendToFile(WIZLIST_FILE, wizlist);
 }

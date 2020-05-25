@@ -1110,6 +1110,7 @@ void ReadComment(Character *ch, FILE *fp);
 void WriteComments(const Character *ch, FILE *fp);
 
 /* db.c */
+void MakeWizlist();
 void ShutdownMud(const std::string &reason);
 void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl);
 void AppendFile(const Character *ch, const std::string &file, const std::string &str);
@@ -1130,7 +1131,6 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
 std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr<Room> to_room, DirectionType door,
     const std::string &keyword = "");
 void RandomizeExits(std::shared_ptr<Room> room, short maxdir);
-void MakeWizlist();
 bool DeleteRoom(std::shared_ptr<Room> room);
 bool DeleteObject(std::shared_ptr<ProtoObject> obj);
 bool DeleteMobile(std::shared_ptr<ProtoMobile> mob);

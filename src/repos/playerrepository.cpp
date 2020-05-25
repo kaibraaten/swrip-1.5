@@ -1,5 +1,7 @@
+#include <sstream>
 #include <cassert>
 #include <filesystem>
+#include <set>
 #include "playerrepository.hpp"
 #include "character.hpp"
 #include "script.hpp"
@@ -30,6 +32,7 @@ public:
     bool Load(std::shared_ptr<Descriptor> d, const std::string &name, bool preload) override;
     void Save() const override;
     void Save(const Character *pc) const override;
+    std::string MakeWizlist() const override;
 
 protected:
     void OnAdded(Character* &entity) override;
@@ -64,6 +67,166 @@ private:
     static void LoadAddictions(lua_State *L, Character *ch);
     static void LoadAliases(lua_State *L, Character *ch);
 };
+
+class Wizard
+{
+public:
+    Wizard(const std::string &name, short level) : Name(name), Level(level) { }
+    std::string Name;
+    short Level = 0;
+};
+
+struct CompareWizard
+{
+    bool operator()(const Wizard &lhv, const Wizard &rhv) const
+    {
+        return lhv.Level > rhv.Level;
+    }
+};
+
+static std::set<Wizard, CompareWizard> Wizards;
+
+static void AddToWizList(const std::string &name, int level)
+{
+    Wizards.insert(Wizard(name, level));
+}
+
+static void ToOutput(const std::string &line, std::ostringstream &output)
+{
+    char outline[MAX_STRING_LENGTH] = { '\0' };
+
+    if (!line.empty())
+    {
+        int filler = 78 - line.size();
+
+        if (filler < 1)
+            filler = 1;
+
+        filler /= 2;
+
+        for (int xx = 0; xx < filler; xx++)
+            strcat(outline, " ");
+
+        strcat(outline, line.c_str());
+    }
+
+    strcat(outline, "\r\n");
+    output << outline;
+}
+
+static int L_WizardEntry(lua_State *L)
+{
+    int level = 0;
+    std::string name;
+    LuaGetfieldInt(L, "Level", &level);
+    LuaGetfieldString(L, "Name", &name);
+
+    if(level >= LEVEL_IMMORTAL)
+    {
+        AddToWizList(name, level);
+    }
+
+    return 0;
+}
+
+static void AddIfWizard(const std::string &filename, void *userData)
+{
+    LuaLoadDataFile(filename, L_WizardEntry, "CharacterEntry");
+}
+
+std::string InMemoryPlayerRepository::MakeWizlist() const
+{
+    std::ostringstream output;
+
+    Wizards.clear();
+
+    try
+    {
+        for (const auto &entry : fs::directory_iterator(PLAYER_DIR))
+        {
+            if(entry.is_directory())
+            {
+                const auto &path = entry.path();
+                std::string dirname = path.string();
+                Log->Info("Scanning directory %s", dirname.c_str());
+                ForEachLuaFileInDir(dirname, AddIfWizard, nullptr);
+            }
+        }
+
+        ToOutput(" Masters of Star Wars: Rise in Power!", output);
+        int ilevel = 65535;
+        char buf[MAX_STRING_LENGTH] = { '\0' };
+
+        for (const auto &wiz : Wizards)
+        {
+            if (wiz.Level > LEVEL_AVATAR)
+            {
+                if (wiz.Level < ilevel)
+                {
+                    if (buf[0])
+                    {
+                        ToOutput(buf, output);
+                        buf[0] = '\0';
+                    }
+
+                    ToOutput("", output);
+                    ilevel = wiz.Level;
+
+                    switch (ilevel)
+                    {
+                    case MAX_LEVEL - 0:
+                        ToOutput(" Implementors ", output);
+                        break;
+
+                    case MAX_LEVEL - 1:
+                        ToOutput(" Head Administrator ", output);
+                        break;
+
+                    case MAX_LEVEL - 2:
+                        ToOutput(" Administrators ", output);
+                        break;
+
+                    case MAX_LEVEL - 4:
+                        ToOutput(" Lower Immortals ", output);
+
+                    default:
+                        ToOutput(" Builders", output);
+                        break;
+                    }
+                }
+
+                if (strlen(buf) + wiz.Name.size() > 76)
+                {
+                    ToOutput(buf, output);
+                    buf[0] = '\0';
+                }
+
+                strcat(buf, " ");
+                strcat(buf, wiz.Name.c_str());
+
+                if (strlen(buf) > 70)
+                {
+                    ToOutput(buf, output);
+                    buf[0] = '\0';
+                }
+            }
+        }
+
+        if (buf[0])
+        {
+            ToOutput(buf, output);
+        }
+
+        Wizards.clear();
+    }
+    catch (const fs::filesystem_error &ex)
+    {
+        Log->Bug("%s: Filesystem error: %s", __FUNCTION__, ex.what());
+        output.str("");
+    }
+
+    return output.str();
+}
 
 void InMemoryPlayerRepository::Load()
 {
@@ -101,8 +264,8 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
         else
         {
             sprintf(buf, "%s player data for: %s (%dK)",
-                preload ? "Preloading" : "Loading", Capitalize(name).c_str(),
-                (int)fst.st_size / 1024);
+                    preload ? "Preloading" : "Loading", Capitalize(name).c_str(),
+                    (int)fst.st_size / 1024);
             Log->LogStringPlus(buf, LOG_COMM, LEVEL_GREATER);
         }
     }
@@ -130,8 +293,8 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
     if (error)
     {
         Log->Bug("%s:%d %s() : Cannot run file: %s. Msg: %s",
-            __FILE__, __LINE__, __FUNCTION__,
-            filename.c_str(), lua_tostring(L, -1));
+                 __FILE__, __LINE__, __FUNCTION__,
+                 filename.c_str(), lua_tostring(L, -1));
         return false;
     }
     else
@@ -180,23 +343,23 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, Character *ch)
     LuaGetfieldInt(L, "MobDeaths", &ch->PCData->MDeaths);
     LuaGetfieldInt(L, "IllegalPk", &ch->PCData->IllegalPk);
     LuaGetfieldInt(L, "PKilledTimer",
-        [ch](const int pkilledTimer)
-    {
-        if (pkilledTimer < 0)
-        {
-            AddTimerToCharacter(ch, TIMER_PKILLED, pkilledTimer, nullptr, SUB_NONE);
-        }
-    });
+                   [ch](const int pkilledTimer)
+                   {
+                       if (pkilledTimer < 0)
+                       {
+                           AddTimerToCharacter(ch, TIMER_PKILLED, pkilledTimer, nullptr, SUB_NONE);
+                       }
+                   });
     LuaGetfieldInt(L, "Alignment", &ch->Alignment);
     LuaGetfieldInt(L, "ArmorClass", &ch->ArmorClass);
     LuaGetfieldInt(L, "PlayerHome",
-        [ch](const int homeVnum)
-    {
-        if (homeVnum > 0)
-        {
-            ch->PlayerHome = GetRoom(homeVnum);
-        }
-    });
+                   [ch](const int homeVnum)
+                   {
+                       if (homeVnum > 0)
+                       {
+                           ch->PlayerHome = GetRoom(homeVnum);
+                       }
+                   });
 
     ch->Flags = LuaLoadFlags(L, "Flags").to_ulong();
     ch->PCData->Flags = LuaLoadFlags(L, "PcFlags");
@@ -370,7 +533,7 @@ void InMemoryPlayerRepository::LoadSkills(lua_State *L, Character *ch)
 
             default:
                 Log->Bug("InMemoryPlayerRepository::LoadSkills() : Invalid skill type '%s'",
-                    typeName.c_str());
+                         typeName.c_str());
                 break;
             }
 
@@ -381,7 +544,7 @@ void InMemoryPlayerRepository::LoadSkills(lua_State *L, Character *ch)
             else
             {
                 Log->Bug("InMemoryPlayerRepository::LoadSkills() : Unknown skill '%s'",
-                    skillName.c_str());
+                         skillName.c_str());
             }
 
             lua_pop(L, 1);
@@ -600,7 +763,7 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, const Character *pc)
     LuaSetfieldNumber(L, "Alignment", pc->Alignment);
     LuaSetfieldNumber(L, "ArmorClass", pc->ArmorClass);
     LuaSetfieldNumber(L, "PlayerHome",
-        pc->PlayerHome != nullptr ? pc->PlayerHome->Vnum : INVALID_VNUM);
+                      pc->PlayerHome != nullptr ? pc->PlayerHome->Vnum : INVALID_VNUM);
 
     if (pc->Desc != nullptr
         && !pc->Desc->Remote.Hostname.empty())
@@ -836,10 +999,10 @@ void InMemoryPlayerRepository::Save(const Character *pc) const
     {
         fs::rename(GetPlayerFilename(pc).c_str(), GetPlayerBackupFilename(pc->Name).c_str());
     }
-    
+
     LuaSaveDataFile(GetPlayerFilename(pc),
-        &InMemoryPlayerRepository::PushPlayer,
-        "character", pc);
+                    &InMemoryPlayerRepository::PushPlayer,
+                    "character", pc);
 
     WriteCorpses(pc, "");
 
@@ -866,17 +1029,17 @@ PlayerRepository *NewPlayerRepository()
 std::string GetPlayerFilename(const Character *pc)
 {
     return FormatString("%s%c/%s.lua", PLAYER_DIR, tolower(pc->Name[0]),
-        ToLower(pc->Name).c_str());
+                        ToLower(pc->Name).c_str());
 }
 
 static std::string GetPlayerFilename(const std::string &name)
 {
     return FormatString("%s%c/%s.lua", PLAYER_DIR, tolower(name[0]),
-        ToLower(name).c_str());
+                        ToLower(name).c_str());
 }
 
 static std::string GetPlayerBackupFilename(const std::string &name)
 {
     return FormatString("%s%c/%s.lua", BACKUP_DIR, tolower(name[0]),
-        ToLower(name).c_str());
+                        ToLower(name).c_str());
 }
