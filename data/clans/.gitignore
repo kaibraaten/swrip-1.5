@@ -1,0 +1,7 @@
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
+!the_empire.lua
+!the_rebel_alliance.lua
+!independent_factions.lua

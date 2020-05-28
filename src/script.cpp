@@ -147,8 +147,8 @@ void LuaGetfieldDouble(lua_State *L, const std::string &key, double *value)
 }
 
 void LuaLoadDataFile(const std::string &filename,
-    int(*callback)(lua_State *L),
-    const std::string &callbackFunctionName)
+                     int(*callback)(lua_State *L),
+                     const std::string &callbackFunctionName)
 {
     lua_State *L = CreateLuaState();
 
@@ -167,8 +167,8 @@ void LuaLoadDataFile(const std::string &filename,
 }
 
 void LuaSaveDataFile(const std::string &filename,
-    void(*pushData)(lua_State *L, const void*),
-    const std::string &data, const void *userData)
+                     void(*pushData)(lua_State *L, const void*),
+                     const std::string &data, const void *userData)
 {
     lua_State *L = CreateLuaState();
     char buffer[MAX_STRING_LENGTH];
@@ -181,7 +181,7 @@ void LuaSaveDataFile(const std::string &filename,
     if (error)
     {
         Log->Bug("%s:%s():%d: Cannot run file: %s\n",
-            __FILE__, __FUNCTION__, __LINE__, lua_tostring(L, -1));
+                 __FILE__, __FUNCTION__, __LINE__, lua_tostring(L, -1));
     }
     else
     {
@@ -195,7 +195,7 @@ void LuaSaveDataFile(const std::string &filename,
         if (error)
         {
             Log->Bug("%s:%s():%d: Cannot run file: %s\n",
-                __FILE__, __FUNCTION__, __LINE__, lua_tostring(L, -1));
+                     __FILE__, __FUNCTION__, __LINE__, lua_tostring(L, -1));
         }
     }
 
@@ -203,27 +203,27 @@ void LuaSaveDataFile(const std::string &filename,
 }
 
 void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
-    const std::array<const char * const, Flag::MAX> &nameArray,
-    const std::string &key)
+                  const std::array<const char * const, Flag::MAX> &nameArray,
+                  const std::string &key)
 {
     LuaPushFlags(L, flags.to_ulong(), nameArray.data(), key);
 }
 
 void LuaPushFlags(lua_State *L, unsigned long flags,
-    const std::array<const char * const, Flag::MAX> &nameArray,
-    const std::string &key)
+                  const std::array<const char * const, Flag::MAX> &nameArray,
+                  const std::string &key)
 {
     LuaPushFlags(L, flags, nameArray.data(), key);
 }
 
 void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
-    const char * const nameArray[], const std::string &key)
+                  const char * const nameArray[], const std::string &key)
 {
     LuaPushFlags(L, flags.to_ulong(), nameArray, key);
 }
 
 void LuaPushFlags(lua_State *L, unsigned long flags,
-    const char * const nameArray[], const std::string &key)
+                  const char * const nameArray[], const std::string &key)
 {
     if (flags)
     {
@@ -489,12 +489,12 @@ static void LuaPushProtoObjectAffect(lua_State *L, std::shared_ptr<Affect> affec
 
     LuaSetfieldNumber(L, "Location", affect->Location);
     LuaSetfieldNumber(L, "Modifier",
-        (affect->Location == APPLY_WEAPONSPELL
-            || affect->Location == APPLY_WEARSPELL
-            || affect->Location == APPLY_REMOVESPELL
-            || affect->Location == APPLY_STRIPSN)
-        && IS_VALID_SN(affect->Modifier)
-        ? SkillTable[affect->Modifier]->Slot : affect->Modifier);    
+                      (affect->Location == APPLY_WEAPONSPELL
+                       || affect->Location == APPLY_WEARSPELL
+                       || affect->Location == APPLY_REMOVESPELL
+                       || affect->Location == APPLY_STRIPSN)
+                      && IS_VALID_SN(affect->Modifier)
+                      ? SkillTable[affect->Modifier]->Slot : affect->Modifier);
 
     lua_settable(L, -3);
 }
@@ -552,8 +552,8 @@ static void LuaPushObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, in
 }
 
 static void LuaPushAffects(lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
-    const std::string &key,
-    std::function<void(lua_State*, std::shared_ptr<Affect>, int)> pushOneAffect)
+                           const std::string &key,
+                           std::function<void(lua_State*, std::shared_ptr<Affect>, int)> pushOneAffect)
 {
     if (!affects.empty())
     {
@@ -571,13 +571,13 @@ static void LuaPushAffects(lua_State *L, const std::list<std::shared_ptr<Affect>
 }
 
 void LuaPushCharacterAffects(lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
-    const std::string &key)
+                             const std::string &key)
 {
     LuaPushAffects(L, affects, key, LuaPushCharacterAffect);
 }
 
 void LuaPushObjectAffects(lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
-    const std::string &key)
+                          const std::string &key)
 {
     LuaPushAffects(L, affects, key, LuaPushObjectAffect);
 }
@@ -761,7 +761,7 @@ static void LuaPushObject(lua_State *L, const Object *obj, size_t idx)
     }
 
     if (std::any_of(std::cbegin(obj->Value), std::cend(obj->Value),
-        [](const auto v) { return v != 0; }))
+                    [](const auto v) { return v != 0; }))
     {
         LuaPushOvalues(L, obj->Value);
     }
@@ -806,19 +806,19 @@ static void LuaPushObject(lua_State *L, const Object *obj, size_t idx)
         if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]))
         {
             LuaSetfieldString(L, "Spell1",
-                SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name);
+                              SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name);
         }
 
         if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]))
         {
             LuaSetfieldString(L, "Spell2",
-                SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name);
+                              SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name);
         }
 
         if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]))
         {
             LuaSetfieldString(L, "Spell3",
-                SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name);
+                              SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name);
         }
         break;
 
@@ -826,7 +826,7 @@ static void LuaPushObject(lua_State *L, const Object *obj, size_t idx)
         if (IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]))
         {
             LuaSetfieldString(L, "Spell3",
-                SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name);
+                              SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name);
         }
         break;
 
@@ -834,13 +834,13 @@ static void LuaPushObject(lua_State *L, const Object *obj, size_t idx)
         if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]))
         {
             LuaSetfieldString(L, "Spell4",
-                SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name);
+                              SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name);
         }
 
         if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]))
         {
             LuaSetfieldString(L, "Spell5",
-                SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name);
+                              SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name);
         }
 
         break;
@@ -856,7 +856,7 @@ static void LuaPushObject(lua_State *L, const Object *obj, size_t idx)
 }
 
 void LuaPushObjects(lua_State *L, const std::list<Object*> &objects,
-    const std::string &key)
+                    const std::string &key)
 {
     lua_pushstring(L, key.c_str());
     lua_newtable(L);
@@ -870,12 +870,22 @@ void LuaPushObjects(lua_State *L, const std::list<Object*> &objects,
     lua_settable(L, -3);
 }
 
+void LuaPushSpecFun(lua_State *L, size_t idx, SpecFun *specfun)
+{
+    lua_pushinteger(L, idx);
+    lua_pushstring(L, LookupSpecial(specfun).c_str());
+    lua_settable(L, -3);
+}
+
 static void LuaPushMobile(lua_State *L, const Character *mob)
 {
     assert(IsNpc(mob));
     auto proto = mob->Prototype;
 
+    LuaSetfieldNumber(L, "Vnum", proto->Vnum);
     LuaSetfieldString(L, "CharacterType", "Mobile");
+
+    RemoveBit(const_cast<Character*>(mob)->Flags, ACT_MOUNTED);
     LuaPushFlags(L, mob->Flags, MobFlags, "Flags");
 
     if (StrCmp(mob->ShortDescr, proto->ShortDescr) != 0)
@@ -888,15 +898,19 @@ static void LuaPushMobile(lua_State *L, const Character *mob)
         LuaSetfieldString(L, "LongDescription", mob->LongDescr);
     }
 
+    std::vector<SpecFun*> specfuns;
+
     if (mob->spec_fun != nullptr && mob->spec_fun != proto->spec_fun)
     {
-        LuaSetfieldString(L, "SpecialFunction1", LookupSpecial(mob->spec_fun));
+        specfuns.push_back(mob->spec_fun);
     }
 
     if (mob->spec_2 != nullptr && mob->spec_2 != proto->spec_2)
     {
-        LuaSetfieldString(L, "SpecialFunction2", LookupSpecial(mob->spec_2));
+        specfuns.push_back(mob->spec_2);
     }
+
+    LuaPushCollection(L, specfuns, "SpecFuns", LuaPushSpecFun);
 
     if (mob->NumberOfAttacks != proto->NumberOfAttacks)
     {
@@ -925,7 +939,7 @@ static void LuaPushMobile(lua_State *L, const Character *mob)
 }
 
 void LuaPushMobiles(lua_State *L, const std::list<Character*> &mobiles,
-    const std::string &key)
+                    const std::string &key)
 {
     lua_pushstring(L, key.c_str());
     lua_newtable(L);
@@ -995,22 +1009,25 @@ void LuaLoadStats(lua_State *L, Stats *stats, const std::string &key)
 
 static void LuaPushCharacterAbilities(lua_State *L, const Character *ch)
 {
-    lua_pushstring(L, "Abilities");
-    lua_newtable(L);
-
-    for (size_t ability = 0; ability < MAX_ABILITY; ++ability)
+    if(!ch->IsNpc())
     {
-        lua_pushinteger(L, ability);
+        lua_pushstring(L, "Abilities");
         lua_newtable(L);
 
-        LuaSetfieldString(L, "Name", AbilityName[ability]);
-        LuaSetfieldNumber(L, "Level", GetAbilityLevel(ch, ability));
-        LuaSetfieldNumber(L, "Experience", GetAbilityXP(ch, ability));
-        LuaSetfieldBoolean(L, "IsMain", static_cast<int>(ability) == ch->Ability.Main);
+        for (size_t ability = 0; ability < MAX_ABILITY; ++ability)
+        {
+            lua_pushinteger(L, ability);
+            lua_newtable(L);
+
+            LuaSetfieldString(L, "Name", AbilityName[ability]);
+            LuaSetfieldNumber(L, "Level", GetAbilityLevel(ch, ability));
+            LuaSetfieldNumber(L, "Experience", GetAbilityXP(ch, ability));
+            LuaSetfieldBoolean(L, "IsMain", static_cast<int>(ability) == ch->Ability.Main);
+            lua_settable(L, -3);
+        }
+
         lua_settable(L, -3);
     }
-
-    lua_settable(L, -3);
 }
 
 static void LuaPushCharacterSaves(lua_State *L, const Character *ch)
@@ -1025,7 +1042,7 @@ static void LuaPushCharacterStats(lua_State *L, const Character *ch)
 }
 
 void LuaPushCharacter(lua_State *L, const Character *ch,
-    std::function<void(lua_State*, const Character*)> pushExtra)
+                      std::function<void(lua_State*, const Character*)> pushExtra)
 {
     // NOT a fan of this cast, but it can't be avoided.
     DeEquipCharacter(const_cast<Character*>(ch));
@@ -1033,21 +1050,21 @@ void LuaPushCharacter(lua_State *L, const Character *ch,
     LuaSetfieldString(L, "Name", ch->Name);
     LuaSetfieldString(L, "Description", ch->Description);
     LuaSetfieldString(L, "Gender",
-        ch->Sex == SEX_MALE ? "Male" : ch->Sex == SEX_FEMALE ? "Female" : "Neutral");
+                      ch->Sex == SEX_MALE ? "Male" : ch->Sex == SEX_FEMALE ? "Female" : "Neutral");
     LuaSetfieldString(L, "Race", RaceTable[ch->Race].Name);
     LuaSetfieldNumber(L, "Speaks", ch->Speaks);
     LuaSetfieldNumber(L, "Speaking", ch->Speaking);
     LuaSetfieldNumber(L, "Level", ch->TopLevel);
     LuaSetfieldNumber(L, "Trust", ch->Trust);
     LuaSetfieldNumber(L, "InRoom",
-        ch->InRoom == GetRoom(ROOM_VNUM_LIMBO) && ch->WasInRoom
-        ? ch->WasInRoom->Vnum : ch->InRoom->Vnum);
+                      ch->InRoom == GetRoom(ROOM_VNUM_LIMBO) && ch->WasInRoom
+                      ? ch->WasInRoom->Vnum : ch->InRoom->Vnum);
     PushCurrentAndMax(L, "HitPoints", ch->HitPoints);
     PushCurrentAndMax(L, "ForcePoints", ch->Mana);
     PushCurrentAndMax(L, "Fatigue", ch->Fatigue);
     LuaSetfieldNumber(L, "Credits", ch->Gold);
     LuaSetfieldString(L, "Position",
-        PositionName[ch->Position == POS_FIGHTING ? POS_STANDING : ch->Position]);
+                      PositionName[ch->Position == POS_FIGHTING ? POS_STANDING : ch->Position]);
     LuaSetfieldNumber(L, "HitRoll", ch->HitRoll);
     LuaSetfieldNumber(L, "DamRoll", ch->DamRoll);
     LuaSetfieldNumber(L, "Wimpy", ch->Wimpy);
@@ -1073,7 +1090,7 @@ void LuaPushCharacter(lua_State *L, const Character *ch,
 }
 
 void LuaGetfieldBool(lua_State *L, const std::string &key,
-    std::function<void(bool)> assignValue)
+                     std::function<void(bool)> assignValue)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -1133,7 +1150,7 @@ void LuaGetfieldShort(lua_State *L, const std::string &key,
 }
 
 void LuaGetfieldDouble(lua_State *L, const std::string &key,
-    std::function<void(double)> assignValue)
+                       std::function<void(double)> assignValue)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -1148,7 +1165,7 @@ void LuaGetfieldDouble(lua_State *L, const std::string &key,
 }
 
 void LuaGetfieldString(lua_State *L, const std::string &key,
-    std::function<void(const std::string&)> assignValue)
+                       std::function<void(const std::string&)> assignValue)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -1165,25 +1182,25 @@ void LuaGetfieldString(lua_State *L, const std::string &key,
 static void LoadAbility(lua_State *L, Character *ch, size_t ability)
 {
     LuaGetfieldInt(L, "Level",
-        [ch, ability](const int level)
-    {
-        SetAbilityLevel(ch, ability, level);
-    });
+                   [ch, ability](const int level)
+                   {
+                       SetAbilityLevel(ch, ability, level);
+                   });
 
     LuaGetfieldInt(L, "Experience",
-        [ch, ability](const int xp)
-    {
-        SetAbilityXP(ch, ability, xp);
-    });
+                   [ch, ability](const int xp)
+                   {
+                       SetAbilityXP(ch, ability, xp);
+                   });
 
     LuaGetfieldBool(L, "IsMain",
-        [ch, ability](const bool isMain)
-    {
-        if (isMain)
-        {
-            ch->Ability.Main = ability;
-        }
-    });
+                    [ch, ability](const bool isMain)
+                    {
+                        if (isMain)
+                        {
+                            ch->Ability.Main = ability;
+                        }
+                    });
 }
 
 static void LuaLoadCharacterAbilities(lua_State *L, Character *ch)
@@ -1206,8 +1223,8 @@ static void LuaLoadCharacterAbilities(lua_State *L, Character *ch)
             else
             {
                 Log->Bug("%s:%d : %s() : Error loading %s: Ability %lu out of range.",
-                    __FILE__, __LINE__, __FUNCTION__,
-                    ch->Name.c_str(), ability);
+                         __FILE__, __LINE__, __FUNCTION__,
+                         ch->Name.c_str(), ability);
             }
 
             lua_pop(L, 1);
@@ -1251,28 +1268,28 @@ static std::shared_ptr<Affect> LuaLoadCharacterAffect(lua_State *L)
 
     bool error = false;
     LuaGetfieldString(L, "Skill",
-        [&affect, &error](const std::string &skillName)
-    {
-        int sn = LookupSkill(skillName);
+                      [&affect, &error](const std::string &skillName)
+                      {
+                          int sn = LookupSkill(skillName);
 
-        if (sn < 0)
-        {
-            sn = LookupHerb(skillName);
+                          if (sn < 0)
+                          {
+                              sn = LookupHerb(skillName);
 
-            if (sn >= 0)
-            {
-                sn += TYPE_HERB;
-            }
-            else
-            {
-                Log->Bug("%s (%d): unknown skill %s.",
-                    __FUNCTION__, __LINE__, skillName.c_str());
-                error = true;
-            }
-        }
+                              if (sn >= 0)
+                              {
+                                  sn += TYPE_HERB;
+                              }
+                              else
+                              {
+                                  Log->Bug("%s (%d): unknown skill %s.",
+                                           __FUNCTION__, __LINE__, skillName.c_str());
+                                  error = true;
+                              }
+                          }
 
-        affect.Type = sn;
-    });
+                          affect.Type = sn;
+                      });
 
     if (error)
     {
@@ -1291,7 +1308,7 @@ static std::shared_ptr<Affect> LuaLoadProtoObjectAffect(lua_State *L)
     LuaGetfieldInt(L, "Location", &affect.Location);
     LuaGetfieldInt(L, "Modifier", &affect.Modifier);
     affect.Type = -1;
-    affect.Duration = -1;    
+    affect.Duration = -1;
 
     if (affect.Location == APPLY_WEAPONSPELL
         || affect.Location == APPLY_WEARSPELL
@@ -1315,21 +1332,21 @@ static std::shared_ptr<Affect> LuaLoadObjectAffect(lua_State *L)
 
     bool error = false;
     LuaGetfieldString(L, "Skill",
-        [&affect, &error](const std::string &skillName)
-    {
-        int sn = LookupSkill(skillName);
+                      [&affect, &error](const std::string &skillName)
+                      {
+                          int sn = LookupSkill(skillName);
 
-        if (sn < 0)
-        {
-            Log->Bug("%s (%d): unknown skill %s.",
-                __FUNCTION__, __LINE__, skillName.c_str());
-            error = true;
-        }
-        else
-        {
-            affect.Type = sn;
-        }
-    });
+                          if (sn < 0)
+                          {
+                              Log->Bug("%s (%d): unknown skill %s.",
+                                       __FUNCTION__, __LINE__, skillName.c_str());
+                              error = true;
+                          }
+                          else
+                          {
+                              affect.Type = sn;
+                          }
+                      });
 
     if (error)
     {
@@ -1349,7 +1366,7 @@ static std::shared_ptr<Affect> LuaLoadObjectAffect(lua_State *L)
 }
 
 static std::list<std::shared_ptr<Affect>> LuaLoadAffects(lua_State *L, const std::string &key,
-    std::function<std::shared_ptr<Affect>(lua_State*)> loadOneAffect)
+                                                         std::function<std::shared_ptr<Affect>(lua_State*)> loadOneAffect)
 {
     std::list<std::shared_ptr<Affect>> affects;
     int idx = lua_gettop(L);
@@ -1392,7 +1409,7 @@ std::list<std::shared_ptr<Affect>> LuaLoadProtoObjectAffects(lua_State *L, const
 }
 
 static void ConvertSpellNameToOvalue(lua_State *L, const std::string &key,
-    Object *obj, size_t idx)
+                                     Object *obj, size_t idx)
 {
     std::string spellName;
     LuaGetfieldString(L, key, &spellName);
@@ -1408,8 +1425,8 @@ static void ConvertSpellNameToOvalue(lua_State *L, const std::string &key,
         else
         {
             Log->Bug("%s:%d %s() : Unknown skill '%s'.",
-                __FILE__, __LINE__, __FUNCTION__,
-                spellName.c_str());
+                     __FILE__, __LINE__, __FUNCTION__,
+                     spellName.c_str());
         }
     }
 }
@@ -1434,7 +1451,7 @@ static Object *LuaLoadObject(lua_State *L)
     if (proto == nullptr)
     {
         Log->Bug("%s:%d %s : Unknown vnum %ld",
-            __FILE__, __LINE__, __FUNCTION__, vnum);
+                 __FILE__, __LINE__, __FUNCTION__, vnum);
         return nullptr;
     }
 
@@ -1446,20 +1463,20 @@ static Object *LuaLoadObject(lua_State *L)
     LuaGetfieldString(L, "Description", &obj->Description);
     LuaGetfieldString(L, "ActionDescription", &obj->ActionDescription);
     LuaGetfieldLong(L, "InRoom",
-        [obj](const long v)
-    {
-        obj->InRoom = GetRoom(v);
-    });
+                    [obj](const long v)
+                    {
+                        obj->InRoom = GetRoom(v);
+                    });
     LuaGetfieldString(L, "ItemType",
-        [obj](const std::string &typeName)
-    {
-        ItemTypes type = GetObjectType(typeName);
+                      [obj](const std::string &typeName)
+                      {
+                          ItemTypes type = GetObjectType(typeName);
 
-        if (type != -1)
-        {
-            obj->ItemType = type;
-        }
-    });
+                          if (type != -1)
+                          {
+                              obj->ItemType = type;
+                          }
+                      });
     LuaGetfieldInt(L, "Weight", &obj->Weight);
     LuaGetfieldInt(L, "Cost", &obj->Cost);
     LuaGetfieldInt(L, "Timer", &obj->Timer);
@@ -1540,50 +1557,115 @@ std::list<Object*> LuaLoadObjects(lua_State *L, const std::string &key)
     return objects;
 }
 
+void LuaLoadSpecFun(lua_State *L, size_t idx, std::vector<SpecFun*> *specfuns)
+{
+    std::string specname = lua_tostring(L, -1);
+    auto specfun = SpecialLookup(specname);
+
+    if(specfun != nullptr)
+    {
+        specfuns->push_back(specfun);
+    }
+}
+
+static void LoadMobileData(lua_State *L, Character *mob)
+{
+    mob->Flags = LuaLoadFlags(L, "Flags").to_ulong();
+
+    LuaGetfieldString(L, "ShortDescription", &mob->ShortDescr);
+    LuaGetfieldString(L, "LongDescription", &mob->LongDescr);
+
+    std::vector<SpecFun*> specfuns;
+    LuaLoadArray(L, "SpecFuns", LuaLoadSpecFun, &specfuns);
+    AssignSpecFuns(mob, specfuns);
+
+    LuaGetfieldInt(L, "NumberOfAttacks", &mob->NumberOfAttacks);
+
+    if(FieldExists(L, "AttackFlags"))
+    {
+        mob->AttackFlags = LuaLoadFlags(L, "AttackFlags");
+    }
+
+    if(FieldExists(L, "DefenseFlags"))
+    {
+        mob->DefenseFlags = LuaLoadFlags(L, "DefenseFlags");
+    }
+
+    LuaGetfieldInt(L, "Alignment", &mob->Alignment);
+    LuaGetfieldInt(L, "ArmorClass", &mob->ArmorClass);
+}
+
 std::list<Character*> LuaLoadMobiles(lua_State *L, const std::string &key)
 {
-#pragma message("LuaLoadMobiles")
-    return std::list<Character*>();
+    std::list<Character*> mobs;
+    int idx = lua_gettop(L);
+    lua_getfield(L, idx, key.c_str());
+
+    if (!lua_isnil(L, ++idx))
+    {
+        lua_pushnil(L);
+
+        while (lua_next(L, -2))
+        {
+            vnum_t vnum = INVALID_VNUM;
+            LuaGetfieldLong(L, "Vnum", &vnum);
+            auto proto = GetProtoMobile(vnum);
+            auto mob = CreateMobile(proto);
+            LuaLoadCharacter(L, mob, LoadMobileData);
+
+            if (mob != nullptr)
+            {
+                mobs.push_back(mob);
+                CharacterToRoom(mob, mob->InRoom);
+            }
+
+            lua_pop(L, 1);
+        }
+    }
+
+    lua_pop(L, 1);
+
+    return mobs;
 }
 
 void LuaLoadCharacter(lua_State *L, Character *ch,
-    std::function<void(lua_State*, Character*)> loadExtra)
+                      std::function<void(lua_State*, Character*)> loadExtra)
 {
     LuaGetfieldString(L, "Name", &ch->Name);
     LuaGetfieldString(L, "Description", &ch->Description);
     LuaGetfieldString(L, "Gender",
-        [ch](const std::string &genderName)
-    {
-        SexType gender = StrCmp(genderName, "male") == 0 ? SEX_MALE
-            : StrCmp(genderName, "female") == 0 ? SEX_FEMALE
-            : SEX_NEUTRAL;
-        ch->Sex = gender;
-    });
+                      [ch](const std::string &genderName)
+                      {
+                          SexType gender = StrCmp(genderName, "male") == 0 ? SEX_MALE
+                              : StrCmp(genderName, "female") == 0 ? SEX_FEMALE
+                              : SEX_NEUTRAL;
+                          ch->Sex = gender;
+                      });
     LuaGetfieldString(L, "Race",
-        [ch](const std::string &raceName)
-    {
-        ch->Race = GetNpcRace(raceName);
-    });
+                      [ch](const std::string &raceName)
+                      {
+                          ch->Race = GetNpcRace(raceName);
+                      });
     LuaGetfieldInt(L, "Speaks", &ch->Speaks);
     LuaGetfieldInt(L, "Speaking", &ch->Speaking);
     LuaGetfieldInt(L, "Level", &ch->TopLevel);
     LuaGetfieldInt(L, "Trust", &ch->Trust);
     LuaGetfieldInt(L, "InRoom",
-        [&ch](const int vnum)
-    {
-        ch->InRoom = GetRoom(vnum);
+                   [&ch](const int vnum)
+                   {
+                       ch->InRoom = GetRoom(vnum);
 
-        if (ch->InRoom == nullptr)
-        {
-            ch->InRoom = GetRoom(ROOM_VNUM_LIMBO);
-        }
-    });
+                       if (ch->InRoom == nullptr)
+                       {
+                           ch->InRoom = GetRoom(ROOM_VNUM_LIMBO);
+                       }
+                   });
     LuaGetfieldInt(L, "Credits", &ch->Gold);
     LuaGetfieldString(L, "Position",
-        [ch](const std::string &posName)
-    {
-        ch->Position = GetPosition(posName);
-    });
+                      [ch](const std::string &posName)
+                      {
+                          ch->Position = GetPosition(posName);
+                      });
     LuaGetfieldInt(L, "HitRoll", &ch->HitRoll);
     LuaGetfieldInt(L, "DamRoll", &ch->DamRoll);
     LuaGetfieldInt(L, "Wimpy", &ch->Wimpy);
@@ -1594,7 +1676,7 @@ void LuaLoadCharacter(lua_State *L, Character *ch,
     LoadCurrentAndMax(L, "ForcePoints", ch->Mana);
     LoadCurrentAndMax(L, "Fatigue", ch->Fatigue);
 
-    ch->AffectedBy = LuaLoadFlags(L, "AffectFlags");
+    ch->AffectedBy = LuaLoadFlags(L, "AffectedBy");
     ch->Deaf = LuaLoadFlags(L, "IgnoreChannels").to_ulong();
     ch->Resistant = LuaLoadFlags(L, "Resistant");
     ch->Immune = LuaLoadFlags(L, "Immune");

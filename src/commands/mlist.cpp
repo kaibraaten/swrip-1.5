@@ -36,6 +36,13 @@ void do_mlist(Character *ch, std::string argument)
         else
             trange = ToLong(arg2);
 
+        if(tarea->VnumRanges.Mob.First == INVALID_VNUM
+           || tarea->VnumRanges.Mob.Last == INVALID_VNUM)
+        {
+            ch->Echo("This area has no mobiles.\r\n");
+            return;
+        }
+        
         if ((lrange < tarea->VnumRanges.Mob.First || trange > tarea->VnumRanges.Mob.Last)
             && GetTrustLevel(ch) < LEVEL_GREATER)
         {
@@ -51,9 +58,9 @@ void do_mlist(Character *ch, std::string argument)
 
     for (vnum = lrange; vnum <= trange; vnum++)
     {
-        std::shared_ptr<ProtoMobile> mob;
+        auto mob = GetProtoMobile(vnum);
 
-        if ((mob = GetProtoMobile(vnum)) == NULL)
+        if (mob == nullptr)
             continue;
 
         ch->Echo("%5ld) %-20s '%s'\r\n", vnum,

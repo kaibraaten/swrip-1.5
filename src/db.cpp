@@ -862,7 +862,7 @@ void RandomizeExits(std::shared_ptr<Room> room, short maxdir)
 /*
  * Create an instance of a mobile.
  */
-Character *AllocateMobile(std::shared_ptr<ProtoMobile> pMobIndex)
+static Character *AllocateMobile(std::shared_ptr<ProtoMobile> pMobIndex)
 {
     assert(pMobIndex != nullptr);
 
@@ -887,7 +887,7 @@ Character *CreateMobile(std::shared_ptr<ProtoMobile> proto)
 /*
  * Create an instance of an object.
  */
-Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level)
+static Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level)
 {
     assert(pObjIndex != nullptr);
     Object *obj = new Object(pObjIndex, level);

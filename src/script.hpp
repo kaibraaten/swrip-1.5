@@ -19,6 +19,7 @@ extern "C" {
 #include <list>
 #include <string>
 #include <array>
+#include <vector>
 #include <utility/vector3.hpp>
 #include "constants.hpp"
 #include "types.hpp"
@@ -87,6 +88,25 @@ void LuaLoadArray(lua_State *L, const std::string &key,
     }
 
     lua_pop(L, 1);
+}
+
+template<typename CallableT, typename CollectionT>
+void LuaPushCollection(lua_State *L, CollectionT collection, const std::string &key,
+                       CallableT callback)
+{
+    if(!collection.empty())
+    {
+        lua_pushstring(L, key.c_str());
+        lua_newtable(L);
+        size_t idx = 0;
+
+        for(const auto &item : collection)
+        {
+            callback(L, idx++, item);
+        }
+
+        lua_settable(L, -3);
+    }
 }
 
 void LuaGetfieldString(lua_State *L, const std::string &key, std::string *value);
@@ -166,5 +186,21 @@ void LuaLoadCharacter(lua_State *L, Character *ch,
 #define PushCurrentAndMax( L, key, structure ) LuaPushCurrentAndMax( (L), (key), (structure.Current), (structure.Max) )
 #define LoadCurrentAndMax( L, key, structure ) LuaLoadCurrentAndMax( (L), (key), (&structure.Current), (&structure.Max) )
 void LuaPushMudProgs(lua_State *L, const MProg *mprog);
+void LuaPushSpecFun(lua_State *L, size_t idx, SpecFun *specfun);
+void LuaLoadSpecFun(lua_State *L, size_t idx, std::vector<SpecFun*> *specfuns);
+
+template<typename EntityT>
+void AssignSpecFuns(const EntityT &mob, const std::vector<SpecFun*> &specfuns)
+{
+    if(!specfuns.empty())
+    {
+        mob->spec_fun = specfuns[0];
+
+        if(specfuns.size() > 1)
+        {
+            mob->spec_2  = specfuns[1];
+        }
+    }
+}
 
 #endif

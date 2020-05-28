@@ -686,34 +686,21 @@ void LuaAreaRepository::PushRepairShop(lua_State *L, const std::shared_ptr<Proto
     lua_settable(L, -3);
 }
 
-static bool HasAnySpecFuns(std::shared_ptr<ProtoMobile> mob)
-{
-    return mob->spec_fun != nullptr || mob->spec_2 != nullptr;
-}
-
 void LuaAreaRepository::PushSpecials(lua_State *L, const std::shared_ptr<ProtoMobile> mob) const
 {
-    if(HasAnySpecFuns(mob))
+    std::vector<SpecFun*> specfuns;
+
+    if(mob->spec_fun != nullptr)
     {
-        lua_pushstring(L, "SpecFuns");
-        lua_newtable(L);
-
-        if(mob->spec_fun != nullptr)
-        {
-            lua_pushinteger(L, 1);
-            lua_pushstring(L, LookupSpecial(mob->spec_fun).c_str());
-            lua_settable(L, -3);
-        }
-
-        if(mob->spec_2 != nullptr)
-        {
-            lua_pushinteger(L, 2);
-            lua_pushstring(L, LookupSpecial(mob->spec_2).c_str());
-            lua_settable(L, -3);
-        }
-
-        lua_settable(L, -3);
+        specfuns.push_back(mob->spec_fun);
     }
+
+    if(mob->spec_2 != nullptr)
+    {
+        specfuns.push_back(mob->spec_2);
+    }
+    
+    LuaPushCollection(L, specfuns, "SpecFuns", LuaPushSpecFun);
 }
 
 template<typename T>
@@ -879,32 +866,6 @@ static void LoadRepairShop(lua_State *L, std::shared_ptr<ProtoMobile> mob)
     RepairShops->Add(mob->RepairShop);
 }
 
-static void LoadSpecFuns(lua_State *L, int subscript, std::shared_ptr<ProtoMobile> mob)
-{
-    std::string specname = lua_tostring(L, -1);
-    auto specfun = SpecialLookup(specname);
-
-    if(specfun != nullptr)
-    {
-        if(mob->spec_fun == nullptr)
-        {
-            mob->spec_fun = specfun;
-        }
-        else if(mob->spec_2 == nullptr)
-        {
-            mob->spec_2 = specfun;
-        }
-        else
-        {
-            Log->Bug("%s: Too many specfuns in file.", __FUNCTION__);
-        }
-    }
-    else
-    {
-        Log->Bug("%s: Unknown specfun: %s", __FUNCTION__, specname.c_str());
-    }
-}
-
 void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mob)
 {
     LuaGetfieldString(L, "Name", &mob->Name);
@@ -967,7 +928,9 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     LuaLoadTable(L, "RepairShop", LoadRepairShop, mob);
     
     // Load specials
-    LuaLoadArray(L, "SpecFuns", LoadSpecFuns, mob);
+    std::vector<SpecFun*> specfuns;
+    LuaLoadArray(L, "SpecFuns", LuaLoadSpecFun, &specfuns);
+    AssignSpecFuns(mob, specfuns);
 }
 
 void LuaAreaRepository::LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area)

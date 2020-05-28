@@ -35,6 +35,13 @@ void do_rlist(Character *ch, std::string argument)
         else
             trange = ToLong(arg2);
 
+        if(tarea->VnumRanges.Room.First == INVALID_VNUM
+           || tarea->VnumRanges.Room.Last == INVALID_VNUM)
+        {
+            ch->Echo("This area has no rooms.\r\n");
+            return;
+        }
+        
         if ((lrange < tarea->VnumRanges.Room.First || trange > tarea->VnumRanges.Room.Last)
             && GetTrustLevel(ch) < LEVEL_GREATER)
         {

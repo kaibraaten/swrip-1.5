@@ -73,7 +73,8 @@ void do_buy(Character *ch, std::string argument)
         BoostEconomy(ch->InRoom->Area, maxgold);
         pet = CreateMobile(pet->Prototype);
         SetBit(pet->Flags, ACT_PET);
-        SetBit(pet->AffectedBy, Flag::Affect::Charm);
+        RemoveBit(pet->Flags, ACT_PROTOTYPE);
+        pet->AffectedBy.set(Flag::Affect::Charm);
 
         argument = OneArgument(argument, arg);
 

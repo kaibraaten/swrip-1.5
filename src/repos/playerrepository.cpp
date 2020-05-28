@@ -365,11 +365,16 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, Character *ch)
     ch->PCData->Flags = LuaLoadFlags(L, "PcFlags");
     ch->PCData->WantedOn = LuaLoadFlags(L, "Wanted");
 
-    std::list<Character*> pet = LuaLoadMobiles(L, "Pets");
+    std::list<Character*> pets = LuaLoadMobiles(L, "Pets");
 
-    if (!pet.empty())
+    if (!pets.empty())
     {
-        ch->PCData->Pet = pet.front();
+        ch->PCData->Pet = pets.front();
+
+        if(ch->PCData->Pet->InRoom == ch->InRoom)
+        {
+            StartFollowing(ch->PCData->Pet, ch);
+        }
     }
 
     LoadGuildData(L, ch);

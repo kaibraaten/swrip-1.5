@@ -38,6 +38,13 @@ void do_olist(Character *ch, std::string argument)
         else
             trange = ToLong(arg2);
 
+        if(tarea->VnumRanges.Object.First == INVALID_VNUM
+           || tarea->VnumRanges.Object.Last == INVALID_VNUM)
+        {
+            ch->Echo("This area has no objects.\r\n");
+            return;
+        }
+        
         if ((lrange < tarea->VnumRanges.Object.First || trange > tarea->VnumRanges.Object.Last)
             && GetTrustLevel(ch) < LEVEL_GREATER)
         {
@@ -53,7 +60,7 @@ void do_olist(Character *ch, std::string argument)
 
     for (vnum_t vnum = lrange; vnum <= trange; ++vnum)
     {
-        std::shared_ptr<ProtoObject> obj = GetProtoObject(vnum);
+        auto obj = GetProtoObject(vnum);
 
         if (obj == nullptr)
         {

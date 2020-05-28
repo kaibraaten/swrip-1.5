@@ -1117,10 +1117,8 @@ void AppendFile(const Character *ch, const std::string &file, const std::string 
 void ShowFile(const Character *ch, const std::string &filename);
 void BootDatabase(bool fCopyover);
 void AddCharacter(Character *ch);
-Character *AllocateMobile(std::shared_ptr<ProtoMobile> pMobIndex);
 Character *CreateMobile(std::shared_ptr<ProtoMobile> pMobIndex);
 Object *CreateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
-Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
 std::string GetExtraDescription(const std::string &name, const std::list<std::shared_ptr<ExtraDescription>> &extras);
 std::shared_ptr<ProtoMobile> GetProtoMobile(vnum_t vnum);
 std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum);

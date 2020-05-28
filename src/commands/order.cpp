@@ -2,8 +2,22 @@
 #include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+
+static bool IsOwnerOf(const Character *owner, const Character *pet)
+{
+    return owner->PCData != nullptr
+        && owner->PCData->Pet == pet;
+}
+
+static bool CanGiveOrderTo(const Character *leader, const Character *follower)
+{
+    return (IsAffectedBy(follower, Flag::Affect::Charm)
+            && follower->Master == leader)
+        || IsOwnerOf(leader, follower);
+}
 
 void do_order( Character *ch, std::string argument )
 {
@@ -44,7 +58,7 @@ void do_order( Character *ch, std::string argument )
             return;
         }
 
-        if ( !IsAffectedBy(victim, Flag::Affect::Charm) || victim->Master != ch )
+        if (!CanGiveOrderTo(ch, victim))
         {
             ch->Echo("Do it yourself!\r\n");
             return;
@@ -60,9 +74,7 @@ void do_order( Character *ch, std::string argument )
     std::list<Character*> charactersToOrder = Filter(ch->InRoom->Characters(),
                                                      [ch, fAll, victim](auto och)
                                                      {
-                                                         return IsAffectedBy(och,
-                                                                             Flag::Affect::Charm)
-                                                         && och->Master == ch
+                                                         return CanGiveOrderTo(ch, och)
                                                          && ( fAll || och == victim );
                                                      });
 

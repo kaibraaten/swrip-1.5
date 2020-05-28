@@ -156,7 +156,7 @@ protected:
 
             std::shared_ptr<ProtoObject> proto = std::make_shared<ProtoObject>(GetNewVnum());
             proto->ItemType = m.ItemType;
-            Object *obj = AllocateObject(proto, 100);
+            Object *obj = new Object(proto, 100);
             output.push_back(obj);
 
             assert(obj->ItemType == obj->Prototype->ItemType);
