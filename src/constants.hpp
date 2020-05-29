@@ -1964,7 +1964,6 @@ constexpr const char *Concat(const char *a, const char *b)
 #define DATA_DIR        "./data/"
 #define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
 #define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
-#define VENDOR_DIR      DATA_DIR "vendor/"
 #define CORPSE_DIR      DATA_DIR "corpses/"   /* Corpses                      */
 #define SCRIPT_DIR      "./scripts/"
 #define LOG_DIR         "./log/"

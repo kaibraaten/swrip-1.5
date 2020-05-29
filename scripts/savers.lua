@@ -41,12 +41,13 @@ function savers.savehelps(helps, filename)
    multisave(helps, filename, "-- Helps\n", "\nHelpEntry")
 end
 
-function savers.savearea(area, filename)
-   singlesave(area, filename, "-- " .. area.Name .. "\n", "\nAreaEntry")
-end
-
 function savers.savecharacter(data, filename)
    singlesave(data, filename, "-- " .. data.Name .. "\n", "\nCharacterEntry" )
+end
+
+function savers.savevendor(vendor, filename)
+   --singlesave(vendor, filename, "-- " .. vendor.Name .. "\n", "\nVendorEntry" )
+   singlesave(vendor, filename, "-- Player Vendor\n", "\nVendorEntry" )
 end
 
 function savers.savesystemdata(data, filename)

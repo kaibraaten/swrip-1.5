@@ -20,8 +20,8 @@ protected:
     virtual void OnRemoved(Character* &entity) = 0;
 };
 
-extern PlayerRepository *PlayerCharacters;
-PlayerRepository *NewPlayerRepository();
+extern std::shared_ptr<PlayerRepository> PlayerCharacters;
+std::shared_ptr<PlayerRepository> NewPlayerRepository();
 
 std::string GetPlayerFilename(const Character *pc);
 

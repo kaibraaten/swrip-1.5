@@ -5,6 +5,14 @@
 #include "protomob.hpp"
 #include "systemdata.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/vendorrepository.hpp"
+
+static bool IsPlayerVendor(const Character *keeper)
+{
+    return IsNpc(keeper)
+        && keeper->Prototype->Shop != nullptr
+        && keeper->Home != nullptr;
+}
 
 void do_give( Character *ch, std::string argument )
 {
@@ -168,5 +176,10 @@ void do_give( Character *ch, std::string argument )
          && !CharacterDiedRecently(victim) )
     {
         PlayerCharacters->Save(victim);
+    }
+
+    if(IsPlayerVendor(victim))
+    {
+        Vendors->Save(victim);
     }
 }

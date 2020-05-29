@@ -5,6 +5,9 @@
 
 #include "lua_storeroomrepository.hpp"
 #include "lua_arearepository.hpp"
+#include "lua_vendorrepository.hpp"
+
+std::shared_ptr<VendorRepository> Vendors;
 
 std::shared_ptr<AreaRepository> NewAreaRepository()
 {
@@ -14,4 +17,9 @@ std::shared_ptr<AreaRepository> NewAreaRepository()
 std::shared_ptr<StoreroomRepository> NewStoreroomRepository()
 {
     return NewLuaStoreroomRepository();
+}
+
+std::shared_ptr<VendorRepository> NewVendorRepository()
+{
+    return NewLuaVendorRepository();
 }

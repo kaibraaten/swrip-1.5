@@ -56,6 +56,7 @@ namespace fs = std::filesystem;
 #include "repos/playerrepository.hpp"
 #include "repos/objectrepository.hpp"
 #include "repos/storeroomrepository.hpp"
+#include "repos/vendorrepository.hpp"
 
 /*
  * Increment with every major format change.
@@ -1397,70 +1398,5 @@ void SaveStoreroom(std::shared_ptr<Room> room)
 
 void LoadVendors()
 {
-    try
-    {
-        Character *mob = NULL;
-        falling = 1;
-
-        for(const auto &entry : fs::directory_iterator(VENDOR_DIR))
-        {
-            const char *filename = entry.path().filename().string().c_str();
-
-            if (filename[0] != '.')
-            {
-                sprintf(strArea, "%s%s", VENDOR_DIR, filename);
-                fprintf(stderr, "Vendor -> %s\n", strArea);
-                fpArea = fopen(strArea, "r");
-
-                if (fpArea == nullptr)
-                {
-                    perror(strArea);
-                    continue;
-                }
-
-                for (; ; )
-                {
-                    const char letter = ReadChar(fpArea, Log, fBootDb);
-
-                    if (letter == '*')
-                    {
-                        ReadToEndOfLine(fpArea, Log, fBootDb);
-                        continue;
-                    }
-
-                    if (letter != '#')
-                    {
-                        Log->Bug("Load_vendor: # not found.");
-                        break;
-                    }
-
-                    const char *word = ReadWord(fpArea, Log, fBootDb);
-
-                    if (!StrCmp(word, "VENDOR"))
-                    {
-                        mob = ReadVendor(fpArea);
-                    }
-                    else if (!StrCmp(word, "OBJECT"))
-                    {
-                        ReadObject(mob, fpArea, OS_CARRY);
-                    }
-                    else if (!StrCmp(word, "END"))
-                    {
-                        break;
-                    }
-                }
-
-                fclose(fpArea);
-            }
-        }
-    }
-    catch(const fs::filesystem_error&)
-    {
-        Log->Bug("Load_vendors: can't open VENDOR_DIR");
-        perror(VENDOR_DIR);
-    }
-
-    fpArea = NULL;
-    strcpy(strArea, "$");
-    falling = 0;
+    Vendors->Load();
 }

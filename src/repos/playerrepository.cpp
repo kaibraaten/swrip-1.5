@@ -20,7 +20,7 @@
 
 namespace fs = std::filesystem;
 
-PlayerRepository *PlayerCharacters = nullptr;
+std::shared_ptr<PlayerRepository> PlayerCharacters;
 
 static std::string GetPlayerBackupFilename(const std::string &name);
 static std::string GetPlayerFilename(const std::string &name);
@@ -33,7 +33,7 @@ public:
     void Save() const override;
     void Save(const Character *pc) const override;
     std::string MakeWizlist() const override;
-
+    
 protected:
     void OnAdded(Character* &entity) override;
     void OnRemoved(Character* &entity) override;
@@ -1026,9 +1026,9 @@ void InMemoryPlayerRepository::OnRemoved(Character* &entity)
 }
 
 ////////////////////////
-PlayerRepository *NewPlayerRepository()
+std::shared_ptr<PlayerRepository> NewPlayerRepository()
 {
-    return new InMemoryPlayerRepository();
+    return std::make_shared<InMemoryPlayerRepository>();
 }
 
 std::string GetPlayerFilename(const Character *pc)

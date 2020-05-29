@@ -9,71 +9,71 @@
 
 void do_pricevendor( Character *ch, std::string argument )
 {
-  Character *vendor = NULL;
-  Character *ch1 = NULL;
-  std::string arg1;
-  std::string arg2;
-  Object *obj = NULL;
-  struct tm *tms = NULL;
+    Character *vendor = NULL;
+    Character *ch1 = NULL;
+    std::string arg1;
+    std::string arg2;
+    Object *obj = NULL;
+    struct tm *tms = NULL;
 
-  argument = OneArgument (argument, arg1);
-  argument = OneArgument (argument, arg2);
+    argument = OneArgument (argument, arg1);
+    argument = OneArgument (argument, arg2);
 
-  if ( arg1.empty() || arg2.empty() )
+    if ( arg1.empty() || arg2.empty() )
     {
-      ch->Echo("Syntax: pricevendor <item> <cost>\r\n");
-      return;
+        ch->Echo("Syntax: pricevendor <item> <cost>\r\n");
+        return;
     }
 
-  if ( ( vendor = FindKeeper (ch) ) == NULL )
+    if ( ( vendor = FindKeeper (ch) ) == NULL )
     {
-      return;
+        return;
     }
 
-  if ( vendor->Owner.empty() )
+    if ( vendor->Owner.empty() )
     {
-      return;
-    }
-  
-  if ( (ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL )
-    {
-      ch->Echo("This isnt your vendor!\r\n");
-      return;
+        return;
     }
 
-  if ( StrCmp( ch1->Name, vendor->Owner ) )
+    if ( (ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL )
     {
-      ch->Echo("Trying to steal huh?\r\n");
-      tms = localtime(&current_time);
-      tms->tm_hour += 24;
-      ch->PCData->ReleaseDate = mktime(tms);
-      ch->PCData->HelledBy = "VendorCheat";
-      Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
-      CharacterFromRoom(ch);
-      CharacterToRoom(ch, GetRoom(ROOM_VNUM_HELL));
-      Act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
-      do_look(ch, "auto");
-      ch->Echo("The immortals are not pleased with your actions.\r\n"
-                "You shall remain in hell for 24 Hours.\r\n");
-      PlayerCharacters->Save(ch);
-      Log->Info("%s just tried to abuse the vendor bug!", ch->Name.c_str());
-      return;
+        ch->Echo("This isn't your vendor!\r\n");
+        return;
     }
 
-  if ( ch->Fighting)
+    if ( StrCmp( ch1->Name, vendor->Owner ) )
     {
-      ch->Echo("Not while you're fighting!\r\n");
-      return;
+        ch->Echo("Trying to steal huh?\r\n");
+        tms = localtime(&current_time);
+        tms->tm_hour += 24;
+        ch->PCData->ReleaseDate = mktime(tms);
+        ch->PCData->HelledBy = "VendorCheat";
+        Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
+        CharacterFromRoom(ch);
+        CharacterToRoom(ch, GetRoom(ROOM_VNUM_HELL));
+        Act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
+        do_look(ch, "auto");
+        ch->Echo("The immortals are not pleased with your actions.\r\n"
+                 "You shall remain in hell for 24 Hours.\r\n");
+        PlayerCharacters->Save(ch);
+        Log->Info("%s just tried to abuse the vendor bug!", ch->Name.c_str());
+        return;
     }
 
-  if ( (obj  = GetCarriedObject( vendor, arg1 )) != NULL)
+    if ( ch->Fighting)
     {
-      obj->Cost = ToLong (arg2);
-      ch->Echo("The price has been changed\r\n");
-      SaveVendor(vendor);
-      return;
+        ch->Echo("Not while you're fighting!\r\n");
+        return;
     }
 
-  ch->Echo("He doesn't have that item!\r\n");
-  SaveVendor(vendor);
+    if ( (obj  = GetCarriedObject( vendor, arg1 )) != NULL)
+    {
+        obj->Cost = ToLong (arg2);
+        ch->Echo("The price has been changed.\r\n");
+        SaveVendor(vendor);
+        return;
+    }
+
+    ch->Echo("He doesn't have that item!\r\n");
+    SaveVendor(vendor);
 }

@@ -6,17 +6,10 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "repos/vendorrepository.hpp"
 
 void do_placevendor(Character *ch, std::string argument)
 {
-    char strsave[MAX_INPUT_LENGTH];
-    struct stat fst;
-    Character *vendor = nullptr;
-    std::shared_ptr<ProtoMobile> temp;
-    Object *obj = nullptr;
-    char vnum1[MAX_INPUT_LENGTH];
-    char buf[MAX_INPUT_LENGTH];
-
     if (FindKeeperQ(ch, false))
     {
         ch->Echo("A vendor is already here!\r\n");;
@@ -28,16 +21,11 @@ void do_placevendor(Character *ch, std::string argument)
         return;
     }
 
-    /* better way to do this? what if they have another object called deed?*/
-    if ((obj = GetCarriedObject(ch, "deed")) == NULL)
+    auto obj = GetCarriedObject(ch, "deed");
+    
+    if (obj == nullptr || obj->Prototype->Vnum != OBJ_VNUM_DEED)
     {
-        ch->Echo("You do not have a deed!.\r\n");
-        return;
-    }
-
-    if (obj->Prototype->Vnum != OBJ_VNUM_DEED)
-    {
-        ch->Echo("You do not have a deed!.\r\n");
+        ch->Echo("You do not have a deed!\r\n");
         return;
     }
 
@@ -47,23 +35,24 @@ void do_placevendor(Character *ch, std::string argument)
         return;
     }
 
-    sprintf(strsave, "%s/%s", VENDOR_DIR, Capitalize(ToLower(ch->Name)).c_str());
-
-    if (stat(strsave, &fst) != -1)
+    if (Vendors->HasVendor(ch))
     {
         ch->Echo("You already have a shop!\r\n");
         return;
     }
 
-    if ((temp = GetProtoMobile(MOB_VNUM_VENDOR)) == NULL)
+    auto vendorPrototype = GetProtoMobile(MOB_VNUM_VENDOR);
+    
+    if (vendorPrototype == nullptr)
     {
         Log->Bug("do_placevendor: no vendor vnum");
         return;
     }
 
-    CharacterToRoom(CreateMobile(temp), ch->InRoom);
-    vendor = GetCharacterInRoom(ch, temp->Name);
+    auto vendor = CreateMobile(vendorPrototype);
+    CharacterToRoom(vendor, ch->InRoom);
 
+    char buf[MAX_INPUT_LENGTH];
     sprintf(buf, vendor->LongDescr.c_str(), ch->Name.c_str());
     vendor->LongDescr = buf;
 
@@ -75,9 +64,12 @@ void do_placevendor(Character *ch, std::string argument)
     SeparateOneObjectFromGroup(obj);
     ExtractObject(obj);
 
-    Act(AT_ACTION, "$n appears in a swirl of smoke.\n", vendor, NULL, NULL, TO_ROOM);
+    Act(AT_ACTION, "$n appears in a swirl of smoke.",
+        vendor, nullptr, nullptr, TO_ROOM);
 
+    char vnum1[MAX_INPUT_LENGTH];
     sprintf(vnum1, "%ld", vendor->Prototype->Vnum);
+    
     do_makeshop(vendor, vnum1); /*makes the vendor a shop.. there has to be a
                                     better way to do it but hell if i know what it is!*/
 }
