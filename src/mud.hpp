@@ -1314,11 +1314,11 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp,
 void ReadObject(Character *ch, FILE *fp, short os_type);
 void DeEquipCharacter(Character *ch);
 void ReEquipCharacter(Character *ch);
-void SaveHome(Character *ch);
 void SaveStoreroom(std::shared_ptr<Room> room);
 void LoadStorerooms();
 void LoadCorpses();
 void WriteCorpses(const Character *ch, std::string name);
+void SaveHome(const Character *ch);
 
 /* special.c */
 SpecFun *SpecialLookup(const std::string &name);

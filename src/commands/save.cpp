@@ -17,33 +17,33 @@ static void SetMissingBits(std::bitset<Flag::MAX> &bits, long missing)
 
 void do_save( Character *ch, std::string argument )
 {
-  if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
+    if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     {
-      ch->Echo("You can't save while polymorphed.\r\n");
-      return;
+        ch->Echo("You can't save while polymorphed.\r\n");
+        return;
     }
 
-  if ( IsNpc(ch) )
-    return;
+    if ( IsNpc(ch) )
+        return;
 
-  SetMissingBits(ch->AffectedBy, RaceTable[ch->Race].Affected);
-  SetMissingBits(ch->Resistant, RaceTable[ch->Race].Resistant);
-  SetMissingBits(ch->Susceptible, RaceTable[ch->Race].Susceptible);
+    SetMissingBits(ch->AffectedBy, RaceTable[ch->Race].Affected);
+    SetMissingBits(ch->Resistant, RaceTable[ch->Race].Resistant);
+    SetMissingBits(ch->Susceptible, RaceTable[ch->Race].Susceptible);
 
-  if ( !IsAuthed(ch) )
+    if ( !IsAuthed(ch) )
     {
-      ch->Echo("You can't save until after you've graduated from the academy.\r\n");
-      return;
+        ch->Echo("You can't save until after you've graduated from the academy.\r\n");
+        return;
     }
 
-  PlayerCharacters->Save( ch );
-  SaveHome (ch );
-
-  if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+    PlayerCharacters->Save( ch );
+    SaveHome(ch);
+    
+    if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
     {
-      SaveStoreroom( ch->InRoom );
+        SaveStoreroom( ch->InRoom );
     }
-  
-  saving_char = NULL;
-  ch->Echo("Ok.\r\n");
+
+    saving_char = NULL;
+    ch->Echo("Ok.\r\n");
 }

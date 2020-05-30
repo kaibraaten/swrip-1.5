@@ -40,6 +40,7 @@
 #include "repos/playerrepository.hpp"
 #include "systemdata.hpp"
 #include "repos/descriptorrepository.hpp"
+#include "repos/homerepository.hpp"
 
 #ifdef _WIN32
 #include <process.h>
@@ -186,6 +187,11 @@ void RecoverFromCopyover()
             /* Insert in the char_list */
             AddCharacter(d->Character);
 
+            if(d->Character->PlayerHome != nullptr)
+            {
+                Homes->Load(d->Character->PlayerHome);
+            }
+            
             CharacterToRoom(d->Character, d->Character->InRoom);
             do_look(d->Character, "auto noprog");
 

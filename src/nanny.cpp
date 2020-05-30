@@ -45,6 +45,7 @@
 #include "race.hpp"
 #include "repos/banrepository.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/homerepository.hpp"
 
 using NannyFun = std::function<void(std::shared_ptr<Descriptor>, std::string)>;
 
@@ -789,78 +790,11 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
     if (GetTimer(ch, TIMER_PKILLED) > 0)
         RemoveTimer(ch, TIMER_PKILLED);
 
-    if (ch->PlayerHome != NULL)
+    if(ch->PlayerHome != nullptr)
     {
-        char filename[256];
-        FILE *fph = nullptr;
-        auto storeroom = ch->PlayerHome;
-        auto objectsToExtract(storeroom->Objects());
-
-        for (Object *obj : objectsToExtract)
-        {
-            ExtractObject(obj);
-        }
-
-        sprintf(filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
-            Capitalize(ch->Name).c_str());
-        if ((fph = fopen(filename, "r")) != NULL)
-        {
-            RoomProgSetSupermob(storeroom);
-
-            for (; ; )
-            {
-                char letter = ReadChar(fph, Log, fBootDb);
-
-                if (letter == '*')
-                {
-                    ReadToEndOfLine(fph, Log, fBootDb);
-                    continue;
-                }
-
-                if (letter != '#')
-                {
-                    Log->Bug("Load_plr_home: # not found.");
-                    Log->Bug("%s", ch->Name.c_str());
-                    break;
-                }
-
-                const char *word = ReadWord(fph, Log, fBootDb);
-
-                if (!StrCmp(word, "OBJECT"))     /* Objects      */
-                {
-                    ReadObject(supermob, fph, OS_CARRY);
-                }
-                else
-                    if (!StrCmp(word, "END"))   /* Done         */
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Log->Bug("Load_plr_home: bad section.");
-                        Log->Bug("%s", ch->Name.c_str());
-                        break;
-                    }
-            }
-
-            fclose(fph);
-
-            std::list<Object*> carriedBySupermob(supermob->Objects());
-
-            for (Object *tobj : carriedBySupermob)
-            {
-                ObjectFromCharacter(tobj);
-
-                if (tobj->ItemType != ITEM_MONEY)
-                {
-                    ObjectToRoom(tobj, storeroom);
-                }
-            }
-
-            ReleaseSupermob();
-        }
+        Homes->Load(ch->PlayerHome);
     }
-
+    
     if (ch->PCData->Pet)
     {
         Act(AT_ACTION, "$n returns with $s master.",

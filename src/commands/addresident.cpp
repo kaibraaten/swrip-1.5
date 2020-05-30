@@ -51,4 +51,3 @@ void do_addresident(Character *ch, std::string argument)
     Act(AT_PLAIN, "You add $N as a resident.", ch, NULL, victim, TO_CHAR);
     victim->Echo("You are now a resident of this home.\r\n");
 }
-

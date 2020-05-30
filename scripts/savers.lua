@@ -46,8 +46,7 @@ function savers.savecharacter(data, filename)
 end
 
 function savers.savevendor(vendor, filename)
-   --singlesave(vendor, filename, "-- " .. vendor.Name .. "\n", "\nVendorEntry" )
-   singlesave(vendor, filename, "-- Player Vendor\n", "\nVendorEntry" )
+   singlesave(vendor, filename, "-- " .. vendor.Owner .. "'s vendor\n", "\nVendorEntry" )
 end
 
 function savers.savesystemdata(data, filename)
@@ -107,7 +106,11 @@ function savers.savehalloffame(halloffame, filename)
 end
 
 function savers.savestoreroom(storeroom, filename)
-   singlesave(storeroom, filename, " -- Storeroom " .. storeroom.Vnum .. "\n", "\nStoreroomEntry")
+   singlesave(storeroom, filename, "-- Storeroom " .. storeroom.Vnum .. "\n", "\nStoreroomEntry")
+end
+
+function savers.savehome(home, filename)
+   singlesave(home, filename, "-- Home " .. home.Vnum .. "\n", "\nHomeEntry")
 end
 
 function savers.savefoo(foo, filename)

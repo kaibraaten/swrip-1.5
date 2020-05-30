@@ -57,6 +57,7 @@ namespace fs = std::filesystem;
 #include "repos/objectrepository.hpp"
 #include "repos/storeroomrepository.hpp"
 #include "repos/vendorrepository.hpp"
+#include "repos/homerepository.hpp"
 
 /*
  * Increment with every major format change.
@@ -87,34 +88,6 @@ static Object *rgObjNest[MAX_NEST];
  */
 static bool HasAnyOvalues(const Object *obj);
 static void WriteCharacter(const Character *ch, FILE *fp);
-
-void SaveHome(Character *ch)
-{
-    if (ch->PlayerHome)
-    {
-        FILE *fp = NULL;
-        char filename[256];
-        short templvl = 0;
-
-        sprintf(filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
-                Capitalize(ch->Name).c_str());
-
-        if ((fp = fopen(filename, "w")))
-        {
-            templvl = ch->TopLevel;
-            ch->TopLevel = LEVEL_AVATAR;           /* make sure EQ doesn't get lost */
-
-            for (const Object *obj : Reverse(ch->PlayerHome->Objects()))
-            {
-                WriteObject(ch, obj, fp, 0, OS_CARRY);
-            }
-
-            fprintf(fp, "#END\n");
-            ch->TopLevel = templvl;
-            fclose(fp);
-        }
-    }
-}
 
 /*
  * Un-equip character before saving to ensure proper    -Thoric
@@ -182,6 +155,14 @@ void ReEquipCharacter(Character *ch)
                 break;
             }
         }
+    }
+}
+
+void SaveHome(const Character *ch)
+{
+    if(ch->PlayerHome != nullptr)
+    {
+        Homes->Save(ch->PlayerHome);
     }
 }
 

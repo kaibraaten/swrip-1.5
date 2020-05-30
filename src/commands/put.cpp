@@ -158,9 +158,9 @@ void do_put( Character *ch, std::string argument )
         {
             PlayerCharacters->Save( ch );
 
-            if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+            if(ch->InRoom->Flags.test(Flag::Room::PlayerHome))
             {
-                SaveHome (ch );
+                SaveHome(ch);
             }
 
             if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
@@ -247,9 +247,9 @@ void do_put( Character *ch, std::string argument )
         {
             PlayerCharacters->Save( ch );
 
-            if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+            if(ch->InRoom->Flags.test(Flag::Room::PlayerHome))
             {
-                SaveHome (ch );
+                SaveHome(ch);
             }
 
             if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )

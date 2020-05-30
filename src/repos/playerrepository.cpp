@@ -352,15 +352,15 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, Character *ch)
                    });
     LuaGetfieldInt(L, "Alignment", &ch->Alignment);
     LuaGetfieldInt(L, "ArmorClass", &ch->ArmorClass);
-    LuaGetfieldInt(L, "PlayerHome",
-                   [ch](const int homeVnum)
-                   {
-                       if (homeVnum > 0)
-                       {
-                           ch->PlayerHome = GetRoom(homeVnum);
-                       }
-                   });
-
+    LuaGetfieldLong(L, "PlayerHome",
+                    [ch](const vnum_t homeVnum)
+                    {
+                        if (homeVnum != INVALID_VNUM)
+                        {
+                            ch->PlayerHome = GetRoom(homeVnum);
+                        }
+                    });
+    
     ch->Flags = LuaLoadFlags(L, "Flags").to_ulong();
     ch->PCData->Flags = LuaLoadFlags(L, "PcFlags");
     ch->PCData->WantedOn = LuaLoadFlags(L, "Wanted");
@@ -769,7 +769,7 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, const Character *pc)
     LuaSetfieldNumber(L, "ArmorClass", pc->ArmorClass);
     LuaSetfieldNumber(L, "PlayerHome",
                       pc->PlayerHome != nullptr ? pc->PlayerHome->Vnum : INVALID_VNUM);
-
+    
     if (pc->Desc != nullptr
         && !pc->Desc->Remote.Hostname.empty())
     {

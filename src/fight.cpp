@@ -2667,10 +2667,6 @@ void RawKill(Character *killer, Character *victim)
                 ToLower(arg).c_str());
 
         rename(buf, buf2);
-
-        sprintf(buf, "%s%c/%s.home", PLAYER_DIR, tolower(arg[0]),
-            Capitalize(arg).c_str());
-        remove(buf);
     }
     else
     {

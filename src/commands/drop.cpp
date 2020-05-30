@@ -92,13 +92,13 @@ void do_drop( Character *ch, std::string argument )
 
             if ( SysData.SaveFlags.test( Flag::AutoSave::Drop ) )
             {
-                PlayerCharacters->Save( ch );
+                PlayerCharacters->Save(ch);
 
-                if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                if(ch->InRoom->Flags.test(Flag::Room::PlayerHome))
                 {
-                    SaveHome (ch );
+                    SaveHome(ch);
                 }
-
+                
                 if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
                 {
                     SaveStoreroom( ch->InRoom );
@@ -233,11 +233,11 @@ void do_drop( Character *ch, std::string argument )
     {
         PlayerCharacters->Save( ch );
 
-        if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+        if(ch->InRoom->Flags.test(Flag::Room::PlayerHome))
         {
-            SaveHome (ch );
+            SaveHome(ch);
         }
-
+        
         if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
         {
             SaveStoreroom( ch->InRoom );

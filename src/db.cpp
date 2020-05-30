@@ -58,6 +58,7 @@ namespace fs = std::filesystem;
 #include "repos/arearepository.hpp"
 #include "repos/storeroomrepository.hpp"
 #include "repos/vendorrepository.hpp"
+#include "repos/homerepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
@@ -1365,6 +1366,7 @@ void AllocateRepositories()
     Areas = NewAreaRepository();
     Storerooms = NewStoreroomRepository();
     Vendors = NewVendorRepository();
+    Homes = NewHomeRepository();
 }
 
 void MakeWizlist()
