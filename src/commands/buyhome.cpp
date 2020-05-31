@@ -3,7 +3,9 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "room.hpp"
+#include "home.hpp"
 #include "repos/arearepository.hpp"
+#include "repos/homerepository.hpp"
 
 void do_buyhome(Character *ch, std::string argument)
 {
@@ -12,7 +14,7 @@ void do_buyhome(Character *ch, std::string argument)
     if (IsNpc(ch) || !ch->PCData)
         return;
 
-    if (ch->PlayerHome != NULL)
+    if (!Homes->FindHomesForResident(ch->Name).empty())
     {
         ch->Echo("&RYou already have a home!\r\n&w");
         return;
@@ -26,12 +28,18 @@ void do_buyhome(Character *ch, std::string argument)
         return;
     }
 
-    if (!room->Flags.test(Flag::Room::EmptyHome))
+    if (!room->Flags.test(Flag::Room::PlayerHome))
     {
         ch->Echo("&RThis room isn't for sale!\r\n&d");
         return;
     }
 
+    if(Homes->FindByVnum(room->Vnum) != nullptr)
+    {
+        ch->Echo("&RThis home is already owned.\r\n&d");
+        return;
+    }
+    
     if (ch->Gold < houseCost)
     {
         ch->Echo("&RThis room costs %d credits you don't have enough!\r\n&d", houseCost);
@@ -45,16 +53,17 @@ void do_buyhome(Character *ch, std::string argument)
         return;
     }
 
-    room->Name = argument;
-
+    auto home = std::make_shared<Home>(room->Vnum);
+    home->RoomName(argument);
+    auto resident = std::make_shared<Resident>();
+    resident->Name = ch->Name;
+    resident->GiveAllPermissions();
+    home->Add(resident);
+    Homes->Add(home);
+    Homes->Save(home);
+    
     ch->Gold -= houseCost;
 
-    room->Flags.reset(Flag::Room::EmptyHome);
-    room->Flags.set(Flag::Room::PlayerHome);
-
-    Areas->Save(room->Area);
-
-    ch->PlayerHome = room;
     do_save(ch, "");
 }
 

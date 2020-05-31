@@ -39,6 +39,8 @@
 #include "alias.hpp"
 #include "race.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/homerepository.hpp"
+#include "home.hpp"
 
 struct Character::Impl
 {
@@ -1404,9 +1406,11 @@ short GetCarryEncumbrance(const Character *ch, short move)
 
 vnum_t WhereHome(const Character *ch)
 {
-    if (ch->PlayerHome)
+    auto homes = Homes->FindHomesForResident(ch->Name);
+    
+    if (!homes.empty())
     {
-        return ch->PlayerHome->Vnum;
+        return homes.front()->Vnum();
     }
     else if (IsImmortal(ch))
     {

@@ -187,9 +187,11 @@ void RecoverFromCopyover()
             /* Insert in the char_list */
             AddCharacter(d->Character);
 
-            if(d->Character->PlayerHome != nullptr)
+            auto homes = Homes->FindHomesForResident(d->Character->Name);
+
+            for(auto home : homes)
             {
-                Homes->Load(d->Character->PlayerHome);
+                Homes->Load(home);
             }
             
             CharacterToRoom(d->Character, d->Character->InRoom);

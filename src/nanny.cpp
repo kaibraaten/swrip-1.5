@@ -790,9 +790,9 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
     if (GetTimer(ch, TIMER_PKILLED) > 0)
         RemoveTimer(ch, TIMER_PKILLED);
 
-    if(ch->PlayerHome != nullptr)
+    for(auto home : Homes->FindHomesForResident(ch->Name))
     {
-        Homes->Load(ch->PlayerHome);
+        Homes->Load(home);
     }
     
     if (ch->PCData->Pet)

@@ -1,26 +1,22 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "home.hpp"
+#include "repos/homerepository.hpp"
 
 void do_addresident(Character *ch, std::string argument)
 {
-    auto home = ch->InRoom;
+    auto home = Homes->FindByVnum(ch->InRoom->Vnum);
 
-    if (!home->Flags.test(Flag::Room::PlayerHome) || home != ch->PlayerHome)
+    if (home == nullptr || StrCmp(home->Owner(), ch->Name) != 0)
     {
-        ch->Echo("&RThis isn't your home!\r\n");
-        return;
-    }
-
-    if (IsBitSet(ch->Flags, PLR_HOME_RESIDENT))
-    {
-        ch->Echo("&RYou are not the owner of this home.\r\n");
+        ch->Echo("&RThis isn't your home!\r\n&d");
         return;
     }
 
     if (argument.empty())
     {
-        ch->Echo("&RAdd who as a resident?\r\n");
+        ch->Echo("&RAdd who as a resident?\r\n&d");
         return;
     }
 
@@ -28,25 +24,26 @@ void do_addresident(Character *ch, std::string argument)
 
     if (victim == nullptr)
     {
-        ch->Echo("&RThey aren't here.\r\n");
+        ch->Echo("&RThey aren't here.\r\n&d");
         return;
     }
 
     if (victim == ch)
     {
-        ch->Echo("&RNot only are you a resident of this home, but you are its owner.\r\n");
+        ch->Echo("&RNot only are you a resident of this home, but you are its owner.\r\n&d");
         return;
     }
 
-    if (victim->PlayerHome != NULL)
+    if(home->IsResident(victim->Name))
     {
-        ch->Echo("&RThat player already has a home.\r\n");
+        ch->Echo("&R%s is already a resident of this home.\r\n&d", PERS(victim, ch).c_str());
         return;
     }
-
-    victim->PlayerHome = home;
-    SetBit(victim->Flags, PLR_HOME_RESIDENT);
-    do_save(victim, "");
+    
+    auto resident = std::make_shared<Resident>();
+    resident->Name = victim->Name;
+    home->Add(resident);
+    Homes->Save(home);
 
     Act(AT_PLAIN, "You add $N as a resident.", ch, NULL, victim, TO_CHAR);
     victim->Echo("You are now a resident of this home.\r\n");

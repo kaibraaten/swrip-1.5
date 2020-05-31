@@ -45,6 +45,7 @@ src/fslogger.cpp
 src/grub.cpp
 src/handler.cpp
 src/help.cpp
+src/home.cpp
 src/imc.cpp
 src/interp.cpp
 src/magic.cpp

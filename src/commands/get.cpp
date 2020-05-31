@@ -7,6 +7,7 @@
 #include "repos/clanrepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/storeroomrepository.hpp"
+#include "repos/homerepository.hpp"
 
 static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch);
 static void get_obj( Character *ch, Object *obj, Object *container );
@@ -69,13 +70,13 @@ void do_get( Character *ch, std::string argument )
     if ( ch->InRoom->Flags.test( Flag::Room::PlayerHome )
          && GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
     {
-        if ( !ch->PlayerHome || ch->PlayerHome->Vnum != ch->InRoom->Vnum )
+        if ( !Homes->IsResidentOf(ch->Name, ch->InRoom->Vnum))
         {
             for (p = LastCharacter; p ; p = p_prev )
             {
                 p_prev = p->Previous;
 
-                if ( p->PlayerHome && p->PlayerHome->Vnum == ch->InRoom->Vnum )
+                if(Homes->IsResidentOf(p->Name, ch->InRoom->Vnum))
                 {
                     foundowner = true;
                 }

@@ -36,7 +36,7 @@ namespace Flag
        NoDrop,
        ClanStoreroom,
        PlayerHome,
-       EmptyHome,
+       _21,
        Teleport,
        Hotel,
        NoFloor,

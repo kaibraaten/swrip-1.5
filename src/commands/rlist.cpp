@@ -62,6 +62,6 @@ void do_rlist(Character *ch, std::string argument)
         if (room == nullptr)
             continue;
 
-        ch->Echo("&w%5ld) %s\r\n", vnum, room->Name.c_str());
+        ch->Echo("&w%5ld) %s\r\n", vnum, GetRoomName(room).c_str());
     }
 }

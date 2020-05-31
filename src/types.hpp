@@ -86,6 +86,7 @@ class MPROG_DATA;
 class MProg;
 class Stats;
 class SaveVs;
+class Home;
 
 /*
  * Function types.

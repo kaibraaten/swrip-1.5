@@ -982,7 +982,7 @@ static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short 
 static void show_no_arg(Character *ch, bool is_auto)
 {
     SetCharacterColor(AT_RMNAME, ch);
-    ch->Echo(ch->InRoom->Name);
+    ch->Echo(GetRoomName(ch->InRoom));
     ch->Echo(" ");
 
     if (!ch->Desc->Original)
@@ -1003,7 +1003,7 @@ static void show_no_arg(Character *ch, bool is_auto)
 
     if (!IsNpc(ch) && !IsBitSet(ch->Flags, PLR_BRIEF))
     {
-        ch->Echo(ch->InRoom->Description);
+        ch->Echo(GetRoomDescription(ch->InRoom));
     }
 
     if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOEXIT))

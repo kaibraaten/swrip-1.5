@@ -44,10 +44,12 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "exit.hpp"
+#include "home.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/descriptorrepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/arearepository.hpp"
+#include "repos/homerepository.hpp"
 
 extern Character *gch_prev;
 
@@ -2572,17 +2574,18 @@ void RawKill(Character *killer, Character *victim)
     {
         ForEachShip(RemoveShipOwner, victim);
 
-        if (victim->PlayerHome)
+        for(auto home : Homes->FindHomesForResident(victim->Name))
         {
-            auto room = victim->PlayerHome;
-
-            room->Name = "An Empty Apartment";
-            room->Flags.reset(Flag::Room::PlayerHome);
-            room->Flags.set(Flag::Room::EmptyHome);
-
-            Areas->Save(room->Area);
+            if(StrCmp(home->Owner(), victim->Name) == 0)
+            {
+                Homes->Delete(home);
+            }
+            else
+            {
+                home->RemoveResident(victim->Name);
+            }
         }
-
+        
         if (victim->PCData && victim->PCData->ClanInfo.Clan)
         {
             if (!StrCmp(victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Leader))

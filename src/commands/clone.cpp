@@ -137,8 +137,6 @@ void do_clone(Character *ch, std::string argument)
         ch->PCData->Played = ch->PCData->Played / 2;
         bank = ch->PCData->Bank;
         ch->PCData->Bank = 0;
-        auto home = ch->PlayerHome;
-        ch->PlayerHome = NULL;
         std::string oldbestowments = ch->PCData->Bestowments;
 
         if (ch->PCData->Clones == 2)
@@ -192,7 +190,6 @@ void do_clone(Character *ch, std::string argument)
             }
         }
 
-        ch->PlayerHome = home;
         ch->PCData->Played = played;
         ch->Gold = credits;
         ch->PCData->Bank = bank;

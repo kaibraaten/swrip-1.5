@@ -45,7 +45,7 @@ void do_exits(Character *ch, std::string argument)
                         Capitalize(pexit->Keyword).c_str(),
                         IsRoomDark(pexit->ToRoom)
                         ? "Too dark to tell"
-                        : pexit->ToRoom->Name.c_str());
+                            : GetRoomName(pexit->ToRoom).c_str());
                 }
                 else
                 {
@@ -53,7 +53,7 @@ void do_exits(Character *ch, std::string argument)
                         Capitalize(GetDirectionName(pexit->Direction)).c_str(),
                         IsRoomDark(pexit->ToRoom)
                         ? "Too dark to tell"
-                        : pexit->ToRoom->Name.c_str());
+                            : GetRoomName(pexit->ToRoom).c_str());
                 }
             }
             else

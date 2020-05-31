@@ -151,7 +151,6 @@ public:
     std::shared_ptr<Room> InRoom;
     std::shared_ptr<Room> WasInRoom;
     std::shared_ptr<Room> WasSentinel;
-    std::shared_ptr<Room> PlayerHome;
     CmdFun *LastCommand = NULL;
     CmdFun *PreviousCommand = NULL;   /* mapping */
     void *dest_buf = NULL;

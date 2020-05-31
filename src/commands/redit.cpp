@@ -218,11 +218,23 @@ void do_redit(Character *ch, std::string argument)
             ch->Echo("Toggle the room flags.\r\n");
             ch->Echo("Usage: redit flags <flag> [flag]...\r\n");
             ch->Echo("\r\nPossible Flags: \r\n");
-            ch->Echo("  dark, nomob, indoors, nomagic, bank,\r\n");
-            ch->Echo("  private, safe, petshop, norecall, donation, nodropall, silence,\r\n");
-            ch->Echo("  logspeach, nodrop, clanstoreroom, plr_home, empty_home, teleport\r\n");
-            ch->Echo("  nofloor, prototype, refinery, factory, recruit\r\n");
-            ch->Echo("  spacecraft, auction, no_drive, can_land, can_fly, hotel\r\n");
+
+            for(size_t i = 0, counter = 0; i < RoomFlags.size(); ++i)
+            {
+                if(RoomFlags[i][0] != '_')
+                {
+                    ++counter;
+                    
+                    ch->Echo("   %s", RoomFlags[i]);
+                    
+                    if(counter % 4 == 0)
+                    {
+                        ch->Echo("\r\n");
+                    }
+                }
+            }
+
+            ch->Echo("\r\n");
             return;
         }
 
@@ -234,10 +246,6 @@ void do_redit(Character *ch, std::string argument)
             if (bit >= Flag::MAX)
             {
                 ch->Echo("Unknown flag: %s\r\n", arg2.c_str());
-            }
-            else if (bit == Flag::Room::PlayerHome && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR)
-            {
-                ch->Echo("If you want to build a player home use the 'empty_home' flag instead.\r\n");
             }
             else
             {

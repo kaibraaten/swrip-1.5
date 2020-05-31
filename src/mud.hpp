@@ -311,7 +311,8 @@ extern const std::array<const char * const, Flag::MAX> ExitFlags;
 extern const std::array<const char * const, Flag::MAX> mprog_flags;
 extern const std::array<const char * const, Flag::MAX> SaveFlags;
 extern const std::array<const char * const, Flag::MAX> ShipFlags;
-
+extern const std::array<const char * const, Flag::MAX> ResidentFlags;
+    
 extern const std::array<const char * const, MAX_ITEM_TYPE + 1> ObjectTypes;
 extern const std::array<const char * const, MAX_APPLY_TYPE> AffectTypes;
 extern const std::array<const char * const, MAX_NPC_RACE> NpcRace;
@@ -1279,6 +1280,9 @@ void LowerEconomy(std::shared_ptr<Area> tarea, int gold);
 void EconomizeMobileGold(Character *mob);
 bool EconomyHas(std::shared_ptr<Area> tarea, int gold);
 int CountCharactersOnObject(const Object *obj);
+std::string GetRoomName(std::shared_ptr<Room> room);
+std::string GetRoomDescription(std::shared_ptr<Room> room);
+bool CheckRoomFlag(std::shared_ptr<Room> room, size_t flag);
 
 /* interp.c */
 bool CheckPosition(const Character *ch, PositionType position);

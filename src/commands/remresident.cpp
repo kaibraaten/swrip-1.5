@@ -1,22 +1,17 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "home.hpp"
+#include "repos/homerepository.hpp"
 
 void do_remresident(Character *ch, std::string argument)
 {
     Character *victim = nullptr;
-    auto home = ch->InRoom;
+    auto home = Homes->FindByVnum(ch->InRoom->Vnum);
 
-    if (!home->Flags.test(Flag::Room::PlayerHome)
-        || home != ch->PlayerHome)
+    if (home == nullptr || StrCmp(home->Owner(), ch->Name) != 0)
     {
         ch->Echo("&RThis isn't your home!\r\n");
-        return;
-    }
-
-    if (IsBitSet(ch->Flags, PLR_HOME_RESIDENT))
-    {
-        ch->Echo("&RYou are not the owner of this home.\r\n");
         return;
     }
 
@@ -38,15 +33,14 @@ void do_remresident(Character *ch, std::string argument)
         return;
     }
 
-    if (!IsBitSet(victim->Flags, PLR_HOME_RESIDENT) || victim->PlayerHome != home)
+    if (!home->IsResident(victim->Name))
     {
         ch->Echo("&RThat player is not a resident of your home.\r\n");
         return;
     }
 
-    victim->PlayerHome = NULL;
-    RemoveBit(victim->Flags, PLR_HOME_RESIDENT);
-    do_save(victim, "");
+    home->RemoveResident(victim->Name);
+    Homes->Save(home);
 
     Act(AT_PLAIN, "You remove $N as a resident.", ch, NULL, victim, TO_CHAR);
     victim->Echo("You are no longer a resident of this home.\r\n");

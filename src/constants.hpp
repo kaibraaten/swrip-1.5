@@ -1816,7 +1816,7 @@ constexpr auto PLR_LOG = BV19;
 constexpr auto PLR_DENY = BV20;
 constexpr auto PLR_FREEZE = BV21;
 constexpr auto PLR_KILLER = BV22;
-constexpr auto PLR_HOME_RESIDENT = BV23;
+
 constexpr auto PLR_LITTERBUG = BV24;
 constexpr auto PLR_ANSI = BV25;
 

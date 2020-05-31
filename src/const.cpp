@@ -2124,7 +2124,7 @@ const std::array<const char * const, Flag::MAX> RoomFlags =
     "NoDrop",
     "ClanStoreroom",
     "PlayerHome",
-    "EmptyHome",
+    "_21",
     "Teleport",
     "Hotel",
     "NoFloor",
@@ -2577,7 +2577,7 @@ const std::array<const char * const, Flag::MAX> PlayerFlags =
     "Autoloot",
     "Autosac",
     "Blank",
-    "Outcast",
+    "_07",
     "Brief",
     "Combine",
     "Prompt",
@@ -2593,10 +2593,10 @@ const std::array<const char * const, Flag::MAX> PlayerFlags =
     "Deny",
     "Freeze",
     "Killer",
-    "HomeResident",
+    "_23",
     "Litterbug",
     "Ansi",
-    "Rip",
+    "_26",
     "Nice",
     "Flee",
     "Autocred",
@@ -3505,6 +3505,47 @@ const std::array<const char * const, Flag::MAX> ShipFlags =
 int GetShipFlag(const std::string &flag)
 {
     return GetInArray(flag, ShipFlags, StrCmp);
+}
+
+const std::array<const char * const, Flag::MAX> ResidentFlags =
+{
+    "IsOwner",
+    "CanDrop",
+    "CanGet",
+    "_03",
+    "_04",
+    "_05",
+    "_06",
+    "_07",
+    "_08",
+    "_09",
+    "_10",
+    "_11",
+    "_12",
+    "_13",
+    "_14",
+    "_15",
+    "_16",
+    "_17",
+    "_18",
+    "_19",
+    "_20",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
+};
+
+int GetResidentFlag(const std::string &flag)
+{
+    return GetInArray(flag, ResidentFlags, StrCmp);
 }
 
 const std::array<const char * const, Flag::MAX> ChannelNames =

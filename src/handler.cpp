@@ -38,6 +38,8 @@
 #include "protomob.hpp"
 #include "descriptor.hpp"
 #include "exit.hpp"
+#include "home.hpp"
+#include "repos/homerepository.hpp"
 
 extern Character *gch_prev;
 
@@ -1763,7 +1765,8 @@ bool IsRoomPrivate(const Character *ch, std::shared_ptr<Room> pRoomIndex)
     assert(pRoomIndex != nullptr);
 
     if (pRoomIndex->Flags.test(Flag::Room::PlayerHome)
-        && ch->PlayerHome != pRoomIndex)
+        && Homes->FindByVnum(pRoomIndex->Vnum) != nullptr
+        && !Homes->IsResidentOf(ch->Name, pRoomIndex->Vnum))
         return true;
 
     size_t count = pRoomIndex->Characters().size();
@@ -2755,4 +2758,21 @@ void EconomizeMobileGold(Character *mob)
     {
         LowerEconomy(tarea, mob->Gold);
     }
+}
+
+std::string GetRoomName(std::shared_ptr<Room> room)
+{
+    auto home = Homes->FindByVnum(room->Vnum);
+    return home != nullptr ? home->RoomName() : room->Name;
+}
+
+std::string GetRoomDescription(std::shared_ptr<Room> room)
+{
+    auto home = Homes->FindByVnum(room->Vnum);
+    return home != nullptr && !home->Description().empty() ? home->Description() : room->Description;
+}
+
+bool CheckRoomFlag(std::shared_ptr<Room> room, size_t flag)
+{
+    return room->Flags.test(flag);
 }

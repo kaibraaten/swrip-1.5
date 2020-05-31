@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "exit.hpp"
+#include "repos/homerepository.hpp"
 
 void do_buzz(Character *ch, std::string arg)
 {
@@ -43,18 +44,18 @@ void do_buzz(Character *ch, std::string arg)
 
     auto home = exitdat->ToRoom;
 
-    if (home->Flags.test(Flag::Room::EmptyHome))
-    {
-        ch->Echo("&RThat home isn't owned by anyone.\r\n");
-        return;
-    }
-
     if (!home->Flags.test(Flag::Room::PlayerHome))
     {
         ch->Echo("&RThat isn't a home.\r\n");
         return;
     }
 
+    if(Homes->FindByVnum(home->Vnum) == nullptr)
+    {
+        ch->Echo("&RThat home isn't owned by anyone.\r\n");
+        return;
+    }
+    
     ch->BuzzedFromRoom = ch->InRoom;
 
     EchoToRoom(AT_WHITE, home, "The door buzzer sounds.\r\n");

@@ -630,6 +630,9 @@ void BootDatabase(bool fCopyOver)
     Log->Boot("Loading help files");
     HelpFiles->Load();
 
+    Log->Boot("Loading player home meta data");
+    Homes->Load();
+    
     Log->Boot("Resetting areas");
     AreaUpdate();
 

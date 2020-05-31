@@ -160,9 +160,9 @@ void ReEquipCharacter(Character *ch)
 
 void SaveHome(const Character *ch)
 {
-    if(ch->PlayerHome != nullptr)
+    for(auto home : Homes->FindHomesForResident(ch->Name))
     {
-        Homes->Save(ch->PlayerHome);
+        Homes->Save(home);
     }
 }
 
@@ -274,11 +274,6 @@ static void WriteCharacter(const Character *ch, FILE *fp)
              && ch->WasInRoom)
             ? ch->WasInRoom->Vnum
             : ch->InRoom->Vnum);
-
-    if (ch->PlayerHome != NULL)
-    {
-        fprintf(fp, "PlrHome      %ld\n", ch->PlayerHome->Vnum);
-    }
 
     fprintf(fp, "HpManaMove   %d %d 0 0 %d %d\n",
             ch->HitPoints.Current, ch->HitPoints.Max,
