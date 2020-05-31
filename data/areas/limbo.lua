@@ -1,188 +1,40 @@
 -- Limbo
--- Last saved Thursday 28-May-2020 11:08:45
+-- Last saved Sunday 31-May-2020 15:51:33
 
 AreaEntry
 {
-   HighEconomy = 0, 
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 1, 
-         MiscData = 0, 
-         Arg3 = 2, 
-      }, 
-      [2] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         Arg1 = 90, 
-         MiscData = 1, 
-         Arg3 = 10, 
-      }, 
-      [3] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 6, 
-         MiscData = 1, 
-         Arg3 = 6, 
-      }, 
-      [4] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 2, 
-         MiscData = 1, 
-         Arg3 = 6, 
-      }, 
-      [5] = 
-      {
-         Arg2 = 1, 
-         Command = "M", 
-         Arg1 = 7, 
-         MiscData = 1, 
-         Arg3 = 6, 
-      }, 
-      [6] = 
-      {
-         Arg2 = 1, 
-         Command = "O", 
-         Arg1 = 7, 
-         MiscData = 1, 
-         Arg3 = 6, 
-      }, 
-   }, 
-   ResetMessage = "&rYour soul burns...", 
+   LowEconomy = 42155975, 
+   FileFormatVersion = 1, 
    Mobiles = 
    {
       [1] = 
       {
-         Level = 50, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 30550, 
-            HitNoDice = 5, 
-         }, 
+         Sex = "female", 
+         Credits = 10000, 
          DefaultPosition = "standing", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [0] = "basic", 
-               [18] = "_clan", 
-               [20] = "verpine", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [8] = "ithorese", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [21] = "defel", 
-            }, 
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [0] = "basic", 
-               [18] = "_clan", 
-               [20] = "verpine", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [8] = "ithorese", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [21] = "defel", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         AffectedBy = 
-         {
-            [9] = "Infrared", 
-            [5] = "DetectHidden", 
-            [22] = "TrueSight", 
-            [3] = "DetectInvis", 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Immune = 
-         {
-            [10] = "sleep", 
-            [11] = "charm", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [21] = "paralysis", 
-         }, 
-         ShortDescr = "Puff", 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [0] = "parry", 
-         }, 
-         HitRoll = 0, 
-         Position = "standing", 
-         Vnum = 1, 
-         DamRoll = 0, 
-         Sex = "female", 
-         Name = "Puff", 
          ArmorClass = -30, 
-         AttackFlags = 
+         Vnum = 1, 
+         HitChance = 
          {
-            [1] = "claws", 
+            HitPlus = 30550, 
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamNoDice = 4, 
-            DamPlus = 200, 
-         }, 
-         NumberOfAttacks = 0, 
+         Level = 50, 
+         Alignment = 1000, 
          Weight = 0, 
-         Height = 0, 
-         Race = "Gand", 
+         ShortDescr = "Puff", 
+         DamRoll = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "say firstname of obj:\9 \9$i\
-say short_desc/title of obj: \9$I\
-say he/she/it of obj:\9 \9$j\
-say him/her/it of obj:\9 \9$k\
-say his/hers/its of obj:\9$l\
-say firstname of victim: \9$t\
-say short_desc/title of victim:\9$T\
-say he/she/it of victim: \9$E\
-say him/her/it of victim: \9$M\
-say his/hers/its of victim:\9$S\
-", 
-               MudProgType = "speech_prog", 
-               Arguments = "test2", 
-            }, 
-            [2] = 
-            {
+               Arguments = "test", 
                Code = "say triggered by (name):\9$n\
 say triggered by (name&title): \9$N\
 say triggerer is (he,she,it):\9$e\
@@ -195,103 +47,163 @@ say random char (him,her,it):\9$L\
 say random char (his,hers,its):\9$K\
 ", 
                MudProgType = "speech_prog", 
-               Arguments = "test", 
+            }, 
+            [2] = 
+            {
+               Arguments = "test2", 
+               Code = "say firstname of obj:\9 \9$i\
+say short_desc/title of obj: \9$I\
+say he/she/it of obj:\9 \9$j\
+say him/her/it of obj:\9 \9$k\
+say his/hers/its of obj:\9$l\
+say firstname of victim: \9$t\
+say short_desc/title of victim:\9$T\
+say he/she/it of victim: \9$E\
+say him/her/it of victim: \9$M\
+say his/hers/its of victim:\9$S\
+", 
+               MudProgType = "speech_prog", 
+            }, 
+         }, 
+         Description = "", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         Race = "Gand", 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [0] = "parry", 
+         }, 
+         Position = "standing", 
+         AttackFlags = 
+         {
+            [1] = "claws", 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamNoDice = 4, 
+            DamPlus = 200, 
+         }, 
+         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [9] = "Infrared", 
+            [5] = "DetectHidden", 
+            [22] = "TrueSight", 
+            [3] = "DetectInvis", 
+         }, 
+         Name = "Puff", 
+         Immune = 
+         {
+            [10] = "sleep", 
+            [11] = "charm", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [21] = "paralysis", 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [0] = "basic", 
+               [18] = "_clan", 
+               [20] = "verpine", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [8] = "ithorese", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [21] = "defel", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [0] = "basic", 
+               [18] = "_clan", 
+               [20] = "verpine", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [8] = "ithorese", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [21] = "defel", 
             }, 
          }, 
          LongDescr = "Puff the Fractal Dragon is here, contemplating a higher reality.\
 ", 
-         Credits = 10000, 
-         Alignment = 1000, 
-         Description = "", 
       }, 
       [2] = 
       {
-         Level = 50, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 31550, 
-            HitNoDice = 5, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 10000, 
          DefaultPosition = "standing", 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [3] = "DetectInvis", 
-         }, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         ShortDescr = "Richard Simmons", 
-         HitRoll = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Position = "standing", 
-         Vnum = 2, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "Richard Simmons", 
          ArmorClass = -300, 
-         SaveVs = 
+         Vnum = 2, 
+         HitChance = 
          {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
+            HitPlus = 31550, 
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 2, 
-            DamNoDice = 1, 
-            DamPlus = 2, 
-         }, 
-         NumberOfAttacks = 0, 
+         Level = 50, 
+         Alignment = -1000, 
          Weight = 0, 
-         Height = 0, 
-         Race = "Human", 
+         ShortDescr = "Richard Simmons", 
+         DamRoll = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "emote hops around singing, \"I'm a pony, I'm a pony, I'm a pony!\"\
+               Arguments = "p is DEAD!!", 
+               Code = "mptrans $n 6\
 ", 
-               MudProgType = "rand_prog", 
-               Arguments = "25", 
+               MudProgType = "act_prog", 
             }, 
             [2] = 
             {
+               Arguments = "25", 
+               Code = "emote hops around singing, \"I'm a pony, I'm a pony, I'm a pony!\"\
+", 
+               MudProgType = "rand_prog", 
+            }, 
+            [3] = 
+            {
+               Arguments = "p is dying", 
                Code = "mpforce $n drink\
 c heal $n\
 ", 
                MudProgType = "act_prog", 
-               Arguments = "p is dying", 
             }, 
-            [3] = 
+            [4] = 
             {
+               Arguments = "p is starved", 
                Code = "mpoload 20\
 give roll $n\
 mpforce $n eat roll\
@@ -300,66 +212,164 @@ emote cackles happily\
 say Oh, the ponies!\
 ", 
                MudProgType = "act_prog", 
-               Arguments = "p is starved", 
             }, 
-            [4] = 
+            [5] = 
             {
+               Arguments = "p bashes against", 
                Code = "cast heal $n\
 cast heal $n\
 ", 
                MudProgType = "act_prog", 
-               Arguments = "p bashes against", 
             }, 
-            [5] = 
+            [6] = 
             {
+               Arguments = "p shivers and", 
                Code = "cast 'cure poison' $n\
 cast heal $n\
 ", 
                MudProgType = "act_prog", 
-               Arguments = "p shivers and", 
-            }, 
-            [6] = 
-            {
-               Code = "c heal $n\
-c heal $n\
-", 
-               MudProgType = "act_prog", 
-               Arguments = "p wears", 
             }, 
             [7] = 
             {
+               Arguments = "p wears", 
                Code = "c heal $n\
 c heal $n\
 ", 
                MudProgType = "act_prog", 
-               Arguments = "p wields", 
             }, 
             [8] = 
             {
-               Code = "mptrans $n 6\
+               Arguments = "p wields", 
+               Code = "c heal $n\
+c heal $n\
 ", 
                MudProgType = "act_prog", 
-               Arguments = "p is DEAD!!", 
+            }, 
+         }, 
+         Description = "This demon is clearly something that you don't want to mess with...\
+It appears to be very agile, and very strong.  \
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 2, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [3] = "DetectInvis", 
+         }, 
+         Name = "Richard Simmons", 
+         Race = "Human", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
             }, 
          }, 
          LongDescr = "Richard Simmons stands before you...he wants you...to dance....\
 ", 
-         Credits = 10000, 
-         Alignment = -1000, 
-         Description = "This demon is clearly something that you don't want to mess with...\
-It appears to be very agile, and very strong.  \
-", 
       }, 
       [3] = 
       {
-         Level = 105, 
+         Sex = "undistinguished", 
+         Credits = 10000, 
+         DefaultPosition = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [13] = "PolySelf", 
+            [21] = "Secretive", 
+            [23] = "MobInvis", 
+         }, 
+         ArmorClass = -162, 
+         Vnum = 3, 
          HitChance = 
          {
-            HitSizeDice = 10, 
             HitPlus = 1050, 
+            HitSizeDice = 10, 
             HitNoDice = 21, 
          }, 
-         DefaultPosition = "standing", 
+         Level = 105, 
+         Alignment = -1000, 
+         Weight = 0, 
+         ShortDescr = "the supermob", 
+         DamRoll = 21, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "25", 
+               Code = "mpinvis 101\
+", 
+               MudProgType = "rand_prog", 
+            }, 
+            [2] = 
+            {
+               Arguments = "100", 
+               Code = "mpinvis 101\
+", 
+               MudProgType = "entry_prog", 
+            }, 
+         }, 
+         Description = "How clever he looks!\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+            DamPlus = 2, 
+         }, 
+         HitRoll = 21, 
          AffectedBy = 
          {
             [1] = "Invisible", 
@@ -368,13 +378,10 @@ It appears to be very agile, and very strong.  \
             [22] = "TrueSight", 
             [3] = "DetectInvis", 
          }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [13] = "PolySelf", 
-            [21] = "Secretive", 
-            [23] = "MobInvis", 
-         }, 
+         Name = "supermob", 
+         Race = "Human", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -386,95 +393,13 @@ It appears to be very agile, and very strong.  \
                [0] = "basic", 
             }, 
          }, 
-         ShortDescr = "the supermob", 
-         HitRoll = 21, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Position = "standing", 
-         Vnum = 3, 
-         DamRoll = 21, 
-         Sex = "undistinguished", 
-         Name = "supermob", 
-         ArmorClass = -162, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 2, 
-         }, 
-         NumberOfAttacks = 0, 
-         Weight = 0, 
-         Height = 0, 
-         Race = "Human", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpinvis 101\
-", 
-               MudProgType = "entry_prog", 
-               Arguments = "100", 
-            }, 
-            [2] = 
-            {
-               Code = "mpinvis 101\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "25", 
-            }, 
-         }, 
          LongDescr = "The supermob is here.  He looks busy as hell.\
-", 
-         Credits = 10000, 
-         Alignment = -1000, 
-         Description = "How clever he looks!\
 ", 
       }, 
       [4] = 
       {
-         Level = 103, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            ProfitBuy = 120, 
-            KeeperShortDescr = "a vendor", 
-            ProfitSell = 90, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
@@ -483,71 +408,68 @@ It appears to be very agile, and very strong.  \
             [25] = "NoKill", 
             [10] = "Practice", 
          }, 
-         Languages = 
+         ArmorClass = 0, 
+         Vnum = 4, 
+         HitChance = 
          {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [14] = "gamorrese", 
-               [17] = "jawaese", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [26] = "falleen", 
-               [27] = "binary", 
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [10] = "devaronese", 
-               [14] = "gamorrese", 
-               [17] = "jawaese", 
-               [18] = "_clan", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [26] = "falleen", 
-               [27] = "binary", 
-            }, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
          }, 
+         Level = 103, 
+         Alignment = 0, 
+         Weight = 0, 
          ShortDescr = "a vendor", 
          DamRoll = 0, 
-         Stats = 
+         Shop = 
          {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            ProfitBuy = 120, 
+            KeeperShortDescr = "a vendor", 
+            ProfitSell = 90, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+         }, 
+         Race = "Human", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Position = "standing", 
-         Vnum = 4, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Description = "", 
+         HitRoll = 0, 
+         Name = "a vendor", 
          Immune = 
          {
             [1] = "cold", 
@@ -574,16 +496,92 @@ It appears to be very agile, and very strong.  \
             [22] = "steal", 
             [0] = "fire", 
          }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [14] = "gamorrese", 
+               [17] = "jawaese", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [26] = "falleen", 
+               [27] = "binary", 
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [14] = "gamorrese", 
+               [17] = "jawaese", 
+               [18] = "_clan", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [26] = "falleen", 
+               [27] = "binary", 
+            }, 
+         }, 
+         LongDescr = "A Vendor owned by %s\
+", 
+      }, 
+      [5] = 
+      {
          Sex = "undistinguished", 
-         Name = "a vendor", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
          ArmorClass = 0, 
+         Vnum = 5, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "an animated corpse", 
+         DamRoll = 0, 
+         Race = "Human", 
+         Position = "standing", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Damage = 
          {
@@ -591,32 +589,26 @@ It appears to be very agile, and very strong.  \
             DamNoDice = 0, 
             DamPlus = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
          HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
-         LongDescr = "A Vendor owned by %s\
+         Name = "undead animated corpse", 
+         Description = "Denied its rightful death, this animated corpse has been infused with the\
+powerful energies of its master.  It exists on the precipice between life\
+and unlife, even as its physical body rots and decays under the strain of\
+its tasks.\
 ", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
-      }, 
-      [5] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         ShortDescr = "an animated corpse", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -628,61 +620,13 @@ It appears to be very agile, and very strong.  \
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 5, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Name = "undead animated corpse", 
-         ArmorClass = 0, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
          LongDescr = "An animated corpse struggles with the horror of its undeath.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "Denied its rightful death, this animated corpse has been infused with the\
-powerful energies of its master.  It exists on the precipice between life\
-and unlife, even as its physical body rots and decays under the strain of\
-its tasks.\
 ", 
       }, 
       [6] = 
       {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
@@ -690,7 +634,51 @@ its tasks.\
             [18] = "Mountable", 
             [30] = "Prototype", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 6, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = -1000, 
+         Weight = 0, 
          ShortDescr = "Rosie O'Donnel...", 
+         DamRoll = 0, 
+         Race = "Human", 
+         Position = "standing", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         HitRoll = 0, 
+         Name = "Rosie O'Donnel", 
+         Description = "", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -702,115 +690,37 @@ its tasks.\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 6, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Name = "Rosie O'Donnel", 
-         ArmorClass = 0, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
          LongDescr = "Rosie O'Donnel blubbers here...like a beached whale\
 ", 
-         Credits = 0, 
-         Alignment = -1000, 
-         Description = "", 
       }, 
       [7] = 
       {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
-         Race = "Human", 
-         ShortDescr = "a newly created Al Gore", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 7, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Name = "Al Gore", 
          ArmorClass = 0, 
-         SaveVs = 
+         Vnum = 7, 
+         HitChance = 
          {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         HitRoll = 0, 
+         Level = 1, 
+         Alignment = 0, 
          Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
+         ShortDescr = "a newly created Al Gore", 
+         DamRoll = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "p is thirsty", 
                Code = "mpforce $n drink\
 emote grins quietly\
 say After no dose stopped giving me\
@@ -818,24 +728,58 @@ cash...\
 say The wife HAD to go.\
 ", 
                MudProgType = "act_prog", 
-               Arguments = "p is thirsty", 
+            }, 
+         }, 
+         Race = "Human", 
+         Position = "standing", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         HitRoll = 0, 
+         Name = "Al Gore", 
+         Description = "", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
             }, 
          }, 
          LongDescr = "Al Gore, the greatest thing since Nyquil, stands before you\
 ", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
       }, 
       [10] = 
       {
-         Level = 80, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 800, 
-            HitNoDice = 16, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
@@ -846,71 +790,39 @@ say The wife HAD to go.\
             [11] = "Immortal", 
             [27] = "NoCorpse", 
          }, 
-         Languages = 
+         ArmorClass = -100, 
+         Vnum = 10, 
+         HitChance = 
          {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [15] = "togorian", 
-               [0] = "basic", 
-               [17] = "jawaese", 
-               [20] = "verpine", 
-               [27] = "binary", 
-            }, 
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [8] = "ithorese", 
-               [9] = "antarian", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [15] = "togorian", 
-               [0] = "basic", 
-               [17] = "jawaese", 
-               [20] = "verpine", 
-               [27] = "binary", 
-            }, 
+            HitPlus = 800, 
+            HitSizeDice = 10, 
+            HitNoDice = 16, 
          }, 
+         Level = 80, 
+         Alignment = 0, 
+         Weight = 0, 
          ShortDescr = "Mauzumi, the Dire Wolf", 
+         DamRoll = 16, 
+         Race = "_69", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Position = "standing", 
-         Vnum = 10, 
-         DamRoll = 16, 
-         Sex = "undistinguished", 
-         Name = "mauzumi die wolf", 
-         ArmorClass = -100, 
-         AttackFlags = 
+         Stats = 
          {
-            [1] = "claws", 
-            [0] = "bite", 
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
          }, 
          Damage = 
          {
@@ -918,97 +830,104 @@ say The wife HAD to go.\
             DamNoDice = 8, 
             DamPlus = 2, 
          }, 
+         AttackFlags = 
+         {
+            [1] = "claws", 
+            [0] = "bite", 
+         }, 
          HitRoll = 16, 
-         Weight = 0, 
-         NumberOfAttacks = 2, 
-         Height = 0, 
-         Race = "_69", 
-         LongDescr = "&z&W&zA huge Dire Wolf stands here.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
+         Name = "mauzumi die wolf", 
          Description = "While this large beast circles you, you have a chance to see its large          \
 fangs and its sharp claws.  The wolf's eyes are small, black and have           \
 the aura of a deadly intent.  Its raggedy coat tells of a recent battle         \
 with something.\
 ", 
-      }, 
-      [11] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
+         Height = 0, 
+         NumberOfAttacks = 2, 
          Languages = 
          {
             Speaks = 
             {
                [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [15] = "togorian", 
                [0] = "basic", 
                [17] = "jawaese", 
-               [3] = "rodese", 
                [20] = "verpine", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [10] = "devaronese", 
                [27] = "binary", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
             }, 
             Speaking = 
             {
                [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [8] = "ithorese", 
+               [9] = "antarian", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [15] = "togorian", 
                [0] = "basic", 
                [17] = "jawaese", 
-               [3] = "rodese", 
                [20] = "verpine", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [10] = "devaronese", 
                [27] = "binary", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
             }, 
          }, 
-         AffectedBy = 
-         {
-            [21] = "Floating", 
-            [15] = "Sneak", 
-         }, 
+         LongDescr = "&z&W&zA huge Dire Wolf stands here.\
+", 
+      }, 
+      [11] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 11, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "mist", 
+         DamRoll = 0, 
+         Description = "Is it the fog you see?  Or are your eyes playing deadly tricks on you.  The\
+mist swirls around you and then quickly disappears before you can blink.  You\
+suddenly find yourself overcome with an unknown power.\
+", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
-         ShortDescr = "mist", 
          Stats = 
          {
-            Force = 0, 
             Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
             Intelligence = 0, 
-            Dexterity = 0, 
+            Luck = 0, 
+            Force = 0, 
             Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
             Constitution = 0, 
          }, 
-         HitRoll = 0, 
          Position = "standing", 
-         Vnum = 11, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "mist", 
-         ArmorClass = 0, 
          AttackFlags = 
          {
             [25] = "_25", 
@@ -1020,102 +939,96 @@ with something.\
             DamNoDice = 0, 
             DamPlus = 0, 
          }, 
-         NumberOfAttacks = 2, 
-         Weight = 0, 
-         Height = 0, 
-         Race = "_85", 
-         DefaultPosition = "standing", 
-         LongDescr = "A thick mist plays with your senses.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "Is it the fog you see?  Or are your eyes playing deadly tricks on you.  The\
-mist swirls around you and then quickly disappears before you can blink.  You\
-suddenly find yourself overcome with an unknown power.\
-", 
-      }, 
-      [12] = 
-      {
-         Level = 1, 
-         HitChance = 
+         HitRoll = 0, 
+         AffectedBy = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            [21] = "Floating", 
+            [15] = "Sneak", 
          }, 
+         Name = "mist", 
+         Race = "_85", 
+         Height = 0, 
+         NumberOfAttacks = 2, 
          Languages = 
          {
             Speaks = 
             {
+               [1] = "shyriiwook", 
                [0] = "basic", 
-               [2] = "twileki", 
+               [17] = "jawaese", 
                [3] = "rodese", 
-               [30] = "durese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [29] = "gand", 
-               [24] = "quarrenese", 
-               [9] = "antarian", 
+               [20] = "verpine", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
                [10] = "devaronese", 
-               [26] = "falleen", 
-               [28] = "yevethan", 
-               [13] = "bothese", 
+               [27] = "binary", 
                [14] = "gamorrese", 
-               [25] = "sullustese", 
+               [15] = "togorian", 
             }, 
             Speaking = 
             {
-               [2] = "twileki", 
+               [1] = "shyriiwook", 
+               [0] = "basic", 
+               [17] = "jawaese", 
                [3] = "rodese", 
-               [30] = "durese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [29] = "gand", 
-               [24] = "quarrenese", 
-               [9] = "antarian", 
+               [20] = "verpine", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
                [10] = "devaronese", 
-               [26] = "falleen", 
-               [28] = "yevethan", 
-               [13] = "bothese", 
+               [27] = "binary", 
                [14] = "gamorrese", 
-               [25] = "sullustese", 
+               [15] = "togorian", 
             }, 
          }, 
-         AffectedBy = 
-         {
-            [19] = "Flying", 
-         }, 
+         LongDescr = "A thick mist plays with your senses.\
+", 
+      }, 
+      [12] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 12, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "bat", 
+         DamRoll = 0, 
+         Description = "As this bloodsucking creature flies past you, you notice the tiny black\
+eyes that stare at your jugular vein.  This little black bat has the\
+intentions of drinking your blood until there is none left in your body.\
+", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
-         ShortDescr = "bat", 
          Stats = 
          {
-            Force = 0, 
             Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
             Intelligence = 0, 
-            Dexterity = 0, 
+            Luck = 0, 
+            Force = 0, 
             Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
             Constitution = 0, 
          }, 
-         HitRoll = 0, 
          Position = "standing", 
-         Vnum = 12, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "bat", 
-         ArmorClass = 0, 
          AttackFlags = 
          {
             [1] = "claws", 
@@ -1127,195 +1040,201 @@ suddenly find yourself overcome with an unknown power.\
             DamNoDice = 0, 
             DamPlus = 0, 
          }, 
-         NumberOfAttacks = 2, 
-         Weight = 0, 
-         Height = 0, 
-         Race = "Barabel", 
-         DefaultPosition = "standing", 
-         LongDescr = "A bat hovers nearby with bloody fangs.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "As this bloodsucking creature flies past you, you notice the tiny black\
-eyes that stare at your jugular vein.  This little black bat has the\
-intentions of drinking your blood until there is none left in your body.\
-", 
-      }, 
-      [13] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [0] = "basic", 
-               [17] = "jawaese", 
-               [27] = "binary", 
-               [11] = "barabel", 
-               [20] = "verpine", 
-               [14] = "gamorrese", 
-               [6] = "shistavanen", 
-               [15] = "togorian", 
-            }, 
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [17] = "jawaese", 
-               [27] = "binary", 
-               [11] = "barabel", 
-               [20] = "verpine", 
-               [14] = "gamorrese", 
-               [6] = "shistavanen", 
-               [15] = "togorian", 
-            }, 
-         }, 
+         HitRoll = 0, 
          AffectedBy = 
          {
             [19] = "Flying", 
          }, 
+         Name = "bat", 
+         Race = "Barabel", 
+         Height = 0, 
+         NumberOfAttacks = 2, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [30] = "durese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [29] = "gand", 
+               [24] = "quarrenese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [26] = "falleen", 
+               [28] = "yevethan", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [25] = "sullustese", 
+            }, 
+            Speaking = 
+            {
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [30] = "durese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [29] = "gand", 
+               [24] = "quarrenese", 
+               [9] = "antarian", 
+               [10] = "devaronese", 
+               [26] = "falleen", 
+               [28] = "yevethan", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [25] = "sullustese", 
+            }, 
+         }, 
+         LongDescr = "A bat hovers nearby with bloody fangs.\
+", 
+      }, 
+      [13] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         ShortDescr = "hawk", 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         HitRoll = 0, 
-         Position = "standing", 
-         Vnum = 13, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "hawk", 
          ArmorClass = 0, 
-         AttackFlags = 
+         Vnum = 13, 
+         HitChance = 
          {
-            [1] = "claws", 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         NumberOfAttacks = 2, 
-         Weight = 0, 
-         Height = 0, 
-         Race = "_78", 
-         DefaultPosition = "standing", 
-         LongDescr = "A hawk watches you with predatory eyes from its perch.\
-", 
-         Credits = 0, 
+         Level = 1, 
          Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "hawk", 
+         DamRoll = 0, 
          Description = "This proud creature stands upon its perch watching you with unblinking\
 eyes.  Any movement made by you could make it flare its wings in disapproval\
 and open its beak to scream its intent.  Its long beak open and before you\
 know what has happened, it comes flying towards you.\
 ", 
-      }, 
-      [14] = 
-      {
-         Level = 1, 
-         HitChance = 
+         SaveVs = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         Position = "standing", 
+         AttackFlags = 
+         {
+            [1] = "claws", 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [19] = "Flying", 
+         }, 
+         Name = "hawk", 
+         Race = "_78", 
+         Height = 0, 
+         NumberOfAttacks = 2, 
          Languages = 
          {
             Speaks = 
             {
                [1] = "shyriiwook", 
+               [3] = "rodese", 
+               [4] = "huttese", 
                [0] = "basic", 
-               [18] = "_clan", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [8] = "ithorese", 
-               [10] = "devaronese", 
-               [22] = "dosh", 
-               [21] = "defel", 
-               [13] = "bothese", 
+               [17] = "jawaese", 
+               [27] = "binary", 
+               [11] = "barabel", 
+               [20] = "verpine", 
                [14] = "gamorrese", 
-               [16] = "kubazian", 
+               [6] = "shistavanen", 
+               [15] = "togorian", 
             }, 
             Speaking = 
             {
                [1] = "shyriiwook", 
-               [16] = "kubazian", 
-               [18] = "_clan", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [8] = "ithorese", 
-               [10] = "devaronese", 
-               [22] = "dosh", 
-               [13] = "bothese", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [17] = "jawaese", 
+               [27] = "binary", 
+               [11] = "barabel", 
+               [20] = "verpine", 
                [14] = "gamorrese", 
-               [21] = "defel", 
+               [6] = "shistavanen", 
+               [15] = "togorian", 
             }, 
          }, 
-         AffectedBy = 
-         {
-            [3] = "DetectInvis", 
-         }, 
+         LongDescr = "A hawk watches you with predatory eyes from its perch.\
+", 
+      }, 
+      [14] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 14, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "black cat", 
+         DamRoll = 0, 
+         Description = "With a furry black coat, and big yellow eyes, this cat gracefully walks\
+across your path, bringing you several years of bad luck.  Its tail moves\
+slowly to tell you that it is laughing at your misfortune.\
+", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
-         ShortDescr = "black cat", 
          Stats = 
          {
-            Force = 0, 
             Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
             Intelligence = 0, 
-            Dexterity = 0, 
+            Luck = 0, 
+            Force = 0, 
             Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
             Constitution = 0, 
          }, 
-         HitRoll = 0, 
          Position = "standing", 
-         Vnum = 14, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "black cat", 
-         ArmorClass = 0, 
          AttackFlags = 
          {
             [1] = "claws", 
@@ -1327,94 +1246,97 @@ know what has happened, it comes flying towards you.\
             DamNoDice = 0, 
             DamPlus = 0, 
          }, 
-         NumberOfAttacks = 2, 
-         Weight = 0, 
-         Height = 0, 
-         Race = "Gran", 
-         DefaultPosition = "standing", 
-         LongDescr = "A black cat has crossed your path with deadly intent.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "With a furry black coat, and big yellow eyes, this cat gracefully walks\
-across your path, bringing you several years of bad luck.  Its tail moves\
-slowly to tell you that it is laughing at your misfortune.\
-", 
-      }, 
-      [15] = 
-      {
-         Level = 1, 
-         HitChance = 
+         HitRoll = 0, 
+         AffectedBy = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            [3] = "DetectInvis", 
          }, 
+         Name = "black cat", 
+         Race = "Gran", 
+         Height = 0, 
+         NumberOfAttacks = 2, 
          Languages = 
          {
             Speaks = 
             {
                [1] = "shyriiwook", 
-               [3] = "rodese", 
-               [4] = "huttese", 
                [0] = "basic", 
-               [17] = "jawaese", 
-               [27] = "binary", 
-               [11] = "barabel", 
-               [20] = "verpine", 
-               [14] = "gamorrese", 
+               [18] = "_clan", 
+               [5] = "mon calamarian", 
                [6] = "shistavanen", 
-               [15] = "togorian", 
+               [8] = "ithorese", 
+               [10] = "devaronese", 
+               [22] = "dosh", 
+               [21] = "defel", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [16] = "kubazian", 
             }, 
             Speaking = 
             {
                [1] = "shyriiwook", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [17] = "jawaese", 
-               [27] = "binary", 
-               [11] = "barabel", 
-               [20] = "verpine", 
-               [14] = "gamorrese", 
+               [16] = "kubazian", 
+               [18] = "_clan", 
+               [5] = "mon calamarian", 
                [6] = "shistavanen", 
-               [15] = "togorian", 
+               [8] = "ithorese", 
+               [10] = "devaronese", 
+               [22] = "dosh", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [21] = "defel", 
             }, 
          }, 
-         AffectedBy = 
-         {
-            [19] = "Flying", 
-         }, 
+         LongDescr = "A black cat has crossed your path with deadly intent.\
+", 
+      }, 
+      [15] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 15, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "dove", 
+         DamRoll = 0, 
+         Description = "With feathers the colour of soft grey and soft loving black eyes, this small\
+delicate creature sings you a tune full of romance.  The tune it sings comes\
+from the small breast that rises and falls with every chorus it sings.  You\
+are at peace as you listen to this lovable creature.\
+", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
-         ShortDescr = "dove", 
          Stats = 
          {
-            Force = 0, 
             Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
             Intelligence = 0, 
-            Dexterity = 0, 
+            Luck = 0, 
+            Force = 0, 
             Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
             Constitution = 0, 
          }, 
-         HitRoll = 0, 
          Position = "standing", 
-         Vnum = 15, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "dove", 
-         ArmorClass = 0, 
          AttackFlags = 
          {
             [1] = "claws", 
@@ -1425,38 +1347,110 @@ slowly to tell you that it is laughing at your misfortune.\
             DamNoDice = 0, 
             DamPlus = 0, 
          }, 
-         NumberOfAttacks = 1, 
-         Weight = 0, 
-         Height = 0, 
+         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [19] = "Flying", 
+         }, 
+         Name = "dove", 
          Race = "_78", 
-         DefaultPosition = "standing", 
+         Height = 0, 
+         NumberOfAttacks = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [0] = "basic", 
+               [17] = "jawaese", 
+               [27] = "binary", 
+               [11] = "barabel", 
+               [20] = "verpine", 
+               [14] = "gamorrese", 
+               [6] = "shistavanen", 
+               [15] = "togorian", 
+            }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [17] = "jawaese", 
+               [27] = "binary", 
+               [11] = "barabel", 
+               [20] = "verpine", 
+               [14] = "gamorrese", 
+               [6] = "shistavanen", 
+               [15] = "togorian", 
+            }, 
+         }, 
          LongDescr = "A beautiful dove sings a melancholy melody from its nest.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "With feathers the colour of soft grey and soft loving black eyes, this small\
-delicate creature sings you a tune full of romance.  The tune it sings comes\
-from the small breast that rises and falls with every chorus it sings.  You\
-are at peace as you listen to this lovable creature.\
 ", 
       }, 
       [16] = 
       {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         AffectedBy = 
-         {
-            [31] = "AquaBreath", 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 16, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "fish", 
+         DamRoll = 0, 
+         Description = "With fins, teeth and gills, this slippery little thing is hard to catch.\
+It swims with a speed no beast, human or animal can compete with.  It's\
+tiny eyes, move with every breath.  It blows several large bubbles as it\
+quickly swims past you.\
+", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [31] = "AquaBreath", 
+         }, 
+         Name = "fish", 
+         Race = "_81", 
+         Height = 0, 
+         NumberOfAttacks = 1, 
          Languages = 
          {
             Speaks = 
@@ -1491,63 +1485,13 @@ are at peace as you listen to this lovable creature.\
                [27] = "binary", 
             }, 
          }, 
-         ShortDescr = "fish", 
-         HitRoll = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Position = "standing", 
-         Vnum = 16, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "fish", 
-         ArmorClass = 0, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         NumberOfAttacks = 1, 
-         Weight = 0, 
-         Height = 0, 
-         Race = "_81", 
-         DefaultPosition = "standing", 
          LongDescr = "A fish blows large bubbles as it quickly swims past you.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "With fins, teeth and gills, this slippery little thing is hard to catch.\
-It swims with a speed no beast, human or animal can compete with.  It's\
-tiny eyes, move with every breath.  It blows several large bubbles as it\
-quickly swims past you.\
 ", 
       }, 
       [20] = 
       {
-         Level = 10, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-            HitNoDice = 2, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
@@ -1555,11 +1499,55 @@ quickly swims past you.\
             [30] = "Prototype", 
             [15] = "Guardian", 
          }, 
+         ArmorClass = 75, 
+         Vnum = 20, 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Level = 10, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a stormtrooper", 
+         DamRoll = 2, 
          SpecFuns = 
          {
             [0] = "spec_stormtrooper", 
          }, 
-         ShortDescr = "a stormtrooper", 
+         Race = "Human", 
+         Position = "standing", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 1, 
+            DamPlus = 2, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         HitRoll = 2, 
+         Name = "imperial trooper stormtrooper", 
+         Description = "", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -1571,68 +1559,68 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 2, 
-         Position = "standing", 
-         Vnum = 20, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Name = "imperial trooper stormtrooper", 
-         ArmorClass = 75, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-            DamPlus = 2, 
-         }, 
-         HitRoll = 2, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
          LongDescr = "An imperial stormtrooper stands at attention here.\
 ", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
       }, 
       [21] = 
       {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 21, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "an imperial guard", 
+         DamRoll = 0, 
          SpecFuns = 
          {
             [0] = "spec_clan_guard", 
          }, 
-         ShortDescr = "an imperial guard", 
+         Race = "Human", 
+         Position = "standing", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamNoDice = 1, 
+            DamPlus = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         HitRoll = 0, 
+         Name = "imperial guard stormtrooper", 
+         Description = "", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -1644,68 +1632,68 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 21, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Name = "imperial guard stormtrooper", 
-         ArmorClass = 0, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamNoDice = 1, 
-            DamPlus = 0, 
-         }, 
-         HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
          LongDescr = "An imperial guard stands at attention.\
 ", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
       }, 
       [22] = 
       {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 22, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a Rebel Alliance guard", 
+         DamRoll = 0, 
          SpecFuns = 
          {
             [0] = "spec_clan_guard", 
          }, 
-         ShortDescr = "a Rebel Alliance guard", 
+         Race = "Human", 
+         Position = "standing", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 10, 
+            DamNoDice = 1, 
+            DamPlus = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
+         HitRoll = 0, 
+         Name = "Rebel Alliance guard", 
+         Description = "", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -1717,103 +1705,45 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 22, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Name = "Rebel Alliance guard", 
-         ArmorClass = 0, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 10, 
-            DamNoDice = 1, 
-            DamPlus = 0, 
-         }, 
-         HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
          LongDescr = "A Rebel Alliance guard stands at attention.\
 ", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
       }, 
       [23] = 
       {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
             [15] = "Guardian", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 23, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a rebel alliance trooper", 
+         DamRoll = 0, 
          SpecFuns = 
          {
             [0] = "spec_rebel_trooper", 
          }, 
-         ShortDescr = "a rebel alliance trooper", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
+         Race = "Human", 
          Position = "standing", 
-         Vnum = 23, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Name = "Rebel Alliance Trooper soldier", 
-         ArmorClass = 0, 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Damage = 
          {
@@ -1821,26 +1751,22 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
-         HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
-         LongDescr = "A rebel alliance trooper is ready for battle.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
-      }, 
-      [24] = 
-      {
-         Level = 1, 
-         HitChance = 
+         Stats = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
          }, 
+         HitRoll = 0, 
+         Name = "Rebel Alliance Trooper soldier", 
+         Description = "", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -1852,45 +1778,56 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
+         LongDescr = "A rebel alliance trooper is ready for battle.\
+", 
+      }, 
+      [24] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
             [15] = "Guardian", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 24, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a mercenary", 
+         DamRoll = 0, 
+         Race = "Human", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
-         ShortDescr = "a mercenary", 
          Stats = 
          {
-            Force = 0, 
             Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
             Intelligence = 0, 
-            Dexterity = 0, 
+            Luck = 0, 
+            Force = 0, 
             Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
             Constitution = 0, 
          }, 
+         Position = "standing", 
          DefenseFlags = 
          {
             [1] = "dodge", 
-         }, 
-         Position = "standing", 
-         Vnum = 24, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "A mercenary", 
-         ArmorClass = 0, 
-         AttackFlags = 
-         {
-            [5] = "kick", 
          }, 
          Damage = 
          {
@@ -1898,72 +1835,65 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
+         AttackFlags = 
+         {
+            [5] = "kick", 
+         }, 
          HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 1, 
+         Name = "A mercenary", 
+         Description = "", 
          Height = 0, 
-         Race = "Human", 
+         NumberOfAttacks = 1, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
          LongDescr = "A mercenary stands here ready for battle.\
 ", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
       }, 
       [25] = 
       {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 25, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a guard", 
+         DamRoll = 0, 
          SpecFuns = 
          {
             [0] = "spec_clan_guard", 
          }, 
-         ShortDescr = "a guard", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         DamRoll = 0, 
+         Race = "Human", 
          Position = "standing", 
-         Vnum = 25, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Name = "bouncer guard thug", 
-         ArmorClass = 0, 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Damage = 
          {
@@ -1971,30 +1901,22 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
          HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
-         LongDescr = "An alert guard stands at attention.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
+         Name = "bouncer guard thug", 
          Description = "", 
-      }, 
-      [26] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -2006,46 +1928,61 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
+         LongDescr = "An alert guard stands at attention.\
+", 
+      }, 
+      [26] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 26, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "an imperial guard", 
+         DamRoll = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         Description = "", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
-            Force = 0, 
             Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
             Intelligence = 0, 
-            Dexterity = 0, 
+            Luck = 0, 
+            Force = 0, 
             Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
             Constitution = 0, 
          }, 
-         ShortDescr = "an imperial guard", 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         HitRoll = 0, 
          Position = "standing", 
-         Vnum = 26, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "Imperial Elite Guard", 
-         ArmorClass = 0, 
          AttackFlags = 
          {
             [4] = "punch", 
@@ -2057,36 +1994,15 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
-         NumberOfAttacks = 3, 
-         Weight = 0, 
-         Height = 0, 
+         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Name = "Imperial Elite Guard", 
          Race = "Human", 
-         DefaultPosition = "standing", 
-         LongDescr = "An elite imperial guard stands at rigid attention.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
-      }, 
-      [27] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
-         ShortDescr = "an imperial guard", 
+         Height = 0, 
+         NumberOfAttacks = 3, 
          Languages = 
          {
             Speaks = 
@@ -2098,30 +2014,44 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 27, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
+         LongDescr = "An elite imperial guard stands at rigid attention.\
+", 
+      }, 
+      [27] = 
+      {
          Sex = "undistinguished", 
-         Name = "The Empire", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
          ArmorClass = 0, 
+         Vnum = 27, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "an imperial guard", 
+         DamRoll = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         Race = "Human", 
+         Position = "standing", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Damage = 
          {
@@ -2129,37 +2059,22 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
          HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
-         LongDescr = "An imperial guard stands at attention.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
+         Name = "The Empire", 
          Description = "", 
-      }, 
-      [28] = 
-      {
-         Level = 10, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 100, 
-            HitNoDice = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [15] = "Guardian", 
-         }, 
-         SpecFuns = 
-         {
-            [0] = "spec_stormtrooper", 
-         }, 
-         ShortDescr = "a stormtrooper", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -2171,30 +2086,45 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 28, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
+         LongDescr = "An imperial guard stands at attention.\
+", 
+      }, 
+      [28] = 
+      {
          Sex = "undistinguished", 
-         Name = "an imperial specfor trooper", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [15] = "Guardian", 
+         }, 
          ArmorClass = 75, 
+         Vnum = 28, 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Level = 10, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a stormtrooper", 
+         DamRoll = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_stormtrooper", 
+         }, 
+         Race = "Human", 
+         Position = "standing", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Damage = 
          {
@@ -2202,30 +2132,22 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 2, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
          HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
-         LongDescr = "An imperial special forces trooper stands at rigid attention here.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
+         Name = "an imperial specfor trooper", 
          Description = "", 
-      }, 
-      [29] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -2237,46 +2159,61 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
+         LongDescr = "An imperial special forces trooper stands at rigid attention here.\
+", 
+      }, 
+      [29] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 29, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a Rebel Alliance guard", 
+         DamRoll = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         Description = "", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
-            Force = 0, 
             Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
             Intelligence = 0, 
-            Dexterity = 0, 
+            Luck = 0, 
+            Force = 0, 
             Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
             Constitution = 0, 
          }, 
-         ShortDescr = "a Rebel Alliance guard", 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         HitRoll = 0, 
          Position = "standing", 
-         Vnum = 29, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "rebel elite guard", 
-         ArmorClass = 0, 
          AttackFlags = 
          {
             [4] = "punch", 
@@ -2288,36 +2225,15 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
-         NumberOfAttacks = 3, 
-         Weight = 0, 
-         Height = 0, 
+         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Name = "rebel elite guard", 
          Race = "Human", 
-         DefaultPosition = "standing", 
-         LongDescr = "An elite rebel guard stands at rigid attention.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
-      }, 
-      [30] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
-         ShortDescr = "a Rebel Alliance guard", 
+         Height = 0, 
+         NumberOfAttacks = 3, 
          Languages = 
          {
             Speaks = 
@@ -2329,30 +2245,44 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 30, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
+         LongDescr = "An elite rebel guard stands at rigid attention.\
+", 
+      }, 
+      [30] = 
+      {
          Sex = "undistinguished", 
-         Name = "The Rebel Alliance", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
          ArmorClass = 0, 
+         Vnum = 30, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a Rebel Alliance guard", 
+         DamRoll = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         Race = "Human", 
+         Position = "standing", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Damage = 
          {
@@ -2360,30 +2290,22 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
          HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
-         LongDescr = "A Rebel Alliance guard stands at attention.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
+         Name = "The Rebel Alliance", 
          Description = "", 
-      }, 
-      [31] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         SpecFuns = 
-         {
-            [0] = "spec_rebel_trooper", 
-         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -2395,46 +2317,61 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
+         LongDescr = "A Rebel Alliance guard stands at attention.\
+", 
+      }, 
+      [31] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [0] = "Npc", 
             [15] = "Guardian", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 31, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a rebel alliance trooper", 
+         DamRoll = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_rebel_trooper", 
+         }, 
+         Description = "", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
-            Force = 0, 
             Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
             Intelligence = 0, 
-            Dexterity = 0, 
+            Luck = 0, 
+            Force = 0, 
             Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
             Constitution = 0, 
          }, 
-         ShortDescr = "a rebel alliance trooper", 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         HitRoll = 0, 
          Position = "standing", 
-         Vnum = 31, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "a rebel specfor trooper", 
-         ArmorClass = 0, 
          AttackFlags = 
          {
             [4] = "punch", 
@@ -2446,30 +2383,15 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
-         NumberOfAttacks = 3, 
-         Weight = 0, 
-         Height = 0, 
+         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Name = "a rebel specfor trooper", 
          Race = "Human", 
-         DefaultPosition = "standing", 
-         LongDescr = "A rebel special forces trooper stands at rigid attention here.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
-      }, 
-      [32] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
+         Height = 0, 
+         NumberOfAttacks = 3, 
          Languages = 
          {
             Speaks = 
@@ -2481,46 +2403,61 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-         }, 
-         AffectedBy = 
-         {
-            [15] = "Sneak", 
-         }, 
+         LongDescr = "A rebel special forces trooper stands at rigid attention here.\
+", 
+      }, 
+      [32] = 
+      {
+         Sex = "undistinguished", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         ArmorClass = 0, 
+         Vnum = 32, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a guard", 
+         DamRoll = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         Description = "", 
+         SaveVs = 
+         {
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
          Stats = 
          {
-            Force = 0, 
             Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
             Intelligence = 0, 
-            Dexterity = 0, 
+            Luck = 0, 
+            Force = 0, 
             Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
             Constitution = 0, 
          }, 
-         ShortDescr = "a guard", 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         HitRoll = 0, 
          Position = "standing", 
-         Vnum = 32, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         Name = "a merc elite guard", 
-         ArmorClass = 0, 
          AttackFlags = 
          {
             [4] = "punch", 
@@ -2532,27 +2469,33 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
-         NumberOfAttacks = 3, 
-         Weight = 0, 
-         Height = 0, 
+         HitRoll = 0, 
+         AffectedBy = 
+         {
+            [15] = "Sneak", 
+         }, 
+         Name = "a merc elite guard", 
          Race = "Human", 
-         DefaultPosition = "standing", 
+         Height = 0, 
+         NumberOfAttacks = 3, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
          LongDescr = "An elite guard stands at rigid attention.\
 ", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
       }, 
       [40] = 
       {
-         Level = 105, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 1050, 
-            HitNoDice = 21, 
-         }, 
-         Race = "Human", 
+         Sex = "undistinguished", 
+         Credits = 0, 
          DefaultPosition = "standing", 
          Flags = 
          {
@@ -2562,46 +2505,49 @@ quickly swims past you.\
             [30] = "Prototype", 
             [0] = "Npc", 
          }, 
-         Languages = 
+         ArmorClass = -162, 
+         Vnum = 40, 
+         HitChance = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
+            HitNoDice = 21, 
          }, 
+         Level = 105, 
+         Alignment = 0, 
+         Weight = 0, 
          ShortDescr = "the ship upgrades technician", 
          DamRoll = 21, 
-         Stats = 
+         MudProgs = 
          {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
+            [1] = 
+            {
+               Arguments = "autopilot", 
+               Code = "mpat 5991 autopilot\
+", 
+               MudProgType = "speech_prog", 
+            }, 
          }, 
-         Position = "standing", 
-         Vnum = 40, 
-         Immune = 
-         {
-            [20] = "magic", 
-         }, 
-         Sex = "undistinguished", 
-         Name = "Ship Upgrades Technician", 
-         ArmorClass = -162, 
+         Race = "Human", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
          }, 
          Damage = 
          {
@@ -2609,45 +2555,15 @@ quickly swims past you.\
             DamNoDice = 10, 
             DamPlus = 2, 
          }, 
-         HitRoll = 21, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpat 5991 autopilot\
-", 
-               MudProgType = "speech_prog", 
-               Arguments = "autopilot", 
-            }, 
-         }, 
-         LongDescr = "The ship upgrades technician is here.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
          Description = "", 
-      }, 
-      [33] = 
-      {
-         Level = 1, 
-         HitChance = 
+         HitRoll = 21, 
+         Name = "Ship Upgrades Technician", 
+         Immune = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            [20] = "magic", 
          }, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         SpecFuns = 
-         {
-            [0] = "spec_clan_guard", 
-         }, 
-         ShortDescr = "a guard", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -2659,30 +2575,44 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 33, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
+         LongDescr = "The ship upgrades technician is here.\
+", 
+      }, 
+      [33] = 
+      {
          Sex = "undistinguished", 
-         Name = "bouncer guard thug", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
          ArmorClass = 0, 
+         Vnum = 33, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a guard", 
+         DamRoll = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_clan_guard", 
+         }, 
+         Race = "Human", 
+         Position = "standing", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Damage = 
          {
@@ -2690,34 +2620,22 @@ quickly swims past you.\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
          HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Race = "Human", 
-         LongDescr = "An alert guard stands at attention.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
+         Name = "bouncer guard thug", 
          Description = "", 
-      }, 
-      [50] = 
-      {
-         Level = 105, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitPlus = 5000, 
-            HitNoDice = 21, 
-         }, 
-         Resistant = 
-         {
-            [0] = "fire", 
-            [20] = "magic", 
-            [2] = "electricity", 
-            [3] = "energy", 
-         }, 
-         DefaultPosition = "standing", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -2729,12 +2647,14 @@ quickly swims past you.\
                [0] = "basic", 
             }, 
          }, 
-         HitRoll = 21, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-            [3] = "DetectInvis", 
-         }, 
+         LongDescr = "An alert guard stands at attention.\
+", 
+      }, 
+      [50] = 
+      {
+         Sex = "male", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -2744,70 +2664,44 @@ quickly swims past you.\
             [30] = "Prototype", 
             [0] = "Npc", 
          }, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
-         ShortDescr = "Jedi Master Yoda", 
-         Immune = 
-         {
-            [20] = "magic", 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-            [2] = "_02", 
-            [0] = "parry", 
-            [11] = "_11", 
-            [13] = "_13", 
-            [19] = "disarm", 
-            [8] = "_08", 
-         }, 
-         Position = "standing", 
-         Vnum = 50, 
-         DamRoll = 21, 
-         Sex = "male", 
-         Name = "Master Yoda", 
          ArmorClass = -162, 
-         SaveVs = 
+         Vnum = 50, 
+         HitChance = 
          {
-            Breath = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
+            HitPlus = 5000, 
+            HitSizeDice = 10, 
+            HitNoDice = 21, 
          }, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 2, 
-         }, 
-         NumberOfAttacks = 0, 
+         Level = 105, 
+         Alignment = 1000, 
          Weight = 0, 
-         Height = 0, 
-         Race = "Human", 
+         ShortDescr = "Jedi Master Yoda", 
+         DamRoll = 21, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "give", 
+               Code = "chuckle \
+' yes i did give a Corusca Crystal to a young apprentice of mine\
+' he would have grown strong in the force, if his father would\
+' not have died , and him have to return to his fathers shop.\
+", 
+               MudProgType = "speech_prog", 
+            }, 
+            [2] = 
+            {
+               Arguments = "shop", 
                Code = "grin $n\
 ' yes the jedi shop in the space mall , he is the owner of it now.\
 ' if you seek the corusca crystal he may still have it \
 ' i don't believe he had crafted his lightsaber before he left.\
 ", 
                MudProgType = "speech_prog", 
-               Arguments = "shop", 
             }, 
-            [2] = 
+            [3] = 
             {
+               Arguments = "package.", 
                Code = "if ovnuminv(10208) >= 1\
 say Thank you.\
 mpwithdraw 2500\
@@ -2821,56 +2715,76 @@ mpat 10299 drop all\
 mpat 10299 mppurge\
 ", 
                MudProgType = "act_prog", 
-               Arguments = "package.", 
             }, 
-            [3] = 
+            [4] = 
             {
+               Arguments = "corusca", 
                Code = "non $n \
 ' The corusca is on of the best crytals used to make a lightsaber\
 ' and for that reason they are very rare\
 ' I have seen but a few in my day.\
 ", 
                MudProgType = "speech_prog", 
-               Arguments = "corusca", 
-            }, 
-            [4] = 
-            {
-               Code = "chuckle \
-' yes i did give a Corusca Crystal to a young apprentice of mine\
-' he would have grown strong in the force, if his father would\
-' not have died , and him have to return to his fathers shop.\
-", 
-               MudProgType = "speech_prog", 
-               Arguments = "give", 
             }, 
          }, 
-         LongDescr = "Master Yoda is here to train you in the ways of the force.\
-", 
-         Credits = 0, 
-         Alignment = 1000, 
          Description = "", 
-      }, 
-      [98] = 
-      {
-         Level = 1, 
-         HitChance = 
+         SaveVs = 
          {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
+            ParaPetri = 0, 
+            Wand = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
-         SpecFuns = 
+         Stats = 
          {
-            [0] = "spec_janitor", 
-         }, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [30] = "Prototype", 
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
          }, 
          Race = "Human", 
-         ShortDescr = "a janitor", 
+         Resistant = 
+         {
+            [0] = "fire", 
+            [20] = "magic", 
+            [2] = "electricity", 
+            [3] = "energy", 
+         }, 
+         Position = "standing", 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+            [2] = "_02", 
+            [0] = "parry", 
+            [11] = "_11", 
+            [13] = "_13", 
+            [19] = "disarm", 
+            [8] = "_08", 
+         }, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+            DamPlus = 2, 
+         }, 
+         HitRoll = 21, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+            [3] = "DetectInvis", 
+         }, 
+         Name = "Master Yoda", 
+         Immune = 
+         {
+            [20] = "magic", 
+         }, 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -2882,30 +2796,55 @@ mpat 10299 mppurge\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 98, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
+         LongDescr = "Master Yoda is here to train you in the ways of the force.\
+", 
+      }, 
+      [98] = 
+      {
          Sex = "undistinguished", 
-         Name = "janitor", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
          ArmorClass = 0, 
+         Vnum = 98, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a janitor", 
+         DamRoll = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_janitor", 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpat 32179 drop all\
+", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         Race = "Human", 
+         Position = "standing", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Damage = 
          {
@@ -2913,43 +2852,22 @@ mpat 10299 mppurge\
             DamNoDice = 0, 
             DamPlus = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
          HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpat 32179 drop all\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         LongDescr = "A janitor cleans up the ship here.\
-", 
-         Credits = 0, 
-         Alignment = 0, 
+         Name = "janitor", 
          Description = "", 
-      }, 
-      [34] = 
-      {
-         Level = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-            HitNoDice = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [30] = "Prototype", 
-            [15] = "Guardian", 
-         }, 
-         ShortDescr = "a mercenary", 
+         Height = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaks = 
@@ -2961,30 +2879,42 @@ mpat 10299 mppurge\
                [0] = "basic", 
             }, 
          }, 
-         DamRoll = 0, 
-         Position = "standing", 
-         Vnum = 34, 
-         Stats = 
-         {
-            Force = 0, 
-            Wisdom = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-         }, 
+         LongDescr = "A janitor cleans up the ship here.\
+", 
+      }, 
+      [34] = 
+      {
          Sex = "undistinguished", 
-         Name = "A mercenary", 
+         Credits = 0, 
+         DefaultPosition = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [30] = "Prototype", 
+            [15] = "Guardian", 
+         }, 
          ArmorClass = 0, 
+         Vnum = 34, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Level = 1, 
+         Alignment = 0, 
+         Weight = 0, 
+         ShortDescr = "a mercenary", 
+         DamRoll = 0, 
+         Race = "Human", 
+         Position = "standing", 
          SaveVs = 
          {
-            Breath = 0, 
             ParaPetri = 0, 
-            PoisonDeath = 0, 
             Wand = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
+            PoisonDeath = 0, 
          }, 
          Damage = 
          {
@@ -2992,30 +2922,60 @@ mpat 10299 mppurge\
             DamNoDice = 1, 
             DamPlus = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Strength = 0, 
+            Constitution = 0, 
+         }, 
          HitRoll = 0, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
+         Name = "A mercenary", 
+         Description = "", 
          Height = 0, 
-         Race = "Human", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
          LongDescr = "An ex-military special forces trooper stands here, looking relaxed.\
 ", 
-         Credits = 0, 
-         Alignment = 0, 
-         Description = "", 
       }, 
    }, 
+   Flags = 
+   {
+      [1] = "_01", 
+   }, 
+   Author = "RoD/Durga", 
+   HighEconomy = 0, 
    Objects = 
    {
       [2] = 
       {
-         Vnum = 2, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "credit credits", 
-         Cost = 0, 
          ItemType = "money", 
+         ActionDescription = "", 
+         Vnum = 2, 
+         Description = "One miserable credit.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "credit credits", 
          Weight = 1, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "a credit", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3025,53 +2985,25 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 1, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "a credit", 
-         Layers = 0, 
-         WearFlags = 
+         ExtraDescriptions = 
          {
-            [0] = "Take", 
          }, 
-         Description = "One miserable credit.", 
       }, 
       [3] = 
       {
-         Vnum = 3, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "credits credit", 
-         Cost = 0, 
          ItemType = "money", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
          ActionDescription = "", 
-         ShortDescr = "%d credits", 
+         Vnum = 3, 
+         Description = "Some credits.", 
          Layers = 0, 
+         Cost = 0, 
+         Name = "credits credit", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Description = "Some credits.", 
-      }, 
-      [4] = 
-      {
-         Vnum = 4, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "deed", 
-         Cost = 0, 
-         ItemType = "paper", 
-         Weight = 1, 
+         ShortDescr = "%d credits", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3081,44 +3013,26 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [4] = 
+      {
+         ItemType = "paper", 
          ActionDescription = "", 
-         ShortDescr = "A deed", 
+         Vnum = 4, 
+         Description = "A deed for a shop", 
          Layers = 0, 
+         Cost = 0, 
+         Name = "deed", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Description = "A deed for a shop", 
-      }, 
-      [5] = 
-      {
-         Vnum = 5, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "an amulet", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 4, 
-               Location = 48, 
-            }, 
-            [2] = 
-            {
-               Modifier = 3, 
-               Location = 2, 
-            }, 
-            [3] = 
-            {
-               Modifier = 11, 
-               Location = 48, 
-            }, 
-         }, 
-         Cost = 100000, 
-         Weight = 1, 
-         ItemType = "armor", 
+         ShortDescr = "A deed", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3128,6 +3042,13 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [5] = 
+      {
+         ItemType = "armor", 
          Flags = 
          {
             [8] = "Bless", 
@@ -3139,33 +3060,36 @@ mpat 10299 mppurge\
             [15] = "_15", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "a metal amulet", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 48, 
+               Modifier = 4, 
+            }, 
+            [2] = 
+            {
+               Location = 2, 
+               Modifier = 3, 
+            }, 
+            [3] = 
+            {
+               Location = 48, 
+               Modifier = 11, 
+            }, 
+         }, 
+         Vnum = 5, 
+         Description = "A thick heavy metallic amulet with arcane writing is here.", 
          Layers = 0, 
+         Cost = 100000, 
+         Name = "an amulet", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [2] = "Neck", 
          }, 
-         Description = "A thick heavy metallic amulet with arcane writing is here.", 
-      }, 
-      [6] = 
-      {
-         Vnum = 6, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "charm", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 2097152, 
-               Location = 27, 
-            }, 
-         }, 
-         Cost = 0, 
-         Weight = 1, 
-         ItemType = "armor", 
+         ShortDescr = "a metal amulet", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3173,8 +3097,15 @@ mpat 10299 mppurge\
             [3] = 0, 
             [4] = 0, 
             [5] = 0, 
-            [0] = 10, 
+            [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [6] = 
+      {
+         ItemType = "armor", 
          Flags = 
          {
             [23] = "_23", 
@@ -3182,138 +3113,27 @@ mpat 10299 mppurge\
             [7] = "NoDrop", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "A small charm", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 27, 
+               Modifier = 2097152, 
+            }, 
+         }, 
+         Vnum = 6, 
+         Description = "A small shimmering charm hangs from a necklace is here.", 
          Layers = 0, 
+         Cost = 0, 
+         Name = "charm", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [2] = "Neck", 
             [14] = "Hold", 
          }, 
-         Description = "A small shimmering charm hangs from a necklace is here.", 
-      }, 
-      [7] = 
-      {
-         Vnum = 7, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Tipper Gore", 
-         Cost = 0, 
-         ItemType = "fountain", 
-         Weight = 1, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "Tipper Gore!", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Layers = 0, 
-         Description = "Tipper Gore lays here in a heap, attacked by vicous republicans", 
-      }, 
-      [9] = 
-      {
-         Vnum = 9, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "corpse remains pieces parts", 
-         Cost = 0, 
-         ItemType = "droid_corpse", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 1, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "the broken parts of %s", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "The shattered remains of %s are here.", 
-      }, 
-      [10] = 
-      {
-         Vnum = 10, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "corpse", 
-         Cost = 0, 
-         ItemType = "corpse", 
-         Weight = 100, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 1, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "the corpse of %s", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "The corpse of %s lies here.", 
-      }, 
-      [11] = 
-      {
-         Vnum = 11, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "corpse", 
-         Cost = 0, 
-         ItemType = "corpse_pc", 
-         Weight = 100, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 1, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "the corpse of %s", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "The corpse of %s is lying here.", 
-      }, 
-      [12] = 
-      {
-         Vnum = 12, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "head", 
-         Cost = 0, 
-         ItemType = "food", 
-         Weight = 5, 
+         ShortDescr = "A small charm", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3323,25 +3143,165 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 10, 
          }, 
-         ActionDescription = "%s gobble$q down $p with gusto... disgusting!", 
-         ShortDescr = "the head of %s", 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [7] = 
+      {
+         ItemType = "fountain", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ActionDescription = "", 
+         Vnum = 7, 
+         Description = "Tipper Gore lays here in a heap, attacked by vicous republicans", 
          Layers = 0, 
+         Name = "Tipper Gore", 
+         Weight = 1, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ShortDescr = "Tipper Gore!", 
+         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [9] = 
+      {
+         ItemType = "droid_corpse", 
+         ActionDescription = "", 
+         Vnum = 9, 
+         Description = "The shattered remains of %s are here.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "corpse remains pieces parts", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Description = "The severed head of %s is lying here.", 
-      }, 
-      [13] = 
-      {
-         Vnum = 13, 
+         ShortDescr = "the broken parts of %s", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 1, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "heart", 
+      }, 
+      [10] = 
+      {
+         ItemType = "corpse", 
+         ActionDescription = "", 
+         Vnum = 10, 
+         Description = "The corpse of %s lies here.", 
+         Layers = 0, 
          Cost = 0, 
+         Name = "corpse", 
+         Weight = 100, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "the corpse of %s", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 1, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [11] = 
+      {
+         ItemType = "corpse_pc", 
+         ActionDescription = "", 
+         Vnum = 11, 
+         Description = "The corpse of %s is lying here.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "corpse", 
+         Weight = 100, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "the corpse of %s", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 1, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [12] = 
+      {
          ItemType = "food", 
+         ActionDescription = "%s gobble$q down $p with gusto... disgusting!", 
+         Vnum = 12, 
+         Description = "The severed head of %s is lying here.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "head", 
+         Weight = 5, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "the head of %s", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [13] = 
+      {
+         ItemType = "food", 
+         ActionDescription = "%s savagely devour$q $p!", 
+         Vnum = 13, 
+         Description = "The torn-out heart of %s is lying here.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "heart", 
          Weight = 2, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "the heart of %s", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3351,25 +3311,25 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 16, 
          }, 
-         ActionDescription = "%s savagely devour$q $p!", 
-         ShortDescr = "the heart of %s", 
-         Layers = 0, 
-         WearFlags = 
+         ExtraDescriptions = 
          {
-            [0] = "Take", 
          }, 
-         Description = "The torn-out heart of %s is lying here.", 
       }, 
       [14] = 
       {
-         Vnum = 14, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "arm", 
-         Cost = 0, 
          ItemType = "food", 
+         ActionDescription = "%s chomp$q on $p.", 
+         Vnum = 14, 
+         Description = "The sliced-off arm of %s is lying here.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "arm", 
          Weight = 5, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "the arm of %s", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3379,25 +3339,25 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 20, 
          }, 
-         ActionDescription = "%s chomp$q on $p.", 
-         ShortDescr = "the arm of %s", 
-         Layers = 0, 
-         WearFlags = 
+         ExtraDescriptions = 
          {
-            [0] = "Take", 
          }, 
-         Description = "The sliced-off arm of %s is lying here.", 
       }, 
       [15] = 
       {
-         Vnum = 15, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "leg", 
-         Cost = 0, 
          ItemType = "food", 
+         ActionDescription = "%s chomp$q on $p.", 
+         Vnum = 15, 
+         Description = "The sliced-off leg of %s is lying here.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "leg", 
          Weight = 5, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "the leg of %s", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3407,27 +3367,19 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 20, 
          }, 
-         ActionDescription = "%s chomp$q on $p.", 
-         ShortDescr = "the leg of %s", 
-         Layers = 0, 
-         WearFlags = 
+         ExtraDescriptions = 
          {
-            [0] = "Take", 
          }, 
-         Description = "The sliced-off leg of %s is lying here.", 
       }, 
       [16] = 
       {
-         Vnum = 16, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "guts", 
          ItemType = "trash", 
-         Cost = 0, 
-         Weight = 1, 
          ActionDescription = "", 
-         ShortDescr = "the spilled guts of %s", 
+         Vnum = 16, 
+         Description = "The spilled guts of %s makes you lose your appetite.", 
+         Layers = 0, 
+         Name = "guts", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3437,21 +3389,21 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 0, 
-         Description = "The spilled guts of %s makes you lose your appetite.", 
+         ShortDescr = "the spilled guts of %s", 
+         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
       [17] = 
       {
-         Vnum = 17, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "blood", 
          ItemType = "_blood", 
-         Cost = 0, 
-         Weight = 1, 
          ActionDescription = "", 
-         ShortDescr = "the spilled blood", 
+         Vnum = 17, 
+         Description = "A pool of spilled blood lies here.", 
+         Layers = 0, 
+         Name = "blood", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3461,21 +3413,21 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 0, 
-         Description = "A pool of spilled blood lies here.", 
+         ShortDescr = "the spilled blood", 
+         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
       [18] = 
       {
-         Vnum = 18, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "bloodstain", 
          ItemType = "_bloodstain", 
-         Cost = 0, 
-         Weight = 1, 
          ActionDescription = "", 
-         ShortDescr = "the bloodstain", 
+         Vnum = 18, 
+         Description = "Blood stains the ground.", 
+         Layers = 0, 
+         Name = "bloodstain", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3485,47 +3437,55 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 5, 
          }, 
-         Layers = 0, 
-         Description = "Blood stains the ground.", 
+         ShortDescr = "the bloodstain", 
+         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
       [19] = 
       {
-         Vnum = 19, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "scraps", 
-         Cost = 0, 
          ItemType = "scraps", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 1, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 5, 
-         }, 
          ActionDescription = "", 
-         ShortDescr = "the scraps of %s", 
+         Vnum = 19, 
+         Description = "The scraps of %s lie here.", 
          Layers = 0, 
+         Cost = 0, 
+         Name = "scraps", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Description = "The scraps of %s lie here.", 
-      }, 
-      [20] = 
-      {
-         Vnum = 20, 
+         ShortDescr = "the scraps of %s", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 1, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 5, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "fruit roll-up", 
-         Cost = 10, 
+      }, 
+      [20] = 
+      {
          ItemType = "food", 
+         ActionDescription = "%s enjoy$q $p.", 
+         Vnum = 20, 
+         Description = "A fruit roll-up lies here", 
+         Layers = 0, 
+         Cost = 10, 
+         Name = "fruit roll-up", 
          Weight = 1, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "a fruit roll-up", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3535,25 +3495,25 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 5, 
          }, 
-         ActionDescription = "%s enjoy$q $p.", 
-         ShortDescr = "a fruit roll-up", 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [21] = 
+      {
+         ItemType = "light", 
+         ActionDescription = "", 
+         Vnum = 21, 
+         Description = "A bright ball of light shimmers in the air.", 
          Layers = 0, 
+         Cost = 0, 
+         Name = "ball light", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Description = "A fruit roll-up lies here", 
-      }, 
-      [21] = 
-      {
-         Vnum = 21, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "ball light", 
-         Cost = 0, 
-         ItemType = "light", 
-         Weight = 1, 
+         ShortDescr = "a bright ball of light", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3563,31 +3523,23 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "a bright ball of light", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "A bright ball of light shimmers in the air.", 
-      }, 
-      [22] = 
-      {
-         Vnum = 22, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "spring", 
-         Cost = 10, 
+      }, 
+      [22] = 
+      {
          ItemType = "fountain", 
-         Weight = 10, 
          Flags = 
          {
             [6] = "Magic", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "a magical spring", 
+         Vnum = 22, 
+         Description = "A magical spring flows here.", 
+         Layers = 0, 
+         Name = "spring", 
+         Weight = 10, 
          ObjectValues = 
          {
             [1] = 100000, 
@@ -3597,27 +3549,36 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 100000, 
          }, 
-         Layers = 0, 
-         Description = "A magical spring flows here.", 
-      }, 
-      [23] = 
-      {
-         Vnum = 23, 
+         ShortDescr = "a magical spring", 
+         Cost = 10, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "the skin of %s", 
+      }, 
+      [23] = 
+      {
+         ItemType = "fabric", 
+         ActionDescription = "", 
          Affects = 
          {
             [1] = 
             {
-               Modifier = 2, 
                Location = 25, 
+               Modifier = 2, 
             }, 
          }, 
+         Vnum = 23, 
+         Description = "The skin of %s", 
+         Layers = 0, 
          Cost = 0, 
-         ItemType = "fabric", 
+         Name = "the skin of %s", 
          Weight = 1, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
+         ShortDescr = "the skin of %s", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3627,26 +3588,29 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 5, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "the skin of %s", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-         }, 
-         Description = "The skin of %s", 
-      }, 
-      [24] = 
-      {
-         Vnum = 24, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "meat fresh slice", 
-         Cost = 0, 
-         Weight = 2, 
+      }, 
+      [24] = 
+      {
          ItemType = "food", 
+         Flags = 
+         {
+            [18] = "SmallSize", 
+         }, 
+         ActionDescription = "", 
+         Vnum = 24, 
+         Description = "A slice of raw meat from %s lies lies on the ground.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "meat fresh slice", 
+         Weight = 2, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "a slice of raw meat from %s", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3656,29 +3620,26 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 15, 
          }, 
-         Flags = 
-         {
-            [18] = "SmallSize", 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a slice of raw meat from %s", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "A slice of raw meat from %s lies lies on the ground.", 
-      }, 
-      [25] = 
-      {
-         Vnum = 25, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "shopping bag", 
-         Cost = 20, 
+      }, 
+      [25] = 
+      {
          ItemType = "container", 
+         ActionDescription = "", 
+         Vnum = 25, 
+         Description = "A shopping bag lies discarded on the ground nearby.", 
+         Layers = 0, 
+         Cost = 20, 
+         Name = "shopping bag", 
          Weight = 2, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ShortDescr = "a bag", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3688,26 +3649,25 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 50, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "a bag", 
-         Layers = 0, 
-         WearFlags = 
+         ExtraDescriptions = 
          {
-            [0] = "Take", 
-            [14] = "Hold", 
          }, 
-         Description = "A shopping bag lies discarded on the ground nearby.", 
       }, 
       [26] = 
       {
-         Vnum = 26, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "fighter module", 
-         Cost = 0, 
          ItemType = "fightercomp", 
+         ActionDescription = "", 
+         Vnum = 26, 
+         Description = "What looks like a part of a ship lies here.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "fighter module", 
          Weight = 100, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "A ship part for %s", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3717,25 +3677,25 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "A ship part for %s", 
-         Layers = 0, 
-         WearFlags = 
+         ExtraDescriptions = 
          {
-            [0] = "Take", 
          }, 
-         Description = "What looks like a part of a ship lies here.", 
       }, 
       [27] = 
       {
-         Vnum = 27, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "midsize midship module", 
-         Cost = 0, 
          ItemType = "midcomp", 
+         ActionDescription = "", 
+         Vnum = 27, 
+         Description = "What looks like a decent size part for a ship lies here.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "midsize midship module", 
          Weight = 150, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "A midsize ship part for %s", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3745,59 +3705,51 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "A midsize ship part for %s", 
-         Layers = 0, 
-         WearFlags = 
+         ExtraDescriptions = 
          {
-            [0] = "Take", 
          }, 
-         Description = "What looks like a decent size part for a ship lies here.", 
       }, 
       [28] = 
       {
-         Vnum = 28, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "capship capital module", 
-         Cost = 0, 
          ItemType = "capitalcomp", 
-         Weight = 350, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
          ActionDescription = "", 
-         ShortDescr = "A capital-class ship part for %s", 
+         Vnum = 28, 
+         Description = "What looks like a huge ship part lies here.", 
          Layers = 0, 
+         Cost = 0, 
+         Name = "capship capital module", 
+         Weight = 350, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Description = "What looks like a huge ship part lies here.", 
+         ShortDescr = "A capital-class ship part for %s", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
       [30] = 
       {
-         Vnum = 30, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "fire", 
-         Cost = 10, 
          ItemType = "fire", 
-         Weight = 10, 
          Flags = 
          {
             [6] = "Magic", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "a magical fire", 
+         Vnum = 30, 
+         Description = "A magical fire burns brightly.", 
+         Layers = 0, 
+         Name = "fire", 
+         Weight = 10, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3807,21 +3759,21 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A magical fire burns brightly.", 
+         ShortDescr = "a magical fire", 
+         Cost = 10, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
       [31] = 
       {
-         Vnum = 31, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "trap", 
          ItemType = "trap", 
-         Cost = 10, 
-         Weight = 100, 
          ActionDescription = "", 
-         ShortDescr = "a trap", 
+         Vnum = 31, 
+         Description = "You detect a trap.", 
+         Layers = 0, 
+         Name = "trap", 
+         Weight = 100, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3831,25 +3783,25 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "You detect a trap.", 
-      }, 
-      [32] = 
-      {
-         Vnum = 32, 
+         ShortDescr = "a trap", 
+         Cost = 10, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "portal", 
-         Cost = 10, 
+      }, 
+      [32] = 
+      {
          ItemType = "_portal", 
-         Weight = 100, 
          Flags = 
          {
             [6] = "Magic", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "a portal", 
+         Vnum = 32, 
+         Description = "A misty portal beckons you to the unknown.", 
+         Layers = 0, 
+         Name = "portal", 
+         Weight = 100, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3859,48 +3811,57 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A misty portal beckons you to the unknown.", 
-      }, 
-      [33] = 
-      {
-         Vnum = 33, 
+         ShortDescr = "a portal", 
+         Cost = 10, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "black poison powder", 
-         Cost = 48000, 
+      }, 
+      [33] = 
+      {
          ItemType = "trash", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
          ActionDescription = "", 
-         ShortDescr = "black poisoning powder", 
+         Vnum = 33, 
+         Description = "A small amount of black poisoning powder sits in a small container on the ground.", 
          Layers = 0, 
+         Cost = 48000, 
+         Name = "black poison powder", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Description = "A small amount of black poisoning powder sits in a small container on the ground.", 
-      }, 
-      [34] = 
-      {
-         Vnum = 34, 
+         ShortDescr = "black poisoning powder", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "scroll scribing blank", 
-         Cost = 10000, 
+      }, 
+      [34] = 
+      {
          ItemType = "scroll", 
+         ActionDescription = "", 
+         Vnum = 34, 
+         Description = "A blank scroll lays here gathering dust.", 
+         Layers = 0, 
+         Cost = 10000, 
+         Name = "scroll scribing blank", 
          Weight = 2, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ShortDescr = "a blank scroll", 
          ObjectValues = 
          {
             [1] = -1, 
@@ -3910,26 +3871,26 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [35] = 
+      {
+         ItemType = "potion", 
          ActionDescription = "", 
-         ShortDescr = "a blank scroll", 
+         Vnum = 35, 
+         Description = "An empty flask lays here gathering dust.", 
          Layers = 0, 
+         Cost = 15000, 
+         Name = "flask empty", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Description = "A blank scroll lays here gathering dust.", 
-      }, 
-      [35] = 
-      {
-         Vnum = 35, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "flask empty", 
-         Cost = 15000, 
-         ItemType = "potion", 
-         Weight = 1, 
+         ShortDescr = "an empty flask", 
          ObjectValues = 
          {
             [1] = -1, 
@@ -3939,26 +3900,26 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 1, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [36] = 
+      {
+         ItemType = "paper", 
          ActionDescription = "", 
-         ShortDescr = "an empty flask", 
+         Vnum = 36, 
+         Description = "A message disk has been discarded here.", 
          Layers = 0, 
+         Cost = 1500, 
+         Name = "parchment paper note data disk message info", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Description = "An empty flask lays here gathering dust.", 
-      }, 
-      [36] = 
-      {
-         Vnum = 36, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "parchment paper note data disk message info", 
-         Cost = 1500, 
-         ItemType = "paper", 
-         Weight = 1, 
+         ShortDescr = "a message disk", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -3968,26 +3929,25 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "a message disk", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         Description = "A message disk has been discarded here.", 
-      }, 
-      [37] = 
-      {
-         Vnum = 37, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "quill pen datapad recorder message disk", 
-         Cost = 2000, 
+      }, 
+      [37] = 
+      {
          ItemType = "pen", 
+         ActionDescription = "", 
+         Vnum = 37, 
+         Description = "A datapad used for recording message disks is here.", 
+         Layers = 0, 
+         Cost = 2000, 
+         Name = "quill pen datapad recorder message disk", 
          Weight = 2, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "a datapad", 
          ObjectValues = 
          {
             [1] = 15, 
@@ -3997,27 +3957,19 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 15, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "a datapad", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "A datapad used for recording message disks is here.", 
-      }, 
-      [38] = 
-      {
-         Vnum = 38, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "mail terminal", 
+      }, 
+      [38] = 
+      {
          ItemType = "furniture", 
-         Cost = 0, 
-         Weight = 1, 
          ActionDescription = "", 
-         ShortDescr = "a mail terminal", 
+         Vnum = 38, 
+         Description = "A standard galactic-net mail terminal has been installed here.", 
+         Layers = 0, 
+         Name = "mail terminal", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4027,27 +3979,36 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A standard galactic-net mail terminal has been installed here.", 
-      }, 
-      [43] = 
-      {
-         Vnum = 43, 
+         ShortDescr = "a mail terminal", 
+         Cost = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "holy symbol faith", 
+      }, 
+      [43] = 
+      {
+         ItemType = "armor", 
+         ActionDescription = "", 
          Affects = 
          {
             [1] = 
             {
-               Modifier = 2, 
                Location = 4, 
+               Modifier = 2, 
             }, 
          }, 
+         Vnum = 43, 
+         Description = "A holy symbol lies here, shining.", 
+         Layers = 0, 
          Cost = 0, 
-         ItemType = "armor", 
+         Name = "holy symbol faith", 
          Weight = 5, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ShortDescr = "a symbol of faith", 
          ObjectValues = 
          {
             [1] = 5, 
@@ -4057,19 +4018,35 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 5, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [45] = 
+      {
+         ItemType = "grenade", 
          ActionDescription = "", 
-         ShortDescr = "a symbol of faith", 
+         Vnum = 45, 
+         Description = "A grenade .... run!!!!", 
          Layers = 0, 
+         Cost = 1200, 
+         Name = "grenade", 
+         Weight = 1, 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Description = "A holy symbol lies here, shining.", 
-      }, 
-      [45] = 
-      {
-         Vnum = 45, 
+         ShortDescr = "a grenade", 
+         ObjectValues = 
+         {
+            [1] = 200, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 100, 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4080,10 +4057,23 @@ mpat 10299 mppurge\
                Keyword = "grenade", 
             }, 
          }, 
-         Name = "grenade", 
-         Cost = 1200, 
-         ItemType = "grenade", 
+      }, 
+      [46] = 
+      {
+         ItemType = "landmine", 
+         ActionDescription = "", 
+         Vnum = 46, 
+         Description = "Don't step on the landmine.", 
+         Layers = 0, 
+         Cost = 1000, 
+         Name = "landmine mine", 
          Weight = 1, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ShortDescr = "a landmine", 
          ObjectValues = 
          {
             [1] = 200, 
@@ -4093,19 +4083,6 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 100, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "a grenade", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         Description = "A grenade .... run!!!!", 
-      }, 
-      [46] = 
-      {
-         Vnum = 46, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4116,32 +4093,40 @@ mpat 10299 mppurge\
                Keyword = "landmine mine", 
             }, 
          }, 
-         Name = "landmine mine", 
-         Cost = 1000, 
-         ItemType = "landmine", 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 200, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 100, 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a landmine", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         Description = "Don't step on the landmine.", 
       }, 
       [50] = 
       {
+         ItemType = "weapon", 
+         ActionDescription = "", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 18, 
+               Modifier = 2, 
+            }, 
+         }, 
          Vnum = 50, 
+         Description = "A Blastech E-11 blaster rifle was left here.", 
+         Layers = 0, 
+         Cost = 3250, 
+         Name = "blaster Blastech E11 rifle E-11", 
+         Weight = 10, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         ShortDescr = "a Blastech E-11 blaster rifle", 
+         ObjectValues = 
+         {
+            [1] = 8, 
+            [2] = 4, 
+            [3] = 6, 
+            [4] = 2000, 
+            [5] = 2000, 
+            [0] = 0, 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4156,40 +4141,40 @@ mpat 10299 mppurge\
                Keyword = "blaster Blastech E11 rifle E-11", 
             }, 
          }, 
-         Name = "blaster Blastech E11 rifle E-11", 
+      }, 
+      [51] = 
+      {
+         ItemType = "weapon", 
+         ActionDescription = "", 
          Affects = 
          {
             [1] = 
             {
-               Modifier = 2, 
                Location = 18, 
+               Modifier = 1, 
             }, 
          }, 
-         Cost = 3250, 
-         ItemType = "weapon", 
-         Weight = 10, 
-         ObjectValues = 
-         {
-            [1] = 8, 
-            [2] = 4, 
-            [3] = 6, 
-            [4] = 2000, 
-            [5] = 2000, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a Blastech E-11 blaster rifle", 
+         Vnum = 51, 
+         Description = "A Blastech DL-18 lies here on the floor.", 
          Layers = 0, 
+         Cost = 3000, 
+         Name = "blaster blastech dl-18 blaster pistol", 
+         Weight = 6, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Description = "A Blastech E-11 blaster rifle was left here.", 
-      }, 
-      [51] = 
-      {
-         Vnum = 51, 
+         ShortDescr = "a blastech DL-18 blaster pistol", 
+         ObjectValues = 
+         {
+            [1] = 5, 
+            [2] = 6, 
+            [3] = 6, 
+            [4] = 2000, 
+            [5] = 2000, 
+            [0] = 0, 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4200,40 +4185,40 @@ mpat 10299 mppurge\
                Keyword = "blaster blastech dl-18 blaster pistol", 
             }, 
          }, 
-         Name = "blaster blastech dl-18 blaster pistol", 
+      }, 
+      [52] = 
+      {
+         ItemType = "weapon", 
+         ActionDescription = "", 
          Affects = 
          {
             [1] = 
             {
+               Location = 19, 
                Modifier = 1, 
-               Location = 18, 
             }, 
          }, 
-         Cost = 3000, 
-         ItemType = "weapon", 
-         Weight = 6, 
+         Vnum = 52, 
+         Description = "A heavy blaster pistol was dropped here.", 
+         Layers = 0, 
+         Cost = 3600, 
+         Name = "blaster blastech dl-44 heavy blaster pistol", 
+         Weight = 8, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         ShortDescr = "a Blastech DL-44 heavy blaster pistol", 
          ObjectValues = 
          {
-            [1] = 5, 
+            [1] = 6, 
             [2] = 6, 
             [3] = 6, 
             [4] = 2000, 
             [5] = 2000, 
             [0] = 0, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "a blastech DL-18 blaster pistol", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Description = "A Blastech DL-18 lies here on the floor.", 
-      }, 
-      [52] = 
-      {
-         Vnum = 52, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4245,40 +4230,40 @@ mpat 10299 mppurge\
                Keyword = "blaster blastech dl-44 heavy blaster pistol", 
             }, 
          }, 
-         Name = "blaster blastech dl-44 heavy blaster pistol", 
+      }, 
+      [53] = 
+      {
+         ItemType = "weapon", 
+         ActionDescription = "", 
          Affects = 
          {
             [1] = 
             {
-               Modifier = 1, 
-               Location = 19, 
+               Location = 18, 
+               Modifier = 2, 
             }, 
          }, 
-         Cost = 3600, 
-         ItemType = "weapon", 
-         Weight = 8, 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 6, 
-            [3] = 6, 
-            [4] = 2000, 
-            [5] = 2000, 
-            [0] = 0, 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "a Blastech DL-44 heavy blaster pistol", 
+         Vnum = 53, 
+         Description = "An assault rifle was left here.", 
          Layers = 0, 
+         Cost = 3750, 
+         Name = "blaster blastech dlt-19 assault rifle", 
+         Weight = 12, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Description = "A heavy blaster pistol was dropped here.", 
-      }, 
-      [53] = 
-      {
-         Vnum = 53, 
+         ShortDescr = "a Blastech DLT-19 assault rifle", 
+         ObjectValues = 
+         {
+            [1] = 9, 
+            [2] = 4, 
+            [3] = 6, 
+            [4] = 2000, 
+            [5] = 2000, 
+            [0] = 0, 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4290,59 +4275,57 @@ mpat 10299 mppurge\
                Keyword = "blaster blastech dlt-19 assault rifle", 
             }, 
          }, 
-         Name = "blaster blastech dlt-19 assault rifle", 
+      }, 
+      [54] = 
+      {
+         ItemType = "weapon", 
+         ActionDescription = "", 
          Affects = 
          {
             [1] = 
             {
-               Modifier = 2, 
                Location = 18, 
+               Modifier = 3, 
             }, 
          }, 
-         Cost = 3750, 
-         ItemType = "weapon", 
-         Weight = 12, 
+         Vnum = 54, 
+         Description = "A repeating blaster is collecting dust.", 
+         Layers = 0, 
+         Cost = 3900, 
+         Name = "blastech t-21 repeating blaster", 
+         Weight = 10, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         ShortDescr = "a Blastech T-21 repeating blaster", 
          ObjectValues = 
          {
-            [1] = 9, 
+            [1] = 10, 
             [2] = 4, 
             [3] = 6, 
             [4] = 2000, 
             [5] = 2000, 
             [0] = 0, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "a Blastech DLT-19 assault rifle", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Description = "An assault rifle was left here.", 
-      }, 
-      [54] = 
-      {
-         Vnum = 54, 
          ExtraDescriptions = 
          {
             [1] = 
+            {
+               Description = "", 
+               Keyword = "blastech t-21 repeating blaster", 
+            }, 
+            [2] = 
             {
                Description = "A long barreled blaster\
 \13", 
                Keyword = "blastech t-21 repeating blaster", 
             }, 
-            [2] = 
+            [3] = 
             {
                Description = "A long, thick barreled weapon.  The T-21 is commonly seen in use with\
 \13stormtrooper corps and Bounty Hunters. \
-\13", 
-               Keyword = "blastech t-21 repeating blaster", 
-            }, 
-            [3] = 
-            {
-               Description = "A long, thick barreled weapon, the Blastec T-21 is a high powered rifle\
-\13often seen in use by private militias and the stormtrooper corps.\
 \13", 
                Keyword = "blastech t-21 repeating blaster", 
             }, 
@@ -4355,64 +4338,58 @@ mpat 10299 mppurge\
             }, 
             [5] = 
             {
+               Description = "A long, thick barreled weapon, the Blastec T-21 is a high powered rifle\
+\13often seen in use by private militias and the stormtrooper corps.\
+\13", 
+               Keyword = "blastech t-21 repeating blaster", 
+            }, 
+            [6] = 
+            {
                Description = "A long, thick barreled weapon, often seen in use by stormtroopers.\
 \13/\
 \13", 
                Keyword = "blastech t-21 repeating blaster", 
             }, 
-            [6] = 
+            [7] = 
             {
                Description = "A long, thick barreled weapon, often used by\
 \13stormtroopers.\
 \13", 
                Keyword = "blastech t-21 repeating blaster", 
             }, 
-            [7] = 
+            [8] = 
             {
                Description = "A long, thick barreled blaster.\
 \13", 
                Keyword = "blastech t-21 repeating blaster", 
             }, 
-            [8] = 
-            {
-               Description = "", 
-               Keyword = "blastech t-21 repeating blaster", 
-            }, 
          }, 
-         Name = "blastech t-21 repeating blaster", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 3, 
-               Location = 18, 
-            }, 
-         }, 
-         Cost = 3900, 
+      }, 
+      [55] = 
+      {
          ItemType = "weapon", 
-         Weight = 10, 
-         ObjectValues = 
-         {
-            [1] = 10, 
-            [2] = 4, 
-            [3] = 6, 
-            [4] = 2000, 
-            [5] = 2000, 
-            [0] = 0, 
-         }, 
          ActionDescription = "", 
-         ShortDescr = "a Blastech T-21 repeating blaster", 
+         Vnum = 55, 
+         Description = "A Bryar heavy blaster pistol could come in handy.", 
          Layers = 0, 
+         Cost = 3700, 
+         Name = "bryar pistol blaster", 
+         Weight = 8, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Description = "A repeating blaster is collecting dust.", 
-      }, 
-      [55] = 
-      {
-         Vnum = 55, 
+         ShortDescr = "a Bryar heavy blaster pistol", 
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 6, 
+            [3] = 6, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4424,32 +4401,40 @@ mpat 10299 mppurge\
                Keyword = "bryar pistol blaster", 
             }, 
          }, 
-         Name = "bryar pistol blaster", 
-         Cost = 3700, 
+      }, 
+      [56] = 
+      {
          ItemType = "weapon", 
-         Weight = 8, 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 6, 
-            [3] = 6, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
          ActionDescription = "", 
-         ShortDescr = "a Bryar heavy blaster pistol", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 18, 
+               Modifier = -3, 
+            }, 
+         }, 
+         Vnum = 56, 
+         Description = "A cheap holdout blaster is here.", 
          Layers = 0, 
+         Cost = 900, 
+         Name = "blaster Budgetline 3.0/12 holdout", 
+         Weight = 4, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Description = "A Bryar heavy blaster pistol could come in handy.", 
-      }, 
-      [56] = 
-      {
-         Vnum = 56, 
+         ShortDescr = "a Budgetline 3.0/12", 
+         ObjectValues = 
+         {
+            [1] = 7, 
+            [2] = 4, 
+            [3] = 6, 
+            [4] = 300, 
+            [5] = 300, 
+            [0] = 0, 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4460,47 +4445,27 @@ mpat 10299 mppurge\
                Keyword = "blaster Budgetline 3.0/12 holdout", 
             }, 
          }, 
-         Name = "blaster Budgetline 3.0/12 holdout", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -3, 
-               Location = 18, 
-            }, 
-         }, 
-         Cost = 900, 
+      }, 
+      [57] = 
+      {
          ItemType = "weapon", 
-         Weight = 4, 
-         ObjectValues = 
+         Flags = 
          {
-            [1] = 7, 
-            [2] = 4, 
-            [3] = 6, 
-            [4] = 300, 
-            [5] = 300, 
-            [0] = 0, 
+            [13] = "Inventory", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "a Budgetline 3.0/12", 
+         Vnum = 57, 
+         Description = "A Sorosuub holdout blaster was dropped here.", 
          Layers = 0, 
+         Cost = 2800, 
+         Name = "sorosuub q2 holdout blaster", 
+         Weight = 4, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Description = "A cheap holdout blaster is here.", 
-      }, 
-      [57] = 
-      {
-         Vnum = 57, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "sorosuub q2 holdout blaster", 
-         Cost = 2800, 
-         Weight = 4, 
-         ItemType = "weapon", 
+         ShortDescr = "a Sorosuub Q2 holdout blaster", 
          ObjectValues = 
          {
             [1] = 7, 
@@ -4510,30 +4475,30 @@ mpat 10299 mppurge\
             [5] = 1000, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [58] = 
+      {
+         ItemType = "weapon", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "a Sorosuub Q2 holdout blaster", 
+         Vnum = 58, 
+         Description = "A very small blaster was dropped here.", 
          Layers = 0, 
+         Cost = 2000, 
+         Name = "blastech last resort mini-blaster blaster", 
+         Weight = 3, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Description = "A Sorosuub holdout blaster was dropped here.", 
-      }, 
-      [58] = 
-      {
-         Vnum = 58, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "blastech last resort mini-blaster blaster", 
-         Cost = 2000, 
-         Weight = 3, 
-         ItemType = "weapon", 
+         ShortDescr = "a Blastech Last Resort mini-blaster", 
          ObjectValues = 
          {
             [1] = 5, 
@@ -4543,38 +4508,38 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [59] = 
+      {
+         ItemType = "weapon", 
          Flags = 
          {
             [13] = "Inventory", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "a Blastech Last Resort mini-blaster", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 18, 
+               Modifier = -1, 
+            }, 
+         }, 
+         Vnum = 59, 
+         Description = "A sharp looking blade is here.", 
          Layers = 0, 
+         Cost = 350, 
+         Name = "long vibro-blade", 
+         Weight = 4, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Description = "A very small blaster was dropped here.", 
-      }, 
-      [59] = 
-      {
-         Vnum = 59, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "long vibro-blade", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = -1, 
-               Location = 18, 
-            }, 
-         }, 
-         Cost = 350, 
-         Weight = 4, 
-         ItemType = "weapon", 
+         ShortDescr = "a long sharp vibro-blade", 
          ObjectValues = 
          {
             [1] = 5, 
@@ -4584,38 +4549,34 @@ mpat 10299 mppurge\
             [5] = 110, 
             [0] = 12, 
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [13] = "Inventory", 
          }, 
+      }, 
+      [60] = 
+      {
+         ItemType = "weapon", 
          ActionDescription = "", 
-         ShortDescr = "a long sharp vibro-blade", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 18, 
+               Modifier = 1, 
+            }, 
+         }, 
+         Vnum = 60, 
+         Description = "A blaster rifle was dropped here.", 
          Layers = 0, 
+         Cost = 3000, 
+         Name = "Sorosuub One Blaster Rifle", 
+         Weight = 10, 
          WearFlags = 
          {
             [0] = "Take", 
             [13] = "Wield", 
          }, 
-         Description = "A sharp looking blade is here.", 
-      }, 
-      [60] = 
-      {
-         Vnum = 60, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Sorosuub One Blaster Rifle", 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 18, 
-            }, 
-         }, 
-         Cost = 3000, 
-         ItemType = "weapon", 
-         Weight = 10, 
+         ShortDescr = "a Sorosuub One blaster rifle", 
          ObjectValues = 
          {
             [1] = 8, 
@@ -4625,28 +4586,19 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "a Sorosuub One blaster rifle", 
-         Layers = 0, 
-         WearFlags = 
+         ExtraDescriptions = 
          {
-            [0] = "Take", 
-            [13] = "Wield", 
          }, 
-         Description = "A blaster rifle was dropped here.", 
       }, 
       [99] = 
       {
-         Vnum = 99, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "final object", 
          ItemType = "trash", 
-         Cost = 0, 
-         Weight = 1, 
          ActionDescription = "", 
-         ShortDescr = "a newly created final object", 
+         Vnum = 99, 
+         Description = "Some god dropped a newly created final object here.", 
+         Layers = 0, 
+         Name = "final object", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4656,21 +4608,21 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "Some god dropped a newly created final object here.", 
+         ShortDescr = "a newly created final object", 
+         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
       [90] = 
       {
-         Vnum = 90, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Suggestions Board", 
          ItemType = "furniture", 
-         Cost = 0, 
-         Weight = 1, 
          ActionDescription = "", 
-         ShortDescr = "the suggestions board", 
+         Vnum = 90, 
+         Description = "The suggestions board is here.", 
+         Layers = 0, 
+         Name = "Suggestions Board", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4680,28 +4632,20 @@ mpat 10299 mppurge\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "The suggestions board is here.", 
-      }, 
-      [70] = 
-      {
-         Vnum = 70, 
+         ShortDescr = "the suggestions board", 
+         Cost = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "quest weapon double bladed lightsaber saber", 
+      }, 
+      [70] = 
+      {
+         ItemType = "weapon", 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "mpechoat $n &R&WYour lightsaber contracts with a soft &R&whiss&R&W. \
-mpechoaround $n &R&W$n's lightsaber contracts with a soft &R&whiss&R&W. \
-", 
-               MudProgType = "remove_prog", 
                Arguments = "100", 
-            }, 
-            [2] = 
-            {
                Code = "mpechoat $n &R&WBoth ends of your lightsaber ignite with a hiss and glow.\
 mpechoat $n Two &rcrimson&R&W blades leap into life!\
 mpechoaround $n $n's lightsaber ignites with a &rred&R&W glow. \
@@ -4709,25 +4653,47 @@ mpechoaround $n There is a &R&whiss&R&W as its other end extends as well!\
 mpechoaround $n &GA sick feeling develops in your stomach.&R&W \
 ", 
                MudProgType = "wear_prog", 
+            }, 
+            [2] = 
+            {
                Arguments = "100", 
+               Code = "mpechoat $n &R&WYour lightsaber contracts with a soft &R&whiss&R&W. \
+mpechoaround $n &R&W$n's lightsaber contracts with a soft &R&whiss&R&W. \
+", 
+               MudProgType = "remove_prog", 
             }, 
          }, 
+         Flags = 
+         {
+            [0] = "Glow", 
+            [8] = "Bless", 
+         }, 
+         ActionDescription = "", 
          Affects = 
          {
             [1] = 
             {
+               Location = 19, 
                Modifier = 5, 
-               Location = 18, 
             }, 
             [2] = 
             {
+               Location = 18, 
                Modifier = 5, 
-               Location = 19, 
             }, 
          }, 
+         Vnum = 70, 
+         Description = "The hilt of a lightsaber lies on the ground.", 
+         Layers = 0, 
          Cost = 0, 
+         Name = "quest weapon double bladed lightsaber saber", 
          Weight = 8, 
-         ItemType = "weapon", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         ShortDescr = "&R&Wa &rd&Rou&R&Wbl&R&we-b&R&Wl&Rade&rd&R&W lightsaber", 
          ObjectValues = 
          {
             [1] = 53, 
@@ -4737,67 +4703,61 @@ mpechoaround $n &GA sick feeling develops in your stomach.&R&W \
             [5] = 5000, 
             [0] = 1000, 
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [0] = "Glow", 
-            [8] = "Bless", 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "&R&Wa &rd&Rou&R&Wbl&R&we-b&R&Wl&Rade&rd&R&W lightsaber", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Description = "The hilt of a lightsaber lies on the ground.", 
       }, 
       [71] = 
       {
-         Vnum = 71, 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Description = "A Mandalorian helmet.  Worn by the most fierce warriors in the galaxy.\
-\13", 
-               Keyword = "quest armor mandalorian battle helmet", 
-            }, 
-         }, 
-         Name = "quest armor mandalorian battle helmet", 
+         ItemType = "armor", 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "mpechoat $n &YYour vision returns to normal.\
-", 
-               MudProgType = "remove_prog", 
                Arguments = "100", 
-            }, 
-            [2] = 
-            {
                Code = "mpechoat $n &YWithin the battle helmet, your vision is sharpened. \
 ", 
                MudProgType = "wear_prog", 
+            }, 
+            [2] = 
+            {
                Arguments = "100", 
+               Code = "mpechoat $n &YYour vision returns to normal.\
+", 
+               MudProgType = "remove_prog", 
             }, 
          }, 
+         Flags = 
+         {
+            [6] = "Magic", 
+            [8] = "Bless", 
+         }, 
+         ActionDescription = "", 
          Affects = 
          {
             [1] = 
             {
-               Modifier = 8, 
-               Location = 18, 
+               Location = 26, 
+               Modifier = 16777216, 
             }, 
             [2] = 
             {
-               Modifier = 16777216, 
-               Location = 26, 
+               Location = 18, 
+               Modifier = 8, 
             }, 
          }, 
+         Vnum = 71, 
+         Description = "An evil looking battle helmet.", 
+         Layers = 0, 
          Cost = 0, 
+         Name = "quest armor mandalorian battle helmet", 
          Weight = 10, 
-         ItemType = "armor", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [4] = "Head", 
+         }, 
+         ShortDescr = "&R&Wa &gMa&Gnd&zalo&Gri&gan&R&W Ba&R&wtt&R&Wle Helmet", 
          ObjectValues = 
          {
             [1] = 25, 
@@ -4807,48 +4767,40 @@ mpechoaround $n &GA sick feeling develops in your stomach.&R&W \
             [5] = 0, 
             [0] = 25, 
          }, 
-         Flags = 
-         {
-            [6] = "Magic", 
-            [8] = "Bless", 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "&R&Wa &gMa&Gnd&zalo&Gri&gan&R&W Ba&R&wtt&R&Wle Helmet", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [4] = "Head", 
-         }, 
-         Description = "An evil looking battle helmet.", 
-      }, 
-      [72] = 
-      {
-         Vnum = 72, 
          ExtraDescriptions = 
-         {
-         }, 
-         Name = "quest item", 
-         MudProgs = 
          {
             [1] = 
             {
-               Code = "mpoload 10313\
-put ration item\
-", 
-               MudProgType = "use_prog", 
-               Arguments = "100", 
+               Description = "A Mandalorian helmet.  Worn by the most fierce warriors in the galaxy.\
+\13", 
+               Keyword = "quest armor mandalorian battle helmet", 
             }, 
          }, 
-         Cost = 0, 
+      }, 
+      [72] = 
+      {
          ItemType = "container", 
-         Weight = 1, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "Mystery Box 1", 
+         Vnum = 72, 
+         Description = "A dud is here.", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpoload 10313\
+put ration item\
+", 
+               MudProgType = "use_prog", 
+            }, 
+         }, 
+         Layers = 0, 
+         Name = "quest item", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4858,12 +4810,73 @@ put ration item\
             [5] = 0, 
             [0] = 2, 
          }, 
-         Layers = 0, 
-         Description = "A dud is here.", 
+         ShortDescr = "Mystery Box 1", 
+         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
       [73] = 
       {
+         ItemType = "armor", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpechoat $n &CYou feel protected within the energy shield.\
+mpechoaround $n &CA bluish-green energy shield envelops $n.\
+", 
+               MudProgType = "wear_prog", 
+            }, 
+            [2] = 
+            {
+               Arguments = "100", 
+               Code = "mpechoat $n &CYou turn off your energy shield. \
+mpechoaround $n &CThe bluish glow around $n seems to dissolve. \
+", 
+               MudProgType = "remove_prog", 
+            }, 
+         }, 
+         Flags = 
+         {
+            [6] = "Magic", 
+         }, 
+         ActionDescription = "", 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 26, 
+               Modifier = 67108864, 
+            }, 
+            [2] = 
+            {
+               Location = 28, 
+               Modifier = 8192, 
+            }, 
+         }, 
          Vnum = 73, 
+         Description = "A small energy device lies on the floor.", 
+         Layers = 0, 
+         Cost = 0, 
+         Name = "quest shield generator", 
+         Weight = 3, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [9] = "Shield", 
+         }, 
+         ShortDescr = "&R&Wa p&R&wer&R&Wson&R&wal&R&W &cs&Ch&R&Wie&Cl&cd&R&W generator", 
+         ObjectValues = 
+         {
+            [1] = 30, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 30, 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -4874,81 +4887,20 @@ put ration item\
                Keyword = "quest shield", 
             }, 
          }, 
-         Name = "quest shield generator", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpechoat $n &CYou turn off your energy shield. \
-mpechoaround $n &CThe bluish glow around $n seems to dissolve. \
-", 
-               MudProgType = "remove_prog", 
-               Arguments = "100", 
-            }, 
-            [2] = 
-            {
-               Code = "mpechoat $n &CYou feel protected within the energy shield.\
-mpechoaround $n &CA bluish-green energy shield envelops $n.\
-", 
-               MudProgType = "wear_prog", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 8192, 
-               Location = 28, 
-            }, 
-            [2] = 
-            {
-               Modifier = 67108864, 
-               Location = 26, 
-            }, 
-         }, 
-         Cost = 0, 
-         Weight = 3, 
-         ItemType = "armor", 
-         ObjectValues = 
-         {
-            [1] = 30, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 30, 
-         }, 
-         Flags = 
-         {
-            [6] = "Magic", 
-         }, 
-         ActionDescription = "", 
-         ShortDescr = "&R&Wa p&R&wer&R&Wson&R&wal&R&W &cs&Ch&R&Wie&Cl&cd&R&W generator", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [9] = "Shield", 
-         }, 
-         Description = "A small energy device lies on the floor.", 
       }, 
       [74] = 
       {
-         Vnum = 74, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "quest item dinner", 
-         Cost = 0, 
          ItemType = "trash", 
-         Weight = 1, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "&R&WDinner with &zMa&R&wn&R&Wda&R&wl&zor&R&W", 
+         Vnum = 74, 
+         Description = "A dud is here.", 
+         Layers = 0, 
+         Name = "quest item dinner", 
+         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4958,20 +4910,25 @@ mpechoaround $n &CA bluish-green energy shield envelops $n.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Layers = 0, 
-         Description = "A dud is here.", 
-      }, 
-      [75] = 
-      {
-         Vnum = 75, 
+         ShortDescr = "&R&WDinner with &zMa&R&wn&R&Wda&R&wl&zor&R&W", 
+         Cost = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "quest token sapphire", 
+      }, 
+      [75] = 
+      {
+         ItemType = "treasure", 
+         Flags = 
+         {
+            [0] = "Glow", 
+         }, 
+         ActionDescription = "", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if questobj($n) == 75\
 mpechoat $n &YYou have found the sapphire!  Return to your employer!\
 else\
@@ -4980,12 +4937,19 @@ mpforce $n drop sapphire\
 endif\
 ", 
                MudProgType = "get_prog", 
-               Arguments = "100", 
             }, 
          }, 
+         Vnum = 75, 
+         Description = "&R&WA &csp&Ca&R&Wrkl&Ci&cng&R&W gem lies at your feet.", 
+         Layers = 0, 
          Cost = 0, 
+         Name = "quest token sapphire", 
          Weight = 2, 
-         ItemType = "treasure", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "&R&Wa &csp&Ca&R&Wrkl&Ci&cng &bsa&Bp&R&Wph&Bir&be&R&W", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -4995,30 +4959,23 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [76] = 
+      {
+         ItemType = "treasure", 
          Flags = 
          {
             [0] = "Glow", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "&R&Wa &csp&Ca&R&Wrkl&Ci&cng &bsa&Bp&R&Wph&Bir&be&R&W", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "&R&WA &csp&Ca&R&Wrkl&Ci&cng&R&W gem lies at your feet.", 
-      }, 
-      [76] = 
-      {
-         Vnum = 76, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "quest token diamond", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if questobj($n) == 76\
 mpechoat $n &YYou have found the diamond!  Return to your employer! \
 else\
@@ -5027,12 +4984,19 @@ mpforce $n drop diamond\
 endif\
 ", 
                MudProgType = "get_prog", 
-               Arguments = "100", 
             }, 
          }, 
+         Vnum = 76, 
+         Description = "&R&WA gl&R&wit&R&Wte&R&wri&R&Wng gem lies at your feet.", 
+         Layers = 0, 
          Cost = 0, 
+         Name = "quest token diamond", 
          Weight = 1, 
-         ItemType = "treasure", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "&R&Wa gl&R&wit&R&Wte&R&wri&R&Wng d&R&wia&R&Wm&R&wo&R&Wnd", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5042,30 +5006,23 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [77] = 
+      {
+         ItemType = "treasure", 
          Flags = 
          {
             [0] = "Glow", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "&R&Wa gl&R&wit&R&Wte&R&wri&R&Wng d&R&wia&R&Wm&R&wo&R&Wnd", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "&R&WA gl&R&wit&R&Wte&R&wri&R&Wng gem lies at your feet.", 
-      }, 
-      [77] = 
-      {
-         Vnum = 77, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "quest token emerald", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if questobj($n) == 77\
 mpechoat $n &YYou have found the emerald!  Return to your employer! \
 else\
@@ -5074,12 +5031,19 @@ mpforce $n drop emerald\
 endif\
 ", 
                MudProgType = "get_prog", 
-               Arguments = "100", 
             }, 
          }, 
+         Vnum = 77, 
+         Description = "&R&WA &Gsh&gin&Gy&R&W gem lies at your feet.", 
+         Layers = 0, 
          Cost = 0, 
+         Name = "quest token emerald", 
          Weight = 1, 
-         ItemType = "treasure", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "&R&Wa sh&R&win&R&Wy &R&We&Gm&gera&Gl&R&Wd", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5089,30 +5053,23 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [78] = 
+      {
+         ItemType = "treasure", 
          Flags = 
          {
             [0] = "Glow", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "&R&Wa sh&R&win&R&Wy &R&We&Gm&gera&Gl&R&Wd", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "&R&WA &Gsh&gin&Gy&R&W gem lies at your feet.", 
-      }, 
-      [78] = 
-      {
-         Vnum = 78, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "quest token amythest", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if questobj($n) == 78\
 mpechoat $n &YYou have found the amythest!  Return to your employer! \
 else\
@@ -5121,12 +5078,19 @@ mpfroce $n drop amythest\
 endif\
 ", 
                MudProgType = "get_prog", 
-               Arguments = "100", 
             }, 
          }, 
+         Vnum = 78, 
+         Description = "&R&WA &psp&Pa&R&Wrkl&Pi&png&R&W gem lies at your feet.", 
+         Layers = 0, 
          Cost = 0, 
+         Name = "quest token amythest", 
          Weight = 1, 
-         ItemType = "treasure", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "&R&Wa sp&R&war&R&Wkl&R&win&R&Wg &pam&Py&R&Wth&Pe&pst&R&W", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5136,30 +5100,23 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [79] = 
+      {
+         ItemType = "treasure", 
          Flags = 
          {
             [0] = "Glow", 
          }, 
          ActionDescription = "", 
-         ShortDescr = "&R&Wa sp&R&war&R&Wkl&R&win&R&Wg &pam&Py&R&Wth&Pe&pst&R&W", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "&R&WA &psp&Pa&R&Wrkl&Pi&png&R&W gem lies at your feet.", 
-      }, 
-      [79] = 
-      {
-         Vnum = 79, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "quest token ruby", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if questobj($n) == 79\
 mpecohat $n &YYou have found the ruby!  Return to your employer! \
 else\
@@ -5168,12 +5125,19 @@ mpforce $n drop ruby\
 endif\
 ", 
                MudProgType = "get_prog", 
-               Arguments = "100", 
             }, 
          }, 
+         Vnum = 79, 
+         Description = "&R&WA &rb&Rl&Yazi&Rn&rg&R&W gem lies at your feet.", 
+         Layers = 0, 
          Cost = 0, 
+         Name = "quest token ruby", 
          Weight = 1, 
-         ItemType = "treasure", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "&R&Wa &rb&Rl&Yazi&Rn&rg r&Ru&rby&R&W", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5183,37 +5147,40 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [0] = "Glow", 
          }, 
-         ActionDescription = "", 
-         ShortDescr = "&R&Wa &rb&Rl&Yazi&Rn&rg r&Ru&rby&R&W", 
-         Layers = 0, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "&R&WA &rb&Rl&Yazi&Rn&rg&R&W gem lies at your feet.", 
       }, 
    }, 
    Rooms = 
    {
       [1] = 
       {
-         Vnum = 1, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "&CCorrans Insane Apartment&g", 
          Sector = "city", 
+         Flags = 
+         {
+            [26] = "Factory", 
+            [23] = "Hotel", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 1, 
+         Description = "This is Corran Horns Apartment. As you look around you see a few\
+items scattered in a corner. The bed in the corner is made with \
+military preciceness, all the corners straight and tucked in as \
+tight as can be. There is a small desk with a DataTerminal in the \
+corner displaying the Rogue Squadron crest, and a Holo-projector.\
+In the closet you see Civilian clothing and a few pressed\
+uniforms neatly hung in a row.\
+", 
+         Name = "&CCorrans Insane Apartment&g", 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "test", 
                Code = "say triggered by (name):\9$n\
 say triggered by (name&title): \9$N\
 say triggerer is (he,she,it):\9$e\
@@ -5226,10 +5193,10 @@ say random char (him,her,it):\9$K\
 say random char (his,hers,its):\9$L\
 ", 
                MudProgType = "speech_prog", 
-               Arguments = "test", 
             }, 
             [2] = 
             {
+               Arguments = "test2", 
                Code = "say firstname of room:\9 \9$i\
 say short_desc/title of room: \9$I\
 say he/she/it of room:\9 \9$j\
@@ -5242,173 +5209,144 @@ say him/her/it of victim: \9$M\
 say his/hers/its of victim:\9$S\
 ", 
                MudProgType = "speech_prog", 
-               Arguments = "test2", 
             }, 
             [3] = 
             {
+               Arguments = "die", 
                Code = "mpdamage $n 234234\
 ", 
                MudProgType = "speech_prog", 
-               Arguments = "die", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Direction = "east", 
                DestinationVnum = 100, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
+               Key = -1, 
                Direction = "up", 
                DestinationVnum = 107, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
-         {
-            [26] = "Factory", 
-            [23] = "Hotel", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Description = "This is Corran Horns Apartment. As you look around you see a few\
-items scattered in a corner. The bed in the corner is made with \
-military preciceness, all the corners straight and tucked in as \
-tight as can be. There is a small desk with a DataTerminal in the \
-corner displaying the Rogue Squadron crest, and a Holo-projector.\
-In the closet you see Civilian clothing and a few pressed\
-uniforms neatly hung in a row.\
-", 
-      }, 
-      [2] = 
-      {
-         Vnum = 2, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Limbo", 
-         Sector = "city", 
+      }, 
+      [2] = 
+      {
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 2, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Name = "An Empty Home", 
          TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Direction = "up", 
                DestinationVnum = 32145, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-            [20] = "PlayerHome", 
-            [21] = "EmptyHome", 
-            [10] = "Safe", 
          }, 
-         Description = "You float in a formless void, detached from all sensation of physical\
-matter, surrounded by swirling glowing light which fades into the\
-relative darkness around you without any trace of edge or shadow.\
-", 
       }, 
       [3] = 
       {
-         Vnum = 3, 
-         ExtraDescriptions = 
+         Sector = "inside", 
+         Flags = 
          {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
          }, 
-         Name = "Storage", 
-         Sector = "city", 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 3, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Name = "An Empty Home", 
          TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [1] = "_Reserved", 
-            [2] = "NoMob", 
-            [9] = "Private", 
-            [11] = "_11", 
-            [20] = "PlayerHome", 
-            [13] = "Arena", 
-            [21] = "EmptyHome", 
          }, 
-         Description = "This room is reserved for storage of polymorphed players.\
-", 
       }, 
       [4] = 
       {
-         Vnum = 4, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Storage", 
          Sector = "inside", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 4, 
          Description = "This room is reserved for future use.\
 ", 
-      }, 
-      [5] = 
-      {
-         Vnum = 5, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
+         Name = "Storage", 
          TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [5] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
-      }, 
-      [6] = 
-      {
-         Vnum = 6, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "&GR&Ri&Gc&Rh&Ga&Rr&Gd S&bi&Rm&Gm&bo&Rn&G'&bs &RD&Wa&Bn&Rc&We &BA&bc&Ya&Bd&be&Ym&Gy&R&W", 
-         Sector = "city", 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 5, 
+         Description = "", 
+         Name = "Floating in a void", 
          TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [6] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [17] = "LogSpeech", 
@@ -5418,185 +5356,176 @@ relative darkness around you without any trace of edge or shadow.\
             [6] = "NoDrive", 
             [23] = "Hotel", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 6, 
          Description = "Now you've done it... the gods must have truly forsaken you, to have sent\
 you straight to Richard Simmons and Rosie O'Donnel!\
    It is highly advised to wait here to make your appeal to the wrath of\
 the gods... or face being damned to this place for all eternity!\
 ", 
-      }, 
-      [7] = 
-      {
-         Vnum = 7, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Mobprog Purge Room", 
-         Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
+         Name = "&GR&Ri&Gc&Rh&Ga&Rr&Gd S&bi&Rm&Gm&bo&Rn&G'&bs &RD&Wa&Bn&Rc&We &BA&bc&Ya&Bd&be&Ym&Gy&R&W", 
          TeleVnum = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mppurge\
-", 
-               MudProgType = "speech_prog", 
-               Arguments = "purge", 
-            }, 
-         }, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [7] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
-      }, 
-      [8] = 
-      {
-         Vnum = 8, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Immhood ClanStoreRoom", 
-         Sector = "city", 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 7, 
+         Description = "", 
+         Name = "Mobprog Purge Room", 
          TeleVnum = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "purge", 
+               Code = "mppurge\
+", 
+               MudProgType = "speech_prog", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [8] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [30] = "Prototype", 
             [2] = "NoMob", 
             [19] = "ClanStoreroom", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 8, 
          Description = "", 
-      }, 
-      [10] = 
-      {
-         Vnum = 10, 
+         Name = "Immhood ClanStoreRoom", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "An Empty Apartment", 
-         Sector = "city", 
+      }, 
+      [10] = 
+      {
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 10, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Name = "An Empty Home", 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
+               Code = "if $n == isimm\
+mpecho Hello\
+endif\
+", 
+               MudProgType = "entry_prog", 
+            }, 
+            [2] = 
+            {
+               Arguments = "100", 
                Code = "mpmload 329\
 mpforce mobslave mpoload 10313\
 mpforce mobslave drop ration\
 mppurge mobslave\
 ", 
                MudProgType = "speech_prog", 
-               Arguments = "100", 
-            }, 
-            [2] = 
-            {
-               Code = "if $n == isimm\
-mpecho Hello\
-endif\
-", 
-               MudProgType = "entry_prog", 
-               Arguments = "100", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Direction = "down", 
                DestinationVnum = 100, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [9] = "Private", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-            [26] = "Factory", 
-            [21] = "EmptyHome", 
-            [25] = "Refinery", 
-            [23] = "Hotel", 
          }, 
-         Description = "Simple wood logs provide the structure for this room.  A stone fireplace\
-dominates one wall, while large windows provide cool breezes in summer.\
-Cheery gingham curtains add a bit of life to the room.  A comfy couch and\
-chair sit with lamps nearby for reading. A small bed is pushed against one\
-wall, a down comforter is rumpled at its foot. A large picture of a\
-beautiful boy hangs prominently on a wall near the door. This is a place\
-of refuge.\
-", 
       }, 
       [11] = 
       {
-         Vnum = 11, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
          Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 11, 
          Description = "", 
+         Name = "Floating in a void", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
       [12] = 
       {
-         Vnum = 12, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
          Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
-      }, 
-      [19] = 
-      {
-         Vnum = 19, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Incognito Platform", 
-         Sector = "city", 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 12, 
+         Description = "", 
+         Name = "Floating in a void", 
          TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [19] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [10] = "Safe", 
@@ -5605,701 +5534,670 @@ of refuge.\
             [30] = "Prototype", 
             [2] = "NoMob", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 19, 
          Description = "A platform is here, located on a desolate shipyard located within the deep\
 fabric of space. A few starships are found, being worked on by a greater\
 life form and are produced for those mortals who have enough credits to\
 purchase them. Quality seems of the essence, and speed nor time has no\
 value.  It would seem this bleak area is managed by Den.\
 ", 
-      }, 
-      [20] = 
-      {
-         Vnum = 20, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
+         Name = "Incognito Platform", 
          TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [20] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 20, 
          Description = "", 
+         Name = "Floating in a void", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
       [29] = 
       {
-         Vnum = 29, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Arena", 
          Sector = "city", 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 29, 
+         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
+is overwhelming, while around you ... your opponent awaits your coming.\
+", 
+         Name = "The Arena", 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "15", 
                Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
 ", 
                MudProgType = "rand_prog", 
-               Arguments = "15", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Direction = "east", 
                DestinationVnum = 30, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
+               Key = -1, 
                Direction = "south", 
                DestinationVnum = 32, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [3] = 
             {
+               Key = -1, 
                Direction = "southeast", 
                DestinationVnum = 33, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
          }, 
-         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
-is overwhelming, while around you ... your opponent awaits your coming.\
-", 
       }, 
       [30] = 
       {
-         Vnum = 30, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Arena", 
          Sector = "city", 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 30, 
+         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
+is overwhelming, while around you ... your opponent awaits your coming.\
+", 
+         Name = "The Arena", 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "15", 
                Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
 ", 
                MudProgType = "rand_prog", 
-               Arguments = "15", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Direction = "north", 
                DestinationVnum = 40, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
+               Key = -1, 
                Direction = "east", 
                DestinationVnum = 31, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [3] = 
             {
+               Key = -1, 
                Direction = "south", 
                DestinationVnum = 33, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [4] = 
             {
+               Key = -1, 
                Direction = "west", 
                DestinationVnum = 29, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
          }, 
-         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
-is overwhelming, while around you ... your opponent awaits your coming.\
-", 
       }, 
       [31] = 
       {
-         Vnum = 31, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Arena", 
          Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "15", 
-            }, 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Direction = "south", 
-               DestinationVnum = 34, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Direction = "west", 
-               DestinationVnum = 30, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Direction = "southwest", 
-               DestinationVnum = 33, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          Flags = 
          {
             [13] = "Arena", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 31, 
          Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
 is overwhelming, while around you ... your opponent awaits your coming.\
 ", 
-      }, 
-      [32] = 
-      {
-         Vnum = 32, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "The Arena", 
-         Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "15", 
                Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
 ", 
                MudProgType = "rand_prog", 
-               Arguments = "15", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Direction = "north", 
-               DestinationVnum = 29, 
-               Keyword = "", 
                Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 34, 
+               Keyword = "", 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
-               Direction = "east", 
-               DestinationVnum = 33, 
-               Keyword = "", 
                Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 30, 
+               Keyword = "", 
                Distance = 0, 
                Description = "", 
             }, 
             [3] = 
             {
-               Direction = "south", 
-               DestinationVnum = 35, 
-               Keyword = "", 
                Key = -1, 
+               Direction = "southwest", 
+               DestinationVnum = 33, 
+               Keyword = "", 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [32] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [13] = "Arena", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 32, 
          Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
 is overwhelming, while around you ... your opponent awaits your coming.\
 ", 
-      }, 
-      [33] = 
-      {
-         Vnum = 33, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "The Arena", 
-         Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "15", 
                Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
 ", 
                MudProgType = "rand_prog", 
-               Arguments = "15", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Direction = "north", 
-               DestinationVnum = 30, 
-               Keyword = "", 
                Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 29, 
+               Keyword = "", 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
-               Direction = "east", 
-               DestinationVnum = 34, 
-               Keyword = "", 
                Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 33, 
+               Keyword = "", 
                Distance = 0, 
                Description = "", 
             }, 
             [3] = 
             {
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 35, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [33] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 33, 
+         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
+is overwhelming, while around you ... your opponent awaits your coming.\
+", 
+         Name = "The Arena", 
+         TeleVnum = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "15", 
+               Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
+", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 30, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 34, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
                Direction = "south", 
                DestinationVnum = 36, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [4] = 
             {
+               Key = -1, 
                Direction = "west", 
                DestinationVnum = 32, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [5] = 
             {
+               Key = -1, 
                Direction = "northeast", 
                DestinationVnum = 31, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [6] = 
             {
+               Key = -1, 
                Direction = "northwest", 
                DestinationVnum = 29, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [7] = 
             {
+               Key = -1, 
                Direction = "southeast", 
                DestinationVnum = 37, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [8] = 
             {
+               Key = -1, 
                Direction = "southwest", 
                DestinationVnum = 35, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
          }, 
-         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
-is overwhelming, while around you ... your opponent awaits your coming.\
-", 
       }, 
       [34] = 
       {
-         Vnum = 34, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Arena", 
          Sector = "city", 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 34, 
+         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
+is overwhelming, while around you ... your opponent awaits your coming.\
+", 
+         Name = "The Arena", 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "15", 
                Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
 ", 
                MudProgType = "rand_prog", 
-               Arguments = "15", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
                Direction = "north", 
                DestinationVnum = 31, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
+               Key = -1, 
                Direction = "south", 
                DestinationVnum = 37, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [3] = 
             {
+               Key = -1, 
                Direction = "west", 
                DestinationVnum = 33, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
+         ExtraDescriptions = 
          {
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
          }, 
-         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
-is overwhelming, while around you ... your opponent awaits your coming.\
-", 
       }, 
       [35] = 
       {
-         Vnum = 35, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Arena", 
          Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "15", 
-            }, 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Direction = "north", 
-               DestinationVnum = 32, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Direction = "east", 
-               DestinationVnum = 36, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Direction = "northeast", 
-               DestinationVnum = 33, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          Flags = 
          {
             [13] = "Arena", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 35, 
          Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
 is overwhelming, while around you ... your opponent awaits your coming.\
 ", 
-      }, 
-      [36] = 
-      {
-         Vnum = 36, 
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "The Arena", 
-         Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "15", 
                Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
 ", 
                MudProgType = "rand_prog", 
-               Arguments = "15", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Direction = "north", 
-               DestinationVnum = 33, 
-               Keyword = "", 
                Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 32, 
+               Keyword = "", 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
-               Direction = "east", 
-               DestinationVnum = 37, 
-               Keyword = "", 
                Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 36, 
+               Keyword = "", 
                Distance = 0, 
                Description = "", 
             }, 
             [3] = 
             {
+               Key = -1, 
+               Direction = "northeast", 
+               DestinationVnum = 33, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [36] = 
+      {
+         Sector = "city", 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 36, 
+         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
+is overwhelming, while around you ... your opponent awaits your coming.\
+", 
+         Name = "The Arena", 
+         TeleVnum = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "15", 
+               Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
+", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 33, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Direction = "east", 
+               DestinationVnum = 37, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
                Direction = "south", 
                DestinationVnum = 38, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [4] = 
             {
+               Key = -1, 
                Direction = "west", 
                DestinationVnum = 35, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Description = "You find yourself on the Arena floor.  The roar of the crowd above you\
-is overwhelming, while around you ... your opponent awaits your coming.\
-", 
-      }, 
-      [37] = 
-      {
-         Vnum = 37, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "The Arena", 
+      }, 
+      [37] = 
+      {
          Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "15", 
-            }, 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Direction = "north", 
-               DestinationVnum = 34, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Direction = "west", 
-               DestinationVnum = 36, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Direction = "northwest", 
-               DestinationVnum = 33, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          Flags = 
          {
             [13] = "Arena", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 37, 
          Description = "You stand in the direct center of the Arena.  Blood pools around your\
 feet, and you almost slip in this morbid mess.  The stench of death\
 surrounds you, momentarily blocking from your mind the realization\
 that you could be attacked from any conceivable direction.  Spinning\
 slowly about, you realize the poor tactical position you hold.\
 ", 
-      }, 
-      [38] = 
-      {
-         Vnum = 38, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Southern Sniper Tower Entrance", 
-         Sector = "inside", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
+         Name = "The Arena", 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "15", 
                Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
 ", 
                MudProgType = "rand_prog", 
-               Arguments = "15", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
-               Direction = "north", 
-               DestinationVnum = 36, 
-               Keyword = "", 
                Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 34, 
+               Keyword = "", 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
-               Direction = "up", 
-               Flags = 
-               {
-                  [16] = "CanClimb", 
-                  [7] = "Climb", 
-               }, 
-               DestinationVnum = 39, 
-               Keyword = "", 
                Key = -1, 
+               Direction = "west", 
+               DestinationVnum = 36, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Key = -1, 
+               Direction = "northwest", 
+               DestinationVnum = 33, 
+               Keyword = "", 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [38] = 
+      {
+         Sector = "inside", 
          Flags = 
          {
             [13] = "Arena", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 38, 
          Description = "This large room is the main entrance to the Southern Sniper Tower in the\
 Arena. It's a pretty bare room, and has a small set of stairs leading up\
 to the main tower supervising the southern portion of the arena. The\
@@ -6310,32 +6208,86 @@ entire room.\
 \
 &RCLIMBing is essential in getting up!&R&W\
 ", 
-      }, 
-      [39] = 
-      {
-         Vnum = 39, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Southern Sniper Tower", 
-         Sector = "inside", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
+         Name = "Southern Sniper Tower Entrance", 
          TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "15", 
                Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
 ", 
                MudProgType = "rand_prog", 
-               Arguments = "15", 
             }, 
          }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
+               Direction = "north", 
+               DestinationVnum = 36, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Direction = "up", 
+               Flags = 
+               {
+                  [16] = "CanClimb", 
+                  [7] = "Climb", 
+               }, 
+               DestinationVnum = 39, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [39] = 
+      {
+         Sector = "inside", 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 39, 
+         Description = "This tower is the primary advantage point for the Southern side of the\
+Arena killing field. Featuring a thin line, combatants can target others\
+who run about on the killing field. A careful sniper would watch the\
+fields and below him at all times, to avoid ambush..or even being sniped\
+from below.\
+\
+&RCLIMBing is essential in getting down!&R&W\
+", 
+         Name = "Southern Sniper Tower", 
+         TeleVnum = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "15", 
+               Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
+", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
                Direction = "north", 
                Flags = 
                {
@@ -6345,12 +6297,12 @@ entire room.\
                }, 
                DestinationVnum = 36, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
+               Key = -1, 
                Direction = "down", 
                Flags = 
                {
@@ -6359,12 +6311,12 @@ entire room.\
                }, 
                DestinationVnum = 38, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [3] = 
             {
+               Key = -1, 
                Direction = "northeast", 
                Flags = 
                {
@@ -6374,12 +6326,12 @@ entire room.\
                }, 
                DestinationVnum = 37, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [4] = 
             {
+               Key = -1, 
                Direction = "northwest", 
                Flags = 
                {
@@ -6389,79 +6341,25 @@ entire room.\
                }, 
                DestinationVnum = 35, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Description = "This tower is the primary advantage point for the Southern side of the\
-Arena killing field. Featuring a thin line, combatants can target others\
-who run about on the killing field. A careful sniper would watch the\
-fields and below him at all times, to avoid ambush..or even being sniped\
-from below.\
-\
-&RCLIMBing is essential in getting down!&R&W\
-", 
-      }, 
-      [40] = 
-      {
-         Vnum = 40, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Northern Sniper Tower Entrance", 
+      }, 
+      [40] = 
+      {
          Sector = "inside", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
-", 
-               MudProgType = "rand_prog", 
-               Arguments = "15", 
-            }, 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Direction = "south", 
-               DestinationVnum = 30, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Direction = "up", 
-               Flags = 
-               {
-                  [16] = "CanClimb", 
-                  [7] = "Climb", 
-               }, 
-               DestinationVnum = 41, 
-               Keyword = "", 
-               Key = -1, 
-               Distance = 0, 
-               Description = "", 
-            }, 
-         }, 
          Flags = 
          {
             [13] = "Arena", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 40, 
          Description = "This large room is the main entrance to the Northern Sniper Tower in the\
 Arena. It's a pretty bare room, and has a small set of stairs leading up\
 to the main tower supervising a portion of the arena. The lighting is\
@@ -6471,22 +6369,76 @@ and many charred blaster/explosive marks are strewn about the entire room.\
 \
 &RCLIMBing is essential in getting up!&R&W\
 ", 
-      }, 
-      [41] = 
-      {
-         Vnum = 41, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Northern Sniper Tower", 
-         Sector = "inside", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
+         Name = "Northern Sniper Tower Entrance", 
          TeleVnum = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "15", 
+               Code = "mpecho A slow chant floats down to you:  \"Two man enter ... one man leave.\"\
+", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         Tunnel = 0, 
          Exits = 
          {
             [1] = 
             {
+               Key = -1, 
+               Direction = "south", 
+               DestinationVnum = 30, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Key = -1, 
+               Direction = "up", 
+               Flags = 
+               {
+                  [16] = "CanClimb", 
+                  [7] = "Climb", 
+               }, 
+               DestinationVnum = 41, 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [41] = 
+      {
+         Sector = "inside", 
+         Flags = 
+         {
+            [13] = "Arena", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         TeleDelay = 0, 
+         Vnum = 41, 
+         Description = "This tower is the primary advantage point for the Northern side of the\
+Arena killing field. Featuring a thin line, combatants can target others\
+who run about on the killing field. A careful sniper would watch the\
+fields and below him at all times, to avoid ambush..or even being sniped\
+from below. \
+\
+&RCLIMBing is essential in getting down!&R&W\
+", 
+         Name = "Northern Sniper Tower", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Key = -1, 
                Direction = "south", 
                Flags = 
                {
@@ -6496,12 +6448,12 @@ and many charred blaster/explosive marks are strewn about the entire room.\
                }, 
                DestinationVnum = 30, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [2] = 
             {
+               Key = -1, 
                Direction = "down", 
                Flags = 
                {
@@ -6510,12 +6462,12 @@ and many charred blaster/explosive marks are strewn about the entire room.\
                }, 
                DestinationVnum = 40, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [3] = 
             {
+               Key = -1, 
                Direction = "southeast", 
                Flags = 
                {
@@ -6525,12 +6477,12 @@ and many charred blaster/explosive marks are strewn about the entire room.\
                }, 
                DestinationVnum = 31, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
             [4] = 
             {
+               Key = -1, 
                Direction = "southwest", 
                Flags = 
                {
@@ -6540,40 +6492,17 @@ and many charred blaster/explosive marks are strewn about the entire room.\
                }, 
                DestinationVnum = 29, 
                Keyword = "", 
-               Key = -1, 
                Distance = 0, 
                Description = "", 
             }, 
          }, 
-         Flags = 
-         {
-            [13] = "Arena", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Description = "This tower is the primary advantage point for the Northern side of the\
-Arena killing field. Featuring a thin line, combatants can target others\
-who run about on the killing field. A careful sniper would watch the\
-fields and below him at all times, to avoid ambush..or even being sniped\
-from below. \
-\
-&RCLIMBing is essential in getting down!&R&W\
-", 
-      }, 
-      [42] = 
-      {
-         Vnum = 42, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "First Combatant's Chamber", 
+      }, 
+      [42] = 
+      {
          Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-         }, 
          Flags = 
          {
             [10] = "Safe", 
@@ -6581,119 +6510,175 @@ from below. \
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 42, 
          Description = "You stand in a long hallway leading out into the Arena proper.  About\
 you are stacked all manner of weaponry and armor.  Choose your armament\
 properly, as it will be all that stands between you and death.\
 ", 
-      }, 
-      [43] = 
-      {
-         Vnum = 43, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Second Combatant's Chamber", 
-         Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
+         Name = "First Combatant's Chamber", 
          TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [43] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [13] = "Arena", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 43, 
          Description = "You stand in a long hallway leading out into the Arena proper.  About\
 you are stacked all manner of weaponry and armor.  Choose your armament\
 properly, as it will be all that stands between you and death.\
 ", 
-      }, 
-      [44] = 
-      {
-         Vnum = 44, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Lost in Space", 
-         Sector = "city", 
-         TeleDelay = 0, 
-         Tunnel = 0, 
+         Name = "Second Combatant's Chamber", 
          TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [44] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
-      }, 
-      [45] = 
-      {
-         Vnum = 45, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Limbo Shipyard", 
-         Sector = "city", 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Vnum = 44, 
+         Description = "", 
+         Name = "Lost in Space", 
          TeleVnum = 0, 
+         Tunnel = 0, 
          Exits = 
          {
          }, 
+         ExtraDescriptions = 
+         {
+         }, 
+      }, 
+      [45] = 
+      {
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [29] = "Spacecraft", 
          }, 
+         TeleDelay = 0, 
+         Vnum = 45, 
          Description = "A wet grey mist hangs over this large yard of old an unused vessels.\
 Ships of all types and sizes rest here empty and abandoned...\
 ", 
+         Name = "Limbo Shipyard", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
       }, 
    }, 
+   Filename = "limbo.lua", 
+   Name = "Limbo", 
+   ResetMessage = "&rYour soul burns...", 
+   Resets = 
+   {
+      [1] = 
+      {
+         MiscData = 0, 
+         Arg3 = 2, 
+         Arg1 = 1, 
+         Arg2 = 1, 
+         Command = "M", 
+      }, 
+      [2] = 
+      {
+         MiscData = 1, 
+         Arg3 = 10, 
+         Arg1 = 90, 
+         Arg2 = 1, 
+         Command = "O", 
+      }, 
+      [3] = 
+      {
+         MiscData = 1, 
+         Arg3 = 6, 
+         Arg1 = 6, 
+         Arg2 = 1, 
+         Command = "M", 
+      }, 
+      [4] = 
+      {
+         MiscData = 1, 
+         Arg3 = 6, 
+         Arg1 = 2, 
+         Arg2 = 1, 
+         Command = "M", 
+      }, 
+      [5] = 
+      {
+         MiscData = 1, 
+         Arg3 = 6, 
+         Arg1 = 7, 
+         Arg2 = 1, 
+         Command = "M", 
+      }, 
+      [6] = 
+      {
+         MiscData = 1, 
+         Arg3 = 6, 
+         Arg1 = 7, 
+         Arg2 = 1, 
+         Command = "O", 
+      }, 
+   }, 
+   ResetFrequency = 0, 
    VnumRanges = 
    {
-      Object = 
+      Mob = 
       {
-         First = 2, 
-         Last = 99, 
+         First = 1, 
+         Last = 98, 
       }, 
       Room = 
       {
          First = 1, 
          Last = 45, 
       }, 
-      Mob = 
+      Object = 
       {
-         First = 1, 
-         Last = 98, 
+         First = 2, 
+         Last = 99, 
       }, 
    }, 
-   Author = "RoD/Durga", 
-   ResetFrequency = 0, 
-   Flags = 
-   {
-      [1] = "_01", 
-   }, 
-   Filename = "limbo.lua", 
    LevelRanges = 
    {
       Hard = 
       {
-         High = 105, 
          Low = 0, 
+         High = 105, 
       }, 
       Soft = 
       {
-         High = 103, 
          Low = 0, 
+         High = 105, 
       }, 
    }, 
-   LowEconomy = 42175975, 
-   FileFormatVersion = 1, 
-   Name = "Limbo", 
 }

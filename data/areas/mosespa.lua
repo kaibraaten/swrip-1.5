@@ -1,1687 +1,534 @@
 -- Mos Espa - Tatooine
--- Last saved Thursday 07-May-2020 14:47:57
+-- Last saved Sunday 31-May-2020 15:51:33
 
 AreaEntry
 {
-   Mobiles = 
+   LevelRanges = 
    {
-      [3300] = 
+      Soft = 
       {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Level = 25, 
-         Credits = 0, 
-         ArmorClass = 37, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3300, 
-         Weight = 0, 
-         LongDescr = "The Head slave goes about his buisness here.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "The Head Slave", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "The head slave", 
-         HitRoll = 5, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 5, 
-            HitPlus = 250, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 5, 
+         Low = 0, 
+         High = 103, 
       }, 
-      [3301] = 
+      Hard = 
       {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Level = 50, 
-         Credits = 0, 
-         ArmorClass = -25, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3301, 
-         HitRoll = 10, 
-         Weight = 0, 
-         LongDescr = "A Customs Guard here checks for weapons.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 5, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "Mos Espa Secruit", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "Customs Guard", 
-         SpecFuns = 
-         {
-            [1] = "spec_customs_weapons", 
-         }, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 10, 
-            HitPlus = 500, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 10, 
-      }, 
-      [3302] = 
-      {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Level = 70, 
-         Credits = 0, 
-         ArmorClass = -75, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3302, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "say If you see that Thief...well, if you see him it'll be to late.\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "Laztech, the Mos Espa Chief of Secruity is standing here\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "Laztech, the Mos Espa Chief of Secruity", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "The Chief of Secruity", 
-         HitRoll = 14, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 14, 
-            HitPlus = 700, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 14, 
-      }, 
-      [3303] = 
-      {
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Level = 75, 
-         Credits = 0, 
-         ArmorClass = -87, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3303, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "say Be carefull, the slaves don't like outsiders. I'm watching you.\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "A Guard Watches over the slaves\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Slave Guard", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Slave Guard", 
-         HitRoll = 15, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 15, 
-            HitPlus = 750, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 15, 
-      }, 
-      [3304] = 
-      {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Level = 1, 
-         Credits = 0, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3304, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "say I gota job for you...interested?\
-", 
-               Arguments = "hello", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "give reciept to $n\
-say Good, give this to the head slave.\
-. . . and make it quick!\
-", 
-               Arguments = "yes", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "A Dirty little man is standing here\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "Brezna", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "Brezna", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-      }, 
-      [3305] = 
-      {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [27] = "NoCorpse", 
-         }, 
-         Level = 1, 
-         Credits = 0, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "A Jawa", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitSell = 90, 
-            ProfitBuy = 120, 
-         }, 
-         ArmorClass = 0, 
-         Race = "Jawa", 
-         Position = "standing", 
-         Vnum = 3305, 
-         Weight = 0, 
-         LongDescr = "A Jawa shop keeper is stacking his shelves\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [17] = "jawaese", 
-            }, 
-            Speaks = 
-            {
-               [17] = "jawaese", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Jawa shop keeper", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Jawa", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-      }, 
-      [3306] = 
-      {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-            [6] = "StayArea", 
-         }, 
-         Level = 35, 
-         Credits = 0, 
-         AttackFlags = 
-         {
-            [4] = "punch", 
-            [5] = "kick", 
-         }, 
-         ArmorClass = 12, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3306, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "emote looks at you\
-say Get outof here, Now!\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "A disgruntled slave is walking about.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 3, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Slave", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Slave", 
-         HitRoll = 7, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 7, 
-            HitPlus = 350, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 7, 
-      }, 
-      [3307] = 
-      {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-            [27] = "NoCorpse", 
-         }, 
-         Level = 20, 
-         Credits = 0, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "short A Shopkeeper", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitSell = 90, 
-            ProfitBuy = 120, 
-         }, 
-         ArmorClass = 50, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3307, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "say Welcome to my shop.\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "A Weird looking Shopkeeper is selling goods here.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [17] = "jawaese", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A weird Shopkeeper", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "short A Shopkeeper", 
-         HitRoll = 4, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 4, 
-            HitPlus = 200, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 4, 
-      }, 
-      [3308] = 
-      {
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Level = 10, 
-         Credits = 0, 
-         ArmorClass = 75, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3308, 
-         Weight = 0, 
-         LongDescr = "A Mos Espa citizen walks through the streets\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Mos Espa citizen", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A citizen", 
-         HitRoll = 2, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 2, 
-            HitPlus = 100, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 2, 
-      }, 
-      [3309] = 
-      {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [6] = "StayArea", 
-            [27] = "NoCorpse", 
-         }, 
-         Level = 1, 
-         Credits = 0, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "A Bartender", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitSell = 90, 
-            ProfitBuy = 120, 
-         }, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3309, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "mpechoat $n The Bartender Leads you to a special room.\
-/\
-/d2\
-mptransfer $n 3357\
-", 
-               Arguments = "Vile", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "The Bartender is tending his bar.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [17] = "jawaese", 
-               [27] = "binary", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Bar tender", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Bartender", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-      }, 
-      [3310] = 
-      {
-         Flags = 
-         {
-            [0] = "Npc", 
-            [27] = "NoCorpse", 
-            [24] = "NoAssist", 
-            [7] = "Wimpy", 
-         }, 
-         Level = 7, 
-         Credits = 0, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "A Jawa", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitSell = 90, 
-            ProfitBuy = 120, 
-         }, 
-         ArmorClass = 82, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3310, 
-         Weight = 0, 
-         LongDescr = "A Jawa Merchant travels the streets.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [17] = "jawaese", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Jawa merchant", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Jawa", 
-         HitRoll = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 1, 
-            HitPlus = 70, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 1, 
-      }, 
-      [3311] = 
-      {
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-            [2] = "Scavenger", 
-            [6] = "StayArea", 
-         }, 
-         Level = 15, 
-         Credits = 0, 
-         ArmorClass = 62, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3311, 
-         Weight = 0, 
-         LongDescr = "A Jawa wonders the streets.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [17] = "jawaese", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Jawa", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Jawa", 
-         HitRoll = 3, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 3, 
-            HitPlus = 150, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 3, 
-      }, 
-      [3312] = 
-      {
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-            [6] = "StayArea", 
-            [27] = "NoCorpse", 
-         }, 
-         Level = 1, 
-         Credits = 0, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3312, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "act_prog", 
-               Code = "if ovnuminv(3300) >=1\
-say You did all right kid.\
-mpwithdraw 2500 credits $n\
-mpgain $n 4 100000\
-mpat 3312 drop all\
-mpat 3312 mppurge\
-endif\
-", 
-               Arguments = "gives", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "A Dealer is here waiting for his runner.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [0] = "basic", 
-               [17] = "jawaese", 
-               [20] = "verpine", 
-               [24] = "quarrenese", 
-               [14] = "gamorrese", 
-               [9] = "antarian", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Dealer", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Dealer", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-      }, 
-      [3313] = 
-      {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-            [6] = "StayArea", 
-         }, 
-         Level = 10, 
-         Credits = 0, 
-         AttackFlags = 
-         {
-            [4] = "punch", 
-            [5] = "kick", 
-         }, 
-         ArmorClass = 75, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3313, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "emote looks at you\
-say Get out of here, Now!\
-", 
-               Arguments = "100", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "murder $n\
-kill $n\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "A disgruntled slave is walking about.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Slave", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Slave", 
-         HitRoll = 2, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 2, 
-            HitPlus = 100, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 2, 
-      }, 
-      [3314] = 
-      {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Level = 25, 
-         Credits = 0, 
-         ArmorClass = 37, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3314, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "act_prog", 
-               Code = "if ovnuminv(3301) >=1\
-say Here give this to the dealer, he's got the stuff.\
-give 3300 to $n\
-mpat 3314 drop all\
-mpat 3314 mppurge\
-endif\
-", 
-               Arguments = "gives", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "The Head slave goes about his buisness here.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "The Head Slave", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "The head slave", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 5, 
-            HitPlus = 250, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-      }, 
-      [3315] = 
-      {
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-            [6] = "StayArea", 
-         }, 
-         Level = 10, 
-         Credits = 0, 
-         AttackFlags = 
-         {
-            [4] = "punch", 
-            [5] = "kick", 
-         }, 
-         ArmorClass = 75, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3315, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "emote looks at you\
-say Get out of here..Now!\
-", 
-               Arguments = "100", 
-            }, 
-            [2] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "murder $n\
-kill $n\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "A disgruntled slave is walking about.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Slave", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Slave", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 2, 
-            HitPlus = 100, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-      }, 
-      [3316] = 
-      {
-         Flags = 
-         {
-            [0] = "Npc", 
-            [5] = "Aggressive", 
-         }, 
-         Level = 5, 
-         Credits = 5, 
-         ArmorClass = 87, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3316, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "all_greet_prog", 
-               Code = "say Die!!\
-muhahaha\
-", 
-               Arguments = "100", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "A Crazed slave is on a rampage here.\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Crazed Slave", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Slave", 
-         HitRoll = 1, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 1, 
-            HitPlus = 50, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 1, 
-      }, 
-      [3317] = 
-      {
-         Flags = 
-         {
-            [0] = "Npc", 
-            [27] = "NoCorpse", 
-         }, 
-         Level = 1, 
-         Credits = 0, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "The Bartender", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitSell = 90, 
-            ProfitBuy = 120, 
-         }, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3317, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               MudProgType = "speech_prog", 
-               Code = "mpechoat $n The Bartender leads you to a secret room\
- \
-mptransfer $n 3361\
-", 
-               Arguments = "Trade", 
-            }, 
-         }, 
-         Weight = 0, 
-         LongDescr = "The Back Room Bartender is here \
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [0] = "basic", 
-               [17] = "jawaese", 
-               [14] = "gamorrese", 
-               [20] = "verpine", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "The Back Room Bar Tende", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "The Bartender", 
-         HitRoll = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 0, 
-      }, 
-      [3318] = 
-      {
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Level = 100, 
-         Credits = 0, 
-         Shop = 
-         {
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            KeeperShortDescr = "A Weapons dealer", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitSell = 90, 
-            ProfitBuy = 120, 
-         }, 
-         ArmorClass = -150, 
-         Race = "Human", 
-         Position = "standing", 
-         Vnum = 3318, 
-         Weight = 0, 
-         LongDescr = "A Weapons Dealer Is Here To Assist You\
-", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [0] = "basic", 
-               [17] = "jawaese", 
-               [20] = "verpine", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 10, 
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-         }, 
-         DefaultPosition = "standing", 
-         Name = "A Weapons Dealer", 
-         NumberOfAttacks = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-         }, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 10, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
-            Strength = 10, 
-         }, 
-         Height = 0, 
-         Alignment = 0, 
-         Description = "", 
-         ShortDescr = "A Weapons dealer", 
-         HitRoll = 20, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 20, 
-            HitPlus = 1000, 
-         }, 
-         Sex = "undistinguished", 
-         DamRoll = 20, 
+         Low = 0, 
+         High = 105, 
       }, 
    }, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg2 = 4, 
+         Arg3 = 2, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg1 = 3324, 
+      }, 
+      [2] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3305, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3303, 
+      }, 
+      [3] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 16, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg1 = 60, 
+      }, 
+      [4] = 
+      {
+         Arg2 = 2, 
+         Arg3 = 3305, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3301, 
+      }, 
+      [5] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 57, 
+         Command = "G", 
+      }, 
+      [6] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3310, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3300, 
+      }, 
+      [7] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3334, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3305, 
+      }, 
+      [8] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 324, 
+         Command = "G", 
+      }, 
+      [9] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 28207, 
+         Command = "G", 
+      }, 
+      [10] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32234, 
+         Command = "G", 
+      }, 
+      [11] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10497, 
+         Command = "G", 
+      }, 
+      [12] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 612, 
+         Command = "G", 
+      }, 
+      [13] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3330, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3306, 
+      }, 
+      [14] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3335, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3307, 
+      }, 
+      [15] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10317, 
+         Command = "G", 
+      }, 
+      [16] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 32232, 
+         Command = "G", 
+      }, 
+      [17] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 31506, 
+         Command = "G", 
+      }, 
+      [18] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10311, 
+         Command = "G", 
+      }, 
+      [19] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10424, 
+         Command = "G", 
+      }, 
+      [20] = 
+      {
+         Arg2 = 6, 
+         Arg3 = 3304, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3308, 
+      }, 
+      [21] = 
+      {
+         Arg2 = 6, 
+         Arg3 = 3328, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3308, 
+      }, 
+      [22] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3303, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3310, 
+      }, 
+      [23] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3308, 
+         Command = "G", 
+      }, 
+      [24] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3306, 
+         Command = "G", 
+      }, 
+      [25] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3307, 
+         Command = "G", 
+      }, 
+      [26] = 
+      {
+         Arg2 = 6, 
+         Arg3 = 3314, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3308, 
+      }, 
+      [27] = 
+      {
+         Arg2 = 6, 
+         Arg3 = 3314, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3308, 
+      }, 
+      [28] = 
+      {
+         Arg2 = 4, 
+         Arg3 = 3314, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3311, 
+      }, 
+      [29] = 
+      {
+         Arg2 = 4, 
+         Arg3 = 3313, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3311, 
+      }, 
+      [30] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 10424, 
+         Command = "G", 
+      }, 
+      [31] = 
+      {
+         Arg2 = 6, 
+         Arg3 = 3313, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3308, 
+      }, 
+      [32] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3302, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3302, 
+      }, 
+      [33] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 60, 
+         Command = "G", 
+      }, 
+      [34] = 
+      {
+         Arg2 = 2, 
+         Arg3 = 3302, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3301, 
+      }, 
+      [35] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 59, 
+         Command = "G", 
+      }, 
+      [36] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 60, 
+         Command = "G", 
+      }, 
+      [37] = 
+      {
+         Arg2 = 4, 
+         Arg3 = 3300, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3311, 
+      }, 
+      [38] = 
+      {
+         Arg2 = 6, 
+         Arg3 = 3315, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3308, 
+      }, 
+      [39] = 
+      {
+         Arg2 = 6, 
+         Arg3 = 3315, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3308, 
+      }, 
+      [40] = 
+      {
+         Arg2 = 6, 
+         Arg3 = 3327, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3308, 
+      }, 
+      [41] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3323, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3304, 
+      }, 
+      [42] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3301, 
+         Command = "G", 
+      }, 
+      [43] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3306, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3316, 
+      }, 
+      [44] = 
+      {
+         Arg2 = 5, 
+         Arg3 = 3343, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3316, 
+      }, 
+      [45] = 
+      {
+         Arg2 = 5, 
+         Arg3 = 3342, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3316, 
+      }, 
+      [46] = 
+      {
+         Arg2 = 5, 
+         Arg3 = 3342, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3316, 
+      }, 
+      [47] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3355, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3312, 
+      }, 
+      [48] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 0, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg1 = 10311, 
+      }, 
+      [49] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3355, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg1 = 3309, 
+      }, 
+      [50] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3337, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3315, 
+      }, 
+      [51] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3338, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3314, 
+      }, 
+      [52] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3300, 
+         Command = "G", 
+      }, 
+      [53] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3318, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3309, 
+      }, 
+      [54] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3302, 
+         Command = "G", 
+      }, 
+      [55] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3305, 
+         Command = "G", 
+      }, 
+      [56] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 301, 
+         Command = "G", 
+      }, 
+      [57] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3357, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3317, 
+      }, 
+      [58] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 301, 
+         Command = "G", 
+      }, 
+      [59] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3302, 
+         Command = "G", 
+      }, 
+      [60] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3305, 
+         Command = "G", 
+      }, 
+      [61] = 
+      {
+         Arg2 = 1, 
+         Arg3 = 3361, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg1 = 3318, 
+      }, 
+      [62] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3315, 
+         Command = "G", 
+      }, 
+      [63] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3314, 
+         Command = "G", 
+      }, 
+      [64] = 
+      {
+         Arg2 = 1, 
+         MiscData = 1, 
+         Arg1 = 3316, 
+         Command = "G", 
+      }, 
+   }, 
+   HighEconomy = 0, 
+   VnumRanges = 
+   {
+      Room = 
+      {
+         Last = 3370, 
+         First = 3300, 
+      }, 
+      Object = 
+      {
+         Last = 3319, 
+         First = 3300, 
+      }, 
+      Mob = 
+      {
+         Last = 3318, 
+         First = 3300, 
+      }, 
+   }, 
+   FileFormatVersion = 1, 
+   LowEconomy = 6272670, 
+   Author = "Rendon", 
    Rooms = 
    {
       [3328] = 
       {
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Mos Espa Market Place", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3327, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3334, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The busy activity of the market place is amazing.  The desert lies in all\
 directions from you.  The noise of the spaceport can be heard faintly. \
 The Jawa's ride through here with all of their new found machinery and\
@@ -1690,8 +537,34 @@ here are full of rocks and small animals.  You also notice that the dirt\
 here is slight discolored then the rest of the market place.\
 ", 
          Vnum = 3328, 
+         TeleVnum = 0, 
+         Name = "The Mos Espa Market Place", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3327, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3334, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3329] = 
       {
@@ -1699,42 +572,7 @@ here is slight discolored then the rest of the market place.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Turbo Lift", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3330, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 3336, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 3308, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where you can access the different Mini Complexes. The turbo lift\
 is well kept compared to the actual living quarters. The walls are made\
 out of some sort of metal covered in a thick coat of paint. There is only\
@@ -1742,8 +580,43 @@ light but it reflects against the walls, which illuminates the entire lift\
 perfectly. \
 ", 
          Vnum = 3329, 
+         TeleVnum = 0, 
+         Name = "Turbo Lift", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3330, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3336, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "down", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3308, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3330] = 
       {
@@ -1751,50 +624,50 @@ perfectly. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Complex 2", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3329, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3333, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 3331, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This hallway leads in many differnt directions to their respective\
 chambers.  The room feels cold, and not welcoming.  The walls and floors\
 are made from raw metal and it shows.  their are several scratching along\
 the walls from people dragging equipment around. \
 ", 
          Vnum = 3330, 
+         TeleVnum = 0, 
+         Name = "Complex 2", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3329, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3333, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3331, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3331] = 
       {
@@ -1802,32 +675,32 @@ the walls from people dragging equipment around. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Head Slaves quarters", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 3330, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Here the head slave can relax and bask in the comfort of his private room.\
 This room is more sanitary and better equiped with furnishings.  The walls\
 have fresh coats of paint and the floors have fresh carpets.   Here is\
 where the \"privlages\" of being the head slave kick in.\
 ", 
          Vnum = 3331, 
+         TeleVnum = 0, 
+         Name = "Head Slaves quarters", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "down", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3330, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3332] = 
       {
@@ -1835,28 +708,28 @@ where the \"privlages\" of being the head slave kick in.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "", 
+         Vnum = 3332, 
+         TeleVnum = 0, 
+         Name = "Children's quarters", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Children's quarters", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 3330, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3330, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3332, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3333] = 
       {
@@ -1864,32 +737,32 @@ where the \"privlages\" of being the head slave kick in.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Female's quarters", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3330, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where all the female slave live.  It comes equiped with a bathroom\
 and Kitchen.  The floors, walls and the room in generale is very femine\
 looking. They are all busy at work, but you can't see what they are\
 working on. \
 ", 
          Vnum = 3333, 
+         TeleVnum = 0, 
+         Name = "Female's quarters", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3330, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3334] = 
       {
@@ -1898,24 +771,7 @@ working on. \
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Electronics Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3328, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This shop is owned and operated by the local band of Jawa's.  They sell\
 merchandise that is found, scavenged and pre-owned.  You see the shelves\
 well stock with both useless items, and items that are in great need to\
@@ -1924,8 +780,25 @@ several foot stools and foot ladders around the shop.  As you look out the\
 window you see a swoop bike race by.\
 ", 
          Vnum = 3334, 
+         TeleVnum = 0, 
+         Name = "Electronics Shop", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3328, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3335] = 
       {
@@ -1934,32 +807,32 @@ window you see a swoop bike race by.\
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Supply Shop", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3314, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This little shop is covered with gadgets and supplies, for both long and\
 short journeys. The walls are stacked nice and neatly, the floor is f \
 some sort of tile, and looks freshly moped and waxed.  The door is heavy\
 because of the crime in this area. \
 ", 
          Vnum = 3335, 
+         TeleVnum = 0, 
+         Name = "A Supply Shop", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3314, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3336] = 
       {
@@ -1967,33 +840,7 @@ because of the crime in this area. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Turbo Lift", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3337, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 3329, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where you can access the different Mini Complexes. The turbo lift\
 is well kept compared to the actual living quarters. The walls are made\
 out of some sort of metal covered in a thick coat of paint. There is only\
@@ -2001,8 +848,34 @@ light but it reflects against the walls, which illuminates the entire lift\
 perfectly.\
 ", 
          Vnum = 3336, 
+         TeleVnum = 0, 
+         Name = "Turbo Lift", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3337, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "down", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3329, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3337] = 
       {
@@ -2010,50 +883,50 @@ perfectly.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Complex 3", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3336, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3339, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 3338, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This hallway leads in many differnt directions to their respective\
 chambers.  The room feels cold, and not welcoming.  The walls and floors\
 are made from raw metal and it shows.  their are several scratching along\
 the walls from people dragging equipment around. \
 ", 
          Vnum = 3337, 
+         TeleVnum = 0, 
+         Name = "Complex 3", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3336, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3339, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3338, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3338] = 
       {
@@ -2061,24 +934,7 @@ the walls from people dragging equipment around. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Head Slaves Quarters", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 3337, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the head slaves private room.  It has nice red carpets, clean white\
 walls, and clean white ceiling.  There are several painting on the wall,\
 aswell as a old clock and small statutes of his owners. The cooling system\
@@ -2086,8 +942,25 @@ in this room is superb, it always stays and the perfect temperature.  You\
 even wish that your own place was as nice as this.\
 ", 
          Vnum = 3338, 
+         TeleVnum = 0, 
+         Name = "Head Slaves Quarters", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "down", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3337, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3339] = 
       {
@@ -2095,32 +968,32 @@ even wish that your own place was as nice as this.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Femal slave's quarters", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3337, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where all the female slave live.  It comes equiped with a bathroom\
 and Kitchen.  The floors, walls and the room in generale is very femine\
 looking. They are all busy at work, but you can't see what they are\
 working on. \
 ", 
          Vnum = 3339, 
+         TeleVnum = 0, 
+         Name = "Femal slave's quarters", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3337, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3340] = 
       {
@@ -2128,28 +1001,28 @@ working on. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "", 
+         Vnum = 3340, 
+         TeleVnum = 0, 
+         Name = "Children's quarters", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Children's quarters", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 3337, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3337, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3340, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3341] = 
       {
@@ -2158,33 +1031,7 @@ working on. \
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Turbo Lift", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3342, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 3307, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where you can access the different Mini Complexes. The turbo lift\
 is well kept compared to the actual living quarters. The walls are made\
 out of some sort of metal covered in a thick coat of paint. There is only\
@@ -2192,8 +1039,34 @@ light but it reflects against the walls, which illuminates the entire lift\
 perfectly. \
 ", 
          Vnum = 3341, 
+         TeleVnum = 0, 
+         Name = "Turbo Lift", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3342, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3307, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3342] = 
       {
@@ -2202,59 +1075,59 @@ perfectly. \
             [0] = "Dark", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Dungeon", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3341, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3343, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3345, 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3344, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where the slaves go if they have lashed out for any reason. It is\
 dark, cold and very dangerous. The walls are made of some sort of stone,\
 which is covered in a moss of some sort. You can hear little insects\
 making noises and crawling around. The smell is unbearable.\
 ", 
          Vnum = 3342, 
+         TeleVnum = 0, 
+         Name = "The Dungeon", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3341, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3343, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3345, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3344, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3343] = 
       {
@@ -2263,32 +1136,32 @@ making noises and crawling around. The smell is unbearable.\
             [0] = "Dark", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Dungeon", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3342, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where the slaves go if they have lashed out for any reason. It is\
 dark, cold and very dangerous. The walls are made of some sort of stone,\
 which is covered in a moss of some sort. You can hear little insects\
 making noises and crawling around. The smell is unbearable.\
 ", 
          Vnum = 3343, 
+         TeleVnum = 0, 
+         Name = "The Dungeon", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3342, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3344] = 
       {
@@ -2297,32 +1170,32 @@ making noises and crawling around. The smell is unbearable.\
             [0] = "Dark", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Dungeon", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3342, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where the slaves go if they have lashed out for any reason. It is\
 dark, cold and very dangerous. The walls are made of some sort of stone,\
 which is covered in a moss of some sort. You can hear little insects\
 making noises and crawling around. The smell is unbearable.\
 ", 
          Vnum = 3344, 
+         TeleVnum = 0, 
+         Name = "The Dungeon", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3342, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3345] = 
       {
@@ -2331,32 +1204,32 @@ making noises and crawling around. The smell is unbearable.\
             [0] = "Dark", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Dungeon", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3342, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where the slaves go if they have lashed out for any reason. It is\
 dark, cold and very dangerous. The walls are made of some sort of stone,\
 which is covered in a moss of some sort. You can hear little insects\
 making noises and crawling around. The smell is unbearable.\
 ", 
          Vnum = 3345, 
+         TeleVnum = 0, 
+         Name = "The Dungeon", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3342, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3346] = 
       {
@@ -2364,23 +1237,23 @@ making noises and crawling around. The smell is unbearable.\
          {
             [2] = "NoMob", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Me001", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This speeder is your average tatooine sppeder.  It can go long distances on\
 average speeds.  The armor is typical but weapons are nothing to be\
 desired. There is room in here for at least two people, not matter how\
 tight. \
 ", 
          Vnum = 3346, 
+         TeleVnum = 0, 
+         Name = "Me001", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3347] = 
       {
@@ -2388,22 +1261,22 @@ tight. \
          {
             [2] = "NoMob", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "ME002", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This speeder is your average tatooine speeder.  It can go long distances at\
 a average speed.  The armor is Typical but weapons are nothing to be\
 desired. At least two people can fit into the speeder.\
 ", 
          Vnum = 3347, 
+         TeleVnum = 0, 
+         Name = "ME002", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3348] = 
       {
@@ -2411,22 +1284,22 @@ desired. At least two people can fit into the speeder.\
          {
             [2] = "NoMob", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "ME003", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This speeder is your average tatooine speeder.  It can go long distances at\
 a average speed.  The armor is Typical but weapons are nothing to be\
 desired. At least two people can fit into the speeder.\
 ", 
          Vnum = 3348, 
+         TeleVnum = 0, 
+         Name = "ME003", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3349] = 
       {
@@ -2434,33 +1307,7 @@ desired. At least two people can fit into the speeder.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Cantina Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3350, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3318, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a very nice hallway.  It has the finest materials from all over the\
 galaxy.  It is well lit and you notice the fine art on the wall.  What a\
 change from the entrance. The hallway here seems much cooler and much more\
@@ -2468,8 +1315,34 @@ relaxed.  The air isn't tense in here at all, hardly anyone passes through\
 here in the course of the day.  \
 ", 
          Vnum = 3349, 
+         TeleVnum = 0, 
+         Name = "A Cantina Hallway", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3350, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3318, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3350] = 
       {
@@ -2477,11 +1350,19 @@ here in the course of the day.  \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "The elegance of this hallway continues to impress you.  Everything to the\
+smallest detail is a enjoyment for your eyes. It continues all the way up\
+to that large door.  This section of the hallway is even cooler then the\
+last.  You feel as if you are getting farther away from the two large suns\
+of the planet, if that's even possible.  \
+", 
+         Vnum = 3350, 
+         TeleVnum = 0, 
+         Name = "A Cantina hallway", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Cantina hallway", 
          Exits = 
          {
             [1] = 
@@ -2494,33 +1375,25 @@ here in the course of the day.  \
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Keyword = "", 
-               Description = "", 
-               Key = 3300, 
                Direction = "north", 
-               DestinationVnum = 3352, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3352, 
+               Key = 3300, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
-               DestinationVnum = 3349, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3349, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "The elegance of this hallway continues to impress you.  Everything to the\
-smallest detail is a enjoyment for your eyes. It continues all the way up\
-to that large door.  This section of the hallway is even cooler then the\
-last.  You feel as if you are getting farther away from the two large suns\
-of the planet, if that's even possible.  \
-", 
-         Vnum = 3350, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3351] = 
       {
@@ -2528,47 +1401,53 @@ of the planet, if that's even possible.  \
          {
             [0] = "Dark", 
          }, 
-         Sector = "underground", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Dirt Tunnel", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3353, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 3352, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This dark and dirty tunnel has been here for some time.  It looks like it\
 is well traversed.\
 ", 
          Vnum = 3351, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-      }, 
-      [3352] = 
-      {
-         Sector = "city", 
+         TeleVnum = 0, 
+         Name = "A Dirt Tunnel", 
          ExtraDescriptions = 
          {
          }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3353, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3352, 
+               Key = -1, 
+            }, 
+         }, 
+         TeleDelay = 0, 
+         Sector = "underground", 
+      }, 
+      [3352] = 
+      {
+         Tunnel = 0, 
+         Description = "After you passed the large door you are confronted by this passage way. \
+Should you go in, or should you go back.  Well if you used the key to get\
+in, might as well see what all the fuss is about.\
+", 
+         Vnum = 3352, 
+         TeleVnum = 0, 
          Name = "The Entrance Way", 
+         ExtraDescriptions = 
+         {
+         }, 
          Exits = 
          {
             [1] = 
@@ -2579,31 +1458,25 @@ is well traversed.\
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Keyword = "", 
-               Description = "", 
-               Key = 3300, 
                Direction = "south", 
-               DestinationVnum = 3350, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3350, 
+               Key = 3300, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "down", 
-               DestinationVnum = 3351, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3351, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "After you passed the large door you are confronted by this passage way. \
-Should you go in, or should you go back.  Well if you used the key to get\
-in, might as well see what all the fuss is about.\
-", 
-         Vnum = 3352, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3353] = 
       {
@@ -2611,37 +1484,37 @@ in, might as well see what all the fuss is about.\
          {
             [0] = "Dark", 
          }, 
-         Sector = "underground", 
+         Tunnel = 0, 
+         Description = "", 
+         Vnum = 3353, 
+         TeleVnum = 0, 
+         Name = "Tunnel", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Tunnel", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
-               DestinationVnum = 3351, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3351, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
-               DestinationVnum = 3354, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3354, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3353, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "underground", 
       }, 
       [3354] = 
       {
@@ -2649,71 +1522,71 @@ in, might as well see what all the fuss is about.\
          {
             [0] = "Dark", 
          }, 
-         Sector = "underground", 
+         Tunnel = 0, 
+         Description = "", 
+         Vnum = 3354, 
+         TeleVnum = 0, 
+         Name = "A tunnel", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A tunnel", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
-               DestinationVnum = 3353, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3353, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
-               DestinationVnum = 3355, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3355, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3354, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "underground", 
       }, 
       [3355] = 
       {
-         Sector = "underground", 
+         Tunnel = 0, 
+         Description = "", 
+         Vnum = 3355, 
+         TeleVnum = 0, 
+         Name = "Tunnel", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Tunnel", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
-               DestinationVnum = 3354, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3354, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
-               DestinationVnum = 3356, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3356, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3355, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "underground", 
       }, 
       [3356] = 
       {
@@ -2721,37 +1594,37 @@ in, might as well see what all the fuss is about.\
          {
             [0] = "Dark", 
          }, 
-         Sector = "underground", 
+         Tunnel = 0, 
+         Description = "", 
+         Vnum = 3356, 
+         TeleVnum = 0, 
+         Name = "Tunnel", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Tunnel", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
-               DestinationVnum = 3355, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3355, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
-               DestinationVnum = 3324, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3324, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3356, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "underground", 
       }, 
       [3357] = 
       {
@@ -2759,42 +1632,7 @@ in, might as well see what all the fuss is about.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Back Room Bar.", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3360, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3358, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3359, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a rather large attachment to the orignal cantina.  It is well\
 lighted and has a very warm feeling to it.  The enite back room facility\
 is made of a shiny metalic material.  The air has a sweet smell to it and\
@@ -2802,8 +1640,43 @@ is pleasing to your senses. Here is to be said the true customers come to\
 buy their drinks.\
 ", 
          Vnum = 3357, 
+         TeleVnum = 0, 
+         Name = "The Back Room Bar.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3360, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3358, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3359, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3358] = 
       {
@@ -2811,32 +1684,32 @@ buy their drinks.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Back Room Booth", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3357, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This booth is cold, and the air is thick.  This booth hasn't been modified\
 at all, it was installed to please those who wish to have no luxuries.\
 There is nothing but the cold metal walls, the lamp hanging from the\
 ceiling, and a couple of metal stools. \
 ", 
          Vnum = 3358, 
+         TeleVnum = 0, 
+         Name = "A Back Room Booth", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3357, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3359] = 
       {
@@ -2844,24 +1717,7 @@ ceiling, and a couple of metal stools. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Back Room Booth", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3357, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This booth has had the most changes made to it.  It has a lovely table in\
 center of it, perfect for dinning.  The walls are made of a stone found\
 only on the forest planet of Endor. The carpets are authentic Ewok fur\
@@ -2870,8 +1726,25 @@ heating in this room can be changed via a hardly notciable control panel\
 besdie the door.\
 ", 
          Vnum = 3359, 
+         TeleVnum = 0, 
+         Name = "A Back Room Booth", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3357, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3360] = 
       {
@@ -2879,24 +1752,7 @@ besdie the door.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Back Room Booth", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3357, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "In this booth faint, pleasing music is being played.  The walls are coverd\
 with decorative art and paintings. The floors have been changed and thick\
 red carpet installed.  The smell is of a lovely woman's perfume. The\
@@ -2904,8 +1760,25 @@ lighting is dim, but can be changed with a control switch next to the\
 doorway.\
 ", 
          Vnum = 3360, 
+         TeleVnum = 0, 
+         Name = "A Back Room Booth", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3357, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3361] = 
       {
@@ -2914,24 +1787,7 @@ doorway.\
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Illegal Hardware Storage.", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3320, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This room is for the true customers of the cantina.  It's a small hardly\
 detectable room. The shelves are made of a shiny metalic material.  They\
 are attached to a large black wall at the back of the room.  To the side\
@@ -2940,8 +1796,25 @@ controls the energy shield around the Illegal hardware that the customers\
 come here to buy.\
 ", 
          Vnum = 3361, 
+         TeleVnum = 0, 
+         Name = "Illegal Hardware Storage.", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3320, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3362] = 
       {
@@ -2949,119 +1822,125 @@ come here to buy.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Complex Hall Way", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3317, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3364, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3365, 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3363, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This Hallyway is poorly lite and the temperature is hot. There is no\
 windows or any outside light. You can smell the odour of a rather large\
 animal.  The walls and floors are the same as in the complex lobby. Sandy\
 colored and made of durasteel. \
 ", 
          Vnum = 3362, 
+         TeleVnum = 0, 
+         Name = "Complex Hall Way", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3317, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3364, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3365, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3363, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3363] = 
       {
          Flags = 
          {
-            [21] = "EmptyHome", 
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Vnum = 3363, 
+         TeleVnum = 0, 
+         Name = "An Empty Home", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Empty Apartment", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
-               DestinationVnum = 3362, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3362, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3363, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "inside", 
       }, 
       [3364] = 
       {
          Flags = 
          {
-            [21] = "EmptyHome", 
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Vnum = 3364, 
+         TeleVnum = 0, 
+         Name = "An Empty Home", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Empty Apartment", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 3362, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3362, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3364, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "inside", 
       }, 
       [3365] = 
       {
@@ -3069,185 +1948,191 @@ colored and made of durasteel. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Complex Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3362, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3366, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3367, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the end of the hallway. It is exellently lite and is a comfrtable\
 temperature. Considering the temperatures have been different in each\
 section of the hall, you wonder how safe this place really is.\
 ", 
          Vnum = 3365, 
+         TeleVnum = 0, 
+         Name = "A Complex Hallway", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3362, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3366, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3367, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3366] = 
       {
          Flags = 
          {
-            [21] = "EmptyHome", 
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Vnum = 3366, 
+         TeleVnum = 0, 
+         Name = "An Empty Home", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Empty Apartment", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 3365, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3365, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3366, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "inside", 
       }, 
       [3367] = 
       {
          Flags = 
          {
-            [21] = "EmptyHome", 
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Vnum = 3367, 
+         TeleVnum = 0, 
+         Name = "An Empty Home", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Empty Apartment", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
-               DestinationVnum = 3365, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3365, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3367, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "inside", 
       }, 
       [3368] = 
       {
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Cantina Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3369, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3318, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3370, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the hallway that leads to the cantinas booths.  The lighting is\
 cool and refreshing.  The air is typical for a Tatooine cantina, and you\
 smell the traces of smoke. The walls are clean and shiny.  This section of\
 the cantina appears to be very well kept.\
 ", 
          Vnum = 3368, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-      }, 
-      [3369] = 
-      {
-         Sector = "city", 
+         TeleVnum = 0, 
+         Name = "A Cantina Hallway", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Small booth", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
                Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3368, 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3369, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3318, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3370, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+      }, 
+      [3369] = 
+      {
+         Tunnel = 0, 
          Description = "This booth is small and cold.  It is designed for 2 people.  The  music\
 netwrok speakers were blasted aprt and are no longer functioning.  The\
 floors are dirty and the walls are stained with a red liquid. The light is\
 dim and the air is very dirty. \
 ", 
          Vnum = 3369, 
+         TeleVnum = 0, 
+         Name = "A Small booth", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3368, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3370] = 
       {
@@ -3255,32 +2140,32 @@ dim and the air is very dirty. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Large booth", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3368, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a rather large and comfortable booth.  The walls are covered with\
 pictures of famous people who have visited here. The floor is soft and a\
 little damp.  The light is bright and clear.  The music in the background\
 is a little annoying.\
 ", 
          Vnum = 3370, 
+         TeleVnum = 0, 
+         Name = "A Large booth", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3368, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3300] = 
       {
@@ -3289,24 +2174,7 @@ is a little annoying.\
             [4] = "CanLand", 
             [5] = "CanFly", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Mos Espa Space Port", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3301, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Mos Espa landing facility is state of the art.  You notice many\
 security guards and security cameras installed in many different locations\
 with in the bay.  You can hear the clatter of tools as a mechanic fixes a\
@@ -3316,6 +2184,8 @@ alien voice comes on the comlink's public network and lists the current\
 departures and arrivals. The sounds of space craft landing and taking off\
 makes you a little nervous.  \
 ", 
+         Vnum = 3300, 
+         TeleVnum = 0, 
          MudProgs = 
          {
             [1] = 
@@ -3326,48 +2196,28 @@ makes you a little nervous.  \
                Arguments = "25", 
             }, 
          }, 
-         Vnum = 3300, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-      }, 
-      [3301] = 
-      {
-         Sector = "city", 
+         Name = "Mos Espa Space Port", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Walkway To Mos Espa", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3302, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3300, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 31570, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3301, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+      }, 
+      [3301] = 
+      {
+         Tunnel = 0, 
          Description = "This is the main terminal of the Mos Espa landing facility.  Here is where\
 you can legally purchase tickets from offworld transports and cargo ships.\
 The room is quiet, except for the traffic of people walking to and from\
@@ -3375,8 +2225,43 @@ the landing facility. You get the notion that not many people \"legally\"\
 purchase tickets. \
 ", 
          Vnum = 3301, 
+         TeleVnum = 0, 
+         Name = "Walkway To Mos Espa", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3302, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3300, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 31570, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3302] = 
       {
@@ -3384,33 +2269,7 @@ purchase tickets. \
          {
             [2] = "NoMob", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Customes Checkpoint", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3303, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3301, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the Security check point for Mos Espa.  It has a large gate in\
 front of it, and a rather vicious looking animal chained to it. The two\
 security guards here are trained in the latest weapon skills and\
@@ -3419,47 +2278,38 @@ to drop the illegal weapons found on the people entering or leaving the\
 city.  \
 ", 
          Vnum = 3302, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-      }, 
-      [3303] = 
-      {
-         Sector = "city", 
+         TeleVnum = 0, 
+         Name = "Customes Checkpoint", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Mos Espa", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
                Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3313, 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3303, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "south", 
-               DestinationVnum = 3302, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
                Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3304, 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3301, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+      }, 
+      [3303] = 
+      {
+         Tunnel = 0, 
          Description = "After a long trek, you finally reach the city that everyone has been\
 talking about, but somehow it doesn't seem all that great. Mos Espa looks\
 very dirty; people shouting in languages that seems undecipherable, and\
@@ -3467,46 +2317,81 @@ very hideous creatures walk about, mouths covered in blood. It'd be best\
 to walk fast and watch your back.\
 ", 
          Vnum = 3303, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-      }, 
-      [3304] = 
-      {
-         Sector = "city", 
+         TeleVnum = 0, 
+         Name = "Mos Espa", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Walkway to the Slave Quarters", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
-               DestinationVnum = 3303, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3313, 
+               Key = -1, 
             }, 
             [2] = 
             {
+               Direction = "south", 
                Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3305, 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3302, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3304, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+      }, 
+      [3304] = 
+      {
+         Tunnel = 0, 
          Description = "This walkway is quite short, but for the slaves at the end of the walway,\
 it's Kilometers long.  They walk back and forth each day, only to do what\
 ever their master orders. As you look at the ground it's very grungy and\
 not very clean.  There is also a terrible smell that makes you gag.\
 ", 
          Vnum = 3304, 
+         TeleVnum = 0, 
+         Name = "Walkway to the Slave Quarters", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3303, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3305, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3305] = 
       {
@@ -3514,41 +2399,41 @@ not very clean.  There is also a terrible smell that makes you gag.\
          {
             [2] = "NoMob", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Slave Quarters Entrance", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3304, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3306, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where the Slaves Live.  They live in their family \"Units' as their\
 called.  The mood is very depresing You can almost hear a constant groan\
 coming from deep within.  The sun's light barely makes it in here, it is\
 all man made and very dim.\
 ", 
          Vnum = 3305, 
+         TeleVnum = 0, 
+         Name = "Slave Quarters Entrance", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3304, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3306, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3306] = 
       {
@@ -3556,33 +2441,7 @@ all man made and very dim.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Slave Corridor", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3305, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3307, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Here is where all the groups of slaves can meet on their way to work.  Each\
 group has it's own mini complex, and each mini complex is owned by a\
 differnt lord . Each lord is responsible for the upkeep of the facility\
@@ -3590,8 +2449,34 @@ there slaves live in, which is not too fantastic.  There living quarters\
 are usually poor and small.\
 ", 
          Vnum = 3306, 
+         TeleVnum = 0, 
+         Name = "Slave Corridor", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3305, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3307, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3307] = 
       {
@@ -3599,42 +2484,7 @@ are usually poor and small.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Turbo Lift", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3306, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 3308, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 3341, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where you can access the different Mini Complexes. The turbo lift\
 is well kept compared to the actual living quarters. The walls are made\
 out of some sort of metal covered in a thick coat of paint. There is only\
@@ -3642,8 +2492,43 @@ light but it reflects against the walls, which illuminates the entire lift\
 perfectly.\
 ", 
          Vnum = 3307, 
+         TeleVnum = 0, 
+         Name = "Turbo Lift", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3306, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3308, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "down", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3341, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3308] = 
       {
@@ -3652,42 +2537,7 @@ perfectly.\
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Turbo Lift", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3309, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 3329, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 3307, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where you can access the different Mini Complexes. The turbo lift\
 is well kept compared to the actual living quarters. The walls are made\
 out of some sort of metal covered in a thick coat of paint. There is only\
@@ -3695,8 +2545,43 @@ light but it reflects against the walls, which illuminates the entire lift\
 perfectly.\
 ", 
          Vnum = 3308, 
+         TeleVnum = 0, 
+         Name = "Turbo Lift", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3309, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3329, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "down", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3307, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3309] = 
       {
@@ -3704,50 +2589,50 @@ perfectly.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Complex 1", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3308, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3312, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 3310, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This hallway leads in many differnt directions to their respective\
 chambers.  The room feels cold, and not welcoming.  The walls and floors\
 are made from raw metal and it shows.  their are several scratching along\
 the walls from people dragging equipment around. \
 ", 
          Vnum = 3309, 
+         TeleVnum = 0, 
+         Name = "Complex 1", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3308, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3312, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3310, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3310] = 
       {
@@ -3755,32 +2640,32 @@ the walls from people dragging equipment around. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Head Slave's Room", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 3309, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Here the head slave can relax and bask in the comfort of his private room.\
 This room is more sanitary and better equiped with furnishings.  The walls\
 have fresh coats of paint and the floors have fresh carpets.   Here is\
 where the \"privlages\" of being the head slave kick in.\
 ", 
          Vnum = 3310, 
+         TeleVnum = 0, 
+         Name = "Head Slave's Room", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "down", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3309, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3311] = 
       {
@@ -3788,19 +2673,19 @@ where the \"privlages\" of being the head slave kick in.\
          {
             [2] = "NoMob", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "", 
+         Vnum = 3311, 
+         TeleVnum = 0, 
+         Name = "Childrens Room", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Childrens Room", 
          Exits = 
          {
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3311, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3312] = 
       {
@@ -3808,109 +2693,74 @@ where the \"privlages\" of being the head slave kick in.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Female slave quarters", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3309, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is where all the female slave live.  It comes equiped with a bathroom\
 and Kitchen.  The floors, walls and the room in generale is very femine\
 looking. They are all busy at work, but you can't see what they are\
 working on. \
 ", 
          Vnum = 3312, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-      }, 
-      [3313] = 
-      {
-         Sector = "city", 
+         TeleVnum = 0, 
+         Name = "Female slave quarters", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "The Mos Espa Market Place", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3314, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 3303, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3309, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+      }, 
+      [3313] = 
+      {
+         Tunnel = 0, 
          Description = "As you walk in this vast market place you notice all sorts of shops and\
 booths, with people behind them trying to sell you everything from\
 clothing to food. As you walk by one booth you smell a foul stench of\
 something terrible being cooked. \
 ", 
          Vnum = 3313, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-      }, 
-      [3314] = 
-      {
-         Sector = "city", 
+         TeleVnum = 0, 
+         Name = "The Mos Espa Market Place", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "The Mos Espa Market Place", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
                Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3335, 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3314, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3315, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 3313, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3303, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+      }, 
+      [3314] = 
+      {
+         Tunnel = 0, 
          Description = "This is a fairly busy market, you see all kinds of races, and creatures,\
 the Jawa's are trying to pawn a broken droid to you, you dismiss their\
 attempts to communicate. The Sand here is worn away and it's a hard type\
@@ -3918,56 +2768,47 @@ of dirt, almost like dried clay. The wind here is stopped by giant shields\
 that protect the town from sand storms at night. \
 ", 
          Vnum = 3314, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-      }, 
-      [3315] = 
-      {
-         Sector = "city", 
+         TeleVnum = 0, 
+         Name = "The Mos Espa Market Place", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "The Mos Espa Market Place", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "north", 
-               DestinationVnum = 3316, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3335, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
-               DestinationVnum = 3325, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3315, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3327, 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 3314, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3313, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+      }, 
+      [3315] = 
+      {
+         Tunnel = 0, 
          Description = "This is the busiest intersection of Mos Espa.  People coming and going from\
 the market place, jawa's trying to pawn their goods on offworlder's and\
 speeders carrying large freights of cargo. The cantina entrance shoots\
@@ -3976,8 +2817,52 @@ station right outside the cantina, it's there to let the owners come back\
 for them when they are done inside the cantina.  \
 ", 
          Vnum = 3315, 
+         TeleVnum = 0, 
+         Name = "The Mos Espa Market Place", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3316, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3325, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3327, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3314, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3316] = 
       {
@@ -3987,42 +2872,7 @@ for them when they are done inside the cantina.  \
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Dirty Cantina", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3318, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3315, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "northwest", 
-               DestinationVnum = 3317, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a sorry Excuse for a Cantina, and you thaught Mos Eisley was bad.\
 The walls are dirty, the floor are dirty.  Your boots become sticky apon\
 entering this fine establishment.  You wonder if the drinks here are any\
@@ -4030,8 +2880,43 @@ good. You cen deinatley smell a strange odour coming from the north.  The\
 smell is over wellming. \
 ", 
          Vnum = 3316, 
+         TeleVnum = 0, 
+         Name = "A Dirty Cantina", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3318, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3315, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "northwest", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3317, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3317] = 
       {
@@ -4039,50 +2924,50 @@ smell is over wellming. \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Complex", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3320, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3362, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 3316, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a very clean apartment complex.  It has sandy colored walls and the\
 floors are made of durasteel. The room is fairly lite and the atmosphere\
 is cold. There is a slight breeze coming in from a vent near the bottom of\
 the wall. This would be a exellent place to purchase a home.\
 ", 
          Vnum = 3317, 
+         TeleVnum = 0, 
+         Name = "The Complex", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3320, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3362, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "southeast", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3316, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3318] = 
       {
@@ -4090,51 +2975,7 @@ the wall. This would be a exellent place to purchase a home.\
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "The Bar", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3368, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3322, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3316, 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3349, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Here the bartender is serving the drinks.  As you look at the counter you\
 can see the scorches of blaster fire, but the counter looks to be solid.\
 The floors and walls are pretty dirty, and the light shades are equally\
@@ -4143,39 +2984,85 @@ business. the feeling in this room is tense, and the temperature is very\
 hot.  \
 ", 
          Vnum = 3318, 
+         TeleVnum = 0, 
+         Name = "The Bar", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3368, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3322, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3316, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3349, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3319] = 
       {
          Flags = 
          {
             [20] = "PlayerHome", 
-            [9] = "Private", 
+            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Vnum = 3319, 
+         TeleVnum = 0, 
+         Name = "An Empty Home", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Luxourious Lightspeed Suite", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 3320, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3320, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3319, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "inside", 
       }, 
       [3320] = 
       {
@@ -4183,42 +3070,7 @@ hot.  \
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Complex Hall Way", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3319, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3317, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3321, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "These apartments are reserved for the very privilaged.  They are so\
 exclusive that most people don't have enough credits to pay for them. The\
 walls on this end are made of a special type of metal only found on a\
@@ -4226,39 +3078,76 @@ secret moon.  The lights are shiped in from Endor and the floors are made\
 of Wampa fur. \
 ", 
          Vnum = 3320, 
+         TeleVnum = 0, 
+         Name = "Complex Hall Way", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3319, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3317, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3321, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3321] = 
       {
          Flags = 
          {
-            [9] = "Private", 
-            [21] = "EmptyHome", 
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Vnum = 3321, 
+         TeleVnum = 0, 
+         Name = "An Empty Home", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "An Empty Apartment", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "east", 
-               DestinationVnum = 3320, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3320, 
+               Key = -1, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "", 
-         Vnum = 3321, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "inside", 
       }, 
       [3322] = 
       {
@@ -4267,41 +3156,41 @@ of Wampa fur. \
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Cantina Hallway", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3323, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3318, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This hallway seems to be cleaner then the other ones.  Maybe it's because\
 the janito just finished cleaning this one before he got blasted by a\
 street thug for his broom. The walls are clean and shiny, and the light is\
 bright and clear.\
 ", 
          Vnum = 3322, 
+         TeleVnum = 0, 
+         Name = "A Cantina Hallway", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3323, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3318, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3323] = 
       {
@@ -4310,32 +3199,32 @@ bright and clear.\
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Rather Clean Booth", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3322, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This booth is rather clean.  It says private, and reserved on it.  This\
 must be a regulars spot.  You notice that it may have secret compartments\
 hidden in it.  The booth is also mounted with a holocam, which is\
 broadcast to a unknown destination. Better be carefull\
 ", 
          Vnum = 3323, 
+         TeleVnum = 0, 
+         Name = "A Rather Clean Booth", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3322, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3324] = 
       {
@@ -4344,21 +3233,26 @@ broadcast to a unknown destination. Better be carefull\
             [0] = "Dark", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Tunnel = 0, 
+         Description = "A Very dark place this is, you think to your self what would possibly be\
+sotred in here. \
+", 
+         Vnum = 3324, 
+         TeleVnum = 0, 
+         Name = "A Dark Storage Room", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Dark Storage Room", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 3356, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3356, 
+               Key = -1, 
             }, 
             [2] = 
             {
@@ -4368,21 +3262,16 @@ broadcast to a unknown destination. Better be carefull\
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Keyword = "", 
-               Description = "", 
-               Key = 3300, 
                Direction = "up", 
-               DestinationVnum = 3325, 
+               Keyword = "", 
                Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3325, 
+               Key = 3300, 
             }, 
          }, 
-         TeleVnum = 0, 
-         Description = "A Very dark place this is, you think to your self what would possibly be\
-sotred in here. \
-", 
-         Vnum = 3324, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3325] = 
       {
@@ -4393,31 +3282,31 @@ sotred in here. \
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Small Hut", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3315, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This Small hut is paid for, and maintained by the Tatooine government. \
 It's clean and realitvley safe, more then you can say about the rest of\
 Mos Espa. You can quit and re-ent ther game form here.\
 ", 
          Vnum = 3325, 
+         TeleVnum = 0, 
+         Name = "A Small Hut", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3315, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [3326] = 
       {
@@ -4427,70 +3316,35 @@ Mos Espa. You can quit and re-ent ther game form here.\
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Speeder Sales and Delivery", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 3327, 
-               Distance = 0, 
-            }, 
-         }, 
-         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a fine place to purchase speeders. The room is very large and has\
 lots os speeders and swoop bikes in it. The room is well lite and the air\
 is nice to your senses. This is a very comfortable place.\
 ", 
          Vnum = 3326, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-      }, 
-      [3327] = 
-      {
-         Sector = "city", 
+         TeleVnum = 0, 
+         Name = "Speeder Sales and Delivery", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "The Mos Espa Market Place", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
                Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 3315, 
                Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
                Description = "", 
+               DestinationVnum = 3327, 
                Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 3326, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 3328, 
-               Distance = 0, 
             }, 
          }, 
-         TeleVnum = 0, 
+         TeleDelay = 0, 
+         Sector = "city", 
+      }, 
+      [3327] = 
+      {
+         Tunnel = 0, 
          Description = "This is a section in the Market that has the most land speeder traffic. \
 You notice the Jawa's salvaging parts of speeder that have fallen off, and\
 even a entire speeder that was broke down.  The noise of the distant\
@@ -4499,512 +3353,47 @@ with the most delightfull smell and you wish that you could spend all day\
 here.\
 ", 
          Vnum = 3327, 
+         TeleVnum = 0, 
+         Name = "The Mos Espa Market Place", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3315, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3326, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Description = "", 
+               DestinationVnum = 3328, 
+               Key = -1, 
+            }, 
+         }, 
          TeleDelay = 0, 
-         Tunnel = 0, 
+         Sector = "city", 
       }, 
    }, 
-   LevelRanges = 
-   {
-      Soft = 
-      {
-         High = 0, 
-         Low = 0, 
-      }, 
-      Hard = 
-      {
-         High = 103, 
-         Low = 0, 
-      }, 
-   }, 
+   ResetMessage = "", 
    Name = "Mos Espa - Tatooine", 
-   Author = "Rendon", 
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg1 = 3324, 
-         MiscData = 0, 
-         Arg2 = 4, 
-         Command = "D", 
-         Arg3 = 2, 
-      }, 
-      [2] = 
-      {
-         Arg1 = 3303, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3305, 
-      }, 
-      [3] = 
-      {
-         Arg1 = 60, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "E", 
-         Arg3 = 16, 
-      }, 
-      [4] = 
-      {
-         Arg1 = 3301, 
-         MiscData = 1, 
-         Arg2 = 2, 
-         Command = "M", 
-         Arg3 = 3305, 
-      }, 
-      [5] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 57, 
-         MiscData = 1, 
-      }, 
-      [6] = 
-      {
-         Arg1 = 3300, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3310, 
-      }, 
-      [7] = 
-      {
-         Arg1 = 3305, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3334, 
-      }, 
-      [8] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 324, 
-         MiscData = 1, 
-      }, 
-      [9] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 28207, 
-         MiscData = 1, 
-      }, 
-      [10] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 32234, 
-         MiscData = 1, 
-      }, 
-      [11] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 10497, 
-         MiscData = 1, 
-      }, 
-      [12] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 612, 
-         MiscData = 1, 
-      }, 
-      [13] = 
-      {
-         Arg1 = 3306, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3330, 
-      }, 
-      [14] = 
-      {
-         Arg1 = 3307, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3335, 
-      }, 
-      [15] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 10317, 
-         MiscData = 1, 
-      }, 
-      [16] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 32232, 
-         MiscData = 1, 
-      }, 
-      [17] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 31506, 
-         MiscData = 1, 
-      }, 
-      [18] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 10311, 
-         MiscData = 1, 
-      }, 
-      [19] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 10424, 
-         MiscData = 1, 
-      }, 
-      [20] = 
-      {
-         Arg1 = 3308, 
-         MiscData = 1, 
-         Arg2 = 6, 
-         Command = "M", 
-         Arg3 = 3304, 
-      }, 
-      [21] = 
-      {
-         Arg1 = 3308, 
-         MiscData = 1, 
-         Arg2 = 6, 
-         Command = "M", 
-         Arg3 = 3328, 
-      }, 
-      [22] = 
-      {
-         Arg1 = 3310, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3303, 
-      }, 
-      [23] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3308, 
-         MiscData = 1, 
-      }, 
-      [24] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3306, 
-         MiscData = 1, 
-      }, 
-      [25] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3307, 
-         MiscData = 1, 
-      }, 
-      [26] = 
-      {
-         Arg1 = 3308, 
-         MiscData = 1, 
-         Arg2 = 6, 
-         Command = "M", 
-         Arg3 = 3314, 
-      }, 
-      [27] = 
-      {
-         Arg1 = 3308, 
-         MiscData = 1, 
-         Arg2 = 6, 
-         Command = "M", 
-         Arg3 = 3314, 
-      }, 
-      [28] = 
-      {
-         Arg1 = 3311, 
-         MiscData = 1, 
-         Arg2 = 4, 
-         Command = "M", 
-         Arg3 = 3314, 
-      }, 
-      [29] = 
-      {
-         Arg1 = 3311, 
-         MiscData = 1, 
-         Arg2 = 4, 
-         Command = "M", 
-         Arg3 = 3313, 
-      }, 
-      [30] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 10424, 
-         MiscData = 1, 
-      }, 
-      [31] = 
-      {
-         Arg1 = 3308, 
-         MiscData = 1, 
-         Arg2 = 6, 
-         Command = "M", 
-         Arg3 = 3313, 
-      }, 
-      [32] = 
-      {
-         Arg1 = 3302, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3302, 
-      }, 
-      [33] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 60, 
-         MiscData = 1, 
-      }, 
-      [34] = 
-      {
-         Arg1 = 3301, 
-         MiscData = 1, 
-         Arg2 = 2, 
-         Command = "M", 
-         Arg3 = 3302, 
-      }, 
-      [35] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 59, 
-         MiscData = 1, 
-      }, 
-      [36] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 60, 
-         MiscData = 1, 
-      }, 
-      [37] = 
-      {
-         Arg1 = 3311, 
-         MiscData = 1, 
-         Arg2 = 4, 
-         Command = "M", 
-         Arg3 = 3300, 
-      }, 
-      [38] = 
-      {
-         Arg1 = 3308, 
-         MiscData = 1, 
-         Arg2 = 6, 
-         Command = "M", 
-         Arg3 = 3315, 
-      }, 
-      [39] = 
-      {
-         Arg1 = 3308, 
-         MiscData = 1, 
-         Arg2 = 6, 
-         Command = "M", 
-         Arg3 = 3315, 
-      }, 
-      [40] = 
-      {
-         Arg1 = 3308, 
-         MiscData = 1, 
-         Arg2 = 6, 
-         Command = "M", 
-         Arg3 = 3327, 
-      }, 
-      [41] = 
-      {
-         Arg1 = 3304, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3323, 
-      }, 
-      [42] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3301, 
-         MiscData = 1, 
-      }, 
-      [43] = 
-      {
-         Arg1 = 3316, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3306, 
-      }, 
-      [44] = 
-      {
-         Arg1 = 3316, 
-         MiscData = 1, 
-         Arg2 = 5, 
-         Command = "M", 
-         Arg3 = 3343, 
-      }, 
-      [45] = 
-      {
-         Arg1 = 3316, 
-         MiscData = 1, 
-         Arg2 = 5, 
-         Command = "M", 
-         Arg3 = 3342, 
-      }, 
-      [46] = 
-      {
-         Arg1 = 3316, 
-         MiscData = 1, 
-         Arg2 = 5, 
-         Command = "M", 
-         Arg3 = 3342, 
-      }, 
-      [47] = 
-      {
-         Arg1 = 3312, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3355, 
-      }, 
-      [48] = 
-      {
-         Arg1 = 10311, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "E", 
-         Arg3 = 0, 
-      }, 
-      [49] = 
-      {
-         Arg1 = 3309, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "O", 
-         Arg3 = 3355, 
-      }, 
-      [50] = 
-      {
-         Arg1 = 3315, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3337, 
-      }, 
-      [51] = 
-      {
-         Arg1 = 3314, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3338, 
-      }, 
-      [52] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3300, 
-         MiscData = 1, 
-      }, 
-      [53] = 
-      {
-         Arg1 = 3309, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3318, 
-      }, 
-      [54] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3302, 
-         MiscData = 1, 
-      }, 
-      [55] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3305, 
-         MiscData = 1, 
-      }, 
-      [56] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 301, 
-         MiscData = 1, 
-      }, 
-      [57] = 
-      {
-         Arg1 = 3317, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3357, 
-      }, 
-      [58] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 301, 
-         MiscData = 1, 
-      }, 
-      [59] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3302, 
-         MiscData = 1, 
-      }, 
-      [60] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3305, 
-         MiscData = 1, 
-      }, 
-      [61] = 
-      {
-         Arg1 = 3318, 
-         MiscData = 1, 
-         Arg2 = 1, 
-         Command = "M", 
-         Arg3 = 3361, 
-      }, 
-      [62] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3315, 
-         MiscData = 1, 
-      }, 
-      [63] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3314, 
-         MiscData = 1, 
-      }, 
-      [64] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         Arg1 = 3316, 
-         MiscData = 1, 
-      }, 
-   }, 
-   Filename = "mosespa.lua", 
    Objects = 
    {
       [3300] = 
@@ -5013,22 +3402,8 @@ here.\
          {
             [13] = "Inventory", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Locker key", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Vnum = 3300, 
-         Cost = 0, 
          ItemType = "key", 
-         ShortDescr = "A Storage locker's key", 
-         Weight = 5, 
          Description = "A Strange looking key is lying here", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5038,25 +3413,25 @@ here.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Weight = 5, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "Locker key", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "A Storage locker's key", 
+         Vnum = 3300, 
       }, 
       [3301] = 
       {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Reciept eq3301", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Vnum = 3301, 
-         Cost = 0, 
          ItemType = "container", 
-         ShortDescr = "A receipt", 
-         Weight = 1, 
          Description = "A receipt lies here", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5065,6 +3440,20 @@ here.\
             [4] = 0, 
             [5] = 0, 
             [0] = 0, 
+         }, 
+         Weight = 1, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Name = "A Reciept eq3301", 
+         ActionDescription = "", 
+         Vnum = 3301, 
+         ShortDescr = "A receipt", 
+         WearFlags = 
+         {
+            [0] = "Take", 
          }, 
       }, 
       [3302] = 
@@ -5073,6 +3462,18 @@ here.\
          {
             [13] = "Inventory", 
          }, 
+         ItemType = "drink_container", 
+         Description = "A glass of Mos Espa brew", 
+         ObjectValues = 
+         {
+            [1] = 6, 
+            [2] = 4, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 6, 
+         }, 
+         Weight = 2, 
          Layers = 0, 
          ExtraDescriptions = 
          {
@@ -5087,28 +3488,16 @@ here.\
                Keyword = "Vintage Bespin Port", 
             }, 
          }, 
+         Cost = 675, 
          Name = "A glass of Mos Espa street brew", 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Vnum = 3302, 
-         Cost = 675, 
-         ItemType = "drink_container", 
          ShortDescr = "A Glass of Mos Espa Brew", 
-         Weight = 2, 
-         Description = "A glass of Mos Espa brew", 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 6, 
-            [2] = 4, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 6, 
-         }, 
+         Vnum = 3302, 
       }, 
       [3303] = 
       {
@@ -5116,18 +3505,8 @@ here.\
          {
             [13] = "Inventory", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Jawa droid fluid", 
-         Vnum = 3303, 
-         Cost = 0, 
          ItemType = "trash", 
-         ShortDescr = "A Vile of Jawa Droid Fluid", 
-         Weight = 1, 
          Description = "A Jawa droid fluid is here.", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5137,6 +3516,16 @@ here.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Weight = 1, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "Jawa droid fluid", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "A Vile of Jawa Droid Fluid", 
+         Vnum = 3303, 
       }, 
       [3304] = 
       {
@@ -5145,6 +3534,18 @@ here.\
             [1] = "Hum", 
             [13] = "Inventory", 
          }, 
+         ItemType = "drink_container", 
+         Description = "A piece of paper lies here", 
+         ObjectValues = 
+         {
+            [1] = 5, 
+            [2] = 7, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 5, 
+         }, 
+         Weight = 5, 
          Layers = 0, 
          ExtraDescriptions = 
          {
@@ -5162,28 +3563,16 @@ here.\
                Keyword = "Flaming Hurricane", 
             }, 
          }, 
+         Cost = 1150, 
          Name = "Jawa droid", 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Vnum = 3304, 
-         Cost = 1150, 
-         ItemType = "drink_container", 
          ShortDescr = "a reciept", 
-         Weight = 5, 
-         Description = "A piece of paper lies here", 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 5, 
-            [2] = 7, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 5, 
-         }, 
+         Vnum = 3304, 
       }, 
       [3305] = 
       {
@@ -5192,10 +3581,28 @@ here.\
             [0] = "Glow", 
             [13] = "Inventory", 
          }, 
+         ItemType = "drink_container", 
+         Description = "A Mug of a Specialty brew", 
+         ObjectValues = 
+         {
+            [1] = 2, 
+            [2] = 16, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
+         }, 
+         Weight = 1, 
          Layers = 0, 
          ExtraDescriptions = 
          {
             [1] = 
+            {
+               Description = "Bartender's specialty\
+\13", 
+               Keyword = "Bartenders Special", 
+            }, 
+            [2] = 
             {
                Description = "Considered one of the rarest drinks this side of the galaxy, Alderaanian\
 \13Nectar sports pure honey fermented into a delicious drink. Collected from\
@@ -5207,35 +3614,17 @@ here.\
 \13", 
                Keyword = "Alderaanian Nectar", 
             }, 
-            [2] = 
-            {
-               Description = "Bartender's specialty\
-\13", 
-               Keyword = "Bartenders Special", 
-            }, 
          }, 
+         Cost = 2375, 
          Name = "Bartenders Specialty", 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Vnum = 3305, 
-         Cost = 2375, 
-         ItemType = "drink_container", 
          ShortDescr = "A Mug of the Bartenders Specialty", 
-         Weight = 1, 
-         Description = "A Mug of a Specialty brew", 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 2, 
-            [2] = 16, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
+         Vnum = 3305, 
       }, 
       [3306] = 
       {
@@ -5243,23 +3632,8 @@ here.\
          {
             [13] = "Inventory", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "AA robe eq3306", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-         }, 
-         Vnum = 3306, 
-         Cost = 440, 
          ItemType = "armor", 
-         ShortDescr = "A dirty Robe", 
-         Weight = 9, 
          Description = "A Tusken Raider's Robe", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5269,6 +3643,21 @@ here.\
             [5] = 0, 
             [0] = 1, 
          }, 
+         Weight = 9, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 440, 
+         Name = "AA robe eq3306", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+         }, 
+         ShortDescr = "A dirty Robe", 
+         Vnum = 3306, 
       }, 
       [3307] = 
       {
@@ -5276,23 +3665,8 @@ here.\
          {
             [4] = "Contraband", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Gaffi Stick", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Vnum = 3307, 
-         Cost = 550, 
          ItemType = "weapon", 
-         ShortDescr = "a Gaffi Stick", 
-         Weight = 1, 
          Description = "A Gaffi Stick is here.", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 5, 
@@ -5302,6 +3676,21 @@ here.\
             [5] = 0, 
             [0] = 12, 
          }, 
+         Weight = 1, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 550, 
+         Name = "Gaffi Stick", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         ShortDescr = "a Gaffi Stick", 
+         Vnum = 3307, 
       }, 
       [3308] = 
       {
@@ -5309,22 +3698,8 @@ here.\
          {
             [13] = "Inventory", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Dead Key", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Vnum = 3308, 
-         Cost = 1290, 
          ItemType = "key", 
-         ShortDescr = "A Rusty Key", 
-         Weight = 2, 
          Description = "A Rusty Key", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5334,6 +3709,20 @@ here.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Weight = 2, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 1290, 
+         Name = "Dead Key", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ShortDescr = "A Rusty Key", 
+         Vnum = 3308, 
       }, 
       [3309] = 
       {
@@ -5341,18 +3730,8 @@ here.\
          {
             [0] = "Glow", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Light", 
-         Vnum = 3309, 
-         Cost = 0, 
          ItemType = "light", 
-         ShortDescr = "a light", 
-         Weight = 600, 
          Description = "A Light glows dimly", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5362,6 +3741,16 @@ here.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Weight = 600, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "A Light", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "a light", 
+         Vnum = 3309, 
       }, 
       [3310] = 
       {
@@ -5369,23 +3758,8 @@ here.\
          {
             [13] = "Inventory", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Gold Medal", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         Vnum = 3310, 
-         Cost = 3000, 
          ItemType = "trash", 
-         ShortDescr = "A Gold Medal", 
-         Weight = 5, 
          Description = "A Gold Raishik Medal", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5395,6 +3769,21 @@ here.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Weight = 5, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 3000, 
+         Name = "Gold Medal", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         ShortDescr = "A Gold Medal", 
+         Vnum = 3310, 
       }, 
       [3311] = 
       {
@@ -5402,23 +3791,8 @@ here.\
          {
             [13] = "Inventory", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Silver Medal", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         Vnum = 3311, 
-         Cost = 2000, 
          ItemType = "trash", 
-         ShortDescr = "A Silver Medal", 
-         Weight = 5, 
          Description = "A Silver Raishik Medal", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5428,6 +3802,21 @@ here.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Weight = 5, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 2000, 
+         Name = "Silver Medal", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         ShortDescr = "A Silver Medal", 
+         Vnum = 3311, 
       }, 
       [3312] = 
       {
@@ -5435,23 +3824,8 @@ here.\
          {
             [13] = "Inventory", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Bronze Medal", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         Vnum = 3312, 
-         Cost = 1000, 
          ItemType = "trash", 
-         ShortDescr = "A Bronze Medal", 
-         Weight = 5, 
          Description = "A Bronze Raishik Medal", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5461,9 +3835,36 @@ here.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Weight = 5, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 1000, 
+         Name = "Bronze Medal", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         ShortDescr = "A Bronze Medal", 
+         Vnum = 3312, 
       }, 
       [3313] = 
       {
+         ItemType = "furniture", 
+         Description = "A comfortable couch is here toward the side.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 2, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
+         }, 
+         Weight = 1, 
          Layers = 0, 
          ExtraDescriptions = 
          {
@@ -5476,22 +3877,10 @@ here.\
             }, 
          }, 
          Name = "A small couch", 
-         Vnum = 3313, 
-         Cost = 0, 
-         ItemType = "furniture", 
-         ShortDescr = "a couch", 
-         Weight = 1, 
-         Description = "A comfortable couch is here toward the side.", 
          ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 2, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
+         Cost = 0, 
+         ShortDescr = "a couch", 
+         Vnum = 3313, 
       }, 
       [3314] = 
       {
@@ -5499,23 +3888,8 @@ here.\
          {
             [13] = "Inventory", 
          }, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "A Sleak Blaster", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
-         Vnum = 3314, 
-         Cost = 2000, 
          ItemType = "weapon", 
-         ShortDescr = "A Sleak Blaster", 
-         Weight = 1, 
          Description = "A blaster is lying here", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 10, 
@@ -5525,6 +3899,21 @@ here.\
             [5] = 2000, 
             [0] = 12, 
          }, 
+         Weight = 1, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 2000, 
+         Name = "A Sleak Blaster", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+         ShortDescr = "A Sleak Blaster", 
+         Vnum = 3314, 
       }, 
       [3315] = 
       {
@@ -5532,6 +3921,18 @@ here.\
          {
             [13] = "Inventory", 
          }, 
+         ItemType = "grenade", 
+         Description = "A grenade .... run!!!!", 
+         ObjectValues = 
+         {
+            [1] = 200, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 100, 
+         }, 
+         Weight = 1, 
          Layers = 0, 
          ExtraDescriptions = 
          {
@@ -5543,41 +3944,19 @@ here.\
                Keyword = "grenade", 
             }, 
          }, 
+         Cost = 1200, 
          Name = "A Black Grenade", 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
             [14] = "Hold", 
          }, 
-         Vnum = 3315, 
-         Cost = 1200, 
-         ItemType = "grenade", 
          ShortDescr = "A Black Grenade", 
-         Weight = 1, 
-         Description = "A grenade .... run!!!!", 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 200, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 100, 
-         }, 
+         Vnum = 3315, 
       }, 
       [3316] = 
       {
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "light blaster pistol rt-22", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [13] = "Wield", 
-         }, 
          Affects = 
          {
             [1] = 
@@ -5596,13 +3975,8 @@ here.\
                Location = 31, 
             }, 
          }, 
-         Vnum = 3316, 
-         Cost = 3000, 
          ItemType = "weapon", 
-         ShortDescr = "an RT-22 Light Blaster Pistol", 
-         Weight = 1, 
          Description = "A small, lightweight blaster is gathering dust here.", 
-         ActionDescription = "", 
          ObjectValues = 
          {
             [1] = 12, 
@@ -5612,21 +3986,26 @@ here.\
             [5] = 1000, 
             [0] = 0, 
          }, 
-      }, 
-      [3318] = 
-      {
+         Weight = 1, 
          Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "a Large Table", 
-         Vnum = 3318, 
-         Cost = 0, 
-         ItemType = "furniture", 
-         ShortDescr = "the table", 
-         Weight = 1, 
-         Description = "A large wooden table", 
+         Cost = 3000, 
+         Name = "light blaster pistol rt-22", 
          ActionDescription = "", 
+         Vnum = 3316, 
+         ShortDescr = "an RT-22 Light Blaster Pistol", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
+      }, 
+      [3318] = 
+      {
+         ItemType = "furniture", 
+         Description = "A large wooden table", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5636,21 +4015,21 @@ here.\
             [5] = 0, 
             [0] = 10, 
          }, 
-      }, 
-      [3319] = 
-      {
+         Weight = 1, 
          Layers = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A chair", 
-         Vnum = 3319, 
-         Cost = 0, 
-         ItemType = "trash", 
-         ShortDescr = "a A chair", 
-         Weight = 1, 
-         Description = "A A chair is here.", 
+         Name = "a Large Table", 
          ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "the table", 
+         Vnum = 3318, 
+      }, 
+      [3319] = 
+      {
+         ItemType = "trash", 
+         Description = "A A chair is here.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -5660,29 +4039,1666 @@ here.\
             [5] = 0, 
             [0] = 0, 
          }, 
+         Weight = 1, 
+         Layers = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Name = "A chair", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "a A chair", 
+         Vnum = 3319, 
       }, 
    }, 
-   VnumRanges = 
+   Mobiles = 
    {
-      Object = 
+      [3300] = 
       {
-         Last = 3319, 
-         First = 3300, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 2, 
+         }, 
+         DamRoll = 5, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 37, 
+         Level = 25, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3300, 
+         HitRoll = 5, 
+         Credits = 0, 
+         Name = "The Head Slave", 
+         LongDescr = "The Head slave goes about his buisness here.\
+", 
+         HitChance = 
+         {
+            HitPlus = 250, 
+            HitNoDice = 5, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "The head slave", 
       }, 
-      Room = 
+      [3301] = 
       {
-         Last = 3370, 
-         First = 3300, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 5, 
+         }, 
+         DamRoll = 10, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         SpecFuns = 
+         {
+            [0] = "spec_customs_weapons", 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = -25, 
+         Level = 50, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3301, 
+         HitRoll = 10, 
+         Credits = 0, 
+         Name = "Mos Espa Secruit", 
+         LongDescr = "A Customs Guard here checks for weapons.\
+", 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitNoDice = 10, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "Customs Guard", 
       }, 
-      Mob = 
+      [3302] = 
       {
-         Last = 3318, 
-         First = 3300, 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 7, 
+         }, 
+         DamRoll = 14, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "say If you see that Thief...well, if you see him it'll be to late.\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = -75, 
+         Level = 70, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3302, 
+         HitRoll = 14, 
+         Credits = 0, 
+         Name = "Laztech, the Mos Espa Chief of Secruity", 
+         LongDescr = "Laztech, the Mos Espa Chief of Secruity is standing here\
+", 
+         HitChance = 
+         {
+            HitPlus = 700, 
+            HitNoDice = 14, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "The Chief of Secruity", 
+      }, 
+      [3303] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 7, 
+         }, 
+         DamRoll = 15, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "say Be carefull, the slaves don't like outsiders. I'm watching you.\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = -87, 
+         Level = 75, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3303, 
+         HitRoll = 15, 
+         Credits = 0, 
+         Name = "A Slave Guard", 
+         LongDescr = "A Guard Watches over the slaves\
+", 
+         HitChance = 
+         {
+            HitPlus = 750, 
+            HitNoDice = 15, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Slave Guard", 
+      }, 
+      [3304] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "give reciept to $n\
+say Good, give this to the head slave.\
+. . . and make it quick!\
+", 
+               Arguments = "yes", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "say I gota job for you...interested?\
+", 
+               Arguments = "hello", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 0, 
+         Level = 1, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3304, 
+         HitRoll = 0, 
+         Credits = 0, 
+         Name = "Brezna", 
+         LongDescr = "A Dirty little man is standing here\
+", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "Brezna", 
+      }, 
+      [3305] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [17] = "jawaese", 
+            }, 
+            Speaking = 
+            {
+               [17] = "jawaese", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "A Jawa", 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 0, 
+         Level = 1, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [27] = "NoCorpse", 
+         }, 
+         Height = 0, 
+         Race = "Jawa", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3305, 
+         HitRoll = 0, 
+         Credits = 0, 
+         Name = "A Jawa shop keeper", 
+         LongDescr = "A Jawa shop keeper is stacking his shelves\
+", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Jawa", 
+      }, 
+      [3306] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 3, 
+         }, 
+         DamRoll = 7, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "emote looks at you\
+say Get outof here, Now!\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         AttackFlags = 
+         {
+            [4] = "punch", 
+            [5] = "kick", 
+         }, 
+         ArmorClass = 12, 
+         Level = 35, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+            [6] = "StayArea", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3306, 
+         HitRoll = 7, 
+         Credits = 0, 
+         Name = "A Slave", 
+         LongDescr = "A disgruntled slave is walking about.\
+", 
+         HitChance = 
+         {
+            HitPlus = 350, 
+            HitNoDice = 7, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Slave", 
+      }, 
+      [3307] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 2, 
+         }, 
+         DamRoll = 4, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [17] = "jawaese", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "short A Shopkeeper", 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "say Welcome to my shop.\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 50, 
+         Level = 20, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+            [27] = "NoCorpse", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3307, 
+         HitRoll = 4, 
+         Credits = 0, 
+         Name = "A weird Shopkeeper", 
+         LongDescr = "A Weird looking Shopkeeper is selling goods here.\
+", 
+         HitChance = 
+         {
+            HitPlus = 200, 
+            HitNoDice = 4, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "short A Shopkeeper", 
+      }, 
+      [3308] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 1, 
+         }, 
+         DamRoll = 2, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 75, 
+         Level = 10, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3308, 
+         HitRoll = 2, 
+         Credits = 0, 
+         Name = "A Mos Espa citizen", 
+         LongDescr = "A Mos Espa citizen walks through the streets\
+", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitNoDice = 2, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A citizen", 
+      }, 
+      [3309] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [17] = "jawaese", 
+               [27] = "binary", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "A Bartender", 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "mpechoat $n The Bartender Leads you to a special room.\
+/\
+/d2\
+mptransfer $n 3357\
+", 
+               Arguments = "Vile", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 0, 
+         Level = 1, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [6] = "StayArea", 
+            [27] = "NoCorpse", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3309, 
+         HitRoll = 0, 
+         Credits = 0, 
+         Name = "A Bar tender", 
+         LongDescr = "The Bartender is tending his bar.\
+", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Bartender", 
+      }, 
+      [3310] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 0, 
+         }, 
+         DamRoll = 1, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [17] = "jawaese", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "A Jawa", 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 82, 
+         Level = 7, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [27] = "NoCorpse", 
+            [24] = "NoAssist", 
+            [7] = "Wimpy", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3310, 
+         HitRoll = 1, 
+         Credits = 0, 
+         Name = "A Jawa merchant", 
+         LongDescr = "A Jawa Merchant travels the streets.\
+", 
+         HitChance = 
+         {
+            HitPlus = 70, 
+            HitNoDice = 1, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Jawa", 
+      }, 
+      [3311] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 1, 
+         }, 
+         DamRoll = 3, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [17] = "jawaese", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 62, 
+         Level = 15, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+            [2] = "Scavenger", 
+            [6] = "StayArea", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3311, 
+         HitRoll = 3, 
+         Credits = 0, 
+         Name = "A Jawa", 
+         LongDescr = "A Jawa wonders the streets.\
+", 
+         HitChance = 
+         {
+            HitPlus = 150, 
+            HitNoDice = 3, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Jawa", 
+      }, 
+      [3312] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [0] = "basic", 
+               [17] = "jawaese", 
+               [20] = "verpine", 
+               [24] = "quarrenese", 
+               [14] = "gamorrese", 
+               [9] = "antarian", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "act_prog", 
+               Code = "if ovnuminv(3300) >=1\
+say You did all right kid.\
+mpwithdraw 2500 credits $n\
+mpgain $n 4 100000\
+mpat 3312 drop all\
+mpat 3312 mppurge\
+endif\
+", 
+               Arguments = "gives", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 0, 
+         Level = 1, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+            [6] = "StayArea", 
+            [27] = "NoCorpse", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3312, 
+         HitRoll = 0, 
+         Credits = 0, 
+         Name = "A Dealer", 
+         LongDescr = "A Dealer is here waiting for his runner.\
+", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Dealer", 
+      }, 
+      [3313] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 1, 
+         }, 
+         DamRoll = 2, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "murder $n\
+kill $n\
+", 
+               Arguments = "100", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "emote looks at you\
+say Get out of here, Now!\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         AttackFlags = 
+         {
+            [4] = "punch", 
+            [5] = "kick", 
+         }, 
+         ArmorClass = 75, 
+         Level = 10, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+            [6] = "StayArea", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3313, 
+         HitRoll = 2, 
+         Credits = 0, 
+         Name = "A Slave", 
+         LongDescr = "A disgruntled slave is walking about.\
+", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitNoDice = 2, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Slave", 
+      }, 
+      [3314] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 2, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "act_prog", 
+               Code = "if ovnuminv(3301) >=1\
+say Here give this to the dealer, he's got the stuff.\
+give 3300 to $n\
+mpat 3314 drop all\
+mpat 3314 mppurge\
+endif\
+", 
+               Arguments = "gives", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 37, 
+         Level = 25, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3314, 
+         HitRoll = 0, 
+         Credits = 0, 
+         Name = "The Head Slave", 
+         LongDescr = "The Head slave goes about his buisness here.\
+", 
+         HitChance = 
+         {
+            HitPlus = 250, 
+            HitNoDice = 5, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "The head slave", 
+      }, 
+      [3315] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 1, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "murder $n\
+kill $n\
+", 
+               Arguments = "100", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "emote looks at you\
+say Get out of here..Now!\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         AttackFlags = 
+         {
+            [4] = "punch", 
+            [5] = "kick", 
+         }, 
+         ArmorClass = 75, 
+         Level = 10, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+            [6] = "StayArea", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3315, 
+         HitRoll = 0, 
+         Credits = 0, 
+         Name = "A Slave", 
+         LongDescr = "A disgruntled slave is walking about.\
+", 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitNoDice = 2, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Slave", 
+      }, 
+      [3316] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 0, 
+         }, 
+         DamRoll = 1, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "say Die!!\
+muhahaha\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 87, 
+         Level = 5, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [5] = "Aggressive", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3316, 
+         HitRoll = 1, 
+         Credits = 5, 
+         Name = "A Crazed Slave", 
+         LongDescr = "A Crazed slave is on a rampage here.\
+", 
+         HitChance = 
+         {
+            HitPlus = 50, 
+            HitNoDice = 1, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Slave", 
+      }, 
+      [3317] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+         }, 
+         DamRoll = 0, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [0] = "basic", 
+               [17] = "jawaese", 
+               [14] = "gamorrese", 
+               [20] = "verpine", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "The Bartender", 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "mpechoat $n The Bartender leads you to a secret room\
+ \
+mptransfer $n 3361\
+", 
+               Arguments = "Trade", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = 0, 
+         Level = 1, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [27] = "NoCorpse", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3317, 
+         HitRoll = 0, 
+         Credits = 0, 
+         Name = "The Back Room Bar Tende", 
+         LongDescr = "The Back Room Bartender is here \
+", 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "The Bartender", 
+      }, 
+      [3318] = 
+      {
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+            DamNoDice = 10, 
+         }, 
+         DamRoll = 20, 
+         Description = "", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [0] = "basic", 
+               [17] = "jawaese", 
+               [20] = "verpine", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Weight = 0, 
+         Sex = "undistinguished", 
+         NumberOfAttacks = 0, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitSell = 90, 
+            KeeperShortDescr = "A Weapons dealer", 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            SpellStaff = 0, 
+            ParaPetri = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Force = 0, 
+            Charisma = 0, 
+            Dexterity = 0, 
+            Constitution = 0, 
+            Intelligence = 0, 
+         }, 
+         ArmorClass = -150, 
+         Level = 100, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         Height = 0, 
+         Race = "Human", 
+         DefaultPosition = "standing", 
+         Position = "standing", 
+         Vnum = 3318, 
+         HitRoll = 20, 
+         Credits = 0, 
+         Name = "A Weapons Dealer", 
+         LongDescr = "A Weapons Dealer Is Here To Assist You\
+", 
+         HitChance = 
+         {
+            HitPlus = 1000, 
+            HitNoDice = 20, 
+            HitSizeDice = 10, 
+         }, 
+         Alignment = 0, 
+         ShortDescr = "A Weapons dealer", 
       }, 
    }, 
-   ResetMessage = "", 
-   LowEconomy = 6272690, 
+   Filename = "mosespa.lua", 
    ResetFrequency = 0, 
-   HighEconomy = 0, 
-   FileFormatVersion = 1, 
 }

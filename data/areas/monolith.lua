@@ -1,65 +1,43 @@
 -- Dark Asteroid
--- Last saved Thursday 07-May-2020 14:47:57
+-- Last saved Sunday 31-May-2020 15:51:33
 
 AreaEntry
 {
-   Objects = 
+   ResetMessage = "", 
+   Filename = "monolith.lua", 
+   Resets = 
    {
-      [8900] = 
+      [1] = 
       {
-         Weight = 1, 
-         Name = "exarstuff", 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ShortDescr = "a exarstuff", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Layers = 0, 
-         Description = "A exarstuff is here.", 
-         Vnum = 8900, 
+         Command = "M", 
+         Arg1 = 8999, 
+         Arg2 = 1, 
+         Arg3 = 8999, 
+         MiscData = 1, 
       }, 
-      [8999] = 
+      [2] = 
       {
-         Weight = 1, 
-         Name = "exarstuff", 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         ExtraDescriptions = 
-         {
-         }, 
-         Cost = 0, 
-         ShortDescr = "a exarstuff", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Layers = 0, 
-         Description = "A exarstuff is here.", 
-         Vnum = 8999, 
+         Command = "M", 
+         Arg1 = 8900, 
+         Arg2 = 1, 
+         Arg3 = 8999, 
+         MiscData = 1, 
+      }, 
+      [3] = 
+      {
+         Command = "O", 
+         Arg1 = 8900, 
+         Arg2 = 1, 
+         Arg3 = 8999, 
+         MiscData = 1, 
+      }, 
+      [4] = 
+      {
+         Command = "O", 
+         Arg1 = 8999, 
+         Arg2 = 1, 
+         Arg3 = 8999, 
+         MiscData = 1, 
       }, 
    }, 
    VnumRanges = 
@@ -80,349 +58,305 @@ AreaEntry
          First = 8900, 
       }, 
    }, 
+   Name = "Dark Asteroid", 
+   Flags = 
+   {
+      [0] = "NoPkill", 
+   }, 
    Rooms = 
    {
       [8904] = 
       {
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho An icy wind blows out of nowhere and into your face.\
-", 
-               Arguments = "25", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Exits = 
-         {
-         }, 
+         Name = "A Freezing Passage", 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Name = "A Freezing Passage", 
          Vnum = 8904, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpecho An icy wind blows out of nowhere and into your face.\
+", 
+               Arguments = "25", 
+            }, 
+         }, 
+         Description = "", 
+         TeleDelay = 0, 
+         Exits = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
       }, 
       [8905] = 
       {
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-         }, 
+         Name = "A Windy Passage", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
-         Name = "A Windy Passage", 
          Vnum = 8905, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Description = "", 
+         TeleDelay = 0, 
+         Exits = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
       }, 
       [8906] = 
       {
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Description = "", 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-         }, 
+         Name = "A Watery Passage", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Tunnel = 0, 
-         Name = "A Watery Passage", 
          Vnum = 8906, 
-      }, 
-      [8999] = 
-      {
-         TeleVnum = 0, 
-         Sector = "city", 
-         Description = "", 
+         Sector = "inside", 
          ExtraDescriptions = 
          {
          }, 
+         Description = "", 
          TeleDelay = 0, 
          Exits = 
          {
          }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+      }, 
+      [8999] = 
+      {
+         Name = "Floating in a void", 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Tunnel = 0, 
-         Name = "Floating in a void", 
          Vnum = 8999, 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Description = "", 
+         TeleDelay = 0, 
+         Exits = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
       }, 
       [8900] = 
       {
-         TeleVnum = 0, 
-         Sector = "inside", 
-         Description = "Debris and wreckage cover the inside of this docking bay, to the point of\
-making it difficult to move around.  Obviously the bay has been in a state\
-of disuse for some time, possibly since the addition of this base to the\
-asteroid.  You can only see one exit, a ladder leading down into the main\
-portion of the asteroid.\
-", 
-         ExtraDescriptions = 
-         {
-            [1] = 
-            {
-               Keyword = "junk garbage", 
-               Description = "All manner of things litter the floor, including hydrospanners and other useful equipment, but there is also a lot of melted equipment too far damaged for you to make out.", 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho Some equipment clatters loudly in the northern corner of the bay.", 
-               Arguments = "1", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Key = 0, 
-               Description = "", 
-               DestinationVnum = 8901, 
-               Direction = "down", 
-            }, 
-         }, 
+         Name = "Primary Docking Bay", 
          Flags = 
          {
             [0] = "Dark", 
             [4] = "CanLand", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Name = "Primary Docking Bay", 
          Vnum = 8900, 
-      }, 
-      [8901] = 
-      {
-         TeleVnum = 0, 
          Sector = "inside", 
-         Description = "The ladder quickly enters a narrow shaft surrounded by the asteroid's rock\
-itself, creating a very claustrophobic feel.  Only one person can fit\
-through at a time, making you a blockage in this passageway.  The only\
-available directions are up and down. \
-", 
          ExtraDescriptions = 
          {
+            [1] = 
+            {
+               Description = "All manner of things litter the floor, including hydrospanners and other useful equipment, but there is also a lot of melted equipment too far damaged for you to make out.", 
+               Keyword = "junk garbage", 
+            }, 
          }, 
-         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "mpecho Light flickers briefly below you and then disappears so quickly you aren't sure it was ever there.", 
-               Arguments = "15", 
                MudProgType = "rand_prog", 
+               Code = "mpecho Some equipment clatters loudly in the northern corner of the bay.", 
+               Arguments = "1", 
             }, 
          }, 
+         Description = "Debris and wreckage cover the inside of this docking bay, to the point of\
+making it difficult to move around.  Obviously the bay has been in a state\
+of disuse for some time, possibly since the addition of this base to the\
+asteroid.  You can only see one exit, a ladder leading down into the main\
+portion of the asteroid.\
+", 
+         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Distance = 0, 
                Key = 0, 
-               Description = "", 
-               DestinationVnum = 8900, 
-               Direction = "up", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Key = 0, 
-               Description = "", 
-               DestinationVnum = 8902, 
                Direction = "down", 
+               Description = "", 
+               DestinationVnum = 8901, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+      }, 
+      [8901] = 
+      {
+         Name = "A Descending Shaft", 
          Flags = 
          {
             [0] = "Dark", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 1, 
-         Name = "A Descending Shaft", 
          Vnum = 8901, 
-      }, 
-      [8902] = 
-      {
-         TeleVnum = 0, 
          Sector = "inside", 
-         Description = "Here, at the bottom of the Docking Bay ladder, there is a four way intersection of passages.  Each seems to have been burned from the rock.  There are some strange symbols carved into the floor here, unlike any you have ever seen before.", 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "mpechoat Something on the floor glitters.\
-", 
-               Arguments = "50", 
-               MudProgType = "all_greet_prog", 
+               MudProgType = "rand_prog", 
+               Code = "mpecho Light flickers briefly below you and then disappears so quickly you aren't sure it was ever there.", 
+               Arguments = "15", 
             }, 
          }, 
+         Description = "The ladder quickly enters a narrow shaft surrounded by the asteroid's rock\
+itself, creating a very claustrophobic feel.  Only one person can fit\
+through at a time, making you a blockage in this passageway.  The only\
+available directions are up and down. \
+", 
+         TeleDelay = 0, 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Distance = 0, 
                Key = 0, 
-               Description = "", 
-               DestinationVnum = 8901, 
                Direction = "up", 
+               Description = "", 
+               DestinationVnum = 8900, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
+            [2] = 
+            {
+               Key = 0, 
+               Direction = "down", 
+               Description = "", 
+               DestinationVnum = 8902, 
+               Distance = 0, 
+               Keyword = "", 
             }, 
          }, 
+         Tunnel = 1, 
+         TeleVnum = 0, 
+      }, 
+      [8902] = 
+      {
+         Name = "An Intersection", 
          Flags = 
          {
             [0] = "Dark", 
             [6] = "NoDrive", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 0, 
-         Name = "An Intersection", 
          Vnum = 8902, 
-      }, 
-      [8903] = 
-      {
-         TeleVnum = 0, 
          Sector = "inside", 
-         Description = "", 
          ExtraDescriptions = 
          {
          }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "mpechoat Something on the floor glitters.\
+", 
+               Arguments = "50", 
+            }, 
+         }, 
+         Description = "Here, at the bottom of the Docking Bay ladder, there is a four way intersection of passages.  Each seems to have been burned from the rock.  There are some strange symbols carved into the floor here, unlike any you have ever seen before.", 
          TeleDelay = 0, 
          Exits = 
          {
+            [1] = 
+            {
+               Key = 0, 
+               Direction = "up", 
+               Description = "", 
+               DestinationVnum = 8901, 
+               Distance = 0, 
+               Keyword = "", 
+            }, 
          }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+      }, 
+      [8903] = 
+      {
+         Name = "A Slippery Passage", 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Tunnel = 2, 
-         Name = "A Slippery Passage", 
          Vnum = 8903, 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Description = "", 
+         TeleDelay = 0, 
+         Exits = 
+         {
+         }, 
+         Tunnel = 2, 
+         TeleVnum = 0, 
       }, 
-   }, 
-   Name = "Dark Asteroid", 
-   ResetFrequency = 180, 
-   LowEconomy = 9000000, 
-   Resets = 
-   {
-      [1] = 
-      {
-         MiscData = 1, 
-         Arg1 = 8999, 
-         Arg2 = 1, 
-         Arg3 = 8999, 
-         Command = "M", 
-      }, 
-      [2] = 
-      {
-         MiscData = 1, 
-         Arg1 = 8900, 
-         Arg2 = 1, 
-         Arg3 = 8999, 
-         Command = "M", 
-      }, 
-      [3] = 
-      {
-         MiscData = 1, 
-         Arg1 = 8900, 
-         Arg2 = 1, 
-         Arg3 = 8999, 
-         Command = "O", 
-      }, 
-      [4] = 
-      {
-         MiscData = 1, 
-         Arg1 = 8999, 
-         Arg2 = 1, 
-         Arg3 = 8999, 
-         Command = "O", 
-      }, 
-   }, 
-   Flags = 
-   {
-      [0] = "NoPkill", 
    }, 
    LevelRanges = 
    {
-      Soft = 
-      {
-         High = 100, 
-         Low = 40, 
-      }, 
       Hard = 
       {
-         High = 65, 
          Low = 0, 
+         High = 105, 
+      }, 
+      Soft = 
+      {
+         Low = 0, 
+         High = 65, 
       }, 
    }, 
+   Author = "Exar", 
    Mobiles = 
    {
       [8900] = 
       {
-         Credits = 0, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         LongDescr = "Some god abandoned a newly created exarstuff here.\
+", 
          Name = "exarstuff", 
-         ArmorClass = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
+         Vnum = 8900, 
          HitChance = 
          {
+            HitPlus = 0, 
             HitNoDice = 0, 
             HitSizeDice = 0, 
-            HitPlus = 0, 
          }, 
+         Weight = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         DamRoll = 0, 
          Languages = 
          {
             Speaks = 
@@ -434,64 +368,64 @@ available directions are up and down. \
                [0] = "basic", 
             }, 
          }, 
-         Alignment = 0, 
-         Position = "standing", 
-         Description = "", 
-         Level = 1, 
-         Weight = 0, 
-         Height = 0, 
-         LongDescr = "Some god abandoned a newly created exarstuff here.\
-", 
          Stats = 
          {
-            Strength = 10, 
             Force = 0, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Wisdom = 0, 
+            Constitution = 0, 
+            Charisma = 0, 
          }, 
-         ShortDescr = "a newly created exarstuff", 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          SaveVs = 
          {
-            Breath = 0, 
-            PoisonDeath = 0, 
             SpellStaff = 0, 
-            ParaPetri = 0, 
+            Breath = 0, 
             Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
          }, 
-         Vnum = 8900, 
+         HitRoll = 0, 
+         Position = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         NumberOfAttacks = 0, 
+         ArmorClass = 0, 
+         ShortDescr = "a newly created exarstuff", 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Height = 0, 
+         Credits = 0, 
+         Sex = "undistinguished", 
       }, 
       [8999] = 
       {
-         Credits = 0, 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         LongDescr = "Some god abandoned a newly created exarstuff here.\
+", 
          Name = "exarstuff", 
-         ArmorClass = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
+         Vnum = 8999, 
          HitChance = 
          {
+            HitPlus = 0, 
             HitNoDice = 0, 
             HitSizeDice = 0, 
-            HitPlus = 0, 
          }, 
+         Weight = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         DamRoll = 0, 
          Languages = 
          {
             Speaks = 
@@ -503,43 +437,109 @@ available directions are up and down. \
                [0] = "basic", 
             }, 
          }, 
-         Alignment = 0, 
-         Position = "standing", 
-         Description = "", 
-         Level = 1, 
-         Weight = 0, 
-         Height = 0, 
-         LongDescr = "Some god abandoned a newly created exarstuff here.\
-", 
          Stats = 
          {
-            Strength = 10, 
             Force = 0, 
-            Constitution = 10, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Dexterity = 10, 
-            Charisma = 10, 
-            Wisdom = 10, 
+            Intelligence = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Wisdom = 0, 
+            Constitution = 0, 
+            Charisma = 0, 
          }, 
-         ShortDescr = "a newly created exarstuff", 
-         DefaultPosition = "standing", 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
          SaveVs = 
          {
-            Breath = 0, 
-            PoisonDeath = 0, 
             SpellStaff = 0, 
-            ParaPetri = 0, 
+            Breath = 0, 
             Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
          }, 
-         Vnum = 8999, 
+         HitRoll = 0, 
+         Position = "standing", 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         NumberOfAttacks = 0, 
+         ArmorClass = 0, 
+         ShortDescr = "a newly created exarstuff", 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Height = 0, 
+         Credits = 0, 
+         Sex = "undistinguished", 
       }, 
    }, 
-   HighEconomy = 0, 
    FileFormatVersion = 1, 
-   Filename = "monolith.lua", 
-   Author = "Exar", 
-   ResetMessage = "", 
+   HighEconomy = 0, 
+   Objects = 
+   {
+      [8900] = 
+      {
+         Cost = 0, 
+         Name = "exarstuff", 
+         ItemType = "trash", 
+         Vnum = 8900, 
+         ExtraDescriptions = 
+         {
+         }, 
+         ShortDescr = "a exarstuff", 
+         Layers = 0, 
+         Description = "A exarstuff is here.", 
+         Weight = 1, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+      }, 
+      [8999] = 
+      {
+         Cost = 0, 
+         Name = "exarstuff", 
+         ItemType = "trash", 
+         Vnum = 8999, 
+         ExtraDescriptions = 
+         {
+         }, 
+         ShortDescr = "a exarstuff", 
+         Layers = 0, 
+         Description = "A exarstuff is here.", 
+         Weight = 1, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ActionDescription = "", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+      }, 
+   }, 
+   LowEconomy = 9000000, 
+   ResetFrequency = 180, 
 }

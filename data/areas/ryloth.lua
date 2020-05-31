@@ -1,710 +1,727 @@
 -- Ryloth
--- Last saved Thursday 07-May-2020 14:47:57
+-- Last saved Sunday 31-May-2020 15:51:33
 
 AreaEntry
 {
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 801, 
-      }, 
-      [2] = 
-      {
-         Arg2 = 3, 
-         MiscData = 1, 
-         Arg1 = 890, 
-         Command = "M", 
-         Arg3 = 808, 
-      }, 
-      [3] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 893, 
-         Command = "M", 
-         Arg3 = 808, 
-      }, 
-      [4] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 898, 
-         Command = "M", 
-         Arg3 = 809, 
-      }, 
-      [5] = 
-      {
-         Arg2 = 3, 
-         MiscData = 1, 
-         Arg1 = 890, 
-         Command = "M", 
-         Arg3 = 813, 
-      }, 
-      [6] = 
-      {
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg1 = 894, 
-         Command = "M", 
-         Arg3 = 814, 
-      }, 
-      [7] = 
-      {
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg1 = 894, 
-         Command = "M", 
-         Arg3 = 814, 
-      }, 
-      [8] = 
-      {
-         Arg1 = 32230, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [9] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 895, 
-         Command = "M", 
-         Arg3 = 815, 
-      }, 
-      [10] = 
-      {
-         Arg1 = 302, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [11] = 
-      {
-         Arg2 = 3, 
-         MiscData = 1, 
-         Arg1 = 890, 
-         Command = "M", 
-         Arg3 = 815, 
-      }, 
-      [12] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32259, 
-         Command = "O", 
-         Arg3 = 816, 
-      }, 
-      [13] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 326, 
-         Command = "O", 
-         Arg3 = 820, 
-      }, 
-      [14] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 90, 
-         Command = "O", 
-         Arg3 = 805, 
-      }, 
-      [15] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 800, 
-         Command = "M", 
-         Arg3 = 864, 
-      }, 
-      [16] = 
-      {
-         Arg1 = 326, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [17] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 880, 
-         Command = "O", 
-         Arg3 = 864, 
-      }, 
-      [18] = 
-      {
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg1 = 800, 
-         Command = "M", 
-         Arg3 = 862, 
-      }, 
-      [19] = 
-      {
-         Arg1 = 326, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [20] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 880, 
-         Command = "O", 
-         Arg3 = 862, 
-      }, 
-      [21] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 326, 
-         Command = "O", 
-         Arg3 = 873, 
-      }, 
-      [22] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 326, 
-         Command = "O", 
-         Arg3 = 872, 
-      }, 
-      [23] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 326, 
-         Command = "O", 
-         Arg3 = 871, 
-      }, 
-      [24] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 326, 
-         Command = "O", 
-         Arg3 = 869, 
-      }, 
-      [25] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 326, 
-         Command = "O", 
-         Arg3 = 870, 
-      }, 
-      [26] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 801, 
-         Command = "M", 
-         Arg3 = 853, 
-      }, 
-      [27] = 
-      {
-         Arg1 = 32210, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [28] = 
-      {
-         Arg1 = 32234, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [29] = 
-      {
-         Arg1 = 10494, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [30] = 
-      {
-         Arg1 = 324, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [31] = 
-      {
-         Arg1 = 10497, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [32] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 802, 
-         Command = "M", 
-         Arg3 = 877, 
-      }, 
-      [33] = 
-      {
-         Arg2 = 3, 
-         MiscData = 1, 
-         Arg1 = 10509, 
-         Command = "M", 
-         Arg3 = 878, 
-      }, 
-      [34] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 803, 
-         Command = "M", 
-         Arg3 = 879, 
-      }, 
-      [35] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 899, 
-         Command = "M", 
-         Arg3 = 880, 
-      }, 
-      [36] = 
-      {
-         Arg1 = 3, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [37] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 895, 
-         Command = "M", 
-         Arg3 = 842, 
-      }, 
-      [38] = 
-      {
-         Arg1 = 302, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [39] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 889, 
-         Command = "M", 
-         Arg3 = 818, 
-      }, 
-      [40] = 
-      {
-         Arg1 = 900, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [41] = 
-      {
-         Arg1 = 32234, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [42] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 892, 
-         Command = "M", 
-         Arg3 = 817, 
-      }, 
-      [43] = 
-      {
-         Arg1 = 32229, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [44] = 
-      {
-         Arg1 = 10424, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg2 = 1, 
-      }, 
-      [45] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 822, 
-         Command = "M", 
-         Arg3 = 822, 
-      }, 
-      [46] = 
-      {
-         Arg2 = 11, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 821, 
-      }, 
-      [47] = 
-      {
-         Arg2 = 11, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 821, 
-      }, 
-      [48] = 
-      {
-         Arg2 = 11, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 821, 
-      }, 
-      [49] = 
-      {
-         Arg2 = 11, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 821, 
-      }, 
-      [50] = 
-      {
-         Arg2 = 11, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 821, 
-      }, 
-      [51] = 
-      {
-         Arg2 = 11, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 821, 
-      }, 
-      [52] = 
-      {
-         Arg2 = 18, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 824, 
-      }, 
-      [53] = 
-      {
-         Arg2 = 18, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 824, 
-      }, 
-      [54] = 
-      {
-         Arg2 = 18, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 824, 
-      }, 
-      [55] = 
-      {
-         Arg2 = 18, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 824, 
-      }, 
-      [56] = 
-      {
-         Arg2 = 18, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 824, 
-      }, 
-      [57] = 
-      {
-         Arg2 = 18, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 824, 
-      }, 
-      [58] = 
-      {
-         Arg2 = 18, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 824, 
-      }, 
-      [59] = 
-      {
-         Arg2 = 26, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 823, 
-      }, 
-      [60] = 
-      {
-         Arg2 = 26, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 823, 
-      }, 
-      [61] = 
-      {
-         Arg2 = 26, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 823, 
-      }, 
-      [62] = 
-      {
-         Arg2 = 26, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 823, 
-      }, 
-      [63] = 
-      {
-         Arg2 = 26, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 823, 
-      }, 
-      [64] = 
-      {
-         Arg2 = 26, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 823, 
-      }, 
-      [65] = 
-      {
-         Arg2 = 26, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 823, 
-      }, 
-      [66] = 
-      {
-         Arg2 = 26, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 823, 
-      }, 
-      [67] = 
-      {
-         Arg2 = 34, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 825, 
-      }, 
-      [68] = 
-      {
-         Arg2 = 34, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 825, 
-      }, 
-      [69] = 
-      {
-         Arg2 = 34, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 825, 
-      }, 
-      [70] = 
-      {
-         Arg2 = 34, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 825, 
-      }, 
-      [71] = 
-      {
-         Arg2 = 34, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 825, 
-      }, 
-      [72] = 
-      {
-         Arg2 = 34, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 825, 
-      }, 
-      [73] = 
-      {
-         Arg2 = 34, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 825, 
-      }, 
-      [74] = 
-      {
-         Arg2 = 34, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 825, 
-      }, 
-      [75] = 
-      {
-         Arg2 = 37, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 826, 
-      }, 
-      [76] = 
-      {
-         Arg2 = 37, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 826, 
-      }, 
-      [77] = 
-      {
-         Arg2 = 37, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 826, 
-      }, 
-      [78] = 
-      {
-         Arg2 = 41, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 845, 
-      }, 
-      [79] = 
-      {
-         Arg2 = 41, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 845, 
-      }, 
-      [80] = 
-      {
-         Arg2 = 41, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 845, 
-      }, 
-      [81] = 
-      {
-         Arg2 = 41, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 845, 
-      }, 
-      [82] = 
-      {
-         Arg2 = 45, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 828, 
-      }, 
-      [83] = 
-      {
-         Arg2 = 45, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 828, 
-      }, 
-      [84] = 
-      {
-         Arg2 = 45, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 828, 
-      }, 
-      [85] = 
-      {
-         Arg2 = 45, 
-         MiscData = 1, 
-         Arg1 = 891, 
-         Command = "M", 
-         Arg3 = 828, 
-      }, 
-      [86] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 893, 
-         Command = "M", 
-         Arg3 = 819, 
-      }, 
-   }, 
+   FileFormatVersion = 1, 
+   Name = "Ryloth", 
+   Author = "Darrik", 
    VnumRanges = 
    {
       Room = 
       {
-         Last = 898, 
          First = 800, 
-      }, 
-      Object = 
-      {
-         Last = 900, 
-         First = 880, 
+         Last = 898, 
       }, 
       Mob = 
       {
-         Last = 899, 
          First = 800, 
+         Last = 899, 
+      }, 
+      Object = 
+      {
+         First = 880, 
+         Last = 900, 
       }, 
    }, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg3 = 801, 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [2] = 
+      {
+         Arg3 = 808, 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 890, 
+         Command = "M", 
+      }, 
+      [3] = 
+      {
+         Arg3 = 808, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 893, 
+         Command = "M", 
+      }, 
+      [4] = 
+      {
+         Arg3 = 809, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 898, 
+         Command = "M", 
+      }, 
+      [5] = 
+      {
+         Arg3 = 813, 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 890, 
+         Command = "M", 
+      }, 
+      [6] = 
+      {
+         Arg3 = 814, 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg1 = 894, 
+         Command = "M", 
+      }, 
+      [7] = 
+      {
+         Arg3 = 814, 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg1 = 894, 
+         Command = "M", 
+      }, 
+      [8] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32230, 
+         Command = "G", 
+      }, 
+      [9] = 
+      {
+         Arg3 = 815, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 895, 
+         Command = "M", 
+      }, 
+      [10] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 302, 
+         Command = "G", 
+      }, 
+      [11] = 
+      {
+         Arg3 = 815, 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 890, 
+         Command = "M", 
+      }, 
+      [12] = 
+      {
+         Arg3 = 816, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32259, 
+         Command = "O", 
+      }, 
+      [13] = 
+      {
+         Arg3 = 820, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 326, 
+         Command = "O", 
+      }, 
+      [14] = 
+      {
+         Arg3 = 805, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 90, 
+         Command = "O", 
+      }, 
+      [15] = 
+      {
+         Arg3 = 864, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 800, 
+         Command = "M", 
+      }, 
+      [16] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 326, 
+         Command = "G", 
+      }, 
+      [17] = 
+      {
+         Arg3 = 864, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 880, 
+         Command = "O", 
+      }, 
+      [18] = 
+      {
+         Arg3 = 862, 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg1 = 800, 
+         Command = "M", 
+      }, 
+      [19] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 326, 
+         Command = "G", 
+      }, 
+      [20] = 
+      {
+         Arg3 = 862, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 880, 
+         Command = "O", 
+      }, 
+      [21] = 
+      {
+         Arg3 = 873, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 326, 
+         Command = "O", 
+      }, 
+      [22] = 
+      {
+         Arg3 = 872, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 326, 
+         Command = "O", 
+      }, 
+      [23] = 
+      {
+         Arg3 = 871, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 326, 
+         Command = "O", 
+      }, 
+      [24] = 
+      {
+         Arg3 = 869, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 326, 
+         Command = "O", 
+      }, 
+      [25] = 
+      {
+         Arg3 = 870, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 326, 
+         Command = "O", 
+      }, 
+      [26] = 
+      {
+         Arg3 = 853, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 801, 
+         Command = "M", 
+      }, 
+      [27] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32210, 
+         Command = "G", 
+      }, 
+      [28] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32234, 
+         Command = "G", 
+      }, 
+      [29] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 10494, 
+         Command = "G", 
+      }, 
+      [30] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 324, 
+         Command = "G", 
+      }, 
+      [31] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 10497, 
+         Command = "G", 
+      }, 
+      [32] = 
+      {
+         Arg3 = 877, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 802, 
+         Command = "M", 
+      }, 
+      [33] = 
+      {
+         Arg3 = 878, 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg1 = 10509, 
+         Command = "M", 
+      }, 
+      [34] = 
+      {
+         Arg3 = 879, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 803, 
+         Command = "M", 
+      }, 
+      [35] = 
+      {
+         Arg3 = 880, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 899, 
+         Command = "M", 
+      }, 
+      [36] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 3, 
+         Command = "G", 
+      }, 
+      [37] = 
+      {
+         Arg3 = 842, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 895, 
+         Command = "M", 
+      }, 
+      [38] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 302, 
+         Command = "G", 
+      }, 
+      [39] = 
+      {
+         Arg3 = 818, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 889, 
+         Command = "M", 
+      }, 
+      [40] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 900, 
+         Command = "G", 
+      }, 
+      [41] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32234, 
+         Command = "G", 
+      }, 
+      [42] = 
+      {
+         Arg3 = 817, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 892, 
+         Command = "M", 
+      }, 
+      [43] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 32229, 
+         Command = "G", 
+      }, 
+      [44] = 
+      {
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 10424, 
+         Command = "G", 
+      }, 
+      [45] = 
+      {
+         Arg3 = 822, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 822, 
+         Command = "M", 
+      }, 
+      [46] = 
+      {
+         Arg3 = 821, 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [47] = 
+      {
+         Arg3 = 821, 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [48] = 
+      {
+         Arg3 = 821, 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [49] = 
+      {
+         Arg3 = 821, 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [50] = 
+      {
+         Arg3 = 821, 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [51] = 
+      {
+         Arg3 = 821, 
+         MiscData = 1, 
+         Arg2 = 11, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [52] = 
+      {
+         Arg3 = 824, 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [53] = 
+      {
+         Arg3 = 824, 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [54] = 
+      {
+         Arg3 = 824, 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [55] = 
+      {
+         Arg3 = 824, 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [56] = 
+      {
+         Arg3 = 824, 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [57] = 
+      {
+         Arg3 = 824, 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [58] = 
+      {
+         Arg3 = 824, 
+         MiscData = 1, 
+         Arg2 = 18, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [59] = 
+      {
+         Arg3 = 823, 
+         MiscData = 1, 
+         Arg2 = 26, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [60] = 
+      {
+         Arg3 = 823, 
+         MiscData = 1, 
+         Arg2 = 26, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [61] = 
+      {
+         Arg3 = 823, 
+         MiscData = 1, 
+         Arg2 = 26, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [62] = 
+      {
+         Arg3 = 823, 
+         MiscData = 1, 
+         Arg2 = 26, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [63] = 
+      {
+         Arg3 = 823, 
+         MiscData = 1, 
+         Arg2 = 26, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [64] = 
+      {
+         Arg3 = 823, 
+         MiscData = 1, 
+         Arg2 = 26, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [65] = 
+      {
+         Arg3 = 823, 
+         MiscData = 1, 
+         Arg2 = 26, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [66] = 
+      {
+         Arg3 = 823, 
+         MiscData = 1, 
+         Arg2 = 26, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [67] = 
+      {
+         Arg3 = 825, 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [68] = 
+      {
+         Arg3 = 825, 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [69] = 
+      {
+         Arg3 = 825, 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [70] = 
+      {
+         Arg3 = 825, 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [71] = 
+      {
+         Arg3 = 825, 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [72] = 
+      {
+         Arg3 = 825, 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [73] = 
+      {
+         Arg3 = 825, 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [74] = 
+      {
+         Arg3 = 825, 
+         MiscData = 1, 
+         Arg2 = 34, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [75] = 
+      {
+         Arg3 = 826, 
+         MiscData = 1, 
+         Arg2 = 37, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [76] = 
+      {
+         Arg3 = 826, 
+         MiscData = 1, 
+         Arg2 = 37, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [77] = 
+      {
+         Arg3 = 826, 
+         MiscData = 1, 
+         Arg2 = 37, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [78] = 
+      {
+         Arg3 = 845, 
+         MiscData = 1, 
+         Arg2 = 41, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [79] = 
+      {
+         Arg3 = 845, 
+         MiscData = 1, 
+         Arg2 = 41, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [80] = 
+      {
+         Arg3 = 845, 
+         MiscData = 1, 
+         Arg2 = 41, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [81] = 
+      {
+         Arg3 = 845, 
+         MiscData = 1, 
+         Arg2 = 41, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [82] = 
+      {
+         Arg3 = 828, 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [83] = 
+      {
+         Arg3 = 828, 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [84] = 
+      {
+         Arg3 = 828, 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [85] = 
+      {
+         Arg3 = 828, 
+         MiscData = 1, 
+         Arg2 = 45, 
+         Arg1 = 891, 
+         Command = "M", 
+      }, 
+      [86] = 
+      {
+         Arg3 = 819, 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg1 = 893, 
+         Command = "M", 
+      }, 
+   }, 
+   Filename = "ryloth.lua", 
+   LowEconomy = 4483179, 
+   HighEconomy = 0, 
    Objects = 
    {
       [880] = 
       {
-         Vnum = 880, 
-         Description = "Some of Ryloth's Finest was left around here.", 
-         Cost = 0, 
+         Name = "Pure Ryll", 
          ShortDescr = "Pure Ryll", 
+         Description = "Some of Ryloth's Finest was left around here.", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ItemType = "spice", 
+         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Weight = 3, 
          ObjectValues = 
          {
             [1] = 25, 
@@ -714,26 +731,25 @@ AreaEntry
             [5] = 0, 
             [0] = 2, 
          }, 
-         ActionDescription = "", 
-         Name = "Pure Ryll", 
-         ItemType = "spice", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
          Layers = 0, 
-         Weight = 3, 
+         Vnum = 880, 
       }, 
       [881] = 
       {
-         Vnum = 881, 
-         Description = "A package for Koh'shak", 
-         Cost = 10000, 
+         Name = "A package for Koh'shak", 
          ShortDescr = "A package for Koh'shak", 
+         Description = "A package for Koh'shak", 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ItemType = "container", 
+         Cost = 10000, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Weight = 200, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -743,29 +759,26 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Layers = 0, 
+         Vnum = 881, 
+      }, 
+      [900] = 
+      {
+         Name = "A Super-Advanced Battery", 
+         ShortDescr = "a A Super-Advanced Battery", 
+         Description = "A Super-Advanced Battery", 
+         Weight = 1, 
          ActionDescription = "", 
-         Name = "A package for Koh'shak", 
-         ItemType = "container", 
+         Layers = 0, 
+         ItemType = "battery", 
+         Cost = 350, 
+         ExtraDescriptions = 
+         {
+         }, 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Weight = 200, 
-      }, 
-      [900] = 
-      {
-         Vnum = 900, 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         Description = "A Super-Advanced Battery", 
-         Cost = 350, 
-         ShortDescr = "a A Super-Advanced Battery", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -775,509 +788,526 @@ AreaEntry
             [5] = 0, 
             [0] = 250, 
          }, 
-         ActionDescription = "", 
-         Name = "A Super-Advanced Battery", 
-         ItemType = "battery", 
-         WearFlags = 
+         Flags = 
          {
-            [0] = "Take", 
+            [13] = "Inventory", 
          }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Weight = 1, 
+         Vnum = 900, 
       }, 
    }, 
+   ResetMessage = "", 
    Rooms = 
    {
       [896] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 896, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [897] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 897, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [898] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 898, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
+      }, 
+      [800] = 
+      {
+         Name = "Kala'uun Spaceport Landing Pad", 
+         TeleDelay = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Description = "", 
+         Vnum = 800, 
          Exits = 
          {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 801, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
          }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [800] = 
-      {
-         Vnum = 800, 
+         Tunnel = 0, 
          Flags = 
          {
             [4] = "CanLand", 
             [5] = "CanFly", 
          }, 
-         Description = "", 
          Sector = "city", 
+      }, 
+      [801] = 
+      {
+         Name = "In the heart of Kala'uun Spaceport", 
+         TeleDelay = 0, 
+         Description = "", 
+         Vnum = 801, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
+               DestinationVnum = 802, 
+               Direction = "north", 
                Description = "", 
-               Direction = "west", 
-               DestinationVnum = 801, 
                Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 800, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 805, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Spaceport Landing Pad", 
+         Tunnel = 0, 
+         Sector = "city", 
+      }, 
+      [802] = 
+      {
+         Name = "Gira'haad Cantina.", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
                Code = "", 
                Arguments = "100", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [801] = 
-      {
-         Vnum = 801, 
          Description = "", 
-         Sector = "city", 
+         Vnum = 802, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 804, 
                Direction = "north", 
-               DestinationVnum = 802, 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
+               DestinationVnum = 801, 
+               Direction = "south", 
                Description = "", 
-               Direction = "east", 
-               DestinationVnum = 800, 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 803, 
                Direction = "west", 
-               DestinationVnum = 805, 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "In the heart of Kala'uun Spaceport", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [802] = 
-      {
-         Vnum = 802, 
+         Tunnel = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 804, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 801, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 803, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Gira'haad Cantina.", 
+      }, 
+      [803] = 
+      {
+         Name = "A cramped booth", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "", 
-               Arguments = "100", 
                MudProgType = "rand_prog", 
+               Code = "mpechoat $n &gA Small Cock-a-Roach skitters past your boot...\
+", 
+               Arguments = "100", 
             }, 
          }, 
-         Tunnel = 0, 
+         Description = "You can refine spice here.\
+", 
+         Vnum = 803, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 802, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 804, 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [803] = 
-      {
-         Vnum = 803, 
+         Tunnel = 0, 
          Flags = 
          {
             [25] = "Refinery", 
             [3] = "Indoors", 
          }, 
-         Description = "You can refine spice here.\
-", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 802, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "northeast", 
-               DestinationVnum = 804, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "A cramped booth", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpechoat $n &gA Small Cock-a-Roach skitters past your boot...\
-", 
-               Arguments = "100", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [804] = 
       {
-         Vnum = 804, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Description = "", 
-         Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 802, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "southwest", 
-               DestinationVnum = 803, 
-               Distance = 0, 
-            }, 
-         }, 
          Name = "Gira'haad's Counter", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
                Code = "mpechoat $n &gThe hustle and bustle of the bar gets a bit louder...\
 ", 
                Arguments = "100", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
+         Description = "", 
+         Vnum = 804, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 802, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 803, 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
       }, 
       [805] = 
       {
-         Vnum = 805, 
-         Description = "", 
-         Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 801, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 806, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 816, 
-               Distance = 0, 
-            }, 
-         }, 
          Name = "Entrance to Kala'uun", 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Description = "", 
+         Vnum = 805, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 801, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 806, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 816, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [806] = 
       {
-         Vnum = 806, 
-         Description = "", 
-         Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 805, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "southwest", 
-               DestinationVnum = 807, 
-               Distance = 0, 
-            }, 
-         }, 
          Name = "Nuntav'ara Street", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
                Code = "", 
                Arguments = "100", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
+         Description = "", 
+         Vnum = 806, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 805, 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 807, 
+               Direction = "southwest", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [807] = 
       {
-         Vnum = 807, 
-         Description = "", 
-         Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 815, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "northeast", 
-               DestinationVnum = 806, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "southwest", 
-               DestinationVnum = 808, 
-               Distance = 0, 
-            }, 
-         }, 
          Name = "Nuntav'ara Street", 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Description = "", 
+         Vnum = 807, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [808] = 
-      {
-         Vnum = 808, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
+               DestinationVnum = 815, 
+               Direction = "east", 
                Description = "", 
-               Direction = "south", 
-               DestinationVnum = 809, 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
+               DestinationVnum = 806, 
+               Direction = "northeast", 
                Description = "", 
-               Direction = "west", 
-               DestinationVnum = 810, 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
+               DestinationVnum = 808, 
+               Direction = "southwest", 
                Description = "", 
-               Direction = "northeast", 
-               DestinationVnum = 807, 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
+         Tunnel = 0, 
+         Sector = "city", 
+      }, 
+      [808] = 
+      {
          Name = "Nuntav'ara Street", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
                Code = "", 
                Arguments = "100", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
+         Description = "", 
+         Vnum = 808, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 809, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 810, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 807, 
+               Direction = "northeast", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         Tunnel = 0, 
+         Sector = "city", 
       }, 
       [809] = 
       {
-         Vnum = 809, 
-         Flags = 
+         Name = "Ryloth Planetary Bank", 
+         TeleDelay = 0, 
+         MudProgs = 
          {
-            [8] = "Bank", 
-            [3] = "Indoors", 
+            [1] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "", 
+               Arguments = "", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "mpechoat $n The Fat Banker snickers under his breath.\
+mpechoat $n The Fat Banker says, \"Hello, there.  Just give all your credits\
+to\
+me.\"\
+mpechoat $n The Fat Banker guffaws loudly to nobody in particular.\
+", 
+               Arguments = "100", 
+            }, 
+            [3] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpecho &gThe clanging of exchanged credits fills the room...\
+", 
+               Arguments = "100", 
+            }, 
          }, 
          Description = "The Planetary Bank is one of the few bustling offices in town.  Mainly\
 because it's indoors, and offers it's residents an escape from the heat.\
@@ -1287,142 +1317,126 @@ the bankers uniform stand off near a table.  You dash over to him in hopes\
 that he can record your credit transactions.  Upon closer inspection, you\
 notice his uniform is not quite right...\
 ", 
-         Sector = "city", 
+         Vnum = 809, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 808, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Ryloth Planetary Bank", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "", 
-               Arguments = "", 
-               MudProgType = "all_greet_prog", 
-            }, 
-            [2] = 
-            {
-               Code = "mpechoat $n The Fat Banker snickers under his breath.\
-mpechoat $n The Fat Banker says, \"Hello, there.  Just give all your credits\
-to\
-me.\"\
-mpechoat $n The Fat Banker guffaws loudly to nobody in particular.\
-", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-            }, 
-            [3] = 
-            {
-               Code = "mpecho &gThe clanging of exchanged credits fills the room...\
-", 
-               Arguments = "100", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [8] = "Bank", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
       }, 
       [810] = 
       {
-         Vnum = 810, 
-         Description = "", 
-         Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 811, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 808, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "northwest", 
-               DestinationVnum = 813, 
-               Distance = 0, 
-            }, 
-         }, 
          Name = "Nuntav'ara Street", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
                Code = "", 
                Arguments = "100", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
+         Description = "", 
+         Vnum = 810, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [811] = 
-      {
-         Vnum = 811, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
+               DestinationVnum = 811, 
+               Direction = "north", 
                Description = "", 
-               Direction = "south", 
-               DestinationVnum = 810, 
                Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 808, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 813, 
+               Direction = "northwest", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Fal'vira Ryll Clinic", 
          Tunnel = 0, 
+         Sector = "city", 
+      }, 
+      [811] = 
+      {
+         Name = "Fal'vira Ryll Clinic", 
+         TeleDelay = 0, 
+         Description = "", 
+         Vnum = 811, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 810, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
       }, 
       [812] = 
       {
-         Vnum = 812, 
-         Flags = 
+         Name = "Ryll Tank", 
+         TeleDelay = 0, 
+         MudProgs = 
          {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "feel 'cure serious' $n\
+mpechoat $n You feel the Ryll healing you slightly.\
+", 
+               Arguments = "100", 
+            }, 
          }, 
          Description = "Well, you've made it into a ryll tank.  Once you get in here, you notice\
 something is clearly different from most bacta tanks. While in bacta, your\
@@ -1431,488 +1445,478 @@ little while longer.  It certainly feels better than bacta somehow, and\
 you are comforted by the fact that you won't be tasting bacta in your\
 mouth for weeks to come.\
 ", 
-         Sector = "city", 
+         Vnum = 812, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 849, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Ryll Tank", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "feel 'cure serious' $n\
-mpechoat $n You feel the Ryll healing you slightly.\
-", 
-               Arguments = "100", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Tunnel = 1, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 1, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "city", 
       }, 
       [813] = 
       {
-         Vnum = 813, 
-         Flags = 
+         Name = "A Dark alley.", 
+         TeleDelay = 0, 
+         MudProgs = 
          {
-            [0] = "Dark", 
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "mpechoat $n &gAn unidentified rodent skitters by your feet...\
+", 
+               Arguments = "100", 
+            }, 
          }, 
          Description = "DO NOT GO NORTHWEST UNLESS YOU FEEL VERY COMFORTABLE ABOUT YOUR FIGHTING\
 SKILLS!!!\
 ", 
-         Sector = "city", 
+         Vnum = 813, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "northwest", 
                DestinationVnum = 814, 
+               Direction = "northwest", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "southeast", 
                DestinationVnum = 810, 
+               Direction = "southeast", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "A Dark alley.", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpechoat $n &gAn unidentified rodent skitters by your feet...\
-", 
-               Arguments = "100", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [814] = 
-      {
-         Vnum = 814, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "southeast", 
-               DestinationVnum = 813, 
-               Distance = 0, 
-            }, 
-         }, 
+      }, 
+      [814] = 
+      {
          Name = "A Dead End", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
                Code = "", 
                Arguments = "100", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
+         Description = "", 
+         Vnum = 814, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 813, 
+               Direction = "southeast", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [0] = "Dark", 
+         }, 
+         Sector = "city", 
       }, 
       [815] = 
       {
-         Vnum = 815, 
-         Description = "", 
-         Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 807, 
-               Distance = 0, 
-            }, 
-         }, 
          Name = "Tam'arr Food Bar.", 
-         Tunnel = 0, 
+         TeleDelay = 0, 
+         Description = "", 
+         Vnum = 815, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [816] = 
-      {
-         Vnum = 816, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
+               DestinationVnum = 807, 
+               Direction = "west", 
                Description = "", 
-               Direction = "east", 
-               DestinationVnum = 805, 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
+         Tunnel = 0, 
+         Sector = "city", 
+      }, 
+      [816] = 
+      {
          Name = "Malachu Market", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "", 
-               Arguments = "100", 
                MudProgType = "rand_prog", 
-            }, 
-            [2] = 
-            {
                Code = "mpechoat $n &bWater rises from the plaza fountain blasting 50 meters in the\
 mpechoat $n &bair and falling back down into the tiny pool...\
 ", 
                Arguments = "100", 
+            }, 
+            [2] = 
+            {
                MudProgType = "rand_prog", 
+               Code = "", 
+               Arguments = "100", 
             }, 
          }, 
-         Tunnel = 0, 
+         Description = "", 
+         Vnum = 816, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 805, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Sector = "city", 
       }, 
       [817] = 
       {
-         Vnum = 817, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Name = "The Komlinks of Kookab'urra", 
+         TeleDelay = 0, 
          Description = "", 
-         Sector = "city", 
+         Vnum = 817, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 846, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "The Komlinks of Kookab'urra", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [818] = 
-      {
-         Vnum = 818, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
          Sector = "city", 
+      }, 
+      [818] = 
+      {
+         Name = "Power Cell Kiosk", 
+         TeleDelay = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "", 
+               Arguments = "100", 
+            }, 
+         }, 
+         Description = "", 
+         Vnum = 818, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 848, 
                Direction = "west", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               DestinationVnum = 848, 
-               Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "spice", 
-               Description = "", 
+               DestinationVnum = 820, 
                Direction = "somewhere", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [19] = "Auto", 
                   [11] = "Hidden", 
                }, 
-               DestinationVnum = 820, 
-               Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Power Cell Kiosk", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "", 
-               Arguments = "100", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [819] = 
-      {
-         Vnum = 819, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
          Sector = "city", 
+      }, 
+      [819] = 
+      {
+         Name = "Sal'mara Shields.", 
+         TeleDelay = 0, 
+         Description = "", 
+         Vnum = 819, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 847, 
                Direction = "west", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               DestinationVnum = 847, 
-               Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Sal'mara Shields.", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [820] = 
-      {
-         Vnum = 820, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "southeast", 
-               DestinationVnum = 818, 
-               Distance = 0, 
-            }, 
-         }, 
+      }, 
+      [820] = 
+      {
          Name = "A Raw Ryll Depository.", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
                Code = "", 
                Arguments = "100", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [821] = 
-      {
-         Vnum = 821, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [23] = "Hotel", 
-         }, 
-         Description = "Amenities here are spare.  This hostel is strictly for getting much needed\
-rest for non-twl'lek travelers, since no aliens are allowed into the\
-warrens. Two rooms and one commons is provided.\
-", 
-         Sector = "city", 
+         Description = "", 
+         Vnum = 820, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
+               DestinationVnum = 818, 
+               Direction = "southeast", 
                Description = "", 
-               Direction = "east", 
-               DestinationVnum = 880, 
                Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Sector = "city", 
+      }, 
+      [821] = 
+      {
+         Name = "Kala'uun Hostel.", 
+         TeleDelay = 0, 
+         Description = "Amenities here are spare.  This hostel is strictly for getting much needed\
+rest for non-twl'lek travelers, since no aliens are allowed into the\
+warrens. Two rooms and one commons is provided.\
+", 
+         Vnum = 821, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 880, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 881, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 822, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Key = -1, 
                Keyword = "pluogusnow", 
-               Description = "", 
+               DestinationVnum = 32149, 
                Direction = "somewhere", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [19] = "Auto", 
                   [11] = "Hidden", 
                   [3] = "Secret", 
                }, 
-               DestinationVnum = 32149, 
-               Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Hostel.", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [23] = "Hotel", 
+         }, 
+         Sector = "city", 
       }, 
       [822] = 
       {
-         Vnum = 822, 
-         Flags = 
+         Name = "Kala'uun Starport : Serin Landing Bay", 
+         TeleDelay = 0, 
+         MudProgs = 
          {
-            [4] = "CanLand", 
-            [5] = "CanFly", 
-            [2] = "NoMob", 
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "", 
+               Arguments = "100", 
+            }, 
          }, 
          Description = "The starport is a colossil cavern which had been hollowed out out of the\
 heart of the mountain that sheltered it. Above the landing area lay level\
 upon level of Twi'lek clan warrens, comprising the living quarters and\
 work areas of over 100,00 Twi'leks.\
 ", 
-         Sector = "city", 
+         Vnum = 822, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 821, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 823, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "northwest", 
                DestinationVnum = 824, 
+               Direction = "northwest", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Serin Landing Bay", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "", 
-               Arguments = "100", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [4] = "CanLand", 
+            [5] = "CanFly", 
+            [2] = "NoMob", 
+         }, 
+         Sector = "city", 
       }, 
       [823] = 
       {
-         Vnum = 823, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Name = "Kala'uun Starport : Landing Bay", 
+         TeleDelay = 0, 
          Description = "The starport is a colossil cavern which had been hollowed out out of the\
 heart of the mountain that sheltered it. Above the landing area lay level\
 upon level of Twi'lek clan warrens, comprising the living quarters and\
@@ -1920,211 +1924,160 @@ work areas of over 100,00 Twi'leks.    This section of the Starport is\
 reserved for Twi'lek Clan ships. Mostly this consists of merchant vessels,\
 but occasionally a starfighter of various kind will land here.\
 ", 
-         Sector = "city", 
+         Vnum = 823, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 822, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "northeast", 
                DestinationVnum = 824, 
+               Direction = "northeast", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Landing Bay", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [824] = 
-      {
-         Vnum = 824, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
+         }, 
+         Sector = "city", 
+      }, 
+      [824] = 
+      {
+         Name = "Kala'uun Starport", 
+         TeleDelay = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "", 
+               Arguments = "100", 
+            }, 
          }, 
          Description = "The starport is a colossil cavern which had been hollowed out out of the\
 heart of the mountain that sheltered it. Above the landing area lay level\
 upon level of Twi'lek clan warrens, comprising the living quarters and\
 work areas of over 100,00 Twi'leks. \
 ", 
-         Sector = "city", 
+         Vnum = 824, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 825, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "southeast", 
                DestinationVnum = 822, 
+               Direction = "southeast", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "southwest", 
                DestinationVnum = 823, 
+               Direction = "southwest", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "", 
-               Arguments = "100", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [825] = 
-      {
-         Vnum = 825, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         Sector = "city", 
+      }, 
+      [825] = 
+      {
+         Name = "Kala'uun Starport : Warren Entrance", 
+         TeleDelay = 0, 
          Description = "The starport is a colossil cavern which had been hollowed out out of the\
 heart of the mountain that sheltered it. Above the landing area lay level\
 upon level of Twi'lek clan warrens, comprising the living quarters and\
 work areas of over 100,00 Twi'leks.   The areas beyond this are private.\
 Only Twi'lek clan members are allowedibeyond here. \
 ", 
-         Sector = "city", 
+         Vnum = 825, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 824, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "up", 
                DestinationVnum = 826, 
+               Direction = "up", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "down", 
                DestinationVnum = 854, 
+               Direction = "down", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Warren Entrance", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [826] = 
-      {
-         Vnum = 826, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "The stair case you climb brings you to a hallway. Hollowed out of stone,\
-the hallway is lighted by glowrods attached to the ceiling. To the west\
-lies the thousands of warrens where the Twi'lek clans live. To the east\
-lies the shops where one can buy what one needs. \
-", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 844, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 827, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "up", 
-               DestinationVnum = 850, 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "down", 
-               DestinationVnum = 825, 
-               Distance = 0, 
-            }, 
-         }, 
+      }, 
+      [826] = 
+      {
          Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "", 
-               Arguments = "100", 
-               MudProgType = "rand_prog", 
-            }, 
-            [2] = 
-            {
+               MudProgType = "entry_prog", 
                Code = "if isimmort($n)\
 else\
 if race($n) == twi'lek\
@@ -2135,1550 +2088,1640 @@ endif\
 endif\
 ", 
                Arguments = "100", 
-               MudProgType = "entry_prog", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "rand_prog", 
+               Code = "", 
+               Arguments = "100", 
             }, 
          }, 
-         Tunnel = 0, 
+         Description = "The stair case you climb brings you to a hallway. Hollowed out of stone,\
+the hallway is lighted by glowrods attached to the ceiling. To the west\
+lies the thousands of warrens where the Twi'lek clans live. To the east\
+lies the shops where one can buy what one needs. \
+", 
+         Vnum = 826, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 844, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 827, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 850, 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [4] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 825, 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Sector = "city", 
       }, 
       [827] = 
       {
-         Vnum = 827, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
          Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
 ceiling.\
 ", 
-         Sector = "city", 
+         Vnum = 827, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 826, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 828, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [828] = 
-      {
-         Vnum = 828, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
-ceiling.\
-", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 827, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 829, 
-               Distance = 0, 
-            }, 
-         }, 
+      }, 
+      [828] = 
+      {
          Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
                Code = "", 
                Arguments = "100", 
-               MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
+         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
+ceiling.\
+", 
+         Vnum = 828, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 827, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 829, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Sector = "city", 
       }, 
       [829] = 
       {
-         Vnum = 829, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
          Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
 ceiling.\
 ", 
-         Sector = "city", 
+         Vnum = 829, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 828, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 835, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 830, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Sector = "city", 
       }, 
       [830] = 
       {
-         Vnum = 830, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
          Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to\
 the ceiling.\
 ", 
-         Sector = "city", 
+         Vnum = 830, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 829, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 836, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 831, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Sector = "city", 
       }, 
       [831] = 
       {
-         Vnum = 831, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
          Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
 ceiling.\
 ", 
-         Sector = "city", 
+         Vnum = 831, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 830, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 837, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 832, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 842, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [832] = 
       {
-         Vnum = 832, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
          Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
 ceiling.\
 ", 
-         Sector = "city", 
+         Vnum = 832, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 831, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 838, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 833, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 841, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [833] = 
       {
-         Vnum = 833, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
          Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
 ceiling.\
 ", 
-         Sector = "city", 
+         Vnum = 833, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 832, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 839, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 834, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [4] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 840, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [834] = 
       {
+         Name = "An Empty Home", 
+         TeleDelay = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 834, 
-         Flags = 
-         {
-            [21] = "EmptyHome", 
-            [30] = "Prototype", 
-            [23] = "Hotel", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 833, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "An Empty Warren", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
       }, 
       [835] = 
       {
+         Name = "An Empty Home", 
+         TeleDelay = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 835, 
-         Flags = 
-         {
-            [21] = "EmptyHome", 
-            [30] = "Prototype", 
-            [23] = "Hotel", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 822, 
                Direction = "east", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               DestinationVnum = 822, 
-               Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 829, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "An Empty Apartment", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
       }, 
       [836] = 
       {
+         Name = "An Empty Home", 
+         TeleDelay = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 836, 
-         Flags = 
-         {
-            [21] = "EmptyHome", 
-            [30] = "Prototype", 
-            [23] = "Hotel", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 822, 
                Direction = "east", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               DestinationVnum = 822, 
-               Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 830, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "An Empty Warren", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
       }, 
       [837] = 
       {
+         Name = "An Empty Home", 
+         TeleDelay = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 837, 
-         Flags = 
-         {
-            [21] = "EmptyHome", 
-            [30] = "Prototype", 
-            [23] = "Hotel", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 822, 
                Direction = "east", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               DestinationVnum = 822, 
-               Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 831, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "An Empty Apartment", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
       }, 
       [838] = 
       {
+         Name = "An Empty Home", 
+         TeleDelay = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 838, 
-         Flags = 
-         {
-            [21] = "EmptyHome", 
-            [30] = "Prototype", 
-            [23] = "Hotel", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 822, 
                Direction = "east", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               DestinationVnum = 822, 
-               Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 832, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "An Empty Warren", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
       }, 
       [839] = 
       {
+         Name = "An Empty Home", 
+         TeleDelay = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 839, 
-         Flags = 
-         {
-            [21] = "EmptyHome", 
-            [30] = "Prototype", 
-            [23] = "Hotel", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 822, 
                Direction = "east", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               DestinationVnum = 822, 
-               Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 833, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "An Empty Warren", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
       }, 
       [840] = 
       {
+         Name = "An Empty Home", 
+         TeleDelay = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 840, 
-         Flags = 
-         {
-            [21] = "EmptyHome", 
-            [30] = "Prototype", 
-            [23] = "Hotel", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 833, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "An Empty Warren", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
       }, 
       [841] = 
       {
+         Name = "An Empty Home", 
+         TeleDelay = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 841, 
-         Flags = 
-         {
-            [21] = "EmptyHome", 
-            [30] = "Prototype", 
-            [23] = "Hotel", 
-         }, 
-         Description = "", 
-         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 832, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "An Empty Warren", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [23] = "Hotel", 
+            [3] = "Indoors", 
+         }, 
+         Sector = "inside", 
       }, 
       [842] = 
       {
-         Vnum = 842, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
+         Name = "Butcher", 
+         TeleDelay = 0, 
          Description = "", 
-         Sector = "city", 
+         Vnum = 842, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 843, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 831, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Butcher", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [843] = 
       {
-         Vnum = 843, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
+         Name = "Meat Locker", 
+         TeleDelay = 0, 
          Description = "", 
-         Sector = "city", 
+         Vnum = 843, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 842, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Meat Locker", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [844] = 
       {
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
+         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
+ceiling. \
+", 
          Vnum = 844, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 845, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 826, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
-ceiling. \
-", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 845, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 826, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [845] = 
       {
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
+         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
+ceiling. \
+", 
          Vnum = 845, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 846, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 844, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
-ceiling. \
-", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 846, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 844, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [846] = 
       {
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
+         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
+ceiling. \
+", 
          Vnum = 846, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 845, 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 817, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 847, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
-ceiling. \
-", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 845, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 817, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 847, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [847] = 
       {
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
+         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
+ceiling. \
+", 
          Vnum = 847, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 846, 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 819, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 848, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
-ceiling. \
-", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 846, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 819, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 848, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [848] = 
       {
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
+         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
+ceiling. \
+", 
          Vnum = 848, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 847, 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 818, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 849, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
-ceiling. \
-", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 847, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 818, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 849, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [849] = 
       {
-         Vnum = 849, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
+         Name = "Kala'uun Starport : Warrens", 
+         TeleDelay = 0, 
          Description = "Hollowed out of stone, the hallway is lighted by glowrods attached to the\
 ceiling. \
 ", 
-         Sector = "city", 
+         Vnum = 849, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 848, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 812, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Warrens", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [850] = 
       {
-         Vnum = 850, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
+         Name = "Kala'uun Starport : Work Area", 
+         TeleDelay = 0, 
          Description = "The stair case you climb brings you to a hallway. Hollowed out of stone,\
 the hallway is lighted by glowrods attached to the ceiling. Thousands of\
 twi'leks move in and out of this area, where things are built and pieces\
 of hardware are sold.\
 ", 
-         Sector = "city", 
+         Vnum = 850, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 851, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "up", 
                DestinationVnum = 875, 
+               Direction = "up", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "down", 
                DestinationVnum = 826, 
+               Direction = "down", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Work Area", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [851] = 
       {
-         Vnum = 851, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
+         Name = "Kala'uun Starport : Work Area", 
+         TeleDelay = 0, 
          Description = "The stair case you climb brings you to a hallway. Hollowed out of stone,\
 the hallway is lighted by glowrods attached to the ceiling. Thousands of\
 twi'leks move in and out of this area, where things are built and pieces\
 of hardware are sold.\
 ", 
-         Sector = "city", 
+         Vnum = 851, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 852, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 850, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 853, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Work Area", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [852] = 
       {
+         Name = "Workshop", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 852, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 879, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 851, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [30] = "Prototype", 
             [26] = "Factory", 
             [2] = "NoMob", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 879, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 851, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Workshop", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [853] = 
       {
+         Name = "Hardware", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 853, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 851, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [30] = "Prototype", 
             [26] = "Factory", 
             [2] = "NoMob", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 851, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Hardware", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [854] = 
       {
+         Name = "A Dark Tunnel", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 854, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 855, 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 825, 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 855, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "up", 
-               DestinationVnum = 825, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "A Dark Tunnel", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [855] = 
       {
+         Name = "A Dark Tunnel", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 855, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 856, 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 854, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 856, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 854, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "A Dark Tunnel", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [856] = 
       {
+         Name = "A Dark Tunnel", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 856, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 857, 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 855, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 857, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 855, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "A Dark Tunnel", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [857] = 
       {
+         Name = "A Dark Tunnel", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 857, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 858, 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 856, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 858, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 856, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "A Dark Tunnel", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [858] = 
       {
-         Vnum = 858, 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
+         Name = "A Dark Tunnel", 
+         TeleDelay = 0, 
          Description = "", 
-         Sector = "city", 
+         Vnum = 858, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 859, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 857, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "A Dark Tunnel", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [859] = 
-      {
-         Vnum = 859, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
+      }, 
+      [859] = 
+      {
+         Name = "A Dark Tunnel", 
+         TeleDelay = 0, 
+         Description = "", 
+         Vnum = 859, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 858, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "Mines", 
-               Description = "", 
+               DestinationVnum = 860, 
                Direction = "somewhere", 
+               Distance = 0, 
+               Description = "", 
                Flags = 
                {
                   [19] = "Auto", 
                }, 
-               DestinationVnum = 860, 
-               Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "A Dark Tunnel", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [860] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 860, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 861, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 859, 
+               Direction = "south", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 863, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 861, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "south", 
-               DestinationVnum = 859, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 863, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [861] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 861, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 862, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 860, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 865, 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 862, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 860, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "down", 
-               DestinationVnum = 865, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [862] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 862, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 861, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
@@ -3686,80 +3729,80 @@ of hardware are sold.\
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 861, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [863] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 863, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 860, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 864, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 867, 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
+      }, 
+      [864] = 
+      {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
+         Vnum = 864, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
+               DestinationVnum = 863, 
                Direction = "east", 
-               DestinationVnum = 860, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
                Description = "", 
-               Direction = "west", 
-               DestinationVnum = 864, 
                Distance = 0, 
-            }, 
-            [3] = 
-            {
                Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "down", 
-               DestinationVnum = 867, 
-               Distance = 0, 
             }, 
          }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [864] = 
-      {
-         Vnum = 864, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
@@ -3767,1022 +3810,1013 @@ of hardware are sold.\
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 863, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [865] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 865, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 866, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 861, 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 872, 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 866, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "up", 
-               DestinationVnum = 861, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "down", 
-               DestinationVnum = 872, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [866] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 866, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 865, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 865, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [867] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 867, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 868, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 863, 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 870, 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 868, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "up", 
-               DestinationVnum = 863, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "down", 
-               DestinationVnum = 870, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [868] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 868, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 867, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 867, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [869] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 869, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 870, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 870, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [870] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 870, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 871, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 869, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 867, 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 871, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 869, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "up", 
-               DestinationVnum = 867, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [871] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 871, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 872, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 870, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 872, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 870, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [872] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 872, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 873, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 871, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [3] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 865, 
+               Direction = "up", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 873, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 871, 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "up", 
-               DestinationVnum = 865, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [873] = 
       {
+         Name = "Ryll Mines", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 873, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 872, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 872, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Ryll Mines", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [874] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 874, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [0] = "Dark", 
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [875] = 
       {
+         Name = "Kala'uun Starport : Academy", 
+         TeleDelay = 0, 
+         Description = "The stair case you climb brings you to a hallway. Hollowed out of stone,\
+the hallway is lighted by glowrods attached to the ceiling. Twi'leks come\
+here to train before going out into the world. \
+", 
          Vnum = 875, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 876, 
+               Direction = "north", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+            [2] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 850, 
+               Direction = "down", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "The stair case you climb brings you to a hallway. Hollowed out of stone,\
-the hallway is lighted by glowrods attached to the ceiling. Twi'leks come\
-here to train before going out into the world. \
-", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "north", 
-               DestinationVnum = 876, 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "down", 
-               DestinationVnum = 850, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Kala'uun Starport : Academy", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [876] = 
       {
-         Vnum = 876, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
+         Name = "Kala'uun Starport : Academy", 
+         TeleDelay = 0, 
          Description = "The stair case you climb brings you to a hallway. Hollowed out of stone,\
 the hallway is lighted by glowrods attached to the ceiling. Twi'leks come\
 here to train before going out into the world. \
 ", 
-         Sector = "city", 
+         Vnum = 876, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "east", 
                DestinationVnum = 878, 
+               Direction = "east", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 875, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [3] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 877, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Kala'uun Starport : Academy", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [877] = 
       {
+         Name = "Kala'uun Starport : Academy Training", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 877, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 876, 
+               Direction = "east", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "east", 
-               DestinationVnum = 876, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Kala'uun Starport : Academy Training", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [878] = 
       {
+         Name = "Kala'uun Starport : Combat Skills", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 878, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Keyword = "", 
+               DestinationVnum = 876, 
+               Direction = "west", 
+               Description = "", 
+               Distance = 0, 
+               Key = -1, 
+            }, 
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Description = "", 
-               Direction = "west", 
-               DestinationVnum = 876, 
-               Distance = 0, 
-            }, 
-         }, 
-         Name = "Kala'uun Starport : Combat Skills", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [879] = 
       {
-         Vnum = 879, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
+         Name = "Compactor", 
+         TeleDelay = 0, 
          Description = "", 
-         Sector = "city", 
+         Vnum = 879, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 852, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Compactor", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [880] = 
-      {
-         Vnum = 880, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         Sector = "city", 
+      }, 
+      [880] = 
+      {
+         Name = "Hostel Commons", 
+         TeleDelay = 0, 
          Description = "The hostel commons is simply an area where travelers can get food and drink\
 for cheap prices. It is small and crowded with tables.  A fireplace sits\
 near the bar, and a bartender waits on your order. \
 ", 
-         Sector = "city", 
+         Vnum = 880, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "south", 
                DestinationVnum = 882, 
+               Direction = "south", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
             [2] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "west", 
                DestinationVnum = 821, 
+               Direction = "west", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Hostel Commons", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+         Sector = "city", 
       }, 
       [881] = 
       {
-         Vnum = 881, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-            [2] = "NoMob", 
-            [23] = "Hotel", 
-         }, 
+         Name = "Hostel Room", 
+         TeleDelay = 0, 
          Description = "Small and cramped, the room will fit a family of 4 in 2 beds, with little\
 space to spare.\
 ", 
-         Sector = "city", 
+         Vnum = 881, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 821, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Hostel Room", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
-      }, 
-      [882] = 
-      {
-         Vnum = 882, 
+         Tunnel = 0, 
          Flags = 
          {
             [30] = "Prototype", 
             [2] = "NoMob", 
             [23] = "Hotel", 
          }, 
+         Sector = "city", 
+      }, 
+      [882] = 
+      {
+         Name = "Hostel Room", 
+         TeleDelay = 0, 
          Description = "Small and cramped, the room will fit a family of 4 in 2 beds, with little\
 space to spare. \
 ", 
-         Sector = "city", 
+         Vnum = 882, 
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
                Keyword = "", 
-               Description = "", 
-               Direction = "north", 
                DestinationVnum = 880, 
+               Direction = "north", 
+               Description = "", 
                Distance = 0, 
+               Key = -1, 
             }, 
          }, 
-         Name = "Hostel Room", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+            [2] = "NoMob", 
+            [23] = "Hotel", 
+         }, 
+         Sector = "city", 
       }, 
       [883] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 883, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [884] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 884, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [885] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 885, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [886] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 886, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [887] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 887, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [888] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 888, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [889] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 889, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [890] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 890, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [891] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 891, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [892] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 892, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [893] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 893, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
       [894] = 
       {
-         Vnum = 894, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
          Description = "", 
-         Sector = "city", 
+         Vnum = 894, 
          Exits = 
          {
          }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
          TeleVnum = 0, 
-         TeleDelay = 0, 
+         Tunnel = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Sector = "city", 
       }, 
       [895] = 
       {
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
+         Description = "", 
          Vnum = 895, 
+         Exits = 
+         {
+         }, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
          Sector = "city", 
-         Exits = 
-         {
-         }, 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleVnum = 0, 
-         TeleDelay = 0, 
       }, 
    }, 
-   HighEconomy = 0, 
    Mobiles = 
    {
       [800] = 
       {
+         NumberOfAttacks = 0, 
+         Name = "twi'lek", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Credits = 0, 
+         AffectedBy = 
+         {
+            [9] = "Infrared", 
+         }, 
          Vnum = 800, 
+         Weight = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
+         DefaultPosition = "standing", 
+         ArmorClass = -160, 
          LongDescr = "A twi'lek works hard refining ryll here.\
 ", 
-         Race = "Twi'lek", 
-         Alignment = 0, 
-         ShortDescr = "a twi'lek", 
-         Stats = 
+         HitChance = 
          {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
+            HitNoDice = 21, 
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         ArmorClass = -160, 
-         Description = "", 
+         Race = "Twi'lek", 
+         Level = 104, 
          SaveVs = 
          {
             Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
             PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         DefenseFlags = 
+         Stats = 
          {
-            [1] = "dodge", 
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
          }, 
+         Alignment = 0, 
          DamRoll = 21, 
-         NumberOfAttacks = 0, 
-         HitRoll = 23, 
-         Name = "twi'lek", 
          Languages = 
          {
             Speaking = 
@@ -4796,80 +4830,40 @@ space to spare. \
                [2] = "twileki", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 10, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Level = 104, 
-         Sex = "undistinguished", 
-         AffectedBy = 
-         {
-            [9] = "Infrared", 
-         }, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 21, 
-            HitPlus = 1050, 
-         }, 
-         Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-      }, 
-      [801] = 
-      {
-         Vnum = 801, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
-         }, 
-         LongDescr = "A twi'lek sells hardware equipment while he works.\
-", 
-         Race = "Twi'lek", 
-         Alignment = 0, 
-         ShortDescr = "a twi'lek", 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
          Position = "standing", 
-         DamRoll = 0, 
+         HitRoll = 23, 
          Height = 0, 
-         ArmorClass = -160, 
-         Description = "", 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
+         Sex = "undistinguished", 
+         ShortDescr = "a twi'lek", 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
+      }, 
+      [801] = 
+      {
+         NumberOfAttacks = 0, 
+         Name = "twi'lek", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Credits = 0, 
+         AffectedBy = 
+         {
+            [9] = "Infrared", 
+         }, 
+         Vnum = 801, 
          Shop = 
          {
             BusinessHours = 
             {
-               Open = 0, 
                Close = 23, 
+               Open = 0, 
             }, 
-            ProfitBuy = 120, 
-            ProfitSell = 90, 
             KeeperShortDescr = "a twi'lek", 
             BuyTypes = 
             {
@@ -4879,227 +4873,10 @@ space to spare. \
                [4] = "none", 
                [0] = "none", 
             }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
          }, 
-         NumberOfAttacks = 0, 
-         HitRoll = 0, 
-         Name = "twi'lek", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [2] = "twileki", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [2] = "twileki", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 10, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Level = 104, 
-         Sex = "undistinguished", 
-         AffectedBy = 
-         {
-            [9] = "Infrared", 
-         }, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 21, 
-            HitPlus = 1050, 
-         }, 
-         Credits = 0, 
-         DefaultPosition = "standing", 
          Weight = 0, 
-      }, 
-      [802] = 
-      {
-         Vnum = 802, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [9] = "Train", 
-            [30] = "Prototype", 
-         }, 
-         LongDescr = "A twi'lek is here to help develop your abilities\
-", 
-         Race = "Twi'lek", 
-         Alignment = 0, 
-         ShortDescr = "a twi'lek", 
-         Stats = 
-         {
-            Wisdom = 25, 
-            Charisma = 25, 
-            Force = 0, 
-            Intelligence = 25, 
-            Luck = 10, 
-            Constitution = 25, 
-            Strength = 25, 
-            Dexterity = 25, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         ArmorClass = -160, 
-         Description = "", 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         HitRoll = 0, 
-         Name = "a twi'lek stat trainer", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [2] = "twileki", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [2] = "twileki", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 10, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Level = 104, 
-         Sex = "undistinguished", 
-         AffectedBy = 
-         {
-            [9] = "Infrared", 
-         }, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 21, 
-            HitPlus = 1050, 
-         }, 
-         Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-      }, 
-      [803] = 
-      {
-         Vnum = 803, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         LongDescr = "A twi'lek goes through the trash, preparing for compaction.\
-", 
-         Race = "Twi'lek", 
-         Alignment = 0, 
-         ShortDescr = "a twi'lek", 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
-         Position = "standing", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho The Janitor ushers you out as the walls begin to close\
-mppurge\
-mpecho You are allowed back in after the cycle is complete. \
-", 
-               Arguments = "compact", 
-               MudProgType = "speech_prog", 
-            }, 
-            [2] = 
-            {
-               Code = "mpecho The janitor ushers you out as the walls begin to close.\
-mppurge\
-mpecho You are allowed back in after the cycle is complete.\
-", 
-               Arguments = "25", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
-         Height = 0, 
-         ArmorClass = -160, 
-         Description = "", 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         HitRoll = 0, 
-         Name = "a twilek janitor", 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [2] = "twileki", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [2] = "twileki", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 10, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Level = 104, 
-         Sex = "undistinguished", 
-         AffectedBy = 
-         {
-            [9] = "Infrared", 
-         }, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 21, 
-            HitPlus = 1050, 
-         }, 
-         Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-      }, 
-      [899] = 
-      {
-         Vnum = 899, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -5107,34 +4884,281 @@ mpecho You are allowed back in after the cycle is complete.\
             [25] = "NoKill", 
             [30] = "Prototype", 
          }, 
-         LongDescr = "Gira'haad waits to take your order.\
+         DefaultPosition = "standing", 
+         ArmorClass = -160, 
+         LongDescr = "A twi'lek sells hardware equipment while he works.\
 ", 
+         HitChance = 
+         {
+            HitNoDice = 21, 
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
+         }, 
          Race = "Twi'lek", 
-         Alignment = 0, 
-         ShortDescr = "Gira'haad the Bartender", 
+         Level = 104, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
          Stats = 
          {
-            Wisdom = 10, 
-            Charisma = 10, 
+            Wisdom = 0, 
             Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
+         }, 
+         Alignment = 0, 
+         DamRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [2] = "twileki", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [2] = "twileki", 
+            }, 
          }, 
          Position = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
+         HitRoll = 0, 
          Height = 0, 
-         ArmorClass = -75, 
+         Sex = "undistinguished", 
+         ShortDescr = "a twi'lek", 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+      }, 
+      [802] = 
+      {
+         NumberOfAttacks = 0, 
+         Name = "a twi'lek stat trainer", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Credits = 0, 
+         AffectedBy = 
+         {
+            [9] = "Infrared", 
+         }, 
+         Vnum = 802, 
+         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [9] = "Train", 
+            [30] = "Prototype", 
+         }, 
+         DefaultPosition = "standing", 
+         ArmorClass = -160, 
+         LongDescr = "A twi'lek is here to help develop your abilities\
+", 
+         HitChance = 
+         {
+            HitNoDice = 21, 
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
+         }, 
+         Race = "Twi'lek", 
+         Level = 104, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
+         }, 
+         Alignment = 0, 
+         DamRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [2] = "twileki", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [2] = "twileki", 
+            }, 
+         }, 
+         Position = "standing", 
+         HitRoll = 0, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         ShortDescr = "a twi'lek", 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+      }, 
+      [803] = 
+      {
+         NumberOfAttacks = 0, 
+         Name = "a twilek janitor", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 10, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Credits = 0, 
+         AffectedBy = 
+         {
+            [9] = "Infrared", 
+         }, 
+         Vnum = 803, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "rand_prog", 
+               Code = "mpecho The janitor ushers you out as the walls begin to close.\
+mppurge\
+mpecho You are allowed back in after the cycle is complete.\
+", 
+               Arguments = "25", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "mpecho The Janitor ushers you out as the walls begin to close\
+mppurge\
+mpecho You are allowed back in after the cycle is complete. \
+", 
+               Arguments = "compact", 
+            }, 
+         }, 
+         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         DefaultPosition = "standing", 
+         ArmorClass = -160, 
+         LongDescr = "A twi'lek goes through the trash, preparing for compaction.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 21, 
+            HitPlus = 1050, 
+            HitSizeDice = 10, 
+         }, 
+         Race = "Twi'lek", 
+         Level = 104, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
+         }, 
+         Alignment = 0, 
+         DamRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [2] = "twileki", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [2] = "twileki", 
+            }, 
+         }, 
+         Position = "standing", 
+         HitRoll = 0, 
+         Height = 0, 
+         Sex = "undistinguished", 
+         ShortDescr = "a twi'lek", 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+      }, 
+      [899] = 
+      {
+         NumberOfAttacks = 0, 
+         Name = "Gira'haad", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 7, 
+            DamPlus = 2, 
+         }, 
+         Description = "Gira'haad is a weathered Twi'lek female.  You can tell she has been running\
+this cantina for a long time and is fed up with the everyday scum that\
+comes here. What keeps that lovely smile on her face?\
+", 
+         Sex = "female", 
+         Vnum = 899, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            KeeperShortDescr = "Gira'haad the Bartender", 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 50, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "bribe_prog", 
                Code = "say ooh, thanks Honey.  Here...\
 ,reaches down under the counter and rises with a stim of ryll.\
 mpoload 32230\
@@ -5143,19 +5167,19 @@ say This'll make you feel real good!\
 cackle\
 ", 
                Arguments = "50", 
-               MudProgType = "bribe_prog", 
             }, 
             [2] = 
             {
+               MudProgType = "speech_prog", 
                Code = ",looks up from the counter.\
 say Hello there, $n.  Can I get you something?  Some alcohol perhaps?\
 mpechoat $n Is that Ryll in her cloak pocket?\
 ", 
                Arguments = "Hi hello hey sup konichiwa shalom aloha hola", 
-               MudProgType = "speech_prog", 
             }, 
             [3] = 
             {
+               MudProgType = "act_prog", 
                Code = "if ovnuminv(2100) >= 1\
 'Ah, my special Ry...um, Ale.\
 giggle\
@@ -5168,40 +5192,53 @@ mpechoat $n &gThe Bitch forgot to pay you!\
 endif\
 ", 
                Arguments = "gives", 
-               MudProgType = "act_prog", 
             }, 
          }, 
+         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+         }, 
+         DefaultPosition = "standing", 
+         Race = "Twi'lek", 
+         LongDescr = "Gira'haad waits to take your order.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 14, 
+            HitPlus = 700, 
+            HitSizeDice = 10, 
+         }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
          Level = 70, 
+         ArmorClass = -75, 
          SaveVs = 
          {
             Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
             PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         Shop = 
+         Stats = 
          {
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            ProfitBuy = 120, 
-            ProfitSell = 50, 
-            KeeperShortDescr = "Gira'haad the Bartender", 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "spice", 
-            }, 
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
          }, 
          DamRoll = 14, 
-         HitRoll = 14, 
-         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -5215,68 +5252,50 @@ endif\
                [2] = "twileki", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Name = "Gira'haad", 
-         Description = "Gira'haad is a weathered Twi'lek female.  You can tell she has been running\
-this cantina for a long time and is fed up with the everyday scum that\
-comes here. What keeps that lovely smile on her face?\
-", 
-         Sex = "female", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 14, 
-            HitPlus = 700, 
-         }, 
+         Position = "standing", 
+         HitRoll = 14, 
+         Height = 0, 
+         ShortDescr = "Gira'haad the Bartender", 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
+         Alignment = 0, 
       }, 
       [898] = 
       {
+         NumberOfAttacks = 0, 
+         Name = "A Fat Twi'lek Banker", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Description = "", 
+         Sex = "male", 
          Vnum = 898, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         LongDescr = "A Fat Twi'lek Banker is here smelling credits.\
-", 
-         Race = "Human", 
-         Alignment = -500, 
-         ShortDescr = "A Twi'lek Banker", 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         ArmorClass = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "all_greet_prog", 
+               Code = "chuckle\
+'Hello there.  You got credits?  Give them\
+mpecho &Chere'&c\
+grin\
+", 
+               Arguments = "100", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "bribe_prog", 
                Code = "snicker\
 say Thanks, Bud.  Your credits are mine now.\
 muha\
 ", 
                Arguments = "1", 
-               MudProgType = "bribe_prog", 
             }, 
-            [2] = 
+            [3] = 
             {
+               MudProgType = "speech_prog", 
                Code = "say Oh, hello there. \
 ,peers around nervously.\
 evilgrin\
@@ -5284,45 +5303,60 @@ say Care to make a little transaction?\
 cough\
 ", 
                Arguments = "hi hello sup aloha konichiwa shalom hola bonjour utini", 
-               MudProgType = "speech_prog", 
             }, 
-            [3] = 
+            [4] = 
             {
+               MudProgType = "speech_prog", 
                Code = "grin\
 sat Yes, Ryll is grown here.  I never take it.  I have enough to worry\
 about.\
 mutter\
 ", 
                Arguments = "ryll spice", 
-               MudProgType = "speech_prog", 
-            }, 
-            [4] = 
-            {
-               Code = "chuckle\
-'Hello there.  You got credits?  Give them\
-mpecho &Chere'&c\
-grin\
-", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
             }, 
          }, 
+         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         DefaultPosition = "standing", 
+         Race = "Human", 
+         LongDescr = "A Fat Twi'lek Banker is here smelling credits.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
+         ArmorClass = 0, 
          Level = 1, 
          SaveVs = 
          {
             Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
             PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
+         }, 
+         DamRoll = 10, 
          VipFlags = 
          {
             [2] = "Ryloth", 
          }, 
-         DamRoll = 10, 
-         HitRoll = 10, 
-         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -5336,56 +5370,60 @@ grin\
                [2] = "twileki", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         Name = "A Fat Twi'lek Banker", 
-         Description = "", 
-         Sex = "male", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
+         Position = "standing", 
+         HitRoll = 10, 
+         Height = 0, 
+         ShortDescr = "A Twi'lek Banker", 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
+         Alignment = -500, 
       }, 
       [822] = 
       {
+         NumberOfAttacks = 0, 
+         Name = "Koh'shak, starport master", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 9, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Sex = "undistinguished", 
          Vnum = 822, 
+         Weight = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
+         DefaultPosition = "standing", 
+         Race = "Human", 
          LongDescr = "Koh'shak, starport master\
 ", 
-         Race = "Human", 
-         Alignment = 0, 
-         ShortDescr = "Koh'shak", 
-         Stats = 
+         HitChance = 
          {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 20, 
-            Dexterity = 10, 
+            HitNoDice = 19, 
+            HitPlus = 950, 
+            HitSizeDice = 10, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         ArmorClass = -137, 
          MudProgs = 
          {
             [1] = 
             {
+               MudProgType = "speech_prog", 
+               Code = "say I had an odd customer in here the other day.\
+emote shakes her head.\
+say They asked if I could acquire the queens jewels.\
+emote blinks.\
+say You're not going to believe which queen.\
+say The Queen Mother of Hapes! Ha!\
+say I'd pay anyone who got them enormously though.\
+", 
+               Arguments = "p queen", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "act_prog", 
                Code = "if ovnuminv(881) >= 1 \
 say So! That little thief has finally gotten around to paying me! \
 say It must have been that bounty hunter I sent after him.\
@@ -5411,34 +5449,30 @@ mpat 10299 drop all\
 mpat 10299 mppurge\
 ", 
                Arguments = "gives", 
-               MudProgType = "act_prog", 
-            }, 
-            [2] = 
-            {
-               Code = "say I had an odd customer in here the other day.\
-emote shakes her head.\
-say They asked if I could acquire the queens jewels.\
-emote blinks.\
-say You're not going to believe which queen.\
-say The Queen Mother of Hapes! Ha!\
-say I'd pay anyone who got them enormously though.\
-", 
-               Arguments = "p queen", 
-               MudProgType = "speech_prog", 
             }, 
          }, 
          Level = 95, 
+         ArmorClass = -137, 
          SaveVs = 
          {
             Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
             PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
          }, 
          DamRoll = 20, 
-         HitRoll = 20, 
-         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -5450,85 +5484,85 @@ say I'd pay anyone who got them enormously though.\
                [0] = "basic", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 9, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Name = "Koh'shak, starport master", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 19, 
-            HitPlus = 950, 
-         }, 
+         Position = "standing", 
+         HitRoll = 20, 
+         Height = 0, 
+         ShortDescr = "Koh'shak", 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
+         Alignment = 0, 
       }, 
       [897] = 
       {
+         NumberOfAttacks = 0, 
+         Name = "Faro the Triad Armor Guy", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 7, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Sex = "male", 
          Vnum = 897, 
+         RepairShop = 
+         {
+            ShopType = 1, 
+            ProfitFix = 50, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
+            KeeperShortDescr = "Triad Armor Repairman", 
+            FixTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [0] = "none", 
+            }, 
+         }, 
+         Weight = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         DefaultPosition = "standing", 
+         Race = "Human", 
          LongDescr = "Faro, the Triad Armorer is fixing armor for members\
 ", 
-         Race = "Human", 
-         Alignment = 0, 
-         ShortDescr = "Triad Armor Repairman", 
-         Stats = 
+         HitChance = 
          {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         ArmorClass = -87, 
-         DamRoll = 15, 
-         Level = 75, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
+            HitNoDice = 15, 
+            HitPlus = 750, 
+            HitSizeDice = 10, 
          }, 
          Immune = 
          {
             [11] = "charm", 
          }, 
-         RepairShop = 
+         Level = 75, 
+         ArmorClass = -87, 
+         SaveVs = 
          {
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            KeeperShortDescr = "Triad Armor Repairman", 
-            ProfitFix = 50, 
-            ShopType = 1, 
-            FixTypes = 
-            {
-               [1] = "weapon", 
-               [2] = "none", 
-               [0] = "armor", 
-            }, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
-         HitRoll = 15, 
-         NumberOfAttacks = 0, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
+         }, 
+         DamRoll = 15, 
          Languages = 
          {
             Speaking = 
@@ -5540,88 +5574,47 @@ say I'd pay anyone who got them enormously though.\
                [0] = "basic", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 7, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Name = "Faro the Triad Armor Guy", 
-         Description = "", 
-         Sex = "male", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 15, 
-            HitPlus = 750, 
-         }, 
+         Position = "standing", 
+         HitRoll = 15, 
+         Height = 0, 
+         ShortDescr = "Triad Armor Repairman", 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
+         Alignment = 0, 
       }, 
       [896] = 
       {
+         NumberOfAttacks = 0, 
+         Name = "Fal'vira is renting out RYLL tanks??", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 5, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Sex = "male", 
          Vnum = 896, 
+         Weight = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
+         DefaultPosition = "standing", 
+         Race = "Twi'lek", 
          LongDescr = "Fal'vira is renting out RYLL tanks??\
 ", 
-         Race = "Twi'lek", 
-         Alignment = 0, 
-         ShortDescr = "Fal'vira", 
-         Stats = 
+         HitChance = 
          {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
+            HitNoDice = 11, 
+            HitPlus = 550, 
+            HitSizeDice = 10, 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         ArmorClass = -37, 
          MudProgs = 
          {
             [1] = 
             {
-               Code = "smile $n\
-'Welcome.  Are you wounded?\
-exam $n\
-'Come relax in my Ryll tank.  Only 100 credits.\
-comfort $n\
-", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-            }, 
-            [2] = 
-            {
-               Code = "'Oh dear, you are hurt, aren't you?  Well, we'll have you fixed up.\
-smile\
-,gestures downwards and lowers you into the tank.\
-mptransfer $n 812\
-", 
-               Arguments = "100", 
-               MudProgType = "bribe_prog", 
-            }, 
-            [3] = 
-            {
-               Code = "'Yes, it's true.  Some evil Twi'leks have changed the purpose of\
-mpecho &Cryll.\
-sigh\
-'They use it as a drug.  But ryll is meant strictly for\
-mpecho &chealing.\
-", 
-               Arguments = "ryll spice drugs", 
                MudProgType = "speech_prog", 
-            }, 
-            [4] = 
-            {
                Code = "'Bacta??\
 snort\
 'Bacta is for human wimps who must get rid of their pain faster.\
@@ -5632,21 +5625,62 @@ laugh\
 'Bacta...silly tourists...\
 ", 
                Arguments = "bacta", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "smile $n\
+'Welcome.  Are you wounded?\
+exam $n\
+'Come relax in my Ryll tank.  Only 100 credits.\
+comfort $n\
+", 
+               Arguments = "100", 
+            }, 
+            [3] = 
+            {
+               MudProgType = "bribe_prog", 
+               Code = "'Oh dear, you are hurt, aren't you?  Well, we'll have you fixed up.\
+smile\
+,gestures downwards and lowers you into the tank.\
+mptransfer $n 812\
+", 
+               Arguments = "100", 
+            }, 
+            [4] = 
+            {
                MudProgType = "speech_prog", 
+               Code = "'Yes, it's true.  Some evil Twi'leks have changed the purpose of\
+mpecho &Cryll.\
+sigh\
+'They use it as a drug.  But ryll is meant strictly for\
+mpecho &chealing.\
+", 
+               Arguments = "ryll spice drugs", 
             }, 
          }, 
          Level = 55, 
+         ArmorClass = -37, 
          SaveVs = 
          {
             Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
             PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
          }, 
          DamRoll = 11, 
-         HitRoll = 11, 
-         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -5660,76 +5694,33 @@ laugh\
                [2] = "twileki", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 5, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Name = "Fal'vira is renting out RYLL tanks??", 
-         Description = "", 
-         Sex = "male", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 11, 
-            HitPlus = 550, 
-         }, 
+         Position = "standing", 
+         HitRoll = 11, 
+         Height = 0, 
+         ShortDescr = "Fal'vira", 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
+         Alignment = 0, 
       }, 
       [889] = 
       {
+         NumberOfAttacks = 0, 
+         Name = "A Twi'lek Merchant", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Description = "", 
+         Sex = "undistinguished", 
          Vnum = 889, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
-         }, 
-         LongDescr = "A Twi'lek Merchant\
-", 
-         Race = "Human", 
-         Alignment = 0, 
-         ShortDescr = "a newly created A Twi'lek Merchant", 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         ArmorClass = 0, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Level = 1, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
          Shop = 
          {
             BusinessHours = 
             {
-               Open = 0, 
                Close = 23, 
+               Open = 0, 
             }, 
-            ProfitBuy = 120, 
-            ProfitSell = 90, 
             KeeperShortDescr = "a newly created A Twi'lek Merchant", 
             BuyTypes = 
             {
@@ -5739,264 +5730,259 @@ laugh\
                [4] = "none", 
                [0] = "none", 
             }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
          }, 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         Name = "A Twi'lek Merchant", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Credits = 0, 
-         DefaultPosition = "standing", 
          Weight = 0, 
-      }, 
-      [890] = 
-      {
-         Vnum = 890, 
          Flags = 
          {
-            [0] = "Npc", 
-            [30] = "Prototype", 
-         }, 
-         LongDescr = "A Twi'lek Peace Official is protecting the innocent.\
-", 
-         Race = "Human", 
-         Alignment = 0, 
-         ShortDescr = "A Twi'lek Cop", 
-         SpecFuns = 
-         {
-            [1] = "spec_guardian", 
-            [2] = "spec_police_attack", 
-         }, 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
-         Position = "standing", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "", 
-               Arguments = "100", 
-               MudProgType = "fight_prog", 
-            }, 
-         }, 
-         Height = 0, 
-         ArmorClass = 40, 
-         Level = 24, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
-         VipFlags = 
-         {
-            [2] = "Ryloth", 
-         }, 
-         Immune = 
-         {
-            [11] = "charm", 
-         }, 
-         DamRoll = 4, 
-         HitRoll = 4, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-               [2] = "twileki", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [2] = "twileki", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Name = "A Twi'lek Police", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 4, 
-            HitPlus = 240, 
-         }, 
-         Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-      }, 
-      [891] = 
-      {
-         Vnum = 891, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         LongDescr = "A twi'lek moves around Kala'uun on business.\
-", 
-         Race = "Human", 
-         Alignment = 0, 
-         ShortDescr = "Twi'lek Male", 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         ArmorClass = 87, 
-         Level = 5, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
-         VipFlags = 
-         {
-            [2] = "Ryloth", 
-         }, 
-         DamRoll = 1, 
-         HitRoll = 1, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [2] = "twileki", 
-            }, 
-            Speaks = 
-            {
-               [2] = "twileki", 
-            }, 
-         }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Name = "twi'lek twilek citizen", 
-         Description = "This is your everyday Twi'lek, really.  He stands 2 meters tall, with his\
-lekku hanging behind his\
-head.\
-", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 1, 
-            HitPlus = 50, 
-         }, 
-         Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
-      }, 
-      [892] = 
-      {
-         Vnum = 892, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
             [0] = "Npc", 
             [25] = "NoKill", 
             [30] = "Prototype", 
          }, 
-         LongDescr = "Kookab'urra is selling comlinks\
-", 
+         DefaultPosition = "standing", 
          Race = "Human", 
-         Alignment = 0, 
-         ShortDescr = "Kookab'urra", 
-         Stats = 
+         LongDescr = "A Twi'lek Merchant\
+", 
+         HitChance = 
          {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
          }, 
-         Position = "standing", 
          Immune = 
          {
             [20] = "magic", 
             [11] = "charm", 
          }, 
-         Height = 0, 
-         ArmorClass = 0, 
          Level = 1, 
+         ArmorClass = 0, 
          SaveVs = 
          {
             Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
             Wand = 0, 
             PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
          }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
+         }, 
+         DamRoll = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Position = "standing", 
+         HitRoll = 0, 
+         Height = 0, 
+         ShortDescr = "a newly created A Twi'lek Merchant", 
+         Credits = 0, 
+         Alignment = 0, 
+      }, 
+      [890] = 
+      {
+         NumberOfAttacks = 0, 
+         Name = "A Twi'lek Police", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Sex = "undistinguished", 
+         SpecFuns = 
+         {
+            [1] = "spec_guardian", 
+            [0] = "spec_police_attack", 
+         }, 
+         Vnum = 890, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "fight_prog", 
+               Code = "", 
+               Arguments = "100", 
+            }, 
+         }, 
+         ArmorClass = 40, 
+         Weight = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [30] = "Prototype", 
+         }, 
+         DefaultPosition = "standing", 
+         Race = "Human", 
+         LongDescr = "A Twi'lek Peace Official is protecting the innocent.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 4, 
+            HitPlus = 240, 
+            HitSizeDice = 10, 
+         }, 
+         Immune = 
+         {
+            [11] = "charm", 
+         }, 
+         Level = 24, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
+         }, 
+         DamRoll = 4, 
          VipFlags = 
          {
             [2] = "Ryloth", 
          }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+               [2] = "twileki", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+               [2] = "twileki", 
+            }, 
+         }, 
+         Position = "standing", 
+         HitRoll = 4, 
+         Height = 0, 
+         ShortDescr = "A Twi'lek Cop", 
+         Credits = 0, 
+         Alignment = 0, 
+      }, 
+      [891] = 
+      {
+         NumberOfAttacks = 0, 
+         Name = "twi'lek twilek citizen", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 0, 
+            DamPlus = 2, 
+         }, 
+         Description = "This is your everyday Twi'lek, really.  He stands 2 meters tall, with his\
+lekku hanging behind his\
+head.\
+", 
+         Sex = "undistinguished", 
+         Vnum = 891, 
+         Weight = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+         DefaultPosition = "standing", 
+         Race = "Human", 
+         LongDescr = "A twi'lek moves around Kala'uun on business.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 1, 
+            HitPlus = 50, 
+            HitSizeDice = 10, 
+         }, 
+         ArmorClass = 87, 
+         Level = 5, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
+         }, 
+         DamRoll = 1, 
+         VipFlags = 
+         {
+            [2] = "Ryloth", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [2] = "twileki", 
+            }, 
+            Speaks = 
+            {
+               [2] = "twileki", 
+            }, 
+         }, 
+         Position = "standing", 
+         HitRoll = 1, 
+         Height = 0, 
+         ShortDescr = "Twi'lek Male", 
+         Credits = 0, 
+         Alignment = 0, 
+      }, 
+      [892] = 
+      {
+         NumberOfAttacks = 0, 
+         Name = "Kookab'urra", 
+         Damage = 
+         {
+            DamSizeDice = 0, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+         }, 
+         Description = "", 
+         Sex = "undistinguished", 
+         Vnum = 892, 
          Shop = 
          {
             BusinessHours = 
             {
-               Open = 0, 
                Close = 23, 
+               Open = 0, 
             }, 
-            ProfitBuy = 120, 
-            ProfitSell = 90, 
             KeeperShortDescr = "Kookab'urra", 
             BuyTypes = 
             {
@@ -6004,12 +5990,60 @@ head.\
                [2] = "none", 
                [3] = "none", 
                [4] = "none", 
-               [0] = "comlink", 
+               [0] = "none", 
             }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+         }, 
+         ArmorClass = 0, 
+         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+         }, 
+         DefaultPosition = "standing", 
+         Race = "Human", 
+         LongDescr = "Kookab'urra is selling comlinks\
+", 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+         }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Level = 1, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
          }, 
          DamRoll = 0, 
-         HitRoll = 0, 
-         NumberOfAttacks = 0, 
+         VipFlags = 
+         {
+            [2] = "Ryloth", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -6023,80 +6057,33 @@ head.\
                [2] = "twileki", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         Name = "Kookab'urra", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
+         Position = "standing", 
+         HitRoll = 0, 
+         Height = 0, 
+         ShortDescr = "Kookab'urra", 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
+         Alignment = 0, 
       }, 
       [893] = 
       {
+         NumberOfAttacks = 0, 
+         Name = "Sal'mara", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 6, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Sex = "undistinguished", 
          Vnum = 893, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
-         }, 
-         LongDescr = "Sal'mara is here looking to unload some shields\
-", 
-         Race = "Human", 
-         Alignment = 0, 
-         ShortDescr = "Sal'mara the Vendor", 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
-         Position = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Height = 0, 
-         ArmorClass = -62, 
-         Level = 65, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
-         VipFlags = 
-         {
-            [2] = "Ryloth", 
-         }, 
          Shop = 
          {
             BusinessHours = 
             {
-               Open = 0, 
                Close = 23, 
+               Open = 0, 
             }, 
-            ProfitBuy = 120, 
-            ProfitSell = 0, 
             KeeperShortDescr = "Sal'mara the Vendor", 
             BuyTypes = 
             {
@@ -6106,10 +6093,57 @@ head.\
                [4] = "none", 
                [0] = "none", 
             }, 
+            ProfitBuy = 120, 
+            ProfitSell = 0, 
+         }, 
+         ArmorClass = -62, 
+         Weight = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+         }, 
+         DefaultPosition = "standing", 
+         Race = "Human", 
+         LongDescr = "Sal'mara is here looking to unload some shields\
+", 
+         HitChance = 
+         {
+            HitNoDice = 13, 
+            HitPlus = 650, 
+            HitSizeDice = 10, 
+         }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Level = 65, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
          }, 
          DamRoll = 13, 
-         HitRoll = 13, 
-         NumberOfAttacks = 0, 
+         VipFlags = 
+         {
+            [2] = "Ryloth", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -6123,28 +6157,58 @@ head.\
                [2] = "twileki", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 6, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Name = "Sal'mara", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 13, 
-            HitPlus = 650, 
-         }, 
+         Position = "standing", 
+         HitRoll = 13, 
+         Height = 0, 
+         ShortDescr = "Sal'mara the Vendor", 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
+         Alignment = 0, 
       }, 
       [894] = 
       {
+         NumberOfAttacks = 0, 
+         Name = "A Twi'lek Junkie", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 4, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Sex = "male", 
+         SpecFuns = 
+         {
+            [0] = "spec_janitor", 
+         }, 
          Vnum = 894, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "death_prog", 
+               Code = "mpmload 894\
+", 
+               Arguments = "100", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "mpechoat $n &cA Twi'lek Junkie looks at you with utter contempt.\
+'Get out of here!  This is our Ryll!\
+", 
+               Arguments = "100", 
+            }, 
+         }, 
+         ArmorClass = -12, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Weight = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -6152,71 +6216,38 @@ head.\
             [5] = "Aggressive", 
             [10] = "Practice", 
          }, 
+         DefaultPosition = "standing", 
+         Race = "Human", 
          LongDescr = "A Twi'lek Junkie is hoarding Ryll.\
 ", 
-         Race = "Human", 
-         Alignment = 0, 
-         ShortDescr = "A Twi'lek Junkie", 
-         SpecFuns = 
+         HitChance = 
          {
-            [1] = "spec_janitor", 
+            HitNoDice = 4, 
+            HitPlus = 450, 
+            HitSizeDice = 10, 
          }, 
          Stats = 
          {
-            Wisdom = 10, 
-            Charisma = 10, 
+            Wisdom = 0, 
             Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
-         Position = "standing", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpechoat $n &cA Twi'lek Junkie looks at you with utter contempt.\
-'Get out of here!  This is our Ryll!\
-", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-            }, 
-            [2] = 
-            {
-               Code = "mpmload 894\
-", 
-               Arguments = "100", 
-               MudProgType = "death_prog", 
-            }, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
          }, 
          Level = 45, 
-         Height = 0, 
-         ArmorClass = -12, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
-         VipFlags = 
-         {
-            [2] = "Ryloth", 
-         }, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
          AttackFlags = 
          {
             [1] = "claws", 
          }, 
          DamRoll = 11, 
-         HitRoll = 11, 
-         NumberOfAttacks = 0, 
+         Alignment = 0, 
+         VipFlags = 
+         {
+            [2] = "Ryloth", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -6230,127 +6261,36 @@ head.\
                [2] = "twileki", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 4, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Name = "A Twi'lek Junkie", 
-         Description = "", 
-         Sex = "male", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 4, 
-            HitPlus = 450, 
-         }, 
+         Position = "standing", 
+         HitRoll = 11, 
+         Height = 0, 
+         ShortDescr = "A Twi'lek Junkie", 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
       }, 
       [895] = 
       {
+         NumberOfAttacks = 0, 
+         Name = "Lavar'inaa", 
+         Damage = 
+         {
+            DamSizeDice = 4, 
+            DamNoDice = 2, 
+            DamPlus = 2, 
+         }, 
+         Description = "", 
+         Sex = "female", 
          Vnum = 895, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         LongDescr = "Lavar'inaa is serving Twi'lek delicacies.\
-", 
-         Race = "Twi'lek", 
-         Alignment = 0, 
-         ShortDescr = "Lavar'inaa the cook", 
-         Stats = 
-         {
-            Wisdom = 10, 
-            Charisma = 10, 
-            Force = 0, 
-            Intelligence = 10, 
-            Luck = 10, 
-            Constitution = 10, 
-            Strength = 10, 
-            Dexterity = 10, 
-         }, 
-         Position = "standing", 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "smile $n\
-'Uncle Tam'arr isn't feeling well so I'm watching the cafe today.\
-giggle\
-'Would you like something to eat?\
-flirt $n\
-", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-            }, 
-            [2] = 
-            {
-               Code = "'Well in that case, pull up a seat.\
-mpecho &cLavar'inaa leans on the greasy counter.\
-'We got a lot of good stuff\
-here.\
-giggle\
-", 
-               Arguments = "yes yeah yup yep oui si sure", 
-               MudProgType = "speech_prog", 
-            }, 
-            [3] = 
-            {
-               Code = "'The food?\
-mpecho &cLavar'inaa laughs nervously.\
-'Well...they're not exactly Twi'lek delicacies.\
-inno $n\
-'Listen, Uncle Tam'arr is sick.  This is the best I can do.\
-", 
-               Arguments = "food", 
-               MudProgType = "speech_prog", 
-            }, 
-            [4] = 
-            {
-               Code = "mpechoat $n &cLavar'inaa takes your credits.\
-'A tip?  Thanks, $n.  You're a doll.\
-mpecho &cLavar'inaa puts some credits in her pocket.\
-smile $n\
-thank $n\
-", 
-               Arguments = "1", 
-               MudProgType = "bribe_prog", 
-            }, 
-         }, 
-         Height = 0, 
-         ArmorClass = 37, 
-         Level = 25, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            ParaPetri = 0, 
-            SpellStaff = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-         }, 
-         VipFlags = 
-         {
-            [2] = "Ryloth", 
-         }, 
          Shop = 
          {
             BusinessHours = 
             {
-               Open = 0, 
                Close = 23, 
+               Open = 0, 
             }, 
-            ProfitBuy = 120, 
-            ProfitSell = 75, 
             KeeperShortDescr = "Lavar'inaa the cook", 
             BuyTypes = 
             {
@@ -6360,10 +6300,104 @@ thank $n\
                [4] = "none", 
                [0] = "none", 
             }, 
+            ProfitBuy = 120, 
+            ProfitSell = 75, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               MudProgType = "bribe_prog", 
+               Code = "mpechoat $n &cLavar'inaa takes your credits.\
+'A tip?  Thanks, $n.  You're a doll.\
+mpecho &cLavar'inaa puts some credits in her pocket.\
+smile $n\
+thank $n\
+", 
+               Arguments = "1", 
+            }, 
+            [2] = 
+            {
+               MudProgType = "all_greet_prog", 
+               Code = "smile $n\
+'Uncle Tam'arr isn't feeling well so I'm watching the cafe today.\
+giggle\
+'Would you like something to eat?\
+flirt $n\
+", 
+               Arguments = "100", 
+            }, 
+            [3] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "'Well in that case, pull up a seat.\
+mpecho &cLavar'inaa leans on the greasy counter.\
+'We got a lot of good stuff\
+here.\
+giggle\
+", 
+               Arguments = "yes yeah yup yep oui si sure", 
+            }, 
+            [4] = 
+            {
+               MudProgType = "speech_prog", 
+               Code = "'The food?\
+mpecho &cLavar'inaa laughs nervously.\
+'Well...they're not exactly Twi'lek delicacies.\
+inno $n\
+'Listen, Uncle Tam'arr is sick.  This is the best I can do.\
+", 
+               Arguments = "food", 
+            }, 
+         }, 
+         ArmorClass = 37, 
+         Weight = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+         }, 
+         DefaultPosition = "standing", 
+         Race = "Twi'lek", 
+         LongDescr = "Lavar'inaa is serving Twi'lek delicacies.\
+", 
+         HitChance = 
+         {
+            HitNoDice = 5, 
+            HitPlus = 250, 
+            HitSizeDice = 10, 
+         }, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         Level = 25, 
+         SaveVs = 
+         {
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 0, 
+            Force = 0, 
+            Luck = 0, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Charisma = 0, 
+            Intelligence = 0, 
+            Constitution = 0, 
          }, 
          DamRoll = 5, 
-         HitRoll = 5, 
-         NumberOfAttacks = 0, 
+         VipFlags = 
+         {
+            [2] = "Ryloth", 
+         }, 
          Languages = 
          {
             Speaking = 
@@ -6377,44 +6411,26 @@ thank $n\
                [2] = "twileki", 
             }, 
          }, 
-         Damage = 
-         {
-            DamNoDice = 2, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         Name = "Lavar'inaa", 
-         Description = "", 
-         Sex = "female", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 5, 
-            HitPlus = 250, 
-         }, 
+         Position = "standing", 
+         HitRoll = 5, 
+         Height = 0, 
+         ShortDescr = "Lavar'inaa the cook", 
          Credits = 0, 
-         DefaultPosition = "standing", 
-         Weight = 0, 
+         Alignment = 0, 
       }, 
    }, 
    LevelRanges = 
    {
-      Soft = 
+      Hard = 
       {
          Low = 0, 
-         High = 0, 
+         High = 105, 
       }, 
-      Hard = 
+      Soft = 
       {
          Low = 0, 
          High = 100, 
       }, 
    }, 
-   ResetMessage = "", 
    ResetFrequency = 0, 
-   LowEconomy = 4483179, 
-   Name = "Ryloth", 
-   Author = "Darrik", 
-   Filename = "ryloth.lua", 
-   FileFormatVersion = 1, 
 }
