@@ -9645,12 +9645,12 @@ Allows the character to change the text of their 'rank' on the who listing.\
 
 HelpEntry
 {
-   Keyword = "RASSIGN MASSIGN OASSIGN", 
+   Keyword = "VASSIGN", 
    Level = 101, 
-   Text = "Syntax:  rassign <character> <begin vnum range> <end vnum range>\
+   Text = "Syntax:  vassign <character> <begin vnum range> <end vnum range>\
  \
-These commands allow you to assign a range of vnums to an immortal for\
-so that they may build inside that range.  Use the 'checkvnums' command\
+This command allow you to assign a range of vnums to an immortal for\
+so that they may build inside that range. Use the 'checkvnums' command\
 before assigning a range to ensure that there will be no vnum conflicts.\
 You can also use the 'vnums' command for a complete list of currently\
 allocated ranges, and the 'newzones' command for a complete list of\
@@ -9660,10 +9660,9 @@ Warning:  *Never* assign any vnums to a character who has another vnum\
 range assigned to them via 'aassign'.  Simply be sure to have the\
 character type 'aassign none' before assigning vnums to them.\
  \
-Example:  massign Joseph 9000 9099\
+Example:  vassign Joseph 9000 9099\
  \
-This will assign the vnum range from 9000 to 9099 for rooms to Joseph.\
-It is best to keep an areas object, room and mob range the same.\
+This will assign the vnum range from 9000 to 9099 to Joseph.\
  \
 Be sure to always use 'checkvnums' to ensure the vnums you are going to\
 assign are clear.\
