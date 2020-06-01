@@ -14,7 +14,7 @@ void do_buyhome(Character *ch, std::string argument)
     if (IsNpc(ch) || !ch->PCData)
         return;
 
-    if (!Homes->FindHomesForResident(ch->Name).empty())
+    if (OwnsHome(ch->Name))
     {
         ch->Echo("&RYou already have a home!\r\n&w");
         return;
@@ -65,5 +65,7 @@ void do_buyhome(Character *ch, std::string argument)
     ch->Gold -= houseCost;
 
     do_save(ch, "");
+
+    ch->Echo("Congratulations on your purchase. See HELP HOMES to get started.\r\n");
 }
 

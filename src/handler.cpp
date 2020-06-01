@@ -2774,5 +2774,7 @@ std::string GetRoomDescription(std::shared_ptr<Room> room)
 
 bool CheckRoomFlag(std::shared_ptr<Room> room, size_t flag)
 {
-    return room->Flags.test(flag);
+    auto home = Homes->FindByVnum(room->Vnum);
+    
+    return (home != nullptr && home->ExtraRoomFlags.test(flag)) || room->Flags.test(flag);
 }

@@ -18,6 +18,7 @@
 #include "area.hpp"
 #include "repos/objectrepository.hpp"
 #include "repos/skillrepository.hpp"
+#include "repos/homerepository.hpp"
 #include "skill.hpp"
 
 constexpr short gsn_mycraftingskill = 0;
@@ -96,6 +97,26 @@ private:
     std::shared_ptr<Skill> _myCraftingSkill = std::make_shared<Skill>();
 };
 
+class FakeHomeRepository : public HomeRepository
+{
+public:
+    void Load() override { }
+    void Save() const override { }
+
+    void Load(std::shared_ptr<Home> home) override { }
+    void Save(std::shared_ptr<Home> home) const override { }
+
+    void Delete(std::shared_ptr<Home> home) override { }
+
+    std::shared_ptr<Home> FindByVnum(vnum_t) const override { return nullptr; }
+    std::list<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override
+    {
+        return std::list<std::shared_ptr<Home>>();
+    }
+    
+    bool IsResidentOf(const std::string &name, vnum_t room) const override { return false; }
+};
+
 class CraftTests : public ::testing::Test
 {
 protected:
@@ -104,7 +125,8 @@ protected:
         Log = new FakeLogger();
         Objects = new FakeObjectRepository();
         Skills = new FakeSkillRepository();
-
+        Homes = std::make_shared<FakeHomeRepository>();
+        
         SetRandomGenerator(new NotRandomGenerator());
 
         _resultantObject = std::make_shared<ProtoObject>(1);

@@ -4,6 +4,7 @@
 #include <utility/algorithms.hpp>
 #include "home.hpp"
 #include "constants.hpp"
+#include "room.hpp"
 
 void Resident::GiveAllPermissions()
 {
@@ -27,7 +28,7 @@ struct Home::Impl
 Home::Home(vnum_t room)
     : pImpl(std::make_unique<Impl>(room))
 {
-
+    ExtraRoomFlags.set(Flag::Room::Hotel);
 }
 
 Home::~Home()
@@ -109,4 +110,21 @@ bool Home::IsResident(const std::string &name) const
                 {
                     return StrCmp(r->Name, name) == 0;
                 }) != nullptr;
+}
+
+//////////////////////////////////////////////////////////
+// Code related to homes, but not part of Home class.
+#include "repos/homerepository.hpp"
+
+bool OwnsHome(const std::string &name)
+{
+    for(auto home : Homes->FindHomesForResident(name))
+    {
+        if(StrCmp(home->Owner(), name) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }

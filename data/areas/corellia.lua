@@ -1,647 +1,34 @@
 -- Corellia
--- Last saved Sunday 31-May-2020 15:51:33
+-- Last saved Monday 01-Jun-2020 11:08:46
 
 AreaEntry
 {
+   Name = "Corellia", 
+   HighEconomy = 0, 
+   FileFormatVersion = 1, 
+   ResetFrequency = 0, 
    LevelRanges = 
    {
+      Soft = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
       Hard = 
       {
          High = 105, 
          Low = 0, 
       }, 
-      Soft = 
-      {
-         High = 105, 
-         Low = 1, 
-      }, 
    }, 
-   LowEconomy = 2682898, 
-   ResetFrequency = 0, 
-   Filename = "corellia.lua", 
-   Resets = 
-   {
-      [1] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10501, 
-         Arg2 = 1, 
-         Arg1 = 90, 
-         Command = "O", 
-      }, 
-      [2] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10504, 
-         Arg2 = 6, 
-         Arg1 = 10500, 
-         Command = "M", 
-      }, 
-      [3] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10505, 
-         Arg2 = 1, 
-         Arg1 = 10502, 
-         Command = "M", 
-      }, 
-      [4] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 301, 
-         Command = "G", 
-      }, 
-      [5] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 302, 
-         Command = "G", 
-      }, 
-      [6] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 305, 
-         Command = "G", 
-      }, 
-      [7] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10506, 
-         Arg2 = 1, 
-         Arg1 = 10503, 
-         Command = "M", 
-      }, 
-      [8] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32207, 
-         Command = "G", 
-      }, 
-      [9] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 301, 
-         Command = "G", 
-      }, 
-      [10] = 
-      {
-         MiscData = 0, 
-         Arg3 = 2, 
-         Arg2 = 8, 
-         Arg1 = 10507, 
-         Command = "D", 
-      }, 
-      [11] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10514, 
-         Arg2 = 8, 
-         Arg1 = 10505, 
-         Command = "M", 
-      }, 
-      [12] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10515, 
-         Arg2 = 8, 
-         Arg1 = 10505, 
-         Command = "M", 
-      }, 
-      [13] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10515, 
-         Arg2 = 8, 
-         Arg1 = 10505, 
-         Command = "M", 
-      }, 
-      [14] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10517, 
-         Arg2 = 8, 
-         Arg1 = 10505, 
-         Command = "M", 
-      }, 
-      [15] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10518, 
-         Arg2 = 8, 
-         Arg1 = 10505, 
-         Command = "M", 
-      }, 
-      [16] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10518, 
-         Arg2 = 8, 
-         Arg1 = 10505, 
-         Command = "M", 
-      }, 
-      [17] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10519, 
-         Arg2 = 1, 
-         Arg1 = 10504, 
-         Command = "M", 
-      }, 
-      [18] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10519, 
-         Arg2 = 8, 
-         Arg1 = 10505, 
-         Command = "M", 
-      }, 
-      [19] = 
-      {
-         MiscData = 1, 
-         Arg3 = 16, 
-         Arg2 = 1, 
-         Arg1 = 54, 
-         Command = "E", 
-      }, 
-      [20] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10519, 
-         Arg2 = 8, 
-         Arg1 = 10505, 
-         Command = "M", 
-      }, 
-      [21] = 
-      {
-         MiscData = 1, 
-         Arg3 = 16, 
-         Arg2 = 1, 
-         Arg1 = 54, 
-         Command = "E", 
-      }, 
-      [22] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10521, 
-         Arg2 = 3, 
-         Arg1 = 10515, 
-         Command = "M", 
-      }, 
-      [23] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10521, 
-         Arg2 = 6, 
-         Arg1 = 10500, 
-         Command = "M", 
-      }, 
-      [24] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10522, 
-         Arg2 = 3, 
-         Arg1 = 10515, 
-         Command = "M", 
-      }, 
-      [25] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10526, 
-         Arg2 = 6, 
-         Arg1 = 10500, 
-         Command = "M", 
-      }, 
-      [26] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10528, 
-         Arg2 = 6, 
-         Arg1 = 10500, 
-         Command = "M", 
-      }, 
-      [27] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10529, 
-         Arg2 = 6, 
-         Arg1 = 10500, 
-         Command = "M", 
-      }, 
-      [28] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10554, 
-         Arg2 = 1, 
-         Arg1 = 10548, 
-         Command = "M", 
-      }, 
-      [29] = 
-      {
-         MiscData = 0, 
-         Arg3 = 2, 
-         Arg2 = 5, 
-         Arg1 = 10554, 
-         Command = "D", 
-      }, 
-      [30] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10556, 
-         Arg2 = 1, 
-         Arg1 = 10571, 
-         Command = "O", 
-      }, 
-      [31] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 50, 
-         Command = "G", 
-      }, 
-      [32] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 54, 
-         Command = "G", 
-      }, 
-      [33] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 10311, 
-         Command = "G", 
-      }, 
-      [34] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 10313, 
-         Command = "G", 
-      }, 
-      [35] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 10569, 
-         Command = "G", 
-      }, 
-      [36] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10564, 
-         Arg2 = 1, 
-         Arg1 = 10570, 
-         Command = "O", 
-      }, 
-      [37] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10571, 
-         Arg2 = 1, 
-         Arg1 = 10313, 
-         Command = "O", 
-      }, 
-      [38] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10571, 
-         Arg2 = 1, 
-         Arg1 = 32208, 
-         Command = "O", 
-      }, 
-      [39] = 
-      {
-         MiscData = 0, 
-         Arg3 = 2, 
-         Arg2 = 4, 
-         Arg1 = 10571, 
-         Command = "D", 
-      }, 
-      [40] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10578, 
-         Arg2 = 1, 
-         Arg1 = 10545, 
-         Command = "M", 
-      }, 
-      [41] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10582, 
-         Arg2 = 6, 
-         Arg1 = 10500, 
-         Command = "M", 
-      }, 
-      [42] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10583, 
-         Arg2 = 1, 
-         Arg1 = 32208, 
-         Command = "O", 
-      }, 
-      [43] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10589, 
-         Arg2 = 6, 
-         Arg1 = 413, 
-         Command = "M", 
-      }, 
-      [44] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10590, 
-         Arg2 = 1, 
-         Arg1 = 10510, 
-         Command = "M", 
-      }, 
-      [45] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10591, 
-         Arg2 = 1, 
-         Arg1 = 10511, 
-         Command = "M", 
-      }, 
-      [46] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10592, 
-         Arg2 = 1, 
-         Arg1 = 10512, 
-         Command = "M", 
-      }, 
-      [47] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10593, 
-         Arg2 = 1, 
-         Arg1 = 10513, 
-         Command = "M", 
-      }, 
-      [48] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10594, 
-         Arg2 = 4, 
-         Arg1 = 10514, 
-         Command = "M", 
-      }, 
-      [49] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10595, 
-         Arg2 = 4, 
-         Arg1 = 10514, 
-         Command = "M", 
-      }, 
-      [50] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10605, 
-         Arg2 = 3, 
-         Arg1 = 10515, 
-         Command = "M", 
-      }, 
-      [51] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10608, 
-         Arg2 = 1, 
-         Arg1 = 38, 
-         Command = "O", 
-      }, 
-      [52] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10555, 
-         Arg2 = 1, 
-         Arg1 = 32208, 
-         Command = "O", 
-      }, 
-      [53] = 
-      {
-         MiscData = 0, 
-         Arg3 = 0, 
-         Arg2 = 3, 
-         Arg1 = 10555, 
-         Command = "D", 
-      }, 
-      [54] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10549, 
-         Arg2 = 1, 
-         Arg1 = 10517, 
-         Command = "M", 
-      }, 
-      [55] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10650, 
-         Arg2 = 1, 
-         Arg1 = 10518, 
-         Command = "M", 
-      }, 
-      [56] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10547, 
-         Arg2 = 1, 
-         Arg1 = 10516, 
-         Command = "M", 
-      }, 
-      [57] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10548, 
-         Arg2 = 1, 
-         Arg1 = 10543, 
-         Command = "O", 
-      }, 
-      [58] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10548, 
-         Arg2 = 1, 
-         Arg1 = 10544, 
-         Command = "O", 
-      }, 
-      [59] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10530, 
-         Arg2 = 2, 
-         Arg1 = 10501, 
-         Command = "M", 
-      }, 
-      [60] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32229, 
-         Command = "G", 
-      }, 
-      [61] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32238, 
-         Command = "G", 
-      }, 
-      [62] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 10546, 
-         Command = "G", 
-      }, 
-      [63] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10587, 
-         Arg2 = 8, 
-         Arg1 = 10509, 
-         Command = "M", 
-      }, 
-      [64] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10584, 
-         Arg2 = 2, 
-         Arg1 = 10508, 
-         Command = "M", 
-      }, 
-      [65] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32281, 
-         Command = "G", 
-      }, 
-      [66] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 330, 
-         Command = "G", 
-      }, 
-      [67] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10545, 
-         Arg2 = 2, 
-         Arg1 = 10507, 
-         Command = "M", 
-      }, 
-      [68] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 10497, 
-         Command = "G", 
-      }, 
-      [69] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 324, 
-         Command = "G", 
-      }, 
-      [70] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32210, 
-         Command = "G", 
-      }, 
-      [71] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32234, 
-         Command = "G", 
-      }, 
-      [72] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32280, 
-         Command = "G", 
-      }, 
-      [73] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 10494, 
-         Command = "G", 
-      }, 
-      [74] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10502, 
-         Arg2 = 1, 
-         Arg1 = 10506, 
-         Command = "M", 
-      }, 
-      [75] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10502, 
-         Arg2 = 6, 
-         Arg1 = 10500, 
-         Command = "M", 
-      }, 
-      [76] = 
-      {
-         MiscData = 1, 
-         Arg3 = 10572, 
-         Arg2 = 1, 
-         Arg1 = 32257, 
-         Command = "O", 
-      }, 
-   }, 
-   ResetMessage = "", 
    Mobiles = 
    {
       [10500] = 
       {
-         LongDescr = "Corellian Citizen\
-", 
-         DamRoll = 4, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
          Name = "Corellian Citizen", 
-         ArmorClass = 50, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-         }, 
-         Vnum = 10500, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [6] = "StayArea", 
-         }, 
-         Description = "", 
-         ShortDescr = "corellian citizen", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -653,105 +40,68 @@ AreaEntry
                [0] = "basic", 
             }, 
          }, 
+         HitChance = 
+         {
+            HitNoDice = 4, 
+            HitSizeDice = 10, 
+            HitPlus = 200, 
+         }, 
          SaveVs = 
          {
             PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
             ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
          }, 
-         Credits = 0, 
+         HitRoll = 4, 
          VipFlags = 
          {
             [17] = "Hoth", 
          }, 
-         Weight = 0, 
-         HitRoll = 4, 
-         Alignment = 0, 
-         NumberOfAttacks = 2, 
-         Level = 20, 
-         Race = "Human", 
          Stats = 
          {
-            Intelligence = 0, 
             Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
             Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
             Charisma = 0, 
          }, 
-         DefaultPosition = "standing", 
+         Vnum = 10500, 
+         LongDescr = "Corellian Citizen\
+", 
+         NumberOfAttacks = 2, 
+         Level = 20, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "corellian citizen", 
+         DamRoll = 4, 
+         Height = 0, 
+         Race = "Human", 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 50, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [6] = "StayArea", 
+         }, 
       }, 
       [10501] = 
       {
-         LongDescr = "A shady shopkeeper\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Sex = "female", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 69, 
-            KeeperShortDescr = "a shopkeeper", 
-         }, 
-         Position = "standing", 
-         Height = 0, 
          Name = "A shady shopkeeper", 
-         ArmorClass = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Vnum = 10501, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Description = "This shopkeeper keeps an eye on her security monitors and a hand on her\
-blaster while she deals with you.   \
-", 
-         ShortDescr = "a shopkeeper", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "if ovnuminv(10217) >= 1\
-say I've been waiting for you.\
-mpoload 10218\
-give pictures $n\
-mpat 10299 drop film\
-mpat 10299 mppurge\
-endif\
-", 
-               Arguments = "gives", 
-               MudProgType = "act_prog", 
-            }, 
-         }, 
+         Sex = "female", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -764,183 +114,106 @@ endif\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 1, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10502] = 
-      {
-         LongDescr = "Cook Galin bakes loaves of bread here.\
-", 
-         DamRoll = 4, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-            KeeperShortDescr = "galin", 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         Name = "Galin", 
-         ArmorClass = 50, 
-         HitChance = 
-         {
-            HitNoDice = 4, 
-            HitSizeDice = 10, 
-            HitPlus = 200, 
-         }, 
-         Vnum = 10502, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
-         }, 
-         Description = "", 
-         ShortDescr = "galin", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Weight = 0, 
-         HitRoll = 4, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 20, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10503] = 
-      {
-         LongDescr = "Minit the cute little tavernmaid serves drinks here\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-            KeeperShortDescr = "Minit", 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         Name = "Minit", 
-         ArmorClass = 0, 
          HitChance = 
          {
             HitNoDice = 0, 
             HitSizeDice = 0, 
             HitPlus = 0, 
          }, 
-         Vnum = 10503, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         ArmorClass = 0, 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
+         Vnum = 10501, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         LongDescr = "A shady shopkeeper\
+", 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Description = "This shopkeeper keeps an eye on her security monitors and a hand on her\
+blaster while she deals with you.   \
+", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ShortDescr = "a shopkeeper", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "gives", 
+               Code = "if ovnuminv(10217) >= 1\
+say I've been waiting for you.\
+mpoload 10218\
+give pictures $n\
+mpat 10299 drop film\
+mpat 10299 mppurge\
+endif\
+", 
+               MudProgType = "act_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            ProfitSell = 69, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            KeeperShortDescr = "a shopkeeper", 
+         }, 
          Flags = 
          {
+            [1] = "Sentinel", 
             [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
          }, 
-         Description = "", 
-         ShortDescr = "Minit", 
+      }, 
+      [10502] = 
+      {
+         Name = "Galin", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -952,59 +225,253 @@ endif\
                [0] = "basic", 
             }, 
          }, 
+         HitChance = 
+         {
+            HitNoDice = 4, 
+            HitSizeDice = 10, 
+            HitPlus = 200, 
+         }, 
          SaveVs = 
          {
             PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
             ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
          }, 
-         Credits = 0, 
+         HitRoll = 4, 
+         ArmorClass = 50, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
+         Vnum = 10502, 
          Immune = 
          {
             [20] = "magic", 
             [11] = "charm", 
          }, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
+         LongDescr = "Cook Galin bakes loaves of bread here.\
+", 
          NumberOfAttacks = 0, 
-         Level = 1, 
+         Level = 20, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "galin", 
+         DamRoll = 4, 
+         Height = 0, 
          Race = "Human", 
+         Position = "standing", 
+         Credits = 0, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            KeeperShortDescr = "galin", 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+         }, 
+      }, 
+      [10503] = 
+      {
+         Name = "Minit", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         ArmorClass = 0, 
          Stats = 
          {
-            Intelligence = 0, 
             Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
             Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
             Charisma = 0, 
          }, 
-         DefaultPosition = "standing", 
+         Vnum = 10503, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         LongDescr = "Minit the cute little tavernmaid serves drinks here\
+", 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ShortDescr = "Minit", 
+         DamRoll = 0, 
+         Height = 0, 
+         Race = "Human", 
+         Position = "standing", 
+         Credits = 0, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            KeeperShortDescr = "Minit", 
+         }, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
+         }, 
       }, 
       [10504] = 
       {
+         Name = "Corellian Diktat", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 10, 
+            HitSizeDice = 10, 
+            HitPlus = 500, 
+         }, 
          AffectedBy = 
          {
             [22] = "TrueSight", 
          }, 
-         DamRoll = 10, 
+         Race = "Human", 
+         HitRoll = 10, 
+         VipFlags = 
+         {
+            [17] = "Hoth", 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
+         Vnum = 10504, 
+         NumberOfAttacks = 0, 
+         LongDescr = "The Diktat of Corellia stands here giving orders.\
+", 
+         AttackFlags = 
+         {
+            [5] = "kick", 
+         }, 
+         Level = 50, 
+         Description = "", 
          Damage = 
          {
-            DamSizeDice = 4, 
             DamNoDice = 5, 
+            DamSizeDice = 4, 
             DamPlus = 2, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
+         ShortDescr = "the corellian diktat", 
+         DamRoll = 10, 
          Height = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "gives", 
                Code = "if ovnuminv(10208) >= 1\
 Say I have been waiting for this important package.  Thank you.\
 mpwithdraw 2500\
@@ -1015,30 +482,10 @@ mpat 10299 drop all\
 mpat 10299 mppurge\
 endif\
 ", 
-               Arguments = "gives", 
                MudProgType = "act_prog", 
             }, 
          }, 
-         Name = "Corellian Diktat", 
-         ArmorClass = -25, 
-         HitChance = 
-         {
-            HitNoDice = 10, 
-            HitSizeDice = 10, 
-            HitPlus = 500, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Vnum = 10504, 
+         Position = "standing", 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1046,81 +493,90 @@ endif\
             [10] = "Practice", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
-         Level = 50, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         VipFlags = 
-         {
-            [17] = "Hoth", 
-         }, 
-         AttackFlags = 
-         {
-            [5] = "kick", 
-         }, 
-         HitRoll = 10, 
-         Weight = 0, 
-         NumberOfAttacks = 0, 
-         Alignment = 0, 
-         Sex = "undistinguished", 
-         ShortDescr = "the corellian diktat", 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         LongDescr = "The Diktat of Corellia stands here giving orders.\
-", 
+         Credits = 0, 
+         ArmorClass = -25, 
       }, 
       [10505] = 
       {
-         LongDescr = "A palace guard keeps the peace.\
-", 
-         DamRoll = 5, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         SpecFuns = 
-         {
-            [0] = "spec_police", 
-         }, 
-         Position = "standing", 
-         Height = 0, 
          Name = "Palace Guard", 
-         ArmorClass = 37, 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
          HitChance = 
          {
             HitNoDice = 5, 
             HitSizeDice = 10, 
             HitPlus = 250, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 5, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10505, 
+         SpecFuns = 
+         {
+            [0] = "spec_police", 
+         }, 
+         LongDescr = "A palace guard keeps the peace.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 25, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "a palace guard", 
+         DamRoll = 5, 
+         Height = 0, 
+         Race = "Human", 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 37, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
-         Description = "", 
-         ShortDescr = "a palace guard", 
+      }, 
+      [10506] = 
+      {
+         Name = "Master Bunyon", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1132,74 +588,74 @@ endif\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 5, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 25, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10506] = 
-      {
-         LongDescr = "Master Bunyon waits for callers here.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "Master Bunyon", 
-         ArmorClass = 0, 
          HitChance = 
          {
             HitNoDice = 0, 
             HitSizeDice = 0, 
             HitPlus = 0, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10506, 
+         Race = "Human", 
+         LongDescr = "Master Bunyon waits for callers here.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ShortDescr = "Master Bunyon", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "say Greetings, welcome to the Master and Fool.  Make yourself at home.\
+", 
+               MudProgType = "greet_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Description = "", 
-         ShortDescr = "Master Bunyon", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "say Greetings, welcome to the Master and Fool.  Make yourself at home.\
-", 
-               Arguments = "100", 
-               MudProgType = "greet_prog", 
-            }, 
-         }, 
+      }, 
+      [10507] = 
+      {
+         Name = "Turen", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1211,71 +667,68 @@ endif\
                [0] = "basic", 
             }, 
          }, 
+         DefenseFlags = 
+         {
+            [1] = "dodge", 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 18, 
+            HitSizeDice = 10, 
+            HitPlus = 900, 
+         }, 
          SaveVs = 
          {
             PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
             ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
          }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 1, 
+         ArmorClass = -125, 
+         HitRoll = 18, 
          Race = "Human", 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
          Stats = 
          {
-            Intelligence = 0, 
             Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
             Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
             Charisma = 0, 
          }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10507] = 
-      {
+         Vnum = 10507, 
+         NumberOfAttacks = 0, 
          LongDescr = "Turen is selling tools of the trade here.\
 ", 
-         DamRoll = 18, 
+         AttackFlags = 
+         {
+            [4] = "punch", 
+            [5] = "kick", 
+         }, 
+         Level = 90, 
+         Description = "", 
          Damage = 
          {
-            DamSizeDice = 4, 
             DamNoDice = 9, 
+            DamSizeDice = 4, 
             DamPlus = 2, 
          }, 
-         Sex = "undistinguished", 
-         Shop = 
-         {
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-            ProfitSell = 90, 
-            KeeperShortDescr = "Turen", 
-         }, 
-         Position = "standing", 
+         ShortDescr = "Turen", 
+         DamRoll = 18, 
          Height = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "1", 
                Code = "if rand(1)\
 say I had a customer the other day........rather a strange fellow.\
 emote shakes his head sadly.\
@@ -1290,100 +743,20 @@ emote thinks a moment.\
 say There is a garden near one of the houses that has a secret exit.....\
 endif\
 ", 
-               Arguments = "1", 
                MudProgType = "rand_prog", 
             }, 
          }, 
-         Name = "Turen", 
-         ArmorClass = -125, 
-         HitChance = 
-         {
-            HitNoDice = 18, 
-            HitSizeDice = 10, 
-            HitPlus = 900, 
-         }, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Vnum = 10507, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-         }, 
-         Description = "", 
-         ShortDescr = "Turen", 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
+         Position = "standing", 
          Credits = 0, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Level = 90, 
-         AttackFlags = 
-         {
-            [4] = "punch", 
-            [5] = "kick", 
-         }, 
-         Weight = 0, 
-         HitRoll = 18, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10508] = 
-      {
-         LongDescr = "A craftsman has set up a booth here.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 2, 
-         }, 
-         Sex = "female", 
          Shop = 
          {
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
             BusinessHours = 
             {
                Open = 0, 
                Close = 23, 
             }, 
-            ProfitBuy = 120, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -1392,33 +765,22 @@ endif\
                [4] = "none", 
                [0] = "none", 
             }, 
-            ProfitSell = 90, 
-            KeeperShortDescr = "a craftsman", 
+            KeeperShortDescr = "Turen", 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         Name = "craftsman", 
-         ArmorClass = -150, 
-         HitChance = 
-         {
-            HitNoDice = 20, 
-            HitSizeDice = 10, 
-            HitPlus = 1000, 
-         }, 
-         Vnum = 10508, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [25] = "NoKill", 
-            [10] = "Practice", 
-            [30] = "Prototype", 
          }, 
-         Description = "This old twilek woman has a booth with some incredably beautiful\
-items. She is very skilled in her craft. Maybe she could teach you a\
-few things.\
-", 
-         ShortDescr = "a craftsman", 
+      }, 
+      [10508] = 
+      {
+         Name = "craftsman", 
+         Sex = "female", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1436,62 +798,150 @@ few things.\
                [2] = "twileki", 
             }, 
          }, 
+         HitChance = 
+         {
+            HitNoDice = 20, 
+            HitSizeDice = 10, 
+            HitPlus = 1000, 
+         }, 
          SaveVs = 
          {
             PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
             ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
          }, 
-         Credits = 20, 
+         HitRoll = 0, 
+         ArmorClass = -150, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
+         Vnum = 10508, 
          Immune = 
          {
             [20] = "magic", 
             [11] = "charm", 
          }, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
+         LongDescr = "A craftsman has set up a booth here.\
+", 
          NumberOfAttacks = 0, 
          Level = 100, 
-         Race = "Twi'lek", 
-         Stats = 
+         Description = "This old twilek woman has a booth with some incredably beautiful\
+items. She is very skilled in her craft. Maybe she could teach you a\
+few things.\
+", 
+         Damage = 
          {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
+            DamNoDice = 10, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
          }, 
-         DefaultPosition = "standing", 
+         ShortDescr = "a craftsman", 
+         DamRoll = 0, 
+         Height = 0, 
+         Race = "Twi'lek", 
+         Position = "standing", 
+         Credits = 20, 
+         Shop = 
+         {
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            KeeperShortDescr = "a craftsman", 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [10] = "Practice", 
+            [30] = "Prototype", 
+         }, 
       }, 
       [10509] = 
       {
-         LongDescr = "An instructor stands here.\
-", 
-         DamRoll = 21, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
          Name = "An instructor", 
-         ArmorClass = -162, 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
          HitChance = 
          {
             HitNoDice = 21, 
             HitSizeDice = 10, 
             HitPlus = 1050, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 21, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10509, 
+         LongDescr = "An instructor stands here.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 105, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "an instructor", 
+         DamRoll = 21, 
+         Height = 0, 
+         Race = "Wookiee", 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = -162, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1501,8 +951,14 @@ few things.\
             [25] = "NoKill", 
             [0] = "Npc", 
          }, 
-         Description = "", 
-         ShortDescr = "an instructor", 
+      }, 
+      [10510] = 
+      {
+         Name = "a training remote", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1514,57 +970,63 @@ few things.\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 21, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 105, 
-         Race = "Wookiee", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10510] = 
-      {
-         LongDescr = "A training remote hovers nearby.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "a training remote", 
-         ArmorClass = 97, 
          HitChance = 
          {
             HitNoDice = 0, 
             HitSizeDice = 10, 
             HitPlus = 10, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10510, 
+         Race = "Human", 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "a remote", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpecho As the remote explodes, a door opens in the wall and another remote\
+mpecho floats out.\
+mpmload 10510\
+", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 97, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1572,20 +1034,14 @@ few things.\
             [26] = "Droid", 
             [0] = "Npc", 
          }, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho As the remote explodes, a door opens in the wall and another remote\
-mpecho floats out.\
-mpmload 10510\
-", 
-               Arguments = "100", 
-               MudProgType = "death_prog", 
-            }, 
-         }, 
+      }, 
+      [10511] = 
+      {
+         Name = "a training remote", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1597,57 +1053,63 @@ mpmload 10510\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 1, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10511] = 
-      {
-         LongDescr = "A training remote hovers nearby.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "a training remote", 
-         ArmorClass = 95, 
          HitChance = 
          {
             HitNoDice = 0, 
             HitSizeDice = 10, 
             HitPlus = 20, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10511, 
+         Race = "Human", 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 2, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "a remote", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpecho As the remote explodes, a door opens in the wall and another \
+mpecho remote floats out.\
+mpmload 10511\
+", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 95, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1655,20 +1117,14 @@ mpmload 10510\
             [26] = "Droid", 
             [0] = "Npc", 
          }, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho As the remote explodes, a door opens in the wall and another \
-mpecho remote floats out.\
-mpmload 10511\
-", 
-               Arguments = "100", 
-               MudProgType = "death_prog", 
-            }, 
-         }, 
+      }, 
+      [10512] = 
+      {
+         Name = "a training remote", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1680,57 +1136,63 @@ mpmload 10511\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 2, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10512] = 
-      {
-         LongDescr = "A training remote hovers nearby.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "a training remote", 
-         ArmorClass = 92, 
          HitChance = 
          {
             HitNoDice = 0, 
             HitSizeDice = 10, 
             HitPlus = 30, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10512, 
+         Race = "Human", 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 3, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "a remote", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpecho As the remote explodes, a door opens in the wall and another \
+mpecho remote floats out.\
+mpmload 10512\
+", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 92, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1738,20 +1200,14 @@ mpmload 10511\
             [26] = "Droid", 
             [0] = "Npc", 
          }, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho As the remote explodes, a door opens in the wall and another \
-mpecho remote floats out.\
-mpmload 10512\
-", 
-               Arguments = "100", 
-               MudProgType = "death_prog", 
-            }, 
-         }, 
+      }, 
+      [10513] = 
+      {
+         Name = "a training remote", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1763,57 +1219,63 @@ mpmload 10512\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 3, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10513] = 
-      {
-         LongDescr = "A training remote hovers nearby.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "a training remote", 
-         ArmorClass = 90, 
          HitChance = 
          {
             HitNoDice = 0, 
             HitSizeDice = 10, 
             HitPlus = 40, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10513, 
+         Race = "Human", 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 4, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "a remote", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpecho As the remote explodes, a door opens in the wall and another \
+mpecho remote floats out.\
+mpmload 10513\
+", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 90, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1821,20 +1283,14 @@ mpmload 10512\
             [26] = "Droid", 
             [0] = "Npc", 
          }, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho As the remote explodes, a door opens in the wall and another \
-mpecho remote floats out.\
-mpmload 10513\
-", 
-               Arguments = "100", 
-               MudProgType = "death_prog", 
-            }, 
-         }, 
+      }, 
+      [10514] = 
+      {
+         Name = "a training remote", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1846,57 +1302,63 @@ mpmload 10513\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 4, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10514] = 
-      {
-         LongDescr = "A training remote hovers nearby.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 0, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "a training remote", 
-         ArmorClass = 87, 
          HitChance = 
          {
             HitNoDice = 1, 
             HitSizeDice = 10, 
             HitPlus = 50, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10514, 
+         Race = "Human", 
+         LongDescr = "A training remote hovers nearby.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 5, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "a remote", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpecho As the remote explodes, a door opens in the wall and another \
+mpecho remote floats out.\
+mpmload 10514\
+", 
+               MudProgType = "death_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 87, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -1905,20 +1367,14 @@ mpmload 10513\
             [26] = "Droid", 
             [0] = "Npc", 
          }, 
-         Description = "", 
-         ShortDescr = "a remote", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho As the remote explodes, a door opens in the wall and another \
-mpecho remote floats out.\
-mpmload 10514\
-", 
-               Arguments = "100", 
-               MudProgType = "death_prog", 
-            }, 
-         }, 
+      }, 
+      [10515] = 
+      {
+         Name = "Corsec Agent", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -1930,81 +1386,85 @@ mpmload 10514\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 5, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10515] = 
-      {
-         LongDescr = "A Corsec Agent patrolls the area.\
-", 
-         DamRoll = 4, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 2, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         SpecFuns = 
-         {
-            [1] = "spec_police_attack", 
-            [0] = "spec_guardian", 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         Name = "Corsec Agent", 
-         ArmorClass = 50, 
          HitChance = 
          {
             HitNoDice = 4, 
             HitSizeDice = 10, 
             HitPlus = 200, 
          }, 
-         Vnum = 10515, 
-         Flags = 
+         SaveVs = 
          {
-            [0] = "Npc", 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
          }, 
+         HitRoll = 4, 
+         VipFlags = 
+         {
+            [17] = "Hoth", 
+         }, 
+         SpecFuns = 
+         {
+            [1] = "spec_police_attack", 
+            [0] = "spec_guardian", 
+         }, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
+         Vnum = 10515, 
+         Race = "Human", 
+         LongDescr = "A Corsec Agent patrolls the area.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 20, 
          Description = "", 
+         Damage = 
+         {
+            DamNoDice = 2, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
          ShortDescr = "a corsec agent", 
+         DamRoll = 4, 
+         Height = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if ovnumcarry(54) < 1\
 mpoload 54\
 wield t-21\
 endif\
 ", 
-               Arguments = "100", 
                MudProgType = "fight_prog", 
             }, 
          }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 50, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+      }, 
+      [10516] = 
+      {
+         Name = "chef", 
+         Sex = "female", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -2016,99 +1476,100 @@ endif\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         VipFlags = 
-         {
-            [17] = "Hoth", 
-         }, 
-         Weight = 0, 
-         HitRoll = 4, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 20, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10516] = 
-      {
-         LongDescr = "A chef is here preparing mouthwatering food.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Sex = "female", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "chef", 
-         ArmorClass = 0, 
          HitChance = 
          {
             HitNoDice = 0, 
             HitSizeDice = 0, 
             HitPlus = 0, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10516, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         LongDescr = "A chef is here preparing mouthwatering food.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ShortDescr = "A chef", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "food", 
+               Code = "emote asks, '&PWhat kind of food?  A salad or a steak?&R&W'\
+", 
+               MudProgType = "speech_prog", 
+            }, 
+            [2] = 
+            {
+               Arguments = "steak", 
+               Code = "mpoload 10541\
+emote smiles and says, '&PThere are go, $n.&R&W'\
+give steak $n\
+drop all\
+", 
+               MudProgType = "speech_prog", 
+            }, 
+            [3] = 
+            {
+               Arguments = "salad", 
+               Code = "mpoload 10542\
+emote smiles and says, '&PEnjoy, $n.&R&W'\
+give salad $n\
+drop all\
+", 
+               MudProgType = "speech_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [27] = "NoCorpse", 
          }, 
-         Description = "", 
-         ShortDescr = "A chef", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "emote asks, '&PWhat kind of food?  A salad or a steak?&R&W'\
-", 
-               Arguments = "food", 
-               MudProgType = "speech_prog", 
-            }, 
-            [2] = 
-            {
-               Code = "mpoload 10541\
-emote smiles and says, '&PThere are go, $n.&R&W'\
-give steak $n\
-drop all\
-", 
-               Arguments = "steak", 
-               MudProgType = "speech_prog", 
-            }, 
-            [3] = 
-            {
-               Code = "mpoload 10542\
-emote smiles and says, '&PEnjoy, $n.&R&W'\
-give salad $n\
-drop all\
-", 
-               Arguments = "salad", 
-               MudProgType = "speech_prog", 
-            }, 
-         }, 
+      }, 
+      [10517] = 
+      {
+         Name = "orchestra band", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -2120,79 +1581,79 @@ drop all\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 1, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10517] = 
-      {
-         LongDescr = "A small group of musicians play quietly off to the side.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "orchestra band", 
-         ArmorClass = 0, 
          HitChance = 
          {
             HitNoDice = 0, 
             HitSizeDice = 0, 
             HitPlus = 0, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10517, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         LongDescr = "A small group of musicians play quietly off to the side.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ShortDescr = "An orchestra", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "10", 
+               Code = "mpecho &cSoft, beautiful music lifts from the band. \
+", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
          }, 
-         Description = "", 
-         ShortDescr = "An orchestra", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho &cSoft, beautiful music lifts from the band. \
-", 
-               Arguments = "10", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
+      }, 
+      [10518] = 
+      {
+         Name = "waiter", 
+         Sex = "male", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -2204,101 +1665,101 @@ drop all\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 1, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10518] = 
-      {
-         LongDescr = "A young man in fine clothes is here greeting guests.\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Sex = "male", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "waiter", 
-         ArmorClass = 0, 
          HitChance = 
          {
             HitNoDice = 0, 
             HitSizeDice = 0, 
             HitPlus = 0, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Race = "Human", 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10518, 
+         Immune = 
+         {
+            [20] = "magic", 
+            [11] = "charm", 
+         }, 
+         LongDescr = "A young man in fine clothes is here greeting guests.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ShortDescr = "A young waiter", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpecho &cThe young man bows deeply before $n.\
+mpecho He says, '&PGreetings, $n.&R&W'\
+mpecho He smiles, '&PCan I get you a bottle of wine?&R&W'\
+", 
+               MudProgType = "all_greet_prog", 
+            }, 
+            [2] = 
+            {
+               Arguments = "Yes", 
+               Code = "mpoload 10545\
+give wine $n\
+mpecho He says, '&PThere you go, $n.&R&W'\
+drop all\
+", 
+               MudProgType = "speech_prog", 
+            }, 
+            [3] = 
+            {
+               Arguments = "No", 
+               Code = "sniff\
+mpecho He says, '&PAs you wish, $n.&R&W'\
+bow\
+", 
+               MudProgType = "speech_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [25] = "NoKill", 
          }, 
-         Description = "", 
-         ShortDescr = "A young waiter", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpecho &cThe young man bows deeply before $n.\
-mpecho He says, '&PGreetings, $n.&R&W'\
-mpecho He smiles, '&PCan I get you a bottle of wine?&R&W'\
-", 
-               Arguments = "100", 
-               MudProgType = "all_greet_prog", 
-            }, 
-            [2] = 
-            {
-               Code = "mpoload 10545\
-give wine $n\
-mpecho He says, '&PThere you go, $n.&R&W'\
-drop all\
-", 
-               Arguments = "Yes", 
-               MudProgType = "speech_prog", 
-            }, 
-            [3] = 
-            {
-               Code = "sniff\
-mpecho He says, '&PAs you wish, $n.&R&W'\
-bow\
-", 
-               Arguments = "No", 
-               MudProgType = "speech_prog", 
-            }, 
-         }, 
+      }, 
+      [10572] = 
+      {
+         Name = "Niku", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -2310,82 +1771,58 @@ bow\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 1, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10572] = 
-      {
-         LongDescr = "Niku, the weapons check girl will check in your weapons while your here\
-", 
-         DamRoll = 3, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         SpecFuns = 
-         {
-            [1] = "spec_customs_smut", 
-            [0] = "spec_customs_weapons", 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         Name = "Niku", 
-         ArmorClass = 60, 
          HitChance = 
          {
             HitNoDice = 3, 
             HitSizeDice = 10, 
             HitPlus = 160, 
          }, 
-         Vnum = 10572, 
-         Flags = 
+         SaveVs = 
          {
-            [1] = "Sentinel", 
-            [2] = "Scavenger", 
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [6] = "StayArea", 
-            [15] = "Guardian", 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
          }, 
+         HitRoll = 3, 
+         SpecFuns = 
+         {
+            [1] = "spec_customs_smut", 
+            [0] = "spec_customs_weapons", 
+         }, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
+         Vnum = 10572, 
+         Race = "Human", 
+         LongDescr = "Niku, the weapons check girl will check in your weapons while your here\
+", 
+         NumberOfAttacks = 0, 
+         Level = 16, 
          Description = "", 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
          ShortDescr = "Niku", 
+         DamRoll = 3, 
+         Height = 0, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "prog 20", 
                Code = "time_prg 16\
 mpecho Niku leaves in a rush\
 mpgoto 10556\
@@ -2393,10 +1830,29 @@ drop all\
 mpgoto 10554\
 mpecho Niku has returned to her post\
 ", 
-               Arguments = "prog 20", 
                MudProgType = "hitprcnt_prog", 
             }, 
          }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 60, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [2] = "Scavenger", 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [6] = "StayArea", 
+            [15] = "Guardian", 
+         }, 
+      }, 
+      [10570] = 
+      {
+         Name = "shistanoven guard", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -2408,65 +1864,74 @@ mpecho Niku has returned to her post\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
+         DefenseFlags = 
          {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
+            [1] = "dodge", 
          }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 3, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 16, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10570] = 
-      {
-         LongDescr = "A burly and well armed shistanoven guard stands here and glares at you.\
-", 
-         DamRoll = 21, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "shistanoven guard", 
-         ArmorClass = -162, 
          HitChance = 
          {
             HitNoDice = 21, 
             HitSizeDice = 10, 
             HitPlus = 1050, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 21, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10570, 
+         NumberOfAttacks = 0, 
+         LongDescr = "A burly and well armed shistanoven guard stands here and glares at you.\
+", 
+         AttackFlags = 
+         {
+            [0] = "bite", 
+            [4] = "punch", 
+         }, 
+         Level = 105, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "A Shistanoven Guard", 
+         DamRoll = 21, 
+         Height = 0, 
+         Race = "Human", 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = -162, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [17] = "NoWander", 
          }, 
-         Description = "", 
-         ShortDescr = "A Shistanoven Guard", 
+      }, 
+      [10549] = 
+      {
+         Name = "The TRIAD Syndicate", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -2478,78 +1943,78 @@ mpecho Niku has returned to her post\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Level = 105, 
-         AttackFlags = 
-         {
-            [0] = "bite", 
-            [4] = "punch", 
-         }, 
-         Weight = 0, 
-         HitRoll = 21, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
          DefenseFlags = 
          {
             [1] = "dodge", 
          }, 
-         Race = "Human", 
-         Stats = 
+         HitChance = 
          {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
+            HitNoDice = 21, 
+            HitSizeDice = 10, 
+            HitPlus = 1050, 
          }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10549] = 
-      {
-         LongDescr = "A burly and well armed shistanoven guard stands here and glares at you.\
-", 
-         DamRoll = 0, 
-         Damage = 
+         SaveVs = 
          {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 2, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
          }, 
-         Sex = "undistinguished", 
+         HitRoll = 0, 
          SpecFuns = 
          {
             [0] = "spec_clan_guard", 
          }, 
-         Position = "standing", 
-         Height = 0, 
-         Name = "The TRIAD Syndicate", 
-         ArmorClass = -162, 
-         HitChance = 
+         Stats = 
          {
-            HitNoDice = 21, 
-            HitSizeDice = 10, 
-            HitPlus = 1050, 
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
          }, 
          Vnum = 10549, 
+         NumberOfAttacks = 0, 
+         LongDescr = "A burly and well armed shistanoven guard stands here and glares at you.\
+", 
+         AttackFlags = 
+         {
+            [0] = "bite", 
+            [4] = "punch", 
+         }, 
+         Level = 105, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "A Shistanoven Guard", 
+         DamRoll = 0, 
+         Height = 0, 
+         Race = "Human", 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = -162, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [17] = "NoWander", 
          }, 
-         Description = "", 
-         ShortDescr = "A Shistanoven Guard", 
+      }, 
+      [10548] = 
+      {
+         Name = "Niku", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -2561,71 +2026,68 @@ mpecho Niku has returned to her post\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Level = 105, 
-         AttackFlags = 
-         {
-            [0] = "bite", 
-            [4] = "punch", 
-         }, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         DefenseFlags = 
-         {
-            [1] = "dodge", 
-         }, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10548] = 
-      {
-         LongDescr = "Niku is here checking in weapons\
-", 
-         DamRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 1, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         SpecFuns = 
-         {
-            [1] = "spec_customs_smut", 
-            [0] = "spec_customs_weapons", 
-         }, 
-         Position = "standing", 
-         Height = 0, 
-         Name = "Niku", 
-         ArmorClass = 60, 
          HitChance = 
          {
             HitNoDice = 3, 
             HitSizeDice = 10, 
             HitPlus = 160, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         SpecFuns = 
+         {
+            [1] = "spec_customs_smut", 
+            [0] = "spec_customs_weapons", 
+         }, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10548, 
+         Race = "Human", 
+         LongDescr = "Niku is here checking in weapons\
+", 
+         NumberOfAttacks = 0, 
+         Level = 16, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "Niku", 
+         DamRoll = 0, 
+         Height = 0, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "5", 
+               Code = "mpat 10556 drop all\
+say Sorry but weapons are not allowed in the Headquarters\
+emote drops something down a chute.\
+", 
+               MudProgType = "rand_prog", 
+            }, 
+         }, 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 60, 
          Flags = 
          {
             [1] = "Sentinel", 
@@ -2636,20 +2098,14 @@ mpecho Niku has returned to her post\
             [6] = "StayArea", 
             [15] = "Guardian", 
          }, 
-         Description = "", 
-         ShortDescr = "Niku", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpat 10556 drop all\
-say Sorry but weapons are not allowed in the Headquarters\
-emote drops something down a chute.\
-", 
-               Arguments = "5", 
-               MudProgType = "rand_prog", 
-            }, 
-         }, 
+      }, 
+      [10545] = 
+      {
+         Name = "A Corellian pirate", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
          Languages = 
          {
             Speaks = 
@@ -2661,57 +2117,57 @@ emote drops something down a chute.\
                [0] = "basic", 
             }, 
          }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Weight = 0, 
-         HitRoll = 0, 
-         Alignment = 0, 
-         NumberOfAttacks = 0, 
-         Level = 16, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
-      }, 
-      [10545] = 
-      {
-         LongDescr = "A dark skinned, fierce Corellian pirate is here, guarding his treasure.\
-", 
-         DamRoll = 7, 
-         Damage = 
-         {
-            DamSizeDice = 4, 
-            DamNoDice = 10, 
-            DamPlus = 2, 
-         }, 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         Height = 0, 
-         Name = "A Corellian pirate", 
-         ArmorClass = -300, 
          HitChance = 
          {
             HitNoDice = 20, 
             HitSizeDice = 10, 
             HitPlus = 1000, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 14, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
          Vnum = 10545, 
+         Resistant = 
+         {
+            [20] = "magic", 
+            [10] = "sleep", 
+            [11] = "charm", 
+         }, 
+         LongDescr = "A dark skinned, fierce Corellian pirate is here, guarding his treasure.\
+", 
+         NumberOfAttacks = 3, 
+         Level = 100, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 10, 
+            DamSizeDice = 4, 
+            DamPlus = 2, 
+         }, 
+         ShortDescr = "A fierce Corellian pirate", 
+         DamRoll = 7, 
+         Height = 0, 
+         Race = "Human", 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = -300, 
          Flags = 
          {
             [0] = "Npc", 
@@ -2719,137 +2175,1008 @@ emote drops something down a chute.\
             [2] = "Scavenger", 
             [27] = "NoCorpse", 
          }, 
-         Description = "", 
-         ShortDescr = "A fierce Corellian pirate", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         SaveVs = 
-         {
-            PoisonDeath = 0, 
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-         }, 
-         Credits = 0, 
-         Resistant = 
-         {
-            [20] = "magic", 
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         Weight = 0, 
-         HitRoll = 14, 
-         Alignment = 0, 
-         NumberOfAttacks = 3, 
-         Level = 100, 
-         Race = "Human", 
-         Stats = 
-         {
-            Intelligence = 0, 
-            Strength = 0, 
-            Force = 0, 
-            Luck = 0, 
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-         }, 
-         DefaultPosition = "standing", 
       }, 
    }, 
+   ResetMessage = "", 
+   Resets = 
+   {
+      [1] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10501, 
+         Arg1 = 90, 
+         Arg2 = 1, 
+      }, 
+      [2] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10504, 
+         Arg1 = 10500, 
+         Arg2 = 6, 
+      }, 
+      [3] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10505, 
+         Arg1 = 10502, 
+         Arg2 = 1, 
+      }, 
+      [4] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 301, 
+         Arg2 = 1, 
+      }, 
+      [5] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 302, 
+         Arg2 = 1, 
+      }, 
+      [6] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 305, 
+         Arg2 = 1, 
+      }, 
+      [7] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10506, 
+         Arg1 = 10503, 
+         Arg2 = 1, 
+      }, 
+      [8] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 32207, 
+         Arg2 = 1, 
+      }, 
+      [9] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 301, 
+         Arg2 = 1, 
+      }, 
+      [10] = 
+      {
+         Command = "D", 
+         MiscData = 0, 
+         Arg3 = 2, 
+         Arg1 = 10507, 
+         Arg2 = 8, 
+      }, 
+      [11] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10514, 
+         Arg1 = 10505, 
+         Arg2 = 8, 
+      }, 
+      [12] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10515, 
+         Arg1 = 10505, 
+         Arg2 = 8, 
+      }, 
+      [13] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10515, 
+         Arg1 = 10505, 
+         Arg2 = 8, 
+      }, 
+      [14] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10517, 
+         Arg1 = 10505, 
+         Arg2 = 8, 
+      }, 
+      [15] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10518, 
+         Arg1 = 10505, 
+         Arg2 = 8, 
+      }, 
+      [16] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10518, 
+         Arg1 = 10505, 
+         Arg2 = 8, 
+      }, 
+      [17] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10519, 
+         Arg1 = 10504, 
+         Arg2 = 1, 
+      }, 
+      [18] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10519, 
+         Arg1 = 10505, 
+         Arg2 = 8, 
+      }, 
+      [19] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg3 = 16, 
+         Arg1 = 54, 
+         Arg2 = 1, 
+      }, 
+      [20] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10519, 
+         Arg1 = 10505, 
+         Arg2 = 8, 
+      }, 
+      [21] = 
+      {
+         Command = "E", 
+         MiscData = 1, 
+         Arg3 = 16, 
+         Arg1 = 54, 
+         Arg2 = 1, 
+      }, 
+      [22] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10521, 
+         Arg1 = 10515, 
+         Arg2 = 3, 
+      }, 
+      [23] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10521, 
+         Arg1 = 10500, 
+         Arg2 = 6, 
+      }, 
+      [24] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10522, 
+         Arg1 = 10515, 
+         Arg2 = 3, 
+      }, 
+      [25] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10526, 
+         Arg1 = 10500, 
+         Arg2 = 6, 
+      }, 
+      [26] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10528, 
+         Arg1 = 10500, 
+         Arg2 = 6, 
+      }, 
+      [27] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10529, 
+         Arg1 = 10500, 
+         Arg2 = 6, 
+      }, 
+      [28] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10554, 
+         Arg1 = 10548, 
+         Arg2 = 1, 
+      }, 
+      [29] = 
+      {
+         Command = "D", 
+         MiscData = 0, 
+         Arg3 = 2, 
+         Arg1 = 10554, 
+         Arg2 = 5, 
+      }, 
+      [30] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10556, 
+         Arg1 = 10571, 
+         Arg2 = 1, 
+      }, 
+      [31] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 50, 
+         Arg2 = 1, 
+      }, 
+      [32] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 54, 
+         Arg2 = 1, 
+      }, 
+      [33] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 10311, 
+         Arg2 = 1, 
+      }, 
+      [34] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 10313, 
+         Arg2 = 1, 
+      }, 
+      [35] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 10569, 
+         Arg2 = 1, 
+      }, 
+      [36] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10564, 
+         Arg1 = 10570, 
+         Arg2 = 1, 
+      }, 
+      [37] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10571, 
+         Arg1 = 10313, 
+         Arg2 = 1, 
+      }, 
+      [38] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10571, 
+         Arg1 = 32208, 
+         Arg2 = 1, 
+      }, 
+      [39] = 
+      {
+         Command = "D", 
+         MiscData = 0, 
+         Arg3 = 2, 
+         Arg1 = 10571, 
+         Arg2 = 4, 
+      }, 
+      [40] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10578, 
+         Arg1 = 10545, 
+         Arg2 = 1, 
+      }, 
+      [41] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10582, 
+         Arg1 = 10500, 
+         Arg2 = 6, 
+      }, 
+      [42] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10583, 
+         Arg1 = 32208, 
+         Arg2 = 1, 
+      }, 
+      [43] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10589, 
+         Arg1 = 413, 
+         Arg2 = 6, 
+      }, 
+      [44] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10590, 
+         Arg1 = 10510, 
+         Arg2 = 1, 
+      }, 
+      [45] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10591, 
+         Arg1 = 10511, 
+         Arg2 = 1, 
+      }, 
+      [46] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10592, 
+         Arg1 = 10512, 
+         Arg2 = 1, 
+      }, 
+      [47] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10593, 
+         Arg1 = 10513, 
+         Arg2 = 1, 
+      }, 
+      [48] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10594, 
+         Arg1 = 10514, 
+         Arg2 = 4, 
+      }, 
+      [49] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10595, 
+         Arg1 = 10514, 
+         Arg2 = 4, 
+      }, 
+      [50] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10605, 
+         Arg1 = 10515, 
+         Arg2 = 3, 
+      }, 
+      [51] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10608, 
+         Arg1 = 38, 
+         Arg2 = 1, 
+      }, 
+      [52] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10555, 
+         Arg1 = 32208, 
+         Arg2 = 1, 
+      }, 
+      [53] = 
+      {
+         Command = "D", 
+         MiscData = 0, 
+         Arg3 = 0, 
+         Arg1 = 10555, 
+         Arg2 = 3, 
+      }, 
+      [54] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10549, 
+         Arg1 = 10517, 
+         Arg2 = 1, 
+      }, 
+      [55] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10650, 
+         Arg1 = 10518, 
+         Arg2 = 1, 
+      }, 
+      [56] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10547, 
+         Arg1 = 10516, 
+         Arg2 = 1, 
+      }, 
+      [57] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10548, 
+         Arg1 = 10543, 
+         Arg2 = 1, 
+      }, 
+      [58] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10548, 
+         Arg1 = 10544, 
+         Arg2 = 1, 
+      }, 
+      [59] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10530, 
+         Arg1 = 10501, 
+         Arg2 = 2, 
+      }, 
+      [60] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 32229, 
+         Arg2 = 1, 
+      }, 
+      [61] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 32238, 
+         Arg2 = 1, 
+      }, 
+      [62] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 10546, 
+         Arg2 = 1, 
+      }, 
+      [63] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10587, 
+         Arg1 = 10509, 
+         Arg2 = 8, 
+      }, 
+      [64] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10584, 
+         Arg1 = 10508, 
+         Arg2 = 2, 
+      }, 
+      [65] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 32281, 
+         Arg2 = 1, 
+      }, 
+      [66] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 330, 
+         Arg2 = 1, 
+      }, 
+      [67] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10545, 
+         Arg1 = 10507, 
+         Arg2 = 2, 
+      }, 
+      [68] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 10497, 
+         Arg2 = 1, 
+      }, 
+      [69] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 324, 
+         Arg2 = 1, 
+      }, 
+      [70] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 32210, 
+         Arg2 = 1, 
+      }, 
+      [71] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 32234, 
+         Arg2 = 1, 
+      }, 
+      [72] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 32280, 
+         Arg2 = 1, 
+      }, 
+      [73] = 
+      {
+         Command = "G", 
+         MiscData = 1, 
+         Arg1 = 10494, 
+         Arg2 = 1, 
+      }, 
+      [74] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10502, 
+         Arg1 = 10506, 
+         Arg2 = 1, 
+      }, 
+      [75] = 
+      {
+         Command = "M", 
+         MiscData = 1, 
+         Arg3 = 10502, 
+         Arg1 = 10500, 
+         Arg2 = 6, 
+      }, 
+      [76] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 10572, 
+         Arg1 = 32257, 
+         Arg2 = 1, 
+      }, 
+   }, 
+   Author = "Darrik", 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         Last = 10572, 
+         First = 10500, 
+      }, 
+      Room = 
+      {
+         Last = 10650, 
+         First = 10500, 
+      }, 
+      Object = 
+      {
+         Last = 10571, 
+         First = 10540, 
+      }, 
+   }, 
+   Objects = 
+   {
+      [10544] = 
+      {
+         Name = "exquisite mahogany table", 
+         Vnum = 10544, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 1, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 6, 
+         }, 
+         Layers = 0, 
+         Description = "An exquisite mahogany table is here.", 
+         ShortDescr = "an exquisite mahogany table", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Weight = 1, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "furniture", 
+      }, 
+      [10545] = 
+      {
+         Name = "bottle wine", 
+         Vnum = 10545, 
+         ObjectValues = 
+         {
+            [1] = 10, 
+            [2] = 2, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
+         }, 
+         Layers = 0, 
+         Description = "A bottle of sparkling wine lies here, looks tempting.", 
+         ShortDescr = "a bottle of sparkling wine", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 1000, 
+         Weight = 3, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ItemType = "drink_container", 
+      }, 
+      [10546] = 
+      {
+         Name = "pair infrared binoculars", 
+         Vnum = 10546, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Layers = 0, 
+         Description = "A pair of infrared binoculars have been dropped here.", 
+         ShortDescr = "infrared binoculars", 
+         Cost = 10000, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Affects = 
+         {
+            [1] = 
+            {
+               Location = 26, 
+               Modifier = 32, 
+            }, 
+         }, 
+         Weight = 1, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
+         ItemType = "trash", 
+      }, 
+      [10569] = 
+      {
+         Name = "Triad Backpack", 
+         Vnum = 10569, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 35, 
+         }, 
+         Layers = 128, 
+         Description = "A Triad Backpack was dropped here", 
+         ShortDescr = "a Triad Backpack", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 200, 
+         Weight = 1, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [10] = "About", 
+            [14] = "Hold", 
+         }, 
+         ItemType = "container", 
+      }, 
+      [10570] = 
+      {
+         Name = "Workbench", 
+         Vnum = 10570, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10000, 
+         }, 
+         Layers = 0, 
+         Description = "A Workbench is here.", 
+         ShortDescr = "workbench", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Weight = 1, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "container", 
+      }, 
+      [10571] = 
+      {
+         Name = "Triad Key", 
+         Vnum = 10571, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Layers = 0, 
+         Description = "A Triad Key is here.", 
+         ShortDescr = "a Triad Key", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Weight = 1, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ItemType = "trash", 
+      }, 
+      [10540] = 
+      {
+         Name = "treasure chest", 
+         Vnum = 10540, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         Layers = 0, 
+         Description = "A treasure chest is here.", 
+         ShortDescr = "a treasure chest", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Weight = 1, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "container", 
+      }, 
+      [10541] = 
+      {
+         Name = "delicious steak", 
+         Vnum = 10541, 
+         ObjectValues = 
+         {
+            [1] = 30, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 30, 
+         }, 
+         Layers = 0, 
+         Description = "A delicious steak lies here rotting.", 
+         ShortDescr = "a delicious steak", 
+         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpechoat $n &YMmmm, now that was a good steak.\
+", 
+               MudProgType = "use_prog", 
+            }, 
+         }, 
+         Weight = 3, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ItemType = "food", 
+      }, 
+      [10542] = 
+      {
+         Name = "hand tossed salad", 
+         Vnum = 10542, 
+         ObjectValues = 
+         {
+            [1] = 10, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 10, 
+         }, 
+         Layers = 0, 
+         Description = "A hand-tossed salad lies scattered on the floor.", 
+         ShortDescr = "a hand-tossed &rs&Ga&R&Wl&Ga&rd&R&W", 
+         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "100", 
+               Code = "mpechoat $n &GA satisfactory salad, you've had better.&R&W\
+", 
+               MudProgType = "use_prog", 
+            }, 
+         }, 
+         Weight = 2, 
+         ActionDescription = "", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         ItemType = "food", 
+      }, 
+      [10543] = 
+      {
+         Name = "satin cushioned mahogany chair", 
+         Vnum = 10543, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 2, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 2, 
+         }, 
+         Layers = 0, 
+         Description = "A satin-cushioned mahogany chair looks very comfortable.", 
+         ShortDescr = "a satin cushioned mahogany chair", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Weight = 1, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "furniture", 
+      }, 
+   }, 
+   Filename = "corellia.lua", 
    Rooms = 
    {
       [10500] = 
       {
+         Name = "Corellia Serin Stop", 
+         Vnum = 10500, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The docking bay on Corellia is a crowded platform.  Ships continually land,\
 delivering supplies and passengers, then lift off again, millions of\
 credits richer.  You see a white palace in the distance to the northeast. \
 You brush by merchants and travelers as you move your way across the pad.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10605, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellia Serin Stop", 
-         Tunnel = 0, 
-         Vnum = 10500, 
       }, 
       [10501] = 
       {
+         Name = "Main Street", 
+         Vnum = 10501, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Running down the center of the town, Main Street is paved with white\
 marble, worn down by the feet of the millions of citizens of Corellia.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10503, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10502, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10605, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Main Street", 
-         Tunnel = 0, 
-         Vnum = 10501, 
       }, 
       [10502] = 
       {
+         Name = "The Master and Fool", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [31] = "Auction", 
             [23] = "Hotel", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Master and Fool is one of the more frequented hotels on Corellia. \
 Master Bunyon owns the establishment, although he seems to wear the\
 clothes of a servant most of the time.\
@@ -2859,148 +3186,148 @@ clothes of a servant most of the time.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10501, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "The Master and Fool", 
-         Tunnel = 0, 
          Vnum = 10502, 
+         TeleDelay = 0, 
       }, 
       [10503] = 
       {
+         Name = "Street intersection", 
+         Vnum = 10503, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Running down the center of the town, Main Street is paved with white\
 marble, worn down by the feet of the millions of citizens of Corellia.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10510, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10504, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10501, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10522, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Street intersection", 
-         Tunnel = 0, 
-         Vnum = 10503, 
       }, 
       [10504] = 
       {
+         Name = "Treasure Ship Row", 
+         Vnum = 10504, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Treasure Ship Row is lined with vendors selling all kinds of goods and\
 services.  Wading through the crowd, vendors yell slogans.  More line the\
 side of the road, trying to get your\
 attention.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10505, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 10505, 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10521, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10506, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10506, 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10503, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Treasure Ship Row", 
-         Tunnel = 0, 
-         Vnum = 10504, 
       }, 
       [10505] = 
       {
+         Name = "Galin's bakery", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Galin bakes the best bread in the sector.  However, it is not the only\
 attraction.  Womp rats are imported in from Tatooine and sold here, as\
 well.\
@@ -3009,30 +3336,30 @@ well.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10504, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Galin's bakery", 
-         Tunnel = 0, 
          Vnum = 10505, 
+         TeleDelay = 0, 
       }, 
       [10506] = 
       {
+         Name = "Minit's Tavern", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Tavern is a popular hangout for the citizens of Corellia.  You have to\
 push your way through, but the wait is well worth it when you see the\
 owner... and the\
@@ -3042,30 +3369,30 @@ drinks\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10504, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Minit's Tavern", 
-         Tunnel = 0, 
          Vnum = 10506, 
+         TeleDelay = 0, 
       }, 
       [10507] = 
       {
+         Name = "A garden", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "As you enter the garden your breath is taken away from you from the exotic\
 flowers, vegatation, fruits, and many huge trees. There is a small\
 trickling creak running into a small pond. There is a bench and a stone\
@@ -3075,37 +3402,41 @@ path leading to a house.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10521, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10573, 
                Flags = 
                {
                   [11] = "Hidden", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10573, 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10508, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
+               Direction = "southeast", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10508, 
                Flags = 
                {
                   [1] = "Closed", 
@@ -3114,32 +3445,27 @@ path leading to a house.\
                   [0] = "IsDoor", 
                   [11] = "Hidden", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "southeast", 
-               DestinationVnum = 10508, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A garden", 
-         Tunnel = 0, 
          Vnum = 10507, 
+         TeleDelay = 0, 
       }, 
       [10508] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -3147,30 +3473,30 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10507, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10508, 
+         TeleDelay = 0, 
       }, 
       [10509] = 
       {
+         Name = "The Corellian Ocean", 
+         Sector = "water_swim", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The green waters of the ocean are chilly to your skin, but not so much as\
 to inhibit your functioning if you do not spend too much time floating.\
 The waves are high, but not periously so. At the top of each crest, the\
@@ -3180,83 +3506,83 @@ vision of an island appears to solidify into the real thing. \
          {
             [1] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10575, 
                Flags = 
                {
                   [4] = "Swim", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10575, 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10579, 
                Flags = 
                {
                   [4] = "Swim", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10579, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "water_swim", 
-         Name = "The Corellian Ocean", 
-         Tunnel = 0, 
          Vnum = 10509, 
+         TeleDelay = 0, 
       }, 
       [10510] = 
       {
+         Name = "Main Street", 
+         Vnum = 10510, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Running down the center of the town, Main Street is paved with white\
 marble, worn down by the feet of the millions of citizens of Corellia.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10511, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10503, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Main Street", 
-         Tunnel = 0, 
-         Vnum = 10510, 
       }, 
       [10511] = 
       {
+         Name = "Street intersection", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Main Street is intersected by Starlight Avenue here.   To the east and\
 north, the palace seems closer.   To the west, are apartments and\
 housing.\
@@ -3265,108 +3591,107 @@ housing.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10580, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10512, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10510, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10524, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Street intersection", 
-         Tunnel = 0, 
          Vnum = 10511, 
+         TeleDelay = 0, 
       }, 
       [10512] = 
       {
+         Name = "Starlight Avenue", 
+         Vnum = 10512, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Starlight Avenue is a newer road than Main Street.  You can not see any\
 worn down stones or cracked mortar in the street. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10514, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10514, 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10513, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10511, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Starlight Avenue", 
-         Tunnel = 0, 
-         Vnum = 10512, 
       }, 
       [10513] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -3374,486 +3699,485 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10512, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10513, 
+         TeleDelay = 0, 
       }, 
       [10514] = 
       {
+         Name = "Starlight Avenue", 
+         Vnum = 10514, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Starlight Avenue is a newer road than Main Street.  You can not see any\
 worn down stones or cracked mortar in the street. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10515, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10512, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Starlight Avenue", 
-         Tunnel = 0, 
-         Vnum = 10514, 
       }, 
       [10515] = 
       {
+         Name = "Diktat Avenue", 
+         Vnum = 10515, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This road leads to the Diktat's palace.  Black marble statues have been\
 carved and placed on pedestals, standing out from the white marble of the\
 street. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10516, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10514, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Diktat Avenue", 
-         Tunnel = 0, 
-         Vnum = 10515, 
       }, 
       [10516] = 
       {
+         Name = "Diktat Avenue", 
+         Vnum = 10516, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This road leads to the Diktat's palace.  Black marble statues have been \
 carved and placed on pedestals, standing out from the white marble of the\
 street. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10517, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10515, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Diktat Avenue", 
-         Tunnel = 0, 
-         Vnum = 10516, 
       }, 
       [10517] = 
       {
+         Name = "Diktat's Palace", 
+         Vnum = 10517, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Palace is huge.  White and black marble were the primary materials in\
 building this work of art.  Corellia spares no expense in making their\
 Diktat feel at home. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10518, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10520, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10516, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Diktat's Palace", 
-         Tunnel = 0, 
-         Vnum = 10517, 
       }, 
       [10518] = 
       {
+         Name = "Palace Hallway", 
+         Vnum = 10518, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Palace is huge.  White and black marble were the primary materials in\
 building this work of art.  Corellia spares no expense in making their\
 Diktat feel at home. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10519, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10517, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Palace Hallway", 
-         Tunnel = 0, 
-         Vnum = 10518, 
       }, 
       [10519] = 
       {
+         Name = "The Throne Room", 
+         Vnum = 10519, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Palace is huge.  White and black marble were the primary materials in\
 building this work of art.  Corellia spares no expense in making their\
 Diktat feel at home.  The throne room is spectacular, featuring many\
 different styles of tapestries hanging on the walls. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10518, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "The Throne Room", 
-         Tunnel = 0, 
-         Vnum = 10519, 
       }, 
       [10520] = 
       {
+         Name = "Diktat's Palace", 
+         Vnum = 10520, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Palace is huge.  White and black marble were the primary materials in\
 building this work of art.  Corellia spares no expense in making their\
 Diktat feel at home. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10517, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Diktat's Palace", 
-         Tunnel = 0, 
-         Vnum = 10520, 
       }, 
       [10521] = 
       {
+         Name = "Treasure Ship Row", 
+         Vnum = 10521, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Treasure Ship Row is lined with vendors selling all kinds of goods and\
 services.  Wading through the crowd, vendors yell slogans.  More line the\
 side of the road, trying to get your attention.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10625, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10507, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10507, 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10504, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Treasure Ship Row", 
-         Tunnel = 0, 
-         Vnum = 10521, 
       }, 
       [10522] = 
       {
+         Name = "Treasure Ship Row", 
+         Vnum = 10522, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Treasure Ship Row is lined with vendors selling all kinds of goods and\
 services.  Wading through the crowd, they yell slogans attempting to get\
 your attention.  More of them line the side of the road.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10627, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10503, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10545, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10545, 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10523, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Treasure Ship Row", 
-         Tunnel = 0, 
-         Vnum = 10522, 
       }, 
       [10523] = 
       {
+         Name = "Treasure Ship Row", 
+         Vnum = 10523, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Treasure Ship Row is lined with vendors selling all kinds of goods and\
 services.  Wading through the crowd, they yell slogans attempting to get\
 your attention.  More of them line the side of the road.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10522, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10569, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10569, 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10608, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Treasure Ship Row", 
-         Tunnel = 0, 
-         Vnum = 10523, 
       }, 
       [10524] = 
       {
+         Name = "Starlight Avenue", 
+         Vnum = 10524, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Starlight Avenue is a newer road than Main Street.  You can not see any\
 worn down stones or cracked mortar in the street. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10511, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10525, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10526, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Starlight Avenue", 
-         Tunnel = 0, 
-         Vnum = 10524, 
       }, 
       [10525] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -3861,75 +4185,75 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10524, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10525, 
+         TeleDelay = 0, 
       }, 
       [10526] = 
       {
+         Name = "Starlight Avenue", 
+         Vnum = 10526, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Starlight Avenue is a newer road than Main Street.  You can not see any\
 worn down stones or cracked mortar in the street. \
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10527, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10524, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10550, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Starlight Avenue", 
-         Tunnel = 0, 
-         Vnum = 10526, 
       }, 
       [10527] = 
       {
+         Name = "Recluse Apartment Complex", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Recluse Apartment's can hold many people. Maybe you should look around\
 for a home here?\
 ", 
@@ -3937,142 +4261,66 @@ for a home here?\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10533, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10531, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10526, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10532, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [5] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "up", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10528, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Recluse Apartment Complex", 
-         Tunnel = 0, 
          Vnum = 10527, 
+         TeleDelay = 0, 
       }, 
       [10528] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Description = "The Recluse Apartment's can hold many people. Maybe you should look around\
-for a home here?\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 10537, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10535, 
-            }, 
-            [3] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10538, 
-            }, 
-            [4] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10536, 
-            }, 
-            [5] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 10529, 
-            }, 
-            [6] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "down", 
-               DestinationVnum = 10527, 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
+         Name = "Second Floor", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "city", 
-         Name = "Second Floor", 
-         Tunnel = 0, 
-         Vnum = 10528, 
-      }, 
-      [10529] = 
-      {
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Recluse Apartment's can hold many people. Maybe you should look around\
 for a home here?\
 ", 
@@ -4080,157 +4328,231 @@ for a home here?\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
-               DestinationVnum = 10541, 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10537, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
-               DestinationVnum = 10539, 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10535, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
-               DestinationVnum = 10542, 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10538, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
-               DestinationVnum = 10540, 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10536, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [5] = 
             {
+               Direction = "up", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10529, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [6] = 
+            {
+               Direction = "down", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10527, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
+         Vnum = 10528, 
+         TeleDelay = 0, 
+      }, 
+      [10529] = 
+      {
+         Name = "Third Floor", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "The Recluse Apartment's can hold many people. Maybe you should look around\
+for a home here?\
+", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10541, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10539, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10542, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10540, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [5] = 
+            {
+               Direction = "up", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10530, 
                Flags = 
                {
                   [11] = "Hidden", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "up", 
-               DestinationVnum = 10530, 
+               Description = "", 
             }, 
             [6] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "down", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10528, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Third Floor", 
-         Tunnel = 0, 
          Vnum = 10529, 
+         TeleDelay = 0, 
       }, 
       [10530] = 
       {
+         Name = "Secret Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "down", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10529, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Secret Shop", 
-         Tunnel = 0, 
          Vnum = 10530, 
+         TeleDelay = 0, 
       }, 
       [10531] = 
       {
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [23] = "Hotel", 
-            [3] = "Indoors", 
-         }, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10527, 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
+         Name = "An Empty Home", 
+         Sector = "inside", 
          ExtraDescriptions = 
          {
          }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "75", 
                Code = "feel heal $n\
 feel heal $n\
 feel heal $n\
 feel heal $n\
 feel heal $n\
 ", 
-               Arguments = "75", 
                MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10527, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
          Vnum = 10531, 
+         TeleDelay = 0, 
       }, 
       [10532] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4238,41 +4560,40 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10527, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10622, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10532, 
+         TeleDelay = 0, 
       }, 
       [10533] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4280,32 +4601,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10527, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10533, 
+         TeleDelay = 0, 
       }, 
       [10534] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4313,32 +4633,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10527, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10534, 
+         TeleDelay = 0, 
       }, 
       [10535] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4346,32 +4665,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10528, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10535, 
+         TeleDelay = 0, 
       }, 
       [10536] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4379,32 +4697,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10528, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10536, 
+         TeleDelay = 0, 
       }, 
       [10537] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4412,32 +4729,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10528, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10537, 
+         TeleDelay = 0, 
       }, 
       [10538] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4445,32 +4761,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10528, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10538, 
+         TeleDelay = 0, 
       }, 
       [10539] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4478,32 +4793,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10529, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10539, 
+         TeleDelay = 0, 
       }, 
       [10540] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4511,32 +4825,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10529, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10540, 
+         TeleDelay = 0, 
       }, 
       [10541] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4544,32 +4857,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10529, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10541, 
+         TeleDelay = 0, 
       }, 
       [10542] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4577,32 +4889,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10529, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10542, 
+         TeleDelay = 0, 
       }, 
       [10543] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -4610,59 +4921,59 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10650, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10543, 
+         TeleDelay = 0, 
       }, 
       [10544] = 
       {
+         Name = "Back room", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10543, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Back room", 
-         Tunnel = 0, 
          Vnum = 10544, 
+         TeleDelay = 0, 
       }, 
       [10545] = 
       {
+         Name = "Turen's Hardware", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "A simple store, Turen's shop is bursting with things electronic.   He sells\
 goods for a fair price and will give you a smile if you do the\
 same.\
@@ -4671,70 +4982,70 @@ same.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10522, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Turen's Hardware", 
-         Tunnel = 0, 
          Vnum = 10545, 
+         TeleDelay = 0, 
       }, 
       [10546] = 
       {
+         Name = "Bacta Tank", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Description = "", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "southwest", 
-               DestinationVnum = 10587, 
-            }, 
-         }, 
-         TeleDelay = 0, 
          TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Bacta Tank", 
+         Tunnel = 0, 
+         Description = "", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "feel heal $n\
 ", 
-               Arguments = "100", 
                MudProgType = "rand_prog", 
             }, 
          }, 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10587, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
          Vnum = 10546, 
+         TeleDelay = 0, 
       }, 
       [10547] = 
       {
+         Name = "Kitchen", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Here the chef prepares many fine delicasies.  On the menu for tonight is\
 steak, and a salad, so tell her what you would like.\
 ", 
@@ -4742,31 +5053,31 @@ steak, and a salad, so tell her what you would like.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10650, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Kitchen", 
-         Tunnel = 0, 
          Vnum = 10547, 
+         TeleDelay = 0, 
       }, 
       [10548] = 
       {
+         Name = "Dining Room", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This fine dining room has finely crafter furnishings that appear to be very\
 expensive.  Take a seat and enjoy the great meal cooked by the chef.  Just\
 make sure to clean up after yourself when you leave. \
@@ -4775,31 +5086,31 @@ make sure to clean up after yourself when you leave. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10650, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Dining Room", 
-         Tunnel = 0, 
          Vnum = 10548, 
+         TeleDelay = 0, 
       }, 
       [10549] = 
       {
+         Name = "A Ballroom", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "A beautiful room will a finished oak floor and a band playing soft music in\
 the background.  Many people are dancing, having a good time.\
 ", 
@@ -4807,64 +5118,64 @@ the background.  Many people are dancing, having a good time.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10650, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A Ballroom", 
-         Tunnel = 0, 
          Vnum = 10549, 
+         TeleDelay = 0, 
       }, 
       [10550] = 
       {
+         Name = "A dark alley", 
+         Vnum = 10550, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the entrance to an alley that runs south from here. There is very\
 limited light here even in day, as shadows cover this whole area. You can\
 see that the alley only runs a little ways south and then ends as it meets\
 a large building's wall.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10526, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10551, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A dark alley", 
-         Tunnel = 0, 
-         Vnum = 10550, 
       }, 
       [10551] = 
       {
+         Name = "A dark alley", 
+         Vnum = 10551, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This seems to be the middle of the alley.  To the north, you can see the\
 people walking on Starlight Avenue.   In fact, north is the only direction\
 you can really see anything, as shadows press in on you from the other\
@@ -4872,39 +5183,39 @@ directions. To the south, there are a couple of vague outlines, that might\
 be people.  This is verified as you hear two hushed voices in\
 conversation.  The growls you hear don't sound pleasant.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10550, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10552, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A dark alley", 
-         Tunnel = 0, 
-         Vnum = 10551, 
       }, 
       [10552] = 
       {
+         Name = "The end of the alley", 
+         Vnum = 10552, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "As you come to the end of the alley, you can see that the two outlines were\
 in fact, two heavily armed private guards. These Shistavinians stand on\
 either side of a door to the east.  The door is marked 'Private' in large\
@@ -4914,43 +5225,43 @@ notice that both of them have dropped their hands to their weapons as they\
 look directly at you.  On the wall, there is a small sign posted that\
 reads, 'If you dont belong here, you should leave!!! NOW!!!'\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10551, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10553, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "The end of the alley", 
-         Tunnel = 0, 
-         Vnum = 10552, 
       }, 
       [10553] = 
       {
+         Name = "Dark entrance", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "As you enter, you notice the large symbol engraved on the walls on either\
 side of you.  It appears to be the symbol known throughout the galaxy for\
 the Triad Syndicate. An almost silent humming of scanners running various\
@@ -4962,44 +5273,44 @@ to enter the Main Lobby.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10552, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "somewhere", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10554, 
                Flags = 
                {
                   [19] = "Auto", 
                   [11] = "Hidden", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "evangelion", 
-               Key = -1, 
-               Direction = "somewhere", 
-               DestinationVnum = 10554, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Dark entrance", 
-         Tunnel = 0, 
          Vnum = 10553, 
+         TeleDelay = 0, 
       }, 
       [10554] = 
       {
+         Name = "Lobby", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the main lobby of the Triad's Headquarters.  There seems to be\
 every possible luxury around you. Fromt he marble floors to the expensive\
 gems set in the hangings on the walls.  There is a fortune put in this\
@@ -5012,78 +5323,78 @@ hallway that leads to a turbolift to take you to the rest of the building.\
          {
             [1] = 
             {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10555, 
                Flags = 
                {
                   [2] = "Locked", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 10555, 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10558, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10557, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10553, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [5] = 
             {
+               Direction = "down", 
+               Distance = 0, 
+               Key = 10571, 
+               DestinationVnum = 10571, 
                Flags = 
                {
                   [1] = "Closed", 
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = 10571, 
-               Direction = "down", 
-               DestinationVnum = 10571, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Lobby", 
-         Tunnel = 0, 
          Vnum = 10554, 
+         TeleDelay = 0, 
       }, 
       [10555] = 
       {
+         Name = "The Triad Hotel", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [8] = "Bank", 
             [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This room is quiet and cozy. With large couches and soft music playing from\
 somewhere you almost feel a need to lie down and take a rest. This hotel\
 was added here strictly for members of the Triad Syndicate so as to not\
@@ -5099,43 +5410,43 @@ You may safely save and quit here.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10554, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Distance = 0, 
+               Key = 10571, 
+               DestinationVnum = 10556, 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "grate", 
-               Key = 10571, 
-               Direction = "west", 
-               DestinationVnum = 10556, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "The Triad Hotel", 
-         Tunnel = 0, 
          Vnum = 10555, 
+         TeleDelay = 0, 
       }, 
       [10556] = 
       {
+         Name = "Weapons Storage", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This durasteel walled storeroom is for members to reclaim any weapons that\
 may have been checked in when they entered the lobby. There is a large\
 somewhat organized shelf system here where the weapons sit or hang. Any\
@@ -5148,40 +5459,40 @@ the weapons check in the lobby. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10555, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10553, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Weapons Storage", 
-         Tunnel = 0, 
          Vnum = 10556, 
+         TeleDelay = 0, 
       }, 
       [10557] = 
       {
+         Name = "Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the shop of the Triad Syndicate. At this shop members can sell\
 weapons that they may have 'come across' to the salesman for credits no\
 questions asked. They may also buy standard weapons and other items that\
@@ -5192,39 +5503,39 @@ seems to be filled to overflowing with assorted items.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10554, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10570, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Shop", 
-         Tunnel = 0, 
          Vnum = 10557, 
+         TeleDelay = 0, 
       }, 
       [10558] = 
       {
+         Name = "Stairway First Floor", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This stairway is quite elegant with marble floors and an engraved banister.\
 The stairs lead up to the Lounge Room and the Secondary Apartments. To the\
 west is the Main Lobby. \
@@ -5233,39 +5544,39 @@ west is the Main Lobby. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10554, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "up", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10559, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Stairway First Floor", 
-         Tunnel = 0, 
          Vnum = 10558, 
+         TeleDelay = 0, 
       }, 
       [10559] = 
       {
+         Name = "Stairway Second Floor", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The stairway here has marble floors and an engraved banister as well as\
 some precious metals hammered into the sides of the steps. The stairs lead\
 up to the Meeting Room and the Penthouse apartment while down from here is\
@@ -5275,49 +5586,49 @@ the Main Lobby. To the west is a very nice and well lit hallway.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10565, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "up", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10560, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "down", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10558, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Stairway Second Floor", 
-         Tunnel = 0, 
          Vnum = 10559, 
+         TeleDelay = 0, 
       }, 
       [10560] = 
       {
+         Name = "Stairway Third Floor", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The landing here at the top of the stairs is engraved as well as encrusted\
 with many precious gems and metels. The walls are adorned with pictures\
 that seem to focus around the possesions of the Triad Syndicate. Some of\
@@ -5328,50 +5639,49 @@ and in plain view.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "down", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10559, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10567, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10568, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Stairway Third Floor", 
-         Tunnel = 0, 
          Vnum = 10560, 
+         TeleDelay = 0, 
       }, 
       [10561] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -5379,32 +5689,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10565, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10561, 
+         TeleDelay = 0, 
       }, 
       [10562] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -5412,30 +5721,30 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10566, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10562, 
+         TeleDelay = 0, 
       }, 
       [10563] = 
       {
+         Name = "Private Lounge", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the lounge for relaxing among clan memebers. This room is generaly\
 reserved for Triads only and if you are a guest here you should not be in\
 here. There are many different sofas and chairs around the room for\
@@ -5447,31 +5756,31 @@ building.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10565, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Private Lounge", 
-         Tunnel = 0, 
          Vnum = 10563, 
+         TeleDelay = 0, 
       }, 
       [10564] = 
       {
+         Name = "Workshop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [26] = "Factory", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This room is intended to be used by the engineers of the Triad.  There are\
 racks of tools lining the walls, and a workbench also holds some tools.\
 ", 
@@ -5479,30 +5788,30 @@ racks of tools lining the walls, and a workbench also holds some tools.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10566, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Workshop", 
-         Tunnel = 0, 
          Vnum = 10564, 
+         TeleDelay = 0, 
       }, 
       [10565] = 
       {
+         Name = "Hallway", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the floor dedicated to the secondary apartments for the first\
 second and third of the clan. It has polished wood floors that echo with\
 your steps. To the west you can see the end of the hallway. To the north\
@@ -5513,57 +5822,57 @@ lounge for resting and visiting between assignments.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10561, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10559, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10563, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10566, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Hallway", 
-         Tunnel = 0, 
          Vnum = 10565, 
+         TeleDelay = 0, 
       }, 
       [10566] = 
       {
+         Name = "Hallway", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the floor dedicated to the secondary apartments for the first\
 second and third of the clan. It has polished wood floors that echo with\
 your steps. To the east you can see the stairway leading through the\
@@ -5574,50 +5883,49 @@ the clan. To the south is the apartment for the third.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10562, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10565, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10564, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Hallway", 
-         Tunnel = 0, 
          Vnum = 10566, 
+         TeleDelay = 0, 
       }, 
       [10567] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -5625,39 +5933,39 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10568, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10560, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10567, 
+         TeleDelay = 0, 
       }, 
       [10568] = 
       {
+         Name = "Meeting Room", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is the main meeting room for the Leader and secondary members of The\
 Triad Syndicate to meet and decide policy and action. The room is\
 dominated by a large cirular table with a Triad symbol emblazened in the\
@@ -5668,39 +5976,39 @@ other clan leaders and for meeting with many members of this clan.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10567, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10560, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Meeting Room", 
-         Tunnel = 0, 
          Vnum = 10568, 
+         TeleDelay = 0, 
       }, 
       [10569] = 
       {
+         Name = "Enterance to Steven's Mansion", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Kasaan's mansion towers above you, inspiring you with wonder... maybe you\
 should take a look around.\
 ", 
@@ -5708,124 +6016,124 @@ should take a look around.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10523, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10650, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Enterance to Steven's Mansion", 
-         Tunnel = 0, 
          Vnum = 10569, 
+         TeleDelay = 0, 
       }, 
       [10570] = 
       {
+         Name = "Armor Repair", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10557, 
-            }, 
-         }, 
-         TeleDelay = 0, 
          TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Armor Repair", 
+         Tunnel = 0, 
+         Description = "", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "", 
+               Code = "mpechoat $n Faro looks around nervously.\
+", 
+               MudProgType = "rand_prog", 
+            }, 
+            [2] = 
+            {
+               Arguments = "", 
                Code = "Faro looks up from his book.\
 Faro says, \"Hello got something for me to\
 fix?\"\
 Faro peers around the corner nervously.\
 ", 
-               Arguments = "", 
                MudProgType = "greet_prog", 
             }, 
-            [2] = 
+         }, 
+         Exits = 
+         {
+            [1] = 
             {
-               Code = "mpechoat $n Faro looks around nervously.\
-", 
-               Arguments = "", 
-               MudProgType = "rand_prog", 
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10557, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         Tunnel = 0, 
          Vnum = 10570, 
+         TeleDelay = 0, 
       }, 
       [10571] = 
       {
+         Name = "Triad Jail", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [23] = "Hotel", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "up", 
+               Distance = 0, 
+               Key = 10571, 
+               DestinationVnum = 10554, 
                Flags = 
                {
                   [1] = "Closed", 
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = 10571, 
-               Direction = "up", 
-               DestinationVnum = 10554, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Triad Jail", 
-         Tunnel = 0, 
          Vnum = 10571, 
+         TeleDelay = 0, 
       }, 
       [10572] = 
       {
+         Name = "A high clifftop", 
+         Sector = "field", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Once at the top of the cliffs, you find a quiet meadow.   Tall grass sways\
 in the ocean breeze.  The sun beats down on you mercilessly. There are\
 piles of rocks scattered all over the place, perhaps they are ancient\
@@ -5835,48 +6143,48 @@ markers of some sort. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10577, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10578, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10575, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "field", 
-         Name = "A high clifftop", 
-         Tunnel = 0, 
          Vnum = 10572, 
+         TeleDelay = 0, 
       }, 
       [10573] = 
       {
+         Name = "A hidden cove", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "A small path from the garden leads down to a rocky beach.  The Corellian\
 Ocean laps at your feet as you stand on one of the slippery rocks. The\
 water is a clear deep green, and many fish swim its depths.   Far upon the\
@@ -5887,44 +6195,44 @@ brave enough to swim out and see what is there?\
          {
             [1] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10579, 
                Flags = 
                {
                   [4] = "Swim", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10579, 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10507, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A hidden cove", 
-         Tunnel = 0, 
          Vnum = 10573, 
+         TeleDelay = 0, 
       }, 
       [10575] = 
       {
+         Name = "A sandy beach", 
+         Sector = "desert", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Corellian ocean laps at the edges of this tranquil beach.  The sand is\
 a coarser type that is slightly sticky.   A few rocks protrude from the\
 ground at the edge where the sand meets the vegetation of the island. Tall\
@@ -5937,65 +6245,65 @@ southwest.\
          {
             [1] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10572, 
                Flags = 
                {
                   [7] = "Climb", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10572, 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10509, 
                Flags = 
                {
                   [4] = "Swim", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10509, 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10576, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10578, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-         Name = "A sandy beach", 
-         Tunnel = 0, 
          Vnum = 10575, 
+         TeleDelay = 0, 
       }, 
       [10576] = 
       {
+         Name = "A sandy beach", 
+         Sector = "desert", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Corellian ocean laps at the edges of this tranquil beach.  The sand is\
 a coarser type that is slightly sticky.   A few rocks protrude from the\
 ground at the edge where the sand meets the vegetation of the island. Tall\
@@ -6008,52 +6316,52 @@ southwest.\
          {
             [1] = 
             {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10572, 
                Flags = 
                {
                   [7] = "Climb", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10572, 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10577, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10575, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-         Name = "A sandy beach", 
-         Tunnel = 0, 
          Vnum = 10576, 
+         TeleDelay = 0, 
       }, 
       [10577] = 
       {
+         Name = "A sandy beach", 
+         Sector = "desert", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Corellian ocean laps at the edges of this tranquil beach.  The sand is\
 a coarser type that is slightly sticky.   A few rocks protrude from the\
 ground at the edge where the sand meets the vegetation of the island. Tall\
@@ -6066,52 +6374,52 @@ southwest.\
          {
             [1] = 
             {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10572, 
                Flags = 
                {
                   [7] = "Climb", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10572, 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10576, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10578, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-         Name = "A sandy beach", 
-         Tunnel = 0, 
          Vnum = 10577, 
+         TeleDelay = 0, 
       }, 
       [10578] = 
       {
+         Name = "A sandy beach", 
+         Sector = "desert", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Corellian ocean laps at the edges of this tranquil beach.  The sand is\
 a coarser type that is slightly sticky.   A few rocks protrude from the\
 ground at the edge where the sand meets the vegetation of the island. Tall\
@@ -6124,52 +6432,52 @@ northeast. \
          {
             [1] = 
             {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10572, 
                Flags = 
                {
                   [7] = "Climb", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 10572, 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10577, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10575, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "desert", 
-         Name = "A sandy beach", 
-         Tunnel = 0, 
          Vnum = 10578, 
+         TeleDelay = 0, 
       }, 
       [10579] = 
       {
+         Name = "The Corellian Ocean", 
+         Sector = "water_swim", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The green waters of the ocean are chilly to your skin, but not so much as\
 to inhibit your functioning if you do not spend too much time floating.\
 The waves are high, but not periously so. At the top of each crest, the\
@@ -6179,1044 +6487,1044 @@ vision of an island appears to solidify into the real thing.\
          {
             [1] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10509, 
                Flags = 
                {
                   [4] = "Swim", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10509, 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10573, 
                Flags = 
                {
                   [4] = "Swim", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10573, 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "water_swim", 
-         Name = "The Corellian Ocean", 
-         Tunnel = 0, 
          Vnum = 10579, 
+         TeleDelay = 0, 
       }, 
       [10580] = 
       {
+         Name = "Main Street", 
+         Vnum = 10580, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10581, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10511, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Main Street", 
-         Tunnel = 0, 
-         Vnum = 10580, 
       }, 
       [10581] = 
       {
+         Name = "Street Intersection", 
+         Vnum = 10581, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Main street continues north into the Corellian main plaza.  To the west is\
 the Corellian school, Coronet Academy. Corsec agents patrol the clean\
 streets, and pedestrians walk without fear here.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10582, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10580, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10587, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10587, 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Street Intersection", 
-         Tunnel = 0, 
-         Vnum = 10581, 
       }, 
       [10582] = 
       {
+         Name = "Plaza Entrance", 
+         Vnum = 10582, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Corellian plaza, is a clean and airy area.  Couples stroll around the\
 wide walkways.  A few speeders weave through them easily.  Peace and\
 security are maintained by Corsec agents.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10583, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10581, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10620, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10585, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [5] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10584, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Plaza Entrance", 
-         Tunnel = 0, 
-         Vnum = 10582, 
       }, 
       [10583] = 
       {
+         Name = "Central Plaza", 
+         Vnum = 10583, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10586, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10585, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10582, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10584, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Central Plaza", 
-         Tunnel = 0, 
-         Vnum = 10583, 
       }, 
       [10584] = 
       {
+         Name = "West Plaza", 
+         Vnum = 10584, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Corellian plaza, is a clean and airy area.  Couples stroll around the\
 wide walkways.  A few speeders weave through them easily.  Peace and\
 security are maintained by Corsec agents\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10583, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10586, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10582, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "West Plaza", 
-         Tunnel = 0, 
-         Vnum = 10584, 
       }, 
       [10585] = 
       {
+         Name = "East Plaza", 
+         Vnum = 10585, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10583, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10586, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10582, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "East Plaza", 
-         Tunnel = 0, 
-         Vnum = 10585, 
       }, 
       [10586] = 
       {
+         Name = "North Plaza", 
+         Vnum = 10586, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10583, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10596, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10585, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10584, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "North Plaza", 
-         Tunnel = 0, 
-         Vnum = 10586, 
       }, 
       [10587] = 
       {
+         Name = "Coronet Academy", 
+         Vnum = 10587, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Coronet Academy was created to train the Corellian guard.  Mainly\
 concentrating on combat skills, it is the ideal place for a new arrival to\
 begin.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10588, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10581, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10590, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10546, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Coronet Academy", 
-         Tunnel = 0, 
-         Vnum = 10587, 
       }, 
       [10588] = 
       {
+         Name = "Target Range", 
+         Vnum = 10588, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10587, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10589, 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10589, 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Target Range", 
-         Tunnel = 0, 
-         Vnum = 10588, 
       }, 
       [10589] = 
       {
+         Name = "Target Area", 
+         Vnum = 10589, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10588, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10588, 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Target Area", 
-         Tunnel = 0, 
-         Vnum = 10589, 
       }, 
       [10590] = 
       {
+         Name = "Combat Training 1", 
+         Vnum = 10590, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10591, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 10591, 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10587, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10587, 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Combat Training 1", 
-         Tunnel = 0, 
-         Vnum = 10590, 
       }, 
       [10591] = 
       {
+         Name = "Combat Training 2", 
+         Vnum = 10591, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10590, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10590, 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10592, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10592, 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Combat Training 2", 
-         Tunnel = 0, 
-         Vnum = 10591, 
       }, 
       [10592] = 
       {
+         Name = "Combat Training 3", 
+         Vnum = 10592, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10591, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10591, 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10593, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10593, 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Combat Training 3", 
-         Tunnel = 0, 
-         Vnum = 10592, 
       }, 
       [10593] = 
       {
+         Name = "Combat Training 4", 
+         Vnum = 10593, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10592, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 10592, 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10594, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10594, 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Combat Training 4", 
-         Tunnel = 0, 
-         Vnum = 10593, 
       }, 
       [10594] = 
       {
+         Name = "Combat Training 5", 
+         Vnum = 10594, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10595, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 10595, 
+               Description = "", 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10593, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10593, 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Combat Training 5", 
-         Tunnel = 0, 
-         Vnum = 10594, 
       }, 
       [10595] = 
       {
+         Name = "Combat Training 6", 
+         Vnum = 10595, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10594, 
                Flags = 
                {
                   [24] = "NoMob", 
                }, 
-               Description = "", 
-               Distance = 0, 
                Keyword = "", 
-               Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10594, 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Combat Training 6", 
-         Tunnel = 0, 
-         Vnum = 10595, 
       }, 
       [10596] = 
       {
+         Name = "Corellia Shipyard", 
+         Vnum = 10596, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10597, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10599, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10586, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellia Shipyard", 
-         Tunnel = 0, 
-         Vnum = 10596, 
       }, 
       [10597] = 
       {
+         Name = "Corellian Shipyard", 
+         Vnum = 10597, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10598, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10596, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellian Shipyard", 
-         Tunnel = 0, 
-         Vnum = 10597, 
       }, 
       [10598] = 
       {
+         Name = "Corellian Shipyard", 
+         Vnum = 10598, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10601, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10599, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10597, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellian Shipyard", 
-         Tunnel = 0, 
-         Vnum = 10598, 
       }, 
       [10599] = 
       {
+         Name = "Corellian Shipyard", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10598, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10600, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10596, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellian Shipyard", 
-         Tunnel = 0, 
          Vnum = 10599, 
+         TeleDelay = 0, 
       }, 
       [10600] = 
       {
+         Name = "Corellian Shipyard", 
+         Vnum = 10600, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10601, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10603, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10599, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellian Shipyard", 
-         Tunnel = 0, 
-         Vnum = 10600, 
       }, 
       [10601] = 
       {
+         Name = "Corellian Shipyard", 
+         Vnum = 10601, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10600, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10598, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellian Shipyard", 
-         Tunnel = 0, 
-         Vnum = 10601, 
       }, 
       [10602] = 
       {
+         Name = "Shipyard Launching Bay", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Shipyard Launching Bay", 
-         Tunnel = 0, 
          Vnum = 10602, 
+         TeleDelay = 0, 
       }, 
       [10603] = 
       {
+         Name = "Shipyard Landing Bay", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [4] = "CanLand", 
             [5] = "CanFly", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10600, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Shipyard Landing Bay", 
-         Tunnel = 0, 
          Vnum = 10603, 
+         TeleDelay = 0, 
       }, 
       [10605] = 
       {
+         Name = "Corellia Docking Bay", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [4] = "CanLand", 
             [5] = "CanFly", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The docking bay on Corellia is a crowded platform.  Ships continually land,\
 delivering supplies and passengers, then lift off again, millions of\
 credits richer.  You see a white palace in the distance to the northeast.\
@@ -7226,41 +7534,40 @@ You brush by merchants and travelers as you move your way across the pad.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10501, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10500, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellia Docking Bay", 
-         Tunnel = 0, 
          Vnum = 10605, 
+         TeleDelay = 0, 
       }, 
       [10606] = 
       {
+         Name = "An Empty Home", 
+         Sector = "inside", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
-            [23] = "Hotel", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
@@ -7268,32 +7575,32 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10609, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "inside", 
-         Name = "An Empty Home", 
-         Tunnel = 0, 
          Vnum = 10606, 
+         TeleDelay = 0, 
       }, 
       [10607] = 
       {
+         Name = "A Factory", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [26] = "Factory", 
             [2] = "NoMob", 
             [23] = "Hotel", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Here it be, home and work.  The interior has been redesigned to resemble\
 that of a simple hut, like that in Honoghr, but off to the side, half of\
 the room is occupied by a real office and workstation, where the Chief\
@@ -7305,86 +7612,24 @@ to stock his extra supplies.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10609, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A Factory", 
-         Tunnel = 0, 
          Vnum = 10607, 
+         TeleDelay = 0, 
       }, 
       [10608] = 
       {
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Description = "Here you enter the shop for Galatech Corporations, owned by Daraen of the\
-Khi'hone.  A collection of freelance engineers have setup shop here to\
-serve any who are in need of equipment of any kind. This place has a\
-reputation of sending out orders within a week. Surrounded by an array of\
-display models, an oak counter sits at the back of the shop, sporting two\
-terminals. One terminal shows the list of prices, while the other shows a\
-list of orders. This way, one can place an order while all engineers are\
-away, and pay as necessary, and there is no charge for holding your order.\
-At the back, a door remains locked, serving as the backroom to where all\
-the employees work and live. \
- \
-To see the list of prices, type 'Look prices'.\
-To see the Engineers of GalaTech, type \"Look List\"\
-", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "north", 
-               DestinationVnum = 10609, 
-            }, 
-            [2] = 
-            {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "east", 
-               DestinationVnum = 10523, 
-            }, 
-         }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
+         Name = "Galatech Corporation", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
             [1] = 
-            {
-               Keyword = "list", 
-               Description = "&gEMPLOYEE         &c|&C RANK            &c|&Y FL/ROOM\
-\13&C==============================================\
-\13&gDaraen Khi'hone  &c|&C Chief Executive &c|&Y 1/N\
-\13&gHemini           &c|&C Executive       &c|&R N/A\
-\13&gDena Dar'kyyon   &c|&C Engineer        &c|&Y 1/W\
-\13&gK1-39 (DarweidU) &c|&C Engineer        &c|&R N/A\
-\13&gDK-83 (Deimos)   &c|&C Apprentice      &c|&R N/A\
-\13&gDartan Vinas     &c|&C Apprentice      &c|&R N/A\
-\13&gDeacon           &c|&C Apprentice      &c|&R N/A\
-\13&gNottingham       &c|&C Apprentice      &c|&R N/A\
-\13", 
-            }, 
-            [2] = 
             {
                Keyword = "prices", 
                Description = "Items         |    Price |\
@@ -7403,57 +7648,71 @@ To see the Engineers of GalaTech, type \"Look List\"\
 \13Grenade       |  1,000   |\
 \13", 
             }, 
+            [2] = 
+            {
+               Keyword = "list", 
+               Description = "&gEMPLOYEE         &c|&C RANK            &c|&Y FL/ROOM\
+\13&C==============================================\
+\13&gDaraen Khi'hone  &c|&C Chief Executive &c|&Y 1/N\
+\13&gHemini           &c|&C Executive       &c|&R N/A\
+\13&gDena Dar'kyyon   &c|&C Engineer        &c|&Y 1/W\
+\13&gK1-39 (DarweidU) &c|&C Engineer        &c|&R N/A\
+\13&gDK-83 (Deimos)   &c|&C Apprentice      &c|&R N/A\
+\13&gDartan Vinas     &c|&C Apprentice      &c|&R N/A\
+\13&gDeacon           &c|&C Apprentice      &c|&R N/A\
+\13&gNottingham       &c|&C Apprentice      &c|&R N/A\
+\13", 
+            }, 
          }, 
-         Sector = "city", 
-         Name = "Galatech Corporation", 
-         Tunnel = 0, 
-         Vnum = 10608, 
-      }, 
-      [10609] = 
-      {
          Flags = 
          {
+            [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Description = "A hallway of offices lead down along the shop, each one consisting of a\
-chamber for the engineers to use as their apartment and private workshop.\
-Three doors line either-side of the hall, while at the very back, with a\
-brass nameplate, lies the bedroom-office of the owner of Galatech Corp.\
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "Here you enter the shop for Galatech Corporations, owned by Daraen of the\
+Khi'hone.  A collection of freelance engineers have setup shop here to\
+serve any who are in need of equipment of any kind. This place has a\
+reputation of sending out orders within a week. Surrounded by an array of\
+display models, an oak counter sits at the back of the shop, sporting two\
+terminals. One terminal shows the list of prices, while the other shows a\
+list of orders. This way, one can place an order while all engineers are\
+away, and pay as necessary, and there is no charge for holding your order.\
+At the back, a door remains locked, serving as the backroom to where all\
+the employees work and live. \
  \
-Employees, please read rules, type \"Look Rules\".\
+To see the list of prices, type 'Look prices'.\
+To see the Engineers of GalaTech, type \"Look List\"\
 ", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
-               DestinationVnum = 10607, 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10609, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
+               Direction = "east", 
                Distance = 0, 
-               Keyword = "", 
                Key = -1, 
-               Direction = "south", 
-               DestinationVnum = 10608, 
-            }, 
-            [3] = 
-            {
+               DestinationVnum = 10523, 
+               Keyword = "", 
                Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
-               Direction = "west", 
-               DestinationVnum = 10606, 
             }, 
          }, 
+         Vnum = 10608, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
+      }, 
+      [10609] = 
+      {
+         Name = "Office Hallway", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
             [1] = 
@@ -7471,13 +7730,59 @@ Employees, please read rules, type \"Look Rules\".\
 \13", 
             }, 
          }, 
-         Sector = "city", 
-         Name = "Office Hallway", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "A hallway of offices lead down along the shop, each one consisting of a\
+chamber for the engineers to use as their apartment and private workshop.\
+Three doors line either-side of the hall, while at the very back, with a\
+brass nameplate, lies the bedroom-office of the owner of Galatech Corp.\
+ \
+Employees, please read rules, type \"Look Rules\".\
+", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10607, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10608, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 10606, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
          Vnum = 10609, 
+         TeleDelay = 0, 
       }, 
       [10610] = 
       {
+         Name = "Training Center", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
@@ -7486,27 +7791,29 @@ Employees, please read rules, type \"Look Rules\".\
             [30] = "Prototype", 
             [5] = "CanFly", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Training Center", 
-         Tunnel = 0, 
          Vnum = 10610, 
+         TeleDelay = 0, 
       }, 
       [10620] = 
       {
+         Name = "Corellian Central Bank", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [8] = "Bank", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "The Corellian bank is well appointed.  Cool air filters in with soft muzac\
 through overhead ducts. A few cushioned chairs and plants are placed\
 strategically throughout the lobby.   Innumerable guards, droids, monitors\
@@ -7517,31 +7824,31 @@ desks are available for more involved transactions.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10582, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellian Central Bank", 
-         Tunnel = 0, 
          Vnum = 10620, 
+         TeleDelay = 0, 
       }, 
       [10622] = 
       {
+         Name = "A small room", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [26] = "Factory", 
             [25] = "Refinery", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "This room is small but relatively organized.  There is a wooden table and\
 many exotic tools for working on various projects. There is a power\
 generator in the corner with many outlets.  It would be an excellent place\
@@ -7551,141 +7858,141 @@ to design some equipment.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10532, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A small room", 
-         Tunnel = 0, 
          Vnum = 10622, 
+         TeleDelay = 0, 
       }, 
       [10625] = 
       {
+         Name = "Treasure Ship Row", 
+         Vnum = 10625, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Treasure Ship Row is lined with vendors selling all kinds of goods and\
 services.  Wading through the crowd, vendors yell slogans.  More line the\
 side of the road, trying to get your attention.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10626, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10631, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10630, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10521, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Treasure Ship Row", 
-         Tunnel = 0, 
-         Vnum = 10625, 
       }, 
       [10626] = 
       {
+         Name = "A Small Plaza", 
+         Vnum = 10626, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "A Small Plaza leads off of Treasure Row.  The colorful signs of vendors \
 attract the eye. Several have incredible designs in various spectrums, \
 invisible to the human eye.  In the plaza, each shop can be bought and \
 privately owned.\
 ", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10633, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10625, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10632, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10629, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
          TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A Small Plaza", 
-         Tunnel = 0, 
-         Vnum = 10626, 
       }, 
       [10627] = 
       {
+         Name = "A Small Plaza", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "A Small Plaza leads off of Treasure Row.  The colorful signs of vendors \
 attract the eye. Several have incredible designs in various spectrums, \
 invisible to the human eye.  In the plaza, each shop can be bought and \
@@ -7695,66 +8002,66 @@ privately owned. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10628, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10638, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10522, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10637, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [5] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "northeast", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10636, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A Small Plaza", 
-         Tunnel = 0, 
          Vnum = 10627, 
+         TeleDelay = 0, 
       }, 
       [10628] = 
       {
+         Name = "A Small Plaza", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "A Small Plaza leads off of Treasure Row.  The colorful signs of vendors \
 attract the eye. Several have incredible designs in various spectrums, \
 invisible to the human eye.  In the plaza, each shop can be bought and \
@@ -7764,57 +8071,57 @@ privately owned. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10640, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10636, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10627, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10639, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A Small Plaza", 
-         Tunnel = 0, 
          Vnum = 10628, 
+         TeleDelay = 0, 
       }, 
       [10629] = 
       {
+         Name = "A Small Plaza", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "A Small Plaza leads off of Treasure Row.  The colorful signs of vendors \
 attract the eye. Several have incredible designs in various spectrums, \
 invisible to the human eye.  In the plaza, each shop can be bought and \
@@ -7824,48 +8131,48 @@ privately owned.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10635, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10634, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10626, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A Small Plaza", 
-         Tunnel = 0, 
          Vnum = 10629, 
+         TeleDelay = 0, 
       }, 
       [10630] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares. \
@@ -7874,30 +8181,30 @@ here to sell you his wares. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10625, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10630, 
+         TeleDelay = 0, 
       }, 
       [10631] = 
       {
+         Name = "Corellian Engineering Corporation", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares. \
@@ -7906,30 +8213,30 @@ here to sell you his wares. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10625, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Corellian Engineering Corporation", 
-         Tunnel = 0, 
          Vnum = 10631, 
+         TeleDelay = 0, 
       }, 
       [10632] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares.\
@@ -7938,30 +8245,30 @@ here to sell you his wares.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10626, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10632, 
+         TeleDelay = 0, 
       }, 
       [10633] = 
       {
+         Name = "&z&OA small shop&R&W", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares.\
@@ -7970,30 +8277,30 @@ here to sell you his wares.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10626, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "&z&OA small shop&R&W", 
-         Tunnel = 0, 
          Vnum = 10633, 
+         TeleDelay = 0, 
       }, 
       [10634] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares.\
@@ -8002,30 +8309,30 @@ here to sell you his wares.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10629, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10634, 
+         TeleDelay = 0, 
       }, 
       [10635] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares.\
@@ -8034,30 +8341,30 @@ here to sell you his wares.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10629, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10635, 
+         TeleDelay = 0, 
       }, 
       [10636] = 
       {
+         Name = "A Small Plaza", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "A Small Plaza leads off of Treasure Row.  The colorful signs of vendors \
 attract the eye. Several have incredible designs in various spectrums, \
 invisible to the human eye.  In the plaza, each shop can be bought and \
@@ -8067,57 +8374,57 @@ privately owned. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10641, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10642, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10628, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10627, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "A Small Plaza", 
-         Tunnel = 0, 
          Vnum = 10636, 
+         TeleDelay = 0, 
       }, 
       [10637] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares.\
@@ -8126,30 +8433,30 @@ here to sell you his wares.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10627, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10637, 
+         TeleDelay = 0, 
       }, 
       [10638] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares.\
@@ -8158,30 +8465,30 @@ here to sell you his wares.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10627, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10638, 
+         TeleDelay = 0, 
       }, 
       [10639] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares. \
@@ -8190,30 +8497,30 @@ here to sell you his wares. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10628, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10639, 
+         TeleDelay = 0, 
       }, 
       [10640] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares. \
@@ -8222,30 +8529,30 @@ here to sell you his wares. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10628, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10640, 
+         TeleDelay = 0, 
       }, 
       [10641] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares. \
@@ -8254,30 +8561,30 @@ here to sell you his wares. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10636, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10641, 
+         TeleDelay = 0, 
       }, 
       [10642] = 
       {
+         Name = "An Empty Shop", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [28] = "PlayerShop", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "Shelves line the walls of this shop, and several high quality glass  cases\
 stand in rows.  If the shop has been bought, there will be a  shopkeeper\
 here to sell you his wares. \
@@ -8286,94 +8593,94 @@ here to sell you his wares. \
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10636, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "An Empty Shop", 
-         Tunnel = 0, 
          Vnum = 10642, 
+         TeleDelay = 0, 
       }, 
       [10643] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
          Vnum = 10643, 
+         TeleDelay = 0, 
       }, 
       [10644] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
          Vnum = 10644, 
+         TeleDelay = 0, 
       }, 
       [10645] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "", 
          Exits = 
          {
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Floating in a void", 
-         Tunnel = 0, 
          Vnum = 10645, 
+         TeleDelay = 0, 
       }, 
       [10650] = 
       {
+         Name = "Central Chamber", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "As you walk into the central chamber, you are overcome with a sense of awe.\
  The sheer mass of it is breathtaking.  A glass ceiling allows sunlight to\
 shine, illuminating the room.  The floor is made of polished marble.  A\
@@ -8384,380 +8691,53 @@ handing out fine wine.\
          {
             [1] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10543, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "east", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10548, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10547, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [4] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "west", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10549, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [5] = 
             {
-               Description = "", 
-               Distance = 0, 
-               Keyword = "", 
-               Key = -1, 
                Direction = "southwest", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 10569, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleDelay = 0, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Sector = "city", 
-         Name = "Central Chamber", 
-         Tunnel = 0, 
          Vnum = 10650, 
+         TeleDelay = 0, 
       }, 
    }, 
-   Author = "Darrik", 
-   Name = "Corellia", 
-   Objects = 
-   {
-      [10544] = 
-      {
-         ItemType = "furniture", 
-         Description = "An exquisite mahogany table is here.", 
-         ShortDescr = "an exquisite mahogany table", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 1, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 6, 
-         }, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Name = "exquisite mahogany table", 
-         Weight = 1, 
-         ActionDescription = "", 
-         Vnum = 10544, 
-      }, 
-      [10545] = 
-      {
-         ItemType = "drink_container", 
-         Description = "A bottle of sparkling wine lies here, looks tempting.", 
-         ShortDescr = "a bottle of sparkling wine", 
-         ActionDescription = "", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Name = "bottle wine", 
-         Cost = 1000, 
-         Weight = 3, 
-         ObjectValues = 
-         {
-            [1] = 10, 
-            [2] = 2, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
-         }, 
-         Vnum = 10545, 
-      }, 
-      [10546] = 
-      {
-         ItemType = "trash", 
-         Description = "A pair of infrared binoculars have been dropped here.", 
-         ShortDescr = "infrared binoculars", 
-         ActionDescription = "", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 32, 
-               Location = 26, 
-            }, 
-         }, 
-         Name = "pair infrared binoculars", 
-         Cost = 10000, 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 10546, 
-      }, 
-      [10569] = 
-      {
-         ItemType = "container", 
-         Description = "A Triad Backpack was dropped here", 
-         ShortDescr = "a Triad Backpack", 
-         ActionDescription = "", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [10] = "About", 
-            [14] = "Hold", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 128, 
-         Name = "Triad Backpack", 
-         Cost = 200, 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 35, 
-         }, 
-         Vnum = 10569, 
-      }, 
-      [10570] = 
-      {
-         ItemType = "container", 
-         Description = "A Workbench is here.", 
-         ShortDescr = "workbench", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10000, 
-         }, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Name = "Workbench", 
-         Weight = 1, 
-         ActionDescription = "", 
-         Vnum = 10570, 
-      }, 
-      [10571] = 
-      {
-         ItemType = "trash", 
-         Description = "A Triad Key is here.", 
-         ShortDescr = "a Triad Key", 
-         ActionDescription = "", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Name = "Triad Key", 
-         Cost = 0, 
-         Weight = 1, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Vnum = 10571, 
-      }, 
-      [10540] = 
-      {
-         ItemType = "container", 
-         Description = "A treasure chest is here.", 
-         ShortDescr = "a treasure chest", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Name = "treasure chest", 
-         Weight = 1, 
-         ActionDescription = "", 
-         Vnum = 10540, 
-      }, 
-      [10541] = 
-      {
-         ItemType = "food", 
-         Description = "A delicious steak lies here rotting.", 
-         ShortDescr = "a delicious steak", 
-         ActionDescription = "", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Cost = 0, 
-         Name = "delicious steak", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpechoat $n &YMmmm, now that was a good steak.\
-", 
-               Arguments = "100", 
-               MudProgType = "use_prog", 
-            }, 
-         }, 
-         Weight = 3, 
-         ObjectValues = 
-         {
-            [1] = 30, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 30, 
-         }, 
-         Vnum = 10541, 
-      }, 
-      [10542] = 
-      {
-         ItemType = "food", 
-         Description = "A hand-tossed salad lies scattered on the floor.", 
-         ShortDescr = "a hand-tossed &rs&Ga&R&Wl&Ga&rd&R&W", 
-         ActionDescription = "", 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Cost = 0, 
-         Name = "hand tossed salad", 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpechoat $n &GA satisfactory salad, you've had better.&R&W\
-", 
-               Arguments = "100", 
-               MudProgType = "use_prog", 
-            }, 
-         }, 
-         Weight = 2, 
-         ObjectValues = 
-         {
-            [1] = 10, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 10, 
-         }, 
-         Vnum = 10542, 
-      }, 
-      [10543] = 
-      {
-         ItemType = "furniture", 
-         Description = "A satin-cushioned mahogany chair looks very comfortable.", 
-         ShortDescr = "a satin cushioned mahogany chair", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 2, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 2, 
-         }, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         Name = "satin cushioned mahogany chair", 
-         Weight = 1, 
-         ActionDescription = "", 
-         Vnum = 10543, 
-      }, 
-   }, 
-   VnumRanges = 
-   {
-      Object = 
-      {
-         First = 10540, 
-         Last = 10571, 
-      }, 
-      Mob = 
-      {
-         First = 10500, 
-         Last = 10572, 
-      }, 
-      Room = 
-      {
-         First = 10500, 
-         Last = 10650, 
-      }, 
-   }, 
-   HighEconomy = 0, 
-   FileFormatVersion = 1, 
+   LowEconomy = 2682878, 
 }

@@ -1,23 +1,225 @@
 -- Coruscant Prison
--- Last saved Sunday 31-May-2020 15:51:33
+-- Last saved Monday 01-Jun-2020 11:08:46
 
 AreaEntry
 {
+   Name = "Coruscant Prison", 
+   HighEconomy = 0, 
+   FileFormatVersion = 1, 
+   ResetFrequency = 0, 
+   LevelRanges = 
+   {
+      Soft = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+      Hard = 
+      {
+         High = 105, 
+         Low = 0, 
+      }, 
+   }, 
+   Mobiles = 
+   {
+      [9000] = 
+      {
+         Name = "dude", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
+         Vnum = 9000, 
+         LongDescr = "Some god abandoned a newly created dude here.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ShortDescr = "a newly created dude", 
+         DamRoll = 0, 
+         Height = 0, 
+         Race = "Human", 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+      }, 
+      [9049] = 
+      {
+         Name = "dude", 
+         Sex = "undistinguished", 
+         Weight = 0, 
+         Alignment = 0, 
+         DefaultPosition = "standing", 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         HitChance = 
+         {
+            HitNoDice = 0, 
+            HitSizeDice = 0, 
+            HitPlus = 0, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+            Breath = 0, 
+            SpellStaff = 0, 
+            Wand = 0, 
+         }, 
+         HitRoll = 0, 
+         Stats = 
+         {
+            Strength = 0, 
+            Dexterity = 0, 
+            Intelligence = 0, 
+            Force = 0, 
+            Constitution = 0, 
+            Luck = 0, 
+            Wisdom = 0, 
+            Charisma = 0, 
+         }, 
+         Vnum = 9049, 
+         LongDescr = "Some god abandoned a newly created dude here.\
+", 
+         NumberOfAttacks = 0, 
+         Level = 1, 
+         Description = "", 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+            DamPlus = 0, 
+         }, 
+         ShortDescr = "a newly created dude", 
+         DamRoll = 0, 
+         Height = 0, 
+         Race = "Human", 
+         Position = "standing", 
+         Credits = 0, 
+         ArmorClass = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+      }, 
+   }, 
+   ResetMessage = "", 
+   Resets = 
+   {
+      [1] = 
+      {
+         Command = "D", 
+         MiscData = 0, 
+         Arg3 = 2, 
+         Arg1 = 9005, 
+         Arg2 = 0, 
+      }, 
+      [2] = 
+      {
+         Command = "D", 
+         MiscData = 0, 
+         Arg3 = 1, 
+         Arg1 = 9004, 
+         Arg2 = 2, 
+      }, 
+      [3] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 9033, 
+         Arg1 = 9001, 
+         Arg2 = 1, 
+      }, 
+      [4] = 
+      {
+         Command = "O", 
+         MiscData = 1, 
+         Arg3 = 9032, 
+         Arg1 = 9002, 
+         Arg2 = 1, 
+      }, 
+   }, 
+   Author = "Durga", 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         Last = 9049, 
+         First = 9000, 
+      }, 
+      Room = 
+      {
+         Last = 9049, 
+         First = 9000, 
+      }, 
+      Object = 
+      {
+         Last = 9049, 
+         First = 9000, 
+      }, 
+   }, 
    Objects = 
    {
       [9000] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "jail key", 
-         ItemType = "furniture", 
-         ShortDescr = "a jail key", 
          Vnum = 9000, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Weight = 1, 
-         Description = "A key is here", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -27,28 +229,25 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Layers = 0, 
+         Description = "A key is here", 
+         ShortDescr = "a jail key", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 0, 
+         Weight = 1, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Layers = 0, 
+         ItemType = "furniture", 
       }, 
       [9001] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
          Name = "sink", 
-         ItemType = "fountain", 
-         ShortDescr = "a sink", 
          Vnum = 9001, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Weight = 1, 
          ObjectValues = 
          {
             [1] = 1000, 
@@ -58,22 +257,25 @@ AreaEntry
             [5] = 0, 
             [0] = 1000, 
          }, 
-         Description = "A sink is here.", 
          Layers = 0, 
-      }, 
-      [9002] = 
-      {
+         Description = "A sink is here.", 
+         ShortDescr = "a sink", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "mush", 
-         ItemType = "food", 
-         ShortDescr = "some mush", 
-         Vnum = 9002, 
-         Cost = 5, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Weight = 1, 
          ActionDescription = "", 
-         Weight = 2, 
-         Description = "Some day old mush is here for you to eat.", 
+         Cost = 0, 
+         ItemType = "fountain", 
+      }, 
+      [9002] = 
+      {
+         Name = "mush", 
+         Vnum = 9002, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -83,24 +285,25 @@ AreaEntry
             [5] = 0, 
             [0] = 20, 
          }, 
+         Layers = 0, 
+         Description = "Some day old mush is here for you to eat.", 
+         ShortDescr = "some mush", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Cost = 5, 
+         Weight = 2, 
+         ActionDescription = "", 
          WearFlags = 
          {
             [0] = "Take", 
          }, 
-         Layers = 0, 
+         ItemType = "food", 
       }, 
       [9049] = 
       {
-         ExtraDescriptions = 
-         {
-         }, 
-         Layers = 0, 
-         ItemType = "trash", 
-         ShortDescr = "a dud", 
+         Name = "dud", 
          Vnum = 9049, 
-         ActionDescription = "", 
-         Cost = 0, 
-         Weight = 1, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -110,1064 +313,905 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
+         Layers = 0, 
          Description = "A dud is here.", 
-         Name = "dud", 
+         ShortDescr = "a dud", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Weight = 1, 
+         ActionDescription = "", 
+         Cost = 0, 
+         ItemType = "trash", 
       }, 
    }, 
-   ResetFrequency = 0, 
-   FileFormatVersion = 1, 
-   Mobiles = 
-   {
-      [9000] = 
-      {
-         Position = "standing", 
-         Name = "dude", 
-         NumberOfAttacks = 0, 
-         Sex = "undistinguished", 
-         Vnum = 9000, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Height = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Luck = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Wisdom = 0, 
-            Strength = 0, 
-         }, 
-         Alignment = 0, 
-         DamRoll = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ArmorClass = 0, 
-         HitRoll = 0, 
-         ShortDescr = "a newly created dude", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Description = "", 
-         Level = 1, 
-         Credits = 0, 
-         LongDescr = "Some god abandoned a newly created dude here.\
-", 
-         Weight = 0, 
-         Race = "Human", 
-         DefaultPosition = "standing", 
-      }, 
-      [9049] = 
-      {
-         Position = "standing", 
-         Name = "dude", 
-         NumberOfAttacks = 0, 
-         Sex = "undistinguished", 
-         Vnum = 9049, 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-            Breath = 0, 
-         }, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
-            DamPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-         Height = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Luck = 0, 
-            Charisma = 0, 
-            Constitution = 0, 
-            Intelligence = 0, 
-            Dexterity = 0, 
-            Wisdom = 0, 
-            Strength = 0, 
-         }, 
-         Alignment = 0, 
-         DamRoll = 0, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         ArmorClass = 0, 
-         HitRoll = 0, 
-         ShortDescr = "a newly created dude", 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Description = "", 
-         Level = 1, 
-         Credits = 0, 
-         LongDescr = "Some god abandoned a newly created dude here.\
-", 
-         Weight = 0, 
-         Race = "Human", 
-         DefaultPosition = "standing", 
-      }, 
-   }, 
-   Author = "Durga", 
-   HighEconomy = 0, 
-   ResetMessage = "", 
+   Filename = "corus_jail.lua", 
    Rooms = 
    {
       [9024] = 
       {
+         Name = "CellBlock Checkpoint", 
+         Vnum = 9024, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "CellBlock Checkpoint", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9026, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9026, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9023, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9023, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9024, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9025] = 
       {
+         Name = "CellBlock Checkpoint", 
+         Vnum = 9025, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "CellBlock Checkpoint", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9023, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9023, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9025, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9026] = 
       {
+         Name = "Cellblock A", 
+         Vnum = 9026, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Cellblock A", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "Cell", 
-               Description = "", 
-               DestinationVnum = 9029, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9029, 
+               Keyword = "Cell", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9027, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9027, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9024, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9024, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9026, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9027] = 
       {
+         Name = "Cellblock A", 
+         Vnum = 9027, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Cellblock A", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9028, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9028, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9026, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9026, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9027, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9028] = 
       {
+         Name = "Cellblock A", 
+         Vnum = 9028, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Cellblock A", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9027, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9027, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9028, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9029] = 
       {
+         Name = "A Cell", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Cell", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "Cell", 
-               Description = "", 
-               DestinationVnum = 9026, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9029, 
          Flags = 
          {
             [29] = "Spacecraft", 
             [23] = "Hotel", 
          }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
          Description = "You may safely quit and reenter the game from here.\
  \
 ", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 9026, 
+               Keyword = "Cell", 
+               Description = "", 
+            }, 
+         }, 
+         Vnum = 9029, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9030] = 
       {
+         Name = "Outside the Dining Area", 
+         Vnum = 9030, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Outside the Dining Area", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9031, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9031, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9033, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9033, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9021, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9021, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9030, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9031] = 
       {
+         Name = "Prison Dining Room", 
+         Vnum = 9031, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Prison Dining Room", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9032, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9032, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9030, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 9030, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9031, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9032] = 
       {
+         Name = "Food Line", 
+         Vnum = 9032, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Food Line", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 9033, 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9031, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9031, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9032, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9033] = 
       {
+         Name = "The Prison Kitchen", 
+         Vnum = 9033, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "The Prison Kitchen", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 9032, 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9030, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9030, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9033, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9034] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9034, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9034, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9035] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9035, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9035, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9036] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9036, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9036, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9037] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9037, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9037, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9038] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9038, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9038, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9039] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9039, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9039, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9040] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9040, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9040, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9041] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9041, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9041, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9042] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9042, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9042, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9043] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9043, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9043, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9044] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9044, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9044, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9045] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9045, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9045, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9046] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9046, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9046, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9047] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9047, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9047, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9048] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9048, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9048, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9049] = 
       {
+         Name = "Floating in a void", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9049, 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+         }, 
+         Vnum = 9049, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9000] = 
       {
+         Name = "New Prisoner Processing", 
+         Vnum = 9000, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "New Prisoner Processing", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9018, 
+               Direction = "southeast", 
                Distance = 0, 
                Key = -1, 
-               Direction = "southeast", 
+               DestinationVnum = 9018, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9000, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9001] = 
       {
+         Name = "Coruscant Penitentiary", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Coruscant Penitentiary", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 337, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 337, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9003, 
+               Direction = "southeast", 
                Distance = 0, 
                Key = -1, 
-               Direction = "southeast", 
+               DestinationVnum = 9003, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9002, 
+               Direction = "southwest", 
                Distance = 0, 
                Key = -1, 
-               Direction = "southwest", 
+               DestinationVnum = 9002, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
          Vnum = 9001, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9002] = 
       {
+         Name = "Prisoner Entrance", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Prisoner Entrance", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9001, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "northeast", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9004, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "southwest", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9002, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
-         TeleDelay = 0, 
-         Sector = "city", 
-      }, 
-      [9003] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Vistor Entrance", 
+         Description = "", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9001, 
+               Direction = "northeast", 
                Distance = 0, 
                Key = -1, 
-               Direction = "northwest", 
+               DestinationVnum = 9001, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9017, 
+               Direction = "southwest", 
                Distance = 0, 
                Key = -1, 
-               Direction = "southeast", 
+               DestinationVnum = 9004, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9003, 
+         Vnum = 9002, 
+         TeleDelay = 0, 
+      }, 
+      [9003] = 
+      {
+         Name = "Vistor Entrance", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
-         TeleDelay = 0, 
-         Sector = "city", 
-      }, 
-      [9004] = 
-      {
-         ExtraDescriptions = 
-         {
-         }, 
-         Name = "Outside Checkpoint A", 
+         Description = "", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "northwest", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 9001, 
                Keyword = "", 
                Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "southeast", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 9017, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
+         Vnum = 9003, 
+         TeleDelay = 0, 
+      }, 
+      [9004] = 
+      {
+         Name = "Outside Checkpoint A", 
+         Sector = "city", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "p opens the door.", 
+               Code = "mpat 122 mpecho $n just opened the Coruscant jail door. \
+mpat 109 mpecho $n just opened the jail door. \
+", 
+               MudProgType = "act_prog", 
+            }, 
+         }, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               Key = 9000, 
                DestinationVnum = 9005, 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                }, 
-               Distance = 0, 
-               Key = 9000, 
-               Direction = "south", 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9002, 
+               Direction = "northeast", 
                Distance = 0, 
                Key = -1, 
-               Direction = "northeast", 
+               DestinationVnum = 9002, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
          Vnum = 9004, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "mpat 122 mpecho $n just opened the Coruscant jail door. \
-mpat 109 mpecho $n just opened the jail door. \
-", 
-               MudProgType = "act_prog", 
-               Arguments = "p opens the door.", 
-            }, 
-         }, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9005] = 
       {
+         Name = "Inside Checkpoint A", 
+         Vnum = 9005, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Inside Checkpoint A", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9004, 
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9006, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-         }, 
          TeleVnum = 0, 
-         Vnum = 9005, 
+         Tunnel = 0, 
+         Description = "", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "exit door", 
                Code = "if clan($n) == The Empire\
 mpat 9004 open s\
 mpat 122 mpecho $n just commanded the Coruscant jail be opened. \
@@ -1181,732 +1225,688 @@ endif\
 endif\
 ", 
                MudProgType = "speech_prog", 
-               Arguments = "exit door", 
             }, 
          }, 
-         Description = "", 
-         Tunnel = 0, 
-         TeleDelay = 0, 
          Sector = "city", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 9004, 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+               }, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 9006, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
+         TeleDelay = 0, 
       }, 
       [9006] = 
       {
+         Name = "A Prison Corridor", 
+         Vnum = 9006, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Prison Corridor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9005, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9005, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9009, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9009, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9007, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 9007, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9006, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9007] = 
       {
+         Name = "Outside Check Point B", 
+         Vnum = 9007, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Outside Check Point B", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9006, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9006, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9008, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 9008, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9007, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9008] = 
       {
+         Name = "Inside Check Point B", 
+         Vnum = 9008, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Inside Check Point B", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9007, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9007, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9000, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 9000, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9010, 
+               Direction = "southeast", 
                Distance = 0, 
                Key = -1, 
-               Direction = "southeast", 
+               DestinationVnum = 9010, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9008, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9009] = 
       {
+         Name = "Staff Check Point", 
+         Vnum = 9009, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Staff Check Point", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9006, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9006, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9009, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9010] = 
       {
+         Name = "A Prison Corridor", 
+         Vnum = 9010, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Prison Corridor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9011, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9011, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9008, 
+               Direction = "northwest", 
                Distance = 0, 
                Key = -1, 
-               Direction = "northwest", 
+               DestinationVnum = 9008, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9010, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9011] = 
       {
+         Name = "Outside Checkpoint C", 
+         Vnum = 9011, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Outside Checkpoint C", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9012, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9012, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9020, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 9020, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9010, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9010, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9011, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9012] = 
       {
+         Name = "A Prison Corridor", 
+         Vnum = 9012, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Prison Corridor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9011, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9011, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9013, 
+               Direction = "northeast", 
                Distance = 0, 
                Key = -1, 
-               Direction = "northeast", 
+               DestinationVnum = 9013, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9012, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9013] = 
       {
+         Name = "Viewing Room Checkpoint", 
+         Vnum = 9013, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Viewing Room Checkpoint", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9014, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9014, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9012, 
+               Direction = "southwest", 
                Distance = 0, 
                Key = -1, 
-               Direction = "southwest", 
+               DestinationVnum = 9012, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9013, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9014] = 
       {
+         Name = "Viewing Room", 
+         Vnum = 9014, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Viewing Room", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 9015, 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9013, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 9013, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9014, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9015] = 
       {
+         Name = "Visiting Room", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Visiting Room", 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9016, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9016, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
                DestinationVnum = 9014, 
                Flags = 
                {
                   [25] = "Window", 
                }, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
          Vnum = 9015, 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9016] = 
       {
+         Name = "Inside Visitors Checkpoint", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Inside Visitors Checkpoint", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9017, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "north", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9015, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9016, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 9017, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 9015, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
+         Vnum = 9016, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9017] = 
       {
+         Name = "Outside Visitors Checkpoint", 
+         Sector = "city", 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Outside Visitors Checkpoint", 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9016, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "south", 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9003, 
-               Distance = 0, 
-               Key = -1, 
-               Direction = "northwest", 
-            }, 
-         }, 
-         TeleVnum = 0, 
-         Vnum = 9017, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Description = "", 
+         TeleVnum = 0, 
          Tunnel = 0, 
+         Description = "", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "south", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 9016, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+            [2] = 
+            {
+               Direction = "northwest", 
+               Distance = 0, 
+               Key = -1, 
+               DestinationVnum = 9003, 
+               Keyword = "", 
+               Description = "", 
+            }, 
+         }, 
+         Vnum = 9017, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9018] = 
       {
+         Name = "Strip Search", 
+         Vnum = 9018, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Strip Search", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9019, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9019, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9018, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9019] = 
       {
+         Name = "Prison Garments", 
+         Vnum = 9019, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Prison Garments", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9010, 
+               Direction = "northeast", 
                Distance = 0, 
                Key = -1, 
-               Direction = "northeast", 
+               DestinationVnum = 9010, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9019, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9020] = 
       {
+         Name = "Inside Checkpoint C", 
+         Vnum = 9020, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Inside Checkpoint C", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9011, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9011, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9021, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 9021, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9020, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9021] = 
       {
+         Name = "A Prison Corridor", 
+         Vnum = 9021, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Prison Corridor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9020, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9020, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9030, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9030, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9022, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 9022, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9021, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9022] = 
       {
+         Name = "A Prison Corridor", 
+         Vnum = 9022, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Prison Corridor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9021, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9021, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9023, 
+               Direction = "south", 
                Distance = 0, 
                Key = -1, 
-               Direction = "south", 
+               DestinationVnum = 9023, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9022, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
       [9023] = 
       {
+         Name = "A Prison Corridor", 
+         Vnum = 9023, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "A Prison Corridor", 
+         TeleVnum = 0, 
+         Tunnel = 0, 
+         Description = "", 
+         Sector = "city", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9022, 
+               Direction = "north", 
                Distance = 0, 
                Key = -1, 
-               Direction = "north", 
+               DestinationVnum = 9022, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [2] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9024, 
+               Direction = "east", 
                Distance = 0, 
                Key = -1, 
-               Direction = "east", 
+               DestinationVnum = 9024, 
+               Keyword = "", 
+               Description = "", 
             }, 
             [3] = 
             {
-               Keyword = "", 
-               Description = "", 
-               DestinationVnum = 9025, 
+               Direction = "west", 
                Distance = 0, 
                Key = -1, 
-               Direction = "west", 
+               DestinationVnum = 9025, 
+               Keyword = "", 
+               Description = "", 
             }, 
          }, 
-         TeleVnum = 0, 
-         Vnum = 9023, 
-         Description = "", 
-         Tunnel = 0, 
          TeleDelay = 0, 
-         Sector = "city", 
       }, 
    }, 
-   Filename = "corus_jail.lua", 
-   VnumRanges = 
-   {
-      Room = 
-      {
-         First = 9000, 
-         Last = 9049, 
-      }, 
-      Mob = 
-      {
-         First = 9000, 
-         Last = 9049, 
-      }, 
-      Object = 
-      {
-         First = 9000, 
-         Last = 9049, 
-      }, 
-   }, 
-   LevelRanges = 
-   {
-      Hard = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-      Soft = 
-      {
-         High = 103, 
-         Low = 0, 
-      }, 
-   }, 
-   Resets = 
-   {
-      [1] = 
-      {
-         MiscData = 0, 
-         Command = "D", 
-         Arg3 = 2, 
-         Arg2 = 0, 
-         Arg1 = 9005, 
-      }, 
-      [2] = 
-      {
-         MiscData = 0, 
-         Command = "D", 
-         Arg3 = 1, 
-         Arg2 = 2, 
-         Arg1 = 9004, 
-      }, 
-      [3] = 
-      {
-         MiscData = 1, 
-         Command = "O", 
-         Arg3 = 9033, 
-         Arg2 = 1, 
-         Arg1 = 9001, 
-      }, 
-      [4] = 
-      {
-         MiscData = 1, 
-         Command = "O", 
-         Arg3 = 9032, 
-         Arg2 = 1, 
-         Arg1 = 9002, 
-      }, 
-   }, 
-   Name = "Coruscant Prison", 
    LowEconomy = 6250000, 
 }

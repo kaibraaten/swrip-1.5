@@ -189,14 +189,14 @@ static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs 
     Character *ch = GetEngineer(args->CraftingSession);
 
     if (args->CraftingSession->Recipe->Flags.test(Flag::Crafting::NeedsWorkshop)
-        && !ch->InRoom->Flags.test(Flag::Room::Factory))
+        && !CheckRoomFlag(ch->InRoom, Flag::Room::Factory))
     {
         ch->Echo("&RYou need to be in a factory or workshop to do that.&d\r\n");
         args->AbortSession = true;
     }
 
     if (args->CraftingSession->Recipe->Flags.test(Flag::Crafting::NeedsRefinery)
-        && !ch->InRoom->Flags.test(Flag::Room::Refinery))
+        && !CheckRoomFlag(ch->InRoom, Flag::Room::Refinery))
     {
         ch->Echo("&RYou need to be in a refinery to do that.&d\r\n");
         args->AbortSession = true;

@@ -116,7 +116,6 @@ void do_test( Character *ch, std::string argument )
                     room->Flags.reset();
                     room->Flags.set(Flag::Room::PlayerHome);
                     room->Flags.set(Flag::Room::Indoors);
-                    room->Flags.set(Flag::Room::Hotel);
                     room->Sector = SECT_INSIDE;
                     room->Name = "An Empty Home";
                     room->Description = "This is a small apartment with the bare essentials required to live here.\r\n"

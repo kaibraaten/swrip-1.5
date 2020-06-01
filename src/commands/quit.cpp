@@ -4,6 +4,12 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/homerepository.hpp"
+
+static bool CanQuitHere(const Character *ch, std::shared_ptr<Room> room)
+{
+    return CheckRoomFlag(ch->InRoom, Flag::Room::Hotel);
+}
 
 void do_quit( Character *ch, std::string argument )
 {
@@ -41,7 +47,7 @@ void do_quit( Character *ch, std::string argument )
     }
 
     if ( !IsImmortal(ch) && ch->InRoom
-         && !ch->InRoom->Flags.test( Flag::Room::Hotel )
+         && !CanQuitHere(ch, ch->InRoom)
          && IsAuthed(ch) )
     {
         ch->Echo("You may not quit here.\r\n");
@@ -81,8 +87,12 @@ void do_quit( Character *ch, std::string argument )
     ExtractCharacter( ch, true );
 
     for ( x = 0; x < MAX_WEAR; x++ )
+    {
         for ( y = 0; y < MAX_LAYERS; y++ )
+        {
             save_equipment[x][y] = NULL;
-
+        }
+    }
+    
     Log->LogStringPlus( log_buf, LOG_COMM, level );
 }

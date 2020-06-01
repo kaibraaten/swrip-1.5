@@ -72,10 +72,16 @@ public:
     void RemoveResident(const std::string &name);
     std::list<std::shared_ptr<Resident>> Residents() const;
     bool IsResident(const std::string &name) const;
-
+    std::bitset<Flag::MAX> ExtraRoomFlags;
+    
 private:
     struct Impl;
     std::unique_ptr<Impl> pImpl;
 };
+
+// Return true if this character owns a home.
+// Return false if not, even if the character
+// is non-owning resident in one or more homes.
+bool OwnsHome(const std::string &name);
 
 #endif
