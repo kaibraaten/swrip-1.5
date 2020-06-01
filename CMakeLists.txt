@@ -530,6 +530,7 @@ src/commands/unjail.cpp
 src/commands/unlock.cpp
 src/commands/unsilence.cpp
 src/commands/up.cpp
+src/commands/upgradehome.cpp
 src/commands/use.cpp
 src/commands/users.cpp
 src/commands/value.cpp

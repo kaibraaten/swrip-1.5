@@ -41,7 +41,7 @@ void do_cedit( Character *ch, std::string argument )
       return;
     }
 
-  command = GetCommand( commandName );
+  command = GetCommand(commandName, false);
 
   if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM && !StrCmp( arg2, "create" ) )
     {

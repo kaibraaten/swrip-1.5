@@ -385,6 +385,7 @@ extern std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 /*
  * Command functions.
  */
+DECLARE_CMD_FUN(do_upgradehome);
 DECLARE_CMD_FUN(do_showshuttle);
 DECLARE_CMD_FUN(do_makeshuttle);
 DECLARE_CMD_FUN(do_setshuttle);

@@ -25,7 +25,7 @@ Command *AllocateCommand();
 void FreeCommand(Command *command);
 void RemoveCommand(Command *command);
 void AddCommand(Command *command);
-Command *GetCommand(const std::string &command);
+Command *GetCommand(const std::string &command, bool allowPrefixMatch = true);
 void LoadCommands();
 void SaveCommands();
 OldRepository *NewCommandRepository();

@@ -141,7 +141,7 @@ static void PushHome(lua_State *L, const void *userData)
     auto room = GetRoom(home->Vnum());
     LuaPushObjects(L, room->Objects());
     LuaPushCollection(L, home->Residents(), "Residents", PushResident);
-    
+    LuaPushFlags(L, home->ExtraRoomFlags, RoomFlags, "ExtraRoomFlags");
     lua_setglobal(L, "home");
 }
 
@@ -184,6 +184,7 @@ static int L_HomeEntryFull(lua_State *L)
                               {
                                   home->Description(desc);
                               });
+            home->ExtraRoomFlags = LuaLoadFlags(L, "ExtraRoomFlags");
         }
     }
 

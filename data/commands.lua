@@ -1,4286 +1,4295 @@
 -- Commands
--- Last saved Monday 01-Jun-2020 11:12:47
+-- Last saved Monday 01-Jun-2020 12:26:17
 
 CommandEntry
 {
-   Function = "do_buyvendor", 
-   Position = "dead", 
    Level = 1, 
+   Position = "dead", 
    Name = "buyvendor", 
+   Function = "do_buyvendor", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_calculate", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "calculate", 
+   Function = "do_calculate", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_capture", 
-   Position = "resting", 
    Level = 1, 
+   Position = "resting", 
    Name = "capture", 
+   Function = "do_capture", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_chaff", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "chaff", 
+   Function = "do_chaff", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_ammo", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "charge", 
+   Function = "do_ammo", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_clantalk", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "clantalk", 
+   Function = "do_clantalk", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_close", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "close", 
+   Function = "do_close", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_closehatch", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "closehatch", 
+   Function = "do_closehatch", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_consider", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "consider", 
+   Function = "do_consider", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_channels", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "channels", 
+   Function = "do_channels", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_chat", 
-   Position = "resting", 
    Level = 1, 
+   Position = "resting", 
    Name = "chat", 
+   Function = "do_chat", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_check_vnums", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "checkvnums", 
+   Function = "do_check_vnums", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_clans", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "clans", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_cedit", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "cedit", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_compare", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "compare", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_commands", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "commands", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_comment", 
-   Position = "resting", 
-   Level = 102, 
-   Name = "comment", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_config", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "config", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_trajectory", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "course", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_credits", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "credits", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_cset", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "cset", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_cmdtable", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "cmdtable", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_clone", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "clone", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_copyship", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "copyship", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_closebay", 
-   Position = "resting", 
-   Level = 1, 
-   Name = "closebay", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_clanbuyship", 
-   Position = "dead", 
-   Level = 100, 
-   Name = "clanbuyship", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_challenge", 
-   Position = "resting", 
-   Level = 1, 
-   Name = "challenge", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_chaos", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "chaos", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_clansellship", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "clansellship", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_cutdoor", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "cutdoor", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_clanfunds", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "clanfunds", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_calculate_diff", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "calculatediff", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_trajectory_actual", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "courseactual", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_copyover", 
-   Position = "dead", 
-   Level = 104, 
-   Name = "copyover", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_down", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "down", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_clan_donate", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "donate", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_drink", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "drink", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_drive", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "drive", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_drop", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "drop", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_demote", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "demote", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_deny", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "deny", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_description", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "description", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_destroy", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "destroy", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_dig", 
-   Position = "standing", 
-   Level = 3, 
-   Name = "dig", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_disconnect", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "disconnect", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_dmesg", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "dmesg", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_drag", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "drag", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_dismount", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "dismount", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_dock", 
-   Position = "resting", 
-   Level = 1, 
-   Name = "dock", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_decline", 
-   Position = "dead", 
-   Level = 5, 
-   Name = "decline", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_diagnose", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "diagnose", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_delay", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "delay", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_draw", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "draw", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_dismiss", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "dismiss", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_east", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "east", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_eat", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "eat", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_emote", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "emote", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_empower", 
-   Position = "resting", 
-   Level = 1, 
-   Name = "empower", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_exits", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "exits", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_examine", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "examine", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_equipment", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "equipment", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_echo", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "echo", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_empty", 
-   Position = "sitting", 
-   Level = 0, 
-   Name = "empty", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_enter", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "enter", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_jumpvector", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "entryvector", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_fire", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "fire", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_cast", 
-   Position = "sleeping", 
-   Level = 0, 
-   Name = "feel", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_fill", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "fill", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_follow", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "follow", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_fixchar", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "fixchar", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_flee", 
-   Position = "fighting", 
-   Level = 0, 
-   Name = "flee", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_foldarea", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "foldarea", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_for", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "for", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_force", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "force", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_forceclose", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "forceclose", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_form_password", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "formpass", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_freeze", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "freeze", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_fquit", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "fquit", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_form_password", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "form_password", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_fuel", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "fuel", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_pluogus", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "findserin", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_get", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "get", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_give", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "give", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_gtell", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "gtell", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_group", 
-   Position = "sleeping", 
-   Level = 0, 
-   Name = "group", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_glance", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "glance", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_goto", 
-   Position = "dead", 
-   Level = 100, 
-   Name = "goto", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_gold", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "gold", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_ooc", 
-   Position = "dead", 
-   Level = 5, 
-   Name = "gossip", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_collectgold", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "getcredits", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_grub", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "grub", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_guard", 
-   Position = "dead", 
-   Level = 30, 
-   Name = "guard", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
    Function = "do_clans", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
    Position = "dead", 
-   Level = 0, 
-   Name = "guilds", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_help", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "help", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_hail", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "hail", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_hyperspace", 
-   Position = "resting", 
-   Level = 1, 
-   Name = "hyperspace", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_wear", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "hold", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_hedit", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "hedit", 
+   Name = "cedit", 
+   Function = "do_cedit", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_hell", 
+   Level = 0, 
+   Position = "resting", 
+   Name = "compare", 
+   Function = "do_compare", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
    Position = "dead", 
+   Name = "commands", 
+   Function = "do_commands", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 102, 
+   Position = "resting", 
+   Name = "comment", 
+   Function = "do_comment", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "config", 
+   Function = "do_config", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "course", 
+   Function = "do_trajectory", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "credits", 
+   Function = "do_credits", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "cset", 
+   Function = "do_cset", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "cmdtable", 
+   Function = "do_cmdtable", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "clone", 
+   Function = "do_clone", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "copyship", 
+   Function = "do_copyship", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "resting", 
+   Name = "closebay", 
+   Function = "do_closebay", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 100, 
+   Position = "dead", 
+   Name = "clanbuyship", 
+   Function = "do_clanbuyship", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "resting", 
+   Name = "challenge", 
+   Function = "do_challenge", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 101, 
+   Position = "dead", 
+   Name = "chaos", 
+   Function = "do_chaos", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "clansellship", 
+   Function = "do_clansellship", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "cutdoor", 
+   Function = "do_cutdoor", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "clanfunds", 
+   Function = "do_clanfunds", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "calculatediff", 
+   Function = "do_calculate_diff", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "courseactual", 
+   Function = "do_trajectory_actual", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 104, 
+   Position = "dead", 
+   Name = "copyover", 
+   Function = "do_copyover", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "standing", 
+   Name = "down", 
+   Function = "do_down", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "donate", 
+   Function = "do_clan_donate", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "drink", 
+   Function = "do_drink", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "drive", 
+   Function = "do_drive", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "drop", 
+   Function = "do_drop", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "demote", 
+   Function = "do_demote", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "deny", 
+   Function = "do_deny", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "description", 
+   Function = "do_description", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "destroy", 
+   Function = "do_destroy", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 3, 
+   Position = "standing", 
+   Name = "dig", 
+   Function = "do_dig", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "disconnect", 
+   Function = "do_disconnect", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "dmesg", 
+   Function = "do_dmesg", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "standing", 
+   Name = "drag", 
+   Function = "do_drag", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "dismount", 
+   Function = "do_dismount", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "resting", 
+   Name = "dock", 
+   Function = "do_dock", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 5, 
+   Position = "dead", 
+   Name = "decline", 
+   Function = "do_decline", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "diagnose", 
+   Function = "do_diagnose", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "delay", 
+   Function = "do_delay", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "draw", 
+   Function = "do_draw", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "dismiss", 
+   Function = "do_dismiss", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "standing", 
+   Name = "east", 
+   Function = "do_east", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "eat", 
+   Function = "do_eat", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "emote", 
+   Function = "do_emote", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "resting", 
+   Name = "empower", 
+   Function = "do_empower", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "exits", 
+   Function = "do_exits", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "examine", 
+   Function = "do_examine", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "equipment", 
+   Function = "do_equipment", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 101, 
+   Position = "dead", 
+   Name = "echo", 
+   Function = "do_echo", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "sitting", 
+   Name = "empty", 
+   Function = "do_empty", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "standing", 
+   Name = "enter", 
+   Function = "do_enter", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "entryvector", 
+   Function = "do_jumpvector", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "fire", 
+   Function = "do_fire", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "sleeping", 
+   Name = "feel", 
+   Function = "do_cast", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "fill", 
+   Function = "do_fill", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "follow", 
+   Function = "do_follow", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "fixchar", 
+   Function = "do_fixchar", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "fighting", 
+   Name = "flee", 
+   Function = "do_flee", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "foldarea", 
+   Function = "do_foldarea", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "for", 
+   Function = "do_for", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "force", 
+   Function = "do_force", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 101, 
+   Position = "dead", 
+   Name = "forceclose", 
+   Function = "do_forceclose", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "formpass", 
+   Function = "do_form_password", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "freeze", 
+   Function = "do_freeze", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 101, 
+   Position = "dead", 
+   Name = "fquit", 
+   Function = "do_fquit", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "form_password", 
+   Function = "do_form_password", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "fuel", 
+   Function = "do_fuel", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "findserin", 
+   Function = "do_pluogus", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "get", 
+   Function = "do_get", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "give", 
+   Function = "do_give", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "gtell", 
+   Function = "do_gtell", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "sleeping", 
+   Name = "group", 
+   Function = "do_group", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "glance", 
+   Function = "do_glance", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 100, 
+   Position = "dead", 
+   Name = "goto", 
+   Function = "do_goto", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "gold", 
+   Function = "do_gold", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 5, 
+   Position = "dead", 
+   Name = "gossip", 
+   Function = "do_ooc", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "getcredits", 
+   Function = "do_collectgold", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "grub", 
+   Function = "do_grub", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 30, 
+   Position = "dead", 
+   Name = "guard", 
+   Function = "do_guard", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "guilds", 
+   Function = "do_clans", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "help", 
+   Function = "do_help", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "hail", 
+   Function = "do_hail", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "resting", 
+   Name = "hyperspace", 
+   Function = "do_hyperspace", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "hold", 
+   Function = "do_wear", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "hedit", 
+   Function = "do_hedit", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
    Name = "hell", 
+   Function = "do_hell", 
    Log = "high", 
 }
 
 CommandEntry
 {
-   Function = "do_hlist", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "hlist", 
+   Function = "do_hlist", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_holylight", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "holylight", 
+   Function = "do_holylight", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_homepage", 
-   Position = "dead", 
    Level = 10, 
+   Position = "dead", 
    Name = "homepage", 
+   Function = "do_homepage", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_hset", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "hset", 
+   Function = "do_hset", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_inventory", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "inventory", 
+   Function = "do_inventory", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_idea", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "idea", 
+   Function = "do_idea", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_induct", 
-   Position = "standing", 
    Level = 1, 
+   Position = "standing", 
    Name = "induct", 
+   Function = "do_induct", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_info", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "info", 
+   Function = "do_info", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_installarea", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "installarea", 
+   Function = "do_installarea", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_instazone", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "instazone", 
+   Function = "do_instazone", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_invis", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "invis", 
+   Function = "do_invis", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_instaroom", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "instaroom", 
+   Function = "do_instaroom", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_immtalk", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "immtalk", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
    Function = "do_immtalk", 
-   Position = "dead", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 105, 
+   Position = "dead", 
    Name = "immchannel", 
+   Function = "do_immtalk", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_immortalize", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "immortalize", 
+   Function = "do_immortalize", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_i103", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "i103", 
+   Function = "do_i103", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_i104", 
-   Position = "dead", 
    Level = 104, 
+   Position = "dead", 
    Name = "i104", 
+   Function = "do_i104", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_i105", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "i105", 
+   Function = "do_i105", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_invite", 
-   Position = "sitting", 
    Level = 1, 
+   Position = "sitting", 
    Name = "invite", 
+   Function = "do_invite", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_jumpvector", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "jumpvector", 
+   Function = "do_jumpvector", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_junk", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "junk", 
+   Function = "do_junk", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_kill", 
-   Position = "fighting", 
    Level = 0, 
+   Position = "fighting", 
    Name = "kill", 
+   Function = "do_kill", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_look", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "look", 
+   Function = "do_look", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_land", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "land", 
+   Function = "do_land", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_launch", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "launch", 
+   Function = "do_launch", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_lock", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "lock", 
+   Function = "do_lock", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_level", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "level", 
+   Function = "do_level", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_list", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "list", 
+   Function = "do_list", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_languages", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "languages", 
+   Function = "do_languages", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_last", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "last", 
+   Function = "do_last", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_leave", 
-   Position = "standing", 
    Level = 0, 
+   Position = "standing", 
    Name = "leave", 
+   Function = "do_leave", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_leaveship", 
-   Position = "standing", 
    Level = 0, 
+   Position = "standing", 
    Name = "leaveship", 
+   Function = "do_leaveship", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_light", 
+   Level = 0, 
    Position = "sitting", 
-   Level = 0, 
    Name = "light", 
+   Function = "do_light", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_hyperspace", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "lightspeed", 
+   Function = "do_hyperspace", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_litterbug", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "litterbug", 
+   Function = "do_litterbug", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_loadarea", 
-   Position = "dead", 
    Level = 100, 
+   Position = "dead", 
    Name = "loadarea", 
+   Function = "do_loadarea", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_loadup", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "loadup", 
+   Function = "do_loadup", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_log", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "log", 
+   Function = "do_log", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_makelightsaber", 
-   Position = "resting", 
    Level = 1, 
+   Position = "resting", 
    Name = "makelightsaber", 
+   Function = "do_makelightsaber", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_makespice", 
-   Position = "resting", 
    Level = 1, 
+   Position = "resting", 
    Name = "makespice", 
+   Function = "do_makespice", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_makespaceobject", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "makespaceobject", 
+   Function = "do_makespaceobject", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_mpecho", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpecho", 
+   Function = "do_mpecho", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpechoat", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpechoat", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
    Function = "do_mpechoat", 
-   Position = "dead", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 0, 
+   Position = "dead", 
    Name = "mea", 
+   Function = "do_mpechoat", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpat", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpat", 
+   Function = "do_mpat", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpforce", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpforce", 
+   Function = "do_mpforce", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpechoaround", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpechoaround", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
    Function = "do_mpechoaround", 
-   Position = "dead", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 0, 
+   Position = "dead", 
    Name = "mer", 
+   Function = "do_mpechoaround", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpasound", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpasound", 
+   Function = "do_mpasound", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpoload", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpoload", 
+   Function = "do_mpoload", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpjunk", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpjunk", 
+   Function = "do_mpjunk", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpgoto", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpgoto", 
+   Function = "do_mpgoto", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mp_damage", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpdamage", 
+   Function = "do_mp_damage", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mp_deposit", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpdeposit", 
+   Function = "do_mp_deposit", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mp_restore", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mprestore", 
+   Function = "do_mp_restore", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpkill", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpkill", 
+   Function = "do_mpkill", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mptransfer", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mptransfer", 
+   Function = "do_mptransfer", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpmload", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpmload", 
+   Function = "do_mpmload", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpnothing", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpnothing", 
+   Function = "do_mpnothing", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mppurge", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mppurge", 
+   Function = "do_mppurge", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpinvis", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpinvis", 
+   Function = "do_mpinvis", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpapply", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpapply", 
+   Function = "do_mpapply", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpapplyb", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpapplyb", 
+   Function = "do_mpapplyb", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mp_close_passage", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpclosepassage", 
+   Function = "do_mp_close_passage", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mp_open_passage", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpopenpassage", 
+   Function = "do_mp_open_passage", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpdream", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpdream", 
+   Function = "do_mpdream", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mp_slay", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpslay", 
+   Function = "do_mp_slay", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mp_withdraw", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "mpwithdraw", 
+   Function = "do_mp_withdraw", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mailroom", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "mail", 
+   Function = "do_mailroom", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_makeboard", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "makeboard", 
+   Function = "do_makeboard", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_makeclan", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "makeclan", 
+   Function = "do_makeclan", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_makeship", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "makeship", 
+   Function = "do_makeship", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_makerepair", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "makerepair", 
+   Function = "do_makerepair", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_makeshop", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "makeshop", 
+   Function = "do_makeshop", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_makewizlist", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "makewizlist", 
+   Function = "do_makewizlist", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_massign", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "massign", 
+   Function = "do_massign", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_mcreate", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "mcreate", 
+   Function = "do_mcreate", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_memory", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "memory", 
+   Function = "do_memory", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_noteroom", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "message", 
+   Function = "do_noteroom", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mfind", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "mfind", 
+   Function = "do_mfind", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_minvoke", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "minvoke", 
+   Function = "do_minvoke", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_mlist", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "mlist", 
+   Function = "do_mlist", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpedit", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "mpedit", 
+   Function = "do_mpedit", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_mpstat", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "mpstat", 
+   Function = "do_mpstat", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mset", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "mset", 
+   Function = "do_mset", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_mstat", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "mstat", 
+   Function = "do_mstat", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_murder", 
+   Level = 1, 
    Position = "fighting", 
-   Level = 1, 
    Name = "murder", 
+   Function = "do_murder", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_music", 
+   Level = 0, 
    Position = "sleeping", 
-   Level = 0, 
    Name = "music", 
+   Function = "do_music", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mwhere", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "mwhere", 
+   Function = "do_mwhere", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpgain", 
-   Position = "dead", 
    Level = 1, 
+   Position = "dead", 
    Name = "mpgain", 
+   Function = "do_mpgain", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_makeplanet", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "makeplanet", 
+   Function = "do_makeplanet", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_open", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "move", 
+   Function = "do_open", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_mpfind", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "mpfind", 
+   Function = "do_mpfind", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_members", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "members", 
+   Function = "do_members", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_makedisguise", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "makedisguise", 
+   Function = "do_makedisguise", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_makeshuttle", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "makeshuttle", 
+   Function = "do_makeshuttle", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_north", 
-   Position = "standing", 
    Level = 0, 
+   Position = "standing", 
    Name = "north", 
+   Function = "do_north", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_name", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "name", 
+   Function = "do_name", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_northeast", 
-   Position = "standing", 
    Level = 0, 
+   Position = "standing", 
    Name = "ne", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_northwest", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "nw", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_noteroom", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "note", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_noteroom", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "note", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_newbiechat", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "newbiechat", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_newbieset", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "newbieset", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_noemote", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "noemote", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_noresolve", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "noresolve", 
-   Log = "always", 
-}
-
-CommandEntry
-{
    Function = "do_northeast", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "northeast", 
    Log = "normal", 
 }
 
 CommandEntry
 {
+   Level = 0, 
+   Position = "standing", 
+   Name = "nw", 
    Function = "do_northwest", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "northwest", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_notell", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "notell", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_notitle", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "notitle", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_order", 
+   Level = 0, 
    Position = "resting", 
-   Level = 0, 
-   Name = "order", 
+   Name = "note", 
+   Function = "do_noteroom", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_open", 
+   Level = 0, 
    Position = "resting", 
+   Name = "note", 
+   Function = "do_noteroom", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 0, 
-   Name = "open", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_openbay", 
-   Position = "resting", 
-   Level = 1, 
-   Name = "openbay", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_open", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "openhatch", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_oassign", 
    Position = "dead", 
-   Level = 105, 
-   Name = "oassign", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_ocreate", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "ocreate", 
-   Log = "build", 
-}
-
-CommandEntry
-{
-   Function = "do_ofind", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "ofind", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_oinvoke", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "oinvoke", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_oldscore", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "oldscore", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_olist", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "olist", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_opedit", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "opedit", 
-   Log = "build", 
-}
-
-CommandEntry
-{
-   Function = "do_opstat", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "opstat", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_ostat", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "ostat", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_outcast", 
-   Position = "standing", 
-   Level = 1, 
-   Name = "outcast", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_owhere", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "owhere", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_oset", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "oset", 
-   Log = "build", 
-}
-
-CommandEntry
-{
-   Function = "do_ooc", 
-   Position = "dead", 
-   Level = 6, 
-   Name = "ooc", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
+   Name = "newbiechat", 
    Function = "do_newbiechat", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "ooc2", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_override", 
+   Level = 101, 
    Position = "dead", 
-   Level = 1, 
-   Name = "override", 
+   Name = "newbieset", 
+   Function = "do_newbieset", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_opfind", 
-   Position = "dead", 
    Level = 103, 
-   Name = "opfind", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_ogrub", 
    Position = "dead", 
-   Level = 105, 
-   Name = "ogrub", 
+   Name = "noemote", 
+   Function = "do_noemote", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_put", 
+   Level = 103, 
+   Position = "dead", 
+   Name = "noresolve", 
+   Function = "do_noresolve", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "standing", 
+   Name = "northeast", 
+   Function = "do_northeast", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "standing", 
+   Name = "northwest", 
+   Function = "do_northwest", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "notell", 
+   Function = "do_notell", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "notitle", 
+   Function = "do_notitle", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
    Position = "resting", 
-   Level = 0, 
-   Name = "put", 
+   Name = "order", 
+   Function = "do_order", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_password", 
-   Position = "dead", 
    Level = 0, 
+   Position = "resting", 
+   Name = "open", 
+   Function = "do_open", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "resting", 
+   Name = "openbay", 
+   Function = "do_openbay", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "openhatch", 
+   Function = "do_open", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "oassign", 
+   Function = "do_oassign", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "ocreate", 
+   Function = "do_ocreate", 
+   Log = "build", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "ofind", 
+   Function = "do_ofind", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "oinvoke", 
+   Function = "do_oinvoke", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "oldscore", 
+   Function = "do_oldscore", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "olist", 
+   Function = "do_olist", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "opedit", 
+   Function = "do_opedit", 
+   Log = "build", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "opstat", 
+   Function = "do_opstat", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "ostat", 
+   Function = "do_ostat", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "standing", 
+   Name = "outcast", 
+   Function = "do_outcast", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "owhere", 
+   Function = "do_owhere", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 101, 
+   Position = "dead", 
+   Name = "oset", 
+   Function = "do_oset", 
+   Log = "build", 
+}
+
+CommandEntry
+{
+   Level = 6, 
+   Position = "dead", 
+   Name = "ooc", 
+   Function = "do_ooc", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "ooc2", 
+   Function = "do_newbiechat", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "override", 
+   Function = "do_override", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "opfind", 
+   Function = "do_opfind", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "ogrub", 
+   Function = "do_ogrub", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "put", 
+   Function = "do_put", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
    Name = "password", 
+   Function = "do_password", 
    Log = "never", 
 }
 
 CommandEntry
 {
-   Function = "do_practice", 
-   Position = "sleeping", 
    Level = 0, 
+   Position = "sleeping", 
    Name = "practice", 
+   Function = "do_practice", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_peace", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "peace", 
+   Function = "do_peace", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_pluogus", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "pluogus", 
+   Function = "do_pluogus", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_pull", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "pull", 
+   Function = "do_pull", 
    Log = "normal", 
 }
 
 CommandEntry
 {
+   Level = 103, 
+   Position = "dead", 
+   Name = "purge", 
    Function = "do_purge", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "purge", 
    Log = "always", 
 }
 
 CommandEntry
 {
+   Level = 101, 
+   Position = "dead", 
+   Name = "purge", 
    Function = "do_low_purge", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "purge", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_push", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "push", 
+   Function = "do_push", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_prompt", 
-   Position = "dead", 
    Level = 1, 
+   Position = "dead", 
    Name = "prompt", 
+   Function = "do_prompt", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_planets", 
-   Position = "dead", 
    Level = 1, 
+   Position = "dead", 
    Name = "planets", 
+   Function = "do_planets", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_pricevendor", 
-   Position = "dead", 
    Level = 1, 
+   Position = "dead", 
    Name = "pricevendor", 
+   Function = "do_pricevendor", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_placevendor", 
-   Position = "dead", 
    Level = 1, 
+   Position = "dead", 
    Name = "placevendor", 
+   Function = "do_placevendor", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_quaff", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "quaff", 
+   Function = "do_quaff", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_quit", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "quit", 
+   Function = "do_quit", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_radar", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "radar", 
+   Function = "do_radar", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_recharge", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "recharge", 
+   Function = "do_recharge", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_reload", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "reload", 
+   Function = "do_reload", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_remove", 
-   Position = "sitting", 
    Level = 0, 
+   Position = "sitting", 
    Name = "remove", 
+   Function = "do_remove", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rempilot", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "rempilot", 
+   Function = "do_rempilot", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rest", 
-   Position = "sleeping", 
    Level = 0, 
+   Position = "sleeping", 
    Name = "rest", 
+   Function = "do_rest", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_resign", 
-   Position = "resting", 
    Level = 1, 
+   Position = "resting", 
    Name = "resign", 
+   Function = "do_resign", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_report", 
-   Position = "dead", 
    Level = 0, 
+   Position = "dead", 
    Name = "report", 
+   Function = "do_report", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_repair", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "repair", 
+   Function = "do_repair", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_repairship", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "repairship", 
+   Function = "do_repairship", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_reply", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "reply", 
+   Function = "do_reply", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rank", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "rank", 
+   Function = "do_rank", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rassign", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "rassign", 
+   Function = "do_rassign", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_rat", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "rat", 
+   Function = "do_rat", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_rdelete", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "rdelete", 
+   Function = "do_rdelete", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_reboot", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "reboot", 
+   Function = "do_reboot", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_recho", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "recho", 
+   Function = "do_recho", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_redit", 
-   Position = "dead", 
    Level = 100, 
+   Position = "dead", 
    Name = "redit", 
+   Function = "do_redit", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_regoto", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "regoto", 
+   Function = "do_regoto", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_repairset", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "repairset", 
+   Function = "do_repairset", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_repairshops", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "repairshops", 
+   Function = "do_repairshops", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_repairstat", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "repairstat", 
+   Function = "do_repairstat", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_reset", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "reset", 
+   Function = "do_reset", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_resetship", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "resetship", 
+   Function = "do_resetship", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_restore", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "restore", 
+   Function = "do_restore", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_restoretime", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "restoretime", 
+   Function = "do_restoretime", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_restrict", 
-   Position = "dead", 
    Level = 104, 
+   Position = "dead", 
    Name = "restrict", 
+   Function = "do_restrict", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_return", 
-   Position = "dead", 
    Level = 1, 
+   Position = "dead", 
    Name = "return", 
+   Function = "do_return", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_retran", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "retran", 
+   Function = "do_retran", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_retire", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "retire", 
+   Function = "do_retire", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_revert", 
-   Position = "resting", 
    Level = 0, 
+   Position = "resting", 
    Name = "revert", 
+   Function = "do_revert", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rlist", 
-   Position = "dead", 
    Level = 100, 
+   Position = "dead", 
    Name = "rlist", 
+   Function = "do_rlist", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rpedit", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "rpedit", 
+   Function = "do_rpedit", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_rpstat", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "rpstat", 
+   Function = "do_rpstat", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rstat", 
-   Position = "dead", 
    Level = 100, 
+   Position = "dead", 
    Name = "rstat", 
+   Function = "do_rstat", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rreset", 
-   Position = "dead", 
    Level = 102, 
+   Position = "dead", 
    Name = "rreset", 
+   Function = "do_rreset", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_request", 
-   Position = "resting", 
    Level = 1, 
+   Position = "resting", 
    Name = "request", 
+   Function = "do_request", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_remresident", 
-   Position = "sitting", 
    Level = 1, 
+   Position = "sitting", 
    Name = "remresident", 
+   Function = "do_remresident", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rembounty", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "rembounty", 
+   Function = "do_rembounty", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_rpfind", 
-   Position = "dead", 
    Level = 103, 
+   Position = "dead", 
    Name = "rpfind", 
+   Function = "do_rpfind", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_rgrub", 
-   Position = "dead", 
    Level = 105, 
+   Position = "dead", 
    Name = "rgrub", 
+   Function = "do_rgrub", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_roster", 
-   Position = "dead", 
    Level = 1, 
+   Position = "dead", 
    Name = "roster", 
+   Function = "do_roster", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_recall", 
-   Position = "dead", 
    Level = 101, 
+   Position = "dead", 
    Name = "recall", 
+   Function = "do_recall", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_renameship", 
-   Position = "dead", 
    Level = 1, 
+   Position = "dead", 
    Name = "renameship", 
+   Function = "do_renameship", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_south", 
-   Position = "standing", 
    Level = 0, 
+   Position = "standing", 
    Name = "south", 
+   Function = "do_south", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_southeast", 
-   Position = "standing", 
    Level = 0, 
+   Position = "standing", 
    Name = "se", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_southwest", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "sw", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_say", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "say", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_save", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "save", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_score", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "score", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_autorecharge", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "shields", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_sleep", 
-   Position = "sleeping", 
-   Level = 0, 
-   Name = "sleep", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_stand", 
-   Position = "sleeping", 
-   Level = 0, 
-   Name = "stand", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_savearea", 
-   Position = "dead", 
-   Level = 100, 
-   Name = "savearea", 
-   Log = "build", 
-}
-
-CommandEntry
-{
-   Function = "do_sell", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "sell", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_sellship", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "sellship", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_sedit", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "sedit", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_setblaster", 
-   Position = "resting", 
-   Level = 1, 
-   Name = "setblaster", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_set_boot_time", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "setboot", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_setship", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "setship", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_setclan", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "setclan", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_setspaceobject", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "setspaceobject", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_ships", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "ships", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_shout", 
-   Position = "resting", 
-   Level = 3, 
-   Name = "shout", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_shops", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "shops", 
-   Log = "build", 
-}
-
-CommandEntry
-{
-   Function = "do_shopset", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "shopset", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_shopstat", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "shopstat", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_shove", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "shove", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_showship", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "showship", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_showspaceobject", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "showspaceobject", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_showclan", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "showclan", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_shutdown", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "shutdown", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_sit", 
-   Position = "sleeping", 
-   Level = 0, 
-   Name = "sit", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_silence", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "silence", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_sla", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "sla", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_slay", 
-   Position = "dead", 
-   Level = 104, 
-   Name = "slay", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_slist", 
-   Position = "sleeping", 
-   Level = 0, 
-   Name = "slist", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_slookup", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "slookup", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_smoke", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "smoke", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_snoop", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "snoop", 
-   Log = "high", 
-}
-
-CommandEntry
-{
-   Function = "do_sober", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "sober", 
-   Log = "high", 
-}
-
-CommandEntry
-{
-   Function = "do_socials", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "socials", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
    Function = "do_southeast", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "southeast", 
    Log = "normal", 
 }
 
 CommandEntry
 {
+   Level = 0, 
+   Position = "standing", 
+   Name = "sw", 
    Function = "do_southwest", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "southwest", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_speak", 
+   Level = 0, 
    Position = "resting", 
-   Level = 0, 
-   Name = "speak", 
+   Name = "say", 
+   Function = "do_say", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_accelerate", 
+   Level = 0, 
+   Position = "dead", 
+   Name = "save", 
+   Function = "do_save", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "score", 
+   Function = "do_score", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
    Position = "resting", 
+   Name = "shields", 
+   Function = "do_autorecharge", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 0, 
-   Name = "speed", 
+   Position = "sleeping", 
+   Name = "sleep", 
+   Function = "do_sleep", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_split", 
-   Position = "resting", 
    Level = 0, 
-   Name = "split", 
+   Position = "sleeping", 
+   Name = "stand", 
+   Function = "do_stand", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_sset", 
+   Level = 100, 
    Position = "dead", 
-   Level = 103, 
-   Name = "sset", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_switch", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "switch", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_spaceobjects", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "starsystems", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_spaceobjects", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "spaceobjects", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_status", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "status", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_spacetalk", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "spacetalk", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_systemtalk", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "systemtalk", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_shiptalk", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "shiptalk", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_speeders", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "speeders", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_suicide", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "suicide", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_setplanet", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "setplanet", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_showplanet", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "showplanet", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_stun", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "stun", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_sellhome", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "sellhome", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_showlayers", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "showlayers", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_scatter", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "scatter", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_shiptrack", 
-   Position = "dead", 
-   Level = 30, 
-   Name = "shiptrack", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_showstatistic", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "showstatistic", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_study", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "study", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_setshuttle", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "setshuttle", 
+   Name = "savearea", 
+   Function = "do_savearea", 
    Log = "build", 
 }
 
 CommandEntry
 {
-   Function = "do_showshuttle", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "showshuttle", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_makeguild", 
-   Position = "dead", 
-   Level = 2, 
-   Name = "startguild", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_tell", 
+   Level = 0, 
    Position = "resting", 
-   Level = 0, 
-   Name = "tell", 
+   Name = "sell", 
+   Function = "do_sell", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_get", 
+   Level = 0, 
    Position = "resting", 
-   Level = 0, 
-   Name = "take", 
+   Name = "sellship", 
+   Function = "do_sellship", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_takedrug", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "takedrug", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_target", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "target", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_tamp", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "tamp", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_time", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "time", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_title", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "title", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_trajectory", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "trajectory", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_transfer", 
-   Position = "dead", 
    Level = 103, 
-   Name = "transfer", 
+   Position = "dead", 
+   Name = "sedit", 
+   Function = "do_sedit", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_trust", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "trust", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_typo", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "typo", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_timecmd", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "timecmd", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_train", 
-   Position = "dead", 
    Level = 1, 
-   Name = "train", 
+   Position = "resting", 
+   Name = "setblaster", 
+   Function = "do_setblaster", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_teach", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "teach", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_transship", 
-   Position = "dead", 
    Level = 103, 
-   Name = "transship", 
+   Position = "dead", 
+   Name = "setboot", 
+   Function = "do_set_boot_time", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_toplevel", 
+   Level = 103, 
    Position = "dead", 
-   Level = 105, 
-   Name = "toplevel", 
+   Name = "setship", 
+   Function = "do_setship", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_tractorbeam", 
+   Level = 103, 
    Position = "dead", 
-   Level = 1, 
-   Name = "tractorbeam", 
+   Name = "setclan", 
+   Function = "do_setclan", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "setspaceobject", 
+   Function = "do_setspaceobject", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "ships", 
+   Function = "do_ships", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_test", 
+   Level = 3, 
+   Position = "resting", 
+   Name = "shout", 
+   Function = "do_shout", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
    Position = "dead", 
-   Level = 105, 
-   Name = "test", 
+   Name = "shops", 
+   Function = "do_shops", 
+   Log = "build", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "shopset", 
+   Function = "do_shopset", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_up", 
+   Level = 102, 
+   Position = "dead", 
+   Name = "shopstat", 
+   Function = "do_shopstat", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
    Position = "standing", 
-   Level = 0, 
-   Name = "up", 
+   Name = "shove", 
+   Function = "do_shove", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_unlock", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "unlock", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_unhell", 
+   Level = 102, 
    Position = "dead", 
-   Level = 101, 
-   Name = "unhell", 
+   Name = "showship", 
+   Function = "do_showship", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "showspaceobject", 
+   Function = "do_showspaceobject", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "showclan", 
+   Function = "do_showclan", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "shutdown", 
+   Function = "do_shutdown", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "sleeping", 
+   Name = "sit", 
+   Function = "do_sit", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "silence", 
+   Function = "do_silence", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "sla", 
+   Function = "do_sla", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 104, 
+   Position = "dead", 
+   Name = "slay", 
+   Function = "do_slay", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "sleeping", 
+   Name = "slist", 
+   Function = "do_slist", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "slookup", 
+   Function = "do_slookup", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "smoke", 
+   Function = "do_smoke", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "snoop", 
+   Function = "do_snoop", 
    Log = "high", 
 }
 
 CommandEntry
 {
-   Function = "do_use", 
-   Position = "resting", 
+   Level = 102, 
+   Position = "dead", 
+   Name = "sober", 
+   Function = "do_sober", 
+   Log = "high", 
+}
+
+CommandEntry
+{
    Level = 0, 
-   Name = "use", 
+   Position = "dead", 
+   Name = "socials", 
+   Function = "do_socials", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_users", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "users", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_unsilence", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "unsilence", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_undock", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "undock", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_unjail", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "unjail", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_unfocusalias", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "unfocusalias", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_trajectory", 
-   Position = "resting", 
    Level = 0, 
-   Name = "vector", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_value", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "value", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_vassign", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "vassign", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_accelerate", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "velocity", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_visible", 
-   Position = "sleeping", 
-   Level = 0, 
-   Name = "visible", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_vsearch", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "vsearch", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_viewskills", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "viewskills", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_west", 
    Position = "standing", 
-   Level = 0, 
-   Name = "west", 
+   Name = "southeast", 
+   Function = "do_southeast", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_wake", 
-   Position = "sleeping", 
    Level = 0, 
-   Name = "wake", 
+   Position = "standing", 
+   Name = "southwest", 
+   Function = "do_southwest", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_wartalk", 
-   Position = "sleeping", 
+   Level = 0, 
+   Position = "resting", 
+   Name = "speak", 
+   Function = "do_speak", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "speed", 
+   Function = "do_accelerate", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "split", 
+   Function = "do_split", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "sset", 
+   Function = "do_sset", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "switch", 
+   Function = "do_switch", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "starsystems", 
+   Function = "do_spaceobjects", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "spaceobjects", 
+   Function = "do_spaceobjects", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "status", 
+   Function = "do_status", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "spacetalk", 
+   Function = "do_spacetalk", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "systemtalk", 
+   Function = "do_systemtalk", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "shiptalk", 
+   Function = "do_shiptalk", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "speeders", 
+   Function = "do_speeders", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "suicide", 
+   Function = "do_suicide", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "setplanet", 
+   Function = "do_setplanet", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "showplanet", 
+   Function = "do_showplanet", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 101, 
+   Position = "dead", 
+   Name = "stun", 
+   Function = "do_stun", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "sellhome", 
+   Function = "do_sellhome", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "showlayers", 
+   Function = "do_showlayers", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "scatter", 
+   Function = "do_scatter", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 30, 
+   Position = "dead", 
+   Name = "shiptrack", 
+   Function = "do_shiptrack", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "showstatistic", 
+   Function = "do_showstatistic", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "study", 
+   Function = "do_study", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "setshuttle", 
+   Function = "do_setshuttle", 
+   Log = "build", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "showshuttle", 
+   Function = "do_showshuttle", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 2, 
-   Name = "wartalk", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_who", 
    Position = "dead", 
-   Level = 0, 
-   Name = "who", 
+   Name = "startguild", 
+   Function = "do_makeguild", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_clan_withdraw", 
-   Position = "dead", 
    Level = 0, 
-   Name = "withdraw", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_wear", 
-   Position = "sitting", 
-   Level = 0, 
-   Name = "wear", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_whois", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "whois", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_wear", 
-   Position = "sitting", 
-   Level = 0, 
-   Name = "wield", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_where", 
    Position = "resting", 
+   Name = "tell", 
+   Function = "do_tell", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "take", 
+   Function = "do_get", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "takedrug", 
+   Function = "do_takedrug", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "target", 
+   Function = "do_target", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "tamp", 
+   Function = "do_tamp", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "time", 
+   Function = "do_time", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "title", 
+   Function = "do_title", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "trajectory", 
+   Function = "do_trajectory", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 103, 
-   Name = "where", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_weather", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "weather", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_wimpy", 
    Position = "dead", 
-   Level = 0, 
-   Name = "wimpy", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_wizlist", 
-   Position = "sleeping", 
-   Level = 0, 
-   Name = "wizlist", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_wizhelp", 
-   Position = "dead", 
-   Level = 36, 
-   Name = "wizhelp", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_wizlock", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "wizlock", 
+   Name = "transfer", 
+   Function = "do_transfer", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_yell", 
-   Position = "resting", 
+   Level = 105, 
+   Position = "dead", 
+   Name = "trust", 
+   Function = "do_trust", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "typo", 
+   Function = "do_typo", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "timecmd", 
+   Function = "do_timecmd", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 1, 
-   Name = "yell", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_zap", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "zap", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_zones", 
    Position = "dead", 
-   Level = 102, 
-   Name = "zones", 
+   Name = "train", 
+   Function = "do_train", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_say", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "'", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_emote", 
-   Position = "resting", 
-   Level = 0, 
-   Name = ",", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_ooc", 
-   Position = "sleeping", 
-   Level = 5, 
-   Name = ".", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_emote", 
+   Level = 1, 
    Position = "dead", 
-   Level = 0, 
-   Name = ":", 
+   Name = "teach", 
+   Function = "do_teach", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_gtell", 
+   Level = 103, 
    Position = "dead", 
+   Name = "transship", 
+   Function = "do_transship", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "toplevel", 
+   Function = "do_toplevel", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "tractorbeam", 
+   Function = "do_tractorbeam", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "test", 
+   Function = "do_test", 
+   Log = "always", 
+}
+
+CommandEntry
+{
    Level = 0, 
-   Name = ";", 
+   Position = "standing", 
+   Name = "up", 
+   Function = "do_up", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_accelerate", 
-   Position = "resting", 
    Level = 0, 
-   Name = "accelerate", 
+   Position = "resting", 
+   Name = "unlock", 
+   Function = "do_unlock", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_addpilot", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "addpilot", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_auction", 
-   Position = "resting", 
-   Level = 3, 
-   Name = "auction", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_ammo", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "ammo", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_allships", 
-   Position = "resting", 
    Level = 101, 
-   Name = "allships", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_appoint", 
-   Position = "resting", 
-   Level = 1, 
-   Name = "appoint", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_arm", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "arm", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_autorecharge", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "autorecharge", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_autotrack", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "autotrack", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_at", 
    Position = "dead", 
-   Level = 103, 
-   Name = "at", 
-   Log = "normal", 
+   Name = "unhell", 
+   Function = "do_unhell", 
+   Log = "high", 
 }
 
 CommandEntry
 {
-   Function = "do_affected", 
-   Position = "sleeping", 
    Level = 0, 
-   Name = "affected", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_afk", 
-   Position = "sleeping", 
-   Level = 0, 
-   Name = "afk", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_ansi", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "ansi", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_answer", 
-   Position = "sleeping", 
-   Level = 103, 
-   Name = "answer", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_aassign", 
-   Position = "dead", 
-   Level = 100, 
-   Name = "aassign", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_addbounty", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "addbounty", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
+   Position = "resting", 
+   Name = "use", 
    Function = "do_use", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "activate", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_advance", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "advance", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_allow", 
-   Position = "dead", 
-   Level = 105, 
-   Name = "allow", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_appraise", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "appraise", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_areas", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "areas", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_aset", 
-   Position = "dead", 
    Level = 103, 
-   Name = "aset", 
+   Position = "dead", 
+   Name = "users", 
+   Function = "do_users", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 101, 
+   Position = "dead", 
+   Name = "unsilence", 
+   Function = "do_unsilence", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_ask", 
+   Level = 1, 
+   Position = "dead", 
+   Name = "undock", 
+   Function = "do_undock", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "unjail", 
+   Function = "do_unjail", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "unfocusalias", 
+   Function = "do_unfocusalias", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "vector", 
+   Function = "do_trajectory", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "value", 
+   Function = "do_value", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "vassign", 
+   Function = "do_vassign", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "velocity", 
+   Function = "do_accelerate", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
    Position = "sleeping", 
+   Name = "visible", 
+   Function = "do_visible", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "vsearch", 
+   Function = "do_vsearch", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 105, 
-   Name = "ask", 
+   Position = "dead", 
+   Name = "viewskills", 
+   Function = "do_viewskills", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_astat", 
-   Position = "dead", 
-   Level = 102, 
-   Name = "astat", 
+   Level = 0, 
+   Position = "standing", 
+   Name = "west", 
+   Function = "do_west", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_apply", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "apply", 
+   Level = 0, 
+   Position = "sleeping", 
+   Name = "wake", 
+   Function = "do_wake", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_authorize", 
+   Level = 2, 
+   Position = "sleeping", 
+   Name = "wartalk", 
+   Function = "do_wartalk", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
    Position = "dead", 
-   Level = 102, 
-   Name = "authorize", 
+   Name = "who", 
+   Function = "do_who", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "withdraw", 
+   Function = "do_clan_withdraw", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_allspeeders", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "allspeeders", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_autopilot", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "autopilot", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_avtalk", 
-   Position = "dead", 
-   Level = 100, 
-   Name = "avtalk", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_addresident", 
+   Level = 0, 
    Position = "sitting", 
-   Level = 1, 
-   Name = "addresident", 
+   Name = "wear", 
+   Function = "do_wear", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_addsalary", 
+   Level = 0, 
    Position = "dead", 
-   Level = 1, 
-   Name = "addsalary", 
+   Name = "whois", 
+   Function = "do_whois", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_arena", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "arena", 
+   Level = 0, 
+   Position = "sitting", 
+   Name = "wield", 
+   Function = "do_wear", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_accept", 
+   Level = 103, 
    Position = "resting", 
+   Name = "where", 
+   Function = "do_where", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "weather", 
+   Function = "do_weather", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "wimpy", 
+   Function = "do_wimpy", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "sleeping", 
+   Name = "wizlist", 
+   Function = "do_wizlist", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 36, 
+   Position = "dead", 
+   Name = "wizhelp", 
+   Function = "do_wizhelp", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "wizlock", 
+   Function = "do_wizlock", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "resting", 
+   Name = "yell", 
+   Function = "do_yell", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "zap", 
+   Function = "do_zap", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "zones", 
+   Function = "do_zones", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "'", 
+   Function = "do_say", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = ",", 
+   Function = "do_emote", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 5, 
-   Name = "accept", 
+   Position = "sleeping", 
+   Name = ".", 
+   Function = "do_ooc", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_ahall", 
+   Level = 0, 
    Position = "dead", 
-   Level = 1, 
-   Name = "ahall", 
+   Name = ":", 
+   Function = "do_emote", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_awho", 
+   Level = 0, 
    Position = "dead", 
-   Level = 1, 
-   Name = "awho", 
+   Name = ";", 
+   Function = "do_gtell", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_alias", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "alias", 
+   Level = 0, 
+   Position = "resting", 
+   Name = "accelerate", 
+   Function = "do_accelerate", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_focusalias", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "aliasfocus", 
+   Level = 0, 
+   Position = "resting", 
+   Name = "addpilot", 
+   Function = "do_addpilot", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_adjusttractorbeam", 
-   Position = "dead", 
-   Level = 35, 
-   Name = "adjusttractorbeam", 
+   Level = 3, 
+   Position = "resting", 
+   Name = "auction", 
+   Function = "do_auction", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_allclantalk", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "allclantalk", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
+   Level = 0, 
+   Position = "resting", 
+   Name = "ammo", 
    Function = "do_ammo", 
-   Position = "resting", 
-   Level = 0, 
-   Name = "battery", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_beep", 
+   Level = 101, 
    Position = "resting", 
-   Level = 0, 
-   Name = "beep", 
+   Name = "allships", 
+   Function = "do_allships", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_bounties", 
+   Level = 1, 
+   Position = "resting", 
+   Name = "appoint", 
+   Function = "do_appoint", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "arm", 
+   Function = "do_arm", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "autorecharge", 
+   Function = "do_autorecharge", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "autotrack", 
+   Function = "do_autotrack", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
    Position = "dead", 
-   Level = 0, 
-   Name = "bounties", 
+   Name = "at", 
+   Function = "do_at", 
    Log = "normal", 
 }
 
 CommandEntry
 {
+   Level = 0, 
+   Position = "sleeping", 
+   Name = "affected", 
+   Function = "do_affected", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "sleeping", 
+   Name = "afk", 
+   Function = "do_afk", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "ansi", 
+   Function = "do_ansi", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "sleeping", 
+   Name = "answer", 
+   Function = "do_answer", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 100, 
+   Position = "dead", 
+   Name = "aassign", 
+   Function = "do_aassign", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "addbounty", 
    Function = "do_addbounty", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "bounty", 
-   Log = "always", 
+   Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_buy", 
+   Level = 0, 
    Position = "resting", 
-   Level = 0, 
-   Name = "buy", 
+   Name = "activate", 
+   Function = "do_use", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_buyship", 
+   Level = 105, 
+   Position = "dead", 
+   Name = "advance", 
+   Function = "do_advance", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "allow", 
+   Function = "do_allow", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
    Position = "resting", 
-   Level = 0, 
-   Name = "buyship", 
+   Name = "appraise", 
+   Function = "do_appraise", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_brandish", 
-   Position = "sitting", 
    Level = 0, 
-   Name = "brandish", 
+   Position = "dead", 
+   Name = "areas", 
+   Function = "do_areas", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_backstab", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "bs", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_balzhur", 
-   Position = "sitting", 
    Level = 103, 
-   Name = "balzhur", 
+   Position = "dead", 
+   Name = "aset", 
+   Function = "do_aset", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_bamfin", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "bamfin", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_bamfout", 
-   Position = "dead", 
-   Level = 101, 
-   Name = "bamfout", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_ban", 
-   Position = "dead", 
-   Level = 104, 
-   Name = "ban", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_bestow", 
-   Position = "dead", 
    Level = 105, 
-   Name = "bestow", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_bio", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "bio", 
+   Position = "sleeping", 
+   Name = "ask", 
+   Function = "do_ask", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_bodybag", 
-   Position = "dead", 
    Level = 102, 
-   Name = "bodybag", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_board", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "board", 
+   Position = "dead", 
+   Name = "astat", 
+   Function = "do_astat", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_boards", 
+   Level = 1, 
    Position = "dead", 
-   Level = 103, 
-   Name = "boards", 
+   Name = "apply", 
+   Function = "do_apply", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_bset", 
-   Position = "dead", 
-   Level = 104, 
-   Name = "bset", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_bstat", 
-   Position = "dead", 
-   Level = 103, 
-   Name = "bstat", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_bug", 
-   Position = "dead", 
-   Level = 0, 
-   Name = "bug", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_bury", 
-   Position = "standing", 
-   Level = 0, 
-   Name = "bury", 
-   Log = "normal", 
-}
-
-CommandEntry
-{
-   Function = "do_bestowarea", 
-   Position = "dead", 
    Level = 102, 
-   Name = "bestowarea", 
+   Position = "dead", 
+   Name = "authorize", 
+   Function = "do_authorize", 
    Log = "always", 
 }
 
 CommandEntry
 {
-   Function = "do_buyhome", 
+   Level = 101, 
    Position = "dead", 
-   Level = 1, 
-   Name = "buyhome", 
-   Log = "always", 
-}
-
-CommandEntry
-{
-   Function = "do_bank", 
-   Position = "dead", 
-   Level = 1, 
-   Name = "bank", 
+   Name = "allspeeders", 
+   Function = "do_allspeeders", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_badname", 
+   Level = 1, 
    Position = "dead", 
-   Level = 105, 
-   Name = "badnames", 
-   Log = "always", 
+   Name = "autopilot", 
+   Function = "do_autopilot", 
+   Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_buzz", 
+   Level = 100, 
+   Position = "dead", 
+   Name = "avtalk", 
+   Function = "do_avtalk", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
    Position = "sitting", 
-   Level = 1, 
-   Name = "buzz", 
+   Name = "addresident", 
+   Function = "do_addresident", 
    Log = "normal", 
 }
 
 CommandEntry
 {
-   Function = "do_bet", 
+   Level = 1, 
    Position = "dead", 
+   Name = "addsalary", 
+   Function = "do_addsalary", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "arena", 
+   Function = "do_arena", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
    Level = 5, 
+   Position = "resting", 
+   Name = "accept", 
+   Function = "do_accept", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "ahall", 
+   Function = "do_ahall", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "awho", 
+   Function = "do_awho", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "alias", 
+   Function = "do_alias", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "aliasfocus", 
+   Function = "do_focusalias", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 35, 
+   Position = "dead", 
+   Name = "adjusttractorbeam", 
+   Function = "do_adjusttractorbeam", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "allclantalk", 
+   Function = "do_allclantalk", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "battery", 
+   Function = "do_ammo", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "beep", 
+   Function = "do_beep", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "bounties", 
+   Function = "do_bounties", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "bounty", 
+   Function = "do_addbounty", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "buy", 
+   Function = "do_buy", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "resting", 
+   Name = "buyship", 
+   Function = "do_buyship", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "sitting", 
+   Name = "brandish", 
+   Function = "do_brandish", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "standing", 
+   Name = "bs", 
+   Function = "do_backstab", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "sitting", 
+   Name = "balzhur", 
+   Function = "do_balzhur", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 101, 
+   Position = "dead", 
+   Name = "bamfin", 
+   Function = "do_bamfin", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 101, 
+   Position = "dead", 
+   Name = "bamfout", 
+   Function = "do_bamfout", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 104, 
+   Position = "dead", 
+   Name = "ban", 
+   Function = "do_ban", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "bestow", 
+   Function = "do_bestow", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "bio", 
+   Function = "do_bio", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "bodybag", 
+   Function = "do_bodybag", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "standing", 
+   Name = "board", 
+   Function = "do_board", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "boards", 
+   Function = "do_boards", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 104, 
+   Position = "dead", 
+   Name = "bset", 
+   Function = "do_bset", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 103, 
+   Position = "dead", 
+   Name = "bstat", 
+   Function = "do_bstat", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "dead", 
+   Name = "bug", 
+   Function = "do_bug", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 0, 
+   Position = "standing", 
+   Name = "bury", 
+   Function = "do_bury", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 102, 
+   Position = "dead", 
+   Name = "bestowarea", 
+   Function = "do_bestowarea", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "buyhome", 
+   Function = "do_buyhome", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "dead", 
+   Name = "bank", 
+   Function = "do_bank", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 105, 
+   Position = "dead", 
+   Name = "badnames", 
+   Function = "do_badname", 
+   Log = "always", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "sitting", 
+   Name = "buzz", 
+   Function = "do_buzz", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 5, 
+   Position = "dead", 
    Name = "bet", 
+   Function = "do_bet", 
+   Log = "normal", 
+}
+
+CommandEntry
+{
+   Level = 1, 
+   Position = "sitting", 
+   Name = "upgradehome", 
+   Function = "do_upgradehome", 
    Log = "normal", 
 }

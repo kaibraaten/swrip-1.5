@@ -19,8 +19,8 @@ void do_auction(Character *ch, std::string argument)
   if (IsNpc(ch)) /* NPC can be extracted at any time and thus can't auction! */
     return;
 
-  if ( !ch->InRoom->Flags.test( Flag::Room::Hotel )
-       && !ch->InRoom->Flags.test( Flag::Room::Hotel ) )
+  if ( !CheckRoomFlag(ch->InRoom, Flag::Room::Hotel)
+       && !CheckRoomFlag(ch->InRoom, Flag::Room::Auction))
     {
       SetCharacterColor ( AT_LBLUE, ch );
       ch->Echo( "\r\nYou must go to an auction hall to do that!\r\n" );

@@ -31,12 +31,12 @@ Command::Command()
 
 }
 
-Command *GetCommand( const std::string &name )
+Command *GetCommand(const std::string &name, bool allowPrefixMatch)
 {
     const List *commandList = GetEntities(CommandRepository);
     Command *command = (Command*) FindIfInList(commandList, _ExactMatch, name.c_str());
 
-    if(command == NULL)
+    if(command == nullptr && allowPrefixMatch)
     {
         command = (Command*) FindIfInList(commandList, _PrefixMatch, name.c_str());
     }
