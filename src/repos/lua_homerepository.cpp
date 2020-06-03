@@ -185,6 +185,7 @@ static int L_HomeEntryFull(lua_State *L)
                                   home->Description(desc);
                               });
             home->ExtraRoomFlags = LuaLoadFlags(L, "ExtraRoomFlags");
+            home->ExtraRoomFlags.set(Flag::Room::Hotel);
         }
     }
 

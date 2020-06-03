@@ -1160,7 +1160,7 @@ int GetCarryCapacityWeight(const Character *ch)
 
 bool Character::IsNpc() const
 {
-    return IsBitSet(Flags, ACT_NPC) || !PCData;
+    return IsBitSet(Flags, ACT_NPC) || PCData == nullptr;
 }
 
 bool IsNpc(const Character* ch)

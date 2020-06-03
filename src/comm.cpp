@@ -412,10 +412,10 @@ static void HandleSocketInput()
                 continue;
             }
         }
-        else if ((d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true) &&
-            ((!d->Character && d->Idle > 360)              /* 2 mins */
-                || (d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
-                || d->Idle > 28800))                             /* 2 hrs  */
+        else if ((d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
+                 && ((!d->Character && d->Idle > 360)              /* 2 mins */
+                     || (d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
+                     || d->Idle > 28800))                             /* 2 hrs  */
         {
             if (d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
             {
@@ -737,7 +737,8 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
     {
         sprintf(log_buf, "Closing link to %s.", ch->Name.c_str());
         Log->LogStringPlus(log_buf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
-
+        PlayerCharacters->Remove(dclose->Character);
+        
         if (dclose->ConnectionState == CON_PLAYING
             || dclose->ConnectionState == CON_EDITING)
         {

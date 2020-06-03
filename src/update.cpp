@@ -49,11 +49,13 @@
 #include "systemdata.hpp"
 #include "race.hpp"
 #include "exit.hpp"
+#include "home.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/clanrepository.hpp"
 #include "repos/planetrepository.hpp"
 #include "repos/objectrepository.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/homerepository.hpp"
 
  /*
   * Local functions.
@@ -1544,23 +1546,91 @@ static void AutosavePlayerCharacters()
     }
 }
 
+static std::shared_ptr<Room> GetOwnedHome(const Character *ch,
+                                          std::list<std::shared_ptr<Home>> homes)
+{
+    auto home = Find(homes,
+                     [ch](const auto &h)
+                     {
+                         return StrCmp(h->Owner(), ch->Name) == 0;
+                     });
+
+    if(home != nullptr)
+    {
+        return GetRoom(home->Vnum());
+    }
+    else
+    {
+        return nullptr;
+    }
+}
+
+static std::shared_ptr<Room> GetRoomToQuitIn(const Character *ch)
+{
+    std::shared_ptr<Room> room;
+
+    if(ch->InRoom != nullptr
+       && CheckRoomFlag(ch->InRoom, Flag::Room::Hotel))
+    {
+        room = ch->InRoom;
+    }
+    else
+    {
+        auto homes = Homes->FindHomesForResident(ch->Name);
+        
+        if(!homes.empty())
+        {
+            room = GetOwnedHome(ch, homes);
+            
+            if(room == nullptr)
+            {
+                room = GetRoom(homes.front()->Vnum());
+            }
+        }
+        else
+        {
+            room = GetRoom(ROOM_PLUOGUS_QUIT);
+        }
+    }
+    
+    return room;
+}
+
+static std::list<Character*> GetLinkdeadCharacters()
+{
+    std::list<Character*> linkdeads;
+    
+    for(auto ch = FirstCharacter; ch; ch = ch->Next)
+    {
+        if(!ch->IsNpc()
+           && ++ch->IdleTimer > 15
+           && ch->Desc == nullptr)
+        {
+            linkdeads.push_back(ch);
+        }
+    }
+
+    return linkdeads;
+}
+
 static void KickOutLinkdeadCharacters()
 {
-    for (Character *ch : PlayerCharacters)
+    auto linkdead = GetLinkdeadCharacters();
+                           
+    for (auto ch : linkdead)
     {
-        if (++ch->IdleTimer > 15 && !ch->Desc)
+        auto room = GetRoomToQuitIn(ch);
+        
+        if (ch->InRoom)
         {
-            if (ch->InRoom)
-            {
-                CharacterFromRoom(ch);
-            }
-
-            CharacterToRoom(ch, GetRoom(ROOM_PLUOGUS_QUIT));
-            ch->Position = POS_RESTING;
-            ch->HitPoints.Current = umax(1, ch->HitPoints.Current);
-            PlayerCharacters->Save(ch);
-            do_quit(ch, "");
+            CharacterFromRoom(ch);
         }
+
+        CharacterToRoom(ch, room);
+        ch->Position = POS_RESTING;
+        ch->HitPoints.Current = umax(1, ch->HitPoints.Current);
+        PlayerCharacters->Save(ch);
+        do_quit(ch, "");
     }
 }
 

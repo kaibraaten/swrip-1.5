@@ -60,6 +60,7 @@ struct Resident
 class Home
 {
 public:
+    Home() = delete;
     Home(vnum_t room);
     virtual ~Home();
     std::string Owner() const;
