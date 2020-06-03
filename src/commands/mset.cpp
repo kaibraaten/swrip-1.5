@@ -39,33 +39,6 @@ void do_mset( Character *ch, std::string argument )
         return;
     }
 
-    switch( ch->SubState )
-    {
-    default:
-        break;
-
-    case SUB_MOB_DESC:
-        victim = (Character*)EditorUserData(ch);
-
-        if ( CharacterDiedRecently(victim) )
-        {
-            ch->Echo("Your victim died!\r\n");
-            StopEditing( ch );
-            return;
-        }
-
-        victim->Description = CopyEditBuffer( ch );
-
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        {
-            victim->Prototype->Description = victim->Description;
-        }
-
-        StopEditing( ch );
-        ch->SubState = (CharacterSubState)ch->tempnum;
-        return;
-    }
-
     victim = NULL;
     lockvictim = false;
     SmashTilde( argument );
@@ -906,7 +879,22 @@ void do_mset( Character *ch, std::string argument )
             ch->tempnum = SUB_NONE;
 
         ch->SubState = SUB_MOB_DESC;
-        StartEditing( ch, victim->Description, victim, do_mset );
+        StartEditing( ch, victim->Description,
+                      [ch, victim](const auto &txt)
+                      {
+                          if ( CharacterDiedRecently(victim) )
+                          {
+                              ch->Echo("Your victim died!\r\n");
+                              return;
+                          }
+
+                          victim->Description = txt;
+
+                          if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+                          {
+                              victim->Prototype->Description = victim->Description;
+                          }
+                      });
         EditorDescPrintf( ch, "Mobile %ld (%s) description",
                           victim->Prototype->Vnum, victim->Name.c_str() );
         return;

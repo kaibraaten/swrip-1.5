@@ -23,26 +23,10 @@ void do_redit(Character *ch, std::string argument)
     DirectionType edir = DIR_INVALID;
     vnum_t evnum = INVALID_VNUM;
     std::string origarg = argument;
-    std::string *editedText = nullptr;
 
     if (!ch->Desc)
     {
         ch->Echo("You have no descriptor.\r\n");
-        return;
-    }
-
-    switch (ch->SubState)
-    {
-    default:
-        break;
-
-        // Both these cases handled the same way.
-    case SUB_ROOM_DESC:
-    case SUB_ROOM_EXTRA:
-        editedText = static_cast<std::string*>(EditorUserData(ch));
-        *editedText = CopyEditBuffer(ch);
-        StopEditing(ch);
-        ch->SubState = (CharacterSubState)ch->tempnum;
         return;
     }
 
@@ -116,13 +100,11 @@ void do_redit(Character *ch, std::string argument)
 
     if (!StrCmp(arg, "desc"))
     {
-        if (ch->SubState == SUB_REPEATCMD)
-            ch->tempnum = SUB_REPEATCMD;
-        else
-            ch->tempnum = SUB_NONE;
-
-        ch->SubState = SUB_ROOM_DESC;
-        StartEditing(ch, location->Description, &location->Description, do_redit);
+        StartEditing(ch, location->Description,
+                     [location](const auto &txt)
+                     {
+                         location->Description = txt;
+                     });
         EditorDescPrintf(ch, "Room %ld (%s) description",
                          location->Vnum, location->Name.c_str());
         return;
@@ -154,13 +136,11 @@ void do_redit(Character *ch, std::string argument)
         CHECK_SUBRESTRICTED(ch);
         auto extraDescription = SetRExtra(location, argument);
 
-        if (ch->SubState == SUB_REPEATCMD)
-            ch->tempnum = SUB_REPEATCMD;
-        else
-            ch->tempnum = SUB_NONE;
-
-        ch->SubState = SUB_ROOM_EXTRA;
-        StartEditing(ch, extraDescription->Description, &extraDescription->Description, do_redit);
+        StartEditing(ch, extraDescription->Description,
+                     [extraDescription](const auto &txt)
+                     {
+                         extraDescription->Description = txt;
+                     });
         EditorDescPrintf(ch, "Room %ld (%s) extra description: %s",
                          location->Vnum, location->Name.c_str(), argument.c_str());
         return;

@@ -2,7 +2,6 @@
 #include "mud.hpp"
 #include "editor.hpp"
 #include "help.hpp"
-#include "log.hpp"
 #include "repos/helprepository.hpp"
 
 /*
@@ -10,22 +9,8 @@
  */
 void do_hedit( Character *ch, std::string argument )
 {
-    std::string *editedText = nullptr;
-    
     if ( !ch->Desc )
     {
-        return;
-    }
-
-    switch( ch->SubState )
-    {
-    default:
-        break;
-
-    case SUB_HELP_EDIT:
-        editedText = static_cast<std::string*>(EditorUserData(ch));
-        *editedText = CopyEditBuffer( ch );
-        StopEditing( ch );
         return;
     }
 
@@ -38,8 +23,10 @@ void do_hedit( Character *ch, std::string argument )
         HelpFiles->Add( pHelp );
     }
 
-    ch->SubState = SUB_HELP_EDIT;
-    ch->dest_buf = pHelp.get();
-    StartEditing( ch, pHelp->Text, &pHelp->Text, do_hedit );
+    StartEditing(ch, pHelp->Text,
+                 [pHelp](const auto &txt)
+                 {
+                     pHelp->Text = txt;
+                 });
     EditorDescPrintf( ch, "Help file: %s", GetHelpFileKeyword( pHelp ).c_str() );
 }

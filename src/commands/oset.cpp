@@ -15,7 +15,7 @@ void do_oset( Character *ch, std::string argument )
     std::string arg3;
     char buf[MAX_STRING_LENGTH];
     char outbuf[MAX_STRING_LENGTH];
-    Object *obj = NULL, *tmpobj = NULL;
+    Object *obj = NULL;
     std::shared_ptr<ExtraDescription> ed;
     bool lockobj = false;
     std::string origarg = argument;
@@ -30,70 +30,6 @@ void do_oset( Character *ch, std::string argument )
     if ( !ch->Desc )
     {
         ch->Echo("You have no descriptor\r\n");
-        return;
-    }
-
-    switch( ch->SubState )
-    {
-    default:
-        break;
-
-    case SUB_OBJ_EXTRA:
-        if ( !ch->dest_buf )
-        {
-            ch->Echo("Fatal error: report to Thoric.\r\n");
-            Log->Bug( "do_oset: sub_obj_extra: NULL ch->dest_buf" );
-            ch->SubState = SUB_NONE;
-            return;
-        }
-        /*
-         * hopefully the object didn't get extracted...
-         * if you're REALLY paranoid, you could always go through
-         * the object and index-object lists, searching through the
-         * extra_descr lists for a matching pointer...
-         */
-        tmpobj = (Object*)ch->spare_ptr;
-        
-        if ( tmpobj->Flags.test(Flag::Obj::Prototype))
-            ed = SetOExtraProto(tmpobj->Prototype, (char*)ch->dest_buf);
-        else
-            ed = SetOExtra(tmpobj, (char*)ch->dest_buf);
-        
-        ed->Description = CopyEditBuffer( ch );
-        StopEditing( ch );
-        ch->dest_buf = tmpobj;
-        ch->SubState = (CharacterSubState)ch->tempnum;
-        return;
-
-    case SUB_OBJ_LONG:
-        if ( !ch->dest_buf )
-        {
-            ch->Echo("Fatal error: report to Thoric.\r\n");
-            Log->Bug( "do_oset: sub_obj_long: NULL ch->dest_buf" );
-            ch->SubState = SUB_NONE;
-            return;
-        }
-
-        obj = (Object*)ch->dest_buf;
-
-        if ( obj && IsObjectExtracted(obj) )
-        {
-            ch->Echo("Your object was extracted!\r\n");
-            StopEditing( ch );
-            return;
-        }
-
-        obj->Description = CopyEditBuffer( ch );
-
-        if ( obj->Flags.test(Flag::Obj::Prototype) )
-        {
-            obj->Prototype->Description = obj->Description;
-        }
-
-        tmpobj = (Object*)ch->spare_ptr;
-        StopEditing( ch );
-        ch->SubState = (CharacterSubState)ch->tempnum;
-        ch->dest_buf = tmpobj;
         return;
     }
 
@@ -538,19 +474,22 @@ void do_oset( Character *ch, std::string argument )
 
         CHECK_SUBRESTRICTED( ch );
 
-        if ( ch->SubState == SUB_REPEATCMD )
-            ch->tempnum = SUB_REPEATCMD;
-        else
-            ch->tempnum = SUB_NONE;
+        StartEditing(ch, obj->Description,
+                     [ch, obj](const auto &txt)
+                     {
+                         if (IsObjectExtracted(obj))
+                         {
+                             ch->Echo("Your object was extracted!\r\n");
+                             return;
+                         }
 
-        if ( lockobj )
-            ch->spare_ptr = obj;
-        else
-            ch->spare_ptr = NULL;
+                         obj->Description = txt;
 
-        ch->SubState = SUB_OBJ_LONG;
-        ch->dest_buf = obj;
-        StartEditing( ch, obj->Description, nullptr, do_oset );
+                         if ( obj->Flags.test(Flag::Obj::Prototype) )
+                         {
+                             obj->Prototype->Description = obj->Description;
+                         }
+                     });
         EditorDescPrintf( ch, "Object %ld (%s) long description",
                           obj->Prototype->Vnum, obj->Name.c_str() );
         return;
@@ -716,20 +655,11 @@ void do_oset( Character *ch, std::string argument )
         else
             ed = SetOExtra( obj, arg3 );
 
-        if ( ch->SubState == SUB_REPEATCMD )
-            ch->tempnum = SUB_REPEATCMD;
-        else
-            ch->tempnum = SUB_NONE;
-
-        if ( lockobj )
-            ch->spare_ptr = obj;
-        else
-            ch->spare_ptr = NULL;
-
-        ch->SubState = SUB_OBJ_EXTRA;
-        ch->spare_ptr = obj;
-        ch->dest_buf = (char*)arg3.c_str();
-        StartEditing( ch, ed->Description, nullptr, do_oset );
+        StartEditing(ch, ed->Description,
+                     [ed](const auto &txt)
+                     {
+                         ed->Description = txt;
+                     });
         EditorDescPrintf( ch, "Object %ld (%s) extra description: %s",
                           obj->Prototype->Vnum, obj->Name.c_str(), arg3.c_str() );
         return;
@@ -756,20 +686,11 @@ void do_oset( Character *ch, std::string argument )
         else
             ed = SetOExtra( obj, obj->Name );
 
-        if ( ch->SubState == SUB_REPEATCMD )
-            ch->tempnum = SUB_REPEATCMD;
-        else
-            ch->tempnum = SUB_NONE;
-
-        if ( lockobj )
-            ch->spare_ptr = obj;
-        else
-            ch->spare_ptr = NULL;
-
-        ch->SubState = SUB_OBJ_EXTRA;
-        ch->spare_ptr = obj;
-        ch->dest_buf = (char*)obj->Name.c_str();
-        StartEditing( ch, ed->Description, nullptr, do_oset );
+        StartEditing(ch, ed->Description,
+                     [ed](const auto &txt)
+                     {
+                         ed->Description = txt;
+                     });
         EditorDescPrintf( ch, "Object %ld (%s) description",
                           obj->Prototype->Vnum, obj->Name.c_str() );
         return;
