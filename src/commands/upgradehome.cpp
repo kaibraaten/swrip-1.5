@@ -6,11 +6,13 @@
 
 constexpr int FACTORY_PRICE = 50000;
 constexpr int REFINERY_PRICE = 50000;
+constexpr int MULTIPLERESIDENTS_PRICE = 50000;
 
 enum
 {
     FactoryUpgrade,
     RefineryUpgrade,
+    MultipleResidentsUpgrade,
     InvalidUpgrade
 };
 
@@ -25,6 +27,10 @@ static int GetUpgrade(const std::string &type)
     else if(StrCmp(type, "refinery") == 0)
     {
         upgrade = RefineryUpgrade;
+    }
+    else if(StrCmp(type, "residents") == 0)
+    {
+        upgrade = MultipleResidentsUpgrade;
     }
     else
     {
@@ -48,8 +54,13 @@ static int GetUpgradePrice(int upgrade)
         price = REFINERY_PRICE;
         break;
 
+    case MultipleResidentsUpgrade:
+        price = MULTIPLERESIDENTS_PRICE;
+        break;
+        
     default:
         price = 0;
+        break;
     }
 
     return price;
@@ -69,6 +80,10 @@ static bool AlreadyHasUpgrade(std::shared_ptr<Home> home, int type)
         has = home->ExtraRoomFlags.test(Flag::Room::Refinery);
         break;
 
+    case MultipleResidentsUpgrade:
+        has = home->Flags.test(Flag::Home::MultipleResidents);
+        break;
+        
     default:
         break;
     }
@@ -88,6 +103,10 @@ static void PerformUpgrade(std::shared_ptr<Home> home, int type)
         home->ExtraRoomFlags.set(Flag::Room::Refinery);
         break;
 
+    case MultipleResidentsUpgrade:
+        home->Flags.set(Flag::Home::MultipleResidents);
+        break;
+        
     default:
         break;
     }
@@ -122,6 +141,7 @@ void do_upgradehome(Character *ch, std::string argument)
         ch->Echo("Available upgrades:\r\n");
         ch->Echo("  * Factory: Craft items here. %d credits.\r\n", FACTORY_PRICE);
         ch->Echo("  * Refinery: Refine spice here. %d credits.\r\n", REFINERY_PRICE);
+        ch->Echo("  * Residents: Add residents to home. %d credits.\r\n", MULTIPLERESIDENTS_PRICE);
         return;
     }
 

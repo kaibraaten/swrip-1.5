@@ -253,6 +253,7 @@ src/commands/hitall.cpp
 src/commands/hlist.cpp
 src/commands/holylight.cpp
 src/commands/homepage.cpp
+src/commands/homestat.cpp
 src/commands/hset.cpp
 src/commands/hyperspace.cpp
 src/commands/i103.cpp

@@ -312,7 +312,8 @@ extern const std::array<const char * const, Flag::MAX> mprog_flags;
 extern const std::array<const char * const, Flag::MAX> SaveFlags;
 extern const std::array<const char * const, Flag::MAX> ShipFlags;
 extern const std::array<const char * const, Flag::MAX> ResidentFlags;
-    
+extern const std::array<const char * const, Flag::MAX> HomeFlags;
+
 extern const std::array<const char * const, MAX_ITEM_TYPE + 1> ObjectTypes;
 extern const std::array<const char * const, MAX_APPLY_TYPE> AffectTypes;
 extern const std::array<const char * const, MAX_NPC_RACE> NpcRace;
@@ -386,6 +387,14 @@ extern std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
  * Command functions.
  */
 DECLARE_CMD_FUN(do_upgradehome);
+DECLARE_CMD_FUN(do_addresident);
+DECLARE_CMD_FUN(do_remresident);
+DECLARE_CMD_FUN(do_buyhome);
+DECLARE_CMD_FUN(do_sellhome);
+DECLARE_CMD_FUN(do_buzz);
+DECLARE_CMD_FUN(do_invite);
+DECLARE_CMD_FUN(do_homestat);
+
 DECLARE_CMD_FUN(do_showshuttle);
 DECLARE_CMD_FUN(do_makeshuttle);
 DECLARE_CMD_FUN(do_setshuttle);
@@ -482,9 +491,7 @@ DECLARE_CMD_FUN(do_reload);
 DECLARE_CMD_FUN(do_tractorbeam);
 DECLARE_CMD_FUN(do_radar);
 DECLARE_CMD_FUN(do_buyship);
-DECLARE_CMD_FUN(do_buyhome);
 DECLARE_CMD_FUN(do_renameship);
-DECLARE_CMD_FUN(do_buzz);
 DECLARE_CMD_FUN(do_clanbuyship);
 DECLARE_CMD_FUN(do_clansellship);
 DECLARE_CMD_FUN(do_sellship);
@@ -502,9 +509,7 @@ DECLARE_CMD_FUN(do_guard);
 DECLARE_CMD_FUN(do_recharge);
 DECLARE_CMD_FUN(do_repairship);
 DECLARE_CMD_FUN(do_addpilot);
-DECLARE_CMD_FUN(do_addresident);
 DECLARE_CMD_FUN(do_rempilot);
-DECLARE_CMD_FUN(do_remresident);
 DECLARE_CMD_FUN(do_trajectory);
 DECLARE_CMD_FUN(do_trajectory_actual);
 DECLARE_CMD_FUN(do_accelerate);
@@ -664,7 +669,6 @@ DECLARE_CMD_FUN(do_instaroom);
 DECLARE_CMD_FUN(do_instazone);
 DECLARE_CMD_FUN(do_inventory);
 DECLARE_CMD_FUN(do_invis);
-DECLARE_CMD_FUN(do_invite);
 DECLARE_CMD_FUN(do_junk);
 DECLARE_CMD_FUN(do_kick);
 DECLARE_CMD_FUN(do_kill);
@@ -782,7 +786,6 @@ DECLARE_CMD_FUN(do_study);
 DECLARE_CMD_FUN(do_search);
 DECLARE_CMD_FUN(do_sedit);
 DECLARE_CMD_FUN(do_sell);
-DECLARE_CMD_FUN(do_sellhome);
 DECLARE_CMD_FUN(do_set_boot_time);
 DECLARE_CMD_FUN(do_setclan);
 DECLARE_CMD_FUN(do_setship);
@@ -1093,6 +1096,8 @@ ShipClass GetShipClass(const std::string &txt);
 ShipType GetShipType(const std::string &txt);
 int GetShipFlag(const std::string &txt);
 int GetCondition(const std::string &conditionName);
+int GetResidentFlag(const std::string &flag);
+int GetHomeFlag(const std::string &flag);
 
 /* nanny.c */
 void Nanny(std::shared_ptr<Descriptor> d, std::string argument);

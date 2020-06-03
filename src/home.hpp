@@ -48,6 +48,45 @@ namespace Flag
                 _31
         };
     }
+
+    namespace Home
+    {
+        enum : size_t
+        {
+            MultipleResidents,
+                _01,
+                _02,
+                _03,
+                _04,
+                _05,
+                _06,
+                _07,
+                _08,
+                _09,
+                _10,
+                _11,
+                _12,
+                _13,
+                _14,
+                _15,
+                _16,
+                _17,
+                _18,
+                _19,
+                _20,
+                _21,
+                _22,
+                _23,
+                _24,
+                _25,
+                _26,
+                _27,
+                _28,
+                _29,
+                _30,
+                _31
+        };
+    }
 }
 
 struct Resident
@@ -73,6 +112,7 @@ public:
     void RemoveResident(const std::string &name);
     std::list<std::shared_ptr<Resident>> Residents() const;
     bool IsResident(const std::string &name) const;
+    std::bitset<Flag::MAX> Flags;
     std::bitset<Flag::MAX> ExtraRoomFlags;
     
 private:

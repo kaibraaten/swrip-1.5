@@ -15,6 +15,12 @@ void do_remresident(Character *ch, std::string argument)
         return;
     }
 
+    if(!home->Flags.test(Flag::Home::MultipleResidents))
+    {
+        ch->Echo("&RYou need to unlock this ability with UPGRADEHOME.\r\n&d");
+        return;
+    }
+    
     if (argument.empty())
     {
         ch->Echo("&RRemove which resident?\r\n");
