@@ -394,6 +394,7 @@ DECLARE_CMD_FUN(do_sellhome);
 DECLARE_CMD_FUN(do_buzz);
 DECLARE_CMD_FUN(do_invite);
 DECLARE_CMD_FUN(do_homestat);
+DECLARE_CMD_FUN(do_decorate);
 
 DECLARE_CMD_FUN(do_showshuttle);
 DECLARE_CMD_FUN(do_makeshuttle);

@@ -3551,7 +3551,7 @@ int GetResidentFlag(const std::string &flag)
 const std::array<const char * const, Flag::MAX> HomeFlags =
 {
     "MultipleResidents",
-    "_01",
+    "CanDecorate",
     "_02",
     "_03",
     "_04",

@@ -68,6 +68,11 @@ static std::list<std::string> GetUpgrades(std::shared_ptr<Home> home)
     {
         upgrades.push_back("Residents");
     }
+
+    if(home->Flags.test(Flag::Home::CanDecorate))
+    {
+        upgrades.push_back("Decorate");
+    }
     
     if(upgrades.empty())
     {

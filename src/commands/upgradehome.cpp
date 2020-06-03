@@ -7,12 +7,14 @@
 constexpr int FACTORY_PRICE = 50000;
 constexpr int REFINERY_PRICE = 50000;
 constexpr int MULTIPLERESIDENTS_PRICE = 50000;
+constexpr int DECORATE_PRICE = 50000;
 
 enum
 {
     FactoryUpgrade,
     RefineryUpgrade,
     MultipleResidentsUpgrade,
+    DecorateUpgrade,
     InvalidUpgrade
 };
 
@@ -31,6 +33,10 @@ static int GetUpgrade(const std::string &type)
     else if(StrCmp(type, "residents") == 0)
     {
         upgrade = MultipleResidentsUpgrade;
+    }
+    else if(StrCmp(type, "decorate") == 0)
+    {
+        upgrade = DecorateUpgrade;
     }
     else
     {
@@ -56,6 +62,10 @@ static int GetUpgradePrice(int upgrade)
 
     case MultipleResidentsUpgrade:
         price = MULTIPLERESIDENTS_PRICE;
+        break;
+
+    case DecorateUpgrade:
+        price = DECORATE_PRICE;
         break;
         
     default:
@@ -83,6 +93,10 @@ static bool AlreadyHasUpgrade(std::shared_ptr<Home> home, int type)
     case MultipleResidentsUpgrade:
         has = home->Flags.test(Flag::Home::MultipleResidents);
         break;
+
+    case DecorateUpgrade:
+        has = home->Flags.test(Flag::Home::CanDecorate);
+        break;
         
     default:
         break;
@@ -105,6 +119,10 @@ static void PerformUpgrade(std::shared_ptr<Home> home, int type)
 
     case MultipleResidentsUpgrade:
         home->Flags.set(Flag::Home::MultipleResidents);
+        break;
+
+    case DecorateUpgrade:
+        home->Flags.set(Flag::Home::CanDecorate);
         break;
         
     default:
@@ -142,6 +160,7 @@ void do_upgradehome(Character *ch, std::string argument)
         ch->Echo("  * Factory: Craft items here. %d credits.\r\n", FACTORY_PRICE);
         ch->Echo("  * Refinery: Refine spice here. %d credits.\r\n", REFINERY_PRICE);
         ch->Echo("  * Residents: Add residents to home. %d credits.\r\n", MULTIPLERESIDENTS_PRICE);
+        ch->Echo("  * Decorate: Access the DECORATE command. %d credits.\r\n", DECORATE_PRICE);
         return;
     }
 
@@ -159,7 +178,6 @@ void do_upgradehome(Character *ch, std::string argument)
         return;
     }
     
-
     int price = GetUpgradePrice(upgradeType);
 
     if(price > ch->Gold)

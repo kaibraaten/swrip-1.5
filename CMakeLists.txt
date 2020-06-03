@@ -184,6 +184,7 @@ src/commands/credits.cpp
 src/commands/cset.cpp
 src/commands/cutdoor.cpp
 src/commands/decline.cpp
+src/commands/decorate.cpp
 src/commands/delay.cpp
 src/commands/demote.cpp
 src/commands/deny.cpp

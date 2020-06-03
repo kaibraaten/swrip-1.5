@@ -54,7 +54,7 @@ namespace Flag
         enum : size_t
         {
             MultipleResidents,
-                _01,
+                CanDecorate,
                 _02,
                 _03,
                 _04,
