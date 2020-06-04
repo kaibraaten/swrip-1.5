@@ -25,7 +25,7 @@ void do_loadup(Character *ch, std::string argument)
 
     name[0] = CharToUppercase(name[0]);
 
-    sprintf(fname, "%s%c/%s", PLAYER_DIR, tolower(name[0]),
+    sprintf(fname, "%s%c/%s.lua", PLAYER_DIR, tolower(name[0]),
         Capitalize(ToLower(name)).c_str());
 
     if (stat(fname, &fst) != -1)
@@ -67,6 +67,8 @@ void do_loadup(Character *ch, std::string argument)
         ch->Echo("Done.\r\n");
         return;
     }
-
-    ch->Echo("No such player.\r\n");
+    else
+    {
+        ch->Echo("No such player.\r\n");
+    }
 }

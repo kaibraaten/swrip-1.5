@@ -895,8 +895,8 @@ void do_mset( Character *ch, std::string argument )
                               victim->Prototype->Description = victim->Description;
                           }
                       });
-        EditorDescPrintf( ch, "Mobile %ld (%s) description",
-                          victim->Prototype->Vnum, victim->Name.c_str() );
+        SetEditorDesc( ch, "Mobile %ld (%s) description",
+                       victim->Prototype->Vnum, victim->Name.c_str() );
         return;
     }
 

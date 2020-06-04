@@ -2,7 +2,6 @@
 #include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
-#include "editor.hpp"
 #include "log.hpp"
 #include "protomob.hpp"
 
@@ -25,21 +24,6 @@ void do_mpedit( Character *ch, std::string argument )
     if ( !ch->Desc )
     {
         ch->Echo("You have no descriptor\r\n");
-        return;
-    }
-
-    switch( ch->SubState )
-    {
-    default:
-        break;
-
-    case SUB_MPROG_EDIT:
-        {
-            std::string *comlist = static_cast<std::string*>(EditorUserData(ch));
-
-            *comlist = CopyEditBuffer( ch );
-            StopEditing( ch );
-        }
         return;
     }
 

@@ -28,5 +28,5 @@ void do_hedit( Character *ch, std::string argument )
                  {
                      pHelp->Text = txt;
                  });
-    EditorDescPrintf( ch, "Help file: %s", GetHelpFileKeyword( pHelp ).c_str() );
+    SetEditorDesc( ch, "Help file: %s", GetHelpFileKeyword( pHelp ).c_str() );
 }

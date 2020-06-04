@@ -33,6 +33,7 @@ public:
     void Save() const override;
     void Save(const Character *pc) const override;
     std::string MakeWizlist() const override;
+    bool Exists(const std::string &name) const override;
     
 protected:
     void OnAdded(Character* &entity) override;
@@ -226,6 +227,11 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
     }
 
     return output.str();
+}
+
+bool InMemoryPlayerRepository::Exists(const std::string &name) const
+{
+    return fs::exists(GetPlayerFilename(name));
 }
 
 void InMemoryPlayerRepository::Load()

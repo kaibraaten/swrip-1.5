@@ -490,8 +490,8 @@ void do_oset( Character *ch, std::string argument )
                              obj->Prototype->Description = obj->Description;
                          }
                      });
-        EditorDescPrintf( ch, "Object %ld (%s) long description",
-                          obj->Prototype->Vnum, obj->Name.c_str() );
+        SetEditorDesc( ch, "Object %ld (%s) long description",
+                       obj->Prototype->Vnum, obj->Name.c_str() );
         return;
     }
 
@@ -660,8 +660,8 @@ void do_oset( Character *ch, std::string argument )
                      {
                          ed->Description = txt;
                      });
-        EditorDescPrintf( ch, "Object %ld (%s) extra description: %s",
-                          obj->Prototype->Vnum, obj->Name.c_str(), arg3.c_str() );
+        SetEditorDesc( ch, "Object %ld (%s) extra description: %s",
+                       obj->Prototype->Vnum, obj->Name.c_str(), arg3.c_str() );
         return;
     }
 
@@ -691,8 +691,8 @@ void do_oset( Character *ch, std::string argument )
                      {
                          ed->Description = txt;
                      });
-        EditorDescPrintf( ch, "Object %ld (%s) description",
-                          obj->Prototype->Vnum, obj->Name.c_str() );
+        SetEditorDesc( ch, "Object %ld (%s) description",
+                       obj->Prototype->Vnum, obj->Name.c_str() );
         return;
     }
 

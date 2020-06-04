@@ -14,6 +14,7 @@ public:
     virtual void Save() const = 0;
     virtual void Save(const Character *pc) const = 0;
     virtual std::string MakeWizlist() const = 0;
+    virtual bool Exists(const std::string &name) const = 0;
     
 protected:
     virtual void OnAdded(Character* &entity) = 0;

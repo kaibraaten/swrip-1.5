@@ -105,8 +105,8 @@ void do_redit(Character *ch, std::string argument)
                      {
                          location->Description = txt;
                      });
-        EditorDescPrintf(ch, "Room %ld (%s) description",
-                         location->Vnum, location->Name.c_str());
+        SetEditorDesc(ch, "Room %ld (%s) description",
+                      location->Vnum, location->Name.c_str());
         return;
     }
 
@@ -141,8 +141,8 @@ void do_redit(Character *ch, std::string argument)
                      {
                          extraDescription->Description = txt;
                      });
-        EditorDescPrintf(ch, "Room %ld (%s) extra description: %s",
-                         location->Vnum, location->Name.c_str(), argument.c_str());
+        SetEditorDesc(ch, "Room %ld (%s) extra description: %s",
+                      location->Vnum, location->Name.c_str(), argument.c_str());
         return;
     }
 

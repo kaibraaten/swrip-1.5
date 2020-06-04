@@ -119,8 +119,6 @@ public:
     int max_size;                       /* max size in chars of string being
                                          * edited (counting newlines) */
     std::string desc;           /* buffer description */
-    void *UserData;
-    CmdFun *CalledFrom;
     std::function<void(const std::string&)> OnSave;
     
 private:
@@ -164,9 +162,7 @@ Editor::Editor()
       line_count( 0 ),
       on_line( 0 ),
       text_size( 0 ),
-      max_size( 0 ),
-      UserData( NULL ),
-      CalledFrom( NULL )
+      max_size( 0 )
 {
 
 }
@@ -180,7 +176,7 @@ static std::string NumberedRuler()
  * Edit_data manipulation functions
  */
 
-EditorLine *make_new_line( const char *str )
+static EditorLine *make_new_line( const char *str )
 {
     size_t size = strlen( str );
     size = BLOCK_ROUNDUP( size );
@@ -239,11 +235,10 @@ Editor::Editor( const Editor &edd )
     line_count = edd.line_count;
     first_line = root_line.next;
     desc = edd.desc;
-    UserData = edd.UserData;
-    CalledFrom = edd.CalledFrom;
+    OnSave = edd.OnSave;
 }
 
-Editor *str_to_editdata( const std::string &str, int max_size )
+static Editor *str_to_editdata( const std::string &str, int max_size )
 {
     const char *p = str.c_str();
     int i = 0;
@@ -325,55 +320,19 @@ std::string Editor::EditDataToStr() const
  * Main editor functions
  */
 
-void SetEditorDesc( Character *ch, const std::string &new_desc )
+void SetEditorDesc(Character *ch, const char *desc_fmt, ...)
 {
     if( !ch || !ch->PCData || !ch->PCData->TextEditor )
     {
         return;
     }
-
-    ch->PCData->TextEditor->desc = new_desc;
-}
-
-void EditorDescPrintf( Character *ch, const char *desc_fmt, ... )
-{
+    
     va_list args;
     va_start( args, desc_fmt );
     std::vector<char> buf = CreateFmtBuffer( desc_fmt, args );
     va_end( args );
 
-    SetEditorDesc( ch, &buf[0] );
-}
-
-static void StartEditingNoLimit( Character *ch, const std::string &old_text,
-                                 int max_total, void *userdata, CmdFun *caller )
-{
-    if( !ch->Desc )
-    {
-        Log->Bug( "Fatal: start_editing: no desc" );
-        return;
-    }
-
-    ch->Echo( "&GBegin entering your text now (/? = help /s = save /c = clear /l = list)\r\n" );
-    ch->Echo( NumberedRuler() + "&d" );
-
-    if( ch->PCData->TextEditor )
-    {
-        StopEditing( ch );
-    }
-
-    ch->PCData->TextEditor = str_to_editdata( old_text, max_total );
-    ch->PCData->TextEditor->desc = "Unknown buffer";
-    ch->Desc->ConnectionState = CON_EDITING;
-    ch->PCData->TextEditor->CalledFrom = caller;
-    ch->PCData->TextEditor->UserData = userdata;
-    ch->Echo( "&G> &d" );
-}
-
-void StartEditing(Character *ch, const std::string &old_text,
-                  void *userData, CmdFun *caller)
-{
-    StartEditingNoLimit(ch, old_text, MAX_STRING_LENGTH * 4, userData, caller);
+    ch->PCData->TextEditor->desc = &buf[0];
 }
 
 void StartEditing(Character *ch, const std::string &old_text,
@@ -400,7 +359,7 @@ void StartEditing(Character *ch, const std::string &old_text,
     ch->Echo( "&G> &d" );
 }
 
-std::string CopyEditBuffer( const Character *ch )
+static std::string CopyEditBuffer( const Character *ch )
 {
     if( !ch )
     {
@@ -415,23 +374,6 @@ std::string CopyEditBuffer( const Character *ch )
     }
 
     return ch->PCData->TextEditor->EditDataToStr();
-}
-
-void *EditorUserData( Character *ch )
-{
-    if( !ch )
-    {
-        Log->Bug( "%s: null ch", __FUNCTION__ );
-        return NULL;
-    }
-
-    if( !ch->PCData->TextEditor )
-    {
-        Log->Bug( "%s: null editor", __FUNCTION__ );
-        return NULL;
-    }
-
-    return ch->PCData->TextEditor->UserData;
 }
 
 void StopEditing( Character *ch )
@@ -761,15 +703,11 @@ void Editor::ClearBuf( Editor *edd, Character *ch, std::string )
 {
     int edd_max_size = edd->max_size;
     std::string desc = edd->desc;
-    CmdFun *caller = edd->CalledFrom;
-    void *ud = edd->UserData;
     auto onSave = edd->OnSave;
     
     Editor::Discard( edd );
     ch->PCData->TextEditor = str_to_editdata( "", edd_max_size );
     ch->PCData->TextEditor->desc = desc;
-    ch->PCData->TextEditor->CalledFrom = caller;
-    ch->PCData->TextEditor->UserData = ud;
     ch->PCData->TextEditor->OnSave = onSave;
     ch->Echo( "Buffer cleared.\r\n" );
 }
@@ -1050,24 +988,16 @@ void Editor::Abort( Character *ch ) const
 void Editor::Save( Character *ch ) const
 {
     ch->Desc->ConnectionState = CON_PLAYING;
-
-    if(OnSave)
-    {
-        OnSave(CopyEditBuffer(ch));
-        StopEditing(ch);
-    }
-    else if( CalledFrom )
-    {
-        CalledFrom( ch, "" );
-    }
+    OnSave(CopyEditBuffer(ch));
+    StopEditing(ch);
 }
 
 /****************************************************************************
  * Misc functions
  */
 
-char *text_replace( char *src, char *word_src, char *word_dst,
-                    size_t *pnew_size, size_t *prepl_count )
+static char *text_replace( char *src, char *word_src, char *word_dst,
+                           size_t *pnew_size, size_t *prepl_count )
 /* Replaces a word word_src in src for word_dst. Returns a pointer to a newly
  * allocated buffer containing the line with the replacements. Stores in
  * pnew_size the size of the allocated buffer, wich may be different from the
@@ -1136,7 +1066,7 @@ char *text_replace( char *src, char *word_src, char *word_dst,
  * convert to lowercase, and it can handle the (') character
  * when it's escaped inside '.
  */
-char *finer_OneArgument( char *argument, char *arg_first )
+static char *finer_OneArgument( char *argument, char *arg_first )
 {
     char cEnd = ' ';
     u_long count = 0;

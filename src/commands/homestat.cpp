@@ -21,10 +21,10 @@ void do_homestat(Character *ch, std::string argument)
         return;
     }
 
-    if(StrCmp(home->Owner(), ch->Name) != 0
+    if(!Homes->IsResidentOf(ch->Name, home->Vnum())
        && !IsImmortal(ch))
     {
-        ch->Echo("&RYou can only do this with homes you own.\r\n&d");
+        ch->Echo("&RYou can only do this with your own home.\r\n&d");
         return;
     }
 

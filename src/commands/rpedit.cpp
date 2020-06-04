@@ -1,6 +1,5 @@
 #include <cassert>
 #include <utility/algorithms.hpp>
-#include "editor.hpp"
 #include "character.hpp"
 #include "mud.hpp"
 #include "log.hpp"
@@ -22,21 +21,6 @@ void do_rpedit( Character *ch, std::string argument )
     {
         ch->Echo("You have no descriptor\r\n");
         return;
-    }
-
-    switch( ch->SubState )
-    {
-    default:
-        break;
-
-    case SUB_MPROG_EDIT:
-        {
-            std::string *comlist = static_cast<std::string*>(EditorUserData(ch));
-
-            *comlist = CopyEditBuffer( ch );
-            StopEditing( ch );
-            return;
-        }
     }
 
     SmashTilde( argument );

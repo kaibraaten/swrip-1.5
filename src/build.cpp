@@ -181,7 +181,7 @@ std::shared_ptr<ExtraDescription> SetRExtra(std::shared_ptr<Room> room, const st
     bool found = false;
 
     for (auto i = std::begin(room->ExtraDescriptions());
-        i != std::end(room->ExtraDescriptions()); ++i)
+         i != std::end(room->ExtraDescriptions()); ++i)
     {
         ed = *i;
 
@@ -209,7 +209,7 @@ bool DelRExtra(std::shared_ptr<Room> room, const std::string &keywords)
     bool found = false;
 
     for (auto i = std::begin(room->ExtraDescriptions());
-        i != std::end(room->ExtraDescriptions()); ++i)
+         i != std::end(room->ExtraDescriptions()); ++i)
     {
         rmed = *i;
 
@@ -231,10 +231,10 @@ bool DelRExtra(std::shared_ptr<Room> room, const std::string &keywords)
 std::shared_ptr<ExtraDescription> SetOExtra(Object *obj, const std::string &keywords)
 {
     auto ed = Find(obj->ExtraDescriptions(),
-        [keywords](auto descr)
-    {
-        return IsName(keywords, descr->Keyword);
-    });
+                   [keywords](auto descr)
+                   {
+                       return IsName(keywords, descr->Keyword);
+                   });
 
     if (ed == nullptr)
     {
@@ -250,10 +250,10 @@ std::shared_ptr<ExtraDescription> SetOExtra(Object *obj, const std::string &keyw
 bool DelOExtra(Object *obj, const std::string &keywords)
 {
     auto rmed = Find(obj->ExtraDescriptions(),
-        [keywords](auto ed)
-    {
-        return IsName(keywords, ed->Keyword);
-    });
+                     [keywords](auto ed)
+                     {
+                         return IsName(keywords, ed->Keyword);
+                     });
 
     if (rmed == nullptr)
     {
@@ -268,10 +268,10 @@ bool DelOExtra(Object *obj, const std::string &keywords)
 std::shared_ptr<ExtraDescription> SetOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords)
 {
     auto ed = Find(obj->ExtraDescriptions(),
-        [keywords](auto extra)
-    {
-        return IsName(keywords, extra->Keyword);
-    });
+                   [keywords](auto extra)
+                   {
+                       return IsName(keywords, extra->Keyword);
+                   });
 
     if (ed == nullptr)
     {
@@ -287,10 +287,10 @@ std::shared_ptr<ExtraDescription> SetOExtraProto(std::shared_ptr<ProtoObject> ob
 bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords)
 {
     auto rmed = Find(obj->ExtraDescriptions(),
-        [keywords](auto ed)
-    {
-        return IsName(keywords, ed->Keyword);
-    });
+                     [keywords](auto ed)
+                     {
+                         return IsName(keywords, ed->Keyword);
+                     });
 
     if (rmed == nullptr)
     {
@@ -357,7 +357,7 @@ std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argum
     else if (val1 < MIN_VNUM || val1 > MAX_VNUM)
     {
         ch->Echo("Reset: value out of range. Must be between %ld and %s.\r\n",
-            MIN_VNUM, PunctuateNumber(MAX_VNUM).c_str());
+                 MIN_VNUM, PunctuateNumber(MAX_VNUM).c_str());
         return NULL;
     }
     else if (!StrCmp(arg1, "mob"))
@@ -590,7 +590,7 @@ std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argum
 }
 
 void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
-    int mptype, const std::string &argument)
+                 int mptype, const std::string &argument)
 {
     if (mptype != -1)
     {
@@ -604,14 +604,16 @@ void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
         mprg->arglist = CopyString(argument);
     }
 
-    ch->SubState = SUB_MPROG_EDIT;
-
-    StartEditing(ch, mprg->comlist, &mprg->comlist, do_mpedit);
+    StartEditing(ch, mprg->comlist,
+                 [mprg](const auto &txt)
+                 {
+                     mprg->comlist = txt;
+                 });
     SetEditorDesc(ch, "MOBPROG script");
 }
 
 void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
-    int mptype, const std::string &argument)
+                 int mptype, const std::string &argument)
 {
     if (mptype != -1)
     {
@@ -625,9 +627,11 @@ void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
         mprg->arglist = CopyString(argument);
     }
 
-    ch->SubState = SUB_MPROG_EDIT;
-
-    StartEditing(ch, mprg->comlist, &mprg->comlist, do_opedit);
+    StartEditing(ch, mprg->comlist,
+                 [mprg](const auto &txt)
+                 {
+                     mprg->comlist = txt;
+                 });
     SetEditorDesc(ch, "OBJPROG script");
 }
 
@@ -635,7 +639,7 @@ void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
  * RoomProg Support
  */
 void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
-    int mptype, const std::string &argument)
+                  int mptype, const std::string &argument)
 {
     if (mptype != -1)
     {
@@ -651,6 +655,10 @@ void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
 
     ch->SubState = SUB_MPROG_EDIT;
 
-    StartEditing(ch, mprg->comlist, &mprg->comlist, do_rpedit);
+    StartEditing(ch, mprg->comlist,
+                 [mprg](const auto &txt)
+                 {
+                     mprg->comlist = txt;
+                 });
     SetEditorDesc(ch, "ROOMPROG script");
 }
