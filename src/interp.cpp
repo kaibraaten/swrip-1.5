@@ -37,9 +37,9 @@
 #include "alias.hpp"
 #include "exit.hpp"
 
- /*
-  * Log-all switch.
-  */
+/*
+ * Log-all switch.
+ */
 bool fLogAll = false;
 
 static std::string ParseTarget(const Character *ch, std::string oldstring);
@@ -185,13 +185,6 @@ static std::string GetMultiCommand(std::shared_ptr<Descriptor> d, std::string ar
     return multicommand;
 }
 
-static bool _CommandFunctionEquals(void *cmd, const void *fun)
-{
-    const Command *command = static_cast<const Command*>(cmd);
-    CmdFun *function = reinterpret_cast<CmdFun*>(fun);
-    return command->Function == function;
-}
-
 struct CommandFindData
 {
     Character *ch = nullptr;
@@ -233,113 +226,91 @@ void Interpret(Character *ch, std::string argument)
     struct timeval time_used;
     long tmptime = 0;
 
-    if (ch->SubState == SUB_REPEATCMD)
+    /* Changed the order of these ifchecks to prevent crashing. */
+    if (argument.empty())
     {
-        CmdFun *fun = ch->LastCommand;
-
-        assert(fun != nullptr);
-
-        const List *commands = GetEntities(CommandRepository);
-        cmd = (Command*)FindIfInList(commands, _CommandFunctionEquals, (const void*)fun);
-        found = cmd != NULL;
-
-        if (!found)
-        {
-            Log->Bug("Interpret: SUB_REPEATCMD: last_cmd invalid");
-            return;
-        }
-
-        sprintf(logline, "(%s) %s", cmd->Name.c_str(), argument.c_str());
+        Log->Bug("Interpret: null argument!");
+        return;
     }
 
-    if (!cmd)
+    /*
+     * Strip leading spaces.
+     */
+    argument = TrimStringStart(argument);
+
+    if (argument.empty())
     {
-        /* Changed the order of these ifchecks to prevent crashing. */
-        if (argument.empty())
-        {
-            Log->Bug("Interpret: null argument!");
-            return;
-        }
+        return;
+    }
 
-        /*
-         * Strip leading spaces.
-         */
+    timer = GetTimerPointer(ch, TIMER_CMD_FUN);
+
+    /*
+     * Implement freeze command.
+     */
+    if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_FREEZE))
+    {
+        ch->Echo("You're totally frozen!\r\n");
+        return;
+    }
+
+    /*
+     * Grab the command word.
+     * Special parsing so ' can be a command,
+     *   also no spaces needed after punctuation.
+     */
+    strcpy(logline, argument.c_str());
+
+    if (ch->Desc && (strchr(argument.c_str(), '|') != nullptr))
+    {
+        argument = GetMultiCommand(ch->Desc, argument);
+    }
+
+    if (!IsNpc(ch) && ch->PCData && !ch->PCData->AliasFocus.empty())
+    {
+        if (strchr(argument.c_str(), '$') != nullptr)
+        {
+            argument = ParseTarget(ch, argument);
+        }
+    }
+
+    if (!isalpha(argument[0]) && !isdigit(argument[0]))
+    {
+        command = argument[0];
+        argument = argument.substr(1);
         argument = TrimStringStart(argument);
+    }
+    else
+    {
+        argument = OneArgument(argument, command);
+    }
 
-        if (argument.empty())
-        {
-            return;
-        }
+    /*
+     * Look for command in command table.
+     * Check for council powers and/or bestowments
+     */
+    struct CommandFindData findData;
+    const List *commands = GetEntities(CommandRepository);
+    findData.ch = ch;
+    findData.command = command;
+    cmd = (Command*)FindIfInList(commands, _CheckTrustAndBestowments, &findData);
 
-        timer = GetTimerPointer(ch, TIMER_CMD_FUN);
+    if (cmd != NULL)
+    {
+        found = true;
+    }
+    else
+    {
+        found = false;
+    }
 
-        /*
-         * Implement freeze command.
-         */
-        if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_FREEZE))
-        {
-            ch->Echo("You're totally frozen!\r\n");
-            return;
-        }
-
-        /*
-         * Grab the command word.
-         * Special parsing so ' can be a command,
-         *   also no spaces needed after punctuation.
-         */
-        strcpy(logline, argument.c_str());
-
-        if (ch->Desc && (strchr(argument.c_str(), '|') != nullptr))
-        {
-            argument = GetMultiCommand(ch->Desc, argument);
-        }
-
-        if (!IsNpc(ch) && ch->PCData && !ch->PCData->AliasFocus.empty())
-        {
-            if (strchr(argument.c_str(), '$') != nullptr)
-            {
-                argument = ParseTarget(ch, argument);
-            }
-        }
-
-        if (!isalpha(argument[0]) && !isdigit(argument[0]))
-        {
-            command = argument[0];
-            argument = argument.substr(1);
-            argument = TrimStringStart(argument);
-        }
-        else
-        {
-            argument = OneArgument(argument, command);
-        }
-
-        /*
-         * Look for command in command table.
-         * Check for council powers and/or bestowments
-         */
-        struct CommandFindData findData;
-        const List *commands = GetEntities(CommandRepository);
-        findData.ch = ch;
-        findData.command = command;
-        cmd = (Command*)FindIfInList(commands, _CheckTrustAndBestowments, &findData);
-
-        if (cmd != NULL)
-        {
-            found = true;
-        }
-        else
-        {
-            found = false;
-        }
-
-        /*
-         * Turn off afk bit when any command performed.
-         */
-        if (IsBitSet(ch->Flags, PLR_AFK) && (StrCmp(command, "AFK")))
-        {
-            RemoveBit(ch->Flags, PLR_AFK);
-            Act(AT_GREY, "$n is no longer afk.", ch, NULL, NULL, TO_ROOM);
-        }
+    /*
+     * Turn off afk bit when any command performed.
+     */
+    if (IsBitSet(ch->Flags, PLR_AFK) && (StrCmp(command, "AFK")))
+    {
+        RemoveBit(ch->Flags, PLR_AFK);
+        Act(AT_GREY, "$n is no longer afk.", ch, NULL, NULL, TO_ROOM);
     }
 
     /*
@@ -363,7 +334,7 @@ void Interpret(Character *ch, std::string argument)
         if (ch->Desc && ch->Desc->Original)
         {
             sprintf(log_buf, "Log %s (%s): %s", ch->Name.c_str(),
-                ch->Desc->Original->Name.c_str(), logline);
+                    ch->Desc->Original->Name.c_str(), logline);
         }
         else
         {
@@ -494,12 +465,12 @@ void Interpret(Character *ch, std::string argument)
     if (tmptime > 1500000)
     {
         sprintf(log_buf, "[*****] LAG: %s: %s %s (R:%ld S:%d.%06d)",
-            ch->Name.c_str(),
-            cmd->Name.c_str(),
-            (cmd->Log == LOG_NEVER ? "XXX" : argument.c_str()),
-            ch->InRoom ? ch->InRoom->Vnum : 0,
-            (int)(time_used.tv_sec),
-            (int)(time_used.tv_usec));
+                ch->Name.c_str(),
+                cmd->Name.c_str(),
+                (cmd->Log == LOG_NEVER ? "XXX" : argument.c_str()),
+                ch->InRoom ? ch->InRoom->Vnum : 0,
+                (int)(time_used.tv_sec),
+                (int)(time_used.tv_usec));
         Log->LogStringPlus(log_buf, LOG_NORMAL, GetTrustLevel(ch));
     }
 }
@@ -519,8 +490,8 @@ void SendTimer(std::shared_ptr<timerset> vtime, Character *ch)
     ntime.tv_usec = (vtime->TotalTime.tv_usec + carry) / vtime->NumberOfTimesUsed;
     ch->Echo("Has been used %d times this boot.\r\n", vtime->NumberOfTimesUsed);
     ch->Echo("Time (in secs): min %ld.%06ld; avg: %ld.%06ld; max %ld.%06ld\r\n",
-        vtime->MinTime.tv_sec, vtime->MinTime.tv_usec, ntime.tv_sec,
-        ntime.tv_usec, vtime->MaxTime.tv_sec, vtime->MaxTime.tv_usec);
+             vtime->MinTime.tv_sec, vtime->MinTime.tv_usec, ntime.tv_sec,
+             ntime.tv_usec, vtime->MaxTime.tv_sec, vtime->MaxTime.tv_usec);
 }
 
 void UpdateNumberOfTimesUsed(timeval *time_used, std::shared_ptr<timerset> userec)

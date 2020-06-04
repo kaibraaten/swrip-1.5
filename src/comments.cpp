@@ -224,7 +224,6 @@ void do_comment( Character *ch, std::string argument )
     if ( !StrCmp( arg, "write" ) )
     {
         AttachNote( ch );
-        ch->SubState = SUB_WRITING_NOTE;
         StartEditing(ch, ch->PCData->Note->Text,
                      [ch](const auto &txt)
                      {

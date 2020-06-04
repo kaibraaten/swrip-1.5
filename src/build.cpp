@@ -653,8 +653,6 @@ void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
         mprg->arglist = CopyString(argument);
     }
 
-    ch->SubState = SUB_MPROG_EDIT;
-
     StartEditing(ch, mprg->comlist,
                  [mprg](const auto &txt)
                  {

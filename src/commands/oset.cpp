@@ -36,40 +36,6 @@ void do_oset( Character *ch, std::string argument )
     obj = NULL;
     SmashTilde( argument );
 
-    if ( ch->SubState == SUB_REPEATCMD )
-    {
-        obj = (Object*)ch->dest_buf;
-
-        if ( obj && IsObjectExtracted(obj) )
-        {
-            ch->Echo("Your object was extracted!\r\n");
-            obj = NULL;
-            argument = "done";
-        }
-
-        if ( argument.empty()
-             || !StrCmp( argument, "stat" ) )
-        {
-            if ( obj )
-                do_ostat( ch, obj->Name );
-            else
-                ch->Echo("No object selected.  Type '?' for help.\r\n");
-
-            return;
-        }
-
-        if ( !StrCmp( argument, "done" ) || !StrCmp( argument, "off" ) )
-        {
-            ch->Echo("Oset mode off.\r\n");
-            ch->SubState = SUB_NONE;
-            FreeMemory(ch->dest_buf);
-
-            ch->PCData->SubPrompt.erase();
-
-            return;
-        }
-    }
-
     if ( obj )
     {
         lockobj = true;
@@ -87,16 +53,7 @@ void do_oset( Character *ch, std::string argument )
 
     if ( arg1.empty() || arg2.empty() || !StrCmp( arg1, "?" ) )
     {
-        if ( ch->SubState == SUB_REPEATCMD )
-        {
-            if ( obj )
-                ch->Echo("Syntax: <field>  <value>\r\n");
-            else
-                ch->Echo("Syntax: <object> <field>  <value>\r\n");
-        }
-        else
-            ch->Echo("Syntax: oset <object> <field>  <value>\r\n");
-
+        ch->Echo("Syntax: oset <object> <field>  <value>\r\n");
         ch->Echo("\r\n");
         ch->Echo("Field being one of:\r\n");
         ch->Echo("  flags wear level weight cost timer\r\n");
@@ -957,15 +914,5 @@ void do_oset( Character *ch, std::string argument )
     /*
      * Generate usage message.
      */
-    if ( ch->SubState == SUB_REPEATCMD )
-    {
-        ch->SubState = SUB_RESTRICTED;
-        Interpret( ch, origarg );
-        ch->SubState = SUB_REPEATCMD;
-        ch->LastCommand = do_oset;
-    }
-    else
-        do_oset( ch, "" );
-
-    return;
+    do_oset( ch, "" );
 }

@@ -43,40 +43,6 @@ void do_mset( Character *ch, std::string argument )
     lockvictim = false;
     SmashTilde( argument );
 
-    if ( ch->SubState == SUB_REPEATCMD )
-    {
-        victim = (Character*)ch->dest_buf;
-
-        if ( CharacterDiedRecently(victim) )
-        {
-            ch->Echo("Your victim died!\r\n");
-            victim = NULL;
-            argument = "done";
-        }
-
-        if ( argument.empty() || !StrCmp( argument, " " )
-             || !StrCmp( argument, "stat" ) )
-        {
-            if ( victim )
-                do_mstat( ch, victim->Name );
-            else
-                ch->Echo("No victim selected. Type '?' for help.\r\n");
-
-            return;
-        }
-
-        if ( !StrCmp( argument, "done" ) || !StrCmp( argument, "off" ) )
-        {
-            ch->Echo("Mset mode off.\r\n");
-            ch->SubState = SUB_NONE;
-            ch->dest_buf = nullptr;
-
-            ch->PCData->SubPrompt.erase();
-
-            return;
-        }
-    }
-
     if ( victim )
     {
         lockvictim = true;
@@ -92,19 +58,11 @@ void do_mset( Character *ch, std::string argument )
         arg3 = argument;
     }
 
-    if ( arg1.empty() || ( arg2.empty() && ch->SubState != SUB_REPEATCMD)
-         || !StrCmp( arg1, "?" ) )
+    if ( arg1.empty()
+         || arg2.empty()
+         || StrCmp( arg1, "?" ) == 0)
     {
-        if ( ch->SubState == SUB_REPEATCMD )
-        {
-            if ( victim )
-                ch->Echo("Syntax: <field>  <value>\r\n");
-            else
-                ch->Echo("Syntax: <victim> <field>  <value>\r\n");
-        }
-        else
-            ch->Echo("Syntax: mset <victim> <field>  <value>\r\n");
-
+        ch->Echo("Syntax: mset <victim> <field>  <value>\r\n");
         ch->Echo("\r\n");
         ch->Echo("Field being one of:\r\n");
         ch->Echo("  str int wis dex con cha lck frc sex\r\n");
@@ -873,12 +831,6 @@ void do_mset( Character *ch, std::string argument )
         }
         CHECK_SUBRESTRICTED( ch );
 
-        if ( ch->SubState == SUB_REPEATCMD )
-            ch->tempnum = SUB_REPEATCMD;
-        else
-            ch->tempnum = SUB_NONE;
-
-        ch->SubState = SUB_MOB_DESC;
         StartEditing( ch, victim->Description,
                       [ch, victim](const auto &txt)
                       {
@@ -1736,13 +1688,5 @@ void do_mset( Character *ch, std::string argument )
     /*
      * Generate usage message.
      */
-    if ( ch->SubState == SUB_REPEATCMD )
-    {
-        ch->SubState = SUB_RESTRICTED;
-        Interpret( ch, origarg );
-        ch->SubState = SUB_REPEATCMD;
-        ch->LastCommand = do_mset;
-    }
-    else
-        do_mset( ch, "" );
+    do_mset( ch, "" );
 }

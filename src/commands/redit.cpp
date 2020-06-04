@@ -35,30 +35,9 @@ void do_redit(Character *ch, std::string argument)
     SmashTilde(argument);
     argument = OneArgument(argument, arg);
 
-    if (ch->SubState == SUB_REPEATCMD)
-    {
-        if (arg.empty())
-        {
-            do_rstat(ch, "");
-            return;
-        }
-
-        if (!StrCmp(arg, "done") || !StrCmp(arg, "off"))
-        {
-            ch->Echo("Redit mode off.\r\n");
-            ch->PCData->SubPrompt.erase();
-            ch->SubState = SUB_NONE;
-            return;
-        }
-    }
-
     if (arg.empty() || !StrCmp(arg, "?"))
     {
-        if (ch->SubState == SUB_REPEATCMD)
-            ch->Echo("Syntax: <field> value\r\n");
-        else
-            ch->Echo("Syntax: redit <field> value\r\n");
-
+        ch->Echo("Syntax: redit <field> value\r\n");
         ch->Echo("\r\n");
         ch->Echo("Field being one of:\r\n");
         ch->Echo("  name desc wordwrap ed rmed\r\n");
@@ -767,15 +746,5 @@ void do_redit(Character *ch, std::string argument)
     /*
      * Generate usage message.
      */
-    if (ch->SubState == SUB_REPEATCMD)
-    {
-        ch->SubState = SUB_RESTRICTED;
-        Interpret(ch, origarg);
-        ch->SubState = SUB_REPEATCMD;
-        ch->LastCommand = do_redit;
-    }
-    else
-    {
-        do_redit(ch, "");
-    }
+    do_redit(ch, "");
 }

@@ -491,9 +491,8 @@ void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea,
 
     if (arg.empty() || !StrCmp(arg, "?"))
     {
-        const char *nm = (ch->SubState == SUB_REPEATCMD ? "" : (aRoom ? "rreset "
-            : "reset "));
-        const char *rn = (aRoom ? "" : " [room#]");
+        const char *nm = aRoom ? "rreset " : "reset ";
+        const char *rn = aRoom ? "" : " [room#]";
         ch->Echo("Syntax: %s<list|edit|delete|add|insert|place%s>\r\n",
             nm, (aRoom ? "" : "|area"));
         ch->Echo("Syntax: %sremove <#>\r\n", nm);
@@ -1245,17 +1244,7 @@ void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea,
         return;
     }
 
-    if (ch->SubState == SUB_REPEATCMD)
-    {
-        ch->SubState = SUB_NONE;
-        Interpret(ch, origarg);
-        ch->SubState = SUB_REPEATCMD;
-        ch->LastCommand = (aRoom ? do_rreset : do_reset);
-    }
-    else
-    {
-        EditReset(ch, "", pArea, aRoom);
-    }
+    EditReset(ch, "", pArea, aRoom);
 }
 
 static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, const Object *obj, int v2, int v3)
