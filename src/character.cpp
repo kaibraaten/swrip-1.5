@@ -1410,6 +1410,14 @@ vnum_t WhereHome(const Character *ch)
     
     if (!homes.empty())
     {
+        for(const auto &home : homes)
+        {
+            if(StrCmp(home->Owner(), ch->Name) == 0)
+            {
+                return home->Vnum();
+            }
+        }
+        
         return homes.front()->Vnum();
     }
     else if (IsImmortal(ch))
