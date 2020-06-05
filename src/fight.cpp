@@ -2489,11 +2489,35 @@ static bool RemoveShipOwner(std::shared_ptr<Ship> ship, void *userData)
     return true;
 }
 
+class RemoveResident
+{
+public:
+    RemoveResident(const std::string &name)
+        : _resident(name)
+    {
+
+    }
+    
+    void operator()(const std::shared_ptr<Home> home) const
+    {
+        if(StrCmp(home->Owner(), _resident) == 0)
+        {
+            Homes->Delete(home);
+        }
+        else
+        {
+            home->RemoveResident(_resident);
+            Homes->Save(home);
+        }
+    }
+
+private:
+    std::string _resident;
+};
+
 void RawKill(Character *killer, Character *victim)
 {
     Character *victmp = nullptr;
-    char buf[MAX_STRING_LENGTH];
-    char buf2[MAX_STRING_LENGTH];
 
     if (!victim)
     {
@@ -2573,18 +2597,7 @@ void RawKill(Character *killer, Character *victim)
     if (SysData.PermaDeath)
     {
         ForEachShip(RemoveShipOwner, victim);
-
-        for(auto home : Homes->FindHomesForResident(victim->Name))
-        {
-            if(StrCmp(home->Owner(), victim->Name) == 0)
-            {
-                Homes->Delete(home);
-            }
-            else
-            {
-                home->RemoveResident(victim->Name);
-            }
-        }
+        ForEach(Homes->FindHomesForResident(victim->Name), RemoveResident(victim->Name));
         
         if (victim->PCData && victim->PCData->ClanInfo.Clan)
         {
@@ -2657,19 +2670,7 @@ void RawKill(Character *killer, Character *victim)
             }
         }
 
-#pragma message("Reimplement this")
-#if 0
-        sprintf(buf, "%s", GetPlayerFilename(victim).c_str());
-        sprintf(buf2, "%s", GetPlayerBackupFilename(victim->Name).c_str());
-
-        rename(buf, buf2);
-#endif
-        sprintf(buf, "%s%c/%s.clone", PLAYER_DIR, tolower(arg[0]),
-                ToLower(arg).c_str());
-        sprintf(buf2, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-                ToLower(arg).c_str());
-
-        rename(buf, buf2);
+        PlayerCharacters->RestoreClone(victim);
     }
     else
     {

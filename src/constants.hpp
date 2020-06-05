@@ -1942,18 +1942,13 @@ constexpr const char *Concat(const char *a, const char *b)
 /*
  * Data files used by the server.
  *
- * AREA_LIST contains a list of areas to boot.
- * All files are read in completely at bootup.
  * Most output files (bug, idea, typo, shutdown) are append-only.
  */
 #define DATA_DIR        "./data/"
-#define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
-#define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
 #define CORPSE_DIR      DATA_DIR "corpses/"   /* Corpses                      */
 #define SCRIPT_DIR      "./scripts/"
 #define LOG_DIR         "./log/"
 
-#define AREA_LIST       "area.lst"      /* List of areas                */
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */
 
 #define COPYOVER_FILE   DATA_DIR "copyover.dat"

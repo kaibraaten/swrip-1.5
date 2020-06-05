@@ -18,12 +18,17 @@
 #include "skill.hpp"
 #include "area.hpp"
 
+#define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
+#define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
+#define CLONE_DIR       DATA_DIR "clones/"
+
 namespace fs = std::filesystem;
 
 std::shared_ptr<PlayerRepository> PlayerCharacters;
 
 static std::string GetPlayerBackupFilename(const std::string &name);
 static std::string GetPlayerFilename(const std::string &name);
+static std::string GetCloneFilename(const std::string &name);
 
 class InMemoryPlayerRepository : public PlayerRepository
 {
@@ -34,6 +39,10 @@ public:
     void Save(const Character *pc) const override;
     std::string MakeWizlist() const override;
     bool Exists(const std::string &name) const override;
+    void MakeClone(const Character *pc) override;
+    void RestoreClone(const Character *pc) override;
+    void Delete(const std::string &name) override;
+    time_t LastOnline(const std::string &name) const override;
     
 protected:
     void OnAdded(Character* &entity) override;
@@ -998,7 +1007,7 @@ void InMemoryPlayerRepository::Save(const Character *pc) const
 
     if(fs::exists(GetPlayerFilename(pc)))
     {
-        fs::rename(GetPlayerFilename(pc).c_str(), GetPlayerBackupFilename(pc->Name).c_str());
+        fs::rename(GetPlayerFilename(pc), GetPlayerBackupFilename(pc->Name));
     }
 
     LuaSaveDataFile(GetPlayerFilename(pc),
@@ -1021,6 +1030,45 @@ void InMemoryPlayerRepository::OnRemoved(Character* &entity)
 
 }
 
+void InMemoryPlayerRepository::MakeClone(const Character *pc)
+{
+    std::error_code ec;
+    auto pfileFilename = GetPlayerFilename(pc);
+    auto cloneFilename = GetCloneFilename(pc->Name);
+
+    fs::copy(pfileFilename, cloneFilename, ec);
+}
+
+void InMemoryPlayerRepository::RestoreClone(const Character *pc)
+{
+    std::error_code ec;
+    auto cloneFilename = GetCloneFilename(pc->Name);
+    auto pfileFilename = GetPlayerFilename(pc);
+
+    fs::rename(cloneFilename, pfileFilename, ec);
+}
+
+void InMemoryPlayerRepository::Delete(const std::string &name)
+{
+    std::error_code ec;
+    fs::rename(GetPlayerFilename(name), GetPlayerBackupFilename(name), ec);
+    fs::remove(GetCloneFilename(name), ec);
+}
+
+time_t InMemoryPlayerRepository::LastOnline(const std::string &name) const
+{
+    time_t tm = 0;
+    struct stat fst;
+    std::string filename = GetPlayerFilename(name);
+    
+    if (stat(filename.c_str(), &fst) != -1)
+    {
+        tm = fst.st_mtime;
+    }
+
+    return tm;
+}
+
 ////////////////////////
 std::shared_ptr<PlayerRepository> NewPlayerRepository()
 {
@@ -1029,8 +1077,7 @@ std::shared_ptr<PlayerRepository> NewPlayerRepository()
 
 std::string GetPlayerFilename(const Character *pc)
 {
-    return FormatString("%s%c/%s.lua", PLAYER_DIR, tolower(pc->Name[0]),
-                        ToLower(pc->Name).c_str());
+    return GetPlayerFilename(pc->Name);
 }
 
 static std::string GetPlayerFilename(const std::string &name)
@@ -1042,5 +1089,11 @@ static std::string GetPlayerFilename(const std::string &name)
 static std::string GetPlayerBackupFilename(const std::string &name)
 {
     return FormatString("%s%c/%s.lua", BACKUP_DIR, tolower(name[0]),
+                        ToLower(name).c_str());
+}
+
+static std::string GetCloneFilename(const std::string &name)
+{
+    return FormatString("%s%c/%s.lua", CLONE_DIR, tolower(name[0]),
                         ToLower(name).c_str());
 }

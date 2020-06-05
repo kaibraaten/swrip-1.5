@@ -9,6 +9,9 @@
 
 void do_loadup(Character *ch, std::string argument)
 {
+#if 1
+    ch->Echo("Out of commission.\r\n");
+#else
     char fname[1024];
     std::string name;
     struct stat fst;
@@ -71,4 +74,5 @@ void do_loadup(Character *ch, std::string argument)
     {
         ch->Echo("No such player.\r\n");
     }
+#endif
 }

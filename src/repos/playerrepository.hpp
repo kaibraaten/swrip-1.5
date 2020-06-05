@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <ctime>
 #include <utility/repository.hpp>
 #include "types.hpp"
 
@@ -15,6 +16,10 @@ public:
     virtual void Save(const Character *pc) const = 0;
     virtual std::string MakeWizlist() const = 0;
     virtual bool Exists(const std::string &name) const = 0;
+    virtual void MakeClone(const Character *pc) = 0;
+    virtual void RestoreClone(const Character *pc) = 0;
+    virtual void Delete(const std::string &name) = 0;
+    virtual time_t LastOnline(const std::string &name) const = 0;
     
 protected:
     virtual void OnAdded(Character* &entity) = 0;
