@@ -155,7 +155,7 @@ void do_throw(Character *ch, std::string argument)
                 return;
             }
 
-            if (!IsNpc(victim) && IsBitSet(ch->Flags, PLR_NICE))
+            if (!IsNpc(victim) && ch->Flags.test(Flag::Plr::Nice))
             {
                 ch->Echo("You feel too nice to do that!\r\n");
                 return;
@@ -183,20 +183,20 @@ void do_throw(Character *ch, std::string argument)
             CharacterToRoom(ch, to_room);
 
             sprintf(buf, "Someone throws %s at you from the %s.",
-                obj->ShortDescr.c_str(), GetDirectionName(dir));
+                    obj->ShortDescr.c_str(), GetDirectionName(dir));
             Act(AT_ACTION, buf, victim, NULL, ch, TO_CHAR);
             Act(AT_ACTION, "You throw %p at $N.", ch, obj, victim, TO_CHAR);
             sprintf(buf, "%s is thrown at $N from the %s.",
-                obj->ShortDescr.c_str(), GetDirectionName(dir));
+                    obj->ShortDescr.c_str(), GetDirectionName(dir));
             Act(AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT);
         }
         else
         {
             ch->Echo("You throw %s %s.\r\n",
-                obj->ShortDescr.c_str(),
-                GetDirectionName(GetDirection(arg2)));
+                     obj->ShortDescr.c_str(),
+                     GetDirectionName(GetDirection(arg2)));
             sprintf(buf, "%s is thrown from the %s.",
-                obj->ShortDescr.c_str(), GetDirectionName(dir));
+                    obj->ShortDescr.c_str(), GetDirectionName(dir));
             Act(AT_ACTION, buf, ch, NULL, NULL, TO_ROOM);
         }
     }
@@ -211,7 +211,7 @@ void do_throw(Character *ch, std::string argument)
             return;
         }
 
-        if (!IsNpc(victim) && IsBitSet(ch->Flags, PLR_NICE))
+        if (!IsNpc(victim) && ch->Flags.test(Flag::Plr::Nice))
         {
             ch->Echo("You feel too nice to do that!\r\n");
             return;
@@ -268,10 +268,10 @@ void do_throw(Character *ch, std::string argument)
 
         if (IsNpc(victim) && !CharacterDiedRecently(victim))
         {
-            if (IsBitSet(victim->Flags, ACT_SENTINEL))
+            if (victim->Flags.test(Flag::Mob::Sentinel))
             {
                 victim->WasSentinel = victim->InRoom;
-                RemoveBit(victim->Flags, ACT_SENTINEL);
+                victim->Flags.reset(Flag::Mob::Sentinel);
             }
 
             StartHating(victim, ch);

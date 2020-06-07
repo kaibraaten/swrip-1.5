@@ -77,13 +77,13 @@ void do_mpedit( Character *ch, std::string argument )
     if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-    if ( !IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+    if ( !victim->Flags.test(Flag::Mob::Prototype))
     {
         ch->Echo("A mobile must have a prototype flag to be mpset.\r\n");
         return;
     }
 
-    const auto &mobProgs = victim->Prototype->mprog.MudProgs();
+    const auto mobProgs = victim->Prototype->mprog.MudProgs();
 
     SetCharacterColor( AT_GREEN, ch );
 

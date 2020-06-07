@@ -1563,7 +1563,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
 
                 if (pRoomPrev && pRoomPrev->Flags.test(Flag::Room::PetShop))
                 {
-                    SetBit(mob->Flags, ACT_PET);
+                    mob->Flags.set(Flag::Mob::Pet);
                 }
             }
 

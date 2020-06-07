@@ -3,21 +3,19 @@
 
 void do_afk( Character *ch, std::string argument )
 {
-  if ( IsNpc(ch) )
-    return;
+    if ( IsNpc(ch) )
+        return;
 
-  if(IsBitSet(ch->Flags, PLR_AFK))
+    ch->Flags.flip(Flag::Plr::Afk);
+    
+    if(!ch->Flags.test(Flag::Plr::Afk))
     {
-      RemoveBit(ch->Flags, PLR_AFK);
-      ch->Echo( "You are no longer afk.\r\n" );
-      Act(AT_GREY,"$n is no longer afk.", ch, NULL, NULL, TO_ROOM);
+        ch->Echo( "You are no longer afk.\r\n" );
+        Act(AT_GREY,"$n is no longer afk.", ch, NULL, NULL, TO_ROOM);
     }
-  else
+    else
     {
-      SetBit(ch->Flags, PLR_AFK);
-      ch->Echo( "You are now afk.\r\n" );
-      Act(AT_GREY,"$n is now afk.", ch, NULL, NULL, TO_ROOM);
-      return;
+        ch->Echo( "You are now afk.\r\n" );
+        Act(AT_GREY,"$n is now afk.", ch, NULL, NULL, TO_ROOM);
     }
 }
-

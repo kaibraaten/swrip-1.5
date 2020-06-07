@@ -1198,7 +1198,7 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
         pMobIndex->LongDescr = buf;
         pMobIndex->ShortDescr[0] = CharToLowercase(pMobIndex->ShortDescr[0]);
         pMobIndex->LongDescr[0] = CharToUppercase(pMobIndex->LongDescr[0]);
-        pMobIndex->Flags = ACT_NPC | ACT_PROTOTYPE;
+        pMobIndex->Flags = CreateBitSet<Flag::MAX>({ Flag::Mob::Npc, Flag::Mob::Prototype });
         pMobIndex->Level = 1;
         pMobIndex->Position = DEFAULT_POSITION;
         pMobIndex->DefaultPosition = DEFAULT_POSITION;
@@ -1217,7 +1217,8 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
         pMobIndex->ShortDescr = cMobIndex->ShortDescr;
         pMobIndex->LongDescr = cMobIndex->LongDescr;
         pMobIndex->Description = cMobIndex->Description;
-        pMobIndex->Flags = cMobIndex->Flags | ACT_PROTOTYPE;
+        pMobIndex->Flags = cMobIndex->Flags;
+        pMobIndex->Flags.set(Flag::Mob::Prototype);
         pMobIndex->AffectedBy = cMobIndex->AffectedBy;
         pMobIndex->spec_fun = cMobIndex->spec_fun;
         pMobIndex->spec_2 = cMobIndex->spec_2;

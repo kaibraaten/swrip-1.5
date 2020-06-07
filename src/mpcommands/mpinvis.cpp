@@ -4,48 +4,48 @@
 /* Allow mobiles to go wizinvis with programs -- SB */
 void do_mpinvis( Character *ch, std::string arg )
 {
-  if ( !IsNpc(ch))
+    if ( !IsNpc(ch))
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      short level = 0;
+        short level = 0;
 
-      if ( !IsNumber( arg ) )
+        if ( !IsNumber( arg ) )
         {
-          ProgBug( "Mpinvis - Non numeric argument ", ch );
-          return;
+            ProgBug( "Mpinvis - Non numeric argument ", ch );
+            return;
         }
 
-      level = ToLong( arg );
+        level = ToLong( arg );
 
-      if ( level < 2 || level > MAX_LEVEL )
+        if ( level < 2 || level > MAX_LEVEL )
         {
-          ProgBug( "MPinvis - Invalid level ", ch );
-          return;
-	}
+            ProgBug( "MPinvis - Invalid level ", ch );
+            return;
+        }
 
-      ch->MobInvis = level;
-      ch->Echo("Mobinvis level set to %d.\r\n", level );
-      return;
+        ch->MobInvis = level;
+        ch->Echo("Mobinvis level set to %d.\r\n", level );
+        return;
     }
 
-  if ( ch->MobInvis < 2 )
-    ch->MobInvis = ch->TopLevel;
+    if ( ch->MobInvis < 2 )
+        ch->MobInvis = ch->TopLevel;
 
-  if ( IsBitSet(ch->Flags, ACT_MOBINVIS) )
+    if (ch->Flags.test(Flag::Mob::MobInvis))
     {
-      RemoveBit(ch->Flags, ACT_MOBINVIS);
-      Act(AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL,TO_ROOM );
-      ch->Echo("You slowly fade back into existence.\r\n");
+        ch->Flags.reset(Flag::Mob::MobInvis);
+        Act(AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL,TO_ROOM );
+        ch->Echo("You slowly fade back into existence.\r\n");
     }
-  else
+    else
     {
-      SetBit(ch->Flags, ACT_MOBINVIS);
-      Act( AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, TO_ROOM );
-      ch->Echo("You slowly vanish into thin air.\r\n");
+        ch->Flags.set(Flag::Mob::MobInvis);
+        Act( AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, TO_ROOM );
+        ch->Echo("You slowly vanish into thin air.\r\n");
     }
 }

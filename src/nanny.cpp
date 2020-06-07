@@ -191,7 +191,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
         return;
     }
 
-    if (IsBitSet(ch->Flags, PLR_DENY))
+    if (ch->Flags.test(Flag::Plr::Deny))
     {
         sprintf(log_buf, "Denying access to %s@%s.", argument.c_str(), d->Remote.Hostname.c_str());
         Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
@@ -536,7 +536,7 @@ static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument)
         return;
     }
 
-    SetBit(ch->Flags, PLR_ANSI);
+    ch->Flags.set(Flag::Plr::Ansi);
     FinalizeCharacter(d);
     d->ConnectionState = CON_PRESS_ENTER;
 }
@@ -545,7 +545,7 @@ static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
 {
     Character *ch = d->Character;
 
-    if (IsBitSet(ch->Flags, PLR_ANSI))
+    if (ch->Flags.test(Flag::Plr::Ansi))
     {
         ch->Echo("\033[2J");
     }
@@ -717,8 +717,8 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 
         /* Added by Narn.  Start new characters with autoexit and autgold
            already turned on.  Very few people don't use those. */
-        SetBit(ch->Flags, PLR_AUTOGOLD);
-        SetBit(ch->Flags, PLR_AUTOEXIT);
+        ch->Flags.set(Flag::Plr::Autocred);
+        ch->Flags.set(Flag::Plr::Autoexits);
 
         /* New players don't have to earn some eq */
 
@@ -781,8 +781,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
         CharacterToRoom(ch, GetRoom(WhereHome(ch)));
     }
 
-    if (IsBitSet(ch->Flags, ACT_POLYMORPHED))
-        RemoveBit(ch->Flags, ACT_POLYMORPHED);
+    ch->Flags.reset(Flag::Mob::Polymorphed);
 
     if (GetTimer(ch, TIMER_SHOVEDRAG) > 0)
         RemoveTimer(ch, TIMER_SHOVEDRAG);

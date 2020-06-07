@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #ifdef __STRICT_ANSI__
- /* To include the prototype for gethostname() */
+/* To include the prototype for gethostname() */
 #define _DEFAULT_SOURCE
 #define _BSD_SOURCE
 #endif
@@ -82,7 +82,7 @@ static void CaughtAlarm(int dummy);
 static bool CheckBadSocket(socket_t desc);
 static void AcceptNewSocket(socket_t ctrl);
 static std::string ActString(const std::string &format, Character *to, Character *ch,
-    const void *arg1, const void *arg2);
+                             const void *arg1, const void *arg2);
 static void HandleSocketInput();
 static void HandleSocketOutput();
 static void Sleep(timeval &last_time);
@@ -228,7 +228,7 @@ socket_t InitializeSocket(unsigned short port)
     }
 
     if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR,
-        &optval, optlen) == SOCKET_ERROR)
+                   &optval, optlen) == SOCKET_ERROR)
     {
         perror("Init_socket: SO_REUSEADDR");
         closesocket(fd);
@@ -242,7 +242,7 @@ socket_t InitializeSocket(unsigned short port)
     ld.l_linger = 1000;
 
     if (setsockopt(fd, SOL_SOCKET, SO_DONTLINGER,
-        (const char*)&ld, sizeof(ld)) == SOCKET_ERROR)
+                   (const char*)&ld, sizeof(ld)) == SOCKET_ERROR)
     {
         perror("Init_socket: SO_DONTLINGER");
         closesocket(fd);
@@ -401,13 +401,13 @@ static void HandleSocketInput()
             continue;
         }
         else if ((d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
-            && d->Idle > 7200 && !IsBitSet(d->Character->Flags, PLR_AFK)) /* 30 minutes  */
+                 && d->Idle > 7200 && !d->Character->Flags.test(Flag::Plr::Afk)) /* 30 minutes  */
         {
             if ((d->Character && d->Character->InRoom) ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
             {
                 WriteToDescriptor(d.get(),
-                    "Idle 30 minutes. Activating AFK flag.\r\n", 0);
-                SetBit(d->Character->Flags, PLR_AFK);
+                                  "Idle 30 minutes. Activating AFK flag.\r\n", 0);
+                d->Character->Flags.set(Flag::Plr::Afk);
                 Act(AT_GREY, "$n is now afk due to idle time.", d->Character, NULL, NULL, TO_ROOM);
                 continue;
             }
@@ -420,7 +420,7 @@ static void HandleSocketInput()
             if (d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
             {
                 WriteToDescriptor(d.get(),
-                    "Idle timeout... disconnecting.\r\n", 0);
+                                  "Idle timeout... disconnecting.\r\n", 0);
                 d->OutBuffer.str("");
                 CloseDescriptor(d, true);
                 continue;
@@ -631,7 +631,7 @@ static void NewDescriptor(socket_t new_desc)
 
     std::string buf = inet_ntoa(sock.sin_addr);
     sprintf(log_buf, "Sock.sinaddr:  %s, port %hd.",
-        buf.c_str(), dnew->Remote.Port);
+            buf.c_str(), dnew->Remote.Port);
     Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
 
     dnew->Remote.HostIP = buf;
@@ -639,7 +639,7 @@ static void NewDescriptor(socket_t new_desc)
     if (!SysData.NoNameResolving)
     {
         from = gethostbyaddr((char *)&sock.sin_addr,
-            sizeof(sock.sin_addr), AF_INET);
+                             sizeof(sock.sin_addr), AF_INET);
     }
     else
     {
@@ -649,11 +649,11 @@ static void NewDescriptor(socket_t new_desc)
     dnew->Remote.Hostname = from ? from->h_name : buf;
 
     auto pban = Bans->Find([dnew](const auto &b)
-    {
-        return (StringPrefix(b->Site, dnew->Remote.Hostname) == 0
-            || StringSuffix(b->Site, dnew->Remote.Hostname) == 0)
-            && b->Level >= LEVEL_IMPLEMENTOR;
-    });
+                           {
+                               return (StringPrefix(b->Site, dnew->Remote.Hostname) == 0
+                                       || StringSuffix(b->Site, dnew->Remote.Hostname) == 0)
+                               && b->Level >= LEVEL_IMPLEMENTOR;
+                           });
 
     if (pban != nullptr)
     {
@@ -725,7 +725,7 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
         else
         {
             Log->Bug("Close_socket: dclose->Original without character %s",
-                !dclose->Original->Name.empty() ? dclose->Original->Name.c_str() : "unknown");
+                     !dclose->Original->Name.empty() ? dclose->Original->Name.c_str() : "unknown");
             dclose->Character = dclose->Original;
             dclose->Original = NULL;
         }
@@ -738,7 +738,7 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
         sprintf(log_buf, "Closing link to %s.", ch->Name.c_str());
         Log->LogStringPlus(log_buf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
         PlayerCharacters->Remove(dclose->Character);
-        
+
         if (dclose->ConnectionState == CON_PLAYING
             || dclose->ConnectionState == CON_EDITING)
         {
@@ -785,7 +785,7 @@ bool WriteToDescriptor(Descriptor *desc, const std::string &orig, int length)
         if (nWrite == SOCKET_ERROR)
         {
             Log->Bug("Write_to_descriptor: error on socket %d: %s",
-                desc->Socket, strerror(GETERROR));
+                     desc->Socket, strerror(GETERROR));
             perror("Write_to_descriptor");
             return false;
         }
@@ -820,7 +820,7 @@ void SetCharacterColor(short AType, const Character *ch)
 
     och = (ch->Desc->Original ? ch->Desc->Original : ch);
 
-    if (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI))
+    if (!IsNpc(och) && och->Flags.test(Flag::Plr::Ansi))
     {
         if (AType == 7)
         {
@@ -829,7 +829,7 @@ void SetCharacterColor(short AType, const Character *ch)
         else
         {
             buf = FormatString("\033[0;%d;%s%dm", (AType & 8) == 8,
-                            (AType > 15 ? "5;" : ""), (AType & 7) + 30);
+                               (AType > 15 ? "5;" : ""), (AType & 7) + 30);
         }
 
         ch->Desc->WriteToBuffer(buf);
@@ -845,7 +845,7 @@ static std::string NAME(const Character *ch)
 }
 
 static std::string ActString(const std::string &format, Character *to, Character *ch,
-    const void *arg1, const void *arg2)
+                             const void *arg1, const void *arg2)
 {
     static const char * const he_she[] = { "it",  "he",  "she" };
     static const char * const him_her[] = { "it",  "him", "her" };
@@ -904,7 +904,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
                     Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name.c_str(),
-                        ch->Sex);
+                             ch->Sex);
                     i = "it";
                 }
                 else
@@ -918,7 +918,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
                     Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name.c_str(),
-                        vch->Sex);
+                             vch->Sex);
                     i = "it";
                 }
                 else
@@ -932,7 +932,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
                     Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name.c_str(),
-                        ch->Sex);
+                             ch->Sex);
                     i = "it";
                 }
                 else
@@ -946,7 +946,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
                     Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name.c_str(),
-                        vch->Sex);
+                             vch->Sex);
                     i = "it";
                 }
                 else
@@ -960,7 +960,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
                     Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name.c_str(),
-                        ch->Sex);
+                             ch->Sex);
                     i = "its";
                 }
                 else
@@ -974,7 +974,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
                     Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name.c_str(),
-                        vch->Sex);
+                             vch->Sex);
                     i = "its";
                 }
                 else
@@ -993,12 +993,12 @@ static std::string ActString(const std::string &format, Character *to, Character
 
             case 'p':
                 i = (!to || CanSeeObject(to, obj1)
-                    ? GetObjectShortDescription(obj1) : "something");
+                     ? GetObjectShortDescription(obj1) : "something");
                 break;
 
             case 'P':
                 i = (!to || CanSeeObject(to, obj2)
-                    ? GetObjectShortDescription(obj2) : "something");
+                     ? GetObjectShortDescription(obj2) : "something");
                 break;
 
             case 'd':
@@ -1058,8 +1058,12 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
     /*
      * ACT_SECRETIVE handling
      */
-    if (IsNpc(ch) && IsBitSet(ch->Flags, ACT_SECRETIVE) && type != TO_CHAR)
+    if (IsNpc(ch)
+        && ch->Flags.test(Flag::Mob::Secretive)
+        && type != TO_CHAR)
+    {
         return;
+    }
 
     if (type == TO_VICT)
     {
@@ -1069,6 +1073,7 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
             Log->Bug("%s (%s)", ch->Name.c_str(), format.c_str());
             return;
         }
+
         if (!vch->InRoom)
         {
             Log->Bug("Act: vch in NULL room!");
@@ -1089,10 +1094,10 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
         }
 
         std::list<Object*> objectsToTrigger = Filter(to->InRoom->Objects(),
-            [](auto to_obj)
-        {
-            return IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG);
-        });
+                                                     [](auto to_obj)
+                                                     {
+                                                         return IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG);
+                                                     });
 
         for (Object *to_obj : objectsToTrigger)
         {
@@ -1118,7 +1123,7 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
         to = person;
 
         if (((!to || !to->Desc)
-            && (IsNpc(to) && !IsBitSet(to->Prototype->mprog.progtypes, ACT_PROG)))
+             && (IsNpc(to) && !IsBitSet(to->Prototype->mprog.progtypes, ACT_PROG)))
             || !IsAwake(to))
             continue;
 
@@ -1178,7 +1183,7 @@ void DisplayPrompt(Descriptor *d)
 {
     const Character *ch = d->Character;
     const Character *och = d->Original ? d->Original : d->Character;
-    const bool ansi = !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI);
+    const bool ansi = !IsNpc(och) && och->Flags.test(Flag::Plr::Ansi);
     std::string promptBuffer;
     const char *prompt = nullptr;
     char buf[MAX_STRING_LENGTH] = { '\0' };
@@ -1319,21 +1324,26 @@ void DisplayPrompt(Descriptor *d)
                 break;
 
             case 'R':
-                if (IsBitSet(och->Flags, PLR_ROOMVNUM))
+                if (ch->Flags.test(Flag::Plr::RoomVnum))
                     sprintf(pbuf, "<#%ld> ", ch->InRoom->Vnum);
                 break;
 
             case 'i':
-                if ((!IsNpc(ch) && IsBitSet(ch->Flags, PLR_WIZINVIS)) ||
-                    (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOBINVIS)))
+                if ((!IsNpc(ch) && ch->Flags.test(Flag::Plr::WizInvis))
+                    || (IsNpc(ch) && ch->Flags.test(Flag::Mob::MobInvis)))
+                {
                     sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->MobInvis : ch->PCData->WizInvis));
+                }
                 else if (IsAffectedBy(ch, Flag::Affect::Invisible))
+                {
                     sprintf(pbuf, "(Invis) ");
+                }
+                
                 break;
 
             case 'I':
-                the_stat = (IsNpc(ch) ? (IsBitSet(ch->Flags, ACT_MOBINVIS) ? ch->MobInvis : 0)
-                    : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->PCData->WizInvis : 0));
+                the_stat = (IsNpc(ch) ? (ch->Flags.test(Flag::Mob::MobInvis) ? ch->MobInvis : 0)
+                            : (ch->Flags.test(Flag::Plr::WizInvis) ? ch->PCData->WizInvis : 0));
                 break;
             }
 

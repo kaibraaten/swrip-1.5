@@ -3,35 +3,34 @@
 
 void do_deny( Character *ch, std::string arg )
 {
-  Character *victim = nullptr;
+    Character *victim = nullptr;
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ch->Echo( "Deny whom?\r\n" );
-      return;
+        ch->Echo( "Deny whom?\r\n" );
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      ch->Echo( "They aren't here.\r\n" );
-      return;
+        ch->Echo( "They aren't here.\r\n" );
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if ( IsNpc(victim) )
     {
-      ch->Echo( "Not on NPC's.\r\n" );
-      return;
+        ch->Echo( "Not on NPC's.\r\n" );
+        return;
     }
 
-  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      ch->Echo( "You failed.\r\n" );
-      return;
+        ch->Echo( "You failed.\r\n" );
+        return;
     }
 
-  SetBit(victim->Flags, PLR_DENY);
-  victim->Echo( "You are denied access!\r\n" );
-  ch->Echo( "OK.\r\n" );
-  do_quit( victim, "" );
+    victim->Flags.set(Flag::Plr::Deny);
+    victim->Echo( "You are denied access!\r\n" );
+    ch->Echo( "OK.\r\n" );
+    do_quit( victim, "" );
 }
-

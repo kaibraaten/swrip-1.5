@@ -26,7 +26,7 @@ void do_tell( Character *ch, std::string argument )
     }
 
     if (!IsNpc(ch)
-        && ( IsBitSet(ch->Flags, PLR_SILENCE) || IsBitSet(ch->Flags, PLR_NO_TELL) ) )
+        && (ch->Flags.test(Flag::Plr::Silence) || ch->Flags.test(Flag::Plr::NoTell)))
     {
         ch->Echo("You can't do that.\r\n");
         return;
@@ -87,14 +87,14 @@ void do_tell( Character *ch, std::string argument )
 
     if ( !IsNpc( victim ) && ( victim->Switched )
          && ( GetTrustLevel( ch ) > LEVEL_AVATAR )
-         && !IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+         && !victim->Switched->Flags.test(Flag::Mob::Polymorphed)
          && !IsAffectedBy(victim->Switched, Flag::Affect::Possess))
     {
         ch->Echo("That player is switched.\r\n");
         return;
     }
-    else if ( !IsNpc( victim ) && ( victim->Switched )
-              && (IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+    else if ( !IsNpc( victim ) && victim->Switched
+              && (victim->Switched->Flags.test(Flag::Mob::Polymorphed)
                   ||  IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
     {
         switched_victim = victim->Switched;
@@ -112,7 +112,7 @@ void do_tell( Character *ch, std::string argument )
         return;
     }
 
-    if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_SILENCE ) ) )
+    if ( !IsNpc (victim) && (victim->Flags.test(Flag::Plr::Silence)))
     {
         ch->Echo("That player is silenced. %s will receive your message but can not respond.\r\n",
                  Capitalize( HeSheIt( victim ) ).c_str() );
@@ -134,7 +134,7 @@ void do_tell( Character *ch, std::string argument )
         return;
     }
 
-    if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_AFK ) ) )
+    if ( !IsNpc (victim) && victim->Flags.test(Flag::Plr::Afk))
     {
         ch->Echo("That player is afk so %s may not respond.\r\n",
                  Capitalize( HeSheIt( victim ) ).c_str() );

@@ -3,54 +3,52 @@
 
 void do_log( Character *ch, std::string arg )
 {
-  Character *victim = nullptr;
+    Character *victim = nullptr;
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ch->Echo("Log whom?\r\n");
-      return;
+        ch->Echo("Log whom?\r\n");
+        return;
     }
 
-  if ( !StrCmp( arg, "all" ) )
+    if ( !StrCmp( arg, "all" ) )
     {
-      if ( fLogAll )
+        if ( fLogAll )
         {
-          fLogAll = false;
-          ch->Echo("Log ALL off.\r\n");
+            fLogAll = false;
+            ch->Echo("Log ALL off.\r\n");
         }
-      else
+        else
         {
-          fLogAll = true;
-          ch->Echo("Log ALL on.\r\n");
+            fLogAll = true;
+            ch->Echo("Log ALL on.\r\n");
         }
-      return;
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if ( IsNpc(victim) )
     {
-      ch->Echo("Not on NPC's.\r\n");
-      return;
+        ch->Echo("Not on NPC's.\r\n");
+        return;
     }
 
-  /*
-   * No level check, gods can log anyone.
-   */
-  if ( IsBitSet(victim->Flags, PLR_LOG) )
+    /*
+     * No level check, gods can log anyone.
+     */
+    if (victim->Flags.test(Flag::Plr::Log))
     {
-      RemoveBit(victim->Flags, PLR_LOG);
-      ch->Echo("LOG removed.\r\n");
+        victim->Flags.reset(Flag::Plr::Log);
+        ch->Echo("LOG removed.\r\n");
     }
-  else
+    else
     {
-      SetBit(victim->Flags, PLR_LOG);
-      ch->Echo("LOG set.\r\n");
+        victim->Flags.set(Flag::Plr::Log);
+        ch->Echo("LOG set.\r\n");
     }
 }
-
-

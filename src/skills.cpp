@@ -121,8 +121,8 @@ void Trip( Character *ch, Character *victim )
       Act( AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT    );
       Act( AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR    );
       Act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
-      RemoveBit( victim->Mount->Flags, ACT_MOUNTED );
-      victim->Mount = NULL;
+      victim->Mount->Flags.reset(Flag::Mob::Mounted);
+      victim->Mount = nullptr;
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, 2 * PULSE_VIOLENCE );
       victim->Position = POS_RESTING;

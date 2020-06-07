@@ -19,7 +19,7 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
         return false;
     }
 
-    if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_NO_EMOTE))
+    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::NoEmote))
     {
         ch->Echo("You are anti-social!\r\n");
         return true;

@@ -551,7 +551,7 @@ void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobi
 {
     if (install)
     {
-        RemoveBit(mob->Flags, ACT_PROTOTYPE);
+        mob->Flags.reset(Flag::Mob::Prototype);
     }
 
     lua_pushinteger(L, mob->Vnum);
@@ -905,14 +905,15 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     LuaGetfieldInt(L, "HitRoll", &mob->HitRoll);
     LuaGetfieldInt(L, "DamRoll", &mob->DamRoll);
     
-    mob->Flags = LuaLoadFlags(L, "Flags").to_ulong() | ACT_NPC;
-    mob->AffectedBy = LuaLoadFlags(L, "AffectedBy").to_ulong();
-    mob->AttackFlags = LuaLoadFlags(L, "AttackFlags").to_ulong();
-    mob->DefenseFlags = LuaLoadFlags(L, "DefenseFlags").to_ulong();
-    mob->Resistant = LuaLoadFlags(L, "Resistant").to_ulong();
-    mob->Immune = LuaLoadFlags(L, "Immune").to_ulong();
-    mob->Susceptible = LuaLoadFlags(L, "Susceptible").to_ulong();
-    mob->VipFlags = LuaLoadFlags(L, "VipFlags").to_ulong();
+    mob->Flags = LuaLoadFlags(L, "Flags");
+    mob->Flags.set(Flag::Mob::Npc);
+    mob->AffectedBy = LuaLoadFlags(L, "AffectedBy");
+    mob->AttackFlags = LuaLoadFlags(L, "AttackFlags");
+    mob->DefenseFlags = LuaLoadFlags(L, "DefenseFlags");
+    mob->Resistant = LuaLoadFlags(L, "Resistant");
+    mob->Immune = LuaLoadFlags(L, "Immune");
+    mob->Susceptible = LuaLoadFlags(L, "Susceptible");
+    mob->VipFlags = LuaLoadFlags(L, "VipFlags");
     
     LuaLoadTable(L, "HitChance", LoadHitChance, mob);
     LuaLoadTable(L, "Damage", LoadDamage, mob);

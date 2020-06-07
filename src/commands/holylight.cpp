@@ -3,17 +3,17 @@
 
 void do_holylight( Character *ch, std::string argument )
 {
-  if ( IsNpc(ch) )
-    return;
+    if ( IsNpc(ch) )
+        return;
 
-  if ( IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
+    ch->Flags.flip(Flag::Plr::Holylight);
+    
+    if (ch->Flags.test(Flag::Plr::Holylight))
     {
-      RemoveBit(ch->Flags, PLR_HOLYLIGHT);
-      ch->Echo("Holy light mode off.\r\n");
+        ch->Echo("Holy light mode on.\r\n");
     }
-  else
+    else
     {
-      SetBit(ch->Flags, PLR_HOLYLIGHT);
-      ch->Echo("Holy light mode on.\r\n");
+        ch->Echo("Holy light mode off.\r\n");
     }
 }

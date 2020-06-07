@@ -21,7 +21,7 @@ void do_kick( Character *ch, std::string argument )
         return;
     }
 
-    if ( IsBitSet(victim->Flags, PLR_AFK))
+    if (victim->Flags.test(Flag::Plr::Afk))
     {
         Log->Info("%s just attacked %s with an afk flag on!"
                   , ch->Name.c_str(), victim->Name.c_str() );

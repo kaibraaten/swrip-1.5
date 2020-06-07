@@ -7,7 +7,6 @@ void do_mpecho( Character *ch, std::string argument )
 {
     std::string arg1;
     short color = 0;
-    int mobflags = 0;
 
     if ( IsAffectedBy( ch, Flag::Affect::Charm))
         return;
@@ -24,8 +23,8 @@ void do_mpecho( Character *ch, std::string argument )
         return;
     }
 
-    mobflags = ch->Flags;
-    RemoveBit(ch->Flags, ACT_SECRETIVE);
+    auto mobflags = ch->Flags;
+    ch->Flags.reset(Flag::Mob::Secretive);
 
     if ( (color = GetColor(argument)) )
     {

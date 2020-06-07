@@ -94,9 +94,9 @@ void do_score(Character *ch, std::string argument)
              ch->CarryNumber, GetCarryCapacityNumber(ch));
 
     ch->Echo("&cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
-             IsBitSet(ch->Flags, PLR_AUTOEXIT) ? '*' : ' ',
-             IsBitSet(ch->Flags, PLR_AUTOLOOT) ? '*' : ' ',
-             IsBitSet(ch->Flags, PLR_AUTOSAC) ? '*' : ' ');
+             ch->Flags.test(Flag::Plr::Autoexits) ? '*' : ' ',
+             ch->Flags.test(Flag::Plr::Autoloot) ? '*' : ' ',
+             ch->Flags.test(Flag::Plr::Autosac) ? '*' : ' ');
 
     switch (ch->Position)
     {
@@ -255,7 +255,7 @@ void do_score(Character *ch, std::string argument)
     {
         ch->Echo("&C----------------------------------------------------------------------------\r\n");
         ch->Echo("&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
-                 IsBitSet(ch->Flags, PLR_WIZINVIS) ? "X" : " ", ch->PCData->WizInvis );
+                 ch->Flags.test(Flag::Plr::WizInvis) ? "X" : " ", ch->PCData->WizInvis );
         ch->Echo("&cBamfin:  &C%s\r\n", !ch->PCData->BamfIn.empty()
                  ? ch->PCData->BamfIn.c_str()
                  : FormatString("%s appears in a swirling mist.", ch->Name.c_str()).c_str());

@@ -17,7 +17,7 @@ void do_board(Character *ch, std::string argument)
         return;
     }
 
-    if (IsBitSet(ch->Flags, ACT_MOUNTED) && IsNpc(ch))
+    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Mounted))
     {
         Act(AT_PLAIN, "&RYou can't go in there riding THAT.",
             ch, NULL, argument.c_str(), TO_CHAR);

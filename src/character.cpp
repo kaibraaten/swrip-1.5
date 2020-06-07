@@ -51,9 +51,9 @@ struct Character::Impl
 
 Character::Character(std::unique_ptr<class PCData> pcdata)
     : PCData(std::move(pcdata)),
-    Flags(PLR_BLANK | PLR_COMBINE | PLR_PROMPT),
-    PermStats(10),
-    pImpl(std::make_unique<Impl>())
+      Flags(CreateBitSet<Flag::MAX>({ Flag::Plr::Blank, Flag::Plr::Combine, Flag::Plr::Prompt })),
+      PermStats(10),
+      pImpl(std::make_unique<Impl>())
 {
     Ability.Level.fill(0);
     Ability.Experience.fill(0);
@@ -61,40 +61,40 @@ Character::Character(std::unique_ptr<class PCData> pcdata)
 
 Character::Character(std::shared_ptr<ProtoMobile> protoMob)
     : spec_fun(protoMob->spec_fun),
-    spec_2(protoMob->spec_2),
-    Prototype(protoMob),
-    Name(protoMob->Name),
-    ShortDescr(protoMob->ShortDescr),
-    LongDescr(protoMob->LongDescr),
-    Description(protoMob->Description),
-    Sex(protoMob->Sex),
-    Race(protoMob->Race),
-    TopLevel(NumberFuzzy(protoMob->Level)),
-    NumberOfAttacks(protoMob->NumberOfAttacks),
-    Gold(protoMob->Gold),
-    Flags(protoMob->Flags),
-    AffectedBy(protoMob->AffectedBy),
-    Resistant(protoMob->Resistant),
-    Immune(protoMob->Immune),
-    Susceptible(protoMob->Susceptible),
-    AttackFlags(protoMob->AttackFlags),
-    DefenseFlags(protoMob->DefenseFlags),
-    Speaks(protoMob->Speaks),
-    Speaking(protoMob->Speaking),
-    Alignment(protoMob->Alignment),
-    BareNumDie(protoMob->DamNoDice),
-    BareSizeDie(protoMob->DamSizeDice),
-    HitRoll(protoMob->HitRoll),
-    DamRoll(protoMob->DamRoll),
-    HitPlus(protoMob->HitPlus),
-    DamPlus(protoMob->DamPlus),
-    Position(protoMob->Position),
-    DefaultPosition(protoMob->DefaultPosition),
-    Height(protoMob->Height),
-    Weight(protoMob->Weight),
-    VipFlags(protoMob->VipFlags),
-    PermStats(protoMob->Stats),
-    pImpl(std::make_unique<Impl>())
+      spec_2(protoMob->spec_2),
+      Prototype(protoMob),
+      Name(protoMob->Name),
+      ShortDescr(protoMob->ShortDescr),
+      LongDescr(protoMob->LongDescr),
+      Description(protoMob->Description),
+      Sex(protoMob->Sex),
+      Race(protoMob->Race),
+      TopLevel(NumberFuzzy(protoMob->Level)),
+      NumberOfAttacks(protoMob->NumberOfAttacks),
+      Gold(protoMob->Gold),
+      Flags(protoMob->Flags),
+      AffectedBy(protoMob->AffectedBy),
+      Resistant(protoMob->Resistant),
+      Immune(protoMob->Immune),
+      Susceptible(protoMob->Susceptible),
+      AttackFlags(protoMob->AttackFlags),
+      DefenseFlags(protoMob->DefenseFlags),
+      Speaks(protoMob->Speaks),
+      Speaking(protoMob->Speaking),
+      Alignment(protoMob->Alignment),
+      BareNumDie(protoMob->DamNoDice),
+      BareSizeDie(protoMob->DamSizeDice),
+      HitRoll(protoMob->HitRoll),
+      DamRoll(protoMob->DamRoll),
+      HitPlus(protoMob->HitPlus),
+      DamPlus(protoMob->DamPlus),
+      Position(protoMob->Position),
+      DefaultPosition(protoMob->DefaultPosition),
+      Height(protoMob->Height),
+      Weight(protoMob->Weight),
+      VipFlags(protoMob->VipFlags),
+      PermStats(protoMob->Stats),
+      pImpl(std::make_unique<Impl>())
 {
     Ability.Level.fill(0);
     Ability.Experience.fill(0);
@@ -209,7 +209,7 @@ void Character::Remove(std::shared_ptr<Timer> timer)
 bool IsWizVis(const Character *ch, const Character *victim)
 {
     if (!IsNpc(victim)
-        && IsBitSet(victim->Flags, PLR_WIZINVIS)
+        && victim->Flags.test(Flag::Plr::WizInvis)
         && GetTrustLevel(ch) < victim->PCData->WizInvis)
         return false;
 
@@ -458,10 +458,10 @@ bool HasComlink(const Character *ch)
 bool HasDiploma(const Character *ch)
 {
     return Find(ch->Objects(),
-        [](auto obj)
-    {
-        return obj->Prototype->Vnum == OBJ_VNUM_SCHOOL_DIPLOMA;
-    });
+                [](auto obj)
+                {
+                    return obj->Prototype->Vnum == OBJ_VNUM_SCHOOL_DIPLOMA;
+                });
 }
 
 short GetAbilityLevel(const Character *ch, short ability)
@@ -494,10 +494,10 @@ void SetAbilityLevel(Character *ch, short ability, int newlevel)
 bool IsAffected(const Character *ch, int sn)
 {
     return Find(ch->Affects(),
-        [sn](const auto affect)
-    {
-        return affect->Type == sn;
-    }) != nullptr;
+                [sn](const auto affect)
+                {
+                    return affect->Type == sn;
+                }) != nullptr;
 }
 
 bool IsAffectedBy(const Character *ch, size_t affected_by_bit)
@@ -522,7 +522,7 @@ Object *GetEquipmentOnCharacter(const Character *ch, WearLocation iWear)
                 return obj;
             }
             else if (!maxobj
-                || obj->Prototype->Layers > maxobj->Prototype->Layers)
+                     || obj->Prototype->Layers > maxobj->Prototype->Layers)
             {
                 maxobj = obj;
             }
@@ -543,11 +543,11 @@ void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
         && (otmp->Prototype->Layers == 0 || obj->Prototype->Layers == 0))
     {
         Log->Bug("%s: %s %s (%ld) already has %s (%ld) equipped on wear location %d.",
-            __FUNCTION__,
-            IsNpc(ch) ? "Mob" : "Player",
-            ch->Name.c_str(), IsNpc(ch) ? ch->Prototype->Vnum : INVALID_VNUM,
-            otmp->ShortDescr.c_str(), otmp->Prototype->Vnum,
-            iWear);
+                 __FUNCTION__,
+                 IsNpc(ch) ? "Mob" : "Player",
+                 ch->Name.c_str(), IsNpc(ch) ? ch->Prototype->Vnum : INVALID_VNUM,
+                 otmp->ShortDescr.c_str(), otmp->Prototype->Vnum,
+                 iWear);
         return;
     }
 
@@ -907,7 +907,7 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
     {
         if (IsAffectedBy(victim, Flag::Affect::Invisible)
             || IsAffectedBy(victim, Flag::Affect::Hide)
-            || IsBitSet(victim->Flags, PLR_WIZINVIS))
+            || victim->Flags.test(Flag::Plr::WizInvis))
             return false;
         else
             return true;
@@ -917,7 +917,7 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
         return true;
 
     if (!IsNpc(victim)
-        && IsBitSet(victim->Flags, PLR_WIZINVIS)
+        && victim->Flags.test(Flag::Plr::WizInvis)
         && GetTrustLevel(ch) < victim->PCData->WizInvis)
         return false;
 
@@ -929,7 +929,7 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
 
     /* SB */
     if (IsNpc(victim)
-        && IsBitSet(victim->Flags, ACT_MOBINVIS)
+        && victim->Flags.test(Flag::Mob::MobInvis)
         && GetTrustLevel(ch) < victim->MobInvis)
         return false;
 
@@ -938,7 +938,7 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
         && (!victim->Switched || !IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
         return false;
 
-    if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT))
+    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return true;
 
     /* The miracle cure for blindness? -- Altrag */
@@ -974,7 +974,7 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
  */
 bool CanSeeObject(const Character *ch, const Object *obj)
 {
-    if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT))
+    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return true;
 
     if (obj->Flags.test(Flag::Obj::Burried))
@@ -1123,7 +1123,7 @@ int GetCarryCapacityNumber(const Character *ch)
     if (!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
         return GetTrustLevel(ch) * 200;
 
-    if (IsNpc(ch) && IsBitSet(ch->Flags, ACT_PET))
+    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Pet))
         return 0;
 
     if (GetEquipmentOnCharacter(ch, WEAR_WIELD))
@@ -1152,7 +1152,7 @@ int GetCarryCapacityWeight(const Character *ch)
     if (!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
         return 1000000;
 
-    if (IsNpc(ch) && IsBitSet(ch->Flags, ACT_PET))
+    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Pet))
         return 0;
 
     return StrengthBonus[GetCurrentStrength(ch)].Carry;
@@ -1160,7 +1160,7 @@ int GetCarryCapacityWeight(const Character *ch)
 
 bool Character::IsNpc() const
 {
-    return IsBitSet(Flags, ACT_NPC) || PCData == nullptr;
+    return Flags.test(Flag::Mob::Npc) || PCData == nullptr;
 }
 
 bool IsNpc(const Character* ch)
@@ -1297,7 +1297,7 @@ bool IsDroid(const Character *ch)
         || ch->Race == RACE_GLADIATOR_DROID
         || ch->Race == RACE_ASTROMECH_DROID
         || ch->Race == RACE_INTERROGATION_DROID
-        || (IsNpc(ch) && IsBitSet(ch->Flags, ACT_DROID));
+        || (IsNpc(ch) && ch->Flags.test(Flag::Mob::Droid));
 }
 
 void ResetPlayerOnDeath(Character *ch)
@@ -1342,7 +1342,7 @@ void ResetPlayerOnDeath(Character *ch)
 
 bool IsBlind(const Character *ch)
 {
-    if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT))
+    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return false;
 
     if (IsAffectedBy(ch, Flag::Affect::TrueSight))
@@ -1359,11 +1359,11 @@ bool IsBlind(const Character *ch)
 bool HasKey(const Character *ch, vnum_t key)
 {
     return Find(ch->Objects(),
-        [key](auto obj)
-    {
-        return obj->Prototype->Vnum == key
-            || obj->Value[OVAL_KEY_UNLOCKS_VNUM] == key;
-    });
+                [key](auto obj)
+                {
+                    return obj->Prototype->Vnum == key
+                        || obj->Value[OVAL_KEY_UNLOCKS_VNUM] == key;
+                });
 }
 
 /*
@@ -1407,7 +1407,7 @@ short GetCarryEncumbrance(const Character *ch, short move)
 vnum_t WhereHome(const Character *ch)
 {
     auto homes = Homes->FindHomesForResident(ch->Name);
-    
+
     if (!homes.empty())
     {
         for(const auto &home : homes)
@@ -1417,7 +1417,7 @@ vnum_t WhereHome(const Character *ch)
                 return home->Vnum();
             }
         }
-        
+
         return homes.front()->Vnum();
     }
     else if (IsImmortal(ch))
@@ -1468,7 +1468,7 @@ void FreeCharacter(Character *ch)
         {
             StopEditing(ch);
         }
-        
+
         if (ch->PCData->Note)
         {
             ch->PCData->Note.reset();
@@ -1636,8 +1636,8 @@ void AddReinforcements(Character *ch)
         {
             mob->Name = ch->PCData->ClanInfo.Clan->Name;
             mob->LongDescr = FormatString("(%s) %s",
-                ch->PCData->ClanInfo.Clan->Name.c_str(),
-                mob->LongDescr.c_str());
+                                          ch->PCData->ClanInfo.Clan->Name.c_str(),
+                                          mob->LongDescr.c_str());
         }
 
         Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM);

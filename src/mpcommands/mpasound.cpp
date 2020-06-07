@@ -7,8 +7,6 @@
 /* Prints the argument to all the rooms around the mobile */
 void do_mpasound(Character *ch, std::string argument)
 {
-    int mobflags = 0;
-
     assert(ch != nullptr);
 
     if (IsAffectedBy(ch, Flag::Affect::Charm))
@@ -26,14 +24,14 @@ void do_mpasound(Character *ch, std::string argument)
         return;
     }
 
-    mobflags = ch->Flags;
-    RemoveBit(ch->Flags, ACT_SECRETIVE);
+    auto mobflags = ch->Flags;
+    ch->Flags.reset(Flag::Mob::Secretive);
     auto was_in_room = ch->InRoom;
 
     for (auto pexit : was_in_room->Exits())
     {
         if (pexit->ToRoom
-            &&   pexit->ToRoom != was_in_room)
+            && pexit->ToRoom != was_in_room)
         {
             ch->InRoom = pexit->ToRoom;
             MOBtrigger = false;

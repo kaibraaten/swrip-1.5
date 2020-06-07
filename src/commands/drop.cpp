@@ -46,7 +46,7 @@ void do_drop( Character *ch, std::string argument )
         return;
 
     if ( ch->InRoom->Flags.test( Flag::Room::NoDrop )
-         || ( !IsNpc(ch) && IsBitSet( ch->Flags, PLR_LITTERBUG )) )
+         || ( !IsNpc(ch) && ch->Flags.test(Flag::Plr::Litterbug)))
     {
         SetCharacterColor( AT_MAGIC, ch );
         ch->Echo( "A magical force stops you!\r\n" );

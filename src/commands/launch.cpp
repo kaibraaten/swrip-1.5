@@ -130,7 +130,7 @@ void do_launch(Character *ch, std::string argument)
             }
         }
 
-        if (IsBitSet(ch->Flags, PLR_DONTAUTOFUEL))
+        if (ch->Flags.test(Flag::Plr::DontAutofuel))
         {
             if (IsShipDisabled(ship))
             {
@@ -177,7 +177,7 @@ void do_launch(Character *ch, std::string argument)
             ch->Echo("&GYou pay %ld credits to ready the ship for launch.\r\n", price);
         }
 
-        if (!IsBitSet(ch->Flags, PLR_DONTAUTOFUEL))
+        if (!ch->Flags.test(Flag::Plr::DontAutofuel))
         {
             if (GetShipFromHangar(ship->InRoom->Vnum) == NULL || ship->Class == SHIP_PLATFORM)
             {

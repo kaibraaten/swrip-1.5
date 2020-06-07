@@ -3,25 +3,19 @@
 
 void do_ansi( Character *ch, std::string argument )
 {
-  if ( argument.empty() )
+    if ( argument.empty() )
     {
-      ch->Echo( "ANSI ON or OFF?\r\n" );
-      return;
+        ch->Echo( "ANSI ON or OFF?\r\n" );
     }
-
-  if ( !StrCmp(argument, "on") )
+    else if ( !StrCmp(argument, "on") )
     {
-      SetBit(ch->Flags, PLR_ANSI);
-      SetCharacterColor( AT_WHITE + AT_BLINK, ch);
-      ch->Echo( "ANSI ON!!!\r\n" );
-      return;
+        ch->Flags.set(Flag::Plr::Ansi);
+        SetCharacterColor( AT_WHITE + AT_BLINK, ch);
+        ch->Echo( "ANSI ON!!!\r\n" );
     }
-
-  if ( !StrCmp(argument, "off") )
+    else if ( !StrCmp(argument, "off") )
     {
-      RemoveBit(ch->Flags, PLR_ANSI);
-      ch->Echo( "Okay... ANSI support is now off\r\n" );
-      return;
+        ch->Flags.reset(Flag::Plr::Ansi);
+        ch->Echo( "Okay... ANSI support is now off\r\n" );
     }
 }
-

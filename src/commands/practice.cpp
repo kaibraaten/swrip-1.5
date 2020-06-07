@@ -105,7 +105,7 @@ void do_practice(Character* ch, std::string argument)
 
         for (Character* potentialTeacher : ch->InRoom->Characters())
         {
-            if (IsNpc(potentialTeacher) && IsBitSet(potentialTeacher->Flags, ACT_PRACTICE))
+            if (IsNpc(potentialTeacher) && potentialTeacher->Flags.test(Flag::Mob::Practice))
             {
                 mob = potentialTeacher;
                 break;

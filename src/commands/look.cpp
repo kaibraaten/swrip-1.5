@@ -255,11 +255,11 @@ static void show_char_to_char_0(Character *victim, Character *ch)
     }
 
     if (!IsNpc(victim)
-        && IsBitSet(victim->Flags, PLR_AFK))
+        && victim->Flags.test(Flag::Plr::Afk))
         strcat(buf, "[AFK] ");
 
-    if ((!IsNpc(victim) && IsBitSet(victim->Flags, PLR_WIZINVIS))
-        || (IsNpc(victim) && IsBitSet(victim->Flags, ACT_MOBINVIS)))
+    if ((!IsNpc(victim) && victim->Flags.test(Flag::Plr::WizInvis))
+        || (IsNpc(victim) && victim->Flags.test(Flag::Mob::MobInvis)))
     {
         if (!IsNpc(victim))
             sprintf(buf1, "(Invis %d) ", victim->PCData->WizInvis);
@@ -289,11 +289,12 @@ static void show_char_to_char_0(Character *victim, Character *ch)
         && (IsAffectedBy(ch, Flag::Affect::DetectMagic) || IsImmortal(ch)))
         strcat(buf, "&B(Blue Aura)&w ");
 
-    if (!IsNpc(victim) && IsBitSet(victim->Flags, PLR_LITTERBUG))
+    if (!IsNpc(victim) && victim->Flags.test(Flag::Plr::Litterbug))
         strcat(buf, "(LITTERBUG) ");
 
     if (IsNpc(victim) && IsImmortal(ch)
-        && IsBitSet(victim->Flags, ACT_PROTOTYPE)) strcat(buf, "(PROTO) ");
+        && victim->Flags.test(Flag::Mob::Prototype))
+        strcat(buf, "(PROTO) ");
 
     if (victim->Desc && victim->Desc->ConnectionState == CON_EDITING)
         strcat(buf, "(Writing) ");
@@ -309,7 +310,7 @@ static void show_char_to_char_0(Character *victim, Character *ch)
         return;
     }
 
-    if (!IsNpc(victim) && !IsBitSet(ch->Flags, PLR_BRIEF))
+    if (!IsNpc(victim) && !ch->Flags.test(Flag::Plr::Brief))
         strcat(buf, victim->PCData->Title.c_str());
     else
         strcat(buf, PERS(victim, ch).c_str());
@@ -578,7 +579,7 @@ static void show_char_to_char_1(Character *victim, Character *ch)
             if ((obj = GetEquipmentOnCharacter(victim, (WearLocation)iWear)) != NULL
                 && CanSeeObject(ch, obj)
                 && (!obj->Description.empty()
-                    || (IsBitSet(ch->Flags, PLR_HOLYLIGHT)
+                    || (ch->Flags.test(Flag::Plr::Holylight)
                         || IsNpc(ch))))
             {
                 if (!found)
@@ -760,7 +761,7 @@ static bool requirements_are_met(Character *ch)
     }
 
     if (!IsNpc(ch)
-        && !IsBitSet(ch->Flags, PLR_HOLYLIGHT)
+        && !ch->Flags.test(Flag::Plr::Holylight)
         && !IsAffectedBy(ch, Flag::Affect::TrueSight)
         && IsRoomDark(ch->InRoom))
     {
@@ -1001,12 +1002,12 @@ static void show_no_arg(Character *ch, bool is_auto)
     ch->Echo("\r\n");
     SetCharacterColor(AT_RMDESC, ch);
 
-    if (!IsNpc(ch) && !IsBitSet(ch->Flags, PLR_BRIEF))
+    if (!IsNpc(ch) && !ch->Flags.test(Flag::Plr::Brief))
     {
         ch->Echo(GetRoomDescription(ch->InRoom));
     }
 
-    if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOEXIT))
+    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Autoexits))
     {
         do_exits(ch, "");
     }

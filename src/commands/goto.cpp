@@ -8,7 +8,6 @@
 void do_goto(Character *ch, std::string argument)
 {
     std::string arg;
-    std::shared_ptr<Room> location;
     std::shared_ptr<Area> pArea;
     vnum_t vnum = INVALID_VNUM;
 
@@ -20,7 +19,9 @@ void do_goto(Character *ch, std::string argument)
         return;
     }
 
-    if ((location = FindLocation(ch, arg)) == NULL)
+    auto location = FindLocation(ch, arg);
+    
+    if (location == nullptr)
     {
         vnum = ToLong(arg);
 
@@ -96,7 +97,7 @@ void do_goto(Character *ch, std::string argument)
     if (ch->Fighting)
         StopFighting(ch, true);
 
-    if (!IsBitSet(ch->Flags, PLR_WIZINVIS))
+    if (!ch->Flags.test(Flag::Plr::WizInvis))
     {
         if (ch->PCData && !ch->PCData->BamfOut.empty())
             Act(AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfOut.c_str(), TO_ROOM);
@@ -115,7 +116,7 @@ void do_goto(Character *ch, std::string argument)
 
     CharacterToRoom(ch, location);
 
-    if (!IsBitSet(ch->Flags, PLR_WIZINVIS))
+    if (!ch->Flags.test(Flag::Plr::WizInvis))
     {
         if (ch->PCData && !ch->PCData->BamfIn.empty())
             Act(AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfIn.c_str(), TO_ROOM);
@@ -128,9 +129,7 @@ void do_goto(Character *ch, std::string argument)
     if (ch->InRoom == in_room)
         return;
 
-    std::list<Character*> copyOfCharactersInRoom(in_room->Characters());
-
-    for (Character *fch : copyOfCharactersInRoom)
+    for (auto fch : in_room->Characters())
     {
         if (fch->Master == ch && IsImmortal(fch))
         {

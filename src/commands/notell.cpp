@@ -3,42 +3,42 @@
 
 void do_notell( Character *ch, std::string arg )
 {
-  Character *victim = nullptr;
+    Character *victim = nullptr;
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ch->Echo("Notell whom?");
-      return;
+        ch->Echo("Notell whom?");
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if ( IsNpc(victim) )
     {
-      ch->Echo("Not on NPC's.\r\n");
-      return;
+        ch->Echo("Not on NPC's.\r\n");
+        return;
     }
 
-  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      ch->Echo("You failed.\r\n");
-      return;
+        ch->Echo("You failed.\r\n");
+        return;
     }
 
-  if ( IsBitSet(victim->Flags, PLR_NO_TELL) )
+    if (victim->Flags.test(Flag::Plr::NoTell))
     {
-      RemoveBit(victim->Flags, PLR_NO_TELL);
-      victim->Echo("You can tell again.\r\n");
-      ch->Echo("NO_TELL removed.\r\n");
+        victim->Flags.reset(Flag::Plr::NoTell);
+        victim->Echo("You can tell again.\r\n");
+        ch->Echo("NO_TELL removed.\r\n");
     }
-  else
+    else
     {
-      SetBit(victim->Flags, PLR_NO_TELL);
-      victim->Echo("You can't tell!\r\n");
-      ch->Echo("NO_TELL set.\r\n");
+        victim->Flags.set(Flag::Plr::NoTell);
+        victim->Echo("You can't tell!\r\n");
+        ch->Echo("NO_TELL set.\r\n");
     }
 }

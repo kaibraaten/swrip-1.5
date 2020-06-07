@@ -147,7 +147,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->PermStats.Str = value;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Stats.Str = value;
 
         return;
@@ -166,7 +166,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->PermStats.Int = value;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Stats.Int = value;
 
         return;
@@ -185,7 +185,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->PermStats.Wis = value;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Stats.Wis = value;
 
         return;
@@ -204,7 +204,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->PermStats.Dex = value;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Stats.Dex = value;
 
         return;
@@ -223,7 +223,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->PermStats.Con = value;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Stats.Con = value;
 
         return;
@@ -242,7 +242,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->PermStats.Cha = value;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Stats.Cha = value;
 
         return;
@@ -261,7 +261,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->PermStats.Lck = value;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Stats.Lck = value;
 
         return;
@@ -278,7 +278,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->PermStats.Frc = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Stats.Frc = value;
         return;
     }
@@ -293,7 +293,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->Saving.PoisonDeath = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Saving.PoisonDeath = value;
         return;
     }
@@ -308,7 +308,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->Saving.Wand = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Saving.Wand = value;
         return;
     }
@@ -323,7 +323,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->Saving.ParaPetri = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Saving.ParaPetri = value;
         return;
     }
@@ -338,7 +338,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->Saving.Breath = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Saving.Breath = value;
         return;
     }
@@ -353,7 +353,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->Saving.SpellStaff = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Saving.SpellStaff = value;
         return;
     }
@@ -371,7 +371,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->Sex = (SexType)value;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Sex = (SexType)value;
 
         return;
@@ -395,7 +395,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->Race = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Race = value;
         return;
     }
@@ -410,7 +410,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->ArmorClass = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->ArmorClass = value;
         return;
     }
@@ -444,7 +444,7 @@ void do_mset( Character *ch, std::string argument )
         victim->HitRoll = value/5;
         victim->DamRoll = value/5;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
         {
             victim->Prototype->Level = value;
             victim->Prototype->ArmorClass = 100-value*2.5;
@@ -483,7 +483,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->NumberOfAttacks = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->NumberOfAttacks = value;
         return;
     }
@@ -493,7 +493,7 @@ void do_mset( Character *ch, std::string argument )
         if ( !CanModifyCharacter( ch, victim ) )
             return;
         victim->Gold = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Gold = value;
         return;
     }
@@ -503,7 +503,7 @@ void do_mset( Character *ch, std::string argument )
         if ( !CanModifyCharacter( ch, victim ) )
             return;
         victim->HitRoll = urange(0, value, 85);
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->HitRoll = victim->HitRoll;
         return;
     }
@@ -513,7 +513,7 @@ void do_mset( Character *ch, std::string argument )
         if ( !CanModifyCharacter( ch, victim ) )
             return;
         victim->DamRoll = urange(0, value, 65);
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->DamRoll = victim->DamRoll;
         return;
     }
@@ -573,7 +573,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
         victim->Alignment = value;
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Alignment = value;
         return;
     }
@@ -716,7 +716,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->Name = arg3;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
         {
             victim->Prototype->Name = victim->Name;
         }
@@ -797,7 +797,7 @@ void do_mset( Character *ch, std::string argument )
     {
         victim->ShortDescr = arg3;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
         {
             victim->Prototype->ShortDescr = victim->ShortDescr;
         }
@@ -810,7 +810,7 @@ void do_mset( Character *ch, std::string argument )
         strcat( buf, "\r\n" );
         victim->LongDescr = buf;
 
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
         {
             victim->Prototype->LongDescr = victim->LongDescr;
         }
@@ -823,7 +823,7 @@ void do_mset( Character *ch, std::string argument )
         {
             victim->Description = arg3;
 
-            if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+            if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             {
                 victim->Prototype->Description = victim->Description;
             }
@@ -842,7 +842,7 @@ void do_mset( Character *ch, std::string argument )
 
                           victim->Description = txt;
 
-                          if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+                          if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
                           {
                               victim->Prototype->Description = victim->Description;
                           }
@@ -878,7 +878,7 @@ void do_mset( Character *ch, std::string argument )
         {
             victim->spec_fun = NULL;
             ch->Echo("Special function removed.\r\n");
-            if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+            if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
                 victim->Prototype->spec_fun = victim->spec_fun;
             return;
         }
@@ -888,7 +888,7 @@ void do_mset( Character *ch, std::string argument )
             ch->Echo("No such spec fun.\r\n");
             return;
         }
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->spec_fun = victim->spec_fun;
         return;
     }
@@ -907,7 +907,7 @@ void do_mset( Character *ch, std::string argument )
         {
             victim->spec_2 = NULL;
             ch->Echo("Special function removed.\r\n");
-            if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+            if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
                 victim->Prototype->spec_2 = victim->spec_2;
             return;
         }
@@ -917,7 +917,7 @@ void do_mset( Character *ch, std::string argument )
             ch->Echo("No such spec fun.\r\n");
             return;
         }
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->spec_2 = victim->spec_2;
         return;
     }
@@ -970,36 +970,51 @@ void do_mset( Character *ch, std::string argument )
             argument = OneArgument( argument, arg3 );
             value = IsNpc( victim) ? GetMobFlag( arg3 ) : GetPlayerFlag( arg3 );
 
-            if ( !IsNpc( victim ) && ( value < 0 || value > 31 ) )
+            if ( !IsNpc( victim ) && ( value < 0 || value >= Flag::MAX ) )
             {
                 pcflag = true;
                 value = GetPcFlag( arg3 );
             }
-            if ( value < 0 || value > 31 )
+            
+            if ( value < 0 || value >= Flag::MAX )
+            {
                 ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
+            }
             else
             {
-                if ( IsNpc(victim) && 1 << value == ACT_NPC )
+                if ( IsNpc(victim) && value == Flag::Mob::Npc)
+                {
                     ch->Echo("If that could be changed, it would cause many problems.\r\n");
-                else
-                    if ( IsNpc(victim) && 1 << value == ACT_POLYMORPHED )
+                }
+                else if ( IsNpc(victim) && value == Flag::Mob::Polymorphed)
+                {
                         ch->Echo("Changing that would be a _bad_ thing.\r\n");
+                }
+                else
+                {
+                    if ( pcflag )
+                    {
+                        victim->PCData->Flags.flip(value);
+                    }
                     else
                     {
-                        if ( pcflag )
-                            ToggleBit( victim->PCData->Flags, 1 << value );
-                        else
+                        victim->Flags.flip(value);
+                        
+                        /* NPC check added by Gorog */
+                        if ( IsNpc(victim) && value == Flag::Mob::Prototype)
                         {
-                            ToggleBit( victim->Flags, 1 << value );
-                            /* NPC check added by Gorog */
-                            if ( IsNpc(victim) && (1 << value == ACT_PROTOTYPE) )
-                                victim->Prototype->Flags = victim->Flags;
+                            victim->Prototype->Flags = victim->Flags;
                         }
                     }
+                }
             }
         }
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
+        {
             victim->Prototype->Flags = victim->Flags;
+        }
+        
         return;
     }
 
@@ -1065,7 +1080,7 @@ void do_mset( Character *ch, std::string argument )
             else
                 victim->VipFlags.flip(value);
         }
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->VipFlags = victim->VipFlags;
         return;
     }
@@ -1098,7 +1113,7 @@ void do_mset( Character *ch, std::string argument )
                 victim->AffectedBy.flip(value);
         }
 
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->AffectedBy = victim->AffectedBy;
 
         return;
@@ -1245,7 +1260,7 @@ void do_mset( Character *ch, std::string argument )
                 victim->Resistant.flip(value);
         }
         
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Resistant = victim->Resistant;
         return;
     }
@@ -1278,7 +1293,7 @@ void do_mset( Character *ch, std::string argument )
                 victim->Immune.flip(value);
         }
 
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Immune = victim->Immune;
         return;
     }
@@ -1309,7 +1324,7 @@ void do_mset( Character *ch, std::string argument )
                 victim->Susceptible.test(value);
         }
 
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Susceptible = victim->Susceptible;
 
         return;
@@ -1343,7 +1358,7 @@ void do_mset( Character *ch, std::string argument )
             else
                 victim->AttackFlags.flip(value);
         }
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->AttackFlags = victim->AttackFlags;
         return;
     }
@@ -1375,7 +1390,7 @@ void do_mset( Character *ch, std::string argument )
             else
                 victim->DefenseFlags.flip(value);
         }
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->DefenseFlags = victim->DefenseFlags;
         return;
     }
@@ -1399,7 +1414,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->Position = (PositionType)value;
 
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Position = victim->Position;
 
         ch->Echo("Done.\r\n");
@@ -1425,7 +1440,7 @@ void do_mset( Character *ch, std::string argument )
 
         victim->DefaultPosition = (PositionType)value;
 
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->DefaultPosition = victim->DefaultPosition;
 
         ch->Echo("Done.\r\n");
@@ -1494,7 +1509,7 @@ void do_mset( Character *ch, std::string argument )
                      PunctuateNumber( SHRT_MAX ).c_str() );
             return;
         }
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->HitNoDice = value;
         ch->Echo("Done.\r\n");
         return;
@@ -1515,7 +1530,7 @@ void do_mset( Character *ch, std::string argument )
                      PunctuateNumber( SHRT_MAX ).c_str() );
             return;
         }
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->HitSizeDice = value;
         ch->Echo("Done.\r\n");
         return;
@@ -1536,7 +1551,7 @@ void do_mset( Character *ch, std::string argument )
                      PunctuateNumber( SHRT_MAX ).c_str() );
             return;
         }
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->HitPlus = value;
         ch->Echo("Done.\r\n");
         return;
@@ -1556,7 +1571,7 @@ void do_mset( Character *ch, std::string argument )
             ch->Echo("Number of damage dice range is 0 to 100.\r\n");
             return;
         }
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->DamNoDice = value;
         ch->Echo("Done.\r\n");
         return;
@@ -1577,7 +1592,7 @@ void do_mset( Character *ch, std::string argument )
             ch->Echo("Damage dice size range is 0 to 100.\r\n");
             return;
         }
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->DamSizeDice = value;
         ch->Echo("Done.\r\n");
         return;
@@ -1598,7 +1613,7 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
 
-        if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->DamPlus = value;
         ch->Echo("Done.\r\n");
         return;
@@ -1647,7 +1662,7 @@ void do_mset( Character *ch, std::string argument )
                 victim->Speaking = RaceTable[victim->Race].Language;
         }
         else
-            if ( IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+            if ( victim->Flags.test(Flag::Mob::Prototype) )
                 victim->Prototype->Speaks = victim->Speaks;
         ch->Echo("Done.\r\n");
         return;
@@ -1679,7 +1694,7 @@ void do_mset( Character *ch, std::string argument )
             else
                 ToggleBit( victim->Speaking, value );
         }
-        if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+        if ( IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype) )
             victim->Prototype->Speaking = victim->Speaking;
         ch->Echo("Done.\r\n");
         return;

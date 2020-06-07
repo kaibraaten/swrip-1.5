@@ -17,7 +17,7 @@ void do_quit( Character *ch, std::string argument )
     int level = 0;
     char qbuf[MAX_INPUT_LENGTH] = {'\0'};
 
-    if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
+    if ( IsNpc(ch) && ch->Flags.test(Flag::Mob::Polymorphed))
     {
         ch->Echo("You can't quit while polymorphed.\r\n");
         return;

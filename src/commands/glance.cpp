@@ -8,55 +8,55 @@
 */
 void do_glance( Character *ch, std::string argument )
 {
-  std::string arg1;
-  Character *victim = nullptr;
+    std::string arg1;
+    Character *victim = nullptr;
 
-  if ( !ch->Desc )
-    return;
+    if ( !ch->Desc )
+        return;
 
-  if ( ch->Position < POS_SLEEPING )
+    if ( ch->Position < POS_SLEEPING )
     {
-      ch->Echo( "You can't see anything but stars!\r\n" );
-      return;
+        ch->Echo( "You can't see anything but stars!\r\n" );
+        return;
     }
 
-  if ( ch->Position == POS_SLEEPING )
+    if ( ch->Position == POS_SLEEPING )
     {
-      ch->Echo( "You can't see anything, you're sleeping!\r\n" );
-      return;
+        ch->Echo( "You can't see anything, you're sleeping!\r\n" );
+        return;
     }
 
-  if ( IsBlind( ch ) )
+    if ( IsBlind( ch ) )
     {
-      ch->Echo( "You can't see a thing!\r\n" );
-      return;
+        ch->Echo( "You can't see a thing!\r\n" );
+        return;
     }
 
-  argument = OneArgument( argument, arg1 );
+    argument = OneArgument( argument, arg1 );
 
-  if ( arg1.empty() )
+    if ( arg1.empty() )
     {
-      int saveFlags = ch->Flags;
-      SetBit( ch->Flags, PLR_BRIEF );
-      do_look( ch, "auto" );
-      ch->Flags = saveFlags;
-      return;
+        auto flags = ch->Flags;
+        ch->Flags.set(Flag::Plr::Brief);
+        do_look( ch, "auto" );
+        ch->Flags = flags;
+        return;
     }
 
-  if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
+    if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
-      ch->Echo( "They're not here." );
-      return;
+        ch->Echo( "They're not here." );
+        return;
     }
-  else
+    else
     {
-      if ( CanSeeCharacter( victim, ch ) )
+        if ( CanSeeCharacter( victim, ch ) )
         {
-          Act( AT_ACTION, "$n glances at you.", ch, NULL, victim, TO_VICT    );
-          Act( AT_ACTION, "$n glances at $N.",  ch, NULL, victim, TO_NOTVICT );
+            Act( AT_ACTION, "$n glances at you.", ch, NULL, victim, TO_VICT    );
+            Act( AT_ACTION, "$n glances at $N.",  ch, NULL, victim, TO_NOTVICT );
         }
 
-      ShowCharacterCondition( ch, victim );
-      return;
+        ShowCharacterCondition( ch, victim );
+        return;
     }
 }

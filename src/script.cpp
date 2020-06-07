@@ -885,8 +885,9 @@ static void LuaPushMobile(lua_State *L, const Character *mob)
     LuaSetfieldNumber(L, "Vnum", proto->Vnum);
     LuaSetfieldString(L, "CharacterType", "Mobile");
 
-    RemoveBit(const_cast<Character*>(mob)->Flags, ACT_MOUNTED);
-    LuaPushFlags(L, mob->Flags, MobFlags, "Flags");
+    auto mobflags = mob->Flags;
+    mobflags.reset(Flag::Mob::Mounted);
+    LuaPushFlags(L, mobflags, MobFlags, "Flags");
 
     if (StrCmp(mob->ShortDescr, proto->ShortDescr) != 0)
     {
@@ -1570,7 +1571,7 @@ void LuaLoadSpecFun(lua_State *L, size_t idx, std::vector<SpecFun*> *specfuns)
 
 static void LoadMobileData(lua_State *L, Character *mob)
 {
-    mob->Flags = LuaLoadFlags(L, "Flags").to_ulong();
+    mob->Flags = LuaLoadFlags(L, "Flags");
 
     LuaGetfieldString(L, "ShortDescription", &mob->ShortDescr);
     LuaGetfieldString(L, "LongDescription", &mob->LongDescr);

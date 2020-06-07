@@ -17,7 +17,7 @@ static void SetMissingBits(std::bitset<Flag::MAX> &bits, long missing)
 
 void do_save( Character *ch, std::string argument )
 {
-    if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
+    if ( IsNpc(ch) && ch->Flags.test(Flag::Mob::Polymorphed))
     {
         ch->Echo("You can't save while polymorphed.\r\n");
         return;

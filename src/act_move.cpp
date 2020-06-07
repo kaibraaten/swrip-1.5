@@ -343,7 +343,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
         pexit = GetExit(ch->InRoom, door);
     }
 
-    if (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOUNTED))
+    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Mounted))
     {
         return retcode;
     }
@@ -388,7 +388,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
     }
 
     if (pexit->Flags.test(Flag::Exit::NoMob)
-        && IsNpc(ch) && !IsBitSet(ch->Flags, ACT_SCAVENGER))
+        && IsNpc(ch) && !ch->Flags.test(Flag::Mob::Scavenger))
     {
         Act(AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR);
         return rNONE;
@@ -701,7 +701,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
     /* check for traps on exit - later */
 
     if (!IsAffectedBy(ch, Flag::Affect::Sneak)
-        && (IsNpc(ch) || !IsBitSet(ch->Flags, PLR_WIZINVIS)))
+        && (IsNpc(ch) || !ch->Flags.test(Flag::Plr::WizInvis)))
     {
         if (fall)
             txt = "falls";
@@ -788,7 +788,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
     CharacterToRoom(ch, to_room);
 
     if (!IsAffectedBy(ch, Flag::Affect::Sneak)
-        && (IsNpc(ch) || !IsBitSet(ch->Flags, PLR_WIZINVIS)))
+        && (IsNpc(ch) || !ch->Flags.test(Flag::Plr::WizInvis)))
     {
         if (fall)
         {
@@ -929,8 +929,10 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
     do_look(ch, "auto");
 
     if (brief)
-        SetBit(ch->Flags, PLR_BRIEF);
-
+    {
+        ch->Flags.set(Flag::Plr::Brief);
+    }
+    
     /* BIG ugly looping problem here when the character is mptransed back
        to the starting room.  To avoid this, check how many chars are in
        the room at the start and stop processing followers after doing

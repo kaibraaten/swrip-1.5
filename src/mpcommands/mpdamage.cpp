@@ -265,7 +265,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
      */
     if ( npcvict && dam > 0 )
     {
-        if ( ( IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits( 1 ) == 0
+        if ( ( victim->Flags.test(Flag::Mob::Wimpy) && NumberBits( 1 ) == 0
                && victim->HitPoints.Current < victim->HitPoints.Max / 2 )
              ||   ( IsAffectedBy(victim, Flag::Affect::Charm) && victim->Master
                     && victim->Master->InRoom != victim->InRoom ) )
@@ -281,9 +281,8 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
          &&   victim->HitPoints.Current <= victim->Wimpy
          &&   victim->Wait == 0 )
         do_flee( victim, "" );
-    else
-        if ( !npcvict && IsBitSet( victim->Flags, PLR_FLEE ) )
-            do_flee( victim, "" );
+    else if ( !npcvict && victim->Flags.test(Flag::Plr::Flee))
+        do_flee( victim, "" );
 
     return rNONE;
 }

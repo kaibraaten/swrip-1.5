@@ -980,7 +980,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
     {
         if (!StrCmp(chck, "ismobinvis"))
         {
-            return IsNpc(chkchar) && IsBitSet(chkchar->Flags, ACT_MOBINVIS);
+            return IsNpc(chkchar) && chkchar->Flags.test(Flag::Mob::MobInvis);
         }
         else if (!StrCmp(chck, "mobinvislevel"))
         {

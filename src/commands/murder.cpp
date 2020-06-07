@@ -25,7 +25,7 @@ void do_murder( Character *ch, std::string arg )
         return;
     }
 
-    if ( IsBitSet(victim->Flags, PLR_AFK))
+    if (victim->Flags.test(Flag::Plr::Afk))
     {
         Log->Info("%s just attacked %s with an afk flag on!",
                   ch->Name.c_str(), victim->Name.c_str() );
@@ -49,7 +49,7 @@ void do_murder( Character *ch, std::string arg )
         return;
     }
 
-    if ( !IsNpc( victim ) && IsBitSet( ch->Flags, PLR_NICE ) )
+    if ( !IsNpc( victim ) && ch->Flags.test(Flag::Plr::Nice))
     {
         ch->Echo("You feel too nice to do that!\r\n");
         return;

@@ -383,7 +383,7 @@ void HuntVictim(Character *ch)
                 return;
             }
         }
-        else if (!IsBitSet(ch->Flags, ACT_DROID))
+        else if (!IsDroid(ch))
         {
             do_hide(ch, "");
         }

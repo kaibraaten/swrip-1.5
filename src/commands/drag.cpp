@@ -85,7 +85,7 @@ void do_drag(Character *ch, std::string argument)
                 return;
             }
 
-            if (IsBitSet(ch->Flags, ACT_MOUNTED))
+            if (ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go in there riding THAT.", ch,
                     nullptr, argument.c_str(), TO_CHAR);
@@ -157,7 +157,7 @@ void do_drag(Character *ch, std::string argument)
                 return;
             }
 
-            if (IsBitSet(ch->Flags, ACT_MOUNTED))
+            if (ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go out there riding THAT.",
                     ch, NULL, argument.c_str(), TO_CHAR);

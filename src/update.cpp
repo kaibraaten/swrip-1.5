@@ -346,7 +346,7 @@ void AdvanceLevel(Character *ch, int ability)
 
     if (!IsNpc(ch))
     {
-        RemoveBit(ch->Flags, PLR_BOUGHT_PET);
+        ch->Flags.reset(Flag::Plr::BoughtPet);
     }
 }
 
@@ -903,8 +903,8 @@ static void CleanUpAnimatedCorpse(Character *ch)
 
 static bool IsHunting(const Character *ch)
 {
-    return IsNpc(ch) && !IsBitSet(ch->Flags, ACT_RUNNING)
-        && !IsBitSet(ch->Flags, ACT_SENTINEL)
+    return IsNpc(ch) && !ch->Flags.test(Flag::Mob::Running)
+        && !ch->Flags.test(Flag::Mob::Sentinel)
         && !ch->Fighting && ch->HHF.Hunting;
 }
 
@@ -944,7 +944,7 @@ static bool IsSentinelWhoIsReadyToReturn(const Character *ch)
 {
     return IsNpc(ch)
         && !ch->Fighting && !ch->HHF.Hunting
-        && !IsBitSet(ch->Flags, ACT_RUNNING)
+        && !ch->Flags.test(Flag::Mob::Running)
         && ch->WasSentinel && ch->Position >= POS_STANDING;
 }
 
@@ -956,8 +956,8 @@ static void ReturnSentinelToHome(Character *ch)
     CharacterFromRoom(ch);
     CharacterToRoom(ch, ch->WasSentinel);
     Act(AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM);
-    SetBit(ch->Flags, ACT_SENTINEL);
-    ch->WasSentinel = NULL;
+    ch->Flags.set(Flag::Mob::Sentinel);
+    ch->WasSentinel = nullptr;
 }
 
 static bool NpcShouldNotBeUpdated(const Character *ch)
@@ -971,7 +971,7 @@ static bool NpcShouldNotBeUpdated(const Character *ch)
 static bool IsReadyToPerformSpecFun(const Character *ch)
 {
     return IsNpc(ch)
-        && !IsBitSet(ch->Flags, ACT_RUNNING)
+        && !ch->Flags.test(Flag::Mob::Running)
         && ch->spec_fun != nullptr;
 }
 
@@ -985,7 +985,7 @@ static bool TryPerformSpecFun(Character *ch)
 static bool IsReadyToPerformSpecFun2(const Character *ch)
 {
     return IsNpc(ch)
-        && !IsBitSet(ch->Flags, ACT_RUNNING)
+        && !ch->Flags.test(Flag::Mob::Running)
         && ch->spec_2 != nullptr;
 }
 
@@ -1005,7 +1005,7 @@ static bool MobHasScriptTrigger(const Character *ch)
 static bool MobShouldScavenge(const Character *ch)
 {
     return IsNpc(ch)
-        && IsBitSet(ch->Flags, ACT_SCAVENGER)
+        && ch->Flags.test(Flag::Mob::Scavenger)
         && !ch->InRoom->Objects().empty()
         && NumberBits(2) == 0;
 }
@@ -1039,13 +1039,13 @@ static bool MobShouldWander(const Character *ch, DirectionType door)
     std::shared_ptr<Exit> pexit = GetExit(ch->InRoom, door);
 
     return IsNpc(ch)
-        && !IsBitSet(ch->Flags, ACT_RUNNING)
-        && !IsBitSet(ch->Flags, ACT_SENTINEL)
-        && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
+        && !ch->Flags.test(Flag::Mob::Running)
+        && !ch->Flags.test(Flag::Mob::Sentinel)
+        && !ch->Flags.test(Flag::Mob::Prototype)
         && pexit != nullptr
         && !pexit->Flags.test(Flag::Exit::Closed)
         && !pexit->ToRoom->Flags.test(Flag::Room::NoMob)
-        && (!IsBitSet(ch->Flags, ACT_STAY_AREA)
+        && (!ch->Flags.test(Flag::Mob::StayArea)
             || pexit->ToRoom->Area == ch->InRoom->Area);
 }
 
@@ -1191,9 +1191,9 @@ static void MobileUpdate()
             continue;
         }
 
-        if (IsBitSet(ch->Flags, ACT_MOUNTED))
+        if (ch->Flags.test(Flag::Mob::Mounted))
         {
-            if (IsBitSet(ch->Flags, ACT_AGGRESSIVE))
+            if (ch->Flags.test(Flag::Mob::Aggressive))
             {
                 do_emote(ch, "snarls and growls.");
             }
@@ -1202,7 +1202,7 @@ static void MobileUpdate()
         }
 
         if (ch->InRoom->Flags.test(Flag::Room::Safe)
-            && IsBitSet(ch->Flags, ACT_AGGRESSIVE))
+            && ch->Flags.test(Flag::Mob::Aggressive))
         {
             do_emote(ch, "glares around and snarls.");
         }
@@ -1266,7 +1266,7 @@ static void MobileUpdate()
                 continue;
             }
 
-            if (retcode != rNONE || IsBitSet(ch->Flags, ACT_SENTINEL)
+            if (retcode != rNONE || ch->Flags.test(Flag::Mob::Sentinel)
                 || ch->Position < POS_STANDING)
             {
                 continue;
@@ -2380,9 +2380,9 @@ static void CharacterCheck()
             }
 
             /* running mobs       -Thoric */
-            if (IsBitSet(ch->Flags, ACT_RUNNING))
+            if (ch->Flags.test(Flag::Mob::Running))
             {
-                if (!IsBitSet(ch->Flags, ACT_SENTINEL)
+                if (!ch->Flags.test(Flag::Mob::Sentinel)
                     && !ch->Fighting && ch->HHF.Hunting)
                 {
                     SetWaitState(ch, 2 * PULSE_VIOLENCE);
@@ -2419,14 +2419,14 @@ static void CharacterCheck()
                 DirectionType door = (DirectionType)NumberBits(4);
                 std::shared_ptr<Exit> pexit = GetExit(ch->InRoom, door);
 
-                if (!IsBitSet(ch->Flags, ACT_SENTINEL)
-                    && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
+                if (!ch->Flags.test(Flag::Mob::Sentinel)
+                    && !ch->Flags.test(Flag::Mob::Prototype)
                     && door < DIR_SOMEWHERE
                     && pexit != nullptr
                     && pexit->ToRoom
                     && !pexit->Flags.test(Flag::Exit::Closed)
                     && !pexit->ToRoom->Flags.test(Flag::Room::NoMob)
-                    && (!IsBitSet(ch->Flags, ACT_STAY_AREA)
+                    && (!ch->Flags.test(Flag::Mob::StayArea)
                         || pexit->ToRoom->Area == ch->InRoom->Area))
                 {
                     retcode = MoveCharacter(ch, pexit);
@@ -2437,7 +2437,7 @@ static void CharacterCheck()
                     }
 
                     if (retcode != rNONE
-                        || IsBitSet(ch->Flags, ACT_SENTINEL)
+                        || ch->Flags.test(Flag::Mob::Sentinel)
                         || ch->Position < POS_STANDING)
                     {
                         continue;
@@ -2452,8 +2452,8 @@ static void CharacterCheck()
             if (ch->Mount
                 && ch->InRoom != ch->Mount->InRoom)
             {
-                RemoveBit(ch->Mount->Flags, ACT_MOUNTED);
-                ch->Mount = NULL;
+                ch->Mount->Flags.reset(Flag::Mob::Mounted);
+                ch->Mount = nullptr;
                 ch->Position = POS_STANDING;
                 ch->Echo("No longer upon your mount, you fall to the ground...\r\nOUCH!\r\n");
             }
@@ -2615,9 +2615,9 @@ static void AggroUpdate()
             || ch->Fighting
             || IsAffectedBy(ch, Flag::Affect::Charm)
             || !IsAwake(ch)
-            || IsBitSet(ch->Flags, ACT_WIMPY)
-            || !IsBitSet(ch->Flags, ACT_AGGRESSIVE)
-            || IsBitSet(ch->Flags, ACT_MOUNTED)
+            || ch->Flags.test(Flag::Mob::Wimpy)
+            || !ch->Flags.test(Flag::Mob::Aggressive)
+            || ch->Flags.test(Flag::Mob::Mounted)
             || ch->InRoom->Flags.test(Flag::Room::Safe))
         {
             continue;
@@ -2641,7 +2641,7 @@ static void AggroUpdate()
                 continue;
             }
 
-            if (IsBitSet(wch->Flags, ACT_AGGRESSIVE))
+            if (wch->Flags.test(Flag::Mob::Aggressive))
             {
                 continue;
             }

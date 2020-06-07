@@ -17,7 +17,6 @@ void do_clone(Character *ch, std::string argument)
     std::string bestowments;
     std::array<int, MAX_ABILITY> experience;
     std::array<int, MAX_ABILITY> skill_level;
-    int flags = 0;
     short frc = 0, change = 0, change2 = 0, frc_level = 0, low_frc = 0, mana = 0;
 
     experience.fill(0);
@@ -118,8 +117,9 @@ void do_clone(Character *ch, std::string argument)
 
         ch->Mana.Current = 100 + 100 * ch->PermStats.Frc;
 
-        flags = ch->Flags;
-        RemoveBit(ch->Flags, PLR_KILLER);
+        auto flags = ch->Flags;
+
+        ch->Flags.reset(Flag::Plr::Killer);
         credits = ch->Gold;
 
         if (credits <= CLONEGOLD)

@@ -598,39 +598,47 @@ constexpr vnum_t MOB_VNUM_MERC_FORCES = 34;
  * ACT bits for mobs.
  * Used in #MOBILES.
  */
-constexpr auto ACT_NPC = BV00;           /* Auto set for mobs    */
-constexpr auto ACT_SENTINEL = BV01;           /* Stays in one room    */
-constexpr auto ACT_SCAVENGER = BV02;           /* Picks up objects     */
-constexpr auto ACT_UNUSED_03 = BV03;
-constexpr auto ACT_UNUSED_04 = BV04;
-constexpr auto ACT_AGGRESSIVE = BV05;           /* Attacks PC's         */
-constexpr auto ACT_STAY_AREA = BV06;           /* Won't leave area     */
-constexpr auto ACT_WIMPY = BV07;           /* Flees when hurt      */
-constexpr auto ACT_PET = BV08;           /* Auto set for pets    */
-constexpr auto ACT_TRAIN = BV09;           /* Can train PC's       */
-constexpr auto ACT_PRACTICE = BV10;           /* Can practice PC's    */
-constexpr auto ACT_IMMORTAL = BV11;          /* Cannot be killed     */
-constexpr auto ACT_DEADLY = BV12;       /* Has a deadly poison  */
-constexpr auto ACT_POLYSELF = BV13;
-constexpr auto ACT_META_AGGR = BV14; /* Extremely aggressive */
-constexpr auto ACT_GUARDIAN = BV15;     /* Protects master      */
-constexpr auto ACT_RUNNING = BV16;         /* Hunts quickly        */
-constexpr auto ACT_NOWANDER = BV17;      /* Doesn't wander       */
-constexpr auto ACT_MOUNTABLE = BV18;     /* Can be mounted       */
-constexpr auto ACT_MOUNTED = BV19;      /* Is mounted           */
-constexpr auto ACT_SCHOLAR = BV20;          /* Can teach languages  */
-constexpr auto ACT_SECRETIVE = BV21;         /* actions aren't seen  */
-constexpr auto ACT_POLYMORPHED = BV22;         /* Mob is a ch          */
-constexpr auto ACT_MOBINVIS = BV23;         /* Like wizinvis        */
-constexpr auto ACT_NOASSIST = BV24;        /* Doesn't assist mobs  */
-constexpr auto ACT_NOKILL = BV25;          /* Mob can't die */
-constexpr auto ACT_DROID = BV26;          /* mob is a droid */
-constexpr auto ACT_NOCORPSE = BV27;
-constexpr auto ACT_UNUSED_28 = BV28;
-constexpr auto ACT_UNUSED_29 = BV29;
-constexpr auto ACT_PROTOTYPE = BV30;           /* A prototype mob      */
-constexpr auto ACT_UNUSED_31 = BV31;
-/* 20 acts */
+namespace Flag
+{
+    namespace Mob
+    {
+        enum : size_t
+        {
+            Npc,
+                Sentinel,
+                Scavenger,
+                _03,
+                _04,
+                Aggressive,
+                StayArea,
+                Wimpy,
+                Pet,
+                Train,
+                Practice,
+                Immortal,
+                Deadly,
+                PolySelf,
+                MetaAggr,
+                Guardian,
+                Running,
+                NoWander,
+                Mountable,
+                Mounted,
+                Scholar,
+                Secretive,
+                Polymorphed,
+                MobInvis,
+                NoAssist,
+                NoKill,
+                Droid,
+                NoCorpse,
+                _28,
+                _29,
+                Prototype,
+                _31
+                };
+    }
+}
 
 constexpr vnum_t ROOM_JAIL_MON_CALAMARI_1 = 21148;
 constexpr vnum_t ROOM_JAIL_MON_CALAMARI_2 = 21149;
@@ -774,45 +782,6 @@ namespace Flag
 }
 
 /*
- * Attack types
- */
-/*
-  constexpr auto ATCK_BITE = BV00;
-  constexpr auto ATCK_CLAWS = BV01;
-  constexpr auto ATCK_TAIL = BV02;
-  constexpr auto ATCK_STING = BV03;
-  constexpr auto ATCK_PUNCH = BV04;
-  constexpr auto ATCK_KICK = BV05;
-  constexpr auto ATCK_TRIP = BV06;
-  constexpr auto ATCK_BASH = BV07;
-  constexpr auto ATCK_STUN = BV08;
-  constexpr auto ATCK_GOUGE = BV09;
-  constexpr auto ATCK_BACKSTAB = BV10;
-  constexpr auto ATCK_FEED = BV11;
-  constexpr auto ATCK_DRAIN = BV12;
-  constexpr auto ATCK_FIREBREATH = BV13;
-  constexpr auto ATCK_FROSTBREATH = BV14;
-  constexpr auto ATCK_ACIDBREATH = BV15;
-  constexpr auto ATCK_LIGHTNBREATH = BV16;
-  constexpr auto ATCK_GASBREATH = BV17;
-  constexpr auto ATCK_POISON = BV18;
-  constexpr auto ATCK_NASTYPOISON = BV19;
-  constexpr auto ATCK_GAZE = BV20;
-  constexpr auto ATCK_BLINDNESS = BV21;
-  constexpr auto ATCK_CAUSESERIOUS = BV22;
-  constexpr auto ATCK_EARTHQUAKE = BV23;
-  constexpr auto ATCK_CAUSECRITICAL = BV24;
-  constexpr auto ATCK_CURSE = BV25;
-  constexpr auto ATCK_FLAMESTRIKE = BV26;
-  constexpr auto ATCK_HARM = BV27;
-  constexpr auto ATCK_FIREBALL = BV28;
-  constexpr auto ATCK_COLORSPRAY = BV29;
-  constexpr auto ATCK_WEAKEN = BV30;
-  constexpr auto ATCK_SPIRALBLAST = BV31;
-*/
-/* 32 USED! DO NOT ADD MORE! SB */
-
-/*
  * Defense types
  */
 
@@ -857,32 +826,6 @@ namespace Flag
                 };
     }
 }
-
-/*
-  constexpr auto DFND_PARRY = BV00;
-  constexpr auto DFND_DODGE = BV01;
-  constexpr auto DFND_HEAL = BV02;
-  constexpr auto DFND_CURELIGHT = BV03;
-  constexpr auto DFND_CURESERIOUS = BV04;
-  constexpr auto DFND_CURECRITICAL = BV05;
-  constexpr auto DFND_DISPELMAGIC = BV06;
-  constexpr auto DFND_DISPELEVIL = BV07;
-  constexpr auto DFND_SANCTUARY = BV08;
-  constexpr auto DFND_FIRESHIELD = BV09;
-  constexpr auto DFND_SHOCKSHIELD = BV10;
-  constexpr auto DFND_SHIELD = BV11;
-  constexpr auto DFND_BLESS = BV12;
-  constexpr auto DFND_STONESKIN = BV13;
-  constexpr auto DFND_TELEPORT = BV14;
-  constexpr auto DFND_MONSUM1 = BV15;
-  constexpr auto DFND_MONSUM2 = BV16;
-  constexpr auto DFND_MONSUM3 = BV17;
-  constexpr auto DFND_MONSUM4 = BV18;
-  constexpr auto DFND_DISARM = BV19;
-  constexpr auto DFND_ICESHIELD = BV20;
-  constexpr auto DFND_GRIP = BV21;
-*/
-/* 21 def's */
 
 /*
  * Pipe flags
@@ -1778,38 +1721,47 @@ enum
 /*
  * ACT bits for players.
  */
-constexpr auto PLR_IS_NPC = BV00;      /* Don't EVER set.      */
-constexpr auto PLR_BOUGHT_PET = BV01;
-constexpr auto PLR_SHOVEDRAG = BV02;
-constexpr auto PLR_AUTOEXIT = BV03;
-constexpr auto PLR_AUTOLOOT = BV04;
-constexpr auto PLR_AUTOSAC = BV05;
-constexpr auto PLR_BLANK = BV06;
-
-constexpr auto PLR_BRIEF = BV08;
-constexpr auto PLR_COMBINE = BV09;
-constexpr auto PLR_PROMPT = BV10;
-constexpr auto PLR_TELNET_GA = BV11;
-constexpr auto PLR_HOLYLIGHT = BV12;
-constexpr auto PLR_WIZINVIS = BV13;
-constexpr auto PLR_ROOMVNUM = BV14;
-constexpr auto PLR_SILENCE = BV15;
-constexpr auto PLR_NO_EMOTE = BV16;
-constexpr auto PLR_DONTAUTOFUEL = BV17;
-constexpr auto PLR_NO_TELL = BV18;
-constexpr auto PLR_LOG = BV19;
-constexpr auto PLR_DENY = BV20;
-constexpr auto PLR_FREEZE = BV21;
-constexpr auto PLR_KILLER = BV22;
-
-constexpr auto PLR_LITTERBUG = BV24;
-constexpr auto PLR_ANSI = BV25;
-
-constexpr auto PLR_NICE = BV27;
-constexpr auto PLR_FLEE = BV28;
-constexpr auto PLR_AUTOGOLD = BV29;
-constexpr auto PLR_AUTOMAP = BV30;
-constexpr auto PLR_AFK = BV31;
+namespace Flag
+{
+    namespace Plr
+    {
+        enum : size_t
+        {
+            Npc,
+                BoughtPet,
+                ShoveDrag,
+                Autoexits,
+                Autoloot,
+                Autosac,
+                Blank,
+                _07,
+                Brief,
+                Combine,
+                Prompt,
+                TelnetGA,
+                Holylight,
+                WizInvis,
+                RoomVnum,
+                Silence,
+                NoEmote,
+                DontAutofuel,
+                NoTell,
+                Log,
+                Deny,
+                Freeze,
+                Killer,
+                _23,
+                Litterbug,
+                Ansi,
+                _26,
+                Nice,
+                Flee,
+                Autocred,
+                Automap,
+                Afk
+                };
+    }
+}
 
 /* TimerType */
 enum

@@ -192,14 +192,20 @@ bool Descriptor::FlushBuffer(bool fPrompt)
     {
         ch = Original ? Original : Character;
 
-        if (IsBitSet(ch->Flags, PLR_BLANK))
+        if (ch->Flags.test(Flag::Plr::Blank))
+        {
             WriteToBuffer("\r\n", 2);
-
-        if (IsBitSet(ch->Flags, PLR_PROMPT))
+        }
+        
+        if (ch->Flags.test(Flag::Plr::Prompt))
+        {
             DisplayPrompt(this);
-
-        if (IsBitSet(ch->Flags, PLR_TELNET_GA))
+        }
+        
+        if (ch->Flags.test(Flag::Plr::TelnetGA))
+        {
             WriteToBuffer(go_ahead_str, 0);
+        }
     }
 
     /*

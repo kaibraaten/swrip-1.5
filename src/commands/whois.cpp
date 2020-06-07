@@ -118,18 +118,19 @@ void do_whois( Character *ch, std::string argument)
             do_comment(ch, buf2);
         }
 
-        if(IsBitSet(victim->Flags, PLR_SILENCE) || IsBitSet(victim->Flags, PLR_NO_EMOTE)
-           || IsBitSet(victim->Flags, PLR_NO_TELL) )
+        if(victim->Flags.test(Flag::Plr::Silence)
+           || victim->Flags.test(Flag::Plr::NoEmote)
+           || victim->Flags.test(Flag::Plr::NoTell))
         {
             sprintf(buf2, "This player has the following flags set:");
 
-            if(IsBitSet(victim->Flags, PLR_SILENCE))
+            if(victim->Flags.test(Flag::Plr::Silence))
                 strcat(buf2, " silence");
 
-            if(IsBitSet(victim->Flags, PLR_NO_EMOTE))
+            if(victim->Flags.test(Flag::Plr::NoEmote))
                 strcat(buf2, " noemote");
 
-            if(IsBitSet(victim->Flags, PLR_NO_TELL) )
+            if(victim->Flags.test(Flag::Plr::NoTell))
                 strcat(buf2, " notell");
 
             strcat(buf2, ".\r\n");

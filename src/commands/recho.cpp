@@ -3,30 +3,30 @@
 
 void do_recho( Character *ch, std::string argument )
 {
-  std::string arg;
-  short color = 0;
+    std::string arg;
+    short color = 0;
 
-  if ( IsBitSet(ch->Flags, PLR_NO_EMOTE) )
+    if (ch->Flags.test(Flag::Plr::NoEmote))
     {
-      ch->Echo("You are noemoted and can not recho.\r\n");
-      return;
+        ch->Echo("You are noemoted and can not recho.\r\n");
+        return;
     }
 
-  if ( argument.empty() )
+    if ( argument.empty() )
     {
-      ch->Echo("Recho what?\r\n");
-      return;
+        ch->Echo("Recho what?\r\n");
+        return;
     }
 
-  OneArgument( argument, arg );
+    OneArgument( argument, arg );
 
-  if ( (color = GetColor ( argument )) )
+    if ( (color = GetColor ( argument )) )
     {
-      argument = OneArgument ( argument, arg );
-      EchoToRoom ( color, ch->InRoom, argument );
+        argument = OneArgument ( argument, arg );
+        EchoToRoom ( color, ch->InRoom, argument );
     }
-  else
+    else
     {
-      EchoToRoom ( AT_IMMORT, ch->InRoom, argument );
+        EchoToRoom ( AT_IMMORT, ch->InRoom, argument );
     }
 }

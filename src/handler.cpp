@@ -153,10 +153,10 @@ static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> roo
         {
             if (IsNpc(rch))
             {
-                if (IsBitSet(rch->Flags, ACT_SENTINEL))
+                if (rch->Flags.test(Flag::Mob::Sentinel))
                 {
                     rch->WasSentinel = rch->InRoom;
-                    RemoveBit(rch->Flags, ACT_SENTINEL);
+                    rch->Flags.reset(Flag::Mob::Sentinel);
                 }
 
                 StartHating(rch, xch);
@@ -240,7 +240,7 @@ bool CharacterCanTakePrototype(const Character *ch)
 {
     if (IsImmortal(ch))
         return true;
-    else if (IsNpc(ch) && IsBitSet(ch->Flags, ACT_PROTOTYPE))
+    else if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Prototype))
         return true;
     else
         return false;
@@ -807,7 +807,7 @@ Object *ObjectToCharacter(Object *obj, Character *ch)
     if (obj->Flags.test(Flag::Obj::Prototype))
     {
         if (!IsImmortal(ch)
-            && (IsNpc(ch) && !IsBitSet(ch->Flags, ACT_PROTOTYPE)))
+            && (IsNpc(ch) && !ch->Flags.test(Flag::Mob::Prototype)))
         {
             return ObjectToRoom(obj, ch->InRoom);
         }
@@ -1206,7 +1206,7 @@ void ExtractCharacter(Character *ch, bool fPull)
     if (gch_prev == ch)
         gch_prev = ch->Previous;
 
-    if (fPull && !IsBitSet(ch->Flags, ACT_POLYMORPHED))
+    if (fPull && !ch->Flags.test(Flag::Mob::Polymorphed))
         DieFollower(ch);
 
     StopFighting(ch, true);
@@ -1220,12 +1220,13 @@ void ExtractCharacter(Character *ch, bool fPull)
 
     if (ch->Mount)
     {
-        RemoveBit(ch->Mount->Flags, ACT_MOUNTED);
-        ch->Mount = NULL;
+        ch->Mount->Flags.reset(Flag::Mob::Mounted);
+        ch->Mount = nullptr;
         ch->Position = POS_STANDING;
     }
 
-    if (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOUNTED))
+    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Mounted))
+    {
         for (Character *wch = FirstCharacter; wch; wch = wch->Next)
         {
             if (wch->Mount == ch)
@@ -1233,16 +1234,21 @@ void ExtractCharacter(Character *ch, bool fPull)
                 wch->Mount = NULL;
                 wch->Position = POS_STANDING;
             }
+            
             if (wch->PCData && wch->PCData->Pet == ch)
             {
                 wch->PCData->Pet = NULL;
+                
                 if (wch->InRoom == ch->InRoom)
+                {
                     Act(AT_SOCIAL, "You mourn for the loss of $N.",
                         wch, NULL, ch, TO_CHAR);
+                }
             }
         }
+    }
 
-    RemoveBit(ch->Flags, ACT_MOUNTED);
+    ch->Flags.reset(Flag::Mob::Mounted);
 
     while (!ch->Objects().empty())
     {
@@ -1271,7 +1277,7 @@ void ExtractCharacter(Character *ch, bool fPull)
         --nummobsloaded;
     }
 
-    if (ch->Desc && ch->Desc->Original && IsBitSet(ch->Flags, ACT_POLYMORPHED))
+    if (ch->Desc && ch->Desc->Original && ch->Flags.test(Flag::Mob::Polymorphed))
         do_revert(ch, "");
 
     if (ch->Desc && ch->Desc->Original)

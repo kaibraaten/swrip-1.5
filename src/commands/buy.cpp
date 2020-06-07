@@ -44,13 +44,13 @@ void do_buy(Character *ch, std::string argument)
         pet = GetCharacterInRoom(ch, arg);
         ch->InRoom = in_room;
 
-        if (pet == NULL || !IsNpc(pet) || !IsBitSet(pet->Flags, ACT_PET))
+        if (pet == NULL || !IsNpc(pet) || !pet->Flags.test(Flag::Mob::Pet))
         {
             ch->Echo("Sorry, you can't buy that here.\r\n");
             return;
         }
 
-        if (IsBitSet(ch->Flags, PLR_BOUGHT_PET))
+        if (ch->Flags.test(Flag::Plr::BoughtPet))
         {
             ch->Echo("You already bought one pet this level.\r\n");
             return;
@@ -72,8 +72,8 @@ void do_buy(Character *ch, std::string argument)
         ch->Gold -= maxgold;
         BoostEconomy(ch->InRoom->Area, maxgold);
         pet = CreateMobile(pet->Prototype);
-        SetBit(pet->Flags, ACT_PET);
-        RemoveBit(pet->Flags, ACT_PROTOTYPE);
+        pet->Flags.set(Flag::Mob::Pet);
+        pet->Flags.reset(Flag::Mob::Prototype);
         pet->AffectedBy.set(Flag::Affect::Charm);
 
         argument = OneArgument(argument, arg);

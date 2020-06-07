@@ -367,7 +367,7 @@ void ViolenceUpdate()
                  * NPCs assist NPCs of same type or 12.5% chance regardless.
                  */
                 if (IsNpc(rch) && !IsAffectedBy(rch, Flag::Affect::Charm)
-                    && !IsBitSet(rch->Flags, ACT_NOASSIST))
+                    && !rch->Flags.test(Flag::Mob::NoAssist))
                 {
                     if (CharacterDiedRecently(ch))
                     {
@@ -476,7 +476,7 @@ ch_ret HitMultipleTimes(Character *ch, Character *victim, int dt)
         AddTimerToCharacter(ch, TIMER_RECENTFIGHT, 20, NULL, SUB_NONE);
     }
 
-    if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_NICE) && !IsNpc(victim))
+    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Nice) && !IsNpc(victim))
     {
         return rNONE;
     }
@@ -1452,7 +1452,7 @@ static void WimpOut(Character* ch, Character* victim, int dam)
 {
     if (IsNpc(victim) && dam > 0)
     {
-        if ((IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits(1) == 0
+        if ((victim->Flags.test(Flag::Mob::Wimpy) && NumberBits(1) == 0
                 && victim->HitPoints.Current < victim->HitPoints.Max / 2)
             || (IsAffectedBy(victim, Flag::Affect::Charm) && victim->Master
                 && victim->Master->InRoom != victim->InRoom))
@@ -1470,7 +1470,7 @@ static void WimpOut(Character* ch, Character* victim, int dam)
     {
         do_flee(victim, "");
     }
-    else if (!IsNpc(victim) && IsBitSet(victim->Flags, PLR_FLEE))
+    else if (!IsNpc(victim) && victim->Flags.test(Flag::Plr::Flee))
     {
         do_flee(victim, "");
     }
@@ -1571,7 +1571,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
 
     if (dam && IsNpc(victim) && ch != victim)
     {
-        if (!IsBitSet(victim->Flags, ACT_SENTINEL))
+        if (!victim->Flags.test(Flag::Mob::Sentinel))
         {
             if (victim->HHF.Hunting)
             {
@@ -1810,7 +1810,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
         }
     }
 
-    if (IsNpc(victim) && IsBitSet(victim->Flags, ACT_IMMORTAL))
+    if (IsNpc(victim) && victim->Flags.test(Flag::Mob::Immortal))
     {
         victim->HitPoints.Current = victim->HitPoints.Max;
     }
@@ -1893,13 +1893,12 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
             }
         }
 
-        if (IsNpc(victim) && IsBitSet(victim->Flags, ACT_NOKILL))
+        if (IsNpc(victim) && victim->Flags.test(Flag::Mob::NoKill))
         {
             Act(AT_YELLOW, "$n flees for $s life... barely escaping certain death!",
                 victim, 0, 0, TO_ROOM);
         }
-        else if ((IsNpc(victim) && IsBitSet(victim->Flags, ACT_DROID))
-                 || (!IsNpc(victim) && IsDroid(victim)))
+        else if (IsNpc(victim))
         {
             Act(AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM);
         }
@@ -2068,7 +2067,9 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
             UpdateClanMember(victim);
         }
 
-        if (victim->InRoom != ch->InRoom || !IsNpc(victim) || !IsBitSet(victim->Flags, ACT_NOKILL))
+        if (victim->InRoom != ch->InRoom
+            || !IsNpc(victim)
+            || !victim->Flags.test(Flag::Mob::NoKill))
         {
             loot = CanLootVictim(ch, victim);
         }
@@ -2084,12 +2085,13 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
         if (!IsNpc(ch) && loot)
         {
             /* Autogold by Scryn 8/12 */
-            if (IsBitSet(ch->Flags, PLR_AUTOGOLD))
+            if (ch->Flags.test(Flag::Plr::Autocred))
             {
                 init_gold = ch->Gold;
                 do_get(ch, "credits corpse");
                 new_gold = ch->Gold;
                 gold_diff = (new_gold - init_gold);
+                
                 if (gold_diff > 0)
                 {
                     sprintf(buf1, "%d", gold_diff);
@@ -2097,7 +2099,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
                 }
             }
 
-            if (IsBitSet(ch->Flags, PLR_AUTOLOOT))
+            if (ch->Flags.test(Flag::Plr::Autoloot))
             {
                 do_get(ch, "all corpse");
             }
@@ -2106,7 +2108,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
                 do_look(ch, "in corpse");
             }
 
-            if (IsBitSet(ch->Flags, PLR_AUTOSAC))
+            if (ch->Flags.test(Flag::Plr::Autosac))
             {
                 do_junk(ch, "corpse");
             }
@@ -2321,8 +2323,8 @@ void UpdatePosition(Character *victim)
         if (victim->Mount)
         {
             Act(AT_ACTION, "$n falls from $N.", victim, NULL, victim->Mount, TO_ROOM);
-            RemoveBit(victim->Mount->Flags, ACT_MOUNTED);
-            victim->Mount = NULL;
+            victim->Mount->Flags.reset(Flag::Mob::Mounted);
+            victim->Mount = nullptr;
         }
 
         victim->Position = POS_DEAD;
@@ -2351,8 +2353,8 @@ void UpdatePosition(Character *victim)
     if (victim->Mount)
     {
         Act(AT_ACTION, "$n falls unconscious from $N.", victim, NULL, victim->Mount, TO_ROOM);
-        RemoveBit(victim->Mount->Flags, ACT_MOUNTED);
-        victim->Mount = NULL;
+        victim->Mount->Flags.reset(Flag::Mob::Mounted);
+        victim->Mount = nullptr;
     }
 }
 
@@ -2536,7 +2538,7 @@ void RawKill(Character *killer, Character *victim)
         ClaimBounty(killer, victim);
 
     /* Take care of polymorphed chars */
-    if (IsNpc(victim) && IsBitSet(victim->Flags, ACT_POLYMORPHED))
+    if (IsNpc(victim) && victim->Flags.test(Flag::Mob::Polymorphed))
     {
         CharacterFromRoom(victim->Desc->Original);
         CharacterToRoom(victim->Desc->Original, victim->InRoom);
@@ -2556,19 +2558,20 @@ void RawKill(Character *killer, Character *victim)
             victim->InRoom->Area->Planet->PopularSupport = -100;
     }
 
-    if (!IsNpc(victim) || !IsBitSet(victim->Flags, ACT_NOKILL))
+    if (!IsNpc(victim) || !victim->Flags.test(Flag::Mob::NoKill))
         MobProgDeathTrigger(killer, victim);
 
     if (CharacterDiedRecently(victim))
         return;
 
-    if (!IsNpc(victim) || !IsBitSet(victim->Flags, ACT_NOKILL))
+    if (!IsNpc(victim) || !victim->Flags.test(Flag::Mob::NoKill))
         RoomProgDeathTrigger(killer, victim);
 
     if (CharacterDiedRecently(victim))
         return;
 
-    if (!IsNpc(victim) || (!IsBitSet(victim->Flags, ACT_NOKILL) && !IsBitSet(victim->Flags, ACT_NOCORPSE)))
+    if (!IsNpc(victim)
+        || (!victim->Flags.test(Flag::Mob::NoKill) && !victim->Flags.test(Flag::Mob::NoCorpse)))
     {
         MakeCorpse(victim);
     }

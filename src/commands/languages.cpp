@@ -64,12 +64,13 @@ void do_languages( Character *ch, std::string argument )
 
       bool teacherIsPresent = false;
 
-      for(const Character *sch : ch->InRoom->Characters())
+      for(const auto &sch : ch->InRoom->Characters())
         {
-          if ( IsNpc(sch) && IsBitSet(sch->Flags, ACT_SCHOLAR) &&
-               CharacterKnowsLanguage( sch, ch->Speaking, ch ) &&
-               CharacterKnowsLanguage( sch, LanguageArray[lang], sch ) &&
-               (!sch->Speaking || CharacterKnowsLanguage( ch, sch->Speaking, sch )) )
+          if ( IsNpc(sch)
+               && sch->Flags.test(Flag::Mob::Scholar)
+               && CharacterKnowsLanguage( sch, ch->Speaking, ch )
+               && CharacterKnowsLanguage( sch, LanguageArray[lang], sch )
+               && (!sch->Speaking || CharacterKnowsLanguage( ch, sch->Speaking, sch )) )
             {
               teacherIsPresent = true;
               break;

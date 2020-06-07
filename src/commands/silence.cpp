@@ -3,40 +3,40 @@
 
 void do_silence( Character *ch, std::string arg )
 {
-  Character *victim = nullptr;
+    Character *victim = nullptr;
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ch->Echo("Silence whom?");
-      return;
+        ch->Echo("Silence whom?");
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if ( IsNpc(victim) )
     {
-      ch->Echo("Not on NPC's.\r\n");
-      return;
+        ch->Echo("Not on NPC's.\r\n");
+        return;
     }
 
-  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      ch->Echo("You failed.\r\n");
-      return;
+        ch->Echo("You failed.\r\n");
+        return;
     }
 
-  if ( IsBitSet(victim->Flags, PLR_SILENCE) )
+    if (victim->Flags.test(Flag::Plr::Silence))
     {
-      ch->Echo("Player already silenced, use unsilence to remove.\r\n");
+        ch->Echo("Player already silenced, use unsilence to remove.\r\n");
     }
-  else
+    else
     {
-      SetBit(victim->Flags, PLR_SILENCE);
-      victim->Echo("You can't use channels!\r\n");
-      ch->Echo("SILENCE set.\r\n");
+        victim->Flags.set(Flag::Plr::Silence);
+        victim->Echo("You can't use channels!\r\n");
+        ch->Echo("SILENCE set.\r\n");
     }
 }

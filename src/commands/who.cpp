@@ -257,8 +257,8 @@ void do_who(Character *ch, std::string argument)
             && !wch->PCData->HomePage.empty())
         {
             char_name = FormatString("<A HREF=\"%s\">%s</A>",
-                wch->PCData->HomePage.c_str(),
-                wch->Name.c_str());
+                                     wch->PCData->HomePage.c_str(),
+                                     wch->Name.c_str());
         }
         else
         {
@@ -322,7 +322,7 @@ void do_who(Character *ch, std::string argument)
 
         if (IsClanned(wch)
             && ((IsClanned(ch)
-                && ch->PCData->ClanInfo.Clan == wch->PCData->ClanInfo.Clan)
+                 && ch->PCData->ClanInfo.Clan == wch->PCData->ClanInfo.Clan)
                 || IsGreater(ch)))
         {
             std::shared_ptr<Clan> pclan = wch->PCData->ClanInfo.Clan;
@@ -344,22 +344,22 @@ void do_who(Character *ch, std::string argument)
             clan_name.erase();
         }
 
-        if (IsBitSet(wch->Flags, PLR_WIZINVIS))
+        if (wch->Flags.test(Flag::Plr::WizInvis))
             invis_str = FormatString("(%d) ", wch->PCData->WizInvis);
         else
             invis_str.erase();
 
         sprintf(buf, "%c%s %s%s%s%s %s%s%s%s\r\n",
-            force_char,
-            race.c_str(),
-            invis_str.c_str(),
-            IsBitSet(wch->Flags, PLR_AFK) ? "[AFK] " : "",
-            char_name.c_str(),
-            wch->PCData->Title.c_str(),
-            extra_title.c_str(), wch->PCData->WhoCloak ? "<WC>" : "",
-            clan_name.c_str(),
-            IsBitSet(wch->Flags, PLR_KILLER)
-            && (ch->TopLevel >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W");
+                force_char,
+                race.c_str(),
+                invis_str.c_str(),
+                wch->Flags.test(Flag::Plr::Afk) ? "[AFK] " : "",
+                char_name.c_str(),
+                wch->PCData->Title.c_str(),
+                extra_title.c_str(), wch->PCData->WhoCloak ? "<WC>" : "",
+                clan_name.c_str(),
+                wch->Flags.test(Flag::Plr::Killer)
+                && (ch->TopLevel >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W");
 
 
         /*
@@ -367,7 +367,7 @@ void do_who(Character *ch, std::string argument)
          * What we do instead is put the found data into a linked list
          */
 
-         /* First make the structure. */
+        /* First make the structure. */
         WhoData cur_who;
         cur_who.Text = buf;
 
@@ -400,7 +400,7 @@ void do_who(Character *ch, std::string argument)
      * display the information and clean up.
      */
 
-     /* Deadly list removed for swr ... now only 2 lists */
+    /* Deadly list removed for swr ... now only 2 lists */
 
     if (!newbies.empty())
     {

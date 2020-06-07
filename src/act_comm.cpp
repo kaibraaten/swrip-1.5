@@ -248,7 +248,7 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
         return;
     }
 
-    if (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_SILENCE))
+    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Silence))
     {
         ch->Echo("You can't %s.\r\n", verb.c_str());
         return;
@@ -568,7 +568,7 @@ void StartFollowing(Character *ch, Character *master)
     ch->Master = master;
     ch->Leader = NULL;
 
-    if (IsNpc(ch) && IsBitSet(ch->Flags, ACT_PET) && !IsNpc(master))
+    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Pet) && !IsNpc(master))
     {
         master->PCData->Pet = ch;
     }

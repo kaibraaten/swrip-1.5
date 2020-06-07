@@ -6,82 +6,81 @@
 
 void do_purge( Character *ch, std::string arg )
 {
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      std::list<Character*> charactersToExtract = Filter(ch->InRoom->Characters(),
-                                                         [ch](const auto victim)
-                                                         {
-                                                           return IsNpc(victim)
-                                                             && victim != ch
-                                                             && !IsBitSet(victim->Flags,
-                                                                          ACT_POLYMORPHED);
-                                                         });
-      for(Character *victim : charactersToExtract)
+        const auto charactersToExtract = Filter(ch->InRoom->Characters(),
+                                                [ch](const auto victim)
+                                                {
+                                                    return IsNpc(victim)
+                                                    && victim != ch
+                                                    && !victim->Flags.test(Flag::Mob::Polymorphed);
+                                                });
+        for(auto victim : charactersToExtract)
         {
-          ExtractCharacter( victim, true );
+            ExtractCharacter( victim, true );
         }
 
-      std::list<Object*> objectsToExtract = Filter(ch->InRoom->Objects(),
-                                                   [](const auto obj)
-                                                   {
-                                                     return obj->ItemType != ITEM_SPACECRAFT;
-                                                   });
-      for(Object *obj : objectsToExtract)
+        auto objectsToExtract = Filter(ch->InRoom->Objects(),
+                                       [](const auto obj)
+                                       {
+                                           return obj->ItemType != ITEM_SPACECRAFT;
+                                       });
+        for(auto obj : objectsToExtract)
         {
-	  ExtractObject( obj );
+            ExtractObject( obj );
         }
 
-      Act( AT_IMMORT, "$n purges the room!", ch, NULL, NULL, TO_ROOM);
-      ch->Echo("Ok.\r\n");
-      return;
+        Act( AT_IMMORT, "$n purges the room!", ch, NULL, NULL, TO_ROOM);
+        ch->Echo("Ok.\r\n");
+        return;
     }
 
-  Character *victim = NULL;
-  Object *obj = NULL;
+    Character *victim = NULL;
+    Object *obj = NULL;
 
-  /* fixed to get things in room first -- i.e., purge portal (obj),
-   * no more purging mobs with that keyword in another room first
-   * -- Tri */
-  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL
-       && ( obj = GetObjectHere( ch, arg ) ) == NULL )
+    /* fixed to get things in room first -- i.e., purge portal (obj),
+     * no more purging mobs with that keyword in another room first
+     * -- Tri */
+    if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL
+         && ( obj = GetObjectHere( ch, arg ) ) == NULL )
     {
-      if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL
-           &&   ( obj = GetObjectAnywhere( ch, arg ) ) == NULL )  /* no get_obj_room */
+        if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL
+             &&   ( obj = GetObjectAnywhere( ch, arg ) ) == NULL )  /* no get_obj_room */
         {
-          ch->Echo("They aren't here.\r\n");
-          return;
+            ch->Echo("They aren't here.\r\n");
+            return;
         }
     }
 
-  /* Single object purge in room for high level purge - Scryn 8/12*/
-  if ( obj )
+    /* Single object purge in room for high level purge - Scryn 8/12*/
+    if ( obj )
     {
-      SeparateOneObjectFromGroup( obj );
-      Act( AT_IMMORT, "$n purges $p.", ch, obj, NULL, TO_ROOM);
-      Act( AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR);
-      ExtractObject( obj );
-      return;
+        SeparateOneObjectFromGroup( obj );
+        Act( AT_IMMORT, "$n purges $p.", ch, obj, NULL, TO_ROOM);
+        Act( AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR);
+        ExtractObject( obj );
+        return;
     }
 
 
-  if ( !IsNpc(victim) )
+    if ( !IsNpc(victim) )
     {
-      ch->Echo("Not on PC's.\r\n");
-      return;
+        ch->Echo("Not on PC's.\r\n");
+        return;
     }
 
-  if ( victim == ch )
+    if ( victim == ch )
     {
-      ch->Echo("You cannot purge yourself!\r\n");
-      return;
+        ch->Echo("You cannot purge yourself!\r\n");
+        return;
     }
 
-  if (IsBitSet(victim->Flags, ACT_POLYMORPHED))
+    if (victim->Flags.test(Flag::Mob::Polymorphed))
     {
-      ch->Echo("You cannot purge a polymorphed player.\r\n");
-      return;
+        ch->Echo("You cannot purge a polymorphed player.\r\n");
+        return;
     }
 
-  Act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
-  ExtractCharacter( victim, true );
+    Act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
+    ExtractCharacter( victim, true );
 }

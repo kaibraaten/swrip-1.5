@@ -197,11 +197,11 @@ void do_pick(Character *ch, std::string arg)
                     continue;
 
                 if (!IsNpc(victim) && victim->Switched
-                    && !IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+                    && !victim->Switched->Flags.test(Flag::Mob::Polymorphed)
                     && !IsAffectedBy(victim->Switched, Flag::Affect::Possess))
                     continue;
                 else if (!IsNpc(victim) && victim->Switched
-                    && (IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+                         && (victim->Switched->Flags.test(Flag::Mob::Polymorphed)
                         || IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
                     victim = victim->Switched;
 
@@ -252,11 +252,11 @@ void do_pick(Character *ch, std::string arg)
                     continue;
 
                 if (!IsNpc(victim) && victim->Switched
-                    && !IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+                    && !victim->Switched->Flags.test(Flag::Mob::Polymorphed)
                     && !IsAffectedBy(victim->Switched, Flag::Affect::Possess))
                     continue;
                 else if (!IsNpc(victim) && victim->Switched
-                    && (IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+                         && (victim->Switched->Flags.test(Flag::Mob::Polymorphed)
                         || IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
                     victim = victim->Switched;
 

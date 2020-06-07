@@ -26,7 +26,7 @@ ch_ret spell_farsight(int sn, int level, Character* ch, void* vo)
         || !victim->InRoom
         || victim->InRoom->Flags.test(Flag::Room::Private)
         || victim->InRoom->Flags.test(Flag::Room::Prototype)
-        || (IsNpc(victim) && IsBitSet(victim->Flags, ACT_PROTOTYPE))
+        || (IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
         || (IsNpc(victim) && SaveVsSpellStaff(level, victim))
         || saving <= 50)
     {

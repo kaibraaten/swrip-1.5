@@ -44,7 +44,7 @@ ch_ret spell_area_attack(int sn, int level, Character* ch, void* vo)
 
     for (Character* vch : charactersToAttack)
     {
-        if (!IsNpc(vch) && IsBitSet(vch->Flags, PLR_WIZINVIS)
+        if (!IsNpc(vch) && vch->Flags.test(Flag::Plr::WizInvis)
             && vch->PCData->WizInvis >= LEVEL_IMMORTAL)
         {
             continue;

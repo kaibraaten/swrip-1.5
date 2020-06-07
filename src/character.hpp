@@ -99,7 +99,7 @@ public:
 
     int NumberOfAttacks = 0;
     int Gold = 0;
-    int Flags = 0;
+    std::bitset<Flag::MAX> Flags;
     std::bitset<Flag::MAX> AffectedBy;
     std::bitset<Flag::MAX> Resistant;
     std::bitset<Flag::MAX> Immune;

@@ -4,42 +4,42 @@
 
 void do_noemote( Character *ch, std::string arg )
 {
-  Character *victim = nullptr;
+    Character *victim = nullptr;
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ch->Echo("Noemote whom?\r\n");
-      return;
+        ch->Echo("Noemote whom?\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if ( IsNpc(victim) )
     {
-      ch->Echo("Not on NPC's.\r\n");
-      return;
+        ch->Echo("Not on NPC's.\r\n");
+        return;
     }
 
-  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      ch->Echo("You failed.\r\n");
-      return;
+        ch->Echo("You failed.\r\n");
+        return;
     }
 
-  if ( IsBitSet(victim->Flags, PLR_NO_EMOTE) )
+    if (victim->Flags.test(Flag::Plr::NoEmote))
     {
-      RemoveBit(victim->Flags, PLR_NO_EMOTE);
-      victim->Echo("You can emote again.\r\n");
-      ch->Echo("NO_EMOTE removed.\r\n");
+        victim->Flags.reset(Flag::Plr::NoEmote);
+        victim->Echo("You can emote again.\r\n");
+        ch->Echo("NO_EMOTE removed.\r\n");
     }
-  else
+    else
     {
-      SetBit(victim->Flags, PLR_NO_EMOTE);
-      victim->Echo("You can't emote!\r\n");
-      ch->Echo("NO_EMOTE set.\r\n");
+        victim->Flags.set(Flag::Plr::NoEmote);
+        victim->Echo("You can't emote!\r\n");
+        ch->Echo("NO_EMOTE set.\r\n");
     }
 }

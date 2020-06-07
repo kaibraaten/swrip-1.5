@@ -14,7 +14,7 @@ void do_return( Character *ch, std::string argument )
         return;
     }
 
-    if (IsBitSet(ch->Flags, ACT_POLYMORPHED))
+    if (ch->Flags.test(Flag::Mob::Polymorphed))
     {
         ch->Echo("Use revert to return from a polymorphed mob.\r\n");
         return;

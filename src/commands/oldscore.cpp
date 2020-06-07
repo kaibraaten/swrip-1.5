@@ -13,41 +13,41 @@ void do_oldscore(Character* ch, std::string argument)
 
     SetCharacterColor(AT_SCORE, ch);
     ch->Echo("You are %s%s, level %d.\r\n",
-        ch->Name.c_str(),
-        IsNpc(ch) ? "" : ch->PCData->Title.c_str(),
-        ch->TopLevel);
+             ch->Name.c_str(),
+             IsNpc(ch) ? "" : ch->PCData->Title.c_str(),
+             ch->TopLevel);
 
     if (GetTrustLevel(ch) != ch->TopLevel)
         ch->Echo("You are trusted at level %d.\r\n",
-            GetTrustLevel(ch));
+                 GetTrustLevel(ch));
 
-    if (IsBitSet(ch->Flags, ACT_MOBINVIS))
+    if (ch->Flags.test(Flag::Mob::MobInvis))
         ch->Echo("You are mobinvis at level %d.\r\n",
-            ch->MobInvis);
+                 ch->MobInvis);
 
     ch->Echo("You have %d/%d hit, %d/%d movement.\r\n",
-        ch->HitPoints.Current, ch->HitPoints.Max,
-        ch->Fatigue.Current, ch->Fatigue.Max);
+             ch->HitPoints.Current, ch->HitPoints.Max,
+             ch->Fatigue.Current, ch->Fatigue.Max);
 
     ch->Echo("You are carrying %d/%d items with weight %d/%d kg.\r\n",
-        ch->CarryNumber, GetCarryCapacityNumber(ch),
-        ch->CarryWeight, GetCarryCapacityWeight(ch));
+             ch->CarryNumber, GetCarryCapacityNumber(ch),
+             ch->CarryWeight, GetCarryCapacityWeight(ch));
 
     ch->Echo("Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: ??  Frc: ??\r\n",
-        GetCurrentStrength(ch),
-        GetCurrentIntelligence(ch),
-        GetCurrentWisdom(ch),
-        GetCurrentDexterity(ch),
-        GetCurrentConstitution(ch),
-        GetCurrentCharisma(ch));
+             GetCurrentStrength(ch),
+             GetCurrentIntelligence(ch),
+             GetCurrentWisdom(ch),
+             GetCurrentDexterity(ch),
+             GetCurrentConstitution(ch),
+             GetCurrentCharisma(ch));
 
     ch->Echo("You have have %d credits.\r\n", ch->Gold);
 
-    ch->Echo("Autoexit: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
-        (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOEXIT)) ? "yes" : "no",
-        (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOLOOT)) ? "yes" : "no",
-        (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOSAC)) ? "yes" : "no",
-        (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOGOLD)) ? "yes" : "no");
+    ch->Echo("Autoexits: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
+             (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Autoexits)) ? "yes" : "no",
+             (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Autoloot)) ? "yes" : "no",
+             (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Autosac)) ? "yes" : "no",
+             (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Autocred)) ? "yes" : "no");
 
     ch->Echo("Wimpy set to %d hit points.\r\n", ch->Wimpy);
 
@@ -233,7 +233,7 @@ void do_oldscore(Character* ch, std::string argument)
 
     if (ch->TopLevel >= 15)
         ch->Echo("Hitroll: %d  Damroll: %d.\r\n",
-            GetHitRoll(ch), GetDamageRoll(ch));
+                 GetHitRoll(ch), GetDamageRoll(ch));
 
     if (ch->TopLevel >= 10)
         ch->Echo("Alignment: %d.  ", ch->Alignment);
@@ -274,9 +274,9 @@ void do_oldscore(Character* ch, std::string argument)
                 if (ch->TopLevel >= 20)
                 {
                     ch->Echo(" modifies %s by %d for %d rounds",
-                        GetAffectLocationName(paf->Location),
-                        paf->Modifier,
-                        paf->Duration);
+                             GetAffectLocationName(paf->Location),
+                             paf->Modifier,
+                             paf->Duration);
                 }
 
                 ch->Echo(".\r\n");
@@ -287,22 +287,22 @@ void do_oldscore(Character* ch, std::string argument)
     if (!IsNpc(ch) && IsImmortal(ch))
     {
         ch->Echo("WizInvis level: %d   WizInvis is %s\r\n",
-            ch->PCData->WizInvis,
-            IsBitSet(ch->Flags, PLR_WIZINVIS) ? "ON" : "OFF");
+                 ch->PCData->WizInvis,
+                 ch->Flags.test(Flag::Plr::WizInvis) ? "ON" : "OFF");
 
         if (ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last)
             ch->Echo("Room Range: %ld - %ld\r\n",
-                ch->PCData->Build.VnumRanges.Room.First,
-                ch->PCData->Build.VnumRanges.Room.Last);
+                     ch->PCData->Build.VnumRanges.Room.First,
+                     ch->PCData->Build.VnumRanges.Room.Last);
 
         if (ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last)
             ch->Echo("Obj Range : %ld - %ld\r\n",
-                ch->PCData->Build.VnumRanges.Object.First,
-                ch->PCData->Build.VnumRanges.Object.Last);
+                     ch->PCData->Build.VnumRanges.Object.First,
+                     ch->PCData->Build.VnumRanges.Object.Last);
 
         if (ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last)
             ch->Echo("Mob Range : %ld - %ld\r\n",
-                ch->PCData->Build.VnumRanges.Mob.First,
-                ch->PCData->Build.VnumRanges.Mob.Last);
+                     ch->PCData->Build.VnumRanges.Mob.First,
+                     ch->PCData->Build.VnumRanges.Mob.Last);
     }
 }

@@ -71,7 +71,7 @@ void do_restore( Character *ch, std::string arg )
 
       if ( GetTrustLevel( ch ) < LEVEL_CREATOR
            &&  victim != ch
-           && !( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) ) )
+           && !( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype)))
         {
           ch->Echo("You can't do that.\r\n");
           return;

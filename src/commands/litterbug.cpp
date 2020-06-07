@@ -3,42 +3,42 @@
 
 void do_litterbug( Character *ch, std::string arg )
 {
-  Character *victim = nullptr;
+    Character *victim = nullptr;
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ch->Echo("Set litterbug flag on whom?\r\n");
-      return;
+        ch->Echo("Set litterbug flag on whom?\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if ( IsNpc(victim) )
     {
-      ch->Echo("Not on NPC's.\r\n");
-      return;
+        ch->Echo("Not on NPC's.\r\n");
+        return;
     }
 
-  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      ch->Echo("You failed.\r\n");
-      return;
+        ch->Echo("You failed.\r\n");
+        return;
     }
 
-  if ( IsBitSet(victim->Flags, PLR_LITTERBUG) )
+    if (victim->Flags.test(Flag::Plr::Litterbug))
     {
-      RemoveBit(victim->Flags, PLR_LITTERBUG);
-      victim->Echo("You can drop items again.\r\n");
-      ch->Echo("LITTERBUG removed.\r\n");
+        victim->Flags.reset(Flag::Plr::Litterbug);
+        victim->Echo("You can drop items again.\r\n");
+        ch->Echo("LITTERBUG removed.\r\n");
     }
-  else
+    else
     {
-      SetBit(victim->Flags, PLR_LITTERBUG);
-      victim->Echo("You a strange force prevents you from dropping any more items!\r\n");
-      ch->Echo("LITTERBUG set.\r\n");
+        victim->Flags.set(Flag::Plr::Litterbug);
+        victim->Echo("You a strange force prevents you from dropping any more items!\r\n");
+        ch->Echo("LITTERBUG set.\r\n");
     }
 }

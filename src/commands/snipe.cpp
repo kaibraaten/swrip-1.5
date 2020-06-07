@@ -144,7 +144,7 @@ void do_snipe(Character *ch, std::string argument)
         return;
     }
 
-    if (!IsNpc(victim) && IsBitSet(ch->Flags, PLR_NICE))
+    if (!IsNpc(victim) && ch->Flags.test(Flag::Plr::Nice))
     {
         ch->Echo("You feel too nice to do that!\r\n");
         return;
@@ -233,10 +233,10 @@ void do_snipe(Character *ch, std::string argument)
 
     if (IsNpc(victim) && !CharacterDiedRecently(victim))
     {
-        if (IsBitSet(victim->Flags, ACT_SENTINEL))
+        if (victim->Flags.test(Flag::Mob::Sentinel))
         {
             victim->WasSentinel = victim->InRoom;
-            RemoveBit(victim->Flags, ACT_SENTINEL);
+            victim->Flags.reset(Flag::Mob::Sentinel);
         }
 
         StartHating(victim, ch);

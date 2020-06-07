@@ -2587,7 +2587,7 @@ const std::array<const char * const, Flag::MAX> PlayerFlags =
     "RoomVnum",
     "Silence",
     "NoEmote",
-    "Attacker",
+    "DontAutofuel",
     "NoTell",
     "Log",
     "Deny",

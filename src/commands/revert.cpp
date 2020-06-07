@@ -4,33 +4,33 @@
 
 void do_revert(Character *ch, std::string argument)
 {
-  Character *mob = nullptr;
+    Character *mob = nullptr;
 
-  if ( !IsNpc(ch) || !IsBitSet(ch->Flags, ACT_POLYMORPHED) )
+    if ( !IsNpc(ch) || !ch->Flags.test(Flag::Mob::Polymorphed))
     {
-      ch->Echo("You are not polymorphed.\r\n");
-      return;
+        ch->Echo("You are not polymorphed.\r\n");
+        return;
     }
 
-  RemoveBit(ch->Flags, ACT_POLYMORPHED);
-  CharacterFromRoom(ch->Desc->Original);
+    ch->Flags.reset(Flag::Mob::Polymorphed);
+    CharacterFromRoom(ch->Desc->Original);
 
-  if(ch->Desc->Character)
+    if(ch->Desc->Character)
     {
-      mob = ch->Desc->Character;
-      CharacterToRoom(ch->Desc->Original, ch->Desc->Character->InRoom); /*WORKS!!*/
-      ch->Desc->Character       = ch->Desc->Original;
-      ch->Desc->Original        = NULL;
-      ch->Desc->Character->Desc = ch->Desc;
-      ch->Desc->Character->Switched = NULL;
-      ch->Desc                  = NULL;
-      ExtractCharacter(mob, true);
-      return;
+        mob = ch->Desc->Character;
+        CharacterToRoom(ch->Desc->Original, ch->Desc->Character->InRoom);
+        ch->Desc->Character       = ch->Desc->Original;
+        ch->Desc->Original        = NULL;
+        ch->Desc->Character->Desc = ch->Desc;
+        ch->Desc->Character->Switched = NULL;
+        ch->Desc                  = NULL;
+        ExtractCharacter(mob, true);
+        return;
     }
 
-  ch->Desc->Character       = ch->Desc->Original;
-  ch->Desc->Original        = NULL;
-  ch->Desc->Character->Desc = ch->Desc;
-  ch->Desc->Character->Switched = NULL;
-  ch->Desc                  = NULL;
+    ch->Desc->Character       = ch->Desc->Original;
+    ch->Desc->Original        = NULL;
+    ch->Desc->Character->Desc = ch->Desc;
+    ch->Desc->Character->Switched = NULL;
+    ch->Desc                  = NULL;
 }

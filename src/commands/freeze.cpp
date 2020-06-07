@@ -4,48 +4,47 @@
 
 void do_freeze( Character *ch, std::string argument )
 {
-  std::string arg;
-  Character *victim = nullptr;
+    std::string arg;
+    Character *victim = nullptr;
 
-  OneArgument( argument, arg );
+    OneArgument( argument, arg );
 
-  if ( arg.empty() )
+    if ( arg.empty() )
     {
-      ch->Echo( "Freeze whom?\r\n" );
-      return;
+        ch->Echo( "Freeze whom?\r\n" );
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      ch->Echo( "They aren't here.\r\n" );
-      return;
+        ch->Echo( "They aren't here.\r\n" );
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if ( IsNpc(victim) )
     {
-      ch->Echo( "Not on NPC's.\r\n" );
-      return;
+        ch->Echo( "Not on NPC's.\r\n" );
+        return;
     }
 
-  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      ch->Echo( "You failed.\r\n" );
-      return;
+        ch->Echo( "You failed.\r\n" );
+        return;
     }
 
-  if ( IsBitSet(victim->Flags, PLR_FREEZE) )
+    victim->Flags.flip(Flag::Plr::Freeze);
+    
+    if (!victim->Flags.test(Flag::Plr::Freeze))
     {
-      RemoveBit(victim->Flags, PLR_FREEZE);
-      victim->Echo( "You can play again.\r\n" );
-      ch->Echo( "FREEZE removed.\r\n" );
+        victim->Echo( "You can play again.\r\n" );
+        ch->Echo( "FREEZE removed.\r\n" );
     }
-  else
+    else
     {
-      SetBit(victim->Flags, PLR_FREEZE);
-      victim->Echo( "You can't do ANYthing!\r\n" );
-      ch->Echo( "FREEZE set.\r\n" );
+        victim->Echo( "You can't do ANYthing!\r\n" );
+        ch->Echo( "FREEZE set.\r\n" );
     }
-  
-  PlayerCharacters->Save( victim );
+
+    PlayerCharacters->Save( victim );
 }
-

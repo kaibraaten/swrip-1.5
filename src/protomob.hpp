@@ -30,7 +30,7 @@ public:
     int Killed = 0;
     SexType Sex = 0;
     int Level = 0;
-    int Flags = 0;
+    std::bitset<Flag::MAX> Flags;
     std::bitset<Flag::MAX> AffectedBy;
     int Alignment = 0;
     int ArmorClass = 0;
