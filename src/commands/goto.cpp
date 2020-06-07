@@ -129,7 +129,9 @@ void do_goto(Character *ch, std::string argument)
     if (ch->InRoom == in_room)
         return;
 
-    for (auto fch : in_room->Characters())
+    const auto charactersInRoom = in_room->Characters();
+    
+    for (auto fch : charactersInRoom)
     {
         if (fch->Master == ch && IsImmortal(fch))
         {

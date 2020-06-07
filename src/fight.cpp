@@ -343,9 +343,9 @@ void ViolenceUpdate()
         /*
          * Fun for the whole family!
          */
-        std::list<Character*> copyOfCharacterList(ch->InRoom->Characters());
+        const auto characterList = ch->InRoom->Characters();
 
-        for (Character *rch : ch->InRoom->Characters())
+        for (auto rch : characterList)
         {
             if (IsAwake(rch) && !rch->Fighting)
             {
