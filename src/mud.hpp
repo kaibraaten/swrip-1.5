@@ -375,7 +375,6 @@ extern Character       *saving_char;
 extern Object          *all_obj;
 extern time_t           current_time;
 extern bool             fLogAll;
-extern char             log_buf[];
 extern TimeInfo   time_info;
 extern Weather     weather_info;
 extern std::unique_ptr<Auction> OngoingAuction;

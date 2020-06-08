@@ -193,8 +193,9 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 
     if (ch->Flags.test(Flag::Plr::Deny))
     {
-        sprintf(log_buf, "Denying access to %s@%s.", argument.c_str(), d->Remote.Hostname.c_str());
-        Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
+        auto logBuf = FormatString("Denying access to %s@%s.",
+                                   argument.c_str(), d->Remote.Hostname.c_str());
+        Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
 
         d->WriteToBuffer("You are denied access.\r\n", 0);
         CloseDescriptor(d, false);
@@ -297,20 +298,21 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
     }
 
     sprintf(buf, "%s", ch->Name.c_str());
-    d->Character->Desc = NULL;
+    d->Character->Desc = nullptr;
     FreeCharacter(d->Character);
     PlayerCharacters->Load(d, buf, false);
     ch = d->Character;
-    sprintf(log_buf, "%s@%s has connected.", ch->Name.c_str(), d->Remote.Hostname.c_str());
+    auto logBuf = FormatString("%s@%s has connected.",
+                               ch->Name.c_str(),
+                               d->Remote.Hostname.c_str());
 
     if (ch->TopLevel < LEVEL_CREATOR)
     {
-        /*ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );*/
-        Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
+        Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
     }
     else
     {
-        Log->LogStringPlus(log_buf, LOG_COMM, ch->TopLevel);
+        Log->LogStringPlus(logBuf, LOG_COMM, ch->TopLevel);
     }
 
     d->WriteToBuffer("Press enter...\r\n", 0);
@@ -966,11 +968,11 @@ static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
     Character *ch = d->Character;
     int ability = 0;
 
-    sprintf(log_buf, "%s@%s new %s.",
-        ch->Name.c_str(), d->Remote.Hostname.c_str(),
-        RaceTable[ch->Race].Name);
-    Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
-    ToChannel(log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
+    auto logBuf = FormatString("%s@%s new %s.",
+                               ch->Name.c_str(), d->Remote.Hostname.c_str(),
+                               RaceTable[ch->Race].Name);
+    Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
+    ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
     d->WriteToBuffer("Press [ENTER] ", 0);
     d->WriteToBuffer("Press enter...\r\n", 0);
 

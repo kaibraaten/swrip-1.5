@@ -77,9 +77,9 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string &n
                 ch->IdleTimer = 0;
                 ch->Echo("Reconnecting.\r\n");
                 Act(AT_ACTION, "$n has reconnected.", ch, nullptr, nullptr, TO_ROOM);
-                sprintf(log_buf, "%s@%s reconnected.",
-                    ch->Name.c_str(), d->Remote.Hostname.c_str());
-                Log->LogStringPlus(log_buf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
+                auto logBuf = FormatString("%s@%s reconnected.",
+                                           ch->Name.c_str(), d->Remote.Hostname.c_str());
+                Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
                 d->ConnectionState = CON_PLAYING;
             }
 
@@ -107,10 +107,12 @@ bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string &name)
             }
 
             d->WriteToBuffer("Sorry multi-playing is not allowed... have your other character quit first.\r\n");
-            sprintf(log_buf, "%s attempting to multiplay with %s.",
-                dold->Original ? dold->Original->Name.c_str() : dold->Character->Name.c_str(),
-                d->Character->Name.c_str());
-            Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
+            auto logBuf = FormatString("%s attempting to multiplay with %s.",
+                                       dold->Original
+                                       ? dold->Original->Name.c_str()
+                                       : dold->Character->Name.c_str(),
+                                       d->Character->Name.c_str());
+            Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
             FreeCharacter(d->Character);
             d->Character = nullptr;
             return true;
@@ -130,14 +132,14 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string &nam
                 ? dold->Original->Name : dold->Character->Name))
         {
             const int cstate = dold->ConnectionState;
-            class Character *ch = dold->Original ? dold->Original : dold->Character;
+            Character *ch = dold->Original ? dold->Original : dold->Character;
 
             if (ch->Name.empty()
                 || (cstate != CON_PLAYING && cstate != CON_EDITING))
             {
                 d->WriteToBuffer("Already connected - try again.\r\n", 0);
-                sprintf(log_buf, "%s already connected.", ch->Name.c_str());
-                Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
+                auto logBuf = FormatString("%s already connected.", ch->Name.c_str());
+                Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
                 return BERR;
             }
 
@@ -165,9 +167,9 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string &nam
             ch->Echo("Reconnecting.\r\n");
             Act(AT_ACTION, "$n has reconnected, kicking off old link.",
                 ch, nullptr, nullptr, TO_ROOM);
-            sprintf(log_buf, "%s@%s reconnected, kicking off old link.",
-                ch->Name.c_str(), d->Remote.Hostname.c_str());
-            Log->LogStringPlus(log_buf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
+            auto logBuf = FormatString("%s@%s reconnected, kicking off old link.",
+                                       ch->Name.c_str(), d->Remote.Hostname.c_str());
+            Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
 
             d->ConnectionState = cstate;
             return true;

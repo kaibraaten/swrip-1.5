@@ -7,43 +7,42 @@
 
 void do_mpapply( Character *ch, std::string argument )
 {
-  Character *victim = NULL;
+    Character *victim = NULL;
 
-  if ( !IsNpc( ch ) )
+    if ( !IsNpc( ch ) )
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  if ( argument.empty() )
+    if ( argument.empty() )
     {
-      ProgBug("Mpapply - bad syntax", ch );
-      return;
+        ProgBug("Mpapply - bad syntax", ch );
+        return;
     }
 
-  if ( (victim = GetCharacterInRoomMudProg( ch, argument ) ) == NULL )
+    if ( (victim = GetCharacterInRoomMudProg( ch, argument ) ) == NULL )
     {
-      ProgBug("Mpapply - no such player in room.", ch );
-      return;
+        ProgBug("Mpapply - no such player in room.", ch );
+        return;
     }
 
-  if ( !victim->Desc )
+    if ( !victim->Desc )
     {
-      ch->Echo("Not on linkdeads.\r\n");
-      return;
+        ch->Echo("Not on linkdeads.\r\n");
+        return;
     }
 
-  if( IsAuthed(victim) )
-    return;
+    if( IsAuthed(victim) )
+        return;
 
-  if( victim->PCData->AuthState >= 1 )
-    return;
+    if( victim->PCData->AuthState >= 1 )
+        return;
 
-  sprintf( log_buf, "%s@%s new %s applying for authorization...",
-           victim->Name.c_str(), victim->Desc->Remote.Hostname.c_str(),
-           RaceTable[victim->Race].Name);
-  Log->Info( "%s", log_buf );
-  ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
-  victim->PCData->AuthState = 1;
+    auto logBuf = FormatString("%s@%s new %s applying for authorization...",
+                               victim->Name.c_str(), victim->Desc->Remote.Hostname.c_str(),
+                               RaceTable[victim->Race].Name);
+    Log->Info("%s", logBuf.c_str());
+    ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
+    victim->PCData->AuthState = 1;
 }
-

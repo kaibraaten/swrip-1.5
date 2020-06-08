@@ -168,8 +168,8 @@ static bool MudProgCompareStrings(const std::string &lhs, const std::string &opr
     if (!StrCmp(opr, "!/"))
         return StringInfix(rhs, lhs);
 
-    sprintf(log_buf, "Improper MOBprog operator '%s'", opr.c_str());
-    ProgBug(log_buf, mob);
+    auto logBuf = FormatString("Improper MOBprog operator '%s'", opr.c_str());
+    ProgBug(logBuf, mob);
     return false;
 }
 
@@ -199,8 +199,8 @@ static bool MudProgCompareNumbers(int lhs, const std::string &opr, int rhs, Char
     if (!StrCmp(opr, "|"))
         return lhs | rhs;
 
-    sprintf(log_buf, "Improper MOBprog operator '%s'", opr.c_str());
-    ProgBug(log_buf, mob);
+    auto logBuf = FormatString("Improper MOBprog operator '%s'", opr.c_str());
+    ProgBug(logBuf, mob);
 
     return false;
 }
@@ -1248,9 +1248,6 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
 static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
     Object *obj, void *vo, Character *rndm)
 {
-    static const char *he_she[] = { "it",  "he",  "she" };
-    static const char *him_her[] = { "it",  "him", "her" };
-    static const char *his_her[] = { "its", "his", "her" };
     Character   *vict = (Character *)vo;
     Object    *v_obj = (Object  *)vo;
 
@@ -1432,7 +1429,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         {
             if (CanSeeCharacter(mob, actor))
             {
-                strcpy(t, he_she[actor->Sex]);
+                strcpy(t, HeSheIt(actor));
             }
             else
             {
@@ -1450,7 +1447,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         {
             if (CanSeeCharacter(mob, actor))
             {
-                strcpy(t, him_her[actor->Sex]);
+                strcpy(t, HimHerIt(actor));
             }
             else
             {
@@ -1468,7 +1465,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         {
             if (CanSeeCharacter(mob, actor))
             {
-                strcpy(t, his_her[actor->Sex]);
+                strcpy(t, HisHersIts(actor));
             }
             else
             {
@@ -1486,7 +1483,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         {
             if (CanSeeCharacter(mob, vict))
             {
-                strcpy(t, he_she[vict->Sex]);
+                strcpy(t, HeSheIt(vict));
             }
             else
             {
@@ -1504,7 +1501,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         {
             if (CanSeeCharacter(mob, vict))
             {
-                strcpy(t, him_her[vict->Sex]);
+                strcpy(t, HimHerIt(vict));
             }
             else
             {
@@ -1522,7 +1519,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         {
             if (CanSeeCharacter(mob, vict))
             {
-                strcpy(t, his_her[vict->Sex]);
+                strcpy(t, HisHersIts(vict));
             }
             else
             {
@@ -1538,7 +1535,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
     case 'j':
         if (mob && !CharacterDiedRecently(mob))
         {
-            strcpy(t, he_she[mob->Sex]);
+            strcpy(t, HeSheIt(mob));
         }
         else
         {
@@ -1549,7 +1546,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
     case 'k':
         if (mob && !CharacterDiedRecently(mob))
         {
-            strcpy(t, him_her[mob->Sex]);
+            strcpy(t, HimHerIt(mob));
         }
         else
         {
@@ -1560,7 +1557,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
     case 'l':
         if (mob && !CharacterDiedRecently(mob))
         {
-            strcpy(t, his_her[mob->Sex]);
+            strcpy(t, HisHersIts(mob));
         }
         else
         {
@@ -1573,7 +1570,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         {
             if (CanSeeCharacter(mob, rndm))
             {
-                strcpy(t, he_she[rndm->Sex]);
+                strcpy(t, HeSheIt(rndm));
             }
             else
             {
@@ -1591,7 +1588,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         {
             if (CanSeeCharacter(mob, rndm))
             {
-                strcpy(t, him_her[rndm->Sex]);
+                strcpy(t, HimHerIt(rndm));
             }
             else
             {
@@ -1609,7 +1606,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         {
             if (CanSeeCharacter(mob, rndm))
             {
-                strcpy(t, his_her[rndm->Sex]);
+                strcpy(t, HisHersIts(rndm));
             }
             else
             {

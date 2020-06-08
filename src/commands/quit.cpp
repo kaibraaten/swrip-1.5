@@ -70,7 +70,7 @@ void do_quit( Character *ch, std::string argument )
     Act( AT_BYE, "$n has left the game.", ch, NULL, NULL, TO_ROOM );
     SetCharacterColor( AT_GREY, ch);
 
-    sprintf( log_buf, "%s has quit.", ch->Name.c_str() );
+    auto logBuf = FormatString("%s has quit.", ch->Name.c_str() );
     quitting_char = ch;
     PlayerCharacters->Save( ch );
     SaveHome(ch);
@@ -94,5 +94,5 @@ void do_quit( Character *ch, std::string argument )
         }
     }
     
-    Log->LogStringPlus( log_buf, LOG_COMM, level );
+    Log->LogStringPlus(logBuf, LOG_COMM, level);
 }

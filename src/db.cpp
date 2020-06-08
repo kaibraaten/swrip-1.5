@@ -74,7 +74,6 @@ std::shared_ptr<TeleportData> LastTeleport;
 
 Character *FirstCharacter = NULL;
 Character *LastCharacter = NULL;
-char log_buf[2 * MAX_INPUT_LENGTH];
 
 TimeInfo time_info;
 Weather weather_info;

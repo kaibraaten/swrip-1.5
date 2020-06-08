@@ -15,7 +15,6 @@ void do_mp_damage( Character *ch, std::string argument )
 {
     std::string arg1;
     std::string arg2;
-    Character *victim = nullptr;
     int dam = 0;
 
     if ( IsAffectedBy( ch, Flag::Affect::Charm))
@@ -44,7 +43,9 @@ void do_mp_damage( Character *ch, std::string argument )
         return;
     }
 
-    if ( ( victim = GetCharacterInRoomMudProg( ch, arg1 ) ) == NULL )
+    auto victim = GetCharacterInRoomMudProg( ch, arg1 );
+    
+    if (victim == nullptr)
     {
         ch->Echo("Victim must be in room.\r\n");
         ProgBug( "Mpdamage: victim not in room", ch );
@@ -230,18 +231,16 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     {
         if ( !npcvict )
         {
-            sprintf( log_buf, "%s killed by %s at %ld",
-                     victim->Name.c_str(),
-                     (IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str()),
-                     victim->InRoom->Vnum );
-            Log->Info( "%s", log_buf );
-            ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
+            auto logBuf = FormatString("%s killed by %s at %ld",
+                                       victim->Name.c_str(),
+                                       (IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str()),
+                                       victim->InRoom->Vnum );
+            Log->Info("%s", logBuf.c_str());
+            ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
         }
 
         SetCurrentGlobalCharacter(victim);
         RawKill( ch, victim );
-        victim = NULL;
-
         return rVICT_DIED;
     }
 
@@ -276,13 +275,17 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
         }
     }
 
-    if ( !npcvict
-         &&   victim->HitPoints.Current > 0
-         &&   victim->HitPoints.Current <= victim->Wimpy
-         &&   victim->Wait == 0 )
+    if (!npcvict
+        && victim->HitPoints.Current > 0
+        && victim->HitPoints.Current <= victim->Wimpy
+        && victim->Wait == 0)
+    {
         do_flee( victim, "" );
+    }
     else if ( !npcvict && victim->Flags.test(Flag::Plr::Flee))
+    {
         do_flee( victim, "" );
-
+    }
+    
     return rNONE;
 }

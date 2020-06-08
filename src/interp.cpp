@@ -329,16 +329,18 @@ void Interpret(Character *ch, std::string argument)
         || loglvl == LOG_HIGH
         || loglvl == LOG_ALWAYS)
     {
+        std::string logBuf;
+        
         /* Added by Narn to show who is switched into a mob that executes
            a logged command.  Check for descriptor in case force is used. */
         if (ch->Desc && ch->Desc->Original)
         {
-            sprintf(log_buf, "Log %s (%s): %s", ch->Name.c_str(),
-                    ch->Desc->Original->Name.c_str(), logline);
+            logBuf = FormatString("Log %s (%s): %s", ch->Name.c_str(),
+                                  ch->Desc->Original->Name.c_str(), logline);
         }
         else
         {
-            sprintf(log_buf, "Log %s: %s", ch->Name.c_str(), logline);
+            logBuf = FormatString("Log %s: %s", ch->Name.c_str(), logline);
         }
 
         /*
@@ -351,7 +353,7 @@ void Interpret(Character *ch, std::string argument)
             loglvl = LOG_ALL;
         }
 
-        Log->LogStringPlus(log_buf, loglvl, ch->TopLevel);
+        Log->LogStringPlus(logBuf, loglvl, ch->TopLevel);
     }
 
     if (ch->Desc && ch->Desc->SnoopBy)
@@ -464,14 +466,14 @@ void Interpret(Character *ch, std::string argument)
     /* laggy command notice: command took longer than 1.5 seconds */
     if (tmptime > 1500000)
     {
-        sprintf(log_buf, "[*****] LAG: %s: %s %s (R:%ld S:%d.%06d)",
-                ch->Name.c_str(),
-                cmd->Name.c_str(),
-                (cmd->Log == LOG_NEVER ? "XXX" : argument.c_str()),
-                ch->InRoom ? ch->InRoom->Vnum : 0,
-                (int)(time_used.tv_sec),
-                (int)(time_used.tv_usec));
-        Log->LogStringPlus(log_buf, LOG_NORMAL, GetTrustLevel(ch));
+        auto logBuf = FormatString("[*****] LAG: %s: %s %s (R:%ld S:%d.%06d)",
+                                   ch->Name.c_str(),
+                                   cmd->Name.c_str(),
+                                   (cmd->Log == LOG_NEVER ? "XXX" : argument.c_str()),
+                                   ch->InRoom ? ch->InRoom->Vnum : 0,
+                                   (int)(time_used.tv_sec),
+                                   (int)(time_used.tv_usec));
+        Log->LogStringPlus(logBuf, LOG_NORMAL, GetTrustLevel(ch));
     }
 }
 

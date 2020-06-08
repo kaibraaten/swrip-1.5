@@ -630,9 +630,9 @@ static void NewDescriptor(socket_t new_desc)
     dnew->Remote.Port = ntohs(sock.sin_port);
 
     std::string buf = inet_ntoa(sock.sin_addr);
-    sprintf(log_buf, "Sock.sinaddr:  %s, port %hd.",
-            buf.c_str(), dnew->Remote.Port);
-    Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
+    auto logBuf = FormatString("Sock.sinaddr:  %s, port %hd.",
+                               buf.c_str(), dnew->Remote.Port);
+    Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
 
     dnew->Remote.HostIP = buf;
 
@@ -643,7 +643,7 @@ static void NewDescriptor(socket_t new_desc)
     }
     else
     {
-        from = NULL;
+        from = nullptr;
     }
 
     dnew->Remote.Hostname = from ? from->h_name : buf;
@@ -685,9 +685,10 @@ static void NewDescriptor(socket_t new_desc)
     {
         SysData.TimeOfMaxPlayersEver = FormatString("%24.24s", ctime(&current_time));
         SysData.MaxPlayersEver = SysData.MaxPlayersThisBoot;
-        sprintf(log_buf, "Broke all-time maximum player record: %d", SysData.MaxPlayersEver);
-        Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
-        ToChannel(log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
+        logBuf = FormatString("Broke all-time maximum player record: %d",
+                                   SysData.MaxPlayersEver);
+        Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
+        ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
         SysData.Save();
     }
 
@@ -702,53 +703,63 @@ void FreeDescriptor(std::shared_ptr<Descriptor> d)
 
 void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
 {
-    Character *ch = nullptr;
-
     /* flush outbuf */
     if (!force && !dclose->OutBuffer.str().empty())
-        dclose->FlushBuffer(false);
-
-    /* say bye to whoever's snooping this descriptor */
-    if (dclose->SnoopBy)
-        dclose->SnoopBy->WriteToBuffer("Your victim has left the game.\r\n");
-
-    /* stop snooping everyone else */
-    for (auto d : Descriptors)
-        if (d->SnoopBy == dclose)
-            d->SnoopBy = NULL;
-
-    /* Check for switched people who go link-dead. -- Altrag */
-    if (dclose->Original)
     {
-        if ((ch = dclose->Character) != NULL)
+        dclose->FlushBuffer(false);
+    }
+    
+    /* say bye to whoever's snooping this descriptor */
+    if (dclose->SnoopBy != nullptr)
+    {
+        dclose->SnoopBy->WriteToBuffer("Your victim has left the game.\r\n");
+    }
+    
+    /* stop snooping everyone else */
+    for (const auto &d : Descriptors)
+    {
+        if (d->SnoopBy == dclose)
+        {
+            d->SnoopBy = nullptr;
+        }
+    }
+    
+    /* Check for switched people who go link-dead. -- Altrag */
+    if (dclose->Original != nullptr)
+    {
+        auto ch = dclose->Character;
+        
+        if (ch != nullptr)
+        {
             do_return(ch, "");
+        }
         else
         {
             Log->Bug("Close_socket: dclose->Original without character %s",
                      !dclose->Original->Name.empty() ? dclose->Original->Name.c_str() : "unknown");
             dclose->Character = dclose->Original;
-            dclose->Original = NULL;
+            dclose->Original = nullptr;
         }
     }
 
-    ch = dclose->Character;
+    auto ch = dclose->Character;
 
-    if (dclose->Character)
+    if (ch != nullptr)
     {
-        sprintf(log_buf, "Closing link to %s.", ch->Name.c_str());
-        Log->LogStringPlus(log_buf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
+        auto logBuf = FormatString("Closing link to %s.", ch->Name.c_str());
+        Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
         PlayerCharacters->Remove(dclose->Character);
 
         if (dclose->ConnectionState == CON_PLAYING
             || dclose->ConnectionState == CON_EDITING)
         {
-            Act(AT_ACTION, "$n has lost $s link.", ch, NULL, NULL, TO_ROOM);
-            ch->Desc = NULL;
+            Act(AT_ACTION, "$n has lost $s link.", ch, nullptr, nullptr, TO_ROOM);
+            ch->Desc = nullptr;
         }
         else
         {
             /* clear descriptor pointer to get rid of bug message in log */
-            dclose->Character->Desc = NULL;
+            dclose->Character->Desc = nullptr;
             FreeCharacter(dclose->Character);
         }
     }
@@ -756,8 +767,10 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
     Descriptors->Remove(dclose);
 
     if (dclose->Socket == maxdesc)
+    {
         --maxdesc;
-
+    }
+    
     FreeDescriptor(dclose);
 }
 
@@ -812,16 +825,17 @@ static void StopIdling(Character *ch)
 
 void SetCharacterColor(short AType, const Character *ch)
 {
-    std::string buf;
-    const Character *och = nullptr;
-
-    if (!ch || !ch->Desc)
+    if (ch == nullptr || ch->Desc == nullptr)
+    {
         return;
-
-    och = (ch->Desc->Original ? ch->Desc->Original : ch);
+    }
+    
+    const Character *och = (ch->Desc->Original ? ch->Desc->Original : ch);
 
     if (!IsNpc(och) && och->Flags.test(Flag::Plr::Ansi))
     {
+        std::string buf;
+        
         if (AType == 7)
         {
             buf = "\033[m";
@@ -844,20 +858,113 @@ static std::string NAME(const Character *ch)
     return IsNpc(ch) ? ch->ShortDescr : ch->Name;
 }
 
+static std::string SubstituteActSequence(char code,
+                                         const Character *ch,
+                                         const Character *vch,
+                                         const Character *to,
+                                         const Object *obj1,
+                                         const Object *obj2,
+                                         const char *arg1,
+                                         const char *arg2)
+{
+    std::string i;
+    
+    switch (code)
+    {
+    case 't':
+        i = arg1;
+        break;
+
+    case 'T':
+        i = arg2;
+        break;
+
+    case 'n':
+        i = (to != nullptr ? PERS(ch, to) : NAME(ch));
+        break;
+
+    case 'N':
+        i = (to != nullptr ? PERS(vch, to) : NAME(vch));
+        break;
+
+    case 'e':
+        assert(ch->Sex <= SEX_FEMALE && ch->Sex >= SEX_NEUTRAL);
+        i = HeSheIt(ch);
+        break;
+
+    case 'E':
+        assert(vch->Sex <= SEX_FEMALE && vch->Sex >= SEX_NEUTRAL);
+        i = HeSheIt(vch);
+        break;
+
+    case 'm':
+        assert(ch->Sex <= SEX_FEMALE && ch->Sex >= SEX_NEUTRAL);
+        i = HimHerIt(ch);
+        break;
+
+    case 'M':
+        assert(vch->Sex <= SEX_FEMALE && vch->Sex >= SEX_NEUTRAL);
+        i = HimHerIt(vch);
+        break;
+
+    case 's':
+        assert(ch->Sex <= SEX_FEMALE && ch->Sex >= SEX_NEUTRAL);
+        i = HisHersIts(ch);
+        break;
+
+    case 'S':
+        assert(vch->Sex <= SEX_FEMALE && vch->Sex >= SEX_NEUTRAL);
+        i = HisHersIts(vch);
+        break;
+
+    case 'q':
+        i = (to == ch) ? "" : "s";
+        break;
+
+    case 'Q':
+        i = (to == ch) ? "your" : HisHersIts(ch);
+        break;
+
+    case 'p':
+        i = (to == nullptr || CanSeeObject(to, obj1)
+             ? GetObjectShortDescription(obj1) : "something");
+        break;
+
+    case 'P':
+        i = (to == nullptr || CanSeeObject(to, obj2)
+             ? GetObjectShortDescription(obj2) : "something");
+        break;
+
+    case 'd':
+        if (IsNullOrEmpty(arg2))
+        {
+            i = "door";
+        }
+        else
+        {
+            std::string fname;
+            OneArgument(arg2, fname);
+            i = fname;
+        }
+
+        break;
+
+    default:
+        Log->Bug("%s: bad code %c.", __FUNCTION__, code);
+        i = " <@@@> ";
+        break;
+    }
+
+    return i;
+}
+
 static std::string ActString(const std::string &format, Character *to, Character *ch,
                              const void *arg1, const void *arg2)
 {
-    static const char * const he_she[] = { "it",  "he",  "she" };
-    static const char * const him_her[] = { "it",  "him", "her" };
-    static const char * const his_her[] = { "its", "his", "her" };
     char buf[MAX_STRING_LENGTH] = { '\0' };
-    std::string fname;
     char *point = buf;
     const char *str = format.c_str();
     std::string i;
-    Character *vch = (Character *)arg2;
-    Object *obj1 = (Object  *)arg1;
-    Object *obj2 = (Object  *)arg2;
 
     while (!IsNullOrEmpty(str))
     {
@@ -869,7 +976,7 @@ static std::string ActString(const std::string &format, Character *to, Character
 
         ++str;
 
-        if (!arg2 && *str >= 'A' && *str <= 'Z')
+        if (arg2 == nullptr && *str >= 'A' && *str <= 'Z')
         {
             Log->Bug("%s: missing arg2 for code %c:", __FUNCTION__, *str);
             Log->Bug("%s", format.c_str());
@@ -877,143 +984,17 @@ static std::string ActString(const std::string &format, Character *to, Character
         }
         else
         {
-            switch (*str)
-            {
-            default:
-                Log->Bug("%s: bad code %c.", __FUNCTION__, *str);
-                i = " <@@@> ";
-                break;
-
-            case 't':
-                i = (char *)arg1;
-                break;
-
-            case 'T':
-                i = (char *)arg2;
-                break;
-
-            case 'n':
-                i = (to ? PERS(ch, to) : NAME(ch));
-                break;
-
-            case 'N':
-                i = (to ? PERS(vch, to) : NAME(vch));
-                break;
-
-            case 'e':
-                if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
-                {
-                    Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name.c_str(),
-                             ch->Sex);
-                    i = "it";
-                }
-                else
-                {
-                    i = he_she[urange(SEX_NEUTRAL, ch->Sex, SEX_FEMALE)];
-                }
-
-                break;
-
-            case 'E':
-                if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
-                {
-                    Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name.c_str(),
-                             vch->Sex);
-                    i = "it";
-                }
-                else
-                {
-                    i = he_she[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
-                }
-
-                break;
-
-            case 'm':
-                if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
-                {
-                    Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name.c_str(),
-                             ch->Sex);
-                    i = "it";
-                }
-                else
-                {
-                    i = him_her[urange(SEX_NEUTRAL, ch->Sex, SEX_FEMALE)];
-                }
-
-                break;
-
-            case 'M':
-                if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
-                {
-                    Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name.c_str(),
-                             vch->Sex);
-                    i = "it";
-                }
-                else
-                {
-                    i = him_her[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
-                }
-
-                break;
-
-            case 's':
-                if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
-                {
-                    Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name.c_str(),
-                             ch->Sex);
-                    i = "its";
-                }
-                else
-                {
-                    i = his_her[urange(SEX_NEUTRAL, ch->Sex, SEX_FEMALE)];
-                }
-
-                break;
-
-            case 'S':
-                if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
-                {
-                    Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name.c_str(),
-                             vch->Sex);
-                    i = "its";
-                }
-                else
-                {
-                    i = his_her[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
-                }
-                break;
-
-            case 'q':
-                i = (to == ch) ? "" : "s";
-                break;
-
-            case 'Q':
-                i = (to == ch) ? "your" : his_her[urange(SEX_NEUTRAL, ch->Sex, SEX_FEMALE)];
-                break;
-
-            case 'p':
-                i = (!to || CanSeeObject(to, obj1)
-                     ? GetObjectShortDescription(obj1) : "something");
-                break;
-
-            case 'P':
-                i = (!to || CanSeeObject(to, obj2)
-                     ? GetObjectShortDescription(obj2) : "something");
-                break;
-
-            case 'd':
-                if (IsNullOrEmpty((const char*)arg2))
-                {
-                    i = "door";
-                }
-                else
-                {
-                    OneArgument(std::string((char *)arg2), fname);
-                    i = fname;
-                }
-
-                break;
-            }
+            Character *vch = static_cast<Character*>(const_cast<void*>(arg2));
+            Object *obj1 = static_cast<Object*>(const_cast<void*>(arg1));
+            Object *obj2 = static_cast<Object*>(const_cast<void*>(arg2));
+            i = SubstituteActSequence(*str,
+                                      ch,
+                                      vch,
+                                      to,
+                                      obj1,
+                                      obj2,
+                                      static_cast<const char*>(arg1),
+                                      static_cast<const char*>(arg2));
         }
 
         ++str;
@@ -1032,28 +1013,16 @@ static std::string ActString(const std::string &format, Character *to, Character
 
 void Act(short AType, const std::string &format, Character *ch, const void *arg1, const void *arg2, int type)
 {
+    assert(ch != nullptr);
     std::string txt;
     Character *to = nullptr;
-    Character *vch = (Character *)arg2;
+    Character *vch = static_cast<Character*>(const_cast<void*>(arg2));
 
     /*
      * Discard null and zero-length messages.
      */
     if (format.empty())
         return;
-
-    if (!ch)
-    {
-        Log->Bug("Act: null ch. (%s)", format.c_str());
-        return;
-    }
-
-    if (!ch->InRoom)
-        to = NULL;
-    else if (type == TO_CHAR)
-        to = ch;
-    else
-        to = ch->InRoom->Characters().front();
 
     /*
      * ACT_SECRETIVE handling
@@ -1064,49 +1033,59 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
     {
         return;
     }
-
+    
+    if (ch->InRoom == nullptr)
+    {
+        to = nullptr;
+    }
+    else if (type == TO_CHAR)
+    {
+        to = ch;
+    }
+    else
+    {
+        to = ch->InRoom->Characters().front();
+    }
+    
     if (type == TO_VICT)
     {
-        if (!vch)
+        if (vch == nullptr)
         {
-            Log->Bug("Act: null vch with TO_VICT.");
+            Log->Bug("Act: null vch (arg2) with TO_VICT.");
             Log->Bug("%s (%s)", ch->Name.c_str(), format.c_str());
             return;
         }
 
-        if (!vch->InRoom)
-        {
-            Log->Bug("Act: vch in NULL room!");
-            Log->Bug("%s -> %s (%s)", ch->Name.c_str(), vch->Name.c_str(), format.c_str());
-            return;
-        }
+        assert(vch->InRoom != nullptr);
+        
         to = vch;
-        /*        to = vch->InRoom->first_person;*/
     }
 
-    if (MOBtrigger && type != TO_CHAR && type != TO_VICT && to)
+    if (MOBtrigger && type != TO_CHAR && type != TO_VICT && to != nullptr)
     {
-        txt = ActString(format, NULL, ch, arg1, arg2);
+        txt = ActString(format, nullptr, ch, arg1, arg2);
 
         if (IsBitSet(to->InRoom->mprog.progtypes, ACT_PROG))
         {
-            RoomProgActTrigger(txt, to->InRoom, ch, (Object *)arg1, (void *)arg2);
+            RoomProgActTrigger(txt, to->InRoom, ch,
+                               static_cast<Object*>(const_cast<void*>(arg1)),
+                               const_cast<void*>(arg2));
         }
 
-        std::list<Object*> objectsToTrigger = Filter(to->InRoom->Objects(),
-                                                     [](auto to_obj)
-                                                     {
-                                                         return IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG);
-                                                     });
+        auto objectsToTrigger = Filter(to->InRoom->Objects(),
+                                       [](auto to_obj)
+                                       {
+                                           return IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG);
+                                       });
 
-        for (Object *to_obj : objectsToTrigger)
+        for (const auto &to_obj : objectsToTrigger)
         {
-            ObjProgActTrigger(txt, to_obj, ch, (Object *)arg1, (void *)arg2);
+            Object *obj1 = static_cast<Object*>(const_cast<void*>(arg1));
+            Object *obj2 = static_cast<Object*>(const_cast<void*>(arg2));
+            ObjProgActTrigger(txt, to_obj, ch, obj1, obj2);
         }
     }
 
-    /* Anyone feel like telling me the point of looping through the whole
-       room when we're only sending to one char anyways..? -- Alty */
     std::list<Character*> charactersInRoom;
 
     if (type == TO_CHAR || type == TO_VICT)
@@ -1118,11 +1097,11 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
         charactersInRoom = ch->InRoom->Characters();
     }
 
-    for (Character *person : charactersInRoom)
+    for (const auto &person : charactersInRoom)
     {
         to = person;
 
-        if (((!to || !to->Desc)
+        if (((to == nullptr || to->Desc == nullptr)
              && (IsNpc(to) && !IsBitSet(to->Prototype->mprog.progtypes, ACT_PROG)))
             || !IsAwake(to))
             continue;
@@ -1147,21 +1126,21 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
 
         txt = ActString(format, to, ch, arg1, arg2);
 
-        if (to && to->Desc)
+        if (to != nullptr && to->Desc != nullptr)
         {
             SetCharacterColor(AType, to);
-            to->Echo("%s", txt.c_str());
+            to->Echo(txt);
         }
 
         if (MOBtrigger)
         {
+            Object *obj1 = static_cast<Object*>(const_cast<void*>(arg1));
             /* Note: use original string, not string with ANSI. -- Alty */
-            MobProgActTrigger(txt, to, ch, (Object *)arg1, (void *)arg2);
+            MobProgActTrigger(txt, to, ch, obj1, const_cast<void*>(arg2));
         }
     }
 
     MOBtrigger = true;
-    return;
 }
 
 static std::string DefaultPrompt(const Character *ch)
@@ -1338,7 +1317,7 @@ void DisplayPrompt(Descriptor *d)
                 {
                     sprintf(pbuf, "(Invis) ");
                 }
-                
+
                 break;
 
             case 'I':

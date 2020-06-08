@@ -1683,7 +1683,7 @@ const char *HimHerIt(const Character *ch)
 
 const char *HisHersIts(const Character *ch)
 {
-    return ch->Sex == SEX_MALE ? "his" : ch->Sex == SEX_FEMALE ? "hers" : "its";
+    return ch->Sex == SEX_MALE ? "his" : ch->Sex == SEX_FEMALE ? "her" : "its";
 }
 
 bool HasPermanentHide(const Character *ch)

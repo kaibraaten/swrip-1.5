@@ -2041,12 +2041,12 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
 
         if (!IsNpc(victim))
         {
-            sprintf(log_buf, "%s killed by %s at %ld",
-                victim->Name.c_str(),
-                (IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str()),
-                victim->InRoom->Vnum);
-            Log->Info("%s", log_buf);
-            ToChannel(log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
+            auto logBuf = FormatString("%s killed by %s at %ld",
+                                       victim->Name.c_str(),
+                                       (IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str()),
+                                       victim->InRoom->Vnum);
+            Log->Info("%s", logBuf.c_str());
+            ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
 
         }
         else if (!IsNpc(ch))              /* keep track of mob vnum killed */
