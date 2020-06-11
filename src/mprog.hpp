@@ -28,18 +28,10 @@ private:
     std::unique_ptr<Impl> pImpl;
 };
 
-/* Mob program structures */
-class act_prog_data
-{
-public:
-    void *vo = nullptr;
-    std::shared_ptr<Room> room;
-};
-
 class MPROG_ACT_LIST
 {
 public:
-    char *buf = nullptr;
+    std::string buf;
     Character *ch = nullptr;
     Object *obj = nullptr;
     void *vo = nullptr;
@@ -57,21 +49,21 @@ public:
 };
 
 extern bool MOBtrigger;
-extern std::list<std::shared_ptr<act_prog_data>> mob_act_list;
 extern Character *supermob;
 
+void MobActUpdate();
 void RoomActUpdate();
 void ObjectActUpdate();
 void ProgBug(const std::string &str, const Character *mob);
 void InitializeSupermob();
 void ReleaseSupermob();
 void MobProgWordlistCheck(const std::string &arg, Character *mob,
-    Character* actor, Object* object,
-    void* vo, int type);
+                          Character* actor, Object* object,
+                          void* vo, int type);
 void MobProgPercentCheck(Character *mob, Character* actor,
-    Object* object, void* vo, int type);
+                         Object* object, void* vo, int type);
 void MobProgActTrigger(const std::string &buf, Character* mob,
-    Character* ch, Object* obj, void* vo);
+                       Character* ch, Object* obj, void* vo);
 void MobProgBribeTrigger(Character* mob, Character* ch, int amount);
 void MobProgEntryTrigger(Character* mob);
 void MobProgGiveTrigger(Character* mob, Character* ch, Object* obj);
@@ -89,7 +81,7 @@ void ObjProgSpeechTrigger(const std::string &txt, Character *ch);
 void ObjProgRandomTrigger(Object *obj);
 void ObjProgWearTrigger(Character *ch, Object *obj);
 bool ObjProgUseTrigger(Character *ch, Object *obj,
-    Character *vict, Object *targ, void *vo);
+                       Character *vict, Object *targ, void *vo);
 void ObjProgRemoveTrigger(Character *ch, Object *obj);
 void ObjProgExamineTrigger(Character *ch, Object *obj);
 void ObjProgSacTrigger(Character *ch, Object *obj);
@@ -116,9 +108,9 @@ void RoomProgHourTrigger(Character *ch);
 char *RoomProgTypeToName(int type);
 
 void ObjProgActTrigger(const std::string &buf, Object *mobj, Character *ch,
-    Object *obj, void *vo);
+                       Object *obj, void *vo);
 void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, Character *ch,
-    Object *obj, void *vo);
+                        Object *obj, void *vo);
 
 
 #endif

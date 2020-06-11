@@ -57,9 +57,9 @@
 #include "repos/playerrepository.hpp"
 #include "repos/homerepository.hpp"
 
- /*
-  * Local functions.
-  */
+/*
+ * Local functions.
+ */
 static int GainHitPoints(const Character *ch);
 static int GainMana(const Character *ch);
 static int GainMove(const Character *ch);
@@ -97,20 +97,20 @@ Character *timechar = NULL;
 
 const char * const corpse_descs[] =
 {
- "The corpse of %s will soon be gone.",
- "The corpse of %s lies here.",
- "The corpse of %s lies here.",
- "The corpse of %s lies here.",
- "The corpse of %s lies here."
+    "The corpse of %s will soon be gone.",
+    "The corpse of %s lies here.",
+    "The corpse of %s lies here.",
+    "The corpse of %s lies here.",
+    "The corpse of %s lies here."
 };
 
 const char * const d_corpse_descs[] =
 {
- "The shattered remains %s will soon be gone.",
- "The shattered remains %s are here.",
- "The shattered remains %s are here.",
- "The shattered remains %s are here.",
- "The shattered remains %s are here."
+    "The shattered remains %s will soon be gone.",
+    "The shattered remains %s are here.",
+    "The shattered remains %s are here.",
+    "The shattered remains %s are here.",
+    "The shattered remains %s are here."
 };
 
 /*
@@ -383,7 +383,7 @@ void GainXP(Character *ch, short ability, long gain)
         SetAbilityLevel(ch, ability, new_level);
 
         ch->Echo("You have now obtained %s level %d!\r\n",
-            AbilityName[ability], GetAbilityLevel(ch, ability));
+                 AbilityName[ability], GetAbilityLevel(ch, ability));
         AdvanceLevel(ch, ability);
     }
 
@@ -678,7 +678,7 @@ static void GainAddiction(Character *ch)
         if (ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug] + 200)
         {
             ch->Echo("You feel like you are going to die. You NEED %s\r\n.",
-                GetSpiceTypeName(drug));
+                     GetSpiceTypeName(drug));
             WorsenMentalState(ch, 2);
             InflictDamage(ch, ch, 5, TYPE_UNDEFINED);
         }
@@ -1055,8 +1055,8 @@ static bool MobShouldFlee(const Character *ch, DirectionType door)
 
     return ch->HitPoints.Current < ch->HitPoints.Max / 2
         && door < DIR_SOMEWHERE
-        && pexit != nullptr
-        && pexit->ToRoom
+                  && pexit != nullptr
+                  && pexit->ToRoom
         && !pexit->Flags.test(Flag::Exit::Closed)
         && !pexit->ToRoom->Flags.test(Flag::Room::NoMob);
 }
@@ -1577,11 +1577,11 @@ static std::shared_ptr<Room> GetRoomToQuitIn(const Character *ch)
     else
     {
         auto homes = Homes->FindHomesForResident(ch->Name);
-        
+
         if(!homes.empty())
         {
             room = GetOwnedHome(ch, homes);
-            
+
             if(room == nullptr)
             {
                 room = GetRoom(homes.front()->Vnum());
@@ -1592,14 +1592,14 @@ static std::shared_ptr<Room> GetRoomToQuitIn(const Character *ch)
             room = GetRoom(ROOM_PLUOGUS_QUIT);
         }
     }
-    
+
     return room;
 }
 
 static std::list<Character*> GetLinkdeadCharacters()
 {
     std::list<Character*> linkdeads;
-    
+
     for(auto ch = FirstCharacter; ch; ch = ch->Next)
     {
         if(!ch->IsNpc()
@@ -1616,11 +1616,11 @@ static std::list<Character*> GetLinkdeadCharacters()
 static void KickOutLinkdeadCharacters()
 {
     auto linkdead = GetLinkdeadCharacters();
-                           
+
     for (auto ch : linkdead)
     {
         auto room = GetRoomToQuitIn(ch);
-        
+
         if (ch->InRoom)
         {
             CharacterFromRoom(ch);
@@ -1901,7 +1901,7 @@ static void CharacterUpdate()
                 Act(AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM);
                 Act(AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR);
                 ch->MentalState = urange(20, ch->MentalState
-                    + 4, 100);
+                                         + 4, 100);
                 InflictDamage(ch, ch, 6, gsn_poison);
             }
             else if (ch->Position == POS_INCAP)
@@ -1974,7 +1974,7 @@ static void CharacterUpdate()
                     if (ch->Position > POS_SLEEPING)
                     {
                         if ((ch->Position == POS_STANDING
-                            || ch->Position < POS_FIGHTING)
+                             || ch->Position < POS_FIGHTING)
                             && GetRandomPercent() + 10 < abs(ch->MentalState))
                         {
                             do_sleep(ch, "");
@@ -1990,7 +1990,7 @@ static void CharacterUpdate()
                     if (ch->Position > POS_SLEEPING)
                     {
                         if ((ch->Position == POS_STANDING
-                            || ch->Position < POS_FIGHTING)
+                             || ch->Position < POS_FIGHTING)
                             && (GetRandomPercent() + 20) < abs(ch->MentalState))
                         {
                             do_sleep(ch, "");
@@ -2182,12 +2182,12 @@ static void ObjectUpdate()
                 if (obj->ItemType == ITEM_DROID_CORPSE)
                 {
                     sprintf(buf, d_corpse_descs[umin(timerfrac - 1, 4)],
-                        bufptr.c_str());
+                            bufptr.c_str());
                 }
                 else
                 {
                     sprintf(buf, corpse_descs[umin(timerfrac - 1, 4)],
-                        Capitalize(bufptr).c_str());
+                            Capitalize(bufptr).c_str());
                 }
 
                 obj->Description = buf;
@@ -2466,7 +2466,7 @@ static void CharacterCheck()
                     if (GetTrustLevel(ch) < LEVEL_IMMORTAL)
                     {
                         int dam = GetRandomNumberFromRange(ch->HitPoints.Max / 50,
-                            ch->HitPoints.Max / 30);
+                                                           ch->HitPoints.Max / 30);
                         dam = umax(1, dam);
 
                         if (ch->HitPoints.Current <= 0)
@@ -2507,7 +2507,7 @@ static void CharacterCheck()
                         else
                         {
                             int dam = GetRandomNumberFromRange(ch->HitPoints.Max / 50,
-                                ch->HitPoints.Max / 30);
+                                                               ch->HitPoints.Max / 30);
                             dam = umax(1, dam);
 
                             if (ch->HitPoints.Current <= 0)
@@ -2574,39 +2574,6 @@ static bool PerformBackstab(Character *ch, Character *victim)
  */
 static void AggroUpdate()
 {
-    /* check mobprog act queue */
-    while (!mob_act_list.empty())
-    {
-        std::shared_ptr<act_prog_data> apdtmp = mob_act_list.front();
-        Character *wch = (Character*)apdtmp->vo;
-
-        if (!CharacterDiedRecently(wch) && wch->mprog.mpactnum > 0)
-        {
-            auto actLists(wch->mprog.ActLists());
-
-            for (auto tmp_act : actLists)
-            {
-                if (tmp_act->obj && IsObjectExtracted(tmp_act->obj))
-                {
-                    tmp_act->obj = NULL;
-                }
-
-                if (tmp_act->ch && !CharacterDiedRecently(tmp_act->ch))
-                {
-                    MobProgWordlistCheck(tmp_act->buf, wch, tmp_act->ch,
-                        tmp_act->obj, tmp_act->vo, ACT_PROG);
-                }
-
-                wch->mprog.Remove(tmp_act);
-                FreeMemory(tmp_act->buf);
-            }
-
-            wch->mprog.mpactnum = 0;
-        }
-
-        mob_act_list.remove(apdtmp);
-    }
-
     for (Character *ch = FirstCharacter, *wch_next = nullptr; ch; ch = wch_next)
     {
         wch_next = ch->Next;
@@ -2714,7 +2681,7 @@ static void PerformRandomDrunkBehavior(Character *ch)
         CheckSocial(ch, "fart", "");
     }
     else if (drunk > (10 + (GetCurrentConstitution(ch) / 5))
-        && GetRandomPercent() < (2 * drunk / 18))
+             && GetRandomPercent() < (2 * drunk / 18))
     {
         for (Character *vch : ch->InRoom->Characters())
         {
@@ -2837,11 +2804,36 @@ static void TeleportUpdate()
             if (!tele->FromRoom->Characters().empty())
             {
                 Teleport(tele->FromRoom->Characters().front(), tele->FromRoom->TeleVnum,
-                    TELE_TRANSALL);
+                         TELE_TRANSALL);
             }
 
             UNLINK(tele, FirstTeleport, LastTeleport, Next, Previous);
         }
+    }
+}
+
+static void StartTiming(timeval &start_time)
+{
+    if (timechar)
+    {
+        SetCharacterColor(AT_PLAIN, timechar);
+        timechar->Echo("Starting update timer.\r\n");
+        gettimeofday(&start_time, nullptr);
+    }
+}
+
+static void StopTiming(timeval &start_time)
+{
+    if (timechar)
+    {
+        timeval etime;
+        gettimeofday(&etime, NULL);
+        SetCharacterColor(AT_PLAIN, timechar);
+        timechar->Echo("Update timing complete.\r\n");
+        SubtractTimes(&etime, &start_time);
+        timechar->Echo("Timing took %ld.%06ld seconds.\r\n",
+                       etime.tv_sec, etime.tv_usec);
+        timechar = nullptr;
     }
 }
 
@@ -2863,15 +2855,9 @@ void UpdateHandler()
     static int pulse_recharge;
     static int pulse_StartArena = PULSE_ARENA;
     static int pulse_arena = PULSE_ARENA;
-    struct timeval start_time;
-    struct timeval etime;
+    timeval start_time;
 
-    if (timechar)
-    {
-        SetCharacterColor(AT_PLAIN, timechar);
-        timechar->Echo("Starting update timer.\r\n");
-        gettimeofday(&start_time, NULL);
-    }
+    StartTiming(start_time);
 
     if (--pulse_area <= 0)
     {
@@ -2957,7 +2943,8 @@ void UpdateHandler()
 
     if (arena.PeopleIsInArena)
     {
-        if ((--pulse_arena <= 0) || (CharactersInArena() == 1))
+        if (--pulse_arena <= 0
+            || CharactersInArena() == 1)
         {
             pulse_arena = PULSE_ARENA;
             UpdateArena();
@@ -2965,22 +2952,14 @@ void UpdateHandler()
     }
 
     TeleportUpdate();
+    MobActUpdate();
     AggroUpdate();
     ObjectActUpdate();
     RoomActUpdate();
     CleanObjectQueue();            /* dispose of extracted objects */
     CleanCharacterQueue();           /* dispose of dead mobs/quitting chars */
 
-    if (timechar)
-    {
-        gettimeofday(&etime, NULL);
-        SetCharacterColor(AT_PLAIN, timechar);
-        timechar->Echo("Update timing complete.\r\n");
-        SubtractTimes(&etime, &start_time);
-        timechar->Echo("Timing took %ld.%06ld seconds.\r\n",
-            etime.tv_sec, etime.tv_usec);
-        timechar = NULL;
-    }
+    StopTiming(start_time);
 }
 
 void RemovePortal(Object *portal)
@@ -2990,10 +2969,10 @@ void RemovePortal(Object *portal)
     std::shared_ptr<Exit> pexit;
 
     const auto &exitIter = Find(fromRoom->Exits(),
-        [](auto ex)
-    {
-        return ex->Flags.test(Flag::Exit::Portal);
-    });
+                                [](auto ex)
+                                {
+                                    return ex->Flags.test(Flag::Exit::Portal);
+                                });
 
     if (exitIter != nullptr)
     {
@@ -3029,15 +3008,15 @@ void RemovePortal(Object *portal)
 void RebootCheck(time_t reset)
 {
     static const char * const tmsg[] =
-    { "SYSTEM: Reboot in 10 seconds.",
-      "SYSTEM: Reboot in 30 seconds.",
-      "SYSTEM: Reboot in 1 minute.",
-      "SYSTEM: Reboot in 2 minutes.",
-      "SYSTEM: Reboot in 3 minutes.",
-      "SYSTEM: Reboot in 4 minutes.",
-      "SYSTEM: Reboot in 5 minutes.",
-      "SYSTEM: Reboot in 10 minutes.",
-    };
+        { "SYSTEM: Reboot in 10 seconds.",
+          "SYSTEM: Reboot in 30 seconds.",
+          "SYSTEM: Reboot in 1 minute.",
+          "SYSTEM: Reboot in 2 minutes.",
+          "SYSTEM: Reboot in 3 minutes.",
+          "SYSTEM: Reboot in 4 minutes.",
+          "SYSTEM: Reboot in 5 minutes.",
+          "SYSTEM: Reboot in 10 minutes.",
+        };
     static const int times[] = { 10, 30, 60, 120, 180, 240, 300, 600 };
     static int trun = 0;
     static bool init = false;
@@ -3077,7 +3056,7 @@ void RebootCheck(time_t reset)
         if (OngoingAuction->Item)
         {
             sprintf(buf, "Sale of %s has been stopped by mud.",
-                OngoingAuction->Item->ShortDescr.c_str());
+                    OngoingAuction->Item->ShortDescr.c_str());
             TalkAuction(buf);
             ObjectToCharacter(OngoingAuction->Item, OngoingAuction->Seller);
             OngoingAuction->Item = NULL;
@@ -3090,7 +3069,7 @@ void RebootCheck(time_t reset)
         }
 
         EchoToAll(AT_YELLOW, "You are forced from these realms by a strong "
-            "presence\r\nas life here is reconstructed.", ECHOTAR_ALL);
+                  "presence\r\nas life here is reconstructed.", ECHOTAR_ALL);
 
         for (vch = FirstCharacter; vch; vch = vch->Next)
         {
@@ -3135,12 +3114,12 @@ static void AuctionUpdate()
         if (OngoingAuction->Bet > OngoingAuction->Starting)
         {
             sprintf(buf, "%s: going %s for %d.", OngoingAuction->Item->ShortDescr.c_str(),
-                ((OngoingAuction->Going == GoingOnce) ? "once" : "twice"), OngoingAuction->Bet);
+                    ((OngoingAuction->Going == GoingOnce) ? "once" : "twice"), OngoingAuction->Bet);
         }
         else
         {
             sprintf(buf, "%s: going %s (bid not received yet).", OngoingAuction->Item->ShortDescr.c_str(),
-                ((OngoingAuction->Going == GoingOnce) ? "once" : "twice"));
+                    ((OngoingAuction->Going == GoingOnce) ? "once" : "twice"));
         }
 
         TalkAuction(buf);
@@ -3156,9 +3135,9 @@ static void AuctionUpdate()
         if (OngoingAuction->Bet > 0 && OngoingAuction->Buyer != OngoingAuction->Seller)
         {
             sprintf(buf, "%s sold to %s for %d.",
-                OngoingAuction->Item->ShortDescr.c_str(),
-                IsNpc(OngoingAuction->Buyer) ? OngoingAuction->Buyer->ShortDescr.c_str() : OngoingAuction->Buyer->Name.c_str(),
-                OngoingAuction->Bet);
+                    OngoingAuction->Item->ShortDescr.c_str(),
+                    IsNpc(OngoingAuction->Buyer) ? OngoingAuction->Buyer->ShortDescr.c_str() : OngoingAuction->Buyer->Name.c_str(),
+                    OngoingAuction->Bet);
             TalkAuction(buf);
 
             Act(AT_ACTION, "The auctioneer materializes before you, and hands you $p.",
@@ -3167,8 +3146,8 @@ static void AuctionUpdate()
                 OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_ROOM);
 
             if ((OngoingAuction->Buyer->CarryWeight
-                + GetObjectWeight(OngoingAuction->Item))
-        > GetCarryCapacityWeight(OngoingAuction->Buyer))
+                 + GetObjectWeight(OngoingAuction->Item))
+                > GetCarryCapacityWeight(OngoingAuction->Buyer))
             {
                 Act(AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_CHAR);
                 Act(AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_ROOM);
@@ -3184,7 +3163,7 @@ static void AuctionUpdate()
             BoostEconomy(OngoingAuction->Seller->InRoom->Area, tax);
             OngoingAuction->Seller->Gold += pay; /* give him the money, tax 10 % */
             OngoingAuction->Buyer->Echo("The auctioneer pays you %d gold, charging an auction fee of %d.\r\n",
-                pay, tax);
+                                        pay, tax);
             OngoingAuction->Item = NULL; /* reset item */
 
             if (SysData.SaveFlags.test(Flag::AutoSave::Auction))
@@ -3196,7 +3175,7 @@ static void AuctionUpdate()
         else /* not sold */
         {
             sprintf(buf, "No bids received for %s - object has been removed from auction\r\n.",
-                OngoingAuction->Item->ShortDescr.c_str());
+                    OngoingAuction->Item->ShortDescr.c_str());
             TalkAuction(buf);
             Act(AT_ACTION, "The auctioneer appears before you to return $p to you.",
                 OngoingAuction->Seller, OngoingAuction->Item, NULL, TO_CHAR);
@@ -3204,8 +3183,8 @@ static void AuctionUpdate()
                 OngoingAuction->Seller, OngoingAuction->Item, NULL, TO_ROOM);
 
             if ((OngoingAuction->Seller->CarryWeight
-                + GetObjectWeight(OngoingAuction->Item))
-    > GetCarryCapacityWeight(OngoingAuction->Seller))
+                 + GetObjectWeight(OngoingAuction->Item))
+                > GetCarryCapacityWeight(OngoingAuction->Seller))
             {
                 Act(AT_PLAIN, "You drop $p as it is just too much to carry"
                     " with everything else you're carrying.", OngoingAuction->Seller,

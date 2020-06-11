@@ -1198,8 +1198,8 @@ void DrawMap(const Character *ch, const std::string &desc);
 /* misc.c */
 bool IsValidLanguage(int language);
 void PullOrPush(Character *ch, Object *obj, bool pull);
-void ActionDescription(Character *ch, Object *obj, void *vo);
 std::string FormatDate(const time_t*);
+void ActionDescription(Character *ch, Object *obj);
 
 /* mud_comm.c */
 Character *GetCharacterInRoomMudProg(Character *ch, std::string argument);

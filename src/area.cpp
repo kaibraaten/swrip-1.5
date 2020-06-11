@@ -238,7 +238,6 @@ void CloseArea(std::shared_ptr<Area> pArea)
             for (auto mpact : mprogActLists)
             {
                 rid->mprog.Remove(mpact);
-                FreeMemory(mpact->buf);
             }
 
             auto roomProgs(rid->mprog.MudProgs());

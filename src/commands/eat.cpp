@@ -61,7 +61,7 @@ void do_eat( Character *ch, std::string argument )
         }
         else
         {
-            ActionDescription( ch, obj, NULL );
+            ActionDescription(ch, obj);
         }
     }
 

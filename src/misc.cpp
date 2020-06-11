@@ -333,7 +333,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
     }
 }
 
-void ActionDescription(Character *ch, Object *obj, void *vo)
+void ActionDescription(Character *ch, Object *obj)
 {
     char charbuf[MAX_STRING_LENGTH];
     char roombuf[MAX_STRING_LENGTH];
