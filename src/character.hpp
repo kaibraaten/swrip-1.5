@@ -154,7 +154,6 @@ public:
     CmdFun *LastCommand = NULL;
     CmdFun *PreviousCommand = NULL;   /* mapping */
     std::string dest_buf;
-    void *spare_ptr = NULL;
     int tempnum = 0;
     int NumFighting = 0;
     CharacterSubState SubState = SUB_NONE;
