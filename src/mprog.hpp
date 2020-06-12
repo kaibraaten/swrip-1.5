@@ -44,7 +44,7 @@ public:
     int         type = 0;
     bool        triggered = false;
     int         resetdelay = 0;
-    char       *arglist = nullptr;
+    std::string arglist;
     std::string comlist;
 };
 

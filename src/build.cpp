@@ -595,13 +595,7 @@ void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
     if (mptype != -1)
     {
         mprg->type = 1 << mptype;
-
-        if (mprg->arglist)
-        {
-            FreeMemory(mprg->arglist);
-        }
-
-        mprg->arglist = CopyString(argument);
+        mprg->arglist = argument;
     }
 
     StartEditing(ch, mprg->comlist,
@@ -618,13 +612,7 @@ void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
     if (mptype != -1)
     {
         mprg->type = 1 << mptype;
-
-        if (mprg->arglist)
-        {
-            FreeMemory(mprg->arglist);
-        }
-
-        mprg->arglist = CopyString(argument);
+        mprg->arglist = argument;
     }
 
     StartEditing(ch, mprg->comlist,
@@ -644,13 +632,7 @@ void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
     if (mptype != -1)
     {
         mprg->type = 1 << mptype;
-
-        if (mprg->arglist)
-        {
-            FreeMemory(mprg->arglist);
-        }
-
-        mprg->arglist = CopyString(argument);
+        mprg->arglist = argument;
     }
 
     StartEditing(ch, mprg->comlist,

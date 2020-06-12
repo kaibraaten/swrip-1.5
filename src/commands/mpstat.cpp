@@ -55,7 +55,7 @@ void do_mpstat( Character *ch, std::string arg )
     {
       ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
-               mprg->arglist,
+               mprg->arglist.c_str(),
                mprg->comlist.c_str() );
     }
 }

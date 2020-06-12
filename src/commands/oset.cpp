@@ -15,9 +15,8 @@ void do_oset( Character *ch, std::string argument )
     std::string arg3;
     char buf[MAX_STRING_LENGTH];
     char outbuf[MAX_STRING_LENGTH];
-    Object *obj = NULL;
+    Object *obj = nullptr;
     std::shared_ptr<ExtraDescription> ed;
-    bool lockobj = false;
     std::string origarg = argument;
     int value = 0, tmp = 0;
 
@@ -33,23 +32,11 @@ void do_oset( Character *ch, std::string argument )
         return;
     }
 
-    obj = NULL;
     SmashTilde( argument );
 
-    if ( obj )
-    {
-        lockobj = true;
-        arg1 = obj->Name;
-        argument = OneArgument( argument, arg2 );
-        arg3 = argument;
-    }
-    else
-    {
-        lockobj = false;
-        argument = OneArgument( argument, arg1 );
-        argument = OneArgument( argument, arg2 );
-        arg3 = argument;
-    }
+    argument = OneArgument( argument, arg1 );
+    argument = OneArgument( argument, arg2 );
+    arg3 = argument;
 
     if ( arg1.empty() || arg2.empty() || !StrCmp( arg1, "?" ) )
     {
@@ -87,20 +74,14 @@ void do_oset( Character *ch, std::string argument )
             return;
         }
     }
-    else
-        if ( !obj )
+    else if ( !obj )
+    {
+        if ( ( obj = GetObjectAnywhere( ch, arg1 ) ) == NULL )
         {
-            if ( ( obj = GetObjectAnywhere( ch, arg1 ) ) == NULL )
-            {
-                ch->Echo("There is nothing like that in all the realms.\r\n");
-                return;
-            }
+            ch->Echo("There is nothing like that in all the realms.\r\n");
+            return;
         }
-
-    if ( lockobj )
-        ch->dest_buf = obj;
-    else
-        FreeMemory(ch->dest_buf);
+    }
 
     SeparateOneObjectFromGroup( obj );
     value = ToLong( arg3 );

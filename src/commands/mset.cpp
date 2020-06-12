@@ -21,11 +21,9 @@ void do_mset( Character *ch, std::string argument )
     char outbuf[MAX_STRING_LENGTH] = {'\0'};
     int  num = 0, size = 0, plus = 0;
     char char1 = 0, char2 = 0;
-    Character *victim = NULL;
+    Character *victim = nullptr;
     int value = 0;
     int minattr = 0, maxattr = 0;
-    bool lockvictim = false;
-    std::string origarg = argument;
 
     if ( IsNpc( ch ) )
     {
@@ -39,24 +37,11 @@ void do_mset( Character *ch, std::string argument )
         return;
     }
 
-    victim = NULL;
-    lockvictim = false;
     SmashTilde( argument );
 
-    if ( victim )
-    {
-        lockvictim = true;
-        arg1 = victim->Name;
-        argument = OneArgument( argument, arg2 );
-        arg3 = argument;
-    }
-    else
-    {
-        lockvictim = false;
-        argument = OneArgument( argument, arg1 );
-        argument = OneArgument( argument, arg2 );
-        arg3 = argument;
-    }
+    argument = OneArgument( argument, arg1 );
+    argument = OneArgument( argument, arg2 );
+    arg3 = argument;
 
     if ( arg1.empty()
          || arg2.empty()
@@ -91,32 +76,26 @@ void do_mset( Character *ch, std::string argument )
             return;
         }
     }
-    else
-        if ( !victim )
+    else if ( !victim )
+    {
+        if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
         {
-            if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
-            {
-                ch->Echo("No one like that in all the realms.\r\n");
-                return;
-            }
+            ch->Echo("No one like that in all the realms.\r\n");
+            return;
         }
+    }
 
     if ( GetTrustLevel(ch) < SysData.LevelToMsetPlayers && (victim != ch) && !IsNpc( victim ) )
     {
         ch->Echo("You can't do that!\r\n");
-        FreeMemory(ch->dest_buf);
         return;
     }
 
     if ( GetTrustLevel( ch ) < GetTrustLevel( victim ) && !IsNpc( victim ) )
     {
         ch->Echo("You can't do that!\r\n");
-        FreeMemory(ch->dest_buf);
         return;
     }
-
-    if ( lockvictim )
-        ch->dest_buf = victim;
 
     if ( IsNpc(victim) )
     {

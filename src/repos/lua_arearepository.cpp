@@ -804,7 +804,7 @@ static void LoadMudProg(lua_State *L, int subscript, MProg *mprog)
     LuaGetfieldString(L, "Arguments",
                       [prog](const auto &args)
                       {
-                          prog->arglist = CopyString(args);
+                          prog->arglist = args;
                       });
     LuaGetfieldString(L, "Code", &prog->comlist);
     mprog->Add(prog);

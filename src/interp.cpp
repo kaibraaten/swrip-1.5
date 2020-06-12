@@ -117,7 +117,7 @@ static std::string ParseTarget(const Character *ch, std::string oldstring)
 
         if (*str == '$' && !ch->PCData->AliasFocus.empty())
         {
-            char *i = CopyString(ch->PCData->AliasFocus);
+            const char *i = ch->PCData->AliasFocus.c_str();
             ++str;
 
             while ((*point = *i) != '\0')
@@ -127,12 +127,9 @@ static std::string ParseTarget(const Character *ch, std::string oldstring)
                 if (count > MAX_INPUT_LENGTH)
                 {
                     ch->Echo("Target substitution too long; not processed.\r\n");
-                    FreeMemory(i);
                     return oldstring;
                 }
             }
-
-            FreeMemory(i);
         }
         else
         {

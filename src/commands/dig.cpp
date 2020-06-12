@@ -73,13 +73,13 @@ void do_dig(Character *ch, std::string arg)
 
         AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(SkillTable[gsn_dig]->Beats / 10, 3),
             do_dig, SUB_PAUSE);
-        ch->dest_buf = CopyString(arg);
+        ch->dest_buf = arg;
         ch->Echo("You begin digging...\r\n");
         Act(AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM);
         return;
 
     case SUB_PAUSE:
-        if (!ch->dest_buf)
+        if (ch->dest_buf.empty())
         {
             ch->Echo("Your digging was interrupted!\r\n");
             Act(AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM);
@@ -87,12 +87,12 @@ void do_dig(Character *ch, std::string arg)
             return;
         }
 
-        arg = static_cast<const char*>(ch->dest_buf);
-        FreeMemory(ch->dest_buf);
+        arg = ch->dest_buf;
+        ch->dest_buf.erase();
         break;
 
     case SUB_TIMER_DO_ABORT:
-        FreeMemory(ch->dest_buf);
+        ch->dest_buf.erase();
         ch->SubState = SUB_NONE;
         ch->Echo("You stop digging...\r\n");
         Act(AT_PLAIN, "$n stops digging...", ch, NULL, NULL, TO_ROOM);

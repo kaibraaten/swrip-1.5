@@ -18,7 +18,7 @@ void do_rpstat( Character *ch, std::string argument )
     {
       ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
-               mprg->arglist,
+               mprg->arglist.c_str(),
                mprg->comlist.c_str() );
     }
 }

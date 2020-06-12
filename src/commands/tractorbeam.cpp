@@ -10,232 +10,232 @@
 
 void do_tractorbeam( Character *ch, std::string arg )
 {
-  int the_chance = 0;
-  std::shared_ptr<Ship> ship;
-  std::shared_ptr<Ship> target;
-  char buf[MAX_STRING_LENGTH] = {'\0'};
+    int the_chance = 0;
+    std::shared_ptr<Ship> ship;
+    std::shared_ptr<Ship> target;
+    char buf[MAX_STRING_LENGTH] = {'\0'};
 
-  switch( ch->SubState )
+    switch( ch->SubState )
     {
     default:
-      if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
+        if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
         {
-          ch->Echo("&RYou must be in the copilot's seat of a ship to do that!\r\n");
-          return;
+            ch->Echo("&RYou must be in the copilot's seat of a ship to do that!\r\n");
+            return;
         }
 
-      if ( ship->Class > SHIP_PLATFORM )
+        if ( ship->Class > SHIP_PLATFORM )
         {
-          ch->Echo("&RThis isn't a spacecraft!\r\n");
-          return;
+            ch->Echo("&RThis isn't a spacecraft!\r\n");
+            return;
         }
 
-      if ( !ship->WeaponSystems.TractorBeam.Strength )
+        if ( !ship->WeaponSystems.TractorBeam.Strength )
         {
-          ch->Echo("&RThis craft does not have a tractorbeam!\r\n");
-          return;
-	}
-
-      if ( IsShipInHyperspace( ship ) || !ship->Spaceobject )
-        {
-          ch->Echo("&RYou can only do that in realspace!\r\n");
-          return;
+            ch->Echo("&RThis craft does not have a tractorbeam!\r\n");
+            return;
         }
 
-      if (ship->Docking != SHIP_READY )
+        if ( IsShipInHyperspace( ship ) || !ship->Spaceobject )
         {
-          ch->Echo("&RThe ship structure can not tolerate pressure from both tractorbeam and docking port.\r\n");
-          return;
+            ch->Echo("&RYou can only do that in realspace!\r\n");
+            return;
         }
 
-      if (ship->State == SHIP_TRACTORED)
+        if (ship->Docking != SHIP_READY )
         {
-          ch->Echo("&RYou can not move in a tractorbeam!\r\n");
-          return;
+            ch->Echo("&RThe ship structure can not tolerate pressure from both tractorbeam and docking port.\r\n");
+            return;
         }
 
-      if ( IsShipAutoflying(ship) )
+        if (ship->State == SHIP_TRACTORED)
         {
-          ch->Echo("&RYou'll have to turn off the ship's autopilot first.\r\n");
-          return;
+            ch->Echo("&RYou can not move in a tractorbeam!\r\n");
+            return;
         }
 
-      if ( arg.empty() )
+        if ( IsShipAutoflying(ship) )
         {
-          ch->Echo("&RYou need to specify a target!\r\n");
-          return;
+            ch->Echo("&RYou'll have to turn off the ship's autopilot first.\r\n");
+            return;
         }
 
-      if ( !StrCmp( arg, "none") )
+        if ( arg.empty() )
         {
-          ch->Echo("&GTractorbeam set to no target.\r\n");
+            ch->Echo("&RYou need to specify a target!\r\n");
+            return;
+        }
 
-          if( ship->WeaponSystems.TractorBeam.Tractoring
-              && ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy == ship )
+        if ( !StrCmp( arg, "none") )
+        {
+            ch->Echo("&GTractorbeam set to no target.\r\n");
+
+            if( ship->WeaponSystems.TractorBeam.Tractoring
+                && ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy == ship )
             {
-              ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = NULL;
+                ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = NULL;
 
-              if( ship->WeaponSystems.TractorBeam.Tractoring->Location )
+                if( ship->WeaponSystems.TractorBeam.Tractoring->Location )
+                    ship->WeaponSystems.TractorBeam.Tractoring->State = SHIP_LANDED;
+                else if ( ship->WeaponSystems.TractorBeam.Tractoring->State != SHIP_DOCKED ||
+                          !IsShipDisabled( ship->WeaponSystems.TractorBeam.Tractoring ) )
+                    ship->WeaponSystems.TractorBeam.Tractoring->State = SHIP_READY;
+            }
+
+            ship->WeaponSystems.TractorBeam.Tractoring = NULL;
+            return;
+        }
+
+        if( ship->WeaponSystems.TractorBeam.Tractoring )
+        {
+            ch->Echo("&RReleasing previous target.\r\n");
+            ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = NULL;
+
+            if( ship->WeaponSystems.TractorBeam.Tractoring->Location )
                 ship->WeaponSystems.TractorBeam.Tractoring->State = SHIP_LANDED;
-              else if ( ship->WeaponSystems.TractorBeam.Tractoring->State != SHIP_DOCKED ||
-                        !IsShipDisabled( ship->WeaponSystems.TractorBeam.Tractoring ) )
+            else if ( ship->WeaponSystems.TractorBeam.Tractoring->State != SHIP_DOCKED ||
+                      !IsShipDisabled( ship->WeaponSystems.TractorBeam.Tractoring ) )
                 ship->WeaponSystems.TractorBeam.Tractoring->State = SHIP_READY;
-	    }
-	  
-          ship->WeaponSystems.TractorBeam.Tractoring = NULL;
-          return;
         }
 
-      if( ship->WeaponSystems.TractorBeam.Tractoring )
-        {
-          ch->Echo("&RReleasing previous target.\r\n");
-          ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = NULL;
+        target = GetShipInRange( arg, ship );
 
-	  if( ship->WeaponSystems.TractorBeam.Tractoring->Location )
-            ship->WeaponSystems.TractorBeam.Tractoring->State = SHIP_LANDED;
-          else if ( ship->WeaponSystems.TractorBeam.Tractoring->State != SHIP_DOCKED ||
-                    !IsShipDisabled( ship->WeaponSystems.TractorBeam.Tractoring ) )
-            ship->WeaponSystems.TractorBeam.Tractoring->State = SHIP_READY;
+        if( target == NULL )
+        {
+            ch->Echo("&RThat ship isn't here!\r\n");
+            return;
         }
 
-      target = GetShipInRange( arg, ship );
-
-      if( target == NULL )
+        if( target == ship )
         {
-          ch->Echo("&RThat ship isn't here!\r\n");
-          return;
+            ch->Echo("&RYou can't tractor your own ship!\r\n");
+            return;
         }
 
-      if( target == ship )
+        if ( !StrCmp(ship->Owner, "Trainer") && StrCmp(target->Owner, "Trainer") )
         {
-          ch->Echo("&RYou can't tractor your own ship!\r\n");
-          return;
+            ch->Echo("&RTrainers can only target other trainers!\r\n");
+            return;
         }
 
-      if ( !StrCmp(ship->Owner, "Trainer") && StrCmp(target->Owner, "Trainer") )
+        if ( StrCmp(ship->Owner, "Trainer") && !StrCmp(target->Owner, "Trainer") )
         {
-          ch->Echo("&RTrainers can only target other trainers!\r\n");
-          return;
+            ch->Echo("&ROnly trainers can target other trainers!\r\n");
+            return;
         }
 
-      if ( StrCmp(ship->Owner, "Trainer") && !StrCmp(target->Owner, "Trainer") )
+        if ( ship->Thrusters.Energy.Current < (25 + 25 * ((int)target->Class) ) )
         {
-          ch->Echo("&ROnly trainers can target other trainers!\r\n");
-          return;
+            ch->Echo("&RThere's not enough fuel!\r\n");
+            return;
         }
 
-      if ( ship->Thrusters.Energy.Current < (25 + 25 * ((int)target->Class) ) )
+        if( ship->Class <= SHIP_PLATFORM)
         {
-          ch->Echo("&RThere's not enough fuel!\r\n");
-          return;
-        }
-
-      if( ship->Class <= SHIP_PLATFORM)
-        {
-          if ( GetShipDistanceToShip( ship, target ) > 100+ship->WeaponSystems.TractorBeam.Strength )
+            if ( GetShipDistanceToShip( ship, target ) > 100+ship->WeaponSystems.TractorBeam.Strength )
             {
-              ch->Echo("&RThat ship is too far away to tractor.\r\n");
-              return;
+                ch->Echo("&RThat ship is too far away to tractor.\r\n");
+                return;
             }
         }
 
-      the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)  (ch->PCData->Learned[gsn_tractorbeams]) ;
+        the_chance = IsNpc(ch) ? ch->TopLevel
+            : (int)  (ch->PCData->Learned[gsn_tractorbeams]) ;
 
-      if ( GetRandomPercent() < the_chance )
+        if ( GetRandomPercent() < the_chance )
         {
-          ch->Echo("&GTracking target.\r\n");
-          Act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
-               NULL, arg.c_str(), TO_ROOM );
-          AddTimerToCharacter( ch , TIMER_CMD_FUN , 1 , do_tractorbeam , SUB_PAUSE );
-          ch->dest_buf = CopyString(arg);
-          return;
+            ch->Echo("&GTracking target.\r\n");
+            Act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
+                 NULL, arg.c_str(), TO_ROOM );
+            AddTimerToCharacter( ch , TIMER_CMD_FUN , 1 , do_tractorbeam , SUB_PAUSE );
+            ch->dest_buf = arg;
+            return;
         }
 
-      ch->Echo("&RYou fail to work the controls properly.\r\n");
-      LearnFromFailure( ch, gsn_tractorbeams );
-      return;
+        ch->Echo("&RYou fail to work the controls properly.\r\n");
+        LearnFromFailure( ch, gsn_tractorbeams );
+        return;
 
     case SUB_PAUSE:
-      if ( !ch->dest_buf )
-        return;
+        if (ch->dest_buf.empty())
+            return;
 
-      arg = static_cast<const char*>( ch->dest_buf );
-      FreeMemory( ch->dest_buf);
-      break;
+        arg = ch->dest_buf;
+        ch->dest_buf.erase();
+        break;
 
     case SUB_TIMER_DO_ABORT:
-      FreeMemory( ch->dest_buf );
-      ch->SubState = SUB_NONE;
+        ch->dest_buf.erase();
+        ch->SubState = SUB_NONE;
 
-      if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
+        if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
+            return;
+
+        ch->Echo("&RYour concentration is broken. You fail to lock onto your target.\r\n");
         return;
-
-      ch->Echo("&RYour concentration is broken. You fail to lock onto your target.\r\n");
-      return;
     }
 
-  ch->SubState = SUB_NONE;
+    ch->SubState = SUB_NONE;
 
-  if ( (ship = GetShipFromCoSeat(ch->InRoom->Vnum)) == NULL )
+    if ( (ship = GetShipFromCoSeat(ch->InRoom->Vnum)) == NULL )
     {
-      return;
-    }
-  
-  target = GetShipInRange( arg, ship );
-
-  if ( target == NULL || target == ship)
-    {
-      ch->Echo("&RThe ship has left the starsystem. Targetting aborted.\r\n");
-      return;
+        return;
     }
 
-  the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->Learned[gsn_tractorbeams]) ;
+    target = GetShipInRange( arg, ship );
 
-  the_chance += target->Class - ship->Class;
-  the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
-  the_chance += ship->Thrusters.Maneuver - target->Thrusters.Maneuver;
-  the_chance -= GetShipDistanceToShip( ship, target ) /(10*(target->Class+1));
-  the_chance /= 2;
-  the_chance = urange( 1, the_chance, 99 );
-
-  if ( GetRandomPercent() >= the_chance )
+    if ( target == NULL || target == ship)
     {
-      ch->Echo("&RYou fail to work the controls properly.\r\n");
-      LearnFromFailure( ch, gsn_tractorbeams );
-      return;
+        ch->Echo("&RThe ship has left the starsystem. Targetting aborted.\r\n");
+        return;
     }
 
-  ship->WeaponSystems.TractorBeam.Tractoring = target;
-  target->TractoredBy = ship;
-  target->State = SHIP_TRACTORED;
-  ship->Thrusters.Energy.Current -= 25 + 25 * target->Class;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+        : (int)  (ch->PCData->Learned[gsn_tractorbeams]) ;
 
-  if ( target->Class <= ship->Class )
+    the_chance += target->Class - ship->Class;
+    the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
+    the_chance += ship->Thrusters.Maneuver - target->Thrusters.Maneuver;
+    the_chance -= GetShipDistanceToShip( ship, target ) /(10*(target->Class+1));
+    the_chance /= 2;
+    the_chance = urange( 1, the_chance, 99 );
+
+    if ( GetRandomPercent() >= the_chance )
     {
-      target->Thrusters.Speed.Current = ship->WeaponSystems.TractorBeam.Strength / 2;
-      SetShipCourseTowardsShip( target, ship );
+        ch->Echo("&RYou fail to work the controls properly.\r\n");
+        LearnFromFailure( ch, gsn_tractorbeams );
+        return;
     }
 
-  if ( target->Class > ship->Class )
+    ship->WeaponSystems.TractorBeam.Tractoring = target;
+    target->TractoredBy = ship;
+    target->State = SHIP_TRACTORED;
+    ship->Thrusters.Energy.Current -= 25 + 25 * target->Class;
+
+    if ( target->Class <= ship->Class )
     {
-      ship->Thrusters.Speed.Current = ship->WeaponSystems.TractorBeam.Strength / 2;
-      SetShipCourseTowardsShip( ship, target );
+        target->Thrusters.Speed.Current = ship->WeaponSystems.TractorBeam.Strength / 2;
+        SetShipCourseTowardsShip( target, ship );
     }
 
-  ch->Echo("&GTarget Locked.\r\n");
-  sprintf( buf, "You have been locked in a tractor beam by %s.",
-           ship->Name.c_str());
-  EchoToCockpit( AT_BLOOD , target , buf );
-  LearnFromSuccess( ch, gsn_tractorbeams );
-
-  if ( IsShipAutoflying(target)
-       && !target->WeaponSystems.Target
-       && StrCmp( target->Owner, ship->Owner ) )
+    if ( target->Class > ship->Class )
     {
-      sprintf( buf, "You are being targetted by %s.", target->Name.c_str());
-      EchoToCockpit( AT_BLOOD, ship, buf );
-      target->WeaponSystems.Target = ship;
+        ship->Thrusters.Speed.Current = ship->WeaponSystems.TractorBeam.Strength / 2;
+        SetShipCourseTowardsShip( ship, target );
+    }
+
+    ch->Echo("&GTarget Locked.\r\n");
+    sprintf( buf, "You have been locked in a tractor beam by %s.",
+             ship->Name.c_str());
+    EchoToCockpit( AT_BLOOD , target , buf );
+    LearnFromSuccess( ch, gsn_tractorbeams );
+
+    if ( IsShipAutoflying(target)
+         && !target->WeaponSystems.Target
+         && StrCmp( target->Owner, ship->Owner ) )
+    {
+        sprintf( buf, "You are being targetted by %s.", target->Name.c_str());
+        EchoToCockpit( AT_BLOOD, ship, buf );
+        target->WeaponSystems.Target = ship;
     }
 }

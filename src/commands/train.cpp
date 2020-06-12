@@ -140,19 +140,19 @@ void do_train( Character *ch, std::string arg )
         }
 
         AddTimerToCharacter( ch , TIMER_CMD_FUN , 10 , do_train , SUB_PAUSE );
-        ch->dest_buf = CopyString(arg);
+        ch->dest_buf = arg;
         return;
 
     case SUB_PAUSE:
-        if ( !ch->dest_buf )
+        if (ch->dest_buf.empty())
             return;
 
-        arg = static_cast<const char*>( ch->dest_buf );
-        FreeMemory( ch->dest_buf);
+        arg = ch->dest_buf;
+        ch->dest_buf.erase();
         break;
 
     case SUB_TIMER_DO_ABORT:
-        FreeMemory( ch->dest_buf );
+        ch->dest_buf.erase();
         ch->SubState = SUB_NONE;
         ch->Echo("&RYou fail to complete your training.\r\n");
         return;

@@ -176,13 +176,13 @@ void do_cast(Character* ch, std::string argument)
         Act(AT_MAGIC, "You begin to feel the force in yourself and those around you...",
             ch, NULL, NULL, TO_CHAR);
         Act(AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM);
-        ch->dest_buf = CopyString(targetName + " " + spell_target_name);
+        ch->dest_buf = targetName + " " + spell_target_name;
         ch->tempnum = sn;
         return;
 
     case SUB_TIMER_DO_ABORT:
-        FreeMemory(ch->dest_buf);
-
+        ch->dest_buf.erase();
+        
         if (IS_VALID_SN((sn = ch->tempnum)))
         {
             if ((skill = GetSkill(sn)) == NULL)
@@ -213,17 +213,17 @@ void do_cast(Character* ch, std::string argument)
             return;
         }
 
-        if (!ch->dest_buf || !IS_VALID_SN(sn) || skill->Type != SKILL_SPELL)
+        if (ch->dest_buf.empty() || !IS_VALID_SN(sn) || skill->Type != SKILL_SPELL)
         {
             ch->Echo("Something negates the powers of the force.\r\n");
-            Log->Bug("do_cast: ch->dest_buf NULL or bad sn (%d)", sn);
+            Log->Bug("do_cast: ch->dest_buf.empty() or bad sn (%d)", sn);
             return;
         }
 
         mana = IsNpc(ch) ? 0 : skill->Mana;
-        std::string buf = static_cast<const char*>(ch->dest_buf);
+        std::string buf = ch->dest_buf;
+        ch->dest_buf.erase();
         spell_target_name = OneArgument(buf, targetName);
-        FreeMemory(ch->dest_buf);
         ch->SubState = SUB_NONE;
 
         if (skill->Participants > 1)
@@ -236,8 +236,8 @@ void do_cast(Character* ch, std::string argument)
                 if (tmp != ch
                     && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
                     && t->Count >= 1 && t->DoFun == do_cast
-                    && tmp->tempnum == sn && tmp->dest_buf
-                    && !StrCmp((const char*)tmp->dest_buf, buf))
+                    && tmp->tempnum == sn && !tmp->dest_buf.empty()
+                    && StrCmp(tmp->dest_buf, buf) == 0)
                 {
                     ++cnt;
                 }
@@ -250,8 +250,8 @@ void do_cast(Character* ch, std::string argument)
                     if (tmp != ch
                         && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
                         && t->Count >= 1 && t->DoFun == do_cast
-                        && tmp->tempnum == sn && tmp->dest_buf
-                        && !StrCmp((const char*)tmp->dest_buf, buf))
+                        && tmp->tempnum == sn && !tmp->dest_buf.empty()
+                        && StrCmp(tmp->dest_buf, buf) == 0)
                     {
                         ExtractTimer(tmp, t);
                         Act(AT_MAGIC, "Channeling your energy into $n, you help direct the force",
@@ -263,7 +263,7 @@ void do_cast(Character* ch, std::string argument)
                         tmp->Mana.Current -= mana;
                         tmp->SubState = SUB_NONE;
                         tmp->tempnum = -1;
-                        FreeMemory(tmp->dest_buf);
+                        tmp->dest_buf.erase();
                     }
                 }
 

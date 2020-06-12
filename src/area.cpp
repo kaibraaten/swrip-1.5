@@ -245,7 +245,6 @@ void CloseArea(std::shared_ptr<Area> pArea)
             for (auto mprog : roomProgs)
             {
                 rid->mprog.Remove(mprog);
-                FreeMemory(mprog->arglist);
             }
 
             if (rid == RoomIndexHash[icnt])
@@ -290,7 +289,6 @@ void CloseArea(std::shared_ptr<Area> pArea)
             for (auto mprog : mobProgs)
             {
                 mid->mprog.Remove(mprog);
-                FreeMemory(mprog->arglist);
             }
 
             if (mid == MobIndexHash[icnt])
@@ -339,7 +337,6 @@ void CloseArea(std::shared_ptr<Area> pArea)
             for (auto mprog : objProgs)
             {
                 oid->mprog.Remove(mprog);
-                FreeMemory(mprog->arglist);
             }
 
             if (oid == ObjectIndexHash[icnt])

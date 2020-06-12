@@ -2244,7 +2244,7 @@ void MobProgWordlistCheck(const std::string &arg, Character *mob, Character *act
         if (mprg->type & type)
         {
             char temp1[MAX_STRING_LENGTH];
-            strcpy(temp1, mprg->arglist);
+            strcpy(temp1, mprg->arglist.c_str());
             char *list = temp1;
 
             for (size_t i = 0; i < strlen(list); i++)
@@ -2326,7 +2326,7 @@ void MobProgPercentCheck(Character *mob, Character *actor, Object *obj,
     for (auto mprg : mob->Prototype->mprog.MudProgs())
     {
         if (mprg->type & type
-            && GetRandomPercent() <= atoi(mprg->arglist))
+            && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
         {
             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
 
@@ -2341,7 +2341,7 @@ static void mprog_time_check(Character *mob, Character *actor, Object *obj,
 {
     for (auto mprg : mob->Prototype->mprog.MudProgs())
     {
-        bool trigger_time = time_info.Hour == atoi(mprg->arglist);
+        bool trigger_time = time_info.Hour == atoi(mprg->arglist.c_str());
 
         if (!trigger_time)
         {
@@ -2477,7 +2477,7 @@ void MobProgBribeTrigger(Character *mob, Character *ch, int amount)
         for (auto mprg : mob->Prototype->mprog.MudProgs())
         {
             if (mprg->type & BRIBE_PROG
-                && amount >= atoi(mprg->arglist))
+                && amount >= atoi(mprg->arglist.c_str()))
             {
                 MudProgDriver(mprg->comlist, mob, ch, obj, nullptr, false);
                 break;
@@ -2581,7 +2581,7 @@ void MobProgHitPercentTrigger(Character *mob, Character *ch)
         for (auto mprg : mob->Prototype->mprog.MudProgs())
         {
             if (mprg->type & HITPRCNT_PROG
-                && 100 * mob->HitPoints.Current / mob->HitPoints.Max < atoi(mprg->arglist))
+                && 100 * mob->HitPoints.Current / mob->HitPoints.Max < atoi(mprg->arglist.c_str()))
             {
                 MudProgDriver(mprg->comlist, mob, ch, nullptr, nullptr, false);
                 break;
@@ -2632,9 +2632,9 @@ void MobProgScriptTrigger(Character *mob)
         {
             if (mprg->type & SCRIPT_PROG)
             {
-                if (IsNullOrEmpty(mprg->arglist)
+                if (mprg->arglist.empty()
                     || mob->mprog.mpscriptpos != 0
-                    || atoi(mprg->arglist) == time_info.Hour)
+                    || atoi(mprg->arglist.c_str()) == time_info.Hour)
                 {
                     MudProgDriver(mprg->comlist, mob, nullptr, nullptr, nullptr, true);
                 }
@@ -2702,7 +2702,7 @@ static bool ObjProgPercentCheck(Character *mob, Character *actor, Object *obj,
     for (auto mprg : obj->Prototype->mprog.MudProgs())
     {
         if (mprg->type & type
-            && GetRandomPercent() <= atoi(mprg->arglist))
+            && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
         {
             executed = true;
             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
@@ -2981,7 +2981,7 @@ static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Charact
             const char *end = nullptr;
             size_t i = 0;
 
-            strcpy(temp1, mprg->arglist);
+            strcpy(temp1, mprg->arglist.c_str());
             list = temp1;
 
             for (i = 0; i < strlen(list); i++)
@@ -3086,7 +3086,7 @@ static void RoomProgPercentCheck(Character *mob, Character *actor, Object *obj,
     for (auto mprg : mob->InRoom->mprog.MudProgs())
     {
         if (mprg->type & type
-            && GetRandomPercent() <= atoi(mprg->arglist))
+            && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
         {
             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
 
@@ -3227,7 +3227,7 @@ static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Charac
             const char *end = nullptr;
             size_t i = 0;
 
-            strcpy(temp1, mprg->arglist);
+            strcpy(temp1, mprg->arglist.c_str());
             list = temp1;
 
             for (i = 0; i < strlen(list); i++)
@@ -3306,7 +3306,7 @@ static void RoomProgTimeCheck(Character *mob, Character *actor, Object *obj,
 
     for (auto mprg : room->mprog.MudProgs())
     {
-        bool trigger_time = time_info.Hour == atoi(mprg->arglist);
+        bool trigger_time = time_info.Hour == atoi(mprg->arglist.c_str());
 
         if (!trigger_time)
         {

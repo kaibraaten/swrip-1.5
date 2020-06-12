@@ -102,7 +102,7 @@ void do_mpedit( Character *ch, std::string argument )
             ch->Echo("%d>%s %s\r\n%s\r\n",
                      ++cnt,
                      MobProgTypeToName( mprg->type ),
-                     mprg->arglist,
+                     mprg->arglist.c_str(),
                      mprg->comlist.c_str() );
         }
 
@@ -216,7 +216,6 @@ void do_mpedit( Character *ch, std::string argument )
 
         std::shared_ptr<MPROG_DATA> progToDelete = result.front();
         victim->Prototype->mprog.Remove(progToDelete);
-        FreeMemory( progToDelete->arglist );
 
         if ( num <= 1 )
         {

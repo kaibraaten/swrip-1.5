@@ -58,23 +58,23 @@ void do_search(Character *ch, std::string arg)
 
         AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(SkillTable[gsn_search]->Beats / 10, 3), do_search, SUB_PAUSE);
         ch->Echo("You begin your search...\r\n");
-        ch->dest_buf = CopyString(arg);
+        ch->dest_buf = arg;
         return;
 
     case SUB_PAUSE:
-        if (!ch->dest_buf)
+        if (ch->dest_buf.empty())
         {
             ch->Echo("Your search was interrupted!\r\n");
             Log->Bug("do_search: dest_buf NULL");
             return;
         }
 
-        arg = static_cast<const char*>(ch->dest_buf);
-        FreeMemory(ch->dest_buf);
+        arg = ch->dest_buf;
+        ch->dest_buf.erase();
         break;
 
     case SUB_TIMER_DO_ABORT:
-        FreeMemory(ch->dest_buf);
+        ch->dest_buf.erase();
         ch->SubState = SUB_NONE;
         ch->Echo("You stop your search...\r\n");
         return;
