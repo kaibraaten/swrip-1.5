@@ -1300,7 +1300,7 @@ void do_mset( Character *ch, std::string argument )
             if ( value < 0 || value > 31 )
                 ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
             else
-                victim->Susceptible.test(value);
+                victim->Susceptible.flip(value);
         }
 
         if ( IsNpc( victim ) && victim->Flags.test(Flag::Mob::Prototype) )

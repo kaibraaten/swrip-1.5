@@ -1204,7 +1204,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
        one character, and that NULL checks were made previously. */
     if (!StrCmp(chck, "number"))
     {
-        if (chkchar)
+        if (chkchar != nullptr)
         {
             if (!IsNpc(chkchar))
                 return false;
@@ -1212,16 +1212,22 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
             lhsvl = chkchar == mob ? chkchar->Gold : chkchar->Prototype->Vnum;
             return MudProgCompareNumbers(lhsvl, opr, atoi(rval), mob);
         }
-
-        return MudProgCompareNumbers(chkobj->Prototype->Vnum, opr, atoi(rval), mob);
+        else if (chkobj != nullptr)
+        {
+            return MudProgCompareNumbers(chkobj->Prototype->Vnum, opr, atoi(rval), mob);
+        }
     }
 
     if (!StrCmp(chck, "name"))
     {
-        if (chkchar)
+        if (chkchar != nullptr)
+        {
             return MudProgCompareStrings(chkchar->Name, opr, rval, mob);
-
-        return MudProgCompareStrings(chkobj->Name, opr, rval, mob);
+        }
+        else if(chkobj != nullptr)
+        {
+            return MudProgCompareStrings(chkobj->Name, opr, rval, mob);
+        }
     }
 
     /* Ok... all the ifchecks are done, so if we didnt find ours then something
