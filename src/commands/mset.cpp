@@ -1203,11 +1203,11 @@ void do_mset( Character *ch, std::string argument )
         if ( !CanModifyCharacter( ch, victim ) )
             return;
 
-        sprintf(outbuf,"%s resistant %s",arg1.c_str(), arg3.c_str());
+        sprintf(outbuf, "%s resistant %s", arg1.c_str(), arg3.c_str());
         do_mset( ch, outbuf );
-        sprintf(outbuf,"%s immune %s",arg1.c_str(), arg3.c_str());
+        sprintf(outbuf, "%s immune %s", arg1.c_str(), arg3.c_str());
         do_mset( ch, outbuf );
-        sprintf(outbuf,"%s susceptible %s",arg1.c_str(), arg3.c_str());
+        sprintf(outbuf, "%s susceptible %s", arg1.c_str(), arg3.c_str());
         do_mset( ch, outbuf );
         return;
     }
@@ -1216,7 +1216,7 @@ void do_mset( Character *ch, std::string argument )
     {
         if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-            ch->Echo("You can only modify a mobile's resistancies.\r\n");
+            ch->Echo("You can only modify a mobile's resistances.\r\n");
             return;
         }
         if ( !CanModifyCharacter( ch, victim ) )
