@@ -35,6 +35,7 @@
 #include <unordered_map>
 #include <cstring>
 #include <cctype>
+#include <stdexcept>
 #include <utility/algorithms.hpp>
 #include <utility/random.hpp>
 #include "mud.hpp"

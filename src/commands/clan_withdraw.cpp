@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
