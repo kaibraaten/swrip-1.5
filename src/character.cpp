@@ -41,19 +41,20 @@
 #include "repos/playerrepository.hpp"
 #include "repos/homerepository.hpp"
 #include "home.hpp"
+#include "act.hpp"
 
 struct Character::Impl
 {
     std::list<std::shared_ptr<Affect>> Affects;
-    std::list<Object*> Objects;
+    std::list<Object *> Objects;
     std::list<std::shared_ptr<Timer>> Timers;
 };
 
 Character::Character(std::unique_ptr<class PCData> pcdata)
     : PCData(std::move(pcdata)),
-      Flags(CreateBitSet<Flag::MAX>({ Flag::Plr::Blank, Flag::Plr::Combine, Flag::Plr::Prompt })),
-      PermStats(10),
-      pImpl(std::make_unique<Impl>())
+    Flags(CreateBitSet<Flag::MAX>({ Flag::Plr::Blank, Flag::Plr::Combine, Flag::Plr::Prompt })),
+    PermStats(10),
+    pImpl(std::make_unique<Impl>())
 {
     Ability.Level.fill(0);
     Ability.Experience.fill(0);
@@ -61,50 +62,50 @@ Character::Character(std::unique_ptr<class PCData> pcdata)
 
 Character::Character(std::shared_ptr<ProtoMobile> protoMob)
     : spec_fun(protoMob->spec_fun),
-      spec_2(protoMob->spec_2),
-      Prototype(protoMob),
-      Name(protoMob->Name),
-      ShortDescr(protoMob->ShortDescr),
-      LongDescr(protoMob->LongDescr),
-      Description(protoMob->Description),
-      Sex(protoMob->Sex),
-      Race(protoMob->Race),
-      TopLevel(NumberFuzzy(protoMob->Level)),
-      NumberOfAttacks(protoMob->NumberOfAttacks),
-      Gold(protoMob->Gold),
-      Flags(protoMob->Flags),
-      AffectedBy(protoMob->AffectedBy),
-      Resistant(protoMob->Resistant),
-      Immune(protoMob->Immune),
-      Susceptible(protoMob->Susceptible),
-      AttackFlags(protoMob->AttackFlags),
-      DefenseFlags(protoMob->DefenseFlags),
-      Speaks(protoMob->Speaks),
-      Speaking(protoMob->Speaking),
-      Alignment(protoMob->Alignment),
-      BareNumDie(protoMob->DamNoDice),
-      BareSizeDie(protoMob->DamSizeDice),
-      HitRoll(protoMob->HitRoll),
-      DamRoll(protoMob->DamRoll),
-      HitPlus(protoMob->HitPlus),
-      DamPlus(protoMob->DamPlus),
-      Position(protoMob->Position),
-      DefaultPosition(protoMob->DefaultPosition),
-      Height(protoMob->Height),
-      Weight(protoMob->Weight),
-      VipFlags(protoMob->VipFlags),
-      PermStats(protoMob->Stats),
-      pImpl(std::make_unique<Impl>())
+    spec_2(protoMob->spec_2),
+    Prototype(protoMob),
+    Name(protoMob->Name),
+    ShortDescr(protoMob->ShortDescr),
+    LongDescr(protoMob->LongDescr),
+    Description(protoMob->Description),
+    Sex(protoMob->Sex),
+    Race(protoMob->Race),
+    TopLevel(NumberFuzzy(protoMob->Level)),
+    NumberOfAttacks(protoMob->NumberOfAttacks),
+    Gold(protoMob->Gold),
+    Flags(protoMob->Flags),
+    AffectedBy(protoMob->AffectedBy),
+    Resistant(protoMob->Resistant),
+    Immune(protoMob->Immune),
+    Susceptible(protoMob->Susceptible),
+    AttackFlags(protoMob->AttackFlags),
+    DefenseFlags(protoMob->DefenseFlags),
+    Speaks(protoMob->Speaks),
+    Speaking(protoMob->Speaking),
+    Alignment(protoMob->Alignment),
+    BareNumDie(protoMob->DamNoDice),
+    BareSizeDie(protoMob->DamSizeDice),
+    HitRoll(protoMob->HitRoll),
+    DamRoll(protoMob->DamRoll),
+    HitPlus(protoMob->HitPlus),
+    DamPlus(protoMob->DamPlus),
+    Position(protoMob->Position),
+    DefaultPosition(protoMob->DefaultPosition),
+    Height(protoMob->Height),
+    Weight(protoMob->Weight),
+    VipFlags(protoMob->VipFlags),
+    PermStats(protoMob->Stats),
+    pImpl(std::make_unique<Impl>())
 {
     Ability.Level.fill(0);
     Ability.Experience.fill(0);
 
-    for (int ability = 0; ability < MAX_ABILITY; ability++)
+    for(int ability = 0; ability < MAX_ABILITY; ability++)
     {
         SetAbilityLevel(ability, TopLevel);
     }
 
-    if (protoMob->ArmorClass != 0)
+    if(protoMob->ArmorClass != 0)
     {
         ArmorClass = protoMob->ArmorClass;
     }
@@ -113,7 +114,7 @@ Character::Character(std::shared_ptr<ProtoMobile> protoMob)
         ArmorClass = 100 - TopLevel * 2.5;
     }
 
-    if (protoMob->HitNoDice != 0)
+    if(protoMob->HitNoDice != 0)
     {
         HitPoints.Max = protoMob->HitNoDice * GetRandomNumberFromRange(1, protoMob->HitSizeDice) + protoMob->HitPlus;
     }
@@ -143,7 +144,7 @@ void Character::Echo(const std::string &txt) const
 
 void Character::Echo(const char *fmt, ...) const
 {
-    if (IsNpc() || Desc == nullptr)
+    if(IsNpc() || Desc == nullptr)
     {
         return;
     }
@@ -153,7 +154,7 @@ void Character::Echo(const char *fmt, ...) const
     std::vector<char> buf = CreateFmtBuffer(fmt, va);
     va_end(va);
 
-    if (!buf.empty())
+    if(!buf.empty())
     {
         Desc->WriteToBuffer(&buf[0]);
     }
@@ -174,7 +175,7 @@ void Character::Remove(std::shared_ptr<Affect> affect)
     pImpl->Affects.remove(affect);
 }
 
-const std::list<Object*> &Character::Objects() const
+const std::list<Object *> &Character::Objects() const
 {
     return pImpl->Objects;
 }
@@ -208,9 +209,9 @@ void Character::Remove(std::shared_ptr<Timer> timer)
 // Non-class functions
 bool IsWizVis(const Character *ch, const Character *victim)
 {
-    if (!IsNpc(victim)
-        && victim->Flags.test(Flag::Plr::WizInvis)
-        && GetTrustLevel(ch) < victim->PCData->WizInvis)
+    if(!IsNpc(victim)
+       && victim->Flags.test(Flag::Plr::WizInvis)
+       && GetTrustLevel(ch) < victim->PCData->WizInvis)
         return false;
 
     return true;
@@ -221,7 +222,7 @@ bool IsWizVis(const Character *ch, const Character *victim)
  */
 long GetAbilityXP(const Character *ch, short ability)
 {
-    if (ability >= MAX_ABILITY || ability < 0)
+    if(ability >= MAX_ABILITY || ability < 0)
         return 0;
 
     return ch->Ability.Experience[ability];
@@ -229,13 +230,13 @@ long GetAbilityXP(const Character *ch, short ability)
 
 void SetAbilityXP(Character *ch, short ability, long xp)
 {
-    if (ability >= MAX_ABILITY || ability < 0)
+    if(ability >= MAX_ABILITY || ability < 0)
     {
         Log->Bug("%s: ability out of range: %d", __FUNCTION__, ability);
         return;
     }
 
-    if (xp < 0)
+    if(xp < 0)
     {
         Log->Bug("%s: negative value %ld invalid", __FUNCTION__, xp);
         return;
@@ -257,13 +258,13 @@ int GetXPWorth(const Character *ch)
     xp += (ch->BareNumDie * ch->BareSizeDie + GetDamageRoll(ch)) * 50;
     xp += GetHitRoll(ch) * ch->TopLevel * 10;
 
-    if (IsAffectedBy(ch, Flag::Affect::Sanctuary))
+    if(IsAffectedBy(ch, Flag::Affect::Sanctuary))
         xp += xp * 1.5;
 
-    if (IsAffectedBy(ch, Flag::Affect::Fireshield))
+    if(IsAffectedBy(ch, Flag::Affect::Fireshield))
         xp += xp * 1.2;
 
-    if (IsAffectedBy(ch, Flag::Affect::Shockshield))
+    if(IsAffectedBy(ch, Flag::Affect::Shockshield))
         xp += xp * 1.2;
 
     xp = urange(MIN_EXP_WORTH, xp, MAX_EXP_WORTH);
@@ -276,19 +277,19 @@ int GetXPWorth(const Character *ch)
  */
 short Character::GetTrustLevel() const
 {
-    if (Trust != 0)
+    if(Trust != 0)
         return Trust;
 
-    if (IsNpc() && TopLevel >= LEVEL_AVATAR)
+    if(IsNpc() && TopLevel >= LEVEL_AVATAR)
         return LEVEL_AVATAR;
 
-    if (TopLevel >= LEVEL_IMMORTAL && IsRetiredImmortal())
+    if(TopLevel >= LEVEL_IMMORTAL && IsRetiredImmortal())
         return LEVEL_IMMORTAL;
 
     return TopLevel;
 }
 
-short GetTrustLevel(const Character* ch)
+short GetTrustLevel(const Character *ch)
 {
     return ch->GetTrustLevel();
 }
@@ -298,7 +299,7 @@ short GetTrustLevel(const Character* ch)
  */
 short GetAge(const Character *ch)
 {
-    if (IsNpc(ch))
+    if(IsNpc(ch))
         return 17;
 
     return 17 + (ch->PCData->Played + (current_time - ch->PCData->Logon)) / 1515800;
@@ -371,7 +372,7 @@ short GetCurrentForce(const Character *ch)
 {
     short max = 0;
 
-    if (!IsNpc(ch))
+    if(!IsNpc(ch))
     {
         max = 20 + RaceTable[ch->Race].Stats.ModFrc;
         max = umin(max, 25);
@@ -390,19 +391,19 @@ short GetCurrentForce(const Character *ch)
  */
 void AddKill(Character *ch, const Character *mob)
 {
-    if (IsNpc(ch))
+    if(IsNpc(ch))
         return;
 
-    if (!IsNpc(mob))
+    if(!IsNpc(mob))
         return;
 
     vnum_t vnum = mob->Prototype->Vnum;
 
-    for (KilledData &killed : ch->PCData->Killed)
+    for(KilledData &killed : ch->PCData->Killed)
     {
-        if (killed.Vnum == vnum)
+        if(killed.Vnum == vnum)
         {
-            if (killed.Count < 50)
+            if(killed.Count < 50)
             {
                 ++killed.Count;
             }
@@ -413,7 +414,7 @@ void AddKill(Character *ch, const Character *mob)
 
     ch->PCData->Killed.push_front({ vnum, 1 });
 
-    if (ch->PCData->Killed.size() >= GetKillTrackCount(ch))
+    if(ch->PCData->Killed.size() >= GetKillTrackCount(ch))
     {
         ch->PCData->Killed.pop_back();
     }
@@ -425,17 +426,17 @@ void AddKill(Character *ch, const Character *mob)
  */
 int TimesKilled(const Character *ch, const Character *mob)
 {
-    if (IsNpc(ch))
+    if(IsNpc(ch))
         return 0;
 
-    if (!IsNpc(mob))
+    if(!IsNpc(mob))
         return 0;
 
     vnum_t vnum = mob->Prototype->Vnum;
 
-    for (const KilledData &killed : ch->PCData->Killed)
+    for(const KilledData &killed : ch->PCData->Killed)
     {
-        if (killed.Vnum == vnum)
+        if(killed.Vnum == vnum)
         {
             return killed.Count;
         }
@@ -446,7 +447,7 @@ int TimesKilled(const Character *ch, const Character *mob)
 
 bool HasComlink(const Character *ch)
 {
-    if (IsImmortal(ch))
+    if(IsImmortal(ch))
     {
         return true;
     }
@@ -473,7 +474,7 @@ void Character::SetAbilityLevel(short ability, int newlevel)
 {
     int maxlevel = IsImmortal() ? 200 : MAX_ABILITY_LEVEL;
 
-    if (newlevel >= 0 && newlevel <= maxlevel)
+    if(newlevel >= 0 && newlevel <= maxlevel)
     {
         Ability.Level[ability] = newlevel;
     }
@@ -513,16 +514,16 @@ Object *GetEquipmentOnCharacter(const Character *ch, WearLocation iWear)
 {
     Object *maxobj = NULL;
 
-    for (Object *obj : ch->Objects())
+    for(Object *obj : ch->Objects())
     {
-        if (obj->WearLoc == iWear)
+        if(obj->WearLoc == iWear)
         {
-            if (!obj->Prototype->Layers)
+            if(!obj->Prototype->Layers)
             {
                 return obj;
             }
-            else if (!maxobj
-                     || obj->Prototype->Layers > maxobj->Prototype->Layers)
+            else if(!maxobj
+                    || obj->Prototype->Layers > maxobj->Prototype->Layers)
             {
                 maxobj = obj;
             }
@@ -539,8 +540,8 @@ void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
 {
     Object *otmp = GetEquipmentOnCharacter(ch, iWear);
 
-    if (otmp != nullptr
-        && (otmp->Prototype->Layers == 0 || obj->Prototype->Layers == 0))
+    if(otmp != nullptr
+       && (otmp->Prototype->Layers == 0 || obj->Prototype->Layers == 0))
     {
         Log->Bug("%s: %s %s (%ld) already has %s (%ld) equipped on wear location %d.",
                  __FUNCTION__,
@@ -553,27 +554,27 @@ void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
 
     SeparateOneObjectFromGroup(obj);    /* just in case */
 
-    if ((obj->Flags.test(Flag::Obj::AntiEvil) && IsEvil(ch))
-        || (obj->Flags.test(Flag::Obj::AntiGood) && IsGood(ch))
-        || (obj->Flags.test(Flag::Obj::AntiNeutral) && IsNeutral(ch)))
+    if((obj->Flags.test(Flag::Obj::AntiEvil) && IsEvil(ch))
+       || (obj->Flags.test(Flag::Obj::AntiGood) && IsGood(ch))
+       || (obj->Flags.test(Flag::Obj::AntiNeutral) && IsNeutral(ch)))
     {
         /*
          * Thanks to Morgenes for the bug fix here!
          */
-        if (loading_char != ch)
+        if(loading_char != ch)
         {
             Act(AT_MAGIC, "You are zapped by $p and drop it.", ch, obj, NULL, TO_CHAR);
             Act(AT_MAGIC, "$n is zapped by $p and drops it.", ch, obj, NULL, TO_ROOM);
         }
 
-        if (obj->CarriedBy)
+        if(obj->CarriedBy)
             ObjectFromCharacter(obj);
 
         ObjectToRoom(obj, ch->InRoom);
         ObjProgZapTrigger(ch, obj);
 
-        if (SysData.SaveFlags.test(Flag::AutoSave::Zap)
-            && !CharacterDiedRecently(ch))
+        if(SysData.SaveFlags.test(Flag::AutoSave::Zap)
+           && !CharacterDiedRecently(ch))
         {
             PlayerCharacters->Save(ch);
         }
@@ -586,23 +587,23 @@ void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
 
     ch->CarryNumber -= GetObjectCount(obj);
 
-    if (obj->Flags.test(Flag::Obj::Magic)
-        || obj->WearLoc == WEAR_FLOATING)
+    if(obj->Flags.test(Flag::Obj::Magic)
+       || obj->WearLoc == WEAR_FLOATING)
         ch->CarryWeight -= GetObjectWeight(obj);
 
-    for (auto paf : obj->Prototype->Affects())
+    for(auto paf : obj->Prototype->Affects())
     {
         ModifyAffect(ch, paf, true);
     }
 
-    for (auto paf : obj->Affects())
+    for(auto paf : obj->Affects())
     {
         ModifyAffect(ch, paf, true);
     }
 
-    if (obj->ItemType == ITEM_LIGHT
-        && obj->Value[OVAL_LIGHT_POWER] != 0
-        && ch->InRoom)
+    if(obj->ItemType == ITEM_LIGHT
+       && obj->Value[OVAL_LIGHT_POWER] != 0
+       && ch->InRoom)
         ++ch->InRoom->Light;
 }
 
@@ -611,33 +612,33 @@ void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
  */
 void UnequipCharacter(Character *ch, Object *obj)
 {
-    if (obj->WearLoc == WEAR_NONE)
+    if(obj->WearLoc == WEAR_NONE)
     {
         Log->Bug("%s: already unequipped.", __FUNCTION__);
         return;
     }
 
     ch->CarryNumber += GetObjectCount(obj);
-    if (obj->Flags.test(Flag::Obj::Magic) || obj->WearLoc == WEAR_FLOATING)
+    if(obj->Flags.test(Flag::Obj::Magic) || obj->WearLoc == WEAR_FLOATING)
         ch->CarryWeight += GetObjectWeight(obj);
 
     ch->ArmorClass += GetObjectArmorClass(obj, obj->WearLoc);
     obj->WearLoc = WEAR_NONE;
 
-    for (auto paf : obj->Prototype->Affects())
+    for(auto paf : obj->Prototype->Affects())
         ModifyAffect(ch, paf, false);
 
-    if (obj->CarriedBy)
-        for (auto paf : obj->Affects())
+    if(obj->CarriedBy)
+        for(auto paf : obj->Affects())
             ModifyAffect(ch, paf, false);
 
-    if (!obj->CarriedBy)
+    if(!obj->CarriedBy)
         return;
 
-    if (obj->ItemType == ITEM_LIGHT
-        && obj->Value[OVAL_LIGHT_POWER] != 0
-        && ch->InRoom
-        &&   ch->InRoom->Light > 0)
+    if(obj->ItemType == ITEM_LIGHT
+       && obj->Value[OVAL_LIGHT_POWER] != 0
+       && ch->InRoom
+       && ch->InRoom->Light > 0)
         --ch->InRoom->Light;
 }
 
@@ -651,27 +652,27 @@ Object *GetCarriedObject(const Character *ch, const std::string &argument)
     int count = 0;
     int number = NumberArgument(argument, arg);
 
-    if (GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
+    if(GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
     {
         vnum = strtol(arg.c_str(), nullptr, 10);
     }
 
-    for (Object *obj : Reverse(ch->Objects()))
+    for(Object *obj : Reverse(ch->Objects()))
     {
-        if (obj->WearLoc == WEAR_NONE
-            && CanSeeObject(ch, obj)
-            && (NiftyIsName(arg, obj->Name) || obj->Prototype->Vnum == vnum))
+        if(obj->WearLoc == WEAR_NONE
+           && CanSeeObject(ch, obj)
+           && (NiftyIsName(arg, obj->Name) || obj->Prototype->Vnum == vnum))
         {
             count += obj->Count;
 
-            if (count >= number)
+            if(count >= number)
             {
                 return obj;
             }
         }
     }
 
-    if (vnum != INVALID_VNUM)
+    if(vnum != INVALID_VNUM)
     {
         return NULL;
     }
@@ -682,13 +683,13 @@ Object *GetCarriedObject(const Character *ch, const std::string &argument)
     */
     count = 0;
 
-    for (Object *obj : Reverse(ch->Objects()))
+    for(Object *obj : Reverse(ch->Objects()))
     {
-        if (obj->WearLoc == WEAR_NONE
-            && CanSeeObject(ch, obj)
-            && NiftyIsNamePrefix(arg, obj->Name))
+        if(obj->WearLoc == WEAR_NONE
+           && CanSeeObject(ch, obj)
+           && NiftyIsNamePrefix(arg, obj->Name))
         {
-            if ((count += obj->Count) >= number)
+            if((count += obj->Count) >= number)
             {
                 return obj;
             }
@@ -707,7 +708,7 @@ Object *GetWornObject(const Character *ch, const std::string &argument)
     int count = 0;
     vnum_t vnum = INVALID_VNUM;
 
-    if (!ch)
+    if(!ch)
     {
         Log->Bug("%s: null ch", __FUNCTION__);
         return nullptr;
@@ -715,19 +716,19 @@ Object *GetWornObject(const Character *ch, const std::string &argument)
 
     int number = NumberArgument(argument, arg);
 
-    if (GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
+    if(GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
     {
         vnum = strtol(arg.c_str(), nullptr, 10);
     }
 
-    for (Object *obj : Reverse(ch->Objects()))
-        if (obj->WearLoc != WEAR_NONE
-            && CanSeeObject(ch, obj)
-            && (NiftyIsName(arg, obj->Name) || obj->Prototype->Vnum == vnum))
-            if (++count == number)
+    for(Object *obj : Reverse(ch->Objects()))
+        if(obj->WearLoc != WEAR_NONE
+           && CanSeeObject(ch, obj)
+           && (NiftyIsName(arg, obj->Name) || obj->Prototype->Vnum == vnum))
+            if(++count == number)
                 return obj;
 
-    if (vnum != INVALID_VNUM)
+    if(vnum != INVALID_VNUM)
         return NULL;
 
     /* If we didn't find an exact match, run through the list of objects
@@ -736,11 +737,11 @@ Object *GetWornObject(const Character *ch, const std::string &argument)
     */
     count = 0;
 
-    for (Object *obj : Reverse(ch->Objects()))
-        if (obj->WearLoc != WEAR_NONE
-            && CanSeeObject(ch, obj)
-            && NiftyIsNamePrefix(arg, obj->Name))
-            if (++count == number)
+    for(Object *obj : Reverse(ch->Objects()))
+        if(obj->WearLoc != WEAR_NONE
+           && CanSeeObject(ch, obj)
+           && NiftyIsNamePrefix(arg, obj->Name))
+            if(++count == number)
                 return obj;
 
     return NULL;
@@ -763,15 +764,15 @@ bool HasMentalStateToFindObject(const Character *ch)
      */
     drunk = umax(1, drunk);
 
-    if (abs(ms) + (drunk / 3) < 30)
+    if(abs(ms) + (drunk / 3) < 30)
         return false;
 
-    if ((GetRandomPercent() + (ms < 0 ? 15 : 5)) > abs(ms) / 2 + drunk / 4)
+    if((GetRandomPercent() + (ms < 0 ? 15 : 5)) > abs(ms) / 2 + drunk / 4)
         return false;
 
-    if (ms > 15)        /* range 1 to 20 */
+    if(ms > 15)        /* range 1 to 20 */
     {
-        switch (GetRandomNumberFromRange(umax(1, (ms / 5 - 15)), (ms + 4) / 5))
+        switch(GetRandomNumberFromRange(umax(1, (ms / 5 - 15)), (ms + 4) / 5))
         {
         default:
         case 1:
@@ -859,7 +860,7 @@ bool HasMentalStateToFindObject(const Character *ch)
     {
         int sub = urange(1, abs(ms) / 2 + drunk, 60);
 
-        switch (GetRandomNumberFromRange(1, sub / 10))
+        switch(GetRandomNumberFromRange(1, sub / 10))
         {
         default:
         case 1:
@@ -897,72 +898,72 @@ bool HasMentalStateToFindObject(const Character *ch)
  */
 bool CanSeeCharacter(const Character *ch, const Character *victim)
 {
-    if (!victim)
+    if(!victim)
         return false;
 
-    if (victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
+    if(victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
         return true;
 
-    if (!ch)
+    if(!ch)
     {
-        if (IsAffectedBy(victim, Flag::Affect::Invisible)
-            || IsAffectedBy(victim, Flag::Affect::Hide)
-            || victim->Flags.test(Flag::Plr::WizInvis))
+        if(IsAffectedBy(victim, Flag::Affect::Invisible)
+           || IsAffectedBy(victim, Flag::Affect::Hide)
+           || victim->Flags.test(Flag::Plr::WizInvis))
             return false;
         else
             return true;
     }
 
-    if (ch == victim)
+    if(ch == victim)
         return true;
 
-    if (!IsNpc(victim)
-        && victim->Flags.test(Flag::Plr::WizInvis)
-        && GetTrustLevel(ch) < victim->PCData->WizInvis)
+    if(!IsNpc(victim)
+       && victim->Flags.test(Flag::Plr::WizInvis)
+       && GetTrustLevel(ch) < victim->PCData->WizInvis)
         return false;
 
-    if (victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
+    if(victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
         return true;
 
-    if (victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
+    if(victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
         return true;
 
     /* SB */
-    if (IsNpc(victim)
-        && victim->Flags.test(Flag::Mob::MobInvis)
-        && GetTrustLevel(ch) < victim->MobInvis)
+    if(IsNpc(victim)
+       && victim->Flags.test(Flag::Mob::MobInvis)
+       && GetTrustLevel(ch) < victim->MobInvis)
         return false;
 
-    if (!IsImmortal(ch) && !IsNpc(victim) && !victim->Desc
-        && GetTimer(victim, TIMER_RECENTFIGHT) > 0
-        && (!victim->Switched || !IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
+    if(!IsImmortal(ch) && !IsNpc(victim) && !victim->Desc
+       && GetTimer(victim, TIMER_RECENTFIGHT) > 0
+       && (!victim->Switched || !IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
         return false;
 
-    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
+    if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return true;
 
     /* The miracle cure for blindness? -- Altrag */
-    if (!IsAffectedBy(ch, Flag::Affect::TrueSight))
+    if(!IsAffectedBy(ch, Flag::Affect::TrueSight))
     {
-        if (IsAffectedBy(ch, Flag::Affect::Blind))
+        if(IsAffectedBy(ch, Flag::Affect::Blind))
             return false;
 
-        if (IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
+        if(IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
             return false;
 
-        if (IsAffectedBy(victim, Flag::Affect::Hide)
-            && !IsAffectedBy(ch, Flag::Affect::DetectHidden)
-            && !victim->Fighting)
+        if(IsAffectedBy(victim, Flag::Affect::Hide)
+           && !IsAffectedBy(ch, Flag::Affect::DetectHidden)
+           && !victim->Fighting)
         {
-            if (ch->Race == RACE_DEFEL && victim->Race == RACE_DEFEL)
+            if(ch->Race == RACE_DEFEL && victim->Race == RACE_DEFEL)
                 return true;
 
             return false;
         }
 
 
-        if (IsAffectedBy(victim, Flag::Affect::Invisible)
-            && !IsAffectedBy(ch, Flag::Affect::DetectInvis))
+        if(IsAffectedBy(victim, Flag::Affect::Invisible)
+           && !IsAffectedBy(ch, Flag::Affect::DetectInvis))
             return false;
     }
 
@@ -974,28 +975,28 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
  */
 bool CanSeeObject(const Character *ch, const Object *obj)
 {
-    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
+    if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return true;
 
-    if (obj->Flags.test(Flag::Obj::Burried))
+    if(obj->Flags.test(Flag::Obj::Burried))
         return false;
 
-    if (IsAffectedBy(ch, Flag::Affect::TrueSight))
+    if(IsAffectedBy(ch, Flag::Affect::TrueSight))
         return true;
 
-    if (IsAffectedBy(ch, Flag::Affect::Blind))
+    if(IsAffectedBy(ch, Flag::Affect::Blind))
         return false;
 
-    if (obj->Flags.test(Flag::Obj::Hidden))
+    if(obj->Flags.test(Flag::Obj::Hidden))
         return false;
 
-    if (obj->ItemType == ITEM_LIGHT && obj->Value[OVAL_LIGHT_POWER] != 0)
+    if(obj->ItemType == ITEM_LIGHT && obj->Value[OVAL_LIGHT_POWER] != 0)
         return true;
 
-    if (IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
+    if(IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
         return false;
 
-    if (obj->Flags.test(Flag::Obj::Invis) && !IsAffectedBy(ch, Flag::Affect::DetectInvis))
+    if(obj->Flags.test(Flag::Obj::Invis) && !IsAffectedBy(ch, Flag::Affect::DetectInvis))
         return false;
 
     return true;
@@ -1006,13 +1007,13 @@ bool CanSeeObject(const Character *ch, const Object *obj)
  */
 bool CanDropObject(const Character *ch, const Object *obj)
 {
-    if (!obj->Flags.test(Flag::Obj::NoDrop))
+    if(!obj->Flags.test(Flag::Obj::NoDrop))
         return true;
 
-    if (!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
+    if(!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
         return true;
 
-    if (IsNpc(ch) && ch->Prototype->Vnum == MOB_VNUM_SUPERMOB)
+    if(IsNpc(ch) && ch->Prototype->Vnum == MOB_VNUM_SUPERMOB)
         return true;
 
     return false;
@@ -1028,14 +1029,14 @@ void FixCharacterStats(Character *ch)
 
     DeEquipCharacter(ch);
 
-    while (!ch->Objects().empty())
+    while(!ch->Objects().empty())
     {
         Object *obj = ch->Objects().front();
         carry[ncarry++] = obj;
         ObjectFromCharacter(obj);
     }
 
-    for (auto aff : ch->Affects())
+    for(auto aff : ch->Affects())
     {
         ModifyAffect(ch, aff, false);
     }
@@ -1059,12 +1060,12 @@ void FixCharacterStats(Character *ch)
     ch->CarryWeight = 0;
     ch->CarryNumber = 0;
 
-    for (auto aff : ch->Affects())
+    for(auto aff : ch->Affects())
     {
         ModifyAffect(ch, aff, true);
     }
 
-    for (int x = 0; x < ncarry; x++)
+    for(int x = 0; x < ncarry; x++)
     {
         ObjectToCharacter(carry[x], ch);
     }
@@ -1082,9 +1083,9 @@ void ImproveMentalState(Character *ch, int mod)
 
     c += GetRandomPercent() < con ? 1 : 0;
 
-    if (ch->MentalState < 0)
+    if(ch->MentalState < 0)
         ch->MentalState = urange(-100, ch->MentalState + c, 0);
-    else if (ch->MentalState > 0)
+    else if(ch->MentalState > 0)
         ch->MentalState = urange(0, ch->MentalState - c, 100);
 }
 
@@ -1098,15 +1099,15 @@ void WorsenMentalState(Character *ch, int mod)
 
     c -= GetRandomPercent() < con ? 1 : 0;
 
-    if (c < 1)
+    if(c < 1)
         return;
 
-    if (IsDroid(ch))
+    if(IsDroid(ch))
         return;
 
-    if (ch->MentalState < 0)
+    if(ch->MentalState < 0)
         ch->MentalState = urange(-100, ch->MentalState - c, 100);
-    else if (ch->MentalState > 0)
+    else if(ch->MentalState > 0)
         ch->MentalState = urange(-100, ch->MentalState + c, 100);
     else
         ch->MentalState -= c;
@@ -1120,25 +1121,25 @@ int GetCarryCapacityNumber(const Character *ch)
 {
     int penalty = 0;
 
-    if (!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
+    if(!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
         return GetTrustLevel(ch) * 200;
 
-    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Pet))
+    if(IsNpc(ch) && ch->Flags.test(Flag::Mob::Pet))
         return 0;
 
-    if (GetEquipmentOnCharacter(ch, WEAR_WIELD))
+    if(GetEquipmentOnCharacter(ch, WEAR_WIELD))
         ++penalty;
 
-    if (GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD))
+    if(GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD))
         ++penalty;
 
-    if (GetEquipmentOnCharacter(ch, WEAR_MISSILE_WIELD))
+    if(GetEquipmentOnCharacter(ch, WEAR_MISSILE_WIELD))
         ++penalty;
 
-    if (GetEquipmentOnCharacter(ch, WEAR_HOLD))
+    if(GetEquipmentOnCharacter(ch, WEAR_HOLD))
         ++penalty;
 
-    if (GetEquipmentOnCharacter(ch, WEAR_SHIELD))
+    if(GetEquipmentOnCharacter(ch, WEAR_SHIELD))
         ++penalty;
 
     return urange(5, (ch->TopLevel + 15) / 5 + GetCurrentDexterity(ch) - 13 - penalty, 20);
@@ -1149,10 +1150,10 @@ int GetCarryCapacityNumber(const Character *ch)
  */
 int GetCarryCapacityWeight(const Character *ch)
 {
-    if (!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
+    if(!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
         return 1000000;
 
-    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Pet))
+    if(IsNpc(ch) && ch->Flags.test(Flag::Mob::Pet))
         return 0;
 
     return StrengthBonus[GetCurrentStrength(ch)].Carry;
@@ -1163,7 +1164,7 @@ bool Character::IsNpc() const
     return Flags.test(Flag::Mob::Npc) || PCData == nullptr;
 }
 
-bool IsNpc(const Character* ch)
+bool IsNpc(const Character *ch)
 {
     return ch->IsNpc();
 }
@@ -1173,7 +1174,7 @@ bool Character::IsImmortal() const
     return GetTrustLevel() >= LEVEL_IMMORTAL;
 }
 
-bool IsImmortal(const Character* ch)
+bool IsImmortal(const Character *ch)
 {
     return ch->IsImmortal();
 }
@@ -1244,14 +1245,14 @@ bool Character::IsRetiredImmortal() const
     return !IsNpc() && PCData->Flags.test(Flag::PCData::Retired);
 }
 
-bool IsRetiredImmortal(const Character* ch)
+bool IsRetiredImmortal(const Character *ch)
 {
     return ch->IsRetiredImmortal();
 }
 
 bool IsAuthed(const Character *ch)
 {
-    if (IsNpc(ch))
+    if(IsNpc(ch))
     {
         return true;
     }
@@ -1302,7 +1303,7 @@ bool IsDroid(const Character *ch)
 
 void ResetPlayerOnDeath(Character *ch)
 {
-    if (IsNpc(ch))
+    if(IsNpc(ch))
     {
         return;
     }
@@ -1311,7 +1312,7 @@ void ResetPlayerOnDeath(Character *ch)
     ch->Fighting = NULL;
     ch->Mount = NULL;
 
-    while (!ch->Affects().empty())
+    while(!ch->Affects().empty())
     {
         RemoveAffect(ch, ch->Affects().front());
     }
@@ -1320,7 +1321,7 @@ void ResetPlayerOnDeath(Character *ch)
     ch->NumFighting = 0;
     ch->HitPoints.Current = 1;
 
-    if (IsJedi(ch))
+    if(IsJedi(ch))
     {
         ch->Mana.Current = 1;
     }
@@ -1342,13 +1343,13 @@ void ResetPlayerOnDeath(Character *ch)
 
 bool IsBlind(const Character *ch)
 {
-    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
+    if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return false;
 
-    if (IsAffectedBy(ch, Flag::Affect::TrueSight))
+    if(IsAffectedBy(ch, Flag::Affect::TrueSight))
         return false;
 
-    if (IsAffectedBy(ch, Flag::Affect::Blind))
+    if(IsAffectedBy(ch, Flag::Affect::Blind))
     {
         return true;
     }
@@ -1374,27 +1375,27 @@ short GetCarryEncumbrance(const Character *ch, short move)
     int max = GetCarryCapacityWeight(ch);
     int cur = ch->CarryWeight;
 
-    if (cur >= max)
+    if(cur >= max)
     {
         return move * 4;
     }
-    else if (cur >= max * 0.95)
+    else if(cur >= max * 0.95)
     {
         return move * 3.5;
     }
-    else if (cur >= max * 0.90)
+    else if(cur >= max * 0.90)
     {
         return move * 3;
     }
-    else if (cur >= max * 0.85)
+    else if(cur >= max * 0.85)
     {
         return move * 2.5;
     }
-    else if (cur >= max * 0.80)
+    else if(cur >= max * 0.80)
     {
         return move * 2;
     }
-    else if (cur >= max * 0.75)
+    else if(cur >= max * 0.75)
     {
         return move * 1.5;
     }
@@ -1408,7 +1409,7 @@ vnum_t WhereHome(const Character *ch)
 {
     auto homes = Homes->FindHomesForResident(ch->Name);
 
-    if (!homes.empty())
+    if(!homes.empty())
     {
         for(const auto &home : homes)
         {
@@ -1420,7 +1421,7 @@ vnum_t WhereHome(const Character *ch)
 
         return homes.front()->Vnum();
     }
-    else if (IsImmortal(ch))
+    else if(IsImmortal(ch))
     {
         return ROOM_START_IMMORTAL;
     }
@@ -1437,22 +1438,22 @@ void FreeCharacter(Character *ch)
 {
     assert(ch != nullptr);
 
-    if (ch->Desc)
+    if(ch->Desc)
     {
         Log->Bug("%s: char still has descriptor.", __FUNCTION__);
     }
 
-    while (!ch->Objects().empty())
+    while(!ch->Objects().empty())
     {
         ExtractObject(ch->Objects().back());
     }
 
-    while (!ch->Affects().empty())
+    while(!ch->Affects().empty())
     {
         RemoveAffect(ch, ch->Affects().back());
     }
 
-    while (!ch->Timers().empty())
+    while(!ch->Timers().empty())
     {
         ExtractTimer(ch, ch->Timers().front());
     }
@@ -1462,24 +1463,24 @@ void FreeCharacter(Character *ch)
     StopFearing(ch);
     FreeFight(ch);
 
-    if (ch->PCData)
+    if(ch->PCData)
     {
-        if (ch->PCData->TextEditor)
+        if(ch->PCData->TextEditor)
         {
             StopEditing(ch);
         }
 
-        if (ch->PCData->Note)
+        if(ch->PCData->Note)
         {
             ch->PCData->Note.reset();
         }
 
-        if (ch->PCData->CraftingSession)
+        if(ch->PCData->CraftingSession)
         {
             FreeCraftingSession(ch->PCData->CraftingSession);
         }
 
-        while (!ch->PCData->Comments().empty())
+        while(!ch->PCData->Comments().empty())
         {
             ch->PCData->Remove(ch->PCData->Comments().front());
         }
@@ -1498,7 +1499,7 @@ bool IsInArena(const Character *ch)
 
 void ApplyJediBonus(Character *ch)
 {
-    if (GetRandomPercent() == 1)
+    if(GetRandomPercent() == 1)
     {
         ch->Mana.Max++;
         ch->Echo("&YYou are wise in your use of the force.\r\n");
@@ -1508,11 +1509,11 @@ void ApplyJediBonus(Character *ch)
 
 void ApplySithPenalty(Character *ch)
 {
-    if (GetRandomPercent() == 1)
+    if(GetRandomPercent() == 1)
     {
         ch->Mana.Max++;
 
-        if (ch->HitPoints.Max > 100)
+        if(ch->HitPoints.Max > 100)
         {
             ch->HitPoints.Max--;
         }
@@ -1524,7 +1525,7 @@ void ApplySithPenalty(Character *ch)
 
 const char *GetCharacterRace(const Character *ch)
 {
-    if (ch->Race < MAX_NPC_RACE && ch->Race >= 0)
+    if(ch->Race < MAX_NPC_RACE && ch->Race >= 0)
         return (NpcRace[ch->Race]);
 
     return "Unknown";
@@ -1532,7 +1533,7 @@ const char *GetCharacterRace(const Character *ch)
 
 void SetCharacterTitle(Character *ch, const std::string &title)
 {
-    if (IsNpc(ch))
+    if(IsNpc(ch))
     {
         Log->Bug("Set_title: NPC.");
         return;
@@ -1548,7 +1549,7 @@ void AddReinforcements(Character *ch)
     std::shared_ptr<ProtoObject> pObjIndex;
     int multiplier = 1;
 
-    if ((pMobIndex = GetProtoMobile(ch->BackupMob)) == nullptr)
+    if((pMobIndex = GetProtoMobile(ch->BackupMob)) == nullptr)
     {
         return;
     }
@@ -1557,25 +1558,25 @@ void AddReinforcements(Character *ch)
 
     Log->Info("%s just posted a guard on %ld!", ch->Name.c_str(), ch->InRoom->Vnum);
 
-    if (ch->BackupMob == MOB_VNUM_STORMTROOPER ||
-        ch->BackupMob == MOB_VNUM_NR_TROOPER ||
-        ch->BackupMob == MOB_VNUM_MERCINARY ||
-        ch->BackupMob == MOB_VNUM_IMP_FORCES ||
-        ch->BackupMob == MOB_VNUM_NR_FORCES ||
-        ch->BackupMob == MOB_VNUM_MERC_FORCES)
+    if(ch->BackupMob == MOB_VNUM_STORMTROOPER ||
+       ch->BackupMob == MOB_VNUM_NR_TROOPER ||
+       ch->BackupMob == MOB_VNUM_MERCINARY ||
+       ch->BackupMob == MOB_VNUM_IMP_FORCES ||
+       ch->BackupMob == MOB_VNUM_NR_FORCES ||
+       ch->BackupMob == MOB_VNUM_MERC_FORCES)
     {
         Character *mob[3];
 
-        if (ch->BackupMob == MOB_VNUM_IMP_FORCES ||
-            ch->BackupMob == MOB_VNUM_NR_FORCES ||
-            ch->BackupMob == MOB_VNUM_MERC_FORCES)
+        if(ch->BackupMob == MOB_VNUM_IMP_FORCES ||
+           ch->BackupMob == MOB_VNUM_NR_FORCES ||
+           ch->BackupMob == MOB_VNUM_MERC_FORCES)
         {
             multiplier = 2;
         }
 
         ch->Echo("Your reinforcements have arrived.\r\n");
 
-        for (int mob_cnt = 0; mob_cnt < 3; mob_cnt++)
+        for(int mob_cnt = 0; mob_cnt < 3; mob_cnt++)
         {
             int ability = 0;
 
@@ -1584,25 +1585,25 @@ void AddReinforcements(Character *ch)
             Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM);
             mob[mob_cnt]->TopLevel = multiplier / 1.4 * GetAbilityLevel(ch, LEADERSHIP_ABILITY) / 3;
 
-            for (ability = 0; ability < MAX_ABILITY; ability++)
+            for(ability = 0; ability < MAX_ABILITY; ability++)
             {
                 SetAbilityLevel(mob[mob_cnt], ability, mob[mob_cnt]->TopLevel);
             }
 
             mob[mob_cnt]->HitPoints.Current = mob[mob_cnt]->TopLevel * 15;
             mob[mob_cnt]->HitPoints.Max = mob[mob_cnt]->HitPoints.Current;
-            mob[mob_cnt]->ArmorClass = 100 - mob[mob_cnt]->TopLevel*2.5;
+            mob[mob_cnt]->ArmorClass = 100 - mob[mob_cnt]->TopLevel * 2.5;
             mob[mob_cnt]->DamRoll = mob[mob_cnt]->TopLevel / 5;
             mob[mob_cnt]->HitRoll = mob[mob_cnt]->TopLevel / 5;
 
-            if ((pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11)) != NULL)
+            if((pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11)) != NULL)
             {
                 blaster = CreateObject(pObjIndex, mob[mob_cnt]->TopLevel);
                 ObjectToCharacter(blaster, mob[mob_cnt]);
                 EquipCharacter(mob[mob_cnt], blaster, WEAR_WIELD);
             }
 
-            if (mob[mob_cnt]->Master)
+            if(mob[mob_cnt]->Master)
             {
                 StopFollowing(mob[mob_cnt]);
             }
@@ -1617,9 +1618,9 @@ void AddReinforcements(Character *ch)
         Character *mob = NULL;
         int ability = 0;
 
-        if (ch->BackupMob == MOB_VNUM_IMP_ELITE ||
-            ch->BackupMob == MOB_VNUM_NR_ELITE ||
-            ch->BackupMob == MOB_VNUM_MERC_ELITE)
+        if(ch->BackupMob == MOB_VNUM_IMP_ELITE ||
+           ch->BackupMob == MOB_VNUM_NR_ELITE ||
+           ch->BackupMob == MOB_VNUM_MERC_ELITE)
         {
             multiplier = 2;
         }
@@ -1627,7 +1628,7 @@ void AddReinforcements(Character *ch)
         mob = CreateMobile(pMobIndex);
         CharacterToRoom(mob, ch->InRoom);
 
-        if (ch->PCData && ch->PCData->ClanInfo.Clan)
+        if(ch->PCData && ch->PCData->ClanInfo.Clan)
         {
             mob->Name = ch->PCData->ClanInfo.Clan->Name;
             mob->LongDescr = FormatString("(%s) %s",
@@ -1639,18 +1640,18 @@ void AddReinforcements(Character *ch)
         ch->Echo("Your guard has arrived.\r\n");
         mob->TopLevel = multiplier * GetAbilityLevel(ch, LEADERSHIP_ABILITY) / 2;
 
-        for (ability = 0; ability < MAX_ABILITY; ability++)
+        for(ability = 0; ability < MAX_ABILITY; ability++)
         {
             SetAbilityLevel(mob, ability, mob->TopLevel);
         }
 
         mob->HitPoints.Current = mob->TopLevel * 10;
         mob->HitPoints.Max = mob->HitPoints.Current;
-        mob->ArmorClass = 100 - mob->TopLevel*2.5;
+        mob->ArmorClass = 100 - mob->TopLevel * 2.5;
         mob->DamRoll = mob->TopLevel / 5;
         mob->HitRoll = mob->TopLevel / 5;
 
-        if ((pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11)) != NULL)
+        if((pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11)) != NULL)
         {
             blaster = CreateObject(pObjIndex, mob->TopLevel);
             ObjectToCharacter(blaster, mob);
@@ -1659,7 +1660,7 @@ void AddReinforcements(Character *ch)
 
         /* for making this more accurate in the future */
 
-        if (ch->PCData && ch->PCData->ClanInfo.Clan)
+        if(ch->PCData && ch->PCData->ClanInfo.Clan)
         {
             mob->MobClan = ch->PCData->ClanInfo.Clan->Name;
         }
@@ -1688,7 +1689,7 @@ bool HasPermanentHide(const Character *ch)
 
 bool HasPermanentSneak(const Character *ch)
 {
-    switch (ch->Race)
+    switch(ch->Race)
     {
     case RACE_SHISTAVANEN:
     case RACE_DEFEL:

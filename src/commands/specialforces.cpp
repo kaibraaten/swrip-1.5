@@ -5,49 +5,50 @@
 #include "clan.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "act.hpp"
 
-void do_special_forces( Character *ch, std::string argument )
+void do_special_forces(Character *ch, std::string argument)
 {
     int the_chance = 0, credits = 0;
     std::shared_ptr<Clan> clan;
 
-    if ( IsNpc( ch ) )
+    if(IsNpc(ch))
         return;
 
-    switch( ch->SubState )
+    switch(ch->SubState)
     {
     default:
-        if ( ch->BackupWait )
+        if(ch->BackupWait)
         {
             ch->Echo("&RYour reinforcements are already on the way.\r\n");
             return;
         }
 
-        if ( !IsClanned( ch ) )
+        if(!IsClanned(ch))
         {
             ch->Echo("&RYou need to be a member of an organization before you can call for reinforcements.\r\n");
             return;
         }
 
-        if ( ch->Gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 350 )
+        if(ch->Gold < GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 350)
         {
-            ch->Echo("&RYou dont have enough credits to send for reinforcements.\r\n" );
+            ch->Echo("&RYou dont have enough credits to send for reinforcements.\r\n");
             return;
         }
 
-        the_chance = (int) (ch->PCData->Learned[gsn_specialforces]);
+        the_chance = (int)(ch->PCData->Learned[gsn_specialforces]);
 
-        if ( GetRandomPercent() < the_chance )
+        if(GetRandomPercent() < the_chance)
         {
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
-            Act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
-                 NULL, argument.c_str(), TO_ROOM );
-            AddTimerToCharacter( ch , TIMER_CMD_FUN , 1 , do_special_forces , SUB_PAUSE );
+            Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
+                NULL, argument.c_str(), TO_ROOM);
+            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_special_forces, SUB_PAUSE);
             return;
         }
 
         ch->Echo("&RYou call for reinforcements but nobody answers.\r\n");
-        LearnFromFailure( ch, gsn_specialforces );
+        LearnFromFailure(ch, gsn_specialforces);
         return;
 
     case SUB_PAUSE:
@@ -62,20 +63,20 @@ void do_special_forces( Character *ch, std::string argument )
     ch->SubState = SUB_NONE;
 
     ch->Echo("&GYour reinforcements are on the way.\r\n");
-    credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 350;
+    credits = GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 350;
     ch->Echo("It cost you %d credits.\r\n", credits);
-    ch->Gold -= umin( credits , ch->Gold );
+    ch->Gold -= umin(credits, ch->Gold);
 
-    LearnFromSuccess( ch, gsn_specialforces );
+    LearnFromSuccess(ch, gsn_specialforces);
 
     clan = ch->PCData->ClanInfo.Clan->MainClan ? ch->PCData->ClanInfo.Clan->MainClan : ch->PCData->ClanInfo.Clan;
 
-    if ( !StrCmp( clan->Name, BADGUY_CLAN) )
+    if(!StrCmp(clan->Name, BADGUY_CLAN))
         ch->BackupMob = MOB_VNUM_IMP_FORCES;
-    else if ( !StrCmp( clan->Name, GOODGUY_CLAN ) )
+    else if(!StrCmp(clan->Name, GOODGUY_CLAN))
         ch->BackupMob = MOB_VNUM_NR_FORCES;
     else
         ch->BackupMob = MOB_VNUM_MERC_FORCES;
 
-    ch->BackupWait = GetRandomNumberFromRange(1,2);
+    ch->BackupWait = GetRandomNumberFromRange(1, 2);
 }

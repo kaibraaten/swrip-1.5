@@ -2,51 +2,52 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "act.hpp"
 
-void do_seduce( Character *ch, std::string arg )
+void do_seduce(Character *ch, std::string arg)
 {
-  char buf[MAX_INPUT_LENGTH];
-  Character *victim = NULL;
+    char buf[MAX_INPUT_LENGTH];
+    Character *victim = NULL;
 
-  if ( arg.empty() )
+    if(arg.empty())
     {
-      ch->Echo("Seduce whom?\r\n");
-      return;
+        ch->Echo("Seduce whom?\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
+    if((victim = GetCharacterInRoom(ch, arg)) == NULL)
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( IsAffectedBy(victim, Flag::Affect::Charm) && victim->Master )
+    if(IsAffectedBy(victim, Flag::Affect::Charm) && victim->Master)
     {
-      Act( AT_PLAIN, "But he'd rather follow $N!", ch, NULL, victim->Master, TO_CHAR );
-      return;
+        Act(AT_PLAIN, "But he'd rather follow $N!", ch, NULL, victim->Master, TO_CHAR);
+        return;
     }
 
-  if ( IsFollowingInCircle( victim, ch ) )
+    if(IsFollowingInCircle(victim, ch))
     {
-      ch->Echo("Following in loops is not allowed... sorry.\r\n");
-      return;
+        ch->Echo("Following in loops is not allowed... sorry.\r\n");
+        return;
     }
 
-  SetWaitState( ch, SkillTable[gsn_seduce]->Beats );
+    SetWaitState(ch, SkillTable[gsn_seduce]->Beats);
 
-  if ( victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->Learned[gsn_seduce] )
+    if(victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->Learned[gsn_seduce])
     {
-      ch->Echo("You failed.\r\n");
-      sprintf(buf, "%s failed to seduce you.", ch->Name.c_str());
-      victim->Echo("%s", buf);
-      global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
-      return;
+        ch->Echo("You failed.\r\n");
+        sprintf(buf, "%s failed to seduce you.", ch->Name.c_str());
+        victim->Echo("%s", buf);
+        global_retcode = HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
+        return;
     }
 
 
-  if ( victim->Master )
-    StopFollowing( victim );
+    if(victim->Master)
+        StopFollowing(victim);
 
-  LearnFromSuccess( ch, gsn_seduce );
-  StartFollowing( victim, ch );
+    LearnFromSuccess(ch, gsn_seduce);
+    StartFollowing(victim, ch);
 }

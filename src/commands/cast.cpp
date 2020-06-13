@@ -6,6 +6,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
 extern std::string spell_target_name;
 extern int pAbort;

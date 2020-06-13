@@ -3,21 +3,22 @@
 #include "character.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "act.hpp"
 
-void do_purge( Character *ch, std::string arg )
+void do_purge(Character *ch, std::string arg)
 {
-    if ( arg.empty() )
+    if(arg.empty())
     {
         const auto charactersToExtract = Filter(ch->InRoom->Characters(),
                                                 [ch](const auto victim)
                                                 {
                                                     return IsNpc(victim)
-                                                    && victim != ch
-                                                    && !victim->Flags.test(Flag::Mob::Polymorphed);
+                                                        && victim != ch
+                                                        && !victim->Flags.test(Flag::Mob::Polymorphed);
                                                 });
         for(auto victim : charactersToExtract)
         {
-            ExtractCharacter( victim, true );
+            ExtractCharacter(victim, true);
         }
 
         auto objectsToExtract = Filter(ch->InRoom->Objects(),
@@ -27,10 +28,10 @@ void do_purge( Character *ch, std::string arg )
                                        });
         for(auto obj : objectsToExtract)
         {
-            ExtractObject( obj );
+            ExtractObject(obj);
         }
 
-        Act( AT_IMMORT, "$n purges the room!", ch, NULL, NULL, TO_ROOM);
+        Act(AT_IMMORT, "$n purges the room!", ch, NULL, NULL, TO_ROOM);
         ch->Echo("Ok.\r\n");
         return;
     }
@@ -41,11 +42,11 @@ void do_purge( Character *ch, std::string arg )
     /* fixed to get things in room first -- i.e., purge portal (obj),
      * no more purging mobs with that keyword in another room first
      * -- Tri */
-    if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL
-         && ( obj = GetObjectHere( ch, arg ) ) == NULL )
+    if((victim = GetCharacterInRoom(ch, arg)) == NULL
+       && (obj = GetObjectHere(ch, arg)) == NULL)
     {
-        if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL
-             &&   ( obj = GetObjectAnywhere( ch, arg ) ) == NULL )  /* no get_obj_room */
+        if((victim = GetCharacterAnywhere(ch, arg)) == NULL
+           && (obj = GetObjectAnywhere(ch, arg)) == NULL)  /* no get_obj_room */
         {
             ch->Echo("They aren't here.\r\n");
             return;
@@ -53,34 +54,34 @@ void do_purge( Character *ch, std::string arg )
     }
 
     /* Single object purge in room for high level purge - Scryn 8/12*/
-    if ( obj )
+    if(obj)
     {
-        SeparateOneObjectFromGroup( obj );
-        Act( AT_IMMORT, "$n purges $p.", ch, obj, NULL, TO_ROOM);
-        Act( AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR);
-        ExtractObject( obj );
+        SeparateOneObjectFromGroup(obj);
+        Act(AT_IMMORT, "$n purges $p.", ch, obj, NULL, TO_ROOM);
+        Act(AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR);
+        ExtractObject(obj);
         return;
     }
 
 
-    if ( !IsNpc(victim) )
+    if(!IsNpc(victim))
     {
         ch->Echo("Not on PC's.\r\n");
         return;
     }
 
-    if ( victim == ch )
+    if(victim == ch)
     {
         ch->Echo("You cannot purge yourself!\r\n");
         return;
     }
 
-    if (victim->Flags.test(Flag::Mob::Polymorphed))
+    if(victim->Flags.test(Flag::Mob::Polymorphed))
     {
         ch->Echo("You cannot purge a polymorphed player.\r\n");
         return;
     }
 
-    Act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
-    ExtractCharacter( victim, true );
+    Act(AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT);
+    ExtractCharacter(victim, true);
 }

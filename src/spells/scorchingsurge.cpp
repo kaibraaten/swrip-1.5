@@ -1,10 +1,11 @@
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "character.hpp"
+#include "act.hpp"
 
-ch_ret spell_scorching_surge(int sn, int level, Character* ch, void* vo)
+ch_ret spell_scorching_surge(int sn, int level, Character *ch, void *vo)
 {
-    Character* victim = (Character*)vo;
+    Character *victim = (Character *)vo;
     static const short dam_each[] =
     {
       1,
@@ -27,10 +28,10 @@ ch_ret spell_scorching_surge(int sn, int level, Character* ch, void* vo)
     level = umax(0, level);
     dam = GetRandomNumberFromRange(dam_each[level], dam_each[level] * 10);
 
-    if (SaveVsSpellStaff(level, victim))
+    if(SaveVsSpellStaff(level, victim))
         dam /= 2;
 
-    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
+    if(IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         dam -= (int)(dam / 4);
 
     Act(AT_MAGIC, "A fiery current lashes through $n's body!",

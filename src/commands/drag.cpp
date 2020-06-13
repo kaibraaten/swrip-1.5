@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "room.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 void do_drag(Character *ch, std::string argument)
 {
@@ -21,37 +22,37 @@ void do_drag(Character *ch, std::string argument)
     argument = OneArgument(argument, arg);
     argument = OneArgument(argument, arg2);
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("Drag whom?\r\n");
         return;
     }
 
-    if ((victim = GetCharacterInRoom(ch, arg)) == NULL)
+    if((victim = GetCharacterInRoom(ch, arg)) == NULL)
     {
         ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if (victim == ch)
+    if(victim == ch)
     {
         ch->Echo("You take yourself by the scruff of your neck, but go nowhere.\r\n");
         return;
     }
 
-    if (IsNpc(victim))
+    if(IsNpc(victim))
     {
         ch->Echo("You can only drag player characters.\r\n");
         return;
     }
 
-    if (victim->Fighting)
+    if(victim->Fighting)
     {
         ch->Echo("You try, but can't get close enough.\r\n");
         return;
     }
 
-    if (arg2.empty())
+    if(arg2.empty())
     {
         ch->Echo("Drag them in which direction?\r\n");
         return;
@@ -59,8 +60,8 @@ void do_drag(Character *ch, std::string argument)
 
     exit_dir = GetDirection(arg2);
 
-    if (victim->InRoom->Flags.test(Flag::Room::Safe)
-        && GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
+    if(victim->InRoom->Flags.test(Flag::Room::Safe)
+       && GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
     {
         ch->Echo("That character cannot be dragged right now.\r\n");
         return;
@@ -68,24 +69,24 @@ void do_drag(Character *ch, std::string argument)
 
     nogo = false;
 
-    if ((pexit = GetExit(ch->InRoom, exit_dir)) == NULL)
+    if((pexit = GetExit(ch->InRoom, exit_dir)) == NULL)
     {
-        if (!StrCmp(arg2, "in"))
+        if(!StrCmp(arg2, "in"))
         {
-            if (argument.empty())
+            if(argument.empty())
             {
                 ch->Echo("Drag them into what?\r\n");
                 return;
             }
 
-            if ((ship = GetShipInRoom(ch->InRoom, argument)) == NULL)
+            if((ship = GetShipInRoom(ch->InRoom, argument)) == NULL)
             {
                 Act(AT_PLAIN, "I see no $T here.",
                     ch, nullptr, argument.c_str(), TO_CHAR);
                 return;
             }
 
-            if (ch->Mount != nullptr)
+            if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go in there riding THAT.", ch,
                     nullptr, argument.c_str(), TO_CHAR);
@@ -94,26 +95,26 @@ void do_drag(Character *ch, std::string argument)
 
             fromroom = ch->InRoom;
 
-            if ((to_room = GetRoom(ship->Rooms.Entrance)) != NULL)
+            if((to_room = GetRoom(ship->Rooms.Entrance)) != NULL)
             {
-                if (!ship->HatchOpen)
+                if(!ship->HatchOpen)
                 {
                     ch->Echo("&RThe hatch is closed!\r\n");
                     return;
                 }
 
-                if (to_room->Tunnel > 0)
+                if(to_room->Tunnel > 0)
                 {
                     int count = to_room->Characters().size();
 
-                    if (count + 2 >= to_room->Tunnel)
+                    if(count + 2 >= to_room->Tunnel)
                     {
                         ch->Echo("There is no room for you both in there.\r\n");
                         return;
                     }
                 }
 
-                if (ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2)
+                if(ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2)
                 {
                     ch->Echo("&rThat ship has already started launching!\r\n");
                     return;
@@ -147,55 +148,55 @@ void do_drag(Character *ch, std::string argument)
             }
         }
 
-        if (!StrCmp(arg2, "out"))
+        if(!StrCmp(arg2, "out"))
         {
             fromroom = ch->InRoom;
 
-            if ((ship = GetShipFromEntrance(fromroom->Vnum)) == NULL)
+            if((ship = GetShipFromEntrance(fromroom->Vnum)) == NULL)
             {
                 ch->Echo("I see no exit here.\r\n");
                 return;
             }
 
-            if (ch->Mount != nullptr)
+            if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go out there riding THAT.",
                     ch, NULL, argument.c_str(), TO_CHAR);
                 return;
             }
 
-            if (ship->LastDock != ship->Location)
+            if(ship->LastDock != ship->Location)
             {
                 ch->Echo("&rMaybe you should wait until the ship lands.\r\n");
                 return;
             }
 
-            if (ship->State != SHIP_LANDED && !IsShipDisabled(ship))
+            if(ship->State != SHIP_LANDED && !IsShipDisabled(ship))
             {
                 ch->Echo("&rPlease wait till the ship is properly docked.\r\n");
                 return;
             }
 
-            if (!ship->HatchOpen)
+            if(!ship->HatchOpen)
             {
                 ch->Echo("&RYou need to open the hatch first");
                 return;
             }
 
-            if ((to_room = GetRoom(ship->Location)) != NULL)
+            if((to_room = GetRoom(ship->Location)) != NULL)
             {
-                if (to_room->Tunnel > 0)
+                if(to_room->Tunnel > 0)
                 {
                     int count = to_room->Characters().size();
 
-                    if (count + 2 >= to_room->Tunnel)
+                    if(count + 2 >= to_room->Tunnel)
                     {
                         ch->Echo("There is no room for you both in there.\r\n");
                         return;
                     }
                 }
 
-                if (ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2)
+                if(ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2)
                 {
                     ch->Echo("&rThat ship has already started launching!\r\n");
                     return;
@@ -231,14 +232,14 @@ void do_drag(Character *ch, std::string argument)
 
         nogo = true;
     }
-    else if (pexit->Flags.test(Flag::Exit::Closed)
-             && (!IsAffectedBy(victim, Flag::Affect::PassDoor)
-                 || pexit->Flags.test(Flag::Exit::NoPassdoor)))
+    else if(pexit->Flags.test(Flag::Exit::Closed)
+            && (!IsAffectedBy(victim, Flag::Affect::PassDoor)
+                || pexit->Flags.test(Flag::Exit::NoPassdoor)))
     {
         nogo = true;
     }
 
-    if (nogo)
+    if(nogo)
     {
         ch->Echo("There's no exit in that direction.\r\n");
         return;
@@ -246,8 +247,8 @@ void do_drag(Character *ch, std::string argument)
 
     to_room = pexit->ToRoom;
 
-    if (ch->InRoom->Area != to_room->Area
-        && !InHardRange(victim, to_room->Area))
+    if(ch->InRoom->Area != to_room->Area
+       && !InHardRange(victim, to_room->Area))
     {
         ch->Echo("That character cannot enter that area.\r\n");
         return;
@@ -259,13 +260,13 @@ void do_drag(Character *ch, std::string argument)
       sprintf(buf, "Drag percentage of %s = %d", ch->Name, drag_chance);
       Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
     */
-    if (drag_chance < GetRandomPercent())
+    if(drag_chance < GetRandomPercent())
     {
         ch->Echo("You failed.\r\n");
         return;
     }
 
-    if (victim->Position < POS_STANDING)
+    if(victim->Position < POS_STANDING)
     {
         PositionType temp = victim->Position;
         victim->Position = POS_DRAG;
@@ -273,7 +274,7 @@ void do_drag(Character *ch, std::string argument)
         Act(AT_ACTION, "$n grabs your hair and drags you.", ch, NULL, victim, TO_VICT);
         MoveCharacter(victim, GetExit(ch->InRoom, exit_dir), 0);
 
-        if (!CharacterDiedRecently(victim))
+        if(!CharacterDiedRecently(victim))
             victim->Position = temp;
 
         /* Move ch to the room too.. they are doing dragging - Scryn */

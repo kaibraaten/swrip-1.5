@@ -14,6 +14,7 @@
 #include "room.hpp"
 #include "protomob.hpp"
 #include "repos/skillrepository.hpp"
+#include "act.hpp"
 
 int TopSN = 0;
 int TopHerb = 0;
@@ -24,7 +25,7 @@ std::array<std::shared_ptr<Skill>, MAX_SKILL> HerbTable;
 extern std::string spell_target_name;       /* from magic.c */
 
 static int CompareSkills(std::shared_ptr<Skill> *sk1, std::shared_ptr<Skill> *sk2);
-static void PushSkillTable(lua_State *L, const void*);
+static void PushSkillTable(lua_State *L, const void *);
 static void PushSkill(lua_State *L, std::shared_ptr<Skill> skill);
 static void PushSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill);
 static int L_SkillEntry(lua_State *L);
@@ -52,26 +53,26 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     std::shared_ptr<Skill> skill;
 
     /* bsearch for the skill */
-    for (;;)
+    for(;;)
     {
         sn = (first + top) >> 1;
         skill = SkillTable[sn];
 
-        if (CharToLowercase(command[0]) == CharToLowercase(skill->Name[0])
-            && !StringPrefix(command, skill->Name)
-            && (skill->SkillFunction != nullptr
-                || skill->SpellFunction != spell_null)
-            && GetSkillLevel(ch, sn) > 0)
+        if(CharToLowercase(command[0]) == CharToLowercase(skill->Name[0])
+           && !StringPrefix(command, skill->Name)
+           && (skill->SkillFunction != nullptr
+               || skill->SpellFunction != spell_null)
+           && GetSkillLevel(ch, sn) > 0)
         {
             break;
         }
 
-        if (first >= top)
+        if(first >= top)
         {
             return false;
         }
 
-        if (StrCmp(command, skill->Name) < 1)
+        if(StrCmp(command, skill->Name) < 1)
         {
             top = sn - 1;
         }
@@ -81,14 +82,14 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
         }
     }
 
-    if (!CheckPosition(ch, SkillTable[sn]->Position))
+    if(!CheckPosition(ch, SkillTable[sn]->Position))
     {
         return true;
     }
 
-    if (IsNpc(ch)
-        && (IsAffectedBy(ch, Flag::Affect::Charm)
-            || IsAffectedBy(ch, Flag::Affect::Possess)))
+    if(IsNpc(ch)
+       && (IsAffectedBy(ch, Flag::Affect::Charm)
+           || IsAffectedBy(ch, Flag::Affect::Possess)))
     {
         ch->Echo("For some reason, you seem unable to perform that...\r\n");
         Act(AT_GREY, "$n looks around.", ch, NULL, NULL, TO_ROOM);
@@ -96,11 +97,11 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     }
 
     /* check if mana is required */
-    if (skill->Mana)
+    if(skill->Mana)
     {
         mana = IsNpc(ch) ? 0 : skill->Mana;
 
-        if (!IsNpc(ch) && ch->Mana.Current < mana)
+        if(!IsNpc(ch) && ch->Mana.Current < mana)
         {
             ch->Echo("You need to rest before using the Force any more.\r\n");
             return true;
@@ -114,7 +115,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     /*
      * Is this a real do-fun, or a really a spell?
      */
-    if (!skill->SkillFunction)
+    if(!skill->SkillFunction)
     {
         ch_ret retcode = rNONE;
         void *vo = NULL;
@@ -123,7 +124,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
 
         spell_target_name = "";
 
-        switch (skill->Target)
+        switch(skill->Target)
         {
         default:
             Log->Bug("Check_skill: bad target for sn %d.", sn);
@@ -133,9 +134,9 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
         case TAR_IGNORE:
             vo = NULL;
 
-            if (argument.empty())
+            if(argument.empty())
             {
-                if ((victim = GetFightingOpponent(ch)) != NULL)
+                if((victim = GetFightingOpponent(ch)) != NULL)
                 {
                     spell_target_name = victim->Name;
                 }
@@ -147,20 +148,20 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
             break;
 
         case TAR_CHAR_OFFENSIVE:
-            if (argument.empty()
-                && (victim = GetFightingOpponent(ch)) == NULL)
+            if(argument.empty()
+               && (victim = GetFightingOpponent(ch)) == NULL)
             {
                 ch->Echo("%s who?\r\n", Capitalize(skill->Name).c_str());
                 return true;
             }
-            else if (!argument.empty()
-                && (victim = GetCharacterInRoom(ch, argument)) == NULL)
+            else if(!argument.empty()
+                    && (victim = GetCharacterInRoom(ch, argument)) == NULL)
             {
                 ch->Echo("They aren't here.\r\n");
                 return true;
             }
 
-            if (IsSafe(ch, victim))
+            if(IsSafe(ch, victim))
             {
                 return true;
             }
@@ -169,14 +170,14 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
             break;
 
         case TAR_CHAR_DEFENSIVE:
-            if (!argument.empty()
-                && (victim = GetCharacterInRoom(ch, argument)) == NULL)
+            if(!argument.empty()
+               && (victim = GetCharacterInRoom(ch, argument)) == NULL)
             {
                 ch->Echo("They aren't here.\r\n");
                 return true;
             }
 
-            if (!victim)
+            if(!victim)
             {
                 victim = ch;
             }
@@ -189,7 +190,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
             break;
 
         case TAR_OBJ_INV:
-            if ((obj = GetCarriedObject(ch, argument)) == NULL)
+            if((obj = GetCarriedObject(ch, argument)) == NULL)
             {
                 ch->Echo("You can't find that.\r\n");
                 return true;
@@ -203,12 +204,12 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
         SetWaitState(ch, skill->Beats);
 
         /* check for failure */
-        if ((GetRandomPercent() + skill->Difficulty * 5) > (IsNpc(ch) ? 75 : GetSkillLevel(ch, sn)))
+        if((GetRandomPercent() + skill->Difficulty * 5) > (IsNpc(ch) ? 75 : GetSkillLevel(ch, sn)))
         {
-            FailedCasting(SkillTable[sn], ch, (Character*)vo, obj);
+            FailedCasting(SkillTable[sn], ch, (Character *)vo, obj);
             LearnFromFailure(ch, sn);
 
-            if (mana)
+            if(mana)
             {
                 ch->Mana.Current -= mana / 2;
             }
@@ -216,7 +217,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
             return true;
         }
 
-        if (mana)
+        if(mana)
         {
             ch->Mana.Current -= mana;
         }
@@ -226,17 +227,17 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
         StopTimer(&time_used);
         UpdateNumberOfTimesUsed(&time_used, skill->UseRec);
 
-        if (retcode == rCHAR_DIED || retcode == rERROR)
+        if(retcode == rCHAR_DIED || retcode == rERROR)
         {
             return true;
         }
 
-        if (CharacterDiedRecently(ch))
+        if(CharacterDiedRecently(ch))
         {
             return true;
         }
 
-        if (retcode == rSPELL_FAILED)
+        if(retcode == rSPELL_FAILED)
         {
             LearnFromFailure(ch, sn);
             retcode = rNONE;
@@ -246,15 +247,15 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
             LearnFromSuccess(ch, sn);
         }
 
-        if (skill->Target == TAR_CHAR_OFFENSIVE
-            && victim != ch
-            && !CharacterDiedRecently(victim))
+        if(skill->Target == TAR_CHAR_OFFENSIVE
+           && victim != ch
+           && !CharacterDiedRecently(victim))
         {
             auto charactersInRoom(ch->InRoom->Characters());
 
-            for (auto vch : charactersInRoom)
+            for(auto vch : charactersInRoom)
             {
-                if (victim == vch && !victim->Fighting && victim->Master != ch)
+                if(victim == vch && !victim->Fighting && victim->Master != ch)
                 {
                     retcode = HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
                     break;
@@ -265,7 +266,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
         return true;
     }
 
-    if (mana)
+    if(mana)
     {
         ch->Mana.Current -= mana;
     }
@@ -294,16 +295,16 @@ void LearnFromSuccess(Character *ch, int sn)
     int percent = 0;
     int learn_chance = 0;
 
-    if (IsNpc(ch) || ch->PCData->Learned[sn] <= 0)
+    if(IsNpc(ch) || ch->PCData->Learned[sn] <= 0)
     {
         return;
     }
 
-    if (sn == Skills->LookupSkill("meditate") && !IsJedi(ch))
+    if(sn == Skills->LookupSkill("meditate") && !IsJedi(ch))
     {
-        if (ch->PCData->Learned[sn] < 50
-            || (GetAbilityLevel(ch, FORCE_ABILITY) == 1
-                && ch->PermStats.Frc > 0))
+        if(ch->PCData->Learned[sn] < 50
+           || (GetAbilityLevel(ch, FORCE_ABILITY) == 1
+               && ch->PermStats.Frc > 0))
         {
             GainXP(ch, FORCE_ABILITY, 25);
         }
@@ -311,7 +312,7 @@ void LearnFromSuccess(Character *ch, int sn)
 
     sklvl = SkillTable[sn]->Level;
 
-    if (SkillTable[sn]->Guild < 0 || SkillTable[sn]->Guild >= MAX_ABILITY)
+    if(SkillTable[sn]->Guild < 0 || SkillTable[sn]->Guild >= MAX_ABILITY)
     {
         return;
     }
@@ -319,26 +320,26 @@ void LearnFromSuccess(Character *ch, int sn)
     adept = (GetAbilityLevel(ch, SkillTable[sn]->Guild) - SkillTable[sn]->Level) * 5 + 50;
     adept = umin(adept, 100);
 
-    if (ch->PCData->Learned[sn] >= adept)
+    if(ch->PCData->Learned[sn] >= adept)
     {
         return;
     }
 
-    if (sklvl == 0 || sklvl > GetAbilityLevel(ch, SkillTable[sn]->Guild))
+    if(sklvl == 0 || sklvl > GetAbilityLevel(ch, SkillTable[sn]->Guild))
     {
         sklvl = GetAbilityLevel(ch, SkillTable[sn]->Guild);
     }
 
-    if (ch->PCData->Learned[sn] < 100)
+    if(ch->PCData->Learned[sn] < 100)
     {
         learn_chance = ch->PCData->Learned[sn] + (5 * SkillTable[sn]->Difficulty);
         percent = GetRandomPercent();
 
-        if (percent >= learn_chance)
+        if(percent >= learn_chance)
         {
             learn = 2;
         }
-        else if (learn_chance - percent > 25)
+        else if(learn_chance - percent > 25)
         {
             return;
         }
@@ -349,18 +350,18 @@ void LearnFromSuccess(Character *ch, int sn)
 
         ch->PCData->Learned[sn] = umin(adept, ch->PCData->Learned[sn] + learn);
 
-        if (ch->PCData->Learned[sn] == 100)      /* fully learned! */
+        if(ch->PCData->Learned[sn] == 100)      /* fully learned! */
         {
             gain = 50 * sklvl;
             SetCharacterColor(AT_WHITE, ch);
             ch->Echo("You are now an adept of %s! You gain %d bonus experience!\r\n",
-                SkillTable[sn]->Name.c_str(), gain);
+                     SkillTable[sn]->Name.c_str(), gain);
         }
         else
         {
             gain = 10 * sklvl;
 
-            if (!ch->Fighting && sn != gsn_hide && sn != gsn_sneak)
+            if(!ch->Fighting && sn != gsn_hide && sn != gsn_sneak)
             {
                 SetCharacterColor(AT_WHITE, ch);
                 ch->Echo("You gain %d experience points from your success!\r\n", gain);
@@ -381,21 +382,21 @@ void LearnFromFailure(Character *ch, int sn)
  */
 int ChLookupSkill(const Character *ch, const std::string &name)
 {
-    if (IsNpc(ch))
+    if(IsNpc(ch))
     {
         return Skills->LookupSkill(name);
     }
 
-    for (int sn = 0; sn < TopSN; sn++)
+    for(int sn = 0; sn < TopSN; sn++)
     {
-        if (SkillTable[sn]->Name.empty())
+        if(SkillTable[sn]->Name.empty())
         {
             break;
         }
 
-        if (ch->PCData->Learned[sn] > 0
-            && CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
-            && !StringPrefix(name, SkillTable[sn]->Name))
+        if(ch->PCData->Learned[sn] > 0
+           && CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
+           && !StringPrefix(name, SkillTable[sn]->Name))
         {
             return sn;
         }
@@ -411,15 +412,15 @@ int LookupHerb(const std::string &name)
 {
     int sn = 0;
 
-    for (sn = 0; sn < TopHerb; sn++)
+    for(sn = 0; sn < TopHerb; sn++)
     {
-        if (HerbTable[sn] == nullptr || HerbTable[sn]->Name.empty())
+        if(HerbTable[sn] == nullptr || HerbTable[sn]->Name.empty())
         {
             return -1;
         }
 
-        if (CharToLowercase(name[0]) == CharToLowercase(HerbTable[sn]->Name[0])
-            && !StringPrefix(name, HerbTable[sn]->Name))
+        if(CharToLowercase(name[0]) == CharToLowercase(HerbTable[sn]->Name[0])
+           && !StringPrefix(name, HerbTable[sn]->Name))
         {
             return sn;
         }
@@ -435,24 +436,24 @@ int LookupSkill(const std::string &name)
 {
     int sn;
 
-    if ((sn = BSearchSkill(name, gsn_first_spell, gsn_first_skill - 1)) == -1)
+    if((sn = BSearchSkill(name, gsn_first_spell, gsn_first_skill - 1)) == -1)
     {
-        if ((sn = BSearchSkill(name, gsn_first_skill, gsn_first_weapon - 1)) == -1)
+        if((sn = BSearchSkill(name, gsn_first_skill, gsn_first_weapon - 1)) == -1)
         {
-            if ((sn = BSearchSkill(name, gsn_first_weapon, gsn_first_tongue - 1)) == -1)
+            if((sn = BSearchSkill(name, gsn_first_weapon, gsn_first_tongue - 1)) == -1)
             {
-                if ((sn = BSearchSkill(name, gsn_first_tongue, gsn_TopSN - 1)) == -1
-                    && gsn_TopSN < TopSN)
+                if((sn = BSearchSkill(name, gsn_first_tongue, gsn_TopSN - 1)) == -1
+                   && gsn_TopSN < TopSN)
                 {
-                    for (sn = gsn_TopSN; sn < TopSN; sn++)
+                    for(sn = gsn_TopSN; sn < TopSN; sn++)
                     {
-                        if (!SkillTable[sn] || SkillTable[sn]->Name.empty())
+                        if(!SkillTable[sn] || SkillTable[sn]->Name.empty())
                         {
                             return -1;
                         }
 
-                        if (CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
-                            && !StringPrefix(name, SkillTable[sn]->Name))
+                        if(CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
+                           && !StringPrefix(name, SkillTable[sn]->Name))
                         {
                             return sn;
                         }
@@ -473,17 +474,17 @@ int LookupSkill(const std::string &name)
  */
 std::shared_ptr<Skill> GetSkill(int sn)
 {
-    if (sn >= TYPE_PERSONAL)
+    if(sn >= TYPE_PERSONAL)
     {
         return NULL;
     }
 
-    if (sn >= TYPE_HERB)
+    if(sn >= TYPE_HERB)
     {
         return IS_VALID_HERB(sn - TYPE_HERB) ? HerbTable[sn - TYPE_HERB] : NULL;
     }
 
-    if (sn >= TYPE_HIT)
+    if(sn >= TYPE_HIT)
     {
         return NULL;
     }
@@ -497,22 +498,22 @@ std::shared_ptr<Skill> GetSkill(int sn)
  */
 int BSearchSkill(const std::string &name, int first, int top)
 {
-    for (;;)
+    for(;;)
     {
         int sn = (first + top) >> 1;
 
-        if (CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
-            && !StringPrefix(name, SkillTable[sn]->Name))
+        if(CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
+           && !StringPrefix(name, SkillTable[sn]->Name))
         {
             return sn;
         }
 
-        if (first >= top)
+        if(first >= top)
         {
             return -1;
         }
 
-        if (StrCmp(name, SkillTable[sn]->Name) < 1)
+        if(StrCmp(name, SkillTable[sn]->Name) < 1)
         {
             top = sn - 1;
         }
@@ -532,21 +533,21 @@ int BSearchSkill(const std::string &name, int first, int top)
  */
 int BSearchSkillExact(const std::string &name, int first, int top)
 {
-    for (;;)
+    for(;;)
     {
         int sn = (first + top) >> 1;
 
-        if (!StringPrefix(name, SkillTable[sn]->Name))
+        if(!StringPrefix(name, SkillTable[sn]->Name))
         {
             return sn;
         }
 
-        if (first >= top)
+        if(first >= top)
         {
             return -1;
         }
 
-        if (StrCmp(name, SkillTable[sn]->Name) < 1)
+        if(StrCmp(name, SkillTable[sn]->Name) < 1)
         {
             top = sn - 1;
         }
@@ -566,23 +567,23 @@ int BSearchSkillExact(const std::string &name, int first, int top)
  */
 int ChBSearchSkill(const Character *ch, const std::string &name, int first, int top)
 {
-    for (;;)
+    for(;;)
     {
         int sn = (first + top) >> 1;
 
-        if (CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
-            && !StringPrefix(name, SkillTable[sn]->Name)
-            && ch->PCData->Learned[sn] > 0)
+        if(CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
+           && !StringPrefix(name, SkillTable[sn]->Name)
+           && ch->PCData->Learned[sn] > 0)
         {
             return sn;
         }
 
-        if (first >= top)
+        if(first >= top)
         {
             return -1;
         }
 
-        if (StrCmp(name, SkillTable[sn]->Name) < 1)
+        if(StrCmp(name, SkillTable[sn]->Name) < 1)
         {
             top = sn - 1;
         }
@@ -603,20 +604,20 @@ int SkillNumberFromSlot(int slot)
 {
     int sn = 0;
 
-    if (slot <= 0)
+    if(slot <= 0)
     {
         return -1;
     }
 
-    for (sn = 0; sn < TopSN; sn++)
+    for(sn = 0; sn < TopSN; sn++)
     {
-        if (slot == SkillTable[sn]->Slot)
+        if(slot == SkillTable[sn]->Slot)
         {
             return sn;
         }
     }
 
-    if (fBootDb)
+    if(fBootDb)
     {
         Log->Bug("%s: bad slot %d.", __FUNCTION__, slot);
         abort();
@@ -632,7 +633,7 @@ void SortSkillTable()
 {
     Log->Info("Sorting skill table...");
     qsort(&SkillTable[1], TopSN - 1, sizeof(std::shared_ptr<Skill>),
-        (int(*)(const void *, const void *)) CompareSkills);
+          (int(*)(const void *, const void *)) CompareSkills);
 }
 
 /*
@@ -643,27 +644,27 @@ static int CompareSkills(std::shared_ptr<Skill> *sk1, std::shared_ptr<Skill> *sk
     std::shared_ptr<Skill> skill1 = (*sk1);
     std::shared_ptr<Skill> skill2 = (*sk2);
 
-    if (!skill1 && skill2)
+    if(!skill1 && skill2)
     {
         return 1;
     }
 
-    if (skill1 && !skill2)
+    if(skill1 && !skill2)
     {
         return -1;
     }
 
-    if (!skill1 && !skill2)
+    if(!skill1 && !skill2)
     {
         return 0;
     }
 
-    if (skill1->Type < skill2->Type)
+    if(skill1->Type < skill2->Type)
     {
         return -1;
     }
 
-    if (skill1->Type > skill2->Type)
+    if(skill1->Type > skill2->Type)
     {
         return 1;
     }
@@ -673,14 +674,14 @@ static int CompareSkills(std::shared_ptr<Skill> *sk1, std::shared_ptr<Skill> *sk
 
 static void PushSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
 {
-    if (!skill->Teachers.empty())
+    if(!skill->Teachers.empty())
     {
         std::string teacherList = skill->Teachers;
 
         lua_pushstring(L, "Teachers");
         lua_newtable(L);
 
-        while (!teacherList.empty())
+        while(!teacherList.empty())
         {
             std::string teacher;
             vnum_t vnum = INVALID_VNUM;
@@ -689,7 +690,7 @@ static void PushSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
             vnum = strtol(teacher.c_str(), nullptr, 10);
             auto mobile = GetProtoMobile(vnum);
 
-            if (mobile)
+            if(mobile)
             {
                 lua_pushinteger(L, vnum);
                 lua_pushstring(L, mobile->Name.c_str());
@@ -757,64 +758,64 @@ static void PushSkill(lua_State *L, std::shared_ptr<Skill> skill)
 
     LuaSetfieldString(L, "Name", skill->Name);
     LuaSetfieldString(L, "Ability",
-        skill->Guild > ABILITY_NONE && skill->Guild < MAX_ABILITY
-        ? AbilityName[skill->Guild] : "none");
+                      skill->Guild > ABILITY_NONE && skill->Guild < MAX_ABILITY
+                      ? AbilityName[skill->Guild] : "none");
     LuaSetfieldString(L, "Position", PositionName[skill->Position]);
     LuaSetfieldString(L, "Type", SkillTypeName[skill->Type]);
 
-    if (skill->SpellFunction || skill->SkillFunction)
+    if(skill->SpellFunction || skill->SkillFunction)
     {
         LuaSetfieldString(L, "Function", skill->FunctionName);
     }
 
     LuaSetfieldString(L, "Target", SpellTargetName[skill->Target]);
 
-    if (skill->Slot)
+    if(skill->Slot)
     {
         LuaSetfieldNumber(L, "Slot", skill->Slot);
     }
 
-    if (skill->Mana)
+    if(skill->Mana)
     {
         LuaSetfieldNumber(L, "Mana", skill->Mana);
     }
 
-    if (skill->Beats)
+    if(skill->Beats)
     {
         LuaSetfieldNumber(L, "Beats", skill->Beats);
     }
 
-    if (skill->Level && skill->Type != SKILL_HERB)
+    if(skill->Level && skill->Type != SKILL_HERB)
     {
         LuaSetfieldNumber(L, "Level", skill->Level);
     }
 
-    if (!skill->Dice.empty())
+    if(!skill->Dice.empty())
     {
         LuaSetfieldString(L, "Dice", skill->Dice);
     }
 
-    if (skill->Value)
+    if(skill->Value)
     {
         LuaSetfieldNumber(L, "Value", skill->Value);
     }
 
-    if (skill->Saves)
+    if(skill->Saves)
     {
         LuaSetfieldString(L, "Saves", SpellSaveName[skill->Saves]);
     }
 
-    if (skill->Difficulty)
+    if(skill->Difficulty)
     {
         LuaSetfieldNumber(L, "Difficulty", skill->Difficulty);
     }
 
-    if (skill->Participants)
+    if(skill->Participants)
     {
         LuaSetfieldNumber(L, "Participants", skill->Participants);
     }
 
-    if (skill->Alignment)
+    if(skill->Alignment)
     {
         LuaSetfieldNumber(L, "Alignment", skill->Alignment);
     }
@@ -830,11 +831,11 @@ static void PushSkillTable(lua_State *L, const void *userData)
 {
     lua_newtable(L);
 
-    for (int sn = 0; sn < TopSN; ++sn)
+    for(int sn = 0; sn < TopSN; ++sn)
     {
         std::shared_ptr<Skill> skill = SkillTable[sn];
 
-        if (!skill->Name.empty())
+        if(!skill->Name.empty())
         {
             PushSkill(L, skill);
         }
@@ -853,18 +854,18 @@ static void LoadSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Teachers");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         bool first = true;
         char buf[MAX_STRING_LENGTH] = { '\0' };
 
         lua_pushnil(L);
 
-        while (lua_next(L, -2))
+        while(lua_next(L, -2))
         {
             vnum_t vnum = lua_tointeger(L, -2);
 
-            if (!first)
+            if(!first)
             {
                 strcat(buf, " ");
             }
@@ -895,7 +896,7 @@ static void LoadSuccessMessages(lua_State *L, std::shared_ptr<Skill> skill)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Success");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldString(L, "ToCaster", &skill->Messages.Success.ToCaster);
         LuaGetfieldString(L, "ToVictim", &skill->Messages.Success.ToVictim);
@@ -914,7 +915,7 @@ static void LoadFailureMessages(lua_State *L, std::shared_ptr<Skill> skill)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Failure");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldString(L, "ToCaster", &skill->Messages.Failure.ToCaster);
         LuaGetfieldString(L, "ToVictim", &skill->Messages.Failure.ToVictim);
@@ -929,7 +930,7 @@ static void LoadVictimDeathMessages(lua_State *L, std::shared_ptr<Skill> skill)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "VictimDeath");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldString(L, "ToCaster", &skill->Messages.VictimDeath.ToCaster);
         LuaGetfieldString(L, "ToVictim", &skill->Messages.VictimDeath.ToVictim);
@@ -944,7 +945,7 @@ static void LoadVictimImmuneMessages(lua_State *L, std::shared_ptr<Skill> skill)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "VictimImmune");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LuaGetfieldString(L, "ToCaster", &skill->Messages.VictimImmune.ToCaster);
         LuaGetfieldString(L, "ToVictim", &skill->Messages.VictimImmune.ToVictim);
@@ -959,7 +960,7 @@ static void LoadSkillMessages(lua_State *L, std::shared_ptr<Skill> skill)
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Messages");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         LoadBasicMessages(L, skill);
         LoadSuccessMessages(L, skill);
@@ -975,9 +976,9 @@ static int L_SkillEntry(lua_State *L)
 {
     std::shared_ptr<Skill> skill = LoadSkillOrHerb(L);
 
-    if (skill)
+    if(skill)
     {
-        if (TopSN >= MAX_SKILL)
+        if(TopSN >= MAX_SKILL)
         {
             Log->Bug("%s: more skills than MAX_SKILL %d", __FUNCTION__, MAX_SKILL);
             abort();
@@ -994,7 +995,7 @@ static std::shared_ptr<Skill> LoadSkillOrHerb(lua_State *L)
     std::string skillName;
     LuaGetfieldString(L, "Name", &skillName);
 
-    if (skillName.empty())
+    if(skillName.empty())
     {
         Log->Bug("%s: Found skill without name", __FUNCTION__);
         return nullptr;
@@ -1004,70 +1005,70 @@ static std::shared_ptr<Skill> LoadSkillOrHerb(lua_State *L)
     skill->Name = skillName;
 
     LuaGetfieldString(L, "Ability",
-        [skill](const std::string &abilityName)
-    {
-        skill->Guild = GetAbility(abilityName);
+                      [skill](const std::string &abilityName)
+                      {
+                          skill->Guild = GetAbility(abilityName);
 
-        if (skill->Guild >= MAX_ABILITY)
-        {
-            skill->Guild = ABILITY_NONE;
-        }
-    });
+                          if(skill->Guild >= MAX_ABILITY)
+                          {
+                              skill->Guild = ABILITY_NONE;
+                          }
+                      });
     LuaGetfieldString(L, "Position",
-        [skill](const std::string &posName)
-    {
-        skill->Position = GetPosition(posName);
+                      [skill](const std::string &posName)
+                      {
+                          skill->Position = GetPosition(posName);
 
-        if (skill->Position < POS_DEAD || skill->Position >= MAX_POSITION)
-        {
-            skill->Position = DEFAULT_POSITION;
-        }
-    });
+                          if(skill->Position < POS_DEAD || skill->Position >= MAX_POSITION)
+                          {
+                              skill->Position = DEFAULT_POSITION;
+                          }
+                      });
     LuaGetfieldString(L, "Type",
-        [skill](const std::string &typeName)
-    {
-        skill->Type = GetSkillType(typeName);
+                      [skill](const std::string &typeName)
+                      {
+                          skill->Type = GetSkillType(typeName);
 
-        if (skill->Type < SKILL_UNKNOWN || skill->Type > SKILL_HERB)
-        {
-            Log->Bug("%s: Invalid skill type: %d", __FUNCTION__, skill->Type);
-            skill->Type = SKILL_UNKNOWN;
-        }
-    });
+                          if(skill->Type < SKILL_UNKNOWN || skill->Type > SKILL_HERB)
+                          {
+                              Log->Bug("%s: Invalid skill type: %d", __FUNCTION__, skill->Type);
+                              skill->Type = SKILL_UNKNOWN;
+                          }
+                      });
     LuaGetfieldString(L, "Function",
-        [skill](const std::string &funName)
-    {
-        SpellFun *spellfun = GetSpellFunction(funName);
-        CmdFun *dofun = GetSkillFunction(funName);
+                      [skill](const std::string &funName)
+                      {
+                          SpellFun *spellfun = GetSpellFunction(funName);
+                          CmdFun *dofun = GetSkillFunction(funName);
 
-        if (spellfun != spell_notfound
-            && !StringPrefix("spell_", funName))
-        {
-            skill->SpellFunction = spellfun;
-            skill->FunctionName = funName;
-        }
-        else if (dofun != skill_notfound
-            && !StringPrefix("do_", funName))
-        {
-            skill->SkillFunction = dofun;
-            skill->FunctionName = funName;
-        }
-        else
-        {
-            Log->Bug("%s: unknown skill/spell code %s",
-                __FUNCTION__, funName.c_str());
-        }
-    });
+                          if(spellfun != spell_notfound
+                             && !StringPrefix("spell_", funName))
+                          {
+                              skill->SpellFunction = spellfun;
+                              skill->FunctionName = funName;
+                          }
+                          else if(dofun != skill_notfound
+                                  && !StringPrefix("do_", funName))
+                          {
+                              skill->SkillFunction = dofun;
+                              skill->FunctionName = funName;
+                          }
+                          else
+                          {
+                              Log->Bug("%s: unknown skill/spell code %s",
+                                       __FUNCTION__, funName.c_str());
+                          }
+                      });
     LuaGetfieldString(L, "Target",
-        [skill](const std::string &targetName)
-    {
-        skill->Target = (SkillTargetType)GetSpellTarget(targetName);
+                      [skill](const std::string &targetName)
+                      {
+                          skill->Target = (SkillTargetType)GetSpellTarget(targetName);
 
-        if (skill->Target < TAR_IGNORE || skill->Target > TAR_OBJ_INV)
-        {
-            skill->Target = TAR_IGNORE;
-        }
-    });
+                          if(skill->Target < TAR_IGNORE || skill->Target > TAR_OBJ_INV)
+                          {
+                              skill->Target = TAR_IGNORE;
+                          }
+                      });
     LuaGetfieldInt(L, "Slot", &skill->Slot);
     LuaGetfieldInt(L, "Mana", &skill->Mana);
     LuaGetfieldInt(L, "Beats", &skill->Beats);
@@ -1091,9 +1092,9 @@ static int L_HerbEntry(lua_State *L)
 {
     std::shared_ptr<Skill> herb = LoadSkillOrHerb(L);
 
-    if (herb)
+    if(herb)
     {
-        if (TopHerb >= MAX_HERB)
+        if(TopHerb >= MAX_HERB)
         {
             Log->Bug("%s: more herbs than MAX_HERB %d", __FUNCTION__, MAX_HERB);
             abort();
@@ -1115,11 +1116,11 @@ static void PushHerbTable(lua_State *L, const void *userData)
     int sn = 0;
     lua_newtable(L);
 
-    for (sn = 0; sn < TopHerb; ++sn)
+    for(sn = 0; sn < TopHerb; ++sn)
     {
         std::shared_ptr<Skill> herb = HerbTable[sn];
 
-        if (!herb->Name.empty())
+        if(!herb->Name.empty())
         {
             PushSkill(L, herb);
         }
@@ -1142,7 +1143,7 @@ void ASSIGN_GSN(short &gsn, const std::string &skill)
 {
     gsn = Skills->LookupSkill(skill);
 
-    if (gsn == -1)
+    if(gsn == -1)
     {
         fprintf(stderr, "ASSIGN_GSN: Skill %s not found.\n", skill.c_str());
     }
@@ -1152,7 +1153,7 @@ bool IS_VALID_SN(int sn)
 {
     return sn >= 0
         && sn < MAX_SKILL
-        && SkillTable[sn] != nullptr
+        &&SkillTable[sn] != nullptr
         && !SkillTable[sn]->Name.empty();
 }
 
@@ -1160,7 +1161,7 @@ bool IS_VALID_HERB(int sn)
 {
     return sn >= 0
         && sn < MAX_HERB
-        && HerbTable[sn] != nullptr
+        &&HerbTable[sn] != nullptr
         && !HerbTable[sn]->Name.empty();
 }
 

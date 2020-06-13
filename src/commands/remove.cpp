@@ -1,49 +1,50 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "object.hpp"
+#include "act.hpp"
 
-void do_remove( Character *ch, std::string arg )
+void do_remove(Character *ch, std::string arg)
 {
-  if ( arg.empty() )
+    if(arg.empty())
     {
-      ch->Echo("Remove what?\r\n");
-      return;
+        ch->Echo("Remove what?\r\n");
+        return;
     }
 
-  if ( HasMentalStateToFindObject(ch) )
-    return;
+    if(HasMentalStateToFindObject(ch))
+        return;
 
-  if ( !StrCmp( arg, "all" ) )  /* SB Remove all */
+    if(!StrCmp(arg, "all"))  /* SB Remove all */
     {
-      std::list<Object*> carriedObjects(ch->Objects());
+        std::list<Object *> carriedObjects(ch->Objects());
 
-      for(Object *obj : carriedObjects)
+        for(Object *obj : carriedObjects)
         {
-          if ( obj->WearLoc != WEAR_NONE && CanSeeObject( ch, obj ) )
+            if(obj->WearLoc != WEAR_NONE && CanSeeObject(ch, obj))
             {
-              RemoveObject( ch, obj->WearLoc, true );
+                RemoveObject(ch, obj->WearLoc, true);
             }
         }
 
-      return;
+        return;
     }
 
-  Object *obj = GetWornObject(ch, arg);
-  
-  if ( obj == nullptr )
+    Object *obj = GetWornObject(ch, arg);
+
+    if(obj == nullptr)
     {
-      ch->Echo("You are not using that item.\r\n");
-      return;
+        ch->Echo("You are not using that item.\r\n");
+        return;
     }
 
-  Object *alreadyWorn = GetEquipmentOnCharacter(ch, obj->WearLoc);
-  
-  if ( alreadyWorn != obj )
+    Object *alreadyWorn = GetEquipmentOnCharacter(ch, obj->WearLoc);
+
+    if(alreadyWorn != obj)
     {
-      Act( AT_PLAIN, "You must remove $p first.",
-	   ch, alreadyWorn, NULL, TO_CHAR );
-      return;
+        Act(AT_PLAIN, "You must remove $p first.",
+            ch, alreadyWorn, NULL, TO_CHAR);
+        return;
     }
 
-  RemoveObject( ch, obj->WearLoc, true );
+    RemoveObject(ch, obj->WearLoc, true);
 }

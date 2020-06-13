@@ -1,14 +1,15 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "act.hpp"
 
-ch_ret spell_black_lightning(int sn, int level, Character* ch, void* vo)
+ch_ret spell_black_lightning(int sn, int level, Character *ch, void *vo)
 {
-    Character* victim = (Character*)vo;
+    Character *victim = (Character *)vo;
     int dam;
 
     dam = 100;
-    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
+    if(IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         dam -= (int)(dam / 2);
 
     ch->Echo("You feel the hatred grow within you!\r\n");
@@ -23,14 +24,16 @@ ch_ret spell_black_lightning(int sn, int level, Character* ch, void* vo)
     Act(AT_BLUE, "Intense pain spreads through your body as bolts of electricity from $N assault you."
         , victim, NULL, ch, TO_CHAR);
 
-    if (SaveVsPoisonDeath(level, victim))
+    if(SaveVsPoisonDeath(level, victim))
         return InflictDamage(ch, victim, dam, sn);
     else
     {
         InflictDamage(ch, victim, dam, sn);
-        if (CharacterDiedRecently(victim))
+
+        if(CharacterDiedRecently(victim))
             return rCHAR_DIED;
-        if (spell_black_lightning(sn, level, ch, vo) == rCHAR_DIED)
+
+        if(spell_black_lightning(sn, level, ch, vo) == rCHAR_DIED)
             return rCHAR_DIED;
         return rNONE;
     }

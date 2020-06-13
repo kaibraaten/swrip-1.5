@@ -3,80 +3,81 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "act.hpp"
 
-void do_aid( Character *ch, std::string argument )
+void do_aid(Character *ch, std::string argument)
 {
-  Character *victim = nullptr;
-  int percent = 0;
+    Character *victim = nullptr;
+    int percent = 0;
 
-  if ( IsNpc(ch) && IsAffectedBy( ch, Flag::Affect::Charm))
+    if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
     {
-      ch->Echo( "You can't concentrate enough for that.\r\n" );
-      return;
+        ch->Echo("You can't concentrate enough for that.\r\n");
+        return;
     }
 
-  if ( argument.empty() )
+    if(argument.empty())
     {
-      ch->Echo( "Aid whom?\r\n" );
-      return;
+        ch->Echo("Aid whom?\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterInRoom( ch, argument ) ) == NULL )
+    if((victim = GetCharacterInRoom(ch, argument)) == NULL)
     {
-      ch->Echo( "They aren't here.\r\n" );
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( ch->Mount )
+    if(ch->Mount)
     {
-      ch->Echo( "You can't do that while mounted.\r\n" );
-      return;
+        ch->Echo("You can't do that while mounted.\r\n");
+        return;
     }
 
-  if ( victim == ch )
+    if(victim == ch)
     {
-      ch->Echo( "Aid yourself?\r\n" );
-      return;
+        ch->Echo("Aid yourself?\r\n");
+        return;
     }
 
-  if ( victim->Position > POS_STUNNED )
+    if(victim->Position > POS_STUNNED)
     {
-      Act( AT_PLAIN, "$N doesn't need your help.", ch, NULL, victim,
-           TO_CHAR);
-      return;
+        Act(AT_PLAIN, "$N doesn't need your help.", ch, NULL, victim,
+            TO_CHAR);
+        return;
     }
 
-  if ( victim->HitPoints.Current <= -400 )
+    if(victim->HitPoints.Current <= -400)
     {
-      Act( AT_PLAIN, "$N's condition is beyond your aiding ability.", ch,
-           NULL, victim, TO_CHAR);
-      return;
+        Act(AT_PLAIN, "$N's condition is beyond your aiding ability.", ch,
+            NULL, victim, TO_CHAR);
+        return;
     }
 
-  ch->Alignment = ch->Alignment + 20;
-  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
+    ch->Alignment = ch->Alignment + 20;
+    ch->Alignment = urange(-1000, ch->Alignment, 1000);
 
-  percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
-  SetWaitState( ch, SkillTable[gsn_aid]->Beats );
+    percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
+    SetWaitState(ch, SkillTable[gsn_aid]->Beats);
 
-  if ( !IsNpc(ch) && percent > ch->PCData->Learned[gsn_aid] )
+    if(!IsNpc(ch) && percent > ch->PCData->Learned[gsn_aid])
     {
-      ch->Echo( "You fail.\r\n" );
-      LearnFromFailure( ch, gsn_aid );
-      return;
+        ch->Echo("You fail.\r\n");
+        LearnFromFailure(ch, gsn_aid);
+        return;
     }
 
-  ch->Alignment = ch->Alignment + 20;
-  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
+    ch->Alignment = ch->Alignment + 20;
+    ch->Alignment = urange(-1000, ch->Alignment, 1000);
 
-  Act( AT_SKILL, "You aid $N!",  ch, NULL, victim, TO_CHAR    );
-  Act( AT_SKILL, "$n aids $N!",  ch, NULL, victim, TO_NOTVICT );
-  LearnFromSuccess( ch, gsn_aid );
+    Act(AT_SKILL, "You aid $N!", ch, NULL, victim, TO_CHAR);
+    Act(AT_SKILL, "$n aids $N!", ch, NULL, victim, TO_NOTVICT);
+    LearnFromSuccess(ch, gsn_aid);
 
-  if ( victim->HitPoints.Current < 1 )
-    victim->HitPoints.Current = 1;
+    if(victim->HitPoints.Current < 1)
+        victim->HitPoints.Current = 1;
 
-  UpdatePosition( victim );
-  Act( AT_SKILL, "$n aids you!", ch, NULL, victim, TO_VICT    );
+    UpdatePosition(victim);
+    Act(AT_SKILL, "$n aids you!", ch, NULL, victim, TO_VICT);
 }
 

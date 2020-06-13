@@ -1,21 +1,22 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "act.hpp"
 
-ch_ret spell_cure_poison(int sn, int level, Character* ch, void* vo)
+ch_ret spell_cure_poison(int sn, int level, Character *ch, void *vo)
 {
-    Character* victim = (Character*)vo;
+    Character *victim = (Character *)vo;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (victim->Immune.test(Flag::Ris::Magic))
+    if(victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
     }
 
-    if (IsAffected(victim, gsn_poison))
+    if(IsAffected(victim, gsn_poison))
     {
-        if (ch != victim)
+        if(ch != victim)
         {
             ch->Echo("The noble Jedi use their powers to help others!\r\n");
             ch->Alignment = ch->Alignment + 25;

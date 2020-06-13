@@ -6,8 +6,9 @@
 #include "log.hpp"
 #include "object.hpp"
 #include "repos/playerrepository.hpp"
+#include "act.hpp"
 
-void do_pricevendor( Character *ch, std::string argument )
+void do_pricevendor(Character *ch, std::string argument)
 {
     Character *vendor = NULL;
     Character *ch1 = NULL;
@@ -16,32 +17,32 @@ void do_pricevendor( Character *ch, std::string argument )
     Object *obj = NULL;
     struct tm *tms = NULL;
 
-    argument = OneArgument (argument, arg1);
-    argument = OneArgument (argument, arg2);
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-    if ( arg1.empty() || arg2.empty() )
+    if(arg1.empty() || arg2.empty())
     {
         ch->Echo("Syntax: pricevendor <item> <cost>\r\n");
         return;
     }
 
-    if ( ( vendor = FindKeeper (ch) ) == NULL )
+    if((vendor = FindKeeper(ch)) == NULL)
     {
         return;
     }
 
-    if ( vendor->Owner.empty() )
+    if(vendor->Owner.empty())
     {
         return;
     }
 
-    if ( (ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL )
+    if((ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL)
     {
         ch->Echo("This isn't your vendor!\r\n");
         return;
     }
 
-    if ( StrCmp( ch1->Name, vendor->Owner ) )
+    if(StrCmp(ch1->Name, vendor->Owner))
     {
         ch->Echo("Trying to steal huh?\r\n");
         tms = localtime(&current_time);
@@ -60,15 +61,15 @@ void do_pricevendor( Character *ch, std::string argument )
         return;
     }
 
-    if ( ch->Fighting)
+    if(ch->Fighting)
     {
         ch->Echo("Not while you're fighting!\r\n");
         return;
     }
 
-    if ( (obj  = GetCarriedObject( vendor, arg1 )) != NULL)
+    if((obj = GetCarriedObject(vendor, arg1)) != NULL)
     {
-        obj->Cost = ToLong (arg2);
+        obj->Cost = ToLong(arg2);
         ch->Echo("The price has been changed.\r\n");
         SaveVendor(vendor);
         return;

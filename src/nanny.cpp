@@ -46,6 +46,7 @@
 #include "repos/banrepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/homerepository.hpp"
+#include "act.hpp"
 
 using NannyFun = std::function<void(std::shared_ptr<Descriptor>, std::string)>;
 

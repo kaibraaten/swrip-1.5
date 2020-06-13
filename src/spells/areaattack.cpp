@@ -5,11 +5,12 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
 /*
  * Generic area attack                                          -Thoric
  */
-ch_ret spell_area_attack(int sn, int level, Character* ch, void* vo)
+ch_ret spell_area_attack(int sn, int level, Character *ch, void *vo)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
     bool saved = false;
@@ -22,7 +23,7 @@ ch_ret spell_area_attack(int sn, int level, Character* ch, void* vo)
     ch->Alignment = urange(-1000, ch->Alignment, 1000);
     ApplySithPenalty(ch);
 
-    if (ch->InRoom->Flags.test(Flag::Room::Safe))
+    if(ch->InRoom->Flags.test(Flag::Room::Safe))
     {
         FailedCasting(skill, ch, NULL, NULL);
         return rSPELL_FAILED;
@@ -30,36 +31,36 @@ ch_ret spell_area_attack(int sn, int level, Character* ch, void* vo)
 
     affects = !skill->Affects.empty();
 
-    if (!skill->Messages.Success.ToCaster.empty())
+    if(!skill->Messages.Success.ToCaster.empty())
     {
         Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, NULL, TO_CHAR);
     }
 
-    if (!skill->Messages.Success.ToRoom.empty())
+    if(!skill->Messages.Success.ToRoom.empty())
     {
         Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, TO_ROOM);
     }
 
-    std::list<Character*> charactersToAttack(ch->InRoom->Characters());
+    std::list<Character *> charactersToAttack(ch->InRoom->Characters());
 
-    for (Character* vch : charactersToAttack)
+    for(Character *vch : charactersToAttack)
     {
-        if (!IsNpc(vch) && vch->Flags.test(Flag::Plr::WizInvis)
-            && vch->PCData->WizInvis >= LEVEL_IMMORTAL)
+        if(!IsNpc(vch) && vch->Flags.test(Flag::Plr::WizInvis)
+           && vch->PCData->WizInvis >= LEVEL_IMMORTAL)
         {
             continue;
         }
 
-        if (vch != ch && (IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch)))
+        if(vch != ch && (IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch)))
         {
             saved = CheckSavingThrow(sn, level, ch, vch);
 
-            if (saved && !SPELL_FLAG(skill, SF_SAVE_HALF_DAMAGE))
+            if(saved && !SPELL_FLAG(skill, SF_SAVE_HALF_DAMAGE))
             {
                 FailedCasting(skill, ch, vch, NULL);
                 dam = 0;
             }
-            else if (!skill->Dice.empty())
+            else if(!skill->Dice.empty())
             {
                 dam = ParseDice(ch, level, skill->Dice);
             }
@@ -68,12 +69,12 @@ ch_ret spell_area_attack(int sn, int level, Character* ch, void* vo)
                 dam = RollDice(1, level);
             }
 
-            if (saved && SPELL_FLAG(skill, SF_SAVE_HALF_DAMAGE))
+            if(saved && SPELL_FLAG(skill, SF_SAVE_HALF_DAMAGE))
             {
                 dam /= 2;
             }
 
-            if (IsAffectedBy(vch, Flag::Affect::Protect) && IsEvil(ch))
+            if(IsAffectedBy(vch, Flag::Affect::Protect) && IsEvil(ch))
             {
                 dam -= static_cast<int>(dam / 4);
             }
@@ -81,15 +82,15 @@ ch_ret spell_area_attack(int sn, int level, Character* ch, void* vo)
             retcode = InflictDamage(ch, vch, dam, sn);
         }
 
-        if (retcode == rNONE
-            && affects
-            && !CharacterDiedRecently(ch)
-            && !CharacterDiedRecently(vch))
+        if(retcode == rNONE
+           && affects
+           && !CharacterDiedRecently(ch)
+           && !CharacterDiedRecently(vch))
         {
             retcode = spell_affectchar(sn, level, ch, vch);
         }
 
-        if (retcode == rCHAR_DIED || CharacterDiedRecently(ch))
+        if(retcode == rCHAR_DIED || CharacterDiedRecently(ch))
         {
             break;
         }

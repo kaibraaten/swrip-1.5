@@ -2,76 +2,77 @@
 #include "ship.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
-void do_closehatch(Character *ch, std::string argument )
+void do_closehatch(Character *ch, std::string argument)
 {
-  std::shared_ptr<Ship> ship;
-  char buf[MAX_STRING_LENGTH];
+    std::shared_ptr<Ship> ship;
+    char buf[MAX_STRING_LENGTH];
 
-  if ( argument.empty() || !StrCmp(argument,"hatch") )
+    if(argument.empty() || !StrCmp(argument, "hatch"))
     {
-      ship = GetShipFromEntrance( ch->InRoom->Vnum );
+        ship = GetShipFromEntrance(ch->InRoom->Vnum);
 
-      if( ship == NULL)
+        if(ship == NULL)
         {
-          ch->Echo( "&RClose what?\r\n" );
-          return;
+            ch->Echo("&RClose what?\r\n");
+            return;
         }
-      else
+        else
         {
-          if ( ship->Class == SHIP_PLATFORM )
+            if(ship->Class == SHIP_PLATFORM)
             {
-              ch->Echo( "&RTry one of the docking bays!\r\n" );
-              return;
+                ch->Echo("&RTry one of the docking bays!\r\n");
+                return;
             }
 
-	  if ( ship->HatchOpen)
+            if(ship->HatchOpen)
             {
-              ship->HatchOpen = false;
-	      ch->Echo("&GYou close the hatch.\r\n");
-              Act( AT_PLAIN, "$n closes the hatch.", ch, NULL, argument.c_str(), TO_ROOM );
-              sprintf( buf , "The hatch on %s closes." , ship->Name.c_str());
-              EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
-              return;
+                ship->HatchOpen = false;
+                ch->Echo("&GYou close the hatch.\r\n");
+                Act(AT_PLAIN, "$n closes the hatch.", ch, NULL, argument.c_str(), TO_ROOM);
+                sprintf(buf, "The hatch on %s closes.", ship->Name.c_str());
+                EchoToRoom(AT_YELLOW, GetRoom(ship->Location), buf);
+                return;
             }
-          else
+            else
             {
-              ch->Echo("&RIt's already closed.\r\n");
-              return;
+                ch->Echo("&RIt's already closed.\r\n");
+                return;
             }
         }
     }
 
-  ship = GetShipInRoom( ch->InRoom , argument );
+    ship = GetShipInRoom(ch->InRoom, argument);
 
-  if ( !ship )
+    if(!ship)
     {
-      Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR );
-      return;
+        Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR);
+        return;
     }
 
-  if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
+    if(ship->State != SHIP_LANDED && !IsShipDisabled(ship))
     {
-      ch->Echo( "&RThat ship has already started to launch" );
-      return;
+        ch->Echo("&RThat ship has already started to launch");
+        return;
     }
-  else
+    else
     {
-      if(ship->HatchOpen)
+        if(ship->HatchOpen)
         {
-          ship->HatchOpen = false;
-          Act( AT_PLAIN, "You close the hatch on $T.",
-               ch, NULL, ship->Name.c_str(), TO_CHAR );
-          Act( AT_PLAIN, "$n closes the hatch on $T.",
-               ch, NULL, ship->Name.c_str(), TO_ROOM );
-          EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Entrance),
-                      "The hatch is closed from outside.");
-          return;
+            ship->HatchOpen = false;
+            Act(AT_PLAIN, "You close the hatch on $T.",
+                ch, NULL, ship->Name.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "$n closes the hatch on $T.",
+                ch, NULL, ship->Name.c_str(), TO_ROOM);
+            EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Entrance),
+                       "The hatch is closed from outside.");
+            return;
         }
-      else
+        else
         {
-          ch->Echo("&RIts already closed.\r\n");
-	  return;
+            ch->Echo("&RIts already closed.\r\n");
+            return;
         }
     }
 }

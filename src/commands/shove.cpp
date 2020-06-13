@@ -4,6 +4,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 void do_shove(Character *ch, std::string argument)
 {
@@ -18,31 +19,31 @@ void do_shove(Character *ch, std::string argument)
     argument = OneArgument(argument, arg);
     argument = OneArgument(argument, arg2);
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("Shove whom?\r\n");
         return;
     }
 
-    if ((victim = GetCharacterInRoom(ch, arg)) == NULL)
+    if((victim = GetCharacterInRoom(ch, arg)) == NULL)
     {
         ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if (victim == ch)
+    if(victim == ch)
     {
         ch->Echo("You shove yourself around, to no avail.\r\n");
         return;
     }
 
-    if ((victim->Position) != POS_STANDING)
+    if((victim->Position) != POS_STANDING)
     {
         Act(AT_PLAIN, "$N isn't standing up.", ch, NULL, victim, TO_CHAR);
         return;
     }
 
-    if (arg2.empty())
+    if(arg2.empty())
     {
         ch->Echo("Shove them in which direction?\r\n");
         return;
@@ -50,8 +51,8 @@ void do_shove(Character *ch, std::string argument)
 
     exit_dir = GetDirection(arg2);
 
-    if (victim->InRoom->Flags.test(Flag::Room::Safe)
-        && GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
+    if(victim->InRoom->Flags.test(Flag::Room::Safe)
+       && GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
     {
         ch->Echo("That character cannot be shoved right now.\r\n");
         return;
@@ -59,13 +60,13 @@ void do_shove(Character *ch, std::string argument)
 
     victim->Position = POS_SHOVE;
 
-    if ((pexit = GetExit(ch->InRoom, exit_dir)) == NULL)
+    if((pexit = GetExit(ch->InRoom, exit_dir)) == NULL)
     {
-        if (!StrCmp(arg2, "in"))
+        if(!StrCmp(arg2, "in"))
         {
             std::shared_ptr<Ship> ship;
 
-            if (argument.empty())
+            if(argument.empty())
             {
                 ch->Echo("Shove them into what?\r\n");
                 return;
@@ -73,14 +74,14 @@ void do_shove(Character *ch, std::string argument)
 
             ship = GetShipInRoom(ch->InRoom, argument);
 
-            if (!ship)
+            if(!ship)
             {
                 Act(AT_PLAIN, "I see no $T here.",
                     ch, NULL, argument.c_str(), TO_CHAR);
                 return;
             }
 
-            if (ch->Mount != nullptr)
+            if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go in there riding THAT.",
                     ch, NULL, argument.c_str(), TO_CHAR);
@@ -89,27 +90,27 @@ void do_shove(Character *ch, std::string argument)
 
             auto to_room = GetRoom(ship->Rooms.Entrance);
 
-            if (to_room)
+            if(to_room)
             {
-                if (!ship->HatchOpen)
+                if(!ship->HatchOpen)
                 {
                     ch->Echo("&RThe hatch is closed!\r\n");
                     return;
                 }
 
-                if (to_room->Tunnel > 0)
+                if(to_room->Tunnel > 0)
                 {
                     int count = to_room->Characters().size();
 
-                    if (count + 2 >= to_room->Tunnel)
+                    if(count + 2 >= to_room->Tunnel)
                     {
                         ch->Echo("There is no room for you both in there.\r\n");
                         return;
                     }
                 }
 
-                if (ship->State == SHIP_LAUNCH
-                    || ship->State == SHIP_LAUNCH_2)
+                if(ship->State == SHIP_LAUNCH
+                   || ship->State == SHIP_LAUNCH_2)
                 {
                     ch->Echo("&rThat ship has already started launching!\r\n");
                     return;
@@ -144,37 +145,37 @@ void do_shove(Character *ch, std::string argument)
             }
         }
 
-        if (!StrCmp(arg2, "out"))
+        if(!StrCmp(arg2, "out"))
         {
             auto fromroom = ch->InRoom;
             auto ship = GetShipFromEntrance(fromroom->Vnum);
 
-            if (!ship)
+            if(!ship)
             {
                 ch->Echo("I see no exit here.\r\n");
                 return;
             }
 
-            if (ch->Mount != nullptr)
+            if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go out there riding THAT.",
                     ch, NULL, argument.c_str(), TO_CHAR);
                 return;
             }
 
-            if (ship->LastDock != ship->Location)
+            if(ship->LastDock != ship->Location)
             {
                 ch->Echo("&rMaybe you should wait until the ship lands.\r\n");
                 return;
             }
 
-            if (ship->State != SHIP_LANDED && !IsShipDisabled(ship))
+            if(ship->State != SHIP_LANDED && !IsShipDisabled(ship))
             {
                 ch->Echo("&rPlease wait till the ship is properly docked.\r\n");
                 return;
             }
 
-            if (!ship->HatchOpen)
+            if(!ship->HatchOpen)
             {
                 ch->Echo("&RYou need to open the hatch first");
                 return;
@@ -182,20 +183,20 @@ void do_shove(Character *ch, std::string argument)
 
             auto to_room = GetRoom(ship->Location);
 
-            if (to_room)
+            if(to_room)
             {
-                if (to_room->Tunnel > 0)
+                if(to_room->Tunnel > 0)
                 {
                     int count = to_room->Characters().size();
 
-                    if (count + 2 >= to_room->Tunnel)
+                    if(count + 2 >= to_room->Tunnel)
                     {
                         ch->Echo("There is no room for you both in there.\r\n");
                         return;
                     }
                 }
 
-                if (ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2)
+                if(ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2)
                 {
                     ch->Echo("&rThat ship has already started launching!\r\n");
                     return;
@@ -232,28 +233,28 @@ void do_shove(Character *ch, std::string argument)
 
         nogo = true;
     }
-    else if (pexit->Flags.test(Flag::Exit::Closed)
-             && (!IsAffectedBy(victim, Flag::Affect::PassDoor)
-                 || pexit->Flags.test(Flag::Exit::NoPassdoor)))
+    else if(pexit->Flags.test(Flag::Exit::Closed)
+            && (!IsAffectedBy(victim, Flag::Affect::PassDoor)
+                || pexit->Flags.test(Flag::Exit::NoPassdoor)))
     {
         nogo = true;
     }
 
-    if (nogo)
+    if(nogo)
     {
         ch->Echo("There's no exit in that direction.\r\n");
         victim->Position = POS_STANDING;
         return;
     }
 
-    if (IsNpc(victim))
+    if(IsNpc(victim))
     {
         ch->Echo("You can only shove player characters.\r\n");
         return;
     }
 
-    if (ch->InRoom->Area != pexit->ToRoom->Area
-        && !InHardRange(victim, pexit->ToRoom->Area))
+    if(ch->InRoom->Area != pexit->ToRoom->Area
+       && !InHardRange(victim, pexit->ToRoom->Area))
     {
         ch->Echo("That character cannot enter that area.\r\n");
         victim->Position = POS_STANDING;
@@ -264,7 +265,7 @@ void do_shove(Character *ch, std::string argument)
     shove_chance += ((GetCurrentStrength(ch) - 15) * 3);
     shove_chance += (ch->TopLevel - victim->TopLevel);
 
-    if (shove_chance < GetRandomPercent())
+    if(shove_chance < GetRandomPercent())
     {
         ch->Echo("You failed.\r\n");
         victim->Position = POS_STANDING;
@@ -275,15 +276,15 @@ void do_shove(Character *ch, std::string argument)
     Act(AT_ACTION, "$n shoves you.", ch, NULL, victim, TO_VICT);
     MoveCharacter(victim, GetExit(ch->InRoom, exit_dir), 0);
 
-    if (!CharacterDiedRecently(victim))
+    if(!CharacterDiedRecently(victim))
     {
         victim->Position = POS_STANDING;
     }
 
     SetWaitState(ch, 12);
 
-    if (ch->InRoom->Flags.test(Flag::Room::Safe)
-        && GetTimer(ch, TIMER_SHOVEDRAG) <= 0)
+    if(ch->InRoom->Flags.test(Flag::Room::Safe)
+       && GetTimer(ch, TIMER_SHOVEDRAG) <= 0)
     {
         AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, SUB_PAUSE);
     }

@@ -6,6 +6,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 void do_snipe(Character *ch, std::string argument)
 {
@@ -21,14 +22,14 @@ void do_snipe(Character *ch, std::string argument)
     char buf[MAX_STRING_LENGTH];
     bool pfound = false;
 
-    if (ch->InRoom->Flags.test(Flag::Room::Safe))
+    if(ch->InRoom->Flags.test(Flag::Room::Safe))
     {
         SetCharacterColor(AT_MAGIC, ch);
         ch->Echo("You'll have to do that elsewhere.\r\n");
         return;
     }
 
-    if (GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD) != NULL)
+    if(GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD) != NULL)
     {
         ch->Echo("You can't do that while wielding two weapons.");
         return;
@@ -36,33 +37,33 @@ void do_snipe(Character *ch, std::string argument)
 
     wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
-    if (wield == nullptr
-        || wield->ItemType != ITEM_WEAPON
-        || wield->Value[OVAL_WEAPON_TYPE] != WEAPON_BLASTER)
+    if(wield == nullptr
+       || wield->ItemType != ITEM_WEAPON
+       || wield->Value[OVAL_WEAPON_TYPE] != WEAPON_BLASTER)
     {
         ch->Echo("You don't seem to be holding a blaster");
         return;
     }
 
-    if (!IsNpc(ch) && ch->PCData->Learned[gsn_snipe] > 100)
+    if(!IsNpc(ch) && ch->PCData->Learned[gsn_snipe] > 100)
         max_dist += (ch->PCData->Learned[gsn_snipe]) / 15;
 
     argument = OneArgument(argument, arg);
     argument = OneArgument(argument, arg2);
 
-    if ((dir = GetDirection(arg)) == -1 || arg2.empty())
+    if((dir = GetDirection(arg)) == -1 || arg2.empty())
     {
         ch->Echo("Usage: snipe <dir> <target>\r\n");
         return;
     }
 
-    if ((pexit = GetExit(ch->InRoom, dir)) == NULL)
+    if((pexit = GetExit(ch->InRoom, dir)) == NULL)
     {
         ch->Echo("Are you expecting to fire through a wall?\r\n");
         return;
     }
 
-    if (pexit->Flags.test(Flag::Exit::Closed))
+    if(pexit->Flags.test(Flag::Exit::Closed))
     {
         ch->Echo("Are you expecting to fire through a door?\r\n");
         return;
@@ -70,81 +71,81 @@ void do_snipe(Character *ch, std::string argument)
 
     auto was_in_room = ch->InRoom;
 
-    for (dist = 0; dist <= max_dist; dist++)
+    for(dist = 0; dist <= max_dist; dist++)
     {
-        if (pexit->Flags.test(Flag::Exit::Closed))
+        if(pexit->Flags.test(Flag::Exit::Closed))
             break;
 
-        if (!pexit->ToRoom)
+        if(!pexit->ToRoom)
             break;
 
         std::shared_ptr<Room> to_room;
 
-        if (pexit->Distance > 1)
+        if(pexit->Distance > 1)
             to_room = GenerateExit(ch->InRoom, pexit);
 
-        if (to_room == NULL)
+        if(to_room == NULL)
             to_room = pexit->ToRoom;
 
         CharacterFromRoom(ch);
         CharacterToRoom(ch, to_room);
 
-        if (IsNpc(ch) && (victim = GetCharacterInRoomMudProg(ch, arg2)) != NULL)
+        if(IsNpc(ch) && (victim = GetCharacterInRoomMudProg(ch, arg2)) != NULL)
         {
             pfound = true;
             break;
         }
-        else if (!IsNpc(ch) && (victim = GetCharacterInRoom(ch, arg2)) != NULL)
+        else if(!IsNpc(ch) && (victim = GetCharacterInRoom(ch, arg2)) != NULL)
         {
             pfound = true;
             break;
         }
 
-        if ((pexit = GetExit(ch->InRoom, dir)) == NULL)
+        if((pexit = GetExit(ch->InRoom, dir)) == NULL)
             break;
     }
 
     CharacterFromRoom(ch);
     CharacterToRoom(ch, was_in_room);
 
-    if (!pfound)
+    if(!pfound)
     {
         ch->Echo("You don't see that person to the %s!\r\n",
-            GetDirectionName(dir));
+                 GetDirectionName(dir));
         CharacterFromRoom(ch);
         CharacterToRoom(ch, was_in_room);
         return;
     }
 
-    if (victim == ch)
+    if(victim == ch)
     {
         ch->Echo("Shoot yourself... really?\r\n");
         return;
     }
 
-    if (victim->InRoom->Flags.test(Flag::Room::Safe))
+    if(victim->InRoom->Flags.test(Flag::Room::Safe))
     {
         SetCharacterColor(AT_MAGIC, ch);
         ch->Echo("You can't shoot them there.\r\n");
         return;
     }
 
-    if (IsSafe(ch, victim))
+    if(IsSafe(ch, victim))
         return;
 
-    if (IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
+    if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
     {
         Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR);
         return;
     }
 
-    if (ch->Position == POS_FIGHTING)
+    if(ch->Position == POS_FIGHTING)
     {
         ch->Echo("You do the best you can!\r\n");
         return;
     }
 
-    if (!IsNpc(victim) && ch->Flags.test(Flag::Plr::Nice))
+    if(!IsNpc(victim) && ch->Flags.test(Flag::Plr::Nice))
     {
         ch->Echo("You feel too nice to do that!\r\n");
         return;
@@ -153,7 +154,7 @@ void do_snipe(Character *ch, std::string argument)
     the_chance = IsNpc(ch) ? 100
         : (int)(ch->PCData->Learned[gsn_snipe]);
 
-    switch (dir)
+    switch(dir)
     {
     case DIR_NORTH:
     case DIR_EAST:
@@ -190,7 +191,7 @@ void do_snipe(Character *ch, std::string argument)
     CharacterFromRoom(ch);
     CharacterToRoom(ch, victim->InRoom);
 
-    if (GetRandomPercent() < the_chance)
+    if(GetRandomPercent() < the_chance)
     {
         sprintf(buf, "A blaster shot fires at you from the %s.", GetDirectionName(dir));
         Act(AT_ACTION, buf, victim, NULL, ch, TO_CHAR);
@@ -200,7 +201,7 @@ void do_snipe(Character *ch, std::string argument)
 
         HitOnce(ch, victim, TYPE_UNDEFINED);
 
-        if (CharacterDiedRecently(ch))
+        if(CharacterDiedRecently(ch))
             return;
 
         StopFighting(ch, true);
@@ -217,23 +218,23 @@ void do_snipe(Character *ch, std::string argument)
     CharacterFromRoom(ch);
     CharacterToRoom(ch, was_in_room);
 
-    if (IsNpc(ch))
+    if(IsNpc(ch))
     {
         SetWaitState(ch, 1 * PULSE_VIOLENCE);
     }
     else
     {
-        if (GetRandomPercent() < ch->PCData->Learned[gsn_third_attack])
+        if(GetRandomPercent() < ch->PCData->Learned[gsn_third_attack])
             SetWaitState(ch, 1 * PULSE_PER_SECOND);
-        else if (GetRandomPercent() < ch->PCData->Learned[gsn_second_attack])
+        else if(GetRandomPercent() < ch->PCData->Learned[gsn_second_attack])
             SetWaitState(ch, 2 * PULSE_PER_SECOND);
         else
             SetWaitState(ch, 3 * PULSE_PER_SECOND);
     }
 
-    if (IsNpc(victim) && !CharacterDiedRecently(victim))
+    if(IsNpc(victim) && !CharacterDiedRecently(victim))
     {
-        if (victim->Flags.test(Flag::Mob::Sentinel))
+        if(victim->Flags.test(Flag::Mob::Sentinel))
         {
             victim->WasSentinel = victim->InRoom;
             victim->Flags.reset(Flag::Mob::Sentinel);

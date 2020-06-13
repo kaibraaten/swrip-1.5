@@ -29,6 +29,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
  /*
   * Function to handle the state changing of a triggerobject (lever)  -Thoric
@@ -42,7 +43,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
     const char *txt = NULL;
     bool isup = IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
 
-    switch (obj->ItemType)
+    switch(obj->ItemType)
     {
     default:
         ch->Echo("You can't %s that!\r\n", pull ? "pull" : "push");
@@ -52,7 +53,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
     case ITEM_SWITCH:
     case ITEM_LEVER:
     case ITEM_PULLCHAIN:
-        if ((!pull && isup) || (pull && !isup))
+        if((!pull && isup) || (pull && !isup))
         {
             ch->Echo("It is already %s.\r\n", isup ? "up" : "down");
             return;
@@ -60,7 +61,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
         break;
 
     case ITEM_BUTTON:
-        if ((!pull && isup) || (pull & !isup))
+        if((!pull && isup) || (pull & !isup))
         {
             ch->Echo("It is already %s.\r\n", isup ? "in" : "out");
             return;
@@ -68,9 +69,9 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
         break;
     }
 
-    if (pull && IsBitSet(obj->Prototype->mprog.progtypes, PULL_PROG))
+    if(pull && IsBitSet(obj->Prototype->mprog.progtypes, PULL_PROG))
     {
-        if (!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
+        if(!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
         {
             RemoveBit(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
         }
@@ -79,9 +80,9 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
         return;
     }
 
-    if (!pull && IsBitSet(obj->Prototype->mprog.progtypes, PUSH_PROG))
+    if(!pull && IsBitSet(obj->Prototype->mprog.progtypes, PUSH_PROG))
     {
-        if (!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
+        if(!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
         {
             SetBit(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
         }
@@ -90,7 +91,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
         return;
     }
 
-    if (!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+    if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
     {
         sprintf(buf, "$n %s $p.", pull ? "pulls" : "pushes");
         Act(AT_ACTION, buf, ch, obj, NULL, TO_ROOM);
@@ -98,9 +99,9 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
         Act(AT_ACTION, buf, ch, obj, NULL, TO_CHAR);
     }
 
-    if (!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
+    if(!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
     {
-        if (pull)
+        if(pull)
         {
             RemoveBit(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
         }
@@ -110,30 +111,30 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
         }
     }
 
-    if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORT)
-        || IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL)
-        || IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS))
+    if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORT)
+       || IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL)
+       || IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS))
     {
         int flags = 0;
 
-        if ((room = GetRoom(obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION])) == NULL)
+        if((room = GetRoom(obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION])) == NULL)
         {
             Log->Bug("PullOrPush: obj points to invalid room %d",
-                obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
+                     obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
             return;
         }
 
-        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_SHOWROOMDESC))
+        if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_SHOWROOMDESC))
         {
             SetBit(flags, TELE_SHOWDESC);
         }
 
-        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL))
+        if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL))
         {
             SetBit(flags, TELE_TRANSALL);
         }
 
-        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS))
+        if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS))
         {
             SetBit(flags, TELE_TRANSALLPLUS);
         }
@@ -142,74 +143,74 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
         return;
     }
 
-    if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4)
-        || IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND6))
+    if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4)
+       || IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND6))
     {
         int maxd = 0;
 
-        if ((room = GetRoom(obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION])) == NULL)
+        if((room = GetRoom(obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION])) == NULL)
         {
             Log->Bug("PullOrPush: obj points to invalid room %d",
-                obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
+                     obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
             return;
         }
 
-        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4))
+        if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4))
             maxd = 3;
         else
             maxd = 5;
 
         RandomizeExits(room, maxd);
 
-        for (const Character *rch : room->Characters())
+        for(const Character *rch : room->Characters())
         {
             rch->Echo("You hear a loud rumbling sound.\r\n");
             rch->Echo("Something seems different...\r\n");
         }
     }
 
-    if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR))
+    if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR))
     {
         room = GetRoom(obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
 
-        if (!room)
+        if(!room)
         {
             room = obj->InRoom;
         }
 
-        if (!room)
+        if(!room)
         {
             Log->Bug("PullOrPush: obj points to invalid room %d",
-                obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
+                     obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
             return;
         }
 
-        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_NORTH))
+        if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_NORTH))
         {
             edir = DIR_NORTH;
             txt = "to the north";
         }
-        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_SOUTH))
+        else if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_SOUTH))
         {
             edir = DIR_SOUTH;
             txt = "to the south";
         }
-        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_EAST))
+        else if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_EAST))
         {
             edir = DIR_EAST;
             txt = "to the east";
         }
-        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_WEST))
+        else if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_WEST))
         {
             edir = DIR_WEST;
             txt = "to the west";
         }
-        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_UP))
+        else if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_UP))
         {
             edir = DIR_UP;
             txt = "from above";
         }
-        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_DOWN))
+        else if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_DOWN))
         {
             edir = DIR_DOWN;
             txt = "from below";
@@ -222,21 +223,21 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
 
         pexit = GetExit(room, edir);
 
-        if (!pexit)
+        if(!pexit)
         {
-            if (!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE))
+            if(!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE))
             {
                 Log->Bug("PullOrPush: obj points to non-exit %d",
-                    obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
+                         obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
                 return;
             }
 
             to_room = GetRoom(obj->Value[OVAL_BUTTON_2]);
 
-            if (!to_room)
+            if(!to_room)
             {
                 Log->Bug("PullOrPush: dest points to invalid room %d",
-                    obj->Value[OVAL_BUTTON_2]);
+                         obj->Value[OVAL_BUTTON_2]);
                 return;
             }
 
@@ -248,15 +249,15 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
             return;
         }
 
-        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK)
-            && pexit->Flags.test(Flag::Exit::Locked))
+        if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK)
+           && pexit->Flags.test(Flag::Exit::Locked))
         {
             pexit->Flags.reset(Flag::Exit::Locked);
             Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR);
             Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM);
 
-            if ((pexit_rev = pexit->ReverseExit) != NULL
-                && pexit_rev->ToRoom == ch->InRoom)
+            if((pexit_rev = pexit->ReverseExit) != NULL
+               && pexit_rev->ToRoom == ch->InRoom)
             {
                 pexit_rev->Flags.reset(Flag::Exit::Locked);
             }
@@ -264,15 +265,15 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
             return;
         }
 
-        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK)
-            && !pexit->Flags.test(Flag::Exit::Locked))
+        if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK)
+           && !pexit->Flags.test(Flag::Exit::Locked))
         {
             pexit->Flags.set(Flag::Exit::Locked);
             Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR);
             Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM);
 
-            if ((pexit_rev = pexit->ReverseExit) != NULL
-                && pexit_rev->ToRoom == ch->InRoom)
+            if((pexit_rev = pexit->ReverseExit) != NULL
+               && pexit_rev->ToRoom == ch->InRoom)
             {
                 pexit_rev->Flags.set(Flag::Exit::Locked);
             }
@@ -280,22 +281,22 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
             return;
         }
 
-        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN)
-            && pexit->Flags.test(Flag::Exit::Closed))
+        if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN)
+           && pexit->Flags.test(Flag::Exit::Closed))
         {
             pexit->Flags.reset(Flag::Exit::Closed);
 
-            for (Character *rch : room->Characters())
+            for(Character *rch : room->Characters())
             {
                 Act(AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR);
             }
 
-            if ((pexit_rev = pexit->ReverseExit) != NULL
-                && pexit_rev->ToRoom == ch->InRoom)
+            if((pexit_rev = pexit->ReverseExit) != NULL
+               && pexit_rev->ToRoom == ch->InRoom)
             {
                 pexit_rev->Flags.reset(Flag::Exit::Closed);
 
-                for (Character *rch : to_room->Characters())
+                for(Character *rch : to_room->Characters())
                 {
                     Act(AT_ACTION, "The $d opens.",
                         rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
@@ -306,22 +307,22 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
             return;
         }
 
-        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE)
-            && !pexit->Flags.test(Flag::Exit::Closed))
+        if(IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE)
+           && !pexit->Flags.test(Flag::Exit::Closed))
         {
             pexit->Flags.set(Flag::Exit::Closed);
 
-            for (Character *rch : room->Characters())
+            for(Character *rch : room->Characters())
             {
                 Act(AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR);
             }
 
-            if ((pexit_rev = pexit->ReverseExit) != NULL
-                && pexit_rev->ToRoom == ch->InRoom)
+            if((pexit_rev = pexit->ReverseExit) != NULL
+               && pexit_rev->ToRoom == ch->InRoom)
             {
                 pexit_rev->Flags.set(Flag::Exit::Closed);
 
-                for (Character *rch : to_room->Characters())
+                for(Character *rch : to_room->Characters())
                 {
                     Act(AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
                 }
@@ -343,12 +344,12 @@ void ActionDescription(Character *ch, Object *obj)
     const char *ichar = NULL;
     const char *iroom = NULL;
 
-    while (!IsNullOrEmpty(srcptr))
+    while(!IsNullOrEmpty(srcptr))
     {
-        if (*srcptr == '$')
+        if(*srcptr == '$')
         {
             srcptr++;
-            switch (*srcptr)
+            switch(*srcptr)
             {
             case 'e':
                 ichar = "you";
@@ -377,7 +378,7 @@ void ActionDescription(Character *ch, Object *obj)
                 break;
             }
         }
-        else if (*srcptr == '%' && *++srcptr == 's')
+        else if(*srcptr == '%' && *++srcptr == 's')
         {
             ichar = "You";
             iroom = IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str();
@@ -390,13 +391,13 @@ void ActionDescription(Character *ch, Object *obj)
             continue;
         }
 
-        while ((*charptr = *ichar) != '\0')
+        while((*charptr = *ichar) != '\0')
         {
             charptr++;
             ichar++;
         }
 
-        while ((*roomptr = *iroom) != '\0')
+        while((*roomptr = *iroom) != '\0')
         {
             roomptr++;
             iroom++;
@@ -407,7 +408,7 @@ void ActionDescription(Character *ch, Object *obj)
     *charptr = '\0';
     *roomptr = '\0';
 
-    switch (obj->ItemType)
+    switch(obj->ItemType)
     {
     case ITEM_DRINK_CON:
         Act(AT_ACTION, charbuf, ch, obj,
@@ -440,24 +441,24 @@ int GetColor(const std::string &argument)    /* get color code from command stri
 {
     std::string color;
     const char *cptr = NULL;
-    static const char * const color_list =
+    static const char *const color_list =
         "_bla_red_dgr_bro_dbl_pur_cya_cha_dch_ora_gre_yel_blu_pin_lbl_whi";
-    static const char * const blink_list =
+    static const char *const blink_list =
         "*bla*red*dgr*bro*dbl*pur*cya*cha*dch*ora*gre*yel*blu*pin*lbl*whi";
 
     OneArgument(argument, color);
 
-    if (color.empty() || (color[0] != '_' && color[0] != '*'))
+    if(color.empty() || (color[0] != '_' && color[0] != '*'))
     {
         return 0;
     }
 
-    if ((cptr = strstr(color_list, color.c_str())))
+    if((cptr = strstr(color_list, color.c_str())))
     {
         return (cptr - color_list) / 4;
     }
 
-    if ((cptr = strstr(blink_list, color.c_str())))
+    if((cptr = strstr(blink_list, color.c_str())))
         return (cptr - blink_list) / 4 + AT_BLINK;
 
     return 0;

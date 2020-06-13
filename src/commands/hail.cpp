@@ -6,6 +6,7 @@
 #include "character.hpp"
 #include "area.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
 void do_hail(Character *ch, std::string argument)
 {
@@ -22,21 +23,21 @@ void do_hail(Character *ch, std::string argument)
     argument = OneArgument(argument, arg);
     arg2 = argument;
 
-    if (!arg.empty())
+    if(!arg.empty())
     {
-        if ((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
+        if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
         {
             ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
             return;
         }
 
-        if (arg2.empty())
+        if(arg2.empty())
         {
             ch->Echo("&RUsage: Hail <ship> <message>\r\n&w");
             return;
         }
 
-        if (!ship->Spaceobject)
+        if(!ship->Spaceobject)
         {
             ch->Echo("&RYou need to launch first!\r\n&w");
             return;
@@ -44,20 +45,20 @@ void do_hail(Character *ch, std::string argument)
 
         target = GetShipInRange(arg, ship);
 
-        if (target == NULL)
+        if(target == NULL)
         {
             ch->Echo("&RThat ship isn't here!\r\n");
             return;
         }
 
-        if (target == ship)
+        if(target == ship)
         {
             ch->Echo("&RWhy don't you just say it?\r\n");
             return;
         }
 
-        if (GetShipDistanceToShip(target, ship) > 100 * (ship->Instruments.Sensor + 10)*((target->Class) + 1)
-            && GetShipDistanceToShip(target, ship) > 100 * ((ship->Instruments.Comm) + (target->Instruments.Comm) + 20))
+        if(GetShipDistanceToShip(target, ship) > 100 * (ship->Instruments.Sensor + 10) * ((target->Class) + 1)
+           && GetShipDistanceToShip(target, ship) > 100 * ((ship->Instruments.Comm) + (target->Instruments.Comm) + 20))
         {
             ch->Echo("&RThat ship is out of the range of your comm system.\r\n&w");
             return;
@@ -82,72 +83,72 @@ void do_hail(Character *ch, std::string argument)
     }
 
 
-    if (!ch->InRoom)
+    if(!ch->InRoom)
         return;
 
-    if (ch->Position < POS_FIGHTING)
+    if(ch->Position < POS_FIGHTING)
     {
         ch->Echo("You might want to stop fighting first!\r\n");
         return;
     }
 
-    if (ch->Position < POS_STANDING)
+    if(ch->Position < POS_STANDING)
     {
         ch->Echo("You might want to stand up first!\r\n");
         return;
     }
 
-    if (ch->InRoom->Flags.test(Flag::Room::Indoors))
+    if(ch->InRoom->Flags.test(Flag::Room::Indoors))
     {
         ch->Echo("You'll have to go outside to do that!\r\n");
         return;
     }
 
-    if (ch->InRoom->Sector != SECT_CITY)
+    if(ch->InRoom->Sector != SECT_CITY)
     {
         ch->Echo("There does not seem to be any speeders out here.\r\n");
         return;
     }
 
-    if (ch->InRoom->Flags.test(Flag::Room::Spacecraft))
+    if(ch->InRoom->Flags.test(Flag::Room::Spacecraft))
     {
         ch->Echo("You can't do that on spacecraft!\r\n");
         return;
     }
 
-    if (ch->TopLevel < 6)
+    if(ch->TopLevel < 6)
         gold = 0;
 
-    if (gold)
+    if(gold)
         gold = 500 * ch->TopLevel / 50;
 
-    if (ch->Gold < gold)
+    if(ch->Gold < gold)
     {
         ch->Echo("You don't have enough credits!\r\n");
         return;
     }
 
-    if (gold && GetRandomNumberFromRange(1, 10) == 1)
+    if(gold && GetRandomNumberFromRange(1, 10) == 1)
         steal = true;
 
     vnum = ch->InRoom->Vnum;
 
-    for (vnum = ch->InRoom->Area->VnumRanges.Room.First;
+    for(vnum = ch->InRoom->Area->VnumRanges.Room.First;
         vnum <= ch->InRoom->Area->VnumRanges.Room.Last;
         vnum++)
     {
         room = GetRoom(vnum);
 
-        if (room != NULL)
+        if(room != NULL)
         {
-            if (room->Flags.test(Flag::Room::Hotel))
+            if(room->Flags.test(Flag::Room::Hotel))
                 break;
             else
                 room = NULL;
         }
     }
 
-    if (room == NULL)
+    if(room == NULL)
     {
         ch->Echo("There doesn't seem to be any taxis nearby!\r\n");
         return;
@@ -155,7 +156,7 @@ void do_hail(Character *ch, std::string argument)
 
     ch->Gold -= umax(gold, 0);
 
-    if (ch->InRoom && ch->InRoom->Area)
+    if(ch->InRoom && ch->InRoom->Area)
         BoostEconomy(ch->InRoom->Area, gold);
 
     Act(AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.",
@@ -168,13 +169,13 @@ void do_hail(Character *ch, std::string argument)
 
     Act(AT_ACTION, "$n $T", ch, NULL, "arrives on a speederbike, gets off and pays the driver before it leaves.", TO_ROOM);
 
-    if (steal)
+    if(steal)
     {
         ch->Echo("You realize after the taxi drives off that you are missing a good amount of your credits! Thief!\r\n");
         gold = ch->Gold / 10;
         ch->Gold -= gold;
 
-        if (ch->InRoom && ch->InRoom->Area)
+        if(ch->InRoom && ch->InRoom->Area)
             BoostEconomy(ch->InRoom->Area, gold);
 
         return;

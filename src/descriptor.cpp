@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "systemdata.hpp"
 #include "repos/descriptorrepository.hpp"
+#include "act.hpp"
 
 static const char go_ahead_str[] = { (const char)IAC, (const char)GA, '\0' };
 
@@ -28,9 +29,9 @@ Descriptor::Descriptor(socket_t desc)
 
 Descriptor::~Descriptor() = default;
 
-void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
+void Descriptor::WriteToBuffer(const std::string & txt, size_t length)
 {
-    if (OutBuffer.str().empty() && !fCommand)
+    if(OutBuffer.str().empty() && !fCommand)
     {
         OutBuffer << "\r\n";
     }
@@ -38,21 +39,21 @@ void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
     OutBuffer << txt;
 }
 
-unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string &name, bool fConn)
+unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & name, bool fConn)
 {
-    for (class Character *ch = FirstCharacter; ch; ch = ch->Next)
+    for(class Character *ch = FirstCharacter; ch; ch = ch->Next)
     {
-        if (!IsNpc(ch)
-            && (!fConn || !ch->Desc)
-            && !ch->Name.empty()
-            && !StrCmp(name, ch->Name))
+        if(!IsNpc(ch)
+           && (!fConn || !ch->Desc)
+           && !ch->Name.empty()
+           && !StrCmp(name, ch->Name))
         {
-            if (fConn && ch->Switched)
+            if(fConn && ch->Switched)
             {
                 d->WriteToBuffer("Already playing.\r\nName: ", 0);
                 d->ConnectionState = CON_GET_NAME;
 
-                if (d->Character != nullptr)
+                if(d->Character != nullptr)
                 {
                     /* clear descriptor pointer to get rid of bug message in log */
                     d->Character->Desc = nullptr;
@@ -63,7 +64,7 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string &n
                 return BERR;
             }
 
-            if (!fConn)
+            if(!fConn)
             {
                 d->Character->PCData->Password = ch->PCData->Password;
             }
@@ -90,18 +91,18 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string &n
     return 0;
 }
 
-bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string &name)
+bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string & name)
 {
-    for (auto dold : Descriptors)
+    for(auto dold : Descriptors)
     {
-        if (dold != d
-            && (dold->Character || dold->Original)
-            && StrCmp(name, dold->Original
-                ? dold->Original->Name : dold->Character->Name)
-            && !StrCmp(dold->Remote.Hostname, d->Remote.Hostname))
+        if(dold != d
+           && (dold->Character || dold->Original)
+           && StrCmp(name, dold->Original
+                     ? dold->Original->Name : dold->Character->Name)
+           && !StrCmp(dold->Remote.Hostname, d->Remote.Hostname))
         {
-            if (d->Character->TopLevel >= LEVEL_CREATOR
-                || (dold->Original ? dold->Original : dold->Character)->TopLevel >= LEVEL_CREATOR)
+            if(d->Character->TopLevel >= LEVEL_CREATOR
+               || (dold->Original ? dold->Original : dold->Character)->TopLevel >= LEVEL_CREATOR)
             {
                 return false;
             }
@@ -122,20 +123,20 @@ bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string &name)
     return false;
 }
 
-unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string &name, bool kick)
+unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & name, bool kick)
 {
-    for (auto dold : Descriptors)
+    for(auto dold : Descriptors)
     {
-        if (dold != d
-            && (dold->Character || dold->Original)
-            && !StrCmp(name, dold->Original
-                ? dold->Original->Name : dold->Character->Name))
+        if(dold != d
+           && (dold->Character || dold->Original)
+           && !StrCmp(name, dold->Original
+                      ? dold->Original->Name : dold->Character->Name))
         {
             const int cstate = dold->ConnectionState;
             Character *ch = dold->Original ? dold->Original : dold->Character;
 
-            if (ch->Name.empty()
-                || (cstate != CON_PLAYING && cstate != CON_EDITING))
+            if(ch->Name.empty()
+               || (cstate != CON_PLAYING && cstate != CON_EDITING))
             {
                 d->WriteToBuffer("Already connected - try again.\r\n", 0);
                 auto logBuf = FormatString("%s already connected.", ch->Name.c_str());
@@ -143,7 +144,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string &nam
                 return BERR;
             }
 
-            if (!kick)
+            if(!kick)
             {
                 return true;
             }
@@ -158,7 +159,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string &nam
             ch->Desc = d;
             ch->IdleTimer = 0;
 
-            if (ch->Switched)
+            if(ch->Switched)
             {
                 do_return(ch->Switched, "");
             }
@@ -184,27 +185,27 @@ bool Descriptor::FlushBuffer(bool fPrompt)
     char buf[MAX_INPUT_LENGTH] = { '\0' };
     class Character *ch = Original ? Original : Character;
 
-    if (ch && ch->Fighting && ch->Fighting->Who)
+    if(ch && ch->Fighting && ch->Fighting->Who)
         ShowCharacterCondition(ch, ch->Fighting->Who);
 
     /*
      * Bust a prompt.
      */
-    if (fPrompt && !mud_down && ConnectionState == CON_PLAYING)
+    if(fPrompt && !mud_down && ConnectionState == CON_PLAYING)
     {
         ch = Original ? Original : Character;
 
-        if (ch->Flags.test(Flag::Plr::Blank))
+        if(ch->Flags.test(Flag::Plr::Blank))
         {
             WriteToBuffer("\r\n", 2);
         }
-        
-        if (ch->Flags.test(Flag::Plr::Prompt))
+
+        if(ch->Flags.test(Flag::Plr::Prompt))
         {
             DisplayPrompt(this);
         }
-        
-        if (ch->Flags.test(Flag::Plr::TelnetGA))
+
+        if(ch->Flags.test(Flag::Plr::TelnetGA))
         {
             WriteToBuffer(go_ahead_str, 0);
         }
@@ -213,7 +214,7 @@ bool Descriptor::FlushBuffer(bool fPrompt)
     /*
      * Short-circuit if nothing to write.
      */
-    if (OutBuffer.str().empty())
+    if(OutBuffer.str().empty())
     {
         return true;
     }
@@ -221,13 +222,13 @@ bool Descriptor::FlushBuffer(bool fPrompt)
     /*
      * Snoop-o-rama.
      */
-    if (SnoopBy)
+    if(SnoopBy)
     {
         /* without check, 'force mortal quit' while snooped caused crash, -h */
-        if (Character && !Character->Name.empty())
+        if(Character && !Character->Name.empty())
         {
             /* Show original snooped names. -- Altrag */
-            if (Original && !Original->Name.empty())
+            if(Original && !Original->Name.empty())
                 sprintf(buf, "%s (%s)", Character->Name.c_str(), Original->Name.c_str());
             else
                 sprintf(buf, "%s", Character->Name.c_str());
@@ -252,33 +253,33 @@ bool Descriptor::Read()
 {
     size_t iStart = 0;
 
-    if (!IsNullOrEmpty(InComm))
+    if(!IsNullOrEmpty(InComm))
         return true;
 
     iStart = strlen(pImpl->InBuffer);
 
-    if (iStart >= sizeof(pImpl->InBuffer) - 10)
+    if(iStart >= sizeof(pImpl->InBuffer) - 10)
     {
         Log->Info("%s input overflow!", Remote.Hostname.c_str());
         WriteToDescriptor(this,
-            "\r\n*** PUT A LID ON IT!!! ***\r\n");
+                          "\r\n*** PUT A LID ON IT!!! ***\r\n");
         return false;
     }
 
-    for (; ; )
+    for(; ; )
     {
         ssize_t nRead = recv(Socket, pImpl->InBuffer + iStart,
-            sizeof(pImpl->InBuffer) - 10 - iStart, 0);
+                             sizeof(pImpl->InBuffer) - 10 - iStart, 0);
 
-        if (nRead == 0)
+        if(nRead == 0)
         {
             Log->LogStringPlus("EOF encountered on read.", LOG_COMM, SysData.LevelOfLogChannel);
             return false;
         }
 
-        if (nRead == SOCKET_ERROR)
+        if(nRead == SOCKET_ERROR)
         {
-            if (GETERROR == EWOULDBLOCK || GETERROR == EAGAIN)
+            if(GETERROR == EWOULDBLOCK || GETERROR == EAGAIN)
             {
                 break;
             }
@@ -291,7 +292,7 @@ bool Descriptor::Read()
 
         iStart += nRead;
 
-        if (pImpl->InBuffer[iStart - 1] == '\n' || pImpl->InBuffer[iStart - 1] == '\r')
+        if(pImpl->InBuffer[iStart - 1] == '\n' || pImpl->InBuffer[iStart - 1] == '\r')
         {
             break;
         }
@@ -306,16 +307,16 @@ void Descriptor::ReadFromBuffer()
     /*
      * Hold horses if pending command already.
      */
-    if (!IsNullOrEmpty(InComm))
+    if(!IsNullOrEmpty(InComm))
         return;
 
     /*
      * Look for at least one new line.
   */
-    for (int i = 0; pImpl->InBuffer[i] != '\n' && pImpl->InBuffer[i] != '\r' && i < MAX_INBUF_SIZE;
+    for(int i = 0; pImpl->InBuffer[i] != '\n' && pImpl->InBuffer[i] != '\r' && i < MAX_INBUF_SIZE;
         i++)
     {
-        if (pImpl->InBuffer[i] == '\0')
+        if(pImpl->InBuffer[i] == '\0')
             return;
     }
 
@@ -325,9 +326,9 @@ void Descriptor::ReadFromBuffer()
     int i = 0;
     int k = 0;
 
-    for (i = 0, k = 0; pImpl->InBuffer[i] != '\n' && pImpl->InBuffer[i] != '\r'; i++)
+    for(i = 0, k = 0; pImpl->InBuffer[i] != '\n' && pImpl->InBuffer[i] != '\r'; i++)
     {
-        if (k >= 254)
+        if(k >= 254)
         {
             WriteToDescriptor(this, "Line too long.\r\n");
 
@@ -336,16 +337,16 @@ void Descriptor::ReadFromBuffer()
             break;
         }
 
-        if (pImpl->InBuffer[i] == '\b' && k > 0)
+        if(pImpl->InBuffer[i] == '\b' && k > 0)
             --k;
-        else if (isascii(pImpl->InBuffer[i]) && isprint(pImpl->InBuffer[i]))
+        else if(isascii(pImpl->InBuffer[i]) && isprint(pImpl->InBuffer[i]))
             InComm[k++] = pImpl->InBuffer[i];
     }
 
     /*
      * Finish off the line.
      */
-    if (k == 0)
+    if(k == 0)
         InComm[k++] = ' ';
 
     InComm[k] = '\0';
@@ -353,18 +354,18 @@ void Descriptor::ReadFromBuffer()
     /*
      * Deal with bozos with #repeat 1000 ...
      */
-    if (k > 1 || InComm[0] == '!')
+    if(k > 1 || InComm[0] == '!')
     {
-        if (InComm[0] != '!' && StrCmp(InComm, pImpl->InLast))
+        if(InComm[0] != '!' && StrCmp(InComm, pImpl->InLast))
         {
             pImpl->Repeat = 0;
         }
         else
         {
-            if (++pImpl->Repeat >= 100)
+            if(++pImpl->Repeat >= 100)
             {
                 WriteToDescriptor(this,
-                    "\r\n*** PUT A LID ON IT!!! ***\r\n");
+                                  "\r\n*** PUT A LID ON IT!!! ***\r\n");
             }
         }
     }
@@ -372,7 +373,7 @@ void Descriptor::ReadFromBuffer()
     /*
      * Do '!' substitution.
      */
-    if (InComm[0] == '!')
+    if(InComm[0] == '!')
         strcpy(InComm, pImpl->InLast);
     else
         strcpy(pImpl->InLast, InComm);
@@ -380,10 +381,10 @@ void Descriptor::ReadFromBuffer()
     /*
      * Shift the input buffer.
      */
-    while (pImpl->InBuffer[i] == '\n' || pImpl->InBuffer[i] == '\r')
+    while(pImpl->InBuffer[i] == '\n' || pImpl->InBuffer[i] == '\r')
         i++;
 
-    for (int j = 0; (pImpl->InBuffer[j] = pImpl->InBuffer[i + j]) != '\0'; j++)
+    for(int j = 0; (pImpl->InBuffer[j] = pImpl->InBuffer[i + j]) != '\0'; j++)
         ;
 }
 
@@ -400,7 +401,7 @@ NullDescriptor::NullDescriptor()
 
 }
 
-void NullDescriptor::WriteToBuffer(const std::string &txt, size_t len)
+void NullDescriptor::WriteToBuffer(const std::string & txt, size_t len)
 {
 
 }
@@ -425,7 +426,7 @@ bool NullDescriptor::HasInput() const
     return false;
 }
 
-void MapCharacterAndDescriptor(Character* ch, std::shared_ptr<Descriptor> d)
+void MapCharacterAndDescriptor(Character * ch, std::shared_ptr<Descriptor> d)
 {
     ch->Desc = d;
     d->Character = ch;

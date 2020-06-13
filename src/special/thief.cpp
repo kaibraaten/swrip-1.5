@@ -3,20 +3,21 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
 bool spec_thief(Character *ch)
 {
-    if (ch->Position != POS_STANDING)
+    if(ch->Position != POS_STANDING)
         return false;
 
-    for (Character *victim : RandomizeOrder(ch->InRoom->Characters()))
+    for(Character *victim : RandomizeOrder(ch->InRoom->Characters()))
     {
-        if (GetTrustLevel(victim) >= LEVEL_IMMORTAL
-            || NumberBits(2) != 0
-            || !CanSeeCharacter(ch, victim))        /* Thx Glop */
+        if(GetTrustLevel(victim) >= LEVEL_IMMORTAL
+           || NumberBits(2) != 0
+           || !CanSeeCharacter(ch, victim))        /* Thx Glop */
             continue;
 
-        if (IsAwake(victim) && GetRandomNumberFromRange(0, ch->TopLevel) == 0)
+        if(IsAwake(victim) && GetRandomNumberFromRange(0, ch->TopLevel) == 0)
         {
             Act(AT_ACTION, "You discover $n's hands in your wallet!",
                 ch, NULL, victim, TO_VICT);
@@ -31,7 +32,7 @@ bool spec_thief(Character *ch)
             ch->Gold += 9 * gold / 10;
             victim->Gold -= gold;
 
-            if (ch->Gold > maxgold)
+            if(ch->Gold > maxgold)
             {
                 BoostEconomy(ch->InRoom->Area, ch->Gold - maxgold / 2);
                 ch->Gold = maxgold / 2;

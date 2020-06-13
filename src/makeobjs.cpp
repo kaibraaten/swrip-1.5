@@ -30,16 +30,17 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "act.hpp"
 
-/*
- * Make a fire.
- */
+ /*
+  * Make a fire.
+  */
 void MakeFire(std::shared_ptr<Room> in_room, short timer)
 {
-    Object *fire = CreateObject( GetProtoObject( OBJ_VNUM_FIRE ), 0 );
+    Object *fire = CreateObject(GetProtoObject(OBJ_VNUM_FIRE), 0);
 
     fire->Timer = NumberFuzzy(timer);
-    ObjectToRoom( fire, in_room );
+    ObjectToRoom(fire, in_room);
 }
 
 /*
@@ -47,7 +48,7 @@ void MakeFire(std::shared_ptr<Room> in_room, short timer)
  */
 Object *MakeTrap(int v0, int v1, int v2, int v3)
 {
-    Object *trap = CreateObject( GetProtoObject( OBJ_VNUM_TRAP ), 0 );
+    Object *trap = CreateObject(GetProtoObject(OBJ_VNUM_TRAP), 0);
 
     trap->Timer = 0;
     trap->Value[OVAL_TRAP_CHARGE] = v0;
@@ -62,17 +63,17 @@ Object *MakeTrap(int v0, int v1, int v2, int v3)
 /*
  * Turn an object into scraps.          -Thoric
  */
-void MakeScraps( Object *obj )
+void MakeScraps(Object *obj)
 {
-    Object *scraps = CreateObject( GetProtoObject( OBJ_VNUM_SCRAPS ), 0 );
+    Object *scraps = CreateObject(GetProtoObject(OBJ_VNUM_SCRAPS), 0);
     Object *tmpobj = NULL;
     Character *ch = NULL;
 
-    SeparateOneObjectFromGroup( obj );
-    scraps->Timer = GetRandomNumberFromRange( 5, 15 );
+    SeparateOneObjectFromGroup(obj);
+    scraps->Timer = GetRandomNumberFromRange(5, 15);
 
     /* don't make scraps of scraps of scraps of ... */
-    if ( obj->Prototype->Vnum == OBJ_VNUM_SCRAPS )
+    if(obj->Prototype->Vnum == OBJ_VNUM_SCRAPS)
     {
         scraps->ShortDescr = "some debris";
         scraps->Description = "Bits of debris lie on the ground here.";
@@ -83,74 +84,74 @@ void MakeScraps( Object *obj )
         scraps->Description = FormatString(scraps->Description.c_str(), obj->ShortDescr.c_str());
     }
 
-    if ( obj->CarriedBy )
+    if(obj->CarriedBy)
     {
-        Act( AT_OBJECT, "$p falls to the ground in scraps!",
-             obj->CarriedBy, obj, NULL, TO_CHAR );
+        Act(AT_OBJECT, "$p falls to the ground in scraps!",
+            obj->CarriedBy, obj, NULL, TO_CHAR);
 
-        if ( obj == GetEquipmentOnCharacter( obj->CarriedBy, WEAR_WIELD )
-             &&  (tmpobj = GetEquipmentOnCharacter( obj->CarriedBy, WEAR_DUAL_WIELD)) != NULL )
+        if(obj == GetEquipmentOnCharacter(obj->CarriedBy, WEAR_WIELD)
+           && (tmpobj = GetEquipmentOnCharacter(obj->CarriedBy, WEAR_DUAL_WIELD)) != NULL)
         {
             tmpobj->WearLoc = WEAR_WIELD;
         }
 
-        ObjectToRoom( scraps, obj->CarriedBy->InRoom);
+        ObjectToRoom(scraps, obj->CarriedBy->InRoom);
     }
-    else if ( obj->InRoom )
+    else if(obj->InRoom)
     {
         if(!obj->InRoom->Characters().empty())
         {
             ch = obj->InRoom->Characters().front();
-            Act( AT_OBJECT, "$p is reduced to little more than scraps.",
-                 ch, obj, NULL, TO_ROOM );
-            Act( AT_OBJECT, "$p is reduced to little more than scraps.",
-                 ch, obj, NULL, TO_CHAR );
+            Act(AT_OBJECT, "$p is reduced to little more than scraps.",
+                ch, obj, NULL, TO_ROOM);
+            Act(AT_OBJECT, "$p is reduced to little more than scraps.",
+                ch, obj, NULL, TO_CHAR);
         }
 
-        ObjectToRoom( scraps, obj->InRoom);
+        ObjectToRoom(scraps, obj->InRoom);
     }
 
-    if ( (obj->ItemType == ITEM_CONTAINER
-          || obj->ItemType == ITEM_CORPSE_PC) && !obj->Objects().empty() )
+    if((obj->ItemType == ITEM_CONTAINER
+        || obj->ItemType == ITEM_CORPSE_PC) && !obj->Objects().empty())
     {
-        if ( ch && ch->InRoom )
+        if(ch && ch->InRoom)
         {
-            Act( AT_OBJECT, "The contents of $p fall to the ground.",
-                 ch, obj, NULL, TO_ROOM );
-            Act( AT_OBJECT, "The contents of $p fall to the ground.",
-                 ch, obj, NULL, TO_CHAR );
+            Act(AT_OBJECT, "The contents of $p fall to the ground.",
+                ch, obj, NULL, TO_ROOM);
+            Act(AT_OBJECT, "The contents of $p fall to the ground.",
+                ch, obj, NULL, TO_CHAR);
         }
 
-        if ( obj->CarriedBy )
+        if(obj->CarriedBy)
         {
-            EmptyObjectContents( obj, NULL, obj->CarriedBy->InRoom );
+            EmptyObjectContents(obj, NULL, obj->CarriedBy->InRoom);
         }
-        else if ( obj->InRoom )
+        else if(obj->InRoom)
         {
-            EmptyObjectContents( obj, NULL, obj->InRoom );
+            EmptyObjectContents(obj, NULL, obj->InRoom);
         }
-        else if ( obj->InObject )
+        else if(obj->InObject)
         {
-            EmptyObjectContents( obj, obj->InObject, NULL );
+            EmptyObjectContents(obj, obj->InObject, NULL);
         }
     }
 
-    ExtractObject( obj );
+    ExtractObject(obj);
 }
 
 /*
  * Make a corpse out of a character.
  */
-void MakeCorpse( Character *ch )
+void MakeCorpse(Character *ch)
 {
     Object *corpse = nullptr;
     std::string name;
 
-    if ( IsNpc(ch) )
+    if(IsNpc(ch))
     {
         name = ch->ShortDescr;
 
-        if (IsDroid(ch))
+        if(IsDroid(ch))
         {
             corpse = CreateObject(GetProtoObject(OBJ_VNUM_DROID_CORPSE), 0);
         }
@@ -161,19 +162,19 @@ void MakeCorpse( Character *ch )
 
         corpse->Timer = 6;
 
-        if ( ch->Gold > 0 )
+        if(ch->Gold > 0)
         {
-            if ( ch->InRoom )
+            if(ch->InRoom)
             {
                 ch->InRoom->Area->GoldLooted += ch->Gold;
             }
 
-            ObjectToObject( CreateMoney( ch->Gold ), corpse );
+            ObjectToObject(CreateMoney(ch->Gold), corpse);
             ch->Gold = 0;
         }
 
         /* Using corpse cost to cheat, since corpses not sellable */
-        corpse->Cost     = (-(int)ch->Prototype->Vnum);
+        corpse->Cost = (-(int)ch->Prototype->Vnum);
         corpse->Value[OVAL_CORPSE_DECAY] = corpse->Timer;
     }
     else
@@ -181,16 +182,16 @@ void MakeCorpse( Character *ch )
         name = ch->Name;
         corpse = CreateObject(GetProtoObject(OBJ_VNUM_CORPSE_PC), 0);
         corpse->Timer = 40;
-        corpse->Value[OVAL_CORPSE_DECAY] = (int)(corpse->Timer/8);
+        corpse->Value[OVAL_CORPSE_DECAY] = (int)(corpse->Timer / 8);
 
-        if ( ch->Gold > 0 )
+        if(ch->Gold > 0)
         {
-            if ( ch->InRoom )
+            if(ch->InRoom)
             {
                 ch->InRoom->Area->GoldLooted += ch->Gold;
             }
 
-            ObjectToObject( CreateMoney( ch->Gold ), corpse );
+            ObjectToObject(CreateMoney(ch->Gold), corpse);
             ch->Gold = 0;
         }
     }
@@ -200,51 +201,51 @@ void MakeCorpse( Character *ch )
     corpse->ShortDescr = FormatString(corpse->ShortDescr.c_str(), name.c_str());
     corpse->Description = FormatString(corpse->Description.c_str(), name.c_str());
 
-    std::list<Object*> carriedObjects(ch->Objects());
+    std::list<Object *> carriedObjects(ch->Objects());
 
     for(Object *obj : carriedObjects)
     {
-        ObjectFromCharacter( obj );
+        ObjectFromCharacter(obj);
 
-        if (obj->Flags.test(Flag::Obj::Inventory)
-            || obj->Flags.test(Flag::Obj::DeathRot))
+        if(obj->Flags.test(Flag::Obj::Inventory)
+           || obj->Flags.test(Flag::Obj::DeathRot))
         {
-            ExtractObject( obj );
+            ExtractObject(obj);
         }
         else
         {
-            ObjectToObject( obj, corpse );
+            ObjectToObject(obj, corpse);
         }
     }
 
-    ObjectToRoom( corpse, ch->InRoom );
+    ObjectToRoom(corpse, ch->InRoom);
 }
 
-void MakeBloodstain( Character *ch )
+void MakeBloodstain(Character *ch)
 {
-    Object *obj = CreateObject( GetProtoObject( OBJ_VNUM_BLOODSTAIN ), 0 );
-    obj->Timer = GetRandomNumberFromRange( 1, 2 );
-    ObjectToRoom( obj, ch->InRoom );
+    Object *obj = CreateObject(GetProtoObject(OBJ_VNUM_BLOODSTAIN), 0);
+    obj->Timer = GetRandomNumberFromRange(1, 2);
+    ObjectToRoom(obj, ch->InRoom);
 }
 
 /*
  * make some coinage
  */
-Object *CreateMoney( int amount )
+Object *CreateMoney(int amount)
 {
     assert(amount > 0);
 
     Object *obj = NULL;
 
-    if ( amount == 1 )
+    if(amount == 1)
     {
-        obj = CreateObject( GetProtoObject( OBJ_VNUM_MONEY_ONE ), 0 );
+        obj = CreateObject(GetProtoObject(OBJ_VNUM_MONEY_ONE), 0);
     }
     else
     {
-        obj = CreateObject( GetProtoObject( OBJ_VNUM_MONEY_SOME ), 0 );
+        obj = CreateObject(GetProtoObject(OBJ_VNUM_MONEY_SOME), 0);
         obj->ShortDescr = FormatString(obj->ShortDescr.c_str(), amount);
-        obj->Value[OVAL_MONEY_AMOUNT]      = amount;
+        obj->Value[OVAL_MONEY_AMOUNT] = amount;
     }
 
     return obj;

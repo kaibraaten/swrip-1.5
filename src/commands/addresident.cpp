@@ -3,6 +3,7 @@
 #include "room.hpp"
 #include "home.hpp"
 #include "repos/homerepository.hpp"
+#include "act.hpp"
 
 void do_addresident(Character *ch, std::string argument)
 {

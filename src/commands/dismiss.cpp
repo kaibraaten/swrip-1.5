@@ -1,36 +1,37 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "act.hpp"
 
-void do_dismiss( Character *ch, std::string arg )
+void do_dismiss(Character *ch, std::string arg)
 {
-  Character *victim = NULL;
+    Character *victim = NULL;
 
-  if ( arg.empty() )
+    if(arg.empty())
     {
-      ch->Echo( "Dismiss whom?\r\n" );
-      return;
+        ch->Echo("Dismiss whom?\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
+    if((victim = GetCharacterInRoom(ch, arg)) == NULL)
     {
-      ch->Echo( "They aren't here.\r\n" );
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( IsAffectedBy( victim, Flag::Affect::Charm)
-       && IsNpc( victim )
-       && victim->Master == ch )
+    if(IsAffectedBy(victim, Flag::Affect::Charm)
+       && IsNpc(victim)
+       && victim->Master == ch)
     {
-      StopFollowing( victim );
-      StopHating( victim );
-      StopHunting( victim );
-      StopFearing( victim );
-      Act( AT_ACTION, "$n dismisses $N.", ch, NULL, victim, TO_NOTVICT );
-      Act( AT_ACTION, "You dismiss $N.", ch, NULL, victim, TO_CHAR );
+        StopFollowing(victim);
+        StopHating(victim);
+        StopHunting(victim);
+        StopFearing(victim);
+        Act(AT_ACTION, "$n dismisses $N.", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_ACTION, "You dismiss $N.", ch, NULL, victim, TO_CHAR);
     }
-  else
+    else
     {
-      ch->Echo( "You cannot dismiss them.\r\n" );
+        ch->Echo("You cannot dismiss them.\r\n");
     }
 }
 

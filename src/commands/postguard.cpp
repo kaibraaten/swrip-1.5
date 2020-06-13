@@ -5,49 +5,50 @@
 #include "clan.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "act.hpp"
 
-void do_postguard( Character *ch, std::string argument )
+void do_postguard(Character *ch, std::string argument)
 {
     int the_chance = 0, credits = 0;
     std::shared_ptr<Clan> clan;
 
-    if ( IsNpc( ch ) )
+    if(IsNpc(ch))
         return;
 
-    switch( ch->SubState )
+    switch(ch->SubState)
     {
     default:
-        if ( ch->BackupWait )
+        if(ch->BackupWait)
         {
             ch->Echo("&RYou already have backup coming.\r\n");
             return;
         }
 
-        if ( !IsClanned( ch ) )
+        if(!IsClanned(ch))
         {
             ch->Echo("&RYou need to be a member of an organization before you can call for a guard.\r\n");
             return;
         }
 
-        if ( ch->Gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30 )
+        if(ch->Gold < GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 30)
         {
             ch->Echo("&RYou dont have enough credits.\r\n");
             return;
         }
 
-        the_chance = (int) (ch->PCData->Learned[gsn_postguard]);
+        the_chance = (int)(ch->PCData->Learned[gsn_postguard]);
 
-        if ( GetRandomPercent() < the_chance )
+        if(GetRandomPercent() < the_chance)
         {
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
-            Act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
-                 NULL, argument.c_str(), TO_ROOM );
-            AddTimerToCharacter( ch , TIMER_CMD_FUN , 1 , do_postguard , SUB_PAUSE );
+            Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
+                NULL, argument.c_str(), TO_ROOM);
+            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_postguard, SUB_PAUSE);
             return;
         }
 
         ch->Echo("&RYou call for a guard but nobody answers.\r\n");
-        LearnFromFailure( ch, gsn_postguard );
+        LearnFromFailure(ch, gsn_postguard);
         return;
 
     case SUB_PAUSE:
@@ -63,17 +64,17 @@ void do_postguard( Character *ch, std::string argument )
 
     ch->Echo("&GYour guard is on the way.\r\n");
 
-    credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30;
+    credits = GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 30;
     ch->Echo("It cost you %d credits.\r\n", credits);
-    ch->Gold -= umin( credits , ch->Gold );
+    ch->Gold -= umin(credits, ch->Gold);
 
-    LearnFromSuccess( ch, gsn_postguard );
+    LearnFromSuccess(ch, gsn_postguard);
 
     clan = ch->PCData->ClanInfo.Clan->MainClan ? ch->PCData->ClanInfo.Clan->MainClan : ch->PCData->ClanInfo.Clan;
 
-    if ( !StrCmp( clan->Name, BADGUY_CLAN ) )
+    if(!StrCmp(clan->Name, BADGUY_CLAN))
         ch->BackupMob = MOB_VNUM_IMP_GUARD;
-    else if ( !StrCmp( clan->Name, GOODGUY_CLAN ) )
+    else if(!StrCmp(clan->Name, GOODGUY_CLAN))
         ch->BackupMob = MOB_VNUM_NR_GUARD;
     else
         ch->BackupMob = MOB_VNUM_BOUNCER;

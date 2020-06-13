@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
 void do_scatter(Character *ch, std::string arg)
 {
@@ -10,44 +11,44 @@ void do_scatter(Character *ch, std::string arg)
 
     SetCharacterColor(AT_IMMORT, ch);
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("Scatter whom?\r\n");
         return;
     }
 
-    if ((victim = GetCharacterInRoom(ch, arg)) == NULL)
+    if((victim = GetCharacterInRoom(ch, arg)) == NULL)
     {
         ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if (victim == ch)
+    if(victim == ch)
     {
         ch->Echo("It's called teleport. Try it.\r\n");
         return;
     }
 
-    if (!IsNpc(victim) && GetTrustLevel(victim) >= GetTrustLevel(ch))
+    if(!IsNpc(victim) && GetTrustLevel(victim) >= GetTrustLevel(ch))
     {
         ch->Echo("You haven't the power to succeed against them.\r\n");
         return;
     }
 
-    for (; ; )
+    for(; ; )
     {
         pRoomIndex = GetRoom(GetRandomNumberFromRange(MIN_VNUM, MAX_VNUM));
 
-        if (pRoomIndex
-            && !pRoomIndex->Flags.test(Flag::Room::Private)
-            && !pRoomIndex->Flags.test(Flag::Room::Prototype)
-            && !pRoomIndex->Flags.test(Flag::Room::Spacecraft))
+        if(pRoomIndex
+           && !pRoomIndex->Flags.test(Flag::Room::Private)
+           && !pRoomIndex->Flags.test(Flag::Room::Prototype)
+           && !pRoomIndex->Flags.test(Flag::Room::Spacecraft))
         {
             break;
         }
     }
 
-    if (victim->Fighting)
+    if(victim->Fighting)
         StopFighting(victim, true);
 
     Act(AT_MAGIC, "With the sweep of an arm, $n flings $N to the winds.",

@@ -3,6 +3,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
 void do_board(Character *ch, std::string argument)
 {
@@ -11,34 +12,34 @@ void do_board(Character *ch, std::string argument)
     std::string name;
     std::shared_ptr<Shuttle> shuttle;
 
-    if (argument.empty())
+    if(argument.empty())
     {
         ch->Echo("Board what?\r\n");
         return;
     }
 
-    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Mounted))
+    if(IsNpc(ch) && ch->Mount != nullptr)
     {
         Act(AT_PLAIN, "&RYou can't go in there riding THAT.",
             ch, NULL, argument.c_str(), TO_CHAR);
         return;
     }
 
-    if ((ship = GetShipInRoom(ch->InRoom, argument)) != NULL)
+    if((ship = GetShipInRoom(ch->InRoom, argument)) != NULL)
     {
-        if ((toroom = GetRoom(ship->Rooms.Entrance)) == NULL)
+        if((toroom = GetRoom(ship->Rooms.Entrance)) == NULL)
         {
             ch->Echo("&RThat ship has no entrance!\r\n");
             return;
         }
 
-        if (!ship->HatchOpen)
+        if(!ship->HatchOpen)
         {
             ch->Echo("&RThe hatch is closed!\r\n");
             return;
         }
 
-        if (ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2)
+        if(ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2)
         {
             ch->Echo("&RThat ship has already started launching!\r\n");
             return;
@@ -46,11 +47,11 @@ void do_board(Character *ch, std::string argument)
 
         name = ship->Name;
     }
-    else if ((shuttle = GetShuttleInRoom(ch->InRoom, argument)) != NULL)
+    else if((shuttle = GetShuttleInRoom(ch->InRoom, argument)) != NULL)
     {
         name = shuttle->Name;
 
-        if ((toroom = GetRoom(shuttle->Rooms.Entrance)) == NULL)
+        if((toroom = GetRoom(shuttle->Rooms.Entrance)) == NULL)
         {
             ch->Echo("That ship has no entrance!\r\n");
             return;
@@ -63,11 +64,11 @@ void do_board(Character *ch, std::string argument)
         return;
     }
 
-    if (toroom->Tunnel > 0)
+    if(toroom->Tunnel > 0)
     {
         int count = toroom->Characters().size();
 
-        if (count >= toroom->Tunnel)
+        if(count >= toroom->Tunnel)
         {
             ch->Echo("There is no room for you in there.\r\n");
             return;

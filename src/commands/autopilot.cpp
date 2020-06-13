@@ -2,70 +2,71 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
-void do_autopilot(Character *ch, std::string argument )
+void do_autopilot(Character *ch, std::string argument)
 {
-  std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);
+    std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);
 
-  if ( ship == nullptr )
+    if(ship == nullptr)
     {
-      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
-      return;
+        ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
+        return;
     }
 
-  if ( (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
+    if((ship = GetShipFromPilotSeat(ch->InRoom->Vnum)) == NULL)
     {
-      ch->Echo("&RYou must be in the pilots seat!\r\n");
-      return;
+        ch->Echo("&RYou must be in the pilots seat!\r\n");
+        return;
     }
 
-  if ( !CheckPilot(ch,ship) )
+    if(!CheckPilot(ch, ship))
     {
-      ch->Echo("&RHey! Thats not your ship!\r\n");
-      return;
+        ch->Echo("&RHey! Thats not your ship!\r\n");
+        return;
     }
 
-  if ( ship->State == SHIP_DOCKED )
+    if(ship->State == SHIP_DOCKED)
     {
-      if(ship->Docked == NULL
-         || ( ship->Docked->Class > MIDSIZE_SHIP && ship->Class > MIDSIZE_SHIP ))
+        if(ship->Docked == NULL
+           || (ship->Docked->Class > MIDSIZE_SHIP && ship->Class > MIDSIZE_SHIP))
         {
-          ch->Echo("&RNot until after you've launched!\r\n");
-          return;
+            ch->Echo("&RNot until after you've launched!\r\n");
+            return;
         }
 
-      ch->Echo("&RNot while you are docked!\r\n");
-      return;
+        ch->Echo("&RNot while you are docked!\r\n");
+        return;
     }
 
-  if ( ship->WeaponSystems.Target )
+    if(ship->WeaponSystems.Target)
     {
-      ship->AutoTrack = false;
+        ship->AutoTrack = false;
     }
 
 
-  Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
-       NULL, argument.c_str(), TO_ROOM );
+    Act(AT_PLAIN, "$n flips a switch on the control panel.", ch,
+        NULL, argument.c_str(), TO_ROOM);
 
-  if ( ( ship->Autopilot == true && StrCmp(argument,"on") )
-       || !StrCmp(argument,"off") )
+    if((ship->Autopilot == true && StrCmp(argument, "on"))
+       || !StrCmp(argument, "off"))
     {
-      ship->Autopilot=false;
-      ch->Echo( "&GYou toggle the autopilot.\r\n" );
-      EchoToCockpit( AT_YELLOW , ship , "Autopilot OFF.");
+        ship->Autopilot = false;
+        ch->Echo("&GYou toggle the autopilot.\r\n");
+        EchoToCockpit(AT_YELLOW, ship, "Autopilot OFF.");
     }
-  else
+    else
     {
-      if( ship->State == SHIP_LANDED )
+        if(ship->State == SHIP_LANDED)
         {
-          ch->Echo("&RNot while you are docked!\r\n");
-          return;
+            ch->Echo("&RNot while you are docked!\r\n");
+            return;
         }
 
-      ship->Autopilot=true;
-      ship->AutoRecharge = true;
-      ch->Echo( "&GYou toggle the autopilot.\r\n" );
-      EchoToCockpit( AT_YELLOW , ship , "Autopilot ON.");
+        ship->Autopilot = true;
+        ship->AutoRecharge = true;
+        ch->Echo("&GYou toggle the autopilot.\r\n");
+        EchoToCockpit(AT_YELLOW, ship, "Autopilot ON.");
     }
 }
 

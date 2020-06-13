@@ -2,32 +2,33 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "object.hpp"
+#include "act.hpp"
 
 extern std::string spell_target_name;
 
-ch_ret spell_invis(int sn, int level, Character* ch, void* vo)
+ch_ret spell_invis(int sn, int level, Character *ch, void *vo)
 {
-    Character* victim = nullptr;
+    Character *victim = nullptr;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
     /* Modifications on 1/2/96 to work on player/object - Scryn */
 
-    if (spell_target_name.empty())
+    if(spell_target_name.empty())
         victim = ch;
     else
         victim = GetCharacterInRoom(ch, spell_target_name);
 
-    if (victim)
+    if(victim)
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
-        if (victim->Immune.test(Flag::Ris::Magic))
+        if(victim->Immune.test(Flag::Ris::Magic))
         {
             ImmuneCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;
         }
 
-        if (IsAffectedBy(victim, Flag::Affect::Invisible))
+        if(IsAffectedBy(victim, Flag::Affect::Invisible))
         {
             FailedCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;
@@ -45,14 +46,14 @@ ch_ret spell_invis(int sn, int level, Character* ch, void* vo)
     }
     else
     {
-        Object* obj;
+        Object *obj;
 
         obj = GetCarriedObject(ch, spell_target_name);
 
-        if (obj)
+        if(obj)
         {
-            if (obj->Flags.test(Flag::Obj::Invis)
-                || Chance(ch, 40 + level / 10))
+            if(obj->Flags.test(Flag::Obj::Invis)
+               || Chance(ch, 40 + level / 10))
             {
                 FailedCasting(skill, ch, NULL, NULL);
                 return rSPELL_FAILED;

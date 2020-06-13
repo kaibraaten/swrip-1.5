@@ -376,14 +376,6 @@ constexpr auto LANG_UNKNOWN = 0;  /* Anything that doesnt fit a category */
 constexpr auto LANG_MAX = 32;
 
 /*
- * TO types for act.
- */
-constexpr auto TO_ROOM = 0;
-constexpr auto TO_NOTVICT = 1;
-constexpr auto TO_VICT = 2;
-constexpr auto TO_CHAR = 3;
-
-/*
  * Real action "TYPES" for act.
  */
 constexpr auto AT_BLACK = 0;
@@ -1903,7 +1895,6 @@ constexpr const char *Concat(const char *a, const char *b)
 
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */
 
-#define COPYOVER_FILE   DATA_DIR "copyover.dat"
 #define BOOTLOG_FILE    LOG_DIR "boot.txt"     /* Boot up error file  */
 #define BUG_FILE        LOG_DIR "bugs.txt"     /* For 'bug' and Bug() */
 #define IDEA_FILE       DATA_DIR "ideas.txt"    /* For 'idea'          */

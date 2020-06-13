@@ -41,10 +41,13 @@
 #include "systemdata.hpp"
 #include "repos/descriptorrepository.hpp"
 #include "repos/homerepository.hpp"
+#include "act.hpp"
 
 #ifdef _WIN32
 #include <process.h>
 #endif
+
+#define COPYOVER_FILE   DATA_DIR "copyover.dat"
 
 /*  Warm reboot stuff, gotta make sure to thank Erwin for this :) */
 extern socket_t control;                /* Controlling descriptor       */

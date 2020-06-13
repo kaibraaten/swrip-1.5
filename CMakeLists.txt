@@ -17,7 +17,8 @@ target_compile_options(swrip
   )
 
 add_library(mud OBJECT
-  src/act_comm.cpp
+src/act.cpp
+src/act_comm.cpp
 src/act_info.cpp
 src/act_move.cpp
 src/act_obj.cpp

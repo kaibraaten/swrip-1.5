@@ -3,12 +3,13 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "repos/playerrepository.hpp"
+#include "act.hpp"
 
 void do_unhell(Character *ch, std::string arg)
 {
     Character *victim = NULL;
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("Unhell whom?\r\n");
         return;
@@ -19,7 +20,7 @@ void do_unhell(Character *ch, std::string arg)
     victim = GetCharacterInRoom(ch, arg);
     ch->InRoom = location;            /* The case of unhell self, etc. */
 
-    if (!victim || IsNpc(victim) || victim->InRoom->Vnum != ROOM_VNUM_HELL)
+    if(!victim || IsNpc(victim) || victim->InRoom->Vnum != ROOM_VNUM_HELL)
     {
         ch->Echo("No one like that is in hell.\r\n");
         return;
@@ -27,7 +28,7 @@ void do_unhell(Character *ch, std::string arg)
 
     location = GetRoom(WhereHome(victim));
 
-    if (!location)
+    if(!location)
         location = ch->InRoom;
 
     MOBtrigger = false;
@@ -38,11 +39,11 @@ void do_unhell(Character *ch, std::string arg)
     do_look(victim, "auto");
     ch->Echo("They have been released.\r\n");
 
-    if (!victim->PCData->HelledBy.empty())
+    if(!victim->PCData->HelledBy.empty())
     {
-        if (StrCmp(ch->Name, victim->PCData->HelledBy))
+        if(StrCmp(ch->Name, victim->PCData->HelledBy))
             ch->Echo("(You should probably write a note to %s, explaining the early release.)\r\n",
-                victim->PCData->HelledBy.c_str());
+                     victim->PCData->HelledBy.c_str());
         victim->PCData->HelledBy.erase();
     }
 

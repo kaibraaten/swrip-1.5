@@ -7,6 +7,7 @@
 #include "room.hpp"
 #include "protomob.hpp"
 #include "repos/socialrepository.hpp"
+#include "act.hpp"
 
 bool CheckSocial(Character *ch, const std::string &command, const std::string &argument)
 {
@@ -14,18 +15,18 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
     Character *victim = NULL;
     std::shared_ptr<Social> social = Socials->FindByName(command);
 
-    if (social == nullptr)
+    if(social == nullptr)
     {
         return false;
     }
 
-    if (!IsNpc(ch) && ch->Flags.test(Flag::Plr::NoEmote))
+    if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::NoEmote))
     {
         ch->Echo("You are anti-social!\r\n");
         return true;
     }
 
-    switch (ch->Position)
+    switch(ch->Position)
     {
     case POS_DEAD:
         ch->Echo("Lie still; you are DEAD.\r\n");
@@ -45,7 +46,7 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
          * I just know this is the path to a 12" 'if' statement.  :(
          * But two players asked for it already!  -- Furey
          */
-        if (!StrCmp(social->Name, "snore"))
+        if(!StrCmp(social->Name, "snore"))
         {
             break;
         }
@@ -59,16 +60,16 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
 
     OneArgument(argument, arg);
 
-    if (arg.empty())
+    if(arg.empty())
     {
         Act(AT_SOCIAL, social->OthersNoArg, ch, NULL, victim, TO_ROOM);
         Act(AT_SOCIAL, social->CharNoArg, ch, NULL, victim, TO_CHAR);
     }
-    else if (!(victim = GetCharacterInRoom(ch, arg)))
+    else if(!(victim = GetCharacterInRoom(ch, arg)))
     {
         ch->Echo("They aren't here.\r\n");
     }
-    else if (victim == ch)
+    else if(victim == ch)
     {
         Act(AT_SOCIAL, social->OthersAuto, ch, NULL, victim, TO_ROOM);
         Act(AT_SOCIAL, social->CharAuto, ch, NULL, victim, TO_CHAR);
@@ -79,23 +80,23 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
         Act(AT_SOCIAL, social->CharFound, ch, NULL, victim, TO_CHAR);
         Act(AT_SOCIAL, social->VictimFound, ch, NULL, victim, TO_VICT);
 
-        if (!IsNpc(ch) && IsNpc(victim)
-            && !IsAffectedBy(victim, Flag::Affect::Charm)
-            && IsAwake(victim)
-            && !IsBitSet(victim->Prototype->mprog.progtypes, ACT_PROG))
+        if(!IsNpc(ch) && IsNpc(victim)
+           && !IsAffectedBy(victim, Flag::Affect::Charm)
+           && IsAwake(victim)
+           && !IsBitSet(victim->Prototype->mprog.progtypes, ACT_PROG))
         {
-            switch (NumberBits(4))
+            switch(NumberBits(4))
             {
             case 0:
-                if (!ch->InRoom->Flags.test(Flag::Room::Safe)
-                    && IsEvil(ch))
+                if(!ch->InRoom->Flags.test(Flag::Room::Safe)
+                   && IsEvil(ch))
                 {
-                    if (!StrCmp(social->Name, "slap") || !StrCmp(social->Name, "punch"))
+                    if(!StrCmp(social->Name, "slap") || !StrCmp(social->Name, "punch"))
                     {
                         HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
                     }
                 }
-                else if (IsNeutral(ch))
+                else if(IsNeutral(ch))
                 {
                     Act(AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT);
                     Act(AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR);

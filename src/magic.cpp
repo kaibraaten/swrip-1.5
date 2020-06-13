@@ -31,6 +31,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "act.hpp"
 
 int pAbort = 0;
 
@@ -39,15 +40,15 @@ int pAbort = 0;
  */
 std::string spell_target_name;
 
-static int ParseDiceExpression(const Character* ch, int level, const std::string& expr);
+static int ParseDiceExpression(const Character *ch, int level, const std::string &expr);
 
-ch_ret spell_null(int sn, int level, Character* ch, void* vo)
+ch_ret spell_null(int sn, int level, Character *ch, void *vo)
 {
     return spell_notfound(sn, level, ch, vo);
 }
 
 /* don't remove, may look redundant, but is important */
-ch_ret spell_notfound(int sn, int level, Character* ch, void* vo)
+ch_ret spell_notfound(int sn, int level, Character *ch, void *vo)
 {
     ch->Echo("That's not a Force power!\r\n");
     return rNONE;
@@ -56,49 +57,49 @@ ch_ret spell_notfound(int sn, int level, Character* ch, void* vo)
 /*
  * Is immune to a damage type
  */
-bool IsImmuneToDamageType(const Character* ch, short damtype)
+bool IsImmuneToDamageType(const Character *ch, short damtype)
 {
-    switch (damtype)
+    switch(damtype)
     {
     case SD_FIRE:
-        if (ch->Immune[Flag::Ris::Fire])
+        if(ch->Immune[Flag::Ris::Fire])
             return true;
         break;
 
     case SD_COLD:
-        if (ch->Immune[Flag::Ris::Cold])
+        if(ch->Immune[Flag::Ris::Cold])
             return true;
         break;
 
     case SD_ELECTRICITY:
-        if (ch->Immune[Flag::Ris::Electricity])
+        if(ch->Immune[Flag::Ris::Electricity])
             return true;
         break;
 
     case SD_ENERGY:
-        if (ch->Immune[Flag::Ris::Energy])
+        if(ch->Immune[Flag::Ris::Energy])
             return true;
         break;
 
     case SD_ACID:
-        if (ch->Immune[Flag::Ris::Acid])
+        if(ch->Immune[Flag::Ris::Acid])
             return true;
         break;
 
     case SD_POISON:
-        if (ch->Immune[Flag::Ris::Poison])
+        if(ch->Immune[Flag::Ris::Poison])
             return true;
 
-        if (IsDroid(ch))
+        if(IsDroid(ch))
             return true;
 
         break;
 
     case SD_DRAIN:
-        if (ch->Immune[Flag::Ris::Drain])
+        if(ch->Immune[Flag::Ris::Drain])
             return true;
 
-        if (IsDroid(ch))
+        if(IsDroid(ch))
             return true;
 
         break;
@@ -119,39 +120,39 @@ bool IsImmuneToDamageType(const Character* ch, short damtype)
 /*
  * Fancy message handling for a successful casting              -Thoric
  */
-void SuccessfulCasting(std::shared_ptr<Skill> skill, Character* ch,
-    Character* victim, Object* obj)
+void SuccessfulCasting(std::shared_ptr<Skill> skill, Character *ch,
+                       Character *victim, Object *obj)
 {
     short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
     short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
     short chitme = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
 
-    if (skill->Target != TAR_CHAR_OFFENSIVE)
+    if(skill->Target != TAR_CHAR_OFFENSIVE)
     {
         chit = chitroom;
         chitme = chitroom;
     }
 
-    if (ch && ch != victim)
+    if(ch && ch != victim)
     {
-        if (!skill->Messages.Success.ToCaster.empty())
+        if(!skill->Messages.Success.ToCaster.empty())
         {
             Act(chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR);
         }
-        else if (skill->Type == SKILL_SPELL)
+        else if(skill->Type == SKILL_SPELL)
         {
             Act(chit, "Ok.", ch, NULL, NULL, TO_CHAR);
         }
     }
 
-    if (ch && !skill->Messages.Success.ToRoom.empty())
+    if(ch && !skill->Messages.Success.ToRoom.empty())
     {
         Act(chitroom, skill->Messages.Success.ToRoom, ch, obj, victim, TO_NOTVICT);
     }
 
-    if (ch && victim && !skill->Messages.Success.ToVictim.empty())
+    if(ch && victim && !skill->Messages.Success.ToVictim.empty())
     {
-        if (ch != victim)
+        if(ch != victim)
         {
             Act(chitme, skill->Messages.Success.ToVictim, ch, obj, victim, TO_VICT);
         }
@@ -160,7 +161,7 @@ void SuccessfulCasting(std::shared_ptr<Skill> skill, Character* ch,
             Act(chitme, skill->Messages.Success.ToVictim, ch, obj, victim, TO_CHAR);
         }
     }
-    else if (ch && ch == victim && skill->Type == SKILL_SPELL)
+    else if(ch && ch == victim && skill->Type == SKILL_SPELL)
     {
         Act(chitme, "Ok.", ch, NULL, NULL, TO_CHAR);
     }
@@ -169,39 +170,39 @@ void SuccessfulCasting(std::shared_ptr<Skill> skill, Character* ch,
 /*
  * Fancy message handling for a failed casting                  -Thoric
  */
-void FailedCasting(std::shared_ptr<Skill> skill, Character* ch,
-    Character* victim, Object* obj)
+void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
+                   Character *victim, Object *obj)
 {
     short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
     short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
     short chitme = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
 
-    if (skill->Target != TAR_CHAR_OFFENSIVE)
+    if(skill->Target != TAR_CHAR_OFFENSIVE)
     {
         chit = chitroom;
         chitme = chitroom;
     }
 
-    if (ch && ch != victim)
+    if(ch && ch != victim)
     {
-        if (!skill->Messages.Failure.ToCaster.empty())
+        if(!skill->Messages.Failure.ToCaster.empty())
         {
             Act(chit, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR);
         }
-        else if (skill->Type == SKILL_SPELL)
+        else if(skill->Type == SKILL_SPELL)
         {
             Act(chit, "You failed.", ch, NULL, NULL, TO_CHAR);
         }
     }
 
-    if (ch && !skill->Messages.Failure.ToRoom.empty())
+    if(ch && !skill->Messages.Failure.ToRoom.empty())
     {
         Act(chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT);
     }
 
-    if (ch && victim && !skill->Messages.Failure.ToVictim.empty())
+    if(ch && victim && !skill->Messages.Failure.ToVictim.empty())
     {
-        if (ch != victim)
+        if(ch != victim)
         {
             Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_VICT);
         }
@@ -210,13 +211,13 @@ void FailedCasting(std::shared_ptr<Skill> skill, Character* ch,
             Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_CHAR);
         }
     }
-    else if (ch && ch == victim)
+    else if(ch && ch == victim)
     {
-        if (!skill->Messages.Failure.ToCaster.empty())
+        if(!skill->Messages.Failure.ToCaster.empty())
         {
             Act(chitme, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR);
         }
-        else if (skill->Type == SKILL_SPELL)
+        else if(skill->Type == SKILL_SPELL)
         {
             Act(chitme, "You failed.", ch, NULL, NULL, TO_CHAR);
         }
@@ -226,49 +227,49 @@ void FailedCasting(std::shared_ptr<Skill> skill, Character* ch,
 /*
  * Fancy message handling for being immune to something         -Thoric
  */
-void ImmuneCasting(std::shared_ptr<Skill> skill, Character* ch,
-    Character* victim, Object* obj)
+void ImmuneCasting(std::shared_ptr<Skill> skill, Character *ch,
+                   Character *victim, Object *obj)
 {
     short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
     short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
     short chitme = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
 
-    if (skill->Target != TAR_CHAR_OFFENSIVE)
+    if(skill->Target != TAR_CHAR_OFFENSIVE)
     {
         chit = chitroom;
         chitme = chitroom;
     }
 
-    if (ch != nullptr)
+    if(ch != nullptr)
     {
-        if (ch != victim)
+        if(ch != victim)
         {
-            if (!skill->Messages.VictimImmune.ToCaster.empty())
+            if(!skill->Messages.VictimImmune.ToCaster.empty())
             {
                 Act(chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR);
             }
-            else if (!skill->Messages.Failure.ToCaster.empty())
+            else if(!skill->Messages.Failure.ToCaster.empty())
             {
                 Act(chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR);
             }
-            else if (skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL)
+            else if(skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL)
             {
                 Act(chit, "That appears to have no effect.", ch, NULL, NULL, TO_CHAR);
             }
         }
 
-        if (!skill->Messages.VictimImmune.ToRoom.empty())
+        if(!skill->Messages.VictimImmune.ToRoom.empty())
         {
             Act(chitroom, skill->Messages.VictimImmune.ToRoom, ch, obj, victim, TO_NOTVICT);
         }
-        else if (!skill->Messages.Failure.ToRoom.empty())
+        else if(!skill->Messages.Failure.ToRoom.empty())
         {
             Act(chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT);
         }
 
-        if (victim && !skill->Messages.VictimImmune.ToVictim.empty())
+        if(victim && !skill->Messages.VictimImmune.ToVictim.empty())
         {
-            if (ch != victim)
+            if(ch != victim)
             {
                 Act(chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_VICT);
             }
@@ -277,9 +278,9 @@ void ImmuneCasting(std::shared_ptr<Skill> skill, Character* ch,
                 Act(chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_CHAR);
             }
         }
-        else if (victim && !skill->Messages.Failure.ToVictim.empty())
+        else if(victim && !skill->Messages.Failure.ToVictim.empty())
         {
-            if (ch != victim)
+            if(ch != victim)
             {
                 Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_VICT);
             }
@@ -288,17 +289,17 @@ void ImmuneCasting(std::shared_ptr<Skill> skill, Character* ch,
                 Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_CHAR);
             }
         }
-        else if (ch == victim)
+        else if(ch == victim)
         {
-            if (!skill->Messages.VictimImmune.ToCaster.empty())
+            if(!skill->Messages.VictimImmune.ToCaster.empty())
             {
                 Act(chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR);
             }
-            else if (!skill->Messages.Failure.ToCaster.empty())
+            else if(!skill->Messages.Failure.ToCaster.empty())
             {
                 Act(chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR);
             }
-            else if (skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL)
+            else if(skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL)
             {
                 Act(chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR);
             }
@@ -309,29 +310,29 @@ void ImmuneCasting(std::shared_ptr<Skill> skill, Character* ch,
 /*
  * Make adjustments to saving throw based in RIS                -Thoric
  */
-int ModifySavingThrowBasedOnResistance(const Character* ch, int save_chance, int ris)
+int ModifySavingThrowBasedOnResistance(const Character *ch, int save_chance, int ris)
 {
     short modifier = 10;
 
-    if (ch->Immune[ris])
+    if(ch->Immune[ris])
         modifier -= 10;
 
-    if (IsDroid(ch) && (ris == Flag::Ris::Poison || ris == Flag::Ris::Drain))
+    if(IsDroid(ch) && (ris == Flag::Ris::Poison || ris == Flag::Ris::Drain))
         modifier -= 10;
 
-    if (IsDroid(ch) && ris == Flag::Ris::Magic)
+    if(IsDroid(ch) && ris == Flag::Ris::Magic)
         modifier -= 5;
 
-    if (ch->Resistant[ris])
+    if(ch->Resistant[ris])
         modifier -= 2;
 
-    if (ch->Susceptible[ris])
+    if(ch->Susceptible[ris])
         modifier += 2;
 
-    if (modifier <= 0)
+    if(modifier <= 0)
         return 1000;
 
-    if (modifier == 10)
+    if(modifier == 10)
         return save_chance;
 
     return (save_chance * modifier) / 10;
@@ -346,17 +347,17 @@ int ModifySavingThrowBasedOnResistance(const Character* ch, int save_chance, int
  * Used for spell dice parsing, ie: 3d8+L-6
  *
  */
-static int ParseDiceExpression(const Character* ch, int level, const std::string& argument)
+static int ParseDiceExpression(const Character *ch, int level, const std::string &argument)
 {
     int x, lop = 0, gop = 0, eop = 0;
     char operation = '\0';
-    char* sexp[2];
+    char *sexp[2];
     int total = 0, len = 0;
     char expr_buf[MAX_STRING_LENGTH];
-    char* expr = expr_buf;
+    char *expr = expr_buf;
 
     /* take care of nulls coming in */
-    if (argument.empty())
+    if(argument.empty())
     {
         return 0;
     }
@@ -364,7 +365,7 @@ static int ParseDiceExpression(const Character* ch, int level, const std::string
     strcpy(expr, argument.c_str());
 
     /* get rid of brackets if they surround the entire expresion */
-    if ((*expr == '(') && !strchr(expr + 1, '(') && expr[strlen(expr) - 1] == ')')
+    if((*expr == '(') && !strchr(expr + 1, '(') && expr[strlen(expr) - 1] == ')')
     {
         expr[strlen(expr) - 1] = '\0';
         expr++;
@@ -373,9 +374,9 @@ static int ParseDiceExpression(const Character* ch, int level, const std::string
     /* check if the expresion is just a number */
     len = strlen(expr);
 
-    if (len == 1 && isalpha(expr[0]))
+    if(len == 1 && isalpha(expr[0]))
     {
-        switch (expr[0])
+        switch(expr[0])
         {
         case 'L':
         case 'l':
@@ -427,26 +428,26 @@ static int ParseDiceExpression(const Character* ch, int level, const std::string
         }
     }
 
-    for (x = 0; x < len; ++x)
+    for(x = 0; x < len; ++x)
     {
-        if (!isdigit(expr[x]) && !isspace(expr[x]))
+        if(!isdigit(expr[x]) && !isspace(expr[x]))
         {
             break;
         }
     }
 
-    if (x == len)
+    if(x == len)
     {
         return(atoi(expr));
     }
 
     /* break it into 2 parts */
-    for (x = 0; x < (int)strlen(expr); ++x)
+    for(x = 0; x < (int)strlen(expr); ++x)
     {
-        switch (expr[x])
+        switch(expr[x])
         {
         case '^':
-            if (!total)
+            if(!total)
             {
                 eop = x;
             }
@@ -454,7 +455,7 @@ static int ParseDiceExpression(const Character* ch, int level, const std::string
 
         case '-':
         case '+':
-            if (!total)
+            if(!total)
             {
                 lop = x;
             }
@@ -465,7 +466,7 @@ static int ParseDiceExpression(const Character* ch, int level, const std::string
         case '%':
         case 'd':
         case 'D':
-            if (!total)
+            if(!total)
             {
                 gop = x;
             }
@@ -481,11 +482,11 @@ static int ParseDiceExpression(const Character* ch, int level, const std::string
         }
     }
 
-    if (lop)
+    if(lop)
     {
         x = lop;
     }
-    else if (gop)
+    else if(gop)
     {
         x = gop;
     }
@@ -497,12 +498,12 @@ static int ParseDiceExpression(const Character* ch, int level, const std::string
     operation = expr[x];
     expr[x] = '\0';
     sexp[0] = expr;
-    sexp[1] = (char*)(expr + x + 1);
+    sexp[1] = (char *)(expr + x + 1);
 
     /* work it out */
     total = ParseDiceExpression(ch, level, sexp[0]);
 
-    switch (operation)
+    switch(operation)
     {
     case '-':
         total -= ParseDiceExpression(ch, level, sexp[1]);
@@ -533,7 +534,7 @@ static int ParseDiceExpression(const Character* ch, int level, const std::string
     {
         int y = ParseDiceExpression(ch, level, sexp[1]), z = total;
 
-        for (x = 1; x < y; ++x, z *= total)
+        for(x = 1; x < y; ++x, z *= total)
             ;
 
         total = z;
@@ -545,7 +546,7 @@ static int ParseDiceExpression(const Character* ch, int level, const std::string
 }
 
 /* wrapper function so as not to destroy expr */
-int ParseDice(const Character* ch, int level, const std::string& expr)
+int ParseDice(const Character *ch, int level, const std::string &expr)
 {
     return ParseDiceExpression(ch, level, expr);
 }
@@ -554,11 +555,11 @@ int ParseDice(const Character* ch, int level, const std::string& expr)
  * Compute a saving throw.
  * Negative apply's make saving throw better.
  */
-bool SaveVsPoisonDeath(int level, const Character* victim)
+bool SaveVsPoisonDeath(int level, const Character *victim)
 {
     int save = 50 + (victim->TopLevel - level - victim->Saving.PoisonDeath) * 2;
 
-    if (IsDroid(victim))
+    if(IsDroid(victim))
     {
         save += 50;
     }
@@ -568,11 +569,11 @@ bool SaveVsPoisonDeath(int level, const Character* victim)
     return Chance(victim, save);
 }
 
-bool SaveVsWands(int level, const Character* victim)
+bool SaveVsWands(int level, const Character *victim)
 {
     int save = 0;
 
-    if (victim->Immune[Flag::Ris::Magic])
+    if(victim->Immune[Flag::Ris::Magic])
     {
         return true;
     }
@@ -583,11 +584,11 @@ bool SaveVsWands(int level, const Character* victim)
     return Chance(victim, save);
 }
 
-bool SaveVsParalyze(int level, const Character* victim)
+bool SaveVsParalyze(int level, const Character *victim)
 {
     int save = 50 + (victim->TopLevel - level - victim->Saving.ParaPetri) * 2;
 
-    if (IsDroid(victim))
+    if(IsDroid(victim))
     {
         save += 50;
     }
@@ -596,7 +597,7 @@ bool SaveVsParalyze(int level, const Character* victim)
     return Chance(victim, save);
 }
 
-bool SaveVsBreath(int level, const Character* victim)
+bool SaveVsBreath(int level, const Character *victim)
 {
     int save = 50 + (victim->TopLevel - level - victim->Saving.Breath) * 2;
 
@@ -605,23 +606,23 @@ bool SaveVsBreath(int level, const Character* victim)
     return Chance(victim, save);
 }
 
-bool SaveVsSpellStaff(int level, const Character* victim)
+bool SaveVsSpellStaff(int level, const Character *victim)
 {
     int save = 0;
 
-    if (victim->Immune[Flag::Ris::Magic])
+    if(victim->Immune[Flag::Ris::Magic])
     {
         return true;
     }
 
-    if (IsNpc(victim) && level > 10)
+    if(IsNpc(victim) && level > 10)
     {
         level -= 5;
     }
 
     save = 50 + (victim->TopLevel - level - victim->Saving.SpellStaff) * 2;
 
-    if (IsDroid(victim))
+    if(IsDroid(victim))
     {
         save += 20;
     }
@@ -633,16 +634,16 @@ bool SaveVsSpellStaff(int level, const Character* victim)
 /*
  * Locate targets.
  */
-void* LocateSpellTargets(Character* ch, const std::string& arg,
-    int sn, Character** victim, Object** obj)
+void *LocateSpellTargets(Character *ch, const std::string &arg,
+                         int sn, Character **victim, Object **obj)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
-    void* vo = nullptr;
+    void *vo = nullptr;
 
     *victim = nullptr;
     *obj = nullptr;
 
-    switch (skill->Target)
+    switch(skill->Target)
     {
     default:
         Log->Bug("%s: bad target for sn %d.", __FUNCTION__, sn);
@@ -652,11 +653,11 @@ void* LocateSpellTargets(Character* ch, const std::string& arg,
         break;
 
     case TAR_CHAR_OFFENSIVE:
-        if (arg.empty())
+        if(arg.empty())
         {
             *victim = GetFightingOpponent(ch);
 
-            if (*victim == nullptr)
+            if(*victim == nullptr)
             {
                 ch->Echo("Cast the spell on whom?\r\n");
                 return &pAbort;
@@ -666,52 +667,52 @@ void* LocateSpellTargets(Character* ch, const std::string& arg,
         {
             *victim = GetCharacterInRoom(ch, arg);
 
-            if (*victim == nullptr)
+            if(*victim == nullptr)
             {
                 ch->Echo("They aren't here.\r\n");
                 return &pAbort;
             }
         }
 
-        if (IsSafe(ch, *victim))
+        if(IsSafe(ch, *victim))
         {
             return &pAbort;
         }
 
-        if (ch == *victim)
+        if(ch == *victim)
         {
             ch->Echo("Cast this on yourself? Okay...\r\n");
         }
 
-        if (!IsNpc(ch))
+        if(!IsNpc(ch))
         {
-            if (!IsNpc(*victim))
+            if(!IsNpc(*victim))
             {
-                if (GetTimer(ch, TIMER_PKILLED) > 0)
+                if(GetTimer(ch, TIMER_PKILLED) > 0)
                 {
                     ch->Echo("You have been killed in the last 5 minutes.\r\n");
                     return &pAbort;
                 }
 
-                if (GetTimer(*victim, TIMER_PKILLED) > 0)
+                if(GetTimer(*victim, TIMER_PKILLED) > 0)
                 {
                     ch->Echo("This player has been killed in the last 5 minutes.\r\n");
                     return &pAbort;
                 }
             }
 
-            if (IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == *victim)
+            if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == *victim)
             {
                 ch->Echo("You can't do that on your own follower.\r\n");
                 return &pAbort;
             }
         }
 
-        vo = (void*)*victim;
+        vo = (void *)*victim;
         break;
 
     case TAR_CHAR_DEFENSIVE:
-        if (arg.empty())
+        if(arg.empty())
         {
             *victim = ch;
         }
@@ -719,28 +720,28 @@ void* LocateSpellTargets(Character* ch, const std::string& arg,
         {
             *victim = GetCharacterInRoom(ch, arg);
 
-            if (*victim == nullptr)
+            if(*victim == nullptr)
             {
                 ch->Echo("They aren't here.\r\n");
                 return &pAbort;
             }
         }
 
-        vo = (void*)*victim;
+        vo = (void *)*victim;
         break;
 
     case TAR_CHAR_SELF:
-        if (!arg.empty() && !NiftyIsName(arg, ch->Name))
+        if(!arg.empty() && !NiftyIsName(arg, ch->Name))
         {
             ch->Echo("You cannot cast this spell on another.\r\n");
             return &pAbort;
         }
 
-        vo = (void*)ch;
+        vo = (void *)ch;
         break;
 
     case TAR_OBJ_INV:
-        if (arg.empty())
+        if(arg.empty())
         {
             ch->Echo("What should the spell be cast upon?\r\n");
             return &pAbort;
@@ -748,13 +749,13 @@ void* LocateSpellTargets(Character* ch, const std::string& arg,
 
         *obj = GetCarriedObject(ch, arg);
 
-        if (*obj == nullptr)
+        if(*obj == nullptr)
         {
             ch->Echo("You are not carrying that.\r\n");
             return &pAbort;
         }
 
-        vo = (void*)*obj;
+        vo = (void *)*obj;
         break;
     }
 
@@ -764,26 +765,26 @@ void* LocateSpellTargets(Character* ch, const std::string& arg,
 /*
  * Cast spells at targets using a magical object.
  */
-ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, Object* obj)
+ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, Object *obj)
 {
-    void* vo = NULL;
+    void *vo = NULL;
     ch_ret retcode = rNONE;
     int levdiff = ch->TopLevel - level;
     std::shared_ptr<Skill> skill = GetSkill(sn);
     struct timeval time_used;
 
-    if (sn == -1)
+    if(sn == -1)
     {
         return retcode;
     }
 
-    if (!skill || !skill->SpellFunction)
+    if(!skill || !skill->SpellFunction)
     {
         Log->Bug("%s: bad sn %d.", __FUNCTION__, sn);
         return rERROR;
     }
 
-    if (ch->InRoom->Flags.test(Flag::Room::NoMagic))
+    if(ch->InRoom->Flags.test(Flag::Room::NoMagic))
     {
         SetCharacterColor(AT_MAGIC, ch);
         ch->Echo("Nothing seems to happen...\r\n");
@@ -794,12 +795,12 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
      * Basically this was added to cut down on level 5 players using level
      * 40 scrolls in battle too often ;)          -Thoric
      */
-    if ((skill->Target == TAR_CHAR_OFFENSIVE
+    if((skill->Target == TAR_CHAR_OFFENSIVE
         || NumberBits(7) == 1)      /* 1/128 chance if non-offensive */
-        && skill->Type != SKILL_HERB
-        && !Chance(ch, 95 + levdiff))
+       && skill->Type != SKILL_HERB
+       && !Chance(ch, 95 + levdiff))
     {
-        switch (NumberBits(2))
+        switch(NumberBits(2))
         {
         case 0:
             FailedCasting(skill, ch, victim, NULL);
@@ -808,7 +809,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
         case 1:
             Act(AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, TO_CHAR);
 
-            if (victim)
+            if(victim)
             {
                 Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_VICT);
             }
@@ -823,7 +824,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
         case 3:
             Act(AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, TO_CHAR);
 
-            if (victim)
+            if(victim)
             {
                 Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_VICT);
             }
@@ -837,7 +838,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
 
     spell_target_name = "";
 
-    switch (skill->Target)
+    switch(skill->Target)
     {
     default:
         Log->Bug("%s: bad target for sn %d.", __FUNCTION__, sn);
@@ -846,49 +847,49 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
     case TAR_IGNORE:
         vo = NULL;
 
-        if (victim)
+        if(victim)
         {
             spell_target_name = victim->Name;
         }
-        else if (obj)
+        else if(obj)
         {
             spell_target_name = obj->Name;
         }
         break;
 
     case TAR_CHAR_OFFENSIVE:
-        if (victim != ch)
+        if(victim != ch)
         {
-            if (!victim)
+            if(!victim)
             {
                 victim = GetFightingOpponent(ch);
             }
 
-            if (!victim || !IsNpc(victim))
+            if(!victim || !IsNpc(victim))
             {
                 ch->Echo("You can't do that.\r\n");
                 return rNONE;
             }
         }
 
-        if (ch != victim && IsSafe(ch, victim))
+        if(ch != victim && IsSafe(ch, victim))
         {
             return rNONE;
         }
 
-        vo = (void*)victim;
+        vo = (void *)victim;
         break;
 
     case TAR_CHAR_DEFENSIVE:
-        if (victim == NULL)
+        if(victim == NULL)
         {
             victim = ch;
         }
 
-        vo = (void*)victim;
+        vo = (void *)victim;
 
-        if (skill->Type != SKILL_HERB
-            && victim->Immune[Flag::Ris::Magic])
+        if(skill->Type != SKILL_HERB
+           && victim->Immune[Flag::Ris::Magic])
         {
             ImmuneCasting(skill, ch, victim, NULL);
             return rNONE;
@@ -896,10 +897,10 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
         break;
 
     case TAR_CHAR_SELF:
-        vo = (void*)ch;
+        vo = (void *)ch;
 
-        if (skill->Type != SKILL_HERB
-            && ch->Immune[Flag::Ris::Magic])
+        if(skill->Type != SKILL_HERB
+           && ch->Immune[Flag::Ris::Magic])
         {
             ImmuneCasting(skill, ch, victim, NULL);
             return rNONE;
@@ -907,13 +908,13 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
         break;
 
     case TAR_OBJ_INV:
-        if (!obj)
+        if(!obj)
         {
             ch->Echo("You can't do that.\r\n");
             return rNONE;
         }
 
-        vo = (void*)obj;
+        vo = (void *)obj;
         break;
     }
 
@@ -922,30 +923,30 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
     StopTimer(&time_used);
     UpdateNumberOfTimesUsed(&time_used, skill->UseRec);
 
-    if (retcode == rSPELL_FAILED)
+    if(retcode == rSPELL_FAILED)
     {
         retcode = rNONE;
     }
 
-    if (retcode == rCHAR_DIED || retcode == rERROR)
+    if(retcode == rCHAR_DIED || retcode == rERROR)
     {
         return retcode;
     }
 
-    if (CharacterDiedRecently(ch))
+    if(CharacterDiedRecently(ch))
     {
         return rCHAR_DIED;
     }
 
-    if (skill->Target == TAR_CHAR_OFFENSIVE
-        && victim != ch
-        && !CharacterDiedRecently(victim))
+    if(skill->Target == TAR_CHAR_OFFENSIVE
+       && victim != ch
+       && !CharacterDiedRecently(victim))
     {
-        std::list<Character*> copyOfCharacterList(ch->InRoom->Characters());
+        std::list<Character *> copyOfCharacterList(ch->InRoom->Characters());
 
-        for (Character* vch : copyOfCharacterList)
+        for(Character *vch : copyOfCharacterList)
         {
-            if (victim == vch && !victim->Fighting && victim->Master != ch)
+            if(victim == vch && !victim->Fighting && victim->Master != ch)
             {
                 retcode = HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
                 break;
@@ -963,20 +964,20 @@ ch_ret CastSpellWithObject(int sn, int level, Character* ch, Character* victim, 
  /*
   * saving throw check                                           -Thoric
   */
-bool CheckSavingThrow(int sn, int level, const Character* ch, const Character* victim)
+bool CheckSavingThrow(int sn, int level, const Character *ch, const Character *victim)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
     bool saved = false;
 
-    if (SPELL_FLAG(skill, SF_PKSENSITIVE)
-        && !IsNpc(ch) && !IsNpc(victim))
+    if(SPELL_FLAG(skill, SF_PKSENSITIVE)
+       && !IsNpc(ch) && !IsNpc(victim))
     {
         level /= 2;
     }
 
-    if (skill->Saves)
+    if(skill->Saves)
     {
-        switch (skill->Saves)
+        switch(skill->Saves)
         {
         case SS_POISON_DEATH:
             saved = SaveVsPoisonDeath(level, victim);
@@ -1003,9 +1004,9 @@ bool CheckSavingThrow(int sn, int level, const Character* ch, const Character* v
     return saved;
 }
 
-int FindSpell(const Character* ch, const std::string& name, bool know)
+int FindSpell(const Character *ch, const std::string &name, bool know)
 {
-    if (IsNpc(ch) || !know)
+    if(IsNpc(ch) || !know)
     {
         return BSearchSkill(name, gsn_first_spell, gsn_first_skill - 1);
     }

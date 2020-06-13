@@ -3,22 +3,23 @@
 #include "character.hpp"
 #include "room.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 /* Prints the argument to all the rooms around the mobile */
 void do_mpasound(Character *ch, std::string argument)
 {
     assert(ch != nullptr);
 
-    if (IsAffectedBy(ch, Flag::Affect::Charm))
+    if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
-    if (!IsNpc(ch))
+    if(!IsNpc(ch))
     {
         ch->Echo("Huh?\r\n");
         return;
     }
 
-    if (argument.empty())
+    if(argument.empty())
     {
         ProgBug("Mpasound - No argument", ch);
         return;
@@ -28,10 +29,10 @@ void do_mpasound(Character *ch, std::string argument)
     ch->Flags.reset(Flag::Mob::Secretive);
     auto was_in_room = ch->InRoom;
 
-    for (auto pexit : was_in_room->Exits())
+    for(auto pexit : was_in_room->Exits())
     {
-        if (pexit->ToRoom
-            && pexit->ToRoom != was_in_room)
+        if(pexit->ToRoom
+           && pexit->ToRoom != was_in_room)
         {
             ch->InRoom = pexit->ToRoom;
             MOBtrigger = false;

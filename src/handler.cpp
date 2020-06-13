@@ -40,6 +40,7 @@
 #include "exit.hpp"
 #include "home.hpp"
 #include "repos/homerepository.hpp"
+#include "act.hpp"
 
 extern Character *gch_prev;
 
@@ -53,7 +54,7 @@ int cur_obj_serial = 0;
 bool cur_obj_extracted = false;
 obj_ret global_objcode = rNONE;
 
-static std::list<Object*> ExtractedObjectQueue;
+static std::list<Object *> ExtractedObjectQueue;
 
 class ExtractedCharacter
 {
@@ -74,23 +75,23 @@ static void ExplodeRoom_2(std::shared_ptr<Room> room, int blast);
 
 void Explode(Object *obj)
 {
-    if (!obj->ArmedBy.empty())
+    if(!obj->ArmedBy.empty())
     {
         std::shared_ptr<Room> room;
         Character *xch = NULL;
         bool held = false;
         Object *objcont = obj;
 
-        while (objcont->InObject && !obj->CarriedBy)
+        while(objcont->InObject && !obj->CarriedBy)
         {
             objcont = objcont->InObject;
         }
 
-        for (xch = FirstCharacter; xch; xch = xch->Next)
+        for(xch = FirstCharacter; xch; xch = xch->Next)
         {
-            if (!IsNpc(xch) && NiftyIsName(obj->ArmedBy, xch->Name))
+            if(!IsNpc(xch) && NiftyIsName(obj->ArmedBy, xch->Name))
             {
-                if (objcont->CarriedBy)
+                if(objcont->CarriedBy)
                 {
                     Act(AT_WHITE, "$p EXPLODES in $n's hands!",
                         objcont->CarriedBy, obj, NULL, TO_ROOM);
@@ -99,7 +100,7 @@ void Explode(Object *obj)
                     room = xch->InRoom;
                     held = true;
                 }
-                else if (objcont->InRoom)
+                else if(objcont->InRoom)
                 {
                     room = objcont->InRoom;
                 }
@@ -108,9 +109,9 @@ void Explode(Object *obj)
                     room = NULL;
                 }
 
-                if (room)
+                if(room)
                 {
-                    if (!held && !room->Characters().empty())
+                    if(!held && !room->Characters().empty())
                     {
                         Character *ch = room->Characters().front();
                         Act(AT_WHITE, "$p EXPLODES!", ch, obj, NULL, TO_ROOM);
@@ -135,25 +136,25 @@ static void ExplodeRoom(Object *obj, Character *xch, std::shared_ptr<Room> room)
 
 static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> room, int blast)
 {
-    if (room->Flags.test(BFSMark))
+    if(room->Flags.test(BFSMark))
         return;
 
     room->Flags.set(BFSMark);
 
-    std::list<Character*> copyOfCharacterList(room->Characters());
+    std::list<Character *> copyOfCharacterList(room->Characters());
 
-    for (Character *rch : copyOfCharacterList)
+    for(Character *rch : copyOfCharacterList)
     {
         Act(AT_WHITE, "The shockwave from a massive explosion rips through your body!",
             room->Characters().front(), obj, NULL, TO_ROOM);
         int dam = GetRandomNumberFromRange(obj->Value[OVAL_EXPLOSIVE_MIN_DMG], obj->Value[OVAL_EXPLOSIVE_MAX_DMG]);
         InflictDamage(rch, rch, dam, TYPE_UNDEFINED);
 
-        if (!CharacterDiedRecently(rch))
+        if(!CharacterDiedRecently(rch))
         {
-            if (IsNpc(rch))
+            if(IsNpc(rch))
             {
-                if (rch->Flags.test(Flag::Mob::Sentinel))
+                if(rch->Flags.test(Flag::Mob::Sentinel))
                 {
                     rch->WasSentinel = rch->InRoom;
                     rch->Flags.reset(Flag::Mob::Sentinel);
@@ -165,29 +166,29 @@ static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> roo
         }
     }
 
-    std::list<Object*> objectsToScrap = Filter(room->Objects(),
-        [obj](auto robj)
-    {
-        return robj != obj
-            && robj->ItemType != ITEM_SPACECRAFT
-            && robj->ItemType != ITEM_SCRAPS
-            && robj->ItemType != ITEM_CORPSE_NPC
-            && robj->ItemType != ITEM_CORPSE_PC
-            && robj->ItemType != ITEM_DROID_CORPSE;
-    });
+    std::list<Object *> objectsToScrap = Filter(room->Objects(),
+                                                [obj](auto robj)
+                                                {
+                                                    return robj != obj
+                                                        && robj->ItemType != ITEM_SPACECRAFT
+                                                        && robj->ItemType != ITEM_SCRAPS
+                                                        && robj->ItemType != ITEM_CORPSE_NPC
+                                                        && robj->ItemType != ITEM_CORPSE_PC
+                                                        && robj->ItemType != ITEM_DROID_CORPSE;
+                                                });
 
-    for (Object *robj : objectsToScrap)
+    for(Object *robj : objectsToScrap)
     {
         MakeScraps(robj);
     }
 
     /* other rooms */
-    for (std::shared_ptr<Exit> pexit : room->Exits())
+    for(std::shared_ptr<Exit> pexit : room->Exits())
     {
-        if (pexit->ToRoom
-            && pexit->ToRoom != room)
+        if(pexit->ToRoom
+           && pexit->ToRoom != room)
         {
-            if (blast > 0)
+            if(blast > 0)
             {
                 int roomblast = blast - 1;
                 ExplodeRoom_1(obj, xch, pexit->ToRoom, roomblast);
@@ -195,7 +196,7 @@ static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> roo
             else
             {
                 EchoToRoom(AT_WHITE, pexit->ToRoom,
-                    "You hear a loud EXPLOSION not to far from here.");
+                           "You hear a loud EXPLOSION not to far from here.");
             }
         }
     }
@@ -203,18 +204,18 @@ static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> roo
 
 static void ExplodeRoom_2(std::shared_ptr<Room> room, int blast)
 {
-    if (!room->Flags.test(BFSMark))
+    if(!room->Flags.test(BFSMark))
     {
         return;
     }
 
     room->Flags.reset(BFSMark);
 
-    if (blast > 0)
+    if(blast > 0)
     {
-        for (std::shared_ptr<Exit> pexit : room->Exits())
+        for(std::shared_ptr<Exit> pexit : room->Exits())
         {
-            if (pexit->ToRoom && pexit->ToRoom != room)
+            if(pexit->ToRoom && pexit->ToRoom != room)
             {
                 int roomblast = blast - 1;
                 ExplodeRoom_2(pexit->ToRoom, roomblast);
@@ -238,9 +239,9 @@ long GetRequiredXpForLevel(short level)
  */
 bool CharacterCanTakePrototype(const Character *ch)
 {
-    if (IsImmortal(ch))
+    if(IsImmortal(ch))
         return true;
-    else if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Prototype))
+    else if(IsNpc(ch) && ch->Flags.test(Flag::Mob::Prototype))
         return true;
     else
         return false;
@@ -248,7 +249,7 @@ bool CharacterCanTakePrototype(const Character *ch)
 
 static void ApplySkillAffect(Character *ch, int sn, int mod)
 {
-    if (!IsNpc(ch) && ch->PCData->Learned[sn] > 0)
+    if(!IsNpc(ch) && ch->PCData->Learned[sn] > 0)
     {
         ch->PCData->Learned[sn] =
             (ch->PCData->Learned[sn] >= 100 ? 100 : urange(1, ch->PCData->Learned[sn] + mod, 100));
@@ -264,7 +265,7 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
     std::shared_ptr<Skill> skill;
     ch_ret retcode = rNONE;
 
-    if (fAdd)
+    if(fAdd)
     {
         SetBit(ch->AffectedBy, paf->AffectedBy);
     }
@@ -277,12 +278,12 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
          * the spell after the duration... but would have to store
          * the removed spell's information somewhere...           -Thoric
          */
-        if ((paf->Location % REVERSE_APPLY) == APPLY_REMOVESPELL)
+        if((paf->Location % REVERSE_APPLY) == APPLY_REMOVESPELL)
         {
             return;
         }
 
-        switch (paf->Location % REVERSE_APPLY)
+        switch(paf->Location % REVERSE_APPLY)
         {
         case APPLY_AFFECT:
             RemoveBit(ch->AffectedBy, mod);
@@ -312,7 +313,7 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
         mod = 0 - mod;
     }
 
-    switch (paf->Location % REVERSE_APPLY)
+    switch(paf->Location % REVERSE_APPLY)
     {
     default:
         Log->Bug("%s: unknown location %d.", __FUNCTION__, paf->Location);
@@ -352,7 +353,7 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
     case APPLY_SEX:
         ch->Sex = (SexType)((ch->Sex + mod) % 3);
 
-        if (ch->Sex < SEX_NEUTRAL)
+        if(ch->Sex < SEX_NEUTRAL)
         {
             ch->Sex = (SexType)((int)ch->Sex + 2);
         }
@@ -449,21 +450,21 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
         break;
 
     case APPLY_FULL:
-        if (!IsNpc(ch))
+        if(!IsNpc(ch))
         {
             ch->PCData->Condition[COND_FULL] = urange(0, ch->PCData->Condition[COND_FULL] + mod, 48);
         }
         break;
 
     case APPLY_THIRST:
-        if (!IsNpc(ch))
+        if(!IsNpc(ch))
         {
             ch->PCData->Condition[COND_THIRST] = urange(0, ch->PCData->Condition[COND_THIRST] + mod, 48);
         }
         break;
 
     case APPLY_DRUNK:
-        if (!IsNpc(ch))
+        if(!IsNpc(ch))
         {
             ch->PCData->Condition[COND_DRUNK] = urange(0, ch->PCData->Condition[COND_DRUNK] + mod, 48);
         }
@@ -478,7 +479,7 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
         break;
 
     case APPLY_STRIPSN:
-        if (IS_VALID_SN(mod))
+        if(IS_VALID_SN(mod))
         {
             StripAffect(ch, mod);
         }
@@ -491,22 +492,22 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
         /* spell cast upon wear/removal of an object      -Thoric */
     case APPLY_WEARSPELL:
     case APPLY_REMOVESPELL:
-        if (ch->InRoom->Flags.test(Flag::Room::NoMagic)
-            || ch->Immune.test(Flag::Ris::Magic)
-            || saving_char == ch               /* so save/quit doesn't trigger */
-            || loading_char == ch)    /* so loading doesn't trigger */
+        if(ch->InRoom->Flags.test(Flag::Room::NoMagic)
+           || ch->Immune.test(Flag::Ris::Magic)
+           || saving_char == ch               /* so save/quit doesn't trigger */
+           || loading_char == ch)    /* so loading doesn't trigger */
         {
             return;
         }
 
         mod = abs(mod);
 
-        if (IS_VALID_SN(mod)
-            && (skill = SkillTable[mod]) != NULL
-            && skill->Type == SKILL_SPELL)
+        if(IS_VALID_SN(mod)
+           && (skill = SkillTable[mod]) != NULL
+           && skill->Type == SKILL_SPELL)
         {
-            if ((retcode = skill->SpellFunction(mod, GetAbilityLevel(ch, FORCE_ABILITY), ch, ch))
-                == rCHAR_DIED || CharacterDiedRecently(ch))
+            if((retcode = skill->SpellFunction(mod, GetAbilityLevel(ch, FORCE_ABILITY), ch, ch))
+               == rCHAR_DIED || CharacterDiedRecently(ch))
             {
                 return;
             }
@@ -617,14 +618,14 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
      * Check for weapon wielding.
      * Guard against recursion (for weapons with affects).
      */
-    if (!IsNpc(ch)
-        && saving_char != ch
-        && (wield = GetEquipmentOnCharacter(ch, WEAR_WIELD)) != NULL
-        && GetObjectWeight(wield) > StrengthBonus[GetCurrentStrength(ch)].Wield)
+    if(!IsNpc(ch)
+       && saving_char != ch
+       && (wield = GetEquipmentOnCharacter(ch, WEAR_WIELD)) != NULL
+       && GetObjectWeight(wield) > StrengthBonus[GetCurrentStrength(ch)].Wield)
     {
         static int depth;
 
-        if (depth == 0)
+        if(depth == 0)
         {
             depth++;
             Act(AT_ACTION, "You are too weak to wield $p any longer.",
@@ -661,7 +662,7 @@ void AffectToCharacter(Character *ch, std::shared_ptr<Affect> paf)
  */
 void RemoveAffect(Character *ch, std::shared_ptr<Affect> paf)
 {
-    if (ch->Affects().empty())
+    if(ch->Affects().empty())
     {
         Log->Bug("%s: no affect.", __FUNCTION__);
         return;
@@ -677,12 +678,12 @@ void RemoveAffect(Character *ch, std::shared_ptr<Affect> paf)
 void StripAffect(Character *ch, int sn)
 {
     auto affectsToRemove = Filter(ch->Affects(),
-        [sn](const auto affect)
-    {
-        return affect->Type == sn;
-    });
+                                  [sn](const auto affect)
+                                  {
+                                      return affect->Type == sn;
+                                  });
 
-    for (auto affect : affectsToRemove)
+    for(auto affect : affectsToRemove)
     {
         RemoveAffect(ch, affect);
     }
@@ -695,13 +696,13 @@ void StripAffect(Character *ch, int sn)
  */
 void JoinAffect(Character *ch, std::shared_ptr<Affect> paf)
 {
-    for (auto paf_old : ch->Affects())
+    for(auto paf_old : ch->Affects())
     {
-        if (paf_old->Type == paf->Type)
+        if(paf_old->Type == paf->Type)
         {
             paf->Duration = umin(1000000, paf->Duration + paf_old->Duration);
 
-            if (paf->Modifier)
+            if(paf->Modifier)
             {
                 paf->Modifier = umin(5000, paf->Modifier + paf_old->Modifier);
             }
@@ -728,15 +729,15 @@ void CharacterFromRoom(Character *ch)
 
     Object *obj = nullptr;
 
-    if (!IsNpc(ch))
+    if(!IsNpc(ch))
     {
         --ch->InRoom->Area->NumberOfPlayers;
     }
 
-    if ((obj = GetEquipmentOnCharacter(ch, WEAR_LIGHT)) != NULL
-        && obj->ItemType == ITEM_LIGHT
-        && obj->Value[OVAL_LIGHT_POWER] != 0
-        && ch->InRoom->Light > 0)
+    if((obj = GetEquipmentOnCharacter(ch, WEAR_LIGHT)) != NULL
+       && obj->ItemType == ITEM_LIGHT
+       && obj->Value[OVAL_LIGHT_POWER] != 0
+       && ch->InRoom->Light > 0)
     {
         --ch->InRoom->Light;
     }
@@ -744,8 +745,8 @@ void CharacterFromRoom(Character *ch)
     ch->InRoom->Remove(ch);
     ch->InRoom = nullptr;
 
-    if (!IsNpc(ch)
-        && GetTimer(ch, TIMER_SHOVEDRAG) > 0)
+    if(!IsNpc(ch)
+       && GetTimer(ch, TIMER_SHOVEDRAG) > 0)
         RemoveTimer(ch, TIMER_SHOVEDRAG);
 }
 
@@ -761,29 +762,29 @@ void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex)
     pRoomIndex->Add(ch);
     ch->InRoom = pRoomIndex;
 
-    if (!IsNpc(ch))
-        if (++ch->InRoom->Area->NumberOfPlayers > ch->InRoom->Area->MaxPlayers)
+    if(!IsNpc(ch))
+        if(++ch->InRoom->Area->NumberOfPlayers > ch->InRoom->Area->MaxPlayers)
             ch->InRoom->Area->MaxPlayers = ch->InRoom->Area->NumberOfPlayers;
 
-    if ((obj = GetEquipmentOnCharacter(ch, WEAR_LIGHT)) != NULL
-        && obj->ItemType == ITEM_LIGHT
-        && obj->Value[OVAL_LIGHT_POWER] != 0)
+    if((obj = GetEquipmentOnCharacter(ch, WEAR_LIGHT)) != NULL
+       && obj->ItemType == ITEM_LIGHT
+       && obj->Value[OVAL_LIGHT_POWER] != 0)
         ++ch->InRoom->Light;
 
-    if (!IsNpc(ch)
-        && ch->InRoom->Flags.test(Flag::Room::Safe)
-        && GetTimer(ch, TIMER_SHOVEDRAG) <= 0)
+    if(!IsNpc(ch)
+       && ch->InRoom->Flags.test(Flag::Room::Safe)
+       && GetTimer(ch, TIMER_SHOVEDRAG) <= 0)
         AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, SUB_NONE);  /*-30 Seconds-*/
 
       /*
        * Delayed Teleport rooms                                     -Thoric
        * Should be the last thing checked in this function
        */
-    if (ch->InRoom->Flags.test(Flag::Room::Teleport)
-        && ch->InRoom->TeleDelay > 0)
+    if(ch->InRoom->Flags.test(Flag::Room::Teleport)
+       && ch->InRoom->TeleDelay > 0)
     {
-        for (auto tele = FirstTeleport; tele; tele = tele->Next)
-            if (tele->FromRoom == pRoomIndex)
+        for(auto tele = FirstTeleport; tele; tele = tele->Next)
+            if(tele->FromRoom == pRoomIndex)
                 return;
 
         std::shared_ptr<TeleportData> tele = std::make_shared<TeleportData>();
@@ -804,26 +805,26 @@ Object *ObjectToCharacter(Object *obj, Character *ch)
     int onum = GetObjectCount(obj);
     int wear_loc = obj->WearLoc;
 
-    if (obj->Flags.test(Flag::Obj::Prototype))
+    if(obj->Flags.test(Flag::Obj::Prototype))
     {
-        if (!IsImmortal(ch)
-            && (IsNpc(ch) && !ch->Flags.test(Flag::Mob::Prototype)))
+        if(!IsImmortal(ch)
+           && (IsNpc(ch) && !ch->Flags.test(Flag::Mob::Prototype)))
         {
             return ObjectToRoom(obj, ch->InRoom);
         }
     }
 
-    if (loading_char == ch)
+    if(loading_char == ch)
     {
         int x = 0;
 
-        for (x = 0; x < MAX_WEAR; x++)
+        for(x = 0; x < MAX_WEAR; x++)
         {
             int y = 0;
 
-            for (y = 0; y < MAX_LAYERS; y++)
+            for(y = 0; y < MAX_LAYERS; y++)
             {
-                if (save_equipment[x][y] == obj)
+                if(save_equipment[x][y] == obj)
                 {
                     skipgroup = true;
                     break;
@@ -832,13 +833,13 @@ Object *ObjectToCharacter(Object *obj, Character *ch)
         }
     }
 
-    if (!skipgroup)
+    if(!skipgroup)
     {
-        for (Object *otmp : ch->Objects())
+        for(Object *otmp : ch->Objects())
         {
             oret = GroupObject(otmp, obj);
 
-            if (oret == otmp)
+            if(oret == otmp)
             {
                 grouped = true;
                 break;
@@ -846,7 +847,7 @@ Object *ObjectToCharacter(Object *obj, Character *ch)
         }
     }
 
-    if (!grouped)
+    if(!grouped)
     {
         ch->Add(obj);
         obj->CarriedBy = ch;
@@ -854,12 +855,12 @@ Object *ObjectToCharacter(Object *obj, Character *ch)
         obj->InObject = NULL;
     }
 
-    if (wear_loc == WEAR_NONE)
+    if(wear_loc == WEAR_NONE)
     {
         ch->CarryNumber += onum;
         ch->CarryWeight += oweight;
     }
-    else if (!obj->Flags.test(Flag::Obj::Magic) && wear_loc != WEAR_FLOATING)
+    else if(!obj->Flags.test(Flag::Obj::Magic) && wear_loc != WEAR_FLOATING)
     {
         ch->CarryWeight += oweight;
     }
@@ -875,16 +876,16 @@ void ObjectFromCharacter(Object *obj)
     Character *ch = obj->CarriedBy;
     assert(ch != nullptr);
 
-    if (obj->WearLoc != WEAR_NONE)
+    if(obj->WearLoc != WEAR_NONE)
         UnequipCharacter(ch, obj);
 
     /* obj may drop during unequip... */
-    if (!obj->CarriedBy)
+    if(!obj->CarriedBy)
         return;
 
     ch->Remove(obj);
 
-    if (obj->Flags.test(Flag::Obj::Covering) && !obj->Objects().empty())
+    if(obj->Flags.test(Flag::Obj::Covering) && !obj->Objects().empty())
         EmptyObjectContents(obj, NULL, NULL);
 
     obj->InRoom = NULL;
@@ -895,17 +896,17 @@ void ObjectFromCharacter(Object *obj)
 
 int CountCharactersOnObject(const Object *obj)
 {
-    if (obj->InRoom == NULL)
+    if(obj->InRoom == NULL)
     {
         return 0;
     }
 
-    const std::list<Character*> &people = obj->InRoom->Characters();
+    const std::list<Character *> &people = obj->InRoom->Characters();
     int count = count_if(std::begin(people), std::end(people),
-        [obj](auto fch)
-    {
-        return fch->On == obj;
-    });
+                         [obj](auto fch)
+                         {
+                             return fch->On == obj;
+                         });
 
     return count;
 }
@@ -915,10 +916,10 @@ int CountCharactersOnObject(const Object *obj)
  */
 int GetObjectArmorClass(const Object *obj, int iWear)
 {
-    if (obj->ItemType != ITEM_ARMOR)
+    if(obj->ItemType != ITEM_ARMOR)
         return 0;
 
-    switch (iWear)
+    switch(iWear)
     {
     case WEAR_BODY:
         return 3 * obj->Value[OVAL_ARMOR_CONDITION];
@@ -978,13 +979,13 @@ int GetObjectArmorClass(const Object *obj, int iWear)
 /*
  * Count occurrences of an obj in a list.
  */
-int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj, const std::list<Object*> &list)
+int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj, const std::list<Object *> &list)
 {
     return Count(list,
-        [protoobj](const auto obj)
-    {
-        return obj->Prototype == protoobj;
-    });
+                 [protoobj](const auto obj)
+                 {
+                     return obj->Prototype == protoobj;
+                 });
 }
 
 /*
@@ -999,16 +1000,16 @@ void ObjectFromRoom(Object *obj)
 
     in_room->Remove(obj);
 
-    if (obj->Flags.test(Flag::Obj::Covering) && !obj->Objects().empty())
+    if(obj->Flags.test(Flag::Obj::Covering) && !obj->Objects().empty())
         EmptyObjectContents(obj, NULL, obj->InRoom);
 
-    if (obj->ItemType == ITEM_FIRE)
+    if(obj->ItemType == ITEM_FIRE)
         obj->InRoom->Light -= obj->Count;
 
     obj->CarriedBy = NULL;
     obj->InRoom = NULL;
 
-    if (obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0)
+    if(obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0)
         WriteCorpses(NULL, obj->ShortDescr.c_str() + 14);
 }
 
@@ -1020,13 +1021,13 @@ Object *ObjectToRoom(Object *obj, std::shared_ptr<Room> pRoomIndex)
     short count = obj->Count;
     short item_type = obj->ItemType;
 
-    for (Object *otmp : pRoomIndex->Objects())
+    for(Object *otmp : pRoomIndex->Objects())
     {
         Object *oret = GroupObject(otmp, obj);
 
-        if (oret == otmp)
+        if(oret == otmp)
         {
-            if (item_type == ITEM_FIRE)
+            if(item_type == ITEM_FIRE)
             {
                 pRoomIndex->Light += count;
             }
@@ -1040,14 +1041,14 @@ Object *ObjectToRoom(Object *obj, std::shared_ptr<Room> pRoomIndex)
     obj->CarriedBy = NULL;
     obj->InObject = NULL;
 
-    if (item_type == ITEM_FIRE)
+    if(item_type == ITEM_FIRE)
         pRoomIndex->Light += count;
 
     falling++;
     ObjectFallIfNoFloor(obj, false);
     falling--;
 
-    if (obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0)
+    if(obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0)
         WriteCorpses(NULL, obj->ShortDescr.c_str() + 14);
 
     return obj;
@@ -1058,27 +1059,27 @@ Object *ObjectToRoom(Object *obj, std::shared_ptr<Room> pRoomIndex)
  */
 Object *ObjectToObject(Object *obj, Object *obj_to)
 {
-    if (obj == obj_to)
+    if(obj == obj_to)
     {
         Log->Bug("Obj_to_obj: trying to put object inside itself: vnum %ld",
-            obj->Prototype->Vnum);
+                 obj->Prototype->Vnum);
         return obj;
     }
     /* Big carry_weight bug fix here by Thoric */
-    if (obj->CarriedBy != obj_to->CarriedBy)
+    if(obj->CarriedBy != obj_to->CarriedBy)
     {
-        if (obj->CarriedBy)
+        if(obj->CarriedBy)
             obj->CarriedBy->CarryWeight -= GetObjectWeight(obj);
 
-        if (obj_to->CarriedBy && obj_to->WearLoc != WEAR_FLOATING)
+        if(obj_to->CarriedBy && obj_to->WearLoc != WEAR_FLOATING)
             obj_to->CarriedBy->CarryWeight += GetObjectWeight(obj);
     }
 
-    for (Object *otmp : obj_to->Objects())
+    for(Object *otmp : obj_to->Objects())
     {
         Object *oret = GroupObject(otmp, obj);
 
-        if (oret == otmp)
+        if(oret == otmp)
         {
             return oret;
         }
@@ -1102,16 +1103,16 @@ void ObjectFromObject(Object *obj)
 
     obj_from->Remove(obj);
 
-    if (obj->Flags.test(Flag::Obj::Covering) && !obj->Objects().empty())
+    if(obj->Flags.test(Flag::Obj::Covering) && !obj->Objects().empty())
         EmptyObjectContents(obj, obj->InObject, NULL);
 
     obj->InObject = NULL;
     obj->InRoom = NULL;
     obj->CarriedBy = NULL;
 
-    for (; obj_from; obj_from = obj_from->InObject)
+    for(; obj_from; obj_from = obj_from->InObject)
     {
-        if (obj_from->CarriedBy && obj_from->WearLoc != WEAR_FLOATING)
+        if(obj_from->CarriedBy && obj_from->WearLoc != WEAR_FLOATING)
         {
             obj_from->CarriedBy->CarryWeight -= GetObjectWeight(obj);
         }
@@ -1125,41 +1126,41 @@ void ExtractObject(Object *obj)
 {
     assert(obj != nullptr);
 
-    if (IsObjectExtracted(obj))
+    if(IsObjectExtracted(obj))
     {
         Log->Bug("ExtractObject: obj %ld already extracted!", obj->Prototype->Vnum);
         return;
     }
 
-    if (obj->ItemType == ITEM_PORTAL)
+    if(obj->ItemType == ITEM_PORTAL)
         RemovePortal(obj);
 
-    if (obj->CarriedBy)
+    if(obj->CarriedBy)
         ObjectFromCharacter(obj);
     else
-        if (obj->InRoom)
+        if(obj->InRoom)
             ObjectFromRoom(obj);
         else
-            if (obj->InObject)
+            if(obj->InObject)
                 ObjectFromObject(obj);
 
-    std::list<Object*> contents(obj->Objects());
+    std::list<Object *> contents(obj->Objects());
 
-    for (Object *obj_content : contents)
+    for(Object *obj_content : contents)
     {
         ExtractObject(obj_content);
     }
 
     auto affects(obj->Affects());
 
-    for (auto paf : affects)
+    for(auto paf : affects)
     {
         obj->Remove(paf);
     }
 
     auto extraDescriptions = obj->ExtraDescriptions();
 
-    for (auto ed : extraDescriptions)
+    for(auto ed : extraDescriptions)
     {
         obj->Remove(ed);
     }
@@ -1173,11 +1174,11 @@ void ExtractObject(Object *obj)
     numobjsloaded -= obj->Count;
     --physicalobjects;
 
-    if (obj->Serial == cur_obj)
+    if(obj->Serial == cur_obj)
     {
         cur_obj_extracted = true;
 
-        if (global_objcode == rNONE)
+        if(global_objcode == rNONE)
             global_objcode = rOBJ_EXTRACTED;
     }
 }
@@ -1191,55 +1192,55 @@ void ExtractCharacter(Character *ch, bool fPull)
     assert(ch->InRoom != nullptr);
     assert(ch != supermob);
 
-    if (CharacterDiedRecently(ch))
+    if(CharacterDiedRecently(ch))
     {
         Log->Bug("ExtractCharacter: %s already died!", ch->Name.c_str());
         return;
     }
 
-    if (ch == cur_char)
+    if(ch == cur_char)
         cur_char_died = true;
 
     /* shove onto extraction queue */
     QueueExtractedCharacter(ch, fPull);
 
-    if (gch_prev == ch)
+    if(gch_prev == ch)
         gch_prev = ch->Previous;
 
-    if (fPull && !ch->Flags.test(Flag::Mob::Polymorphed))
+    if(fPull && !ch->Flags.test(Flag::Mob::Polymorphed))
         DieFollower(ch);
 
     StopFighting(ch, true);
 
-    if (IsInArena(ch))
+    if(IsInArena(ch))
     {
         ch->HitPoints.Current = ch->HitPoints.Max;
         ch->Mana.Current = ch->Mana.Max;
         ch->Fatigue.Current = ch->Fatigue.Max;
     }
 
-    if (ch->Mount)
+    if(ch->Mount)
     {
         ch->Mount->Flags.reset(Flag::Mob::Mounted);
         ch->Mount = nullptr;
         ch->Position = POS_STANDING;
     }
 
-    if (IsNpc(ch) && ch->Flags.test(Flag::Mob::Mounted))
+    if(IsNpc(ch) && ch->Flags.test(Flag::Mob::Mounted))
     {
-        for (Character *wch = FirstCharacter; wch; wch = wch->Next)
+        for(Character *wch = FirstCharacter; wch; wch = wch->Next)
         {
-            if (wch->Mount == ch)
+            if(wch->Mount == ch)
             {
                 wch->Mount = NULL;
                 wch->Position = POS_STANDING;
             }
-            
-            if (wch->PCData && wch->PCData->Pet == ch)
+
+            if(wch->PCData && wch->PCData->Pet == ch)
             {
                 wch->PCData->Pet = NULL;
-                
-                if (wch->InRoom == ch->InRoom)
+
+                if(wch->InRoom == ch->InRoom)
                 {
                     Act(AT_SOCIAL, "You mourn for the loss of $N.",
                         wch, NULL, ch, TO_CHAR);
@@ -1250,18 +1251,18 @@ void ExtractCharacter(Character *ch, bool fPull)
 
     ch->Flags.reset(Flag::Mob::Mounted);
 
-    while (!ch->Objects().empty())
+    while(!ch->Objects().empty())
     {
         ExtractObject(ch->Objects().back());
     }
 
     CharacterFromRoom(ch);
 
-    if (!fPull)
+    if(!fPull)
     {
         auto location = GetRoom(WhereHome(ch));
 
-        if (!location)
+        if(!location)
             location = GetRoom(ROOM_VNUM_LIMBO);
 
         CharacterToRoom(ch, location);
@@ -1271,25 +1272,25 @@ void ExtractCharacter(Character *ch, bool fPull)
         return;
     }
 
-    if (IsNpc(ch))
+    if(IsNpc(ch))
     {
         --ch->Prototype->Count;
         --nummobsloaded;
     }
 
-    if (ch->Desc && ch->Desc->Original && ch->Flags.test(Flag::Mob::Polymorphed))
+    if(ch->Desc && ch->Desc->Original && ch->Flags.test(Flag::Mob::Polymorphed))
         do_revert(ch, "");
 
-    if (ch->Desc && ch->Desc->Original)
+    if(ch->Desc && ch->Desc->Original)
         do_return(ch, "");
 
-    for (Character *wch = FirstCharacter; wch; wch = wch->Next)
-        if (wch->Reply == ch)
+    for(Character *wch = FirstCharacter; wch; wch = wch->Next)
+        if(wch->Reply == ch)
             wch->Reply = NULL;
 
     UNLINK(ch, FirstCharacter, LastCharacter, Next, Previous);
 
-    if (ch->Desc != nullptr)
+    if(ch->Desc != nullptr)
     {
         assert(ch->Desc->Character == ch);
 
@@ -1311,29 +1312,29 @@ Character *GetCharacterInRoom(const Character *ch, std::string argument)
 
     int number = NumberArgument(argument, arg);
 
-    if (!StrCmp(arg, "self"))
-        return (Character*)ch;
+    if(!StrCmp(arg, "self"))
+        return (Character *)ch;
 
-    if (GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
+    if(GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
         vnum = ToLong(arg);
 
     int count = 0;
 
-    for (Character *rch : ch->InRoom->Characters())
+    for(Character *rch : ch->InRoom->Characters())
     {
-        if (CanSeeCharacter(ch, rch)
-            && (((NiftyIsName(arg, rch->Name)
-                || (!IsNpc(rch) && NiftyIsName(arg, rch->PCData->Title)))
+        if(CanSeeCharacter(ch, rch)
+           && (((NiftyIsName(arg, rch->Name)
+                 || (!IsNpc(rch) && NiftyIsName(arg, rch->PCData->Title)))
                 || (IsNpc(rch) && vnum == rch->Prototype->Vnum))))
         {
-            if (number == 0 && !IsNpc(rch))
+            if(number == 0 && !IsNpc(rch))
                 return rch;
-            else if (++count == number)
+            else if(++count == number)
                 return rch;
         }
     }
 
-    if (vnum != INVALID_VNUM)
+    if(vnum != INVALID_VNUM)
         return NULL;
 
     /* If we didn't find an exact match, run through the list of characters
@@ -1342,16 +1343,16 @@ Character *GetCharacterInRoom(const Character *ch, std::string argument)
     */
     count = 0;
 
-    for (Character *rch : ch->InRoom->Characters())
+    for(Character *rch : ch->InRoom->Characters())
     {
-        if (!CanSeeCharacter(ch, rch) ||
-            (!NiftyIsNamePrefix(arg, rch->Name) &&
+        if(!CanSeeCharacter(ch, rch) ||
+           (!NiftyIsNamePrefix(arg, rch->Name) &&
             (IsNpc(rch) || (!IsNpc(rch) && !NiftyIsNamePrefix(arg, rch->PCData->Title)))))
             continue;
 
-        if (number == 0 && !IsNpc(rch))
+        if(number == 0 && !IsNpc(rch))
             return rch;
-        else if (++count == number)
+        else if(++count == number)
             return rch;
     }
 
@@ -1369,24 +1370,24 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
     int number = NumberArgument(argument, arg);
     int count = 0;
 
-    if (!StrCmp(arg, "self"))
-        return (Character*)ch;
+    if(!StrCmp(arg, "self"))
+        return (Character *)ch;
 
     /*
      * Allow reference by vnum for saints+                        -Thoric
      */
-    if (GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
+    if(GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
         vnum = ToLong(arg);
 
     /* check the room for an exact match */
-    for (Character *wch : ch->InRoom->Characters())
+    for(Character *wch : ch->InRoom->Characters())
     {
-        if ((NiftyIsName(arg, wch->Name)
+        if((NiftyIsName(arg, wch->Name)
             || (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch, wch))
         {
-            if (number == 0 && !IsNpc(wch))
+            if(number == 0 && !IsNpc(wch))
                 return wch;
-            else if (++count == number)
+            else if(++count == number)
                 return wch;
         }
     }
@@ -1394,20 +1395,20 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
     count = 0;
 
     /* check the world for an exact match */
-    for (Character *wch = FirstCharacter; wch; wch = wch->Next)
+    for(Character *wch = FirstCharacter; wch; wch = wch->Next)
     {
-        if ((NiftyIsName(arg, wch->Name)
+        if((NiftyIsName(arg, wch->Name)
             || (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch, wch))
         {
-            if (number == 0 && !IsNpc(wch))
+            if(number == 0 && !IsNpc(wch))
                 return wch;
-            else if (++count == number)
+            else if(++count == number)
                 return wch;
         }
     }
 
     /* bail out if looking for a vnum match */
-    if (vnum != INVALID_VNUM)
+    if(vnum != INVALID_VNUM)
         return NULL;
 
     /*
@@ -1417,14 +1418,14 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
      */
     count = 0;
 
-    for (Character *wch : ch->InRoom->Characters())
+    for(Character *wch : ch->InRoom->Characters())
     {
-        if (!NiftyIsNamePrefix(arg, wch->Name))
+        if(!NiftyIsNamePrefix(arg, wch->Name))
             continue;
 
-        if (number == 0 && !IsNpc(wch) && IsWizVis(ch, wch))
+        if(number == 0 && !IsNpc(wch) && IsWizVis(ch, wch))
             return wch;
-        else if (++count == number && IsWizVis(ch, wch))
+        else if(++count == number && IsWizVis(ch, wch))
             return wch;
     }
 
@@ -1435,14 +1436,14 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
      */
     count = 0;
 
-    for (Character *wch = FirstCharacter; wch; wch = wch->Next)
+    for(Character *wch = FirstCharacter; wch; wch = wch->Next)
     {
-        if (!NiftyIsNamePrefix(arg, wch->Name))
+        if(!NiftyIsNamePrefix(arg, wch->Name))
             continue;
-        if (number == 0 && !IsNpc(wch) && IsWizVis(ch, wch))
+        if(number == 0 && !IsNpc(wch) && IsWizVis(ch, wch))
             return wch;
         else
-            if (++count == number && IsWizVis(ch, wch))
+            if(++count == number && IsWizVis(ch, wch))
                 return wch;
     }
 
@@ -1456,27 +1457,27 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
 Object *GetInstanceOfObject(std::shared_ptr<ProtoObject> pObjIndex)
 {
     return Find(Reverse(Objects->Entities()),
-        [pObjIndex](const auto obj)
-    {
-        return obj->Prototype == pObjIndex;
-    });
+                [pObjIndex](const auto obj)
+                {
+                    return obj->Prototype == pObjIndex;
+                });
 }
 
 /*
  * Find an obj in a list.
  */
 Object *GetObjectInList(const Character *ch, std::string argument,
-    const std::list<Object*> &list)
+                        const std::list<Object *> &list)
 {
     std::string arg;
     int number = NumberArgument(argument, arg);
     int count = 0;
 
-    for (Object *obj : list)
+    for(Object *obj : list)
     {
-        if (CanSeeObject(ch, obj) && NiftyIsName(arg, obj->Name))
+        if(CanSeeObject(ch, obj) && NiftyIsName(arg, obj->Name))
         {
-            if ((count += obj->Count) >= number)
+            if((count += obj->Count) >= number)
             {
                 return obj;
             }
@@ -1489,11 +1490,11 @@ Object *GetObjectInList(const Character *ch, std::string argument,
     */
     count = 0;
 
-    for (Object *obj : list)
+    for(Object *obj : list)
     {
-        if (CanSeeObject(ch, obj) && NiftyIsNamePrefix(arg, obj->Name))
+        if(CanSeeObject(ch, obj) && NiftyIsNamePrefix(arg, obj->Name))
         {
-            if ((count += obj->Count) >= number)
+            if((count += obj->Count) >= number)
             {
                 return obj;
             }
@@ -1507,17 +1508,17 @@ Object *GetObjectInList(const Character *ch, std::string argument,
  * Find an obj in a list...going the other way                  -Thoric
  */
 Object *GetObjectInListReverse(const Character *ch, std::string argument,
-    const std::list<Object*> &list)
+                               const std::list<Object *> &list)
 {
     std::string arg;
     int count = 0;
     int number = NumberArgument(argument, arg);
 
-    for (Object *obj : Reverse(list))
+    for(Object *obj : Reverse(list))
     {
-        if (CanSeeObject(ch, obj) && NiftyIsName(arg, obj->Name))
+        if(CanSeeObject(ch, obj) && NiftyIsName(arg, obj->Name))
         {
-            if ((count += obj->Count) >= number)
+            if((count += obj->Count) >= number)
             {
                 return obj;
             }
@@ -1530,11 +1531,11 @@ Object *GetObjectInListReverse(const Character *ch, std::string argument,
     */
     count = 0;
 
-    for (Object *obj : Reverse(list))
+    for(Object *obj : Reverse(list))
     {
-        if (CanSeeObject(ch, obj) && NiftyIsNamePrefix(arg, obj->Name))
+        if(CanSeeObject(ch, obj) && NiftyIsNamePrefix(arg, obj->Name))
         {
-            if ((count += obj->Count) >= number)
+            if((count += obj->Count) >= number)
             {
                 return obj;
             }
@@ -1551,18 +1552,18 @@ Object *GetObjectHere(const Character *ch, std::string argument)
 {
     Object *obj = nullptr;
 
-    if (!ch || !ch->InRoom)
+    if(!ch || !ch->InRoom)
         return NULL;
 
     obj = GetObjectInListReverse(ch, argument, ch->InRoom->Objects());
 
-    if (obj)
+    if(obj)
         return obj;
 
-    if ((obj = GetCarriedObject(ch, argument)) != NULL)
+    if((obj = GetCarriedObject(ch, argument)) != NULL)
         return obj;
 
-    if ((obj = GetWornObject(ch, argument)) != NULL)
+    if((obj = GetWornObject(ch, argument)) != NULL)
         return obj;
 
     return NULL;
@@ -1578,10 +1579,10 @@ Object *GetObjectAnywhere(const Character *ch, std::string argument)
     int number = 0, count = 0;
     vnum_t vnum = INVALID_VNUM;
 
-    if (!ch)
+    if(!ch)
         return NULL;
 
-    if ((obj = GetObjectHere(ch, argument)) != NULL)
+    if((obj = GetObjectHere(ch, argument)) != NULL)
         return obj;
 
     number = NumberArgument(argument, arg);
@@ -1589,35 +1590,35 @@ Object *GetObjectAnywhere(const Character *ch, std::string argument)
     /*
      * Allow reference by vnum for saints+                        -Thoric
      */
-    if (GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
+    if(GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
         vnum = ToLong(arg);
 
     count = 0;
 
     obj = Find(Objects->Entities(),
-        [&count, ch, arg, vnum, number](const auto o)
-    {
-        if (CanSeeObject(ch, o) && (NiftyIsName(arg, o->Name)
-            || vnum == o->Prototype->Vnum))
-        {
-            count += o->Count;
+               [&count, ch, arg, vnum, number](const auto o)
+               {
+                   if(CanSeeObject(ch, o) && (NiftyIsName(arg, o->Name)
+                                              || vnum == o->Prototype->Vnum))
+                   {
+                       count += o->Count;
 
-            if (count >= number)
-            {
-                return true;
-            }
-        }
+                       if(count >= number)
+                       {
+                           return true;
+                       }
+                   }
 
-        return false;
-    });
+                   return false;
+               });
 
-    if (obj != nullptr)
+    if(obj != nullptr)
     {
         return obj;
     }
 
     /* bail out if looking for a vnum */
-    if (vnum != INVALID_VNUM)
+    if(vnum != INVALID_VNUM)
         return NULL;
 
     /* If we didn't find an exact match, run through the list of objects
@@ -1627,20 +1628,20 @@ Object *GetObjectAnywhere(const Character *ch, std::string argument)
     count = 0;
 
     obj = Find(Objects->Entities(),
-        [&count, ch, arg, number](const auto o)
-    {
-        if (CanSeeObject(ch, o) && NiftyIsNamePrefix(arg, o->Name))
-        {
-            count += o->Count;
+               [&count, ch, arg, number](const auto o)
+               {
+                   if(CanSeeObject(ch, o) && NiftyIsNamePrefix(arg, o->Name))
+                   {
+                       count += o->Count;
 
-            if (count >= number)
-            {
-                return true;
-            }
-        }
+                       if(count >= number)
+                       {
+                           return true;
+                       }
+                   }
 
-        return false;
-    });
+                   return false;
+               });
 
     return obj;
 }
@@ -1658,20 +1659,20 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);
 
-    if (!StrCmp(arg2, "from")
-        && !argument.empty())
+    if(!StrCmp(arg2, "from")
+       && !argument.empty())
     {
         argument = OneArgument(argument, arg2);
     }
 
-    if (arg2.empty())
+    if(arg2.empty())
     {
-        if (carryonly && (obj = GetCarriedObject(ch, arg1)) == NULL)
+        if(carryonly && (obj = GetCarriedObject(ch, arg1)) == NULL)
         {
             ch->Echo("You do not have that item.\r\n");
             return NULL;
         }
-        else if (!carryonly && (obj = GetObjectHere(ch, arg1)) == NULL)
+        else if(!carryonly && (obj = GetObjectHere(ch, arg1)) == NULL)
         {
             Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), TO_CHAR);
             return NULL;
@@ -1683,22 +1684,22 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
     {
         Object *container = nullptr;
 
-        if (carryonly
-            && (container = GetCarriedObject(ch, arg2)) == NULL
-            && (container = GetWornObject(ch, arg2)) == NULL)
+        if(carryonly
+           && (container = GetCarriedObject(ch, arg2)) == NULL
+           && (container = GetWornObject(ch, arg2)) == NULL)
         {
             ch->Echo("You do not have that item.\r\n");
             return NULL;
         }
 
-        if (!carryonly && (container = GetObjectHere(ch, arg2)) == NULL)
+        if(!carryonly && (container = GetObjectHere(ch, arg2)) == NULL)
         {
             Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), TO_CHAR);
             return NULL;
         }
 
-        if (!container->Flags.test(Flag::Obj::Covering)
-            && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
+        if(!container->Flags.test(Flag::Obj::Covering)
+           && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
             Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), TO_CHAR);
             return NULL;
@@ -1706,7 +1707,7 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
 
         obj = GetObjectInList(ch, arg1, container->Objects());
 
-        if (!obj)
+        if(!obj)
             Act(AT_PLAIN,
                 container->Flags.test(Flag::Obj::Covering)
                 ? "I see nothing like that beneath $p."
@@ -1730,7 +1731,7 @@ int GetObjectWeight(const Object *obj)
 {
     int weight = obj->Count * obj->Weight;
 
-    for (const Object *inner : obj->Objects())
+    for(const Object *inner : obj->Objects())
     {
         weight += GetObjectWeight(inner);
     }
@@ -1745,18 +1746,18 @@ bool IsRoomDark(std::shared_ptr<Room> pRoomIndex)
 {
     assert(pRoomIndex != nullptr);
 
-    if (pRoomIndex->Light > 0)
+    if(pRoomIndex->Light > 0)
         return false;
 
-    if (pRoomIndex->Flags.test(Flag::Room::Dark))
+    if(pRoomIndex->Flags.test(Flag::Room::Dark))
         return true;
 
-    if (pRoomIndex->Sector == SECT_INSIDE
-        || pRoomIndex->Sector == SECT_CITY)
+    if(pRoomIndex->Sector == SECT_INSIDE
+       || pRoomIndex->Sector == SECT_CITY)
         return false;
 
-    if (weather_info.Sunlight == SUN_SET
-        || weather_info.Sunlight == SUN_DARK)
+    if(weather_info.Sunlight == SUN_SET
+       || weather_info.Sunlight == SUN_DARK)
         return true;
 
     return false;
@@ -1770,15 +1771,15 @@ bool IsRoomPrivate(const Character *ch, std::shared_ptr<Room> pRoomIndex)
     assert(ch != nullptr);
     assert(pRoomIndex != nullptr);
 
-    if (pRoomIndex->Flags.test(Flag::Room::PlayerHome)
-        && Homes->FindByVnum(pRoomIndex->Vnum) != nullptr
-        && !Homes->IsResidentOf(ch->Name, pRoomIndex->Vnum))
+    if(pRoomIndex->Flags.test(Flag::Room::PlayerHome)
+       && Homes->FindByVnum(pRoomIndex->Vnum) != nullptr
+       && !Homes->IsResidentOf(ch->Name, pRoomIndex->Vnum))
         return true;
 
     size_t count = pRoomIndex->Characters().size();
 
-    if (pRoomIndex->Flags.test(Flag::Room::Private)
-        && count >= 2)
+    if(pRoomIndex->Flags.test(Flag::Room::Private)
+       && count >= 2)
         return true;
 
     return false;
@@ -1789,7 +1790,7 @@ bool IsRoomPrivate(const Character *ch, std::shared_ptr<Room> pRoomIndex)
  */
 const char *GetItemTypeName(const Object *obj)
 {
-    if (obj->ItemType <= ITEM_NONE || obj->ItemType > MAX_ITEM_TYPE)
+    if(obj->ItemType <= ITEM_NONE || obj->ItemType > MAX_ITEM_TYPE)
     {
         Log->Bug("%s: unknown type %d.", __FUNCTION__, obj->ItemType);
         return "(unknown)";
@@ -1803,7 +1804,7 @@ const char *GetItemTypeName(const Object *obj)
  */
 const char *GetAffectLocationName(int location)
 {
-    switch (location)
+    switch(location)
     {
     case APPLY_NONE:            return "none";
     case APPLY_STR:             return "strength";
@@ -1890,7 +1891,7 @@ ch_ret SpringTrap(Character *ch, Object *obj)
     int lev = obj->Value[OVAL_TRAP_STRENGTH];
     ch_ret retcode = rNONE;
 
-    switch (typ)
+    switch(typ)
     {
     default:
         txt = "hit by a trap";                                    break;
@@ -1930,10 +1931,10 @@ ch_ret SpringTrap(Character *ch, Object *obj)
 
     --obj->Value[OVAL_TRAP_CHARGE];
 
-    if (obj->Value[OVAL_TRAP_CHARGE] <= 0)
+    if(obj->Value[OVAL_TRAP_CHARGE] <= 0)
         ExtractObject(obj);
 
-    switch (typ)
+    switch(typ)
     {
     default:
     case TRAP_TYPE_POISON_DART:
@@ -1942,7 +1943,7 @@ ch_ret SpringTrap(Character *ch, Object *obj)
     case TRAP_TYPE_POISON_ARROW:
         /* hmm... why not use spell_poison() here? */
         retcode = CastSpellWithObject(gsn_poison, lev, ch, ch, NULL);
-        if (retcode == rNONE)
+        if(retcode == rNONE)
             retcode = InflictDamage(ch, ch, dam, TYPE_UNDEFINED);
         break;
     case TRAP_TYPE_POISON_GAS:
@@ -1978,19 +1979,19 @@ ch_ret CheckObjectForTrap(Character *ch, const Object *obj, int flag)
 {
     ch_ret retcode = rNONE;
 
-    if (obj->Objects().empty())
+    if(obj->Objects().empty())
     {
         return rNONE;
     }
 
-    for (Object *check : obj->Objects())
+    for(Object *check : obj->Objects())
     {
-        if (check->ItemType == ITEM_TRAP
-            && IsBitSet(check->Value[OVAL_TRAP_FLAGS], flag))
+        if(check->ItemType == ITEM_TRAP
+           && IsBitSet(check->Value[OVAL_TRAP_FLAGS], flag))
         {
             retcode = SpringTrap(ch, check);
 
-            if (retcode != rNONE)
+            if(retcode != rNONE)
             {
                 return retcode;
             }
@@ -2007,27 +2008,27 @@ ch_ret CheckRoomForTraps(Character *ch, int flag)
 {
     ch_ret retcode = rNONE;
 
-    if (!ch)
+    if(!ch)
     {
         return rERROR;
     }
 
-    if (!ch->InRoom || ch->InRoom->Objects().empty())
+    if(!ch->InRoom || ch->InRoom->Objects().empty())
         return rNONE;
 
-    for (Object *check : ch->InRoom->Objects())
+    for(Object *check : ch->InRoom->Objects())
     {
-        if (check->ItemType == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM)
+        if(check->ItemType == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM)
         {
             Explode(check);
             return rNONE;
         }
-        else if (check->ItemType == ITEM_TRAP
-            && IsBitSet(check->Value[OVAL_TRAP_FLAGS], flag))
+        else if(check->ItemType == ITEM_TRAP
+                && IsBitSet(check->Value[OVAL_TRAP_FLAGS], flag))
         {
             retcode = SpringTrap(ch, check);
 
-            if (retcode != rNONE)
+            if(retcode != rNONE)
             {
                 return retcode;
             }
@@ -2051,10 +2052,10 @@ bool IsObjectTrapped(const Object *obj)
 Object *GetTrap(const Object *obj)
 {
     return Find(obj->Objects(),
-        [](const auto check)
-    {
-        return check->ItemType == ITEM_TRAP;
-    });
+                [](const auto check)
+                {
+                    return check->ItemType == ITEM_TRAP;
+                });
 }
 
 /*
@@ -2064,7 +2065,7 @@ void ExtractExit(std::shared_ptr<Room> room, std::shared_ptr<Exit> pexit)
 {
     room->Remove(pexit);
 
-    if (pexit->ReverseExit)
+    if(pexit->ReverseExit)
     {
         pexit->ReverseExit->ReverseExit = nullptr;
     }
@@ -2082,13 +2083,13 @@ void CleanRoom(std::shared_ptr<Room> room)
 
     std::list<std::shared_ptr<ExtraDescription>> extraDescriptions(room->ExtraDescriptions());
 
-    for (auto ed : extraDescriptions)
+    for(auto ed : extraDescriptions)
     {
         room->Remove(ed);
         top_ed--;
     }
 
-    while (!room->Exits().empty())
+    while(!room->Exits().empty())
     {
         std::shared_ptr<Exit> pexit = room->Exits().front();
         room->Remove(pexit);
@@ -2120,7 +2121,7 @@ void CleanObject(std::shared_ptr<ProtoObject> obj)
 
     auto affects(obj->Affects());
 
-    for (auto paf : affects)
+    for(auto paf : affects)
     {
         obj->Remove(paf);
         top_affect--;
@@ -2128,7 +2129,7 @@ void CleanObject(std::shared_ptr<ProtoObject> obj)
 
     std::list<std::shared_ptr<ExtraDescription>> extraDescriptions(obj->ExtraDescriptions());
 
-    for (auto ed : obj->ExtraDescriptions())
+    for(auto ed : obj->ExtraDescriptions())
     {
         top_ed--;
         obj->Remove(ed);
@@ -2152,7 +2153,7 @@ void CleanMobile(std::shared_ptr<ProtoMobile> mob)
 
     auto mobProgs(mob->mprog.MudProgs());
 
-    for (auto mprog : mobProgs)
+    for(auto mprog : mobProgs)
     {
         mob->mprog.Remove(mprog);
     }
@@ -2185,23 +2186,23 @@ void ShowAffectToCharacter(const Character *ch, std::shared_ptr<Affect> paf)
 {
     assert(paf != nullptr);
 
-    if (paf->Location != APPLY_NONE && paf->Modifier != 0)
+    if(paf->Location != APPLY_NONE && paf->Modifier != 0)
     {
         char buf[MAX_STRING_LENGTH];
 
-        switch (paf->Location)
+        switch(paf->Location)
         {
         default:
             sprintf(buf, "Affects %s by %d.\r\n",
-                GetAffectLocationName(paf->Location), paf->Modifier);
+                    GetAffectLocationName(paf->Location), paf->Modifier);
             break;
         case APPLY_AFFECT:
             sprintf(buf, "Affects %s by",
-                GetAffectLocationName(paf->Location));
+                    GetAffectLocationName(paf->Location));
 
-            for (size_t x = 0; x < AffectFlags.size(); x++)
+            for(size_t x = 0; x < AffectFlags.size(); x++)
             {
-                if (IsBitSet(paf->Modifier, 1 << x))
+                if(IsBitSet(paf->Modifier, 1 << x))
                 {
                     strcat(buf, " ");
                     strcat(buf, AffectFlags[x]);
@@ -2214,18 +2215,18 @@ void ShowAffectToCharacter(const Character *ch, std::shared_ptr<Affect> paf)
         case APPLY_WEARSPELL:
         case APPLY_REMOVESPELL:
             sprintf(buf, "Casts spell '%s'\r\n",
-                IS_VALID_SN(paf->Modifier) ? SkillTable[paf->Modifier]->Name.c_str()
-                : "unknown");
+                    IS_VALID_SN(paf->Modifier) ? SkillTable[paf->Modifier]->Name.c_str()
+                    : "unknown");
             break;
         case APPLY_RESISTANT:
         case APPLY_IMMUNE:
         case APPLY_SUSCEPTIBLE:
             sprintf(buf, "Affects %s by",
-                GetAffectLocationName(paf->Location));
+                    GetAffectLocationName(paf->Location));
 
-            for (size_t x = 0; x < RisFlags.size(); x++)
+            for(size_t x = 0; x < RisFlags.size(); x++)
             {
-                if (IsBitSet(paf->Modifier, 1 << x))
+                if(IsBitSet(paf->Modifier, 1 << x))
                 {
                     strcat(buf, " ");
                     strcat(buf, RisFlags[x]);
@@ -2257,8 +2258,8 @@ bool IsObjectExtracted(const Object *obj)
 {
     assert(obj != nullptr);
 
-    if (obj->Serial == cur_obj
-        && cur_obj_extracted)
+    if(obj->Serial == cur_obj
+       && cur_obj_extracted)
     {
         return true;
     }
@@ -2280,7 +2281,7 @@ void QueueExtractedObject(Object *obj)
  */
 void CleanObjectQueue()
 {
-    for (Object *obj : ExtractedObjectQueue)
+    for(Object *obj : ExtractedObjectQueue)
     {
         delete obj;
         --cur_qobjs;
@@ -2305,14 +2306,14 @@ void SetCurrentGlobalCharacter(Character *ch)
  */
 bool CharacterDiedRecently(const Character *ch)
 {
-    if (ch == cur_char && cur_char_died)
+    if(ch == cur_char && cur_char_died)
         return true;
 
     return Find(ExtractedCharacterQueue,
-        [ch](const auto &ccd)
-    {
-        return ccd->Character == ch;
-    }) != nullptr;
+                [ch](const auto &ccd)
+                {
+                    return ccd->Character == ch;
+                }) != nullptr;
 }
 
 /*
@@ -2327,7 +2328,7 @@ void QueueExtractedCharacter(Character *ch, bool extract)
     ccd->InRoom = ch->InRoom;
     ccd->Extract = extract;
 
-    if (ch == cur_char)
+    if(ch == cur_char)
         ccd->RetCode = global_retcode;
     else
         ccd->RetCode = rCHAR_DIED;
@@ -2341,9 +2342,9 @@ void QueueExtractedCharacter(Character *ch, bool extract)
  */
 void CleanCharacterQueue()
 {
-    for (auto ccd : ExtractedCharacterQueue)
+    for(auto ccd : ExtractedCharacterQueue)
     {
-        if (ccd->Extract)
+        if(ccd->Extract)
         {
             FreeCharacter(ccd->Character);
         }
@@ -2362,7 +2363,7 @@ void AddTimerToCharacter(Character *ch, short type, short count, CmdFun *fun, in
 {
     auto timer = GetTimerPointer(ch, type);
 
-    if (!timer)
+    if(!timer)
     {
         timer = std::make_shared<Timer>();
         ch->Add(timer);
@@ -2377,10 +2378,10 @@ void AddTimerToCharacter(Character *ch, short type, short count, CmdFun *fun, in
 std::shared_ptr<Timer> GetTimerPointer(const Character *ch, short type)
 {
     return Find(ch->Timers(),
-        [type](auto timer)
-    {
-        return timer->Type == type;
-    });
+                [type](auto timer)
+                {
+                    return timer->Type == type;
+                });
 }
 
 short GetTimer(const Character *ch, short type)
@@ -2402,7 +2403,7 @@ void RemoveTimer(Character *ch, short type)
 {
     std::shared_ptr<Timer> timer = GetTimerPointer(ch, type);
 
-    if (timer != nullptr)
+    if(timer != nullptr)
     {
         ExtractTimer(ch, timer);
     }
@@ -2410,11 +2411,11 @@ void RemoveTimer(Character *ch, short type)
 
 bool InSoftRange(const Character *ch, std::shared_ptr<Area> tarea)
 {
-    if (IsImmortal(ch))
+    if(IsImmortal(ch))
         return true;
-    else if (IsNpc(ch))
+    else if(IsNpc(ch))
         return true;
-    else if (ch->TopLevel >= tarea->LevelRanges.Soft.Low || ch->TopLevel <= tarea->LevelRanges.Soft.High)
+    else if(ch->TopLevel >= tarea->LevelRanges.Soft.Low || ch->TopLevel <= tarea->LevelRanges.Soft.High)
         return true;
     else
         return false;
@@ -2422,11 +2423,11 @@ bool InSoftRange(const Character *ch, std::shared_ptr<Area> tarea)
 
 bool InHardRange(const Character *ch, std::shared_ptr<Area> tarea)
 {
-    if (IsImmortal(ch))
+    if(IsImmortal(ch))
         return true;
-    else if (IsNpc(ch))
+    else if(IsNpc(ch))
         return true;
-    else if (ch->TopLevel >= tarea->LevelRanges.Hard.Low && ch->TopLevel <= tarea->LevelRanges.Hard.High)
+    else if(ch->TopLevel >= tarea->LevelRanges.Hard.Low && ch->TopLevel <= tarea->LevelRanges.Hard.High)
         return true;
     else
         return false;
@@ -2448,7 +2449,7 @@ bool Chance(const Character *ch, short percent)
 
     short ms = 10 - abs(ch->MentalState);
 
-    if ((GetRandomPercent() - GetCurrentLuck(ch) + 13 - ms) <= percent)
+    if((GetRandomPercent() - GetCurrentLuck(ch) + 13 - ms) <= percent)
         return true;
     else
         return false;
@@ -2473,7 +2474,7 @@ Object *CopyObject(const Object *obj)
     clone->Cost = obj->Cost;
     clone->Timer = obj->Timer;
 
-    for (size_t oval = 0; oval < MAX_OVAL; ++oval)
+    for(size_t oval = 0; oval < MAX_OVAL; ++oval)
     {
         clone->Value[oval] = obj->Value[oval];
     }
@@ -2491,9 +2492,9 @@ static bool HasSameOvalues(const Object *a, const Object *b)
 {
     int oval = 0;
 
-    for (oval = 0; oval < MAX_OVAL; ++oval)
+    for(oval = 0; oval < MAX_OVAL; ++oval)
     {
-        if (a->Value[oval] != b->Value[oval])
+        if(a->Value[oval] != b->Value[oval])
         {
             return false;
         }
@@ -2515,29 +2516,29 @@ static Object *GroupObject(Object *obj1, Object *obj2)
     assert(obj1 != nullptr);
     assert(obj2 != nullptr);
 
-    if (obj1 == obj2)
+    if(obj1 == obj2)
         return obj1;
 
-    if (obj1->Prototype == obj2->Prototype
-        && !StrCmp(obj1->Name, obj2->Name)
-        && !StrCmp(obj1->ShortDescr, obj2->ShortDescr)
-        && !StrCmp(obj1->Description, obj2->Description)
-        && !StrCmp(obj1->ActionDescription, obj2->ActionDescription)
-        && obj1->ItemType == obj2->ItemType
-        && obj1->Flags == obj2->Flags
-        && obj1->WearFlags == obj2->WearFlags
-        && obj1->WearLoc == obj2->WearLoc
-        && obj1->Weight == obj2->Weight
-        && obj1->Cost == obj2->Cost
-        && obj1->Level == obj2->Level
-        && obj1->Timer == obj2->Timer
-        && HasSameOvalues(obj1, obj2)
-        && obj1->ExtraDescriptions().empty()
-        && obj2->ExtraDescriptions().empty()
-        && obj1->Affects().empty()
-        && obj2->Affects().empty()
-        && obj1->Objects().empty()
-        && obj2->Objects().empty())
+    if(obj1->Prototype == obj2->Prototype
+       && !StrCmp(obj1->Name, obj2->Name)
+       && !StrCmp(obj1->ShortDescr, obj2->ShortDescr)
+       && !StrCmp(obj1->Description, obj2->Description)
+       && !StrCmp(obj1->ActionDescription, obj2->ActionDescription)
+       && obj1->ItemType == obj2->ItemType
+       && obj1->Flags == obj2->Flags
+       && obj1->WearFlags == obj2->WearFlags
+       && obj1->WearLoc == obj2->WearLoc
+       && obj1->Weight == obj2->Weight
+       && obj1->Cost == obj2->Cost
+       && obj1->Level == obj2->Level
+       && obj1->Timer == obj2->Timer
+       && HasSameOvalues(obj1, obj2)
+       && obj1->ExtraDescriptions().empty()
+       && obj2->ExtraDescriptions().empty()
+       && obj1->Affects().empty()
+       && obj2->Affects().empty()
+       && obj1->Objects().empty()
+       && obj2->Objects().empty())
     {
         obj1->Count += obj2->Count;
         obj1->Prototype->Count += obj2->Count;   /* to be decremented in */
@@ -2559,7 +2560,7 @@ void SplitGroupedObject(Object *obj, int num)
 
     int count = obj->Count;
 
-    if (count <= num || num == 0)
+    if(count <= num || num == 0)
     {
         return;
     }
@@ -2570,21 +2571,21 @@ void SplitGroupedObject(Object *obj, int num)
     rest->Count = obj->Count - num;
     obj->Count = num;
 
-    if (obj->CarriedBy)
+    if(obj->CarriedBy)
     {
         obj->CarriedBy->Add(rest);
         rest->CarriedBy = obj->CarriedBy;
         rest->InRoom = NULL;
         rest->InObject = NULL;
     }
-    else if (obj->InRoom)
+    else if(obj->InRoom)
     {
         obj->InRoom->Add(rest);
         rest->InRoom = obj->InRoom;
         rest->CarriedBy = NULL;
         rest->InObject = NULL;
     }
-    else if (obj->InObject)
+    else if(obj->InObject)
     {
         obj->InObject->Add(rest);
         rest->InObject = obj->InObject;
@@ -2607,15 +2608,15 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
 
     Character *ch = obj->CarriedBy;
 
-    if (destobj || (!destroom && !ch && (destobj = obj->InObject) != NULL))
+    if(destobj || (!destroom && !ch && (destobj = obj->InObject) != NULL))
     {
         bool movedsome = false;
-        std::list<Object*> objects(obj->Objects());
+        std::list<Object *> objects(obj->Objects());
 
-        for (Object *otmp : objects)
+        for(Object *otmp : objects)
         {
-            if (destobj->ItemType == ITEM_CONTAINER
-                && GetObjectWeight(otmp) + GetObjectWeight(destobj)
+            if(destobj->ItemType == ITEM_CONTAINER
+               && GetObjectWeight(otmp) + GetObjectWeight(destobj)
     > destobj->Value[OVAL_CONTAINER_CAPACITY])
             {
                 continue;
@@ -2629,22 +2630,22 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
         return movedsome;
     }
 
-    if (destroom || (!ch && (destroom = obj->InRoom) != NULL))
+    if(destroom || (!ch && (destroom = obj->InRoom) != NULL))
     {
         bool movedsome = false;
 
-        for (auto i = std::begin(obj->Objects()), i_next = std::end(obj->Objects());
+        for(auto i = std::begin(obj->Objects()), i_next = std::end(obj->Objects());
             i != std::end(obj->Objects()); i = i_next)
         {
             Object *otmp = *i;
             i_next = ++i;
 
-            if (ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->Count > 1)
+            if(ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->Count > 1)
             {
                 SeparateOneObjectFromGroup(otmp);
                 ObjectFromObject(otmp);
 
-                if (i_next == std::end(obj->Objects()))
+                if(i_next == std::end(obj->Objects()))
                 {
                     i_next = std::begin(obj->Objects());
                 }
@@ -2656,11 +2657,11 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
 
             otmp = ObjectToRoom(otmp, destroom);
 
-            if (ch)
+            if(ch)
             {
                 ObjProgDropTrigger(ch, otmp);           /* mudprogs */
 
-                if (CharacterDiedRecently(ch))
+                if(CharacterDiedRecently(ch))
                     ch = NULL;
             }
             movedsome = true;
@@ -2669,12 +2670,12 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
         return movedsome;
     }
 
-    if (ch)
+    if(ch)
     {
         bool movedsome = false;
-        std::list<Object*> objects(obj->Objects());
+        std::list<Object *> objects(obj->Objects());
 
-        for (Object *otmp : objects)
+        for(Object *otmp : objects)
         {
             ObjectFromObject(otmp);
             ObjectToCharacter(otmp, ch);
@@ -2685,7 +2686,7 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
     }
 
     Log->Bug("EmptyObjectContents: could not determine a destination for vnum %ld",
-        obj->Prototype->Vnum);
+             obj->Prototype->Vnum);
     return false;
 }
 
@@ -2694,7 +2695,7 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
  */
 void BoostEconomy(std::shared_ptr<Area> tarea, int gold)
 {
-    while (gold >= 1000000000)
+    while(gold >= 1000000000)
     {
         ++tarea->HighEconomy;
         gold -= 1000000000;
@@ -2702,7 +2703,7 @@ void BoostEconomy(std::shared_ptr<Area> tarea, int gold)
 
     tarea->LowEconomy += gold;
 
-    while (tarea->LowEconomy >= 1000000000)
+    while(tarea->LowEconomy >= 1000000000)
     {
         ++tarea->HighEconomy;
         tarea->LowEconomy -= 1000000000;
@@ -2714,7 +2715,7 @@ void BoostEconomy(std::shared_ptr<Area> tarea, int gold)
  */
 void LowerEconomy(std::shared_ptr<Area> tarea, int gold)
 {
-    while (gold >= 1000000000)
+    while(gold >= 1000000000)
     {
         tarea->HighEconomy -= 1;
         gold -= 1000000000;
@@ -2722,7 +2723,7 @@ void LowerEconomy(std::shared_ptr<Area> tarea, int gold)
 
     tarea->LowEconomy -= gold;
 
-    while (tarea->LowEconomy < 0)
+    while(tarea->LowEconomy < 0)
     {
         tarea->HighEconomy -= 1;
         tarea->LowEconomy += 1000000000;
@@ -2737,7 +2738,7 @@ bool EconomyHas(std::shared_ptr<Area> tarea, int gold)
     int hasgold = ((tarea->HighEconomy > 0) ? 1 : 0) * 1000000000
         + tarea->LowEconomy;
 
-    if (hasgold >= gold)
+    if(hasgold >= gold)
         return true;
 
     return false;
@@ -2759,7 +2760,7 @@ void EconomizeMobileGold(Character *mob)
     long gold = ((tarea->HighEconomy > 0) ? 1 : 0) * 1000000000 + tarea->LowEconomy;
     mob->Gold = urange(0, mob->Gold, gold / 100);
 
-    if (mob->Gold != 0)
+    if(mob->Gold != 0)
     {
         LowerEconomy(tarea, mob->Gold);
     }
@@ -2780,6 +2781,6 @@ std::string GetRoomDescription(std::shared_ptr<Room> room)
 bool CheckRoomFlag(std::shared_ptr<Room> room, size_t flag)
 {
     auto home = Homes->FindByVnum(room->Vnum);
-    
+
     return (home != nullptr && home->ExtraRoomFlags.test(flag)) || room->Flags.test(flag);
 }

@@ -2,15 +2,16 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "object.hpp"
+#include "act.hpp"
 
 extern std::string spell_target_name;
 
-ch_ret spell_remove_invis(int sn, int level, Character* ch, void* vo)
+ch_ret spell_remove_invis(int sn, int level, Character *ch, void *vo)
 {
-    Object* obj = nullptr;
+    Object *obj = nullptr;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (spell_target_name.empty())
+    if(spell_target_name.empty())
     {
         ch->Echo("What should the spell be cast upon?\r\n");
         return rSPELL_FAILED;
@@ -18,9 +19,9 @@ ch_ret spell_remove_invis(int sn, int level, Character* ch, void* vo)
 
     obj = GetCarriedObject(ch, spell_target_name);
 
-    if (obj)
+    if(obj)
     {
-        if (!obj->Flags.test(Flag::Obj::Invis))
+        if(!obj->Flags.test(Flag::Obj::Invis))
             return rSPELL_FAILED;
 
         obj->Flags.reset(Flag::Obj::Invis);
@@ -31,41 +32,41 @@ ch_ret spell_remove_invis(int sn, int level, Character* ch, void* vo)
     }
     else
     {
-        Character* victim;
+        Character *victim;
 
         victim = GetCharacterInRoom(ch, spell_target_name);
 
-        if (victim)
+        if(victim)
         {
-            if (!CanSeeCharacter(ch, victim))
+            if(!CanSeeCharacter(ch, victim))
             {
                 ch->Echo("You don't see %s!\r\n", spell_target_name.c_str());
                 return rSPELL_FAILED;
             }
 
-            if (victim->Race == RACE_DEFEL)
+            if(victim->Race == RACE_DEFEL)
                 return rSPELL_FAILED;
 
-            if (!IsAffectedBy(victim, Flag::Affect::Invisible))
+            if(!IsAffectedBy(victim, Flag::Affect::Invisible))
             {
                 ch->Echo("They are not invisible!\r\n");
                 return rSPELL_FAILED;
             }
 
-            if (IsSafe(ch, victim))
+            if(IsSafe(ch, victim))
             {
                 FailedCasting(skill, ch, victim, NULL);
                 return rSPELL_FAILED;
             }
 
-            if (victim->Immune.test(Flag::Ris::Magic))
+            if(victim->Immune.test(Flag::Ris::Magic))
             {
                 ImmuneCasting(skill, ch, victim, NULL);
                 return rSPELL_FAILED;
             }
-            if (!IsNpc(victim))
+            if(!IsNpc(victim))
             {
-                if (Chance(ch, 50) && GetAbilityLevel(ch, FORCE_ABILITY) < victim->TopLevel)
+                if(Chance(ch, 50) && GetAbilityLevel(ch, FORCE_ABILITY) < victim->TopLevel)
                 {
                     FailedCasting(skill, ch, victim, NULL);
                     return rSPELL_FAILED;
@@ -74,7 +75,7 @@ ch_ret spell_remove_invis(int sn, int level, Character* ch, void* vo)
             }
             else
             {
-                if (Chance(ch, 50) && GetAbilityLevel(ch, FORCE_ABILITY) + 15 < victim->TopLevel)
+                if(Chance(ch, 50) && GetAbilityLevel(ch, FORCE_ABILITY) + 15 < victim->TopLevel)
                 {
                     FailedCasting(skill, ch, victim, NULL);
                     return rSPELL_FAILED;

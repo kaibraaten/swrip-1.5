@@ -33,13 +33,14 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "object.hpp"
+#include "act.hpp"
 
-/*
- * Dummy function
- */
-void skill_notfound( Character *ch, std::string argument )
+ /*
+  * Dummy function
+  */
+void skill_notfound(Character *ch, std::string argument)
 {
-  ch->Echo( "Huh?\r\n" );
+    ch->Echo("Huh?\r\n");
 }
 
 /*
@@ -47,247 +48,247 @@ void skill_notfound( Character *ch, std::string argument )
  * Caller must check for successful attack.
  * Check for loyalty flag (weapon disarms to inventory) for pkillers -Blodkai
  */
-void Disarm( Character *ch, Character *victim )
+void Disarm(Character *ch, Character *victim)
 {
-  Object *obj = NULL;
-  Object *tmpobj = NULL;
+    Object *obj = NULL;
+    Object *tmpobj = NULL;
 
-  if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) == NULL )
+    if((obj = GetEquipmentOnCharacter(victim, WEAR_WIELD)) == NULL)
     {
-      return;
+        return;
     }
 
-  if ( ( tmpobj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) != NULL
-       && NumberBits( 1 ) == 0 )
+    if((tmpobj = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) != NULL
+       && NumberBits(1) == 0)
     {
-      obj = tmpobj;
+        obj = tmpobj;
     }
 
-  if ( GetEquipmentOnCharacter( ch, WEAR_WIELD ) == NULL
-       && NumberBits( 1 ) == 0 )
+    if(GetEquipmentOnCharacter(ch, WEAR_WIELD) == NULL
+       && NumberBits(1) == 0)
     {
-      LearnFromFailure( ch, gsn_disarm );
-      return;
+        LearnFromFailure(ch, gsn_disarm);
+        return;
     }
 
-  if ( IsNpc( ch ) && !CanSeeObject( ch, obj )
-       && NumberBits( 1 ) == 0)
+    if(IsNpc(ch) && !CanSeeObject(ch, obj)
+       && NumberBits(1) == 0)
     {
-      LearnFromFailure( ch, gsn_disarm );
-      return;
+        LearnFromFailure(ch, gsn_disarm);
+        return;
     }
 
-  if ( CheckGrip( ch, victim ) )
+    if(CheckGrip(ch, victim))
     {
-      LearnFromFailure( ch, gsn_disarm );
-      return;
+        LearnFromFailure(ch, gsn_disarm);
+        return;
     }
 
-  Act( AT_SKILL, "$n DISARMS you!", ch, NULL, victim, TO_VICT    );
-  Act( AT_SKILL, "You disarm $N!",  ch, NULL, victim, TO_CHAR    );
-  Act( AT_SKILL, "$n disarms $N!",  ch, NULL, victim, TO_NOTVICT );
-  LearnFromSuccess( ch, gsn_disarm );
+    Act(AT_SKILL, "$n DISARMS you!", ch, NULL, victim, TO_VICT);
+    Act(AT_SKILL, "You disarm $N!", ch, NULL, victim, TO_CHAR);
+    Act(AT_SKILL, "$n disarms $N!", ch, NULL, victim, TO_NOTVICT);
+    LearnFromSuccess(ch, gsn_disarm);
 
-  if ( obj == GetEquipmentOnCharacter( victim, WEAR_WIELD )
-       &&  (tmpobj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD)) != NULL )
+    if(obj == GetEquipmentOnCharacter(victim, WEAR_WIELD)
+       && (tmpobj = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) != NULL)
     {
-      tmpobj->WearLoc = WEAR_WIELD;
+        tmpobj->WearLoc = WEAR_WIELD;
     }
 
-  ObjectFromCharacter( obj );
-  ObjectToRoom( obj, victim->InRoom );
+    ObjectFromCharacter(obj);
+    ObjectToRoom(obj, victim->InRoom);
 }
 
 /*
  * Trip a creature.
  * Caller must check for successful attack.
  */
-void Trip( Character *ch, Character *victim )
+void Trip(Character *ch, Character *victim)
 {
-    if ( IsAffectedBy( victim, Flag::Affect::Flying)
-         || IsAffectedBy( victim, Flag::Affect::Floating))
+    if(IsAffectedBy(victim, Flag::Affect::Flying)
+       || IsAffectedBy(victim, Flag::Affect::Floating))
     {
-      return;
+        return;
     }
 
-  if ( victim->Mount )
+    if(victim->Mount)
     {
-        if ( IsAffectedBy( victim->Mount, Flag::Affect::Flying)
-             || IsAffectedBy( victim->Mount, Flag::Affect::Floating))
-	{
-	  return;
-	}
+        if(IsAffectedBy(victim->Mount, Flag::Affect::Flying)
+           || IsAffectedBy(victim->Mount, Flag::Affect::Floating))
+        {
+            return;
+        }
 
-      Act( AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT    );
-      Act( AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR    );
-      Act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
-      victim->Mount->Flags.reset(Flag::Mob::Mounted);
-      victim->Mount = nullptr;
-      SetWaitState( ch,     2 * PULSE_VIOLENCE );
-      SetWaitState( victim, 2 * PULSE_VIOLENCE );
-      victim->Position = POS_RESTING;
-      return;
+        Act(AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT);
+        Act(AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR);
+        Act(AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT);
+        victim->Mount->Flags.reset(Flag::Mob::Mounted);
+        victim->Mount = nullptr;
+        SetWaitState(ch, 2 * PULSE_VIOLENCE);
+        SetWaitState(victim, 2 * PULSE_VIOLENCE);
+        victim->Position = POS_RESTING;
+        return;
     }
 
-  if ( victim->Wait == 0 )
+    if(victim->Wait == 0)
     {
-      Act( AT_SKILL, "$n trips you and you go down!", ch, NULL, victim, TO_VICT    );
-      Act( AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, TO_CHAR    );
-      Act( AT_SKILL, "$n trips $N and $N goes down!", ch, NULL, victim, TO_NOTVICT );
+        Act(AT_SKILL, "$n trips you and you go down!", ch, NULL, victim, TO_VICT);
+        Act(AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, TO_CHAR);
+        Act(AT_SKILL, "$n trips $N and $N goes down!", ch, NULL, victim, TO_NOTVICT);
 
-      SetWaitState( ch,     2 * PULSE_VIOLENCE );
-      SetWaitState( victim, 2 * PULSE_VIOLENCE );
-      victim->Position = POS_RESTING;
+        SetWaitState(ch, 2 * PULSE_VIOLENCE);
+        SetWaitState(victim, 2 * PULSE_VIOLENCE);
+        victim->Position = POS_RESTING;
     }
 }
 
 /*
  * Check for parry.
  */
-bool CheckParry( Character *ch, Character *victim )
+bool CheckParry(Character *ch, Character *victim)
 {
-  int chances = 0;
-  Object *wield = NULL;
+    int chances = 0;
+    Object *wield = NULL;
 
-  if ( !IsAwake(victim) )
+    if(!IsAwake(victim))
     {
-      return false;
+        return false;
     }
 
-  if ( IsNpc(victim) && !victim->DefenseFlags.test(Flag::Defense::Parry))
+    if(IsNpc(victim) && !victim->DefenseFlags.test(Flag::Defense::Parry))
     {
-      return false;
+        return false;
     }
 
-  if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
-      chances = umin( 60, GetAbilityLevel( victim, COMBAT_ABILITY ) );
+        chances = umin(60, GetAbilityLevel(victim, COMBAT_ABILITY));
     }
-  else
+    else
     {
-      if ( ( wield = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) == NULL ||
-           ( wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
+        if((wield = GetEquipmentOnCharacter(victim, WEAR_WIELD)) == NULL ||
+           (wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER))
         {
-          if ( ( wield = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) == NULL ||
-               ( wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
-	    {
-	      return false;
-	    }
+            if((wield = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) == NULL ||
+               (wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER))
+            {
+                return false;
+            }
         }
 
-      chances = (int) (victim->PCData->Learned[gsn_parry] );
+        chances = (int)(victim->PCData->Learned[gsn_parry]);
     }
 
-  chances = urange ( 10 , chances , 90 );
+    chances = urange(10, chances, 90);
 
-  if ( GetRandomNumberFromRange( 1, 100 ) > chances )
+    if(GetRandomNumberFromRange(1, 100) > chances)
     {
-      LearnFromFailure( victim, gsn_parry );
-      return false;
+        LearnFromFailure(victim, gsn_parry);
+        return false;
     }
 
-  if ( !IsNpc(victim)
-       && !victim->PCData->Flags.test( Flag::PCData::Gag ) )
+    if(!IsNpc(victim)
+       && !victim->PCData->Flags.test(Flag::PCData::Gag))
     {
-      Act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
+        Act(AT_SKILL, "You parry $n's attack.", ch, NULL, victim, TO_VICT);
     }
 
-  if ( !IsNpc(ch)
-       && !ch->PCData->Flags.test( Flag::PCData::Gag ) )
+    if(!IsNpc(ch)
+       && !ch->PCData->Flags.test(Flag::PCData::Gag))
     {
-      Act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
+        Act(AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR);
     }
 
-  LearnFromSuccess( victim, gsn_parry );
-  return true;
+    LearnFromSuccess(victim, gsn_parry);
+    return true;
 }
 
 /*
  * Check for dodge.
  */
-bool CheckDodge( Character *ch, Character *victim )
+bool CheckDodge(Character *ch, Character *victim)
 {
-  int chances = 0;
+    int chances = 0;
 
-  if ( !IsAwake(victim) )
+    if(!IsAwake(victim))
     {
-      return false;
+        return false;
     }
 
-  if ( IsNpc(victim) && !victim->DefenseFlags.test(Flag::Defense::Dodge))
+    if(IsNpc(victim) && !victim->DefenseFlags.test(Flag::Defense::Dodge))
     {
-      return false;
+        return false;
     }
 
-  if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
-      chances  = umin( 60, victim->TopLevel );
+        chances = umin(60, victim->TopLevel);
     }
-  else
+    else
     {
-      chances  = (int) (victim->PCData->Learned[gsn_dodge] / 2);
-    }
-
-  chances += 5*(GetCurrentDexterity(victim) - 20);
-
-  if ( GetRandomNumberFromRange( 1, 100 ) > chances )
-    {
-      LearnFromFailure( victim, gsn_dodge );
-      return false;
+        chances = (int)(victim->PCData->Learned[gsn_dodge] / 2);
     }
 
-  if ( !IsNpc(victim)
-       && !victim->PCData->Flags.test( Flag::PCData::Gag ) )
+    chances += 5 * (GetCurrentDexterity(victim) - 20);
+
+    if(GetRandomNumberFromRange(1, 100) > chances)
     {
-      Act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
+        LearnFromFailure(victim, gsn_dodge);
+        return false;
     }
 
-  if ( !IsNpc(ch)
-       && !ch->PCData->Flags.test( Flag::PCData::Gag ) )
+    if(!IsNpc(victim)
+       && !victim->PCData->Flags.test(Flag::PCData::Gag))
     {
-      Act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
+        Act(AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT);
     }
 
-  LearnFromSuccess( victim, gsn_dodge );
-  return true;
+    if(!IsNpc(ch)
+       && !ch->PCData->Flags.test(Flag::PCData::Gag))
+    {
+        Act(AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR);
+    }
+
+    LearnFromSuccess(victim, gsn_dodge);
+    return true;
 }
 
-bool CheckGrip( Character *ch, Character *victim )
+bool CheckGrip(Character *ch, Character *victim)
 {
-  int grip_chance = 0;
+    int grip_chance = 0;
 
-  if ( !IsAwake(victim) )
+    if(!IsAwake(victim))
     {
-      return false;
+        return false;
     }
 
-  if ( IsNpc(victim) && !victim->DefenseFlags.test(Flag::Defense::Grip))
+    if(IsNpc(victim) && !victim->DefenseFlags.test(Flag::Defense::Grip))
     {
-      return false;
+        return false;
     }
 
-  if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
-      grip_chance  = umin( 60, 2 * victim->TopLevel );
+        grip_chance = umin(60, 2 * victim->TopLevel);
     }
-  else
+    else
     {
-      grip_chance  = (int) (victim->PCData->Learned[gsn_grip] / 2);
-    }
-
-  /* Consider luck as a factor */
-  grip_chance += (2 * (GetCurrentLuck(victim) - 13 ) );
-
-  if ( GetRandomPercent() >= grip_chance + victim->TopLevel - ch->TopLevel )
-    {
-      LearnFromFailure( victim, gsn_grip );
-      return false;
+        grip_chance = (int)(victim->PCData->Learned[gsn_grip] / 2);
     }
 
-  Act( AT_SKILL, "You evade $n's attempt to disarm you.", ch, NULL, victim, TO_VICT    );
-  Act( AT_SKILL, "$N holds $S weapon strongly, and is not disarmed.",
-       ch, NULL, victim, TO_CHAR    );
-  LearnFromSuccess( victim, gsn_grip );
-  return true;
+    /* Consider luck as a factor */
+    grip_chance += (2 * (GetCurrentLuck(victim) - 13));
+
+    if(GetRandomPercent() >= grip_chance + victim->TopLevel - ch->TopLevel)
+    {
+        LearnFromFailure(victim, gsn_grip);
+        return false;
+    }
+
+    Act(AT_SKILL, "You evade $n's attempt to disarm you.", ch, NULL, victim, TO_VICT);
+    Act(AT_SKILL, "$N holds $S weapon strongly, and is not disarmed.",
+        ch, NULL, victim, TO_CHAR);
+    LearnFromSuccess(victim, gsn_grip);
+    return true;
 }
 

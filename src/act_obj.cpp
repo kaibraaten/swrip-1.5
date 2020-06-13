@@ -26,6 +26,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
  /*
   * how resistant an object is to damage                         -Thoric
@@ -35,26 +36,26 @@ short GetObjectResistance(const Object *obj)
     short resist = NumberFuzzy(MAX_ITEM_IMPACT);
 
     /* magical items are more resistant */
-    if (obj->Flags.test(Flag::Obj::Magic))
+    if(obj->Flags.test(Flag::Obj::Magic))
         resist += NumberFuzzy(12);
 
     /* blessed objects should have a little bonus */
-    if (obj->Flags.test(Flag::Obj::Bless))
+    if(obj->Flags.test(Flag::Obj::Bless))
         resist += NumberFuzzy(5);
 
-/* lets make store inventory pretty tough */
-    if (obj->Flags.test(Flag::Obj::Inventory))
+    /* lets make store inventory pretty tough */
+    if(obj->Flags.test(Flag::Obj::Inventory))
         resist += 20;
 
     /* okay... let's add some bonus/penalty for item level... */
     resist += (obj->Level / 10);
 
     /* and lasty... take armor or weapon's condition into consideration */
-    if (obj->ItemType == ITEM_ARMOR)
+    if(obj->ItemType == ITEM_ARMOR)
     {
         resist += (obj->Value[OVAL_ARMOR_CONDITION]);
     }
-    else if (obj->ItemType == ITEM_WEAPON)
+    else if(obj->ItemType == ITEM_WEAPON)
     {
         resist += (obj->Value[OVAL_WEAPON_CONDITION]);
     }
@@ -73,18 +74,18 @@ obj_ret DamageObject(Object *obj)
     Character *ch = obj->CarriedBy;
     obj_ret objcode = rNONE;
 
-    if (ch != nullptr && IsInArena(ch))
+    if(ch != nullptr && IsInArena(ch))
     {
         return objcode;
     }
 
     SeparateOneObjectFromGroup(obj);
 
-    if (ch)
+    if(ch)
     {
         Act(AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR);
     }
-    else if (obj->InRoom && !obj->InRoom->Characters().empty())
+    else if(obj->InRoom && !obj->InRoom->Characters().empty())
     {
         ch = obj->InRoom->Characters().front();
         Act(AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_ROOM);
@@ -94,10 +95,10 @@ obj_ret DamageObject(Object *obj)
 
     ObjProgDamageTrigger(ch, obj);
 
-    if (IsObjectExtracted(obj))
+    if(IsObjectExtracted(obj))
         return global_objcode;
 
-    switch (obj->ItemType)
+    switch(obj->ItemType)
     {
     default:
         MakeScraps(obj);
@@ -105,7 +106,7 @@ obj_ret DamageObject(Object *obj)
         break;
 
     case ITEM_CONTAINER:
-        if (--obj->Value[OVAL_CONTAINER_CONDITION] <= 0)
+        if(--obj->Value[OVAL_CONTAINER_CONDITION] <= 0)
         {
             MakeScraps(obj);
             objcode = rOBJ_SCRAPPED;
@@ -113,22 +114,22 @@ obj_ret DamageObject(Object *obj)
         break;
 
     case ITEM_ARMOR:
-        if (ch && obj->Value[OVAL_ARMOR_CONDITION] >= 1)
+        if(ch && obj->Value[OVAL_ARMOR_CONDITION] >= 1)
             ch->ArmorClass += GetObjectArmorClass(obj, obj->WearLoc);
 
-        if (--obj->Value[OVAL_ARMOR_CONDITION] <= 0)
+        if(--obj->Value[OVAL_ARMOR_CONDITION] <= 0)
         {
             MakeScraps(obj);
             objcode = rOBJ_SCRAPPED;
         }
         else
-            if (ch && obj->Value[OVAL_ARMOR_CONDITION] >= 1)
+            if(ch && obj->Value[OVAL_ARMOR_CONDITION] >= 1)
                 ch->ArmorClass -= GetObjectArmorClass(obj, obj->WearLoc);
 
         break;
 
     case ITEM_WEAPON:
-        if (--obj->Value[OVAL_WEAPON_CONDITION] <= 0)
+        if(--obj->Value[OVAL_WEAPON_CONDITION] <= 0)
         {
             MakeScraps(obj);
             objcode = rOBJ_SCRAPPED;
@@ -145,10 +146,10 @@ void ObjectFallIfNoFloor(Object *obj, bool through)
     static int fall_count;
     static bool is_falling; /* Stop loops from the call to ObjectToRoom()  -- Altrag */
 
-    if (!obj->InRoom || is_falling)
+    if(!obj->InRoom || is_falling)
         return;
 
-    if (fall_count > 30)
+    if(fall_count > 30)
     {
         Log->Bug("object falling in loop more than 30 times");
         ExtractObject(obj);
@@ -156,26 +157,26 @@ void ObjectFallIfNoFloor(Object *obj, bool through)
         return;
     }
 
-    if (obj->InRoom->Flags.test(Flag::Room::NoFloor)
-        && CAN_GO(obj, DIR_DOWN)
-        && !obj->Flags.test(Flag::Obj::Magic))
+    if(obj->InRoom->Flags.test(Flag::Room::NoFloor)
+       && CAN_GO(obj, DIR_DOWN)
+       && !obj->Flags.test(Flag::Obj::Magic))
     {
         auto pexit = GetExit(obj->InRoom, DIR_DOWN);
         auto to_room = pexit->ToRoom;
 
-        if (through)
+        if(through)
             fall_count++;
         else
             fall_count = 0;
 
-        if (obj->InRoom == to_room)
+        if(obj->InRoom == to_room)
         {
             Log->Bug("Object falling into same room, room %ld", to_room->Vnum);
             ExtractObject(obj);
             return;
         }
 
-        if (!obj->InRoom->Characters().empty())
+        if(!obj->InRoom->Characters().empty())
         {
             Character *ch = obj->InRoom->Characters().front();
             Act(AT_PLAIN, "$p falls far below...", ch, obj, NULL, TO_ROOM);
@@ -187,27 +188,27 @@ void ObjectFallIfNoFloor(Object *obj, bool through)
         obj = ObjectToRoom(obj, to_room);
         is_falling = false;
 
-        if (!obj->InRoom->Characters().empty())
+        if(!obj->InRoom->Characters().empty())
         {
             Character *ch = obj->InRoom->Characters().front();
             Act(AT_PLAIN, "$p falls from above...", ch, obj, NULL, TO_ROOM);
             Act(AT_PLAIN, "$p falls from above...", ch, obj, NULL, TO_CHAR);
         }
 
-        if (!obj->InRoom->Flags.test(Flag::Room::NoFloor)
-            && through)
+        if(!obj->InRoom->Flags.test(Flag::Room::NoFloor)
+           && through)
         {
             int dam = fall_count * obj->Weight / 2;
 
             /* Damage players */
-            if (!obj->InRoom->Characters().empty() && GetRandomPercent() > 15)
+            if(!obj->InRoom->Characters().empty() && GetRandomPercent() > 15)
             {
                 Character *vch = NULL;
                 int chcnt = 0;
 
-                for (Character *rch : obj->InRoom->Characters())
+                for(Character *rch : obj->InRoom->Characters())
                 {
-                    if (GetRandomNumberFromRange(0, chcnt) == 0)
+                    if(GetRandomNumberFromRange(0, chcnt) == 0)
                     {
                         vch = rch;
                     }
@@ -217,16 +218,16 @@ void ObjectFallIfNoFloor(Object *obj, bool through)
 
                 Act(AT_WHITE, "$p falls on $n!", vch, obj, NULL, TO_ROOM);
                 Act(AT_WHITE, "$p falls on you!", vch, obj, NULL, TO_CHAR);
-                InflictDamage(vch, vch, dam*vch->TopLevel, TYPE_UNDEFINED);
+                InflictDamage(vch, vch, dam * vch->TopLevel, TYPE_UNDEFINED);
             }
             /* Damage objects */
-            switch (obj->ItemType)
+            switch(obj->ItemType)
             {
             case ITEM_WEAPON:
             case ITEM_ARMOR:
-                if ((obj->Value[OVAL_ARMOR_CONDITION] - dam) <= 0)
+                if((obj->Value[OVAL_ARMOR_CONDITION] - dam) <= 0)
                 {
-                    if (!obj->InRoom->Characters().empty())
+                    if(!obj->InRoom->Characters().empty())
                     {
                         Character *ch = obj->InRoom->Characters().front();
                         Act(AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, TO_ROOM);
@@ -238,9 +239,9 @@ void ObjectFallIfNoFloor(Object *obj, bool through)
                     obj->Value[OVAL_ARMOR_CONDITION] -= dam;
                 break;
             default:
-                if ((dam * 15) > GetObjectResistance(obj))
+                if((dam * 15) > GetObjectResistance(obj))
                 {
-                    if (!obj->InRoom->Characters().empty())
+                    if(!obj->InRoom->Characters().empty())
                     {
                         Character *ch = obj->InRoom->Characters().front();
                         Act(AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, TO_ROOM);
@@ -261,28 +262,28 @@ bool RemoveObject(Character *ch, WearLocation iWear, bool fReplace)
 {
     Object *obj, *tmpobj;
 
-    if ((obj = GetEquipmentOnCharacter(ch, iWear)) == NULL)
+    if((obj = GetEquipmentOnCharacter(ch, iWear)) == NULL)
         return true;
 
-    if (!fReplace
-        &&   ch->CarryNumber + GetObjectCount(obj) > GetCarryCapacityNumber(ch))
+    if(!fReplace
+       && ch->CarryNumber + GetObjectCount(obj) > GetCarryCapacityNumber(ch))
     {
         Act(AT_PLAIN, "$d: you can't carry that many items.",
             ch, NULL, obj->Name.c_str(), TO_CHAR);
         return false;
     }
 
-    if (!fReplace)
+    if(!fReplace)
         return false;
 
-    if (obj->Flags.test(Flag::Obj::NoRemove))
+    if(obj->Flags.test(Flag::Obj::NoRemove))
     {
         Act(AT_PLAIN, "You can't remove $p.", ch, obj, NULL, TO_CHAR);
         return false;
     }
 
-    if (obj == GetEquipmentOnCharacter(ch, WEAR_WIELD)
-        && (tmpobj = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD)) != NULL)
+    if(obj == GetEquipmentOnCharacter(ch, WEAR_WIELD)
+       && (tmpobj = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD)) != NULL)
         tmpobj->WearLoc = WEAR_WIELD;
 
     UnequipCharacter(ch, obj);
@@ -295,7 +296,7 @@ bool RemoveObject(Character *ch, WearLocation iWear, bool fReplace)
 
 std::string GetObjectShortDescription(const Object *obj)
 {
-    if (obj->Count > 1)
+    if(obj->Count > 1)
     {
         return FormatString("%s (%d)", obj->ShortDescr.c_str(), obj->Count);
     }

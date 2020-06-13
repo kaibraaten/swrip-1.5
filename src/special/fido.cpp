@@ -3,34 +3,35 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "act.hpp"
 
-bool spec_fido( Character *ch )
+bool spec_fido(Character *ch)
 {
-  if ( !IsAwake(ch) )
-    return false;
+    if(!IsAwake(ch))
+        return false;
 
-  std::list<Object*> corpsesToEat = Filter(ch->InRoom->Objects(),
-                                           [](const auto corpse)
-                                           {
-                                             return corpse->ItemType == ITEM_CORPSE_NPC;
-                                           });
+    std::list<Object *> corpsesToEat = Filter(ch->InRoom->Objects(),
+                                              [](const auto corpse)
+                                              {
+                                                  return corpse->ItemType == ITEM_CORPSE_NPC;
+                                              });
 
-  for(Object *corpse : corpsesToEat)
+    for(Object *corpse : corpsesToEat)
     {
-      Act( AT_ACTION, "$n savagely devours a corpse.", ch, NULL, NULL, TO_ROOM );
+        Act(AT_ACTION, "$n savagely devours a corpse.", ch, NULL, NULL, TO_ROOM);
 
-      std::list<Object*> objectsInCorpse(corpse->Objects());
+        std::list<Object *> objectsInCorpse(corpse->Objects());
 
-      for(Object *obj : objectsInCorpse)
+        for(Object *obj : objectsInCorpse)
         {
-          ObjectFromObject( obj );
-          ObjectToRoom( obj, ch->InRoom );
+            ObjectFromObject(obj);
+            ObjectToRoom(obj, ch->InRoom);
         }
 
-      ExtractObject( corpse );
-      return true;
+        ExtractObject(corpse);
+        return true;
     }
 
-  return false;
+    return false;
 }
 

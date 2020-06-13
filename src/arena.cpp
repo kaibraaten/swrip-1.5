@@ -40,6 +40,7 @@
 #include "log.hpp"
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
+#include "act.hpp"
 
 Arena arena;
 std::list<HallOfFameElement*> FameList;

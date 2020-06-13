@@ -30,6 +30,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 #define TRACK_THROUGH_DOORS
 
@@ -47,9 +48,9 @@ struct bfs_queue_struct
     bfs_queue_struct *Next = nullptr;
 };
 
-static struct bfs_queue_struct *queue_head = NULL;
-static struct bfs_queue_struct *queue_tail = NULL;
-static struct bfs_queue_struct *room_queue = NULL;
+static bfs_queue_struct *queue_head = NULL;
+static bfs_queue_struct *queue_tail = NULL;
+static bfs_queue_struct *room_queue = NULL;
 
 /* Utility macros */
 static void MARK(std::shared_ptr<Room> room)
@@ -131,7 +132,7 @@ static void bfs_clear_queue()
 
 static void room_enqueue(std::shared_ptr<Room> room)
 {
-    bfs_queue_struct *curr = new bfs_queue_struct();
+    auto curr = new bfs_queue_struct();
     curr->room = room;
     curr->Next = room_queue;
 

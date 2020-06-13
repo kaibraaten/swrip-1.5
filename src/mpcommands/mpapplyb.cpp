@@ -4,44 +4,45 @@
 #include "log.hpp"
 #include "descriptor.hpp"
 #include "race.hpp"
+#include "act.hpp"
 
-void do_mpapplyb( Character *ch, std::string argument )
+void do_mpapplyb(Character *ch, std::string argument)
 {
     Character *victim = NULL;
 
-    if ( !IsNpc( ch ) )
+    if(!IsNpc(ch))
     {
         ch->Echo("Huh?\r\n");
         return;
     }
 
-    if ( argument.empty() )
+    if(argument.empty())
     {
-        ProgBug("Mpapplyb - bad syntax", ch );
+        ProgBug("Mpapplyb - bad syntax", ch);
         return;
     }
 
-    if ( (victim = GetCharacterInRoomMudProg( ch, argument ) ) == NULL )
+    if((victim = GetCharacterInRoomMudProg(ch, argument)) == NULL)
     {
-        ProgBug("Mpapplyb - no such player in room.", ch );
+        ProgBug("Mpapplyb - no such player in room.", ch);
         return;
     }
 
-    if ( !victim->Desc )
+    if(!victim->Desc)
     {
         ch->Echo("Not on linkdeads.\r\n");
         return;
     }
 
-    if( IsAuthed(victim) )
+    if(IsAuthed(victim))
         return;
 
-    if ( GetTimer(victim, TIMER_APPLIED) >= 1)
+    if(GetTimer(victim, TIMER_APPLIED) >= 1)
         return;
 
     std::string logBuf;
-    
-    switch( victim->PCData->AuthState )
+
+    switch(victim->PCData->AuthState)
     {
     case 0:
     case 1:
@@ -63,15 +64,15 @@ void do_mpapplyb( Character *ch, std::string argument )
 
     case 3:
         victim->Echo("The gods permit you to enter the Star Wars Reality.\r\n");
-        victim->PCData->Flags.reset( Flag::PCData::Unauthed );
+        victim->PCData->Flags.reset(Flag::PCData::Unauthed);
 
-        if ( victim->Fighting )
-            StopFighting( victim, true );
+        if(victim->Fighting)
+            StopFighting(victim, true);
 
         CharacterFromRoom(victim);
         CharacterToRoom(victim, GetRoom(ROOM_VNUM_SCHOOL));
-        Act( AT_WHITE, "$n enters this world from within a column of blinding light!",
-             victim, NULL, NULL, TO_ROOM );
+        Act(AT_WHITE, "$n enters this world from within a column of blinding light!",
+            victim, NULL, NULL, TO_ROOM);
         do_look(victim, "auto");
         break;
     }

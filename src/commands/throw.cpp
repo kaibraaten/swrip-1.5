@@ -6,6 +6,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 void do_throw(Character *ch, std::string argument)
 {
@@ -25,7 +26,7 @@ void do_throw(Character *ch, std::string argument)
 
     auto was_in_room = ch->InRoom;
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("Usage: throw <object> [direction] [target]\r\n");
         return;
@@ -33,49 +34,49 @@ void do_throw(Character *ch, std::string argument)
 
     obj = GetEquipmentOnCharacter(ch, WEAR_MISSILE_WIELD);
 
-    if (!obj || !NiftyIsName(arg, obj->Name))
+    if(!obj || !NiftyIsName(arg, obj->Name))
         obj = GetEquipmentOnCharacter(ch, WEAR_HOLD);
 
-    if (!obj || !NiftyIsName(arg, obj->Name))
+    if(!obj || !NiftyIsName(arg, obj->Name))
         obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
-    if (!obj || !NiftyIsName(arg, obj->Name))
+    if(!obj || !NiftyIsName(arg, obj->Name))
         obj = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD);
 
-    if (!obj || !NiftyIsName(arg, obj->Name))
-        if (!obj || !NiftyIsNamePrefix(arg, obj->Name))
+    if(!obj || !NiftyIsName(arg, obj->Name))
+        if(!obj || !NiftyIsNamePrefix(arg, obj->Name))
             obj = GetEquipmentOnCharacter(ch, WEAR_HOLD);
 
-    if (!obj || !NiftyIsNamePrefix(arg, obj->Name))
+    if(!obj || !NiftyIsNamePrefix(arg, obj->Name))
         obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
-    if (!obj || !NiftyIsNamePrefix(arg, obj->Name))
+    if(!obj || !NiftyIsNamePrefix(arg, obj->Name))
         obj = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD);
 
-    if (!obj || !NiftyIsNamePrefix(arg, obj->Name))
+    if(!obj || !NiftyIsNamePrefix(arg, obj->Name))
     {
         ch->Echo("You don't seem to be holding or wielding %s.\r\n", arg.c_str());
         return;
     }
 
-    if (obj->Flags.test(Flag::Obj::NoRemove))
+    if(obj->Flags.test(Flag::Obj::NoRemove))
     {
         Act(AT_PLAIN, "You can't throw $p.", ch, obj, NULL, TO_CHAR);
         return;
     }
 
-    if (ch->Position == POS_FIGHTING)
+    if(ch->Position == POS_FIGHTING)
     {
         victim = GetFightingOpponent(ch);
 
-        if (CharacterDiedRecently(victim))
+        if(CharacterDiedRecently(victim))
             return;
 
         Act(AT_ACTION, "You throw $p at $N.", ch, obj, victim, TO_CHAR);
         Act(AT_ACTION, "$n throws $p at $N.", ch, obj, victim, TO_NOTVICT);
         Act(AT_ACTION, "$n throw $p at you.", ch, obj, victim, TO_VICT);
     }
-    else if (arg2.empty())
+    else if(arg2.empty())
     {
         sprintf(buf, "$n throws %s at the floor.", obj->ShortDescr.c_str());
         Act(AT_ACTION, buf, ch, NULL, NULL, TO_ROOM);
@@ -83,21 +84,21 @@ void do_throw(Character *ch, std::string argument)
 
         victim = NULL;
     }
-    else  if ((dir = GetDirection(arg2)) != -1)
+    else  if((dir = GetDirection(arg2)) != -1)
     {
-        if ((pexit = GetExit(ch->InRoom, dir)) == NULL)
+        if((pexit = GetExit(ch->InRoom, dir)) == NULL)
         {
             ch->Echo("Are you expecting to throw it through a wall?\r\n");
             return;
         }
 
-        if (pexit->Flags.test(Flag::Exit::Closed))
+        if(pexit->Flags.test(Flag::Exit::Closed))
         {
             ch->Echo("Are you expecting to throw it through a door?\r\n");
             return;
         }
 
-        switch (dir)
+        switch(dir)
         {
         case DIR_NORTH:
         case DIR_EAST:
@@ -133,10 +134,10 @@ void do_throw(Character *ch, std::string argument)
 
         std::shared_ptr<Room> to_room;
 
-        if (pexit->Distance > 1)
+        if(pexit->Distance > 1)
             to_room = GenerateExit(ch->InRoom, pexit);
 
-        if (to_room == NULL)
+        if(to_room == NULL)
             to_room = pexit->ToRoom;
 
         CharacterFromRoom(ch);
@@ -144,18 +145,18 @@ void do_throw(Character *ch, std::string argument)
 
         victim = GetCharacterInRoom(ch, arg3);
 
-        if (victim)
+        if(victim)
         {
-            if (IsSafe(ch, victim))
+            if(IsSafe(ch, victim))
                 return;
 
-            if (IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
+            if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
             {
                 Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR);
                 return;
             }
 
-            if (!IsNpc(victim) && ch->Flags.test(Flag::Plr::Nice))
+            if(!IsNpc(victim) && ch->Flags.test(Flag::Plr::Nice))
             {
                 ch->Echo("You feel too nice to do that!\r\n");
                 return;
@@ -164,7 +165,7 @@ void do_throw(Character *ch, std::string argument)
             CharacterFromRoom(ch);
             CharacterToRoom(ch, was_in_room);
 
-            if (ch->InRoom->Flags.test(Flag::Room::Safe))
+            if(ch->InRoom->Flags.test(Flag::Room::Safe))
             {
                 SetCharacterColor(AT_MAGIC, ch);
                 ch->Echo("You'll have to do that elsewhere.\r\n");
@@ -173,10 +174,10 @@ void do_throw(Character *ch, std::string argument)
 
             to_room = NULL;
 
-            if (pexit->Distance > 1)
+            if(pexit->Distance > 1)
                 to_room = GenerateExit(ch->InRoom, pexit);
 
-            if (to_room == NULL)
+            if(to_room == NULL)
                 to_room = pexit->ToRoom;
 
             CharacterFromRoom(ch);
@@ -200,18 +201,18 @@ void do_throw(Character *ch, std::string argument)
             Act(AT_ACTION, buf, ch, NULL, NULL, TO_ROOM);
         }
     }
-    else if ((victim = GetCharacterInRoom(ch, arg2)) != NULL)
+    else if((victim = GetCharacterInRoom(ch, arg2)) != NULL)
     {
-        if (IsSafe(ch, victim))
+        if(IsSafe(ch, victim))
             return;
 
-        if (IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
+        if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
         {
             Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR);
             return;
         }
 
-        if (!IsNpc(victim) && ch->Flags.test(Flag::Plr::Nice))
+        if(!IsNpc(victim) && ch->Flags.test(Flag::Plr::Nice))
         {
             ch->Echo("You feel too nice to do that!\r\n");
             return;
@@ -224,8 +225,8 @@ void do_throw(Character *ch, std::string argument)
     }
 
 
-    if (obj == GetEquipmentOnCharacter(ch, WEAR_WIELD)
-        && (tmpobj = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD)) != NULL)
+    if(obj == GetEquipmentOnCharacter(ch, WEAR_WIELD)
+       && (tmpobj = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD)) != NULL)
         tmpobj->WearLoc = WEAR_WIELD;
 
     UnequipCharacter(ch, obj);
@@ -233,7 +234,7 @@ void do_throw(Character *ch, std::string argument)
     ObjectFromCharacter(obj);
     obj = ObjectToRoom(obj, ch->InRoom);
 
-    if (obj->ItemType != ITEM_GRENADE)
+    if(obj->ItemType != ITEM_GRENADE)
         DamageObject(obj);
 
     /* NOT NEEDED UNLESS REFERING TO OBJECT AGAIN
@@ -241,13 +242,13 @@ void do_throw(Character *ch, std::string argument)
        if( IsObjectExtracted(obj) )
        return;
     */
-    if (ch->InRoom != was_in_room)
+    if(ch->InRoom != was_in_room)
     {
         CharacterFromRoom(ch);
         CharacterToRoom(ch, was_in_room);
     }
 
-    if (!victim || CharacterDiedRecently(victim))
+    if(!victim || CharacterDiedRecently(victim))
     {
         LearnFromFailure(ch, gsn_throw);
     }
@@ -255,7 +256,7 @@ void do_throw(Character *ch, std::string argument)
     {
         SetWaitState(ch, SkillTable[gsn_throw]->Beats);
 
-        if (IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_throw])
+        if(IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_throw])
         {
             LearnFromSuccess(ch, gsn_throw);
             global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(obj->Weight * 2, (obj->Weight * 2 + ch->PermStats.Str)), TYPE_HIT);
@@ -266,9 +267,9 @@ void do_throw(Character *ch, std::string argument)
             global_retcode = InflictDamage(ch, victim, 0, TYPE_HIT);
         }
 
-        if (IsNpc(victim) && !CharacterDiedRecently(victim))
+        if(IsNpc(victim) && !CharacterDiedRecently(victim))
         {
-            if (victim->Flags.test(Flag::Mob::Sentinel))
+            if(victim->Flags.test(Flag::Mob::Sentinel))
             {
                 victim->WasSentinel = victim->InRoom;
                 victim->Flags.reset(Flag::Mob::Sentinel);

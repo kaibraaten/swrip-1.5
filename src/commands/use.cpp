@@ -2,107 +2,108 @@
 #include "mud.hpp"
 #include "log.hpp"
 #include "object.hpp"
+#include "act.hpp"
 
-void do_use( Character *ch, std::string argument )
+void do_use(Character *ch, std::string argument)
 {
-  std::string arg;
-  std::string argd;
-  Character *victim = nullptr;
-  Object *device = nullptr;
-  Object *obj = nullptr;
-  ch_ret retcode = rNONE;
+    std::string arg;
+    std::string argd;
+    Character *victim = nullptr;
+    Object *device = nullptr;
+    Object *obj = nullptr;
+    ch_ret retcode = rNONE;
 
-  argument = OneArgument( argument, argd );
-  argument = OneArgument( argument, arg );
+    argument = OneArgument(argument, argd);
+    argument = OneArgument(argument, arg);
 
-  if ( !StrCmp( arg , "on" ) )
-    argument = OneArgument( argument, arg );
+    if(!StrCmp(arg, "on"))
+        argument = OneArgument(argument, arg);
 
-  if ( argd.empty() )
+    if(argd.empty())
     {
-      ch->Echo("Use what?\r\n");
-      return;
+        ch->Echo("Use what?\r\n");
+        return;
     }
 
-  if ( ( device = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL ||
-       !NiftyIsName(argd, device->Name) )
+    if((device = GetEquipmentOnCharacter(ch, WEAR_HOLD)) == NULL ||
+       !NiftyIsName(argd, device->Name))
     {
-      do_takedrug( ch , argd );
-      return;
+        do_takedrug(ch, argd);
+        return;
     }
 
-  if ( device->ItemType == ITEM_SPICE )
+    if(device->ItemType == ITEM_SPICE)
     {
-      do_takedrug( ch , argd );
-      return;
+        do_takedrug(ch, argd);
+        return;
     }
 
-  if ( device->ItemType != ITEM_DEVICE )
+    if(device->ItemType != ITEM_DEVICE)
     {
-      ch->Echo("You can't figure out what it is your supposed to do with it.\r\n");
-      return;
+        ch->Echo("You can't figure out what it is your supposed to do with it.\r\n");
+        return;
     }
 
-  if ( device->Value[OVAL_DEVICE_CHARGES] <= 0 )
+    if(device->Value[OVAL_DEVICE_CHARGES] <= 0)
     {
-      ch->Echo("It has no more charge left.");
-      return;
+        ch->Echo("It has no more charge left.");
+        return;
     }
 
-  obj = NULL;
-  
-  if ( arg.empty() )
+    obj = NULL;
+
+    if(arg.empty())
     {
-      if ( ch->Fighting )
+        if(ch->Fighting)
         {
-          victim = GetFightingOpponent( ch );
+            victim = GetFightingOpponent(ch);
         }
-      else
+        else
         {
-          ch->Echo("Use on whom or what?\r\n");
-          return;
-        }
-    }
-  else
-    {
-      if ( ( victim = GetCharacterInRoom ( ch, arg ) ) == NULL
-           &&   ( obj    = GetObjectHere  ( ch, arg ) ) == NULL )
-        {
-          ch->Echo("You can't find your target.\r\n");
-          return;
+            ch->Echo("Use on whom or what?\r\n");
+            return;
         }
     }
-
-  SetWaitState( ch, 1 * PULSE_VIOLENCE );
-
-  if ( device->Value[OVAL_DEVICE_CHARGES] > 0 )
+    else
     {
-      device->Value[OVAL_DEVICE_CHARGES]--;
-
-      if ( victim )
+        if((victim = GetCharacterInRoom(ch, arg)) == NULL
+           && (obj = GetObjectHere(ch, arg)) == NULL)
         {
-          if ( !ObjProgUseTrigger( ch, device, victim, NULL, NULL ) )
+            ch->Echo("You can't find your target.\r\n");
+            return;
+        }
+    }
+
+    SetWaitState(ch, 1 * PULSE_VIOLENCE);
+
+    if(device->Value[OVAL_DEVICE_CHARGES] > 0)
+    {
+        device->Value[OVAL_DEVICE_CHARGES]--;
+
+        if(victim)
+        {
+            if(!ObjProgUseTrigger(ch, device, victim, NULL, NULL))
             {
-              Act( AT_MAGIC, "$n uses $p on $N.", ch, device, victim, TO_ROOM );
-              Act( AT_MAGIC, "You use $p on $N.", ch, device, victim, TO_CHAR );
+                Act(AT_MAGIC, "$n uses $p on $N.", ch, device, victim, TO_ROOM);
+                Act(AT_MAGIC, "You use $p on $N.", ch, device, victim, TO_CHAR);
             }
         }
-      else
+        else
         {
-          if ( !ObjProgUseTrigger( ch, device, NULL, obj, NULL ) )
+            if(!ObjProgUseTrigger(ch, device, NULL, obj, NULL))
             {
-              Act( AT_MAGIC, "$n uses $p on $P.", ch, device, obj, TO_ROOM );
-              Act( AT_MAGIC, "You use $p on $P.", ch, device, obj, TO_CHAR );
+                Act(AT_MAGIC, "$n uses $p on $P.", ch, device, obj, TO_ROOM);
+                Act(AT_MAGIC, "You use $p on $P.", ch, device, obj, TO_CHAR);
             }
         }
 
-      retcode = CastSpellWithObject( device->Value[OVAL_DEVICE_SPELL],
-                                     device->Value[OVAL_DEVICE_LEVEL], ch, victim, obj );
+        retcode = CastSpellWithObject(device->Value[OVAL_DEVICE_SPELL],
+                                      device->Value[OVAL_DEVICE_LEVEL], ch, victim, obj);
 
-      if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
+        if(retcode == rCHAR_DIED || retcode == rBOTH_DIED)
         {
-          Log->Bug( "do_use: char died" );
-          return;
+            Log->Bug("do_use: char died");
+            return;
         }
     }
 }

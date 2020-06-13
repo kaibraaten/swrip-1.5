@@ -4,25 +4,26 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
 bool spec_police_jail(Character *ch)
 {
-    if (!IsAwake(ch) || ch->Fighting)
+    if(!IsAwake(ch) || ch->Fighting)
         return false;
 
-    std::list<Character*> potentialCriminals = Filter(ch->InRoom->Characters(),
-        [ch](auto victim)
-    {
-        return !IsNpc(victim)
-            && CanSeeCharacter(ch, victim)
-            && NumberBits(1) != 0;
-    });
+    auto potentialCriminals = Filter(ch->InRoom->Characters(),
+                                     [ch](auto victim)
+                                     {
+                                         return !IsNpc(victim)
+                                             && CanSeeCharacter(ch, victim)
+                                             && NumberBits(1) != 0;
+                                     });
 
-    for (Character *victim : potentialCriminals)
+    for(auto victim : potentialCriminals)
     {
-        for (size_t vip = 0; vip < Flag::MAX; vip++)
+        for(size_t vip = 0; vip < Flag::MAX; vip++)
         {
-            if (ch->VipFlags.test(vip) && victim->PCData->WantedOn.test(vip))
+            if(ch->VipFlags.test(vip) && victim->PCData->WantedOn.test(vip))
             {
                 std::shared_ptr<Room> jail;
                 char buf[MAX_STRING_LENGTH];
@@ -30,10 +31,10 @@ bool spec_police_jail(Character *ch)
                 sprintf(buf, "Hey you're wanted on %s!", WantedFlags[vip]);
                 do_say(ch, buf);
 
-                if (vip == Flag::Wanted::Adari)
+                if(vip == Flag::Wanted::Adari)
                     jail = GetRoom(ROOM_JAIL_ADARI);
-                else if (vip == Flag::Wanted::MonCalamari)
-                    switch (GetRandomNumberFromRange(1, 4))
+                else if(vip == Flag::Wanted::MonCalamari)
+                    switch(GetRandomNumberFromRange(1, 4))
                     {
                     case 1:
                         jail = GetRoom(ROOM_JAIL_MON_CALAMARI_1);
@@ -49,7 +50,7 @@ bool spec_police_jail(Character *ch)
                         break;
                     }
 
-                if (jail)
+                if(jail)
                 {
                     victim->PCData->WantedOn.reset(vip);
                     Act(AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT);

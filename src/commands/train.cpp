@@ -4,26 +4,27 @@
 #include "character.hpp"
 #include "room.hpp"
 #include "race.hpp"
+#include "act.hpp"
 
-void do_train( Character *ch, std::string arg )
+void do_train(Character *ch, std::string arg)
 {
     Character *mob = nullptr;
     bool successful = false;
 
-    if ( IsNpc(ch) )
+    if(IsNpc(ch))
         return;
 
-    switch( ch->SubState )
+    switch(ch->SubState)
     {
     default:
-        if ( arg.empty() )
+        if(arg.empty())
         {
             ch->Echo("Train what?\r\n");
             ch->Echo("\r\nChoices: strength, intelligence, wisdom, dexterity, constitution or charisma\r\n");
             return;
         }
 
-        if ( !IsAwake(ch) )
+        if(!IsAwake(ch))
         {
             ch->Echo("In your dreams, or what?\r\n");
             return;
@@ -31,120 +32,120 @@ void do_train( Character *ch, std::string arg )
 
         for(Character *potentialTrainer : ch->InRoom->Characters())
         {
-            if ( IsNpc(potentialTrainer) && potentialTrainer->Flags.test(Flag::Mob::Train))
+            if(IsNpc(potentialTrainer) && potentialTrainer->Flags.test(Flag::Mob::Train))
             {
                 mob = potentialTrainer;
                 break;
             }
         }
 
-        if ( mob == nullptr )
+        if(mob == nullptr)
         {
             ch->Echo("You can't do that here.\r\n");
             return;
         }
 
-        if ( StrCmp( arg, "str" ) && StrCmp( arg, "strength" )
-             && StrCmp( arg, "dex" ) && StrCmp( arg, "dexterity" )
-             && StrCmp( arg, "con" ) && StrCmp( arg, "constitution" )
-             && StrCmp( arg, "cha" ) && StrCmp( arg, "charisma" )
-             && StrCmp( arg, "wis" ) && StrCmp( arg, "wisdom" )
-             && StrCmp( arg, "int" ) && StrCmp( arg, "intelligence" ) )
+        if(StrCmp(arg, "str") && StrCmp(arg, "strength")
+           && StrCmp(arg, "dex") && StrCmp(arg, "dexterity")
+           && StrCmp(arg, "con") && StrCmp(arg, "constitution")
+           && StrCmp(arg, "cha") && StrCmp(arg, "charisma")
+           && StrCmp(arg, "wis") && StrCmp(arg, "wisdom")
+           && StrCmp(arg, "int") && StrCmp(arg, "intelligence"))
         {
-            do_train( ch , "" );
+            do_train(ch, "");
             return;
         }
 
-        if ( !StrCmp( arg, "str" ) || !StrCmp( arg, "strength" ) )
+        if(!StrCmp(arg, "str") || !StrCmp(arg, "strength"))
         {
-            if( mob->PermStats.Str <= ch->PermStats.Str
-                || ch->PermStats.Str >= 20 + RaceTable[ch->Race].Stats.ModStr
-                || ch->PermStats.Str >= 25 )
+            if(mob->PermStats.Str <= ch->PermStats.Str
+               || ch->PermStats.Str >= 20 + RaceTable[ch->Race].Stats.ModStr
+               || ch->PermStats.Str >= 25)
             {
-                Act( AT_TELL, "$n tells you 'I cannot help you... you are already stronger than me.'",
-                     mob, NULL, ch, TO_VICT );
+                Act(AT_TELL, "$n tells you 'I cannot help you... you are already stronger than me.'",
+                    mob, NULL, ch, TO_VICT);
                 return;
             }
 
             ch->Echo("&GYou begin your weight training.\r\n");
         }
 
-        if ( !StrCmp( arg, "dex" ) || !StrCmp( arg, "dexterity" ) )
+        if(!StrCmp(arg, "dex") || !StrCmp(arg, "dexterity"))
         {
-            if( mob->PermStats.Dex <= ch->PermStats.Dex
-                || ch->PermStats.Dex >= 20 + RaceTable[ch->Race].Stats.ModDex
-                || ch->PermStats.Dex >= 25 )
+            if(mob->PermStats.Dex <= ch->PermStats.Dex
+               || ch->PermStats.Dex >= 20 + RaceTable[ch->Race].Stats.ModDex
+               || ch->PermStats.Dex >= 25)
             {
-                Act( AT_TELL, "$n tells you 'I cannot help you... you are already more dextrous than me.'",
-                     mob, NULL, ch, TO_VICT );
+                Act(AT_TELL, "$n tells you 'I cannot help you... you are already more dextrous than me.'",
+                    mob, NULL, ch, TO_VICT);
                 return;
             }
 
             ch->Echo("&GYou begin to work at some challenging tests of coordination.\r\n");
         }
 
-        if ( !StrCmp( arg, "int" ) || !StrCmp( arg, "intelligence" ) )
+        if(!StrCmp(arg, "int") || !StrCmp(arg, "intelligence"))
         {
-            if( mob->PermStats.Int <= ch->PermStats.Int
-                || ch->PermStats.Int >= 20 + RaceTable[ch->Race].Stats.ModInt
-                || ch->PermStats.Int >= 25 )
+            if(mob->PermStats.Int <= ch->PermStats.Int
+               || ch->PermStats.Int >= 20 + RaceTable[ch->Race].Stats.ModInt
+               || ch->PermStats.Int >= 25)
             {
-                Act( AT_TELL, "$n tells you 'I cannot help you... you are already more educated than me.'",
-                     mob, NULL, ch, TO_VICT );
+                Act(AT_TELL, "$n tells you 'I cannot help you... you are already more educated than me.'",
+                    mob, NULL, ch, TO_VICT);
                 return;
             }
 
             ch->Echo("&GYou begin your studies.\r\n");
         }
 
-        if ( !StrCmp( arg, "wis" ) || !StrCmp( arg, "wisdom" ) )
+        if(!StrCmp(arg, "wis") || !StrCmp(arg, "wisdom"))
         {
-            if( mob->PermStats.Wis <= ch->PermStats.Wis
-                || ch->PermStats.Wis >= 20 + RaceTable[ch->Race].Stats.ModWis
-                || ch->PermStats.Wis >= 25 )
+            if(mob->PermStats.Wis <= ch->PermStats.Wis
+               || ch->PermStats.Wis >= 20 + RaceTable[ch->Race].Stats.ModWis
+               || ch->PermStats.Wis >= 25)
             {
-                Act( AT_TELL, "$n tells you 'I cannot help you... you are already far wiser than me.'",
-                     mob, NULL, ch, TO_VICT );
+                Act(AT_TELL, "$n tells you 'I cannot help you... you are already far wiser than me.'",
+                    mob, NULL, ch, TO_VICT);
                 return;
             }
 
             ch->Echo("&GYou begin contemplating several ancient texts in an effort to gain wisdom.\r\n");
         }
 
-        if ( !StrCmp( arg, "con" ) || !StrCmp( arg, "constitution" ) )
+        if(!StrCmp(arg, "con") || !StrCmp(arg, "constitution"))
         {
-            if( mob->PermStats.Con <= ch->PermStats.Con
-                || ch->PermStats.Con >= 20 + RaceTable[ch->Race].Stats.ModCon
-                || ch->PermStats.Con >= 25 )
+            if(mob->PermStats.Con <= ch->PermStats.Con
+               || ch->PermStats.Con >= 20 + RaceTable[ch->Race].Stats.ModCon
+               || ch->PermStats.Con >= 25)
             {
-                Act( AT_TELL, "$n tells you 'I cannot help you... you are already healthier than me.'",
-                     mob, NULL, ch, TO_VICT );
+                Act(AT_TELL, "$n tells you 'I cannot help you... you are already healthier than me.'",
+                    mob, NULL, ch, TO_VICT);
                 return;
             }
 
             ch->Echo("&GYou begin your endurance training.\r\n");
         }
 
-        if ( !StrCmp( arg, "cha" ) || !StrCmp( arg, "charisma" ) )
+        if(!StrCmp(arg, "cha") || !StrCmp(arg, "charisma"))
         {
-            if( mob->PermStats.Cha <= ch->PermStats.Cha
-                || ch->PermStats.Cha >= 20 + RaceTable[ch->Race].Stats.ModCha
-                || ch->PermStats.Cha >= 25 )
+            if(mob->PermStats.Cha <= ch->PermStats.Cha
+               || ch->PermStats.Cha >= 20 + RaceTable[ch->Race].Stats.ModCha
+               || ch->PermStats.Cha >= 25)
             {
-                Act( AT_TELL, "$n tells you 'I cannot help you... you already are more charming than me.'",
-                     mob, NULL, ch, TO_VICT );
+                Act(AT_TELL, "$n tells you 'I cannot help you... you already are more charming than me.'",
+                    mob, NULL, ch, TO_VICT);
                 return;
             }
 
             ch->Echo("&GYou begin lessons in maners and ettiquite.\r\n");
         }
 
-        AddTimerToCharacter( ch , TIMER_CMD_FUN , 10 , do_train , SUB_PAUSE );
+        AddTimerToCharacter(ch, TIMER_CMD_FUN, 10, do_train, SUB_PAUSE);
         ch->dest_buf = arg;
         return;
 
     case SUB_PAUSE:
-        if (ch->dest_buf.empty())
+        if(ch->dest_buf.empty())
             return;
 
         arg = ch->dest_buf;
@@ -160,14 +161,14 @@ void do_train( Character *ch, std::string arg )
 
     ch->SubState = SUB_NONE;
 
-    if ( NumberBits ( 2 ) == 0 )
+    if(NumberBits(2) == 0)
     {
         successful = true;
     }
 
-    if ( !StrCmp( arg, "str" ) || !StrCmp( arg, "strength" ) )
+    if(!StrCmp(arg, "str") || !StrCmp(arg, "strength"))
     {
-        if ( !successful )
+        if(!successful)
         {
             ch->Echo("&RYou feel that you have wasted a lot of energy for nothing.\r\n");
             return;
@@ -178,9 +179,9 @@ void do_train( Character *ch, std::string arg )
         return;
     }
 
-    if ( !StrCmp( arg, "dex" ) || !StrCmp( arg, "dexterity" ) )
+    if(!StrCmp(arg, "dex") || !StrCmp(arg, "dexterity"))
     {
-        if ( !successful )
+        if(!successful)
         {
             ch->Echo("&RAfter all that training you still feel like a clutz.\r\n");
             return;
@@ -191,9 +192,9 @@ void do_train( Character *ch, std::string arg )
         return;
     }
 
-    if ( !StrCmp( arg, "int" ) || !StrCmp( arg, "intelligence" ) )
+    if(!StrCmp(arg, "int") || !StrCmp(arg, "intelligence"))
     {
-        if ( !successful )
+        if(!successful)
         {
             ch->Echo("&RHitting the books leaves you only with sore eyes.\r\n");
             return;
@@ -204,9 +205,9 @@ void do_train( Character *ch, std::string arg )
         return;
     }
 
-    if ( !StrCmp( arg, "wis" ) || !StrCmp( arg, "wisdom" ) )
+    if(!StrCmp(arg, "wis") || !StrCmp(arg, "wisdom"))
     {
-        if ( !successful )
+        if(!successful)
         {
             ch->Echo("&RStudying the ancient texts has left you more confused than wise.\r\n");
             return;
@@ -218,9 +219,9 @@ void do_train( Character *ch, std::string arg )
         return;
     }
 
-    if ( !StrCmp( arg, "con" ) || !StrCmp( arg, "constitution" ) )
+    if(!StrCmp(arg, "con") || !StrCmp(arg, "constitution"))
     {
-        if ( !successful )
+        if(!successful)
         {
             ch->Echo("&RYou spend a long aerobics session exercising very hard, but finish\r\n"
                      "feeling only tired and out of breath.\r\n");
@@ -233,9 +234,9 @@ void do_train( Character *ch, std::string arg )
     }
 
 
-    if ( !StrCmp( arg, "cha" ) || !StrCmp( arg, "charisma" ) )
+    if(!StrCmp(arg, "cha") || !StrCmp(arg, "charisma"))
     {
-        if ( !successful )
+        if(!successful)
         {
             ch->Echo("&RYou finish your self improvement session feeling a little depressed.\r\n");
             return;

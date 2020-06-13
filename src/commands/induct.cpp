@@ -3,14 +3,15 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 #include "repos/playerrepository.hpp"
+#include "act.hpp"
 
-void do_induct(Character* ch, std::string argument)
+void do_induct(Character *ch, std::string argument)
 {
     std::string arg;
-    Character* victim = NULL;
+    Character *victim = NULL;
     std::shared_ptr<Clan> clan;
 
-    if (IsNpc(ch) || !IsClanned(ch))
+    if(IsNpc(ch) || !IsClanned(ch))
     {
         ch->Echo("Huh?\r\n");
         return;
@@ -18,11 +19,11 @@ void do_induct(Character* ch, std::string argument)
 
     clan = ch->PCData->ClanInfo.Clan;
 
-    if ((ch->PCData
+    if((ch->PCData
         && IsName("induct", ch->PCData->Bestowments))
-        || !StrCmp(ch->Name, clan->Leadership.Leader)
-        || !StrCmp(ch->Name, clan->Leadership.Number1)
-        || !StrCmp(ch->Name, clan->Leadership.Number2))
+       || !StrCmp(ch->Name, clan->Leadership.Leader)
+       || !StrCmp(ch->Name, clan->Leadership.Number1)
+       || !StrCmp(ch->Name, clan->Leadership.Number2))
     {
         ;
     }
@@ -34,31 +35,31 @@ void do_induct(Character* ch, std::string argument)
 
     argument = OneArgument(argument, arg);
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("Induct whom?\r\n");
         return;
     }
 
-    if ((victim = GetCharacterAnywhere(ch, arg)) == NULL)
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
         ch->Echo("That player is not here.\r\n");
         return;
     }
 
-    if (IsNpc(victim))
+    if(IsNpc(victim))
     {
         ch->Echo("Not on NPCs.\r\n");
         return;
     }
 
-    if (IsClanned(victim))
+    if(IsClanned(victim))
     {
         std::shared_ptr<Clan> victimClan = victim->PCData->ClanInfo.Clan;
 
-        if (victimClan->Type == CLAN_GUILD)
+        if(victimClan->Type == CLAN_GUILD)
         {
-            if (victimClan == clan)
+            if(victimClan == clan)
             {
                 ch->Echo("This player already belongs to your guild!\r\n");
             }
@@ -71,7 +72,7 @@ void do_induct(Character* ch, std::string argument)
         }
         else
         {
-            if (victimClan == clan)
+            if(victimClan == clan)
             {
                 ch->Echo("This player already belongs to your organization!\r\n");
             }

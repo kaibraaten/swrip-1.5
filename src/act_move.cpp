@@ -31,6 +31,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 static std::shared_ptr<Room> vroom_hash[64];
 

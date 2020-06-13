@@ -1,47 +1,48 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "act.hpp"
 
 /* prints the message to everyone in the room other than the mob and victim */
 
-void do_mpechoaround( Character *ch, std::string argument )
+void do_mpechoaround(Character *ch, std::string argument)
 {
     std::string arg;
     Character *victim = nullptr;
     short color = 0;
 
-    if ( IsAffectedBy( ch, Flag::Affect::Charm))
+    if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
-    if ( !IsNpc( ch ) )
+    if(!IsNpc(ch))
     {
         ch->Echo("Huh?\r\n");
         return;
     }
 
-    argument = OneArgument( argument, arg );
+    argument = OneArgument(argument, arg);
 
-    if ( arg.empty() )
+    if(arg.empty())
     {
-        ProgBug( "Mpechoaround - No argument", ch );
+        ProgBug("Mpechoaround - No argument", ch);
         return;
     }
 
-    if ( !( victim=GetCharacterInRoomMudProg( ch, arg ) ) )
+    if(!(victim = GetCharacterInRoomMudProg(ch, arg)))
     {
-        ProgBug( "Mpechoaround - victim does not exist", ch );
+        ProgBug("Mpechoaround - victim does not exist", ch);
         return;
     }
 
     auto mobflags = ch->Flags;
     ch->Flags.reset(Flag::Mob::Secretive);
 
-    if ( (color = GetColor(argument)) )
+    if((color = GetColor(argument)))
     {
-        argument = OneArgument( argument, arg );
-        Act( color, argument, ch, NULL, victim, TO_NOTVICT );
+        argument = OneArgument(argument, arg);
+        Act(color, argument, ch, NULL, victim, TO_NOTVICT);
     }
     else
-        Act( AT_ACTION, argument, ch, NULL, victim, TO_NOTVICT );
+        Act(AT_ACTION, argument, ch, NULL, victim, TO_NOTVICT);
 
     ch->Flags = mobflags;
 }

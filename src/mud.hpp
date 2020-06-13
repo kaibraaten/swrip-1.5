@@ -246,7 +246,7 @@ public:
 class Auction
 {
 public:
-    Object  *Item = nullptr;   /* a pointer to the item */
+    Object *Item = nullptr;   /* a pointer to the item */
     Character *Seller = nullptr; /* a pointer to the seller - which may NOT quit */
     Character *Buyer = nullptr;  /* a pointer to the buyer - which may NOT quit */
     int        Bet = 0;    /* last bet - or 0 if noone has bet anything */
@@ -270,7 +270,7 @@ public:
  */
 extern time_t last_restore_all_time;
 extern time_t boot_time;  /* this should be moved down */
-extern HourMinSec * set_boot_time;
+extern HourMinSec *set_boot_time;
 extern tm *new_boot_time;
 extern time_t new_boot_time_t;
 
@@ -285,49 +285,49 @@ extern const std::array<const ForceBonusType, MAX_STAT + 1> ForceBonus;
 
 extern const std::array<const LiquidType, LIQ_MAX> LiquidTable;
 
-extern const std::array<const char * const, MAX_ABILITY> AbilityName;
-extern const std::array<const char * const, MAX_SPACEOBJECT_TYPE> SpaceobjectTypeName;
+extern const std::array<const char *const, MAX_ABILITY> AbilityName;
+extern const std::array<const char *const, MAX_SPACEOBJECT_TYPE> SpaceobjectTypeName;
 extern const std::array<const short, SECT_MAX> MovementLoss;
-extern const std::array<const char * const, MAX_WEAR> WhereName;
+extern const std::array<const char *const, MAX_WEAR> WhereName;
 extern const std::array<int, MAX_DIR + 1> TrapDoor;
-extern const char * const SectorNames[][2];
+extern const char *const SectorNames[][2];
 extern const int SentTotal[];
-extern const char * const RoomSents[][25];
-extern const std::array<const char * const, Flag::MAX> RoomFlags;
-extern const std::array<const char * const, Flag::MAX> WearFlags;
-extern const std::array<const char * const, Flag::MAX> ObjectFlags;
-extern const std::array<const char * const, Flag::MAX> MobFlags;
-extern const std::array<const char * const, Flag::MAX> AffectFlags;
-extern const std::array<const char * const, Flag::MAX> WantedFlags;
-extern const std::array<const char * const, Flag::MAX> PlanetFlags;
-extern const std::array<const char * const, Flag::MAX> PlayerFlags;
-extern const std::array<const char * const, Flag::MAX> TrapFlags;
-extern const std::array<const char * const, Flag::MAX> RisFlags;
-extern const std::array<const char * const, Flag::MAX> TriggerFlags;
-extern const std::array<const char * const, Flag::MAX> DefenseFlags;
-extern const std::array<const char * const, Flag::MAX> AttackFlags;
-extern const std::array<const char * const, Flag::MAX> AreaFlags;
-extern const std::array<const char * const, Flag::MAX> ExitFlags;
-extern const std::array<const char * const, Flag::MAX> mprog_flags;
-extern const std::array<const char * const, Flag::MAX> SaveFlags;
-extern const std::array<const char * const, Flag::MAX> ShipFlags;
-extern const std::array<const char * const, Flag::MAX> ResidentFlags;
-extern const std::array<const char * const, Flag::MAX> HomeFlags;
+extern const char *const RoomSents[][25];
+extern const std::array<const char *const, Flag::MAX> RoomFlags;
+extern const std::array<const char *const, Flag::MAX> WearFlags;
+extern const std::array<const char *const, Flag::MAX> ObjectFlags;
+extern const std::array<const char *const, Flag::MAX> MobFlags;
+extern const std::array<const char *const, Flag::MAX> AffectFlags;
+extern const std::array<const char *const, Flag::MAX> WantedFlags;
+extern const std::array<const char *const, Flag::MAX> PlanetFlags;
+extern const std::array<const char *const, Flag::MAX> PlayerFlags;
+extern const std::array<const char *const, Flag::MAX> TrapFlags;
+extern const std::array<const char *const, Flag::MAX> RisFlags;
+extern const std::array<const char *const, Flag::MAX> TriggerFlags;
+extern const std::array<const char *const, Flag::MAX> DefenseFlags;
+extern const std::array<const char *const, Flag::MAX> AttackFlags;
+extern const std::array<const char *const, Flag::MAX> AreaFlags;
+extern const std::array<const char *const, Flag::MAX> ExitFlags;
+extern const std::array<const char *const, Flag::MAX> mprog_flags;
+extern const std::array<const char *const, Flag::MAX> SaveFlags;
+extern const std::array<const char *const, Flag::MAX> ShipFlags;
+extern const std::array<const char *const, Flag::MAX> ResidentFlags;
+extern const std::array<const char *const, Flag::MAX> HomeFlags;
 
-extern const std::array<const char * const, MAX_ITEM_TYPE + 1> ObjectTypes;
-extern const std::array<const char * const, MAX_APPLY_TYPE> AffectTypes;
-extern const std::array<const char * const, MAX_NPC_RACE> NpcRace;
-extern const std::array<const char * const, MAX_WEAR - 1> WearLocations;
+extern const std::array<const char *const, MAX_ITEM_TYPE + 1> ObjectTypes;
+extern const std::array<const char *const, MAX_APPLY_TYPE> AffectTypes;
+extern const std::array<const char *const, MAX_NPC_RACE> NpcRace;
+extern const std::array<const char *const, MAX_WEAR - 1> WearLocations;
 extern const std::array<int, LANG_MAX + 1> LanguageArray;
-extern const std::array<const char * const, LANG_MAX + 1> LanguageNames;
+extern const std::array<const char *const, LANG_MAX + 1> LanguageNames;
 
-extern const std::array<const char * const, MAX_POSITION> PositionName;
-extern const std::array<const char * const, MAX_LOG> CmdLogName;
-extern const std::array<const char * const, MAX_SHIP_TYPE> ShipTypes;
-extern const std::array<const char * const, MAX_SHIP_CLASS> ShipClasses;
-extern const std::array<const char * const, Flag::MAX> ChannelNames;
-extern const std::array<const char * const, MAX_CONDS> ConditionNames;
-extern const std::array<const char * const, MAX_SEX> SexNames;
+extern const std::array<const char *const, MAX_POSITION> PositionName;
+extern const std::array<const char *const, MAX_LOG> CmdLogName;
+extern const std::array<const char *const, MAX_SHIP_TYPE> ShipTypes;
+extern const std::array<const char *const, MAX_SHIP_CLASS> ShipClasses;
+extern const std::array<const char *const, Flag::MAX> ChannelNames;
+extern const std::array<const char *const, MAX_CONDS> ConditionNames;
+extern const std::array<const char *const, MAX_SEX> SexNames;
 
 /*
  * Global variables.
@@ -353,7 +353,7 @@ extern int cur_qchars;
 extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
-extern Character       *cur_char;
+extern Character *cur_char;
 extern std::shared_ptr<Room>             cur_room;
 extern bool             cur_char_died;
 extern ch_ret           global_retcode;
@@ -363,16 +363,16 @@ extern int              cur_obj_serial;
 extern bool             cur_obj_extracted;
 extern obj_ret          global_objcode;
 
-extern Character       *FirstCharacter;
-extern Character       *LastCharacter;
+extern Character *FirstCharacter;
+extern Character *LastCharacter;
 
 extern std::shared_ptr<TeleportData> FirstTeleport;
 extern std::shared_ptr<TeleportData> LastTeleport;
-extern Object          *save_equipment[MAX_WEAR][MAX_LAYERS];
-extern Character       *quitting_char;
-extern Character       *loading_char;
-extern Character       *saving_char;
-extern Object          *all_obj;
+extern Object *save_equipment[MAX_WEAR][MAX_LAYERS];
+extern Character *quitting_char;
+extern Character *loading_char;
+extern Character *saving_char;
+extern Object *all_obj;
 extern time_t           current_time;
 extern bool             fLogAll;
 extern TimeInfo   time_info;
@@ -976,14 +976,14 @@ void RecoverFromCopyover();
 bool IsNameAcceptable(const std::string &name);
 std::string DrunkSpeech(const std::string &argument, Character *ch);
 void TalkChannel(Character *ch, const std::string &text,
-    int channel, const std::string &verb);
+                 int channel, const std::string &verb);
 bool IsFollowingInCircle(const Character *ch, const Character *victim);
 void StartFollowing(Character *ch, Character *master);
 void StopFollowing(Character *ch);
 void DieFollower(Character *ch);
 bool IsInSameGroup(const Character *ach, const Character *bch);
 void ToChannel(const std::string &argument, int channel,
-    const std::string &verb, short level);
+               const std::string &verb, short level);
 void TalkAuction(const std::string &argument);
 bool CharacterKnowsLanguage(const Character *ch, int language, const Character *cch);
 bool CharacterCanLearnLanguage(const Character *ch, int language);
@@ -995,8 +995,8 @@ int GetRaceFromName(const std::string &arg);
 int GetClassFromName(const std::string &arg);
 void ShowCharacterCondition(const Character *ch, const Character *victim);
 std::string FormatObjectToCharacter(const Object *obj, const Character *ch, bool fShort);
-void ShowObjectListToCharacter(const std::list<Object*> &list, Character *ch,
-    bool fShort, bool fShowNothing);
+void ShowObjectListToCharacter(const std::list<Object *> &list, Character *ch,
+                               bool fShort, bool fShowNothing);
 /* act_move.c */
 void SetBExitFlag(std::shared_ptr<Exit> pexit, size_t flag);
 void RemoveBExitFlag(std::shared_ptr<Exit> pexit, size_t flag);
@@ -1027,9 +1027,9 @@ void GenerateRebootString();
 
 /* const.c */
 std::string FlagString(const std::bitset<Flag::MAX> &flags,
-    const std::array<const char * const, Flag::MAX> &nameArray);
+                       const std::array<const char *const, Flag::MAX> &nameArray);
 std::string FlagString(int bitvector,
-    const std::array<const char * const, Flag::MAX> &nameArray);
+                       const std::array<const char *const, Flag::MAX> &nameArray);
 int GetSaveFlag(const std::string &txt);
 const char *GetDirectionName(DirectionType dir);
 DirectionType GetReverseDirection(DirectionType dir);
@@ -1107,8 +1107,6 @@ void DisplayPrompt(Descriptor *d);
 void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force);
 bool WriteToDescriptor(Descriptor *desc, const std::string &txt, int length = 0);
 void SetCharacterColor(short AType, const Character *ch);
-void Act(short AType, const std::string &format, Character *ch,
-    const void *arg1, const void *arg2, int type);
 socket_t InitializeSocket(unsigned short port);
 void FreeDescriptor(std::shared_ptr<Descriptor> d);
 
@@ -1134,7 +1132,7 @@ std::shared_ptr<Room> MakeRoom(vnum_t vnum);
 std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name);
 std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name);
 std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr<Room> to_room, DirectionType door,
-    const std::string &keyword = "");
+                               const std::string &keyword = "");
 void RandomizeExits(std::shared_ptr<Room> room, short maxdir);
 bool DeleteRoom(std::shared_ptr<Room> room);
 bool DeleteObject(std::shared_ptr<ProtoObject> obj);
@@ -1198,7 +1196,7 @@ void DrawMap(const Character *ch, const std::string &desc);
 /* misc.c */
 bool IsValidLanguage(int language);
 void PullOrPush(Character *ch, Object *obj, bool pull);
-std::string FormatDate(const time_t*);
+std::string FormatDate(const time_t *);
 void ActionDescription(Character *ch, Object *obj);
 
 /* mud_comm.c */
@@ -1228,7 +1226,7 @@ void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex);
 Object *ObjectToCharacter(Object *obj, Character *ch);
 void ObjectFromCharacter(Object *obj);
 int GetObjectArmorClass(const Object *obj, int iWear);
-int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj, const std::list<Object*> &list);
+int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj, const std::list<Object *> &list);
 void ObjectFromRoom(Object *obj);
 Object *ObjectToRoom(Object *obj, std::shared_ptr<Room> pRoomIndex);
 Object *ObjectToObject(Object *obj, Object *obj_to);
@@ -1243,9 +1241,9 @@ Character *GetCharacterInRoom(const Character *ch, std::string argument);
 Character *GetCharacterAnywhere(const Character *ch, std::string argument);
 Object *GetInstanceOfObject(std::shared_ptr<ProtoObject> pObjIndexData);
 Object *GetObjectInList(const Character *ch, std::string objName,
-    const std::list<Object*> &list);
+                        const std::list<Object *> &list);
 Object *GetObjectInListReverse(const Character *ch, std::string objName,
-    const std::list<Object*> &list);
+                               const std::list<Object *> &list);
 Object *GetObjectHere(const Character *ch, std::string argument);
 Object *GetObjectAnywhere(const Character *ch, std::string argument);
 int GetObjectCount(const Object *obj);
@@ -1299,14 +1297,14 @@ void UpdateNumberOfTimesUsed(timeval *time_used, std::shared_ptr<timerset> usere
 /* magic.c */
 int ModifySavingThrowBasedOnResistance(const Character *ch, int save_chance, int ris);
 void SuccessfulCasting(std::shared_ptr<Skill> skill, Character *ch,
-    Character *victim, Object *obj);
+                       Character *victim, Object *obj);
 void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
-    Character *victim, Object *obj);
+                   Character *victim, Object *obj);
 bool IsImmuneToDamageType(const Character *ch, short damtype);
 bool CheckSavingThrow(int sn, int level, const Character *ch, const Character *victim);
 void ImmuneCasting(std::shared_ptr<Skill> skill, Character *ch, Character *victim, Object *obj);
 void *LocateSpellTargets(Character *ch, const std::string &arg,
-    int sn, Character **victim, Object **obj);
+                         int sn, Character **victim, Object **obj);
 int FindSpell(const Character *ch, const std::string &name, bool know);
 bool SaveVsPoisonDeath(int level, const Character *victim);
 bool SaveVsWands(int level, const Character *victim);
@@ -1320,7 +1318,7 @@ int ParseDice(const Character *ch, int level, const std::string &exp);
 void SaveClone(Character *ch);
 void SetAlarm(long seconds);
 void WriteObject(const Character *ch, const Object *obj, FILE *fp,
-    int iNest, short os_type);
+                 int iNest, short os_type);
 void ReadObject(Character *ch, FILE *fp, short os_type);
 void DeEquipCharacter(Character *ch);
 void ReEquipCharacter(Character *ch);

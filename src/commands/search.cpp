@@ -8,48 +8,49 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 void do_search(Character *ch, std::string arg)
 {
     Object *obj = NULL;
     Object *container = NULL;
-    std::list<Object*> searchList;
+    std::list<Object *> searchList;
     int percent = 0;
     DirectionType door = DIR_INVALID;
     bool found = false;
 
-    switch (ch->SubState)
+    switch(ch->SubState)
     {
     default:
-        if (IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
+        if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
         {
             ch->Echo("You can't concentrate enough for that.\r\n");
             return;
         }
 
-        if (ch->Mount)
+        if(ch->Mount)
         {
             ch->Echo("You can't do that while mounted.\r\n");
             return;
         }
 
-        if (!arg.empty() && (door = GetDirection(arg)) == -1)
+        if(!arg.empty() && (door = GetDirection(arg)) == -1)
         {
             container = GetObjectHere(ch, arg);
 
-            if (!container)
+            if(!container)
             {
                 ch->Echo("You can't find that here.\r\n");
                 return;
             }
 
-            if (container->ItemType != ITEM_CONTAINER)
+            if(container->ItemType != ITEM_CONTAINER)
             {
                 ch->Echo("You can't search in that!\r\n");
                 return;
             }
 
-            if (IsBitSet(container->Value[1], CONT_CLOSED))
+            if(IsBitSet(container->Value[1], CONT_CLOSED))
             {
                 ch->Echo("It is closed.\r\n");
                 return;
@@ -62,7 +63,7 @@ void do_search(Character *ch, std::string arg)
         return;
 
     case SUB_PAUSE:
-        if (ch->dest_buf.empty())
+        if(ch->dest_buf.empty())
         {
             ch->Echo("Your search was interrupted!\r\n");
             Log->Bug("do_search: dest_buf NULL");
@@ -82,7 +83,7 @@ void do_search(Character *ch, std::string arg)
 
     ch->SubState = SUB_NONE;
 
-    if (arg.empty())
+    if(arg.empty())
     {
         searchList = ch->InRoom->Objects();
     }
@@ -90,11 +91,11 @@ void do_search(Character *ch, std::string arg)
     {
         door = GetDirection(arg);
 
-        if (door == DIR_INVALID)
+        if(door == DIR_INVALID)
         {
             container = GetObjectHere(ch, arg);
 
-            if (container == nullptr)
+            if(container == nullptr)
             {
                 ch->Echo("You can't find that here.\r\n");
                 return;
@@ -106,7 +107,7 @@ void do_search(Character *ch, std::string arg)
 
     found = false;
 
-    if ((searchList.empty() && door == DIR_INVALID) || IsNpc(ch))
+    if((searchList.empty() && door == DIR_INVALID) || IsNpc(ch))
     {
         ch->Echo("You find nothing.\r\n");
         LearnFromFailure(ch, gsn_search);
@@ -115,14 +116,14 @@ void do_search(Character *ch, std::string arg)
 
     percent = GetRandomPercent();
 
-    if (door != -1)
+    if(door != -1)
     {
         std::shared_ptr<Exit> pexit;
 
-        if ((pexit = GetExit(ch->InRoom, door)) != NULL
-            && pexit->Flags.test(Flag::Exit::Secret)
-            && pexit->Flags.test(Flag::Exit::Searchable)
-            && percent < (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_search]))
+        if((pexit = GetExit(ch->InRoom, door)) != NULL
+           && pexit->Flags.test(Flag::Exit::Secret)
+           && pexit->Flags.test(Flag::Exit::Searchable)
+           && percent < (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_search]))
         {
             Act(AT_SKILL, "Your search reveals the $d!",
                 ch, nullptr, pexit->Keyword.c_str(), TO_CHAR);
@@ -134,10 +135,10 @@ void do_search(Character *ch, std::string arg)
     }
     else
     {
-        for (Object *hiddenObject : searchList)
+        for(Object *hiddenObject : searchList)
         {
-            if (obj->Flags.test(Flag::Obj::Hidden)
-                && percent < ch->PCData->Learned[gsn_search])
+            if(obj->Flags.test(Flag::Obj::Hidden)
+               && percent < ch->PCData->Learned[gsn_search])
             {
                 obj = hiddenObject;
                 found = true;
@@ -146,7 +147,7 @@ void do_search(Character *ch, std::string arg)
         }
     }
 
-    if (!found)
+    if(!found)
     {
         ch->Echo("You find nothing.\r\n");
         LearnFromFailure(ch, gsn_search);

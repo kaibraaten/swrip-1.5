@@ -5,8 +5,9 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
-void show_char_to_char(const std::list<Character*> &list, Character *ch);
+void show_char_to_char(const std::list<Character *> &list, Character *ch);
 
 void do_scan(Character *ch, std::string argument)
 {
@@ -15,13 +16,13 @@ void do_scan(Character *ch, std::string argument)
     short dist = 0;
     short max_dist = 5;
 
-    if (argument.empty())
+    if(argument.empty())
     {
         ch->Echo("Scan in a direction...\r\n");
         return;
     }
 
-    if ((dir = GetDirection(argument)) == -1)
+    if((dir = GetDirection(argument)) == -1)
     {
         ch->Echo("Scan in WHAT direction?\r\n");
         return;
@@ -31,8 +32,8 @@ void do_scan(Character *ch, std::string argument)
     Act(AT_GREY, "Scanning $t...", ch, GetDirectionName(dir), NULL, TO_CHAR);
     Act(AT_GREY, "$n scans $t.", ch, GetDirectionName(dir), NULL, TO_ROOM);
 
-    if (IsNpc(ch)
-        || (GetRandomPercent() > ch->PCData->Learned[gsn_scan]))
+    if(IsNpc(ch)
+       || (GetRandomPercent() > ch->PCData->Learned[gsn_scan]))
     {
         Act(AT_GREY, "You stop scanning $t as your vision blurs.", ch,
             GetDirectionName(dir), NULL, TO_CHAR);
@@ -40,23 +41,23 @@ void do_scan(Character *ch, std::string argument)
         return;
     }
 
-    if ((pexit = GetExit(ch->InRoom, dir)) == NULL)
+    if((pexit = GetExit(ch->InRoom, dir)) == NULL)
     {
         Act(AT_GREY, "You can't see $t.", ch, GetDirectionName(dir), NULL, TO_CHAR);
         return;
     }
 
-    if (ch->TopLevel < 50)
+    if(ch->TopLevel < 50)
         max_dist--;
 
-    if (ch->TopLevel < 20)
+    if(ch->TopLevel < 20)
         max_dist--;
 
-    for (dist = 1; dist <= max_dist; )
+    for(dist = 1; dist <= max_dist; )
     {
-        if (pexit->Flags.test(Flag::Exit::Closed))
+        if(pexit->Flags.test(Flag::Exit::Closed))
         {
-            if (pexit->Flags.test(Flag::Exit::Secret))
+            if(pexit->Flags.test(Flag::Exit::Secret))
                 Act(AT_GREY, "Your view $t is blocked by a wall.", ch,
                     GetDirectionName(dir), NULL, TO_CHAR);
             else
@@ -67,14 +68,14 @@ void do_scan(Character *ch, std::string argument)
 
         std::shared_ptr<Room> to_room;
 
-        if (pexit->Distance > 1)
+        if(pexit->Distance > 1)
             to_room = GenerateExit(ch->InRoom, pexit);
 
-        if (to_room == nullptr)
+        if(to_room == nullptr)
             to_room = pexit->ToRoom;
 
-        if (IsRoomPrivate(ch, to_room)
-            && GetTrustLevel(ch) < LEVEL_GREATER)
+        if(IsRoomPrivate(ch, to_room)
+           && GetTrustLevel(ch) < LEVEL_GREATER)
         {
             Act(AT_GREY, "Your view $t is blocked by a private room.", ch,
                 GetDirectionName(dir), NULL, TO_CHAR);
@@ -89,14 +90,14 @@ void do_scan(Character *ch, std::string argument)
         ShowObjectListToCharacter(ch->InRoom->Objects(), ch, false, false);
         show_char_to_char(ch->InRoom->Characters(), ch);
 
-        switch (ch->InRoom->Sector)
+        switch(ch->InRoom->Sector)
         {
         default:
             dist++;
             break;
 
         case SECT_AIR:
-            if (GetRandomPercent() < 80) dist++;
+            if(GetRandomPercent() < 80) dist++;
             break;
 
         case SECT_INSIDE:
@@ -124,14 +125,14 @@ void do_scan(Character *ch, std::string argument)
             break;
         }
 
-        if (dist >= max_dist)
+        if(dist >= max_dist)
         {
             Act(AT_GREY, "Your vision blurs with distance and you see no "
                 "farther $t.", ch, GetDirectionName(dir), NULL, TO_CHAR);
             break;
         }
 
-        if ((pexit = GetExit(ch->InRoom, dir)) == NULL)
+        if((pexit = GetExit(ch->InRoom, dir)) == NULL)
         {
             Act(AT_GREY, "Your view $t is blocked by a wall.", ch,
                 GetDirectionName(dir), NULL, TO_CHAR);

@@ -3,6 +3,7 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
+#include "act.hpp"
 
 void do_transfer(Character *ch, std::string argument)
 {
@@ -14,20 +15,20 @@ void do_transfer(Character *ch, std::string argument)
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);
 
-    if (arg1.empty())
+    if(arg1.empty())
     {
         ch->Echo("Transfer whom (and where)?\r\n");
         return;
     }
 
-    if (!StrCmp(arg1, "all"))
+    if(!StrCmp(arg1, "all"))
     {
-        for (auto d : Descriptors)
+        for(auto d : Descriptors)
         {
-            if (d->ConnectionState == CON_PLAYING
-                && d->Character != ch
-                && d->Character->InRoom
-                && CanSeeCharacter(ch, d->Character))
+            if(d->ConnectionState == CON_PLAYING
+               && d->Character != ch
+               && d->Character->InRoom
+               && CanSeeCharacter(ch, d->Character))
             {
                 char buf[MAX_STRING_LENGTH] = { '\0' };
                 sprintf(buf, "%s %s", d->Character->Name.c_str(), arg2.c_str());
@@ -41,44 +42,44 @@ void do_transfer(Character *ch, std::string argument)
     /*
      * Thanks to Grodyn for the optional location parameter.
      */
-    if (arg2.empty())
+    if(arg2.empty())
     {
         location = ch->InRoom;
     }
     else
     {
-        if ((location = FindLocation(ch, arg2)) == NULL)
+        if((location = FindLocation(ch, arg2)) == NULL)
         {
             ch->Echo("No such location.\r\n");
             return;
         }
 
-        if (IsRoomPrivate(ch, location))
+        if(IsRoomPrivate(ch, location))
         {
             ch->Echo("That room is private right now.\r\n");
             return;
         }
     }
 
-    if ((victim = GetCharacterAnywhere(ch, arg1)) == NULL)
+    if((victim = GetCharacterAnywhere(ch, arg1)) == NULL)
     {
         ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if (!IsAuthed(victim))
+    if(!IsAuthed(victim))
     {
         ch->Echo("%s is not authorized yet!\r\n", HeSheIt(victim));
         return;
     }
 
-    if (!victim->InRoom)
+    if(!victim->InRoom)
     {
         ch->Echo("%s is in limbo.\r\n", HeSheIt(victim));
         return;
     }
 
-    if (victim->Fighting)
+    if(victim->Fighting)
         StopFighting(victim, true);
 
     Act(AT_MAGIC, "$n disappears in a cloud of swirling colors.",
@@ -88,14 +89,14 @@ void do_transfer(Character *ch, std::string argument)
     CharacterToRoom(victim, location);
     Act(AT_MAGIC, "$n arrives from a puff of smoke.", victim, NULL, NULL, TO_ROOM);
 
-    if (ch != victim)
+    if(ch != victim)
         Act(AT_IMMORT, "$n has transferred you.", ch, NULL, victim, TO_VICT);
 
     do_look(victim, "auto");
     ch->Echo("Ok.\r\n");
 
-    if (!IsImmortal(victim) && !IsNpc(victim)
-        && !InHardRange(victim, location->Area))
+    if(!IsImmortal(victim) && !IsNpc(victim)
+       && !InHardRange(victim, location->Area))
     {
         ch->Echo("Warning: the player's level is not within the area's level range.\r\n");
     }

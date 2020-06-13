@@ -3,22 +3,23 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "act.hpp"
 
 static vnum_t GetNewObjectVnum(std::shared_ptr<Area> area, const std::string &arg)
 {
     vnum_t vnum = INVALID_VNUM;
 
-    if (IsNumber(arg))
+    if(IsNumber(arg))
     {
         vnum = ToLong(arg);
     }
-    else if (!StrCmp(arg, "auto"))
+    else if(!StrCmp(arg, "auto"))
     {
-        for (vnum_t iter = area->VnumRanges.Object.First;
+        for(vnum_t iter = area->VnumRanges.Object.First;
             iter <= area->VnumRanges.Object.Last;
             ++iter)
         {
-            if (GetProtoObject(iter) == nullptr)
+            if(GetProtoObject(iter) == nullptr)
             {
                 vnum = iter;
                 break;
@@ -41,13 +42,13 @@ void do_ocreate(Character *ch, std::string argument)
     vnum_t vnum = INVALID_VNUM;
     vnum_t cvnum = INVALID_VNUM;
 
-    if (IsNpc(ch))
+    if(IsNpc(ch))
     {
         ch->Echo("Mobiles cannot create.\r\n");
         return;
     }
 
-    if (ch->PCData->Build.Area == nullptr)
+    if(ch->PCData->Build.Area == nullptr)
     {
         ch->Echo("You must AASSIGN an area first.\r\n");
         return;
@@ -57,7 +58,7 @@ void do_ocreate(Character *ch, std::string argument)
 
     vnum = GetNewObjectVnum(ch->PCData->Build.Area, arg);
 
-    if (vnum == INVALID_VNUM || argument.empty())
+    if(vnum == INVALID_VNUM || argument.empty())
     {
         ch->Echo("Usage: ocreate <vnum> [copy vnum] <item name>\r\n");
         ch->Echo("\r\n");
@@ -65,7 +66,7 @@ void do_ocreate(Character *ch, std::string argument)
         return;
     }
 
-    if (vnum < MIN_VNUM || vnum > MAX_VNUM)
+    if(vnum < MIN_VNUM || vnum > MAX_VNUM)
     {
         ch->Echo("Bad number.\r\n");
         return;
@@ -74,45 +75,45 @@ void do_ocreate(Character *ch, std::string argument)
     OneArgument(argument, arg2);
     cvnum = ToLong(arg2);
 
-    if (cvnum != INVALID_VNUM)
+    if(cvnum != INVALID_VNUM)
         argument = OneArgument(argument, arg2);
 
-    if (cvnum < 1)
+    if(cvnum < 1)
         cvnum = INVALID_VNUM;
 
-    if (GetProtoObject(vnum))
+    if(GetProtoObject(vnum))
     {
         ch->Echo("An object with that number already exists.\r\n");
         return;
     }
 
-    if (IsNpc(ch))
+    if(IsNpc(ch))
         return;
 
-    if (GetTrustLevel(ch) <= LEVEL_IMMORTAL)
+    if(GetTrustLevel(ch) <= LEVEL_IMMORTAL)
     {
         std::shared_ptr<Area> pArea;
 
-        if (!ch->PCData || !(pArea = ch->PCData->Build.Area))
+        if(!ch->PCData || !(pArea = ch->PCData->Build.Area))
         {
             ch->Echo("You must have an assigned area to create objects.\r\n");
             return;
         }
 
-        if (vnum < pArea->VnumRanges.Object.First
-            || vnum > pArea->VnumRanges.Object.Last)
+        if(vnum < pArea->VnumRanges.Object.First
+           || vnum > pArea->VnumRanges.Object.Last)
         {
             ch->Echo("That number is not in your allocated range.\r\n");
             return;
         }
     }
 
-    if (cvnum == vnum)
+    if(cvnum == vnum)
         ch->Echo("The vnums must be different!\r\n");
 
     std::shared_ptr<ProtoObject> pObjIndex = MakeObject(vnum, cvnum, argument);
 
-    if (!pObjIndex)
+    if(!pObjIndex)
     {
         ch->Echo("Error.\r\n");
         Log->Bug("do_ocreate: MakeObject failed.");

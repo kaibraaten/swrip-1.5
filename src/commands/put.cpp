@@ -7,47 +7,48 @@
 #include "repos/clanrepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/storeroomrepository.hpp"
+#include "act.hpp"
 
 static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch);
 
-void do_put( Character *ch, std::string argument )
+void do_put(Character *ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
     int number = 0;
 
-    argument = OneArgument( argument, arg1 );
+    argument = OneArgument(argument, arg1);
 
-    if ( IsNumber(arg1) )
+    if(IsNumber(arg1))
     {
         number = ToLong(arg1);
 
-        if ( number < 1 )
+        if(number < 1)
         {
             ch->Echo("That was easy...\r\n");
             return;
         }
 
-        argument = OneArgument( argument, arg1 );
+        argument = OneArgument(argument, arg1);
     }
 
-    argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg2);
 
     /* munch optional words */
-    if ( (!StrCmp(arg2, "into") || !StrCmp(arg2, "inside") || !StrCmp(arg2, "in"))
-         && !argument.empty() )
-        argument = OneArgument( argument, arg2 );
+    if((!StrCmp(arg2, "into") || !StrCmp(arg2, "inside") || !StrCmp(arg2, "in"))
+       && !argument.empty())
+        argument = OneArgument(argument, arg2);
 
-    if ( arg1.empty() || arg2.empty() )
+    if(arg1.empty() || arg2.empty())
     {
         ch->Echo("Put what in what?\r\n");
         return;
     }
 
-    if ( HasMentalStateToFindObject(ch) )
+    if(HasMentalStateToFindObject(ch))
         return;
 
-    if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
+    if(!StrCmp(arg2, "all") || !StringPrefix("all.", arg2))
     {
         ch->Echo("You can't do that.\r\n");
         return;
@@ -55,24 +56,24 @@ void do_put( Character *ch, std::string argument )
 
     Object *container = GetObjectHere(ch, arg2);
 
-    if ( container == nullptr )
+    if(container == nullptr)
     {
-        Act( AT_PLAIN, "I see no $T here.",
-             ch, NULL, arg2.c_str(), TO_CHAR );
+        Act(AT_PLAIN, "I see no $T here.",
+            ch, NULL, arg2.c_str(), TO_CHAR);
         return;
     }
 
     bool save_char = false;
 
-    if ( !container->CarriedBy
-         && SysData.SaveFlags.test( Flag::AutoSave::Put ) )
+    if(!container->CarriedBy
+       && SysData.SaveFlags.test(Flag::AutoSave::Put))
     {
         save_char = true;
     }
 
-    if (container->Flags.test(Flag::Obj::Covering))
+    if(container->Flags.test(Flag::Obj::Covering))
     {
-        if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )
+        if(ch->CarryWeight + container->Weight > GetCarryCapacityWeight(ch))
         {
             ch->Echo("It's too heavy for you to lift.\r\n");
             return;
@@ -80,54 +81,54 @@ void do_put( Character *ch, std::string argument )
     }
     else
     {
-        if ( container->ItemType != ITEM_CONTAINER )
+        if(container->ItemType != ITEM_CONTAINER)
         {
             ch->Echo("That's not a container.\r\n");
             return;
         }
 
-        if ( IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+        if(IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-            Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), TO_CHAR );
+            Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), TO_CHAR);
             return;
         }
     }
 
-    if ( number <= 1 && StrCmp( arg1, "all" ) && StringPrefix( "all.", arg1 ) )
+    if(number <= 1 && StrCmp(arg1, "all") && StringPrefix("all.", arg1))
     {
         Object *obj = GetCarriedObject(ch, arg1);
 
         /* 'put obj container' */
-        if ( obj == nullptr )
+        if(obj == nullptr)
         {
             ch->Echo("You do not have that item.\r\n");
             return;
         }
 
-        if ( obj == container )
+        if(obj == container)
         {
             ch->Echo("You can't fold it into itself.\r\n");
             return;
         }
 
-        if ( !CanDropObject( ch, obj ) )
+        if(!CanDropObject(ch, obj))
         {
             ch->Echo("You can't let go of it.\r\n");
             return;
         }
 
-        if ( (container->Flags.test(Flag::Obj::Covering)
-              && (GetObjectWeight( obj ) / obj->Count)
-              > ((GetObjectWeight( container ) / container->Count)
-                 -   container->Weight)) )
+        if((container->Flags.test(Flag::Obj::Covering)
+            && (GetObjectWeight(obj) / obj->Count)
+              > ((GetObjectWeight(container) / container->Count)
+                 - container->Weight)))
         {
             ch->Echo("It won't fit under there.\r\n");
             return;
         }
 
-        if ( (GetObjectWeight( obj ) / obj->Count)
-             + (GetObjectWeight( container ) / container->Count)
-             >  container->Value[OVAL_CONTAINER_CAPACITY] )
+        if((GetObjectWeight(obj) / obj->Count)
+           + (GetObjectWeight(container) / container->Count)
+             > container->Value[OVAL_CONTAINER_CAPACITY])
         {
             ch->Echo("It won't fit.\r\n");
             return;
@@ -135,42 +136,42 @@ void do_put( Character *ch, std::string argument )
 
         SeparateOneObjectFromGroup(obj);
         SeparateOneObjectFromGroup(container);
-        ObjectFromCharacter( obj );
-        obj = ObjectToObject( obj, container );
-        CheckObjectForTrap ( ch, container, TRAP_PUT );
+        ObjectFromCharacter(obj);
+        obj = ObjectToObject(obj, container);
+        CheckObjectForTrap(ch, container, TRAP_PUT);
 
-        if ( CharacterDiedRecently(ch) )
+        if(CharacterDiedRecently(ch))
             return;
 
         int count = obj->Count;
         obj->Count = 1;
-        Act( AT_ACTION,
-             container->Flags.test(Flag::Obj::Covering)
-             ? "$n hides $p beneath $P." : "$n puts $p in $P.",
-             ch, obj, container, TO_ROOM );
-        Act( AT_ACTION,
-             container->Flags.test(Flag::Obj::Covering)
-             ? "You hide $p beneath $P." : "You put $p in $P.",
-             ch, obj, container, TO_CHAR );
+        Act(AT_ACTION,
+            container->Flags.test(Flag::Obj::Covering)
+            ? "$n hides $p beneath $P." : "$n puts $p in $P.",
+            ch, obj, container, TO_ROOM);
+        Act(AT_ACTION,
+            container->Flags.test(Flag::Obj::Covering)
+            ? "You hide $p beneath $P." : "You put $p in $P.",
+            ch, obj, container, TO_CHAR);
         obj->Count = count;
 
-        if ( save_char )
+        if(save_char)
         {
-            PlayerCharacters->Save( ch );
+            PlayerCharacters->Save(ch);
 
             if(ch->InRoom->Flags.test(Flag::Room::PlayerHome))
             {
                 SaveHome(ch);
             }
 
-            if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+            if(ch->InRoom->Flags.test(Flag::Room::ClanStoreroom))
             {
-                SaveStoreroom( ch->InRoom );
+                SaveStoreroom(ch->InRoom);
             }
         }
 
-        if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom )
-             && container->CarriedBy == NULL)
+        if(ch->InRoom->Flags.test(Flag::Room::ClanStoreroom)
+           && container->CarriedBy == NULL)
         {
             for(const auto &clan : Clans)
             {
@@ -185,11 +186,11 @@ void do_put( Character *ch, std::string argument )
         bool fAll = false;
         std::string chk;
 
-        if ( !StrCmp(arg1, "all") )
+        if(!StrCmp(arg1, "all"))
             fAll = true;
         else
             fAll = false;
-        if ( number > 1 )
+        if(number > 1)
             chk = arg1;
         else
             chk = arg1.substr(4);
@@ -197,34 +198,34 @@ void do_put( Character *ch, std::string argument )
         SeparateOneObjectFromGroup(container);
 
         /* 'put all container' or 'put all.obj container' */
-        std::list<Object*> carriedObjects(ch->Objects());
+        std::list<Object *> carriedObjects(ch->Objects());
 
         for(Object *obj : carriedObjects)
         {
-            if ( ( fAll || NiftyIsName( chk, obj->Name ) )
-                 && CanSeeObject( ch, obj )
-                 && obj->WearLoc == WEAR_NONE
-                 && obj != container
-                 && CanDropObject( ch, obj )
-                 && GetObjectWeight( obj ) + GetObjectWeight( container )
-                 <= container->Value[OVAL_CONTAINER_CAPACITY] )
+            if((fAll || NiftyIsName(chk, obj->Name))
+               && CanSeeObject(ch, obj)
+               && obj->WearLoc == WEAR_NONE
+               && obj != container
+               && CanDropObject(ch, obj)
+               && GetObjectWeight(obj) + GetObjectWeight(container)
+               <= container->Value[OVAL_CONTAINER_CAPACITY])
             {
-                if ( number && (cnt + obj->Count) > number )
-                    SplitGroupedObject( obj, number - cnt );
+                if(number && (cnt + obj->Count) > number)
+                    SplitGroupedObject(obj, number - cnt);
 
                 cnt += obj->Count;
-                ObjectFromCharacter( obj );
-                Act( AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM );
-                Act( AT_ACTION, "You put $p in $P.", ch, obj, container, TO_CHAR );
-                obj = ObjectToObject( obj, container );
+                ObjectFromCharacter(obj);
+                Act(AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM);
+                Act(AT_ACTION, "You put $p in $P.", ch, obj, container, TO_CHAR);
+                obj = ObjectToObject(obj, container);
                 found = true;
 
-                CheckObjectForTrap( ch, container, TRAP_PUT );
+                CheckObjectForTrap(ch, container, TRAP_PUT);
 
-                if ( CharacterDiedRecently(ch) )
+                if(CharacterDiedRecently(ch))
                     return;
 
-                if ( number && cnt >= number )
+                if(number && cnt >= number)
                     break;
             }
         }
@@ -232,34 +233,34 @@ void do_put( Character *ch, std::string argument )
         /*
          * Don't bother to save anything if nothing was dropped   -Thoric
          */
-        if ( !found )
+        if(!found)
         {
-            if ( fAll )
-                Act( AT_PLAIN, "You are not carrying anything.",
-                     ch, NULL, NULL, TO_CHAR );
+            if(fAll)
+                Act(AT_PLAIN, "You are not carrying anything.",
+                    ch, NULL, NULL, TO_CHAR);
             else
-                Act( AT_PLAIN, "You are not carrying any $T.",
-                     ch, NULL, chk.c_str(), TO_CHAR );
+                Act(AT_PLAIN, "You are not carrying any $T.",
+                    ch, NULL, chk.c_str(), TO_CHAR);
             return;
         }
 
-        if ( save_char )
+        if(save_char)
         {
-            PlayerCharacters->Save( ch );
+            PlayerCharacters->Save(ch);
 
             if(ch->InRoom->Flags.test(Flag::Room::PlayerHome))
             {
                 SaveHome(ch);
             }
 
-            if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+            if(ch->InRoom->Flags.test(Flag::Room::ClanStoreroom))
             {
-                SaveStoreroom( ch->InRoom );
+                SaveStoreroom(ch->InRoom);
             }
         }
 
-        if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom )
-             && container->CarriedBy == NULL)
+        if(ch->InRoom->Flags.test(Flag::Room::ClanStoreroom)
+           && container->CarriedBy == NULL)
         {
             for(const auto &clan : Clans)
             {
@@ -271,7 +272,7 @@ void do_put( Character *ch, std::string argument )
 
 static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch)
 {
-    if ( clan->Storeroom == ch->InRoom->Vnum )
+    if(clan->Storeroom == ch->InRoom->Vnum)
     {
         auto room = GetRoom(clan->Storeroom);
         Storerooms->Save(room);

@@ -4,6 +4,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "systemdata.hpp"
+#include "act.hpp"
 
 void do_goto(Character *ch, std::string argument)
 {
@@ -13,41 +14,41 @@ void do_goto(Character *ch, std::string argument)
 
     OneArgument(argument, arg);
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("Goto where?\r\n");
         return;
     }
 
     auto location = FindLocation(ch, arg);
-    
-    if (location == nullptr)
+
+    if(location == nullptr)
     {
         vnum = ToLong(arg);
 
-        if (vnum < 0 || GetRoom(vnum))
+        if(vnum < 0 || GetRoom(vnum))
         {
             ch->Echo("You cannot find that...\r\n");
             return;
         }
 
-        if (vnum < 1 || IsNpc(ch) || !ch->PCData->Build.Area)
+        if(vnum < 1 || IsNpc(ch) || !ch->PCData->Build.Area)
         {
             ch->Echo("No such location.\r\n");
             return;
         }
 
-        if (GetTrustLevel(ch) < SysData.LevelToModifyProto
-            && !IsName("intergoto", ch->PCData->Bestowments))
+        if(GetTrustLevel(ch) < SysData.LevelToModifyProto
+           && !IsName("intergoto", ch->PCData->Bestowments))
         {
-            if (!ch->PCData || !(pArea = ch->PCData->Build.Area))
+            if(!ch->PCData || !(pArea = ch->PCData->Build.Area))
             {
                 ch->Echo("You must have an assigned area to create rooms.\r\n");
                 return;
             }
 
-            if (vnum < pArea->VnumRanges.Room.First
-                || vnum > pArea->VnumRanges.Room.Last)
+            if(vnum < pArea->VnumRanges.Room.First
+               || vnum > pArea->VnumRanges.Room.Last)
             {
                 ch->Echo("That room is not within your assigned range.\r\n");
                 return;
@@ -60,32 +61,32 @@ void do_goto(Character *ch, std::string argument)
         ch->Echo("Waving your hand, you form order from swirling chaos,\r\nand step into a new reality...\r\n");
     }
 
-    if (IsRoomPrivate(ch, location))
+    if(IsRoomPrivate(ch, location))
     {
         ch->Echo("Overriding private flag!\r\n");
     }
 
-    if (GetTrustLevel(ch) < LEVEL_GREATER
-        && !IsName("intergoto", ch->PCData->Bestowments))
+    if(GetTrustLevel(ch) < LEVEL_GREATER
+       && !IsName("intergoto", ch->PCData->Bestowments))
     {
         vnum = ToLong(arg);
 
-        if (!ch->PCData || !(pArea = ch->PCData->Build.Area))
+        if(!ch->PCData || !(pArea = ch->PCData->Build.Area))
         {
             ch->Echo("You must have an assigned area to goto.\r\n");
             return;
         }
 
-        if (vnum < pArea->VnumRanges.Room.First
-            || vnum > pArea->VnumRanges.Room.Last)
+        if(vnum < pArea->VnumRanges.Room.First
+           || vnum > pArea->VnumRanges.Room.Last)
         {
             ch->Echo("That room is not within your assigned range.\r\n");
             return;
         }
 
-        if ((ch->InRoom->Vnum < pArea->VnumRanges.Room.First
+        if((ch->InRoom->Vnum < pArea->VnumRanges.Room.First
             || ch->InRoom->Vnum > pArea->VnumRanges.Room.Last)
-            && !ch->InRoom->Flags.test(Flag::Room::Hotel))
+           && !ch->InRoom->Flags.test(Flag::Room::Hotel))
         {
             ch->Echo("Builders can only use goto from a hotel or in their zone.\r\n");
             return;
@@ -94,12 +95,12 @@ void do_goto(Character *ch, std::string argument)
 
     auto in_room = ch->InRoom;
 
-    if (ch->Fighting)
+    if(ch->Fighting)
         StopFighting(ch, true);
 
-    if (!ch->Flags.test(Flag::Plr::WizInvis))
+    if(!ch->Flags.test(Flag::Plr::WizInvis))
     {
-        if (ch->PCData && !ch->PCData->BamfOut.empty())
+        if(ch->PCData && !ch->PCData->BamfOut.empty())
             Act(AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfOut.c_str(), TO_ROOM);
         else
             Act(AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.", TO_ROOM);
@@ -108,7 +109,7 @@ void do_goto(Character *ch, std::string argument)
     ch->ReGoto = ch->InRoom->Vnum;
     CharacterFromRoom(ch);
 
-    if (ch->Mount)
+    if(ch->Mount)
     {
         CharacterFromRoom(ch->Mount);
         CharacterToRoom(ch->Mount, location);
@@ -116,9 +117,9 @@ void do_goto(Character *ch, std::string argument)
 
     CharacterToRoom(ch, location);
 
-    if (!ch->Flags.test(Flag::Plr::WizInvis))
+    if(!ch->Flags.test(Flag::Plr::WizInvis))
     {
-        if (ch->PCData && !ch->PCData->BamfIn.empty())
+        if(ch->PCData && !ch->PCData->BamfIn.empty())
             Act(AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfIn.c_str(), TO_ROOM);
         else
             Act(AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.", TO_ROOM);
@@ -126,14 +127,14 @@ void do_goto(Character *ch, std::string argument)
 
     do_look(ch, "auto");
 
-    if (ch->InRoom == in_room)
+    if(ch->InRoom == in_room)
         return;
 
     const auto charactersInRoom = in_room->Characters();
-    
-    for (auto fch : charactersInRoom)
+
+    for(auto fch : charactersInRoom)
     {
-        if (fch->Master == ch && IsImmortal(fch))
+        if(fch->Master == ch && IsImmortal(fch))
         {
             Act(AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR);
             do_goto(fch, argument);

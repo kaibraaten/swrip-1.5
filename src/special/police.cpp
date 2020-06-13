@@ -4,28 +4,29 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
 bool spec_police(Character *ch)
 {
-    if (!IsAwake(ch) || ch->Fighting)
+    if(!IsAwake(ch) || ch->Fighting)
     {
         return false;
     }
 
-    std::list<Character*> potentialCriminals = Filter(ch->InRoom->Characters(),
-        [ch](auto victim)
-    {
-        return !IsNpc(victim)
-            && CanSeeCharacter(ch, victim)
-            && NumberBits(1) != 0;
-    });
+    auto potentialCriminals = Filter(ch->InRoom->Characters(),
+                                     [ch](auto victim)
+                                     {
+                                         return !IsNpc(victim)
+                                             && CanSeeCharacter(ch, victim)
+                                             && NumberBits(1) != 0;
+                                     });
 
-    for (Character *victim : potentialCriminals)
+    for(auto victim : potentialCriminals)
     {
-        for (size_t vip = 0; vip < Flag::MAX; vip++)
+        for(size_t vip = 0; vip < Flag::MAX; vip++)
         {
-            if (ch->VipFlags.test(vip)
-                && victim->PCData->WantedOn.test(vip))
+            if(ch->VipFlags.test(vip)
+               && victim->PCData->WantedOn.test(vip))
             {
                 std::shared_ptr<Room> jail;
                 char buf[MAX_STRING_LENGTH];
@@ -34,17 +35,17 @@ bool spec_police(Character *ch)
                 do_say(ch, buf);
                 victim->PCData->WantedOn.reset(vip);
 
-                if (ch->TopLevel >= victim->TopLevel)
+                if(ch->TopLevel >= victim->TopLevel)
                 {
                     HitMultipleTimes(ch, victim, TYPE_UNDEFINED);
                 }
-                else if (vip == Flag::Wanted::Adari)
+                else if(vip == Flag::Wanted::Adari)
                 {
                     jail = GetRoom(ROOM_JAIL_ADARI);
                 }
-                else if (vip == Flag::Wanted::MonCalamari)
+                else if(vip == Flag::Wanted::MonCalamari)
                 {
-                    switch (GetRandomNumberFromRange(1, 4))
+                    switch(GetRandomNumberFromRange(1, 4))
                     {
                     case 1:
                         jail = GetRoom(ROOM_JAIL_MON_CALAMARI_1);
@@ -68,7 +69,7 @@ bool spec_police(Character *ch)
                     Act(AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT);
                     Act(AT_ACTION, "$n fines you an enourmous amount of money.", ch, NULL, victim, TO_VICT);
 
-                    if (victim->InRoom && victim->InRoom->Area)
+                    if(victim->InRoom && victim->InRoom->Area)
                     {
                         BoostEconomy(victim->InRoom->Area, (victim->Gold) / 2);
                     }
@@ -76,7 +77,7 @@ bool spec_police(Character *ch)
                     victim->Gold /= 2;
                 }
 
-                if (jail)
+                if(jail)
                 {
                     victim->PCData->WantedOn.reset(vip);
                     Act(AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT);

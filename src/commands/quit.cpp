@@ -5,50 +5,51 @@
 #include "room.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/homerepository.hpp"
+#include "act.hpp"
 
 static bool CanQuitHere(const Character *ch, std::shared_ptr<Room> room)
 {
     return CheckRoomFlag(ch->InRoom, Flag::Room::Hotel);
 }
 
-void do_quit( Character *ch, std::string argument )
+void do_quit(Character *ch, std::string argument)
 {
     int x = 0, y = 0;
     int level = 0;
-    char qbuf[MAX_INPUT_LENGTH] = {'\0'};
+    char qbuf[MAX_INPUT_LENGTH] = { '\0' };
 
-    if ( IsNpc(ch) && ch->Flags.test(Flag::Mob::Polymorphed))
+    if(IsNpc(ch) && ch->Flags.test(Flag::Mob::Polymorphed))
     {
         ch->Echo("You can't quit while polymorphed.\r\n");
         return;
     }
 
-    if ( IsNpc(ch) )
+    if(IsNpc(ch))
         return;
 
-    if ( ch->Position == POS_FIGHTING )
+    if(ch->Position == POS_FIGHTING)
     {
-        SetCharacterColor( AT_RED, ch );
+        SetCharacterColor(AT_RED, ch);
         ch->Echo("No way! You are fighting.\r\n");
         return;
     }
 
-    if ( ch->Position < POS_STUNNED  )
+    if(ch->Position < POS_STUNNED)
     {
-        SetCharacterColor( AT_BLOOD, ch );
+        SetCharacterColor(AT_BLOOD, ch);
         ch->Echo("You're not DEAD yet.\r\n");
         return;
     }
 
-    if ( OngoingAuction->Item != NULL && ((ch == OngoingAuction->Buyer) || (ch == OngoingAuction->Seller) ) )
+    if(OngoingAuction->Item != NULL && ((ch == OngoingAuction->Buyer) || (ch == OngoingAuction->Seller)))
     {
         ch->Echo("Wait until you have bought/sold the item on auction.\r\n");
         return;
     }
 
-    if ( !IsImmortal(ch) && ch->InRoom
-         && !CanQuitHere(ch, ch->InRoom)
-         && IsAuthed(ch) )
+    if(!IsImmortal(ch) && ch->InRoom
+       && !CanQuitHere(ch, ch->InRoom)
+       && IsAuthed(ch))
     {
         ch->Echo("You may not quit here.\r\n");
         ch->Echo("You will have to find a safer resting place such as a hotel...\r\n");
@@ -56,43 +57,43 @@ void do_quit( Character *ch, std::string argument )
         return;
     }
 
-    if ( ch->Challenged )
+    if(ch->Challenged)
     {
         sprintf(qbuf, "%s has quit! Challenge is void. WHAT A WUSS!", ch->Name.c_str());
         ch->Challenged = NULL;
-        ToChannel(qbuf,CHANNEL_ARENA,"&RArena&W",5);
+        ToChannel(qbuf, CHANNEL_ARENA, "&RArena&W", 5);
     }
 
-    SetCharacterColor( AT_WHITE, ch );
+    SetCharacterColor(AT_WHITE, ch);
     ch->Echo("Your surroundings begin to fade as a mystical swirling vortex of colors\r\nenvelops your body... When you come to, things are not as they were.\r\n\r\n");
-    Act( AT_SAY, "A strange voice says, 'We await your return, $n...'",
-         ch, NULL, NULL, TO_CHAR );
-    Act( AT_BYE, "$n has left the game.", ch, NULL, NULL, TO_ROOM );
-    SetCharacterColor( AT_GREY, ch);
+    Act(AT_SAY, "A strange voice says, 'We await your return, $n...'",
+        ch, NULL, NULL, TO_CHAR);
+    Act(AT_BYE, "$n has left the game.", ch, NULL, NULL, TO_ROOM);
+    SetCharacterColor(AT_GREY, ch);
 
-    auto logBuf = FormatString("%s has quit.", ch->Name.c_str() );
+    auto logBuf = FormatString("%s has quit.", ch->Name.c_str());
     quitting_char = ch;
-    PlayerCharacters->Save( ch );
+    PlayerCharacters->Save(ch);
     SaveHome(ch);
-    
-    if ( ch->PCData->Pet )
+
+    if(ch->PCData->Pet)
     {
-        Act( AT_BYE, "$N follows $S master out of the game.", ch, NULL,
-             ch->PCData->Pet, TO_ROOM );
-        ExtractCharacter( ch->PCData->Pet, true );
+        Act(AT_BYE, "$N follows $S master out of the game.", ch, NULL,
+            ch->PCData->Pet, TO_ROOM);
+        ExtractCharacter(ch->PCData->Pet, true);
     }
 
     saving_char = NULL;
     level = GetTrustLevel(ch);
-    ExtractCharacter( ch, true );
+    ExtractCharacter(ch, true);
 
-    for ( x = 0; x < MAX_WEAR; x++ )
+    for(x = 0; x < MAX_WEAR; x++)
     {
-        for ( y = 0; y < MAX_LAYERS; y++ )
+        for(y = 0; y < MAX_LAYERS; y++)
         {
             save_equipment[x][y] = NULL;
         }
     }
-    
+
     Log->LogStringPlus(logBuf, LOG_COMM, level);
 }

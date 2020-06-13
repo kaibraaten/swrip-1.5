@@ -3,6 +3,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "act.hpp"
 
 void do_mcreate(Character *ch, std::string argument)
 {
@@ -11,7 +12,7 @@ void do_mcreate(Character *ch, std::string argument)
     Character *mob = NULL;
     vnum_t vnum = 0, cvnum = 0;
 
-    if (IsNpc(ch))
+    if(IsNpc(ch))
     {
         ch->Echo("Mobiles cannot create.\r\n");
         return;
@@ -21,13 +22,13 @@ void do_mcreate(Character *ch, std::string argument)
 
     vnum = IsNumber(arg) ? ToLong(arg) : -1;
 
-    if (vnum == -1 || argument.empty())
+    if(vnum == -1 || argument.empty())
     {
         ch->Echo("Usage: mcreate <vnum> [cvnum] <mobile name>\r\n");
         return;
     }
 
-    if (vnum < MIN_VNUM || vnum > MAX_VNUM)
+    if(vnum < MIN_VNUM || vnum > MAX_VNUM)
     {
         ch->Echo("Bad number.\r\n");
         return;
@@ -36,33 +37,33 @@ void do_mcreate(Character *ch, std::string argument)
     OneArgument(argument, arg2);
     cvnum = ToLong(arg2);
 
-    if (cvnum != 0)
+    if(cvnum != 0)
         argument = OneArgument(argument, arg2);
 
-    if (cvnum < 1)
+    if(cvnum < 1)
         cvnum = 0;
 
-    if (GetProtoMobile(vnum))
+    if(GetProtoMobile(vnum))
     {
         ch->Echo("A mobile with that number already exists.\r\n");
         return;
     }
 
-    if (IsNpc(ch))
+    if(IsNpc(ch))
         return;
 
-    if (GetTrustLevel(ch) <= LEVEL_IMMORTAL)
+    if(GetTrustLevel(ch) <= LEVEL_IMMORTAL)
     {
         std::shared_ptr<Area> pArea;
 
-        if (!ch->PCData || !(pArea = ch->PCData->Build.Area))
+        if(!ch->PCData || !(pArea = ch->PCData->Build.Area))
         {
             ch->Echo("You must have an assigned area to create mobiles.\r\n");
             return;
         }
 
-        if (vnum < pArea->VnumRanges.Mob.First
-            || vnum > pArea->VnumRanges.Mob.Last)
+        if(vnum < pArea->VnumRanges.Mob.First
+           || vnum > pArea->VnumRanges.Mob.Last)
         {
             ch->Echo("That number is not in your allocated range.\r\n");
             return;
@@ -71,7 +72,7 @@ void do_mcreate(Character *ch, std::string argument)
 
     auto pMobIndex = MakeMobile(vnum, cvnum, argument);
 
-    if (!pMobIndex)
+    if(!pMobIndex)
     {
         ch->Echo("Error.\r\n");
         Log->Bug("do_mcreate: MakeMobile failed.");

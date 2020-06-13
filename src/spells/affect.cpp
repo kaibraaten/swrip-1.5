@@ -4,26 +4,27 @@
 #include "skill.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "act.hpp"
 
 /*
  * Generic spell affect                                         -Thoric
  */
-ch_ret spell_affect(int sn, int level, Character* ch, void* vo)
+ch_ret spell_affect(int sn, int level, Character *ch, void *vo)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
-    Character* victim = (Character*)vo;
+    Character *victim = (Character *)vo;
     bool groupsp = false;
     bool areasp = false;
     bool hitchar = false, hitroom = false, hitvict = false;
     ch_ret retcode = rNONE;
 
-    if (skill->Affects.empty())
+    if(skill->Affects.empty())
     {
         Log->Bug("spell_affect has no affects sn %d", sn);
         return rNONE;
     }
 
-    if (SPELL_FLAG(skill, SF_GROUPSPELL))
+    if(SPELL_FLAG(skill, SF_GROUPSPELL))
     {
         groupsp = true;
     }
@@ -32,7 +33,7 @@ ch_ret spell_affect(int sn, int level, Character* ch, void* vo)
         groupsp = false;
     }
 
-    if (SPELL_FLAG(skill, SF_AREA))
+    if(SPELL_FLAG(skill, SF_AREA))
     {
         areasp = true;
     }
@@ -41,27 +42,27 @@ ch_ret spell_affect(int sn, int level, Character* ch, void* vo)
         areasp = false;
     }
 
-    if (!groupsp && !areasp)
+    if(!groupsp && !areasp)
     {
         /* Can't find a victim */
-        if (!victim)
+        if(!victim)
         {
             FailedCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;
         }
 
-        if ((skill->Type != SKILL_HERB
-             && victim->Immune.test(Flag::Ris::Magic))
-            || IsImmuneToDamageType(victim, SPELL_DAMAGE(skill)))
+        if((skill->Type != SKILL_HERB
+            && victim->Immune.test(Flag::Ris::Magic))
+           || IsImmuneToDamageType(victim, SPELL_DAMAGE(skill)))
         {
             ImmuneCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;
         }
 
         /* Spell is already on this guy */
-        if (IsAffected(victim, sn)
-            && !SPELL_FLAG(skill, SF_ACCUMULATIVE)
-            && !SPELL_FLAG(skill, SF_RECASTABLE))
+        if(IsAffected(victim, sn)
+           && !SPELL_FLAG(skill, SF_ACCUMULATIVE)
+           && !SPELL_FLAG(skill, SF_RECASTABLE))
         {
             FailedCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;
@@ -69,15 +70,15 @@ ch_ret spell_affect(int sn, int level, Character* ch, void* vo)
 
         auto saf = skill->Affects.front();
 
-        if (saf != nullptr && skill->Affects.size() == 1
-            && saf->Location == APPLY_STRIPSN
-            && !IsAffected(victim, ParseDice(ch, level, saf->Modifier)))
+        if(saf != nullptr && skill->Affects.size() == 1
+           && saf->Location == APPLY_STRIPSN
+           && !IsAffected(victim, ParseDice(ch, level, saf->Modifier)))
         {
             FailedCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;
         }
 
-        if (CheckSavingThrow(sn, level, ch, victim))
+        if(CheckSavingThrow(sn, level, ch, victim))
         {
             FailedCasting(skill, ch, victim, NULL);
             return rSPELL_FAILED;
@@ -85,9 +86,9 @@ ch_ret spell_affect(int sn, int level, Character* ch, void* vo)
     }
     else
     {
-        if (!skill->Messages.Success.ToCaster.empty())
+        if(!skill->Messages.Success.ToCaster.empty())
         {
-            if (strstr(skill->Messages.Success.ToCaster.c_str(), "$N"))
+            if(strstr(skill->Messages.Success.ToCaster.c_str(), "$N"))
             {
                 hitchar = true;
             }
@@ -97,9 +98,9 @@ ch_ret spell_affect(int sn, int level, Character* ch, void* vo)
             }
         }
 
-        if (!skill->Messages.Success.ToRoom.empty())
+        if(!skill->Messages.Success.ToRoom.empty())
         {
-            if (strstr(skill->Messages.Success.ToRoom.c_str(), "$N"))
+            if(strstr(skill->Messages.Success.ToRoom.c_str(), "$N"))
             {
                 hitroom = true;
             }
@@ -109,12 +110,12 @@ ch_ret spell_affect(int sn, int level, Character* ch, void* vo)
             }
         }
 
-        if (!skill->Messages.Success.ToVictim.empty())
+        if(!skill->Messages.Success.ToVictim.empty())
         {
             hitvict = true;
         }
 
-        if (victim)
+        if(victim)
         {
             victim = victim->InRoom->Characters().front();
         }
@@ -124,58 +125,58 @@ ch_ret spell_affect(int sn, int level, Character* ch, void* vo)
         }
     }
 
-    if (!victim)
+    if(!victim)
     {
         Log->Bug("spell_affect: could not find victim: sn %d", sn);
         FailedCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
     }
 
-    std::list<Character*>::const_iterator begin = find(std::cbegin(victim->InRoom->Characters()),
-        std::cend(victim->InRoom->Characters()),
-        victim);
-    std::list<Character*>::const_iterator end = std::cend(victim->InRoom->Characters());
+    std::list<Character *>::const_iterator begin = find(std::cbegin(victim->InRoom->Characters()),
+                                                        std::cend(victim->InRoom->Characters()),
+                                                        victim);
+    std::list<Character *>::const_iterator end = std::cend(victim->InRoom->Characters());
 
-    for (auto i = begin; i != end; ++i)
+    for(auto i = begin; i != end; ++i)
     {
         victim = *i;
 
-        if (groupsp || areasp)
+        if(groupsp || areasp)
         {
-            if ((groupsp && !IsInSameGroup(victim, ch))
-                || victim->Immune.test(Flag::Ris::Magic)
-                || IsImmuneToDamageType(victim, SPELL_DAMAGE(skill))
-                || CheckSavingThrow(sn, level, ch, victim)
-                || (!SPELL_FLAG(skill, SF_RECASTABLE) && IsAffected(victim, sn)))
+            if((groupsp && !IsInSameGroup(victim, ch))
+               || victim->Immune.test(Flag::Ris::Magic)
+               || IsImmuneToDamageType(victim, SPELL_DAMAGE(skill))
+               || CheckSavingThrow(sn, level, ch, victim)
+               || (!SPELL_FLAG(skill, SF_RECASTABLE) && IsAffected(victim, sn)))
                 continue;
 
-            if (hitvict && ch != victim)
+            if(hitvict && ch != victim)
             {
                 Act(AT_MAGIC, skill->Messages.Success.ToVictim, ch, NULL, victim, TO_VICT);
 
-                if (hitroom)
+                if(hitroom)
                 {
                     Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_NOTVICT);
                     Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_CHAR);
                 }
             }
-            else if (hitroom)
+            else if(hitroom)
             {
                 Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_ROOM);
             }
 
-            if (ch == victim)
+            if(ch == victim)
             {
-                if (hitvict)
+                if(hitvict)
                 {
                     Act(AT_MAGIC, skill->Messages.Success.ToVictim, ch, NULL, ch, TO_CHAR);
                 }
-                else if (hitchar)
+                else if(hitchar)
                 {
                     Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, ch, TO_CHAR);
                 }
             }
-            else if (hitchar)
+            else if(hitchar)
             {
                 Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, victim, TO_CHAR);
             }
@@ -183,15 +184,15 @@ ch_ret spell_affect(int sn, int level, Character* ch, void* vo)
 
         retcode = spell_affectchar(sn, level, ch, victim);
 
-        if (!groupsp && !areasp)
+        if(!groupsp && !areasp)
         {
-            if (retcode == rSPELL_FAILED)
+            if(retcode == rSPELL_FAILED)
             {
                 FailedCasting(skill, ch, victim, NULL);
                 return rSPELL_FAILED;
             }
 
-            if (retcode == rVICT_IMMUNE)
+            if(retcode == rVICT_IMMUNE)
             {
                 ImmuneCasting(skill, ch, victim, NULL);
             }

@@ -3,6 +3,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 void do_close(Character *ch, std::string argument)
 {
@@ -13,24 +14,24 @@ void do_close(Character *ch, std::string argument)
 
     OneArgument(argument, arg);
 
-    if (arg.empty())
+    if(arg.empty())
     {
         do_closehatch(ch, "");
         return;
     }
 
-    if ((pexit = FindDoor(ch, arg, true)) != NULL)
+    if((pexit = FindDoor(ch, arg, true)) != NULL)
     {
         /* 'close door' */
         std::shared_ptr<Exit> pexit_rev;
 
-        if (!pexit->Flags.test(Flag::Exit::IsDoor))
+        if(!pexit->Flags.test(Flag::Exit::IsDoor))
         {
             ch->Echo("You can't do that.\r\n");
             return;
         }
 
-        if (pexit->Flags.test(Flag::Exit::Closed))
+        if(pexit->Flags.test(Flag::Exit::Closed))
         {
             ch->Echo("It's already closed.\r\n");
             return;
@@ -40,12 +41,12 @@ void do_close(Character *ch, std::string argument)
         Act(AT_ACTION, "You close the $d.", ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
 
         /* close the other side */
-        if ((pexit_rev = pexit->ReverseExit) != NULL
-            && pexit_rev->ToRoom == ch->InRoom)
+        if((pexit_rev = pexit->ReverseExit) != NULL
+           && pexit_rev->ToRoom == ch->InRoom)
         {
             pexit_rev->Flags.set(Flag::Exit::Closed);
 
-            for (Character *rch : pexit->ToRoom->Characters())
+            for(Character *rch : pexit->ToRoom->Characters())
             {
                 Act(AT_ACTION, "The $d closes.",
                     rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
@@ -56,7 +57,7 @@ void do_close(Character *ch, std::string argument)
 
         door = pexit->Direction;
 
-        if (door > DIR_INVALID && door < DIR_SOMEWHERE)
+        if(door > DIR_INVALID && door < DIR_SOMEWHERE)
         {
             CheckRoomForTraps(ch, TrapDoor[door]);
         }
@@ -64,11 +65,11 @@ void do_close(Character *ch, std::string argument)
         return;
     }
 
-    if ((obj = GetObjectHere(ch, arg)) != NULL)
+    if((obj = GetObjectHere(ch, arg)) != NULL)
     {
-        if (obj->ItemType != ITEM_CONTAINER)
+        if(obj->ItemType != ITEM_CONTAINER)
         {
-            if (obj->WearFlags.test(Flag::Wear::Over))
+            if(obj->WearFlags.test(Flag::Wear::Over))
             {
                 obj->Value[2] = 1;
                 Act(AT_ACTION, "You closes $p.", ch, obj, NULL, TO_CHAR);
@@ -79,21 +80,21 @@ void do_close(Character *ch, std::string argument)
             }
 
             ch->Echo("%s isn't a container.\r\n",
-                Capitalize(obj->ShortDescr).c_str());
+                     Capitalize(obj->ShortDescr).c_str());
             return;
         }
 
-        if (IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
+        if(IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
             ch->Echo("%s is already closed.\r\n",
-                Capitalize(obj->ShortDescr).c_str());
+                     Capitalize(obj->ShortDescr).c_str());
             return;
         }
 
-        if (!IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSEABLE))
+        if(!IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSEABLE))
         {
             ch->Echo("%s cannot be opened or closed.\r\n",
-                Capitalize(obj->ShortDescr).c_str());
+                     Capitalize(obj->ShortDescr).c_str());
             return;
         }
 
@@ -104,7 +105,7 @@ void do_close(Character *ch, std::string argument)
         return;
     }
 
-    if (!StrCmp(arg, "hatch"))
+    if(!StrCmp(arg, "hatch"))
     {
         do_closehatch(ch, argument);
         return;

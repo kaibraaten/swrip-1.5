@@ -8,31 +8,27 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "act.hpp"
 
 void do_buy(Character *ch, std::string argument)
 {
     std::string arg;
-    int maxgold = 0;
-
     argument = OneArgument(argument, arg);
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("Buy what?\r\n");
         return;
     }
 
-    if (ch->InRoom->Flags.test(Flag::Room::PetShop))
+    if(ch->InRoom->Flags.test(Flag::Room::PetShop))
     {
-        char buf[MAX_STRING_LENGTH];
-        Character *pet = nullptr;
-
-        if (IsNpc(ch))
+        if(IsNpc(ch))
             return;
 
         auto pRoomIndexNext = GetRoom(ch->InRoom->Vnum + 1);
 
-        if (!pRoomIndexNext)
+        if(pRoomIndexNext == nullptr)
         {
             Log->Bug("Do_buy: bad pet shop at vnum %ld.", ch->InRoom->Vnum);
             ch->Echo("Sorry, you can't buy that here.\r\n");
@@ -41,34 +37,34 @@ void do_buy(Character *ch, std::string argument)
 
         auto in_room = ch->InRoom;
         ch->InRoom = pRoomIndexNext;
-        pet = GetCharacterInRoom(ch, arg);
+        Character *pet = GetCharacterInRoom(ch, arg);
         ch->InRoom = in_room;
 
-        if (pet == NULL || !IsNpc(pet) || !pet->Flags.test(Flag::Mob::Pet))
+        if(pet == nullptr || !IsNpc(pet) || !pet->Flags.test(Flag::Mob::Pet))
         {
             ch->Echo("Sorry, you can't buy that here.\r\n");
             return;
         }
 
-        if (ch->Flags.test(Flag::Plr::BoughtPet))
+        if(ch->Flags.test(Flag::Plr::BoughtPet))
         {
             ch->Echo("You already bought one pet this level.\r\n");
             return;
         }
 
-        if (ch->Gold < 10 * pet->TopLevel * pet->TopLevel)
+        if(ch->Gold < 10 * pet->TopLevel * pet->TopLevel)
         {
             ch->Echo("You can't afford it.\r\n");
             return;
         }
 
-        if (ch->TopLevel < pet->TopLevel)
+        if(ch->TopLevel < pet->TopLevel)
         {
             ch->Echo("You're not ready for this pet.\r\n");
             return;
         }
 
-        maxgold = 10 * pet->TopLevel * pet->TopLevel;
+        int maxgold = 10 * pet->TopLevel * pet->TopLevel;
         ch->Gold -= maxgold;
         BoostEconomy(ch->InRoom->Area, maxgold);
         pet = CreateMobile(pet->Prototype);
@@ -78,16 +74,16 @@ void do_buy(Character *ch, std::string argument)
 
         argument = OneArgument(argument, arg);
 
-        if (!arg.empty())
+        if(!arg.empty())
         {
             pet->Name += " " + arg;
         }
 
-        sprintf(buf, "%sA neck tag says 'I belong to %s'.\r\n",
-            pet->Description.c_str(), ch->Name.c_str());
+        std::string buf = FormatString("%sA neck tag says 'I belong to %s'.\r\n",
+                                       pet->Description.c_str(), ch->Name.c_str());
         pet->Description = buf;
 
-        if (ch->PCData)
+        if(ch->PCData)
             ch->PCData->Pet = pet;
 
         CharacterToRoom(pet, ch->InRoom);
@@ -98,26 +94,21 @@ void do_buy(Character *ch, std::string argument)
     }
     else
     {
-        Character *keeper = nullptr;
-        Object *obj = nullptr;
-        int cost = 0;
+        auto keeper = FindKeeper(ch);
         int noi = 1;              /* Number of items */
-        short mnoi = 20;  /* Max number of items to be bought at once */
+        constexpr short mnoi = 20;  /* Max number of items to be bought at once */
 
-        if ((keeper = FindKeeper(ch)) == NULL)
+        if(keeper == nullptr)
             return;
 
-        if (keeper == NULL)
-            return;
+        int maxgold = keeper->TopLevel * 10;
 
-        maxgold = keeper->TopLevel * 10;
-
-        if (IsNumber(arg))
+        if(IsNumber(arg))
         {
             noi = ToLong(arg);
             argument = OneArgument(argument, arg);
 
-            if (noi > mnoi)
+            if(noi > mnoi)
             {
                 Act(AT_TELL, "$n tells you 'I don't sell that many items at"
                     " once.'", keeper, NULL, ch, TO_VICT);
@@ -126,65 +117,65 @@ void do_buy(Character *ch, std::string argument)
             }
         }
 
-        obj = GetCarriedObject(keeper, arg);
+        auto obj = GetCarriedObject(keeper, arg);
 
-        if (!obj && arg[0] == '#')
+        if(!obj && arg[0] == '#')
         {
             int onum = 0;
             bool ofound = false;
-            int oref = strtol(arg.substr(1).c_str(), nullptr, 10);
+            const int oref = strtol(arg.substr(1).c_str(), nullptr, 10);
 
-            for (Object *iter : Reverse(keeper->Objects()))
+            for(auto iter : Reverse(keeper->Objects()))
             {
-                if (iter->WearLoc == WEAR_NONE
-                    && CanSeeObject(ch, iter))
+                if(iter->WearLoc == WEAR_NONE
+                   && CanSeeObject(ch, iter))
                     onum++;
 
-                if (onum == oref)
+                if(onum == oref)
                 {
                     obj = iter;
                     ofound = true;
                     break;
                 }
-                else if (onum > oref)
+                else if(onum > oref)
                 {
                     break;
                 }
             }
 
-            if (!ofound)
-                obj = NULL;
+            if(!ofound)
+                obj = nullptr;
         }
 
-        if (!obj)
+        if(obj == nullptr)
         {
             ch->Echo("Buy what?\r\n");
             return;
         }
 
-        cost = GetObjectCost(ch, keeper, obj, true) * noi;
+        int cost = GetObjectCost(ch, keeper, obj, true) * noi;
 
-        if (keeper->Home != NULL && obj->Cost > 0)
+        if(keeper->Home != nullptr && obj->Cost > 0)
             cost = obj->Cost;
 
-        if (cost <= 0 || !CanSeeObject(ch, obj))
+        if(cost <= 0 || !CanSeeObject(ch, obj))
         {
             Act(AT_TELL, "$n tells you 'I don't sell that -- try 'list'.'",
-                keeper, NULL, ch, TO_VICT);
+                keeper, nullptr, ch, TO_VICT);
             ch->Reply = keeper;
             return;
         }
 
-        if (!obj->Flags.test(Flag::Obj::Inventory) && (noi > 1))
+        if(!obj->Flags.test(Flag::Obj::Inventory) && noi > 1)
         {
             Interpret(keeper, "laugh");
             Act(AT_TELL, "$n tells you 'I don't have enough of those in stock"
-                " to sell more than one at a time.'", keeper, NULL, ch, TO_VICT);
+                " to sell more than one at a time.'", keeper, nullptr, ch, TO_VICT);
             ch->Reply = keeper;
             return;
         }
 
-        if (ch->Gold < cost)
+        if(ch->Gold < cost)
         {
             Act(AT_TELL, "$n tells you 'You can't afford to buy $p.'",
                 keeper, obj, ch, TO_VICT);
@@ -192,66 +183,65 @@ void do_buy(Character *ch, std::string argument)
             return;
         }
 
-        if (obj->Flags.test(Flag::Obj::Prototype)
-            && GetTrustLevel(ch) < LEVEL_IMMORTAL)
+        if(obj->Flags.test(Flag::Obj::Prototype)
+           && GetTrustLevel(ch) < LEVEL_IMMORTAL)
         {
             Act(AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",
-                keeper, NULL, ch, TO_VICT);
+                keeper, nullptr, ch, TO_VICT);
             ch->Reply = keeper;
             return;
         }
 
-        if (ch->CarryNumber + GetObjectCount(obj) > GetCarryCapacityNumber(ch))
+        if(ch->CarryNumber + GetObjectCount(obj) > GetCarryCapacityNumber(ch))
         {
             ch->Echo("You can't carry that many items.\r\n");
             return;
         }
 
-        if (ch->CarryWeight + (GetObjectWeight(obj) * noi)
-            + (noi > 1 ? 2 : 0) > GetCarryCapacityWeight(ch))
+        if(ch->CarryWeight + (GetObjectWeight(obj) * noi)
+           + (noi > 1 ? 2 : 0) > GetCarryCapacityWeight(ch))
         {
             ch->Echo("You can't carry that much weight.\r\n");
             return;
         }
 
-        if (noi == 1)
+        if(noi == 1)
         {
-            if (!obj->Flags.test(Flag::Obj::Inventory)
-                || keeper->Home != nullptr)
+            if(!obj->Flags.test(Flag::Obj::Inventory)
+               || keeper->Home != nullptr)
                 SeparateOneObjectFromGroup(obj);
 
-            Act(AT_ACTION, "$n buys $p.", ch, obj, NULL, TO_ROOM);
-            Act(AT_ACTION, "You buy $p.", ch, obj, NULL, TO_CHAR);
+            Act(AT_ACTION, "$n buys $p.", ch, obj, nullptr, TO_ROOM);
+            Act(AT_ACTION, "You buy $p.", ch, obj, nullptr, TO_CHAR);
         }
         else
         {
-            char buf[MAX_STRING_LENGTH];
-            sprintf(buf, "$n buys %d $p%s.", noi,
-                (obj->ShortDescr[obj->ShortDescr.size() - 1] == 's'
-                    ? "" : "s"));
-            Act(AT_ACTION, buf, ch, obj, NULL, TO_ROOM);
-            sprintf(buf, "You buy %d $p%s.", noi,
-                (obj->ShortDescr[obj->ShortDescr.size() - 1] == 's'
-                    ? "" : "s"));
-            Act(AT_ACTION, buf, ch, obj, NULL, TO_CHAR);
+            std::string buf = FormatString("$n buys %d $p%s.", noi,
+                                           (obj->ShortDescr[obj->ShortDescr.size() - 1] == 's'
+                                            ? "" : "s"));
+            Act(AT_ACTION, buf, ch, obj, nullptr, TO_ROOM);
+            buf = FormatString("You buy %d $p%s.", noi,
+                               (obj->ShortDescr[obj->ShortDescr.size() - 1] == 's'
+                                ? "" : "s"));
+            Act(AT_ACTION, buf, ch, obj, nullptr, TO_CHAR);
             Act(AT_ACTION, "$N puts them into a bag and hands it to you.",
-                ch, NULL, keeper, TO_CHAR);
+                ch, nullptr, keeper, TO_CHAR);
         }
 
         ch->Gold -= cost;
         keeper->Gold += cost;
 
-        if (keeper->Gold > maxgold && keeper->Owner.empty())
+        if(keeper->Gold > maxgold && keeper->Owner.empty())
         {
             BoostEconomy(keeper->InRoom->Area, keeper->Gold - maxgold / 2);
             keeper->Gold = maxgold / 2;
-            Act(AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n puts some credits into a large safe.", keeper, nullptr, nullptr, TO_ROOM);
         }
 
-        if (obj->Flags.test(Flag::Obj::Inventory)
-            && keeper->Home == nullptr)
+        if(obj->Flags.test(Flag::Obj::Inventory)
+           && keeper->Home == nullptr)
         {
-            Object *buy_obj = CreateObject(obj->Prototype, obj->Level);
+            auto buy_obj = CreateObject(obj->Prototype, obj->Level);
 
             /*
              * Due to grouped objects and carry limitations in SMAUG
@@ -259,9 +249,9 @@ void do_buy(Character *ch, std::string argument)
              * and also, only one object needs be created with a count
              * set to the number bought.          -Thoric
              */
-            if (noi > 1)
+            if(noi > 1)
             {
-                Object *bag = CreateObject(GetProtoObject(OBJ_VNUM_SHOPPING_BAG), 1);
+                auto bag = CreateObject(GetProtoObject(OBJ_VNUM_SHOPPING_BAG), 1);
                 /* perfect size bag ;) */
                 bag->Value[0] = bag->Weight + (buy_obj->Weight * noi);
                 buy_obj->Count = noi;
@@ -269,24 +259,10 @@ void do_buy(Character *ch, std::string argument)
                 numobjsloaded += (noi - 1);
                 ObjectToObject(buy_obj, bag);
                 ObjectToCharacter(bag, ch);
-
-                /* vendor snippit. Forces vendor to save after anyone buys anything*/
-                if (keeper->Home != NULL)
-                {
-                    SaveVendor(keeper);
-                    bag->Cost = 0;
-                }
             }
             else
             {
                 ObjectToCharacter(buy_obj, ch);
-            }
-
-            /* vendor snippet. Forces vendor to save after anyone buys anything*/
-            if (keeper->Home != NULL)
-            {
-                SaveVendor(keeper);
-                buy_obj->Cost = 0;
             }
         }
         else
@@ -295,13 +271,11 @@ void do_buy(Character *ch, std::string argument)
             ObjectToCharacter(obj, ch);
 
             /* vendor snippet. Forces vendor to save after anyone buys anything*/
-            if (keeper->Home != NULL)
+            if(keeper->Home != nullptr)
             {
                 SaveVendor(keeper);
                 obj->Cost = 0;
             }
         }
-
-        return;
     }
 }

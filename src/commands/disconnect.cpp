@@ -1,35 +1,36 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "act.hpp"
 
-void do_disconnect( Character *ch, std::string arg )
+void do_disconnect(Character *ch, std::string arg)
 {
-  Character *victim = nullptr;
+    Character *victim = nullptr;
 
-  if ( arg.empty() )
+    if(arg.empty())
     {
-      ch->Echo( "Disconnect whom?\r\n" );
-      return;
+        ch->Echo("Disconnect whom?\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
-      ch->Echo( "They aren't here.\r\n" );
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( victim->Desc == NULL )
+    if(victim->Desc == NULL)
     {
-      Act( AT_PLAIN, "$N doesn't have a descriptor.", ch, NULL, victim, TO_CHAR );
-      return;
+        ch->Echo("%s doesn't have a descriptor.", victim->Name.c_str());
+        return;
     }
 
-  if ( GetTrustLevel(ch) <= GetTrustLevel( victim ) )
+    if(GetTrustLevel(ch) <= GetTrustLevel(victim))
     {
-      ch->Echo( "They might not like that...\r\n" );
-      return;
+        ch->Echo("They might not like that...\r\n");
+        return;
     }
 
-  CloseDescriptor( victim->Desc, false );
-  ch->Echo( "Ok.\r\n" );
+    CloseDescriptor(victim->Desc, false);
+    ch->Echo("Ok.\r\n");
 }
 

@@ -8,39 +8,40 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "exit.hpp"
+#include "act.hpp"
 
 void do_dig(Character *ch, std::string arg)
 {
-    switch (ch->SubState)
+    switch(ch->SubState)
     {
     default:
-        if (IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
+        if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
         {
             ch->Echo("You can't concentrate enough for that.\r\n");
             return;
         }
 
-        if (ch->Mount)
+        if(ch->Mount)
         {
             ch->Echo("You can't do that while mounted.\r\n");
             return;
         }
 
-        if (!arg.empty())
+        if(!arg.empty())
         {
             std::shared_ptr<Exit> pexit = FindDoor(ch, arg, true);
 
-            if (pexit == nullptr
-                && GetDirection(arg) == -1)
+            if(pexit == nullptr
+               && GetDirection(arg) == -1)
             {
                 ch->Echo("What direction is that?\r\n");
                 return;
             }
 
-            if (pexit != nullptr)
+            if(pexit != nullptr)
             {
-                if (!pexit->Flags.test(Flag::Exit::Dig)
-                    && !pexit->Flags.test(Flag::Exit::Closed))
+                if(!pexit->Flags.test(Flag::Exit::Dig)
+                   && !pexit->Flags.test(Flag::Exit::Closed))
                 {
                     ch->Echo("There is no need to dig out that exit.\r\n");
                     return;
@@ -49,7 +50,7 @@ void do_dig(Character *ch, std::string arg)
         }
         else
         {
-            switch (ch->InRoom->Sector)
+            switch(ch->InRoom->Sector)
             {
             case SECT_CITY:
             case SECT_INSIDE:
@@ -72,14 +73,14 @@ void do_dig(Character *ch, std::string arg)
         }
 
         AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(SkillTable[gsn_dig]->Beats / 10, 3),
-            do_dig, SUB_PAUSE);
+                            do_dig, SUB_PAUSE);
         ch->dest_buf = arg;
         ch->Echo("You begin digging...\r\n");
         Act(AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM);
         return;
 
     case SUB_PAUSE:
-        if (ch->dest_buf.empty())
+        if(ch->dest_buf.empty())
         {
             ch->Echo("Your digging was interrupted!\r\n");
             Act(AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM);
@@ -105,17 +106,17 @@ void do_dig(Character *ch, std::string arg)
     bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
 
     /* dig out an EX_DIG exit... */
-    if (!arg.empty())
+    if(!arg.empty())
     {
         std::shared_ptr<Exit> pexit = FindDoor(ch, arg, true);
 
-        if (pexit != nullptr
-            && pexit->Flags.test(Flag::Exit::Dig)
-            && pexit->Flags.test(Flag::Exit::Closed))
+        if(pexit != nullptr
+           && pexit->Flags.test(Flag::Exit::Dig)
+           && pexit->Flags.test(Flag::Exit::Closed))
         {
             /* 4 times harder to dig open a passage without a shovel */
-            if ((GetRandomPercent() * (shovel ? 1 : 4)) <
-                (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]))
+            if((GetRandomPercent() * (shovel ? 1 : 4)) <
+               (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]))
             {
                 pexit->Flags.reset(Flag::Exit::Closed);
                 ch->Echo("You dig open a passageway!\r\n");
@@ -134,21 +135,21 @@ void do_dig(Character *ch, std::string arg)
     bool found = false;
     Object *obj = nullptr;
 
-    for (auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
+    for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
     {
         obj = *i;
 
         /* twice as hard to find something without a shovel */
-        if (obj->Flags.test(Flag::Obj::Burried)
-            && (GetRandomPercent() * (shovel ? 1 : 2)) <
-            (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]))
+        if(obj->Flags.test(Flag::Obj::Burried)
+           && (GetRandomPercent() * (shovel ? 1 : 2)) <
+           (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]))
         {
             found = true;
             break;
         }
     }
 
-    if (!found)
+    if(!found)
     {
         ch->Echo("Your dig uncovered nothing.\r\n");
         Act(AT_PLAIN, "$n's dig uncovered nothing.", ch, NULL, NULL, TO_ROOM);
