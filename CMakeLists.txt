@@ -675,12 +675,12 @@ if(WIN32)
   target_link_libraries(swrip utility colorparser lua WS2_32)
   set(BUILD_SHARED_LIBS ON)
   set(PYTHON py)
-  set(RM IF EXIST ${COMMANDTABLE_FILE} del)
 else()
   target_link_libraries(swrip utility colorparser lua stdc++fs dl)
   set(PYTHON python3)
-  set(RM rm -f)
 endif()
+
+set(RM ${PYTHON} scripts/rm.py)
 
 target_compile_features(mud PUBLIC cxx_std_17)
 target_compile_options(mud
@@ -717,7 +717,7 @@ add_custom_command(OUTPUT ${COMMANDTABLE_FILE}
                    COMMAND ${RM} ${COMMANDTABLE_FILE}
                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_target(tables_cpp ALL
-                  COMMAND ${PYTHON} make_lookup_table.py ${COMMANDTABLE_FILE}
+                  COMMAND ${PYTHON} scripts/make_lookup_table.py ${COMMANDTABLE_FILE}
                   DEPENDS ${COMMANDTABLE_FILE}
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_dependencies(mud tables_cpp)
