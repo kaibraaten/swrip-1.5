@@ -669,13 +669,17 @@ src/spells/smaug.cpp
 src/spells/ventriloquate.cpp
 src/spells/weaken.cpp)
 
+set(COMMANDTABLE_FILE ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp)
+
 if(WIN32)
   target_link_libraries(swrip utility colorparser lua WS2_32)
   set(BUILD_SHARED_LIBS ON)
   set(PYTHON py)
+  set(RM IF EXIST ${COMMANDTABLE_FILE} del)
 else()
   target_link_libraries(swrip utility colorparser lua stdc++fs dl)
   set(PYTHON python3)
+  set(RM rm -f)
 endif()
 
 target_compile_features(mud PUBLIC cxx_std_17)
@@ -709,11 +713,11 @@ add_subdirectory(libs/3rdparty/lua)
 add_subdirectory(test)
 
 # Generate src/tables.cpp file.
-add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp
-                   COMMAND rm -f ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp
+add_custom_command(OUTPUT ${COMMANDTABLE_FILE}
+                   COMMAND ${RM} ${COMMANDTABLE_FILE}
                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_target(tables_cpp ALL
-                  COMMAND ${PYTHON} make_lookup_table.py ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp
-                  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp
+                  COMMAND ${PYTHON} make_lookup_table.py ${COMMANDTABLE_FILE}
+                  DEPENDS ${COMMANDTABLE_FILE}
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_dependencies(mud tables_cpp)
