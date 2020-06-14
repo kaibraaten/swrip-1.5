@@ -123,7 +123,7 @@ void do_ocreate(Character *ch, std::string argument)
     obj = CreateObject(pObjIndex, GetTrustLevel(ch));
     ObjectToCharacter(obj, ch);
     Act(AT_IMMORT, "$n makes some ancient arcane gestures, and opens $s hands to reveal $p!",
-        ch, obj, NULL, TO_ROOM);
+        ch, obj, NULL, ActTarget::Room);
     Act(AT_IMMORT, "You make some ancient arcane gestures, and open your hands to reveal $p!",
-        ch, obj, NULL, TO_CHAR);
+        ch, obj, NULL, ActTarget::Char);
 }

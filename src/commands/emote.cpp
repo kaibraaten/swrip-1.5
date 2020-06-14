@@ -35,10 +35,10 @@ void do_emote(Character *ch, std::string argument)
     }
 
     MOBtrigger = false;
-    Act(AT_ACTION, "$n $T", ch, NULL, buf.c_str(), TO_ROOM);
+    Act(AT_ACTION, "$n $T", ch, NULL, buf.c_str(), ActTarget::Room);
 
     MOBtrigger = false;
-    Act(AT_ACTION, "$n $T", ch, NULL, buf.c_str(), TO_CHAR);
+    Act(AT_ACTION, "$n $T", ch, NULL, buf.c_str(), ActTarget::Char);
 
     ch->Flags = flags;
 

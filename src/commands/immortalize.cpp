@@ -33,7 +33,7 @@ void do_immortalize(Character *ch, std::string arg)
     ch->Echo("Immortalizing a player...\r\n");
     SetCharacterColor(AT_IMMORT, victim);
     Act(AT_IMMORT, "$n begins to chant softly... then raises $s arms to the sky...",
-        ch, NULL, NULL, TO_ROOM);
+        ch, NULL, NULL, ActTarget::Room);
     SetCharacterColor(AT_WHITE, victim);
     victim->Echo("You suddenly feel very strange...\r\n\r\n");
     SetCharacterColor(AT_LBLUE, victim);

@@ -137,33 +137,33 @@ void SuccessfulCasting(std::shared_ptr<Skill> skill, Character *ch,
     {
         if(!skill->Messages.Success.ToCaster.empty())
         {
-            Act(chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR);
+            Act(chit, skill->Messages.Success.ToCaster, ch, obj, victim, ActTarget::Char);
         }
         else if(skill->Type == SKILL_SPELL)
         {
-            Act(chit, "Ok.", ch, NULL, NULL, TO_CHAR);
+            Act(chit, "Ok.", ch, NULL, NULL, ActTarget::Char);
         }
     }
 
     if(ch && !skill->Messages.Success.ToRoom.empty())
     {
-        Act(chitroom, skill->Messages.Success.ToRoom, ch, obj, victim, TO_NOTVICT);
+        Act(chitroom, skill->Messages.Success.ToRoom, ch, obj, victim, ActTarget::NotVict);
     }
 
     if(ch && victim && !skill->Messages.Success.ToVictim.empty())
     {
         if(ch != victim)
         {
-            Act(chitme, skill->Messages.Success.ToVictim, ch, obj, victim, TO_VICT);
+            Act(chitme, skill->Messages.Success.ToVictim, ch, obj, victim, ActTarget::Vict);
         }
         else
         {
-            Act(chitme, skill->Messages.Success.ToVictim, ch, obj, victim, TO_CHAR);
+            Act(chitme, skill->Messages.Success.ToVictim, ch, obj, victim, ActTarget::Char);
         }
     }
     else if(ch && ch == victim && skill->Type == SKILL_SPELL)
     {
-        Act(chitme, "Ok.", ch, NULL, NULL, TO_CHAR);
+        Act(chitme, "Ok.", ch, NULL, NULL, ActTarget::Char);
     }
 }
 
@@ -187,39 +187,39 @@ void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
     {
         if(!skill->Messages.Failure.ToCaster.empty())
         {
-            Act(chit, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR);
+            Act(chit, skill->Messages.Failure.ToCaster, ch, obj, victim, ActTarget::Char);
         }
         else if(skill->Type == SKILL_SPELL)
         {
-            Act(chit, "You failed.", ch, NULL, NULL, TO_CHAR);
+            Act(chit, "You failed.", ch, NULL, NULL, ActTarget::Char);
         }
     }
 
     if(ch && !skill->Messages.Failure.ToRoom.empty())
     {
-        Act(chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT);
+        Act(chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, ActTarget::NotVict);
     }
 
     if(ch && victim && !skill->Messages.Failure.ToVictim.empty())
     {
         if(ch != victim)
         {
-            Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_VICT);
+            Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, ActTarget::Vict);
         }
         else
         {
-            Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_CHAR);
+            Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, ActTarget::Char);
         }
     }
     else if(ch && ch == victim)
     {
         if(!skill->Messages.Failure.ToCaster.empty())
         {
-            Act(chitme, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR);
+            Act(chitme, skill->Messages.Failure.ToCaster, ch, obj, victim, ActTarget::Char);
         }
         else if(skill->Type == SKILL_SPELL)
         {
-            Act(chitme, "You failed.", ch, NULL, NULL, TO_CHAR);
+            Act(chitme, "You failed.", ch, NULL, NULL, ActTarget::Char);
         }
     }
 }
@@ -246,62 +246,62 @@ void ImmuneCasting(std::shared_ptr<Skill> skill, Character *ch,
         {
             if(!skill->Messages.VictimImmune.ToCaster.empty())
             {
-                Act(chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR);
+                Act(chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, ActTarget::Char);
             }
             else if(!skill->Messages.Failure.ToCaster.empty())
             {
-                Act(chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR);
+                Act(chit, skill->Messages.Success.ToCaster, ch, obj, victim, ActTarget::Char);
             }
             else if(skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL)
             {
-                Act(chit, "That appears to have no effect.", ch, NULL, NULL, TO_CHAR);
+                Act(chit, "That appears to have no effect.", ch, NULL, NULL, ActTarget::Char);
             }
         }
 
         if(!skill->Messages.VictimImmune.ToRoom.empty())
         {
-            Act(chitroom, skill->Messages.VictimImmune.ToRoom, ch, obj, victim, TO_NOTVICT);
+            Act(chitroom, skill->Messages.VictimImmune.ToRoom, ch, obj, victim, ActTarget::NotVict);
         }
         else if(!skill->Messages.Failure.ToRoom.empty())
         {
-            Act(chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT);
+            Act(chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, ActTarget::NotVict);
         }
 
         if(victim && !skill->Messages.VictimImmune.ToVictim.empty())
         {
             if(ch != victim)
             {
-                Act(chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_VICT);
+                Act(chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, ActTarget::Vict);
             }
             else
             {
-                Act(chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_CHAR);
+                Act(chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, ActTarget::Char);
             }
         }
         else if(victim && !skill->Messages.Failure.ToVictim.empty())
         {
             if(ch != victim)
             {
-                Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_VICT);
+                Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, ActTarget::Vict);
             }
             else
             {
-                Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_CHAR);
+                Act(chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, ActTarget::Char);
             }
         }
         else if(ch == victim)
         {
             if(!skill->Messages.VictimImmune.ToCaster.empty())
             {
-                Act(chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR);
+                Act(chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, ActTarget::Char);
             }
             else if(!skill->Messages.Failure.ToCaster.empty())
             {
-                Act(chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR);
+                Act(chit, skill->Messages.Success.ToCaster, ch, obj, victim, ActTarget::Char);
             }
             else if(skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL)
             {
-                Act(chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR);
+                Act(chit, "That appears to have no affect.", ch, NULL, NULL, ActTarget::Char);
             }
         }
     }
@@ -807,14 +807,14 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
             break;
 
         case 1:
-            Act(AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, TO_CHAR);
+            Act(AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::Char);
 
             if(victim)
             {
-                Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_VICT);
+                Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::Vict);
             }
 
-            Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_NOTVICT);
+            Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::NotVict);
             return InflictDamage(ch, ch, GetRandomNumberFromRange(1, level), TYPE_UNDEFINED);
 
         case 2:
@@ -822,14 +822,14 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
             break;
 
         case 3:
-            Act(AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, TO_CHAR);
+            Act(AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::Char);
 
             if(victim)
             {
-                Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_VICT);
+                Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::Vict);
             }
 
-            Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_NOTVICT);
+            Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::NotVict);
             return InflictDamage(ch, ch, GetRandomNumberFromRange(1, level), TYPE_UNDEFINED);
         }
 

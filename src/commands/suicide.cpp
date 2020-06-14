@@ -36,9 +36,9 @@ void do_suicide(Character *ch, std::string argument)
     }
 
     Act(AT_BLOOD, "With a sad determination and trembling hands you slit your own throat!",
-        ch, NULL, NULL, TO_CHAR);
+        ch, NULL, NULL, ActTarget::Char);
     Act(AT_BLOOD, "Cold shivers run down your spine as you watch $n slit $s own throat!",
-        ch, NULL, NULL, TO_ROOM);
+        ch, NULL, NULL, ActTarget::Room);
     Log->Info("%s just committed suicide.", ch->Name.c_str());
 
     SetCurrentGlobalCharacter(ch);

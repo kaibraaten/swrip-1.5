@@ -68,7 +68,7 @@ void do_radar(Character *ch, std::string argument)
         return;
     }
 
-    Act(AT_PLAIN, "$n checks the radar.", ch, NULL, argument.c_str(), TO_ROOM);
+    Act(AT_PLAIN, "$n checks the radar.", ch, NULL, argument.c_str(), ActTarget::Room);
     SetCharacterColor(AT_RED, ch);
 
     for(auto spaceobj : Spaceobjects)

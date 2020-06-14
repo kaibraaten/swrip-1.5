@@ -91,8 +91,8 @@ void do_mass_propaganda(Character *ch, std::string argument)
     ch->Echo("You speak to them about the benefits of %s%s.\r\n",
              ch->PCData->ClanInfo.Clan->Name.c_str(),
              planet->GovernedBy == clan ? "" : buf);
-    Act(AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT);
-    Act(AT_ACTION, "$n tells $N about their organization.\r\n", ch, NULL, victim, TO_NOTVICT);
+    Act(AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, ActTarget::Vict);
+    Act(AT_ACTION, "$n tells $N about their organization.\r\n", ch, NULL, victim, ActTarget::NotVict);
 
     SetWaitState(ch, SkillTable[gsn_masspropaganda]->Beats);
 

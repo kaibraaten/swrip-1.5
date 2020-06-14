@@ -194,34 +194,34 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
     {
         if(ch->Race == RACE_DEFEL)
         {
-            Act(AT_MAGIC, "It is against your nature to wear anything that might make you visible.", ch, NULL, NULL, TO_CHAR);
+            Act(AT_MAGIC, "It is against your nature to wear anything that might make you visible.", ch, NULL, NULL, ActTarget::Char);
             Act(AT_ACTION, "$n wants to use $p, but doesn't.",
-                ch, obj, NULL, TO_ROOM);
+                ch, obj, NULL, ActTarget::Room);
             return;
         }
 
         if(obj->Flags.test(Flag::Obj::HuttSize))
         {
-            Act(AT_MAGIC, "That item is too big for you.", ch, NULL, NULL, TO_CHAR);
+            Act(AT_MAGIC, "That item is too big for you.", ch, NULL, NULL, ActTarget::Char);
             Act(AT_ACTION, "$n tries to use $p, but it is too big.",
-                ch, obj, NULL, TO_ROOM);
+                ch, obj, NULL, ActTarget::Room);
             return;
         }
 
         if(obj->Flags.test(Flag::Obj::LargeSize)
            || obj->Flags.test(Flag::Obj::HumanSize))
         {
-            Act(AT_MAGIC, "That item is the wrong size for you.", ch, NULL, NULL, TO_CHAR);
+            Act(AT_MAGIC, "That item is the wrong size for you.", ch, NULL, NULL, ActTarget::Char);
             Act(AT_ACTION, "$n tries to use $p, but can't.",
-                ch, obj, NULL, TO_ROOM);
+                ch, obj, NULL, ActTarget::Room);
             return;
         }
 
         if(obj->Flags.test(Flag::Obj::SmallSize))
         {
-            Act(AT_MAGIC, "That item is too small for you.", ch, NULL, NULL, TO_CHAR);
+            Act(AT_MAGIC, "That item is too small for you.", ch, NULL, NULL, ActTarget::Char);
             Act(AT_ACTION, "$n tries to use $p, but it is too small.",
-                ch, obj, NULL, TO_ROOM);
+                ch, obj, NULL, ActTarget::Room);
             return;
         }
     }
@@ -235,8 +235,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n holds $p as a light.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You hold $p as your light.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n holds $p as a light.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You hold $p as your light.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -276,8 +276,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             {
                 if(obj->ActionDescription.empty())
                 {
-                    Act(AT_ACTION, "$n slips $s left finger into $p.", ch, obj, NULL, TO_ROOM);
-                    Act(AT_ACTION, "You slip your left finger into $p.", ch, obj, NULL, TO_CHAR);
+                    Act(AT_ACTION, "$n slips $s left finger into $p.", ch, obj, NULL, ActTarget::Room);
+                    Act(AT_ACTION, "You slip your left finger into $p.", ch, obj, NULL, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -293,8 +293,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             {
                 if(obj->ActionDescription.empty())
                 {
-                    Act(AT_ACTION, "$n slips $s right finger into $p.", ch, obj, NULL, TO_ROOM);
-                    Act(AT_ACTION, "You slip your right finger into $p.", ch, obj, NULL, TO_CHAR);
+                    Act(AT_ACTION, "$n slips $s right finger into $p.", ch, obj, NULL, ActTarget::Room);
+                    Act(AT_ACTION, "You slip your right finger into $p.", ch, obj, NULL, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -322,8 +322,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             {
                 if(obj->ActionDescription.empty())
                 {
-                    Act(AT_ACTION, "$n wears $p around $s neck.", ch, obj, NULL, TO_ROOM);
-                    Act(AT_ACTION, "You wear $p around your neck.", ch, obj, NULL, TO_CHAR);
+                    Act(AT_ACTION, "$n wears $p around $s neck.", ch, obj, NULL, ActTarget::Room);
+                    Act(AT_ACTION, "You wear $p around your neck.", ch, obj, NULL, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -339,8 +339,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             {
                 if(obj->ActionDescription.empty())
                 {
-                    Act(AT_ACTION, "$n wears $p around $s neck.", ch, obj, NULL, TO_ROOM);
-                    Act(AT_ACTION, "You wear $p around your neck.", ch, obj, NULL, TO_CHAR);
+                    Act(AT_ACTION, "$n wears $p around $s neck.", ch, obj, NULL, ActTarget::Room);
+                    Act(AT_ACTION, "You wear $p around your neck.", ch, obj, NULL, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -364,8 +364,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n fits $p on $s body.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You fit $p on your body.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n fits $p on $s body.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You fit $p on your body.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -386,8 +386,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n dons $p upon $s head.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You don $p upon your head.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n dons $p upon $s head.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You don $p upon your head.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -403,8 +403,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n places $p on $s eyes.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You place $p on your eyes.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n places $p on $s eyes.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You place $p on your eyes.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -425,8 +425,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n wears $p on $s ears.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You wear $p on your ears.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n wears $p on $s ears.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You wear $p on your ears.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -451,8 +451,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n slips into $p.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You slip into $p.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n slips into $p.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You slip into $p.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -476,8 +476,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n wears $p on $s feet.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You wear $p on your feet.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n wears $p on $s feet.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You wear $p on your feet.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -496,8 +496,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n wears $p on $s hands.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You wear $p on your hands.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n wears $p on $s hands.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You wear $p on your hands.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -516,8 +516,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n wears $p on $s arms.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You wear $p on your arms.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n wears $p on $s arms.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You wear $p on your arms.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -537,8 +537,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n wears $p about $s body.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You wear $p about your body.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n wears $p about $s body.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You wear $p about your body.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -557,8 +557,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n wears $p about $s waist.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You wear $p about your waist.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n wears $p about $s waist.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You wear $p about your waist.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -581,9 +581,9 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
                 if(obj->ActionDescription.empty())
                 {
                     Act(AT_ACTION, "$n fits $p around $s left wrist.",
-                        ch, obj, NULL, TO_ROOM);
+                        ch, obj, NULL, ActTarget::Room);
                     Act(AT_ACTION, "You fit $p around your left wrist.",
-                        ch, obj, NULL, TO_CHAR);
+                        ch, obj, NULL, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -600,9 +600,9 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
                 if(obj->ActionDescription.empty())
                 {
                     Act(AT_ACTION, "$n fits $p around $s right wrist.",
-                        ch, obj, NULL, TO_ROOM);
+                        ch, obj, NULL, ActTarget::Room);
                     Act(AT_ACTION, "You fit $p around your right wrist.",
-                        ch, obj, NULL, TO_CHAR);
+                        ch, obj, NULL, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -623,8 +623,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n uses $p as an energy shield.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You use $p as an energy shield.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n uses $p as an energy shield.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You use $p as an energy shield.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -661,8 +661,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
                 {
                     if(obj->ActionDescription.empty())
                     {
-                        Act(AT_ACTION, "$n dual-wields $p.", ch, obj, NULL, TO_ROOM);
-                        Act(AT_ACTION, "You dual-wield $p.", ch, obj, NULL, TO_CHAR);
+                        Act(AT_ACTION, "$n dual-wields $p.", ch, obj, NULL, ActTarget::Room);
+                        Act(AT_ACTION, "You dual-wield $p.", ch, obj, NULL, ActTarget::Char);
                     }
                     else
                     {
@@ -686,8 +686,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n wields $p.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You wield $p.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n wields $p.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You wield $p.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -714,8 +714,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
            || obj->ItemType == ITEM_KEY
            || !ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
         {
-            Act(AT_ACTION, "$n holds $p in $s hands.", ch, obj, NULL, TO_ROOM);
-            Act(AT_ACTION, "You hold $p in your hands.", ch, obj, NULL, TO_CHAR);
+            Act(AT_ACTION, "$n holds $p in $s hands.", ch, obj, NULL, ActTarget::Room);
+            Act(AT_ACTION, "You hold $p in your hands.", ch, obj, NULL, ActTarget::Char);
         }
         EquipCharacter(ch, obj, WEAR_HOLD);
         ObjProgWearTrigger(ch, obj);
@@ -731,8 +731,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n activates $p. $p takes up position behind $n", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You activate $p and it takes up position behind you.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n activates $p. $p takes up position behind $n", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You activate $p and it takes up position behind you.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -747,8 +747,8 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n wears $p.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You wear $p over you.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n wears $p.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You wear $p over you.", ch, obj, NULL, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);

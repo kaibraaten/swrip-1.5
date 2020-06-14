@@ -63,7 +63,7 @@ void do_train(Character *ch, std::string arg)
                || ch->PermStats.Str >= 25)
             {
                 Act(AT_TELL, "$n tells you 'I cannot help you... you are already stronger than me.'",
-                    mob, NULL, ch, TO_VICT);
+                    mob, NULL, ch, ActTarget::Vict);
                 return;
             }
 
@@ -77,7 +77,7 @@ void do_train(Character *ch, std::string arg)
                || ch->PermStats.Dex >= 25)
             {
                 Act(AT_TELL, "$n tells you 'I cannot help you... you are already more dextrous than me.'",
-                    mob, NULL, ch, TO_VICT);
+                    mob, NULL, ch, ActTarget::Vict);
                 return;
             }
 
@@ -91,7 +91,7 @@ void do_train(Character *ch, std::string arg)
                || ch->PermStats.Int >= 25)
             {
                 Act(AT_TELL, "$n tells you 'I cannot help you... you are already more educated than me.'",
-                    mob, NULL, ch, TO_VICT);
+                    mob, NULL, ch, ActTarget::Vict);
                 return;
             }
 
@@ -105,7 +105,7 @@ void do_train(Character *ch, std::string arg)
                || ch->PermStats.Wis >= 25)
             {
                 Act(AT_TELL, "$n tells you 'I cannot help you... you are already far wiser than me.'",
-                    mob, NULL, ch, TO_VICT);
+                    mob, NULL, ch, ActTarget::Vict);
                 return;
             }
 
@@ -119,7 +119,7 @@ void do_train(Character *ch, std::string arg)
                || ch->PermStats.Con >= 25)
             {
                 Act(AT_TELL, "$n tells you 'I cannot help you... you are already healthier than me.'",
-                    mob, NULL, ch, TO_VICT);
+                    mob, NULL, ch, ActTarget::Vict);
                 return;
             }
 
@@ -133,7 +133,7 @@ void do_train(Character *ch, std::string arg)
                || ch->PermStats.Cha >= 25)
             {
                 Act(AT_TELL, "$n tells you 'I cannot help you... you already are more charming than me.'",
-                    mob, NULL, ch, TO_VICT);
+                    mob, NULL, ch, ActTarget::Vict);
                 return;
             }
 

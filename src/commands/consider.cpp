@@ -44,6 +44,6 @@ void do_consider(Character *ch, std::string arg)
     else
         msg = "$N is built like an AT-AT!";
 
-    Act(AT_CONSIDER, msg, ch, NULL, victim, TO_CHAR);
+    Act(AT_CONSIDER, msg, ch, NULL, victim, ActTarget::Char);
 }
 

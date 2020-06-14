@@ -26,7 +26,7 @@ void do_buyship(Character *ch, std::string argument)
 
         if(!ship)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, nullptr, argument.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "I see no $T here.", ch, nullptr, argument.c_str(), ActTarget::Char);
             return;
         }
     }
@@ -78,7 +78,7 @@ void do_buyship(Character *ch, std::string argument)
     ch->Echo("&GYou pay %ld credits to purchace the ship.\r\n", price);
 
     Act(AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.", ch,
-        NULL, argument.c_str(), TO_ROOM);
+        NULL, argument.c_str(), ActTarget::Room);
 
     ship->Owner = ch->Name;
     Ships->Save(ship);

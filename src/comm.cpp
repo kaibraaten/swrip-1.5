@@ -407,7 +407,7 @@ static void HandleSocketInput()
                 WriteToDescriptor(d.get(),
                                   "Idle 30 minutes. Activating AFK flag.\r\n", 0);
                 d->Character->Flags.set(Flag::Plr::Afk);
-                Act(AT_GREY, "$n is now afk due to idle time.", d->Character, nullptr, nullptr, TO_ROOM);
+                Act(AT_GREY, "$n is now afk due to idle time.", d->Character, nullptr, nullptr, ActTarget::Room);
                 continue;
             }
         }
@@ -752,7 +752,7 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
         if (dclose->ConnectionState == CON_PLAYING
             || dclose->ConnectionState == CON_EDITING)
         {
-            Act(AT_ACTION, "$n has lost $s link.", ch, nullptr, nullptr, TO_ROOM);
+            Act(AT_ACTION, "$n has lost $s link.", ch, nullptr, nullptr, ActTarget::Room);
             ch->Desc = nullptr;
         }
         else
@@ -819,7 +819,7 @@ static void StopIdling(Character *ch)
     CharacterFromRoom(ch);
     CharacterToRoom(ch, ch->WasInRoom);
     ch->WasInRoom = NULL;
-    Act(AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, TO_ROOM);
+    Act(AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, ActTarget::Room);
 }
 
 void SetCharacterColor(short AType, const Character *ch)

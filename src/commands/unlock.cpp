@@ -52,7 +52,7 @@ void do_unlock(Character *ch, std::string arg)
         {
             ch->Echo("*Click*\r\n");
             Act(AT_ACTION, "$n unlocks the $d.",
-                ch, NULL, pexit->Keyword.c_str(), TO_ROOM);
+                ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
             RemoveBExitFlag(pexit, Flag::Exit::Locked);
             return;
         }
@@ -93,7 +93,7 @@ void do_unlock(Character *ch, std::string arg)
 
         RemoveBit(obj->Value[OVAL_CONTAINER_FLAGS], CONT_LOCKED);
         ch->Echo("*Click*\r\n");
-        Act(AT_ACTION, "$n unlocks $p.", ch, obj, NULL, TO_ROOM);
+        Act(AT_ACTION, "$n unlocks $p.", ch, obj, NULL, ActTarget::Room);
         return;
     }
 

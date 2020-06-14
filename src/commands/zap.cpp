@@ -59,16 +59,16 @@ void do_zap(Character *ch, std::string arg)
         {
             if(!ObjProgUseTrigger(ch, wand, victim, NULL, NULL))
             {
-                Act(AT_MAGIC, "$n aims $p at $N.", ch, wand, victim, TO_ROOM);
-                Act(AT_MAGIC, "You aim $p at $N.", ch, wand, victim, TO_CHAR);
+                Act(AT_MAGIC, "$n aims $p at $N.", ch, wand, victim, ActTarget::Room);
+                Act(AT_MAGIC, "You aim $p at $N.", ch, wand, victim, ActTarget::Char);
             }
         }
         else
         {
             if(!ObjProgUseTrigger(ch, wand, NULL, obj, NULL))
             {
-                Act(AT_MAGIC, "$n aims $p at $P.", ch, wand, obj, TO_ROOM);
-                Act(AT_MAGIC, "You aim $p at $P.", ch, wand, obj, TO_CHAR);
+                Act(AT_MAGIC, "$n aims $p at $P.", ch, wand, obj, ActTarget::Room);
+                Act(AT_MAGIC, "You aim $p at $P.", ch, wand, obj, ActTarget::Char);
             }
         }
 
@@ -84,8 +84,8 @@ void do_zap(Character *ch, std::string arg)
 
     if(--wand->Value[OVAL_WAND_CHARGES] <= 0)
     {
-        Act(AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_ROOM);
-        Act(AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_CHAR);
+        Act(AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, ActTarget::Room);
+        Act(AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, ActTarget::Char);
 
         if(wand->Serial == cur_obj)
             global_objcode = rOBJ_USED;

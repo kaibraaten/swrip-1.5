@@ -101,9 +101,9 @@ void do_goto(Character *ch, std::string argument)
     if(!ch->Flags.test(Flag::Plr::WizInvis))
     {
         if(ch->PCData && !ch->PCData->BamfOut.empty())
-            Act(AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfOut.c_str(), TO_ROOM);
+            Act(AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfOut.c_str(), ActTarget::Room);
         else
-            Act(AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.", TO_ROOM);
+            Act(AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.", ActTarget::Room);
     }
 
     ch->ReGoto = ch->InRoom->Vnum;
@@ -120,9 +120,9 @@ void do_goto(Character *ch, std::string argument)
     if(!ch->Flags.test(Flag::Plr::WizInvis))
     {
         if(ch->PCData && !ch->PCData->BamfIn.empty())
-            Act(AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfIn.c_str(), TO_ROOM);
+            Act(AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfIn.c_str(), ActTarget::Room);
         else
-            Act(AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.", TO_ROOM);
+            Act(AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.", ActTarget::Room);
     }
 
     do_look(ch, "auto");
@@ -136,7 +136,7 @@ void do_goto(Character *ch, std::string argument)
     {
         if(fch->Master == ch && IsImmortal(fch))
         {
-            Act(AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR);
+            Act(AT_ACTION, "You follow $N.", fch, NULL, ch, ActTarget::Char);
             do_goto(fch, argument);
         }
     }

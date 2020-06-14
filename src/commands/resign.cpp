@@ -50,7 +50,7 @@ void do_resign(Character *ch, std::string argument)
     ch->PCData->ClanInfo.Clan = NULL;
     ch->PCData->ClanInfo.ClanName.erase();
     Act(AT_MAGIC, "You resign your position in $t",
-        ch, clan->Name.c_str(), nullptr, TO_CHAR);
+        ch, clan->Name.c_str(), nullptr, ActTarget::Char);
 
     xp_to_lose = umax(GetAbilityXP(ch, DIPLOMACY_ABILITY) - GetRequiredXpForLevel(GetAbilityLevel(ch, DIPLOMACY_ABILITY)), 0);
     xp_actually_lost = LoseXP(ch, DIPLOMACY_ABILITY, xp_to_lose);

@@ -67,8 +67,8 @@ void do_steal(Character *ch, std::string argument)
          * Failure.
          */
         ch->Echo("Oops...\r\n");
-        Act(AT_ACTION, "$n tried to steal from you!\r\n", ch, NULL, victim, TO_VICT);
-        Act(AT_ACTION, "$n tried to steal from $N.\r\n", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_ACTION, "$n tried to steal from you!\r\n", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_ACTION, "$n tried to steal from $N.\r\n", ch, NULL, victim, ActTarget::NotVict);
 
         if(IsNpc(victim))
         {

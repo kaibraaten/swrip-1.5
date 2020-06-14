@@ -94,7 +94,7 @@ ch_ret spell_affect(int sn, int level, Character *ch, void *vo)
             }
             else
             {
-                Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, NULL, TO_CHAR);
+                Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, NULL, ActTarget::Char);
             }
         }
 
@@ -106,7 +106,7 @@ ch_ret spell_affect(int sn, int level, Character *ch, void *vo)
             }
             else
             {
-                Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, TO_ROOM);
+                Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, ActTarget::Room);
             }
         }
 
@@ -152,33 +152,33 @@ ch_ret spell_affect(int sn, int level, Character *ch, void *vo)
 
             if(hitvict && ch != victim)
             {
-                Act(AT_MAGIC, skill->Messages.Success.ToVictim, ch, NULL, victim, TO_VICT);
+                Act(AT_MAGIC, skill->Messages.Success.ToVictim, ch, NULL, victim, ActTarget::Vict);
 
                 if(hitroom)
                 {
-                    Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_NOTVICT);
-                    Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_CHAR);
+                    Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, ActTarget::NotVict);
+                    Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, ActTarget::Char);
                 }
             }
             else if(hitroom)
             {
-                Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_ROOM);
+                Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, ActTarget::Room);
             }
 
             if(ch == victim)
             {
                 if(hitvict)
                 {
-                    Act(AT_MAGIC, skill->Messages.Success.ToVictim, ch, NULL, ch, TO_CHAR);
+                    Act(AT_MAGIC, skill->Messages.Success.ToVictim, ch, NULL, ch, ActTarget::Char);
                 }
                 else if(hitchar)
                 {
-                    Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, ch, TO_CHAR);
+                    Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, ch, ActTarget::Char);
                 }
             }
             else if(hitchar)
             {
-                Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, victim, TO_CHAR);
+                Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, victim, ActTarget::Char);
             }
         }
 

@@ -52,15 +52,15 @@ void do_scatter(Character *ch, std::string arg)
         StopFighting(victim, true);
 
     Act(AT_MAGIC, "With the sweep of an arm, $n flings $N to the winds.",
-        ch, NULL, victim, TO_NOTVICT);
+        ch, NULL, victim, ActTarget::NotVict);
     Act(AT_MAGIC, "With the sweep of an arm, $n flings you to the astral winds.",
-        ch, NULL, victim, TO_VICT);
+        ch, NULL, victim, ActTarget::Vict);
     Act(AT_MAGIC, "With the sweep of an arm, you fling $N to the astral winds.",
-        ch, NULL, victim, TO_CHAR);
+        ch, NULL, victim, ActTarget::Char);
     CharacterFromRoom(victim);
     CharacterToRoom(victim, pRoomIndex);
     victim->Position = POS_RESTING;
     Act(AT_MAGIC, "$n staggers forth from a sudden gust of wind, and collapses.",
-        victim, NULL, NULL, TO_ROOM);
+        victim, NULL, NULL, ActTarget::Room);
     do_look(victim, "auto");
 }

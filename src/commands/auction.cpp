@@ -259,7 +259,7 @@ void do_auction(Character *ch, std::string argument)
         switch(obj->ItemType)
         {
         default:
-            Act(AT_TELL, "You cannot auction $Ts.", ch, NULL, GetItemTypeName(obj), TO_CHAR);
+            Act(AT_TELL, "You cannot auction $Ts.", ch, NULL, GetItemTypeName(obj), ActTarget::Char);
             return;
 
             /* insert any more item types.here... items with a timer MAY NOT BE
@@ -298,7 +298,7 @@ void do_auction(Character *ch, std::string argument)
     }
     else
     {
-        Act(AT_TELL, "Try again later - $p is being auctioned right now!", ch, OngoingAuction->Item, NULL, TO_CHAR);
+        Act(AT_TELL, "Try again later - $p is being auctioned right now!", ch, OngoingAuction->Item, NULL, ActTarget::Char);
         SetWaitState(ch, 1.5 * PULSE_VIOLENCE);
         return;
     }

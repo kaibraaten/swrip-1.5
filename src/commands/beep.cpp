@@ -92,7 +92,7 @@ void do_beep(Character *ch, std::string argument)
        && (!IsImmortal(ch) || (GetTrustLevel(ch) < GetTrustLevel(victim))))
     {
         Act(AT_PLAIN, "$E has $S tells turned off.", ch, NULL, victim,
-            TO_CHAR);
+            ActTarget::Char);
         return;
     }
 
@@ -105,7 +105,7 @@ void do_beep(Character *ch, std::string argument)
        || (!IsNpc(victim)
            && victim->InRoom->Flags.test(Flag::Room::Silence)))
     {
-        Act(AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR);
+        Act(AT_PLAIN, "$E can't hear you.", ch, 0, victim, ActTarget::Char);
         return;
     }
 
@@ -114,7 +114,7 @@ void do_beep(Character *ch, std::string argument)
        && GetTrustLevel(ch) < LEVEL_GREATER)
     {
         Act(AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.",
-            ch, 0, victim, TO_CHAR);
+            ch, 0, victim, ActTarget::Char);
         return;
     }
 
@@ -124,8 +124,8 @@ void do_beep(Character *ch, std::string argument)
 
     if(CharacterKnowsLanguage(victim, ch->Speaking, ch)
        || (IsNpc(ch) && !ch->Speaking))
-        Act(AT_WHITE, "$n beeps: '$t'", ch, argument.c_str(), victim, TO_VICT);
+        Act(AT_WHITE, "$n beeps: '$t'", ch, argument.c_str(), victim, ActTarget::Vict);
     else
         Act(AT_WHITE, "$n beeps: '$t'", ch,
-            Scramble(argument, ch->Speaking).c_str(), victim, TO_VICT);
+            Scramble(argument, ch->Speaking).c_str(), victim, ActTarget::Vict);
 }

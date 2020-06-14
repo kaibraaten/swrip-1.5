@@ -32,13 +32,13 @@ void do_light(Character *ch, std::string arg)
     {
         if(pipe_obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] < 1)
         {
-            Act(AT_ACTION, "You try to light $p, but it's empty.", ch, pipe_obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n tries to light $p, but it's empty.", ch, pipe_obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You try to light $p, but it's empty.", ch, pipe_obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n tries to light $p, but it's empty.", ch, pipe_obj, NULL, ActTarget::Room);
             return;
         }
 
-        Act(AT_ACTION, "You carefully light $p.", ch, pipe_obj, NULL, TO_CHAR);
-        Act(AT_ACTION, "$n carefully lights $p.", ch, pipe_obj, NULL, TO_ROOM);
+        Act(AT_ACTION, "You carefully light $p.", ch, pipe_obj, NULL, ActTarget::Char);
+        Act(AT_ACTION, "$n carefully lights $p.", ch, pipe_obj, NULL, ActTarget::Room);
         SetBit(pipe_obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT);
         return;
     }

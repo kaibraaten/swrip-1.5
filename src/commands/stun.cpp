@@ -65,9 +65,9 @@ void do_stun(Character *ch, std::string argument)
         ch->Fatigue.Current -= 15;
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
         SetWaitState(victim, PULSE_VIOLENCE);
-        Act(AT_SKILL, "$N smashes into you, leaving you stunned!", victim, NULL, ch, TO_CHAR);
-        Act(AT_SKILL, "You smash into $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR);
-        Act(AT_SKILL, "$n smashes into $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_SKILL, "$N smashes into you, leaving you stunned!", victim, NULL, ch, ActTarget::Char);
+        Act(AT_SKILL, "You smash into $N, leaving $M stunned!", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n smashes into $N, leaving $M stunned!", ch, NULL, victim, ActTarget::NotVict);
 
         if(!IsAffectedBy(victim, Flag::Affect::Paralysis))
         {
@@ -86,8 +86,8 @@ void do_stun(Character *ch, std::string argument)
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
         ch->Fatigue.Current -= 5;
         LearnFromFailure(ch, gsn_stun);
-        Act(AT_SKILL, "$N charges at you screaming, but you dodge out of the way.", victim, NULL, ch, TO_CHAR);
-        Act(AT_SKILL, "Your attempt to stun $N leaves you racing past $E as $e laughs.", ch, NULL, victim, TO_CHAR);
-        Act(AT_SKILL, "$n charges screaming at $N, but keeps going right on past.", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_SKILL, "$N charges at you screaming, but you dodge out of the way.", victim, NULL, ch, ActTarget::Char);
+        Act(AT_SKILL, "Your attempt to stun $N leaves you racing past $E as $e laughs.", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n charges screaming at $N, but keeps going right on past.", ch, NULL, victim, ActTarget::NotVict);
     }
 }

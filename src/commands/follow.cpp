@@ -20,7 +20,7 @@ void do_follow(Character *ch, std::string arg)
 
     if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master)
     {
-        Act(AT_PLAIN, "But you'd rather follow $N!", ch, NULL, ch->Master, TO_CHAR);
+        Act(AT_PLAIN, "But you'd rather follow $N!", ch, NULL, ch->Master, ActTarget::Char);
         return;
     }
 

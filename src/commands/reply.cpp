@@ -68,14 +68,14 @@ void do_reply(Character *ch, std::string argument)
     if(IsBitSet(victim->Deaf, CHANNEL_TELLS)
        && (!IsImmortal(ch) || (GetTrustLevel(ch) < GetTrustLevel(victim))))
     {
-        Act(AT_PLAIN, "$E can't hear you.", ch, NULL, victim, TO_CHAR);
+        Act(AT_PLAIN, "$E can't hear you.", ch, NULL, victim, ActTarget::Char);
         return;
     }
 
     if((!IsImmortal(ch) && !IsAwake(victim))
        || (!IsNpc(victim) && victim->InRoom->Flags.test(Flag::Room::Silence)))
     {
-        Act(AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR);
+        Act(AT_PLAIN, "$E can't hear you.", ch, 0, victim, ActTarget::Char);
         return;
     }
 
@@ -91,7 +91,7 @@ void do_reply(Character *ch, std::string argument)
     }
 
     Act(AT_TELL, "(&COutgoing Message&B) $N: '$t'",
-        ch, argument.c_str(), victim, TO_CHAR);
+        ch, argument.c_str(), victim, ActTarget::Char);
     position = victim->Position;
     victim->Position = POS_STANDING;
 
@@ -99,12 +99,12 @@ void do_reply(Character *ch, std::string argument)
        (IsNpc(ch) && !ch->Speaking))
     {
         Act(AT_TELL, "(&CIncoming Message&B) $n: '$t'",
-            ch, argument.c_str(), victim, TO_VICT);
+            ch, argument.c_str(), victim, ActTarget::Vict);
     }
     else
     {
         Act(AT_TELL, "(&CIncoming Message&B) $n: '$t'",
-            ch, Scramble(argument, ch->Speaking).c_str(), victim, TO_VICT);
+            ch, Scramble(argument, ch->Speaking).c_str(), victim, ActTarget::Vict);
     }
 
     victim->Position = position;
@@ -136,13 +136,13 @@ void do_reply(Character *ch, std::string argument)
 
             MOBtrigger = false;
             Act(AT_SAY, "$n says quietly into $s comlink '$t'",
-                ch, speech.c_str(), vch, TO_VICT);
+                ch, speech.c_str(), vch, ActTarget::Vict);
         }
 
         if(!IsImmortal(victim))
         {
             Act(AT_ACTION, "$n's comlink buzzes with a message.",
-                victim, NULL, NULL, TO_ROOM);
+                victim, NULL, NULL, ActTarget::Room);
         }
     }
 }

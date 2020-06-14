@@ -45,7 +45,7 @@ void do_clansellship(Character *ch, std::string argument)
 
         if(!ship)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), ActTarget::Char);
             return;
         }
     }
@@ -63,7 +63,7 @@ void do_clansellship(Character *ch, std::string argument)
              clan->Name.c_str(), price - price / 10);
 
     Act(AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.", ch,
-        NULL, argument.c_str(), TO_ROOM);
+        NULL, argument.c_str(), ActTarget::Room);
 
     ship->Owner.erase();
     ship->Pilot.erase();

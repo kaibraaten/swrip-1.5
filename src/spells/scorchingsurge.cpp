@@ -35,9 +35,8 @@ ch_ret spell_scorching_surge(int sn, int level, Character *ch, void *vo)
         dam -= (int)(dam / 4);
 
     Act(AT_MAGIC, "A fiery current lashes through $n's body!",
-        ch, NULL, NULL, TO_ROOM);
+        ch, NULL, NULL, ActTarget::Room);
     Act(AT_MAGIC, "A fiery current lashes through your body!",
-        ch, NULL, NULL, TO_CHAR);
+        ch, NULL, NULL, ActTarget::Char);
     return InflictDamage(ch, victim, (dam * 1.4), sn);
 }
-

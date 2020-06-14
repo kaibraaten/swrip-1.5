@@ -90,11 +90,11 @@ void do_torture(Character *ch, std::string arg)
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
         SetWaitState(victim, PULSE_VIOLENCE);
         Act(AT_SKILL, "$N slowly tortures you. The pain is excruciating.",
-            victim, NULL, ch, TO_CHAR);
+            victim, NULL, ch, ActTarget::Char);
         Act(AT_SKILL, "You torture $N, leaving $M screaming in pain.",
-            ch, NULL, victim, TO_CHAR);
+            ch, NULL, victim, ActTarget::Char);
         Act(AT_SKILL, "$n tortures $N, leaving $M screaming in agony!",
-            ch, NULL, victim, TO_NOTVICT);
+            ch, NULL, victim, ActTarget::NotVict);
 
         dam = RollDice(GetAbilityLevel(ch, LEADERSHIP_ABILITY) / 80, 4);
         dam = urange(0, victim->HitPoints.Max - 10, dam);
@@ -106,9 +106,9 @@ void do_torture(Character *ch, std::string arg)
     }
     else
     {
-        Act(AT_SKILL, "$N tries to cut off your finger!", victim, NULL, ch, TO_CHAR);
-        Act(AT_SKILL, "You mess up big time.", ch, NULL, victim, TO_CHAR);
-        Act(AT_SKILL, "$n tries to painfully torture $N.", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_SKILL, "$N tries to cut off your finger!", victim, NULL, ch, ActTarget::Char);
+        Act(AT_SKILL, "You mess up big time.", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n tries to painfully torture $N.", ch, NULL, victim, ActTarget::NotVict);
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
         global_retcode = HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
     }

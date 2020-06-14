@@ -51,7 +51,7 @@ void do_fill(Character *ch, std::string argument)
     switch(dest_item)
     {
     default:
-        Act(AT_ACTION, "$n tries to fill $p... (Don't ask me how)", ch, obj, NULL, TO_ROOM);
+        Act(AT_ACTION, "$n tries to fill $p... (Don't ask me how)", ch, obj, NULL, ActTarget::Room);
         ch->Echo("You cannot fill that.\r\n");
         return;
 
@@ -83,7 +83,7 @@ void do_fill(Character *ch, std::string argument)
     {
         if(IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-            Act(AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name.c_str(), ActTarget::Char);
             return;
         }
         if(GetObjectWeight(obj) / obj->Count
@@ -135,7 +135,7 @@ void do_fill(Character *ch, std::string argument)
                 if(source->ItemType != src_item1 && source->ItemType != src_item2
                    && source->ItemType != src_item3 && source->ItemType != src_item4)
                 {
-                    Act(AT_PLAIN, "You cannot fill $p with $P!", ch, obj, source, TO_CHAR);
+                    Act(AT_PLAIN, "You cannot fill $p with $P!", ch, obj, source, ActTarget::Char);
                     return;
                 }
             }
@@ -233,8 +233,8 @@ void do_fill(Character *ch, std::string argument)
 
         if(dest_item == ITEM_CONTAINER)
         {
-            Act(AT_ACTION, "You fill $p.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n fills $p.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You fill $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n fills $p.", ch, obj, NULL, ActTarget::Room);
             return;
         }
     }
@@ -267,8 +267,8 @@ void do_fill(Character *ch, std::string argument)
             }
 
             SeparateOneObjectFromGroup(obj);
-            Act(AT_ACTION, "You take $P and put it inside $p.", ch, obj, source, TO_CHAR);
-            Act(AT_ACTION, "$n takes $P and puts it inside $p.", ch, obj, source, TO_ROOM);
+            Act(AT_ACTION, "You take $P and put it inside $p.", ch, obj, source, ActTarget::Char);
+            Act(AT_ACTION, "$n takes $P and puts it inside $p.", ch, obj, source, ActTarget::Room);
             ObjectFromRoom(source);
             ObjectToObject(source, obj);
             break;
@@ -315,7 +315,7 @@ void do_fill(Character *ch, std::string argument)
             if(source->ItemType == ITEM_CONTAINER  /* don't remove */
                && IsBitSet(source->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
             {
-                Act(AT_PLAIN, "The $d is closed.", ch, NULL, source->Name.c_str(), TO_CHAR);
+                Act(AT_PLAIN, "The $d is closed.", ch, NULL, source->Name.c_str(), ActTarget::Char);
                 return;
             }
         case ITEM_DROID_CORPSE:
@@ -348,8 +348,8 @@ void do_fill(Character *ch, std::string argument)
 
             if(found)
             {
-                Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR);
-                Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM);
+                Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, ActTarget::Char);
+                Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, ActTarget::Room);
             }
             else
             {
@@ -389,8 +389,8 @@ void do_fill(Character *ch, std::string argument)
 
         obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] = 0;
         obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] = obj->Value[OVAL_DRINK_CON_CAPACITY];
-        Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR);
-        Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM);
+        Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, ActTarget::Char);
+        Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, ActTarget::Room);
         return;
 
     case ITEM_BLOOD:
@@ -407,8 +407,8 @@ void do_fill(Character *ch, std::string argument)
             diff = source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT];
 
         obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] += diff;
-        Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR);
-        Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM);
+        Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, ActTarget::Char);
+        Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, ActTarget::Room);
         source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= diff;
 
         if(source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 1)
@@ -432,8 +432,8 @@ void do_fill(Character *ch, std::string argument)
             diff = source->Value[OVAL_PIPE_TOBACCO_AMOUNT];
 
         obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] += diff;
-        Act(AT_ACTION, "You fill $p with $P.", ch, obj, source, TO_CHAR);
-        Act(AT_ACTION, "$n fills $p with $P.", ch, obj, source, TO_ROOM);
+        Act(AT_ACTION, "You fill $p with $P.", ch, obj, source, ActTarget::Char);
+        Act(AT_ACTION, "$n fills $p with $P.", ch, obj, source, ActTarget::Room);
 
         if((source->Value[OVAL_PIPE_TOBACCO_AMOUNT] -= diff) < 1)
             ExtractObject(source);
@@ -454,8 +454,8 @@ void do_fill(Character *ch, std::string argument)
 
         obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] += diff;
         source->Value[OVAL_PIPE_TOBACCO_AMOUNT] -= diff;
-        Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR);
-        Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM);
+        Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, ActTarget::Char);
+        Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, ActTarget::Room);
         return;
 
     case ITEM_DRINK_CON:
@@ -473,8 +473,8 @@ void do_fill(Character *ch, std::string argument)
 
         obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] += diff;
         source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= diff;
-        Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR);
-        Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM);
+        Act(AT_ACTION, "You fill $p from $P.", ch, obj, source, ActTarget::Char);
+        Act(AT_ACTION, "$n fills $p from $P.", ch, obj, source, ActTarget::Room);
         return;
     }
 }

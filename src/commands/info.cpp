@@ -15,7 +15,7 @@ void do_info(Character *ch, std::string argument)
     {
         if(argument.empty())
         {
-            Act(AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR);
+            Act(AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, ActTarget::Char);
             return;
         }
 
@@ -23,7 +23,7 @@ void do_info(Character *ch, std::string argument)
 
         if(!ship)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), ActTarget::Char);
             return;
         }
 
@@ -33,7 +33,7 @@ void do_info(Character *ch, std::string argument)
     {
         if(argument.empty())
         {
-            Act(AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR);
+            Act(AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, ActTarget::Char);
             return;
         }
 
@@ -41,7 +41,7 @@ void do_info(Character *ch, std::string argument)
 
         if(!ship)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), ActTarget::Char);
             return;
         }
 
@@ -94,7 +94,7 @@ void do_info(Character *ch, std::string argument)
              target->Thrusters.Speed.Max, target->Hyperdrive.Speed, GetShipValue(target));
 
     Act(AT_PLAIN, "$n checks various gages and displays on the control panel.",
-        ch, NULL, argument.c_str(), TO_ROOM);
+        ch, NULL, argument.c_str(), ActTarget::Room);
 }
 
 

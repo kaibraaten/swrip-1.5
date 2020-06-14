@@ -157,10 +157,10 @@ void do_jail(Character *ch, std::string argument)
     victim->PCData->JailVnum = jail->Vnum;
     ch->Echo("%s will be released from jail at %24.24s.\r\n", victim->Name.c_str(),
              ctime(&victim->PCData->ReleaseDate));
-    Act(AT_MAGIC, "$n is dragged away.", victim, NULL, ch, TO_NOTVICT);
+    Act(AT_MAGIC, "$n is dragged away.", victim, NULL, ch, ActTarget::NotVict);
     CharacterFromRoom(victim);
     CharacterToRoom(victim, jail);
-    Act(AT_MAGIC, "$n is dragged in.", victim, NULL, ch, TO_NOTVICT);
+    Act(AT_MAGIC, "$n is dragged in.", victim, NULL, ch, ActTarget::NotVict);
     do_look(victim, "auto");
     victim->Echo("Whoops. You broke too many laws.\r\n"
                  "You shall remain in jail for %d %s%s.\r\n", jail_time,

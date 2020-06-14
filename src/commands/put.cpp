@@ -59,7 +59,7 @@ void do_put(Character *ch, std::string argument)
     if(container == nullptr)
     {
         Act(AT_PLAIN, "I see no $T here.",
-            ch, NULL, arg2.c_str(), TO_CHAR);
+            ch, NULL, arg2.c_str(), ActTarget::Char);
         return;
     }
 
@@ -89,7 +89,7 @@ void do_put(Character *ch, std::string argument)
 
         if(IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-            Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), ActTarget::Char);
             return;
         }
     }
@@ -148,11 +148,11 @@ void do_put(Character *ch, std::string argument)
         Act(AT_ACTION,
             container->Flags.test(Flag::Obj::Covering)
             ? "$n hides $p beneath $P." : "$n puts $p in $P.",
-            ch, obj, container, TO_ROOM);
+            ch, obj, container, ActTarget::Room);
         Act(AT_ACTION,
             container->Flags.test(Flag::Obj::Covering)
             ? "You hide $p beneath $P." : "You put $p in $P.",
-            ch, obj, container, TO_CHAR);
+            ch, obj, container, ActTarget::Char);
         obj->Count = count;
 
         if(save_char)
@@ -215,8 +215,8 @@ void do_put(Character *ch, std::string argument)
 
                 cnt += obj->Count;
                 ObjectFromCharacter(obj);
-                Act(AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM);
-                Act(AT_ACTION, "You put $p in $P.", ch, obj, container, TO_CHAR);
+                Act(AT_ACTION, "$n puts $p in $P.", ch, obj, container, ActTarget::Room);
+                Act(AT_ACTION, "You put $p in $P.", ch, obj, container, ActTarget::Char);
                 obj = ObjectToObject(obj, container);
                 found = true;
 
@@ -237,10 +237,10 @@ void do_put(Character *ch, std::string argument)
         {
             if(fAll)
                 Act(AT_PLAIN, "You are not carrying anything.",
-                    ch, NULL, NULL, TO_CHAR);
+                    ch, NULL, NULL, ActTarget::Char);
             else
                 Act(AT_PLAIN, "You are not carrying any $T.",
-                    ch, NULL, chk.c_str(), TO_CHAR);
+                    ch, NULL, chk.c_str(), ActTarget::Char);
             return;
         }
 

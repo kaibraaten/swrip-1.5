@@ -17,7 +17,7 @@ void do_push(Character *ch, std::string arg)
 
     if((obj = GetObjectHere(ch, arg)) == NULL)
     {
-        Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg.c_str(), TO_CHAR);
+        Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg.c_str(), ActTarget::Char);
         return;
     }
 

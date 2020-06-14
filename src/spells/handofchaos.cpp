@@ -22,7 +22,7 @@ ch_ret spell_hand_of_chaos(int sn, int level, Character *ch, void *vo)
 
     Act(AT_MAGIC, "$N is grasped by an incomprehensible hand of darkness!"
         , ch, NULL,
-        victim, TO_NOTVICT);
+        victim, ActTarget::NotVict);
     return InflictDamage(ch, victim, dam, sn);
 }
 

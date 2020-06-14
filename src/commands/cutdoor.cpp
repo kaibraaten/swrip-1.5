@@ -77,8 +77,8 @@ void do_cutdoor(Character *ch, std::string arg)
 
             pexit->Flags.set(Flag::Exit::Bashed);
 
-            Act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword.c_str(), TO_CHAR);
-            Act(AT_SKILL, "$n cuts open the $d!", ch, NULL, keyword.c_str(), TO_ROOM);
+            Act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword.c_str(), ActTarget::Char);
+            Act(AT_SKILL, "$n cuts open the $d!", ch, NULL, keyword.c_str(), ActTarget::Room);
             LearnFromSuccess(ch, gsn_cutdoor);
 
             if((to_room = pexit->ToRoom) != NULL
@@ -97,7 +97,7 @@ void do_cutdoor(Character *ch, std::string arg)
                 for(Character *rch : to_room->Characters())
                 {
                     Act(AT_SKILL, "The $d falls open!",
-                        rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
+                        rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
                 }
             }
 
@@ -106,9 +106,9 @@ void do_cutdoor(Character *ch, std::string arg)
         else
         {
             Act(AT_SKILL, "You cut at the $d, but you handle it badly and just score it.",
-                ch, NULL, keyword.c_str(), TO_CHAR);
+                ch, NULL, keyword.c_str(), ActTarget::Char);
             Act(AT_SKILL, "$n cuts at the $d, but just scores it.",
-                ch, NULL, keyword.c_str(), TO_ROOM);
+                ch, NULL, keyword.c_str(), ActTarget::Room);
             InflictDamage(ch, ch, (ch->HitPoints.Max / 20) + 10, gsn_cutdoor);
             LearnFromFailure(ch, gsn_cutdoor);
         }
@@ -116,9 +116,9 @@ void do_cutdoor(Character *ch, std::string arg)
     else
     {
         Act(AT_SKILL, "You slice at the wall, but just score it.",
-            ch, NULL, NULL, TO_CHAR);
+            ch, NULL, NULL, ActTarget::Char);
         Act(AT_SKILL, "$n cuts at the wall, but just scores it.",
-            ch, NULL, NULL, TO_ROOM);
+            ch, NULL, NULL, ActTarget::Room);
         InflictDamage(ch, ch, (ch->HitPoints.Max / 20) + 10, gsn_cutdoor);
         LearnFromFailure(ch, gsn_cutdoor);
     }

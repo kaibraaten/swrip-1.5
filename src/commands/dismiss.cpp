@@ -26,8 +26,8 @@ void do_dismiss(Character *ch, std::string arg)
         StopHating(victim);
         StopHunting(victim);
         StopFearing(victim);
-        Act(AT_ACTION, "$n dismisses $N.", ch, NULL, victim, TO_NOTVICT);
-        Act(AT_ACTION, "You dismiss $N.", ch, NULL, victim, TO_CHAR);
+        Act(AT_ACTION, "$n dismisses $N.", ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_ACTION, "You dismiss $N.", ch, NULL, victim, ActTarget::Char);
     }
     else
     {

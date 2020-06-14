@@ -49,6 +49,6 @@ void do_remresident(Character *ch, std::string argument)
     home->RemoveResident(victim->Name);
     Homes->Save(home);
 
-    Act(AT_PLAIN, "You remove $N as a resident.", ch, NULL, victim, TO_CHAR);
+    Act(AT_PLAIN, "You remove $N as a resident.", ch, NULL, victim, ActTarget::Char);
     victim->Echo("You are no longer a resident of this home.\r\n");
 }

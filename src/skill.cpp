@@ -92,7 +92,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
            || IsAffectedBy(ch, Flag::Affect::Possess)))
     {
         ch->Echo("For some reason, you seem unable to perform that...\r\n");
-        Act(AT_GREY, "$n looks around.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_GREY, "$n looks around.", ch, NULL, NULL, ActTarget::Room);
         return true;
     }
 

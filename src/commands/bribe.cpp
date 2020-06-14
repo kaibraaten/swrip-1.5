@@ -105,8 +105,8 @@ void do_bribe(Character *ch, std::string argument)
 
     ch->Echo("You give them a small gift on behalf of %s.\r\n",
              ch->PCData->ClanInfo.Clan->Name.c_str());
-    Act(AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT);
-    Act(AT_ACTION, "$n gives $N some money.\r\n", ch, NULL, victim, TO_NOTVICT);
+    Act(AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, ActTarget::Vict);
+    Act(AT_ACTION, "$n gives $N some money.\r\n", ch, NULL, victim, ActTarget::NotVict);
 
     if(!IsNpc(victim))
         return;

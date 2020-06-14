@@ -33,12 +33,12 @@ ch_ret spell_area_attack(int sn, int level, Character *ch, void *vo)
 
     if(!skill->Messages.Success.ToCaster.empty())
     {
-        Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, NULL, TO_CHAR);
+        Act(AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, NULL, ActTarget::Char);
     }
 
     if(!skill->Messages.Success.ToRoom.empty())
     {
-        Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, TO_ROOM);
+        Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, ActTarget::Room);
     }
 
     std::list<Character *> charactersToAttack(ch->InRoom->Characters());

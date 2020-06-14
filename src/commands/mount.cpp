@@ -58,17 +58,17 @@ void do_mount(Character *ch, std::string argument)
     {
         victim->Flags.set(Flag::Mob::Mounted);
         ch->Mount = victim;
-        Act(AT_SKILL, "You mount $N.", ch, NULL, victim, TO_CHAR);
-        Act(AT_SKILL, "$n skillfully mounts $N.", ch, NULL, victim, TO_NOTVICT);
-        Act(AT_SKILL, "$n mounts you.", ch, NULL, victim, TO_VICT);
+        Act(AT_SKILL, "You mount $N.", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n skillfully mounts $N.", ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_SKILL, "$n mounts you.", ch, NULL, victim, ActTarget::Vict);
         LearnFromSuccess(ch, gsn_mount);
         ch->Position = POS_MOUNTED;
     }
     else
     {
-        Act(AT_SKILL, "You unsuccessfully try to mount $N.", ch, NULL, victim, TO_CHAR);
-        Act(AT_SKILL, "$n unsuccessfully attempts to mount $N.", ch, NULL, victim, TO_NOTVICT);
-        Act(AT_SKILL, "$n tries to mount you.", ch, NULL, victim, TO_VICT);
+        Act(AT_SKILL, "You unsuccessfully try to mount $N.", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n unsuccessfully attempts to mount $N.", ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_SKILL, "$n tries to mount you.", ch, NULL, victim, ActTarget::Vict);
         LearnFromFailure(ch, gsn_mount);
     }
 }

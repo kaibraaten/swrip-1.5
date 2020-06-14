@@ -800,14 +800,14 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
     if (ch->PCData->Pet)
     {
         Act(AT_ACTION, "$n returns with $s master.",
-            ch->PCData->Pet, NULL, ch, TO_NOTVICT);
+            ch->PCData->Pet, NULL, ch, ActTarget::NotVict);
         Act(AT_ACTION, "$N returns with you.",
-            ch, NULL, ch->PCData->Pet, TO_CHAR);
+            ch, NULL, ch->PCData->Pet, ActTarget::Char);
     }
 
     ch->PCData->Logon = current_time;
 
-    Act(AT_ACTION, "$n has entered the game.", ch, NULL, NULL, TO_ROOM);
+    Act(AT_ACTION, "$n has entered the game.", ch, NULL, NULL, ActTarget::Room);
     do_look(ch, "auto");
     CountMailMessages(ch);
 }

@@ -75,9 +75,9 @@ void do_detrap(Character *ch, std::string argument)
         }
 
         Act(AT_ACTION, "You carefully begin your attempt to remove a trap from $p...",
-            ch, obj, NULL, TO_CHAR);
+            ch, obj, NULL, ActTarget::Char);
         Act(AT_ACTION, "$n carefully attempts to remove a trap from $p...",
-            ch, obj, NULL, TO_ROOM);
+            ch, obj, NULL, ActTarget::Room);
         ch->dest_buf = obj->Name;
         AddTimerToCharacter(ch, TIMER_CMD_FUN, 3, do_detrap, SUB_PAUSE);
         return;

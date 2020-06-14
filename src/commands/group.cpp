@@ -102,7 +102,7 @@ void do_group(Character *ch, std::string arg)
         }
         else
         {
-            Act(AT_ACTION, "$n groups $s followers.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n groups $s followers.", ch, NULL, NULL, ActTarget::Room);
             ch->Echo("You group your followers.\r\n");
         }
 
@@ -123,7 +123,7 @@ void do_group(Character *ch, std::string arg)
 
     if(victim->Master != ch && ch != victim)
     {
-        Act(AT_PLAIN, "$N isn't following you.", ch, NULL, victim, TO_CHAR);
+        Act(AT_PLAIN, "$N isn't following you.", ch, NULL, victim, ActTarget::Char);
         return;
     }
 
@@ -131,16 +131,16 @@ void do_group(Character *ch, std::string arg)
     {
         victim->Leader = NULL;
         Act(AT_ACTION, "$n removes $N from $s group.",
-            ch, NULL, victim, TO_NOTVICT);
+            ch, NULL, victim, ActTarget::NotVict);
         Act(AT_ACTION, "$n removes you from $s group.",
-            ch, NULL, victim, TO_VICT);
+            ch, NULL, victim, ActTarget::Vict);
         Act(AT_ACTION, "You remove $N from your group.",
-            ch, NULL, victim, TO_CHAR);
+            ch, NULL, victim, ActTarget::Char);
         return;
     }
 
     victim->Leader = ch;
-    Act(AT_ACTION, "$N joins $n's group.", ch, NULL, victim, TO_NOTVICT);
-    Act(AT_ACTION, "You join $n's group.", ch, NULL, victim, TO_VICT);
-    Act(AT_ACTION, "$N joins your group.", ch, NULL, victim, TO_CHAR);
+    Act(AT_ACTION, "$N joins $n's group.", ch, NULL, victim, ActTarget::NotVict);
+    Act(AT_ACTION, "You join $n's group.", ch, NULL, victim, ActTarget::Vict);
+    Act(AT_ACTION, "$N joins your group.", ch, NULL, victim, ActTarget::Char);
 }

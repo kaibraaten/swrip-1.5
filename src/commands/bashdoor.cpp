@@ -68,9 +68,9 @@ void do_bashdoor(Character *ch, std::string arg)
 
             pexit->Flags.set(Flag::Exit::Bashed);
             Act(AT_SKILL, "Crash! You bashed open the $d!",
-                ch, NULL, keyword.c_str(), TO_CHAR);
+                ch, NULL, keyword.c_str(), ActTarget::Char);
             Act(AT_SKILL, "$n bashes open the $d!",
-                ch, NULL, keyword.c_str(), TO_ROOM);
+                ch, NULL, keyword.c_str(), ActTarget::Room);
             LearnFromSuccess(ch, gsn_bashdoor);
 
             if((to_room = pexit->ToRoom) != NULL
@@ -89,7 +89,7 @@ void do_bashdoor(Character *ch, std::string arg)
                 for(Character *rch : to_room->Characters())
                 {
                     Act(AT_SKILL, "The $d crashes open!",
-                        rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
+                        rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
                 }
             }
 
@@ -98,9 +98,9 @@ void do_bashdoor(Character *ch, std::string arg)
         else
         {
             Act(AT_SKILL, "WHAAAAM!!! You bash against the $d, but it doesn't budge.",
-                ch, NULL, keyword.c_str(), TO_CHAR);
+                ch, NULL, keyword.c_str(), ActTarget::Char);
             Act(AT_SKILL, "WHAAAAM!!! $n bashes against the $d, but it holds strong.",
-                ch, NULL, keyword.c_str(), TO_ROOM);
+                ch, NULL, keyword.c_str(), ActTarget::Room);
             InflictDamage(ch, ch, (ch->HitPoints.Max / 20) + 10, gsn_bashdoor);
             LearnFromFailure(ch, gsn_bashdoor);
         }
@@ -108,9 +108,9 @@ void do_bashdoor(Character *ch, std::string arg)
     else
     {
         Act(AT_SKILL, "WHAAAAM!!! You bash against the wall, but it doesn't budge.",
-            ch, NULL, NULL, TO_CHAR);
+            ch, NULL, NULL, ActTarget::Char);
         Act(AT_SKILL, "WHAAAAM!!! $n bashes against the wall, but it holds strong.",
-            ch, NULL, NULL, TO_ROOM);
+            ch, NULL, NULL, ActTarget::Room);
         InflictDamage(ch, ch, (ch->HitPoints.Max / 20) + 10, gsn_bashdoor);
         LearnFromFailure(ch, gsn_bashdoor);
     }

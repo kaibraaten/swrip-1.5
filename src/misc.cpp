@@ -94,9 +94,9 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
     if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
     {
         sprintf(buf, "$n %s $p.", pull ? "pulls" : "pushes");
-        Act(AT_ACTION, buf, ch, obj, NULL, TO_ROOM);
+        Act(AT_ACTION, buf, ch, obj, NULL, ActTarget::Room);
         sprintf(buf, "You %s $p.", pull ? "pull" : "push");
-        Act(AT_ACTION, buf, ch, obj, NULL, TO_CHAR);
+        Act(AT_ACTION, buf, ch, obj, NULL, ActTarget::Char);
     }
 
     if(!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
@@ -244,8 +244,8 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
             pexit = MakeExit(room, to_room, edir);
             pexit->Key = -1;
             top_exit++;
-            Act(AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_CHAR);
-            Act(AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_ROOM);
+            Act(AT_PLAIN, "A passage opens!", ch, NULL, NULL, ActTarget::Char);
+            Act(AT_PLAIN, "A passage opens!", ch, NULL, NULL, ActTarget::Room);
             return;
         }
 
@@ -253,8 +253,8 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
            && pexit->Flags.test(Flag::Exit::Locked))
         {
             pexit->Flags.reset(Flag::Exit::Locked);
-            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR);
-            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM);
+            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, ActTarget::Char);
+            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, ActTarget::Room);
 
             if((pexit_rev = pexit->ReverseExit) != NULL
                && pexit_rev->ToRoom == ch->InRoom)
@@ -269,8 +269,8 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
            && !pexit->Flags.test(Flag::Exit::Locked))
         {
             pexit->Flags.set(Flag::Exit::Locked);
-            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR);
-            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM);
+            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, ActTarget::Char);
+            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, ActTarget::Room);
 
             if((pexit_rev = pexit->ReverseExit) != NULL
                && pexit_rev->ToRoom == ch->InRoom)
@@ -288,7 +288,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
 
             for(Character *rch : room->Characters())
             {
-                Act(AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR);
+                Act(AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
             }
 
             if((pexit_rev = pexit->ReverseExit) != NULL
@@ -299,7 +299,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
                 for(Character *rch : to_room->Characters())
                 {
                     Act(AT_ACTION, "The $d opens.",
-                        rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
+                        rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
                 }
             }
 
@@ -314,7 +314,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
 
             for(Character *rch : room->Characters())
             {
-                Act(AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR);
+                Act(AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
             }
 
             if((pexit_rev = pexit->ReverseExit) != NULL
@@ -324,7 +324,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
 
                 for(Character *rch : to_room->Characters())
                 {
-                    Act(AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
+                    Act(AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
                 }
             }
 
@@ -412,9 +412,9 @@ void ActionDescription(Character *ch, Object *obj)
     {
     case ITEM_DRINK_CON:
         Act(AT_ACTION, charbuf, ch, obj,
-            LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_CHAR);
+            LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, ActTarget::Char);
         Act(AT_ACTION, roombuf, ch, obj,
-            LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_ROOM);
+            LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, ActTarget::Room);
         return;
 
     case ITEM_ARMOR:
@@ -424,8 +424,8 @@ void ActionDescription(Character *ch, Object *obj)
     case ITEM_PILL:
     case ITEM_BLOOD:
     case ITEM_FOUNTAIN:
-        Act(AT_ACTION, charbuf, ch, obj, ch, TO_CHAR);
-        Act(AT_ACTION, roombuf, ch, obj, ch, TO_ROOM);
+        Act(AT_ACTION, charbuf, ch, obj, ch, ActTarget::Char);
+        Act(AT_ACTION, roombuf, ch, obj, ch, ActTarget::Room);
         return;
 
     default:

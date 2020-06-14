@@ -12,11 +12,11 @@ void do_afk(Character *ch, std::string argument)
     if(!ch->Flags.test(Flag::Plr::Afk))
     {
         ch->Echo("You are no longer afk.\r\n");
-        Act(AT_GREY, "$n is no longer afk.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_GREY, "$n is no longer afk.", ch, NULL, NULL, ActTarget::Room);
     }
     else
     {
         ch->Echo("You are now afk.\r\n");
-        Act(AT_GREY, "$n is now afk.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_GREY, "$n is now afk.", ch, NULL, NULL, ActTarget::Room);
     }
 }

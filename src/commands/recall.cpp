@@ -60,7 +60,7 @@ void do_recall(Character *ch, std::string argument)
         StopFighting(ch, true);
     }
 
-    Act(AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM);
+    Act(AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, ActTarget::Room);
     CharacterFromRoom(ch);
     CharacterToRoom(ch, location);
 
@@ -70,6 +70,6 @@ void do_recall(Character *ch, std::string argument)
         CharacterToRoom(ch->Mount, location);
     }
 
-    Act(AT_ACTION, "$n appears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM);
+    Act(AT_ACTION, "$n appears in a swirl of the Force.", ch, NULL, NULL, ActTarget::Room);
     do_look(ch, "auto");
 }

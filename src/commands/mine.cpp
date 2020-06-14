@@ -36,13 +36,13 @@ void do_mine(Character *ch, std::string arg)
 
     if(obj->ItemType != ITEM_LANDMINE)
     {
-        Act(AT_PLAIN, "That's not a landmine!", ch, obj, nullptr, TO_CHAR);
+        Act(AT_PLAIN, "That's not a landmine!", ch, obj, nullptr, ActTarget::Char);
         return;
     }
 
     if(!obj->WearFlags.test(Flag::Wear::Take))
     {
-        Act(AT_PLAIN, "You cannot bury $p.", ch, obj, nullptr, TO_CHAR);
+        Act(AT_PLAIN, "You cannot bury $p.", ch, obj, nullptr, ActTarget::Char);
         return;
     }
 
@@ -91,7 +91,7 @@ void do_mine(Character *ch, std::string arg)
     obj->ArmedBy = ch->Name;
 
     ch->Echo("You arm and bury %s.\r\n", obj->ShortDescr.c_str());
-    Act(AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, TO_ROOM);
+    Act(AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, ActTarget::Room);
 
     LearnFromSuccess(ch, gsn_mine);
 }

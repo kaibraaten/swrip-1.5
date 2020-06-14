@@ -308,7 +308,7 @@ void Interpret(Character *ch, std::string argument)
     if(ch->Flags.test(Flag::Plr::Afk) && StrCmp(command, "AFK") != 0)
     {
         ch->Flags.reset(Flag::Plr::Afk);
-        Act(AT_GREY, "$n is no longer afk.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_GREY, "$n is no longer afk.", ch, NULL, NULL, ActTarget::Room);
     }
 
     /*
@@ -409,7 +409,7 @@ void Interpret(Character *ch, std::string argument)
                     if(!pexit->Flags.test(Flag::Exit::Secret))
                     {
                         Act(AT_PLAIN, "The $d is closed.",
-                            ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
+                            ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
                     }
                     else
                     {

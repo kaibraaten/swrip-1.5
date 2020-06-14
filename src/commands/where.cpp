@@ -72,7 +72,7 @@ void do_where(Character *ch, std::string arg)
         if(!found)
         {
             Act(AT_PLAIN, "You didn't find any $T.",
-                ch, NULL, arg.c_str(), TO_CHAR);
+                ch, NULL, arg.c_str(), ActTarget::Char);
         }
     }
 }

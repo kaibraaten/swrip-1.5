@@ -100,5 +100,5 @@ void do_compare(Character *ch, std::string argument)
             msg = "$p looks worse than $P.";
     }
 
-    Act(AT_PLAIN, msg, ch, obj1, obj2, TO_CHAR);
+    Act(AT_PLAIN, msg, ch, obj1, obj2, ActTarget::Char);
 }

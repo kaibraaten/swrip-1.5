@@ -87,7 +87,7 @@ void MakeScraps(Object *obj)
     if(obj->CarriedBy)
     {
         Act(AT_OBJECT, "$p falls to the ground in scraps!",
-            obj->CarriedBy, obj, NULL, TO_CHAR);
+            obj->CarriedBy, obj, NULL, ActTarget::Char);
 
         if(obj == GetEquipmentOnCharacter(obj->CarriedBy, WEAR_WIELD)
            && (tmpobj = GetEquipmentOnCharacter(obj->CarriedBy, WEAR_DUAL_WIELD)) != NULL)
@@ -103,9 +103,9 @@ void MakeScraps(Object *obj)
         {
             ch = obj->InRoom->Characters().front();
             Act(AT_OBJECT, "$p is reduced to little more than scraps.",
-                ch, obj, NULL, TO_ROOM);
+                ch, obj, NULL, ActTarget::Room);
             Act(AT_OBJECT, "$p is reduced to little more than scraps.",
-                ch, obj, NULL, TO_CHAR);
+                ch, obj, NULL, ActTarget::Char);
         }
 
         ObjectToRoom(scraps, obj->InRoom);
@@ -117,9 +117,9 @@ void MakeScraps(Object *obj)
         if(ch && ch->InRoom)
         {
             Act(AT_OBJECT, "The contents of $p fall to the ground.",
-                ch, obj, NULL, TO_ROOM);
+                ch, obj, NULL, ActTarget::Room);
             Act(AT_OBJECT, "The contents of $p fall to the ground.",
-                ch, obj, NULL, TO_CHAR);
+                ch, obj, NULL, ActTarget::Char);
         }
 
         if(obj->CarriedBy)

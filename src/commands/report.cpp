@@ -20,5 +20,5 @@ void do_report(Character *ch, std::string argument)
             ch->HitPoints.Current, ch->HitPoints.Max,
             ch->Fatigue.Current, ch->Fatigue.Max);
 
-    Act(AT_REPORT, buf, ch, NULL, NULL, TO_ROOM);
+    Act(AT_REPORT, buf, ch, NULL, NULL, ActTarget::Room);
 }

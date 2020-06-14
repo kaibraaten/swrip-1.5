@@ -42,7 +42,7 @@ void do_autorecharge(Character *ch, std::string argument)
     }
 
     Act(AT_PLAIN, "$n flips a switch on the control panel.", ch,
-        NULL, argument.c_str(), TO_ROOM);
+        NULL, argument.c_str(), ActTarget::Room);
 
     if(!StrCmp(argument, "on"))
     {

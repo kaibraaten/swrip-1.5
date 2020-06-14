@@ -23,8 +23,8 @@ void do_low_purge(Character *ch, std::string arg)
     if(obj)
     {
         SeparateOneObjectFromGroup(obj);
-        Act(AT_IMMORT, "$n purges $p!", ch, obj, NULL, TO_ROOM);
-        Act(AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR);
+        Act(AT_IMMORT, "$n purges $p!", ch, obj, NULL, ActTarget::Room);
+        Act(AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, ActTarget::Char);
         ExtractObject(obj);
         return;
     }
@@ -41,9 +41,9 @@ void do_low_purge(Character *ch, std::string arg)
         return;
     }
 
-    Act(AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT);
+    Act(AT_IMMORT, "$n purges $N.", ch, NULL, victim, ActTarget::NotVict);
     Act(AT_IMMORT, "You make $N disappear in a puff of smoke!",
-        ch, NULL, victim, TO_CHAR);
+        ch, NULL, victim, ActTarget::Char);
     ExtractCharacter(victim, true);
 }
 

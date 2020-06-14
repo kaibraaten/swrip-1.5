@@ -26,18 +26,18 @@ void do_wake(Character *ch, std::string arg)
 
     if(IsAwake(victim))
     {
-        Act(AT_PLAIN, "$N is already awake.", ch, NULL, victim, TO_CHAR);
+        Act(AT_PLAIN, "$N is already awake.", ch, NULL, victim, ActTarget::Char);
         return;
     }
 
     if(IsAffectedBy(victim, Flag::Affect::Sleep) || victim->Position < POS_SLEEPING)
     {
         Act(AT_PLAIN, "You can't seem to wake $M!",
-            ch, NULL, victim, TO_CHAR);
+            ch, NULL, victim, ActTarget::Char);
         return;
     }
 
-    Act(AT_ACTION, "You wake $M.", ch, NULL, victim, TO_CHAR);
+    Act(AT_ACTION, "You wake $M.", ch, NULL, victim, ActTarget::Char);
     victim->Position = POS_STANDING;
-    Act(AT_ACTION, "$n wakes you.", ch, NULL, victim, TO_VICT);
+    Act(AT_ACTION, "$n wakes you.", ch, NULL, victim, ActTarget::Vict);
 }

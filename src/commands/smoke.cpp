@@ -27,16 +27,16 @@ void do_smoke(Character *ch, std::string arg)
     if(pipe_obj->ItemType != ITEM_PIPE)
     {
         Act(AT_ACTION, "You try to smoke $p... but it doesn't seem to work.",
-            ch, pipe_obj, NULL, TO_CHAR);
+            ch, pipe_obj, NULL, ActTarget::Char);
         Act(AT_ACTION, "$n tries to smoke $p... (I wonder what $e's been putting his $s pipe?)",
-            ch, pipe_obj, NULL, TO_ROOM);
+            ch, pipe_obj, NULL, ActTarget::Room);
         return;
     }
 
     if(!IsBitSet(pipe_obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT))
     {
-        Act(AT_ACTION, "You try to smoke $p, but it's not lit.", ch, pipe_obj, NULL, TO_CHAR);
-        Act(AT_ACTION, "$n tries to smoke $p, but it's not lit.", ch, pipe_obj, NULL, TO_ROOM);
+        Act(AT_ACTION, "You try to smoke $p, but it's not lit.", ch, pipe_obj, NULL, ActTarget::Char);
+        Act(AT_ACTION, "$n tries to smoke $p, but it's not lit.", ch, pipe_obj, NULL, ActTarget::Room);
         return;
     }
 
@@ -44,8 +44,8 @@ void do_smoke(Character *ch, std::string arg)
     {
         if(!ObjProgUseTrigger(ch, pipe_obj, NULL, NULL, NULL))
         {
-            Act(AT_ACTION, "You draw thoughtfully from $p.", ch, pipe_obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n draws thoughtfully from $p.", ch, pipe_obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You draw thoughtfully from $p.", ch, pipe_obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n draws thoughtfully from $p.", ch, pipe_obj, NULL, ActTarget::Room);
         }
 
         if(IS_VALID_HERB(pipe_obj->Value[OVAL_PIPE_TOBACCO_HERB])

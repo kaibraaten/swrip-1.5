@@ -53,16 +53,16 @@ void do_drink(Character *ch, std::string argument)
         if(obj->CarriedBy == ch)
         {
             Act(AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...",
-                ch, obj, NULL, TO_ROOM);
+                ch, obj, NULL, ActTarget::Room);
             Act(AT_ACTION, "You bring $p up to your mouth and try to drink from it...",
-                ch, obj, NULL, TO_CHAR);
+                ch, obj, NULL, ActTarget::Char);
         }
         else
         {
             Act(AT_ACTION, "$n gets down and tries to drink from $p... (Is $e feeling ok?)",
-                ch, obj, NULL, TO_ROOM);
+                ch, obj, NULL, ActTarget::Room);
             Act(AT_ACTION, "You get down on the ground and try to drink from $p...",
-                ch, obj, NULL, TO_CHAR);
+                ch, obj, NULL, ActTarget::Char);
         }
         break;
 
@@ -76,7 +76,7 @@ void do_drink(Character *ch, std::string argument)
     case ITEM_FOUNTAIN:
         if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
         {
-            Act(AT_ACTION, "$n drinks from the fountain.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n drinks from the fountain.", ch, NULL, NULL, ActTarget::Room);
             ch->Echo("You take a long thirst quenching drink.\r\n");
         }
 
@@ -100,9 +100,9 @@ void do_drink(Character *ch, std::string argument)
         if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
         {
             Act(AT_ACTION, "$n drinks $T from $p.",
-                ch, obj, LiquidTable[liquid].Name, TO_ROOM);
+                ch, obj, LiquidTable[liquid].Name, ActTarget::Room);
             Act(AT_ACTION, "You drink $T from $p.",
-                ch, obj, LiquidTable[liquid].Name, TO_CHAR);
+                ch, obj, LiquidTable[liquid].Name, ActTarget::Char);
         }
 
         GainCondition(ch, COND_DRUNK,
@@ -141,8 +141,8 @@ void do_drink(Character *ch, std::string argument)
             /* The drink was poisoned! */
             std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
-            Act(AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM);
-            Act(AT_POISON, "You sputter and gag.", ch, NULL, NULL, TO_CHAR);
+            Act(AT_POISON, "$n sputters and gags.", ch, NULL, NULL, ActTarget::Room);
+            Act(AT_POISON, "You sputter and gag.", ch, NULL, NULL, ActTarget::Char);
             ch->MentalState = urange(20, ch->MentalState + 5, 100);
             af->Type = gsn_poison;
             af->Duration = 3 * obj->Value[OVAL_DRINK_CON_POISON_STRENGTH];

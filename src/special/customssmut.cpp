@@ -34,8 +34,8 @@ bool spec_customs_smut(Character *ch)
 
                     SeparateOneObjectFromGroup(obj);
                     ObjectFromCharacter(obj);
-                    Act(AT_ACTION, "$n confiscates $p from $N.", ch, obj, victim, TO_NOTVICT);
-                    Act(AT_ACTION, "$n takes $p from you.", ch, obj, victim, TO_VICT);
+                    Act(AT_ACTION, "$n confiscates $p from $N.", ch, obj, victim, ActTarget::NotVict);
+                    Act(AT_ACTION, "$n takes $p from you.", ch, obj, victim, ActTarget::Vict);
                     obj = ObjectToCharacter(obj, ch);
                     obj->Flags.set(Flag::Obj::Contraband);
                     long ch_exp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY))));
@@ -51,8 +51,8 @@ bool spec_customs_smut(Character *ch)
                                  ch_exp, obj->ShortDescr.c_str());
                     GainXP(victim, SMUGGLING_ABILITY, ch_exp);
 
-                    Act(AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, TO_NOTVICT);
-                    Act(AT_ACTION, "$n looks at you suspiciously.", ch, NULL, victim, TO_VICT);
+                    Act(AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, ActTarget::NotVict);
+                    Act(AT_ACTION, "$n looks at you suspiciously.", ch, NULL, victim, ActTarget::Vict);
                     obj->Flags.set(Flag::Obj::Contraband);
 
                     return true;

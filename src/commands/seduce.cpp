@@ -23,7 +23,7 @@ void do_seduce(Character *ch, std::string arg)
 
     if(IsAffectedBy(victim, Flag::Affect::Charm) && victim->Master)
     {
-        Act(AT_PLAIN, "But he'd rather follow $N!", ch, NULL, victim->Master, TO_CHAR);
+        Act(AT_PLAIN, "But he'd rather follow $N!", ch, NULL, victim->Master, ActTarget::Char);
         return;
     }
 

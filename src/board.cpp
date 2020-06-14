@@ -305,7 +305,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
                              note->Subject.c_str());
             }
 
-            Act(AT_ACTION, "$n glances over the messages.", ch, nullptr, nullptr, TO_ROOM);
+            Act(AT_ACTION, "$n glances over the messages.", ch, nullptr, nullptr, ActTarget::Room);
 
             if(count == 0)
             {
@@ -412,7 +412,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
                                  note->Abstentions.c_str());
                     }
 
-                    Act(AT_ACTION, "$n reads a message.", ch, NULL, NULL, TO_ROOM);
+                    Act(AT_ACTION, "$n reads a message.", ch, nullptr, nullptr, ActTarget::Room);
                 }
             }
 
@@ -536,7 +536,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
             }
 
             note->Voting = VOTE_OPEN;
-            Act(AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, ActTarget::Room);
             ch->Echo("Voting opened.\r\n");
             Boards->Save(board);
             return;
@@ -551,7 +551,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
             }
 
             note->Voting = VOTE_CLOSED;
-            Act(AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, ActTarget::Room);
             ch->Echo("Voting closed.\r\n");
             Boards->Save(board);
             return;
@@ -579,7 +579,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
         if(!StrCmp(arg_passed, "yes"))
         {
             note->YesVotes += " " + ch->Name;
-            Act(AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n votes on a note.", ch, NULL, NULL, ActTarget::Room);
             ch->Echo("Ok.\r\n");
             Boards->Save(board);
             return;
@@ -588,7 +588,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
         if(!StrCmp(arg_passed, "no"))
         {
             note->NoVotes += " " + ch->Name;
-            Act(AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n votes on a note.", ch, NULL, NULL, ActTarget::Room);
             ch->Echo("Ok.\r\n");
             Boards->Save(board);
             return;
@@ -597,7 +597,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
         if(!StrCmp(arg_passed, "abstain"))
         {
             note->Abstentions += " " + ch->Name;
-            Act(AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n votes on a note.", ch, NULL, NULL, ActTarget::Room);
             ch->Echo("Ok.\r\n");
             Boards->Save(board);
             return;
@@ -652,9 +652,9 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
             paper = ObjectToCharacter(paper, ch);
             EquipCharacter(ch, paper, WEAR_HOLD);
             Act(AT_MAGIC, "$n grabs a message disk to record a note.",
-                ch, NULL, NULL, TO_ROOM);
+                ch, NULL, NULL, ActTarget::Room);
             Act(AT_MAGIC, "You get a message disk to record your note.",
-                ch, NULL, NULL, TO_CHAR);
+                ch, NULL, NULL, ActTarget::Char);
         }
 
         if(paper->Value[OVAL_PAPER_0] < 2)
@@ -728,9 +728,9 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
             paper = ObjectToCharacter(paper, ch);
             EquipCharacter(ch, paper, WEAR_HOLD);
             Act(AT_MAGIC, "$n grabs a message disk.",
-                ch, NULL, NULL, TO_ROOM);
+                ch, NULL, NULL, ActTarget::Room);
             Act(AT_MAGIC, "You get a message disk to record your note.",
-                ch, NULL, NULL, TO_CHAR);
+                ch, NULL, NULL, ActTarget::Char);
         }
         if(paper->Value[OVAL_PAPER_0] > 1)
         {
@@ -792,9 +792,9 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
             paper = ObjectToCharacter(paper, ch);
             EquipCharacter(ch, paper, WEAR_HOLD);
             Act(AT_MAGIC, "$n gets a message disk to record a note.",
-                ch, NULL, NULL, TO_ROOM);
+                ch, NULL, NULL, ActTarget::Room);
             Act(AT_MAGIC, "You grab a message disk to record your note.",
-                ch, NULL, NULL, TO_CHAR);
+                ch, NULL, NULL, ActTarget::Char);
         }
 
         if(paper->Value[OVAL_PAPER_2] > 1)
@@ -917,7 +917,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
             return;
         }
 
-        Act(AT_ACTION, "$n uploads a message.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_ACTION, "$n uploads a message.", ch, NULL, NULL, ActTarget::Room);
 
         const auto extraDescriptions(paper->ExtraDescriptions());
 
@@ -1073,16 +1073,16 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
 
                 if(take == NOTE_REMOVE)
                 {
-                    Act(AT_ACTION, "$n removes a message.", ch, NULL, NULL, TO_ROOM);
+                    Act(AT_ACTION, "$n removes a message.", ch, NULL, NULL, ActTarget::Room);
                 }
                 else if(take == NOTE_TAKE)
                 {
-                    Act(AT_ACTION, "$n downloads a message.", ch, NULL, NULL, TO_ROOM);
+                    Act(AT_ACTION, "$n downloads a message.", ch, NULL, NULL, ActTarget::Room);
                     ObjectToCharacter(paper, ch);
                 }
                 else if(take == NOTE_COPY)
                 {
-                    Act(AT_ACTION, "$n copies a message.", ch, NULL, NULL, TO_ROOM);
+                    Act(AT_ACTION, "$n copies a message.", ch, NULL, NULL, ActTarget::Room);
                     ObjectToCharacter(paper, ch);
                 }
                 else

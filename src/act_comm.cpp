@@ -319,7 +319,7 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
         sprintf(buf, "&z&g(&GOOC&g)&Y $n&Y: $t");
         position = ch->Position;
         ch->Position = POS_STANDING;
-        Act(AT_OOC, buf, ch, argument, NULL, TO_CHAR);
+        Act(AT_OOC, buf, ch, argument, NULL, ActTarget::Char);
         ch->Position = position;
         break;
 
@@ -357,7 +357,7 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
 
         position = ch->Position;
         ch->Position = POS_STANDING;
-        Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, argument, NULL, TO_CHAR);
+        Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, argument, NULL, ActTarget::Char);
         ch->Position = position;
         break;
     }
@@ -490,17 +490,17 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
 
             if(channel == CHANNEL_IMMTALK || channel == CHANNEL_AVTALK
                || channel == CHANNEL_103 || channel == CHANNEL_104 || channel == CHANNEL_105)
-                Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, sbuf.c_str(), vch, TO_VICT);
+                Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
             else if(channel == CHANNEL_WARTALK)
-                Act(AT_WARTALK, buf, ch, sbuf.c_str(), vch, TO_VICT);
+                Act(AT_WARTALK, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
             else if(channel == CHANNEL_OOC || channel == CHANNEL_NEWBIE || channel == CHANNEL_ASK)
-                Act(AT_OOC, buf, ch, sbuf.c_str(), vch, TO_VICT);
+                Act(AT_OOC, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
             else if(channel == CHANNEL_SHIP)
-                Act(AT_SHIP, buf, ch, sbuf.c_str(), vch, TO_VICT);
+                Act(AT_SHIP, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
             else if(channel == CHANNEL_CLAN)
-                Act(AT_CLAN, buf, ch, sbuf.c_str(), vch, TO_VICT);
+                Act(AT_CLAN, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
             else
-                Act(AT_GOSSIP, buf, ch, sbuf.c_str(), vch, TO_VICT);
+                Act(AT_GOSSIP, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
             vch->Position = position;
         }
     }
@@ -576,10 +576,10 @@ void StartFollowing(Character *ch, Character *master)
 
     if(CanSeeCharacter(master, ch))
     {
-        Act(AT_ACTION, "$n now follows you.", ch, NULL, master, TO_VICT);
+        Act(AT_ACTION, "$n now follows you.", ch, NULL, master, ActTarget::Vict);
     }
 
-    Act(AT_ACTION, "You now follow $N.", ch, NULL, master, TO_CHAR);
+    Act(AT_ACTION, "You now follow $N.", ch, NULL, master, ActTarget::Char);
 }
 
 void StopFollowing(Character *ch)
@@ -603,10 +603,10 @@ void StopFollowing(Character *ch)
 
     if(CanSeeCharacter(ch->Master, ch))
     {
-        Act(AT_ACTION, "$n stops following you.", ch, NULL, ch->Master, TO_VICT);
+        Act(AT_ACTION, "$n stops following you.", ch, NULL, ch->Master, ActTarget::Vict);
     }
 
-    Act(AT_ACTION, "You stop following $N.", ch, NULL, ch->Master, TO_CHAR);
+    Act(AT_ACTION, "You stop following $N.", ch, NULL, ch->Master, ActTarget::Char);
 
     ch->Master = NULL;
     ch->Leader = NULL;
@@ -674,7 +674,7 @@ void TalkAuction(const std::string &argument)
            && !original->InRoom->Flags.test(Flag::Room::Silence)
            && IsAuthed(original))
         {
-            Act(AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR);
+            Act(AT_GOSSIP, buf, original, NULL, NULL, ActTarget::Char);
         }
     }
 }

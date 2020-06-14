@@ -33,7 +33,7 @@ void do_arm(Character *ch, std::string argument)
     obj->ArmedBy = ch->Name;
 
     ch->Echo("You arm %s.\r\n", obj->ShortDescr.c_str());
-    Act(AT_PLAIN, "$n arms $p.", ch, obj, NULL, TO_ROOM);
+    Act(AT_PLAIN, "$n arms $p.", ch, obj, NULL, ActTarget::Room);
 
     LearnFromSuccess(ch, gsn_grenades);
 }

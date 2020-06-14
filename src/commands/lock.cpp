@@ -53,7 +53,7 @@ void do_lock(Character *ch, std::string arg)
         {
             ch->Echo("*Click*\r\n");
             Act(AT_ACTION, "$n locks the $d.",
-                ch, NULL, pexit->Keyword.c_str(), TO_ROOM);
+                ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
             SetBExitFlag(pexit, Flag::Exit::Locked);
             return;
         }
@@ -94,7 +94,7 @@ void do_lock(Character *ch, std::string arg)
 
         SetBit(obj->Value[OVAL_CONTAINER_FLAGS], CONT_LOCKED);
         ch->Echo("*Click*\r\n");
-        Act(AT_ACTION, "$n locks $p.", ch, obj, NULL, TO_ROOM);
+        Act(AT_ACTION, "$n locks $p.", ch, obj, NULL, ActTarget::Room);
         return;
     }
 

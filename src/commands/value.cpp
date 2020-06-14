@@ -22,7 +22,7 @@ void do_value(Character *ch, std::string argument)
     if((obj = GetCarriedObject(ch, argument)) == NULL)
     {
         Act(AT_TELL, "$n tells you 'You don't have that item.'",
-            keeper, NULL, ch, TO_VICT);
+            keeper, NULL, ch, ActTarget::Vict);
         ch->Reply = keeper;
         return;
     }
@@ -35,11 +35,11 @@ void do_value(Character *ch, std::string argument)
 
     if((cost = GetObjectCost(ch, keeper, obj, false)) <= 0)
     {
-        Act(AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, TO_VICT);
+        Act(AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, ActTarget::Vict);
         return;
     }
 
     sprintf(buf, "$n tells you 'I'll give you %d credits for $p.'", cost);
-    Act(AT_TELL, buf, keeper, obj, ch, TO_VICT);
+    Act(AT_TELL, buf, keeper, obj, ch, ActTarget::Vict);
     ch->Reply = keeper;
 }

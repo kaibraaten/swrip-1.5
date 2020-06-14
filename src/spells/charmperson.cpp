@@ -56,8 +56,8 @@ ch_ret spell_charm_person(int sn, int level, Character *ch, void *vo)
     af->Modifier = 0;
     af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Charm });
     AffectToCharacter(victim, af);
-    Act(AT_MAGIC, "Isn't $n just so nice?", ch, NULL, victim, TO_VICT);
-    Act(AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, TO_ROOM);
+    Act(AT_MAGIC, "Isn't $n just so nice?", ch, NULL, victim, ActTarget::Vict);
+    Act(AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, ActTarget::Room);
 
     if(ch != victim)
         ch->Echo("Ok.\r\n");

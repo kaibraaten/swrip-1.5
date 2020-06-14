@@ -20,7 +20,7 @@ void do_sleep(Character *ch, std::string argument)
         if(argument.empty() && ch->On == NULL)
         {
             ch->Echo("You go to sleep.\r\n");
-            Act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, ActTarget::Room);
             ch->Position = POS_SLEEPING;
         }
         else  /* find an object and sleep on it */
@@ -46,7 +46,7 @@ void do_sleep(Character *ch, std::string argument)
             if(ch->On != obj && CountCharactersOnObject(obj) >= obj->Value[OVAL_FURNITURE_CAPACITY])
             {
                 Act(AT_ACTION, "There is no room on $p for you.",
-                    ch, obj, NULL, TO_CHAR);
+                    ch, obj, NULL, ActTarget::Char);
                 return;
             }
 
@@ -54,18 +54,18 @@ void do_sleep(Character *ch, std::string argument)
 
             if(obj->Value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
             {
-                Act(AT_ACTION, "You go to sleep at $p.", ch, obj, NULL, TO_CHAR);
-                Act(AT_ACTION, "$n goes to sleep at $p.", ch, obj, NULL, TO_ROOM);
+                Act(AT_ACTION, "You go to sleep at $p.", ch, obj, NULL, ActTarget::Char);
+                Act(AT_ACTION, "$n goes to sleep at $p.", ch, obj, NULL, ActTarget::Room);
             }
             else if(obj->Value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
             {
-                Act(AT_ACTION, "You go to sleep on $p.", ch, obj, NULL, TO_CHAR);
-                Act(AT_ACTION, "$n goes to sleep on $p.", ch, obj, NULL, TO_ROOM);
+                Act(AT_ACTION, "You go to sleep on $p.", ch, obj, NULL, ActTarget::Char);
+                Act(AT_ACTION, "$n goes to sleep on $p.", ch, obj, NULL, ActTarget::Room);
             }
             else
             {
-                Act(AT_ACTION, "You go to sleep in $p.", ch, obj, NULL, TO_CHAR);
-                Act(AT_ACTION, "$n goes to sleep in $p.", ch, obj, NULL, TO_ROOM);
+                Act(AT_ACTION, "You go to sleep in $p.", ch, obj, NULL, ActTarget::Char);
+                Act(AT_ACTION, "$n goes to sleep in $p.", ch, obj, NULL, ActTarget::Room);
             }
 
             ch->Position = POS_SLEEPING;

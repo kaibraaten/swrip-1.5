@@ -160,14 +160,14 @@ void do_hail(Character *ch, std::string argument)
         BoostEconomy(ch->InRoom->Area, gold);
 
     Act(AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.",
-        ch, NULL, NULL, TO_ROOM);
+        ch, NULL, NULL, ActTarget::Room);
 
     CharacterFromRoom(ch);
     CharacterToRoom(ch, room);
 
     ch->Echo("A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver %ld credits.\r\n", gold);
 
-    Act(AT_ACTION, "$n $T", ch, NULL, "arrives on a speederbike, gets off and pays the driver before it leaves.", TO_ROOM);
+    Act(AT_ACTION, "$n $T", ch, NULL, "arrives on a speederbike, gets off and pays the driver before it leaves.", ActTarget::Room);
 
     if(steal)
     {

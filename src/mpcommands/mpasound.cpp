@@ -36,7 +36,7 @@ void do_mpasound(Character *ch, std::string argument)
         {
             ch->InRoom = pexit->ToRoom;
             MOBtrigger = false;
-            Act(AT_SAY, argument, ch, NULL, NULL, TO_ROOM);
+            Act(AT_SAY, argument, ch, NULL, NULL, ActTarget::Room);
         }
     }
 

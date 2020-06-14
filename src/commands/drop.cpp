@@ -87,7 +87,7 @@ void do_drop(Character *ch, std::string argument)
                 }
             }
 
-            Act(AT_ACTION, "$n drops some credits.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n drops some credits.", ch, NULL, NULL, ActTarget::Room);
             ObjectToRoom(CreateMoney(number), ch->InRoom);
             ch->Echo("OK.\r\n");
 
@@ -128,8 +128,8 @@ void do_drop(Character *ch, std::string argument)
         }
 
         SeparateOneObjectFromGroup(obj);
-        Act(AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM);
-        Act(AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR);
+        Act(AT_ACTION, "$n drops $p.", ch, obj, NULL, ActTarget::Room);
+        Act(AT_ACTION, "You drop $p.", ch, obj, NULL, ActTarget::Char);
 
         ObjectFromCharacter(obj);
         obj = ObjectToRoom(obj, ch->InRoom);
@@ -198,10 +198,10 @@ void do_drop(Character *ch, std::string argument)
                     ObjectFromCharacter(obj);
                 }
 
-                Act(AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n drops $p.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You drop $p.", ch, obj, NULL, ActTarget::Char);
                 obj = ObjectToRoom(obj, ch->InRoom);
-                ObjProgDropTrigger(ch, obj);            /* mudprogs */
+                ObjProgDropTrigger(ch, obj);
 
                 if(CharacterDiedRecently(ch))
                     return;
@@ -223,10 +223,10 @@ void do_drop(Character *ch, std::string argument)
         {
             if(fAll)
                 Act(AT_PLAIN, "You are not carrying anything.",
-                    ch, NULL, NULL, TO_CHAR);
+                    ch, NULL, NULL, ActTarget::Char);
             else
                 Act(AT_PLAIN, "You are not carrying any $T.",
-                    ch, NULL, chk.c_str(), TO_CHAR);
+                    ch, NULL, chk.c_str(), ActTarget::Char);
         }
     }
 

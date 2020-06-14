@@ -82,7 +82,7 @@ void do_ammo(Character *ch, std::string argument)
         }
 
         ch->Echo("You replace your ammunition cartridge.\r\nYour blaster is charged with %d shots at high power to %d shots on low.\r\n", charge / 5, charge);
-        Act(AT_PLAIN, "$n replaces the ammunition cell in $p.", ch, wield, NULL, TO_ROOM);
+        Act(AT_PLAIN, "$n replaces the ammunition cell in $p.", ch, wield, NULL, ActTarget::Room);
     }
     else if(wield->Value[OVAL_WEAPON_TYPE] == WEAPON_BOWCASTER)
     {
@@ -136,7 +136,7 @@ void do_ammo(Character *ch, std::string argument)
         }
 
         ch->Echo("You replace your quarrel pack.\r\nYour bowcaster is charged with %d energy bolts.\r\n", charge);
-        Act(AT_PLAIN, "$n replaces the quarrels in $p.", ch, wield, NULL, TO_ROOM);
+        Act(AT_PLAIN, "$n replaces the quarrels in $p.", ch, wield, NULL, ActTarget::Room);
     }
     else
     {
@@ -180,23 +180,23 @@ void do_ammo(Character *ch, std::string argument)
         if(wield->Value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER)
         {
             ch->Echo("You replace your power cell.\r\nYour lightsaber is charged to %d/%d units.\r\n", charge, charge);
-            Act(AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM);
-            Act(AT_PLAIN, "$p ignites with a bright glow.", ch, wield, NULL, TO_ROOM);
+            Act(AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, ActTarget::Room);
+            Act(AT_PLAIN, "$p ignites with a bright glow.", ch, wield, NULL, ActTarget::Room);
         }
         else if(wield->Value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE)
         {
             ch->Echo("You replace your power cell.\r\nYour vibro-blade is charged to %d/%d units.\r\n", charge, charge);
-            Act(AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM);
+            Act(AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, ActTarget::Room);
         }
         else if(wield->Value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE)
         {
             ch->Echo("You replace your power cell.\r\nYour force-pike is charged to %d/%d units.\r\n", charge, charge);
-            Act(AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM);
+            Act(AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, ActTarget::Room);
         }
         else
         {
             ch->Echo("You feel very foolish.\r\n");
-            Act(AT_PLAIN, "$n tries to jam a power cell into $p.", ch, wield, NULL, TO_ROOM);
+            Act(AT_PLAIN, "$n tries to jam a power cell into $p.", ch, wield, NULL, ActTarget::Room);
         }
     }
 

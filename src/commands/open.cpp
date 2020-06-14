@@ -46,9 +46,9 @@ void do_open(Character *ch, std::string argument)
            || NiftyIsName(arg, pexit->Keyword))
         {
             Act(AT_ACTION, "$n opens the $d.",
-                ch, NULL, pexit->Keyword.c_str(), TO_ROOM);
+                ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
             Act(AT_ACTION, "You open the $d.",
-                ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
+                ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
 
             if((pexit_rev = pexit->ReverseExit) != NULL
                && pexit_rev->ToRoom == ch->InRoom)
@@ -56,7 +56,7 @@ void do_open(Character *ch, std::string argument)
                 for(Character *rch : pexit->ToRoom->Characters())
                 {
                     Act(AT_ACTION, "The $d opens.",
-                        rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
+                        rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
                 }
             }
 
@@ -79,8 +79,8 @@ void do_open(Character *ch, std::string argument)
             if(obj->WearFlags.test(Flag::Wear::Over))
             {
                 obj->Value[2] = 0;
-                Act(AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR);
-                Act(AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM);
+                Act(AT_ACTION, "You open $p.", ch, obj, NULL, ActTarget::Char);
+                Act(AT_ACTION, "$n opens $p.", ch, obj, NULL, ActTarget::Room);
                 CheckObjectForTrap(ch, obj, TRAP_OPEN);
                 return;
 
@@ -112,8 +112,8 @@ void do_open(Character *ch, std::string argument)
         }
 
         RemoveBit(obj->Value[1], CONT_CLOSED);
-        Act(AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR);
-        Act(AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM);
+        Act(AT_ACTION, "You open $p.", ch, obj, NULL, ActTarget::Char);
+        Act(AT_ACTION, "$n opens $p.", ch, obj, NULL, ActTarget::Room);
         CheckObjectForTrap(ch, obj, TRAP_OPEN);
         return;
     }

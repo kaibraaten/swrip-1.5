@@ -175,8 +175,8 @@ void do_cast(Character* ch, std::string argument)
         /* multi-participant spells                       -Thoric */
         AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(skill->Beats / 10, 3), do_cast, SUB_PAUSE);
         Act(AT_MAGIC, "You begin to feel the force in yourself and those around you...",
-            ch, NULL, NULL, TO_CHAR);
-        Act(AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM);
+            ch, NULL, NULL, ActTarget::Char);
+        Act(AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, ActTarget::Room);
         ch->dest_buf = targetName + " " + spell_target_name;
         ch->tempnum = sn;
         return;
@@ -256,9 +256,9 @@ void do_cast(Character* ch, std::string argument)
                     {
                         ExtractTimer(tmp, t);
                         Act(AT_MAGIC, "Channeling your energy into $n, you help direct the force",
-                            ch, NULL, tmp, TO_VICT);
-                        Act(AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR);
-                        Act(AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT);
+                            ch, NULL, tmp, ActTarget::Vict);
+                        Act(AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, ActTarget::Char);
+                        Act(AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, ActTarget::NotVict);
                         LearnFromSuccess(tmp, sn);
 
                         tmp->Mana.Current -= mana;

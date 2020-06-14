@@ -101,7 +101,7 @@ void do_get(Character *ch, std::string argument)
 
             if(!obj)
             {
-                Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), TO_CHAR);
+                Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), ActTarget::Char);
                 return;
             }
 
@@ -189,7 +189,7 @@ void do_get(Character *ch, std::string argument)
                 if(fAll)
                     ch->Echo("I see nothing here.\r\n");
                 else
-                    Act(AT_PLAIN, "I see no $T here.", ch, NULL, chk.c_str(), TO_CHAR);
+                    Act(AT_PLAIN, "I see no $T here.", ch, NULL, chk.c_str(), ActTarget::Char);
             }
             else if(SysData.SaveFlags.test(Flag::AutoSave::Get))
             {
@@ -218,7 +218,7 @@ void do_get(Character *ch, std::string argument)
 
         if((container = GetObjectHere(ch, arg2)) == NULL)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), ActTarget::Char);
             return;
         }
 
@@ -250,7 +250,7 @@ void do_get(Character *ch, std::string argument)
            && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
             Act(AT_PLAIN, "The $d is closed.",
-                ch, NULL, container->Name.c_str(), TO_CHAR);
+                ch, NULL, container->Name.c_str(), ActTarget::Char);
             return;
         }
 
@@ -266,7 +266,7 @@ void do_get(Character *ch, std::string argument)
                     container->Flags.test(Flag::Obj::Covering)
                     ? "I see nothing like that beneath the $T."
                     : "I see nothing like that in the $T.",
-                    ch, NULL, arg2.c_str(), TO_CHAR);
+                    ch, NULL, arg2.c_str(), ActTarget::Char);
                 return;
             }
 
@@ -341,13 +341,13 @@ void do_get(Character *ch, std::string argument)
                         container->Flags.test(Flag::Obj::Covering)
                         ? "I see nothing beneath the $T."
                         : "I see nothing in the $T.",
-                        ch, NULL, arg2.c_str(), TO_CHAR);
+                        ch, NULL, arg2.c_str(), ActTarget::Char);
                 else
                     Act(AT_PLAIN,
                         container->Flags.test(Flag::Obj::Covering)
                         ? "I see nothing like that beneath the $T."
                         : "I see nothing like that in the $T.",
-                        ch, NULL, arg2.c_str(), TO_CHAR);
+                        ch, NULL, arg2.c_str(), ActTarget::Char);
             }
             else
             {
@@ -398,7 +398,7 @@ static void get_obj(Character *ch, Object *obj, Object *container)
     if(ch->CarryNumber + GetObjectCount(obj) > GetCarryCapacityNumber(ch))
     {
         Act(AT_PLAIN, "$d: you can't carry that many items.",
-            ch, NULL, obj->Name.c_str(), TO_CHAR);
+            ch, NULL, obj->Name.c_str(), ActTarget::Char);
         return;
     }
 
@@ -410,7 +410,7 @@ static void get_obj(Character *ch, Object *obj, Object *container)
     if(ch->CarryWeight + weight > GetCarryCapacityWeight(ch))
     {
         Act(AT_PLAIN, "$d: you can't carry that much weight.",
-            ch, NULL, obj->Name.c_str(), TO_CHAR);
+            ch, NULL, obj->Name.c_str(), ActTarget::Char);
         return;
     }
 
@@ -419,17 +419,17 @@ static void get_obj(Character *ch, Object *obj, Object *container)
         Act(AT_ACTION,
             container->Flags.test(Flag::Obj::Covering)
             ? "You get $p from beneath $P." : "You get $p from $P",
-            ch, obj, container, TO_CHAR);
+            ch, obj, container, ActTarget::Char);
         Act(AT_ACTION,
             container->Flags.test(Flag::Obj::Covering)
             ? "$n gets $p from beneath $P." : "$n gets $p from $P",
-            ch, obj, container, TO_ROOM);
+            ch, obj, container, ActTarget::Room);
         ObjectFromObject(obj);
     }
     else
     {
-        Act(AT_ACTION, "You get $p.", ch, obj, container, TO_CHAR);
-        Act(AT_ACTION, "$n gets $p.", ch, obj, container, TO_ROOM);
+        Act(AT_ACTION, "You get $p.", ch, obj, container, ActTarget::Char);
+        Act(AT_ACTION, "$n gets $p.", ch, obj, container, ActTarget::Room);
         ObjectFromRoom(obj);
     }
 

@@ -60,10 +60,10 @@ void do_leaveship(Character *ch, std::string argument)
         return;
     }
 
-    Act(AT_PLAIN, "$n exits the ship.", ch, NULL, NULL, TO_ROOM);
-    Act(AT_PLAIN, "You exit the ship.", ch, NULL, NULL, TO_CHAR);
+    Act(AT_PLAIN, "$n exits the ship.", ch, NULL, NULL, ActTarget::Room);
+    Act(AT_PLAIN, "You exit the ship.", ch, NULL, NULL, ActTarget::Char);
     CharacterFromRoom(ch);
     CharacterToRoom(ch, toroom);
-    Act(AT_PLAIN, "$n steps out of a ship.", ch, NULL, NULL, TO_ROOM);
+    Act(AT_PLAIN, "$n steps out of a ship.", ch, NULL, NULL, ActTarget::Room);
     do_look(ch, "auto");
 }

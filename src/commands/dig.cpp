@@ -76,14 +76,14 @@ void do_dig(Character *ch, std::string arg)
                             do_dig, SUB_PAUSE);
         ch->dest_buf = arg;
         ch->Echo("You begin digging...\r\n");
-        Act(AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM);
+        Act(AT_PLAIN, "$n begins digging...", ch, NULL, NULL, ActTarget::Room);
         return;
 
     case SUB_PAUSE:
         if(ch->dest_buf.empty())
         {
             ch->Echo("Your digging was interrupted!\r\n");
-            Act(AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM);
+            Act(AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, ActTarget::Room);
             Log->Bug("do_dig: dest_buf NULL");
             return;
         }
@@ -96,7 +96,7 @@ void do_dig(Character *ch, std::string arg)
         ch->dest_buf.erase();
         ch->SubState = SUB_NONE;
         ch->Echo("You stop digging...\r\n");
-        Act(AT_PLAIN, "$n stops digging...", ch, NULL, NULL, TO_ROOM);
+        Act(AT_PLAIN, "$n stops digging...", ch, NULL, NULL, ActTarget::Room);
         return;
     }
 
@@ -120,7 +120,7 @@ void do_dig(Character *ch, std::string arg)
             {
                 pexit->Flags.reset(Flag::Exit::Closed);
                 ch->Echo("You dig open a passageway!\r\n");
-                Act(AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM);
+                Act(AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, ActTarget::Room);
                 LearnFromSuccess(ch, gsn_dig);
                 return;
             }
@@ -128,7 +128,7 @@ void do_dig(Character *ch, std::string arg)
 
         LearnFromFailure(ch, gsn_dig);
         ch->Echo("Your dig did not discover any exit...\r\n");
-        Act(AT_PLAIN, "$n's dig did not discover any exit...", ch, NULL, NULL, TO_ROOM);
+        Act(AT_PLAIN, "$n's dig did not discover any exit...", ch, NULL, NULL, ActTarget::Room);
         return;
     }
 
@@ -152,14 +152,14 @@ void do_dig(Character *ch, std::string arg)
     if(!found)
     {
         ch->Echo("Your dig uncovered nothing.\r\n");
-        Act(AT_PLAIN, "$n's dig uncovered nothing.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_PLAIN, "$n's dig uncovered nothing.", ch, NULL, NULL, ActTarget::Room);
         LearnFromFailure(ch, gsn_dig);
         return;
     }
 
     SeparateOneObjectFromGroup(obj);
     obj->Flags.reset(Flag::Obj::Burried);
-    Act(AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, TO_CHAR);
-    Act(AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM);
+    Act(AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, ActTarget::Char);
+    Act(AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, ActTarget::Room);
     LearnFromSuccess(ch, gsn_dig);
 }

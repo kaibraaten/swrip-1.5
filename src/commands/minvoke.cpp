@@ -76,6 +76,6 @@ void do_minvoke(Character *ch, std::string arg)
 
     victim = CreateMobile(pMobIndex);
     CharacterToRoom(victim, ch->InRoom);
-    Act(AT_IMMORT, "$n has created $N!", ch, NULL, victim, TO_ROOM);
+    Act(AT_IMMORT, "$n has created $N!", ch, NULL, victim, ActTarget::Room);
     ch->Echo("Ok.\r\n");
 }

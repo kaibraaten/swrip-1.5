@@ -62,8 +62,8 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
 
     if(arg.empty())
     {
-        Act(AT_SOCIAL, social->OthersNoArg, ch, NULL, victim, TO_ROOM);
-        Act(AT_SOCIAL, social->CharNoArg, ch, NULL, victim, TO_CHAR);
+        Act(AT_SOCIAL, social->OthersNoArg, ch, NULL, victim, ActTarget::Room);
+        Act(AT_SOCIAL, social->CharNoArg, ch, NULL, victim, ActTarget::Char);
     }
     else if(!(victim = GetCharacterInRoom(ch, arg)))
     {
@@ -71,14 +71,14 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
     }
     else if(victim == ch)
     {
-        Act(AT_SOCIAL, social->OthersAuto, ch, NULL, victim, TO_ROOM);
-        Act(AT_SOCIAL, social->CharAuto, ch, NULL, victim, TO_CHAR);
+        Act(AT_SOCIAL, social->OthersAuto, ch, NULL, victim, ActTarget::Room);
+        Act(AT_SOCIAL, social->CharAuto, ch, NULL, victim, ActTarget::Char);
     }
     else
     {
-        Act(AT_SOCIAL, social->OthersFound, ch, NULL, victim, TO_NOTVICT);
-        Act(AT_SOCIAL, social->CharFound, ch, NULL, victim, TO_CHAR);
-        Act(AT_SOCIAL, social->VictimFound, ch, NULL, victim, TO_VICT);
+        Act(AT_SOCIAL, social->OthersFound, ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_SOCIAL, social->CharFound, ch, NULL, victim, ActTarget::Char);
+        Act(AT_SOCIAL, social->VictimFound, ch, NULL, victim, ActTarget::Vict);
 
         if(!IsNpc(ch) && IsNpc(victim)
            && !IsAffectedBy(victim, Flag::Affect::Charm)
@@ -98,15 +98,15 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
                 }
                 else if(IsNeutral(ch))
                 {
-                    Act(AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT);
-                    Act(AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR);
-                    Act(AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT);
+                    Act(AT_ACTION, "$n slaps $N.", victim, NULL, ch, ActTarget::NotVict);
+                    Act(AT_ACTION, "You slap $N.", victim, NULL, ch, ActTarget::Char);
+                    Act(AT_ACTION, "$n slaps you.", victim, NULL, ch, ActTarget::Vict);
                 }
                 else
                 {
-                    Act(AT_ACTION, "$n acts like $N doesn't even exist.", victim, NULL, ch, TO_NOTVICT);
-                    Act(AT_ACTION, "You just ignore $N.", victim, NULL, ch, TO_CHAR);
-                    Act(AT_ACTION, "$n appears to be ignoring you.", victim, NULL, ch, TO_VICT);
+                    Act(AT_ACTION, "$n acts like $N doesn't even exist.", victim, NULL, ch, ActTarget::NotVict);
+                    Act(AT_ACTION, "You just ignore $N.", victim, NULL, ch, ActTarget::Char);
+                    Act(AT_ACTION, "$n appears to be ignoring you.", victim, NULL, ch, ActTarget::Vict);
                 }
                 break;
 
@@ -118,18 +118,18 @@ bool CheckSocial(Character *ch, const std::string &command, const std::string &a
             case 6:
             case 7:
             case 8:
-                Act(AT_SOCIAL, social->OthersFound, victim, NULL, ch, TO_NOTVICT);
-                Act(AT_SOCIAL, social->CharFound, victim, NULL, ch, TO_CHAR);
-                Act(AT_SOCIAL, social->VictimFound, victim, NULL, ch, TO_VICT);
+                Act(AT_SOCIAL, social->OthersFound, victim, NULL, ch, ActTarget::NotVict);
+                Act(AT_SOCIAL, social->CharFound, victim, NULL, ch, ActTarget::Char);
+                Act(AT_SOCIAL, social->VictimFound, victim, NULL, ch, ActTarget::Vict);
                 break;
 
             case 9:
             case 10:
             case 11:
             case 12:
-                Act(AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT);
-                Act(AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR);
-                Act(AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT);
+                Act(AT_ACTION, "$n slaps $N.", victim, NULL, ch, ActTarget::NotVict);
+                Act(AT_ACTION, "You slap $N.", victim, NULL, ch, ActTarget::Char);
+                Act(AT_ACTION, "$n slaps you.", victim, NULL, ch, ActTarget::Vict);
                 break;
             }
         }

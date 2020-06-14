@@ -887,14 +887,14 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit
     if(pexit->Flags.test(Flag::Exit::Portal)
        && IsNpc(ch))
     {
-        Act(AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR);
+        Act(AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, ActTarget::Char);
         return rNONE;
     }
 
     if(pexit->Flags.test(Flag::Exit::NoMob)
        && IsNpc(ch))
     {
-        Act(AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR);
+        Act(AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, ActTarget::Char);
         return rNONE;
     }
 
@@ -907,13 +907,13 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit
             if(drunk)
             {
                 Act(AT_PLAIN, "$n drives into the $d in $s drunken state.",
-                    ch, NULL, pexit->Keyword.c_str(), TO_ROOM);
+                    ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
                 Act(AT_PLAIN, "You drive into the $d in your drunken state.",
-                    ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
+                    ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
             }
             else
             {
-                Act(AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
+                Act(AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
             }
         }
         else
@@ -1064,9 +1064,9 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit
     }
 
     sprintf(buf, "$n %ss the vehicle $T.", txt);
-    Act(AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_ROOM);
+    Act(AT_ACTION, buf, ch, NULL, GetDirectionName(door), ActTarget::Room);
     sprintf(buf, "You %s the vehicle $T.", txt);
-    Act(AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_CHAR);
+    Act(AT_ACTION, buf, ch, NULL, GetDirectionName(door), ActTarget::Char);
     sprintf(buf, "%s %ss %s.", ship->Name.c_str(), txt, GetDirectionName(door));
     EchoToRoom(AT_ACTION, GetRoom(ship->Location), buf);
 

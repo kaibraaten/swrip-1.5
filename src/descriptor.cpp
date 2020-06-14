@@ -77,7 +77,7 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & 
                 ch->Desc = d;
                 ch->IdleTimer = 0;
                 ch->Echo("Reconnecting.\r\n");
-                Act(AT_ACTION, "$n has reconnected.", ch, nullptr, nullptr, TO_ROOM);
+                Act(AT_ACTION, "$n has reconnected.", ch, nullptr, nullptr, ActTarget::Room);
                 auto logBuf = FormatString("%s@%s reconnected.",
                                            ch->Name.c_str(), d->Remote.Hostname.c_str());
                 Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
@@ -167,7 +167,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
             ch->Switched = nullptr;
             ch->Echo("Reconnecting.\r\n");
             Act(AT_ACTION, "$n has reconnected, kicking off old link.",
-                ch, nullptr, nullptr, TO_ROOM);
+                ch, nullptr, nullptr, ActTarget::Room);
             auto logBuf = FormatString("%s@%s reconnected, kicking off old link.",
                                        ch->Name.c_str(), d->Remote.Hostname.c_str());
             Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));

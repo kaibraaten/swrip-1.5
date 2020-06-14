@@ -48,7 +48,7 @@ void do_drive(Character *ch, std::string argument)
 
         if(!target)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), ActTarget::Char);
             return;
         }
 

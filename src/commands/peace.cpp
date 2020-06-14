@@ -5,7 +5,7 @@
 
 void do_peace(Character *ch, std::string argument)
 {
-    Act(AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, TO_ROOM);
+    Act(AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, ActTarget::Room);
 
     for(Character *rch : ch->InRoom->Characters())
     {

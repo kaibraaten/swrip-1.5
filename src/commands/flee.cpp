@@ -85,9 +85,9 @@ void do_flee(Character *ch, std::string argument)
             continue;
 
         ch->InRoom = was_in;
-        Act(AT_FLEE, "$n runs for cover!", ch, NULL, NULL, TO_ROOM);
+        Act(AT_FLEE, "$n runs for cover!", ch, NULL, NULL, ActTarget::Room);
         ch->InRoom = now_in;
-        Act(AT_FLEE, "$n glances around for signs of pursuit.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_FLEE, "$n glances around for signs of pursuit.", ch, NULL, NULL, ActTarget::Room);
         ch->Echo("You run for cover!");
 
         StopFighting(ch, true);

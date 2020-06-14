@@ -39,17 +39,17 @@ void do_collectgold(Character *ch, std::string argument)
     // Given the call to GetCharacterInRoom() above, how could
     // this expression ever evaluate to true? Need to
     // investigate this further.
-    if(StrCmp(ch1->Name, vendor->Owner))
+    if(StrCmp(ch1->Name, vendor->Owner) != 0)
     {
         ch->Echo("Trying to steal, huh?\r\n");
         tms = localtime(&current_time);
         tms->tm_hour += 24;
         ch->PCData->ReleaseDate = mktime(tms);
         ch->PCData->HelledBy = "VendorCheat";
-        Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
+        Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, ActTarget::NotVict);
         CharacterFromRoom(ch);
         CharacterToRoom(ch, GetRoom(ROOM_VNUM_HELL));
-        Act(AT_MAGIC, "$n appears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
+        Act(AT_MAGIC, "$n appears in a cloud of hellish light.", ch, NULL, ch, ActTarget::NotVict);
         do_look(ch, "auto");
         ch->Echo("The immortals are not pleased with your actions.\r\n"
                  "You shall remain in hell for 24 Hours.\r\n");
@@ -82,6 +82,6 @@ void do_collectgold(Character *ch, std::string argument)
     ch->Gold += gold;
 
     ch->Echo("&GYour vendor gladly hands over his earnings minus a small fee of course.\r\n");
-    Act(AT_ACTION, "$n hands over some money.\r\n", vendor, NULL, NULL, TO_ROOM);
+    Act(AT_ACTION, "$n hands over some money.\r\n", vendor, NULL, NULL, ActTarget::Room);
 }
 

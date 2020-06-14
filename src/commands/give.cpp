@@ -79,9 +79,9 @@ void do_give(Character *ch, std::string argument)
         strcat(buf, arg1.c_str());
         strcat(buf, (amount > 1) ? " credits." : " credit.");
 
-        Act(AT_ACTION, buf, ch, NULL, victim, TO_VICT);
-        Act(AT_ACTION, "$n gives $N some credits.", ch, NULL, victim, TO_NOTVICT);
-        Act(AT_ACTION, "You give $N some credits.", ch, NULL, victim, TO_CHAR);
+        Act(AT_ACTION, buf, ch, NULL, victim, ActTarget::Vict);
+        Act(AT_ACTION, "$n gives $N some credits.", ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_ACTION, "You give $N some credits.", ch, NULL, victim, ActTarget::Char);
         ch->Echo("OK.\r\n");
         MobProgBribeTrigger(victim, ch, amount);
 
@@ -126,19 +126,19 @@ void do_give(Character *ch, std::string argument)
 
     if(victim->CarryNumber + (GetObjectCount(obj) / obj->Count) > GetCarryCapacityNumber(victim))
     {
-        Act(AT_PLAIN, "$N has $S hands full.", ch, NULL, victim, TO_CHAR);
+        Act(AT_PLAIN, "$N has $S hands full.", ch, NULL, victim, ActTarget::Char);
         return;
     }
 
     if(victim->CarryWeight + (GetObjectWeight(obj) / obj->Count) > GetCarryCapacityWeight(victim))
     {
-        Act(AT_PLAIN, "$N can't carry that much weight.", ch, NULL, victim, TO_CHAR);
+        Act(AT_PLAIN, "$N can't carry that much weight.", ch, NULL, victim, ActTarget::Char);
         return;
     }
 
     if(!CanSeeObject(victim, obj))
     {
-        Act(AT_PLAIN, "$N can't see it.", ch, NULL, victim, TO_CHAR);
+        Act(AT_PLAIN, "$N can't see it.", ch, NULL, victim, ActTarget::Char);
         return;
     }
 
@@ -154,15 +154,15 @@ void do_give(Character *ch, std::string argument)
 
     if(obj->Flags.test(Flag::Obj::Prototype) && !CharacterCanTakePrototype(victim))
     {
-        Act(AT_PLAIN, "You cannot give that to $N!", ch, NULL, victim, TO_CHAR);
+        Act(AT_PLAIN, "You cannot give that to $N!", ch, NULL, victim, ActTarget::Char);
         return;
     }
 
     SeparateOneObjectFromGroup(obj);
     ObjectFromCharacter(obj);
-    Act(AT_ACTION, "$n gives $p to $N.", ch, obj, victim, TO_NOTVICT);
-    Act(AT_ACTION, "$n gives you $p.", ch, obj, victim, TO_VICT);
-    Act(AT_ACTION, "You give $p to $N.", ch, obj, victim, TO_CHAR);
+    Act(AT_ACTION, "$n gives $p to $N.", ch, obj, victim, ActTarget::NotVict);
+    Act(AT_ACTION, "$n gives you $p.", ch, obj, victim, ActTarget::Vict);
+    Act(AT_ACTION, "You give $p to $N.", ch, obj, victim, ActTarget::Char);
     obj = ObjectToCharacter(obj, victim);
 
     MobProgGiveTrigger(victim, ch, obj);

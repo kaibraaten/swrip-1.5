@@ -54,7 +54,7 @@ void do_punch(Character *ch, std::string arg)
 
         if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
         {
-            Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR);
+            Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, ActTarget::Char);
             return;
         }
 

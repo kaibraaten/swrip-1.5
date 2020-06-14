@@ -36,10 +36,10 @@ void do_setblaster(Character *ch, std::string argument)
     }
 
     if(wield != nullptr)
-        Act(AT_PLAIN, "$n adjusts the settings on $p.", ch, wield, NULL, TO_ROOM);
+        Act(AT_PLAIN, "$n adjusts the settings on $p.", ch, wield, NULL, ActTarget::Room);
 
     if(wield2 != nullptr)
-        Act(AT_PLAIN, "$n adjusts the settings on $p.", ch, wield2, NULL, TO_ROOM);
+        Act(AT_PLAIN, "$n adjusts the settings on $p.", ch, wield2, NULL, ActTarget::Room);
 
     if(!StrCmp(argument, "full"))
     {

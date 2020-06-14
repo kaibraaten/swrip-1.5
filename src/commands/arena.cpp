@@ -39,11 +39,11 @@ void do_arena(Character *ch, std::string argument)
     }
     else
     {
-        Act(AT_RED, "$n has been whisked away to the killing fields.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_RED, "$n has been whisked away to the killing fields.", ch, NULL, NULL, ActTarget::Room);
         ch->ReTran = ch->InRoom->Vnum;
         CharacterFromRoom(ch);
         CharacterToRoom(ch, GetRoom(PREP_START));
-        Act(AT_WHITE, "$n is dropped from the sky.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_WHITE, "$n is dropped from the sky.", ch, NULL, NULL, ActTarget::Room);
         ch->Echo("You have been taken to the killing fields\r\n");
         do_look(ch, "auto");
         sprintf(buf, "%s has joined the blood bath.", ch->Name.c_str());

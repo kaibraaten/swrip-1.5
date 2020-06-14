@@ -63,7 +63,7 @@ void do_repair(Character *ch, std::string argument)
     if(obj == nullptr)
     {
         Act(AT_TELL, "$n tells you 'You don't have that item.'",
-            keeper, NULL, ch, TO_VICT);
+            keeper, NULL, ch, ActTarget::Vict);
         ch->Reply = keeper;
         return;
     }
@@ -86,9 +86,9 @@ static void repair_one_obj(Character *ch, Character *keeper, Object *obj,
     {
         if(cost != -2)
             Act(AT_TELL, "$n tells you, 'Sorry, I can't do anything with $p.'",
-                keeper, obj, ch, TO_VICT);
+                keeper, obj, ch, ActTarget::Vict);
         else
-            Act(AT_TELL, "$n tells you, '$p looks fine to me!'", keeper, obj, ch, TO_VICT);
+            Act(AT_TELL, "$n tells you, '$p looks fine to me!'", keeper, obj, ch, ActTarget::Vict);
     }
     /* "repair all" gets a 10% surcharge - Gorog */
 
@@ -97,17 +97,17 @@ static void repair_one_obj(Character *ch, Character *keeper, Object *obj,
         sprintf(buf,
                 "$N tells you, 'It will cost %d credit%s to %s %s...'", cost,
                 cost == 1 ? "" : "s", fixstr.c_str(), obj->Name.c_str());
-        Act(AT_TELL, buf, ch, NULL, keeper, TO_CHAR);
+        Act(AT_TELL, buf, ch, NULL, keeper, ActTarget::Char);
         Act(AT_TELL, "$N tells you, 'Which I see you can't afford.'", ch,
-            NULL, keeper, TO_CHAR);
+            NULL, keeper, ActTarget::Char);
     }
     else
     {
         sprintf(buf, "$n gives $p to $N, who quickly %s it.", fixstr2.c_str());
-        Act(AT_ACTION, buf, ch, obj, keeper, TO_ROOM);
+        Act(AT_ACTION, buf, ch, obj, keeper, ActTarget::Room);
         sprintf(buf, "$N charges you %d credit%s to %s $p.",
                 cost, cost == 1 ? "" : "s", fixstr.c_str());
-        Act(AT_ACTION, buf, ch, obj, keeper, TO_CHAR);
+        Act(AT_ACTION, buf, ch, obj, keeper, ActTarget::Char);
         ch->Gold -= cost;
         keeper->Gold += cost;
 
@@ -120,7 +120,7 @@ static void repair_one_obj(Character *ch, Character *keeper, Object *obj,
             BoostEconomy(keeper->InRoom->Area, keeper->Gold - maxgold / 2);
             keeper->Gold = maxgold / 2;
             Act(AT_ACTION, "$n puts some credits into a large safe.", keeper,
-                NULL, NULL, TO_ROOM);
+                NULL, NULL, ActTarget::Room);
         }
 
         switch(obj->ItemType)

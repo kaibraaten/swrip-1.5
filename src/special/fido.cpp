@@ -18,7 +18,7 @@ bool spec_fido(Character *ch)
 
     for(Object *corpse : corpsesToEat)
     {
-        Act(AT_ACTION, "$n savagely devours a corpse.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_ACTION, "$n savagely devours a corpse.", ch, NULL, NULL, ActTarget::Room);
 
         std::list<Object *> objectsInCorpse(corpse->Objects());
 

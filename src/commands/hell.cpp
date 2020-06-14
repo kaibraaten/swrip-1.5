@@ -85,10 +85,10 @@ void do_hell(Character *ch, std::string argument)
     victim->PCData->HelledBy = ch->Name;
     ch->Echo("%s will be released from hell at %24.24s.\r\n", victim->Name.c_str(),
              ctime(&victim->PCData->ReleaseDate));
-    Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);
+    Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, ActTarget::NotVict);
     CharacterFromRoom(victim);
     CharacterToRoom(victim, GetRoom(ROOM_VNUM_HELL));
-    Act(AT_MAGIC, "$n appears in a could of hellish light.", victim, NULL, ch, TO_NOTVICT);
+    Act(AT_MAGIC, "$n appears in a could of hellish light.", victim, NULL, ch, ActTarget::NotVict);
     do_look(victim, "auto");
     victim->Echo("The immortals are not pleased with your actions.\r\n"
                  "You shall remain in hell for %d %s%s.\r\n", hell_time,

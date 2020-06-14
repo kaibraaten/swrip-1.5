@@ -89,7 +89,7 @@ void do_buy(Character *ch, std::string argument)
         CharacterToRoom(pet, ch->InRoom);
         StartFollowing(pet, ch);
         ch->Echo("Enjoy your pet.\r\n");
-        Act(AT_ACTION, "$n bought $N as a pet.", ch, NULL, pet, TO_ROOM);
+        Act(AT_ACTION, "$n bought $N as a pet.", ch, NULL, pet, ActTarget::Room);
         return;
     }
     else
@@ -111,7 +111,7 @@ void do_buy(Character *ch, std::string argument)
             if(noi > mnoi)
             {
                 Act(AT_TELL, "$n tells you 'I don't sell that many items at"
-                    " once.'", keeper, NULL, ch, TO_VICT);
+                    " once.'", keeper, NULL, ch, ActTarget::Vict);
                 ch->Reply = keeper;
                 return;
             }
@@ -161,7 +161,7 @@ void do_buy(Character *ch, std::string argument)
         if(cost <= 0 || !CanSeeObject(ch, obj))
         {
             Act(AT_TELL, "$n tells you 'I don't sell that -- try 'list'.'",
-                keeper, nullptr, ch, TO_VICT);
+                keeper, nullptr, ch, ActTarget::Vict);
             ch->Reply = keeper;
             return;
         }
@@ -170,7 +170,7 @@ void do_buy(Character *ch, std::string argument)
         {
             Interpret(keeper, "laugh");
             Act(AT_TELL, "$n tells you 'I don't have enough of those in stock"
-                " to sell more than one at a time.'", keeper, nullptr, ch, TO_VICT);
+                " to sell more than one at a time.'", keeper, nullptr, ch, ActTarget::Vict);
             ch->Reply = keeper;
             return;
         }
@@ -178,7 +178,7 @@ void do_buy(Character *ch, std::string argument)
         if(ch->Gold < cost)
         {
             Act(AT_TELL, "$n tells you 'You can't afford to buy $p.'",
-                keeper, obj, ch, TO_VICT);
+                keeper, obj, ch, ActTarget::Vict);
             ch->Reply = keeper;
             return;
         }
@@ -187,7 +187,7 @@ void do_buy(Character *ch, std::string argument)
            && GetTrustLevel(ch) < LEVEL_IMMORTAL)
         {
             Act(AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",
-                keeper, nullptr, ch, TO_VICT);
+                keeper, nullptr, ch, ActTarget::Vict);
             ch->Reply = keeper;
             return;
         }
@@ -211,21 +211,21 @@ void do_buy(Character *ch, std::string argument)
                || keeper->Home != nullptr)
                 SeparateOneObjectFromGroup(obj);
 
-            Act(AT_ACTION, "$n buys $p.", ch, obj, nullptr, TO_ROOM);
-            Act(AT_ACTION, "You buy $p.", ch, obj, nullptr, TO_CHAR);
+            Act(AT_ACTION, "$n buys $p.", ch, obj, nullptr, ActTarget::Room);
+            Act(AT_ACTION, "You buy $p.", ch, obj, nullptr, ActTarget::Char);
         }
         else
         {
             std::string buf = FormatString("$n buys %d $p%s.", noi,
                                            (obj->ShortDescr[obj->ShortDescr.size() - 1] == 's'
                                             ? "" : "s"));
-            Act(AT_ACTION, buf, ch, obj, nullptr, TO_ROOM);
+            Act(AT_ACTION, buf, ch, obj, nullptr, ActTarget::Room);
             buf = FormatString("You buy %d $p%s.", noi,
                                (obj->ShortDescr[obj->ShortDescr.size() - 1] == 's'
                                 ? "" : "s"));
-            Act(AT_ACTION, buf, ch, obj, nullptr, TO_CHAR);
+            Act(AT_ACTION, buf, ch, obj, nullptr, ActTarget::Char);
             Act(AT_ACTION, "$N puts them into a bag and hands it to you.",
-                ch, nullptr, keeper, TO_CHAR);
+                ch, nullptr, keeper, ActTarget::Char);
         }
 
         ch->Gold -= cost;
@@ -235,7 +235,7 @@ void do_buy(Character *ch, std::string argument)
         {
             BoostEconomy(keeper->InRoom->Area, keeper->Gold - maxgold / 2);
             keeper->Gold = maxgold / 2;
-            Act(AT_ACTION, "$n puts some credits into a large safe.", keeper, nullptr, nullptr, TO_ROOM);
+            Act(AT_ACTION, "$n puts some credits into a large safe.", keeper, nullptr, nullptr, ActTarget::Room);
         }
 
         if(obj->Flags.test(Flag::Obj::Inventory)

@@ -32,8 +32,8 @@ void do_study(Character *ch, std::string argument) /* study by Absalom */
         return;
     }
 
-    Act(AT_MAGIC, "$n studies $p.", ch, obj, NULL, TO_ROOM);
-    Act(AT_MAGIC, "You study $p.", ch, obj, NULL, TO_CHAR);
+    Act(AT_MAGIC, "$n studies $p.", ch, obj, NULL, ActTarget::Room);
+    Act(AT_MAGIC, "You study $p.", ch, obj, NULL, ActTarget::Char);
 
     if(obj->Value[1] >= 0)
         bookskills++;
@@ -64,13 +64,13 @@ void do_study(Character *ch, std::string argument) /* study by Absalom */
 
     if(ch->PCData->Learned[sn] <= 0)
         Act(AT_MAGIC, "You have begun learning the ability to $t!",
-            ch, SkillTable[sn]->Name.c_str(), NULL, TO_CHAR);
+            ch, SkillTable[sn]->Name.c_str(), NULL, ActTarget::Char);
     else if(ch->PCData->Learned[sn] < 15)
         Act(AT_MAGIC, "You have learned a bit more of the ability to $t!",
-            ch, SkillTable[sn]->Name.c_str(), NULL, TO_CHAR);
+            ch, SkillTable[sn]->Name.c_str(), NULL, ActTarget::Char);
     else
         Act(AT_MAGIC, "You have absorbed everything the book teaches you on the ability to $t!",
-            ch, SkillTable[sn]->Name.c_str(), NULL, TO_CHAR);
+            ch, SkillTable[sn]->Name.c_str(), NULL, ActTarget::Char);
 
     ch->PCData->Learned[sn] += urange(0, 20 - ch->PCData->Learned[sn], 5);
     ch->PCData->Learned[sn] += 5;

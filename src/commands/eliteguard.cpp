@@ -42,7 +42,7 @@ void do_elite_guard(Character *ch, std::string arg)
         {
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
             Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
-                NULL, arg.c_str(), TO_ROOM);
+                NULL, arg.c_str(), ActTarget::Room);
             AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_elite_guard, SUB_PAUSE);
             return;
         }

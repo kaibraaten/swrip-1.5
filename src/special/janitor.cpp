@@ -25,7 +25,7 @@ bool spec_janitor( Character *ch )
 
     for(auto trash : itemsToPickUp)
     {
-        Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );
+        Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, ActTarget::Room );
         ObjectFromRoom( trash );
         ObjectToCharacter( trash, ch );
         return true;

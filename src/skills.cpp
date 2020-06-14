@@ -84,9 +84,9 @@ void Disarm(Character *ch, Character *victim)
         return;
     }
 
-    Act(AT_SKILL, "$n DISARMS you!", ch, NULL, victim, TO_VICT);
-    Act(AT_SKILL, "You disarm $N!", ch, NULL, victim, TO_CHAR);
-    Act(AT_SKILL, "$n disarms $N!", ch, NULL, victim, TO_NOTVICT);
+    Act(AT_SKILL, "$n DISARMS you!", ch, NULL, victim, ActTarget::Vict);
+    Act(AT_SKILL, "You disarm $N!", ch, NULL, victim, ActTarget::Char);
+    Act(AT_SKILL, "$n disarms $N!", ch, NULL, victim, ActTarget::NotVict);
     LearnFromSuccess(ch, gsn_disarm);
 
     if(obj == GetEquipmentOnCharacter(victim, WEAR_WIELD)
@@ -119,9 +119,9 @@ void Trip(Character *ch, Character *victim)
             return;
         }
 
-        Act(AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT);
-        Act(AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR);
-        Act(AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, ActTarget::NotVict);
         victim->Mount->Flags.reset(Flag::Mob::Mounted);
         victim->Mount = nullptr;
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
@@ -132,9 +132,9 @@ void Trip(Character *ch, Character *victim)
 
     if(victim->Wait == 0)
     {
-        Act(AT_SKILL, "$n trips you and you go down!", ch, NULL, victim, TO_VICT);
-        Act(AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, TO_CHAR);
-        Act(AT_SKILL, "$n trips $N and $N goes down!", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_SKILL, "$n trips you and you go down!", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n trips $N and $N goes down!", ch, NULL, victim, ActTarget::NotVict);
 
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
         SetWaitState(victim, 2 * PULSE_VIOLENCE);
@@ -190,13 +190,13 @@ bool CheckParry(Character *ch, Character *victim)
     if(!IsNpc(victim)
        && !victim->PCData->Flags.test(Flag::PCData::Gag))
     {
-        Act(AT_SKILL, "You parry $n's attack.", ch, NULL, victim, TO_VICT);
+        Act(AT_SKILL, "You parry $n's attack.", ch, NULL, victim, ActTarget::Vict);
     }
 
     if(!IsNpc(ch)
        && !ch->PCData->Flags.test(Flag::PCData::Gag))
     {
-        Act(AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR);
+        Act(AT_SKILL, "$N parries your attack.", ch, NULL, victim, ActTarget::Char);
     }
 
     LearnFromSuccess(victim, gsn_parry);
@@ -240,13 +240,13 @@ bool CheckDodge(Character *ch, Character *victim)
     if(!IsNpc(victim)
        && !victim->PCData->Flags.test(Flag::PCData::Gag))
     {
-        Act(AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT);
+        Act(AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, ActTarget::Vict);
     }
 
     if(!IsNpc(ch)
        && !ch->PCData->Flags.test(Flag::PCData::Gag))
     {
-        Act(AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR);
+        Act(AT_SKILL, "$N dodges your attack.", ch, NULL, victim, ActTarget::Char);
     }
 
     LearnFromSuccess(victim, gsn_dodge);
@@ -285,9 +285,9 @@ bool CheckGrip(Character *ch, Character *victim)
         return false;
     }
 
-    Act(AT_SKILL, "You evade $n's attempt to disarm you.", ch, NULL, victim, TO_VICT);
+    Act(AT_SKILL, "You evade $n's attempt to disarm you.", ch, NULL, victim, ActTarget::Vict);
     Act(AT_SKILL, "$N holds $S weapon strongly, and is not disarmed.",
-        ch, NULL, victim, TO_CHAR);
+        ch, NULL, victim, ActTarget::Char);
     LearnFromSuccess(victim, gsn_grip);
     return true;
 }

@@ -67,8 +67,8 @@ void do_quit(Character *ch, std::string argument)
     SetCharacterColor(AT_WHITE, ch);
     ch->Echo("Your surroundings begin to fade as a mystical swirling vortex of colors\r\nenvelops your body... When you come to, things are not as they were.\r\n\r\n");
     Act(AT_SAY, "A strange voice says, 'We await your return, $n...'",
-        ch, NULL, NULL, TO_CHAR);
-    Act(AT_BYE, "$n has left the game.", ch, NULL, NULL, TO_ROOM);
+        ch, NULL, NULL, ActTarget::Char);
+    Act(AT_BYE, "$n has left the game.", ch, NULL, NULL, ActTarget::Room);
     SetCharacterColor(AT_GREY, ch);
 
     auto logBuf = FormatString("%s has quit.", ch->Name.c_str());
@@ -79,7 +79,7 @@ void do_quit(Character *ch, std::string argument)
     if(ch->PCData->Pet)
     {
         Act(AT_BYE, "$N follows $S master out of the game.", ch, NULL,
-            ch->PCData->Pet, TO_ROOM);
+            ch->PCData->Pet, ActTarget::Room);
         ExtractCharacter(ch->PCData->Pet, true);
     }
 

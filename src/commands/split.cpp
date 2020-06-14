@@ -80,7 +80,7 @@ void do_split(Character *ch, std::string arg)
     {
         if(gch != ch && IsInSameGroup(gch, ch))
         {
-            Act(AT_GOLD, buf, ch, NULL, gch, TO_VICT);
+            Act(AT_GOLD, buf, ch, NULL, gch, ActTarget::Vict);
             gch->Gold += share;
         }
     }

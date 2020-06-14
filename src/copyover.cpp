@@ -201,7 +201,7 @@ void RecoverFromCopyover()
             do_look(d->Character, "auto noprog");
 
             Act(AT_ACTION, "$n materializes!", d->Character, NULL, NULL,
-                TO_ROOM);
+                ActTarget::Room);
             d->ConnectionState = CON_PLAYING;
 
             if (++num_descriptors > SysData.MaxPlayersEver)

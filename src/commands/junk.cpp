@@ -29,7 +29,7 @@ void do_junk(Character *ch, std::string arg)
 
     if(!obj->WearFlags.test(Flag::Wear::Take))
     {
-        Act(AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, TO_CHAR);
+        Act(AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, ActTarget::Char);
         return;
     }
 
@@ -40,7 +40,7 @@ void do_junk(Character *ch, std::string arg)
        && obj->ItemType != ITEM_DRINK_CON
        && obj->ItemType != ITEM_MEDPAC)
     {
-        Act(AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, TO_CHAR);
+        Act(AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, ActTarget::Char);
         return;
     }
 

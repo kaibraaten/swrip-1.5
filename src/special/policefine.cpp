@@ -28,8 +28,8 @@ bool spec_police_fine(Character *ch)
                 char buf[MAX_STRING_LENGTH];
                 sprintf(buf, "Hey you're wanted on %s!", WantedFlags[vip]);
                 do_say(ch, buf);
-                Act(AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT);
-                Act(AT_ACTION, "$n fines you an enourmous amount of money.", ch, NULL, victim, TO_VICT);
+                Act(AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, ActTarget::NotVict);
+                Act(AT_ACTION, "$n fines you an enourmous amount of money.", ch, NULL, victim, ActTarget::Vict);
 
                 if(victim->InRoom && victim->InRoom->Area)
                     BoostEconomy(victim->InRoom->Area, (victim->Gold) / 2);

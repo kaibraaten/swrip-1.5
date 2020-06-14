@@ -39,10 +39,10 @@ void do_mpechoat(Character *ch, std::string argument)
     if((color = GetColor(argument)))
     {
         argument = OneArgument(argument, arg);
-        Act(color, argument, ch, NULL, victim, TO_VICT);
+        Act(color, argument, ch, NULL, victim, ActTarget::Vict);
     }
     else
-        Act(AT_ACTION, argument, ch, NULL, victim, TO_VICT);
+        Act(AT_ACTION, argument, ch, NULL, victim, ActTarget::Vict);
 
     ch->Flags = mobflags;
 }

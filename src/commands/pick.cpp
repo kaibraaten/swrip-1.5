@@ -46,7 +46,7 @@ void do_pick(Character *ch, std::string arg)
         if(IsNpc(gch) && IsAwake(gch) && GetAbilityLevel(ch, SMUGGLING_ABILITY) < gch->TopLevel)
         {
             Act(AT_PLAIN, "$N is standing too close to the lock.",
-                ch, NULL, gch, TO_CHAR);
+                ch, NULL, gch, ActTarget::Char);
             return;
         }
     }
@@ -54,7 +54,7 @@ void do_pick(Character *ch, std::string arg)
     if((pexit = FindDoor(ch, arg, true)) != NULL)
     {
         /* 'pick door' */
-        /*        Room *to_room; */ /* Unused */
+        /*        Room *ActTarget::Room; */ /* Unused */
         std::shared_ptr<Exit> pexit_rev;
 
         if(!pexit->Flags.test(Flag::Exit::Closed))
@@ -93,7 +93,7 @@ void do_pick(Character *ch, std::string arg)
         pexit->Flags.reset(Flag::Exit::Locked);
         ch->Echo("*Click*\r\n");
         Act(AT_ACTION, "$n picks the $d.",
-            ch, NULL, pexit->Keyword.c_str(), TO_ROOM);
+            ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
         LearnFromSuccess(ch, gsn_pick_lock);
 
         /* pick the other side */
@@ -151,7 +151,7 @@ void do_pick(Character *ch, std::string arg)
         SeparateOneObjectFromGroup(obj);
         RemoveBit(obj->Value[OVAL_CONTAINER_FLAGS], CONT_LOCKED);
         ch->Echo("*Click*\r\n");
-        Act(AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM);
+        Act(AT_ACTION, "$n picks $p.", ch, obj, NULL, ActTarget::Room);
         LearnFromSuccess(ch, gsn_pick_lock);
         CheckObjectForTrap(ch, obj, TRAP_PICK);
         return;
@@ -226,9 +226,9 @@ void do_pick(Character *ch, std::string arg)
         {
             ship->HatchOpen = true;
             Act(AT_PLAIN, "You pick the lock and open the hatch on $T.",
-                ch, NULL, ship->Name.c_str(), TO_CHAR);
+                ch, NULL, ship->Name.c_str(), ActTarget::Char);
             Act(AT_PLAIN, "$n picks open the hatch on $T.",
-                ch, NULL, ship->Name.c_str(), TO_ROOM);
+                ch, NULL, ship->Name.c_str(), ActTarget::Room);
             EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Entrance),
                        "The hatch opens from the outside.");
             LearnFromSuccess(ch, gsn_pickshiplock);

@@ -26,8 +26,8 @@ void do_quaff(Character *ch, std::string argument)
             do_drink(ch, obj->Name);
         else
         {
-            Act(AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...", ch, obj, NULL, TO_ROOM);
-            Act(AT_ACTION, "You bring $p up to your mouth and try to drink from it...", ch, obj, NULL, TO_CHAR);
+            Act(AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...", ch, obj, NULL, ActTarget::Room);
+            Act(AT_ACTION, "You bring $p up to your mouth and try to drink from it...", ch, obj, NULL, ActTarget::Char);
         }
         return;
     }
@@ -47,8 +47,8 @@ void do_quaff(Character *ch, std::string argument)
 
     if(obj->InObject)
     {
-        Act(AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, TO_CHAR);
-        Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, TO_ROOM);
+        Act(AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, ActTarget::Char);
+        Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, ActTarget::Room);
     }
 
     /*
@@ -57,16 +57,16 @@ void do_quaff(Character *ch, std::string argument)
     if(ch->Fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48))
     {
         Act(AT_MAGIC, "$n accidentally drops $p and it smashes into a thousand fragments.",
-            ch, obj, NULL, TO_ROOM);
+            ch, obj, NULL, ActTarget::Room);
         Act(AT_MAGIC, "Oops... $p gets knocked from your hands and smashes into pieces!",
-            ch, obj, NULL, TO_CHAR);
+            ch, obj, NULL, ActTarget::Char);
     }
     else
     {
         if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
         {
-            Act(AT_ACTION, "$n quaffs $p.", ch, obj, NULL, TO_ROOM);
-            Act(AT_ACTION, "You quaff $p.", ch, obj, NULL, TO_CHAR);
+            Act(AT_ACTION, "$n quaffs $p.", ch, obj, NULL, ActTarget::Room);
+            Act(AT_ACTION, "You quaff $p.", ch, obj, NULL, ActTarget::Char);
         }
 
         SetWaitState(ch, PULSE_PER_SECOND / 4);

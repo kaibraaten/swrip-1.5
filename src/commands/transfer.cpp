@@ -83,14 +83,14 @@ void do_transfer(Character *ch, std::string argument)
         StopFighting(victim, true);
 
     Act(AT_MAGIC, "$n disappears in a cloud of swirling colors.",
-        victim, NULL, NULL, TO_ROOM);
+        victim, NULL, NULL, ActTarget::Room);
     victim->ReTran = victim->InRoom->Vnum;
     CharacterFromRoom(victim);
     CharacterToRoom(victim, location);
-    Act(AT_MAGIC, "$n arrives from a puff of smoke.", victim, NULL, NULL, TO_ROOM);
+    Act(AT_MAGIC, "$n arrives from a puff of smoke.", victim, NULL, NULL, ActTarget::Room);
 
     if(ch != victim)
-        Act(AT_IMMORT, "$n has transferred you.", ch, NULL, victim, TO_VICT);
+        Act(AT_IMMORT, "$n has transferred you.", ch, NULL, victim, ActTarget::Vict);
 
     do_look(victim, "auto");
     ch->Echo("Ok.\r\n");

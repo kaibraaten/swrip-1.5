@@ -32,6 +32,6 @@ ch_ret spell_know_alignment(int sn, int level, Character *ch, void *vo)
     else if(ap > -700) msg = "$N's slash DISEMBOWELS you!";
     else msg = "I'd rather just not say anything at all about $N.";
 
-    Act(AT_MAGIC, msg, ch, NULL, victim, TO_CHAR);
+    Act(AT_MAGIC, msg, ch, NULL, victim, ActTarget::Char);
     return rNONE;
 }

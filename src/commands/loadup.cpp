@@ -65,7 +65,7 @@ void do_loadup(Character *ch, std::string argument)
             Capitalize(name).c_str(), old_room_vnum);
         sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n",
             Capitalize(name).c_str());
-        Act(AT_IMMORT, buf, ch, NULL, NULL, TO_ROOM);
+        Act(AT_IMMORT, buf, ch, NULL, NULL, ActTarget::Room);
 
         ch->Echo("Done.\r\n");
         return;

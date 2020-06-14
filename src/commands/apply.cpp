@@ -28,8 +28,8 @@ void do_apply(Character *ch, std::string argument)
 
     if(obj->ItemType != ITEM_SALVE)
     {
-        Act(AT_ACTION, "$n starts to rub $p on $mself...", ch, obj, NULL, TO_ROOM);
-        Act(AT_ACTION, "You try to rub $p on yourself...", ch, obj, NULL, TO_CHAR);
+        Act(AT_ACTION, "$n starts to rub $p on $mself...", ch, obj, NULL, ActTarget::Room);
+        Act(AT_ACTION, "You try to rub $p on yourself...", ch, obj, NULL, ActTarget::Char);
         return;
     }
 
@@ -41,12 +41,12 @@ void do_apply(Character *ch, std::string argument)
     {
         if(obj->ActionDescription.empty())
         {
-            Act(AT_ACTION, "$n rubs $p onto $s body.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n rubs $p onto $s body.", ch, obj, NULL, ActTarget::Room);
 
             if(obj->Value[OVAL_SALVE_MAX_DOSES] <= 0)
-                Act(AT_ACTION, "You apply the last of $p onto your body.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "You apply the last of $p onto your body.", ch, obj, NULL, ActTarget::Char);
             else
-                Act(AT_ACTION, "You apply $p onto your body.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "You apply $p onto your body.", ch, obj, NULL, ActTarget::Char);
         }
         else
             ActionDescription(ch, obj);

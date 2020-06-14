@@ -1093,9 +1093,9 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
         if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
             Act(AT_YELLOW, "$n points their blaster at you but nothing happens.",
-                ch, NULL, victim, TO_VICT);
+                ch, NULL, victim, ActTarget::Vict);
             Act(AT_YELLOW, "*CLICK* ... your blaster needs a new ammunition cell!",
-                ch, NULL, victim, TO_CHAR);
+                ch, NULL, victim, ActTarget::Char);
 
             if(IsNpc(ch))
             {
@@ -1156,9 +1156,9 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
             if(!fail && GetRandomPercent() < hit_chance)
             {
                 SetWaitState(victim, PULSE_VIOLENCE);
-                Act(AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim, NULL, ch, TO_CHAR);
-                Act(AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR);
-                Act(AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT);
+                Act(AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim, NULL, ch, ActTarget::Char);
+                Act(AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, NULL, victim, ActTarget::Char);
+                Act(AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, ActTarget::NotVict);
                 StopFighting(victim, true);
 
                 if(!IsAffectedBy(victim, Flag::Affect::Paralysis))
@@ -1182,9 +1182,9 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
             }
             else
             {
-                Act(AT_BLUE, "Blue rings of energy from $N's blaster hit you but have little effect", victim, NULL, ch, TO_CHAR);
-                Act(AT_BLUE, "Blue rings of energy from your blaster hit $N, but nothing seems to happen!", ch, NULL, victim, TO_CHAR);
-                Act(AT_BLUE, "Blue rings of energy from $n's blaster hit $N, but nothing seems to happen!", ch, NULL, victim, TO_NOTVICT);
+                Act(AT_BLUE, "Blue rings of energy from $N's blaster hit you but have little effect", victim, NULL, ch, ActTarget::Char);
+                Act(AT_BLUE, "Blue rings of energy from your blaster hit $N, but nothing seems to happen!", ch, NULL, victim, ActTarget::Char);
+                Act(AT_BLUE, "Blue rings of energy from $n's blaster hit $N, but nothing seems to happen!", ch, NULL, victim, ActTarget::NotVict);
             }
         }
         else if(wield->BlasterSetting == BLASTER_HALF && wield->Value[OVAL_WEAPON_CHARGE] >= 2)
@@ -1204,7 +1204,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
     {
         if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
-            Act(AT_YELLOW, "Your vibro-blade needs recharging...", ch, NULL, victim, TO_CHAR);
+            Act(AT_YELLOW, "Your vibro-blade needs recharging...", ch, NULL, victim, ActTarget::Char);
             dam /= 3;
         }
     }
@@ -1214,7 +1214,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
     {
         if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
-            Act(AT_YELLOW, "Your force-pike needs recharging...", ch, NULL, victim, TO_CHAR);
+            Act(AT_YELLOW, "Your force-pike needs recharging...", ch, NULL, victim, ActTarget::Char);
             dam /= 2;
         }
         else
@@ -1228,8 +1228,8 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
     {
         if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
-            Act(AT_YELLOW, "$n waves a dead hand grip around in the air.", ch, NULL, victim, TO_VICT);
-            Act(AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, NULL, victim, TO_CHAR);
+            Act(AT_YELLOW, "$n waves a dead hand grip around in the air.", ch, NULL, victim, ActTarget::Vict);
+            Act(AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, NULL, victim, ActTarget::Char);
 
             if(IsNpc(ch))
             {
@@ -1243,8 +1243,8 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
     {
         if(wield->Value[OVAL_WEAPON_CHARGE] < 1)
         {
-            Act(AT_YELLOW, "$n points their bowcaster at you but nothing happens.", ch, NULL, victim, TO_VICT);
-            Act(AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, NULL, victim, TO_CHAR);
+            Act(AT_YELLOW, "$n points their bowcaster at you but nothing happens.", ch, NULL, victim, ActTarget::Vict);
+            Act(AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, NULL, victim, ActTarget::Char);
 
             if(IsNpc(ch))
             {
@@ -1286,19 +1286,19 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
 
             if(!skill->Messages.VictimImmune.ToCaster.empty())
             {
-                Act(AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, TO_CHAR);
+                Act(AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, ActTarget::Char);
                 found = true;
             }
 
             if(!skill->Messages.VictimImmune.ToVictim.empty())
             {
-                Act(AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, TO_VICT);
+                Act(AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, ActTarget::Vict);
                 found = true;
             }
 
             if(!skill->Messages.VictimImmune.ToRoom.empty())
             {
-                Act(AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, TO_NOTVICT);
+                Act(AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, ActTarget::NotVict);
                 found = true;
             }
 
@@ -1544,19 +1544,19 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
 
                 if(!skill->Messages.VictimImmune.ToCaster.empty())
                 {
-                    Act(AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, TO_CHAR);
+                    Act(AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, ActTarget::Char);
                     found = true;
                 }
 
                 if(!skill->Messages.VictimImmune.ToVictim.empty())
                 {
-                    Act(AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, TO_VICT);
+                    Act(AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, ActTarget::Vict);
                     found = true;
                 }
 
                 if(!skill->Messages.VictimImmune.ToRoom.empty())
                 {
-                    Act(AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, TO_NOTVICT);
+                    Act(AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, ActTarget::NotVict);
                     found = true;
                 }
 
@@ -1653,7 +1653,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
             StripAffect(ch, gsn_invis);
             StripAffect(ch, gsn_mass_invis);
             ch->AffectedBy.reset(Flag::Affect::Invisible);
-            Act(AT_MAGIC, "$n fades into existence.", ch, nullptr, nullptr, TO_ROOM);
+            Act(AT_MAGIC, "$n fades into existence.", ch, nullptr, nullptr, ActTarget::Room);
         }
 
         /* Take away Hide */
@@ -1801,7 +1801,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
             CharacterFromRoom(victim);
             CharacterToRoom(victim, GetRoom(victim->ReTran));
             do_look(victim, "auto");
-            Act(AT_YELLOW, "$n falls from the sky.", victim, NULL, NULL, TO_ROOM);
+            Act(AT_YELLOW, "$n falls from the sky.", victim, NULL, NULL, ActTarget::Room);
             victim->HitPoints.Current = victim->HitPoints.Max;
             victim->Mana.Current = victim->Mana.Max;
             victim->Fatigue.Current = victim->Fatigue.Max;
@@ -1854,13 +1854,13 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
     {
     case POS_MORTAL:
         Act(AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
-            victim, NULL, NULL, TO_ROOM);
+            victim, NULL, NULL, ActTarget::Room);
         victim->Echo("&RYou are mortally wounded, and will die soon, if not aided.");
         break;
 
     case POS_INCAP:
         Act(AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
-            victim, NULL, NULL, TO_ROOM);
+            victim, NULL, NULL, ActTarget::Room);
         victim->Echo("&RYou are incapacitated and will slowly die, if not aided.");
         break;
 
@@ -1868,7 +1868,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
         if(!IsAffectedBy(victim, Flag::Affect::Paralysis))
         {
             Act(AT_ACTION, "$n is stunned, but will probably recover.",
-                victim, NULL, NULL, TO_ROOM);
+                victim, NULL, NULL, ActTarget::Room);
             victim->Echo("&RYou are stunned, but will probably recover.");
         }
         break;
@@ -1880,32 +1880,32 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
 
             if(!skill->Messages.VictimDeath.ToCaster.empty())
             {
-                Act(AT_DEAD, skill->Messages.VictimDeath.ToCaster, ch, NULL, victim, TO_CHAR);
+                Act(AT_DEAD, skill->Messages.VictimDeath.ToCaster, ch, NULL, victim, ActTarget::Char);
             }
 
             if(!skill->Messages.VictimDeath.ToVictim.empty())
             {
-                Act(AT_DEAD, skill->Messages.VictimDeath.ToVictim, ch, NULL, victim, TO_VICT);
+                Act(AT_DEAD, skill->Messages.VictimDeath.ToVictim, ch, NULL, victim, ActTarget::Vict);
             }
 
             if(!skill->Messages.VictimDeath.ToRoom.empty())
             {
-                Act(AT_DEAD, skill->Messages.VictimDeath.ToRoom, ch, NULL, victim, TO_NOTVICT);
+                Act(AT_DEAD, skill->Messages.VictimDeath.ToRoom, ch, NULL, victim, ActTarget::NotVict);
             }
         }
 
         if(IsNpc(victim) && victim->Flags.test(Flag::Mob::NoKill))
         {
             Act(AT_YELLOW, "$n flees for $s life... barely escaping certain death!",
-                victim, 0, 0, TO_ROOM);
+                victim, 0, 0, ActTarget::Room);
         }
         else if(IsNpc(victim))
         {
-            Act(AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM);
+            Act(AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, ActTarget::Room);
         }
         else
         {
-            Act(AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM);
+            Act(AT_DEAD, "$n is DEAD!", victim, 0, 0, ActTarget::Room);
         }
 
         victim->Echo("&WYou have been KILLED!\r\n");
@@ -1914,7 +1914,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
     default:
         if(dam > victim->HitPoints.Max / 4)
         {
-            Act(AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR);
+            Act(AT_HURT, "That really did HURT!", victim, 0, 0, ActTarget::Char);
 
             if(NumberBits(3) == 0)
             {
@@ -1925,7 +1925,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
         if(victim->HitPoints.Current < victim->HitPoints.Max / 4)
         {
             Act(AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
-                victim, 0, 0, TO_CHAR);
+                victim, 0, 0, ActTarget::Char);
 
             if(NumberBits(2) == 0)
             {
@@ -2016,8 +2016,8 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
                     ObjectFromCharacter(obj);
                 }
 
-                Act(AT_ACTION, "$n drops $p.", victim, obj, NULL, TO_ROOM);
-                Act(AT_ACTION, "You drop $p.", victim, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n drops $p.", victim, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You drop $p.", victim, obj, NULL, ActTarget::Char);
                 obj = ObjectToRoom(obj, victim->InRoom);
             }
         }
@@ -2323,7 +2323,7 @@ void UpdatePosition(Character *victim)
     {
         if(victim->Mount)
         {
-            Act(AT_ACTION, "$n falls from $N.", victim, NULL, victim->Mount, TO_ROOM);
+            Act(AT_ACTION, "$n falls from $N.", victim, NULL, victim->Mount, ActTarget::Room);
             victim->Mount->Flags.reset(Flag::Mob::Mounted);
             victim->Mount = nullptr;
         }
@@ -2353,7 +2353,7 @@ void UpdatePosition(Character *victim)
 
     if(victim->Mount)
     {
-        Act(AT_ACTION, "$n falls unconscious from $N.", victim, NULL, victim->Mount, TO_ROOM);
+        Act(AT_ACTION, "$n falls unconscious from $N.", victim, NULL, victim->Mount, ActTarget::Room);
         victim->Mount->Flags.reset(Flag::Mob::Mounted);
         victim->Mount = nullptr;
     }
@@ -2707,8 +2707,8 @@ static void CheckObjectAlignmentZapping(Character *ch)
            || (obj->Flags.test(Flag::Obj::AntiGood) && IsGood(ch))
            || (obj->Flags.test(Flag::Obj::AntiNeutral) && IsNeutral(ch)))
         {
-            Act(AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR);
-            Act(AT_MAGIC, "$n is zapped by $p.", ch, obj, NULL, TO_ROOM);
+            Act(AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_MAGIC, "$n is zapped by $p.", ch, obj, NULL, ActTarget::Room);
 
             ObjectFromCharacter(obj);
             obj = ObjectToRoom(obj, ch->InRoom);
@@ -3019,19 +3019,19 @@ static void SendDamageMessages(Character *ch, Character *victim, int dam, int dt
 
                 if(!skill->Messages.Failure.ToCaster.empty())
                 {
-                    Act(AT_HIT, skill->Messages.Failure.ToCaster, ch, NULL, victim, TO_CHAR);
+                    Act(AT_HIT, skill->Messages.Failure.ToCaster, ch, NULL, victim, ActTarget::Char);
                     found = true;
                 }
 
                 if(!skill->Messages.Failure.ToVictim.empty())
                 {
-                    Act(AT_HITME, skill->Messages.Failure.ToVictim, ch, NULL, victim, TO_VICT);
+                    Act(AT_HITME, skill->Messages.Failure.ToVictim, ch, NULL, victim, ActTarget::Vict);
                     found = true;
                 }
 
                 if(!skill->Messages.Failure.ToRoom.empty())
                 {
-                    Act(AT_ACTION, skill->Messages.Failure.ToRoom, ch, NULL, victim, TO_NOTVICT);
+                    Act(AT_ACTION, skill->Messages.Failure.ToRoom, ch, NULL, victim, ActTarget::NotVict);
                     found = true;
                 }
 
@@ -3044,17 +3044,17 @@ static void SendDamageMessages(Character *ch, Character *victim, int dam, int dt
             {
                 if(!skill->Messages.Success.ToCaster.empty())
                 {
-                    Act(AT_HIT, skill->Messages.Success.ToCaster, ch, NULL, victim, TO_CHAR);
+                    Act(AT_HIT, skill->Messages.Success.ToCaster, ch, NULL, victim, ActTarget::Char);
                 }
 
                 if(!skill->Messages.Success.ToVictim.empty())
                 {
-                    Act(AT_HITME, skill->Messages.Success.ToVictim, ch, NULL, victim, TO_VICT);
+                    Act(AT_HITME, skill->Messages.Success.ToVictim, ch, NULL, victim, ActTarget::Vict);
                 }
 
                 if(!skill->Messages.Success.ToRoom.empty())
                 {
-                    Act(AT_ACTION, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_NOTVICT);
+                    Act(AT_ACTION, skill->Messages.Success.ToRoom, ch, NULL, victim, ActTarget::NotVict);
                 }
             }
         }
@@ -3082,16 +3082,16 @@ static void SendDamageMessages(Character *ch, Character *victim, int dam, int dt
         strcat(buf2, damageAmountMsg);
     }
 
-    Act(AT_ACTION, buf1, ch, NULL, victim, TO_NOTVICT);
+    Act(AT_ACTION, buf1, ch, NULL, victim, ActTarget::NotVict);
 
     if(!gcflag)
     {
-        Act(AT_HIT, buf2, ch, NULL, victim, TO_CHAR);
+        Act(AT_HIT, buf2, ch, NULL, victim, ActTarget::Char);
     }
 
     if(!gvflag)
     {
-        Act(AT_HITME, buf3, ch, NULL, victim, TO_VICT);
+        Act(AT_HITME, buf3, ch, NULL, victim, ActTarget::Vict);
     }
 }
 
@@ -3137,9 +3137,9 @@ static bool SprintForCover(Character *ch)
         }
 
         ch->InRoom = was_in;
-        Act(AT_FLEE, "$n sprints for cover!", ch, NULL, NULL, TO_ROOM);
+        Act(AT_FLEE, "$n sprints for cover!", ch, NULL, NULL, ActTarget::Room);
         ch->InRoom = now_in;
-        Act(AT_FLEE, "$n spins around and takes aim.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_FLEE, "$n spins around and takes aim.", ch, NULL, NULL, ActTarget::Room);
 
         StopFighting(ch, true);
 

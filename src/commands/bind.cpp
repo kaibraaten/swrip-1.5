@@ -43,7 +43,7 @@ void do_bind(Character *ch, std::string argument)
     {
         if(ch->Master == victim)
         {
-            Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR);
+            Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, ActTarget::Char);
             return;
         }
     }
@@ -67,9 +67,9 @@ void do_bind(Character *ch, std::string argument)
     if(victim->Position != POS_STUNNED)
         return;
 
-    Act(AT_YELLOW, "$n binds you up!", ch, NULL, victim, TO_VICT);
-    Act(AT_YELLOW, "You bind $N up.", ch, NULL, victim, TO_CHAR);
-    Act(AT_BLUE, "$n quickly binds $N, leaving $M helpless!", ch, NULL, victim, TO_NOTVICT);
+    Act(AT_YELLOW, "$n binds you up!", ch, NULL, victim, ActTarget::Vict);
+    Act(AT_YELLOW, "You bind $N up.", ch, NULL, victim, ActTarget::Char);
+    Act(AT_BLUE, "$n quickly binds $N, leaving $M helpless!", ch, NULL, victim, ActTarget::NotVict);
     AffParalysis(ch, victim);
     LearnFromSuccess(ch, gsn_bind);
 }

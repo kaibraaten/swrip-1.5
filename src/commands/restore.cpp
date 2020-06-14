@@ -56,7 +56,7 @@ void do_restore(Character *ch, std::string arg)
                 vch->Fatigue.Current = vch->Fatigue.Max;
                 vch->PCData->Condition[COND_BLOODTHIRST] = (10 + vch->TopLevel);
                 UpdatePosition(vch);
-                Act(AT_IMMORT, "$n has restored you.", ch, NULL, vch, TO_VICT);
+                Act(AT_IMMORT, "$n has restored you.", ch, NULL, vch, ActTarget::Vict);
             }
         }
     }
@@ -88,7 +88,7 @@ void do_restore(Character *ch, std::string arg)
         UpdatePosition(victim);
 
         if(ch != victim)
-            Act(AT_IMMORT, "$n has restored you.", ch, NULL, victim, TO_VICT);
+            Act(AT_IMMORT, "$n has restored you.", ch, NULL, victim, ActTarget::Vict);
 
         ch->Echo("Ok.\r\n");
         return;

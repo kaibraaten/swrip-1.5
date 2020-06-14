@@ -94,9 +94,9 @@ void Explode(Object *obj)
                 if(objcont->CarriedBy)
                 {
                     Act(AT_WHITE, "$p EXPLODES in $n's hands!",
-                        objcont->CarriedBy, obj, NULL, TO_ROOM);
+                        objcont->CarriedBy, obj, NULL, ActTarget::Room);
                     Act(AT_WHITE, "$p EXPLODES in your hands!",
-                        objcont->CarriedBy, obj, NULL, TO_CHAR);
+                        objcont->CarriedBy, obj, NULL, ActTarget::Char);
                     room = xch->InRoom;
                     held = true;
                 }
@@ -114,7 +114,7 @@ void Explode(Object *obj)
                     if(!held && !room->Characters().empty())
                     {
                         Character *ch = room->Characters().front();
-                        Act(AT_WHITE, "$p EXPLODES!", ch, obj, NULL, TO_ROOM);
+                        Act(AT_WHITE, "$p EXPLODES!", ch, obj, NULL, ActTarget::Room);
                     }
 
                     ExplodeRoom(obj, xch, room);
@@ -146,7 +146,7 @@ static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> roo
     for(Character *rch : copyOfCharacterList)
     {
         Act(AT_WHITE, "The shockwave from a massive explosion rips through your body!",
-            room->Characters().front(), obj, NULL, TO_ROOM);
+            room->Characters().front(), obj, NULL, ActTarget::Room);
         int dam = GetRandomNumberFromRange(obj->Value[OVAL_EXPLOSIVE_MIN_DMG], obj->Value[OVAL_EXPLOSIVE_MAX_DMG]);
         InflictDamage(rch, rch, dam, TYPE_UNDEFINED);
 
@@ -629,8 +629,8 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
         {
             depth++;
             Act(AT_ACTION, "You are too weak to wield $p any longer.",
-                ch, wield, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n stops wielding $p.", ch, wield, NULL, TO_ROOM);
+                ch, wield, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n stops wielding $p.", ch, wield, NULL, ActTarget::Room);
             UnequipCharacter(ch, wield);
             depth--;
         }
@@ -1243,7 +1243,7 @@ void ExtractCharacter(Character *ch, bool fPull)
                 if(wch->InRoom == ch->InRoom)
                 {
                     Act(AT_SOCIAL, "You mourn for the loss of $N.",
-                        wch, NULL, ch, TO_CHAR);
+                        wch, NULL, ch, ActTarget::Char);
                 }
             }
         }
@@ -1267,7 +1267,7 @@ void ExtractCharacter(Character *ch, bool fPull)
 
         CharacterToRoom(ch, location);
 
-        Act(AT_MAGIC, "$n appears from some strange swirling mists!", ch, NULL, NULL, TO_ROOM);
+        Act(AT_MAGIC, "$n appears from some strange swirling mists!", ch, NULL, NULL, ActTarget::Room);
         ch->Position = POS_RESTING;
         return;
     }
@@ -1674,7 +1674,7 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
         }
         else if(!carryonly && (obj = GetObjectHere(ch, arg1)) == NULL)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), ActTarget::Char);
             return NULL;
         }
 
@@ -1694,14 +1694,14 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
 
         if(!carryonly && (container = GetObjectHere(ch, arg2)) == NULL)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), ActTarget::Char);
             return NULL;
         }
 
         if(!container->Flags.test(Flag::Obj::Covering)
            && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-            Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), TO_CHAR);
+            Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), ActTarget::Char);
             return NULL;
         }
 
@@ -1712,7 +1712,7 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
                 container->Flags.test(Flag::Obj::Covering)
                 ? "I see nothing like that beneath $p."
                 : "I see nothing like that in $p.",
-                ch, container, NULL, TO_CHAR);
+                ch, container, NULL, ActTarget::Char);
         return obj;
     }
 
@@ -1925,9 +1925,9 @@ ch_ret SpringTrap(Character *ch, Object *obj)
 
     dam = GetRandomNumberFromRange(obj->Value[OVAL_TRAP_STRENGTH], obj->Value[OVAL_TRAP_STRENGTH] * 2);
     sprintf(buf, "You are %s!", txt);
-    Act(AT_HITME, buf, ch, NULL, NULL, TO_CHAR);
+    Act(AT_HITME, buf, ch, NULL, NULL, ActTarget::Char);
     sprintf(buf, "$n is %s.", txt);
-    Act(AT_ACTION, buf, ch, NULL, NULL, TO_ROOM);
+    Act(AT_ACTION, buf, ch, NULL, NULL, ActTarget::Room);
 
     --obj->Value[OVAL_TRAP_CHARGE];
 

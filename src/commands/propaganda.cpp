@@ -90,8 +90,8 @@ void do_propaganda(Character *ch, std::string arg1)
         sprintf(buf, "You speak to them about the evils of %s",
                 planet->GovernedBy ? planet->GovernedBy->Name.c_str() : "their current leaders");
         ch->Echo("%s", buf);
-        Act(AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, TO_VICT);
-        Act(AT_ACTION, "$n tells $N about the evils of their organization.\r\n", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_ACTION, "$n tells $N about the evils of their organization.\r\n", ch, NULL, victim, ActTarget::NotVict);
     }
     else
     {
@@ -107,8 +107,8 @@ void do_propaganda(Character *ch, std::string arg1)
         ch->Echo("You speak to them about the benefits of the %s%s.\r\n",
                  ch->PCData->ClanInfo.Clan->Name.c_str(),
                  planet->GovernedBy == clan ? "" : buf);
-        Act(AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT);
-        Act(AT_ACTION, "$n tells $N about their organization.\r\n", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_ACTION, "$n tells $N about their organization.\r\n", ch, NULL, victim, ActTarget::NotVict);
     }
 
     SetWaitState(ch, SkillTable[gsn_propaganda]->Beats);

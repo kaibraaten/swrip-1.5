@@ -30,7 +30,7 @@ void do_bury(Character *ch, std::string arg)
 
     if(!obj->WearFlags.test(Flag::Wear::Take))
     {
-        Act(AT_PLAIN, "You cannot bury $p.", ch, obj, nullptr, TO_CHAR);
+        Act(AT_PLAIN, "You cannot bury $p.", ch, obj, nullptr, ActTarget::Char);
         return;
     }
 
@@ -72,8 +72,8 @@ void do_bury(Character *ch, std::string arg)
 
     ch->Fatigue.Current -= move;
 
-    Act(AT_ACTION, "You solemnly bury $p...", ch, obj, nullptr, TO_CHAR);
-    Act(AT_ACTION, "$n solemnly buries $p...", ch, obj, nullptr, TO_ROOM);
+    Act(AT_ACTION, "You solemnly bury $p...", ch, obj, nullptr, ActTarget::Char);
+    Act(AT_ACTION, "$n solemnly buries $p...", ch, obj, nullptr, ActTarget::Room);
     obj->Flags.set(Flag::Obj::Burried);
     SetWaitState(ch, urange(10, move / 2, 100));
 }

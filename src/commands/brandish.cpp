@@ -39,8 +39,8 @@ void do_brandish(Character *ch, std::string argument)
     {
         if(!ObjProgUseTrigger(ch, staff, NULL, NULL, NULL))
         {
-            Act(AT_MAGIC, "$n brandishes $p.", ch, staff, NULL, TO_ROOM);
-            Act(AT_MAGIC, "You brandish $p.", ch, staff, NULL, TO_CHAR);
+            Act(AT_MAGIC, "$n brandishes $p.", ch, staff, NULL, ActTarget::Room);
+            Act(AT_MAGIC, "You brandish $p.", ch, staff, NULL, ActTarget::Char);
         }
 
         std::list<Character *> copyOfCharactersInRoom(ch->InRoom->Characters());
@@ -95,8 +95,8 @@ void do_brandish(Character *ch, std::string argument)
 
     if(--staff->Value[OVAL_STAFF_CHARGES] <= 0)
     {
-        Act(AT_MAGIC, "$p blazes bright and vanishes from $n's hands!", ch, staff, NULL, TO_ROOM);
-        Act(AT_MAGIC, "$p blazes bright and is gone!", ch, staff, NULL, TO_CHAR);
+        Act(AT_MAGIC, "$p blazes bright and vanishes from $n's hands!", ch, staff, NULL, ActTarget::Room);
+        Act(AT_MAGIC, "$p blazes bright and is gone!", ch, staff, NULL, ActTarget::Char);
 
         if(staff->Serial == cur_obj)
             global_objcode = rOBJ_USED;

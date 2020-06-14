@@ -53,7 +53,7 @@ void do_gouge(Character *ch, std::string argument)
                 af->Duration = 3 + (GetAbilityLevel(ch, COMBAT_ABILITY) / 20);
                 af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Blind });
                 AffectToCharacter(victim, af);
-                Act(AT_SKILL, "You can't see a thing!", victim, NULL, NULL, TO_CHAR);
+                Act(AT_SKILL, "You can't see a thing!", victim, NULL, NULL, ActTarget::Char);
             }
 
             SetWaitState(ch, PULSE_VIOLENCE);
@@ -66,7 +66,7 @@ void do_gouge(Character *ch, std::string argument)
         else if(global_retcode == rVICT_DIED)
         {
             Act(AT_BLOOD, "Your fingers plunge into your victim's brain, causing immediate death!",
-                ch, NULL, NULL, TO_CHAR);
+                ch, NULL, NULL, ActTarget::Char);
         }
 
         if(global_retcode != rCHAR_DIED && global_retcode != rBOTH_DIED)

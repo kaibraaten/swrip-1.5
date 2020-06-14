@@ -77,8 +77,8 @@ void do_beg(Character *ch, std::string argument)
     if(!IsNpc(victim))
     {
         ch->Echo("You beg them for money.\r\n");
-        Act(AT_ACTION, "$n begs you to give $s some change.", ch, NULL, victim, TO_VICT);
-        Act(AT_ACTION, "$n begs $N for change.", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_ACTION, "$n begs you to give $s some change.", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_ACTION, "$n begs $N for change.", ch, NULL, victim, ActTarget::NotVict);
         return;
     }
 
@@ -91,8 +91,8 @@ void do_beg(Character *ch, std::string argument)
          * Failure.
          */
         ch->Echo("You beg them for money but don't get any!\r\n");
-        Act(AT_ACTION, "$n is really getting on your nerves with all this begging!", ch, NULL, victim, TO_VICT);
-        Act(AT_ACTION, "$n begs $N for money.", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_ACTION, "$n is really getting on your nerves with all this begging!", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_ACTION, "$n begs $N for money.", ch, NULL, victim, ActTarget::NotVict);
 
         if(victim->Alignment < 0 && victim->TopLevel >= ch->TopLevel + 5)
         {
@@ -107,8 +107,8 @@ void do_beg(Character *ch, std::string argument)
         return;
     }
 
-    Act(AT_ACTION, "$n begs $N for money.", ch, NULL, victim, TO_NOTVICT);
-    Act(AT_ACTION, "$n begs you for money!", ch, NULL, victim, TO_VICT);
+    Act(AT_ACTION, "$n begs $N for money.", ch, NULL, victim, ActTarget::NotVict);
+    Act(AT_ACTION, "$n begs you for money!", ch, NULL, victim, ActTarget::Vict);
 
     amount = umin(victim->Gold, GetRandomNumberFromRange(1, 10));
 
@@ -128,6 +128,6 @@ void do_beg(Character *ch, std::string argument)
     xp = umin(xp, ComputeXP(ch, victim));
     GainXP(ch, SMUGGLING_ABILITY, xp);
     ch->Echo("&WYou gain %d smuggling experience points!\r\n", xp);
-    Act(AT_ACTION, "$N gives $n some money.", ch, NULL, victim, TO_NOTVICT);
-    Act(AT_ACTION, "You give $n some money.", ch, NULL, victim, TO_VICT);
+    Act(AT_ACTION, "$N gives $n some money.", ch, NULL, victim, ActTarget::NotVict);
+    Act(AT_ACTION, "You give $n some money.", ch, NULL, victim, ActTarget::Vict);
 }

@@ -53,8 +53,8 @@ bool spec_police_jail(Character *ch)
                 if(jail)
                 {
                     victim->PCData->WantedOn.reset(vip);
-                    Act(AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT);
-                    Act(AT_ACTION, "$n escorts you to jail.", ch, NULL, victim, TO_VICT);
+                    Act(AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, ActTarget::NotVict);
+                    Act(AT_ACTION, "$n escorts you to jail.", ch, NULL, victim, ActTarget::Vict);
                     CharacterFromRoom(victim);
                     CharacterToRoom(victim, jail);
                 }

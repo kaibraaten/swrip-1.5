@@ -171,7 +171,7 @@ static std::string ActString(const std::string &format, Character *to, Character
     return buf;
 }
 
-void Act(short AType, const std::string &format, Character *ch, const void *arg1, const void *arg2, int type)
+void Act(short AType, const std::string &format, Character *ch, const void *arg1, const void *arg2, ActTarget type)
 {
     assert(ch != nullptr);
     std::string txt;
@@ -189,7 +189,7 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
      */
     if(IsNpc(ch)
        && ch->Flags.test(Flag::Mob::Secretive)
-       && type != TO_CHAR)
+       && type != ActTarget::Char)
     {
         return;
     }
@@ -198,7 +198,7 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
     {
         to = nullptr;
     }
-    else if(type == TO_CHAR)
+    else if(type == ActTarget::Char)
     {
         to = ch;
     }
@@ -207,11 +207,11 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
         to = ch->InRoom->Characters().front();
     }
 
-    if(type == TO_VICT)
+    if(type == ActTarget::Vict)
     {
         if(vch == nullptr)
         {
-            Log->Bug("Act: null vch (arg2) with TO_VICT.");
+            Log->Bug("Act: null vch (arg2) with ActTarget::Vict.");
             Log->Bug("%s (%s)", ch->Name.c_str(), format.c_str());
             return;
         }
@@ -221,7 +221,7 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
         to = vch;
     }
 
-    if(MOBtrigger && type != TO_CHAR && type != TO_VICT && to != nullptr)
+    if(MOBtrigger && type != ActTarget::Char && type != ActTarget::Vict && to != nullptr)
     {
         txt = ActString(format, nullptr, ch, arg1, arg2);
 
@@ -248,7 +248,7 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
 
     std::list<Character *> charactersInRoom;
 
-    if(type == TO_CHAR || type == TO_VICT)
+    if(type == ActTarget::Char || type == ActTarget::Vict)
     {
         charactersInRoom.push_back(to);
     }
@@ -266,22 +266,22 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
            || !IsAwake(to))
             continue;
 
-        if(!CanSeeCharacter(to, ch) && type != TO_VICT)
+        if(!CanSeeCharacter(to, ch) && type != ActTarget::Vict)
             continue;
 
-        if(type == TO_CHAR && to != ch)
+        if(type == ActTarget::Char && to != ch)
             continue;
 
-        if(type == TO_VICT && (to != vch || to == ch))
+        if(type == ActTarget::Vict && (to != vch || to == ch))
             continue;
 
-        if(type == TO_ROOM && to == ch)
+        if(type == ActTarget::Room && to == ch)
             continue;
 
-        if(type == TO_NOTVICT && (to == ch || to == vch))
+        if(type == ActTarget::NotVict && (to == ch || to == vch))
             continue;
 
-        if(!CanSeeCharacter(to, ch) && type != TO_VICT)
+        if(!CanSeeCharacter(to, ch) && type != ActTarget::Vict)
             continue;
 
         txt = ActString(format, to, ch, arg1, arg2);

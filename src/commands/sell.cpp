@@ -25,7 +25,7 @@ void do_sell(Character *ch, std::string arg)
     if((obj = GetCarriedObject(ch, arg)) == NULL)
     {
         Act(AT_TELL, "$n tells you 'You don't have that item.'",
-            keeper, NULL, ch, TO_VICT);
+            keeper, NULL, ch, ActTarget::Vict);
         ch->Reply = keeper;
         return;
     }
@@ -39,14 +39,14 @@ void do_sell(Character *ch, std::string arg)
     if(obj->Timer > 0)
     {
         Act(AT_TELL, "$n tells you, '$p is depreciating in value too quickly...'",
-            keeper, obj, ch, TO_VICT);
+            keeper, obj, ch, ActTarget::Vict);
         return;
     }
 
     if((cost = GetObjectCost(ch, keeper, obj, false)) <= 0)
     {
         Act(AT_ACTION, "$n looks uninterested in $p.",
-            keeper, obj, ch, TO_VICT);
+            keeper, obj, ch, ActTarget::Vict);
         return;
     }
 
@@ -55,21 +55,21 @@ void do_sell(Character *ch, std::string arg)
 
     if(cost > keeper->Gold && (EconomyHas(ch->InRoom->Area, cost) || spice))
     {
-        Act(AT_TELL, "$n makes a credit transaction.", keeper, obj, ch, TO_VICT);
+        Act(AT_TELL, "$n makes a credit transaction.", keeper, obj, ch, ActTarget::Vict);
         LowerEconomy(ch->InRoom->Area, cost - keeper->Gold);
     }
 
     if(!EconomyHas(ch->InRoom->Area, cost) && !spice)
     {
-        Act(AT_ACTION, "$n can not afford $p right now.", keeper, obj, ch, TO_VICT);
+        Act(AT_ACTION, "$n can not afford $p right now.", keeper, obj, ch, ActTarget::Vict);
         return;
     }
 
     SeparateOneObjectFromGroup(obj);
-    Act(AT_ACTION, "$n sells $p.", ch, obj, NULL, TO_ROOM);
+    Act(AT_ACTION, "$n sells $p.", ch, obj, NULL, ActTarget::Room);
     sprintf(buf, "You sell $p for %d credit%s.",
             cost, cost == 1 ? "" : "s");
-    Act(AT_ACTION, buf, ch, obj, NULL, TO_CHAR);
+    Act(AT_ACTION, buf, ch, obj, NULL, ActTarget::Char);
     ch->Gold += cost;
     keeper->Gold -= cost;
 

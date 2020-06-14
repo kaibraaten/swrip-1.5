@@ -37,6 +37,6 @@ void do_newbieset(Character *ch, std::string arg1)
     obj = CreateObject(GetProtoObject(OBJ_VNUM_SCHOOL_BLADE), 1);
     ObjectToCharacter(obj, victim);
 
-    Act(AT_IMMORT, "$n has equipped you with a newbieset.", ch, NULL, victim, TO_VICT);
+    Act(AT_IMMORT, "$n has equipped you with a newbieset.", ch, NULL, victim, ActTarget::Vict);
     ch->Echo("You have re-equipped %s.\r\n", victim->Name.c_str());
 }

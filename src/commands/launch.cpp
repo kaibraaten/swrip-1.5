@@ -213,7 +213,7 @@ void do_launch(Character *ch, std::string argument)
         SetCharacterColor(AT_GREEN, ch);
         ch->Echo("Launch sequence initiated.\r\n");
         Act(AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
         EchoToShip(AT_YELLOW, ship, "The ship hums as it lifts off the ground.");
         sprintf(buf, "%s begins to launch.", ship->Name.c_str());
         EchoToRoom(AT_YELLOW, GetRoom(ship->Location), buf);

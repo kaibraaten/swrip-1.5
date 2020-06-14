@@ -563,8 +563,8 @@ void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
          */
         if(loading_char != ch)
         {
-            Act(AT_MAGIC, "You are zapped by $p and drop it.", ch, obj, NULL, TO_CHAR);
-            Act(AT_MAGIC, "$n is zapped by $p and drops it.", ch, obj, NULL, TO_ROOM);
+            Act(AT_MAGIC, "You are zapped by $p and drop it.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_MAGIC, "$n is zapped by $p and drops it.", ch, obj, NULL, ActTarget::Room);
         }
 
         if(obj->CarriedBy)
@@ -1582,7 +1582,7 @@ void AddReinforcements(Character *ch)
 
             mob[mob_cnt] = CreateMobile(pMobIndex);
             CharacterToRoom(mob[mob_cnt], ch->InRoom);
-            Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM);
+            Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], ActTarget::Room);
             mob[mob_cnt]->TopLevel = multiplier / 1.4 * GetAbilityLevel(ch, LEADERSHIP_ABILITY) / 3;
 
             for(ability = 0; ability < MAX_ABILITY; ability++)
@@ -1636,7 +1636,7 @@ void AddReinforcements(Character *ch)
                                           mob->LongDescr.c_str());
         }
 
-        Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM);
+        Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob, ActTarget::Room);
         ch->Echo("Your guard has arrived.\r\n");
         mob->TopLevel = multiplier * GetAbilityLevel(ch, LEADERSHIP_ABILITY) / 2;
 

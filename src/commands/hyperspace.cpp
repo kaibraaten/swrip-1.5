@@ -222,7 +222,7 @@ void do_hyperspace(Character *ch, std::string argument)
 
     ch->Echo("&GYou push forward the hyperspeed lever.\r\n");
     Act(AT_PLAIN, "$n pushes a lever forward on the control panel.", ch,
-        NULL, argument.c_str(), TO_ROOM);
+        NULL, argument.c_str(), ActTarget::Room);
     EchoToShip(AT_YELLOW, ship, "The ship lurches slightly as it makes the jump to lightspeed.");
     EchoToCockpit(AT_YELLOW, ship, "The stars become streaks of light as you enter hyperspace.");
     EchoToDockedShip(AT_YELLOW, ship, "The stars become streaks of light as you enter hyperspace.");

@@ -520,11 +520,11 @@ void do_redit(Character *ch, std::string argument)
 
             xit = MakeExit(location, tmp, edir);
             xit->Key = -1;
-            Act(AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, TO_ROOM);
+            Act(AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, ActTarget::Room);
         }
         else
         {
-            Act(AT_IMMORT, "Something is different...", ch, NULL, NULL, TO_ROOM);
+            Act(AT_IMMORT, "Something is different...", ch, NULL, NULL, ActTarget::Room);
         }
 
         if(xit->ToRoom != tmp)

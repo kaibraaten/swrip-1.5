@@ -221,7 +221,7 @@ void do_land(Character *ch, std::string argument)
         SetCharacterColor(AT_GREEN, ch);
         ch->Echo("Landing sequence initiated.\r\n");
         Act(AT_PLAIN, "$n begins the landing sequence.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
         sprintf(buf, "%s begins its landing sequence.", ship->Name.c_str());
         EchoToNearbyShips(AT_YELLOW, ship, buf);
         EchoToDockedShip(AT_YELLOW, ship, "The ship begins to enter the atmosphere.");

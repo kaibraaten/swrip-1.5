@@ -7,12 +7,16 @@
 /*
  * TO types for act.
  */
-constexpr auto TO_ROOM = 0;
-constexpr auto TO_NOTVICT = 1;
-constexpr auto TO_VICT = 2;
-constexpr auto TO_CHAR = 3;
+
+enum class ActTarget
+{
+    Room,
+    NotVict,
+    Vict,
+    Char
+};
 
 void Act(short AType, const std::string &format, Character *ch,
-         const void *arg1, const void *arg2, int type);
+         const void *arg1, const void *arg2, ActTarget type);
 
 #endif

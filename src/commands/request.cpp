@@ -103,7 +103,7 @@ void do_request(Character *ch, std::string arg)
 
     ch->Echo("You open the bay doors of the remote ship.\r\n");
     Act(AT_PLAIN, "$n flips a switch on the control panel.",
-        ch, nullptr, arg.c_str(), TO_ROOM);
+        ch, nullptr, arg.c_str(), ActTarget::Room);
     eShip->BayOpen = true;
     sprintf(buf, "%s's bay doors open.", eShip->Name.c_str());
     EchoToNearbyShips(AT_YELLOW, ship, buf);

@@ -43,14 +43,14 @@ void do_aid(Character *ch, std::string argument)
     if(victim->Position > POS_STUNNED)
     {
         Act(AT_PLAIN, "$N doesn't need your help.", ch, NULL, victim,
-            TO_CHAR);
+            ActTarget::Char);
         return;
     }
 
     if(victim->HitPoints.Current <= -400)
     {
         Act(AT_PLAIN, "$N's condition is beyond your aiding ability.", ch,
-            NULL, victim, TO_CHAR);
+            NULL, victim, ActTarget::Char);
         return;
     }
 
@@ -70,14 +70,14 @@ void do_aid(Character *ch, std::string argument)
     ch->Alignment = ch->Alignment + 20;
     ch->Alignment = urange(-1000, ch->Alignment, 1000);
 
-    Act(AT_SKILL, "You aid $N!", ch, NULL, victim, TO_CHAR);
-    Act(AT_SKILL, "$n aids $N!", ch, NULL, victim, TO_NOTVICT);
+    Act(AT_SKILL, "You aid $N!", ch, NULL, victim, ActTarget::Char);
+    Act(AT_SKILL, "$n aids $N!", ch, NULL, victim, ActTarget::NotVict);
     LearnFromSuccess(ch, gsn_aid);
 
     if(victim->HitPoints.Current < 1)
         victim->HitPoints.Current = 1;
 
     UpdatePosition(victim);
-    Act(AT_SKILL, "$n aids you!", ch, NULL, victim, TO_VICT);
+    Act(AT_SKILL, "$n aids you!", ch, NULL, victim, ActTarget::Vict);
 }
 

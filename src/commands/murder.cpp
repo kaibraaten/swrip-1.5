@@ -39,7 +39,7 @@ void do_murder(Character *ch, std::string arg)
     {
         if(ch->Master == victim)
         {
-            Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR);
+            Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, ActTarget::Char);
             return;
         }
     }

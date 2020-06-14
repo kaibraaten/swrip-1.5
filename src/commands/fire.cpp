@@ -124,7 +124,7 @@ void do_fire(Character *ch, std::string argument)
         the_chance = urange(1, the_chance, 99);
 
         Act(AT_PLAIN, "$n presses the fire button.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
 
         if(GetRandomPercent() > the_chance)
         {
@@ -246,7 +246,7 @@ void do_fire(Character *ch, std::string argument)
         the_chance = urange(1, the_chance, 99);
 
         Act(AT_PLAIN, "$n presses the fire button.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
 
         if(GetRandomPercent() > the_chance)
         {
@@ -375,7 +375,7 @@ void do_fire(Character *ch, std::string argument)
         the_chance = urange(20, the_chance, 99);
 
         Act(AT_PLAIN, "$n presses the fire button.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
 
         if(GetRandomPercent() > the_chance)
         {
@@ -391,7 +391,7 @@ void do_fire(Character *ch, std::string argument)
 
         ship->WeaponSystems.Tube.Missiles.Current--;
         Act(AT_PLAIN, "$n presses the fire button.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
         EchoToCockpit(AT_YELLOW, ship, "Missiles launched.");
         sprintf(buf, "Incoming missile from %s.", ship->Name.c_str());
 
@@ -488,7 +488,7 @@ void do_fire(Character *ch, std::string argument)
         the_chance = urange(20, the_chance, 99);
 
         Act(AT_PLAIN, "$n presses the fire button.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
 
         if(GetRandomPercent() > the_chance)
         {
@@ -504,7 +504,7 @@ void do_fire(Character *ch, std::string argument)
 
         ship->WeaponSystems.Tube.Torpedoes.Current--;
         Act(AT_PLAIN, "$n presses the fire button.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
         EchoToCockpit(AT_YELLOW, ship, "Torpedoes launched.");
         sprintf(buf, "Incoming torpedo from %s.", ship->Name.c_str());
         EchoToCockpit(AT_BLOOD, target, buf);
@@ -604,7 +604,7 @@ void do_fire(Character *ch, std::string argument)
         the_chance = urange(20, the_chance, 99);
 
         Act(AT_PLAIN, "$n presses the fire button.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
 
         if(GetRandomPercent() > the_chance)
         {
@@ -620,7 +620,7 @@ void do_fire(Character *ch, std::string argument)
 
         ship->WeaponSystems.Tube.Rockets.Current--;
         Act(AT_PLAIN, "$n presses the fire button.", ch,
-            NULL, argument.c_str(), TO_ROOM);
+            NULL, argument.c_str(), ActTarget::Room);
         EchoToCockpit(AT_YELLOW, ship, "Rocket launched.");
         sprintf(buf, "Incoming rocket from %s.", ship->Name.c_str());
         EchoToCockpit(AT_BLOOD, target, buf);
@@ -709,7 +709,7 @@ void do_fire(Character *ch, std::string argument)
             the_chance = urange(1, the_chance, 99);
 
             Act(AT_PLAIN, "$n presses the fire button.", ch,
-                NULL, argument.c_str(), TO_ROOM);
+                NULL, argument.c_str(), ActTarget::Room);
 
             if(GetRandomPercent() > the_chance)
             {

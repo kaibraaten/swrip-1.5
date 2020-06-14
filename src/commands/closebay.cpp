@@ -34,7 +34,7 @@ void do_closebay(Character *ch, std::string argument)
     }
 
     Act(AT_PLAIN, "$n flips a switch on the control panel.", ch,
-        NULL, argument.c_str(), TO_ROOM);
+        NULL, argument.c_str(), ActTarget::Room);
     ship->BayOpen = false;
 
     EchoToCockpit(AT_YELLOW, ship, "Bay Doors close");

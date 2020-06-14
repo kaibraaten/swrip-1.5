@@ -39,7 +39,7 @@ void do_shove(Character *ch, std::string argument)
 
     if((victim->Position) != POS_STANDING)
     {
-        Act(AT_PLAIN, "$N isn't standing up.", ch, NULL, victim, TO_CHAR);
+        Act(AT_PLAIN, "$N isn't standing up.", ch, NULL, victim, ActTarget::Char);
         return;
     }
 
@@ -77,14 +77,14 @@ void do_shove(Character *ch, std::string argument)
             if(!ship)
             {
                 Act(AT_PLAIN, "I see no $T here.",
-                    ch, NULL, argument.c_str(), TO_CHAR);
+                    ch, NULL, argument.c_str(), ActTarget::Char);
                 return;
             }
 
             if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go in there riding THAT.",
-                    ch, NULL, argument.c_str(), TO_CHAR);
+                    ch, NULL, argument.c_str(), ActTarget::Char);
                 return;
             }
 
@@ -117,23 +117,23 @@ void do_shove(Character *ch, std::string argument)
                 }
 
                 Act(AT_PLAIN, "$n enters $T.", ch,
-                    NULL, ship->Name.c_str(), TO_ROOM);
+                    NULL, ship->Name.c_str(), ActTarget::Room);
                 Act(AT_PLAIN, "You enter $T.", ch,
-                    NULL, ship->Name.c_str(), TO_CHAR);
+                    NULL, ship->Name.c_str(), ActTarget::Char);
                 CharacterFromRoom(ch);
                 CharacterToRoom(ch, to_room);
                 Act(AT_PLAIN, "$n enters the ship.", ch,
-                    NULL, argument.c_str(), TO_ROOM);
+                    NULL, argument.c_str(), ActTarget::Room);
                 do_look(ch, "auto");
 
                 Act(AT_PLAIN, "$n enters $T.", victim,
-                    NULL, ship->Name.c_str(), TO_ROOM);
+                    NULL, ship->Name.c_str(), ActTarget::Room);
                 Act(AT_PLAIN, "You enter $T.", victim,
-                    NULL, ship->Name.c_str(), TO_CHAR);
+                    NULL, ship->Name.c_str(), ActTarget::Char);
                 CharacterFromRoom(victim);
                 CharacterToRoom(victim, to_room);
                 Act(AT_PLAIN, "$n enters the ship.", victim,
-                    NULL, argument.c_str(), TO_ROOM);
+                    NULL, argument.c_str(), ActTarget::Room);
                 do_look(victim, "auto");
                 victim->Position = POS_STANDING;
                 return;
@@ -159,7 +159,7 @@ void do_shove(Character *ch, std::string argument)
             if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go out there riding THAT.",
-                    ch, NULL, argument.c_str(), TO_CHAR);
+                    ch, NULL, argument.c_str(), ActTarget::Char);
                 return;
             }
 
@@ -203,23 +203,23 @@ void do_shove(Character *ch, std::string argument)
                 }
 
                 Act(AT_PLAIN, "$n exits the ship.", ch,
-                    NULL, ship->Name.c_str(), TO_ROOM);
+                    NULL, ship->Name.c_str(), ActTarget::Room);
                 Act(AT_PLAIN, "You exits the ship.", ch,
-                    NULL, ship->Name.c_str(), TO_CHAR);
+                    NULL, ship->Name.c_str(), ActTarget::Char);
                 CharacterFromRoom(ch);
                 CharacterToRoom(ch, to_room);
                 Act(AT_PLAIN, "$n exits $T.", ch,
-                    NULL, ship->Name.c_str(), TO_ROOM);
+                    NULL, ship->Name.c_str(), ActTarget::Room);
                 do_look(ch, "auto");
 
                 Act(AT_PLAIN, "$n exits the ship.", victim,
-                    NULL, ship->Name.c_str(), TO_ROOM);
+                    NULL, ship->Name.c_str(), ActTarget::Room);
                 Act(AT_PLAIN, "You exits the ship.", victim,
-                    NULL, ship->Name.c_str(), TO_CHAR);
+                    NULL, ship->Name.c_str(), ActTarget::Char);
                 CharacterFromRoom(victim);
                 CharacterToRoom(victim, to_room);
                 Act(AT_PLAIN, "$n exits $T.", victim,
-                    NULL, ship->Name.c_str(), TO_ROOM);
+                    NULL, ship->Name.c_str(), ActTarget::Room);
                 do_look(victim, "auto");
                 victim->Position = POS_STANDING;
                 return;
@@ -272,8 +272,8 @@ void do_shove(Character *ch, std::string argument)
         return;
     }
 
-    Act(AT_ACTION, "You shove $M.", ch, NULL, victim, TO_CHAR);
-    Act(AT_ACTION, "$n shoves you.", ch, NULL, victim, TO_VICT);
+    Act(AT_ACTION, "You shove $M.", ch, NULL, victim, ActTarget::Char);
+    Act(AT_ACTION, "$n shoves you.", ch, NULL, victim, ActTarget::Vict);
     MoveCharacter(victim, GetExit(ch->InRoom, exit_dir), 0);
 
     if(!CharacterDiedRecently(victim))

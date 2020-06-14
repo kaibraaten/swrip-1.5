@@ -25,7 +25,7 @@ ch_ret spell_remove_invis(int sn, int level, Character *ch, void *vo)
             return rSPELL_FAILED;
 
         obj->Flags.reset(Flag::Obj::Invis);
-        Act(AT_MAGIC, "$p becomes visible again.", ch, obj, NULL, TO_CHAR);
+        Act(AT_MAGIC, "$p becomes visible again.", ch, obj, NULL, ActTarget::Char);
 
         ch->Echo("Ok.\r\n");
         return rNONE;

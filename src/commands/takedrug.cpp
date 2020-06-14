@@ -160,9 +160,9 @@ void do_takedrug(Character *ch, std::string argument)
     if(obj->ItemType != ITEM_SPICE)
     {
         Act(AT_ACTION, "$n looks at $p and scratches $s head.",
-            ch, obj, NULL, TO_ROOM);
+            ch, obj, NULL, ActTarget::Room);
         Act(AT_ACTION, "You can't quite figure out what to do with $p.",
-            ch, obj, NULL, TO_CHAR);
+            ch, obj, NULL, ActTarget::Char);
         return;
     }
 
@@ -170,22 +170,22 @@ void do_takedrug(Character *ch, std::string argument)
 
     if(obj->InObject)
     {
-        Act(AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, TO_CHAR);
-        Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, TO_ROOM);
+        Act(AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, ActTarget::Char);
+        Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, ActTarget::Room);
     }
 
     if(ch->Fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48))
     {
-        Act(AT_MAGIC, "$n accidentally drops $p rendering it useless.", ch, obj, NULL, TO_ROOM);
+        Act(AT_MAGIC, "$n accidentally drops $p rendering it useless.", ch, obj, NULL, ActTarget::Room);
         Act(AT_MAGIC, "Oops... $p gets knocked from your hands rendering it completely useless!",
-            ch, obj, NULL, TO_CHAR);
+            ch, obj, NULL, ActTarget::Char);
     }
     else
     {
         if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
         {
-            Act(AT_ACTION, "$n takes $p.", ch, obj, NULL, TO_ROOM);
-            Act(AT_ACTION, "You take $p.", ch, obj, NULL, TO_CHAR);
+            Act(AT_ACTION, "$n takes $p.", ch, obj, NULL, ActTarget::Room);
+            Act(AT_ACTION, "You take $p.", ch, obj, NULL, ActTarget::Char);
         }
 
         if(IsNpc(ch))
@@ -201,8 +201,8 @@ void do_takedrug(Character *ch, std::string argument)
 
         if(HasTakenOverdose(ch, drug))
         {
-            Act(AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM);
-            Act(AT_POISON, "You feel sick. You may have taken too much.", ch, NULL, NULL, TO_CHAR);
+            Act(AT_POISON, "$n sputters and gags.", ch, NULL, NULL, ActTarget::Room);
+            Act(AT_POISON, "You feel sick. You may have taken too much.", ch, NULL, NULL, ActTarget::Char);
             ApplyOverdose(ch, drug);
         }
 

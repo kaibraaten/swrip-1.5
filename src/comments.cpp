@@ -303,7 +303,7 @@ void do_comment( Character *ch, std::string argument )
             return;
         }
 
-        /* Act( AT_ACTION, "$n posts a note.", ch, NULL, NULL, TO_ROOM ); */
+        /* Act( AT_ACTION, "$n posts a note.", ch, NULL, NULL, ActTarget::Room ); */
 
         strtime                           = ctime( &current_time );
         strtime[strlen(strtime)-1]        = '\0';

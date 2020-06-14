@@ -32,7 +32,7 @@ void do_unhell(Character *ch, std::string arg)
         location = ch->InRoom;
 
     MOBtrigger = false;
-    Act(AT_MAGIC, "$n disappears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT);
+    Act(AT_MAGIC, "$n disappears in a cloud of godly light.", victim, NULL, ch, ActTarget::NotVict);
     CharacterFromRoom(victim);
     CharacterToRoom(victim, location);
     victim->Echo("The gods have smiled on you and released you from hell early!\r\n");
@@ -48,7 +48,7 @@ void do_unhell(Character *ch, std::string arg)
     }
 
     MOBtrigger = false;
-    Act(AT_MAGIC, "$n appears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT);
+    Act(AT_MAGIC, "$n appears in a cloud of godly light.", victim, NULL, ch, ActTarget::NotVict);
     victim->PCData->ReleaseDate = 0;
     PlayerCharacters->Save(victim);
 }

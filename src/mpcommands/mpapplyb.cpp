@@ -72,7 +72,7 @@ void do_mpapplyb(Character *ch, std::string argument)
         CharacterFromRoom(victim);
         CharacterToRoom(victim, GetRoom(ROOM_VNUM_SCHOOL));
         Act(AT_WHITE, "$n enters this world from within a column of blinding light!",
-            victim, NULL, NULL, TO_ROOM);
+            victim, NULL, NULL, ActTarget::Room);
         do_look(victim, "auto");
         break;
     }

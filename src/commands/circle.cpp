@@ -71,7 +71,7 @@ void do_circle(Character *ch, std::string argument)
     if(victim->NumFighting < 2)
     {
         Act(AT_PLAIN, "You can't circle around them without a distraction.",
-            ch, NULL, victim, TO_CHAR);
+            ch, NULL, victim, ActTarget::Char);
         return;
     }
 

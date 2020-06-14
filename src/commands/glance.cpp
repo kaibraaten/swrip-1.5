@@ -53,8 +53,8 @@ void do_glance(Character *ch, std::string argument)
     {
         if(CanSeeCharacter(victim, ch))
         {
-            Act(AT_ACTION, "$n glances at you.", ch, NULL, victim, TO_VICT);
-            Act(AT_ACTION, "$n glances at $N.", ch, NULL, victim, TO_NOTVICT);
+            Act(AT_ACTION, "$n glances at you.", ch, NULL, victim, ActTarget::Vict);
+            Act(AT_ACTION, "$n glances at $N.", ch, NULL, victim, ActTarget::NotVict);
         }
 
         ShowCharacterCondition(ch, victim);

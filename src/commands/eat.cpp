@@ -30,9 +30,9 @@ void do_eat(Character *ch, std::string argument)
         if(obj->ItemType != ITEM_FOOD && obj->ItemType != ITEM_PILL)
         {
             Act(AT_ACTION, "$n starts to nibble on $p... ($e must really be hungry)",
-                ch, obj, NULL, TO_ROOM);
+                ch, obj, NULL, ActTarget::Room);
             Act(AT_ACTION, "You try to nibble on $p...",
-                ch, obj, NULL, TO_CHAR);
+                ch, obj, NULL, ActTarget::Char);
             return;
         }
 
@@ -49,16 +49,16 @@ void do_eat(Character *ch, std::string argument)
 
     if(obj->InObject)
     {
-        Act(AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, TO_CHAR);
-        Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, TO_ROOM);
+        Act(AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, ActTarget::Char);
+        Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, ActTarget::Room);
     }
 
     if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
     {
         if(obj->ActionDescription.empty())
         {
-            Act(AT_ACTION, "$n eats $p.", ch, obj, NULL, TO_ROOM);
-            Act(AT_ACTION, "You eat $p.", ch, obj, NULL, TO_CHAR);
+            Act(AT_ACTION, "$n eats $p.", ch, obj, NULL, ActTarget::Room);
+            Act(AT_ACTION, "You eat $p.", ch, obj, NULL, ActTarget::Char);
         }
         else
         {
@@ -92,14 +92,14 @@ void do_eat(Character *ch, std::string argument)
             /* The food was poisoned! */
             if(obj->Value[OVAL_FOOD_POISON] != 0)
             {
-                Act(AT_POISON, "$n chokes and gags.", ch, NULL, NULL, TO_ROOM);
-                Act(AT_POISON, "You choke and gag.", ch, NULL, NULL, TO_CHAR);
+                Act(AT_POISON, "$n chokes and gags.", ch, NULL, NULL, ActTarget::Room);
+                Act(AT_POISON, "You choke and gag.", ch, NULL, NULL, ActTarget::Char);
                 ch->MentalState = urange(20, ch->MentalState + 5, 100);
             }
             else
             {
-                Act(AT_POISON, "$n gags on $p.", ch, obj, NULL, TO_ROOM);
-                Act(AT_POISON, "You gag on $p.", ch, obj, NULL, TO_CHAR);
+                Act(AT_POISON, "$n gags on $p.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_POISON, "You gag on $p.", ch, obj, NULL, ActTarget::Char);
                 ch->MentalState = urange(15, ch->MentalState + 5, 100);
             }
 

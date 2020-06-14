@@ -66,8 +66,8 @@ bool spec_police(Character *ch)
                 }
                 else
                 {
-                    Act(AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT);
-                    Act(AT_ACTION, "$n fines you an enourmous amount of money.", ch, NULL, victim, TO_VICT);
+                    Act(AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, ActTarget::NotVict);
+                    Act(AT_ACTION, "$n fines you an enourmous amount of money.", ch, NULL, victim, ActTarget::Vict);
 
                     if(victim->InRoom && victim->InRoom->Area)
                     {
@@ -80,8 +80,8 @@ bool spec_police(Character *ch)
                 if(jail)
                 {
                     victim->PCData->WantedOn.reset(vip);
-                    Act(AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT);
-                    Act(AT_ACTION, "$n escorts you to jail.", ch, NULL, victim, TO_VICT);
+                    Act(AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, ActTarget::NotVict);
+                    Act(AT_ACTION, "$n escorts you to jail.", ch, NULL, victim, ActTarget::Vict);
                     CharacterFromRoom(victim);
                     CharacterToRoom(victim, jail);
                 }

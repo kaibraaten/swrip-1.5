@@ -60,6 +60,6 @@ void do_buzz(Character *ch, std::string arg)
     ch->BuzzedFromRoom = ch->InRoom;
 
     EchoToRoom(AT_WHITE, home, "The door buzzer sounds.\r\n");
-    Act(AT_ACTION, "You press the door buzzer.", ch, nullptr, nullptr, TO_CHAR);
-    Act(AT_ACTION, "$n presses a door buzzer.", ch, nullptr, nullptr, TO_ROOM);
+    Act(AT_ACTION, "You press the door buzzer.", ch, nullptr, nullptr, ActTarget::Char);
+    Act(AT_ACTION, "$n presses a door buzzer.", ch, nullptr, nullptr, ActTarget::Room);
 }

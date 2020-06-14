@@ -82,7 +82,7 @@ void do_mcreate(Character *ch, std::string argument)
     mob = CreateMobile(pMobIndex);
     CharacterToRoom(mob, ch->InRoom);
     Act(AT_IMMORT, "$n waves $s arms about, and $N appears at $s command!",
-        ch, NULL, mob, TO_ROOM);
+        ch, NULL, mob, ActTarget::Room);
     Act(AT_IMMORT, "You wave your arms about, and $N appears at your command!",
-        ch, NULL, mob, TO_CHAR);
+        ch, NULL, mob, ActTarget::Char);
 }

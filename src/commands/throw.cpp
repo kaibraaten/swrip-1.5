@@ -61,7 +61,7 @@ void do_throw(Character *ch, std::string argument)
 
     if(obj->Flags.test(Flag::Obj::NoRemove))
     {
-        Act(AT_PLAIN, "You can't throw $p.", ch, obj, NULL, TO_CHAR);
+        Act(AT_PLAIN, "You can't throw $p.", ch, obj, NULL, ActTarget::Char);
         return;
     }
 
@@ -72,14 +72,14 @@ void do_throw(Character *ch, std::string argument)
         if(CharacterDiedRecently(victim))
             return;
 
-        Act(AT_ACTION, "You throw $p at $N.", ch, obj, victim, TO_CHAR);
-        Act(AT_ACTION, "$n throws $p at $N.", ch, obj, victim, TO_NOTVICT);
-        Act(AT_ACTION, "$n throw $p at you.", ch, obj, victim, TO_VICT);
+        Act(AT_ACTION, "You throw $p at $N.", ch, obj, victim, ActTarget::Char);
+        Act(AT_ACTION, "$n throws $p at $N.", ch, obj, victim, ActTarget::NotVict);
+        Act(AT_ACTION, "$n throw $p at you.", ch, obj, victim, ActTarget::Vict);
     }
     else if(arg2.empty())
     {
         sprintf(buf, "$n throws %s at the floor.", obj->ShortDescr.c_str());
-        Act(AT_ACTION, buf, ch, NULL, NULL, TO_ROOM);
+        Act(AT_ACTION, buf, ch, NULL, NULL, ActTarget::Room);
         ch->Echo("You throw %s at the floor.\r\n", obj->ShortDescr.c_str());
 
         victim = NULL;
@@ -152,7 +152,7 @@ void do_throw(Character *ch, std::string argument)
 
             if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
             {
-                Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR);
+                Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, ActTarget::Char);
                 return;
             }
 
@@ -185,11 +185,11 @@ void do_throw(Character *ch, std::string argument)
 
             sprintf(buf, "Someone throws %s at you from the %s.",
                     obj->ShortDescr.c_str(), GetDirectionName(dir));
-            Act(AT_ACTION, buf, victim, NULL, ch, TO_CHAR);
-            Act(AT_ACTION, "You throw %p at $N.", ch, obj, victim, TO_CHAR);
+            Act(AT_ACTION, buf, victim, NULL, ch, ActTarget::Char);
+            Act(AT_ACTION, "You throw %p at $N.", ch, obj, victim, ActTarget::Char);
             sprintf(buf, "%s is thrown at $N from the %s.",
                     obj->ShortDescr.c_str(), GetDirectionName(dir));
-            Act(AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT);
+            Act(AT_ACTION, buf, ch, NULL, victim, ActTarget::NotVict);
         }
         else
         {
@@ -198,7 +198,7 @@ void do_throw(Character *ch, std::string argument)
                      GetDirectionName(GetDirection(arg2)));
             sprintf(buf, "%s is thrown from the %s.",
                     obj->ShortDescr.c_str(), GetDirectionName(dir));
-            Act(AT_ACTION, buf, ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, buf, ch, NULL, NULL, ActTarget::Room);
         }
     }
     else if((victim = GetCharacterInRoom(ch, arg2)) != NULL)
@@ -208,7 +208,7 @@ void do_throw(Character *ch, std::string argument)
 
         if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
         {
-            Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR);
+            Act(AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, ActTarget::Char);
             return;
         }
 

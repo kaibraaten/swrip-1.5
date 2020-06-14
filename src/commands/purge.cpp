@@ -31,7 +31,7 @@ void do_purge(Character *ch, std::string arg)
             ExtractObject(obj);
         }
 
-        Act(AT_IMMORT, "$n purges the room!", ch, NULL, NULL, TO_ROOM);
+        Act(AT_IMMORT, "$n purges the room!", ch, NULL, NULL, ActTarget::Room);
         ch->Echo("Ok.\r\n");
         return;
     }
@@ -57,8 +57,8 @@ void do_purge(Character *ch, std::string arg)
     if(obj)
     {
         SeparateOneObjectFromGroup(obj);
-        Act(AT_IMMORT, "$n purges $p.", ch, obj, NULL, TO_ROOM);
-        Act(AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR);
+        Act(AT_IMMORT, "$n purges $p.", ch, obj, NULL, ActTarget::Room);
+        Act(AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, ActTarget::Char);
         ExtractObject(obj);
         return;
     }
@@ -82,6 +82,6 @@ void do_purge(Character *ch, std::string arg)
         return;
     }
 
-    Act(AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT);
+    Act(AT_IMMORT, "$n purges $N.", ch, NULL, victim, ActTarget::NotVict);
     ExtractCharacter(victim, true);
 }

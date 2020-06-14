@@ -66,7 +66,7 @@ void do_backstab(Character *ch, std::string arg)
        && IsAwake(victim) && CanSeeCharacter(victim, ch))
     {
         Act(AT_PLAIN, "$N is hurt and suspicious... you can't sneak up.",
-            ch, NULL, victim, TO_CHAR);
+            ch, NULL, victim, ActTarget::Char);
         return;
     }
 

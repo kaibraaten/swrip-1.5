@@ -42,7 +42,7 @@ void do_rest(Character *ch, std::string argument)
         if(obj != NULL && ch->On != obj
            && CountCharactersOnObject(obj) >= obj->Value[OVAL_FURNITURE_CAPACITY])
         {
-            Act(AT_ACTION, "There's no more room on $p.", ch, obj, NULL, TO_CHAR);
+            Act(AT_ACTION, "There's no more room on $p.", ch, obj, NULL, ActTarget::Char);
             return;
         }
 
@@ -62,22 +62,22 @@ void do_rest(Character *ch, std::string argument)
         {
             ch->Echo("You wake up and start resting.\r\n");
             Act(AT_ACTION, "$n wakes up and starts resting.",
-                ch, NULL, NULL, TO_ROOM);
+                ch, NULL, NULL, ActTarget::Room);
         }
         else if(obj->Value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
         {
-            Act(AT_ACTION, "You wake up and rest at $p.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n wakes up and rests at $p.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You wake up and rest at $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n wakes up and rests at $p.", ch, obj, NULL, ActTarget::Room);
         }
         else if(obj->Value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
         {
-            Act(AT_ACTION, "You wake up and rest on $p.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n wakes up and rests on $p.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You wake up and rest on $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n wakes up and rests on $p.", ch, obj, NULL, ActTarget::Room);
         }
         else
         {
-            Act(AT_ACTION, "You wake up and rest in $p.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n wakes up and rests in $p.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You wake up and rest in $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n wakes up and rests in $p.", ch, obj, NULL, ActTarget::Room);
         }
         ch->Position = POS_RESTING;
         break;
@@ -90,22 +90,22 @@ void do_rest(Character *ch, std::string argument)
         if(obj == NULL)
         {
             ch->Echo("You rest.\r\n");
-            Act(AT_ACTION, "$n sits down and rests.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n sits down and rests.", ch, NULL, NULL, ActTarget::Room);
         }
         else if(obj->Value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
         {
-            Act(AT_ACTION, "You sit down at $p and rest.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n sits down at $p and rests.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You sit down at $p and rest.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n sits down at $p and rests.", ch, obj, NULL, ActTarget::Room);
         }
         else if(obj->Value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
         {
-            Act(AT_ACTION, "You sit on $p and rest.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n sits on $p and rests.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You sit on $p and rest.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n sits on $p and rests.", ch, obj, NULL, ActTarget::Room);
         }
         else
         {
-            Act(AT_ACTION, "You rest in $p.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n rests in $p.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You rest in $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n rests in $p.", ch, obj, NULL, ActTarget::Room);
         }
         ch->Position = POS_RESTING;
         break;
@@ -114,22 +114,22 @@ void do_rest(Character *ch, std::string argument)
         if(obj == NULL)
         {
             ch->Echo("You rest.\r\n");
-            Act(AT_ACTION, "$n rests.", ch, NULL, NULL, TO_ROOM);
+            Act(AT_ACTION, "$n rests.", ch, NULL, NULL, ActTarget::Room);
         }
         else if(obj->Value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
         {
-            Act(AT_ACTION, "You rest at $p.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n rests at $p.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You rest at $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n rests at $p.", ch, obj, NULL, ActTarget::Room);
         }
         else if(obj->Value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
         {
-            Act(AT_ACTION, "You rest on $p.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n rests on $p.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You rest on $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n rests on $p.", ch, obj, NULL, ActTarget::Room);
         }
         else
         {
-            Act(AT_ACTION, "You rest in $p.", ch, obj, NULL, TO_CHAR);
-            Act(AT_ACTION, "$n rests in $p.", ch, obj, NULL, TO_ROOM);
+            Act(AT_ACTION, "You rest in $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n rests in $p.", ch, obj, NULL, ActTarget::Room);
         }
         ch->Position = POS_RESTING;
         break;

@@ -49,7 +49,7 @@ void do_status(Character *ch, std::string argument)
     }
 
     Act(AT_PLAIN, "$n checks various gages and displays on the control panel.", ch,
-        NULL, argument.c_str(), TO_ROOM);
+        NULL, argument.c_str(), ActTarget::Room);
 
     ch->Echo("&W%s:\r\n", target->Name.c_str());
     ch->Echo("&OCurrent Coordinates:&Y %.0f %.0f %.0f\r\n",

@@ -699,8 +699,8 @@ static void GainAddiction(Character *ch)
         }
         else if(ch->PCData->Addiction[drug] < ch->PCData->DrugLevel[drug] - 50)
         {
-            Act(AT_POISON, "$n bends over and vomits.\r\n", ch, NULL, NULL, TO_ROOM);
-            Act(AT_POISON, "You vomit.\r\n", ch, NULL, NULL, TO_CHAR);
+            Act(AT_POISON, "$n bends over and vomits.\r\n", ch, NULL, NULL, ActTarget::Room);
+            Act(AT_POISON, "You vomit.\r\n", ch, NULL, NULL, ActTarget::Char);
             ch->PCData->DrugLevel[drug] -= 10;
         }
 
@@ -896,7 +896,7 @@ static void CleanUpAnimatedCorpse(Character *ch)
     if(!ch->InRoom->Characters().empty())
     {
         Act(AT_MAGIC, "$n returns to the dust from whence $e came.",
-            ch, NULL, NULL, TO_ROOM);
+            ch, NULL, NULL, ActTarget::Room);
     }
 
     ExtractCharacter(ch, true);
@@ -953,10 +953,10 @@ static void ReturnSentinelToHome(Character *ch)
 {
     assert(IsSentinelWhoIsReadyToReturn(ch));
 
-    Act(AT_ACTION, "$n leaves.", ch, NULL, NULL, TO_ROOM);
+    Act(AT_ACTION, "$n leaves.", ch, NULL, NULL, ActTarget::Room);
     CharacterFromRoom(ch);
     CharacterToRoom(ch, ch->WasSentinel);
-    Act(AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM);
+    Act(AT_ACTION, "$n arrives.", ch, NULL, NULL, ActTarget::Room);
     ch->Flags.set(Flag::Mob::Sentinel);
     ch->WasSentinel = nullptr;
 }
@@ -1031,7 +1031,7 @@ static void PerformScavenging(Character *ch)
     {
         ObjectFromRoom(obj_best);
         ObjectToCharacter(obj_best, ch);
-        Act(AT_ACTION, "$n gets $p.", ch, obj_best, nullptr, TO_ROOM);
+        Act(AT_ACTION, "$n gets $p.", ch, obj_best, nullptr, ActTarget::Room);
     }
 }
 
@@ -1413,7 +1413,7 @@ static void WeatherUpdate()
                && ch->InRoom->Sector != SECT_OCEANFLOOR
                && ch->InRoom->Sector != SECT_UNDERGROUND)
             {
-                Act(AT_TEMP, buf, ch, 0, 0, TO_CHAR);
+                Act(AT_TEMP, buf, ch, 0, 0, ActTarget::Char);
             }
         }
 
@@ -1512,7 +1512,7 @@ static void WeatherUpdate()
             if(IS_OUTSIDE(ch)
                && IsAwake(ch))
             {
-                Act(AT_TEMP, buf, ch, nullptr, nullptr, TO_CHAR);
+                Act(AT_TEMP, buf, ch, nullptr, nullptr, ActTarget::Char);
             }
         }
     }
@@ -1748,8 +1748,8 @@ static void TickdownLightSources()
                 if(--obj->Value[OVAL_LIGHT_POWER] == 0 && ch->InRoom)
                 {
                     ch->InRoom->Light -= obj->Count;
-                    Act(AT_ACTION, "$p goes out.", ch, obj, NULL, TO_ROOM);
-                    Act(AT_ACTION, "$p goes out.", ch, obj, NULL, TO_CHAR);
+                    Act(AT_ACTION, "$p goes out.", ch, obj, NULL, ActTarget::Room);
+                    Act(AT_ACTION, "$p goes out.", ch, obj, NULL, ActTarget::Char);
 
                     if(obj->Serial == cur_obj)
                     {
@@ -1899,8 +1899,8 @@ static void CharacterUpdate()
              */
             if(IsAffectedBy(ch, Flag::Affect::Poison))
             {
-                Act(AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM);
-                Act(AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR);
+                Act(AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, ActTarget::Room);
+                Act(AT_POISON, "You shiver and suffer.", ch, NULL, NULL, ActTarget::Char);
                 ch->MentalState = urange(20, ch->MentalState
                                          + 4, 100);
                 InflictDamage(ch, ch, 6, gsn_poison);
@@ -1925,45 +1925,45 @@ static void CharacterUpdate()
                 {
                 case 3:
                     ch->Echo("You feel feverish.\r\n");
-                    Act(AT_ACTION, "$n looks kind of out of it.", ch, NULL, NULL, TO_ROOM);
+                    Act(AT_ACTION, "$n looks kind of out of it.", ch, NULL, NULL, ActTarget::Room);
                     break;
 
                 case 4:
                     ch->Echo("You do not feel well at all.\r\n");
-                    Act(AT_ACTION, "$n doesn't look too good.", ch, NULL, NULL, TO_ROOM);
+                    Act(AT_ACTION, "$n doesn't look too good.", ch, NULL, NULL, ActTarget::Room);
                     break;
 
                 case 5:
                     ch->Echo("You need help!\r\n");
-                    Act(AT_ACTION, "$n looks like $e could use your help.", ch, NULL, NULL, TO_ROOM);
+                    Act(AT_ACTION, "$n looks like $e could use your help.", ch, NULL, NULL, ActTarget::Room);
                     break;
 
                 case 6:
                     ch->Echo("Seekest thou a cleric.\r\n");
                     Act(AT_ACTION, "Someone should fetch a healer for $n.",
-                        ch, NULL, NULL, TO_ROOM);
+                        ch, NULL, NULL, ActTarget::Room);
                     break;
 
                 case 7:
                     ch->Echo("You feel reality slipping away...\r\n");
                     Act(AT_ACTION, "$n doesn't appear to be aware of what's going on.",
-                        ch, NULL, NULL, TO_ROOM);
+                        ch, NULL, NULL, ActTarget::Room);
                     break;
 
                 case 8:
                     ch->Echo("You begin to understand... everything.\r\n");
-                    Act(AT_ACTION, "$n starts ranting like a madman!", ch, NULL, NULL, TO_ROOM);
+                    Act(AT_ACTION, "$n starts ranting like a madman!", ch, NULL, NULL, ActTarget::Room);
                     break;
 
                 case 9:
                     ch->Echo("You are ONE with the universe.\r\n");
-                    Act(AT_ACTION, "$n is ranting on about 'the answer', 'ONE' and other mumbo-jumbo...", ch, NULL, NULL, TO_ROOM);
+                    Act(AT_ACTION, "$n is ranting on about 'the answer', 'ONE' and other mumbo-jumbo...", ch, NULL, NULL, ActTarget::Room);
                     break;
 
                 case 10:
                     ch->Echo("You feel the end is near.\r\n");
                     Act(AT_ACTION, "$n is muttering and ranting in tongues...",
-                        ch, NULL, NULL, TO_ROOM);
+                        ch, NULL, NULL, ActTarget::Room);
                     break;
                 }
             }
@@ -2109,12 +2109,12 @@ static void ObjectUpdate()
             {
                 if(obj->Value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER)
                 {
-                    Act(AT_PLAIN, "$p fizzles and dies.", obj->CarriedBy, obj, NULL, TO_CHAR);
-                    Act(AT_PLAIN, "$n's lightsaber fizzles and dies.", obj->CarriedBy, NULL, NULL, TO_ROOM);
+                    Act(AT_PLAIN, "$p fizzles and dies.", obj->CarriedBy, obj, NULL, ActTarget::Char);
+                    Act(AT_PLAIN, "$n's lightsaber fizzles and dies.", obj->CarriedBy, NULL, NULL, ActTarget::Room);
                 }
                 else if(obj->Value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE)
                 {
-                    Act(AT_PLAIN, "$p stops vibrating.", obj->CarriedBy, obj, NULL, TO_CHAR);
+                    Act(AT_PLAIN, "$p stops vibrating.", obj->CarriedBy, obj, NULL, ActTarget::Char);
                 }
             }
         }
@@ -2215,7 +2215,7 @@ static void ObjectUpdate()
         {
             if(obj->CarriedBy)
             {
-                Act(AT_TEMP, "$p is almost dead.", obj->CarriedBy, obj, NULL, TO_CHAR);
+                Act(AT_TEMP, "$p is almost dead.", obj->CarriedBy, obj, NULL, ActTarget::Char);
             }
         }
 
@@ -2241,8 +2241,8 @@ static void ObjectUpdate()
                 if(!obj->InRoom->Characters().empty())
                 {
                     rch = obj->InRoom->Characters().front();
-                    Act(AT_ACTION, "$p falls away.", rch, obj, NULL, TO_ROOM);
-                    Act(AT_ACTION, "$p falls away.", rch, obj, NULL, TO_CHAR);
+                    Act(AT_ACTION, "$p falls away.", rch, obj, NULL, ActTarget::Room);
+                    Act(AT_ACTION, "$p falls away.", rch, obj, NULL, ActTarget::Char);
                 }
 
                 ObjectFromRoom(obj);
@@ -2251,8 +2251,8 @@ static void ObjectUpdate()
                 if(!obj->InRoom->Characters().empty())
                 {
                     rch = obj->InRoom->Characters().front();
-                    Act(AT_ACTION, "$p floats by.", rch, obj, NULL, TO_ROOM);
-                    Act(AT_ACTION, "$p floats by.", rch, obj, NULL, TO_CHAR);
+                    Act(AT_ACTION, "$p floats by.", rch, obj, NULL, ActTarget::Room);
+                    Act(AT_ACTION, "$p floats by.", rch, obj, NULL, ActTarget::Char);
                 }
             }
 
@@ -2332,15 +2332,15 @@ static void ObjectUpdate()
 
         if(obj->CarriedBy)
         {
-            Act(AT_TEMP, message, obj->CarriedBy, obj, NULL, TO_CHAR);
+            Act(AT_TEMP, message, obj->CarriedBy, obj, NULL, ActTarget::Char);
         }
         else if(obj->InRoom
                 && !obj->InRoom->Characters().empty()
                 && !obj->Flags.test(Flag::Obj::Burried))
         {
             rch = obj->InRoom->Characters().front();
-            Act(AT_TEMP, message, rch, obj, NULL, TO_ROOM);
-            Act(AT_TEMP, message, rch, obj, NULL, TO_CHAR);
+            Act(AT_TEMP, message, rch, obj, NULL, ActTarget::Room);
+            Act(AT_TEMP, message, rch, obj, NULL, ActTarget::Char);
         }
 
         if(obj->Serial == cur_obj)
@@ -3002,7 +3002,7 @@ void RemovePortal(Object *portal)
     if(toRoom && !toRoom->Characters().empty())
     {
         ch = toRoom->Characters().front();
-        Act(AT_PLAIN, "A magical portal above winks from existence.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_PLAIN, "A magical portal above winks from existence.", ch, NULL, NULL, ActTarget::Room);
     }
 }
 
@@ -3145,16 +3145,16 @@ static void AuctionUpdate()
             TalkAuction(buf);
 
             Act(AT_ACTION, "The auctioneer materializes before you, and hands you $p.",
-                OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_CHAR);
+                OngoingAuction->Buyer, OngoingAuction->Item, NULL, ActTarget::Char);
             Act(AT_ACTION, "The auctioneer materializes before $n, and hands $m $p.",
-                OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_ROOM);
+                OngoingAuction->Buyer, OngoingAuction->Item, NULL, ActTarget::Room);
 
             if((OngoingAuction->Buyer->CarryWeight
                 + GetObjectWeight(OngoingAuction->Item))
             > GetCarryCapacityWeight(OngoingAuction->Buyer))
             {
-                Act(AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_CHAR);
-                Act(AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_ROOM);
+                Act(AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, ActTarget::Char);
+                Act(AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, ActTarget::Room);
                 ObjectToRoom(OngoingAuction->Item, OngoingAuction->Buyer->InRoom);
             }
             else
@@ -3182,9 +3182,9 @@ static void AuctionUpdate()
                     OngoingAuction->Item->ShortDescr.c_str());
             TalkAuction(buf);
             Act(AT_ACTION, "The auctioneer appears before you to return $p to you.",
-                OngoingAuction->Seller, OngoingAuction->Item, NULL, TO_CHAR);
+                OngoingAuction->Seller, OngoingAuction->Item, NULL, ActTarget::Char);
             Act(AT_ACTION, "The auctioneer appears before $n to return $p to $m.",
-                OngoingAuction->Seller, OngoingAuction->Item, NULL, TO_ROOM);
+                OngoingAuction->Seller, OngoingAuction->Item, NULL, ActTarget::Room);
 
             if((OngoingAuction->Seller->CarryWeight
                 + GetObjectWeight(OngoingAuction->Item))
@@ -3192,10 +3192,10 @@ static void AuctionUpdate()
             {
                 Act(AT_PLAIN, "You drop $p as it is just too much to carry"
                     " with everything else you're carrying.", OngoingAuction->Seller,
-                    OngoingAuction->Item, NULL, TO_CHAR);
+                    OngoingAuction->Item, NULL, ActTarget::Char);
                 Act(AT_PLAIN, "$n drops $p as it is too much extra weight"
                     " for $m with everything else.", OngoingAuction->Seller,
-                    OngoingAuction->Item, NULL, TO_ROOM);
+                    OngoingAuction->Item, NULL, ActTarget::Room);
                 ObjectToRoom(OngoingAuction->Item, OngoingAuction->Seller->InRoom);
             }
             else

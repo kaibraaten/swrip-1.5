@@ -135,7 +135,7 @@ void do_trajectory(Character *ch, std::string argument)
     ch->Echo("&GNew course set, approaching %.0f %.0f %.0f.\r\n",
              argvec->x, argvec->y, argvec->z);
     Act(AT_PLAIN, "$n manipulates the ships controls.",
-        ch, NULL, argument.c_str(), TO_ROOM);
+        ch, NULL, argument.c_str(), ActTarget::Room);
 
     EchoToCockpit(AT_YELLOW, ship, "The ship begins to turn.\r\n");
     sprintf(buf, "%s turns altering its present course.", ship->Name.c_str());

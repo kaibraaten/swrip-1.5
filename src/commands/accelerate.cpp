@@ -130,7 +130,7 @@ void do_accelerate(Character *ch, std::string argument)
     }
 
     Act(AT_PLAIN, "$n manipulates the ships controls.", ch,
-        NULL, argument.c_str(), TO_ROOM);
+        NULL, argument.c_str(), ActTarget::Room);
 
     if(change > ship->Thrusters.Speed.Current)
     {

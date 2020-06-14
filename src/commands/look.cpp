@@ -552,8 +552,8 @@ static void show_char_to_char_1(Character *victim, Character *ch)
 
     if(CanSeeCharacter(victim, ch))
     {
-        Act(AT_ACTION, "$n looks at you.", ch, NULL, victim, TO_VICT);
-        Act(AT_ACTION, "$n looks at $N.", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_ACTION, "$n looks at you.", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_ACTION, "$n looks at $N.", ch, NULL, victim, ActTarget::NotVict);
     }
 
     ch->Echo("%s is a %s %s\r\n", victim->Name.c_str(),
@@ -565,7 +565,7 @@ static void show_char_to_char_1(Character *victim, Character *ch)
     }
     else
     {
-        Act(AT_PLAIN, "You see nothing special about $M.", ch, NULL, victim, TO_CHAR);
+        Act(AT_PLAIN, "You see nothing special about $M.", ch, NULL, victim, ActTarget::Char);
     }
 
     ShowCharacterCondition(ch, victim);
@@ -586,7 +586,7 @@ static void show_char_to_char_1(Character *victim, Character *ch)
                 if(!found)
                 {
                     ch->Echo("\r\n");
-                    Act(AT_PLAIN, "$N is using:", ch, NULL, victim, TO_CHAR);
+                    Act(AT_PLAIN, "$N is using:", ch, NULL, victim, ActTarget::Char);
                     found = true;
                 }
 
@@ -715,8 +715,8 @@ static void look_under(Character *ch, const std::string &what, bool doexaprog)
 
     count = obj->Count;
     obj->Count = 1;
-    Act(AT_PLAIN, "You lift $p and look beneath it:", ch, obj, NULL, TO_CHAR);
-    Act(AT_PLAIN, "$n lifts $p and looks beneath it:", ch, obj, NULL, TO_ROOM);
+    Act(AT_PLAIN, "You lift $p and look beneath it:", ch, obj, NULL, ActTarget::Char);
+    Act(AT_PLAIN, "$n lifts $p and looks beneath it:", ch, obj, NULL, ActTarget::Room);
     obj->Count = count;
 
     if(obj->Flags.test(Flag::Obj::Covering))
@@ -867,7 +867,7 @@ static void look_in(Character *ch, const std::string &what, bool doexaprog)
 
         count = obj->Count;
         obj->Count = 1;
-        Act(AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR);
+        Act(AT_PLAIN, "$p contains:", ch, obj, NULL, ActTarget::Char);
         obj->Count = count;
         ShowObjectListToCharacter(obj->Objects(), ch, true, true);
 
@@ -895,7 +895,7 @@ static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short 
             else
             {
                 Act(AT_PLAIN, "The $d is closed.", ch, NULL,
-                    pexit->Keyword.c_str(), TO_CHAR);
+                    pexit->Keyword.c_str(), ActTarget::Char);
             }
 
             return;
@@ -904,7 +904,7 @@ static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short 
         if(pexit->Flags.test(Flag::Exit::Bashed))
         {
             Act(AT_RED, "The $d has been bashed from its hinges!",
-                ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
+                ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
         }
     }
 

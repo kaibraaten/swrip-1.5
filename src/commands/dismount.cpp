@@ -19,9 +19,9 @@ void do_dismount(Character *ch, std::string argument)
 
     if(IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_mount])
     {
-        Act(AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR);
-        Act(AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, TO_NOTVICT);
-        Act(AT_SKILL, "$n dismounts you. Whew!", ch, NULL, victim, TO_VICT);
+        Act(AT_SKILL, "You dismount $N.", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_SKILL, "$n dismounts you. Whew!", ch, NULL, victim, ActTarget::Vict);
         victim->Flags.reset(Flag::Mob::Mounted);
         ch->Mount = nullptr;
         ch->Position = POS_STANDING;
@@ -29,9 +29,9 @@ void do_dismount(Character *ch, std::string argument)
     }
     else
     {
-        Act(AT_SKILL, "You fall off while dismounting $N. Ouch!", ch, NULL, victim, TO_CHAR);
-        Act(AT_SKILL, "$n falls off of $N while dismounting.", ch, NULL, victim, TO_NOTVICT);
-        Act(AT_SKILL, "$n falls off your back.", ch, NULL, victim, TO_VICT);
+        Act(AT_SKILL, "You fall off while dismounting $N. Ouch!", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n falls off of $N while dismounting.", ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_SKILL, "$n falls off your back.", ch, NULL, victim, ActTarget::Vict);
         LearnFromFailure(ch, gsn_mount);
         victim->Flags.reset(Flag::Mob::Mounted);
         ch->Mount = nullptr;

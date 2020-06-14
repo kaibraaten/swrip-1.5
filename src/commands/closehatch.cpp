@@ -30,7 +30,7 @@ void do_closehatch(Character *ch, std::string argument)
             {
                 ship->HatchOpen = false;
                 ch->Echo("&GYou close the hatch.\r\n");
-                Act(AT_PLAIN, "$n closes the hatch.", ch, NULL, argument.c_str(), TO_ROOM);
+                Act(AT_PLAIN, "$n closes the hatch.", ch, NULL, argument.c_str(), ActTarget::Room);
                 sprintf(buf, "The hatch on %s closes.", ship->Name.c_str());
                 EchoToRoom(AT_YELLOW, GetRoom(ship->Location), buf);
                 return;
@@ -47,7 +47,7 @@ void do_closehatch(Character *ch, std::string argument)
 
     if(!ship)
     {
-        Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR);
+        Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), ActTarget::Char);
         return;
     }
 
@@ -62,16 +62,16 @@ void do_closehatch(Character *ch, std::string argument)
         {
             ship->HatchOpen = false;
             Act(AT_PLAIN, "You close the hatch on $T.",
-                ch, NULL, ship->Name.c_str(), TO_CHAR);
+                ch, NULL, ship->Name.c_str(), ActTarget::Char);
             Act(AT_PLAIN, "$n closes the hatch on $T.",
-                ch, NULL, ship->Name.c_str(), TO_ROOM);
+                ch, NULL, ship->Name.c_str(), ActTarget::Room);
             EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Entrance),
                        "The hatch is closed from outside.");
             return;
         }
         else
         {
-            ch->Echo("&RIts already closed.\r\n");
+            ch->Echo("&RIt's already closed.\r\n");
             return;
         }
     }

@@ -84,16 +84,16 @@ void do_use(Character *ch, std::string argument)
         {
             if(!ObjProgUseTrigger(ch, device, victim, NULL, NULL))
             {
-                Act(AT_MAGIC, "$n uses $p on $N.", ch, device, victim, TO_ROOM);
-                Act(AT_MAGIC, "You use $p on $N.", ch, device, victim, TO_CHAR);
+                Act(AT_MAGIC, "$n uses $p on $N.", ch, device, victim, ActTarget::Room);
+                Act(AT_MAGIC, "You use $p on $N.", ch, device, victim, ActTarget::Char);
             }
         }
         else
         {
             if(!ObjProgUseTrigger(ch, device, NULL, obj, NULL))
             {
-                Act(AT_MAGIC, "$n uses $p on $P.", ch, device, obj, TO_ROOM);
-                Act(AT_MAGIC, "You use $p on $P.", ch, device, obj, TO_CHAR);
+                Act(AT_MAGIC, "$n uses $p on $P.", ch, device, obj, ActTarget::Room);
+                Act(AT_MAGIC, "You use $p on $P.", ch, device, obj, ActTarget::Char);
             }
         }
 

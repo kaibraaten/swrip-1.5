@@ -37,8 +37,8 @@ void do_close(Character *ch, std::string argument)
             return;
         }
 
-        Act(AT_ACTION, "$n closes the $d.", ch, NULL, pexit->Keyword.c_str(), TO_ROOM);
-        Act(AT_ACTION, "You close the $d.", ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
+        Act(AT_ACTION, "$n closes the $d.", ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
+        Act(AT_ACTION, "You close the $d.", ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
 
         /* close the other side */
         if((pexit_rev = pexit->ReverseExit) != NULL
@@ -49,7 +49,7 @@ void do_close(Character *ch, std::string argument)
             for(Character *rch : pexit->ToRoom->Characters())
             {
                 Act(AT_ACTION, "The $d closes.",
-                    rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
+                    rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
             }
         }
 
@@ -72,8 +72,8 @@ void do_close(Character *ch, std::string argument)
             if(obj->WearFlags.test(Flag::Wear::Over))
             {
                 obj->Value[2] = 1;
-                Act(AT_ACTION, "You closes $p.", ch, obj, NULL, TO_CHAR);
-                Act(AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM);
+                Act(AT_ACTION, "You closes $p.", ch, obj, NULL, ActTarget::Char);
+                Act(AT_ACTION, "$n closes $p.", ch, obj, NULL, ActTarget::Room);
                 CheckObjectForTrap(ch, obj, TRAP_OPEN);
                 return;
 
@@ -99,8 +99,8 @@ void do_close(Character *ch, std::string argument)
         }
 
         SetBit(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED);
-        Act(AT_ACTION, "You close $p.", ch, obj, NULL, TO_CHAR);
-        Act(AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM);
+        Act(AT_ACTION, "You close $p.", ch, obj, NULL, ActTarget::Char);
+        Act(AT_ACTION, "$n closes $p.", ch, obj, NULL, ActTarget::Room);
         CheckObjectForTrap(ch, obj, TRAP_CLOSE);
         return;
     }

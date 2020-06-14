@@ -78,14 +78,14 @@ ch_ret spell_sleep(int sn, int level, Character *ch, void *vo)
 
     if(IsAwake(victim) && !IsDroid(victim))
     {
-        Act(AT_MAGIC, "You feel very sleepy ..... zzzzzz.", victim, NULL, NULL, TO_CHAR);
-        Act(AT_MAGIC, "$n goes to sleep.", victim, NULL, NULL, TO_ROOM);
+        Act(AT_MAGIC, "You feel very sleepy ..... zzzzzz.", victim, NULL, NULL, ActTarget::Char);
+        Act(AT_MAGIC, "$n goes to sleep.", victim, NULL, NULL, ActTarget::Room);
         victim->Position = POS_SLEEPING;
     }
     else if(IsAwake(victim) && IsDroid(victim))
     {
-        Act(AT_MAGIC, "You feel a jolt as you are deactivated.", victim, NULL, NULL, TO_CHAR);
-        Act(AT_MAGIC, "$n shutsdown.", victim, NULL, NULL, TO_ROOM);
+        Act(AT_MAGIC, "You feel a jolt as you are deactivated.", victim, NULL, NULL, ActTarget::Char);
+        Act(AT_MAGIC, "$n shutsdown.", victim, NULL, NULL, ActTarget::Room);
         victim->Position = POS_SLEEPING;
     }
 

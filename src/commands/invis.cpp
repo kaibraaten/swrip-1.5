@@ -52,13 +52,13 @@ void do_invis(Character *ch, std::string arg)
     if(ch->Flags.test(Flag::Plr::WizInvis))
     {
         ch->Flags.reset(Flag::Plr::WizInvis);
-        Act(AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL, ActTarget::Room);
         ch->Echo("You slowly fade back into existence.\r\n");
     }
     else
     {
         ch->Flags.set(Flag::Plr::WizInvis);
-        Act(AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, TO_ROOM);
+        Act(AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, ActTarget::Room);
         ch->Echo("You slowly vanish into thin air.\r\n");
     }
 }

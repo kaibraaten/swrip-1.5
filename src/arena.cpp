@@ -222,7 +222,7 @@ static void FindGameWinner()
             CharacterFromRoom(i);
             CharacterToRoom(i, GetRoom(i->ReTran));
             do_look(i, "auto");
-            Act(AT_YELLOW, "$n falls from the sky.", i, NULL, NULL, TO_ROOM);
+            Act(AT_YELLOW, "$n falls from the sky.", i, NULL, NULL, ActTarget::Room);
             StopFighting(i, true);
 
             if (i->HitPoints.Current > 1)
@@ -322,7 +322,7 @@ static void DoEndGame()
                 CharacterFromRoom(i);
                 CharacterToRoom(i, GetRoom(i->ReTran));
                 do_look(i, "auto");
-                Act(AT_TELL, "$n falls from the sky.", i, NULL, NULL, TO_ROOM);
+                Act(AT_TELL, "$n falls from the sky.", i, NULL, NULL, ActTarget::Room);
             }
         }
     }

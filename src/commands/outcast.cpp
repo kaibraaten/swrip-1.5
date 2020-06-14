@@ -83,11 +83,11 @@ void do_outcast(Character *ch, std::string arg)
     RemoveClanMember(victim);
     victim->PCData->ClanInfo.ClanName.erase();
     Act(AT_MAGIC, "You outcast $N from $t",
-        ch, clan->Name.c_str(), victim, TO_CHAR);
+        ch, clan->Name.c_str(), victim, ActTarget::Char);
     Act(AT_MAGIC, "$n outcasts $N from $t",
-        ch, clan->Name.c_str(), victim, TO_ROOM);
+        ch, clan->Name.c_str(), victim, ActTarget::Room);
     Act(AT_MAGIC, "$n outcasts you from $t",
-        ch, clan->Name.c_str(), victim, TO_VICT);
+        ch, clan->Name.c_str(), victim, ActTarget::Vict);
 
     victim->PCData->Bestowments.erase();
     PlayerCharacters->Save(victim);      /* clan gets saved when pfile is saved */

@@ -30,10 +30,10 @@ void do_mpecho(Character *ch, std::string argument)
     if((color = GetColor(argument)))
     {
         argument = OneArgument(argument, arg1);
-        Act(color, argument, ch, NULL, NULL, TO_ROOM);
+        Act(color, argument, ch, NULL, NULL, ActTarget::Room);
     }
     else
-        Act(AT_ACTION, argument, ch, NULL, NULL, TO_ROOM);
+        Act(AT_ACTION, argument, ch, NULL, NULL, ActTarget::Room);
 
     ch->Flags = mobflags;
 }

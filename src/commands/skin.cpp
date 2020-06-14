@@ -61,8 +61,8 @@ void do_skin(Character *ch, std::string argument)
 
     LearnFromSuccess(ch, gsn_punch);
 
-    Act(AT_BLOOD, "$n strips the skin from $p.", ch, corpse, NULL, TO_ROOM);
-    Act(AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, TO_CHAR);
+    Act(AT_BLOOD, "$n strips the skin from $p.", ch, corpse, NULL, ActTarget::Room);
+    Act(AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, ActTarget::Char);
     skin = CreateObject(GetProtoObject(OBJ_VNUM_SKIN), 0);
     name = corpse->ShortDescr;
     sprintf(buf, skin->ShortDescr.c_str(), name.c_str());

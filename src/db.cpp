@@ -1261,7 +1261,7 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
 
 /*
  * Creates a simple exit with no fields filled but rvnum and optionally
- * to_room and vnum.                                            -Thoric
+ * ActTarget::Room and vnum.                                            -Thoric
  * Exits are inserted into the linked list based on vdir.
  */
 std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr<Room> to_room, DirectionType door, const std::string &keyword)

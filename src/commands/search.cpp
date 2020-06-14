@@ -126,8 +126,8 @@ void do_search(Character *ch, std::string arg)
            && percent < (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_search]))
         {
             Act(AT_SKILL, "Your search reveals the $d!",
-                ch, nullptr, pexit->Keyword.c_str(), TO_CHAR);
-            Act(AT_SKILL, "$n finds the $d!", ch, nullptr, pexit->Keyword.c_str(), TO_ROOM);
+                ch, nullptr, pexit->Keyword.c_str(), ActTarget::Char);
+            Act(AT_SKILL, "$n finds the $d!", ch, nullptr, pexit->Keyword.c_str(), ActTarget::Room);
             pexit->Flags.reset(Flag::Exit::Secret);
             LearnFromSuccess(ch, gsn_search);
             return;
@@ -156,7 +156,7 @@ void do_search(Character *ch, std::string arg)
 
     SeparateOneObjectFromGroup(obj);
     obj->Flags.reset(Flag::Obj::Hidden);
-    Act(AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR);
-    Act(AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM);
+    Act(AT_SKILL, "Your search reveals $p!", ch, obj, NULL, ActTarget::Char);
+    Act(AT_SKILL, "$n finds $p!", ch, obj, NULL, ActTarget::Room);
     LearnFromSuccess(ch, gsn_search);
 }

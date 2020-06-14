@@ -116,7 +116,7 @@ void do_oinvoke(Character *ch, std::string argument)
     else
     {
         obj = ObjectToRoom(obj, ch->InRoom);
-        Act(AT_IMMORT, "$n has created $p!", ch, obj, NULL, TO_ROOM);
+        Act(AT_IMMORT, "$n has created $p!", ch, obj, NULL, ActTarget::Room);
     }
 
     ch->Echo("Ok.\r\n");

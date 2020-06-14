@@ -39,10 +39,10 @@ void do_mpechoaround(Character *ch, std::string argument)
     if((color = GetColor(argument)))
     {
         argument = OneArgument(argument, arg);
-        Act(color, argument, ch, NULL, victim, TO_NOTVICT);
+        Act(color, argument, ch, NULL, victim, ActTarget::NotVict);
     }
     else
-        Act(AT_ACTION, argument, ch, NULL, victim, TO_NOTVICT);
+        Act(AT_ACTION, argument, ch, NULL, victim, ActTarget::NotVict);
 
     ch->Flags = mobflags;
 }

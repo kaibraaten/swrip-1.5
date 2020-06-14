@@ -66,7 +66,7 @@ void do_placevendor(Character *ch, std::string argument)
     ExtractObject(obj);
 
     Act(AT_ACTION, "$n appears in a swirl of smoke.",
-        vendor, nullptr, nullptr, TO_ROOM);
+        vendor, nullptr, nullptr, ActTarget::Room);
 
     char vnum1[MAX_INPUT_LENGTH];
     sprintf(vnum1, "%ld", vendor->Prototype->Vnum);

@@ -29,21 +29,21 @@ void do_scan(Character *ch, std::string argument)
     }
 
     auto was_in_room = ch->InRoom;
-    Act(AT_GREY, "Scanning $t...", ch, GetDirectionName(dir), NULL, TO_CHAR);
-    Act(AT_GREY, "$n scans $t.", ch, GetDirectionName(dir), NULL, TO_ROOM);
+    Act(AT_GREY, "Scanning $t...", ch, GetDirectionName(dir), NULL, ActTarget::Char);
+    Act(AT_GREY, "$n scans $t.", ch, GetDirectionName(dir), NULL, ActTarget::Room);
 
     if(IsNpc(ch)
        || (GetRandomPercent() > ch->PCData->Learned[gsn_scan]))
     {
         Act(AT_GREY, "You stop scanning $t as your vision blurs.", ch,
-            GetDirectionName(dir), NULL, TO_CHAR);
+            GetDirectionName(dir), NULL, ActTarget::Char);
         LearnFromFailure(ch, gsn_scan);
         return;
     }
 
     if((pexit = GetExit(ch->InRoom, dir)) == NULL)
     {
-        Act(AT_GREY, "You can't see $t.", ch, GetDirectionName(dir), NULL, TO_CHAR);
+        Act(AT_GREY, "You can't see $t.", ch, GetDirectionName(dir), NULL, ActTarget::Char);
         return;
     }
 
@@ -59,10 +59,10 @@ void do_scan(Character *ch, std::string argument)
         {
             if(pexit->Flags.test(Flag::Exit::Secret))
                 Act(AT_GREY, "Your view $t is blocked by a wall.", ch,
-                    GetDirectionName(dir), NULL, TO_CHAR);
+                    GetDirectionName(dir), NULL, ActTarget::Char);
             else
                 Act(AT_GREY, "Your view $t is blocked by a door.", ch,
-                    GetDirectionName(dir), NULL, TO_CHAR);
+                    GetDirectionName(dir), NULL, ActTarget::Char);
             break;
         }
 
@@ -78,7 +78,7 @@ void do_scan(Character *ch, std::string argument)
            && GetTrustLevel(ch) < LEVEL_GREATER)
         {
             Act(AT_GREY, "Your view $t is blocked by a private room.", ch,
-                GetDirectionName(dir), NULL, TO_CHAR);
+                GetDirectionName(dir), NULL, ActTarget::Char);
             break;
         }
 
@@ -128,14 +128,14 @@ void do_scan(Character *ch, std::string argument)
         if(dist >= max_dist)
         {
             Act(AT_GREY, "Your vision blurs with distance and you see no "
-                "farther $t.", ch, GetDirectionName(dir), NULL, TO_CHAR);
+                "farther $t.", ch, GetDirectionName(dir), NULL, ActTarget::Char);
             break;
         }
 
         if((pexit = GetExit(ch->InRoom, dir)) == NULL)
         {
             Act(AT_GREY, "Your view $t is blocked by a wall.", ch,
-                GetDirectionName(dir), NULL, TO_CHAR);
+                GetDirectionName(dir), NULL, ActTarget::Char);
             break;
         }
     }

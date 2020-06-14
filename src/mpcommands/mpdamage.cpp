@@ -187,40 +187,40 @@ static ch_ret simple_damage(Character *ch, Character *victim, int dam, int dt)
     {
     case POS_MORTAL:
         Act(AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
-            victim, NULL, NULL, TO_ROOM);
+            victim, NULL, NULL, ActTarget::Room);
         Act(AT_DANGER, "You are mortally wounded, and will die soon, if not aided.",
-            victim, NULL, NULL, TO_CHAR);
+            victim, NULL, NULL, ActTarget::Char);
         break;
 
     case POS_INCAP:
         Act(AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
-            victim, NULL, NULL, TO_ROOM);
+            victim, NULL, NULL, ActTarget::Room);
         Act(AT_DANGER, "You are incapacitated and will slowly die, if not aided.",
-            victim, NULL, NULL, TO_CHAR);
+            victim, NULL, NULL, ActTarget::Char);
         break;
 
     case POS_STUNNED:
         if(!IsAffectedBy(victim, Flag::Affect::Paralysis))
         {
             Act(AT_ACTION, "$n is stunned, but will probably recover.",
-                victim, NULL, NULL, TO_ROOM);
+                victim, NULL, NULL, ActTarget::Room);
             Act(AT_HURT, "You are stunned, but will probably recover.",
-                victim, NULL, NULL, TO_CHAR);
+                victim, NULL, NULL, ActTarget::Char);
         }
         break;
 
     case POS_DEAD:
-        Act(AT_DEAD, "$n is DEAD!!", victim, 0, 0, TO_ROOM);
-        Act(AT_DEAD, "You have been KILLED!!\r\n", victim, 0, 0, TO_CHAR);
+        Act(AT_DEAD, "$n is DEAD!!", victim, 0, 0, ActTarget::Room);
+        Act(AT_DEAD, "You have been KILLED!!\r\n", victim, 0, 0, ActTarget::Char);
         break;
 
     default:
         if(dam > victim->HitPoints.Max / 4)
-            Act(AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR);
+            Act(AT_HURT, "That really did HURT!", victim, 0, 0, ActTarget::Char);
 
         if(victim->HitPoints.Current < victim->HitPoints.Max / 4)
             Act(AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
-                victim, 0, 0, TO_CHAR);
+                victim, 0, 0, ActTarget::Char);
 
         break;
     }

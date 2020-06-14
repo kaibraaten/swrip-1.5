@@ -40,8 +40,8 @@ void do_invite(Character *ch, std::string argument)
         return;
     }
 
-    Act(AT_ACTION, "You invite $N to enter, and $E steps inside.", ch, NULL, victim, TO_CHAR);
-    Act(AT_ACTION, "$n invites you to enter, and you step inside.", ch, NULL, victim, TO_VICT);
+    Act(AT_ACTION, "You invite $N to enter, and $E steps inside.", ch, NULL, victim, ActTarget::Char);
+    Act(AT_ACTION, "$n invites you to enter, and you step inside.", ch, NULL, victim, ActTarget::Vict);
     CharacterFromRoom(victim);
     CharacterToRoom(victim, home);
     victim->BuzzedHome = NULL;

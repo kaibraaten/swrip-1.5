@@ -42,7 +42,7 @@ void do_remove(Character *ch, std::string arg)
     if(alreadyWorn != obj)
     {
         Act(AT_PLAIN, "You must remove $p first.",
-            ch, alreadyWorn, NULL, TO_CHAR);
+            ch, alreadyWorn, NULL, ActTarget::Char);
         return;
     }
 

@@ -52,6 +52,6 @@ void do_addresident(Character *ch, std::string argument)
     home->Add(resident);
     Homes->Save(home);
 
-    Act(AT_PLAIN, "You add $N as a resident.", ch, NULL, victim, TO_CHAR);
+    Act(AT_PLAIN, "You add $N as a resident.", ch, NULL, victim, ActTarget::Char);
     victim->Echo("You are now a resident of this home.\r\n");
 }

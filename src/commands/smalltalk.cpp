@@ -94,8 +94,8 @@ void do_smalltalk(Character *ch, std::string argument)
          * Failure.
          */
         ch->Echo("You attempt to make smalltalk with them, but are ignored.\r\n");
-        Act(AT_ACTION, "$n is really getting on your nerves with all this chatter!\r\n", ch, NULL, victim, TO_VICT);
-        Act(AT_ACTION, "$n asks $N about the weather but is ignored.\r\n", ch, NULL, victim, TO_NOTVICT);
+        Act(AT_ACTION, "$n is really getting on your nerves with all this chatter!\r\n", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_ACTION, "$n asks $N about the weather but is ignored.\r\n", ch, NULL, victim, ActTarget::NotVict);
 
         if(victim->Alignment < -500 && victim->TopLevel >= ch->TopLevel + 5)
         {
@@ -108,8 +108,8 @@ void do_smalltalk(Character *ch, std::string argument)
     }
 
     ch->Echo("You strike up a short conversation with them.\r\n");
-    Act(AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, TO_VICT);
-    Act(AT_ACTION, "$n chats briefly with $N.\r\n", ch, NULL, victim, TO_NOTVICT);
+    Act(AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, ActTarget::Vict);
+    Act(AT_ACTION, "$n chats briefly with $N.\r\n", ch, NULL, victim, ActTarget::NotVict);
 
     if(!IsClanned(ch) || !ch->InRoom->Area->Planet)
         return;
