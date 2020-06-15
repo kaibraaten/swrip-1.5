@@ -3,22 +3,21 @@
 
 #include "cp_internal.hpp"
 
-namespace ColorParser {
-
-class SmaugStripper
+namespace ColorParser
 {
-public:
-  static SmaugStripper *Instance();
-  std::string Parse( const std::string& );
+    class SmaugStripper
+    {
+    public:
+        static SmaugStripper *Instance();
+        std::string Parse(const std::string &);
 
-private:
-  SmaugStripper();
-  void FillMap( std::map< char, std::string >&, const char[], size_t );
-  std::map< char, AnsiMap > _MasterMap;
-  AnsiMap _Foreground;
-  AnsiMap _Background;
-};
-
+    private:
+        SmaugStripper();
+        void FillMap(std::map< char, std::string > &, const char[], size_t);
+        std::map< char, AnsiMap > _MasterMap;
+        AnsiMap _Foreground;
+        AnsiMap _Background;
+    };
 }
 
 #endif // include guard

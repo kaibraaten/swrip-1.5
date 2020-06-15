@@ -3,23 +3,24 @@
 
 #include "cp_internal.hpp"
 
-namespace ColorParser {
-
-class Smaug2Ansi
+namespace ColorParser
 {
-public:
-  static Smaug2Ansi *Instance();
-  std::string Parse( const std::string& );
 
-private:
-  Smaug2Ansi();
-  void FillMap( std::map< char, std::string >&, const char[],
-                const char * const[], size_t );
+    class Smaug2Ansi
+    {
+    public:
+        static Smaug2Ansi *Instance();
+        std::string Parse(const std::string &);
 
-  std::map< char, AnsiMap > _MasterMap;
-  AnsiMap _Foreground;
-  AnsiMap _Background;
-};
+    private:
+        Smaug2Ansi();
+        void FillMap(std::map<char, std::string> &, const char[],
+                     const char * const[], size_t);
+
+        std::map< char, AnsiMap > _MasterMap;
+        AnsiMap _Foreground;
+        AnsiMap _Background;
+    };
 
 }
 

@@ -1,4 +1,5 @@
 # Star Wars: Rise in Power 1.5
+
 ## Disclaimer
 Before I say anything else, I need to make it clear that I do **_not_**
 recommend using this code in its current state.
@@ -9,16 +10,9 @@ prime example of legacy code, with lots of global variables without any kind
 of access control, everything can be changed freely from anywhere, more code
 duplication than you can shake your fist at, poorly named variables, functions
 and structs, unclear structure and architecture, etc. Even minor changes or
-additions require little changes in a dozen unrelated places all over
+additions require changes in a dozen unrelated places all over
 the codebase. In short, it's the kind of code that no sane person would touch
 with a ten foot pole.
-
-## Why would you do this to yourself?
-Being a computer science student with a special interest in clean code,
-cleaning up this mess is a perfect project for me. Identify poor code, and
-turn it into good (or at least better) code. I'm not saying it'll ever be high
-quality code, but I've already learned a lot from this project. In particular,
-I've felt how much tight coupling can hurt.
 
 ## Goals
 The first goal is to get as much code as possible under test. Because of how
@@ -27,15 +21,24 @@ deal of work. Most of the refactoring is governed by this one goal. The single
 greatest obstacle is dependencies. So breaking dependencies is the name of the
 game.
 
-Exactly where we go from there is not decided yet, but I'm unlikely to add
-new features any time soon. It will still be about refactoring.
+I'm not saying it'll ever be high quality code, but I'm confident it'll
+be better code at least. And better is always a good thing. I've already
+learned a lot from this project. In particular, I've felt how much
+tight coupling can hurt.
+
+## Releases
+
+While anyone can checkout the code at any time, I personally only
+recommend using the releases I make. There is no release schedule,
+this is a hobby project after all. I will make a release when
+I feel I have something that is worth using.
 
 ## Requirements
 * A compiler supporting C++17. Clang, GCC 9, and Visual Studio 2019 are known to work.
 * Lua 5.3 (included in libs/3rdparty directory)
 * Google Test and Google Mock (downloaded automatically)
 * cmake 3.10 or higher.
-* Python 3 (the script also works with Python 2, but the v3 interpreter is the one being used).
+* Python 3.
 
 ## Compiling
 * Type `cmake .` (only needed first time you're compiling)

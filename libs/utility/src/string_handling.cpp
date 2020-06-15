@@ -16,38 +16,38 @@
 #include "utility.hpp"
 #include "sha256.hpp"
 
-using STRING_COMPARATOR = std::function<int(const std::string&, const std::string&)>;
-using STRING_TOKENIZER = std::function<std::string(const std::string&, std::string&)>;
+using STRING_COMPARATOR = std::function<int(const std::string &, const std::string &)>;
+using STRING_TOKENIZER = std::function<std::string(const std::string &, std::string &)>;
 
 static std::string GetNextChunk(std::string &str, const char c);
 static std::string OneArgument2(const std::string &argument, std::string &arg_first);
-static int IsName2(const std::string&, const std::string&);
-static int IsName2Prefix(const std::string&, const std::string&);
-static int IsNameInternal(const std::string&, const std::string&,
-    STRING_COMPARATOR, STRING_TOKENIZER);
-static int NiftyIsNameInternal(const std::string&, const std::string&,
-    STRING_COMPARATOR, STRING_TOKENIZER);
+static int IsName2(const std::string &, const std::string &);
+static int IsName2Prefix(const std::string &, const std::string &);
+static int IsNameInternal(const std::string &, const std::string &,
+                          STRING_COMPARATOR, STRING_TOKENIZER);
+static int NiftyIsNameInternal(const std::string &, const std::string &,
+                               STRING_COMPARATOR, STRING_TOKENIZER);
 
 /*
  * See if a string is one of the names of an object.
  */
 static int IsNameInternal(const std::string &str, const std::string &namelist,
-    STRING_COMPARATOR compare_string,
-    STRING_TOKENIZER tokenize_string)
+                          STRING_COMPARATOR compare_string,
+                          STRING_TOKENIZER tokenize_string)
 {
     std::string name;
     std::string tmp = namelist;
 
-    for (; ; )
+    for(; ; )
     {
         tmp = tokenize_string(tmp, name);
 
-        if (name.empty())
+        if(name.empty())
         {
             return false;
         }
 
-        if (!compare_string(str, name))
+        if(!compare_string(str, name))
         {
             return true;
         }
@@ -96,10 +96,10 @@ static int IsName2Prefix(const std::string &str, const std::string &namelist)
  * Checks if str is a name in namelist supporting multiple keywords
  */
 static int NiftyIsNameInternal(const std::string &str, const std::string &namelist,
-    STRING_COMPARATOR compare_string,
-    STRING_TOKENIZER tokenize_string)
+                               STRING_COMPARATOR compare_string,
+                               STRING_TOKENIZER tokenize_string)
 {
-    if (str.empty())
+    if(str.empty())
     {
         return false;
     }
@@ -107,16 +107,16 @@ static int NiftyIsNameInternal(const std::string &str, const std::string &nameli
     std::string tmp = str;
     std::string name;
 
-    for (; ; )
+    for(; ; )
     {
         tmp = tokenize_string(tmp, name);
 
-        if (name.empty())
+        if(name.empty())
         {
             return true;
         }
 
-        if (!compare_string(name, namelist))
+        if(!compare_string(name, namelist))
         {
             return false;
         }
@@ -180,8 +180,8 @@ int StringPrefix(const std::string &needle, const std::string &haystack)
 {
     int match = 1;
 
-    if (haystack.size() >= needle.size()
-        && !StrCmp(needle, haystack.substr(0, needle.size())))
+    if(haystack.size() >= needle.size()
+       && !StrCmp(needle, haystack.substr(0, needle.size())))
     {
         match = 0;
     }
@@ -195,16 +195,16 @@ int StringPrefix(const std::string &needle, const std::string &haystack)
  *   (compatibility with historical functions).
  */
 int StringInfix(const std::string &needle,
-    const std::string &haystackRef)
+                const std::string &haystackRef)
 {
     std::string haystack = haystackRef;
     int match = 1;
 
-    while (!haystack.empty())
+    while(!haystack.empty())
     {
         std::string token = GetNextChunk(haystack, ' ');
 
-        if (!StringPrefix(needle, token))
+        if(!StringPrefix(needle, token))
         {
             match = 0;
             break;
@@ -225,7 +225,7 @@ int StringSuffix(const std::string &astr, const std::string &bstr)
     const size_t sstr2 = bstr.size();
     const char *bstr_ptr = bstr.c_str();
 
-    if (sstr1 <= sstr2 && !StrCmp(astr, bstr_ptr + sstr2 - sstr1))
+    if(sstr1 <= sstr2 && !StrCmp(astr, bstr_ptr + sstr2 - sstr1))
     {
         return false;
     }
@@ -244,19 +244,22 @@ std::string Capitalize(const std::string &argument)
     char buf[MAX_STRING_LENGTH];
     const char *str = argument.c_str();
     char *dest = buf;
-    enum { Normal, Color } state = Normal;
+    enum
+    {
+        Normal, Color
+    } state = Normal;
     bool bFirst = true;
     char c = 0;
 
-    while ((c = *str++))
+    while((c = *str++))
     {
-        if (state == Normal)
+        if(state == Normal)
         {
-            if (c == '&' || c == '^')
+            if(c == '&' || c == '^')
             {
                 state = Color;
             }
-            else if (isalpha(c))
+            else if(isalpha(c))
             {
                 c = bFirst ? toupper(c) : c;
                 bFirst = false;
@@ -294,7 +297,7 @@ static bool isavowel(char letter)
 {
     char c = tolower((int)letter);
 
-    if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+    if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
         return true;
     else
         return false;
@@ -307,9 +310,9 @@ std::string AOrAn(const std::string &str)
 {
     std::string temp;
 
-    if (isavowel(str[0])
-        || (str.size() > 1 && tolower((int)str[0]) == 'y'
-            && !isavowel(str[1])))
+    if(isavowel(str[0])
+       || (str.size() > 1 && tolower((int)str[0]) == 'y'
+           && !isavowel(str[1])))
     {
         temp = "an ";
     }
@@ -323,9 +326,9 @@ std::string AOrAn(const std::string &str)
 
 void ReplaceChar(std::string &buf, char replace, char with)
 {
-    for (size_t i = 0; i < buf.size(); ++i)
+    for(size_t i = 0; i < buf.size(); ++i)
     {
-        if (buf[i] == replace)
+        if(buf[i] == replace)
         {
             buf[i] = with;
         }
@@ -334,16 +337,16 @@ void ReplaceChar(std::string &buf, char replace, char with)
 
 bool IsNumber(const std::string &arg)
 {
-    if (arg.empty())
+    if(arg.empty())
         return false;
 
-    for (char letter : arg)
+    for(char letter : arg)
     {
-        if (!isdigit((int)letter)
-            && letter != '.'
-            && letter != ','
-            && letter != '+'
-            && letter != '-')
+        if(!isdigit((int)letter)
+           && letter != '.'
+           && letter != ','
+           && letter != '+'
+           && letter != '-')
             return false;
     }
 
@@ -355,9 +358,9 @@ int NumberArgument(const std::string &orig_argument, std::string &arg)
     char argument[MAX_STRING_LENGTH];
     sprintf(argument, "%s", orig_argument.c_str());
 
-    for (char *pdot = argument; *pdot != '\0'; pdot++)
+    for(char *pdot = argument; *pdot != '\0'; pdot++)
     {
-        if (*pdot == '.')
+        if(*pdot == '.')
         {
             *pdot = '\0';
             const int number = strtol(argument, nullptr, 10);
@@ -376,17 +379,17 @@ std::string OneArgument(const std::string &argument, std::string &arg_first)
     std::string::const_iterator argp = argument.begin();
     arg_first.erase();
 
-    while (argp != argument.end() && isspace(*argp))
+    while(argp != argument.end() && isspace(*argp))
         ++argp;
 
     char cEnd = ' ';
 
-    if (*argp == '\'' || *argp == '"')
+    if(*argp == '\'' || *argp == '"')
         cEnd = *argp++;
 
-    while (argp != argument.end())
+    while(argp != argument.end())
     {
-        if (*argp == cEnd)
+        if(*argp == cEnd)
         {
             ++argp;
             break;
@@ -396,7 +399,7 @@ std::string OneArgument(const std::string &argument, std::string &arg_first)
         ++argp;
     }
 
-    while (argp != argument.end() && isspace(*argp))
+    while(argp != argument.end() && isspace(*argp))
         ++argp;
 
     return std::string(argp, argument.end());
@@ -405,7 +408,7 @@ std::string OneArgument(const std::string &argument, std::string &arg_first)
 std::vector<char> StringToVector(const std::string &original)
 {
     return std::vector<char>(original.c_str(),
-        original.c_str() + original.size() + 1);
+                             original.c_str() + original.size() + 1);
 }
 
 /*
@@ -417,17 +420,17 @@ static std::string OneArgument2(const std::string &argument, std::string &arg_fi
     std::string::const_iterator argp = argument.begin();
     arg_first.erase();
 
-    while (argp != argument.end() && isspace(*argp))
+    while(argp != argument.end() && isspace(*argp))
         ++argp;
 
     char cEnd = ' ';
 
-    if (*argp == '\'' || *argp == '"')
+    if(*argp == '\'' || *argp == '"')
         cEnd = *argp++;
 
-    while (argp != argument.end())
+    while(argp != argument.end())
     {
-        if (*argp == cEnd || *argp == '-')
+        if(*argp == cEnd || *argp == '-')
         {
             ++argp;
             break;
@@ -437,7 +440,7 @@ static std::string OneArgument2(const std::string &argument, std::string &arg_fi
         ++argp;
     }
 
-    while (argp != argument.end() && isspace(*argp))
+    while(argp != argument.end() && isspace(*argp))
         ++argp;
 
     return std::string(argp, argument.end());
@@ -452,9 +455,9 @@ std::string StripCarriageReturn(const std::string &arg)
     int j = 0;
     const char *str = arg.c_str();
 
-    for (int i = 0; str[i] != '\0'; i++)
+    for(int i = 0; str[i] != '\0'; i++)
     {
-        if (str[i] != '\r')
+        if(str[i] != '\r')
         {
             newstr[j++] = str[i];
         }
@@ -471,7 +474,7 @@ std::string SmushTilde(std::string &str)
 {
 #if 1
     size_t positionOfLastCharacter = str.empty() ? 0 : str.size() - 1;
-    
+
     for(size_t i = 0; i < str.size(); ++i)
     {
         if(str[i] == '~' && i != positionOfLastCharacter)
@@ -488,13 +491,13 @@ std::string SmushTilde(std::string &str)
     size_t len = strlen(str);
     char last = len != 0 ? strptr[len - 1] : '\0';
 
-    for (; *str != '\0'; str++)
+    for(; *str != '\0'; str++)
     {
-        if (*str == '~')
+        if(*str == '~')
             *str = '-';
     }
 
-    if (len)
+    if(len)
         strptr[len - 1] = last;
 
     orig_str = str;
@@ -522,7 +525,7 @@ std::string TrimStringStart(const std::string &str, char junk)
 {
     const auto strBegin = str.find_first_not_of(junk);
 
-    if (strBegin == std::string::npos)
+    if(strBegin == std::string::npos)
         return ""; // no content
 
     return str.substr(strBegin);
@@ -539,7 +542,7 @@ std::string TrimString(const std::string &str, char junk)
 {
     const auto strBegin = str.find_first_not_of(junk);
 
-    if (strBegin == std::string::npos)
+    if(strBegin == std::string::npos)
         return ""; // no content
 
     const auto strEnd = str.find_last_not_of(junk);
@@ -562,7 +565,7 @@ static const char *str_str(const char *astr, const char *bstr)
 {
     const char c0 = CharToLowercase(bstr[0]);
 
-    if (c0 == '\0')
+    if(c0 == '\0')
     {
         return nullptr;
     }
@@ -570,9 +573,9 @@ static const char *str_str(const char *astr, const char *bstr)
     const size_t sstr1 = strlen(astr);
     const size_t sstr2 = strlen(bstr);
 
-    for (size_t ichar = 0; ichar <= sstr1 - sstr2; ++ichar)
+    for(size_t ichar = 0; ichar <= sstr1 - sstr2; ++ichar)
     {
-        if (c0 == CharToLowercase(astr[ichar]) && !StringPrefix(bstr, astr + ichar))
+        if(c0 == CharToLowercase(astr[ichar]) && !StringPrefix(bstr, astr + ichar))
         {
             return astr + ichar;
         }
@@ -592,7 +595,7 @@ int CountStringOccurances(const std::string &source, const std::string &target)
     const char *ptemp = psource;
     int count = 0;
 
-    while ((ptemp = str_str(ptemp, ptarget)))
+    while((ptemp = str_str(ptemp, ptarget)))
     {
         ptemp++;
         count++;
@@ -611,7 +614,7 @@ static std::string GetNextChunk(std::string &str, const char c)
     std::string::size_type pos = str.find(c);
     std::string line = str.substr(0, pos);
 
-    if (pos == std::string::npos)
+    if(pos == std::string::npos)
     {
         str.erase();
     }
@@ -661,15 +664,15 @@ static char *grab_word(char *argument, char *arg_first)
     char cEnd = ' ';
     short count = 0;
 
-    while (isspace((int)*argument))
+    while(isspace((int)*argument))
         argument++;
 
-    if (*argument == '\'' || *argument == '"')
+    if(*argument == '\'' || *argument == '"')
         cEnd = *argument++;
 
-    while (*argument != '\0' || ++count >= 255)
+    while(*argument != '\0' || ++count >= 255)
     {
-        if (*argument == cEnd)
+        if(*argument == cEnd)
         {
             argument++;
             break;
@@ -680,7 +683,7 @@ static char *grab_word(char *argument, char *arg_first)
 
     *arg_first = '\0';
 
-    while (isspace((int)*argument))
+    while(isspace((int)*argument))
         argument++;
 
     return argument;
@@ -692,7 +695,7 @@ std::string WordWrap(const std::string &stl_txt, unsigned short wrap)
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char *bufp = buf;
 
-    if (!txt.empty())
+    if(!txt.empty())
     {
         char line[MAX_STRING_LENGTH] = { '\0' };
         char temp[MAX_STRING_LENGTH] = { '\0' };
@@ -701,15 +704,15 @@ std::string WordWrap(const std::string &stl_txt, unsigned short wrap)
         ++bufp;
         line[0] = '\0';
 
-        while (*ptr)
+        while(*ptr)
         {
             size_t ln = strlen(line);
             ptr = grab_word(ptr, temp);
             size_t x = strlen(temp);
 
-            if ((ln + x + 1) < wrap)
+            if((ln + x + 1) < wrap)
             {
-                if (ln > 0 && line[ln - 1] == '.')
+                if(ln > 0 && line[ln - 1] == '.')
                 {
                     strcat(line, " ");
                 }
@@ -721,12 +724,12 @@ std::string WordWrap(const std::string &stl_txt, unsigned short wrap)
                 strcat(line, temp);
                 const char *p = strchr(line, '\n');
 
-                if (!p)
+                if(!p)
                 {
                     p = strchr(line, '\r');
                 }
 
-                if (p)
+                if(p)
                 {
                     strcat(buf, line);
                     line[0] = '\0';
@@ -740,7 +743,7 @@ std::string WordWrap(const std::string &stl_txt, unsigned short wrap)
             }
         }
 
-        if (line[0] != '\0')
+        if(line[0] != '\0')
         {
             strcat(buf, line);
         }
@@ -759,9 +762,9 @@ void ReplaceAll(std::string &doc, const std::string &original,
 {
     std::string::size_type pos = 0;
 
-    while( ( pos = doc.find( original, pos ) ) != std::string::npos )
+    while((pos = doc.find(original, pos)) != std::string::npos)
     {
-        doc.replace( pos, original.size(), replacement );
+        doc.replace(pos, original.size(), replacement);
         pos += replacement.size();
     }
 }

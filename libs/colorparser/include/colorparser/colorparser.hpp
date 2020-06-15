@@ -27,10 +27,34 @@
 #define _CERIS_COLORPARSER_HPP_
 
 #include <string>
-namespace ColorParser {
-std::string Smaug2Ansi( const std::string& );
-std::string Smaug2Html( const std::string& );
-std::string Smaug2None( const std::string& );
-std::string Passthrough( const std::string& );
+namespace ColorParser
+{
+    /// <summary>
+    /// Convert text with Smaug style color tokens to ANSI color sequences.
+    /// </summary>
+    /// <param name="txt">Text containing color tokens.</param>
+    /// <returns>The converted text.</returns>
+    std::string Smaug2Ansi(const std::string &txt);
+
+    /// <summary>
+    /// Convert text with Smaug style color tokens to HTML color tags.
+    /// </summary>
+    /// <param name="txt">Text containing color tokens.</param>
+    /// <returns>The converted text.</returns>
+    std::string Smaug2Html(const std::string &txt);
+
+    /// <summary>
+    /// Strip away all Smaug color tokens from text.
+    /// </summary>
+    /// <param name="txt">Text containing color tokens.</param>
+    /// <returns>The converted text.</returns>
+    std::string Smaug2None(const std::string &txt);
+
+    /// <summary>
+    /// Send text through unaltered.
+    /// </summary>
+    /// <param name="txt">Text containing color tokens.</param>
+    /// <returns>Same as the txt parameter.</returns>
+    std::string Passthrough(const std::string &txt);
 }
 #endif

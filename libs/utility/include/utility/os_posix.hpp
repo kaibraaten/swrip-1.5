@@ -52,6 +52,5 @@ static const int SOCKET_ERROR = -1;
 typedef int socket_t;
 typedef char sockbuf_t;
 
-
 #endif /* include guard */
 

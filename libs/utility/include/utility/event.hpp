@@ -30,8 +30,8 @@
 #include <map>
 #include <functional>
 
-namespace Ceris {
-
+namespace Ceris
+{
     // Forward declaration needed by Event.
     template< typename EventArgsT >
     class HandlerFunctionBase;
@@ -51,33 +51,33 @@ namespace Ceris {
 
         // Subscribe to the event using a member function as eventhandler.
         template< typename T >
-        void Add(T *subscriber, void (T::*memFn)(EventArgsT));
+        void Add(T *subscriber, void (T:: *memFn)(EventArgsT));
 
         // Subscribe to the event using a non-member function as eventhandler.
-        void Add(void *userdata, std::function<void(void*, EventArgsT)> fun);
+        void Add(void *userdata, std::function<void(void *, EventArgsT)> fun);
 
         // Subscribe to the event using a non-member function as eventhandler.
-        void Add(std::function<void(void*, EventArgsT)> fun);
+        void Add(std::function<void(void *, EventArgsT)> fun);
 
         // Unsubscribe all eventhandlers for a specific subscriber. Both member
         // and non-member functions are unsubscribed.
         template< typename T >
-        void Remove(T *subscriber, void (T::*memFn)(EventArgsT));
+        void Remove(T *subscriber, void (T:: *memFn)(EventArgsT));
 
         // Unsubscribe all member function eventhandlers for a subscriber.
         void Remove(void *subscriber);
 
         // Unsubscribe a non-member function eventhandler.
-        void Remove(void *userdata, std::function<void(void*, EventArgsT)> fun);
+        void Remove(void *userdata, std::function<void(void *, EventArgsT)> fun);
 
-        Event &operator=(const Event&) = delete;
-        Event(const Event&) = delete;
+        Event &operator=(const Event &) = delete;
+        Event(const Event &) = delete;
 
     private:
-        using HandlerContainer = std::multimap< void*, std::shared_ptr<HandlerFunctionBase<EventArgsT>> >;
+        using HandlerContainer = std::multimap< void *, std::shared_ptr<HandlerFunctionBase<EventArgsT>> >;
         template< typename T >
-        auto Find(T *instance, void (T::*memFn)(EventArgsT)) const;
-        auto Find(void *userdata, std::function<void(void*, EventArgsT)> fun) const;
+        auto Find(T *instance, void (T:: *memFn)(EventArgsT)) const;
+        auto Find(void *userdata, std::function<void(void *, EventArgsT)> fun) const;
         HandlerContainer _Handlers;
     };
 
@@ -90,7 +90,7 @@ namespace Ceris {
     public:
         virtual ~HandlerFunctionBase() = default;
         void Exec(const EventArgsT &args);
-        virtual bool Equals(const std::shared_ptr<HandlerFunctionBase>&) const = 0;
+        virtual bool Equals(const std::shared_ptr<HandlerFunctionBase> &) const = 0;
 
     private:
         virtual void Call(const EventArgsT &args) = 0;
@@ -109,9 +109,9 @@ namespace Ceris {
     class MemberFunctionHandler : public HandlerFunctionBase< EventArgsT >
     {
     public:
-        typedef void (T::*MemberFunc)(EventArgsT);
+        typedef void (T:: *MemberFunc)(EventArgsT);
         MemberFunctionHandler(T *instance, MemberFunc memFn);
-        bool Equals(const std::shared_ptr<HandlerFunctionBase<EventArgsT>>&) const;
+        bool Equals(const std::shared_ptr<HandlerFunctionBase<EventArgsT>> &) const;
 
     private:
         void Call(const EventArgsT &args);
@@ -122,7 +122,7 @@ namespace Ceris {
 
     template< typename T, typename EventArgsT >
     MemberFunctionHandler< T, EventArgsT >::MemberFunctionHandler(T *instance,
-        MemberFunc memFn)
+                                                                  MemberFunc memFn)
         : _Instance(instance),
         _Function(memFn)
     {
@@ -140,7 +140,7 @@ namespace Ceris {
     {
         const auto h2 = std::dynamic_pointer_cast<MemberFunctionHandler< T, EventArgsT >>(rhv);
 
-        if (!h2)
+        if(!h2)
         {
             return false;
         }
@@ -155,9 +155,9 @@ namespace Ceris {
     class GlobalFunctionHandler : public HandlerFunctionBase< EventArgsT >
     {
     public:
-        using Func = std::function<void(void*, EventArgsT)>;
+        using Func = std::function<void(void *, EventArgsT)>;
         GlobalFunctionHandler(void *userdata, Func memFn);
-        bool Equals(const std::shared_ptr<HandlerFunctionBase< EventArgsT >>&) const;
+        bool Equals(const std::shared_ptr<HandlerFunctionBase< EventArgsT >> &) const;
 
     private:
         void Call(const EventArgsT &args);
@@ -185,13 +185,13 @@ namespace Ceris {
     {
         const auto h2 = std::dynamic_pointer_cast<GlobalFunctionHandler< EventArgsT >>(rhv);
 
-        if (!h2)
+        if(!h2)
         {
             return false;
         }
 
         return _UserData == h2->_UserData
-            && *_Function.template target<void(*)(void*, EventArgsT)>() == *h2->_Function.template target<void(*)(void*, EventArgsT)>();
+            && *_Function.template target<void(*)(void *, EventArgsT)>() == *h2->_Function.template target<void(*)(void *, EventArgsT)>();
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -199,13 +199,13 @@ namespace Ceris {
 
     template< typename EventArgsT >
     template< typename T >
-    auto Event< EventArgsT >::Find(T *instance, void (T::*memFn)(EventArgsT)) const
+    auto Event< EventArgsT >::Find(T *instance, void (T:: *memFn)(EventArgsT)) const
     {
         MemberFunctionHandler< T, EventArgsT > handler(instance, memFn);
 
-        for (auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
+        for(auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
         {
-            if (handler.Equals(i->second))
+            if(handler.Equals(i->second))
             {
                 return i;
             }
@@ -215,13 +215,13 @@ namespace Ceris {
     }
 
     template< typename EventArgsT >
-    auto Event< EventArgsT >::Find(void *userdata, std::function<void(void*, EventArgsT)> fun) const
+    auto Event< EventArgsT >::Find(void *userdata, std::function<void(void *, EventArgsT)> fun) const
     {
         GlobalFunctionHandler< EventArgsT > handler(userdata, fun);
 
-        for (auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
+        for(auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
         {
-            if (handler.Equals(i->second))
+            if(handler.Equals(i->second))
             {
                 return i;
             }
@@ -232,9 +232,9 @@ namespace Ceris {
 
     template< typename EventArgsT >
     template< typename T >
-    void Event< EventArgsT >::Add(T *instance, void (T::*memFn)(EventArgsT))
+    void Event< EventArgsT >::Add(T *instance, void (T:: *memFn)(EventArgsT))
     {
-        if (Find(instance, memFn) == _Handlers.end())
+        if(Find(instance, memFn) == _Handlers.end())
         {
             _Handlers.insert({ instance, std::make_shared<MemberFunctionHandler<T, EventArgsT>>(instance, memFn) });
         }
@@ -242,16 +242,16 @@ namespace Ceris {
 
     template< typename EventArgsT >
     void Event< EventArgsT >::Add(void *userdata,
-        std::function<void(void*, EventArgsT)> fun)
+                                  std::function<void(void *, EventArgsT)> fun)
     {
-        if (Find(userdata, fun) == _Handlers.end())
+        if(Find(userdata, fun) == _Handlers.end())
         {
             _Handlers.insert({ userdata, std::make_shared<GlobalFunctionHandler<EventArgsT>>(userdata, fun) });
         }
     }
 
     template< typename EventArgsT >
-    void Event< EventArgsT >::Add(std::function<void(void*, EventArgsT)> fun)
+    void Event< EventArgsT >::Add(std::function<void(void *, EventArgsT)> fun)
     {
         Add(nullptr, fun);
     }
@@ -259,7 +259,7 @@ namespace Ceris {
     template< typename EventArgsT >
     void Event< EventArgsT >::Remove(void *thingy)
     {
-        if (thingy)
+        if(thingy)
         {
             _Handlers.erase(thingy);
         }
@@ -267,13 +267,13 @@ namespace Ceris {
 
     template< typename EventArgsT >
     void Event< EventArgsT >::Remove(void *userdata,
-        std::function<void(void*, EventArgsT)> fun)
+                                     std::function<void(void *, EventArgsT)> fun)
     {
         GlobalFunctionHandler< EventArgsT > handler(userdata, fun);
 
-        for (auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
+        for(auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
         {
-            if (handler.Equals(i->second))
+            if(handler.Equals(i->second))
             {
                 _Handlers.erase(i);
                 break;
@@ -283,13 +283,13 @@ namespace Ceris {
 
     template< typename EventArgsT >
     template< typename T >
-    void Event< EventArgsT >::Remove(T *instance, void (T::*memFn)(EventArgsT))
+    void Event< EventArgsT >::Remove(T *instance, void (T:: *memFn)(EventArgsT))
     {
         MemberFunctionHandler< T, EventArgsT > handler(instance, memFn);
 
-        for (auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
+        for(auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
         {
-            if (handler.Equals(i->second))
+            if(handler.Equals(i->second))
             {
                 _Handlers.erase(i);
                 break;
@@ -303,7 +303,7 @@ namespace Ceris {
         // Use a copy so it's safe for handlers to unregister during dispatch
         HandlerContainer tmp = _Handlers;
 
-        for (auto p : tmp)
+        for(auto p : tmp)
         {
             p.second->Exec(args);
         }

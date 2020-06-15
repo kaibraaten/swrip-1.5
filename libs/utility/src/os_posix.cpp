@@ -11,8 +11,8 @@ void OsCleanup()
 
 }
 
-int SetNonBlockingSocket( socket_t sock )
+int SetNonBlockingSocket(socket_t sock)
 {
-  return fcntl( sock, F_SETFL, O_NONBLOCK );
+    return fcntl(sock, F_SETFL, O_NONBLOCK);
 }
 #endif

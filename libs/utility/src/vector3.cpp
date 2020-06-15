@@ -50,8 +50,8 @@ double GetVectorLength(std::shared_ptr<Vector3> v)
 double GetDistanceBetweenVectors(std::shared_ptr<Vector3> a, std::shared_ptr<Vector3> b)
 {
     return sqrt((a->x - b->x) * (a->x - b->x)
-        + (a->y - b->y) * (a->y - b->y)
-        + (a->z - b->z) * (a->z - b->z));
+                + (a->y - b->y) * (a->y - b->y)
+                + (a->z - b->z) * (a->z - b->z));
 }
 
 /*
@@ -69,7 +69,7 @@ void NormalizeVector(std::shared_ptr<Vector3> v)
 {
     double magnitude = (v->x * v->x) + (v->y * v->y) + (v->z * v->z);
 
-    if (magnitude == 0.0)
+    if(magnitude == 0.0)
         return;
 
     magnitude = sqrt(magnitude);

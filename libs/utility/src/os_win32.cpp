@@ -28,53 +28,53 @@
 #include <ctime>
 #include "os.hpp"
 
-/*
-static const char *get_next_filename( const char *directory )
+ /*
+ static const char *get_next_filename( const char *directory )
+ {
+   static char buf[256];
+   int high_num = 1000;
+   WIN32_FIND_DATA info;
+   HANDLE h;
+
+   snprintf( buf, 256, "%s*.*", directory );
+   h = FindFirstFile( buf, &info );
+
+   if( h != INVALID_HANDLE_VALUE )
+   {
+     do
+     {
+       if( info.cFileName[0] != '.' )
+       {
+     int curr = strtol( info.cFileName, 0, 10 );
+     high_num = curr > high_num ? curr : high_num;
+       }
+     }
+     while( FindNextFile( h, &info ) );
+
+     FindClose( h );
+   }
+
+   ++high_num;
+   snprintf( buf, 256, "%s%d.log", directory, high_num );
+   return buf;
+ }
+ */
+
+void OsSetup(void)
 {
-  static char buf[256];
-  int high_num = 1000;
-  WIN32_FIND_DATA info;
-  HANDLE h;
+    WSADATA wsaData;
 
-  snprintf( buf, 256, "%s*.*", directory );
-  h = FindFirstFile( buf, &info );
-
-  if( h != INVALID_HANDLE_VALUE )
-  {
-    do
+    if(WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
     {
-      if( info.cFileName[0] != '.' )
-      {
-	int curr = strtol( info.cFileName, 0, 10 );
-	high_num = curr > high_num ? curr : high_num;
-      }
+        fprintf(stdout, "%s (%s:%d) - WSAStartup failed.\n",
+                __FUNCTION__, __FILE__, __LINE__);
+        exit(1);
     }
-    while( FindNextFile( h, &info ) );
-
-    FindClose( h );
-  }
-
-  ++high_num;
-  snprintf( buf, 256, "%s%d.log", directory, high_num );
-  return buf;
-}
-*/
-
-void OsSetup( void )
-{
-  WSADATA wsaData;
-
-  if( WSAStartup( MAKEWORD( 2, 2 ), &wsaData ) != 0 )
-  {
-    fprintf( stdout, "%s (%s:%d) - WSAStartup failed.\n",
-	__FUNCTION__, __FILE__, __LINE__ );
-    exit( 1 );
-  }
 }
 
-void OsCleanup( void )
+void OsCleanup(void)
 {
-  WSACleanup();
+    WSACleanup();
 }
 
 // gettimeofday for Windows
@@ -85,45 +85,45 @@ void OsCleanup( void )
 #define DELTA_EPOCH_IN_MICROSECS  11644473600000000ULL
 #endif
 
-int gettimeofday( struct timeval *tv, struct timezone *tz )
+int gettimeofday(struct timeval *tv, struct timezone *tz)
 {
-  FILETIME ft;
-  unsigned __int64 tmpres = 0;
-  static int tzflag = 0;
+    FILETIME ft;
+    unsigned __int64 tmpres = 0;
+    static int tzflag = 0;
 
-  if( NULL != tv )
-  {
-    GetSystemTimeAsFileTime( &ft );
-
-    tmpres |= ft.dwHighDateTime;
-    tmpres <<= 32;
-    tmpres |= ft.dwLowDateTime;
-
-    /*converting file time to posix epoch*/
-    tmpres /= 10;  /*convert into microseconds*/
-    tmpres -= DELTA_EPOCH_IN_MICROSECS; 
-    tv->tv_sec = (long)(tmpres / 1000000UL);
-    tv->tv_usec = (long)(tmpres % 1000000UL);
-  }
-
-  if( NULL != tz )
-  {
-    if( !tzflag )
+    if(NULL != tv)
     {
-      _tzset();
-      tzflag++;
+        GetSystemTimeAsFileTime(&ft);
+
+        tmpres |= ft.dwHighDateTime;
+        tmpres <<= 32;
+        tmpres |= ft.dwLowDateTime;
+
+        /*converting file time to posix epoch*/
+        tmpres /= 10;  /*convert into microseconds*/
+        tmpres -= DELTA_EPOCH_IN_MICROSECS;
+        tv->tv_sec = (long)(tmpres / 1000000UL);
+        tv->tv_usec = (long)(tmpres % 1000000UL);
     }
 
-    tz->tz_minuteswest = _timezone / 60;
-    tz->tz_dsttime = _daylight;
-  }
+    if(NULL != tz)
+    {
+        if(!tzflag)
+        {
+            _tzset();
+            tzflag++;
+        }
 
-  return 0;
+        tz->tz_minuteswest = _timezone / 60;
+        tz->tz_dsttime = _daylight;
+    }
+
+    return 0;
 }
 
-int SetNonBlockingSocket( socket_t sock )
+int SetNonBlockingSocket(socket_t sock)
 {
-  unsigned long optval = 1;
-  return ioctlsocket( sock, FIONBIO, &optval );
+    unsigned long optval = 1;
+    return ioctlsocket(sock, FIONBIO, &optval);
 }
 #endif

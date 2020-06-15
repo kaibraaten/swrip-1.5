@@ -3,12 +3,13 @@
 
 #include <string>
 
-namespace ColorParser {
+namespace ColorParser
+{
     class Passthrough
     {
     public:
         static Passthrough *Instance();
-        std::string Parse(const std::string&);
+        std::string Parse(const std::string &);
     };
 }
 

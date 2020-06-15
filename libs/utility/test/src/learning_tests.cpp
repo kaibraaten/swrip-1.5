@@ -13,7 +13,7 @@ TEST(LearningTests, LoopFiles)
     // Act
     for(const auto &entry : fs::directory_iterator("."))
     {
-      auto path = entry.path();
+        auto path = entry.path();
         ++counter;
     }
 

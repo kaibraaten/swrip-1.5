@@ -11,9 +11,9 @@ auto Filter(const Container &original, UnaryPredicate pred)
 {
     Container filteredElements;
     copy_if(std::begin(original),
-        std::end(original),
-        std::back_inserter(filteredElements),
-        pred);
+            std::end(original),
+            std::back_inserter(filteredElements),
+            pred);
     return filteredElements;
 }
 

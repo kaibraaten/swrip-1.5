@@ -674,12 +674,11 @@ set(COMMANDTABLE_FILE ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp)
 if(WIN32)
   target_link_libraries(swrip utility colorparser lua WS2_32)
   set(BUILD_SHARED_LIBS ON)
-  set(PYTHON py)
 else()
   target_link_libraries(swrip utility colorparser lua stdc++fs dl)
-  set(PYTHON python3)
 endif()
 
+set(PYTHON python3)
 set(RM ${PYTHON} scripts/rm.py)
 
 target_compile_features(mud PUBLIC cxx_std_17)

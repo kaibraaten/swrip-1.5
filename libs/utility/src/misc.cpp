@@ -18,43 +18,43 @@ std::string Scramble(const std::string &strToScamble, int modifier)
 
     modifier %= GetRandomNumberFromRange(80, 300); /* Bitvectors get way too large #s */
 
-    for (position = 0; position < MAX_INPUT_LENGTH; position++)
+    for(position = 0; position < MAX_INPUT_LENGTH; position++)
     {
-        if (argument[position] == '\0')
+        if(argument[position] == '\0')
         {
             arg[position] = '\0';
             return arg;
         }
-        else if (argument[position] >= 'A' && argument[position] <= 'Z')
+        else if(argument[position] >= 'A' && argument[position] <= 'Z')
         {
             conversion = -conversion + position
                 - modifier + argument[position] - 'A';
             conversion = GetRandomNumberFromRange(conversion - 5, conversion + 5);
-            while (conversion > 25)
+            while(conversion > 25)
                 conversion -= 26;
-            while (conversion < 0)
+            while(conversion < 0)
                 conversion += 26;
             arg[position] = (char)(conversion + 'A');
         }
-        else if (argument[position] >= 'a' && argument[position] <= 'z')
+        else if(argument[position] >= 'a' && argument[position] <= 'z')
         {
             conversion = -conversion + position
                 - modifier + argument[position] - 'a';
             conversion = GetRandomNumberFromRange(conversion - 5, conversion + 5);
-            while (conversion > 25)
+            while(conversion > 25)
                 conversion -= 26;
-            while (conversion < 0)
+            while(conversion < 0)
                 conversion += 26;
             arg[position] = (char)(conversion + 'a');
         }
-        else if (argument[position] >= '0' && argument[position] <= '9')
+        else if(argument[position] >= '0' && argument[position] <= '9')
         {
             conversion = -conversion + position
                 - modifier + argument[position] - '0';
             conversion = GetRandomNumberFromRange(conversion - 2, conversion + 2);
-            while (conversion > 9)
+            while(conversion > 9)
                 conversion -= 10;
-            while (conversion < 0)
+            while(conversion < 0)
                 conversion += 10;
             arg[position] = (char)(conversion + '0');
         }
@@ -66,13 +66,13 @@ std::string Scramble(const std::string &strToScamble, int modifier)
     return arg;
 }
 
-std::string FlagString(int bitvector, const char * const flagarray[])
+std::string FlagString(int bitvector, const char *const flagarray[])
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
 
-    for (size_t x = 0; x < 32; x++)
+    for(size_t x = 0; x < 32; x++)
     {
-        if (IsBitSet(bitvector, 1 << x))
+        if(IsBitSet(bitvector, 1 << x))
         {
             strcat(buf, flagarray[x]);
             strcat(buf, " ");
@@ -81,7 +81,7 @@ std::string FlagString(int bitvector, const char * const flagarray[])
 
     size_t x = strlen(buf);
 
-    if (x > 0)
+    if(x > 0)
     {
         buf[--x] = '\0';
     }
@@ -118,7 +118,7 @@ char *StripColorCodes(char *text)
 {
     int i = 0, j = 0;
 
-    if (!text || text[0] == '\0')
+    if(!text || text[0] == '\0')
     {
         return NULL;
     }
@@ -129,20 +129,20 @@ char *StripColorCodes(char *text)
 
         done[0] = '\0';
 
-        if ((buf = (char *)malloc(strlen(text) * sizeof(text))) == NULL)
+        if((buf = (char *)malloc(strlen(text) * sizeof(text))) == NULL)
             return text;
 
         /* Loop through until you've hit your terminating 0 */
-        while (text[i] != '\0')
+        while(text[i] != '\0')
         {
-            while (text[i] == '&' || text[i] == '^')
+            while(text[i] == '&' || text[i] == '^')
             {
                 i += 2;
             }
 
-            if (text[i] != '\0')
+            if(text[i] != '\0')
             {
-                if (isspace(text[i]))
+                if(isspace(text[i]))
                 {
                     buf[j] = ' ';
                     i++;
@@ -164,7 +164,7 @@ char *StripColorCodes(char *text)
         buf[j] = '\0';
 
         sprintf(done, "%s", buf);
-        buf = (char*)realloc(buf, j * sizeof(char));
+        buf = (char *)realloc(buf, j * sizeof(char));
         free(buf);
 
         return done;

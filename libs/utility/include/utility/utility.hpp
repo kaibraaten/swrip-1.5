@@ -32,9 +32,9 @@ constexpr auto MAX_INBUF_SIZE = 1024;
 #define BERR     255
 #endif
 
- /*
-  * Utility macros.
-  */
+/*
+ * Utility macros.
+ */
 
 #define SetBit(var, bit)       ((var) |= (bit))
 #define RemoveBit(var, bit)    ((var) &= ~(bit))
@@ -166,8 +166,8 @@ int ParseBet(const int currentbet, const std::string &s);
 
 /**
  * \brief Return the lesser of two values.
- * \tparam A 
- * \tparam B 
+ * \tparam A
+ * \tparam B
  * \param check The first value to compare.
  * \param ncheck The second value to compare.
  * \return The lesser value.
@@ -180,8 +180,8 @@ auto umin(const A &check, const B &ncheck)
 
 /**
  * \brief Return the greater of two values.
- * \tparam A 
- * \tparam B 
+ * \tparam A
+ * \tparam B
  * \param check The first value to compare.
  * \param ncheck The second value to compare.
  * \return The greater value.
@@ -194,9 +194,9 @@ auto umax(const A &check, const B &ncheck)
 
 /**
  * \brief "Clip" a value to stay within a certain range.
- * \tparam A 
- * \tparam B 
- * \tparam C 
+ * \tparam A
+ * \tparam B
+ * \tparam C
  * \param mincheck The minimum value of the range.
  * \param check The value to "clip".
  * \param maxcheck The maximum value of the range.
@@ -205,10 +205,10 @@ auto umax(const A &check, const B &ncheck)
 template<typename A, typename B, typename C>
 B urange(const A &mincheck, const B &check, const C &maxcheck)
 {
-    if (check < mincheck)
+    if(check < mincheck)
         return mincheck;
 
-    if (check > maxcheck)
+    if(check > maxcheck)
         return maxcheck;
 
     return check;
@@ -219,7 +219,7 @@ std::string WordWrap(const std::string &txt, unsigned short wrap);
 
 void ReplaceAll(std::string &doc, const std::string &original,
                 const std::string &replacement);
-    
+
 /**
  * \brief Return true if an argument is completely numeric.
  */
@@ -232,7 +232,7 @@ int NumberArgument(const std::string &argument, std::string &arg);
 
 /**
  * \brief Pick off one argument from a string and return the rest. Understands quotes.
- * 
+ *
  * \param argument The original string you want to be chopped up. Will not be modified.
  * \param arg_first The first argument.
  * \return The rest of the string after arg_first
@@ -275,13 +275,13 @@ bool IsNullOrEmpty(const char *str);
 std::string CenterString(const std::string &txt, size_t totalWidth, char pad);
 std::string FormatString(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
 std::vector<char> CreateFmtBuffer(const char *fmt, va_list va);
-std::vector<char> StringToVector(const std::string&);
+std::vector<char> StringToVector(const std::string &);
 
 /**
  * \brief Check if a string ends with a specified character sequence.
  * \param str The string to check.
  * \param ending The character sequence that we want to know if str ends with.
- * \return true if str ends with ending. 
+ * \return true if str ends with ending.
  */
 bool StringEndsWith(const std::string &str, const std::string &ending);
 
@@ -294,8 +294,8 @@ void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb);
 char *ReadWord(FILE *fp, Logger *log, bool fBootDb);
 char *ReadLine(FILE *fp, Logger *log, bool fBootDb);
 void ForEachLuaFileInDir(const std::string &pathToDir,
-    const std::function<void(const std::string&, void*)> &doOnFile,
-    void *userData);
+                         const std::function<void(const std::string &, void *)> &doOnFile,
+                         void *userData);
 std::string ConvertToLuaFilename(const std::string &name);
 
 /* misc stuff */
@@ -306,10 +306,10 @@ char CharToUppercase(char c);
 
 /**
  * \brief Convert a string into a long.
- * 
+ *
  * Note that if the input isn't a valid number, the function
  * will return 0.
- * 
+ *
  * \param str The input string.
  * \return The numeric representation of the input string.
  */
@@ -326,7 +326,7 @@ std::bitset<N> CreateBitSet(std::initializer_list<size_t> args)
 {
     std::bitset<N> bs;
 
-    for (size_t bit : args)
+    for(size_t bit : args)
     {
         bs.set(bit);
     }
@@ -349,15 +349,15 @@ time_t StopTimer(timeval *start_time);
 
 /**
  * \brief Create a string of space-separated bit names.
- * 
+ *
  * The current implementation assumes exactly 32 bits, which means the
  * flagarray argument must also have at least 32 elements.
- * 
+ *
  * \param bitvector All the flags packed into an integer.
  * \param flagarray An array containing the names of each bit.
  * \return A string such as: "name_of_bit1 name_of_bit7 name_of_bit30"
  */
-std::string FlagString(int bitvector, const char * const flagarray[]);
+std::string FlagString(int bitvector, const char *const flagarray[]);
 
 
 /**

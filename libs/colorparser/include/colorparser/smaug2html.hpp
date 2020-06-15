@@ -3,26 +3,25 @@
 
 #include "cp_internal.hpp"
 
-namespace ColorParser {
-
-class Smaug2Html
+namespace ColorParser
 {
-public:
-  static Smaug2Html *Instance();
-  std::string Parse( const std::string& );
+    class Smaug2Html
+    {
+    public:
+        static Smaug2Html *Instance();
+        std::string Parse(const std::string &);
 
-private:
-  Smaug2Html();
-  void FillMap( std::map< char, std::string >&, const char[],
-                const char * const[], size_t );
-  std::string MakeColourTag() const;
-  std::map< char, HtmlMap > _MasterMap;
-  HtmlMap _Foreground;
-  HtmlMap _Background;
-  std::string _CurrentFg;
-  std::string _CurrentBk;
-};
-
+    private:
+        Smaug2Html();
+        void FillMap(std::map< char, std::string > &, const char[],
+                     const char *const [], size_t);
+        std::string MakeColourTag() const;
+        std::map< char, HtmlMap > _MasterMap;
+        HtmlMap _Foreground;
+        HtmlMap _Background;
+        std::string _CurrentFg;
+        std::string _CurrentBk;
+    };
 }
 
 #endif // include guard

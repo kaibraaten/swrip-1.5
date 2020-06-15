@@ -39,7 +39,7 @@ long UniformDistributionRandomGenerator::RollDice(size_t numberOfDice, size_t nu
     std::uniform_int_distribution<long> distribution(1, numberOfSides);
     long result = 0;
 
-    for (size_t roll = 0; roll < numberOfDice; ++roll)
+    for(size_t roll = 0; roll < numberOfDice; ++roll)
     {
         result += distribution(_generator);
     }
@@ -51,7 +51,7 @@ long UniformDistributionRandomGenerator::RollDice(size_t numberOfDice, size_t nu
 
 int GetRandomNumberFromRange(int from, int to)
 {
-    if (ActiveRandomGenerator == nullptr)
+    if(ActiveRandomGenerator == nullptr)
     {
         ActiveRandomGenerator = new UniformDistributionRandomGenerator();
     }
@@ -64,7 +64,7 @@ int GetRandomNumberFromRange(int from, int to)
  */
 int GetRandomPercent()
 {
-    if (ActiveRandomGenerator == nullptr)
+    if(ActiveRandomGenerator == nullptr)
     {
         ActiveRandomGenerator = new UniformDistributionRandomGenerator();
     }
@@ -74,7 +74,7 @@ int GetRandomPercent()
 
 int RollDice(int number, int size)
 {
-    if (ActiveRandomGenerator == nullptr)
+    if(ActiveRandomGenerator == nullptr)
     {
         ActiveRandomGenerator = new UniformDistributionRandomGenerator();
     }
@@ -87,7 +87,7 @@ int RollDice(int number, int size)
  */
 int GetRandomDoor()
 {
-    if (ActiveRandomGenerator == nullptr)
+    if(ActiveRandomGenerator == nullptr)
     {
         ActiveRandomGenerator = new UniformDistributionRandomGenerator();
     }
@@ -97,7 +97,7 @@ int GetRandomDoor()
 
 int NumberBits(int width)
 {
-    if (ActiveRandomGenerator == nullptr)
+    if(ActiveRandomGenerator == nullptr)
     {
         ActiveRandomGenerator = new UniformDistributionRandomGenerator();
     }
@@ -110,12 +110,12 @@ int NumberBits(int width)
  */
 int NumberFuzzy(int number)
 {
-    if (ActiveRandomGenerator == nullptr)
+    if(ActiveRandomGenerator == nullptr)
     {
         ActiveRandomGenerator = new UniformDistributionRandomGenerator();
     }
 
-    switch (NumberBits(2))
+    switch(NumberBits(2))
     {
     case 0:
         number -= 1;

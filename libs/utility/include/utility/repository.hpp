@@ -102,7 +102,7 @@ namespace Ceris
         {
             auto iter = find_if(_entities.begin(), _entities.end(), pred);
 
-            if (iter != _entities.end())
+            if(iter != _entities.end())
             {
                 return *iter;
             }
@@ -129,8 +129,8 @@ namespace Ceris
          */
         virtual void Load();
 
-        Repository(const Repository&) = delete;
-        Repository &operator=(const Repository&) = delete;
+        Repository(const Repository &) = delete;
+        Repository &operator=(const Repository &) = delete;
 
     protected:
         /**
@@ -175,7 +175,7 @@ namespace Ceris
     template<typename T, typename Compare>
     const std::list<T> &Repository<T, Compare>::Entities() const noexcept
     {
-        if (_containerChanged)
+        if(_containerChanged)
         {
             _cachedEntities = { _entities.begin(), _entities.end() };
             _containerChanged = false;

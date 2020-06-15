@@ -228,7 +228,7 @@ TEST_F(StringHandlingTests, OneArgumentEmptyArgument)
 
     remainder = OneArgument(original, head);
     remainder = OneArgument(original, head);
-    
+
     EXPECT_EQ(original, "");
     EXPECT_EQ(head, "");
     EXPECT_EQ(remainder, "");
