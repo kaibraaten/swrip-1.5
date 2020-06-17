@@ -39,6 +39,6 @@ void do_bodybag(Character *ch, std::string arg)
 
     if(!found)
     {
-        ch->Echo("You couldn't find any %s\r\n", buf2);
+        ch->Echo("You couldn't find any %s\r\n", buf2.c_str());
     }
 }
