@@ -3,13 +3,13 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-ch_ret spell_harm(int sn, int level, Character* ch, void* vo)
+ch_ret spell_harm(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character* victim = (Character*)vo;
+    Character *victim = vo.Ch;
     int dam = 0;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (victim->Immune.test(Flag::Ris::Magic))
+    if(victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
@@ -23,11 +23,11 @@ ch_ret spell_harm(int sn, int level, Character* ch, void* vo)
 
     dam = umax(20, victim->HitPoints.Current - RollDice(1, 4));
 
-    if (SaveVsSpellStaff(level, victim))
+    if(SaveVsSpellStaff(level, victim))
         dam = umin(50, dam / 4);
     dam = umin(100, dam);
 
-    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
+    if(IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         dam -= (int)(dam / 4);
 
     return InflictDamage(ch, victim, dam, sn);

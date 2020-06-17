@@ -8,7 +8,7 @@
 
 void do_eat(Character *ch, std::string argument)
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     ch_ret retcode = rNONE;
     int foodcond = 0;
 
@@ -53,12 +53,12 @@ void do_eat(Character *ch, std::string argument)
         Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, ActTarget::Room);
     }
 
-    if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+    if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
     {
         if(obj->ActionDescription.empty())
         {
-            Act(AT_ACTION, "$n eats $p.", ch, obj, NULL, ActTarget::Room);
-            Act(AT_ACTION, "You eat $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n eats $p.", ch, obj, nullptr, ActTarget::Room);
+            Act(AT_ACTION, "You eat $p.", ch, obj, nullptr, ActTarget::Char);
         }
         else
         {

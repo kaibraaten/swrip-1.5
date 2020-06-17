@@ -77,14 +77,14 @@ void do_shove(Character *ch, std::string argument)
             if(!ship)
             {
                 Act(AT_PLAIN, "I see no $T here.",
-                    ch, NULL, argument.c_str(), ActTarget::Char);
+                    ch, nullptr, argument, ActTarget::Char);
                 return;
             }
 
             if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go in there riding THAT.",
-                    ch, NULL, argument.c_str(), ActTarget::Char);
+                    ch, nullptr, argument, ActTarget::Char);
                 return;
             }
 
@@ -117,23 +117,23 @@ void do_shove(Character *ch, std::string argument)
                 }
 
                 Act(AT_PLAIN, "$n enters $T.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    nullptr, ship->Name, ActTarget::Room);
                 Act(AT_PLAIN, "You enter $T.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Char);
+                    nullptr, ship->Name, ActTarget::Char);
                 CharacterFromRoom(ch);
                 CharacterToRoom(ch, to_room);
                 Act(AT_PLAIN, "$n enters the ship.", ch,
-                    NULL, argument.c_str(), ActTarget::Room);
+                    nullptr, argument, ActTarget::Room);
                 do_look(ch, "auto");
 
                 Act(AT_PLAIN, "$n enters $T.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    nullptr, ship->Name, ActTarget::Room);
                 Act(AT_PLAIN, "You enter $T.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Char);
+                    nullptr, ship->Name, ActTarget::Char);
                 CharacterFromRoom(victim);
                 CharacterToRoom(victim, to_room);
                 Act(AT_PLAIN, "$n enters the ship.", victim,
-                    NULL, argument.c_str(), ActTarget::Room);
+                    nullptr, argument, ActTarget::Room);
                 do_look(victim, "auto");
                 victim->Position = POS_STANDING;
                 return;
@@ -159,7 +159,7 @@ void do_shove(Character *ch, std::string argument)
             if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go out there riding THAT.",
-                    ch, NULL, argument.c_str(), ActTarget::Char);
+                    ch, nullptr, nullptr, ActTarget::Char);
                 return;
             }
 
@@ -203,23 +203,23 @@ void do_shove(Character *ch, std::string argument)
                 }
 
                 Act(AT_PLAIN, "$n exits the ship.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
-                Act(AT_PLAIN, "You exits the ship.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Char);
+                    nullptr, nullptr, ActTarget::Room);
+                Act(AT_PLAIN, "You exit the ship.", ch,
+                    nullptr, nullptr, ActTarget::Char);
                 CharacterFromRoom(ch);
                 CharacterToRoom(ch, to_room);
                 Act(AT_PLAIN, "$n exits $T.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    nullptr, ship->Name, ActTarget::Room);
                 do_look(ch, "auto");
 
                 Act(AT_PLAIN, "$n exits the ship.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
-                Act(AT_PLAIN, "You exits the ship.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Char);
+                    nullptr, nullptr, ActTarget::Room);
+                Act(AT_PLAIN, "You exit the ship.", victim,
+                    nullptr, nullptr, ActTarget::Char);
                 CharacterFromRoom(victim);
                 CharacterToRoom(victim, to_room);
                 Act(AT_PLAIN, "$n exits $T.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    nullptr, ship->Name, ActTarget::Room);
                 do_look(victim, "auto");
                 victim->Position = POS_STANDING;
                 return;

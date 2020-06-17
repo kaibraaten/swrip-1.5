@@ -68,9 +68,9 @@ void ResetArea(std::shared_ptr<Area> pArea);
 std::string SPrintReset(const Character *ch, std::shared_ptr<Reset> pReset, short num, bool rlist);
 std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3);
 std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea, char letter, int extra,
-    int arg1, int arg2, int arg3);
+                                int arg1, int arg2, int arg3);
 std::shared_ptr<Reset> PlaceReset(std::shared_ptr<Area> tarea, char letter,
-    int extra, int arg1, int arg2, int arg3);
+                                  int extra, int arg1, int arg2, int arg3);
 void RenumberPutResets(std::shared_ptr<Area> pArea);
 
 #endif

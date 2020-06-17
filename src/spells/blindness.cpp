@@ -2,9 +2,9 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-ch_ret spell_blindness(int sn, int level, Character* ch, void* vo)
+ch_ret spell_blindness(int sn, int level, Character* ch, const Vo &vo)
 {
-    Character* victim = (Character*)vo;
+    Character* victim = vo.Ch;
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     int tmp = 0;
     std::shared_ptr<Skill> skill = GetSkill(sn);

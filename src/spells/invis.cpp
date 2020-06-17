@@ -6,7 +6,7 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_invis(int sn, int level, Character *ch, void *vo)
+ch_ret spell_invis(int sn, int level, Character *ch, const Vo &vo)
 {
     Character *victim = nullptr;
     std::shared_ptr<Skill> skill = GetSkill(sn);
@@ -46,9 +46,7 @@ ch_ret spell_invis(int sn, int level, Character *ch, void *vo)
     }
     else
     {
-        Object *obj;
-
-        obj = GetCarriedObject(ch, spell_target_name);
+        auto obj = GetCarriedObject(ch, spell_target_name);
 
         if(obj)
         {

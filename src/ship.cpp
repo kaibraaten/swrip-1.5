@@ -907,13 +907,13 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit
             if(drunk)
             {
                 Act(AT_PLAIN, "$n drives into the $d in $s drunken state.",
-                    ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
+                    ch, nullptr, pexit->Keyword, ActTarget::Room);
                 Act(AT_PLAIN, "You drive into the $d in your drunken state.",
-                    ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
+                    ch, nullptr, pexit->Keyword, ActTarget::Char);
             }
             else
             {
-                Act(AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
+                Act(AT_PLAIN, "The $d is closed.", ch, nullptr, pexit->Keyword, ActTarget::Char);
             }
         }
         else
@@ -1064,9 +1064,11 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit
     }
 
     sprintf(buf, "$n %ss the vehicle $T.", txt);
-    Act(AT_ACTION, buf, ch, NULL, GetDirectionName(door), ActTarget::Room);
+    Act(AT_ACTION, buf, ch, nullptr,
+        ActArg(GetDirectionName(door)), ActTarget::Room);
     sprintf(buf, "You %s the vehicle $T.", txt);
-    Act(AT_ACTION, buf, ch, NULL, GetDirectionName(door), ActTarget::Char);
+    Act(AT_ACTION, buf, ch, nullptr,
+        ActArg(GetDirectionName(door)), ActTarget::Char);
     sprintf(buf, "%s %ss %s.", ship->Name.c_str(), txt, GetDirectionName(door));
     EchoToRoom(AT_ACTION, GetRoom(ship->Location), buf);
 

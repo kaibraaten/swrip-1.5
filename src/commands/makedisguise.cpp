@@ -12,75 +12,75 @@ struct UserData
     std::string Name;
 };
 
-static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
-static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
-static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
-static void FreeUserData( struct UserData *ud );
-static CraftRecipe *MakeCraftRecipe( void );
+static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
+static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
+static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
+static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
+static void FreeUserData(struct UserData *ud);
+static CraftRecipe *MakeCraftRecipe(void);
 
-void do_makedisguise( Character *ch, std::string argument )
+void do_makedisguise(Character *ch, std::string argument)
 {
     CraftRecipe *recipe = MakeCraftRecipe();
-    CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
+    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
     UserData *data = new UserData();
 
-    AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
-    AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
-    AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
-    AddAbortCraftingHandler( session, data, AbortHandler );
+    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
+    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
+    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
+    AddAbortCraftingHandler(session, data, AbortHandler);
 
-    StartCrafting( session );
+    StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe( void )
+static CraftRecipe *MakeCraftRecipe(void)
 {
     static const CraftingMaterial materials[] =
-        {
-            { ITEM_THREAD,      {} },
-            { ITEM_DIS_FABRIC,  { Flag::Crafting::Extract } },
-            { ITEM_HAIR,        { Flag::Crafting::Extract } },
-            { ITEM_NONE,        {} }
-        };
-    CraftRecipe *recipe = AllocateCraftRecipe( gsn_disguise, materials,
-                                               25, GetProtoObject( OBJ_VNUM_CRAFTING_DISGUISE ),
-                                               { Flag::Crafting::NeedsWorkshop } );
+    {
+        { ITEM_THREAD,      {} },
+        { ITEM_DIS_FABRIC,  { Flag::Crafting::Extract } },
+        { ITEM_HAIR,        { Flag::Crafting::Extract } },
+        { ITEM_NONE,        {} }
+    };
+    CraftRecipe *recipe = AllocateCraftRecipe(gsn_disguise, materials,
+                                              25, GetProtoObject(OBJ_VNUM_CRAFTING_DISGUISE),
+                                              { Flag::Crafting::NeedsWorkshop });
 
     return recipe;
 }
 
-static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
+static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
 {
-    struct UserData *ud = (struct UserData*) userData;
-    Character *ch = GetEngineer( args->CraftingSession );
+    struct UserData *ud = (struct UserData *)userData;
+    Character *ch = GetEngineer(args->CraftingSession);
     std::string argument = args->CommandArguments;
     std::string sex;
     std::string race;
 
-    argument = OneArgument( argument, sex );
-    argument = OneArgument( argument, race );
+    argument = OneArgument(argument, sex);
+    argument = OneArgument(argument, race);
 
-    if ( argument.empty() || sex.empty() || race.empty() )
+    if(argument.empty() || sex.empty() || race.empty())
     {
-        ch->Echo("&RUsage: Makedisguise <sex> <race> <name>\r\n&w" );
+        ch->Echo("&RUsage: Makedisguise <sex> <race> <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->Sex = GetSex( sex );
+    ud->Sex = GetSex(sex);
 
     if(ud->Sex == -1)
     {
-        ch->Echo("Sex must be male, female or neutral.&w\r\n" );
+        ch->Echo("Sex must be male, female or neutral.&w\r\n");
         args->AbortSession = true;
         return;
     }
 
-    ud->Race = GetRaceFromName( race );
+    ud->Race = GetRaceFromName(race);
 
-    if( ud->Race < 0 )
+    if(ud->Race < 0)
     {
-        ch->Echo("&R'%s' is not a valid race.&w\r\n", race.c_str() );
+        ch->Echo("&R'%s' is not a valid race.&w\r\n", race.c_str());
         args->AbortSession = true;
         return;
     }
@@ -88,20 +88,20 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
     ud->Name = argument;
 }
 
-static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
+static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
 {
-    struct UserData *ud = (struct UserData*) userData;
+    struct UserData *ud = (struct UserData *)userData;
     char buf[MAX_STRING_LENGTH];
-    Object *disguise = args->Object;
+    auto disguise = args->Object;
 
     disguise->WearFlags.set(Flag::Wear::Disguise);
     disguise->WearFlags.set(Flag::Wear::Take);
 
-    strcpy( buf, ud->Name.c_str() );
-    strcat( buf, " disguise");
+    strcpy(buf, ud->Name.c_str());
+    strcat(buf, " disguise");
     disguise->Name = buf;
 
-    strcpy( buf, ud->Name.c_str() );
+    strcpy(buf, ud->Name.c_str());
     disguise->ShortDescr = buf;
 
     disguise->Description.erase();
@@ -113,19 +113,19 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
     disguise->Cost = 5000;
 }
 
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
+static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
 {
-    struct UserData *ud = (struct UserData*) userData;
-    FreeUserData( ud );
+    struct UserData *ud = (struct UserData *)userData;
+    FreeUserData(ud);
 }
 
-static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
+static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
 {
-    struct UserData *ud = (struct UserData*) userData;
-    FreeUserData( ud );
+    struct UserData *ud = (struct UserData *)userData;
+    FreeUserData(ud);
 }
 
-static void FreeUserData( struct UserData *ud )
+static void FreeUserData(struct UserData *ud)
 {
     delete ud;
 }

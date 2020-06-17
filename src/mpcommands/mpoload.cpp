@@ -7,7 +7,6 @@ void do_mpoload(Character *ch, std::string argument)
     std::string arg1;
     std::string arg2;
     std::shared_ptr<ProtoObject> pObjIndex;
-    Object *obj = nullptr;
     int level = 0;
     int timer = 0;
 
@@ -70,7 +69,7 @@ void do_mpoload(Character *ch, std::string argument)
         return;
     }
 
-    obj = CreateObject(pObjIndex, level);
+    auto obj = CreateObject(pObjIndex, level);
     obj->Timer = timer;
 
     if (obj->WearFlags.test(Flag::Wear::Take))

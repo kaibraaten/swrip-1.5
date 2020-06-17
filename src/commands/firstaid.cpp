@@ -8,7 +8,6 @@
 
 void do_first_aid(Character *ch, std::string argument)
 {
-    Object *medpac = NULL;
     Character *victim = NULL;
     int heal = 0;
     char buf[MAX_STRING_LENGTH];
@@ -19,7 +18,7 @@ void do_first_aid(Character *ch, std::string argument)
         return;
     }
 
-    medpac = GetEquipmentOnCharacter(ch, WEAR_HOLD);
+    std::shared_ptr<Object> medpac = GetEquipmentOnCharacter(ch, WEAR_HOLD);
 
     if(!medpac || medpac->ItemType != ITEM_MEDPAC)
     {

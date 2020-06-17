@@ -15,11 +15,11 @@ static bool IsAffectedBy(const Character *ch, std::bitset<Flag::MAX> &affectedBy
     return false;
 }
 
-ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
+ch_ret spell_affectchar(int sn, int level, Character* ch, const Vo &vo)
 {
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     std::shared_ptr<Skill> skill = GetSkill(sn);
-    Character* victim = (Character*)vo;
+    Character* victim = vo.Ch;
     int aff_chance = 0;
     ch_ret retcode = rNONE;
 
@@ -36,7 +36,7 @@ ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
         }
         else
         {
-            victim = static_cast<Character*>(vo);
+            victim = vo.Ch;
         }
 
         af->AffectedBy = saf->AffectedBy;

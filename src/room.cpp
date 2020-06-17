@@ -12,7 +12,7 @@ struct Room::Impl
   std::list<std::shared_ptr<Shuttle>> Shuttles;
   std::list<std::shared_ptr<Exit>> Exits;
   std::list<Character*> Characters;
-  std::list<Object*> Objects;
+  std::list<std::shared_ptr<Object>> Objects;
   std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
 };
 
@@ -98,17 +98,17 @@ const std::list<Character*> &Room::Characters() const
   return pImpl->Characters;
 }
 
-void Room::Add(Object *object)
+void Room::Add(std::shared_ptr<Object> object)
 {
   pImpl->Objects.push_back(object);
 }
 
-void Room::Remove(Object *object)
+void Room::Remove(std::shared_ptr<Object> object)
 {
   pImpl->Objects.remove(object);
 }
 
-const std::list<Object*> &Room::Objects() const
+const std::list<std::shared_ptr<Object>> &Room::Objects() const
 {
   return pImpl->Objects;
 }

@@ -11,13 +11,13 @@
 #include "act.hpp"
 
 static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch);
-static void get_obj(Character *ch, Object *obj, Object *container);
+static void get_obj(Character *ch, std::shared_ptr<Object> obj, std::shared_ptr<Object> container);
 
 void do_get(Character *ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
-    Object *container = NULL;
+    std::shared_ptr<Object> container;
     short number = 0;
     bool found = false;
     bool foundowner = false;
@@ -97,11 +97,11 @@ void do_get(Character *ch, std::string argument)
            && StringPrefix("all.", arg1))
         {
             /* 'get obj' */
-            Object *obj = GetObjectInList(ch, arg1, ch->InRoom->Objects());
+            auto obj = GetObjectInList(ch, arg1, ch->InRoom->Objects());
 
             if(!obj)
             {
-                Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), ActTarget::Char);
+                Act(AT_PLAIN, "I see no $T here.", ch, nullptr, arg1, ActTarget::Char);
                 return;
             }
 
@@ -143,9 +143,9 @@ void do_get(Character *ch, std::string argument)
                 chk = arg1.size() > 4 ? arg1.substr(4) : "";
 
             /* 'get all' or 'get all.obj' */
-            std::list<Object *> objectsOnGround(ch->InRoom->Objects());
+            auto objectsOnGround = ch->InRoom->Objects();
 
-            for(Object *obj : objectsOnGround)
+            for(auto obj : objectsOnGround)
             {
                 if((fAll || NiftyIsName(chk, obj->Name))
                    && CanSeeObject(ch, obj))
@@ -189,7 +189,7 @@ void do_get(Character *ch, std::string argument)
                 if(fAll)
                     ch->Echo("I see nothing here.\r\n");
                 else
-                    Act(AT_PLAIN, "I see no $T here.", ch, NULL, chk.c_str(), ActTarget::Char);
+                    Act(AT_PLAIN, "I see no $T here.", ch, nullptr, chk, ActTarget::Char);
             }
             else if(SysData.SaveFlags.test(Flag::AutoSave::Get))
             {
@@ -216,9 +216,9 @@ void do_get(Character *ch, std::string argument)
             return;
         }
 
-        if((container = GetObjectHere(ch, arg2)) == NULL)
+        if((container = GetObjectHere(ch, arg2)) == nullptr)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "I see no $T here.", ch, nullptr, arg2, ActTarget::Char);
             return;
         }
 
@@ -250,7 +250,7 @@ void do_get(Character *ch, std::string argument)
            && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
             Act(AT_PLAIN, "The $d is closed.",
-                ch, NULL, container->Name.c_str(), ActTarget::Char);
+                ch, nullptr, container->Name, ActTarget::Char);
             return;
         }
 
@@ -258,7 +258,7 @@ void do_get(Character *ch, std::string argument)
            && StringPrefix("all.", arg1))
         {
             /* 'get obj container' */
-            Object *obj = GetObjectInList(ch, arg1, container->Objects());
+            auto obj = GetObjectInList(ch, arg1, container->Objects());
 
             if(obj == nullptr)
             {
@@ -266,7 +266,7 @@ void do_get(Character *ch, std::string argument)
                     container->Flags.test(Flag::Obj::Covering)
                     ? "I see nothing like that beneath the $T."
                     : "I see nothing like that in the $T.",
-                    ch, NULL, arg2.c_str(), ActTarget::Char);
+                    ch, nullptr, arg2, ActTarget::Char);
                 return;
             }
 
@@ -311,9 +311,9 @@ void do_get(Character *ch, std::string argument)
 
             found = false;
 
-            std::list<Object *> contents(container->Objects());
+            auto contents = container->Objects();
 
-            for(Object *obj : contents)
+            for(auto obj : contents)
             {
                 if((fAll || NiftyIsName(chk, obj->Name))
                    && CanSeeObject(ch, obj))
@@ -341,13 +341,13 @@ void do_get(Character *ch, std::string argument)
                         container->Flags.test(Flag::Obj::Covering)
                         ? "I see nothing beneath the $T."
                         : "I see nothing in the $T.",
-                        ch, NULL, arg2.c_str(), ActTarget::Char);
+                        ch, nullptr, arg2, ActTarget::Char);
                 else
                     Act(AT_PLAIN,
                         container->Flags.test(Flag::Obj::Covering)
                         ? "I see nothing like that beneath the $T."
                         : "I see nothing like that in the $T.",
-                        ch, NULL, arg2.c_str(), ActTarget::Char);
+                        ch, nullptr, arg2, ActTarget::Char);
             }
             else
             {
@@ -377,7 +377,7 @@ void do_get(Character *ch, std::string argument)
     }
 }
 
-static void get_obj(Character *ch, Object *obj, Object *container)
+static void get_obj(Character *ch, std::shared_ptr<Object> obj, std::shared_ptr<Object> container)
 {
     int weight = 0;
 
@@ -398,7 +398,7 @@ static void get_obj(Character *ch, Object *obj, Object *container)
     if(ch->CarryNumber + GetObjectCount(obj) > GetCarryCapacityNumber(ch))
     {
         Act(AT_PLAIN, "$d: you can't carry that many items.",
-            ch, NULL, obj->Name.c_str(), ActTarget::Char);
+            ch, nullptr, obj->Name, ActTarget::Char);
         return;
     }
 
@@ -410,7 +410,7 @@ static void get_obj(Character *ch, Object *obj, Object *container)
     if(ch->CarryWeight + weight > GetCarryCapacityWeight(ch))
     {
         Act(AT_PLAIN, "$d: you can't carry that much weight.",
-            ch, NULL, obj->Name.c_str(), ActTarget::Char);
+            ch, nullptr, obj->Name, ActTarget::Char);
         return;
     }
 

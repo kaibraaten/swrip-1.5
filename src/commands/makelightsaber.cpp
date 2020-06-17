@@ -96,7 +96,7 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventA
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *eventArgs )
 {
     struct UserData *ud = (struct UserData*) userData;
-    Object *lightsaber = eventArgs->Object;
+    auto lightsaber = eventArgs->Object;
     char buf[MAX_STRING_LENGTH];
 
     lightsaber->WearFlags.set(Flag::Wear::Wield);

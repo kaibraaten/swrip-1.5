@@ -68,9 +68,9 @@ void do_bashdoor(Character *ch, std::string arg)
 
             pexit->Flags.set(Flag::Exit::Bashed);
             Act(AT_SKILL, "Crash! You bashed open the $d!",
-                ch, NULL, keyword.c_str(), ActTarget::Char);
+                ch, nullptr, keyword, ActTarget::Char);
             Act(AT_SKILL, "$n bashes open the $d!",
-                ch, NULL, keyword.c_str(), ActTarget::Room);
+                ch, nullptr, keyword, ActTarget::Room);
             LearnFromSuccess(ch, gsn_bashdoor);
 
             if((to_room = pexit->ToRoom) != NULL
@@ -89,7 +89,7 @@ void do_bashdoor(Character *ch, std::string arg)
                 for(Character *rch : to_room->Characters())
                 {
                     Act(AT_SKILL, "The $d crashes open!",
-                        rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
+                        rch, nullptr, pexit_rev->Keyword, ActTarget::Char);
                 }
             }
 
@@ -98,9 +98,9 @@ void do_bashdoor(Character *ch, std::string arg)
         else
         {
             Act(AT_SKILL, "WHAAAAM!!! You bash against the $d, but it doesn't budge.",
-                ch, NULL, keyword.c_str(), ActTarget::Char);
+                ch, nullptr, keyword, ActTarget::Char);
             Act(AT_SKILL, "WHAAAAM!!! $n bashes against the $d, but it holds strong.",
-                ch, NULL, keyword.c_str(), ActTarget::Room);
+                ch, nullptr, keyword, ActTarget::Room);
             InflictDamage(ch, ch, (ch->HitPoints.Max / 20) + 10, gsn_bashdoor);
             LearnFromFailure(ch, gsn_bashdoor);
         }

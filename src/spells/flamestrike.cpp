@@ -2,9 +2,9 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-ch_ret spell_flamestrike(int sn, int level, Character* ch, void* vo)
+ch_ret spell_flamestrike(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character* victim = (Character*)vo;
+    Character *victim = vo.Ch;
     int dam = 0;
 
     ch->Echo("You feel the hatred grow within you!\r\n");
@@ -14,10 +14,10 @@ ch_ret spell_flamestrike(int sn, int level, Character* ch, void* vo)
 
     dam = RollDice(6, 8);
 
-    if (SaveVsSpellStaff(level, victim))
+    if(SaveVsSpellStaff(level, victim))
         dam /= 2;
 
-    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
+    if(IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         dam -= (int)(dam / 4);
 
     return InflictDamage(ch, victim, dam, sn);

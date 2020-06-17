@@ -29,20 +29,20 @@
 class HelpFile
 {
 public:
-  short Level = 0;
-  std::string Keyword;
-  std::string Text;
+    short Level = 0;
+    std::string Keyword;
+    std::string Text;
 };
 
 extern std::string HelpGreeting;
 
-std::shared_ptr<HelpFile> GetHelpFile( const Character *ch, std::string argument );
-std::shared_ptr<HelpFile> AllocateHelpFile( const std::string &keyword, short level );
+std::shared_ptr<HelpFile> GetHelpFile(const Character *ch, std::string argument);
+std::shared_ptr<HelpFile> AllocateHelpFile(const std::string &keyword, short level);
 
-short GetHelpFileLevel( const std::shared_ptr<HelpFile> &help );
-void SetHelpFileLevel( const std::shared_ptr<HelpFile> &help, short level );
+short GetHelpFileLevel(const std::shared_ptr<HelpFile> &help);
+void SetHelpFileLevel(const std::shared_ptr<HelpFile> &help, short level);
 
-std::string GetHelpFileKeyword( const std::shared_ptr<HelpFile> &help );
-void SetHelpFileKeyword( const std::shared_ptr<HelpFile> &help, const std::string &keyword );
+std::string GetHelpFileKeyword(const std::shared_ptr<HelpFile> &help);
+void SetHelpFileKeyword(const std::shared_ptr<HelpFile> &help, const std::string &keyword);
 
 #endif

@@ -7,7 +7,7 @@ void do_value(Character *ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     Character *keeper = nullptr;
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
     int cost = 0;
 
     if(argument.empty())
@@ -19,10 +19,10 @@ void do_value(Character *ch, std::string argument)
     if((keeper = FindKeeper(ch)) == NULL)
         return;
 
-    if((obj = GetCarriedObject(ch, argument)) == NULL)
+    if((obj = GetCarriedObject(ch, argument)) == nullptr)
     {
         Act(AT_TELL, "$n tells you 'You don't have that item.'",
-            keeper, NULL, ch, ActTarget::Vict);
+            keeper, nullptr, ch, ActTarget::Vict);
         ch->Reply = keeper;
         return;
     }

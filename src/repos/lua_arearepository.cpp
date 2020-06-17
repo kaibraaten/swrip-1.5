@@ -408,9 +408,9 @@ void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room,
         }
 
         /* purge room of (prototyped) objects */
-        std::list<Object*> objectsToExtract(room->Objects());
+        auto objectsToExtract = room->Objects();
 
-        for (Object *obj : objectsToExtract)
+        for (auto obj : objectsToExtract)
         {
             ExtractObject(obj);
         }

@@ -8,7 +8,7 @@
 void do_close(Character *ch, std::string argument)
 {
     std::string arg;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     std::shared_ptr<Exit> pexit;
     int door = 0;
 
@@ -37,8 +37,8 @@ void do_close(Character *ch, std::string argument)
             return;
         }
 
-        Act(AT_ACTION, "$n closes the $d.", ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
-        Act(AT_ACTION, "You close the $d.", ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
+        Act(AT_ACTION, "$n closes the $d.", ch, NULL, pexit->Keyword, ActTarget::Room);
+        Act(AT_ACTION, "You close the $d.", ch, NULL, pexit->Keyword, ActTarget::Char);
 
         /* close the other side */
         if((pexit_rev = pexit->ReverseExit) != NULL
@@ -49,7 +49,7 @@ void do_close(Character *ch, std::string argument)
             for(Character *rch : pexit->ToRoom->Characters())
             {
                 Act(AT_ACTION, "The $d closes.",
-                    rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
+                    rch, NULL, pexit_rev->Keyword, ActTarget::Char);
             }
         }
 

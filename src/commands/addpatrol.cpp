@@ -42,7 +42,7 @@ void do_add_patrol(Character *ch, std::string argument)
         {
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
             Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
-                NULL, argument.c_str(), ActTarget::Room);
+                nullptr, argument, ActTarget::Room);
             AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_add_patrol, SUB_PAUSE);
             return;
         }

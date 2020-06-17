@@ -405,12 +405,12 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
             if (drunk)
             {
                 Act(AT_PLAIN, "$n runs into the $d in $s drunken state.", ch,
-                    NULL, pexit->Keyword.c_str(), ActTarget::Room);
+                    nullptr, pexit->Keyword, ActTarget::Room);
                 Act(AT_PLAIN, "You run into the $d in your drunken state.", ch,
-                    NULL, pexit->Keyword.c_str(), ActTarget::Char);
+                    nullptr, pexit->Keyword, ActTarget::Char);
             }
             else
-                Act(AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
+                Act(AT_PLAIN, "The $d is closed.", ch, nullptr, pexit->Keyword, ActTarget::Char);
         }
         else
         {
@@ -533,7 +533,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
              */
             if (!found)
             {
-                found = GetFirstObjectOfType(ch, ITEM_BOAT);
+                found = GetFirstObjectOfType(ch, ITEM_BOAT) != nullptr;
 
                 if (found)
                 {
@@ -570,7 +570,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
                 if ((!IsNpc(ch) && GetRandomPercent() > ch->PCData->Learned[gsn_climb])
                     || drunk || ch->MentalState < -90)
                 {
-                    bool ch_rope = GetFirstObjectOfType(ch, ITEM_ROPE);
+                    bool ch_rope = GetFirstObjectOfType(ch, ITEM_ROPE) != nullptr;
 
                     if (!ch_rope)
                     {
@@ -760,7 +760,8 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
         else
         {
             sprintf(buf, "$n %s $T.", txt);
-            Act(AT_ACTION, buf, ch, NULL, GetDirectionName(door), ActTarget::Room);
+            Act(AT_ACTION, buf, ch, nullptr,
+                ActArg(GetDirectionName(door)), ActTarget::Room);
         }
     }
 
@@ -1072,7 +1073,7 @@ std::shared_ptr<Exit> FindDoor(Character *ch, const std::string &arg, bool quiet
 
         if (!quiet)
         {
-            Act(AT_PLAIN, "You see no $T here.", ch, NULL, arg.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "You see no $T here.", ch, nullptr, arg, ActTarget::Char);
         }
 
         return nullptr;
@@ -1081,7 +1082,7 @@ std::shared_ptr<Exit> FindDoor(Character *ch, const std::string &arg, bool quiet
     if ((pexit = GetExit(ch->InRoom, door)) == nullptr)
     {
         if (!quiet)
-            Act(AT_PLAIN, "You see no $T here.", ch, NULL, arg.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "You see no $T here.", ch, nullptr, arg, ActTarget::Char);
 
         return nullptr;
     }
@@ -1091,7 +1092,7 @@ std::shared_ptr<Exit> FindDoor(Character *ch, const std::string &arg, bool quiet
 
     if (pexit->Flags.test(Flag::Exit::Secret))
     {
-        Act(AT_PLAIN, "You see no $T here.", ch, NULL, arg.c_str(), ActTarget::Char);
+        Act(AT_PLAIN, "You see no $T here.", ch, nullptr, arg, ActTarget::Char);
         return nullptr;
     }
 

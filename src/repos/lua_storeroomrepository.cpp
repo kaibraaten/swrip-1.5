@@ -49,7 +49,7 @@ static int L_StoreroomEntry(lua_State *L)
     {
         auto objects = LuaLoadObjects(L, "Contents");
 
-        for (auto obj : objects)
+        for(auto obj : objects)
         {
             ObjectToRoom(obj, storeroom);
         }
@@ -73,7 +73,7 @@ static void PushStoreroom(lua_State *L, const void *userData)
     lua_pushinteger(L, 1);
     lua_newtable(L);
 
-    const auto storeroom = (const Room*)userData;
+    const auto storeroom = (const Room *)userData;
     LuaSetfieldNumber(L, "Vnum", storeroom->Vnum);
     LuaPushObjects(L, storeroom->Objects(), "Contents");
 

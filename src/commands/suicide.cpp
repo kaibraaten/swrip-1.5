@@ -7,7 +7,7 @@
 
 void do_suicide(Character *ch, std::string argument)
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
 
     if(IsNpc(ch) || !ch->PCData)
     {
@@ -36,9 +36,9 @@ void do_suicide(Character *ch, std::string argument)
     }
 
     Act(AT_BLOOD, "With a sad determination and trembling hands you slit your own throat!",
-        ch, NULL, NULL, ActTarget::Char);
+        ch, nullptr, nullptr, ActTarget::Char);
     Act(AT_BLOOD, "Cold shivers run down your spine as you watch $n slit $s own throat!",
-        ch, NULL, NULL, ActTarget::Room);
+        ch, nullptr, nullptr, ActTarget::Room);
     Log->Info("%s just committed suicide.", ch->Name.c_str());
 
     SetCurrentGlobalCharacter(ch);

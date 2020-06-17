@@ -4,7 +4,6 @@
 
 void do_newbieset(Character *ch, std::string arg1)
 {
-    Object *obj = nullptr;
     Character *victim = nullptr;
 
     if(arg1.empty())
@@ -31,12 +30,12 @@ void do_newbieset(Character *ch, std::string arg1)
         return;
     }
 
-    obj = CreateObject(GetProtoObject(OBJ_VNUM_SCHOOL_GLOWROD), 1);
+    auto obj = CreateObject(GetProtoObject(OBJ_VNUM_SCHOOL_GLOWROD), 1);
     ObjectToCharacter(obj, victim);
 
     obj = CreateObject(GetProtoObject(OBJ_VNUM_SCHOOL_BLADE), 1);
     ObjectToCharacter(obj, victim);
 
-    Act(AT_IMMORT, "$n has equipped you with a newbieset.", ch, NULL, victim, ActTarget::Vict);
+    Act(AT_IMMORT, "$n has equipped you with a newbieset.", ch, nullptr, victim, ActTarget::Vict);
     ch->Echo("You have re-equipped %s.\r\n", victim->Name.c_str());
 }

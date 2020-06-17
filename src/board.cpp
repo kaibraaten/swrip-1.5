@@ -80,7 +80,7 @@ static void RemoveNote(const std::shared_ptr<Board> &board, std::shared_ptr<Note
 static bool CanRemove(const Character *ch, const std::shared_ptr<Board> &board);
 static bool CanRead(const Character *ch, const std::shared_ptr<Board> &board);
 static bool CanPost(const Character *ch, const std::shared_ptr<Board> &board);
-static Object *FindQuill(const Character *ch);
+static std::shared_ptr<Object> FindQuill(const Character *ch);
 
 //////////////////////////////////////////////////////////////
 struct Board::Impl
@@ -184,7 +184,7 @@ static bool CanPost(const Character *ch, const std::shared_ptr<Board> &board)
     return false;
 }
 
-std::shared_ptr<Board> GetBoardFromObject(const Object *obj)
+std::shared_ptr<Board> GetBoardFromObject(std::shared_ptr<Object> obj)
 {
     return Boards->Find([obj](const auto &board)
                         {
@@ -217,7 +217,7 @@ static void RemoveNote(const std::shared_ptr<Board> &board, std::shared_ptr<Note
     Boards->Save(board);
 }
 
-static Object *FindQuill(const Character *ch)
+static std::shared_ptr<Object> FindQuill(const Character *ch)
 {
     auto result = Filter(ch->Objects(),
                          [ch](auto obj)
@@ -1016,7 +1016,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
                     return;
                 }
 
-                Object *paper = nullptr;
+                std::shared_ptr<Object> paper;
 
                 if(take != NOTE_REMOVE)
                 {
@@ -1120,7 +1120,7 @@ void CountMailMessages(const Character *ch)
 
 std::shared_ptr<Board> FindBoardHere(const Character *ch)
 {
-    for(const Object *obj : ch->InRoom->Objects())
+    for(auto obj : ch->InRoom->Objects())
     {
         std::shared_ptr<Board> board = GetBoardFromObject(obj);
 

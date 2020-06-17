@@ -186,7 +186,6 @@ std::string DrunkSpeech(const std::string &argument, Character *ch)
  */
 void TalkChannel(Character *ch, const std::string &text, int channel, const std::string &verb)
 {
-    const char *argument = text.c_str();
     char buf[MAX_STRING_LENGTH];
     char buf2[MAX_STRING_LENGTH];
     PositionType position = 0;
@@ -243,7 +242,7 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
         return;
     }
 
-    if(IsNullOrEmpty(argument))
+    if(text.empty())
     {
         ch->Echo("%s what?\r\n", Capitalize(verb).c_str());
         return;
@@ -261,56 +260,56 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
     {
     default:
         SetCharacterColor(AT_GOSSIP, ch);
-        ch->Echo("&z&CYou %s over the public network&c, '&C%s&c'\r\n", verb.c_str(), argument);
+        ch->Echo("&z&CYou %s over the public network&c, '&C%s&c'\r\n", verb.c_str(), text.c_str());
         sprintf(buf, "&z&C$n &C%ss over the public network&c, '&C$t&c'", verb.c_str());
         break;
 
     case CHANNEL_CLANTALK:
         SetCharacterColor(AT_CLAN, ch);
-        ch->Echo("&z&POver the organizations private network you say&R, '&P%s&R'\r\n", argument);
+        ch->Echo("&z&POver the organizations private network you say&R, '&P%s&R'\r\n", text.c_str());
         sprintf(buf, "&z&P$n &Pspeaks over the organizations network&R, '&P$t&R'");
         break;
 
     case CHANNEL_ALLCLAN:
         SetCharacterColor(AT_CLAN, ch);
-        ch->Echo("&z&POver the entire organizations private network you say&R, '&P%s&R'\r\n", argument);
+        ch->Echo("&z&POver the entire organizations private network you say&R, '&P%s&R'\r\n", text.c_str());
         sprintf(buf, "&z&P$n &Pspeaks over the entire organizations network&R, '&P$t&R'");
         break;
 
     case CHANNEL_SHIP:
         SetCharacterColor(AT_SHIP, ch);
-        ch->Echo("&z&rYou tell the ship&P, '%s'\r\n", argument);
+        ch->Echo("&z&rYou tell the ship&P, '%s'\r\n", text.c_str());
         sprintf(buf, "&z&r$n &rsays over the ships com system,&P '$t'");
         break;
 
     case CHANNEL_SYSTEM:
         SetCharacterColor(AT_GOSSIP, ch);
-        ch->Echo("&z&R(System): '&W%s&r'\r\n", argument);
+        ch->Echo("&z&R(System): '&W%s&r'\r\n", text.c_str());
         sprintf(buf, "&z&R(System) &R$n&r: '&W$t&r'");
         break;
 
     case CHANNEL_SPACE:
         SetCharacterColor(AT_GOSSIP, ch);
-        ch->Echo("&z&rYou space &g(&GOOC&g):, '&W%s&r'\r\n", argument);
+        ch->Echo("&z&rYou space &g(&GOOC&g):, '&W%s&r'\r\n", text.c_str());
         sprintf(buf, "&z&g(&GOOC&g)&R(Space) &R$n&r: '&W$t&r'");
         break;
 
     case CHANNEL_YELL:
     case CHANNEL_SHOUT:
         SetCharacterColor(AT_GOSSIP, ch);
-        ch->Echo("You %s, '%s'\r\n", verb.c_str(), argument);
+        ch->Echo("You %s, '%s'\r\n", verb.c_str(), text.c_str());
         sprintf(buf, "$n %ss, '$t'", verb.c_str());
         break;
 
     case CHANNEL_ASK:
         SetCharacterColor(AT_OOC, ch);
-        ch->Echo("&z&g(&GOOC&g)&Y You %s, '%s'\r\n", verb.c_str(), argument);
+        ch->Echo("&z&g(&GOOC&g)&Y You %s, '%s'\r\n", verb.c_str(), text.c_str());
         sprintf(buf, "&z&g(&GOOC&g)&Y $n &Y%ss, '$t'", verb.c_str());
         break;
 
     case CHANNEL_NEWBIE:
         SetCharacterColor(AT_OOC, ch);
-        ch->Echo("&z&r(&RNEWBIE&r)&Y %s: %s\r\n", ch->Name.c_str(), argument);
+        ch->Echo("&z&r(&RNEWBIE&r)&Y %s: %s\r\n", ch->Name.c_str(), text.c_str());
         sprintf(buf, "&z&r(&RNEWBIE&r)&Y $n&Y: $t");
         break;
 
@@ -319,13 +318,13 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
         sprintf(buf, "&z&g(&GOOC&g)&Y $n&Y: $t");
         position = ch->Position;
         ch->Position = POS_STANDING;
-        Act(AT_OOC, buf, ch, argument, NULL, ActTarget::Char);
+        Act(AT_OOC, buf, ch, text, nullptr, ActTarget::Char);
         ch->Position = position;
         break;
 
     case CHANNEL_WARTALK:
         SetCharacterColor(AT_WARTALK, ch);
-        ch->Echo("&z&cYou %s '&R%s&c'\r\n", verb.c_str(), argument);
+        ch->Echo("&z&cYou %s '&R%s&c'\r\n", verb.c_str(), text.c_str());
         sprintf(buf, "&z&c$n &c%ss '&R$t&c'", verb.c_str());
         break;
 
@@ -357,7 +356,7 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
 
         position = ch->Position;
         ch->Position = POS_STANDING;
-        Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, argument, NULL, ActTarget::Char);
+        Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, text, NULL, ActTarget::Char);
         ch->Position = position;
         break;
     }
@@ -365,7 +364,7 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
     if(ch->InRoom->Flags.test(Flag::Room::LogSpeech))
     {
         sprintf(buf2, "%s: %s (%s)", IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str(),
-                argument, verb.c_str());
+                text.c_str(), verb.c_str());
         AppendToFile(LOG_FILE, buf2);
     }
 
@@ -378,7 +377,7 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
            && vch != ch
            && !IsBitSet(och->Deaf, channel))
         {
-            std::string sbuf = argument;
+            std::string sbuf = text;
 
             if(channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
                && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
@@ -484,23 +483,23 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
                 channel != CHANNEL_ASK &&
                 channel != CHANNEL_AVTALK
                 ))
-                sbuf = Scramble(argument, ch->Speaking);
+                sbuf = Scramble(text, ch->Speaking);
 
             MOBtrigger = false;
 
             if(channel == CHANNEL_IMMTALK || channel == CHANNEL_AVTALK
                || channel == CHANNEL_103 || channel == CHANNEL_104 || channel == CHANNEL_105)
-                Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
+                Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, sbuf, vch, ActTarget::Vict);
             else if(channel == CHANNEL_WARTALK)
-                Act(AT_WARTALK, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
+                Act(AT_WARTALK, buf, ch, sbuf, vch, ActTarget::Vict);
             else if(channel == CHANNEL_OOC || channel == CHANNEL_NEWBIE || channel == CHANNEL_ASK)
-                Act(AT_OOC, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
+                Act(AT_OOC, buf, ch, sbuf, vch, ActTarget::Vict);
             else if(channel == CHANNEL_SHIP)
-                Act(AT_SHIP, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
+                Act(AT_SHIP, buf, ch, sbuf, vch, ActTarget::Vict);
             else if(channel == CHANNEL_CLAN)
-                Act(AT_CLAN, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
+                Act(AT_CLAN, buf, ch, sbuf, vch, ActTarget::Vict);
             else
-                Act(AT_GOSSIP, buf, ch, sbuf.c_str(), vch, ActTarget::Vict);
+                Act(AT_GOSSIP, buf, ch, sbuf, vch, ActTarget::Vict);
             vch->Position = position;
         }
     }

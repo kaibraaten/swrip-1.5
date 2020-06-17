@@ -12,9 +12,9 @@
 
 void do_search(Character *ch, std::string arg)
 {
-    Object *obj = NULL;
-    Object *container = NULL;
-    std::list<Object *> searchList;
+    std::shared_ptr<Object> obj;
+    std::shared_ptr<Object> container;
+    std::list<std::shared_ptr<Object>> searchList;
     int percent = 0;
     DirectionType door = DIR_INVALID;
     bool found = false;
@@ -126,8 +126,8 @@ void do_search(Character *ch, std::string arg)
            && percent < (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_search]))
         {
             Act(AT_SKILL, "Your search reveals the $d!",
-                ch, nullptr, pexit->Keyword.c_str(), ActTarget::Char);
-            Act(AT_SKILL, "$n finds the $d!", ch, nullptr, pexit->Keyword.c_str(), ActTarget::Room);
+                ch, nullptr, pexit->Keyword, ActTarget::Char);
+            Act(AT_SKILL, "$n finds the $d!", ch, nullptr, pexit->Keyword, ActTarget::Room);
             pexit->Flags.reset(Flag::Exit::Secret);
             LearnFromSuccess(ch, gsn_search);
             return;
@@ -135,7 +135,7 @@ void do_search(Character *ch, std::string arg)
     }
     else
     {
-        for(Object *hiddenObject : searchList)
+        for(auto hiddenObject : searchList)
         {
             if(obj->Flags.test(Flag::Obj::Hidden)
                && percent < ch->PCData->Learned[gsn_search])

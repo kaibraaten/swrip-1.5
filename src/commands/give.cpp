@@ -21,7 +21,7 @@ void do_give(Character *ch, std::string argument)
     std::string arg2;
     char buf[MAX_INPUT_LENGTH];
     Character *victim = nullptr;
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
 
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);

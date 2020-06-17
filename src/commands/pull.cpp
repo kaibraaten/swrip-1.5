@@ -4,7 +4,7 @@
 
 void do_pull(Character *ch, std::string arg)
 {
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
 
     if(arg.empty())
     {
@@ -17,7 +17,7 @@ void do_pull(Character *ch, std::string arg)
 
     if((obj = GetObjectHere(ch, arg)) == NULL)
     {
-        Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg.c_str(), ActTarget::Char);
+        Act(AT_PLAIN, "I see no $T here.", ch, nullptr, arg, ActTarget::Char);
         return;
     }
 

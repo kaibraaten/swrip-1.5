@@ -167,7 +167,9 @@ void do_hail(Character *ch, std::string argument)
 
     ch->Echo("A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver %ld credits.\r\n", gold);
 
-    Act(AT_ACTION, "$n $T", ch, NULL, "arrives on a speederbike, gets off and pays the driver before it leaves.", ActTarget::Room);
+    Act(AT_ACTION, "$n $T", ch, nullptr,
+        ActArg("arrives on a speederbike, gets off and pays the driver before it leaves."),
+        ActTarget::Room);
 
     if(steal)
     {

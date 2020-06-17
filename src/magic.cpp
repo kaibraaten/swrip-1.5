@@ -42,13 +42,13 @@ std::string spell_target_name;
 
 static int ParseDiceExpression(const Character *ch, int level, const std::string &expr);
 
-ch_ret spell_null(int sn, int level, Character *ch, void *vo)
+ch_ret spell_null(int sn, int level, Character *ch, const Vo &vo)
 {
     return spell_notfound(sn, level, ch, vo);
 }
 
 /* don't remove, may look redundant, but is important */
-ch_ret spell_notfound(int sn, int level, Character *ch, void *vo)
+ch_ret spell_notfound(int sn, int level, Character *ch, const Vo &vo)
 {
     ch->Echo("That's not a Force power!\r\n");
     return rNONE;
@@ -121,7 +121,7 @@ bool IsImmuneToDamageType(const Character *ch, short damtype)
  * Fancy message handling for a successful casting              -Thoric
  */
 void SuccessfulCasting(std::shared_ptr<Skill> skill, Character *ch,
-                       Character *victim, Object *obj)
+                       Character *victim, std::shared_ptr<Object> obj)
 {
     short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
     short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -171,7 +171,7 @@ void SuccessfulCasting(std::shared_ptr<Skill> skill, Character *ch,
  * Fancy message handling for a failed casting                  -Thoric
  */
 void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
-                   Character *victim, Object *obj)
+                   Character *victim, std::shared_ptr<Object> obj)
 {
     short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
     short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -191,7 +191,7 @@ void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
         }
         else if(skill->Type == SKILL_SPELL)
         {
-            Act(chit, "You failed.", ch, NULL, NULL, ActTarget::Char);
+            Act(chit, "You failed.", ch, nullptr, nullptr, ActTarget::Char);
         }
     }
 
@@ -228,7 +228,7 @@ void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
  * Fancy message handling for being immune to something         -Thoric
  */
 void ImmuneCasting(std::shared_ptr<Skill> skill, Character *ch,
-                   Character *victim, Object *obj)
+                   Character *victim, std::shared_ptr<Object> obj)
 {
     short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
     short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -634,11 +634,11 @@ bool SaveVsSpellStaff(int level, const Character *victim)
 /*
  * Locate targets.
  */
-void *LocateSpellTargets(Character *ch, const std::string &arg,
-                         int sn, Character **victim, Object **obj)
+Vo LocateSpellTargets(Character *ch, const std::string &arg,
+                      int sn, Character **victim, std::shared_ptr<Object> *obj)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
-    void *vo = nullptr;
+    Vo vo;
 
     *victim = nullptr;
     *obj = nullptr;
@@ -708,7 +708,7 @@ void *LocateSpellTargets(Character *ch, const std::string &arg,
             }
         }
 
-        vo = (void *)*victim;
+        vo = *victim;
         break;
 
     case TAR_CHAR_DEFENSIVE:
@@ -727,7 +727,7 @@ void *LocateSpellTargets(Character *ch, const std::string &arg,
             }
         }
 
-        vo = (void *)*victim;
+        vo = *victim;
         break;
 
     case TAR_CHAR_SELF:
@@ -737,7 +737,7 @@ void *LocateSpellTargets(Character *ch, const std::string &arg,
             return &pAbort;
         }
 
-        vo = (void *)ch;
+        vo = ch;
         break;
 
     case TAR_OBJ_INV:
@@ -755,7 +755,7 @@ void *LocateSpellTargets(Character *ch, const std::string &arg,
             return &pAbort;
         }
 
-        vo = (void *)*obj;
+        vo = *obj;
         break;
     }
 
@@ -765,9 +765,9 @@ void *LocateSpellTargets(Character *ch, const std::string &arg,
 /*
  * Cast spells at targets using a magical object.
  */
-ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, Object *obj)
+ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, std::shared_ptr<Object> obj)
 {
-    void *vo = NULL;
+    Vo vo;
     ch_ret retcode = rNONE;
     int levdiff = ch->TopLevel - level;
     std::shared_ptr<Skill> skill = GetSkill(sn);
@@ -807,14 +807,14 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
             break;
 
         case 1:
-            Act(AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::Char);
+            Act(AT_MAGIC, "The $t backfires!", ch, skill->Name, victim, ActTarget::Char);
 
             if(victim)
             {
-                Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::Vict);
+                Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, ActTarget::Vict);
             }
 
-            Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::NotVict);
+            Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, ActTarget::NotVict);
             return InflictDamage(ch, ch, GetRandomNumberFromRange(1, level), TYPE_UNDEFINED);
 
         case 2:
@@ -822,14 +822,14 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
             break;
 
         case 3:
-            Act(AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::Char);
+            Act(AT_MAGIC, "The $t backfires!", ch, skill->Name, victim, ActTarget::Char);
 
             if(victim)
             {
-                Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::Vict);
+                Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, ActTarget::Vict);
             }
 
-            Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, ActTarget::NotVict);
+            Act(AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, ActTarget::NotVict);
             return InflictDamage(ch, ch, GetRandomNumberFromRange(1, level), TYPE_UNDEFINED);
         }
 
@@ -845,8 +845,6 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
         return rERROR;
 
     case TAR_IGNORE:
-        vo = NULL;
-
         if(victim)
         {
             spell_target_name = victim->Name;
@@ -877,7 +875,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
             return rNONE;
         }
 
-        vo = (void *)victim;
+        vo = victim;
         break;
 
     case TAR_CHAR_DEFENSIVE:
@@ -886,7 +884,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
             victim = ch;
         }
 
-        vo = (void *)victim;
+        vo = victim;
 
         if(skill->Type != SKILL_HERB
            && victim->Immune[Flag::Ris::Magic])
@@ -897,7 +895,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
         break;
 
     case TAR_CHAR_SELF:
-        vo = (void *)ch;
+        vo = ch;
 
         if(skill->Type != SKILL_HERB
            && ch->Immune[Flag::Ris::Magic])
@@ -914,7 +912,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
             return rNONE;
         }
 
-        vo = (void *)obj;
+        vo = obj;
         break;
     }
 
@@ -942,9 +940,9 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
        && victim != ch
        && !CharacterDiedRecently(victim))
     {
-        std::list<Character *> copyOfCharacterList(ch->InRoom->Characters());
+        auto copyOfCharacterList = ch->InRoom->Characters();
 
-        for(Character *vch : copyOfCharacterList)
+        for(auto vch : copyOfCharacterList)
         {
             if(victim == vch && !victim->Fighting && victim->Master != ch)
             {

@@ -88,7 +88,7 @@ static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
 {
     struct UserData *ud = (struct UserData *)userData;
     char buf[MAX_STRING_LENGTH];
-    Object *spice = args->Object;
+    auto spice = args->Object;
     Character *ch = GetEngineer(args->CraftingSession);
 
     spice->Value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, (IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_spice_refining])) + 10);

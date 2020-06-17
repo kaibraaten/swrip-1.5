@@ -12,8 +12,8 @@
 void do_detrap(Character *ch, std::string argument)
 {
     std::string arg;
-    Object *obj = NULL;
-    Object *trap = NULL;
+    std::shared_ptr<Object> obj;
+    std::shared_ptr<Object> trap;
     int percent = 0;
     bool found = false;
 

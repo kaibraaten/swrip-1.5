@@ -66,7 +66,7 @@ public:
 constexpr auto GUILD_PRICE = 100000;
 
 void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,
-    const std::string &format = "");
+                     const std::string &format = "");
 std::shared_ptr<Clan> GetClan(const std::string &name);
 void UpdateClanMember(const Character *ch);
 void RemoveClanMember(const Character *ch);
@@ -74,7 +74,7 @@ std::shared_ptr<Clan> AllocateClan();
 void FreeClan(const std::shared_ptr<Clan> &clan);
 void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild);
 void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild,
-    const std::shared_ptr<Clan> &mainClan);
+                           const std::shared_ptr<Clan> &mainClan);
 bool IsBountyHuntersGuild(const std::string &clanName);
 
 #endif /* include guard*/

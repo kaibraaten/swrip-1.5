@@ -8,7 +8,7 @@
 
 void do_empty(Character *ch, std::string argument)
 {
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
     std::string arg1;
     std::string arg2;
 
@@ -39,13 +39,13 @@ void do_empty(Character *ch, std::string argument)
     switch(obj->ItemType)
     {
     default:
-        Act(AT_ACTION, "You shake $p in an attempt to empty it...", ch, obj, NULL, ActTarget::Char);
-        Act(AT_ACTION, "$n begins to shake $p in an attempt to empty it...", ch, obj, NULL, ActTarget::Room);
+        Act(AT_ACTION, "You shake $p in an attempt to empty it...", ch, obj, nullptr, ActTarget::Char);
+        Act(AT_ACTION, "$n begins to shake $p in an attempt to empty it...", ch, obj, nullptr, ActTarget::Room);
         return;
 
     case ITEM_PIPE:
-        Act(AT_ACTION, "You gently tap $p and empty it out.", ch, obj, NULL, ActTarget::Char);
-        Act(AT_ACTION, "$n gently taps $p and empties it out.", ch, obj, NULL, ActTarget::Room);
+        Act(AT_ACTION, "You gently tap $p and empty it out.", ch, obj, nullptr, ActTarget::Char);
+        Act(AT_ACTION, "$n gently taps $p and empties it out.", ch, obj, nullptr, ActTarget::Room);
         RemoveBit(obj->Value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH);
         RemoveBit(obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT);
         obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] = 0;
@@ -58,15 +58,15 @@ void do_empty(Character *ch, std::string argument)
             return;
         }
 
-        Act(AT_ACTION, "You empty $p.", ch, obj, NULL, ActTarget::Char);
-        Act(AT_ACTION, "$n empties $p.", ch, obj, NULL, ActTarget::Room);
+        Act(AT_ACTION, "You empty $p.", ch, obj, nullptr, ActTarget::Char);
+        Act(AT_ACTION, "$n empties $p.", ch, obj, nullptr, ActTarget::Room);
         obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] = 0;
         return;
 
     case ITEM_CONTAINER:
         if(IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-            Act(AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "The $d is closed.", ch, nullptr, obj->Name, ActTarget::Char);
             return;
         }
 
@@ -94,10 +94,10 @@ void do_empty(Character *ch, std::string argument)
                 return;
             }
 
-            if(EmptyObjectContents(obj, NULL, ch->InRoom))
+            if(EmptyObjectContents(obj, nullptr, ch->InRoom))
             {
-                Act(AT_ACTION, "You empty $p.", ch, obj, NULL, ActTarget::Char);
-                Act(AT_ACTION, "$n empties $p.", ch, obj, NULL, ActTarget::Room);
+                Act(AT_ACTION, "You empty $p.", ch, obj, nullptr, ActTarget::Char);
+                Act(AT_ACTION, "$n empties $p.", ch, obj, nullptr, ActTarget::Room);
 
                 if(SysData.SaveFlags.test(Flag::AutoSave::Drop))
                 {
@@ -111,7 +111,7 @@ void do_empty(Character *ch, std::string argument)
         }
         else
         {
-            Object *dest = GetObjectHere(ch, arg2);
+            auto dest = GetObjectHere(ch, arg2);
 
             if(!dest)
             {
@@ -133,13 +133,13 @@ void do_empty(Character *ch, std::string argument)
 
             if(IsBitSet(dest->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
             {
-                Act(AT_PLAIN, "The $d is closed.", ch, NULL, dest->Name.c_str(), ActTarget::Char);
+                Act(AT_PLAIN, "The $d is closed.", ch, nullptr, dest->Name, ActTarget::Char);
                 return;
             }
 
             SeparateOneObjectFromGroup(dest);
 
-            if(EmptyObjectContents(obj, dest, NULL))
+            if(EmptyObjectContents(obj, dest, nullptr))
             {
                 Act(AT_ACTION, "You empty $p into $P.", ch, obj, dest, ActTarget::Char);
                 Act(AT_ACTION, "$n empties $p into $P.", ch, obj, dest, ActTarget::Room);

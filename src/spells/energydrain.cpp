@@ -7,9 +7,9 @@
  * Drain MOVE, MANA, HP.
  * Caster gains HP.
  */
-ch_ret spell_energy_drain(int sn, int level, Character* ch, void* vo)
+ch_ret spell_energy_drain(int sn, int level, Character* ch, const Vo &vo)
 {
-    Character* victim = (Character*)vo;
+    Character* victim = vo.Ch;
     int dam = 0;
     int drain_chance = 0;
     std::shared_ptr<Skill> skill = GetSkill(sn);

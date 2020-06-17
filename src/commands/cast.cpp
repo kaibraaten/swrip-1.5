@@ -14,13 +14,13 @@ extern int pAbort;
 /*
  * Cast a spell.  Multi-caster and component support by Thoric
  */
-void do_cast(Character* ch, std::string argument)
+void do_cast(Character *ch, std::string argument)
 {
     std::string arg1;
     std::string targetName;
-    Character* victim = nullptr;
-    Object* obj = nullptr;
-    void* vo = nullptr;
+    Character *victim = nullptr;
+    std::shared_ptr<Object> obj;
+    Vo vo;
     int mana = 0;
     int sn = 0;
     ch_ret retcode = rNONE;
@@ -28,17 +28,17 @@ void do_cast(Character* ch, std::string argument)
     std::shared_ptr<Skill> skill;
     struct timeval time_used;
 
-    switch (ch->SubState)
+    switch(ch->SubState)
     {
     default:
         /* no ordering charmed mobs to cast spells */
-        if (IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
+        if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
         {
             ch->Echo("You can't seem to do that right now...\r\n");
             return;
         }
 
-        if (ch->InRoom->Flags.test(Flag::Room::NoMagic))
+        if(ch->InRoom->Flags.test(Flag::Room::NoMagic))
         {
             SetCharacterColor(AT_MAGIC, ch);
             ch->Echo("You failed.\r\n");
@@ -48,22 +48,22 @@ void do_cast(Character* ch, std::string argument)
         spell_target_name = OneArgument(argument, arg1);
         OneArgument(spell_target_name, targetName);
 
-        if (arg1.empty())
+        if(arg1.empty())
         {
             ch->Echo("Cast which what where?\r\n");
             return;
         }
 
-        if (GetTrustLevel(ch) < LEVEL_GREATER)
+        if(GetTrustLevel(ch) < LEVEL_GREATER)
         {
-            if ((sn = FindSpell(ch, arg1, true)) < 0
-                || (!IsNpc(ch) && ch->PCData->Learned[sn] <= 0))
+            if((sn = FindSpell(ch, arg1, true)) < 0
+               || (!IsNpc(ch) && ch->PCData->Learned[sn] <= 0))
             {
                 ch->Echo("You can't do that.\r\n");
                 return;
             }
 
-            if ((skill = GetSkill(sn)) == NULL)
+            if((skill = GetSkill(sn)) == NULL)
             {
                 ch->Echo("You can't do that right now...\r\n");
                 return;
@@ -71,31 +71,31 @@ void do_cast(Character* ch, std::string argument)
         }
         else
         {
-            if ((sn = LookupSkill(arg1)) < 0)
+            if((sn = LookupSkill(arg1)) < 0)
             {
                 ch->Echo("We didn't create that yet...\r\n");
                 return;
             }
 
-            if (sn >= MAX_SKILL)
+            if(sn >= MAX_SKILL)
             {
                 ch->Echo("Hmm... that might hurt.\r\n");
                 return;
             }
 
-            if ((skill = GetSkill(sn)) == NULL)
+            if((skill = GetSkill(sn)) == NULL)
             {
                 ch->Echo("Somethis is severely wrong with that one...\r\n");
                 return;
             }
 
-            if (skill->Type != SKILL_SPELL)
+            if(skill->Type != SKILL_SPELL)
             {
                 ch->Echo("That isn't a force power.\r\n");
                 return;
             }
 
-            if (!skill->SpellFunction)
+            if(!skill->SpellFunction)
             {
                 ch->Echo("We didn't finish that one yet...\r\n");
                 return;
@@ -105,9 +105,9 @@ void do_cast(Character* ch, std::string argument)
         /*
          * Something else removed by Merc                 -Thoric
          */
-        if (ch->Position < skill->Position)
+        if(ch->Position < skill->Position)
         {
-            switch (ch->Position)
+            switch(ch->Position)
             {
             default:
                 ch->Echo("You can't concentrate enough.\r\n");
@@ -133,13 +133,13 @@ void do_cast(Character* ch, std::string argument)
             return;
         }
 
-        if (skill->SpellFunction == spell_null)
+        if(skill->SpellFunction == spell_null)
         {
             ch->Echo("That's not a spell!\r\n");
             return;
         }
 
-        if (!skill->SpellFunction)
+        if(!skill->SpellFunction)
         {
             ch->Echo("You cannot cast that... yet.\r\n");
             return;
@@ -152,10 +152,10 @@ void do_cast(Character* ch, std::string argument)
          */
         vo = LocateSpellTargets(ch, targetName, sn, &victim, &obj);
 
-        if (vo == &pAbort)
+        if(vo.IntPtr == &pAbort)
             return;
 
-        if (IsSafe(ch, victim))
+        if(IsSafe(ch, victim))
         {
             SetCharacterColor(AT_MAGIC, ch);
             ch->Echo("You cannot do that to them.\r\n");
@@ -163,13 +163,13 @@ void do_cast(Character* ch, std::string argument)
         }
 
 
-        if (!IsNpc(ch) && ch->Mana.Current < mana)
+        if(!IsNpc(ch) && ch->Mana.Current < mana)
         {
             ch->Echo("The force is not strong enough within you.\r\n");
             return;
         }
 
-        if (skill->Participants <= 1)
+        if(skill->Participants <= 1)
             break;
 
         /* multi-participant spells                       -Thoric */
@@ -183,10 +183,10 @@ void do_cast(Character* ch, std::string argument)
 
     case SUB_TIMER_DO_ABORT:
         ch->dest_buf.erase();
-        
-        if (IS_VALID_SN((sn = ch->tempnum)))
+
+        if(IS_VALID_SN((sn = ch->tempnum)))
         {
-            if ((skill = GetSkill(sn)) == NULL)
+            if((skill = GetSkill(sn)) == NULL)
             {
                 ch->Echo("Something went wrong...\r\n");
                 Log->Bug("do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn);
@@ -195,7 +195,7 @@ void do_cast(Character* ch, std::string argument)
 
             mana = IsNpc(ch) ? 0 : skill->Mana;
 
-            if (GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+            if(GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
                 ch->Mana.Current -= mana / 3;
         }
 
@@ -207,14 +207,14 @@ void do_cast(Character* ch, std::string argument)
     case SUB_PAUSE:
         sn = ch->tempnum;
 
-        if ((skill = GetSkill(sn)) == NULL)
+        if((skill = GetSkill(sn)) == NULL)
         {
             ch->Echo("Something went wrong...\r\n");
             Log->Bug("do_cast: substate 1: bad sn %d", sn);
             return;
         }
 
-        if (ch->dest_buf.empty() || !IS_VALID_SN(sn) || skill->Type != SKILL_SPELL)
+        if(ch->dest_buf.empty() || !IS_VALID_SN(sn) || skill->Type != SKILL_SPELL)
         {
             ch->Echo("Something negates the powers of the force.\r\n");
             Log->Bug("do_cast: ch->dest_buf.empty() or bad sn (%d)", sn);
@@ -227,32 +227,32 @@ void do_cast(Character* ch, std::string argument)
         spell_target_name = OneArgument(buf, targetName);
         ch->SubState = SUB_NONE;
 
-        if (skill->Participants > 1)
+        if(skill->Participants > 1)
         {
             int cnt = 1;
             std::shared_ptr<Timer> t;
 
-            for (Character* tmp : ch->InRoom->Characters())
+            for(Character *tmp : ch->InRoom->Characters())
             {
-                if (tmp != ch
-                    && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
-                    && t->Count >= 1 && t->DoFun == do_cast
-                    && tmp->tempnum == sn && !tmp->dest_buf.empty()
-                    && StrCmp(tmp->dest_buf, buf) == 0)
+                if(tmp != ch
+                   && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
+                   && t->Count >= 1 && t->DoFun == do_cast
+                   && tmp->tempnum == sn && !tmp->dest_buf.empty()
+                   && StrCmp(tmp->dest_buf, buf) == 0)
                 {
                     ++cnt;
                 }
             }
 
-            if (cnt >= skill->Participants)
+            if(cnt >= skill->Participants)
             {
-                for (Character* tmp : ch->InRoom->Characters())
+                for(Character *tmp : ch->InRoom->Characters())
                 {
-                    if (tmp != ch
-                        && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
-                        && t->Count >= 1 && t->DoFun == do_cast
-                        && tmp->tempnum == sn && !tmp->dest_buf.empty()
-                        && StrCmp(tmp->dest_buf, buf) == 0)
+                    if(tmp != ch
+                       && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
+                       && t->Count >= 1 && t->DoFun == do_cast
+                       && tmp->tempnum == sn && !tmp->dest_buf.empty()
+                       && StrCmp(tmp->dest_buf, buf) == 0)
                     {
                         ExtractTimer(tmp, t);
                         Act(AT_MAGIC, "Channeling your energy into $n, you help direct the force",
@@ -272,7 +272,7 @@ void do_cast(Character* ch, std::string argument)
                 ch->Echo("You concentrate all the energy into a burst of force!\r\n");
                 vo = LocateSpellTargets(ch, targetName, sn, &victim, &obj);
 
-                if (vo == &pAbort)
+                if(vo.IntPtr == &pAbort)
                     return;
             }
             else
@@ -280,7 +280,7 @@ void do_cast(Character* ch, std::string argument)
                 SetCharacterColor(AT_MAGIC, ch);
                 ch->Echo("There was not enough power for that to succeed...\r\n");
 
-                if (GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+                if(GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
                     ch->Mana.Current -= mana / 2;
 
                 LearnFromFailure(ch, sn);
@@ -289,52 +289,52 @@ void do_cast(Character* ch, std::string argument)
         }
     }
 
-    if (!dont_wait)
+    if(!dont_wait)
         SetWaitState(ch, skill->Beats);
 
     /*
      * Getting ready to cast... check for spell components        -Thoric
      */
-    if (!IsNpc(ch) && abs(ch->Alignment - skill->Alignment) > 1010)
+    if(!IsNpc(ch) && abs(ch->Alignment - skill->Alignment) > 1010)
     {
-        if (ch->Alignment > skill->Alignment)
+        if(ch->Alignment > skill->Alignment)
         {
             ch->Echo("You do not have enough anger in you.\r\n");
 
-            if (GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+            if(GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
                 ch->Mana.Current -= mana / 2;
 
             return;
         }
 
-        if (ch->Alignment < skill->Alignment)
+        if(ch->Alignment < skill->Alignment)
         {
             ch->Echo("Your anger and hatred prevent you from focusing.\r\n");
 
-            if (GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+            if(GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
                 ch->Mana.Current -= mana / 2;
 
             return;
         }
     }
 
-    if (!IsNpc(ch)
-        && (GetRandomPercent() + skill->Difficulty * 5) > ch->PCData->Learned[sn])
+    if(!IsNpc(ch)
+       && (GetRandomPercent() + skill->Difficulty * 5) > ch->PCData->Learned[sn])
     {
         /* Some more interesting loss of concentration messages  -Thoric */
-        switch (NumberBits(2))
+        switch(NumberBits(2))
         {
         case 0: /* too busy */
-            if (ch->Fighting)
+            if(ch->Fighting)
                 ch->Echo("This round of battle is too hectic to concentrate properly.\r\n");
             else
                 ch->Echo("You lost your concentration.\r\n");
             break;
 
         case 1: /* irritation */
-            if (NumberBits(2) == 0)
+            if(NumberBits(2) == 0)
             {
-                switch (NumberBits(2))
+                switch(NumberBits(2))
                 {
                 case 0:
                     ch->Echo("A tickle in your nose prevents you from keeping your concentration.\r\n");
@@ -360,7 +360,7 @@ void do_cast(Character* ch, std::string argument)
             break;
 
         case 2: /* not enough time */
-            if (ch->Fighting)
+            if(ch->Fighting)
                 ch->Echo("There wasn't enough time this round to complete your concentration.\r\n");
             else
                 ch->Echo("You lost your concentration.\r\n");
@@ -371,7 +371,7 @@ void do_cast(Character* ch, std::string argument)
             break;
         }
 
-        if (GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+        if(GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->Mana.Current -= mana / 2;
 
         LearnFromFailure(ch, sn);
@@ -386,9 +386,9 @@ void do_cast(Character* ch, std::string argument)
          * and it is a TAR_CHAR_DEFENSIVE/SELF spell
          * otherwise spells will have to check themselves
          */
-        if ((skill->Target == TAR_CHAR_DEFENSIVE
+        if((skill->Target == TAR_CHAR_DEFENSIVE
             || skill->Target == TAR_CHAR_SELF)
-            && victim && victim->Immune.test(Flag::Ris::Magic))
+           && victim && victim->Immune.test(Flag::Ris::Magic))
         {
             ImmuneCasting(skill, ch, victim, NULL);
             retcode = rSPELL_FAILED;
@@ -402,15 +402,15 @@ void do_cast(Character* ch, std::string argument)
         }
     }
 
-    if (retcode == rCHAR_DIED || retcode == rERROR || CharacterDiedRecently(ch))
+    if(retcode == rCHAR_DIED || retcode == rERROR || CharacterDiedRecently(ch))
         return;
 
-    if (retcode != rSPELL_FAILED)
+    if(retcode != rSPELL_FAILED)
     {
         int force_exp = skill->Level * skill->Level * 10;
         force_exp = urange(0, force_exp, (GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY))) / 35);
 
-        if (!ch->Fighting)
+        if(!ch->Fighting)
         {
             ch->Echo("You gain %d force experience.\r\n", force_exp);
         }
@@ -424,19 +424,19 @@ void do_cast(Character* ch, std::string argument)
     /*
      * Fixed up a weird mess here, and added double safeguards    -Thoric
      */
-    if (skill->Target == TAR_CHAR_OFFENSIVE
-        && victim
-        && !CharacterDiedRecently(victim)
-        && victim != ch)
+    if(skill->Target == TAR_CHAR_OFFENSIVE
+       && victim
+       && !CharacterDiedRecently(victim)
+       && victim != ch)
     {
-        std::list<Character*> copyOfCharactersInRoom(ch->InRoom->Characters());
+        std::list<Character *> copyOfCharactersInRoom(ch->InRoom->Characters());
 
-        for (Character* vch : copyOfCharactersInRoom)
+        for(Character *vch : copyOfCharactersInRoom)
         {
-            if (vch == victim)
+            if(vch == victim)
             {
-                if (victim->Master != ch
-                    && !victim->Fighting)
+                if(victim->Master != ch
+                   && !victim->Fighting)
                 {
                     retcode = HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
                 }

@@ -2,22 +2,22 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-ch_ret spell_weaken(int sn, int level, Character* ch, void* vo)
+ch_ret spell_weaken(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character* victim = (Character*)vo;
+    Character *victim = vo.Ch;
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (victim->Immune.test(Flag::Ris::Magic))
+    if(victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
     }
 
-    if (IsDroid(victim))
+    if(IsDroid(victim))
         return rSPELL_FAILED;
 
-    if (IsAffected(victim, sn) || SaveVsWands(level, victim))
+    if(IsAffected(victim, sn) || SaveVsWands(level, victim))
         return rSPELL_FAILED;
 
     af->Type = sn;
@@ -28,7 +28,7 @@ ch_ret spell_weaken(int sn, int level, Character* ch, void* vo)
     AffectToCharacter(victim, af);
     SetCharacterColor(AT_MAGIC, victim);
     victim->Echo("You feel weaker.\r\n");
-    if (ch != victim)
+    if(ch != victim)
         ch->Echo("Ok.\r\n");
     return rNONE;
 }

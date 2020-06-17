@@ -59,7 +59,7 @@ RepairShop::RepairShop()
     FixType.fill(0);
 }
 
-static float CostEquation(const Object *obj)
+static float CostEquation(std::shared_ptr<Object> obj)
 {
     float count = obj->Prototype->Count;
 
@@ -81,19 +81,19 @@ Character *FindKeeperQ(const Character *ch, bool message)
     Character *keeper = nullptr;
     std::shared_ptr<Shop> pShop;
 
-    for (auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
+    for(auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
     {
         keeper = *i;
 
-        if (IsNpc(keeper) && (pShop = keeper->Prototype->Shop) != NULL)
+        if(IsNpc(keeper) && (pShop = keeper->Prototype->Shop) != NULL)
         {
             break;
         }
     }
 
-    if (!pShop)
+    if(!pShop)
     {
-        if (message)
+        if(message)
         {
             ch->Echo("You can't do that here.\r\n");
         }
@@ -104,32 +104,32 @@ Character *FindKeeperQ(const Character *ch, bool message)
     /*
      * Shop hours.
      */
-    if (pShop->BusinessHours.Open > pShop->BusinessHours.Close)
+    if(pShop->BusinessHours.Open > pShop->BusinessHours.Close)
     {
-        if (time_info.Hour < pShop->BusinessHours.Open
-            && time_info.Hour > pShop->BusinessHours.Close)
+        if(time_info.Hour < pShop->BusinessHours.Open
+           && time_info.Hour > pShop->BusinessHours.Close)
         {
             do_say(keeper, "Sorry, come back later.");
             return NULL;
         }
     }
-    else if (time_info.Hour < pShop->BusinessHours.Open
-        || time_info.Hour > pShop->BusinessHours.Close)
+    else if(time_info.Hour < pShop->BusinessHours.Open
+            || time_info.Hour > pShop->BusinessHours.Close)
     {
-        if (time_info.Hour > pShop->BusinessHours.Open)
+        if(time_info.Hour > pShop->BusinessHours.Open)
         {
             do_say(keeper, "Sorry, come back later.");
             return NULL;
         }
 
-        if (time_info.Hour > pShop->BusinessHours.Close)
+        if(time_info.Hour > pShop->BusinessHours.Close)
         {
             do_say(keeper, "Sorry, come back tomorrow.");
             return NULL;
         }
     }
 
-    if (!CharacterKnowsLanguage(keeper, ch->Speaking, ch))
+    if(!CharacterKnowsLanguage(keeper, ch->Speaking, ch))
     {
         do_say(keeper, "I can't understand you.");
         return NULL;
@@ -146,17 +146,17 @@ Character *FindFixer(const Character *ch)
     Character *keeper = NULL;
     std::shared_ptr<RepairShop> rShop;
 
-    for (auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
+    for(auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
     {
         keeper = *i;
 
-        if (IsNpc(keeper) && (rShop = keeper->Prototype->RepairShop) != NULL)
+        if(IsNpc(keeper) && (rShop = keeper->Prototype->RepairShop) != NULL)
         {
             break;
         }
     }
 
-    if (!rShop)
+    if(!rShop)
     {
         ch->Echo("You can't do that here.\r\n");
         return NULL;
@@ -165,19 +165,19 @@ Character *FindFixer(const Character *ch)
     /*
      * Shop hours.
      */
-    if (time_info.Hour < rShop->BusinessHours.Open)
+    if(time_info.Hour < rShop->BusinessHours.Open)
     {
         do_say(keeper, "Sorry, come back later.");
         return NULL;
     }
 
-    if (time_info.Hour > rShop->BusinessHours.Close)
+    if(time_info.Hour > rShop->BusinessHours.Close)
     {
         do_say(keeper, "Sorry, come back tomorrow.");
         return NULL;
     }
 
-    if (!CharacterKnowsLanguage(keeper, ch->Speaking, ch))
+    if(!CharacterKnowsLanguage(keeper, ch->Speaking, ch))
     {
         do_say(keeper, "I can't understand you.");
         return NULL;
@@ -186,44 +186,44 @@ Character *FindFixer(const Character *ch)
     return keeper;
 }
 
-int GetObjectCost(const Character *ch, const Character *keeper, const Object *obj, bool fBuy)
+int GetObjectCost(const Character *ch, const Character *keeper, std::shared_ptr<Object> obj, bool fBuy)
 {
     std::shared_ptr<Shop> pShop;
     int cost = 0;
 
-    if (!obj || (pShop = keeper->Prototype->Shop) == NULL)
+    if(!obj || (pShop = keeper->Prototype->Shop) == NULL)
     {
         return 0;
     }
 
     bool richcustomer = ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->Bank) > ch->TopLevel * 1000;
 
-    if (fBuy)
+    if(fBuy)
     {
         int profitmod = 13 - GetCurrentCharisma(ch) + (richcustomer ? 15 : 0)
             + ((urange(5, ch->TopLevel, LEVEL_AVATAR) - 20) / 2);
         cost = (int)(obj->Cost
-            * umax((pShop->ProfitSell + 1), pShop->ProfitBuy + profitmod))
+                     * umax((pShop->ProfitSell + 1), pShop->ProfitBuy + profitmod))
             / 100;
     }
     else
     {
         int profitmod = GetCurrentCharisma(ch) - 13 - (richcustomer ? 15 : 0);
 
-        for (int itype = 0; itype < MAX_TRADE; itype++)
+        for(int itype = 0; itype < MAX_TRADE; itype++)
         {
-            if (obj->ItemType == pShop->BuyType[itype])
+            if(obj->ItemType == pShop->BuyType[itype])
             {
                 cost = (int)(obj->Cost
-                    * umin((pShop->ProfitBuy - 1),
-                        pShop->ProfitSell + profitmod)) / 100;
+                             * umin((pShop->ProfitBuy - 1),
+                                    pShop->ProfitSell + profitmod)) / 100;
                 break;
             }
         }
 
-        for (const Object *obj2 : keeper->Objects())
+        for(auto obj2 : keeper->Objects())
         {
-            if (obj->Prototype == obj2->Prototype)
+            if(obj->Prototype == obj2->Prototype)
             {
                 cost /= (obj2->Count + 1);
                 break;
@@ -233,28 +233,28 @@ int GetObjectCost(const Character *ch, const Character *keeper, const Object *ob
         cost = umin(cost, 2500);
     }
 
-    if (cost > 0)
+    if(cost > 0)
     {
         cost = COST_EQUATION;
 
-        if (cost <= 0)
+        if(cost <= 0)
         {
             cost = 1;
         }
     }
 
-    if (obj->ItemType == ITEM_ARMOR)
+    if(obj->ItemType == ITEM_ARMOR)
     {
         cost = (int)(cost * (obj->Value[OVAL_ARMOR_CONDITION] + 1) / (obj->Value[OVAL_ARMOR_AC] + 1));
     }
 
-    if (obj->ItemType == ITEM_WEAPON)
+    if(obj->ItemType == ITEM_WEAPON)
     {
         cost = (int)(cost * (obj->Value[OVAL_WEAPON_CONDITION] + 1) / INIT_WEAPON_CONDITION + 1);
         cost = (int)(cost * (obj->Value[OVAL_WEAPON_CHARGE] + 1) / (obj->Value[OVAL_WEAPON_MAX_CHARGE] + 1));
     }
 
-    if (obj->ItemType == ITEM_DEVICE)
+    if(obj->ItemType == ITEM_DEVICE)
     {
         cost = (int)(cost * (obj->Value[OVAL_DEVICE_CHARGES] + 1) / (obj->Value[OVAL_DEVICE_MAX_CHARGES] + 1));
     }
@@ -262,20 +262,20 @@ int GetObjectCost(const Character *ch, const Character *keeper, const Object *ob
     return cost;
 }
 
-int GetRepairCost(const Character *keeper, const Object *obj)
+int GetRepairCost(const Character *keeper, std::shared_ptr<Object> obj)
 {
     std::shared_ptr<RepairShop> rShop;
     int cost = 0;
     bool found = false;
 
-    if (!obj || (rShop = keeper->Prototype->RepairShop) == NULL)
+    if(!obj || (rShop = keeper->Prototype->RepairShop) == NULL)
     {
         return 0;
     }
 
-    for (int itype = 0; itype < MAX_FIX; itype++)
+    for(int itype = 0; itype < MAX_FIX; itype++)
     {
-        if (obj->ItemType == rShop->FixType[itype])
+        if(obj->ItemType == rShop->FixType[itype])
         {
             cost = (int)(obj->Cost * rShop->ProfitFix / 100);
             found = true;
@@ -283,22 +283,22 @@ int GetRepairCost(const Character *keeper, const Object *obj)
         }
     }
 
-    if (!found)
+    if(!found)
     {
         cost = -1;
     }
 
-    if (cost == 0)
+    if(cost == 0)
     {
         cost = 1;
     }
 
-    if (found && cost > 0)
+    if(found && cost > 0)
     {
-        switch (obj->ItemType)
+        switch(obj->ItemType)
         {
         case ITEM_ARMOR:
-            if (obj->Value[OVAL_ARMOR_CONDITION] >= obj->Value[OVAL_ARMOR_AC])
+            if(obj->Value[OVAL_ARMOR_CONDITION] >= obj->Value[OVAL_ARMOR_AC])
             {
                 cost = -2;
             }
@@ -309,7 +309,7 @@ int GetRepairCost(const Character *keeper, const Object *obj)
             break;
 
         case ITEM_WEAPON:
-            if (INIT_WEAPON_CONDITION == obj->Value[OVAL_WEAPON_CONDITION])
+            if(INIT_WEAPON_CONDITION == obj->Value[OVAL_WEAPON_CONDITION])
             {
                 cost = -2;
             }
@@ -320,7 +320,7 @@ int GetRepairCost(const Character *keeper, const Object *obj)
             break;
 
         case ITEM_DEVICE:
-            if (obj->Value[OVAL_DEVICE_CHARGES] >= obj->Value[OVAL_DEVICE_MAX_CHARGES])
+            if(obj->Value[OVAL_DEVICE_CHARGES] >= obj->Value[OVAL_DEVICE_MAX_CHARGES])
             {
                 cost = -2;
             }

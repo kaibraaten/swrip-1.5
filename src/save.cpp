@@ -67,7 +67,7 @@ namespace fs = std::filesystem;
 /*
  * Array to keep track of equipment temporarily.                -Thoric
  */
-Object *save_equipment[MAX_WEAR][8];
+std::shared_ptr<Object> save_equipment[MAX_WEAR][8];
 Character *quitting_char = NULL;
 Character *loading_char = NULL;
 Character *saving_char = NULL;
@@ -81,12 +81,12 @@ extern int falling;
 /*
  * Array of containers read for proper re-nesting of objects.
  */
-static Object *rgObjNest[MAX_NEST];
+static std::shared_ptr<Object> rgObjNest[MAX_NEST];
 
 /*
  * Local functions.
  */
-static bool HasAnyOvalues(const Object *obj);
+static bool HasAnyOvalues(std::shared_ptr<Object> obj);
 
 /*
  * Un-equip character before saving to ensure proper    -Thoric
@@ -102,7 +102,7 @@ void DeEquipCharacter(Character *ch)
         }
     }
 
-    for (Object *obj : ch->Objects())
+    for (auto obj : ch->Objects())
     {
         if (obj->WearLoc > WEAR_NONE && obj->WearLoc < MAX_WEAR)
         {
@@ -194,7 +194,7 @@ void SaveClone(Character *ch)
     saving_char = NULL;
 }
 
-static bool HasAnyOvalues(const Object *obj)
+static bool HasAnyOvalues(std::shared_ptr<Object> obj)
 {
     int oval = 0;
 
@@ -212,7 +212,7 @@ static bool HasAnyOvalues(const Object *obj)
 /*
  * Write an object and its contents.
  */
-void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, short os_type)
+void WriteObject(const Character *ch, std::shared_ptr<Object> obj, FILE *fp, int iNest, short os_type)
 {
     short wear = 0, wear_loc = 0, x = 0;
 
@@ -226,7 +226,7 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
      * Slick recursion to write lists backwards,
      *   so loading them will load in forwards order.
      */
-    for (const Object *content : Reverse(obj->Objects()))
+    for (auto content : Reverse(obj->Objects()))
     {
         WriteObject(ch, content, fp, iNest, OS_CARRY);
     }
@@ -455,7 +455,7 @@ void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, sh
 
     fprintf(fp, "End\n\n");
 
-    for (const Object *content : Reverse(obj->Objects()))
+    for (auto content : Reverse(obj->Objects()))
     {
         WriteObject(ch, content, fp, iNest + 1, OS_CARRY);
     }
@@ -467,8 +467,7 @@ void ReadObject(Character *ch, FILE *fp, short os_type)
     bool fNest = true; /* Yes, these should             */
     bool fVnum = true; /* indeed be initialized as true */
     std::shared_ptr<Room> room;
-
-    Object *obj = new Object();
+    auto obj = std::make_shared<Object>();
 
     for (; ; )
     {
@@ -558,7 +557,6 @@ void ReadObject(Character *ch, FILE *fp, short os_type)
                 if (!fNest || !fVnum)
                 {
                     Log->Bug("Fread_obj: incomplete object.");
-                    delete obj;
                     return;
                 }
                 else
@@ -796,7 +794,6 @@ void ReadObject(Character *ch, FILE *fp, short os_type)
                 obj->Remove(paf);
             }
 
-            delete obj;
             return;
         }
     }
@@ -827,7 +824,7 @@ void WriteCorpses(const Character *ch, std::string name)
     }
 
     /* Go by vnum, less chance of screwups. -- Altrag */
-    for (const Object *corpse : Objects)
+    for (auto corpse : Objects)
     {
         if (corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
             && corpse->InRoom != NULL && corpse->Value[OVAL_CORPSE_SKINNED] != 1

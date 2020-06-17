@@ -13,34 +13,34 @@
 class Arena
 {
 public:
-  int PeopleChallenged = 0;
-  int PeopleIsInArena = 0;
-  int InStartArena = 0;
-  int StartTime = 0;
-  int GameLength = 0;
-  int MinLevel = 0;
-  int MaxLevel = 0;
-  int TimeToStart = 0;
-  int TimeLeftInGame = 0;
-  int ArenaPot = 0;
-  int BetPot = 0;
+    int PeopleChallenged = 0;
+    int PeopleIsInArena = 0;
+    int InStartArena = 0;
+    int StartTime = 0;
+    int GameLength = 0;
+    int MinLevel = 0;
+    int MaxLevel = 0;
+    int TimeToStart = 0;
+    int TimeLeftInGame = 0;
+    int ArenaPot = 0;
+    int BetPot = 0;
 };
 
 class HallOfFameElement
 {
 public:
-  std::string Name;
-  time_t Date = 0;
-  int Award = 0;
+    std::string Name;
+    time_t Date = 0;
+    int Award = 0;
 };
 
 extern Arena arena;
-extern std::list<HallOfFameElement*> FameList;
+extern std::list<HallOfFameElement *> FameList;
 
-void StartArena( void );
-void LoadHallOfFame( void );
-void SaveHallOfFame( void );
-void UpdateArena( void );
-int CharactersInArena( void );
+void StartArena(void);
+void LoadHallOfFame(void);
+void SaveHallOfFame(void);
+void UpdateArena(void);
+int CharactersInArena(void);
 
 #endif

@@ -10,7 +10,7 @@ void do_oinvoke(Character *ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     vnum_t vnum = INVALID_VNUM;
     int level = 0;
 

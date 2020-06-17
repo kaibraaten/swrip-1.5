@@ -10,7 +10,7 @@
 /* Allows PCs to learn spells embedded in object. Should prove interesting. - Samson 8-9-98 */
 void do_study(Character *ch, std::string argument) /* study by Absalom */
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     int sn = 0, bookskills = 0, book;
 
     if(argument.empty())
@@ -64,13 +64,13 @@ void do_study(Character *ch, std::string argument) /* study by Absalom */
 
     if(ch->PCData->Learned[sn] <= 0)
         Act(AT_MAGIC, "You have begun learning the ability to $t!",
-            ch, SkillTable[sn]->Name.c_str(), NULL, ActTarget::Char);
+            ch, SkillTable[sn]->Name, nullptr, ActTarget::Char);
     else if(ch->PCData->Learned[sn] < 15)
         Act(AT_MAGIC, "You have learned a bit more of the ability to $t!",
-            ch, SkillTable[sn]->Name.c_str(), NULL, ActTarget::Char);
+            ch, SkillTable[sn]->Name, nullptr, ActTarget::Char);
     else
         Act(AT_MAGIC, "You have absorbed everything the book teaches you on the ability to $t!",
-            ch, SkillTable[sn]->Name.c_str(), NULL, ActTarget::Char);
+            ch, SkillTable[sn]->Name, nullptr, ActTarget::Char);
 
     ch->PCData->Learned[sn] += urange(0, 20 - ch->PCData->Learned[sn], 5);
     ch->PCData->Learned[sn] += 5;

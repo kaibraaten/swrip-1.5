@@ -6,7 +6,7 @@
 
 void do_junk(Character *ch, std::string arg)
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
 
     if(arg.empty() || !StrCmp(arg, ch->Name))
     {

@@ -16,10 +16,10 @@ class InMemoryRepairShopRepository : public RepairShopRepository
 
 std::shared_ptr<ShopRepository> NewShopRepository()
 {
-  return std::make_shared<InMemoryShopRepository>();
+    return std::make_shared<InMemoryShopRepository>();
 }
 
 std::shared_ptr<RepairShopRepository> NewRepairShopRepository()
 {
-  return std::make_shared<InMemoryRepairShopRepository>();
+    return std::make_shared<InMemoryRepairShopRepository>();
 }

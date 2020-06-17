@@ -4,31 +4,34 @@
 
 static std::shared_ptr<BadName> GetBadName(const std::string &name)
 {
-  return BadNames->Find([&name](auto entity) { return StrCmp(entity->Name, name) == 0; });
+    return BadNames->Find([&name](auto entity)
+                          {
+                              return StrCmp(entity->Name, name) == 0;
+                          });
 }
 
-bool IsBadName( const std::string &name )
+bool IsBadName(const std::string &name)
 {
-  return GetBadName(name) != nullptr;
+    return GetBadName(name) != nullptr;
 }
 
 void AddBadName(const std::string &name)
 {
-  if( IsBadName( name ) )
+    if(IsBadName(name))
     {
-      return;
+        return;
     }
 
-  std::shared_ptr<BadName> badName = std::shared_ptr<BadName>(new BadName { name });
-  BadNames->Add(badName);
+    std::shared_ptr<BadName> badName = std::shared_ptr<BadName>(new BadName{ name });
+    BadNames->Add(badName);
 }
 
-void RemoveBadName( const std::string &name )
+void RemoveBadName(const std::string &name)
 {
-  std::shared_ptr<BadName> badname = GetBadName(name);
+    std::shared_ptr<BadName> badname = GetBadName(name);
 
-  if(badname != nullptr)
+    if(badname != nullptr)
     {
-      BadNames->Remove(badname);
+        BadNames->Remove(badname);
     }
 }

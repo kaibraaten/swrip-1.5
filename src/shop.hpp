@@ -62,10 +62,10 @@ public:
 };
 
 Character *FindFixer(const Character *ch);
-int GetRepairCost(const Character *keeper, const Object *obj);
+int GetRepairCost(const Character *keeper, std::shared_ptr<Object> obj);
 Character *FindKeeper(const Character *ch);
 Character *FindKeeperQ(const Character *ch, bool message);
-int GetObjectCost(const Character *ch, const Character *keeper, const Object *obj, bool fBuy);
+int GetObjectCost(const Character *ch, const Character *keeper, std::shared_ptr<Object> obj, bool fBuy);
 void LoadVendors();
 void SaveVendor(Character *ch);
 

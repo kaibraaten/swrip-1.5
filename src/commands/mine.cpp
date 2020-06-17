@@ -23,8 +23,8 @@ void do_mine(Character *ch, std::string arg)
     if(HasMentalStateToFindObject(ch))
         return;
 
-    bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
-    Object *obj = GetObjectInListReverse(ch, arg, ch->InRoom->Objects());
+    bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL) != nullptr;
+    auto obj = GetObjectInListReverse(ch, arg, ch->InRoom->Objects());
 
     if(!obj)
     {

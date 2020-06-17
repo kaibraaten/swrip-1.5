@@ -6,7 +6,7 @@
 
 void do_unlock(Character *ch, std::string arg)
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     std::shared_ptr<Exit> pexit;
 
     if(arg.empty())
@@ -52,7 +52,7 @@ void do_unlock(Character *ch, std::string arg)
         {
             ch->Echo("*Click*\r\n");
             Act(AT_ACTION, "$n unlocks the $d.",
-                ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
+                ch, nullptr, pexit->Keyword, ActTarget::Room);
             RemoveBExitFlag(pexit, Flag::Exit::Locked);
             return;
         }

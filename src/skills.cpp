@@ -50,8 +50,8 @@ void skill_notfound(Character *ch, std::string argument)
  */
 void Disarm(Character *ch, Character *victim)
 {
-    Object *obj = NULL;
-    Object *tmpobj = NULL;
+    std::shared_ptr<Object> obj;
+    std::shared_ptr<Object> tmpobj;
 
     if((obj = GetEquipmentOnCharacter(victim, WEAR_WIELD)) == NULL)
     {
@@ -84,9 +84,9 @@ void Disarm(Character *ch, Character *victim)
         return;
     }
 
-    Act(AT_SKILL, "$n DISARMS you!", ch, NULL, victim, ActTarget::Vict);
-    Act(AT_SKILL, "You disarm $N!", ch, NULL, victim, ActTarget::Char);
-    Act(AT_SKILL, "$n disarms $N!", ch, NULL, victim, ActTarget::NotVict);
+    Act(AT_SKILL, "$n DISARMS you!", ch, nullptr, victim, ActTarget::Vict);
+    Act(AT_SKILL, "You disarm $N!", ch, nullptr, victim, ActTarget::Char);
+    Act(AT_SKILL, "$n disarms $N!", ch, nullptr, victim, ActTarget::NotVict);
     LearnFromSuccess(ch, gsn_disarm);
 
     if(obj == GetEquipmentOnCharacter(victim, WEAR_WIELD)
@@ -119,9 +119,9 @@ void Trip(Character *ch, Character *victim)
             return;
         }
 
-        Act(AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, ActTarget::Vict);
-        Act(AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, ActTarget::Char);
-        Act(AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_SKILL, "$n trips your mount and you fall off!", ch, nullptr, victim, ActTarget::Vict);
+        Act(AT_SKILL, "You trip $N's mount and $N falls off!", ch, nullptr, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n trips $N's mount and $N falls off!", ch, nullptr, victim, ActTarget::NotVict);
         victim->Mount->Flags.reset(Flag::Mob::Mounted);
         victim->Mount = nullptr;
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
@@ -132,9 +132,9 @@ void Trip(Character *ch, Character *victim)
 
     if(victim->Wait == 0)
     {
-        Act(AT_SKILL, "$n trips you and you go down!", ch, NULL, victim, ActTarget::Vict);
-        Act(AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, ActTarget::Char);
-        Act(AT_SKILL, "$n trips $N and $N goes down!", ch, NULL, victim, ActTarget::NotVict);
+        Act(AT_SKILL, "$n trips you and you go down!", ch, nullptr, victim, ActTarget::Vict);
+        Act(AT_SKILL, "You trip $N and $N goes down!", ch, nullptr, victim, ActTarget::Char);
+        Act(AT_SKILL, "$n trips $N and $N goes down!", ch, nullptr, victim, ActTarget::NotVict);
 
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
         SetWaitState(victim, 2 * PULSE_VIOLENCE);
@@ -148,7 +148,7 @@ void Trip(Character *ch, Character *victim)
 bool CheckParry(Character *ch, Character *victim)
 {
     int chances = 0;
-    Object *wield = NULL;
+    std::shared_ptr<Object> wield;
 
     if(!IsAwake(victim))
     {

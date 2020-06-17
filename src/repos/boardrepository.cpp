@@ -39,7 +39,7 @@ void LuaBoardRepository::Load()
 
 void LuaBoardRepository::Save() const
 {
-    for (const auto &board : Boards)
+    for(const auto &board : Boards)
     {
         Save(board);
     }
@@ -74,11 +74,11 @@ void LuaBoardRepository::LoadNotes(lua_State *L, const std::shared_ptr<Board> &b
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Notes");
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         lua_pushnil(L);
 
-        while (lua_next(L, -2))
+        while(lua_next(L, -2))
         {
             LoadNote(L, board);
             lua_pop(L, 1);
@@ -99,10 +99,10 @@ int LuaBoardRepository::L_BoardEntry(lua_State *L)
     LuaGetfieldInt(L, "MinRemoveLevel", &board->MinRemoveLevel);
     LuaGetfieldInt(L, "MaxPosts", &board->MaxPosts);
     LuaGetfieldString(L, "Type",
-        [board](const std::string &typeName)
-    {
-        board->Type = !StrCmp(typeName, "mail") ? BOARD_MAIL : BOARD_NOTE;
-    });
+                      [board](const std::string &typeName)
+                      {
+                          board->Type = !StrCmp(typeName, "mail") ? BOARD_MAIL : BOARD_NOTE;
+                      });
     LuaGetfieldString(L, "ReadGroup", &board->ReadGroup);
     LuaGetfieldString(L, "PostGroup", &board->PostGroup);
     LuaGetfieldString(L, "ExtraReaders", &board->ExtraReaders);
@@ -121,13 +121,13 @@ void LuaBoardRepository::ExecuteBoardFile(const std::string &filePath, void *use
 
 void LuaBoardRepository::PushNotes(lua_State *L, const std::shared_ptr<Board> &board)
 {
-    if (!board->Notes().empty())
+    if(!board->Notes().empty())
     {
         int idx = 0;
         lua_pushstring(L, "Notes");
         lua_newtable(L);
 
-        for (auto note : board->Notes())
+        for(auto note : board->Notes())
         {
             ++idx;
             lua_pushinteger(L, idx);
@@ -152,7 +152,7 @@ void LuaBoardRepository::PushNotes(lua_State *L, const std::shared_ptr<Board> &b
 
 void LuaBoardRepository::PushBoard(lua_State *L, const void *userData)
 {
-    const std::shared_ptr<Board> board = *static_cast<const std::shared_ptr<Board>*>(userData);
+    const std::shared_ptr<Board> board = *static_cast<const std::shared_ptr<Board> *>(userData);
     lua_pushinteger(L, 1);
     lua_newtable(L);
 

@@ -10,7 +10,6 @@
 
 void do_snipe(Character *ch, std::string argument)
 {
-    Object *wield = NULL;
     std::string arg;
     std::string arg2;
     DirectionType dir = DIR_INVALID;
@@ -35,7 +34,7 @@ void do_snipe(Character *ch, std::string argument)
         return;
     }
 
-    wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
+    auto wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
     if(wield == nullptr
        || wield->ItemType != ITEM_WEAPON

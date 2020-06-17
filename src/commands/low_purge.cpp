@@ -5,7 +5,7 @@
 void do_low_purge(Character *ch, std::string arg)
 {
     Character *victim = NULL;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
 
     if(arg.empty())
     {

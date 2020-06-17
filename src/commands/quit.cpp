@@ -41,7 +41,7 @@ void do_quit(Character *ch, std::string argument)
         return;
     }
 
-    if(OngoingAuction->Item != NULL && ((ch == OngoingAuction->Buyer) || (ch == OngoingAuction->Seller)))
+    if(!OngoingAuction->Item.expired() && (ch == OngoingAuction->Buyer || ch == OngoingAuction->Seller))
     {
         ch->Echo("Wait until you have bought/sold the item on auction.\r\n");
         return;

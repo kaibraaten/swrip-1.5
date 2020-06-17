@@ -69,9 +69,9 @@ void do_drop(Character *ch, std::string argument)
 
             ch->Gold -= number;
 
-            std::list<Object *> objectsToExtract(ch->InRoom->Objects());
+            auto objectsToExtract = ch->InRoom->Objects();
 
-            for(Object *obj : objectsToExtract)
+            for(auto obj : objectsToExtract)
             {
                 switch(obj->Prototype->Vnum)
                 {
@@ -112,7 +112,7 @@ void do_drop(Character *ch, std::string argument)
 
     if(number <= 1 && StrCmp(arg, "all") && StringPrefix("all.", arg))
     {
-        Object *obj = nullptr;
+        std::shared_ptr<Object> obj;
 
         /* 'drop obj' */
         if((obj = GetCarriedObject(ch, arg)) == NULL)
@@ -172,9 +172,9 @@ void do_drop(Character *ch, std::string argument)
 
         found = false;
 
-        std::list<Object *> carriedObjects(ch->Objects());
+        auto carriedObjects = ch->Objects();
 
-        for(Object *obj : carriedObjects)
+        for(auto obj : carriedObjects)
         {
             if((fAll || NiftyIsName(chk, obj->Name))
                && CanSeeObject(ch, obj)
@@ -226,7 +226,7 @@ void do_drop(Character *ch, std::string argument)
                     ch, NULL, NULL, ActTarget::Char);
             else
                 Act(AT_PLAIN, "You are not carrying any $T.",
-                    ch, NULL, chk.c_str(), ActTarget::Char);
+                    ch, NULL, chk, ActTarget::Char);
         }
     }
 

@@ -6,7 +6,7 @@
 #include "protomob.hpp"
 #include "act.hpp"
 
-static void repair_one_obj(Character *ch, Character *keeper, Object *obj,
+static void repair_one_obj(Character *ch, Character *keeper, std::shared_ptr<Object> obj,
                            std::string arg, int maxgold,
                            const std::string &fixstr, const std::string &fixstr2);
 
@@ -43,7 +43,7 @@ void do_repair(Character *ch, std::string argument)
 
     if(!StrCmp(argument, "all"))
     {
-        for(Object *obj : ch->Objects())
+        for(auto obj : ch->Objects())
         {
             if(obj->WearLoc == WEAR_NONE
                && CanSeeObject(ch, obj)
@@ -58,7 +58,7 @@ void do_repair(Character *ch, std::string argument)
         return;
     }
 
-    Object *obj = GetCarriedObject(ch, argument);
+    auto obj = GetCarriedObject(ch, argument);
 
     if(obj == nullptr)
     {
@@ -71,7 +71,7 @@ void do_repair(Character *ch, std::string argument)
     repair_one_obj(ch, keeper, obj, argument, maxgold, fixstr, fixstr2);
 }
 
-static void repair_one_obj(Character *ch, Character *keeper, Object *obj,
+static void repair_one_obj(Character *ch, Character *keeper, std::shared_ptr<Object> obj,
                            std::string arg, int maxgold,
                            const std::string &fixstr, const std::string &fixstr2)
 {

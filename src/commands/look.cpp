@@ -119,7 +119,7 @@ void do_look(Character *ch, std::string argument)
 
     number = NumberArgument(arg1, arg);
 
-    for(Object *obj : Reverse(ch->Objects()))
+    for(auto obj : Reverse(ch->Objects()))
     {
         if(CanSeeObject(ch, obj))
         {
@@ -546,7 +546,7 @@ static void show_char_to_char_0(Character *victim, Character *ch)
 
 static void show_char_to_char_1(Character *victim, Character *ch)
 {
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
     int iWear = 0;
     bool found = false;
 
@@ -691,7 +691,7 @@ static void show_visible_affects_to_char(Character *victim, Character *ch)
 static void look_under(Character *ch, const std::string &what, bool doexaprog)
 {
     int count = 0;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
 
     if(what.empty())
     {
@@ -779,7 +779,6 @@ static bool requirements_are_met(Character *ch)
 static void look_in(Character *ch, const std::string &what, bool doexaprog)
 {
     int count = 0;
-    Object *obj = NULL;
 
     if(what.empty())
     {
@@ -787,7 +786,7 @@ static void look_in(Character *ch, const std::string &what, bool doexaprog)
         return;
     }
 
-    obj = GetObjectHere(ch, what);
+    auto obj = GetObjectHere(ch, what);
 
     if(!obj)
     {
@@ -829,7 +828,7 @@ static void look_in(Character *ch, const std::string &what, bool doexaprog)
         break;
 
     case ITEM_PORTAL:
-        for(std::shared_ptr<Exit> pexit : ch->InRoom->Exits())
+        for(auto pexit : ch->InRoom->Exits())
         {
             if(pexit->Direction == DIR_PORTAL
                && pexit->Flags.test(Flag::Exit::Portal))
@@ -894,8 +893,8 @@ static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short 
             }
             else
             {
-                Act(AT_PLAIN, "The $d is closed.", ch, NULL,
-                    pexit->Keyword.c_str(), ActTarget::Char);
+                Act(AT_PLAIN, "The $d is closed.", ch, nullptr,
+                    pexit->Keyword, ActTarget::Char);
             }
 
             return;
@@ -904,7 +903,7 @@ static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short 
         if(pexit->Flags.test(Flag::Exit::Bashed))
         {
             Act(AT_RED, "The $d has been bashed from its hinges!",
-                ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
+                ch, nullptr, pexit->Keyword, ActTarget::Char);
         }
     }
 

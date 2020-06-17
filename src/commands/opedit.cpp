@@ -6,32 +6,32 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-void do_opedit( Character *ch, std::string argument )
+void do_opedit(Character *ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
     std::string arg3;
     std::string arg4;
 
-    if ( IsNpc( ch ) )
+    if(IsNpc(ch))
     {
         ch->Echo("Mob's can't opedit\r\n");
         return;
     }
 
-    if ( !ch->Desc )
+    if(!ch->Desc)
     {
         ch->Echo("You have no descriptor\r\n");
         return;
     }
 
-    SmashTilde( argument );
-    argument = OneArgument( argument, arg1 );
-    argument = OneArgument( argument, arg2 );
-    argument = OneArgument( argument, arg3 );
-    int value = ToLong( arg3 );
+    SmashTilde(argument);
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
+    argument = OneArgument(argument, arg3);
+    int value = ToLong(arg3);
 
-    if ( arg1.empty() || arg2.empty() )
+    if(arg1.empty() || arg2.empty())
     {
         ch->Echo("Syntax: opedit <object> <command> [number] <program> <value>\r\n");
         ch->Echo("\r\n");
@@ -46,13 +46,13 @@ void do_opedit( Character *ch, std::string argument )
         return;
     }
 
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
 
-    if ( GetTrustLevel( ch ) < LEVEL_GREATER )
+    if(GetTrustLevel(ch) < LEVEL_GREATER)
     {
-        obj = GetCarriedObject( ch, arg1 );
+        obj = GetCarriedObject(ch, arg1);
 
-        if ( obj == nullptr )
+        if(obj == nullptr)
         {
             ch->Echo("You aren't carrying that.\r\n");
             return;
@@ -60,19 +60,19 @@ void do_opedit( Character *ch, std::string argument )
     }
     else
     {
-        obj = GetObjectAnywhere( ch, arg1 );
+        obj = GetObjectAnywhere(ch, arg1);
 
-        if ( obj == nullptr )
+        if(obj == nullptr)
         {
             ch->Echo("Nothing like that in all the realms.\r\n");
             return;
         }
     }
 
-    if ( !CanModifyObject( ch, obj ) )
+    if(!CanModifyObject(ch, obj))
         return;
 
-    if ( !obj->Flags.test(Flag::Obj::Prototype))
+    if(!obj->Flags.test(Flag::Obj::Prototype))
     {
         ch->Echo("An object must have a prototype flag to be opset.\r\n");
         return;
@@ -80,13 +80,13 @@ void do_opedit( Character *ch, std::string argument )
 
     const auto &mudProgs(obj->Prototype->mprog.MudProgs());
 
-    SetCharacterColor( AT_GREEN, ch );
+    SetCharacterColor(AT_GREEN, ch);
 
-    if ( !StrCmp( arg2, "list" ) )
+    if(!StrCmp(arg2, "list"))
     {
         int cnt = 0;
 
-        if ( mudProgs.empty() )
+        if(mudProgs.empty())
         {
             ch->Echo("That object has no obj programs.\r\n");
             return;
@@ -96,31 +96,31 @@ void do_opedit( Character *ch, std::string argument )
         {
             ch->Echo("%d>%s %s\r\n%s\r\n",
                      ++cnt,
-                     MobProgTypeToName( mprg->type ),
+                     MobProgTypeToName(mprg->type),
                      mprg->arglist.c_str(),
-                     mprg->comlist.c_str() );
+                     mprg->comlist.c_str());
         }
 
         return;
     }
 
-    if ( !StrCmp( arg2, "edit" ) )
+    if(!StrCmp(arg2, "edit"))
     {
-        if ( mudProgs.empty() )
+        if(mudProgs.empty())
         {
             ch->Echo("That object has no obj programs.\r\n");
             return;
         }
 
-        argument = OneArgument( argument, arg4 );
+        argument = OneArgument(argument, arg4);
 
         int mptype = 0;
 
-        if ( !arg4.empty() )
+        if(!arg4.empty())
         {
-            mptype = GetMudProgFlag( arg4 );
+            mptype = GetMudProgFlag(arg4);
 
-            if ( mptype == -1 )
+            if(mptype == -1)
             {
                 ch->Echo("Unknown program type.\r\n");
                 return;
@@ -131,7 +131,7 @@ void do_opedit( Character *ch, std::string argument )
             mptype = -1;
         }
 
-        if ( value < 1 )
+        if(value < 1)
         {
             ch->Echo("Program not found.\r\n");
             return;
@@ -141,9 +141,9 @@ void do_opedit( Character *ch, std::string argument )
 
         for(auto mprg : mudProgs)
         {
-            if ( ++cnt == value )
+            if(++cnt == value)
             {
-                EditMobProg( ch, mprg, mptype, argument );
+                EditMobProg(ch, mprg, mptype, argument);
                 obj->Prototype->mprog.progtypes = 0;
 
                 for(auto inner : mudProgs)
@@ -159,17 +159,17 @@ void do_opedit( Character *ch, std::string argument )
         return;
     }
 
-    if ( !StrCmp( arg2, "delete" ) )
+    if(!StrCmp(arg2, "delete"))
     {
-        if ( mudProgs.empty() )
+        if(mudProgs.empty())
         {
             ch->Echo("That object has no obj programs.\r\n");
             return;
         }
 
-        argument = OneArgument( argument, arg4 );
+        argument = OneArgument(argument, arg4);
 
-        if ( value < 1 )
+        if(value < 1)
         {
             ch->Echo("Program not found.\r\n");
             return;
@@ -181,7 +181,7 @@ void do_opedit( Character *ch, std::string argument )
 
         for(auto mprg : mudProgs)
         {
-            if ( ++cnt == value )
+            if(++cnt == value)
             {
                 mptype = mprg->type;
                 found = true;
@@ -189,7 +189,7 @@ void do_opedit( Character *ch, std::string argument )
             }
         }
 
-        if ( !found )
+        if(!found)
         {
             ch->Echo("Program not found.\r\n");
             return;
@@ -213,33 +213,33 @@ void do_opedit( Character *ch, std::string argument )
         std::shared_ptr<MPROG_DATA> progToDelete = result.front();
         obj->Prototype->mprog.Remove(progToDelete);
 
-        if ( num <= 1 )
+        if(num <= 1)
         {
-            RemoveBit( obj->Prototype->mprog.progtypes, mptype );
+            RemoveBit(obj->Prototype->mprog.progtypes, mptype);
         }
 
         ch->Echo("Program removed.\r\n");
         return;
     }
 
-    if ( !StrCmp( arg2, "insert" ) )
+    if(!StrCmp(arg2, "insert"))
     {
-        if ( mudProgs.empty() )
+        if(mudProgs.empty())
         {
             ch->Echo("That object has no obj programs.\r\n");
             return;
         }
 
-        argument = OneArgument( argument, arg3 );
-        int mptype = GetMudProgFlag( arg2 );
+        argument = OneArgument(argument, arg3);
+        int mptype = GetMudProgFlag(arg2);
 
-        if ( mptype == -1 )
+        if(mptype == -1)
         {
             ch->Echo("Unknown program type.\r\n");
             return;
         }
 
-        if ( value < 1 )
+        if(value < 1)
         {
             ch->Echo("Program not found.\r\n");
             return;
@@ -256,8 +256,8 @@ void do_opedit( Character *ch, std::string argument )
         if(!result.empty())
         {
             std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
-            obj->Prototype->mprog.progtypes |= ( 1 << mptype );
-            EditMobProg( ch, mprg, mptype, argument );
+            obj->Prototype->mprog.progtypes |= (1 << mptype);
+            EditMobProg(ch, mprg, mptype, argument);
             obj->Prototype->mprog.InsertBefore(value, mprg);
         }
         else
@@ -268,11 +268,11 @@ void do_opedit( Character *ch, std::string argument )
         return;
     }
 
-    if ( !StrCmp( arg2, "add" ) )
+    if(!StrCmp(arg2, "add"))
     {
-        int mptype = GetMudProgFlag( arg2 );
+        int mptype = GetMudProgFlag(arg2);
 
-        if ( mptype == -1 )
+        if(mptype == -1)
         {
             ch->Echo("Unknown program type.\r\n");
             return;
@@ -281,10 +281,10 @@ void do_opedit( Character *ch, std::string argument )
         std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
 
         obj->Prototype->mprog.Add(mprg);
-        obj->Prototype->mprog.progtypes |= ( 1 << mptype );
-        EditMobProg( ch, mprg, mptype, argument );
+        obj->Prototype->mprog.progtypes |= (1 << mptype);
+        EditMobProg(ch, mprg, mptype, argument);
         return;
     }
 
-    do_opedit( ch, "" );
+    do_opedit(ch, "");
 }

@@ -12,14 +12,14 @@ bool spec_customs_alcohol(Character *ch)
     if(!IsAwake(ch) || ch->Position == POS_FIGHTING)
         return false;
 
-    std::list<Character *> charactersToActOn(ch->InRoom->Characters());
+    auto charactersToActOn = ch->InRoom->Characters();
 
-    for(Character *victim : charactersToActOn)
+    for(auto victim : charactersToActOn)
     {
         if(IsNpc(victim) || victim->Position == POS_FIGHTING)
             continue;
 
-        for(Object *obj : Reverse(victim->Objects()))
+        for(auto obj : Reverse(victim->Objects()))
         {
             if(obj->ItemType == ITEM_DRINK_CON)
             {
@@ -77,7 +77,7 @@ bool spec_customs_alcohol(Character *ch)
             }
             else if(obj->ItemType == ITEM_CONTAINER)
             {
-                for(Object *content : obj->Objects())
+                for(auto content : obj->Objects())
                 {
                     if(content->ItemType == ITEM_DRINK_CON
                        && !content->Flags.test(Flag::Obj::Contraband))

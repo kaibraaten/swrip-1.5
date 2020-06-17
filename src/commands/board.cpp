@@ -21,7 +21,7 @@ void do_board(Character *ch, std::string argument)
     if(IsNpc(ch) && ch->Mount != nullptr)
     {
         Act(AT_PLAIN, "&RYou can't go in there riding THAT.",
-            ch, NULL, argument.c_str(), ActTarget::Char);
+            ch, nullptr, argument, ActTarget::Char);
         return;
     }
 
@@ -60,7 +60,7 @@ void do_board(Character *ch, std::string argument)
     else
     {
         Act(AT_PLAIN, "I see no $T here.",
-            ch, NULL, argument.c_str(), ActTarget::Char);
+            ch, nullptr, argument, ActTarget::Char);
         return;
     }
 
@@ -75,11 +75,10 @@ void do_board(Character *ch, std::string argument)
         }
     }
 
-    Act(AT_PLAIN, "$n enters $T.", ch, NULL, name.c_str(), ActTarget::Room);
-    Act(AT_PLAIN, "You enter $T.", ch, NULL, name.c_str(), ActTarget::Char);
+    Act(AT_PLAIN, "$n enters $T.", ch, nullptr, name, ActTarget::Room);
+    Act(AT_PLAIN, "You enter $T.", ch, nullptr, name, ActTarget::Char);
     CharacterFromRoom(ch);
     CharacterToRoom(ch, toroom);
-    Act(AT_PLAIN, "$n enters the ship.", ch, NULL, NULL, ActTarget::Room);
+    Act(AT_PLAIN, "$n enters the ship.", ch, nullptr, nullptr, ActTarget::Room);
     do_look(ch, "auto");
 }
-

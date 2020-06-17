@@ -9,10 +9,10 @@
 /*
  * Generic spell affect                                         -Thoric
  */
-ch_ret spell_affect(int sn, int level, Character *ch, void *vo)
+ch_ret spell_affect(int sn, int level, Character *ch, const Vo &vo)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
-    Character *victim = (Character *)vo;
+    Character *victim = vo.Ch;
     bool groupsp = false;
     bool areasp = false;
     bool hitchar = false, hitroom = false, hitvict = false;

@@ -141,7 +141,7 @@ void do_calculate_diff(Character *ch, std::string argument)
     EchoToDockedShip(AT_YELLOW, ship, "The docking port link shows a new course being calculated.");
 
     Act(AT_PLAIN, "$n does some calculations using the ships computer.", ch,
-        nullptr, argument.c_str(), ActTarget::Room);
+        nullptr, argument, ActTarget::Room);
 
     LearnFromSuccess(ch, gsn_navigation);
 

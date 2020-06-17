@@ -32,22 +32,22 @@
 #include "systemdata.hpp"
 #include "race.hpp"
 
-static std::string SeeHalucinatedObject( int ms, bool fShort );
+static std::string SeeHalucinatedObject(int ms, bool fShort);
 
-int GetRaceFromName( const std::string &arg )
+int GetRaceFromName(const std::string &arg)
 {
     int iRace;
 
-    for ( iRace = 0; iRace < MAX_RACE; iRace++ )
+    for(iRace = 0; iRace < MAX_RACE; iRace++)
     {
-        if ( toupper(arg[0]) == toupper(RaceTable[iRace].Name[0])
-             && !StringPrefix( arg, RaceTable[iRace].Name ) )
+        if(toupper(arg[0]) == toupper(RaceTable[iRace].Name[0])
+           && !StringPrefix(arg, RaceTable[iRace].Name))
         {
             break;
         }
     }
 
-    if( iRace == MAX_RACE )
+    if(iRace == MAX_RACE)
     {
         return -1;
     }
@@ -55,9 +55,9 @@ int GetRaceFromName( const std::string &arg )
     return iRace;
 }
 
-bool RaceIsAvailableToPlayers( const Race *race )
+bool RaceIsAvailableToPlayers(const Race *race)
 {
-    if( SysData.ExtendedRaceSelection )
+    if(SysData.ExtendedRaceSelection)
     {
         return true;
     }
@@ -67,11 +67,11 @@ bool RaceIsAvailableToPlayers( const Race *race )
     }
 }
 
-int GetClassFromName( const std::string &arg )
+int GetClassFromName(const std::string &arg)
 {
     int iClass = 0;
 
-    for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
+    for(iClass = 0; iClass < MAX_ABILITY; iClass++)
     {
         if(iClass == FORCE_ABILITY
            && (StrCmp(arg, "jedi") == 0 || StrCmp(arg, "sith") == 0))
@@ -79,14 +79,14 @@ int GetClassFromName( const std::string &arg )
             break;
         }
 
-        if ( toupper(arg[0]) == toupper(AbilityName[iClass][0])
-             && !StringPrefix( arg, AbilityName[iClass] ) )
+        if(toupper(arg[0]) == toupper(AbilityName[iClass][0])
+           && !StringPrefix(arg, AbilityName[iClass]))
         {
             break;
         }
     }
 
-    if( iClass == MAX_ABILITY )
+    if(iClass == MAX_ABILITY)
     {
         return -1;
     }
@@ -94,53 +94,53 @@ int GetClassFromName( const std::string &arg )
     return iClass;
 }
 
-std::string FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort )
+std::string FormatObjectToCharacter(std::shared_ptr<Object> obj, const Character *ch, bool fShort)
 {
     std::ostringstream buf;
 
-    if (obj->Flags.test(Flag::Obj::Invis))
+    if(obj->Flags.test(Flag::Obj::Invis))
     {
         buf << "(Invis) ";
     }
 
-    if ( ( IsAffectedBy(ch, Flag::Affect::DetectMagic) || IsImmortal(ch) )
-         && obj->Flags.test(Flag::Obj::Magic))
+    if((IsAffectedBy(ch, Flag::Affect::DetectMagic) || IsImmortal(ch))
+       && obj->Flags.test(Flag::Obj::Magic))
     {
         buf << "&B(Blue Aura)&w ";
     }
 
-    if (obj->Flags.test(Flag::Obj::Glow))
+    if(obj->Flags.test(Flag::Obj::Glow))
     {
         buf << "(Glowing) ";
     }
 
-    if (obj->Flags.test(Flag::Obj::Hum))
+    if(obj->Flags.test(Flag::Obj::Hum))
     {
         buf << "(Humming) ";
     }
 
-    if (obj->Flags.test(Flag::Obj::Hidden))
+    if(obj->Flags.test(Flag::Obj::Hidden))
     {
         buf << "(Hidden) ";
     }
 
-    if (obj->Flags.test(Flag::Obj::Burried))
+    if(obj->Flags.test(Flag::Obj::Burried))
     {
         buf << "(Burried) ";
     }
 
-    if ( IsImmortal(ch)
-         && obj->Flags.test(Flag::Obj::Prototype))
+    if(IsImmortal(ch)
+       && obj->Flags.test(Flag::Obj::Prototype))
     {
         buf << "(PROTO) ";
     }
 
-    if ( IsAffectedBy(ch, Flag::Affect::DetectTraps) && IsObjectTrapped(obj) )
+    if(IsAffectedBy(ch, Flag::Affect::DetectTraps) && IsObjectTrapped(obj))
     {
         buf << "(Trap) ";
     }
 
-    if ( fShort )
+    if(fShort)
     {
         buf << obj->ShortDescr;
     }
@@ -155,13 +155,13 @@ std::string FormatObjectToCharacter( const Object *obj, const Character *ch, boo
 /*
  * Some increasingly freaky halucinated objects         -Thoric
  */
-static std::string SeeHalucinatedObject( int ms, bool fShort )
+static std::string SeeHalucinatedObject(int ms, bool fShort)
 {
-    int sms = urange( 1, (ms+10)/5, 20 );
+    int sms = urange(1, (ms + 10) / 5, 20);
 
-    if ( fShort )
+    if(fShort)
     {
-        switch( GetRandomNumberFromRange( 6-urange(1,sms/2,5), sms ) )
+        switch(GetRandomNumberFromRange(6 - urange(1, sms / 2, 5), sms))
         {
         case  1: return "a sword";
         case  2: return "a stick";
@@ -186,7 +186,7 @@ static std::string SeeHalucinatedObject( int ms, bool fShort )
         }
     }
 
-    switch( GetRandomNumberFromRange( 6-urange(1,sms/2,5), sms ) )
+    switch(GetRandomNumberFromRange(6 - urange(1, sms / 2, 5), sms))
     {
     case  1: return "A nice looking sword catches your eye.";
     case  2: return "The ground is covered in small sticks.";
@@ -218,8 +218,8 @@ static std::string SeeHalucinatedObject( int ms, bool fShort )
  * Show a list to a character.
  * Can coalesce duplicated items.
  */
-void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
-                                bool fShort, bool fShowNothing )
+void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, Character *ch,
+                               bool fShort, bool fShowNothing)
 {
     char **prgpstrShow = nullptr;
     int *prgnShow = nullptr;
@@ -229,20 +229,20 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
     int count = list.size(), offcount = 0, tmp = 0, cnt = 0;
     bool fCombine = false;
 
-    if ( !ch->Desc )
+    if(!ch->Desc)
         return;
 
     /*
      * if there's no list... then don't do all this crap!  -Thoric
      */
-    if ( list.empty() )
+    if(list.empty())
     {
-        if ( fShowNothing )
+        if(fShowNothing)
         {
-            if ( IsNpc(ch) || ch->Flags.test(Flag::Plr::Combine))
-                ch->Echo( "     " );
+            if(IsNpc(ch) || ch->Flags.test(Flag::Plr::Combine))
+                ch->Echo("     ");
 
-            ch->Echo( "Nothing.\r\n" );
+            ch->Echo("Nothing.\r\n");
         }
         return;
     }
@@ -250,77 +250,77 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
      * Alloc space for output lines.
      */
 
-    int ms  = (ch->MentalState ? ch->MentalState : 1)
-        * (IsNpc(ch) ? 1 : (ch->PCData->Condition[COND_DRUNK] ? (ch->PCData->Condition[COND_DRUNK]/12) : 1));
+    int ms = (ch->MentalState ? ch->MentalState : 1)
+        * (IsNpc(ch) ? 1 : (ch->PCData->Condition[COND_DRUNK] ? (ch->PCData->Condition[COND_DRUNK] / 12) : 1));
 
     /*
      * If not mentally stable...
      */
-    if ( abs(ms) > 40 )
+    if(abs(ms) > 40)
     {
-        offcount = urange( -(count), (count * ms) / 100, count*2 );
-        if ( offcount < 0 )
+        offcount = urange(-(count), (count * ms) / 100, count * 2);
+        if(offcount < 0)
             offcount += GetRandomNumberFromRange(0, abs(offcount));
         else
-            if ( offcount > 0 )
+            if(offcount > 0)
                 offcount -= GetRandomNumberFromRange(0, offcount);
     }
     else
         offcount = 0;
 
-    if ( count + offcount <= 0 )
+    if(count + offcount <= 0)
     {
-        if ( fShowNothing )
+        if(fShowNothing)
         {
-            if ( IsNpc(ch) || ch->Flags.test(Flag::Plr::Combine))
-                ch->Echo( "     " );
+            if(IsNpc(ch) || ch->Flags.test(Flag::Plr::Combine))
+                ch->Echo("     ");
 
-            ch->Echo( "Nothing.\r\n" );
+            ch->Echo("Nothing.\r\n");
         }
         return;
     }
 
-    AllocateMemory( prgpstrShow,  char*,  count + ((offcount > 0) ? offcount : 0) );
-    AllocateMemory( prgnShow,             int,    count + ((offcount > 0) ? offcount : 0) );
-    AllocateMemory( pitShow,              int,    count + ((offcount > 0) ? offcount : 0) );
+    AllocateMemory(prgpstrShow, char *, count + ((offcount > 0) ? offcount : 0));
+    AllocateMemory(prgnShow, int, count + ((offcount > 0) ? offcount : 0));
+    AllocateMemory(pitShow, int, count + ((offcount > 0) ? offcount : 0));
     nShow = 0;
-    tmp           = (offcount > 0) ? offcount : 0;
-    cnt           = 0;
+    tmp = (offcount > 0) ? offcount : 0;
+    cnt = 0;
 
     /*
      * Format the list of objects.
      */
-    for(Object *obj : list)
+    for(auto obj : list)
     {
-        if ( offcount < 0 && ++cnt > (count + offcount) )
+        if(offcount < 0 && ++cnt >(count + offcount))
             break;
 
-        if ( tmp > 0 && NumberBits(1) == 0 )
+        if(tmp > 0 && NumberBits(1) == 0)
         {
-            prgpstrShow [nShow] = CopyString( SeeHalucinatedObject(ms, fShort) );
-            prgnShow      [nShow] = 1;
-            pitShow       [nShow] = GetRandomNumberFromRange( ITEM_LIGHT, ITEM_BOOK );
+            prgpstrShow[nShow] = CopyString(SeeHalucinatedObject(ms, fShort));
+            prgnShow[nShow] = 1;
+            pitShow[nShow] = GetRandomNumberFromRange(ITEM_LIGHT, ITEM_BOOK);
             nShow++;
             --tmp;
         }
 
-        if ( obj->WearLoc == WEAR_NONE
-             && CanSeeObject( ch, obj )
-             && (!obj->Description.empty() || (ch->Flags.test(Flag::Plr::Holylight) || IsNpc(ch)))
-             && (obj->ItemType != ITEM_TRAP || IsAffectedBy(ch, Flag::Affect::DetectTraps) ) )
+        if(obj->WearLoc == WEAR_NONE
+           && CanSeeObject(ch, obj)
+           && (!obj->Description.empty() || (ch->Flags.test(Flag::Plr::Holylight) || IsNpc(ch)))
+           && (obj->ItemType != ITEM_TRAP || IsAffectedBy(ch, Flag::Affect::DetectTraps)))
         {
-            std::string pstrShow = FormatObjectToCharacter( obj, ch, fShort );
+            std::string pstrShow = FormatObjectToCharacter(obj, ch, fShort);
             fCombine = false;
 
-            if ( IsNpc(ch) || ch->Flags.test(Flag::Plr::Combine))
+            if(IsNpc(ch) || ch->Flags.test(Flag::Plr::Combine))
             {
                 /*
                  * Look for duplicates, case sensitive.
                  * Matches tend to be near end so run loop backwords.
                  */
-                for ( iShow = nShow - 1; iShow >= 0; iShow-- )
+                for(iShow = nShow - 1; iShow >= 0; iShow--)
                 {
-                    if ( !StrCmp( prgpstrShow[iShow], pstrShow ) )
+                    if(!StrCmp(prgpstrShow[iShow], pstrShow))
                     {
                         prgnShow[iShow] += obj->Count;
                         fCombine = true;
@@ -333,22 +333,22 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
             /*
              * Couldn't combine, or didn't want to.
              */
-            if ( !fCombine )
+            if(!fCombine)
             {
-                prgpstrShow [nShow] = CopyString( pstrShow );
-                prgnShow    [nShow] = obj->Count;
+                prgpstrShow[nShow] = CopyString(pstrShow);
+                prgnShow[nShow] = obj->Count;
                 nShow++;
             }
         }
     }
-    if ( tmp > 0 )
+    if(tmp > 0)
     {
         int x;
-        for ( x = 0; x < tmp; x++ )
+        for(x = 0; x < tmp; x++)
         {
-            prgpstrShow [nShow] = CopyString( SeeHalucinatedObject(ms, fShort) );
-            prgnShow      [nShow] = 1;
-            pitShow       [nShow] = GetRandomNumberFromRange( ITEM_LIGHT, ITEM_BOOK );
+            prgpstrShow[nShow] = CopyString(SeeHalucinatedObject(ms, fShort));
+            prgnShow[nShow] = 1;
+            pitShow[nShow] = GetRandomNumberFromRange(ITEM_LIGHT, ITEM_BOOK);
             nShow++;
         }
     }
@@ -356,34 +356,34 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
     /*
      * Output the formatted list.         -Color support by Thoric
      */
-    for ( iShow = 0; iShow < nShow; iShow++ )
+    for(iShow = 0; iShow < nShow; iShow++)
     {
         switch(pitShow[iShow])
         {
         default:
-            SetCharacterColor( AT_OBJECT, ch );
+            SetCharacterColor(AT_OBJECT, ch);
             break;
 
         case ITEM_BLOOD:
-            SetCharacterColor( AT_BLOOD, ch );
+            SetCharacterColor(AT_BLOOD, ch);
             break;
 
         case ITEM_MONEY:
         case ITEM_TREASURE:
-            SetCharacterColor( AT_YELLOW, ch );
+            SetCharacterColor(AT_YELLOW, ch);
             break;
 
         case ITEM_FOOD:
-            SetCharacterColor( AT_HUNGRY, ch );
+            SetCharacterColor(AT_HUNGRY, ch);
             break;
 
         case ITEM_DRINK_CON:
         case ITEM_FOUNTAIN:
-            SetCharacterColor( AT_THIRSTY, ch );
+            SetCharacterColor(AT_THIRSTY, ch);
             break;
 
         case ITEM_FIRE:
-            SetCharacterColor( AT_FIRE, ch );
+            SetCharacterColor(AT_FIRE, ch);
             break;
 
         case ITEM_SCROLL:
@@ -392,87 +392,87 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
             break;
         }
 
-        if ( fShowNothing )
+        if(fShowNothing)
         {
-            ch->Echo( "     " );
+            ch->Echo("     ");
         }
 
-        ch->Echo( "%s", prgpstrShow[iShow] );
+        ch->Echo("%s", prgpstrShow[iShow]);
 
-        if ( prgnShow[iShow] != 1 )
+        if(prgnShow[iShow] != 1)
         {
-            ch->Echo( " (%d)", prgnShow[iShow] );
+            ch->Echo(" (%d)", prgnShow[iShow]);
         }
 
-        ch->Echo( "\r\n" );
-        FreeMemory( prgpstrShow[iShow] );
+        ch->Echo("\r\n");
+        FreeMemory(prgpstrShow[iShow]);
     }
 
-    if ( fShowNothing && nShow == 0 )
+    if(fShowNothing && nShow == 0)
     {
-        if ( IsNpc(ch) || ch->Flags.test(Flag::Plr::Combine))
+        if(IsNpc(ch) || ch->Flags.test(Flag::Plr::Combine))
         {
-            ch->Echo( "     " );
+            ch->Echo("     ");
         }
 
-        ch->Echo( "Nothing.\r\n" );
+        ch->Echo("Nothing.\r\n");
     }
 
     /*
      * Clean up.
      */
-    FreeMemory( prgpstrShow );
-    FreeMemory( prgnShow );
-    FreeMemory( pitShow );
+    FreeMemory(prgpstrShow);
+    FreeMemory(prgnShow);
+    FreeMemory(pitShow);
 }
 
-void ShowCharacterCondition( const Character *ch, const Character *victim )
+void ShowCharacterCondition(const Character *ch, const Character *victim)
 {
     char buf[MAX_STRING_LENGTH];
     int percent;
 
-    if ( victim->HitPoints.Max > 0 )
-        percent = ( 100 * victim->HitPoints.Current ) / victim->HitPoints.Max;
+    if(victim->HitPoints.Max > 0)
+        percent = (100 * victim->HitPoints.Current) / victim->HitPoints.Max;
     else
         percent = -1;
 
 
-    strcpy( buf, PERS(victim, ch).c_str() );
+    strcpy(buf, PERS(victim, ch).c_str());
 
-    if ((IsNpc(victim) && victim->Flags.test(Flag::Mob::Droid))
-        || IsDroid(victim))
+    if((IsNpc(victim) && victim->Flags.test(Flag::Mob::Droid))
+       || IsDroid(victim))
     {
 
-        if ( percent >= 100 ) strcat( buf, " is in perfect condition.\r\n"  );
-        else if ( percent >=  90 ) strcat( buf, " is slightly scratched.\r\n" );
-        else if ( percent >=  80 ) strcat( buf, " has a few scrapes.\r\n"     );
-        else if ( percent >=  70 ) strcat( buf, " has some dents.\r\n"         );
-        else if ( percent >=  60 ) strcat( buf, " has a couple holes in its plating.\r\n"    );
-        else if ( percent >=  50 ) strcat( buf, " has a many broken pieces.\r\n" );
-        else if ( percent >=  40 ) strcat( buf, " has many exposed circuits.\r\n"    );
-        else if ( percent >=  30 ) strcat( buf, " is leaking oil.\r\n"   );
-        else if ( percent >=  20 ) strcat( buf, " has smoke coming out of it.\r\n"       );
-        else if ( percent >=  10 ) strcat( buf, " is almost completely broken.\r\n"        );
-        else                       strcat( buf, " is about to EXPLODE.\r\n"              );
+        if(percent >= 100) strcat(buf, " is in perfect condition.\r\n");
+        else if(percent >= 90) strcat(buf, " is slightly scratched.\r\n");
+        else if(percent >= 80) strcat(buf, " has a few scrapes.\r\n");
+        else if(percent >= 70) strcat(buf, " has some dents.\r\n");
+        else if(percent >= 60) strcat(buf, " has a couple holes in its plating.\r\n");
+        else if(percent >= 50) strcat(buf, " has a many broken pieces.\r\n");
+        else if(percent >= 40) strcat(buf, " has many exposed circuits.\r\n");
+        else if(percent >= 30) strcat(buf, " is leaking oil.\r\n");
+        else if(percent >= 20) strcat(buf, " has smoke coming out of it.\r\n");
+        else if(percent >= 10) strcat(buf, " is almost completely broken.\r\n");
+        else                       strcat(buf, " is about to EXPLODE.\r\n");
 
     }
     else
     {
 
-        if ( percent >= 100 ) strcat( buf, " is in perfect health.\r\n"  );
-        else if ( percent >=  90 ) strcat( buf, " is slightly scratched.\r\n" );
-        else if ( percent >=  80 ) strcat( buf, " has a few bruises.\r\n"     );
-        else if ( percent >=  70 ) strcat( buf, " has some cuts.\r\n"         );
-        else if ( percent >=  60 ) strcat( buf, " has several wounds.\r\n"    );
-        else if ( percent >=  50 ) strcat( buf, " has many nasty wounds.\r\n" );
-        else if ( percent >=  40 ) strcat( buf, " is bleeding freely.\r\n"    );
-        else if ( percent >=  30 ) strcat( buf, " is covered in blood.\r\n"   );
-        else if ( percent >=  20 ) strcat( buf, " is leaking guts.\r\n"       );
-        else if ( percent >=  10 ) strcat( buf, " is almost dead.\r\n"        );
-        else                       strcat( buf, " is DYING.\r\n"              );
+        if(percent >= 100) strcat(buf, " is in perfect health.\r\n");
+        else if(percent >= 90) strcat(buf, " is slightly scratched.\r\n");
+        else if(percent >= 80) strcat(buf, " has a few bruises.\r\n");
+        else if(percent >= 70) strcat(buf, " has some cuts.\r\n");
+        else if(percent >= 60) strcat(buf, " has several wounds.\r\n");
+        else if(percent >= 50) strcat(buf, " has many nasty wounds.\r\n");
+        else if(percent >= 40) strcat(buf, " is bleeding freely.\r\n");
+        else if(percent >= 30) strcat(buf, " is covered in blood.\r\n");
+        else if(percent >= 20) strcat(buf, " is leaking guts.\r\n");
+        else if(percent >= 10) strcat(buf, " is almost dead.\r\n");
+        else                       strcat(buf, " is DYING.\r\n");
 
     }
 
     buf[0] = CharToUppercase(buf[0]);
-    ch->Echo( "%s", buf );
+    ch->Echo("%s", buf);
 }

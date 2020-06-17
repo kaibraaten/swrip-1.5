@@ -54,12 +54,12 @@ void do_put(Character *ch, std::string argument)
         return;
     }
 
-    Object *container = GetObjectHere(ch, arg2);
+    auto container = GetObjectHere(ch, arg2);
 
     if(container == nullptr)
     {
         Act(AT_PLAIN, "I see no $T here.",
-            ch, NULL, arg2.c_str(), ActTarget::Char);
+            ch, nullptr, arg2, ActTarget::Char);
         return;
     }
 
@@ -89,14 +89,14 @@ void do_put(Character *ch, std::string argument)
 
         if(IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-            Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "The $d is closed.", ch, nullptr, container->Name, ActTarget::Char);
             return;
         }
     }
 
     if(number <= 1 && StrCmp(arg1, "all") && StringPrefix("all.", arg1))
     {
-        Object *obj = GetCarriedObject(ch, arg1);
+        auto obj = GetCarriedObject(ch, arg1);
 
         /* 'put obj container' */
         if(obj == nullptr)
@@ -198,9 +198,9 @@ void do_put(Character *ch, std::string argument)
         SeparateOneObjectFromGroup(container);
 
         /* 'put all container' or 'put all.obj container' */
-        std::list<Object *> carriedObjects(ch->Objects());
+        auto carriedObjects = ch->Objects();
 
-        for(Object *obj : carriedObjects)
+        for(auto obj : carriedObjects)
         {
             if((fAll || NiftyIsName(chk, obj->Name))
                && CanSeeObject(ch, obj)
@@ -237,10 +237,10 @@ void do_put(Character *ch, std::string argument)
         {
             if(fAll)
                 Act(AT_PLAIN, "You are not carrying anything.",
-                    ch, NULL, NULL, ActTarget::Char);
+                    ch, nullptr, nullptr, ActTarget::Char);
             else
                 Act(AT_PLAIN, "You are not carrying any $T.",
-                    ch, NULL, chk.c_str(), ActTarget::Char);
+                    ch, nullptr, chk, ActTarget::Char);
             return;
         }
 

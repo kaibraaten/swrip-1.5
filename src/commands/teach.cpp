@@ -92,10 +92,10 @@ void do_teach(Character *ch, std::string argument)
             victim->PCData->Learned[sn] += IntelligenceBonus[GetCurrentIntelligence(ch)].Learn;
             sprintf(buf, "You teach %s $T.", victim->Name.c_str());
             Act(AT_ACTION, buf,
-                ch, NULL, SkillTable[sn]->Name.c_str(), ActTarget::Char);
+                ch, nullptr, SkillTable[sn]->Name, ActTarget::Char);
             sprintf(buf, "%s teaches you $T.", ch->Name.c_str());
             Act(AT_ACTION, buf,
-                victim, NULL, SkillTable[sn]->Name.c_str(), ActTarget::Char);
+                victim, nullptr, SkillTable[sn]->Name, ActTarget::Char);
         }
     }
 }

@@ -32,7 +32,7 @@ void do_poison_weapon(Character *ch, std::string arg)
     if(HasMentalStateToFindObject(ch))
         return;
 
-    Object *obj = GetCarriedObject(ch, arg);
+    auto obj = GetCarriedObject(ch, arg);
 
     if(obj == nullptr)
     {

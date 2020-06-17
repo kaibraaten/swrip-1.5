@@ -27,19 +27,18 @@ static void CleanupCharacter(Character *ch)
 {
     auto timer = GetTimerPointer(ch, TIMER_CMD_FUN);
 
-    if (timer != nullptr)
+    if(timer != nullptr)
     {
         ExtractTimer(ch, timer);
     }
 
-    while (!ch->Objects().empty())
+    while(!ch->Objects().empty())
     {
-        Object *obj = ch->Objects().front();
+        auto obj = ch->Objects().front();
         ObjectFromCharacter(obj);
-        delete obj;
     }
 
-    if (IsCrafting(ch))
+    if(IsCrafting(ch))
     {
         FreeCraftingSession(ch->PCData->CraftingSession);
     }
@@ -100,21 +99,37 @@ private:
 class FakeHomeRepository : public HomeRepository
 {
 public:
-    void Load() override { }
-    void Save() const override { }
+    void Load() override
+    {
+    }
+    void Save() const override
+    {
+    }
 
-    void Load(std::shared_ptr<Home> home) override { }
-    void Save(std::shared_ptr<Home> home) const override { }
+    void Load(std::shared_ptr<Home> home) override
+    {
+    }
+    void Save(std::shared_ptr<Home> home) const override
+    {
+    }
 
-    void Delete(std::shared_ptr<Home> home) override { }
+    void Delete(std::shared_ptr<Home> home) override
+    {
+    }
 
-    std::shared_ptr<Home> FindByVnum(vnum_t) const override { return nullptr; }
+    std::shared_ptr<Home> FindByVnum(vnum_t) const override
+    {
+        return nullptr;
+    }
     std::list<std::shared_ptr<Home>> FindHomesForResident(const std::string &name) const override
     {
         return std::list<std::shared_ptr<Home>>();
     }
-    
-    bool IsResidentOf(const std::string &name, vnum_t room) const override { return false; }
+
+    bool IsResidentOf(const std::string &name, vnum_t room) const override
+    {
+        return false;
+    }
 };
 
 class CraftTests : public ::testing::Test
@@ -126,7 +141,7 @@ protected:
         Objects = new FakeObjectRepository();
         Skills = new FakeSkillRepository();
         Homes = std::make_shared<FakeHomeRepository>();
-        
+
         SetRandomGenerator(new NotRandomGenerator());
 
         _resultantObject = std::make_shared<ProtoObject>(1);
@@ -165,20 +180,20 @@ protected:
         Log = nullptr;
     }
 
-    std::list<Object*> MakeMaterials() const
+    std::list<std::shared_ptr<Object>> MakeMaterials() const
     {
-        std::list<Object*> output;
+        std::list<std::shared_ptr<Object>> output;
 
-        for (const auto &m : _materials)
+        for(const auto &m : _materials)
         {
-            if (m.ItemType == ITEM_NONE)
+            if(m.ItemType == ITEM_NONE)
             {
                 continue;
             }
 
             std::shared_ptr<ProtoObject> proto = std::make_shared<ProtoObject>(GetNewVnum());
             proto->ItemType = m.ItemType;
-            Object *obj = new Object(proto, 100);
+            auto obj = std::make_shared<Object>(proto, 100);
             output.push_back(obj);
 
             assert(obj->ItemType == obj->Prototype->ItemType);
@@ -219,7 +234,7 @@ const std::vector<CraftingMaterial> CraftTests::_materials =
 template<typename EventArgs>
 static void Counting_EventHandler(void *userData, EventArgs *e)
 {
-    int *callCounter = static_cast<int*>(userData);
+    int *callCounter = static_cast<int *>(userData);
     ++(*callCounter);
 }
 
@@ -228,10 +243,10 @@ TEST_F(CraftTests, InterpretArgumentsHandler_IsCalledExactlyOnce)
     int callCounter = 0;
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddInterpretArgumentsCraftingHandler(session, &callCounter,
-        Counting_EventHandler);
+                                         Counting_EventHandler);
 
     StartCrafting(session);
 
@@ -243,10 +258,10 @@ TEST_F(CraftTests, CheckRequirementsHandler_IsCalledExactlyOnce)
     int callCounter = 0;
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddCheckRequirementsCraftingHandler(session, &callCounter,
-        Counting_EventHandler);
+                                        Counting_EventHandler);
 
     StartCrafting(session);
 
@@ -263,10 +278,10 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Fails_SessionNotStarted)
 {
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddInterpretArgumentsCraftingHandler(session, nullptr,
-        Failing_EventHandler);
+                                         Failing_EventHandler);
 
     StartCrafting(session);
 
@@ -277,10 +292,10 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_SessionNotStarted)
 {
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddCheckRequirementsCraftingHandler(session, nullptr,
-        Failing_EventHandler);
+                                        Failing_EventHandler);
 
     StartCrafting(session);
 
@@ -297,10 +312,10 @@ TEST_F(CraftTests, When_CheckArgumentsHandler_Succeeds_SessionIsStarted)
 {
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddCheckRequirementsCraftingHandler(session, nullptr,
-        DoNothing_EventHandler);
+                                        DoNothing_EventHandler);
 
     StartCrafting(session);
 
@@ -311,10 +326,10 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Succeeds_SessionIsStarted)
 {
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddInterpretArgumentsCraftingHandler(session, nullptr,
-        DoNothing_EventHandler);
+                                         DoNothing_EventHandler);
 
     StartCrafting(session);
 
@@ -326,7 +341,7 @@ TEST_F(CraftTests, WhenUnskilled_SessionNotStarted)
     const CraftingMaterial material;
     _engineer->PCData->Learned[gsn_mycraftingskill] = 0;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
 
     StartCrafting(session);
@@ -339,7 +354,7 @@ TEST_F(CraftTests, WhenSkilled_SessionIsStarted)
     const CraftingMaterial material;
     _engineer->PCData->Learned[gsn_mycraftingskill] = 100;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
 
     StartCrafting(session);
@@ -353,10 +368,10 @@ TEST_F(CraftTests, WhenUnskilled_AbortCraftingHandler_IsCalledExactlyOnce)
     const CraftingMaterial material;
     _engineer->PCData->Learned[gsn_mycraftingskill] = 0;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddAbortCraftingHandler(session, &callCounter,
-        Counting_EventHandler);
+                            Counting_EventHandler);
 
     StartCrafting(session);
 
@@ -368,12 +383,12 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Fails_AbortCraftingHandler_IsC
     const CraftingMaterial material;
     int callCounter = 0;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddInterpretArgumentsCraftingHandler(session, nullptr,
-        Failing_EventHandler);
+                                         Failing_EventHandler);
     AddAbortCraftingHandler(session, &callCounter,
-        Counting_EventHandler);
+                            Counting_EventHandler);
     StartCrafting(session);
 
     EXPECT_EQ(callCounter, 1);
@@ -384,12 +399,12 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_AbortCraftingHandler_IsCa
     int callCounter = 0;
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddCheckRequirementsCraftingHandler(session, nullptr,
-        Failing_EventHandler);
+                                        Failing_EventHandler);
     AddAbortCraftingHandler(session, &callCounter,
-        Counting_EventHandler);
+                            Counting_EventHandler);
 
     StartCrafting(session);
 
@@ -399,7 +414,7 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_AbortCraftingHandler_IsCa
 TEST_F(CraftTests, WhenMissingAllMaterials_SessionNotStarted)
 {
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, _materials.data(), 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
 
     StartCrafting(session);
@@ -410,14 +425,15 @@ TEST_F(CraftTests, WhenMissingAllMaterials_SessionNotStarted)
 TEST_F(CraftTests, WhenMissingSomeMaterials_SessionNotStarted)
 {
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, _materials.data(), 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
 
     auto objects = MakeMaterials();
     int i = 0;
-    for (Object *obj : objects)
+
+    for(auto obj : objects)
     {
-        if (++i % 2 == 0)
+        if(++i % 2 == 0)
         {
             ObjectToCharacter(obj, _engineer);
         }
@@ -431,12 +447,12 @@ TEST_F(CraftTests, WhenMissingSomeMaterials_SessionNotStarted)
 TEST_F(CraftTests, WhenHasAllMaterials_SessionIsStarted)
 {
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, _materials.data(), 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
 
     auto objects = MakeMaterials();
 
-    for (Object *obj : objects)
+    for(auto obj : objects)
     {
         ObjectToCharacter(obj, _engineer);
     }
@@ -451,28 +467,28 @@ TEST_F(CraftTests, WhenMissingOptionalMaterials_SessionIsStarted)
     auto materials = _materials;
 
     int i = 0;
-    for (auto m : materials)
+    for(auto m : materials)
     {
-        if (i % 2 == 0)
+        if(i % 2 == 0)
         {
             m.Flags.reset(Flag::Crafting::Optional);
         }
     }
 
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, materials.data(), 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
 
     auto objects = MakeMaterials();
 
-    for (Object *obj : objects)
+    for(auto obj : objects)
     {
-        if (find_if(std::begin(materials), std::end(materials),
-            [obj](const auto m)
-        {
-            return m.Flags.test(Flag::Crafting::Optional)
-                && m.ItemType == obj->ItemType;
-        }) == std::end(materials))
+        if(find_if(std::begin(materials), std::end(materials),
+                   [obj](const auto m)
+                   {
+                       return m.Flags.test(Flag::Crafting::Optional)
+                           && m.ItemType == obj->ItemType;
+                   }) == std::end(materials))
         {
             ObjectToCharacter(obj, _engineer);
         }
@@ -488,7 +504,7 @@ TEST_F(CraftTests, WhenWorkshopRequired_IfNotInWorkshop_SessionNotStarted)
     const CraftingMaterial material;
 
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, { Flag::Crafting::NeedsWorkshop });
+                                              _resultantObject, { Flag::Crafting::NeedsWorkshop });
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     _engineer->InRoom->Flags.reset(Flag::Room::Factory);
 
@@ -502,7 +518,7 @@ TEST_F(CraftTests, WhenWorkshopRequired_IfInWorkshop_SessionIsStarted)
     const CraftingMaterial material;
 
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, { Flag::Crafting::NeedsWorkshop });
+                                              _resultantObject, { Flag::Crafting::NeedsWorkshop });
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     _engineer->InRoom->Flags.set(Flag::Room::Factory);
 
@@ -516,7 +532,7 @@ TEST_F(CraftTests, WhenRefineryRequired_IfNotInRefinery_SessionNotStarted)
     const CraftingMaterial material;
 
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, { Flag::Crafting::NeedsRefinery });
+                                              _resultantObject, { Flag::Crafting::NeedsRefinery });
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     _engineer->InRoom->Flags.reset(Flag::Room::Refinery);
 
@@ -530,7 +546,7 @@ TEST_F(CraftTests, WhenRefineryRequired_IfInRefinery_SessionIsStarted)
     const CraftingMaterial material;
 
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, { Flag::Crafting::NeedsRefinery });
+                                              _resultantObject, { Flag::Crafting::NeedsRefinery });
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     _engineer->InRoom->Flags.set(Flag::Room::Refinery);
 
@@ -543,7 +559,7 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_DoFunTimer)
 {
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
 
@@ -557,7 +573,7 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
 {
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
 
@@ -571,7 +587,7 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterIsCrafting)
 {
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
 
@@ -582,7 +598,7 @@ TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
 {
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
@@ -596,17 +612,17 @@ TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
 static bool HasObjectInstanceOf(const Character *ch, std::shared_ptr<ProtoObject> proto)
 {
     return Find(ch->Objects(),
-        [proto](const auto obj)
-    {
-        return obj->Prototype == proto;
-    });
+                [proto](const auto obj)
+                {
+                    return obj->Prototype == proto;
+                }) != nullptr;
 }
 
 TEST_F(CraftTests, AfterCallback_CharacterReceivedObject)
 {
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
@@ -622,7 +638,7 @@ TEST_F(CraftTests, AfterCallback_SetObjectStatsEventHandler_IsCalledExactlyOnce)
     int callCounter = 0;
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddSetObjectStatsCraftingHandler(session, &callCounter, Counting_EventHandler);
     StartCrafting(session);
@@ -639,7 +655,7 @@ TEST_F(CraftTests, AfterCallback_FinishedCraftingEventHandler_IsCalledExactlyOnc
     int callCounter = 0;
     const CraftingMaterial material;
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
-        _resultantObject, {});
+                                              _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
     AddFinishedCraftingHandler(session, &callCounter, Counting_EventHandler);
     StartCrafting(session);

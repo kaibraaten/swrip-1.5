@@ -8,7 +8,7 @@
  */
 void do_apply(Character *ch, std::string argument)
 {
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
     ch_ret retcode = rNONE;
 
     if(argument.empty())
@@ -37,7 +37,7 @@ void do_apply(Character *ch, std::string argument)
 
     --obj->Value[OVAL_SALVE_DOSES];
 
-    if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+    if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
     {
         if(obj->ActionDescription.empty())
         {

@@ -14,7 +14,7 @@ void do_pricevendor(Character *ch, std::string argument)
     Character *ch1 = NULL;
     std::string arg1;
     std::string arg2;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     struct tm *tms = NULL;
 
     argument = OneArgument(argument, arg1);
@@ -72,9 +72,9 @@ void do_pricevendor(Character *ch, std::string argument)
         obj->Cost = ToLong(arg2);
         ch->Echo("The price has been changed.\r\n");
         SaveVendor(vendor);
-        return;
     }
-
-    ch->Echo("He doesn't have that item!\r\n");
-    SaveVendor(vendor);
+    else
+    {
+        ch->Echo("He doesn't have that item!\r\n");
+    }
 }

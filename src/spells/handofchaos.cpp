@@ -3,9 +3,9 @@
 #include "mud.hpp"
 #include "act.hpp"
 
-ch_ret spell_hand_of_chaos(int sn, int level, Character *ch, void *vo)
+ch_ret spell_hand_of_chaos(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character *victim = (Character *)vo;
+    Character *victim = vo.Ch;
     int dam = 0;
 
     level = umax(0, level);

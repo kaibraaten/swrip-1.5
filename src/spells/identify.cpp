@@ -6,10 +6,10 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_identify(int sn, int level, Character* ch, void* vo)
+ch_ret spell_identify(int sn, int level, Character* ch, const Vo &vo)
 {
     /* Modified by Scryn to work on mobs/players/objs */
-    Object* obj = nullptr;
+    std::shared_ptr<Object> obj;
     Character* victim = nullptr;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 

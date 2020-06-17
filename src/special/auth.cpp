@@ -6,7 +6,7 @@
 
 bool spec_auth(Character *ch)
 {
-    for (Character *victim : ch->InRoom->Characters())
+    for (auto victim : ch->InRoom->Characters())
     {
         std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(OBJ_VNUM_SCHOOL_DIPLOMA);
 
@@ -14,7 +14,7 @@ bool spec_auth(Character *ch)
         {
             if (!HasDiploma(victim))
             {
-                Object *obj = CreateObject(pObjIndex, 1);
+                auto obj = CreateObject(pObjIndex, 1);
                 obj = ObjectToCharacter(obj, victim);
                 victim->Echo("&cThe schoolmaster gives you a diploma, and shakes your hand.\r\n&w");
             }

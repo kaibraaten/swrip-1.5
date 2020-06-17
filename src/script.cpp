@@ -673,7 +673,7 @@ void LuaLoadOvalues(lua_State *L, std::array<int, MAX_OVAL> &values)
     lua_pop(L, 1);
 }
 
-static void LuaPushObject(lua_State *L, const Object *obj, size_t idx)
+static void LuaPushObject(lua_State *L, std::shared_ptr<Object> obj, size_t idx)
 {
     /*
      * Castrate storage characters.
@@ -855,14 +855,14 @@ static void LuaPushObject(lua_State *L, const Object *obj, size_t idx)
     lua_settable(L, -3);
 }
 
-void LuaPushObjects(lua_State *L, const std::list<Object*> &objects,
+void LuaPushObjects(lua_State *L, const std::list<std::shared_ptr<Object>> &objects,
                     const std::string &key)
 {
     lua_pushstring(L, key.c_str());
     lua_newtable(L);
     size_t idx = 0;
 
-    for (const Object *obj : objects)
+    for (auto obj : objects)
     {
         LuaPushObject(L, obj, ++idx);
     }
@@ -1410,7 +1410,7 @@ std::list<std::shared_ptr<Affect>> LuaLoadProtoObjectAffects(lua_State *L, const
 }
 
 static void ConvertSpellNameToOvalue(lua_State *L, const std::string &key,
-                                     Object *obj, size_t idx)
+                                     std::shared_ptr<Object> obj, size_t idx)
 {
     std::string spellName;
     LuaGetfieldString(L, key, &spellName);
@@ -1432,7 +1432,7 @@ static void ConvertSpellNameToOvalue(lua_State *L, const std::string &key,
     }
 }
 
-static void LuaLoadObjectSpells(lua_State *L, Object *obj)
+static void LuaLoadObjectSpells(lua_State *L, std::shared_ptr<Object> obj)
 {
     ConvertSpellNameToOvalue(L, "Spell1", obj, 1);
     ConvertSpellNameToOvalue(L, "Spell2", obj, 2);
@@ -1441,7 +1441,7 @@ static void LuaLoadObjectSpells(lua_State *L, Object *obj)
     ConvertSpellNameToOvalue(L, "Spell5", obj, 5);
 }
 
-static Object *LuaLoadObject(lua_State *L)
+static std::shared_ptr<Object> LuaLoadObject(lua_State *L)
 {
     vnum_t vnum = 0;
     int level = 0;
@@ -1456,7 +1456,7 @@ static Object *LuaLoadObject(lua_State *L)
         return nullptr;
     }
 
-    Object *obj = CreateObject(proto, level);
+    auto obj = CreateObject(proto, level);
 
     LuaGetfieldInt(L, "Count", &obj->Count);
     LuaGetfieldString(L, "Name", &obj->Name);
@@ -1521,9 +1521,9 @@ static Object *LuaLoadObject(lua_State *L)
         obj->Serial = obj->Prototype->Serial = cur_obj_serial;
     }
 
-    std::list<Object*> contents = LuaLoadObjects(L, "Contents");
+    auto contents = LuaLoadObjects(L, "Contents");
 
-    for (Object *nestedObject : contents)
+    for (auto nestedObject : contents)
     {
         ObjectToObject(nestedObject, obj);
     }
@@ -1531,9 +1531,9 @@ static Object *LuaLoadObject(lua_State *L)
     return obj;
 }
 
-std::list<Object*> LuaLoadObjects(lua_State *L, const std::string &key)
+std::list<std::shared_ptr<Object>> LuaLoadObjects(lua_State *L, const std::string &key)
 {
-    std::list<Object*> objects;
+    std::list<std::shared_ptr<Object>> objects;
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
 
@@ -1543,7 +1543,7 @@ std::list<Object*> LuaLoadObjects(lua_State *L, const std::string &key)
 
         while (lua_next(L, -2))
         {
-            Object *obj = LuaLoadObject(L);
+            auto obj = LuaLoadObject(L);
 
             if (obj != nullptr)
             {

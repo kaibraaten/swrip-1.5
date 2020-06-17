@@ -22,10 +22,10 @@ static std::string SubstituteActSequence(char code,
                                          const Character *ch,
                                          const Character *vch,
                                          const Character *to,
-                                         const Object *obj1,
-                                         const Object *obj2,
-                                         const char *arg1,
-                                         const char *arg2)
+                                         std::shared_ptr<Object> obj1,
+                                         std::shared_ptr<Object> obj2,
+                                         const std::string &arg1,
+                                         const std::string &arg2)
 {
     std::string i;
 
@@ -96,7 +96,7 @@ static std::string SubstituteActSequence(char code,
         break;
 
     case 'd':
-        if(IsNullOrEmpty(arg2))
+        if(arg2.empty())
         {
             i = "door";
         }
@@ -119,7 +119,7 @@ static std::string SubstituteActSequence(char code,
 }
 
 static std::string ActString(const std::string &format, Character *to, Character *ch,
-                             const void *arg1, const void *arg2)
+                             const ActArg &arg1, const ActArg &arg2)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char *point = buf;
@@ -136,7 +136,7 @@ static std::string ActString(const std::string &format, Character *to, Character
 
         ++str;
 
-        if(arg2 == nullptr && *str >= 'A' && *str <= 'Z')
+        if(arg2.IsNull() && *str >= 'A' && *str <= 'Z')
         {
             Log->Bug("%s: missing arg2 for code %c:", __FUNCTION__, *str);
             Log->Bug("%s", format.c_str());
@@ -144,17 +144,17 @@ static std::string ActString(const std::string &format, Character *to, Character
         }
         else
         {
-            Character *vch = static_cast<Character *>(const_cast<void *>(arg2));
-            Object *obj1 = static_cast<Object *>(const_cast<void *>(arg1));
-            Object *obj2 = static_cast<Object *>(const_cast<void *>(arg2));
+            Character *vch = arg2.Ch;
+            std::shared_ptr<Object> obj1 = arg1.Obj;
+            std::shared_ptr<Object> obj2 = arg2.Obj;
             i = SubstituteActSequence(*str,
                                       ch,
                                       vch,
                                       to,
                                       obj1,
                                       obj2,
-                                      static_cast<const char *>(arg1),
-                                      static_cast<const char *>(arg2));
+                                      arg1.Str,
+                                      arg2.Str);
         }
 
         ++str;
@@ -171,12 +171,12 @@ static std::string ActString(const std::string &format, Character *to, Character
     return buf;
 }
 
-void Act(short AType, const std::string &format, Character *ch, const void *arg1, const void *arg2, ActTarget type)
+void Act(short AType, const std::string &format, Character *ch, const ActArg &arg1, const ActArg &arg2, ActTarget type)
 {
     assert(ch != nullptr);
     std::string txt;
     Character *to = nullptr;
-    Character *vch = static_cast<Character *>(const_cast<void *>(arg2));
+    Character *vch = arg2.Ch;
 
     /*
      * Discard null and zero-length messages.
@@ -228,8 +228,8 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
         if(IsBitSet(to->InRoom->mprog.progtypes, ACT_PROG))
         {
             RoomProgActTrigger(txt, to->InRoom, ch,
-                               static_cast<Object *>(const_cast<void *>(arg1)),
-                               const_cast<void *>(arg2));
+                               arg1.Obj,
+                               Vo(arg2.Ch, arg2.Obj));
         }
 
         auto objectsToTrigger = Filter(to->InRoom->Objects(),
@@ -240,9 +240,7 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
 
         for(const auto &to_obj : objectsToTrigger)
         {
-            Object *obj1 = static_cast<Object *>(const_cast<void *>(arg1));
-            Object *obj2 = static_cast<Object *>(const_cast<void *>(arg2));
-            ObjProgActTrigger(txt, to_obj, ch, obj1, obj2);
+            ObjProgActTrigger(txt, to_obj, ch, arg1.Obj, arg2.Obj);
         }
     }
 
@@ -294,9 +292,7 @@ void Act(short AType, const std::string &format, Character *ch, const void *arg1
 
         if(MOBtrigger)
         {
-            Object *obj1 = static_cast<Object *>(const_cast<void *>(arg1));
-            /* Note: use original string, not string with ANSI. -- Alty */
-            MobProgActTrigger(txt, to, ch, obj1, const_cast<void *>(arg2));
+            MobProgActTrigger(txt, to, ch, arg1.Obj, Vo(arg2.Ch, arg2.Obj));
         }
     }
 

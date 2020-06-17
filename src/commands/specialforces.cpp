@@ -42,7 +42,7 @@ void do_special_forces(Character *ch, std::string argument)
         {
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
             Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
-                NULL, argument.c_str(), ActTarget::Room);
+                nullptr, nullptr, ActTarget::Room);
             AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_special_forces, SUB_PAUSE);
             return;
         }

@@ -92,7 +92,7 @@ void do_mp_damage(Character *ch, std::string argument)
 static ch_ret simple_damage(Character *ch, Character *victim, int dam, int dt)
 {
     bool npcvict = false;
-    Object *damobj = nullptr;
+    std::shared_ptr<Object> damobj;
 
     assert(ch != nullptr);
     assert(victim != nullptr);

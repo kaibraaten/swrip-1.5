@@ -9,7 +9,7 @@ struct Object::Impl
 {
     std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
     std::list<std::shared_ptr<Affect>> Affects;
-    std::list<Object*> Objects;
+    std::list<std::shared_ptr<Object>> Objects;
 };
 
 Object::Object()
@@ -23,37 +23,35 @@ Object::Object(std::shared_ptr<ProtoObject> pObjIndex, int level)
 {
     Value.fill(0);
 
-    Object *obj = this;
-
-    obj->Prototype = pObjIndex;
-    obj->Level = level;
+    Prototype = pObjIndex;
+    Level = level;
     cur_obj_serial = umax((cur_obj_serial + 1) & (BV30 - 1), 1);
-    obj->Serial = obj->Prototype->Serial = cur_obj_serial;
+    Serial = Prototype->Serial = cur_obj_serial;
 
-    obj->Name = pObjIndex->Name;
-    obj->ShortDescr = pObjIndex->ShortDescr;
-    obj->Description = pObjIndex->Description;
-    obj->ActionDescription = pObjIndex->ActionDescription;
-    obj->ItemType = pObjIndex->ItemType;
-    obj->Flags = pObjIndex->Flags;
-    obj->WearFlags = pObjIndex->WearFlags;
+    Name = pObjIndex->Name;
+    ShortDescr = pObjIndex->ShortDescr;
+    Description = pObjIndex->Description;
+    ActionDescription = pObjIndex->ActionDescription;
+    ItemType = pObjIndex->ItemType;
+    Flags = pObjIndex->Flags;
+    WearFlags = pObjIndex->WearFlags;
 
     for (int oval = 0; oval < MAX_OVAL; ++oval)
     {
-        obj->Value[oval] = pObjIndex->Value[oval];
+        Value[oval] = pObjIndex->Value[oval];
     }
 
-    obj->Weight = pObjIndex->Weight;
-    obj->Cost = pObjIndex->Cost;
+    Weight = pObjIndex->Weight;
+    Cost = pObjIndex->Cost;
 
     /*
      * Mess with object properties.
      */
-    switch (obj->ItemType)
+    switch (ItemType)
     {
     default:
         Log->Bug("%s: vnum %ld bad type.", __FUNCTION__, pObjIndex->Vnum);
-        Log->Bug("------------------------>  %d", obj->ItemType);
+        Log->Bug("------------------------>  %d", ItemType);
         break;
 
     case ITEM_FIGHTERCOMP:
@@ -97,13 +95,13 @@ Object::Object(std::shared_ptr<ProtoObject> pObjIndex, int level)
          * value1 is the max condition of the food
          * value4 is the optional initial condition
          */
-        if (obj->Value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION])
+        if (Value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION])
         {
-            obj->Timer = obj->Value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION];
+            Timer = Value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION];
         }
         else
         {
-            obj->Timer = obj->Value[OVAL_FOOD_MAX_CONDITION];
+            Timer = Value[OVAL_FOOD_MAX_CONDITION];
         }
         break;
 
@@ -133,84 +131,84 @@ Object::Object(std::shared_ptr<ProtoObject> pObjIndex, int level)
         break;
 
     case ITEM_SALVE:
-        obj->Value[OVAL_SALVE_DELAY] = NumberFuzzy(obj->Value[OVAL_SALVE_DELAY]);
+        Value[OVAL_SALVE_DELAY] = NumberFuzzy(Value[OVAL_SALVE_DELAY]);
         break;
 
     case ITEM_DEVICE:
-        obj->Value[OVAL_DEVICE_LEVEL] = NumberFuzzy(obj->Value[OVAL_DEVICE_LEVEL]);
-        obj->Value[OVAL_DEVICE_MAX_CHARGES] = NumberFuzzy(obj->Value[OVAL_DEVICE_MAX_CHARGES]);
+        Value[OVAL_DEVICE_LEVEL] = NumberFuzzy(Value[OVAL_DEVICE_LEVEL]);
+        Value[OVAL_DEVICE_MAX_CHARGES] = NumberFuzzy(Value[OVAL_DEVICE_MAX_CHARGES]);
         break;
 
     case ITEM_BATTERY:
-        if (obj->Value[OVAL_BATTERY_CHARGE] <= 0)
-            obj->Value[OVAL_BATTERY_CHARGE] = NumberFuzzy(95);
+        if (Value[OVAL_BATTERY_CHARGE] <= 0)
+            Value[OVAL_BATTERY_CHARGE] = NumberFuzzy(95);
 
         break;
 
 
     case ITEM_BOLT:
-        if (obj->Value[OVAL_BOLT_CHARGE] <= 0)
-            obj->Value[OVAL_BOLT_CHARGE] = NumberFuzzy(95);
+        if (Value[OVAL_BOLT_CHARGE] <= 0)
+            Value[OVAL_BOLT_CHARGE] = NumberFuzzy(95);
 
         break;
 
     case ITEM_AMMO:
-        if (obj->Value[OVAL_AMMO_CHARGE] <= 0)
-            obj->Value[OVAL_AMMO_CHARGE] = NumberFuzzy(495);
+        if (Value[OVAL_AMMO_CHARGE] <= 0)
+            Value[OVAL_AMMO_CHARGE] = NumberFuzzy(495);
 
         break;
 
     case ITEM_WEAPON:
-        if (obj->Value[OVAL_WEAPON_NUM_DAM_DIE] && obj->Value[OVAL_WEAPON_SIZE_DAM_DIE])
+        if (Value[OVAL_WEAPON_NUM_DAM_DIE] && Value[OVAL_WEAPON_SIZE_DAM_DIE])
         {
-            obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] *= obj->Value[OVAL_WEAPON_NUM_DAM_DIE];
+            Value[OVAL_WEAPON_SIZE_DAM_DIE] *= Value[OVAL_WEAPON_NUM_DAM_DIE];
         }
         else
         {
-            obj->Value[OVAL_WEAPON_NUM_DAM_DIE] = NumberFuzzy(NumberFuzzy(1 + level / 20));
-            obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] = NumberFuzzy(NumberFuzzy(10 + level / 10));
+            Value[OVAL_WEAPON_NUM_DAM_DIE] = NumberFuzzy(NumberFuzzy(1 + level / 20));
+            Value[OVAL_WEAPON_SIZE_DAM_DIE] = NumberFuzzy(NumberFuzzy(10 + level / 10));
         }
 
-        if (obj->Value[OVAL_WEAPON_NUM_DAM_DIE] > obj->Value[OVAL_WEAPON_SIZE_DAM_DIE])
+        if (Value[OVAL_WEAPON_NUM_DAM_DIE] > Value[OVAL_WEAPON_SIZE_DAM_DIE])
         {
-            obj->Value[OVAL_WEAPON_NUM_DAM_DIE] = obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] / 3;
+            Value[OVAL_WEAPON_NUM_DAM_DIE] = Value[OVAL_WEAPON_SIZE_DAM_DIE] / 3;
         }
 
-        if (obj->Value[OVAL_WEAPON_CONDITION] == 0)
+        if (Value[OVAL_WEAPON_CONDITION] == 0)
         {
-            obj->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+            Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
         }
 
-        switch (obj->Value[OVAL_WEAPON_TYPE])
+        switch (Value[OVAL_WEAPON_TYPE])
         {
         case WEAPON_BLASTER:
         case WEAPON_LIGHTSABER:
         case WEAPON_VIBRO_BLADE:
         case WEAPON_FORCE_PIKE:
         case WEAPON_BOWCASTER:
-            if (obj->Value[OVAL_WEAPON_MAX_CHARGE] <= 0)
+            if (Value[OVAL_WEAPON_MAX_CHARGE] <= 0)
             {
-                obj->Value[OVAL_WEAPON_MAX_CHARGE] = NumberFuzzy(1000);
+                Value[OVAL_WEAPON_MAX_CHARGE] = NumberFuzzy(1000);
             }
         }
 
-        obj->Value[OVAL_WEAPON_CHARGE] = obj->Value[OVAL_WEAPON_MAX_CHARGE];
+        Value[OVAL_WEAPON_CHARGE] = Value[OVAL_WEAPON_MAX_CHARGE];
         break;
 
     case ITEM_ARMOR:
-        if (obj->Value[OVAL_ARMOR_CONDITION] == 0)
-            obj->Value[OVAL_ARMOR_CONDITION] = obj->Value[OVAL_ARMOR_AC];
+        if (Value[OVAL_ARMOR_CONDITION] == 0)
+            Value[OVAL_ARMOR_CONDITION] = Value[OVAL_ARMOR_AC];
 
-        obj->Timer = obj->Value[OVAL_ARMOR_3];
+        Timer = Value[OVAL_ARMOR_3];
         break;
 
     case ITEM_POTION:
     case ITEM_PILL:
-        obj->Value[OVAL_PILL_LEVEL] = NumberFuzzy(NumberFuzzy(obj->Value[OVAL_PILL_LEVEL]));
+        Value[OVAL_PILL_LEVEL] = NumberFuzzy(NumberFuzzy(Value[OVAL_PILL_LEVEL]));
         break;
 
     case ITEM_MONEY:
-        obj->Value[OVAL_MONEY_AMOUNT] = obj->Cost;
+        Value[OVAL_MONEY_AMOUNT] = Cost;
         break;
     }
 }
@@ -250,17 +248,17 @@ void Object::Remove(std::shared_ptr<Affect> affect)
     pImpl->Affects.remove(affect);
 }
 
-void Object::Add(Object *object)
+void Object::Add(std::shared_ptr<Object> object)
 {
     pImpl->Objects.push_back(object);
 }
 
-void Object::Remove(Object *object)
+void Object::Remove(std::shared_ptr<Object> object)
 {
     pImpl->Objects.remove(object);
 }
 
-const std::list<Object*> &Object::Objects() const
+const std::list<std::shared_ptr<Object>> &Object::Objects() const
 {
     return pImpl->Objects;
 }

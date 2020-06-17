@@ -6,9 +6,8 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_remove_invis(int sn, int level, Character *ch, void *vo)
+ch_ret spell_remove_invis(int sn, int level, Character *ch, const Vo &vo)
 {
-    Object *obj = nullptr;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
     if(spell_target_name.empty())
@@ -17,7 +16,7 @@ ch_ret spell_remove_invis(int sn, int level, Character *ch, void *vo)
         return rSPELL_FAILED;
     }
 
-    obj = GetCarriedObject(ch, spell_target_name);
+    auto obj = GetCarriedObject(ch, spell_target_name);
 
     if(obj)
     {

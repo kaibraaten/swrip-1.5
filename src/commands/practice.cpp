@@ -181,7 +181,7 @@ void do_practice(Character *ch, std::string argument)
         {
             sprintf(buf, "$n tells you, 'I charge %d credits to teach that. You don't have enough.'", skill->Level * 10);
             Act(AT_TELL, "$n tells you 'You don't have enough credits.'",
-                mob, NULL, ch, ActTarget::Vict);
+                mob, nullptr, ch, ActTarget::Vict);
             return;
         }
 
@@ -189,25 +189,25 @@ void do_practice(Character *ch, std::string argument)
         {
             sprintf(buf, "$n tells you, 'I've taught you everything I can about %s.'",
                     skill->Name.c_str());
-            Act(AT_TELL, buf, mob, NULL, ch, ActTarget::Vict);
+            Act(AT_TELL, buf, mob, nullptr, ch, ActTarget::Vict);
             Act(AT_TELL, "$n tells you, 'You'll have to practice it on your own now...'",
-                mob, NULL, ch, ActTarget::Vict);
+                mob, nullptr, ch, ActTarget::Vict);
         }
         else
         {
             ch->Gold -= skill->Level * 10;
             ch->PCData->Learned[sn] += IntelligenceBonus[GetCurrentIntelligence(ch)].Learn;
             Act(AT_ACTION, "You practice $T.",
-                ch, NULL, skill->Name.c_str(), ActTarget::Char);
+                ch, nullptr, skill->Name, ActTarget::Char);
             Act(AT_ACTION, "$n practices $T.",
-                ch, NULL, skill->Name.c_str(), ActTarget::Room);
+                ch, nullptr, skill->Name, ActTarget::Room);
 
             if(ch->PCData->Learned[sn] >= adept)
             {
                 ch->PCData->Learned[sn] = adept;
                 Act(AT_TELL,
                     "$n tells you, 'You'll have to practice it on your own now...'",
-                    mob, NULL, ch, ActTarget::Vict);
+                    mob, nullptr, ch, ActTarget::Vict);
             }
         }
     }

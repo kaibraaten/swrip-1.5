@@ -44,7 +44,7 @@ void do_repairship(Character *ch, std::string argument)
         {
             ch->Echo("&GYou begin your repairs\r\n");
             Act(AT_PLAIN, "$n begins repairing the ships $T.", ch,
-                NULL, argument.c_str(), ActTarget::Room);
+                nullptr, argument, ActTarget::Room);
 
             if(!StrCmp(argument, "hull"))
                 AddTimerToCharacter(ch, TIMER_CMD_FUN, 15, do_repairship, SUB_PAUSE);
@@ -158,7 +158,7 @@ void do_repairship(Character *ch, std::string argument)
     }
 
     Act(AT_PLAIN, "$n finishes the repairs.", ch,
-        NULL, argument.c_str(), ActTarget::Room);
+        nullptr, argument, ActTarget::Room);
 
     LearnFromSuccess(ch, gsn_shipmaintenance);
 }

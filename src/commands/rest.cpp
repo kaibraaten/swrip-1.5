@@ -6,7 +6,7 @@
 
 void do_rest(Character *ch, std::string argument)
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
 
     if(ch->Position == POS_FIGHTING)
     {

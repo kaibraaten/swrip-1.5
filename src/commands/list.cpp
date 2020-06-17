@@ -57,7 +57,7 @@ void do_list( Character *ch, std::string argument )
         if ( ( keeper = FindKeeper( ch ) ) == NULL )
             return;
 
-        for(const Object *obj : keeper->Objects())
+        for(auto obj : keeper->Objects())
         {
             if ( obj->WearLoc == WEAR_NONE
                  &&   CanSeeObject( ch, obj ) )

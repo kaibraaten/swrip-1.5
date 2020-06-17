@@ -39,12 +39,12 @@ void do_say(Character *ch, std::string argument)
         std::string speech = DrunkSpeech(sbuf, ch);
 
         MOBtrigger = false;
-        Act(AT_SAY, "$n says '$t'", ch, speech.c_str(), vch, ActTarget::Vict);
+        Act(AT_SAY, "$n says '$t'", ch, speech, vch, ActTarget::Vict);
     }
 
     ch->Flags = mobflags;
     MOBtrigger = false;
-    Act(AT_SAY, "You say '$T'", ch, NULL, DrunkSpeech(argument, ch).c_str(), ActTarget::Char);
+    Act(AT_SAY, "You say '$T'", ch, nullptr, DrunkSpeech(argument, ch), ActTarget::Char);
 
     if(ch->InRoom->Flags.test(Flag::Room::LogSpeech))
     {

@@ -6,7 +6,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-ch_ret spell_earthquake(int sn, int level, Character *ch, void *vo)
+ch_ret spell_earthquake(int sn, int level, Character *ch, const Vo &vo)
 {
     Character *vch = NULL;
     Character *vch_next = NULL;

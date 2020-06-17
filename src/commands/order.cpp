@@ -84,7 +84,7 @@ void do_order(Character *ch, std::string argument)
         for(Character *och : charactersToOrder)
         {
             Act(AT_ACTION, "$n orders you to '$t'.",
-                ch, argument.c_str(), och, ActTarget::Vict);
+                ch, argument, och, ActTarget::Vict);
             Interpret(och, argument);
         }
 

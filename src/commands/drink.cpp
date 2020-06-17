@@ -8,12 +8,12 @@
 #include "object.hpp"
 #include "act.hpp"
 
-static Object *FindFountain(std::shared_ptr<Room> location);
+static std::shared_ptr<Object> FindFountain(std::shared_ptr<Room> location);
 
 void do_drink(Character *ch, std::string argument)
 {
     std::string arg;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     int liquid = 0;
 
     argument = OneArgument(argument, arg);
@@ -74,7 +74,7 @@ void do_drink(Character *ch, std::string argument)
         break;
 
     case ITEM_FOUNTAIN:
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
         {
             Act(AT_ACTION, "$n drinks from the fountain.", ch, NULL, NULL, ActTarget::Room);
             ch->Echo("You take a long thirst quenching drink.\r\n");
@@ -97,12 +97,12 @@ void do_drink(Character *ch, std::string argument)
             liquid = obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
         }
 
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
         {
             Act(AT_ACTION, "$n drinks $T from $p.",
-                ch, obj, LiquidTable[liquid].Name, ActTarget::Room);
+                ch, obj, std::string(LiquidTable[liquid].Name), ActTarget::Room);
             Act(AT_ACTION, "You drink $T from $p.",
-                ch, obj, LiquidTable[liquid].Name, ActTarget::Char);
+                ch, obj, std::string(LiquidTable[liquid].Name), ActTarget::Char);
         }
 
         GainCondition(ch, COND_DRUNK,
@@ -159,7 +159,7 @@ void do_drink(Character *ch, std::string argument)
     SetWaitState(ch, PULSE_PER_SECOND);
 }
 
-static Object *FindFountain(std::shared_ptr<Room> location)
+static std::shared_ptr<Object> FindFountain(std::shared_ptr<Room> location)
 {
     return Find(location->Objects(),
                 [](const auto fountain)

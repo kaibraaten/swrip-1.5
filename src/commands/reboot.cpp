@@ -5,45 +5,45 @@
 #include "repos/shiprepository.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_reboot( Character *ch, std::string argument )
+void do_reboot(Character *ch, std::string argument)
 {
-  char buf[MAX_STRING_LENGTH];
-  Character *vch = NULL;
+    char buf[MAX_STRING_LENGTH];
+    Character *vch = NULL;
 
-  if ( StrCmp( argument, "mud now" )
-       && StrCmp( argument, "nosave" )
-       && StrCmp( argument, "and sort skill table" ) )
+    if(StrCmp(argument, "mud now")
+       && StrCmp(argument, "nosave")
+       && StrCmp(argument, "and sort skill table"))
     {
-      ch->Echo("Syntax: 'reboot mud now' or 'reboot nosave'\r\n");
-      return;
+        ch->Echo("Syntax: 'reboot mud now' or 'reboot nosave'\r\n");
+        return;
     }
 
-  if ( OngoingAuction->Item )
+    if(!OngoingAuction->Item.expired())
     {
-      do_auction( ch, "stop");
-    }
-  
-  sprintf( buf, "Reboot by %s.", ch->Name.c_str() );
-  do_echo( ch, buf );
-
-  if ( !StrCmp(argument, "and sort skill table") )
-    {
-      SortSkillTable();
-      SaveSkills();
+        do_auction(ch, "stop");
     }
 
-  /* Save all characters before booting. */
-  if ( StrCmp(argument, "nosave") )
+    sprintf(buf, "Reboot by %s.", ch->Name.c_str());
+    do_echo(ch, buf);
+
+    if(!StrCmp(argument, "and sort skill table"))
     {
-      for ( vch = FirstCharacter; vch; vch = vch->Next )
+        SortSkillTable();
+        SaveSkills();
+    }
+
+    /* Save all characters before booting. */
+    if(StrCmp(argument, "nosave"))
+    {
+        for(vch = FirstCharacter; vch; vch = vch->Next)
         {
-          if ( !IsNpc( vch ) )
+            if(!IsNpc(vch))
             {
-              PlayerCharacters->Save( vch );
+                PlayerCharacters->Save(vch);
             }
         }
     }
 
-  Ships->Save();
-  mud_down = true;
+    Ships->Save();
+    mud_down = true;
 }

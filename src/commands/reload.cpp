@@ -20,7 +20,7 @@ void do_reload(Character *ch, std::string arg)
 
     if((ship = GetShipInRoom(ch->InRoom, arg)) == NULL)
     {
-        Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg.c_str(), ActTarget::Char);
+        Act(AT_PLAIN, "I see no $T here.", ch, nullptr, arg, ActTarget::Char);
         return;
     }
 

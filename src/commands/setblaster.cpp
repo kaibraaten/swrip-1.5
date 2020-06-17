@@ -5,7 +5,7 @@
 
 void do_setblaster(Character *ch, std::string argument)
 {
-    Object *wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
+    auto wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
     if(wield != nullptr
        && !(wield->ItemType == ITEM_WEAPON
@@ -14,7 +14,7 @@ void do_setblaster(Character *ch, std::string argument)
         wield = nullptr;
     }
 
-    Object *wield2 = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD);
+    auto wield2 = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD);
 
     if(wield2 != nullptr
        && !(wield2->ItemType == ITEM_WEAPON

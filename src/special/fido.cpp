@@ -10,19 +10,19 @@ bool spec_fido(Character *ch)
     if(!IsAwake(ch))
         return false;
 
-    std::list<Object *> corpsesToEat = Filter(ch->InRoom->Objects(),
-                                              [](const auto corpse)
-                                              {
-                                                  return corpse->ItemType == ITEM_CORPSE_NPC;
-                                              });
+    auto corpsesToEat = Filter(ch->InRoom->Objects(),
+                               [](const auto corpse)
+                               {
+                                   return corpse->ItemType == ITEM_CORPSE_NPC;
+                               });
 
-    for(Object *corpse : corpsesToEat)
+    for(auto corpse : corpsesToEat)
     {
         Act(AT_ACTION, "$n savagely devours a corpse.", ch, NULL, NULL, ActTarget::Room);
 
-        std::list<Object *> objectsInCorpse(corpse->Objects());
+        auto objectsInCorpse = corpse->Objects();
 
-        for(Object *obj : objectsInCorpse)
+        for(auto obj : objectsInCorpse)
         {
             ObjectFromObject(obj);
             ObjectToRoom(obj, ch->InRoom);
@@ -34,4 +34,3 @@ bool spec_fido(Character *ch)
 
     return false;
 }
-

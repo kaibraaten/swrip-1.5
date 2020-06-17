@@ -72,7 +72,7 @@ bool spec_customs_weapons(Character *ch)
             }
             else if(obj->ItemType == ITEM_CONTAINER)
             {
-                for(Object *content : obj->Objects())
+                for(auto content : obj->Objects())
                 {
                     if(content->Prototype->ItemType == ITEM_WEAPON
                        && !content->Flags.test(Flag::Obj::Contraband))

@@ -65,7 +65,7 @@ void do_autotrack(Character *ch, std::string argument)
     }
 
     Act(AT_PLAIN, "$n flips a switch on the control panel.", ch,
-        NULL, argument.c_str(), ActTarget::Room);
+        nullptr, nullptr, ActTarget::Room);
 
     if(ship->AutoTrack)
     {
@@ -80,4 +80,3 @@ void do_autotrack(Character *ch, std::string argument)
 
     LearnFromSuccess(ch, gsn_shipsystems);
 }
-

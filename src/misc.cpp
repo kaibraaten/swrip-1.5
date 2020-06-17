@@ -34,13 +34,13 @@
  /*
   * Function to handle the state changing of a triggerobject (lever)  -Thoric
   */
-void PullOrPush(Character *ch, Object *obj, bool pull)
+void PullOrPush(Character *ch, std::shared_ptr<Object> obj, bool pull)
 {
     char buf[MAX_STRING_LENGTH];
     std::shared_ptr<Room> room, to_room;
     std::shared_ptr<Exit> pexit, pexit_rev;
     DirectionType edir = DIR_INVALID;
-    const char *txt = NULL;
+    std::string txt;
     bool isup = IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
 
     switch(obj->ItemType)
@@ -91,12 +91,12 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
         return;
     }
 
-    if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+    if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
     {
         sprintf(buf, "$n %s $p.", pull ? "pulls" : "pushes");
-        Act(AT_ACTION, buf, ch, obj, NULL, ActTarget::Room);
+        Act(AT_ACTION, buf, ch, obj, nullptr, ActTarget::Room);
         sprintf(buf, "You %s $p.", pull ? "pull" : "push");
-        Act(AT_ACTION, buf, ch, obj, NULL, ActTarget::Char);
+        Act(AT_ACTION, buf, ch, obj, nullptr, ActTarget::Char);
     }
 
     if(!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
@@ -288,7 +288,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
 
             for(Character *rch : room->Characters())
             {
-                Act(AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
+                Act(AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword, ActTarget::Char);
             }
 
             if((pexit_rev = pexit->ReverseExit) != NULL
@@ -299,7 +299,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
                 for(Character *rch : to_room->Characters())
                 {
                     Act(AT_ACTION, "The $d opens.",
-                        rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
+                        rch, NULL, pexit_rev->Keyword, ActTarget::Char);
                 }
             }
 
@@ -314,7 +314,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
 
             for(Character *rch : room->Characters())
             {
-                Act(AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
+                Act(AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword, ActTarget::Char);
             }
 
             if((pexit_rev = pexit->ReverseExit) != NULL
@@ -324,7 +324,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
 
                 for(Character *rch : to_room->Characters())
                 {
-                    Act(AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
+                    Act(AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword, ActTarget::Char);
                 }
             }
 
@@ -334,7 +334,7 @@ void PullOrPush(Character *ch, Object *obj, bool pull)
     }
 }
 
-void ActionDescription(Character *ch, Object *obj)
+void ActionDescription(Character *ch, std::shared_ptr<Object> obj)
 {
     char charbuf[MAX_STRING_LENGTH];
     char roombuf[MAX_STRING_LENGTH];
@@ -412,9 +412,9 @@ void ActionDescription(Character *ch, Object *obj)
     {
     case ITEM_DRINK_CON:
         Act(AT_ACTION, charbuf, ch, obj,
-            LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, ActTarget::Char);
+            std::string(LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name), ActTarget::Char);
         Act(AT_ACTION, roombuf, ch, obj,
-            LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, ActTarget::Room);
+            std::string(LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name), ActTarget::Room);
         return;
 
     case ITEM_ARMOR:

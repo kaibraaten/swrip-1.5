@@ -55,7 +55,7 @@ void do_adjusttractorbeam(Character *ch, std::string argument)
     eShip = ship->WeaponSystems.TractorBeam.Tractoring;
 
     Act(AT_PLAIN, "$n flips a switch on the control panel.", ch,
-        NULL, argument.c_str(), ActTarget::Room);
+        nullptr, argument, ActTarget::Room);
 
     if(StrCmp(argument, "undock") && eShip->Docked && eShip->Docked != ship)
     {

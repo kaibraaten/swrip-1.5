@@ -5,9 +5,9 @@
 #include "log.hpp"
 #include "act.hpp"
 
-ch_ret spell_charm_person(int sn, int level, Character *ch, void *vo)
+ch_ret spell_charm_person(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character *victim = (Character *)vo;
+    Character *victim = vo.Ch;
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     int charm_chance = 0;
     char buf[MAX_STRING_LENGTH] = { '\0' };

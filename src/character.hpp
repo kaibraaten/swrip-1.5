@@ -51,9 +51,9 @@ public:
     void Add(std::shared_ptr<Affect> affect);
     void Remove(std::shared_ptr<Affect> affect);
 
-    const std::list<Object*> &Objects() const;
-    void Add(Object *object);
-    void Remove(Object *object);
+    const std::list<std::shared_ptr<Object>> &Objects() const;
+    void Add(std::shared_ptr<Object> object);
+    void Remove(std::shared_ptr<Object> object);
 
     const std::list<std::shared_ptr<Timer>> &Timers() const;
     void Add(std::shared_ptr<Timer> timer);
@@ -181,8 +181,8 @@ public:
     std::string Owner;
     std::shared_ptr<Room> Home;
     int CmdRecurse = 0;
-    Object *On = NULL;
-    Character *Pet = NULL;
+    std::shared_ptr<Object> On;
+    Character *Pet = nullptr;
 
     struct
     {
@@ -280,7 +280,7 @@ bool HasComlink(const Character *ch);
 
 bool HasDiploma(const Character *ch);
 
-Object *GetFirstObjectOfType(const Character *ch, ItemTypes type);
+std::shared_ptr<Object> GetFirstObjectOfType(const Character *ch, ItemTypes type);
 
 short GetAbilityLevel(const Character *ch, short ability);
 
@@ -298,27 +298,27 @@ bool IsAffectedBy(const Character *ch, size_t affected_by_bit);
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-Object *GetEquipmentOnCharacter(const Character *ch, WearLocation iWear);
+std::shared_ptr<Object> GetEquipmentOnCharacter(const Character *ch, WearLocation iWear);
 
 /*
  * Equip a char with an obj.
  */
-void EquipCharacter(Character *ch, Object *obj, WearLocation iWear);
+void EquipCharacter(Character *ch, std::shared_ptr<Object> obj, WearLocation iWear);
 
 /*
  * Unequip a char with an obj.
  */
-void UnequipCharacter(Character *ch, Object *obj);
+void UnequipCharacter(Character *ch, std::shared_ptr<Object> obj);
 
 /*
  * Find an obj in player's inventory.
  */
-Object *GetCarriedObject(const Character *ch, const std::string &argument);
+std::shared_ptr<Object> GetCarriedObject(const Character *ch, const std::string &argument);
 
 /*
  * Find an obj in player's equipment.
  */
-Object *GetWornObject(const Character *ch, const std::string &argument);
+std::shared_ptr<Object> GetWornObject(const Character *ch, const std::string &argument);
 
 /*
  * How mental state could affect finding an object              -Thoric
@@ -335,12 +335,12 @@ bool CanSeeCharacter(const Character *ch, const Character *victim);
 /*
  * True if char can see obj.
  */
-bool CanSeeObject(const Character *ch, const Object *obj);
+bool CanSeeObject(const Character *ch, std::shared_ptr<Object> obj);
 
 /*
  * True if char can drop obj.
  */
-bool CanDropObject(const Character *ch, const Object *obj);
+bool CanDropObject(const Character *ch, std::shared_ptr<Object> obj);
 
 /*
  * "Fix" a character's stats                                    -Thoric

@@ -65,9 +65,9 @@ static void GainGroupXP(Character *ch, Character *victim);
 static int CountGroupMembersInRoom(const Character *ch);
 static void CheckObjectAlignmentZapping(Character *ch);
 static int ComputeNewAlignment(const Character *gch, const Character *victim);
-static int GetObjectHitrollBonus(const Object *obj);
+static int GetObjectHitrollBonus(std::shared_ptr<Object> obj);
 static bool SprintForCover(Character *ch);
-static int GetWeaponProficiencyBonus(const Character *ch, const Object *wield, int *gsn_ptr);
+static int GetWeaponProficiencyBonus(const Character *ch, std::shared_ptr<Object> wield, int *gsn_ptr);
 static short GetOffensiveShieldLevelModifier(const Character *ch, const Character *victim);
 
 bool dual_flip = false;
@@ -77,7 +77,7 @@ bool dual_flip = false;
  */
 static bool IsWieldingPoisonedWeapon(const Character *ch)
 {
-    const Object *obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
+    auto obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
     return obj != nullptr && obj->Flags.test(Flag::Obj::Poisoned);
 }
@@ -634,7 +634,7 @@ ch_ret HitMultipleTimes(Character *ch, Character *victim, int dt)
 /*
  * Weapon types, haus
  */
-static int GetWeaponProficiencyBonus(const Character *ch, const Object *wield, int *gsn_ptr)
+static int GetWeaponProficiencyBonus(const Character *ch, std::shared_ptr<Object> wield, int *gsn_ptr)
 {
     int bonus = 0;
 
@@ -699,7 +699,7 @@ static int GetWeaponProficiencyBonus(const Character *ch, const Object *wield, i
  * Calculate the tohit bonus on the object and return RIS values.
  * -- Altrag
  */
-static int GetObjectHitrollBonus(const Object *obj)
+static int GetObjectHitrollBonus(std::shared_ptr<Object> obj)
 {
     int tohit = accumulate(std::begin(obj->Prototype->Affects()),
                            std::end(obj->Prototype->Affects()),
@@ -800,7 +800,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
     /*
      * Figure out the weapon doing the damage                     -Thoric
      */
-    Object *wield = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD);
+    auto wield = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD);
 
     if(wield != nullptr)
     {
@@ -1409,7 +1409,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
      */
     if(IsNpc(victim))
     {
-        Object *wielding = GetEquipmentOnCharacter(victim, WEAR_WIELD);
+        auto wielding = GetEquipmentOnCharacter(victim, WEAR_WIELD);
 
         if(wielding != nullptr
            && wielding->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
@@ -1485,7 +1485,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
     char buf1[MAX_STRING_LENGTH];
     bool loot = false;
     long xp_gain = 0;
-    Object *damobj = NULL;
+    std::shared_ptr<Object> damobj;
     ch_ret retcode = rNONE;
     short dampmod = 0;
     int init_gold = 0, new_gold = 0, gold_diff = 0;
@@ -1961,7 +1961,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
     if(victim->HitPoints.Current <= 0 && !IsNpc(victim))
     {
         int cnt = 0;
-        Object *equippedObject = nullptr;
+        std::shared_ptr<Object> equippedObject;
 
         StopFighting(victim, true);
 
@@ -1994,7 +1994,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
             i != std::end(victim->Objects());
             i = i_next)
         {
-            Object *obj = *i;
+            auto obj = *i;
             i_next = ++i;
 
             if(obj->WearLoc == WEAR_NONE)
@@ -2016,8 +2016,8 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
                     ObjectFromCharacter(obj);
                 }
 
-                Act(AT_ACTION, "$n drops $p.", victim, obj, NULL, ActTarget::Room);
-                Act(AT_ACTION, "You drop $p.", victim, obj, NULL, ActTarget::Char);
+                Act(AT_ACTION, "$n drops $p.", victim, obj, nullptr, ActTarget::Room);
+                Act(AT_ACTION, "You drop $p.", victim, obj, nullptr, ActTarget::Char);
                 obj = ObjectToRoom(obj, victim->InRoom);
             }
         }
@@ -2578,9 +2578,9 @@ void RawKill(Character *killer, Character *victim)
     }
     else
     {
-        std::list<Object *> carriedByVictim(Reverse(victim->Objects()));
+        auto carriedByVictim = Reverse(victim->Objects());
 
-        for(Object *obj : carriedByVictim)
+        for(auto obj : carriedByVictim)
         {
             ObjectFromCharacter(obj);
             ExtractObject(obj);
@@ -2694,9 +2694,9 @@ void RawKill(Character *killer, Character *victim)
 
 static void CheckObjectAlignmentZapping(Character *ch)
 {
-    std::list<Object *> carriedObjects(ch->Objects());
+    auto carriedObjects = ch->Objects();
 
-    for(Object *obj : carriedObjects)
+    for(auto obj : carriedObjects)
     {
         if(obj->WearLoc == WEAR_NONE)
         {

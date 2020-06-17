@@ -46,7 +46,7 @@
 struct Character::Impl
 {
     std::list<std::shared_ptr<Affect>> Affects;
-    std::list<Object *> Objects;
+    std::list<std::shared_ptr<Object>> Objects;
     std::list<std::shared_ptr<Timer>> Timers;
 };
 
@@ -175,17 +175,17 @@ void Character::Remove(std::shared_ptr<Affect> affect)
     pImpl->Affects.remove(affect);
 }
 
-const std::list<Object *> &Character::Objects() const
+const std::list<std::shared_ptr<Object>> &Character::Objects() const
 {
     return pImpl->Objects;
 }
 
-void Character::Add(Object *object)
+void Character::Add(std::shared_ptr<Object> object)
 {
     pImpl->Objects.push_back(object);
 }
 
-void Character::Remove(Object *object)
+void Character::Remove(std::shared_ptr<Object> object)
 {
     pImpl->Objects.remove(object);
 }
@@ -452,8 +452,8 @@ bool HasComlink(const Character *ch)
         return true;
     }
 
-    const Object *comlink = GetFirstObjectOfType(ch, ITEM_COMLINK);
-    return comlink != nullptr ? true : false;
+    std::shared_ptr<Object> comlink = GetFirstObjectOfType(ch, ITEM_COMLINK);
+    return comlink != nullptr;
 }
 
 bool HasDiploma(const Character *ch)
@@ -462,7 +462,7 @@ bool HasDiploma(const Character *ch)
                 [](auto obj)
                 {
                     return obj->Prototype->Vnum == OBJ_VNUM_SCHOOL_DIPLOMA;
-                });
+                }) != nullptr;
 }
 
 short GetAbilityLevel(const Character *ch, short ability)
@@ -510,11 +510,11 @@ bool IsAffectedBy(const Character *ch, size_t affected_by_bit)
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-Object *GetEquipmentOnCharacter(const Character *ch, WearLocation iWear)
+std::shared_ptr<Object> GetEquipmentOnCharacter(const Character *ch, WearLocation iWear)
 {
-    Object *maxobj = NULL;
+    std::shared_ptr<Object> maxobj;
 
-    for(Object *obj : ch->Objects())
+    for(auto obj : ch->Objects())
     {
         if(obj->WearLoc == iWear)
         {
@@ -536,9 +536,9 @@ Object *GetEquipmentOnCharacter(const Character *ch, WearLocation iWear)
 /*
  * Equip a char with an obj.
  */
-void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
+void EquipCharacter(Character *ch, std::shared_ptr<Object> obj, WearLocation iWear)
 {
-    Object *otmp = GetEquipmentOnCharacter(ch, iWear);
+    std::shared_ptr<Object> otmp = GetEquipmentOnCharacter(ch, iWear);
 
     if(otmp != nullptr
        && (otmp->Prototype->Layers == 0 || obj->Prototype->Layers == 0))
@@ -610,7 +610,7 @@ void EquipCharacter(Character *ch, Object *obj, WearLocation iWear)
 /*
  * Unequip a char with an obj.
  */
-void UnequipCharacter(Character *ch, Object *obj)
+void UnequipCharacter(Character *ch, std::shared_ptr<Object> obj)
 {
     if(obj->WearLoc == WEAR_NONE)
     {
@@ -645,7 +645,7 @@ void UnequipCharacter(Character *ch, Object *obj)
 /*
  * Find an obj in player's inventory.
  */
-Object *GetCarriedObject(const Character *ch, const std::string &argument)
+std::shared_ptr<Object> GetCarriedObject(const Character *ch, const std::string &argument)
 {
     std::string arg;
     vnum_t vnum = INVALID_VNUM;
@@ -657,7 +657,7 @@ Object *GetCarriedObject(const Character *ch, const std::string &argument)
         vnum = strtol(arg.c_str(), nullptr, 10);
     }
 
-    for(Object *obj : Reverse(ch->Objects()))
+    for(auto obj : Reverse(ch->Objects()))
     {
         if(obj->WearLoc == WEAR_NONE
            && CanSeeObject(ch, obj)
@@ -683,7 +683,7 @@ Object *GetCarriedObject(const Character *ch, const std::string &argument)
     */
     count = 0;
 
-    for(Object *obj : Reverse(ch->Objects()))
+    for(auto obj : Reverse(ch->Objects()))
     {
         if(obj->WearLoc == WEAR_NONE
            && CanSeeObject(ch, obj)
@@ -702,7 +702,7 @@ Object *GetCarriedObject(const Character *ch, const std::string &argument)
 /*
  * Find an obj in player's equipment.
  */
-Object *GetWornObject(const Character *ch, const std::string &argument)
+std::shared_ptr<Object> GetWornObject(const Character *ch, const std::string &argument)
 {
     std::string arg;
     int count = 0;
@@ -721,7 +721,7 @@ Object *GetWornObject(const Character *ch, const std::string &argument)
         vnum = strtol(arg.c_str(), nullptr, 10);
     }
 
-    for(Object *obj : Reverse(ch->Objects()))
+    for(auto obj : Reverse(ch->Objects()))
         if(obj->WearLoc != WEAR_NONE
            && CanSeeObject(ch, obj)
            && (NiftyIsName(arg, obj->Name) || obj->Prototype->Vnum == vnum))
@@ -737,7 +737,7 @@ Object *GetWornObject(const Character *ch, const std::string &argument)
     */
     count = 0;
 
-    for(Object *obj : Reverse(ch->Objects()))
+    for(auto obj : Reverse(ch->Objects()))
         if(obj->WearLoc != WEAR_NONE
            && CanSeeObject(ch, obj)
            && NiftyIsNamePrefix(arg, obj->Name))
@@ -973,7 +973,7 @@ bool CanSeeCharacter(const Character *ch, const Character *victim)
 /*
  * True if char can see obj.
  */
-bool CanSeeObject(const Character *ch, const Object *obj)
+bool CanSeeObject(const Character *ch, std::shared_ptr<Object> obj)
 {
     if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return true;
@@ -1005,7 +1005,7 @@ bool CanSeeObject(const Character *ch, const Object *obj)
 /*
  * True if char can drop obj.
  */
-bool CanDropObject(const Character *ch, const Object *obj)
+bool CanDropObject(const Character *ch, std::shared_ptr<Object> obj)
 {
     if(!obj->Flags.test(Flag::Obj::NoDrop))
         return true;
@@ -1024,14 +1024,14 @@ bool CanDropObject(const Character *ch, const Object *obj)
  */
 void FixCharacterStats(Character *ch)
 {
-    Object *carry[MAX_LEVEL * 200];
+    std::shared_ptr<Object> carry[MAX_LEVEL * 200];
     int ncarry = 0;
 
     DeEquipCharacter(ch);
 
     while(!ch->Objects().empty())
     {
-        Object *obj = ch->Objects().front();
+        std::shared_ptr<Object> obj = ch->Objects().front();
         carry[ncarry++] = obj;
         ObjectFromCharacter(obj);
     }
@@ -1364,7 +1364,7 @@ bool HasKey(const Character *ch, vnum_t key)
                 {
                     return obj->Prototype->Vnum == key
                         || obj->Value[OVAL_KEY_UNLOCKS_VNUM] == key;
-                });
+                }) != nullptr;
 }
 
 /*
@@ -1545,8 +1545,6 @@ void SetCharacterTitle(Character *ch, const std::string &title)
 void AddReinforcements(Character *ch)
 {
     std::shared_ptr<ProtoMobile> pMobIndex;
-    Object *blaster = nullptr;
-    std::shared_ptr<ProtoObject> pObjIndex;
     int multiplier = 1;
 
     if((pMobIndex = GetProtoMobile(ch->BackupMob)) == nullptr)
@@ -1595,10 +1593,11 @@ void AddReinforcements(Character *ch)
             mob[mob_cnt]->ArmorClass = 100 - mob[mob_cnt]->TopLevel * 2.5;
             mob[mob_cnt]->DamRoll = mob[mob_cnt]->TopLevel / 5;
             mob[mob_cnt]->HitRoll = mob[mob_cnt]->TopLevel / 5;
+            std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11);
 
-            if((pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11)) != NULL)
+            if(pObjIndex != nullptr)
             {
-                blaster = CreateObject(pObjIndex, mob[mob_cnt]->TopLevel);
+                std::shared_ptr<Object> blaster = CreateObject(pObjIndex, mob[mob_cnt]->TopLevel);
                 ObjectToCharacter(blaster, mob[mob_cnt]);
                 EquipCharacter(mob[mob_cnt], blaster, WEAR_WIELD);
             }
@@ -1615,7 +1614,6 @@ void AddReinforcements(Character *ch)
     }
     else
     {
-        Character *mob = NULL;
         int ability = 0;
 
         if(ch->BackupMob == MOB_VNUM_IMP_ELITE ||
@@ -1625,7 +1623,7 @@ void AddReinforcements(Character *ch)
             multiplier = 2;
         }
 
-        mob = CreateMobile(pMobIndex);
+        auto mob = CreateMobile(pMobIndex);
         CharacterToRoom(mob, ch->InRoom);
 
         if(ch->PCData && ch->PCData->ClanInfo.Clan)
@@ -1651,9 +1649,11 @@ void AddReinforcements(Character *ch)
         mob->DamRoll = mob->TopLevel / 5;
         mob->HitRoll = mob->TopLevel / 5;
 
-        if((pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11)) != NULL)
+        std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11);
+
+        if(pObjIndex != nullptr)
         {
-            blaster = CreateObject(pObjIndex, mob->TopLevel);
+            std::shared_ptr<Object> blaster = CreateObject(pObjIndex, mob->TopLevel);
             ObjectToCharacter(blaster, mob);
             EquipCharacter(mob, blaster, WEAR_WIELD);
         }
@@ -1709,7 +1709,7 @@ unsigned int GetKillTrackCount(const Character *ch)
     return urange(2, ((GetAbilityLevel(ch, COMBAT_ABILITY) + 3) * MAX_KILLTRACK) / LEVEL_AVATAR, MAX_KILLTRACK);
 }
 
-Object *GetFirstObjectOfType(const Character *ch, ItemTypes type)
+std::shared_ptr<Object> GetFirstObjectOfType(const Character *ch, ItemTypes type)
 {
     return Find(ch->Objects(),
                 [type](auto obj)

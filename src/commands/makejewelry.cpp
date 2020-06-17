@@ -117,7 +117,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 {
     struct UserData *ud = (struct UserData*) userData;
     char buf[MAX_STRING_LENGTH];
-    Object *obj = args->Object;
+    auto obj = args->Object;
 
     obj->WearFlags.set(Flag::Wear::Take);
     obj->WearFlags.set(ud->WearLocation);

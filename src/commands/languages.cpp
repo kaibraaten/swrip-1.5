@@ -59,7 +59,7 @@ void do_languages(Character *ch, std::string argument)
            ch->PCData->Learned[sn] >= 99)
         {
             Act(AT_PLAIN, "You are already fluent in $t.", ch,
-                LanguageNames[lang], NULL, ActTarget::Char);
+                ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
             return;
         }
 
@@ -98,20 +98,20 @@ void do_languages(Character *ch, std::string argument)
         SetBit(ch->Speaks, LanguageArray[lang]);
 
         if(ch->PCData->Learned[sn] == prct)
-            Act(AT_PLAIN, "You begin lessons in $t.", ch, LanguageNames[lang],
-                NULL, ActTarget::Char);
+            Act(AT_PLAIN, "You begin lessons in $t.", ch,
+                ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
         else if(ch->PCData->Learned[sn] < 60)
-            Act(AT_PLAIN, "You continue lessons in $t.", ch, LanguageNames[lang],
-                NULL, ActTarget::Char);
+            Act(AT_PLAIN, "You continue lessons in $t.", ch,
+                ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
         else if(ch->PCData->Learned[sn] < 60 + prct)
             Act(AT_PLAIN, "You feel you can start communicating in $t.", ch,
-                LanguageNames[lang], NULL, ActTarget::Char);
+                ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
         else if(ch->PCData->Learned[sn] < 99)
             Act(AT_PLAIN, "You become more fluent in $t.", ch,
-                LanguageNames[lang], NULL, ActTarget::Char);
+                ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
         else
-            Act(AT_PLAIN, "You now speak perfect $t.", ch, LanguageNames[lang],
-                NULL, ActTarget::Char);
+            Act(AT_PLAIN, "You now speak perfect $t.", ch, 
+                ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
         return;
     }
 
@@ -135,5 +135,3 @@ void do_languages(Character *ch, std::string argument)
 
     ch->Echo("\r\n");
 }
-
-

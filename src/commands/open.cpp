@@ -8,7 +8,7 @@
 void do_open(Character *ch, std::string argument)
 {
     std::string arg;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     std::shared_ptr<Exit> pexit;
     int door = 0;
 
@@ -46,17 +46,17 @@ void do_open(Character *ch, std::string argument)
            || NiftyIsName(arg, pexit->Keyword))
         {
             Act(AT_ACTION, "$n opens the $d.",
-                ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
+                ch, nullptr, pexit->Keyword, ActTarget::Room);
             Act(AT_ACTION, "You open the $d.",
-                ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
+                ch, nullptr, pexit->Keyword, ActTarget::Char);
 
             if((pexit_rev = pexit->ReverseExit) != NULL
                && pexit_rev->ToRoom == ch->InRoom)
             {
-                for(Character *rch : pexit->ToRoom->Characters())
+                for(auto rch : pexit->ToRoom->Characters())
                 {
                     Act(AT_ACTION, "The $d opens.",
-                        rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
+                        rch, nullptr, pexit_rev->Keyword, ActTarget::Char);
                 }
             }
 

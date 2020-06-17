@@ -33,5 +33,5 @@ void do_mwhere(Character *ch, std::string arg)
     }
 
     if(!found)
-        Act(AT_PLAIN, "You didn't find any $T.", ch, NULL, arg.c_str(), ActTarget::Char);
+        Act(AT_PLAIN, "You didn't find any $T.", ch, nullptr, arg, ActTarget::Char);
 }

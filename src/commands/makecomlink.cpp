@@ -11,75 +11,75 @@ struct UserData
     int WearLocation = 0;
 };
 
-static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
-static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
-static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
-static void FreeUserData( UserData *ud );
-static bool CanUseWearLocation( int wearLocation );
-static CraftRecipe *MakeCraftRecipe( void );
+static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
+static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
+static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
+static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
+static void FreeUserData(UserData *ud);
+static bool CanUseWearLocation(int wearLocation);
+static CraftRecipe *MakeCraftRecipe(void);
 
-void do_makecomlink( Character *ch, std::string argument )
+void do_makecomlink(Character *ch, std::string argument)
 {
     CraftRecipe *recipe = MakeCraftRecipe();
-    CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
+    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
     UserData *ud = new UserData();
 
-    AddInterpretArgumentsCraftingHandler( session, ud, InterpretArgumentsHandler );
-    AddSetObjectStatsCraftingHandler( session, ud, SetObjectStatsHandler );
-    AddFinishedCraftingHandler( session, ud, FinishedCraftingHandler );
-    AddAbortCraftingHandler( session, ud, AbortHandler );
+    AddInterpretArgumentsCraftingHandler(session, ud, InterpretArgumentsHandler);
+    AddSetObjectStatsCraftingHandler(session, ud, SetObjectStatsHandler);
+    AddFinishedCraftingHandler(session, ud, FinishedCraftingHandler);
+    AddAbortCraftingHandler(session, ud, AbortHandler);
 
-    StartCrafting( session );
+    StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe( void )
+static CraftRecipe *MakeCraftRecipe(void)
 {
     static const CraftingMaterial materials[] =
-        {
-            { ITEM_TOOLKIT,  {} },
-            { ITEM_OVEN,     {} },
-            { ITEM_CIRCUIT,  { Flag::Crafting::Extract } },
-            { ITEM_CRYSTAL,  { Flag::Crafting::Extract } },
-            { ITEM_NONE,     {} }
-        };
-    CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecomlink, materials,
-                                               10, GetProtoObject( OBJ_VNUM_CRAFTING_COMLINK ),
-                                               { Flag::Crafting::NeedsWorkshop } );
+    {
+        { ITEM_TOOLKIT,  {} },
+        { ITEM_OVEN,     {} },
+        { ITEM_CIRCUIT,  { Flag::Crafting::Extract } },
+        { ITEM_CRYSTAL,  { Flag::Crafting::Extract } },
+        { ITEM_NONE,     {} }
+    };
+    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makecomlink, materials,
+                                              10, GetProtoObject(OBJ_VNUM_CRAFTING_COMLINK),
+                                              { Flag::Crafting::NeedsWorkshop });
 
     return recipe;
 }
 
-static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
+static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
 {
-    UserData *ud = (UserData*) userData;
-    Character *ch = GetEngineer( args->CraftingSession );
+    UserData *ud = (UserData *)userData;
+    Character *ch = GetEngineer(args->CraftingSession);
     std::string argument = args->CommandArguments;
     std::string wearLoc;
     std::string itemName;
 
-    argument = OneArgument( argument, wearLoc );
+    argument = OneArgument(argument, wearLoc);
     itemName = argument;
 
-    if ( itemName.empty() )
+    if(itemName.empty())
     {
-        ch->Echo("&RUsage: Makecomlink <wearloc> <name>\r\n&w" );
+        ch->Echo("&RUsage: Makecomlink <wearloc> <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->WearLocation = GetWearFlag( wearLoc );
+    ud->WearLocation = GetWearFlag(wearLoc);
 
-    if( ud->WearLocation == -1 )
+    if(ud->WearLocation == -1)
     {
-        ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc.c_str() );
+        ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc.c_str());
         args->AbortSession = true;
         return;
     }
 
-    if ( !CanUseWearLocation( ud->WearLocation ) )
+    if(!CanUseWearLocation(ud->WearLocation))
     {
-        ch->Echo("&RYou cannot make a comlink for that body part.\r\n&w" );
+        ch->Echo("&RYou cannot make a comlink for that body part.\r\n&w");
         args->AbortSession = true;
         return;
     }
@@ -87,10 +87,10 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
     ud->ItemName = itemName;
 }
 
-static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
+static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
 {
-    UserData *ud = (UserData*) userData;
-    Object *comlink = args->Object;
+    UserData *ud = (UserData *)userData;
+    auto comlink = args->Object;
 
     comlink->WearFlags.set(Flag::Wear::Take);
     comlink->WearFlags.set(ud->WearLocation);
@@ -104,24 +104,24 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
     comlink->Cost = 50;
 }
 
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
+static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
 {
-    UserData *ud = (UserData*) userData;
-    FreeUserData( ud );
+    UserData *ud = (UserData *)userData;
+    FreeUserData(ud);
 }
 
-static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
+static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
 {
-    UserData *ud = (UserData*) userData;
-    FreeUserData( ud );
+    UserData *ud = (UserData *)userData;
+    FreeUserData(ud);
 }
 
-static void FreeUserData(UserData *ud )
+static void FreeUserData(UserData *ud)
 {
     delete ud;
 }
 
-static bool CanUseWearLocation( int wearLocation )
+static bool CanUseWearLocation(int wearLocation)
 {
     return wearLocation == Flag::Wear::Hold
         || wearLocation == Flag::Wear::Neck

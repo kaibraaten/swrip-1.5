@@ -50,8 +50,8 @@
 #include "protomob.hpp"
 #include "race.hpp"
 
-/* Defines by Narn for new mudprog parsing, used as
-   return values from mprog_do_command. */
+ /* Defines by Narn for new mudprog parsing, used as
+    return values from mprog_do_command. */
 #define COMMANDOK    1
 #define IFTRUE       2
 #define IFFALSE      3
@@ -62,8 +62,8 @@
 #define IFIGNORED    8
 #define ORIGNORED    9
 
-/* Ifstate defines, used to create and access ifstate array
-   in MudProgDriver. */
+    /* Ifstate defines, used to create and access ifstate array
+       in MudProgDriver. */
 #define MAX_IFS     20          /* should always be generous */
 #define IN_IF        0
 #define IN_ELSE      1
@@ -75,7 +75,7 @@
 class act_prog_data
 {
 public:
-    void *vo = nullptr;
+    Vo vo;
     std::shared_ptr<Room> room;
 };
 
@@ -93,28 +93,30 @@ static std::list<std::shared_ptr<act_prog_data>> mob_act_list;
  * Local function prototypes
  */
 static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
-                            Object *obj, void *vo, Character *rndm,
+                            std::shared_ptr<Object> obj, const Vo &vo, Character *rndm,
                             bool ignore, bool ignore_ors);
-static char *MudProgNextCommand(char* clist);
+static char *MudProgNextCommand(char *clist);
 static bool MudProgCompareStrings(const std::string &lhs, const std::string &opr, const std::string &rhs, Character *mob);
 static bool MudProgCompareNumbers(int lhs, const std::string &opr, int rhs, Character *mob);
-static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Character* actor,
-                            Object* obj, void* vo, Character* rndm);
-static void MudProgTranslate(char ch, char* t, Character *mob,
-                             Character* actor, Object* obj,
-                             void* vo, Character* rndm);
-static void MudProgDriver(std::string com_list, Character* mob,
-                          Character* actor, Object* obj,
-                          void* vo, bool single_step);
+static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Character *actor,
+                            std::shared_ptr<Object> obj, const Vo &vo, Character *rndm);
+static void MudProgTranslate(char ch, char *t, Character *mob,
+                             Character *actor, std::shared_ptr<Object> obj,
+                             const Vo &vo, Character *rndm);
+static void MudProgDriver(std::string com_list, Character *mob,
+                          Character *actor, std::shared_ptr<Object> obj,
+                          const Vo &vo, bool single_step);
 static bool MudProgKeywordCheck(const std::string &argu, const std::string &argl);
-static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Character *actor, Object *obj, void *vo, int type, Object *iobj);
-static void MudProgSetSupermob(Object *obj);
-static bool ObjProgPercentCheck(Character *mob, Character *actor, Object *obj, void *vo, int type);
-static void RoomProgPercentCheck(Character *mob, Character *actor, Object *obj, void *vo, int type);
+static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
+                                 std::shared_ptr<Object> obj, const Vo &vo,
+                                 int type, std::shared_ptr<Object> iobj);
+static void MudProgSetSupermob(std::shared_ptr<Object> obj);
+static bool ObjProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj, const Vo &vo, int type);
+static void RoomProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj, const Vo &vo, int type);
 static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
-                                  Object *obj, void *vo, int type, std::shared_ptr<Room> room);
+                                  std::shared_ptr<Object> obj, const Vo &vo, int type, std::shared_ptr<Room> room);
 static void MobileActAdd(Character *mob);
-static void ObjectActAdd(Object *obj);
+static void ObjectActAdd(std::shared_ptr<Object> obj);
 static void RoomActAdd(std::shared_ptr<Room> room);
 
 /***************************************************************************
@@ -136,19 +138,19 @@ static char *MudProgNextCommand(char *clist)
 {
     char *pointer = clist;
 
-    while (*pointer != '\n' && *pointer != '\r' && !IsNullOrEmpty(pointer))
+    while(*pointer != '\n' && *pointer != '\r' && !IsNullOrEmpty(pointer))
         pointer++;
 
-    if (*pointer == '\r')
+    if(*pointer == '\r')
         *pointer++ = '\0';
 
-    if (*pointer == '\n')
+    if(*pointer == '\n')
         *pointer++ = '\0';
 
-    if (*pointer == '\r')
+    if(*pointer == '\r')
         *pointer++ = '\0';
 
-    if (*pointer == '\n')
+    if(*pointer == '\n')
         *pointer++ = '\0';
 
     return pointer;
@@ -164,16 +166,16 @@ static char *MudProgNextCommand(char *clist)
 static bool MudProgCompareStrings(const std::string &lhs, const std::string &opr,
                                   const std::string &rhs, Character *mob)
 {
-    if (!StrCmp(opr, "=="))
+    if(!StrCmp(opr, "=="))
         return !StrCmp(lhs, rhs);
 
-    if (!StrCmp(opr, "!="))
+    if(!StrCmp(opr, "!="))
         return StrCmp(lhs, rhs);
 
-    if (!StrCmp(opr, "/"))
+    if(!StrCmp(opr, "/"))
         return !StringInfix(rhs, lhs);
 
-    if (!StrCmp(opr, "!/"))
+    if(!StrCmp(opr, "!/"))
         return StringInfix(rhs, lhs);
 
     auto logBuf = FormatString("Improper MOBprog operator '%s'", opr.c_str());
@@ -183,28 +185,28 @@ static bool MudProgCompareStrings(const std::string &lhs, const std::string &opr
 
 static bool MudProgCompareNumbers(int lhs, const std::string &opr, int rhs, Character *mob)
 {
-    if (!StrCmp(opr, "=="))
+    if(!StrCmp(opr, "=="))
         return lhs == rhs;
 
-    if (!StrCmp(opr, "!="))
+    if(!StrCmp(opr, "!="))
         return lhs != rhs;
 
-    if (!StrCmp(opr, ">"))
+    if(!StrCmp(opr, ">"))
         return lhs > rhs;
 
-    if (!StrCmp(opr, "<"))
+    if(!StrCmp(opr, "<"))
         return lhs < rhs;
 
-    if (!StrCmp(opr, "<="))
+    if(!StrCmp(opr, "<="))
         return lhs <= rhs;
 
-    if (!StrCmp(opr, ">="))
+    if(!StrCmp(opr, ">="))
         return lhs >= rhs;
 
-    if (!StrCmp(opr, "&"))
+    if(!StrCmp(opr, "&"))
         return lhs & rhs;
 
-    if (!StrCmp(opr, "|"))
+    if(!StrCmp(opr, "|"))
         return lhs | rhs;
 
     auto logBuf = FormatString("Improper MOBprog operator '%s'", opr.c_str());
@@ -218,14 +220,14 @@ static int IfCheckRandom(const std::string &cvar)
     return GetRandomPercent() <= strtol(cvar.c_str(), nullptr, 10);
 }
 
-static int IfCheckEconomy(Character* mob, const std::string &cvar, const std::string &opr, const std::string &rval)
+static int IfCheckEconomy(Character *mob, const std::string &cvar, const std::string &opr, const std::string &rval)
 {
     const int idx = strtol(cvar.c_str(), nullptr, 10);
     std::shared_ptr<Room> room;
 
-    if (!idx)
+    if(!idx)
     {
-        if (!mob->InRoom)
+        if(!mob->InRoom)
         {
             ProgBug("'economy' ifcheck: mob in NULL room with no room vnum "
                     "argument", mob);
@@ -239,7 +241,7 @@ static int IfCheckEconomy(Character* mob, const std::string &cvar, const std::st
         room = GetRoom(idx);
     }
 
-    if (!room)
+    if(!room)
     {
         ProgBug("Bad room vnum passed to 'economy'", mob);
         return BERR;
@@ -249,11 +251,11 @@ static int IfCheckEconomy(Character* mob, const std::string &cvar, const std::st
                                  + room->Area->LowEconomy, opr, atoi(rval.c_str()), mob);
 }
 
-static int IfCheckMobInRoom(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckMobInRoom(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     int vnum = atoi(cvar.c_str());
 
-    if (vnum < MIN_VNUM || vnum > MAX_VNUM)
+    if(vnum < MIN_VNUM || vnum > MAX_VNUM)
     {
         ProgBug("Bad vnum to 'mobinroom'", mob);
         return BERR;
@@ -266,12 +268,12 @@ static int IfCheckMobInRoom(Character* mob, const std::string &cvar, std::string
                   });
     rhsvl = atoi(rval.c_str());
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
     {
         rhsvl = 1;
     }
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -279,15 +281,15 @@ static int IfCheckMobInRoom(Character* mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckTimesKilled(Character* mob, const std::string &cvar, const std::string &opr, const std::string &rval, const Character* chkchar)
+static int IfCheckTimesKilled(Character *mob, const std::string &cvar, const std::string &opr, const std::string &rval, const Character *chkchar)
 {
     std::shared_ptr<ProtoMobile> pMob;
 
-    if (chkchar)
+    if(chkchar)
     {
         pMob = chkchar->Prototype;
     }
-    else if ((pMob = GetProtoMobile(atoi(cvar.c_str()))) == nullptr)
+    else if((pMob = GetProtoMobile(atoi(cvar.c_str()))) == nullptr)
     {
         ProgBug("TimesKilled ifcheck: bad vnum", mob);
         return BERR;
@@ -296,11 +298,11 @@ static int IfCheckTimesKilled(Character* mob, const std::string &cvar, const std
     return MudProgCompareNumbers(pMob->Killed, opr, atoi(rval.c_str()), mob);
 }
 
-static int IfCheckOVnumHere(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumHere(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     const vnum_t vnum = atoi(cvar.c_str());
 
-    if (vnum < MIN_VNUM || vnum > MAX_VNUM)
+    if(vnum < MIN_VNUM || vnum > MAX_VNUM)
     {
         ProgBug("OvnumHere: bad vnum", mob);
         return BERR;
@@ -308,17 +310,17 @@ static int IfCheckOVnumHere(Character* mob, const std::string &cvar, std::string
 
     lhsvl = 0;
 
-    for (const Object *pObj : mob->Objects())
+    for(auto pObj : mob->Objects())
     {
-        if (CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
+        if(CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
         {
             lhsvl++;
         }
     }
 
-    for (const Object *pObj : mob->InRoom->Objects())
+    for(auto pObj : mob->InRoom->Objects())
     {
-        if (CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
+        if(CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
         {
             lhsvl++;
         }
@@ -326,12 +328,12 @@ static int IfCheckOVnumHere(Character* mob, const std::string &cvar, std::string
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
     {
         rhsvl = 1;
     }
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -339,16 +341,16 @@ static int IfCheckOVnumHere(Character* mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeHere(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeHere(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
-    if (IsNumber(cvar))
+    if(IsNumber(cvar))
         type = (ItemTypes)atoi(cvar.c_str());
     else
         type = GetObjectType(cvar);
 
-    if (type < 0 || type > MAX_ITEM_TYPE)
+    if(type < 0 || type > MAX_ITEM_TYPE)
     {
         ProgBug("OtypeHere: bad type", mob);
         return BERR;
@@ -356,17 +358,17 @@ static int IfCheckOTypeHere(Character* mob, const std::string &cvar, std::string
 
     lhsvl = 0;
 
-    for (const Object *pObj : mob->Objects())
+    for(auto pObj : mob->Objects())
     {
-        if (CanSeeObject(mob, pObj) && pObj->ItemType == type)
+        if(CanSeeObject(mob, pObj) && pObj->ItemType == type)
         {
             lhsvl++;
         }
     }
 
-    for (const Object *pObj : mob->InRoom->Objects())
+    for(auto pObj : mob->InRoom->Objects())
     {
-        if (CanSeeObject(mob, pObj) && pObj->ItemType == type)
+        if(CanSeeObject(mob, pObj) && pObj->ItemType == type)
         {
             lhsvl++;
         }
@@ -374,12 +376,12 @@ static int IfCheckOTypeHere(Character* mob, const std::string &cvar, std::string
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
     {
         rhsvl = 1;
     }
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -387,34 +389,30 @@ static int IfCheckOTypeHere(Character* mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumRoom(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumRoom(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     const vnum_t vnum = atoi(cvar.c_str());
 
-    if (vnum < MIN_VNUM || vnum > MAX_VNUM)
+    if(vnum < MIN_VNUM || vnum > MAX_VNUM)
     {
         ProgBug("OvnumRoom: bad vnum", mob);
         return BERR;
     }
 
-    lhsvl = 0;
-
-    for (const Object *pObj : mob->InRoom->Objects())
-    {
-        if (CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
-        {
-            lhsvl++;
-        }
-    }
+    lhsvl = Count(mob->InRoom->Objects(),
+                  [mob, vnum](std::shared_ptr<Object> pObj)
+                  {
+                      return CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum;
+                  });
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
     {
         rhsvl = 1;
     }
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -422,11 +420,11 @@ static int IfCheckOVnumRoom(Character* mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeRoom(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeRoom(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
-    if (IsNumber(cvar))
+    if(IsNumber(cvar))
     {
         type = (ItemTypes)atoi(cvar.c_str());
     }
@@ -435,7 +433,7 @@ static int IfCheckOTypeRoom(Character* mob, const std::string &cvar, std::string
         type = GetObjectType(cvar);
     }
 
-    if (type < 0 || type > MAX_ITEM_TYPE)
+    if(type < 0 || type > MAX_ITEM_TYPE)
     {
         ProgBug("OtypeRoom: bad type", mob);
         return BERR;
@@ -443,9 +441,9 @@ static int IfCheckOTypeRoom(Character* mob, const std::string &cvar, std::string
 
     lhsvl = 0;
 
-    for (const Object *pObj : mob->InRoom->Objects())
+    for(auto pObj : mob->InRoom->Objects())
     {
-        if (CanSeeObject(mob, pObj) && pObj->ItemType == type)
+        if(CanSeeObject(mob, pObj) && pObj->ItemType == type)
         {
             lhsvl++;
         }
@@ -453,12 +451,12 @@ static int IfCheckOTypeRoom(Character* mob, const std::string &cvar, std::string
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
     {
         rhsvl = 1;
     }
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -470,7 +468,7 @@ static int IfCheckOVnumCarry(Character *mob, const std::string &cvar, std::strin
 {
     int vnum = atoi(cvar.c_str());
 
-    if (vnum < MIN_VNUM || vnum > MAX_VNUM)
+    if(vnum < MIN_VNUM || vnum > MAX_VNUM)
     {
         ProgBug("OvnumCarry: bad vnum", mob);
         return BERR;
@@ -478,9 +476,9 @@ static int IfCheckOVnumCarry(Character *mob, const std::string &cvar, std::strin
 
     lhsvl = 0;
 
-    for (const Object *pObj : mob->Objects())
+    for(auto pObj : mob->Objects())
     {
-        if (CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
+        if(CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
         {
             lhsvl++;
         }
@@ -488,12 +486,12 @@ static int IfCheckOVnumCarry(Character *mob, const std::string &cvar, std::strin
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
     {
         rhsvl = 1;
     }
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -501,11 +499,11 @@ static int IfCheckOVnumCarry(Character *mob, const std::string &cvar, std::strin
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeCarry(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeCarry(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
-    if (IsNumber(cvar))
+    if(IsNumber(cvar))
     {
         type = (ItemTypes)atoi(cvar.c_str());
     }
@@ -514,7 +512,7 @@ static int IfCheckOTypeCarry(Character* mob, const std::string &cvar, std::strin
         type = GetObjectType(cvar);
     }
 
-    if (type < 0 || type > MAX_ITEM_TYPE)
+    if(type < 0 || type > MAX_ITEM_TYPE)
     {
         ProgBug("OtypeCarry: bad type", mob);
         return BERR;
@@ -522,9 +520,9 @@ static int IfCheckOTypeCarry(Character* mob, const std::string &cvar, std::strin
 
     lhsvl = 0;
 
-    for (const Object *pObj : mob->Objects())
+    for(auto pObj : mob->Objects())
     {
-        if (CanSeeObject(mob, pObj) && pObj->ItemType == type)
+        if(CanSeeObject(mob, pObj) && pObj->ItemType == type)
         {
             lhsvl++;
         }
@@ -532,12 +530,12 @@ static int IfCheckOTypeCarry(Character* mob, const std::string &cvar, std::strin
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
     {
         rhsvl = 1;
     }
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -545,11 +543,11 @@ static int IfCheckOTypeCarry(Character* mob, const std::string &cvar, std::strin
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumWear(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumWear(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     int vnum = atoi(cvar.c_str());
 
-    if (vnum < MIN_VNUM || vnum > MAX_VNUM)
+    if(vnum < MIN_VNUM || vnum > MAX_VNUM)
     {
         ProgBug("OvnumWear: bad vnum", mob);
         return BERR;
@@ -557,10 +555,10 @@ static int IfCheckOVnumWear(Character* mob, const std::string &cvar, std::string
 
     lhsvl = 0;
 
-    for (const Object *pObj : mob->Objects())
+    for(auto pObj : mob->Objects())
     {
-        if (pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
-            pObj->Prototype->Vnum == vnum)
+        if(pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
+           pObj->Prototype->Vnum == vnum)
         {
             lhsvl++;
         }
@@ -568,12 +566,12 @@ static int IfCheckOVnumWear(Character* mob, const std::string &cvar, std::string
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
     {
         rhsvl = 1;
     }
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -581,16 +579,16 @@ static int IfCheckOVnumWear(Character* mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeWear(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeWear(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
-    if (IsNumber(cvar))
+    if(IsNumber(cvar))
         type = static_cast<ItemTypes>(atoi(cvar.c_str()));
     else
         type = GetObjectType(cvar);
 
-    if (type < 0 || type > MAX_ITEM_TYPE)
+    if(type < 0 || type > MAX_ITEM_TYPE)
 
     {
         ProgBug("OtypeWear: bad type", mob);
@@ -599,10 +597,10 @@ static int IfCheckOTypeWear(Character* mob, const std::string &cvar, std::string
 
     lhsvl = 0;
 
-    for (const Object *pObj : mob->Objects())
+    for(auto pObj : mob->Objects())
     {
-        if (pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
-            pObj->ItemType == type)
+        if(pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
+           pObj->ItemType == type)
         {
             lhsvl++;
         }
@@ -610,20 +608,20 @@ static int IfCheckOTypeWear(Character* mob, const std::string &cvar, std::string
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
         rhsvl = 1;
 
-    if (opr.empty())
+    if(opr.empty())
         opr = "==";
 
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumInventory(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumInventory(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     int vnum = atoi(cvar.c_str());
 
-    if (vnum < MIN_VNUM || vnum > MAX_VNUM)
+    if(vnum < MIN_VNUM || vnum > MAX_VNUM)
     {
         ProgBug("OvnumInv: bad vnum", mob);
         return BERR;
@@ -631,10 +629,10 @@ static int IfCheckOVnumInventory(Character* mob, const std::string &cvar, std::s
 
     lhsvl = 0;
 
-    for (const Object *pObj : mob->Objects())
+    for(auto pObj : mob->Objects())
     {
-        if (pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
-            pObj->Prototype->Vnum == vnum)
+        if(pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
+           pObj->Prototype->Vnum == vnum)
         {
             lhsvl++;
         }
@@ -642,10 +640,10 @@ static int IfCheckOVnumInventory(Character* mob, const std::string &cvar, std::s
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
         rhsvl = 1;
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -653,11 +651,11 @@ static int IfCheckOVnumInventory(Character* mob, const std::string &cvar, std::s
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeInventory(Character* mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeInventory(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
-    if (IsNumber(cvar))
+    if(IsNumber(cvar))
     {
         type = (ItemTypes)atoi(cvar.c_str());
     }
@@ -666,7 +664,7 @@ static int IfCheckOTypeInventory(Character* mob, const std::string &cvar, std::s
         type = GetObjectType(cvar);
     }
 
-    if (type < 0 || type > MAX_ITEM_TYPE)
+    if(type < 0 || type > MAX_ITEM_TYPE)
     {
         ProgBug("OtypeInv: bad type", mob);
         return BERR;
@@ -674,10 +672,10 @@ static int IfCheckOTypeInventory(Character* mob, const std::string &cvar, std::s
 
     lhsvl = 0;
 
-    for (const Object *pObj : mob->Objects())
+    for(auto pObj : mob->Objects())
     {
-        if (pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
-            pObj->ItemType == type)
+        if(pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
+           pObj->ItemType == type)
         {
             lhsvl++;
         }
@@ -685,10 +683,10 @@ static int IfCheckOTypeInventory(Character* mob, const std::string &cvar, std::s
 
     rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
-    if (rhsvl < 1)
+    if(rhsvl < 1)
         rhsvl = 1;
 
-    if (opr.empty())
+    if(opr.empty())
     {
         opr = "==";
     }
@@ -696,11 +694,11 @@ static int IfCheckOTypeInventory(Character* mob, const std::string &cvar, std::s
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckIsAffected(const Character* mob, const std::string &rval, const Character* chkchar)
+static int IfCheckIsAffected(const Character *mob, const std::string &rval, const Character *chkchar)
 {
     int value = GetAffectFlag(rval);
 
-    if (value < 0 || static_cast<size_t>(value) >= Flag::MAX)
+    if(value < 0 || static_cast<size_t>(value) >= Flag::MAX)
     {
         ProgBug("Unknown affect being checked", mob);
         return BERR;
@@ -709,50 +707,50 @@ static int IfCheckIsAffected(const Character* mob, const std::string &rval, cons
     return IsAffectedBy(chkchar, 1 << value);
 }
 
-static int IfCheckIsCarrying(const Character* mob, const std::string &opr, const std::string &rval, const Character* chkchar)
+static int IfCheckIsCarrying(const Character *mob, const std::string &opr, const std::string &rval, const Character *chkchar)
 {
     int vnum = atoi(rval.c_str());
 
-    if (vnum < 1 || vnum > 2097152000)
+    if(vnum < 1 || vnum > 2097152000)
     {
         ProgBug("iscarrying: bad vnum", mob);
         return BERR;
     }
 
-    if (StrCmp(opr, "=="))
+    if(StrCmp(opr, "=="))
     {
         ProgBug("iscarrying: bad check: only == supported", mob);
         return BERR;
     }
 
-    for (const Object *pObj : chkchar->Objects())
-        if (pObj->Prototype->Vnum == vnum)
+    for(auto pObj : chkchar->Objects())
+        if(pObj->Prototype->Vnum == vnum)
             return true;
 
     return false;
 }
 
-static int IfCheckIsWearing(const Character* mob, const std::string &opr, const Character* chkchar, vnum_t vnum)
+static int IfCheckIsWearing(const Character *mob, const std::string &opr, const Character *chkchar, vnum_t vnum)
 {
-    if (vnum < 1 || vnum > 2097152000)
+    if(vnum < 1 || vnum > 2097152000)
     {
         ProgBug("iswearing: bad vnum", mob);
         return BERR;
     }
 
-    if (StrCmp(opr, "=="))
+    if(StrCmp(opr, "=="))
     {
         ProgBug("iswearing: bad check: only == supported", mob);
         return BERR;
     }
 
-    for (int iWear = 0; iWear < MAX_WEAR; iWear++)
+    for(int iWear = 0; iWear < MAX_WEAR; iWear++)
     {
-        for (const Object *pObj : chkchar->Objects())
+        for(auto pObj : chkchar->Objects())
         {
-            if (pObj->WearLoc == (WearLocation)iWear)
+            if(pObj->WearLoc == (WearLocation)iWear)
             {
-                if (pObj->Prototype->Vnum == vnum)
+                if(pObj->Prototype->Vnum == vnum)
                 {
                     return true;
                 }
@@ -776,35 +774,35 @@ static int IfCheckIsWearing(const Character* mob, const std::string &opr, const 
  * same action on each variable..
  */
 static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Character *actor,
-                            Object *obj, void *vo, Character *rndm)
+                            std::shared_ptr<Object> obj, const Vo &vo, Character *rndm)
 {
-    char cvar[MAX_INPUT_LENGTH] = {'\0'};
-    char chck[MAX_INPUT_LENGTH] = {'\0'};
-    char opr[MAX_INPUT_LENGTH] = {'\0'};
-    char rval[MAX_INPUT_LENGTH] = {'\0'};
+    char cvar[MAX_INPUT_LENGTH] = { '\0' };
+    char chck[MAX_INPUT_LENGTH] = { '\0' };
+    char opr[MAX_INPUT_LENGTH] = { '\0' };
+    char rval[MAX_INPUT_LENGTH] = { '\0' };
     const char *point = ifcheck.c_str();
     char *pchck = chck;
     Character *chkchar = nullptr;
-    Object *chkobj = nullptr;
+    std::shared_ptr<Object> chkobj;
     int lhsvl = 0, rhsvl = 0;
 
-    if (!*point)
+    if(!*point)
     {
         ProgBug("Null ifcheck", mob);
         return BERR;
     }
 
-    while (*point == ' ')
+    while(*point == ' ')
         point++;
 
-    while (*point != '(')
+    while(*point != '(')
     {
-        if (IsNullOrEmpty(point))
+        if(IsNullOrEmpty(point))
         {
             ProgBug("Ifcheck syntax error", mob);
             return BERR;
         }
-        else if (*point == ' ')
+        else if(*point == ' ')
         {
             point++;
         }
@@ -818,14 +816,14 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
     point++;
     pchck = cvar;
 
-    while (*point != ')')
+    while(*point != ')')
     {
-        if (IsNullOrEmpty(point))
+        if(IsNullOrEmpty(point))
         {
             ProgBug("Ifcheck syntax error", mob);
             return BERR;
         }
-        else if (*point == ' ')
+        else if(*point == ' ')
         {
             point++;
         }
@@ -838,12 +836,12 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
     point++;
     *pchck = '\0';
 
-    while (*point == ' ')
+    while(*point == ' ')
     {
         point++;
     }
 
-    if (!*point)
+    if(!*point)
     {
         opr[0] = '\0';
         rval[0] = '\0';
@@ -852,9 +850,9 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
     {
         pchck = opr;
 
-        while (*point != ' ' && !isalnum(*point))
+        while(*point != ' ' && !isalnum(*point))
         {
-            if (IsNullOrEmpty(point))
+            if(IsNullOrEmpty(point))
             {
                 ProgBug("Ifcheck operator without value", mob);
                 return BERR;
@@ -867,14 +865,14 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
 
         *pchck = '\0';
 
-        while (*point == ' ')
+        while(*point == ' ')
         {
             point++;
         }
 
         pchck = rval;
 
-        while (!IsNullOrEmpty(point))
+        while(!IsNullOrEmpty(point))
         {
             *pchck++ = *point++;
         }
@@ -886,9 +884,9 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
      * operator if there is one, and rval is the value if there was an
      * operator.
      */
-    if (cvar[0] == '$')
+    if(cvar[0] == '$')
     {
-        switch (cvar[1])
+        switch(cvar[1])
         {
         case 'i':
             chkchar = mob;
@@ -899,7 +897,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
             break;
 
         case 't':
-            chkchar = (Character *)vo;
+            chkchar = vo.Ch;
             break;
 
         case 'r':
@@ -911,7 +909,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
             break;
 
         case 'p':
-            chkobj = (Object *)vo;
+            chkobj = vo.Obj;
             break;
 
         default:
@@ -921,162 +919,162 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
             return BERR;
         }
 
-        if (!chkchar && !chkobj)
+        if(!chkchar && !chkobj)
         {
             return BERR;
         }
     }
 
-    if (!StrCmp(chck, "rand"))
+    if(!StrCmp(chck, "rand"))
     {
         return IfCheckRandom(cvar);
     }
-    else if (!StrCmp(chck, "economy"))
+    else if(!StrCmp(chck, "economy"))
     {
         return IfCheckEconomy(mob, cvar, opr, rval);
     }
-    else if (!StrCmp(chck, "mobinroom"))
+    else if(!StrCmp(chck, "mobinroom"))
     {
         return IfCheckMobInRoom(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "timeskilled"))
+    else if(!StrCmp(chck, "timeskilled"))
     {
         return IfCheckTimesKilled(mob, cvar, opr, rval, chkchar);
     }
-    else if (!StrCmp(chck, "ovnumhere"))
+    else if(!StrCmp(chck, "ovnumhere"))
     {
         return IfCheckOVnumHere(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "otypehere"))
+    else if(!StrCmp(chck, "otypehere"))
     {
         return IfCheckOTypeHere(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "ovnumroom"))
+    else if(!StrCmp(chck, "ovnumroom"))
     {
         return IfCheckOVnumRoom(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "otyperoom"))
+    else if(!StrCmp(chck, "otyperoom"))
     {
         return IfCheckOTypeRoom(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "ovnumcarry"))
+    else if(!StrCmp(chck, "ovnumcarry"))
     {
         return IfCheckOVnumCarry(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "otypecarry"))
+    else if(!StrCmp(chck, "otypecarry"))
     {
         return IfCheckOTypeCarry(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "ovnumwear"))
+    else if(!StrCmp(chck, "ovnumwear"))
     {
         return IfCheckOVnumWear(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "otypewear"))
+    else if(!StrCmp(chck, "otypewear"))
     {
         return IfCheckOTypeWear(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "ovnuminv"))
+    else if(!StrCmp(chck, "ovnuminv"))
     {
         return IfCheckOVnumInventory(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
-    else if (!StrCmp(chck, "otypeinv"))
+    else if(!StrCmp(chck, "otypeinv"))
     {
         return IfCheckOTypeInventory(mob, cvar, opr, rval, lhsvl, rhsvl);
     }
 
-    if (chkchar)
+    if(chkchar)
     {
-        if (!StrCmp(chck, "ismobinvis"))
+        if(!StrCmp(chck, "ismobinvis"))
         {
             return IsNpc(chkchar) && chkchar->Flags.test(Flag::Mob::MobInvis);
         }
-        else if (!StrCmp(chck, "mobinvislevel"))
+        else if(!StrCmp(chck, "mobinvislevel"))
         {
             return IsNpc(chkchar) ?
                 MudProgCompareNumbers(chkchar->MobInvis, opr, atoi(rval), mob) : false;
         }
-        else if (!StrCmp(chck, "ispc"))
+        else if(!StrCmp(chck, "ispc"))
         {
             return IsNpc(chkchar) ? false : true;
         }
-        else if (!StrCmp(chck, "isnpc"))
+        else if(!StrCmp(chck, "isnpc"))
         {
             return IsNpc(chkchar) ? true : false;
         }
-        else if (!StrCmp(chck, "ismounted"))
+        else if(!StrCmp(chck, "ismounted"))
         {
             return chkchar->Position == POS_MOUNTED;
         }
-        else if (!StrCmp(chck, "isgood"))
+        else if(!StrCmp(chck, "isgood"))
         {
             return IsGood(chkchar) ? true : false;
         }
-        else if (!StrCmp(chck, "isneutral"))
+        else if(!StrCmp(chck, "isneutral"))
         {
             return IsNeutral(chkchar) ? true : false;
         }
-        else if (!StrCmp(chck, "isevil"))
+        else if(!StrCmp(chck, "isevil"))
         {
             return IsEvil(chkchar) ? true : false;
         }
-        else if (!StrCmp(chck, "isfight"))
+        else if(!StrCmp(chck, "isfight"))
         {
             return GetFightingOpponent(chkchar) ? true : false;
         }
-        else if (!StrCmp(chck, "isimmort"))
+        else if(!StrCmp(chck, "isimmort"))
         {
             return GetTrustLevel(chkchar) >= LEVEL_IMMORTAL;
         }
-        else if (!StrCmp(chck, "ischarmed"))
+        else if(!StrCmp(chck, "ischarmed"))
         {
             return IsAffectedBy(chkchar, Flag::Affect::Charm);
         }
-        else if (!StrCmp(chck, "isfollow"))
+        else if(!StrCmp(chck, "isfollow"))
         {
             return chkchar->Master != nullptr &&
                 chkchar->Master->InRoom == chkchar->InRoom;
         }
-        else if (!StrCmp(chck, "isaffected"))
+        else if(!StrCmp(chck, "isaffected"))
         {
             return IfCheckIsAffected(mob, rval, chkchar);
         }
-        else if (!StrCmp(chck, "hitprcnt"))
+        else if(!StrCmp(chck, "hitprcnt"))
         {
             return MudProgCompareNumbers(chkchar->HitPoints.Current / chkchar->HitPoints.Max,
                                          opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "inroom"))
+        else if(!StrCmp(chck, "inroom"))
         {
             return MudProgCompareNumbers(chkchar->InRoom->Vnum, opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "wasinroom"))
+        else if(!StrCmp(chck, "wasinroom"))
         {
             return MudProgCompareNumbers(chkchar->WasInRoom->Vnum, opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "sex"))
+        else if(!StrCmp(chck, "sex"))
         {
             return MudProgCompareNumbers(chkchar->Sex, opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "position"))
+        else if(!StrCmp(chck, "position"))
         {
             return MudProgCompareNumbers(chkchar->Position, opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "ishelled"))
+        else if(!StrCmp(chck, "ishelled"))
         {
             return IsNpc(actor) ? false :
                 MudProgCompareNumbers(chkchar->PCData->ReleaseDate, opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "level"))
+        else if(!StrCmp(chck, "level"))
         {
             return MudProgCompareNumbers(GetTrustLevel(chkchar), opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "goldamt"))
+        else if(!StrCmp(chck, "goldamt"))
         {
             return MudProgCompareNumbers(chkchar->Gold, opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "race"))
+        else if(!StrCmp(chck, "race"))
         {
-            if (IsNpc(chkchar))
+            if(IsNpc(chkchar))
             {
                 return MudProgCompareStrings(NpcRace[chkchar->Race], opr, rval, mob);
             }
@@ -1084,7 +1082,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
             return MudProgCompareStrings(RaceTable[chkchar->Race].Name, opr,
                                          rval, mob);
         }
-        else if (!StrCmp(chck, "droid"))
+        else if(!StrCmp(chck, "droid"))
         {
             return IsDroid(chkchar);
         }
@@ -1092,7 +1090,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
         {
             return IsJedi(chkchar);
         }
-        else if (!StrCmp(chck, "class"))
+        else if(!StrCmp(chck, "class"))
         {
             if(IsNpc(chkchar))
             {
@@ -1103,11 +1101,11 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
 
             return MudProgCompareStrings(abilityName, opr, rval, mob);
         }
-        else if (!StrCmp(chck, "clan"))
+        else if(!StrCmp(chck, "clan"))
         {
             const auto clan = IsNpc(chkchar) ? nullptr : chkchar->PCData->ClanInfo.Clan;
 
-            if (IsNpc(chkchar) || !clan)
+            if(IsNpc(chkchar) || !clan)
                 return false;
 
             bool inClan = MudProgCompareStrings(clan->Name, opr, rval, mob);
@@ -1119,9 +1117,9 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
 
             return inClan;
         }
-        else if (!StrCmp(chck, "clantype"))
+        else if(!StrCmp(chck, "clantype"))
         {
-            if (IsNpc(chkchar) || !IsClanned(chkchar))
+            if(IsNpc(chkchar) || !IsClanned(chkchar))
             {
                 return false;
             }
@@ -1129,72 +1127,72 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
             return MudProgCompareNumbers(chkchar->PCData->ClanInfo.Clan->Type, opr, atoi(rval),
                                          mob);
         }
-        else if (!StrCmp(chck, "str"))
+        else if(!StrCmp(chck, "str"))
         {
             return MudProgCompareNumbers(GetCurrentStrength(chkchar), opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "wis"))
+        else if(!StrCmp(chck, "wis"))
         {
             return MudProgCompareNumbers(GetCurrentWisdom(chkchar), opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "int"))
+        else if(!StrCmp(chck, "int"))
         {
             return MudProgCompareNumbers(GetCurrentIntelligence(chkchar), opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "dex"))
+        else if(!StrCmp(chck, "dex"))
         {
             return MudProgCompareNumbers(GetCurrentDexterity(chkchar), opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "con"))
+        else if(!StrCmp(chck, "con"))
         {
             return MudProgCompareNumbers(GetCurrentConstitution(chkchar), opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "cha"))
+        else if(!StrCmp(chck, "cha"))
         {
             return MudProgCompareNumbers(GetCurrentCharisma(chkchar), opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "lck"))
+        else if(!StrCmp(chck, "lck"))
         {
             return MudProgCompareNumbers(GetCurrentLuck(chkchar), opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "iscarrying"))
+        else if(!StrCmp(chck, "iscarrying"))
         {
             return IfCheckIsCarrying(mob, opr, rval, chkchar);
         }
-        else if (!StrCmp(chck, "iswearing"))
+        else if(!StrCmp(chck, "iswearing"))
         {
             int vnum = atoi(rval);
             return IfCheckIsWearing(mob, opr, chkchar, vnum);
         }
     }
 
-    if (chkobj)
+    if(chkobj)
     {
-        if (!StrCmp(chck, "objtype"))
+        if(!StrCmp(chck, "objtype"))
         {
             return MudProgCompareNumbers(chkobj->ItemType, opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "objval0"))
+        else if(!StrCmp(chck, "objval0"))
         {
             return MudProgCompareNumbers(chkobj->Value[0], opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "objval1"))
+        else if(!StrCmp(chck, "objval1"))
         {
             return MudProgCompareNumbers(chkobj->Value[1], opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "objval2"))
+        else if(!StrCmp(chck, "objval2"))
         {
             return MudProgCompareNumbers(chkobj->Value[2], opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "objval3"))
+        else if(!StrCmp(chck, "objval3"))
         {
             return MudProgCompareNumbers(chkobj->Value[3], opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "objval4"))
+        else if(!StrCmp(chck, "objval4"))
         {
             return MudProgCompareNumbers(chkobj->Value[4], opr, atoi(rval), mob);
         }
-        else if (!StrCmp(chck, "objval5"))
+        else if(!StrCmp(chck, "objval5"))
         {
             return MudProgCompareNumbers(chkobj->Value[5], opr, atoi(rval), mob);
         }
@@ -1202,25 +1200,25 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
 
     /* The following checks depend on the fact that cval[1] can only contain
        one character, and that NULL checks were made previously. */
-    if (!StrCmp(chck, "number"))
+    if(!StrCmp(chck, "number"))
     {
-        if (chkchar != nullptr)
+        if(chkchar != nullptr)
         {
-            if (!IsNpc(chkchar))
+            if(!IsNpc(chkchar))
                 return false;
 
             lhsvl = chkchar == mob ? chkchar->Gold : chkchar->Prototype->Vnum;
             return MudProgCompareNumbers(lhsvl, opr, atoi(rval), mob);
         }
-        else if (chkobj != nullptr)
+        else if(chkobj != nullptr)
         {
             return MudProgCompareNumbers(chkobj->Prototype->Vnum, opr, atoi(rval), mob);
         }
     }
 
-    if (!StrCmp(chck, "name"))
+    if(!StrCmp(chck, "name"))
     {
-        if (chkchar != nullptr)
+        if(chkchar != nullptr)
         {
             return MudProgCompareStrings(chkchar->Name, opr, rval, mob);
         }
@@ -1249,30 +1247,30 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
  * but this would require a lot of small changes all over the code.
  */
 
-/*
- *  There's no reason to make the mud crash when a variable's
- *  fubared.  I added some ifs.  I'm willing to trade some
- *  performance for stability. -Haus
- *
- *  Narn's fubar ***ANNIHILATES*** you!  Hmm, could we add that
- *  as a weapon type? -Narn
- *
- *  Added char_died and obj_extracted checks    -Thoric
- */
+ /*
+  *  There's no reason to make the mud crash when a variable's
+  *  fubared.  I added some ifs.  I'm willing to trade some
+  *  performance for stability. -Haus
+  *
+  *  Narn's fubar ***ANNIHILATES*** you!  Hmm, could we add that
+  *  as a weapon type? -Narn
+  *
+  *  Added char_died and obj_extracted checks    -Thoric
+  */
 static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
-                             Object *obj, void *vo, Character *rndm)
+                             std::shared_ptr<Object> obj, const Vo &vo, Character *rndm)
 {
-    Character   *vict = (Character *)vo;
-    Object    *v_obj = (Object  *)vo;
+    Character *vict = vo.Ch;
+    std::shared_ptr<Object> v_obj = vo.Obj;
 
     *t = '\0';
 
-    switch (ch)
+    switch(ch)
     {
     case 'i':
-        if (mob && !CharacterDiedRecently(mob))
+        if(mob && !CharacterDiedRecently(mob))
         {
-            if (!mob->Name.empty())
+            if(!mob->Name.empty())
             {
                 std::string name;
                 OneArgument(mob->Name, name);
@@ -1287,9 +1285,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'I':
-        if (mob && !CharacterDiedRecently(mob))
+        if(mob && !CharacterDiedRecently(mob))
         {
-            if (!mob->ShortDescr.empty())
+            if(!mob->ShortDescr.empty())
             {
                 strcpy(t, mob->ShortDescr.c_str());
             }
@@ -1305,13 +1303,13 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'n':
-        if (actor && !CharacterDiedRecently(actor))
+        if(actor && !CharacterDiedRecently(actor))
         {
             std::string name;
             OneArgument(actor->Name, name);
             strcpy(t, name.c_str());
 
-            if (!IsNpc(actor))
+            if(!IsNpc(actor))
                 *t = CharToUppercase(*t);
         }
         else
@@ -1322,11 +1320,11 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'N':
-        if (actor && !CharacterDiedRecently(actor))
+        if(actor && !CharacterDiedRecently(actor))
         {
-            if (CanSeeCharacter(mob, actor))
+            if(CanSeeCharacter(mob, actor))
             {
-                if (IsNpc(actor))
+                if(IsNpc(actor))
                 {
                     strcpy(t, actor->ShortDescr.c_str());
                 }
@@ -1348,13 +1346,13 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 't':
-        if (vict && !CharacterDiedRecently(vict))
+        if(vict && !CharacterDiedRecently(vict))
         {
             std::string name;
             OneArgument(vict->Name, name);
             strcpy(t, name.c_str());
 
-            if (!IsNpc(vict))
+            if(!IsNpc(vict))
             {
                 *t = CharToUppercase(*t);
             }
@@ -1367,11 +1365,11 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'T':
-        if (vict && !CharacterDiedRecently(vict))
+        if(vict && !CharacterDiedRecently(vict))
         {
-            if (CanSeeCharacter(mob, vict))
+            if(CanSeeCharacter(mob, vict))
             {
-                if (IsNpc(vict))
+                if(IsNpc(vict))
                 {
                     strcpy(t, vict->ShortDescr.c_str());
                 }
@@ -1394,13 +1392,13 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'r':
-        if (rndm && !CharacterDiedRecently(rndm))
+        if(rndm && !CharacterDiedRecently(rndm))
         {
             std::string name;
             OneArgument(rndm->Name, name);
             strcpy(t, name.c_str());
 
-            if (!IsNpc(rndm))
+            if(!IsNpc(rndm))
             {
                 *t = CharToUppercase(*t);
             }
@@ -1412,11 +1410,11 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'R':
-        if (rndm && !CharacterDiedRecently(rndm))
+        if(rndm && !CharacterDiedRecently(rndm))
         {
-            if (CanSeeCharacter(mob, rndm))
+            if(CanSeeCharacter(mob, rndm))
             {
-                if (IsNpc(rndm))
+                if(IsNpc(rndm))
                 {
                     strcpy(t, rndm->ShortDescr.c_str());
                 }
@@ -1439,9 +1437,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'e':
-        if (actor && !CharacterDiedRecently(actor))
+        if(actor && !CharacterDiedRecently(actor))
         {
-            if (CanSeeCharacter(mob, actor))
+            if(CanSeeCharacter(mob, actor))
             {
                 strcpy(t, HeSheIt(actor));
             }
@@ -1457,9 +1455,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'm':
-        if (actor && !CharacterDiedRecently(actor))
+        if(actor && !CharacterDiedRecently(actor))
         {
-            if (CanSeeCharacter(mob, actor))
+            if(CanSeeCharacter(mob, actor))
             {
                 strcpy(t, HimHerIt(actor));
             }
@@ -1475,9 +1473,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 's':
-        if (actor && !CharacterDiedRecently(actor))
+        if(actor && !CharacterDiedRecently(actor))
         {
-            if (CanSeeCharacter(mob, actor))
+            if(CanSeeCharacter(mob, actor))
             {
                 strcpy(t, HisHersIts(actor));
             }
@@ -1493,9 +1491,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'E':
-        if (vict && !CharacterDiedRecently(vict))
+        if(vict && !CharacterDiedRecently(vict))
         {
-            if (CanSeeCharacter(mob, vict))
+            if(CanSeeCharacter(mob, vict))
             {
                 strcpy(t, HeSheIt(vict));
             }
@@ -1511,9 +1509,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'M':
-        if (vict && !CharacterDiedRecently(vict))
+        if(vict && !CharacterDiedRecently(vict))
         {
-            if (CanSeeCharacter(mob, vict))
+            if(CanSeeCharacter(mob, vict))
             {
                 strcpy(t, HimHerIt(vict));
             }
@@ -1529,9 +1527,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'S':
-        if (vict && !CharacterDiedRecently(vict))
+        if(vict && !CharacterDiedRecently(vict))
         {
-            if (CanSeeCharacter(mob, vict))
+            if(CanSeeCharacter(mob, vict))
             {
                 strcpy(t, HisHersIts(vict));
             }
@@ -1547,7 +1545,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'j':
-        if (mob && !CharacterDiedRecently(mob))
+        if(mob && !CharacterDiedRecently(mob))
         {
             strcpy(t, HeSheIt(mob));
         }
@@ -1558,7 +1556,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'k':
-        if (mob && !CharacterDiedRecently(mob))
+        if(mob && !CharacterDiedRecently(mob))
         {
             strcpy(t, HimHerIt(mob));
         }
@@ -1569,7 +1567,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'l':
-        if (mob && !CharacterDiedRecently(mob))
+        if(mob && !CharacterDiedRecently(mob))
         {
             strcpy(t, HisHersIts(mob));
         }
@@ -1580,9 +1578,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'J':
-        if (rndm && !CharacterDiedRecently(rndm))
+        if(rndm && !CharacterDiedRecently(rndm))
         {
-            if (CanSeeCharacter(mob, rndm))
+            if(CanSeeCharacter(mob, rndm))
             {
                 strcpy(t, HeSheIt(rndm));
             }
@@ -1598,9 +1596,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'K':
-        if (rndm && !CharacterDiedRecently(rndm))
+        if(rndm && !CharacterDiedRecently(rndm))
         {
-            if (CanSeeCharacter(mob, rndm))
+            if(CanSeeCharacter(mob, rndm))
             {
                 strcpy(t, HimHerIt(rndm));
             }
@@ -1616,9 +1614,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'L':
-        if (rndm && !CharacterDiedRecently(rndm))
+        if(rndm && !CharacterDiedRecently(rndm))
         {
-            if (CanSeeCharacter(mob, rndm))
+            if(CanSeeCharacter(mob, rndm))
             {
                 strcpy(t, HisHersIts(rndm));
             }
@@ -1634,9 +1632,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'o':
-        if (obj && !IsObjectExtracted(obj))
+        if(obj && !IsObjectExtracted(obj))
         {
-            if (CanSeeObject(mob, obj))
+            if(CanSeeObject(mob, obj))
             {
                 std::string name;
                 OneArgument(obj->Name, name);
@@ -1654,9 +1652,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'O':
-        if (obj && !IsObjectExtracted(obj))
+        if(obj && !IsObjectExtracted(obj))
         {
-            if (CanSeeObject(mob, obj))
+            if(CanSeeObject(mob, obj))
             {
                 strcpy(t, obj->ShortDescr.c_str());
             }
@@ -1672,9 +1670,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'p':
-        if (v_obj && !IsObjectExtracted(v_obj))
+        if(v_obj && !IsObjectExtracted(v_obj))
         {
-            if (CanSeeObject(mob, v_obj))
+            if(CanSeeObject(mob, v_obj))
             {
                 std::string name;
                 OneArgument(v_obj->Name, name);
@@ -1692,9 +1690,9 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'P':
-        if (v_obj && !IsObjectExtracted(v_obj))
+        if(v_obj && !IsObjectExtracted(v_obj))
         {
-            if (CanSeeObject(mob, v_obj))
+            if(CanSeeObject(mob, v_obj))
             {
                 strcpy(t, v_obj->ShortDescr.c_str());
             }
@@ -1710,7 +1708,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'a':
-        if (obj && !IsObjectExtracted(obj))
+        if(obj && !IsObjectExtracted(obj))
         {
             strcpy(t, AOrAn(obj->Name).c_str());
         }
@@ -1721,7 +1719,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
         break;
 
     case 'A':
-        if (v_obj && !IsObjectExtracted(v_obj))
+        if(v_obj && !IsObjectExtracted(v_obj))
         {
             strcpy(t, AOrAn(v_obj->Name).c_str());
         }
@@ -1750,7 +1748,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
  *
  */
 static void MudProgDriver(std::string com_list, Character *mob, Character *actor,
-                          Object *obj, void *vo, bool single_step)
+                          std::shared_ptr<Object> obj, const Vo &vo, bool single_step)
 {
     char tmpcmndlst[MAX_STRING_LENGTH];
     char *command_list = nullptr;
@@ -1762,19 +1760,19 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
     bool ifstate[MAX_IFS][DO_ELSE + 1];
     static int prog_nest = 0;
 
-    if (IsAffectedBy(mob, Flag::Affect::Charm))
+    if(IsAffectedBy(mob, Flag::Affect::Charm))
     {
         return;
     }
 
     /* Next couple of checks stop program looping. -- Altrag */
-    if (mob == actor)
+    if(mob == actor)
     {
         ProgBug("triggering oneself.", mob);
         return;
     }
 
-    if (++prog_nest > MAX_PROG_NEST)
+    if(++prog_nest > MAX_PROG_NEST)
     {
         ProgBug("max_prog_nest exceeded.", mob);
         --prog_nest;
@@ -1782,9 +1780,9 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
     }
 
     /* Make sure all ifstate bools are set to false */
-    for (iflevel = 0; iflevel < MAX_IFS; iflevel++)
+    for(iflevel = 0; iflevel < MAX_IFS; iflevel++)
     {
-        for (count = 0; count < DO_ELSE; count++)
+        for(count = 0; count < DO_ELSE; count++)
         {
             ifstate[iflevel][count] = false;
         }
@@ -1811,11 +1809,11 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
 
     count = 0;
 
-    for (Character *vch : mob->InRoom->Characters())
+    for(auto vch : mob->InRoom->Characters())
     {
-        if (!IsNpc(vch))
+        if(!IsNpc(vch))
         {
-            if (GetRandomNumberFromRange(0, count) == 0)
+            if(GetRandomNumberFromRange(0, count) == 0)
             {
                 rndm = vch;
             }
@@ -1827,9 +1825,9 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
     strcpy(tmpcmndlst, com_list.c_str());
     command_list = tmpcmndlst;
 
-    if (single_step)
+    if(single_step)
     {
-        if (mob->mprog.mpscriptpos > (int)strlen(tmpcmndlst))
+        if(mob->mprog.mpscriptpos > (int)strlen(tmpcmndlst))
         {
             mob->mprog.mpscriptpos = 0;
         }
@@ -1838,7 +1836,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
             command_list += mob->mprog.mpscriptpos;
         }
 
-        if (IsNullOrEmpty(command_list))
+        if(IsNullOrEmpty(command_list))
         {
             command_list = tmpcmndlst;
             mob->mprog.mpscriptpos = 0;
@@ -1851,7 +1849,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
        use it to increase/decrease max allowed nesting.  -Narn
     */
 
-    while (true)
+    while(true)
     {
         /* With these two lines, cmnd becomes the current line from the prog,
            and command_list becomes everything after that line. */
@@ -1859,9 +1857,9 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
         command_list = MudProgNextCommand(command_list);
 
         /* Are we at the end? */
-        if (IsNullOrEmpty(cmnd))
+        if(IsNullOrEmpty(cmnd))
         {
-            if (ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE])
+            if(ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE])
             {
                 ProgBug("Missing endif", mob);
             }
@@ -1877,7 +1875,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
                                   ignorelevel > 0);
 
         /* Script prog support  -Thoric */
-        if (single_step)
+        if(single_step)
         {
             mob->mprog.mpscriptpos = command_list - tmpcmndlst;
             --prog_nest;
@@ -1886,7 +1884,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
 
         /* This is the complicated part.  Act on the returned value from
            MudProgDoCommand according to the current logic state. */
-        switch (result)
+        switch(result)
         {
         case COMMANDOK:
             /* Ok, this one's a no-brainer. */
@@ -1898,7 +1896,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
                if section and that we want to execute it. */
             iflevel++;
 
-            if (iflevel == MAX_IFS)
+            if(iflevel == MAX_IFS)
             {
                 ProgBug("Maximum nested ifs exceeded", mob);
                 --prog_nest;
@@ -1915,7 +1913,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
                an or that evaluates to true. */
             iflevel++;
 
-            if (iflevel == MAX_IFS)
+            if(iflevel == MAX_IFS)
             {
                 ProgBug("Maximum nested ifs exceeded", mob);
                 --prog_nest;
@@ -1929,7 +1927,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
         case ORTRUE:
             /* An or was evaluated and found true.  We should already be in an
                if section, so note that we want to execute it. */
-            if (!ifstate[iflevel][IN_IF])
+            if(!ifstate[iflevel][IN_IF])
             {
                 ProgBug("Unmatched or", mob);
                 --prog_nest;
@@ -1944,7 +1942,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
                if section, and we don't need to do much.  If the if was true or
                there were/will be other ors that evaluate(d) to true, they'll set
                do_if to true. */
-            if (!ifstate[iflevel][IN_IF])
+            if(!ifstate[iflevel][IN_IF])
             {
                 ProgBug("Unmatched or", mob);
                 --prog_nest;
@@ -1960,19 +1958,19 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
                in an else section, and look at whether or not we executed the if
                section to decide whether to execute the else section.  Ca marche
                bien. */
-            if (ignorelevel > 0)
+            if(ignorelevel > 0)
             {
                 continue;
             }
 
-            if (ifstate[iflevel][IN_ELSE])
+            if(ifstate[iflevel][IN_ELSE])
             {
                 ProgBug("Found else in an else section", mob);
                 --prog_nest;
                 return;
             }
 
-            if (!ifstate[iflevel][IN_IF])
+            if(!ifstate[iflevel][IN_IF])
             {
                 ProgBug("Unmatched else", mob);
                 --prog_nest;
@@ -1992,14 +1990,14 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
                endif matches the if or else that we're executing, note that we are
                now no longer executing an if.  If not, keep track of what we're
                ignoring. */
-            if (!(ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE]))
+            if(!(ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE]))
             {
                 ProgBug("Unmatched endif", mob);
                 --prog_nest;
                 return;
             }
 
-            if (ignorelevel > 0)
+            if(ignorelevel > 0)
             {
                 ignorelevel--;
                 continue;
@@ -2014,7 +2012,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
             break;
 
         case IFIGNORED:
-            if (!(ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE]))
+            if(!(ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE]))
             {
                 ProgBug("Parse error, ignoring if while not in if or else", mob);
                 --prog_nest;
@@ -2025,14 +2023,14 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
             break;
 
         case ORIGNORED:
-            if (!(ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE]))
+            if(!(ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE]))
             {
                 ProgBug("Unmatched or", mob);
                 --prog_nest;
                 return;
             }
 
-            if (ignorelevel == 0)
+            if(ignorelevel == 0)
             {
                 ProgBug("Parse error, mistakenly ignoring or", mob);
                 --prog_nest;
@@ -2057,7 +2055,7 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
  * to perform the the commands.  Written by Narn, Dec 95.
  */
 static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
-                            Object *obj, void *vo, Character *rndm,
+                            std::shared_ptr<Object> obj, const Vo &vo, Character *rndm,
                             bool ignore, bool ignore_ors)
 {
     /* Isolate the first word of the line, it gives us a clue what
@@ -2066,38 +2064,38 @@ static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
     std::string ifcheck = OneArgument(cmnd, firstword);
     int validif = 0;
 
-    if (!StrCmp(firstword, "if"))
+    if(!StrCmp(firstword, "if"))
     {
         /* Ok, we found an if.  According to the boolean 'ignore', either
            ignore the ifcheck and report that back to MudProgDriver or do
            the ifcheck and report whether it was successful. */
-        if (ignore)
+        if(ignore)
             return IFIGNORED;
         else
             validif = MudProgDoIfCheck(ifcheck, mob, actor, obj, vo, rndm);
 
-        if (validif == 1)
+        if(validif == 1)
             return IFTRUE;
 
-        if (validif == 0)
+        if(validif == 0)
             return IFFALSE;
 
         return BERR;
     }
 
-    if (!StrCmp(firstword, "or"))
+    if(!StrCmp(firstword, "or"))
     {
         /* Same behavior as with ifs, but use the boolean 'ignore_ors' to
            decide which way to go. */
-        if (ignore_ors)
+        if(ignore_ors)
             return ORIGNORED;
         else
             validif = MudProgDoIfCheck(ifcheck, mob, actor, obj, vo, rndm);
 
-        if (validif == 1)
+        if(validif == 1)
             return ORTRUE;
 
-        if (validif == 0)
+        if(validif == 0)
             return ORFALSE;
 
         return BERR;
@@ -2105,12 +2103,12 @@ static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
 
     /* For else and endif, just report back what we found.  Mprog_driver
        keeps track of logiclevels. */
-    if (!StrCmp(firstword, "else"))
+    if(!StrCmp(firstword, "else"))
     {
         return FOUNDELSE;
     }
 
-    if (!StrCmp(firstword, "endif"))
+    if(!StrCmp(firstword, "endif"))
     {
         return FOUNDENDIF;
     }
@@ -2120,11 +2118,11 @@ static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
        performed, the boolean 'ignore' is set to true and we just
        return.  If not, we try to execute the command. */
 
-    if (ignore)
+    if(ignore)
         return COMMANDOK;
 
     /* If the command is 'break', that's all folks. */
-    if (!StrCmp(firstword, "break"))
+    if(!StrCmp(firstword, "break"))
         return BERR;
 
     char buf[MAX_INPUT_LENGTH] = { '\0' };
@@ -2132,9 +2130,9 @@ static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
     const char *str = cmnd;
 
     /* This chunk of code taken from mprog_process_cmnd. */
-    while (!IsNullOrEmpty(str))
+    while(!IsNullOrEmpty(str))
     {
-        if (*str != '$')
+        if(*str != '$')
         {
             *point++ = *str++;
             continue;
@@ -2146,7 +2144,7 @@ static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
         const char *i = tmp;
         ++str;
 
-        while ((*point = *i) != '\0')
+        while((*point = *i) != '\0')
         {
             ++point, ++i;
         }
@@ -2158,7 +2156,7 @@ static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
 
     /* If the mob is mentally unstable and does things like fireball
        itself, let's make sure it's still alive. */
-    if (CharacterDiedRecently(mob))
+    if(CharacterDiedRecently(mob))
     {
         return BERR;
     }
@@ -2184,23 +2182,23 @@ static bool MudProgKeywordCheck(const std::string &argu, const std::string &argl
     strcpy(arg2, ToLower(argl).c_str());
     arglist = arg2;
 
-    for (i = 0; i < strlen(arglist); i++)
+    for(i = 0; i < strlen(arglist); i++)
         arglist[i] = CharToLowercase(arglist[i]);
 
-    for (i = 0; i < strlen(arg); i++)
+    for(i = 0; i < strlen(arg); i++)
         arg[i] = CharToLowercase(arg[i]);
 
-    if (arglist[0] == 'p' && arglist[1] == ' ')
+    if(arglist[0] == 'p' && arglist[1] == ' ')
     {
         arglist += 2;
 
-        while ((start = strstr(arg, arglist)))
+        while((start = strstr(arg, arglist)))
         {
-            if ((start == arg || *(start - 1) == ' ')
-                && (*(end = start + strlen(arglist)) == ' '
-                    || *end == '\n'
-                    || *end == '\r'
-                    || *end == '\0'))
+            if((start == arg || *(start - 1) == ' ')
+               && (*(end = start + strlen(arglist)) == ' '
+                   || *end == '\n'
+                   || *end == '\r'
+                   || *end == '\0'))
             {
                 return true;
             }
@@ -2214,17 +2212,17 @@ static bool MudProgKeywordCheck(const std::string &argu, const std::string &argl
     {
         std::string stl_arglist = OneArgument(arglist, word);
 
-        for (; !word.empty(); stl_arglist = OneArgument(arglist, word))
+        for(; !word.empty(); stl_arglist = OneArgument(arglist, word))
         {
             strcpy(arglist, stl_arglist.c_str());
 
-            while ((start = strstr(arg, word.c_str())))
+            while((start = strstr(arg, word.c_str())))
             {
-                if ((start == arg || *(start - 1) == ' ')
-                    && (*(end = start + word.size()) == ' '
-                        || *end == '\n'
-                        || *end == '\r'
-                        || *end == '\0'))
+                if((start == arg || *(start - 1) == ' ')
+                   && (*(end = start + word.size()) == ' '
+                       || *end == '\n'
+                       || *end == '\r'
+                       || *end == '\0'))
                 {
                     return true;
                 }
@@ -2244,17 +2242,17 @@ static bool MudProgKeywordCheck(const std::string &argu, const std::string &argl
  *  To see how this works, look at the various trigger routines..
  */
 void MobProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
-                          Object *obj, void *vo, int type)
+                          std::shared_ptr<Object> obj, const Vo &vo, int type)
 {
-    for (auto mprg : mob->Prototype->mprog.MudProgs())
+    for(auto mprg : mob->Prototype->mprog.MudProgs())
     {
-        if (mprg->type & type)
+        if(mprg->type & type)
         {
             char temp1[MAX_STRING_LENGTH];
             strcpy(temp1, mprg->arglist.c_str());
             char *list = temp1;
 
-            for (size_t i = 0; i < strlen(list); i++)
+            for(size_t i = 0; i < strlen(list); i++)
             {
                 list[i] = CharToLowercase(list[i]);
             }
@@ -2263,25 +2261,25 @@ void MobProgWordlistCheck(const std::string &arg, Character *mob, Character *act
             strcpy(temp2, arg.c_str());
             char *dupl = temp2;
 
-            for (size_t i = 0; i < strlen(dupl); i++)
+            for(size_t i = 0; i < strlen(dupl); i++)
             {
                 dupl[i] = CharToLowercase(dupl[i]);
             }
 
-            if (list[0] == 'p' && list[1] == ' ')
+            if(list[0] == 'p' && list[1] == ' ')
             {
                 char *start = nullptr;
                 list += 2;
 
-                while ((start = strstr(dupl, list)))
+                while((start = strstr(dupl, list)))
                 {
                     const char *end = start + strlen(list);
 
-                    if ((start == dupl || *(start - 1) == ' ')
-                        && (*end == ' '
-                            || *end == '\n'
-                            || *end == '\r'
-                            || *end == '\0'))
+                    if((start == dupl || *(start - 1) == ' ')
+                       && (*end == ' '
+                           || *end == '\n'
+                           || *end == '\r'
+                           || *end == '\0'))
                     {
                         MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
                         break;
@@ -2297,21 +2295,21 @@ void MobProgWordlistCheck(const std::string &arg, Character *mob, Character *act
                 std::string word;
                 std::string stl_list = OneArgument(list, word);
 
-                for (; !word.empty(); stl_list = OneArgument(list, word))
+                for(; !word.empty(); stl_list = OneArgument(list, word))
                 {
                     strcpy(list, stl_list.c_str());
 
                     char *start = nullptr;
 
-                    while ((start = strstr(dupl, word.c_str())))
+                    while((start = strstr(dupl, word.c_str())))
                     {
                         char *end = start + word.size();
 
-                        if ((start == dupl || *(start - 1) == ' ')
-                            && (*end == ' '
-                                || *end == '\n'
-                                || *end == '\r'
-                                || *end == '\0'))
+                        if((start == dupl || *(start - 1) == ' ')
+                           && (*end == ' '
+                               || *end == '\n'
+                               || *end == '\r'
+                               || *end == '\0'))
                         {
                             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
                             break;
@@ -2327,39 +2325,39 @@ void MobProgWordlistCheck(const std::string &arg, Character *mob, Character *act
     }
 }
 
-void MobProgPercentCheck(Character *mob, Character *actor, Object *obj,
-                         void *vo, int type)
+void MobProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+                         const Vo &vo, int type)
 {
-    for (auto mprg : mob->Prototype->mprog.MudProgs())
+    for(auto mprg : mob->Prototype->mprog.MudProgs())
     {
-        if (mprg->type & type
-            && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
+        if(mprg->type & type
+           && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
         {
             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
 
-            if (type != GREET_PROG && type != ALL_GREET_PROG)
+            if(type != GREET_PROG && type != ALL_GREET_PROG)
                 break;
         }
     }
 }
 
-static void mprog_time_check(Character *mob, Character *actor, Object *obj,
-                             void *vo, int type)
+static void mprog_time_check(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+                             const Vo &vo, int type)
 {
-    for (auto mprg : mob->Prototype->mprog.MudProgs())
+    for(auto mprg : mob->Prototype->mprog.MudProgs())
     {
         bool trigger_time = time_info.Hour == atoi(mprg->arglist.c_str());
 
-        if (!trigger_time)
+        if(!trigger_time)
         {
-            if (mprg->triggered)
+            if(mprg->triggered)
                 mprg->triggered = false;
 
             continue;
         }
 
-        if (mprg->type & type
-            && (!mprg->triggered || mprg->type & HOUR_PROG))
+        if(mprg->type & type
+           && (!mprg->triggered || mprg->type & HOUR_PROG))
         {
             mprg->triggered = true;
             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
@@ -2369,38 +2367,43 @@ static void mprog_time_check(Character *mob, Character *actor, Object *obj,
 
 static void MobileActAdd(Character *mob)
 {
-    if (Find(room_act_list, [mob](const auto runner) { return runner->vo == mob; }) != nullptr)
+    bool alreadyInList = Find(room_act_list, [mob](const auto runner)
+                              {
+                                  return runner->vo.Ch == mob;
+                              }) != nullptr;
+
+    if(alreadyInList)
     {
         return;
     }
 
     std::shared_ptr<act_prog_data> runner = std::make_shared<act_prog_data>();
-    runner->vo = mob;
+    runner->vo.Ch = mob;
     mob_act_list.push_front(runner);
 }
 
 void MobActUpdate()
 {
-    while (!mob_act_list.empty())
+    while(!mob_act_list.empty())
     {
         std::shared_ptr<act_prog_data> apdtmp = mob_act_list.front();
-        Character *wch = (Character*)apdtmp->vo;
+        Character *wch = apdtmp->vo.Ch;
 
-        if (!CharacterDiedRecently(wch) && wch->mprog.mpactnum > 0)
+        if(!CharacterDiedRecently(wch) && wch->mprog.mpactnum > 0)
         {
             auto actLists(wch->mprog.ActLists());
 
-            for (auto tmp_act : actLists)
+            for(auto tmp_act : actLists)
             {
-                if (tmp_act->obj && IsObjectExtracted(tmp_act->obj))
+                if(tmp_act->obj && IsObjectExtracted(tmp_act->obj))
                 {
                     tmp_act->obj = NULL;
                 }
 
-                if (tmp_act->ch && !CharacterDiedRecently(tmp_act->ch))
+                if(tmp_act->ch && !CharacterDiedRecently(tmp_act->ch))
                 {
                     MobProgWordlistCheck(tmp_act->buf, wch, tmp_act->ch,
-                        tmp_act->obj, tmp_act->vo, ACT_PROG);
+                                         tmp_act->obj, tmp_act->vo, ACT_PROG);
                 }
 
                 wch->mprog.Remove(tmp_act);
@@ -2422,30 +2425,30 @@ void MobActUpdate()
  * trigger calls.
  */
 void MobProgActTrigger(const std::string &buf, Character *mob, Character *ch,
-                       Object *obj, void *vo)
+                       std::shared_ptr<Object> obj, const Vo &vo)
 {
-    if (IsNpc(mob)
-        && IsBitSet(mob->Prototype->mprog.progtypes, ACT_PROG))
+    if(IsNpc(mob)
+       && IsBitSet(mob->Prototype->mprog.progtypes, ACT_PROG))
     {
         /* Don't let a mob trigger itself, nor one instance of a mob
            trigger another instance. */
-        if (IsNpc(ch) && ch->Prototype == mob->Prototype)
+        if(IsNpc(ch) && ch->Prototype == mob->Prototype)
             return;
 
         bool found = false;
 
         /* make sure this is a matching trigger */
-        for (auto mprg : mob->Prototype->mprog.MudProgs())
+        for(auto mprg : mob->Prototype->mprog.MudProgs())
         {
-            if (mprg->type & ACT_PROG
-                && MudProgKeywordCheck(buf, mprg->arglist))
+            if(mprg->type & ACT_PROG
+               && MudProgKeywordCheck(buf, mprg->arglist))
             {
                 found = true;
                 break;
             }
         }
 
-        if (!found)
+        if(!found)
         {
             return;
         }
@@ -2465,15 +2468,15 @@ void MobProgActTrigger(const std::string &buf, Character *mob, Character *ch,
 
 void MobProgBribeTrigger(Character *mob, Character *ch, int amount)
 {
-    if (IsNpc(mob)
-        && mob->Prototype->mprog.progtypes & BRIBE_PROG)
+    if(IsNpc(mob)
+       && mob->Prototype->mprog.progtypes & BRIBE_PROG)
     {
         /* Don't let a mob trigger itself, nor one instance of a mob
            trigger another instance. */
-        if (IsNpc(ch) && ch->Prototype == mob->Prototype)
+        if(IsNpc(ch) && ch->Prototype == mob->Prototype)
             return;
 
-        Object *obj = CreateObject(GetProtoObject(OBJ_VNUM_MONEY_SOME), 0);
+        std::shared_ptr<Object> obj = CreateObject(GetProtoObject(OBJ_VNUM_MONEY_SOME), 0);
         char buf[MAX_STRING_LENGTH];
         sprintf(buf, obj->ShortDescr.c_str(), amount);
         obj->ShortDescr = buf;
@@ -2481,10 +2484,10 @@ void MobProgBribeTrigger(Character *mob, Character *ch, int amount)
         obj = ObjectToCharacter(obj, mob);
         mob->Gold -= amount;
 
-        for (auto mprg : mob->Prototype->mprog.MudProgs())
+        for(auto mprg : mob->Prototype->mprog.MudProgs())
         {
-            if (mprg->type & BRIBE_PROG
-                && amount >= atoi(mprg->arglist.c_str()))
+            if(mprg->type & BRIBE_PROG
+               && amount >= atoi(mprg->arglist.c_str()))
             {
                 MudProgDriver(mprg->comlist, mob, ch, obj, nullptr, false);
                 break;
@@ -2495,8 +2498,8 @@ void MobProgBribeTrigger(Character *mob, Character *ch, int amount)
 
 void MobProgDeathTrigger(Character *killer, Character *mob)
 {
-    if (IsNpc(mob) && killer != mob
-        && mob->Prototype->mprog.progtypes & DEATH_PROG)
+    if(IsNpc(mob) && killer != mob
+       && mob->Prototype->mprog.progtypes & DEATH_PROG)
     {
         MobProgPercentCheck(mob, killer, nullptr, nullptr, DEATH_PROG);
     }
@@ -2504,8 +2507,8 @@ void MobProgDeathTrigger(Character *killer, Character *mob)
 
 void MobProgEntryTrigger(Character *mob)
 {
-    if (IsNpc(mob)
-        && mob->Prototype->mprog.progtypes & ENTRY_PROG)
+    if(IsNpc(mob)
+       && mob->Prototype->mprog.progtypes & ENTRY_PROG)
     {
         MobProgPercentCheck(mob, nullptr, nullptr, nullptr, ENTRY_PROG);
     }
@@ -2513,36 +2516,36 @@ void MobProgEntryTrigger(Character *mob)
 
 void MobProgFightTrigger(Character *mob, Character *ch)
 {
-    if (IsNpc(mob)
-        && mob->Prototype->mprog.progtypes & FIGHT_PROG)
+    if(IsNpc(mob)
+       && mob->Prototype->mprog.progtypes & FIGHT_PROG)
     {
         MobProgPercentCheck(mob, ch, nullptr, nullptr, FIGHT_PROG);
     }
 }
 
-void MobProgGiveTrigger(Character *mob, Character *ch, Object *obj)
+void MobProgGiveTrigger(Character *mob, Character *ch, std::shared_ptr<Object> obj)
 {
-    if (IsNpc(mob)
-        && mob->Prototype->mprog.progtypes & GIVE_PROG)
+    if(IsNpc(mob)
+       && mob->Prototype->mprog.progtypes & GIVE_PROG)
     {
         /* Don't let a mob trigger itself, nor one instance of a mob
            trigger another instance. */
-        if (IsNpc(ch) && ch->Prototype == mob->Prototype)
+        if(IsNpc(ch) && ch->Prototype == mob->Prototype)
         {
             return;
         }
 
-        for (auto mprg : mob->Prototype->mprog.MudProgs())
+        for(auto mprg : mob->Prototype->mprog.MudProgs())
         {
             std::string buf;
             OneArgument(mprg->arglist, buf);
 
-            if (mprg->type & GIVE_PROG
-                && (!StrCmp(obj->Name, mprg->arglist)
-                    || !StrCmp("all", buf)))
+            if(mprg->type & GIVE_PROG
+               && (!StrCmp(obj->Name, mprg->arglist)
+                   || !StrCmp("all", buf)))
             {
 
-                MudProgDriver(mprg->comlist, mob, ch, obj, nullptr, false);
+                MudProgDriver(mprg->comlist, mob, ch, obj, Vo(), false);
                 break;
             }
         }
@@ -2551,29 +2554,29 @@ void MobProgGiveTrigger(Character *mob, Character *ch, Object *obj)
 
 void MobProgGreetTrigger(Character *ch)
 {
-    std::list<Character*> copyOfCharacterList(ch->InRoom->Characters());
+    std::list<Character *> copyOfCharacterList(ch->InRoom->Characters());
 
-    for (Character *vmob : copyOfCharacterList)
+    for(auto vmob : copyOfCharacterList)
     {
-        if (!IsNpc(vmob)
-            || vmob->Fighting
-            || !IsAwake(vmob))
+        if(!IsNpc(vmob)
+           || vmob->Fighting
+           || !IsAwake(vmob))
         {
             continue;
         }
 
         /* Don't let a mob trigger itself, nor one instance of a mob
            trigger another instance. */
-        if (IsNpc(ch) && ch->Prototype == vmob->Prototype)
+        if(IsNpc(ch) && ch->Prototype == vmob->Prototype)
         {
             continue;
         }
 
-        if (vmob->Prototype->mprog.progtypes & GREET_PROG)
+        if(vmob->Prototype->mprog.progtypes & GREET_PROG)
         {
             MobProgPercentCheck(vmob, ch, nullptr, nullptr, GREET_PROG);
         }
-        else if (vmob->Prototype->mprog.progtypes & ALL_GREET_PROG)
+        else if(vmob->Prototype->mprog.progtypes & ALL_GREET_PROG)
         {
             MobProgPercentCheck(vmob, ch, nullptr, nullptr, ALL_GREET_PROG);
         }
@@ -2582,13 +2585,13 @@ void MobProgGreetTrigger(Character *ch)
 
 void MobProgHitPercentTrigger(Character *mob, Character *ch)
 {
-    if (IsNpc(mob)
-        && mob->Prototype->mprog.progtypes & HITPRCNT_PROG)
+    if(IsNpc(mob)
+       && mob->Prototype->mprog.progtypes & HITPRCNT_PROG)
     {
-        for (auto mprg : mob->Prototype->mprog.MudProgs())
+        for(auto mprg : mob->Prototype->mprog.MudProgs())
         {
-            if (mprg->type & HITPRCNT_PROG
-                && 100 * mob->HitPoints.Current / mob->HitPoints.Max < atoi(mprg->arglist.c_str()))
+            if(mprg->type & HITPRCNT_PROG
+               && 100 * mob->HitPoints.Current / mob->HitPoints.Max < atoi(mprg->arglist.c_str()))
             {
                 MudProgDriver(mprg->comlist, mob, ch, nullptr, nullptr, false);
                 break;
@@ -2599,31 +2602,31 @@ void MobProgHitPercentTrigger(Character *mob, Character *ch)
 
 void MobProgRandomTrigger(Character *mob)
 {
-    if (mob->Prototype->mprog.progtypes & RAND_PROG)
+    if(mob->Prototype->mprog.progtypes & RAND_PROG)
         MobProgPercentCheck(mob, nullptr, nullptr, nullptr, RAND_PROG);
 }
 
 void MobProgTimeTrigger(Character *mob)
 {
-    if (mob->Prototype->mprog.progtypes & TIME_PROG)
+    if(mob->Prototype->mprog.progtypes & TIME_PROG)
         mprog_time_check(mob, nullptr, nullptr, nullptr, TIME_PROG);
 }
 
 void MobProgHourTrigger(Character *mob)
 {
-    if (mob->Prototype->mprog.progtypes & HOUR_PROG)
+    if(mob->Prototype->mprog.progtypes & HOUR_PROG)
         mprog_time_check(mob, nullptr, nullptr, nullptr, HOUR_PROG);
 }
 
 void MobProgSpeechTrigger(const std::string &txt, Character *actor)
 {
-    std::list<Character*> copyOfCharacterList(actor->InRoom->Characters());
+    std::list<Character *> copyOfCharacterList(actor->InRoom->Characters());
 
-    for (Character *vmob : copyOfCharacterList)
+    for(auto vmob : copyOfCharacterList)
     {
-        if (IsNpc(vmob) && vmob->Prototype->mprog.progtypes & SPEECH_PROG)
+        if(IsNpc(vmob) && vmob->Prototype->mprog.progtypes & SPEECH_PROG)
         {
-            if (IsNpc(actor) && actor->Prototype == vmob->Prototype)
+            if(IsNpc(actor) && actor->Prototype == vmob->Prototype)
                 continue;
 
             MobProgWordlistCheck(txt, vmob, actor, nullptr, nullptr, SPEECH_PROG);
@@ -2633,15 +2636,15 @@ void MobProgSpeechTrigger(const std::string &txt, Character *actor)
 
 void MobProgScriptTrigger(Character *mob)
 {
-    if (mob->Prototype->mprog.progtypes & SCRIPT_PROG)
+    if(mob->Prototype->mprog.progtypes & SCRIPT_PROG)
     {
-        for (auto mprg : mob->Prototype->mprog.MudProgs())
+        for(auto mprg : mob->Prototype->mprog.MudProgs())
         {
-            if (mprg->type & SCRIPT_PROG)
+            if(mprg->type & SCRIPT_PROG)
             {
-                if (mprg->arglist.empty()
-                    || mob->mprog.mpscriptpos != 0
-                    || atoi(mprg->arglist.c_str()) == time_info.Hour)
+                if(mprg->arglist.empty()
+                   || mob->mprog.mpscriptpos != 0
+                   || atoi(mprg->arglist.c_str()) == time_info.Hour)
                 {
                     MudProgDriver(mprg->comlist, mob, nullptr, nullptr, nullptr, true);
                 }
@@ -2653,22 +2656,22 @@ void MobProgScriptTrigger(Character *mob)
 /*
  *  Mudprogram additions begin here
  */
-void MudProgSetSupermob(Object *obj)
+void MudProgSetSupermob(std::shared_ptr<Object> obj)
 {
     std::shared_ptr<Room> room;
-    Object *in_obj;
+    std::shared_ptr<Object> in_obj;
     char buf[200];
 
-    if (!supermob)
+    if(!supermob)
         supermob = CreateMobile(GetProtoMobile(MOB_VNUM_SUPERMOB));
 
-    if (!obj)
+    if(!obj)
         return;
 
-    for (in_obj = obj; in_obj->InObject; in_obj = in_obj->InObject)
+    for(in_obj = obj; in_obj->InObject; in_obj = in_obj->InObject)
         ;
 
-    if (in_obj->CarriedBy)
+    if(in_obj->CarriedBy)
     {
         room = in_obj->CarriedBy->InRoom;
     }
@@ -2677,7 +2680,7 @@ void MudProgSetSupermob(Object *obj)
         room = obj->InRoom;
     }
 
-    if (!room)
+    if(!room)
         return;
 
     supermob->ShortDescr = obj->ShortDescr;
@@ -2688,33 +2691,33 @@ void MudProgSetSupermob(Object *obj)
     sprintf(buf, "Object #%ld", obj->Prototype->Vnum);
     supermob->Description = buf;
 
-    if (room != nullptr)
+    if(room != nullptr)
     {
         CharacterFromRoom(supermob);
         CharacterToRoom(supermob, room);
     }
 }
 
-void ReleaseSupermob(void)
+void ReleaseSupermob()
 {
     CharacterFromRoom(supermob);
     CharacterToRoom(supermob, GetRoom(ROOM_VNUM_POLY));
 }
 
-static bool ObjProgPercentCheck(Character *mob, Character *actor, Object *obj,
-                                void *vo, int type)
+static bool ObjProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+                                const Vo &vo, int type)
 {
     bool executed = false;
 
-    for (auto mprg : obj->Prototype->mprog.MudProgs())
+    for(auto mprg : obj->Prototype->mprog.MudProgs())
     {
-        if (mprg->type & type
-            && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
+        if(mprg->type & type
+           && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
         {
             executed = true;
             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
 
-            if (type != GREET_PROG)
+            if(type != GREET_PROG)
                 break;
         }
     }
@@ -2727,13 +2730,13 @@ static bool ObjProgPercentCheck(Character *mob, Character *actor, Object *obj,
  */
 void ObjProgGreetTrigger(Character *ch)
 {
-    std::list<Object*> objectsWithGreetTrigger = Filter(ch->InRoom->Objects(),
-                                                        [](auto vobj)
-                                                        {
-                                                            return vobj->Prototype->mprog.progtypes & GREET_PROG;
-                                                        });
+    auto objectsWithGreetTrigger = Filter(ch->InRoom->Objects(),
+                                          [](auto vobj)
+                                          {
+                                              return vobj->Prototype->mprog.progtypes & GREET_PROG;
+                                          });
 
-    for (Object *vobj : objectsWithGreetTrigger)
+    for(auto vobj : objectsWithGreetTrigger)
     {
         MudProgSetSupermob(vobj);  /* not very efficient to do here */
         ObjProgPercentCheck(supermob, ch, vobj, nullptr, GREET_PROG);
@@ -2750,7 +2753,7 @@ void ObjProgSpeechTrigger(const std::string &txt, Character *ch)
                                            });
 
     /* supermob is set and released in ObjProgWordlistCheck */
-    for (Object *vobj : objectsWithSpeechTrigger)
+    for(auto vobj : objectsWithSpeechTrigger)
     {
         ObjProgWordlistCheck(txt, supermob, ch, vobj, nullptr, SPEECH_PROG, vobj);
     }
@@ -2761,12 +2764,12 @@ void ObjProgSpeechTrigger(const std::string &txt, Character *ch)
  * make sure to put an if(!obj) continue
  * after it
  */
-void ObjProgRandomTrigger(Object *obj)
+void ObjProgRandomTrigger(std::shared_ptr<Object> obj)
 {
-    if (!obj || !obj->Prototype)
+    if(!obj || !obj->Prototype)
         return;
 
-    if (obj->Prototype->mprog.progtypes & RAND_PROG)
+    if(obj->Prototype->mprog.progtypes & RAND_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, nullptr, obj, nullptr, RAND_PROG);
@@ -2778,9 +2781,9 @@ void ObjProgRandomTrigger(Object *obj)
  * in wear_obj, between each successful EquipCharacter
  * the subsequent return
  */
-void ObjProgWearTrigger(Character *ch, Object *obj)
+void ObjProgWearTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & WEAR_PROG)
+    if(obj->Prototype->mprog.progtypes & WEAR_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, WEAR_PROG);
@@ -2788,18 +2791,18 @@ void ObjProgWearTrigger(Character *ch, Object *obj)
     }
 }
 
-bool ObjProgUseTrigger(Character *ch, Object *obj, Character *vict,
-                       Object *targ, void *vo)
+bool ObjProgUseTrigger(Character *ch, std::shared_ptr<Object> obj, Character *vict,
+                       std::shared_ptr<Object> targ, const Vo &vo)
 {
     bool executed = false;
 
-    if (obj->Prototype->mprog.progtypes & USE_PROG)
+    if(obj->Prototype->mprog.progtypes & USE_PROG)
     {
         MudProgSetSupermob(obj);
 
-        if (obj->ItemType == ITEM_STAFF)
+        if(obj->ItemType == ITEM_STAFF)
         {
-            if (vict)
+            if(vict)
             {
                 executed = ObjProgPercentCheck(supermob, ch, obj, vict, USE_PROG);
             }
@@ -2824,9 +2827,9 @@ bool ObjProgUseTrigger(Character *ch, Object *obj, Character *vict,
  * do a if(!ch) return right after, and return true (?)
  * if !ch
  */
-void ObjProgRemoveTrigger(Character *ch, Object *obj)
+void ObjProgRemoveTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & REMOVE_PROG)
+    if(obj->Prototype->mprog.progtypes & REMOVE_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, REMOVE_PROG);
@@ -2837,9 +2840,9 @@ void ObjProgRemoveTrigger(Character *ch, Object *obj)
 /*
  * call in do_sac, right before ExtractObject
  */
-void ObjProgSacTrigger(Character *ch, Object *obj)
+void ObjProgSacTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & SAC_PROG)
+    if(obj->Prototype->mprog.progtypes & SAC_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, SAC_PROG);
@@ -2851,9 +2854,9 @@ void ObjProgSacTrigger(Character *ch, Object *obj)
  * call in do_get, right before CheckObjectForTrap
  * do a if(!ch) return right after
  */
-void ObjProgGetTrigger(Character *ch, Object *obj)
+void ObjProgGetTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & GET_PROG)
+    if(obj->Prototype->mprog.progtypes & GET_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, GET_PROG);
@@ -2864,9 +2867,9 @@ void ObjProgGetTrigger(Character *ch, Object *obj)
 /*
  * called in DamageObject in act_obj.c
  */
-void ObjProgDamageTrigger(Character *ch, Object *obj)
+void ObjProgDamageTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & DAMAGE_PROG)
+    if(obj->Prototype->mprog.progtypes & DAMAGE_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, DAMAGE_PROG);
@@ -2877,9 +2880,9 @@ void ObjProgDamageTrigger(Character *ch, Object *obj)
 /*
  * called in do_repair in shops.c
  */
-void ObjProgRepairTrigger(Character *ch, Object *obj)
+void ObjProgRepairTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & REPAIR_PROG)
+    if(obj->Prototype->mprog.progtypes & REPAIR_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, REPAIR_PROG);
@@ -2891,9 +2894,9 @@ void ObjProgRepairTrigger(Character *ch, Object *obj)
  * call twice in do_drop, right after the Act( AT_ACTION,...)
  * do a if(!ch) return right after
  */
-void ObjProgDropTrigger(Character *ch, Object *obj)
+void ObjProgDropTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & DROP_PROG)
+    if(obj->Prototype->mprog.progtypes & DROP_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, DROP_PROG);
@@ -2904,9 +2907,9 @@ void ObjProgDropTrigger(Character *ch, Object *obj)
 /*
  * call towards end of do_examine, right before CheckObjectForTrap
  */
-void ObjProgExamineTrigger(Character *ch, Object *obj)
+void ObjProgExamineTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & EXA_PROG)
+    if(obj->Prototype->mprog.progtypes & EXA_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, EXA_PROG);
@@ -2917,9 +2920,9 @@ void ObjProgExamineTrigger(Character *ch, Object *obj)
 /*
  * call in fight.c, group_gain, after (?) the ObjectToRoom
  */
-void ObjProgZapTrigger(Character *ch, Object *obj)
+void ObjProgZapTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & ZAP_PROG)
+    if(obj->Prototype->mprog.progtypes & ZAP_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, ZAP_PROG);
@@ -2931,9 +2934,9 @@ void ObjProgZapTrigger(Character *ch, Object *obj)
  * call in levers.c, towards top of do_push_or_pull
  *  see note there
  */
-void ObjProgPullTrigger(Character *ch, Object *obj)
+void ObjProgPullTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & PULL_PROG)
+    if(obj->Prototype->mprog.progtypes & PULL_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, PULL_PROG);
@@ -2945,9 +2948,9 @@ void ObjProgPullTrigger(Character *ch, Object *obj)
  * call in levers.c, towards top of do_push_or_pull
  *  see note there
  */
-void ObjProgPushTrigger(Character *ch, Object *obj)
+void ObjProgPushTrigger(Character *ch, std::shared_ptr<Object> obj)
 {
-    if (obj->Prototype->mprog.progtypes & PUSH_PROG)
+    if(obj->Prototype->mprog.progtypes & PUSH_PROG)
     {
         MudProgSetSupermob(obj);
         ObjProgPercentCheck(supermob, ch, obj, nullptr, PUSH_PROG);
@@ -2955,12 +2958,12 @@ void ObjProgPushTrigger(Character *ch, Object *obj)
     }
 }
 
-void ObjProgActTrigger(const std::string &buf, Object *mobj, Character *ch,
-                       Object *obj, void *vo)
+void ObjProgActTrigger(const std::string &buf, std::shared_ptr<Object> mobj, Character *ch,
+                       std::shared_ptr<Object> obj, const Vo &vo)
 {
-    if (mobj->Prototype->mprog.progtypes & ACT_PROG)
+    if(mobj->Prototype->mprog.progtypes & ACT_PROG)
     {
-        std::shared_ptr<MPROG_ACT_LIST> tmp_act = std::make_shared<MPROG_ACT_LIST>();
+        auto tmp_act = std::make_shared<MPROG_ACT_LIST>();
 
         mobj->mprog.Add(tmp_act);
 
@@ -2974,11 +2977,12 @@ void ObjProgActTrigger(const std::string &buf, Object *mobj, Character *ch,
 }
 
 static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
-                                 Object *obj, void *vo, int type, Object *iobj)
+                                 std::shared_ptr<Object> obj, const Vo &vo,
+                                 int type, std::shared_ptr<Object> iobj)
 {
-    for (auto mprg : iobj->Prototype->mprog.MudProgs())
+    for(auto mprg : iobj->Prototype->mprog.MudProgs())
     {
-        if (mprg->type & type)
+        if(mprg->type & type)
         {
             char temp1[MAX_STRING_LENGTH];
             char temp2[MAX_INPUT_LENGTH];
@@ -2991,7 +2995,7 @@ static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Charact
             strcpy(temp1, mprg->arglist.c_str());
             list = temp1;
 
-            for (i = 0; i < strlen(list); i++)
+            for(i = 0; i < strlen(list); i++)
             {
                 list[i] = CharToLowercase(list[i]);
             }
@@ -2999,22 +3003,22 @@ static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Charact
             strcpy(temp2, arg.c_str());
             dupl = temp2;
 
-            for (i = 0; i < strlen(dupl); i++)
+            for(i = 0; i < strlen(dupl); i++)
             {
                 dupl[i] = CharToLowercase(dupl[i]);
             }
 
-            if (list[0] == 'p' && list[1] == ' ')
+            if(list[0] == 'p' && list[1] == ' ')
             {
                 list += 2;
 
-                while ((start = strstr(dupl, list)))
+                while((start = strstr(dupl, list)))
                 {
-                    if ((start == dupl || *(start - 1) == ' ')
-                        && (*(end = start + strlen(list)) == ' '
-                            || *end == '\n'
-                            || *end == '\r'
-                            || *end == '\0'))
+                    if((start == dupl || *(start - 1) == ' ')
+                       && (*(end = start + strlen(list)) == ' '
+                           || *end == '\n'
+                           || *end == '\r'
+                           || *end == '\0'))
                     {
                         MudProgSetSupermob(iobj);
                         MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
@@ -3032,17 +3036,17 @@ static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Charact
                 std::string word;
                 std::string stl_list = OneArgument(list, word);
 
-                for (; !word.empty(); stl_list = OneArgument(list, word))
+                for(; !word.empty(); stl_list = OneArgument(list, word))
                 {
                     strcpy(list, stl_list.c_str());
 
-                    while ((start = strstr(dupl, word.c_str())))
+                    while((start = strstr(dupl, word.c_str())))
                     {
-                        if ((start == dupl || *(start - 1) == ' ')
-                            && (*(end = start + word.size()) == ' '
-                                || *end == '\n'
-                                || *end == '\r'
-                                || *end == '\0'))
+                        if((start == dupl || *(start - 1) == ' ')
+                           && (*(end = start + word.size()) == ' '
+                               || *end == '\n'
+                               || *end == '\r'
+                               || *end == '\0'))
                         {
                             MudProgSetSupermob(iobj);
                             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
@@ -3068,7 +3072,7 @@ void RoomProgSetSupermob(std::shared_ptr<Room> room)
 {
     char buf[200];
 
-    if (room)
+    if(room)
     {
         supermob->ShortDescr = room->Name;
         supermob->Name = room->Name;
@@ -3084,20 +3088,20 @@ void RoomProgSetSupermob(std::shared_ptr<Room> room)
     }
 }
 
-static void RoomProgPercentCheck(Character *mob, Character *actor, Object *obj,
-                                 void *vo, int type)
+static void RoomProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+                                 const Vo &vo, int type)
 {
-    if (!mob->InRoom)
+    if(!mob->InRoom)
         return;
 
-    for (auto mprg : mob->InRoom->mprog.MudProgs())
+    for(auto mprg : mob->InRoom->mprog.MudProgs())
     {
-        if (mprg->type & type
-            && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
+        if(mprg->type & type
+           && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
         {
             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
 
-            if (type != ENTER_PROG)
+            if(type != ENTER_PROG)
                 break;
         }
     }
@@ -3108,16 +3112,16 @@ static void RoomProgPercentCheck(Character *mob, Character *actor, Object *obj,
  */
 
 
-/*
- *  Hold on this
- * Unhold. -- Alty
- */
+ /*
+  *  Hold on this
+  * Unhold. -- Alty
+  */
 void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, Character *ch,
-                        Object *obj, void *vo)
+                        std::shared_ptr<Object> obj, const Vo &vo)
 {
-    if (room->mprog.progtypes & ACT_PROG)
+    if(room->mprog.progtypes & ACT_PROG)
     {
-        std::shared_ptr<MPROG_ACT_LIST> tmp_act = std::make_shared<MPROG_ACT_LIST>();
+        auto tmp_act = std::make_shared<MPROG_ACT_LIST>();
 
         tmp_act->buf = buf;
         tmp_act->ch = ch;
@@ -3136,7 +3140,7 @@ void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, Char
  */
 void RoomProgLeaveTrigger(Character *ch)
 {
-    if (ch->InRoom->mprog.progtypes & LEAVE_PROG)
+    if(ch->InRoom->mprog.progtypes & LEAVE_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
         RoomProgPercentCheck(supermob, ch, nullptr, nullptr, LEAVE_PROG);
@@ -3146,7 +3150,7 @@ void RoomProgLeaveTrigger(Character *ch)
 
 void RoomProgEnterTrigger(Character *ch)
 {
-    if (ch->InRoom->mprog.progtypes & ENTER_PROG)
+    if(ch->InRoom->mprog.progtypes & ENTER_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
         RoomProgPercentCheck(supermob, ch, nullptr, nullptr, ENTER_PROG);
@@ -3156,7 +3160,7 @@ void RoomProgEnterTrigger(Character *ch)
 
 void RoomProgSleepTrigger(Character *ch)
 {
-    if (ch->InRoom->mprog.progtypes & SLEEP_PROG)
+    if(ch->InRoom->mprog.progtypes & SLEEP_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
         RoomProgPercentCheck(supermob, ch, nullptr, nullptr, SLEEP_PROG);
@@ -3166,7 +3170,7 @@ void RoomProgSleepTrigger(Character *ch)
 
 void RoomProgRestTrigger(Character *ch)
 {
-    if (ch->InRoom->mprog.progtypes & REST_PROG)
+    if(ch->InRoom->mprog.progtypes & REST_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
         RoomProgPercentCheck(supermob, ch, nullptr, nullptr, REST_PROG);
@@ -3176,7 +3180,7 @@ void RoomProgRestTrigger(Character *ch)
 
 void RoomProgFightTrigger(Character *ch)
 {
-    if (ch->InRoom->mprog.progtypes & RFIGHT_PROG)
+    if(ch->InRoom->mprog.progtypes & RFIGHT_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
         RoomProgPercentCheck(supermob, ch, nullptr, nullptr, RFIGHT_PROG);
@@ -3186,7 +3190,7 @@ void RoomProgFightTrigger(Character *ch)
 
 void RoomProgDeathTrigger(Character *killer, Character *ch)
 {
-    if (ch->InRoom->mprog.progtypes & RDEATH_PROG)
+    if(ch->InRoom->mprog.progtypes & RDEATH_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
         RoomProgPercentCheck(supermob, ch, nullptr, nullptr, RDEATH_PROG);
@@ -3196,7 +3200,7 @@ void RoomProgDeathTrigger(Character *killer, Character *ch)
 
 void RoomProgSpeechTrigger(const std::string &txt, Character *ch)
 {
-    if (ch->InRoom->mprog.progtypes & SPEECH_PROG)
+    if(ch->InRoom->mprog.progtypes & SPEECH_PROG)
     {
         /* supermob is set and released in RoomProgWordlistCheck */
         RoomProgWordlistCheck(txt, supermob, ch, nullptr, nullptr, SPEECH_PROG, ch->InRoom);
@@ -3206,7 +3210,7 @@ void RoomProgSpeechTrigger(const std::string &txt, Character *ch)
 void RoomProgRandomTrigger(Character *ch)
 {
 
-    if (ch->InRoom->mprog.progtypes & RAND_PROG)
+    if(ch->InRoom->mprog.progtypes & RAND_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
         RoomProgPercentCheck(supermob, ch, nullptr, nullptr, RAND_PROG);
@@ -3215,16 +3219,16 @@ void RoomProgRandomTrigger(Character *ch)
 }
 
 static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
-                                  Object *obj, void *vo, int type, std::shared_ptr<Room> room)
+                                  std::shared_ptr<Object> obj, const Vo &vo, int type, std::shared_ptr<Room> room)
 {
-    if (actor != nullptr && !CharacterDiedRecently(actor) && actor->InRoom)
+    if(actor != nullptr && !CharacterDiedRecently(actor) && actor->InRoom)
     {
         room = actor->InRoom;
     }
 
-    for (auto mprg : room->mprog.MudProgs())
+    for(auto mprg : room->mprog.MudProgs())
     {
-        if (mprg->type & type)
+        if(mprg->type & type)
         {
             char temp1[MAX_STRING_LENGTH];
             char temp2[MAX_INPUT_LENGTH];
@@ -3237,7 +3241,7 @@ static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Charac
             strcpy(temp1, mprg->arglist.c_str());
             list = temp1;
 
-            for (i = 0; i < strlen(list); i++)
+            for(i = 0; i < strlen(list); i++)
             {
                 list[i] = CharToLowercase(list[i]);
             }
@@ -3245,22 +3249,22 @@ static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Charac
             strcpy(temp2, arg.c_str());
             dupl = temp2;
 
-            for (i = 0; i < strlen(dupl); i++)
+            for(i = 0; i < strlen(dupl); i++)
             {
                 dupl[i] = CharToLowercase(dupl[i]);
             }
 
-            if (list[0] == 'p' && list[1] == ' ')
+            if(list[0] == 'p' && list[1] == ' ')
             {
                 list += 2;
 
-                while ((start = strstr(dupl, list)))
+                while((start = strstr(dupl, list)))
                 {
-                    if ((start == dupl || *(start - 1) == ' ')
-                        && (*(end = start + strlen(list)) == ' '
-                            || *end == '\n'
-                            || *end == '\r'
-                            || *end == '\0'))
+                    if((start == dupl || *(start - 1) == ' ')
+                       && (*(end = start + strlen(list)) == ' '
+                           || *end == '\n'
+                           || *end == '\r'
+                           || *end == '\0'))
                     {
                         RoomProgSetSupermob(room);
                         MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
@@ -3278,17 +3282,17 @@ static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Charac
                 std::string word;
                 std::string stl_list = OneArgument(list, word);
 
-                for (; !word.empty(); stl_list = OneArgument(list, word))
+                for(; !word.empty(); stl_list = OneArgument(list, word))
                 {
                     strcpy(list, stl_list.c_str());
 
-                    while ((start = strstr(dupl, word.c_str())))
+                    while((start = strstr(dupl, word.c_str())))
                     {
-                        if ((start == dupl || *(start - 1) == ' ')
-                            && (*(end = start + word.size()) == ' '
-                                || *end == '\n'
-                                || *end == '\r'
-                                || *end == '\0'))
+                        if((start == dupl || *(start - 1) == ' ')
+                           && (*(end = start + word.size()) == ' '
+                               || *end == '\n'
+                               || *end == '\r'
+                               || *end == '\0'))
                         {
                             RoomProgSetSupermob(room);
                             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
@@ -3306,25 +3310,25 @@ static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Charac
     }
 }
 
-static void RoomProgTimeCheck(Character *mob, Character *actor, Object *obj,
-                              void *vo, int type)
+static void RoomProgTimeCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+                              const Vo &vo, int type)
 {
-    Room *room = (Room *)vo;
+    auto room = vo.Room;
 
-    for (auto mprg : room->mprog.MudProgs())
+    for(auto mprg : room->mprog.MudProgs())
     {
         bool trigger_time = time_info.Hour == atoi(mprg->arglist.c_str());
 
-        if (!trigger_time)
+        if(!trigger_time)
         {
-            if (mprg->triggered)
+            if(mprg->triggered)
                 mprg->triggered = false;
 
             continue;
         }
 
-        if (mprg->type & type
-            && (!mprg->triggered || mprg->type & HOUR_PROG))
+        if(mprg->type & type
+           && (!mprg->triggered || mprg->type & HOUR_PROG))
         {
             mprg->triggered = true;
             MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
@@ -3334,20 +3338,20 @@ static void RoomProgTimeCheck(Character *mob, Character *actor, Object *obj,
 
 void RoomProgTimeTrigger(Character *ch)
 {
-    if (ch->InRoom->mprog.progtypes & TIME_PROG)
+    if(ch->InRoom->mprog.progtypes & TIME_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
-        RoomProgTimeCheck(supermob, nullptr, nullptr, ch->InRoom.get(), TIME_PROG);
+        RoomProgTimeCheck(supermob, nullptr, nullptr, ch->InRoom, TIME_PROG);
         ReleaseSupermob();
     }
 }
 
 void RoomProgHourTrigger(Character *ch)
 {
-    if (ch->InRoom->mprog.progtypes & HOUR_PROG)
+    if(ch->InRoom->mprog.progtypes & HOUR_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
-        RoomProgTimeCheck(supermob, nullptr, nullptr, ch->InRoom.get(), HOUR_PROG);
+        RoomProgTimeCheck(supermob, nullptr, nullptr, ch->InRoom, HOUR_PROG);
         ReleaseSupermob();
     }
 }
@@ -3357,7 +3361,7 @@ void ProgBug(const std::string &str, const Character *mob)
 {
     /* Check if we're dealing with supermob, which means the bug occurred
        in a room or obj prog. */
-    if (mob->Prototype->Vnum == MOB_VNUM_SUPERMOB)
+    if(mob->Prototype->Vnum == MOB_VNUM_SUPERMOB)
     {
         /* It's supermob.  In MudProgSetSupermob and RoomProgSetSupermob, the description
            was set to indicate the object or room, so we just need to show
@@ -3377,7 +3381,12 @@ void ProgBug(const std::string &str, const Character *mob)
 
 static void RoomActAdd(std::shared_ptr<Room> room)
 {
-    if (Find(room_act_list, [room](const auto runner) { return runner->room == room; }) != nullptr)
+    bool alreadyInList = Find(room_act_list, [room](const auto runner)
+                              {
+                                  return runner->room == room;
+                              }) != nullptr;
+
+    if(alreadyInList)
     {
         return;
     }
@@ -3389,16 +3398,16 @@ static void RoomActAdd(std::shared_ptr<Room> room)
 
 void RoomActUpdate()
 {
-    while (!room_act_list.empty())
+    while(!room_act_list.empty())
     {
         std::shared_ptr<act_prog_data> runner = room_act_list.front();
         std::shared_ptr<Room> room = runner->room;
 
         auto actLists(room->mprog.ActLists());
 
-        for (auto mpact : actLists)
+        for(auto mpact : actLists)
         {
-            if (mpact->ch->InRoom == room)
+            if(mpact->ch->InRoom == room)
             {
                 RoomProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
                                       mpact->vo, ACT_PROG, room);
@@ -3412,9 +3421,14 @@ void RoomActUpdate()
     }
 }
 
-static void ObjectActAdd(Object *obj)
+static void ObjectActAdd(std::shared_ptr<Object> obj)
 {
-    if (Find(room_act_list, [obj](const auto runner) { return runner->vo == obj; }) != nullptr)
+    bool alreadyInList = Find(room_act_list, [obj](const auto runner)
+                              {
+                                  return runner->vo.Obj == obj;
+                              }) != nullptr;
+
+    if(alreadyInList)
     {
         return;
     }
@@ -3426,14 +3440,14 @@ static void ObjectActAdd(Object *obj)
 
 void ObjectActUpdate()
 {
-    while (!obj_act_list.empty())
+    while(!obj_act_list.empty())
     {
         std::shared_ptr<act_prog_data> runner = obj_act_list.front();
-        Object *obj = (Object*)runner->vo;
+        std::shared_ptr<Object> obj = runner->vo.Obj;
 
         auto actLists(obj->mprog.ActLists());
 
-        for (auto mpact : actLists)
+        for(auto mpact : actLists)
         {
             ObjProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
                                  mpact->vo, ACT_PROG, obj);
@@ -3445,7 +3459,7 @@ void ObjectActUpdate()
     }
 }
 
-std::unordered_map<int, const char * const> MudProgTypes =
+std::unordered_map<int, const char *const> MudProgTypes =
 {
     { ACT_PROG, "act_prog" },
     { SPEECH_PROG, "speech_prog" },
@@ -3512,53 +3526,53 @@ Character *GetCharacterInRoomMudProg(Character *ch, std::string argument)
     vnum_t vnum = INVALID_VNUM;
     int number = NumberArgument(argument, arg);
 
-    if (!StrCmp(arg, "self"))
+    if(!StrCmp(arg, "self"))
     {
         return ch;
     }
 
-    if (GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
+    if(GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
     {
         vnum = ToLong(arg);
     }
 
     count = 0;
 
-    for (Character *rch : ch->InRoom->Characters())
+    for(auto rch : ch->InRoom->Characters())
     {
-        if (NiftyIsName(arg, rch->Name)
-            || (IsNpc(rch) && vnum == rch->Prototype->Vnum))
+        if(NiftyIsName(arg, rch->Name)
+           || (IsNpc(rch) && vnum == rch->Prototype->Vnum))
         {
-            if (number == 0 && !IsNpc(rch))
+            if(number == 0 && !IsNpc(rch))
             {
                 return rch;
             }
-            else if (++count == number)
+            else if(++count == number)
             {
                 return rch;
             }
         }
     }
 
-    if (vnum != INVALID_VNUM)
+    if(vnum != INVALID_VNUM)
     {
         return nullptr;
     }
 
     count = 0;
 
-    for (Character *rch : ch->InRoom->Characters())
+    for(auto rch : ch->InRoom->Characters())
     {
-        if (!NiftyIsNamePrefix(arg, rch->Name))
+        if(!NiftyIsNamePrefix(arg, rch->Name))
         {
             continue;
         }
 
-        if (number == 0 && !IsNpc(rch))
+        if(number == 0 && !IsNpc(rch))
         {
             return rch;
         }
-        else if (++count == number)
+        else if(++count == number)
         {
             return rch;
         }

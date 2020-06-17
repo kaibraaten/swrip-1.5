@@ -54,7 +54,7 @@ int cur_obj_serial = 0;
 bool cur_obj_extracted = false;
 obj_ret global_objcode = rNONE;
 
-static std::list<Object *> ExtractedObjectQueue;
+static std::list<std::shared_ptr<Object>> ExtractedObjectQueue;
 
 class ExtractedCharacter
 {
@@ -67,20 +67,20 @@ public:
 
 static std::list<std::shared_ptr<ExtractedCharacter>> ExtractedCharacterQueue;
 
-static Object *GroupObject(Object *obj1, Object *obj2);
+static std::shared_ptr<Object> GroupObject(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2);
 
-static void ExplodeRoom(Object *obj, Character *xch, std::shared_ptr<Room> room);
-static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> room, int blast);
+static void ExplodeRoom(std::shared_ptr<Object> obj, Character *xch, std::shared_ptr<Room> room);
+static void ExplodeRoom_1(std::shared_ptr<Object> obj, Character *xch, std::shared_ptr<Room> room, int blast);
 static void ExplodeRoom_2(std::shared_ptr<Room> room, int blast);
 
-void Explode(Object *obj)
+void Explode(std::shared_ptr<Object> obj)
 {
     if(!obj->ArmedBy.empty())
     {
         std::shared_ptr<Room> room;
         Character *xch = NULL;
         bool held = false;
-        Object *objcont = obj;
+        auto objcont = obj;
 
         while(objcont->InObject && !obj->CarriedBy)
         {
@@ -126,7 +126,7 @@ void Explode(Object *obj)
     MakeScraps(obj);
 }
 
-static void ExplodeRoom(Object *obj, Character *xch, std::shared_ptr<Room> room)
+static void ExplodeRoom(std::shared_ptr<Object> obj, Character *xch, std::shared_ptr<Room> room)
 {
     int blast = (int)(obj->Value[OVAL_EXPLOSIVE_MAX_DMG] / 500);
 
@@ -134,7 +134,7 @@ static void ExplodeRoom(Object *obj, Character *xch, std::shared_ptr<Room> room)
     ExplodeRoom_2(room, blast);
 }
 
-static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> room, int blast)
+static void ExplodeRoom_1(std::shared_ptr<Object> obj, Character *xch, std::shared_ptr<Room> room, int blast)
 {
     if(room->Flags.test(BFSMark))
         return;
@@ -146,7 +146,7 @@ static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> roo
     for(Character *rch : copyOfCharacterList)
     {
         Act(AT_WHITE, "The shockwave from a massive explosion rips through your body!",
-            room->Characters().front(), obj, NULL, ActTarget::Room);
+            room->Characters().front(), obj, nullptr, ActTarget::Room);
         int dam = GetRandomNumberFromRange(obj->Value[OVAL_EXPLOSIVE_MIN_DMG], obj->Value[OVAL_EXPLOSIVE_MAX_DMG]);
         InflictDamage(rch, rch, dam, TYPE_UNDEFINED);
 
@@ -166,18 +166,18 @@ static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> roo
         }
     }
 
-    std::list<Object *> objectsToScrap = Filter(room->Objects(),
-                                                [obj](auto robj)
-                                                {
-                                                    return robj != obj
-                                                        && robj->ItemType != ITEM_SPACECRAFT
-                                                        && robj->ItemType != ITEM_SCRAPS
-                                                        && robj->ItemType != ITEM_CORPSE_NPC
-                                                        && robj->ItemType != ITEM_CORPSE_PC
-                                                        && robj->ItemType != ITEM_DROID_CORPSE;
-                                                });
+    auto objectsToScrap = Filter(room->Objects(),
+                                 [obj](auto robj)
+                                 {
+                                     return robj != obj
+                                         && robj->ItemType != ITEM_SPACECRAFT
+                                         && robj->ItemType != ITEM_SCRAPS
+                                         && robj->ItemType != ITEM_CORPSE_NPC
+                                         && robj->ItemType != ITEM_CORPSE_PC
+                                         && robj->ItemType != ITEM_DROID_CORPSE;
+                                 });
 
-    for(Object *robj : objectsToScrap)
+    for(auto robj : objectsToScrap)
     {
         MakeScraps(robj);
     }
@@ -260,7 +260,7 @@ static void ApplySkillAffect(Character *ch, int sn, int mod)
  */
 void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
 {
-    Object *wield = nullptr;
+    std::shared_ptr<Object> wield;
     int mod = paf->Modifier;
     std::shared_ptr<Skill> skill;
     ch_ret retcode = rNONE;
@@ -727,7 +727,7 @@ void CharacterFromRoom(Character *ch)
     assert(ch != nullptr);
     assert(ch->InRoom != nullptr);
 
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
 
     if(!IsNpc(ch))
     {
@@ -757,7 +757,7 @@ void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex)
 {
     assert(ch != nullptr);
     assert(pRoomIndex != nullptr);
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
 
     pRoomIndex->Add(ch);
     ch->InRoom = pRoomIndex;
@@ -797,9 +797,9 @@ void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex)
 /*
  * Give an obj to a char.
  */
-Object *ObjectToCharacter(Object *obj, Character *ch)
+std::shared_ptr<Object> ObjectToCharacter(std::shared_ptr<Object> obj, Character *ch)
 {
-    Object *oret = obj;
+    auto oret = obj;
     bool skipgroup = false, grouped = false;
     int oweight = GetObjectWeight(obj);
     int onum = GetObjectCount(obj);
@@ -835,7 +835,7 @@ Object *ObjectToCharacter(Object *obj, Character *ch)
 
     if(!skipgroup)
     {
-        for(Object *otmp : ch->Objects())
+        for(auto otmp : ch->Objects())
         {
             oret = GroupObject(otmp, obj);
 
@@ -871,7 +871,7 @@ Object *ObjectToCharacter(Object *obj, Character *ch)
 /*
  * Take an obj from its character.
  */
-void ObjectFromCharacter(Object *obj)
+void ObjectFromCharacter(std::shared_ptr<Object> obj)
 {
     Character *ch = obj->CarriedBy;
     assert(ch != nullptr);
@@ -894,19 +894,18 @@ void ObjectFromCharacter(Object *obj)
     ch->CarryWeight -= GetObjectWeight(obj);
 }
 
-int CountCharactersOnObject(const Object *obj)
+int CountCharactersOnObject(std::shared_ptr<Object> obj)
 {
-    if(obj->InRoom == NULL)
+    if(obj->InRoom == nullptr)
     {
         return 0;
     }
 
-    const std::list<Character *> &people = obj->InRoom->Characters();
-    int count = count_if(std::begin(people), std::end(people),
-                         [obj](auto fch)
-                         {
-                             return fch->On == obj;
-                         });
+    int count = Count(obj->InRoom->Characters(),
+                      [obj](auto fch)
+                      {
+                          return fch->On == obj;
+                      });
 
     return count;
 }
@@ -914,7 +913,7 @@ int CountCharactersOnObject(const Object *obj)
 /*
  * Find the ac value of an obj, including position effect.
  */
-int GetObjectArmorClass(const Object *obj, int iWear)
+int GetObjectArmorClass(std::shared_ptr<Object> obj, int iWear)
 {
     if(obj->ItemType != ITEM_ARMOR)
         return 0;
@@ -979,7 +978,8 @@ int GetObjectArmorClass(const Object *obj, int iWear)
 /*
  * Count occurrences of an obj in a list.
  */
-int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj, const std::list<Object *> &list)
+int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj,
+                                   const std::list<std::shared_ptr<Object>> &list)
 {
     return Count(list,
                  [protoobj](const auto obj)
@@ -993,7 +993,7 @@ int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj, const 
  */
 int falling = 0;
 
-void ObjectFromRoom(Object *obj)
+void ObjectFromRoom(std::shared_ptr<Object> obj)
 {
     auto in_room = obj->InRoom;
     assert(in_room != nullptr);
@@ -1016,14 +1016,14 @@ void ObjectFromRoom(Object *obj)
 /*
  * Move an obj into a room.
  */
-Object *ObjectToRoom(Object *obj, std::shared_ptr<Room> pRoomIndex)
+std::shared_ptr<Object> ObjectToRoom(std::shared_ptr<Object> obj, std::shared_ptr<Room> pRoomIndex)
 {
     short count = obj->Count;
     short item_type = obj->ItemType;
 
-    for(Object *otmp : pRoomIndex->Objects())
+    for(auto otmp : pRoomIndex->Objects())
     {
-        Object *oret = GroupObject(otmp, obj);
+        auto oret = GroupObject(otmp, obj);
 
         if(oret == otmp)
         {
@@ -1057,7 +1057,7 @@ Object *ObjectToRoom(Object *obj, std::shared_ptr<Room> pRoomIndex)
 /*
  * Move an object into an object.
  */
-Object *ObjectToObject(Object *obj, Object *obj_to)
+std::shared_ptr<Object> ObjectToObject(std::shared_ptr<Object> obj, std::shared_ptr<Object> obj_to)
 {
     if(obj == obj_to)
     {
@@ -1075,9 +1075,9 @@ Object *ObjectToObject(Object *obj, Object *obj_to)
             obj_to->CarriedBy->CarryWeight += GetObjectWeight(obj);
     }
 
-    for(Object *otmp : obj_to->Objects())
+    for(auto otmp : obj_to->Objects())
     {
-        Object *oret = GroupObject(otmp, obj);
+        auto oret = GroupObject(otmp, obj);
 
         if(oret == otmp)
         {
@@ -1096,9 +1096,9 @@ Object *ObjectToObject(Object *obj, Object *obj_to)
 /*
  * Move an object out of an object.
  */
-void ObjectFromObject(Object *obj)
+void ObjectFromObject(std::shared_ptr<Object> obj)
 {
-    Object *obj_from = obj->InObject;
+    auto obj_from = obj->InObject;
     assert(obj_from != nullptr);
 
     obj_from->Remove(obj);
@@ -1122,7 +1122,7 @@ void ObjectFromObject(Object *obj)
 /*
  * Extract an obj from the world.
  */
-void ExtractObject(Object *obj)
+void ExtractObject(std::shared_ptr<Object> obj)
 {
     assert(obj != nullptr);
 
@@ -1137,16 +1137,14 @@ void ExtractObject(Object *obj)
 
     if(obj->CarriedBy)
         ObjectFromCharacter(obj);
-    else
-        if(obj->InRoom)
-            ObjectFromRoom(obj);
-        else
-            if(obj->InObject)
-                ObjectFromObject(obj);
+    else if(obj->InRoom)
+        ObjectFromRoom(obj);
+    else if(obj->InObject)
+        ObjectFromObject(obj);
 
-    std::list<Object *> contents(obj->Objects());
+    auto contents = obj->Objects();
 
-    for(Object *obj_content : contents)
+    for(auto obj_content : contents)
     {
         ExtractObject(obj_content);
     }
@@ -1454,7 +1452,7 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
  * Find some object with a given index data.
  * Used by area-reset 'P', 'T' and 'H' commands.
  */
-Object *GetInstanceOfObject(std::shared_ptr<ProtoObject> pObjIndex)
+std::shared_ptr<Object> GetInstanceOfObject(std::shared_ptr<ProtoObject> pObjIndex)
 {
     return Find(Reverse(Objects->Entities()),
                 [pObjIndex](const auto obj)
@@ -1466,14 +1464,14 @@ Object *GetInstanceOfObject(std::shared_ptr<ProtoObject> pObjIndex)
 /*
  * Find an obj in a list.
  */
-Object *GetObjectInList(const Character *ch, std::string argument,
-                        const std::list<Object *> &list)
+std::shared_ptr<Object> GetObjectInList(const Character *ch, std::string argument,
+                                        const std::list<std::shared_ptr<Object>> &list)
 {
     std::string arg;
     int number = NumberArgument(argument, arg);
     int count = 0;
 
-    for(Object *obj : list)
+    for(auto obj : list)
     {
         if(CanSeeObject(ch, obj) && NiftyIsName(arg, obj->Name))
         {
@@ -1490,7 +1488,7 @@ Object *GetObjectInList(const Character *ch, std::string argument,
     */
     count = 0;
 
-    for(Object *obj : list)
+    for(auto obj : list)
     {
         if(CanSeeObject(ch, obj) && NiftyIsNamePrefix(arg, obj->Name))
         {
@@ -1507,14 +1505,14 @@ Object *GetObjectInList(const Character *ch, std::string argument,
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-Object *GetObjectInListReverse(const Character *ch, std::string argument,
-                               const std::list<Object *> &list)
+std::shared_ptr<Object> GetObjectInListReverse(const Character *ch, std::string argument,
+                                               const std::list<std::shared_ptr<Object>> &list)
 {
     std::string arg;
     int count = 0;
     int number = NumberArgument(argument, arg);
 
-    for(Object *obj : Reverse(list))
+    for(auto obj : Reverse(list))
     {
         if(CanSeeObject(ch, obj) && NiftyIsName(arg, obj->Name))
         {
@@ -1531,7 +1529,7 @@ Object *GetObjectInListReverse(const Character *ch, std::string argument,
     */
     count = 0;
 
-    for(Object *obj : Reverse(list))
+    for(auto obj : Reverse(list))
     {
         if(CanSeeObject(ch, obj) && NiftyIsNamePrefix(arg, obj->Name))
         {
@@ -1548,14 +1546,12 @@ Object *GetObjectInListReverse(const Character *ch, std::string argument,
 /*
  * Find an obj in the room or in inventory.
  */
-Object *GetObjectHere(const Character *ch, std::string argument)
+std::shared_ptr<Object> GetObjectHere(const Character *ch, std::string argument)
 {
-    Object *obj = nullptr;
-
     if(!ch || !ch->InRoom)
         return NULL;
 
-    obj = GetObjectInListReverse(ch, argument, ch->InRoom->Objects());
+    auto obj = GetObjectInListReverse(ch, argument, ch->InRoom->Objects());
 
     if(obj)
         return obj;
@@ -1572,10 +1568,10 @@ Object *GetObjectHere(const Character *ch, std::string argument)
 /*
  * Find an obj in the world.
  */
-Object *GetObjectAnywhere(const Character *ch, std::string argument)
+std::shared_ptr<Object> GetObjectAnywhere(const Character *ch, std::string argument)
 {
     std::string arg;
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
     int number = 0, count = 0;
     vnum_t vnum = INVALID_VNUM;
 
@@ -1650,11 +1646,11 @@ Object *GetObjectAnywhere(const Character *ch, std::string argument)
  * Generic get obj function that supports optional containers.  -Thoric
  * currently only used for "eat" and "quaff".
  */
-Object *FindObject(Character *ch, std::string argument, bool carryonly)
+std::shared_ptr<Object> FindObject(Character *ch, std::string argument, bool carryonly)
 {
     std::string arg1;
     std::string arg2;
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
 
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);
@@ -1674,7 +1670,7 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
         }
         else if(!carryonly && (obj = GetObjectHere(ch, arg1)) == NULL)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg1, ActTarget::Char);
             return NULL;
         }
 
@@ -1682,7 +1678,7 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
     }
     else
     {
-        Object *container = nullptr;
+        std::shared_ptr<Object> container;
 
         if(carryonly
            && (container = GetCarriedObject(ch, arg2)) == NULL
@@ -1694,14 +1690,14 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
 
         if(!carryonly && (container = GetObjectHere(ch, arg2)) == NULL)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, arg2, ActTarget::Char);
             return NULL;
         }
 
         if(!container->Flags.test(Flag::Obj::Covering)
            && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-            Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, ActTarget::Char);
             return NULL;
         }
 
@@ -1712,14 +1708,14 @@ Object *FindObject(Character *ch, std::string argument, bool carryonly)
                 container->Flags.test(Flag::Obj::Covering)
                 ? "I see nothing like that beneath $p."
                 : "I see nothing like that in $p.",
-                ch, container, NULL, ActTarget::Char);
+                ch, container, nullptr, ActTarget::Char);
         return obj;
     }
 
     return NULL;
 }
 
-int GetObjectCount(const Object *obj)
+int GetObjectCount(std::shared_ptr<Object> obj)
 {
     return obj->Count;
 }
@@ -1727,11 +1723,11 @@ int GetObjectCount(const Object *obj)
 /*
  * Return weight of an object, including weight of contents.
  */
-int GetObjectWeight(const Object *obj)
+int GetObjectWeight(std::shared_ptr<Object> obj)
 {
     int weight = obj->Count * obj->Weight;
 
-    for(const Object *inner : obj->Objects())
+    for(auto inner : obj->Objects())
     {
         weight += GetObjectWeight(inner);
     }
@@ -1788,7 +1784,7 @@ bool IsRoomPrivate(const Character *ch, std::shared_ptr<Room> pRoomIndex)
 /*
  * Return ascii name of an item type.
  */
-const char *GetItemTypeName(const Object *obj)
+const char *GetItemTypeName(std::shared_ptr<Object> obj)
 {
     if(obj->ItemType <= ITEM_NONE || obj->ItemType > MAX_ITEM_TYPE)
     {
@@ -1882,7 +1878,7 @@ const char *GetAffectLocationName(int location)
 /*
  * Set off a trap (obj) upon character (ch)                     -Thoric
  */
-ch_ret SpringTrap(Character *ch, Object *obj)
+ch_ret SpringTrap(Character *ch, std::shared_ptr<Object> obj)
 {
     int dam = 0;
     const char *txt = nullptr;
@@ -1894,40 +1890,67 @@ ch_ret SpringTrap(Character *ch, Object *obj)
     switch(typ)
     {
     default:
-        txt = "hit by a trap";                                    break;
+        txt = "hit by a trap";
+        break;
+
     case TRAP_TYPE_POISON_GAS:
-        txt = "surrounded by a green cloud of gas";               break;
+        txt = "surrounded by a green cloud of gas";
+        break;
+
     case TRAP_TYPE_POISON_DART:
-        txt = "hit by a dart";                                    break;
+        txt = "hit by a dart";
+        break;
+
     case TRAP_TYPE_POISON_NEEDLE:
-        txt = "pricked by a needle";                              break;
+        txt = "pricked by a needle";
+        break;
+
     case TRAP_TYPE_POISON_DAGGER:
-        txt = "stabbed by a dagger";                              break;
+        txt = "stabbed by a dagger";
+        break;
+
     case TRAP_TYPE_POISON_ARROW:
-        txt = "struck with an arrow";                             break;
+        txt = "struck with an arrow";
+        break;
+
     case TRAP_TYPE_BLINDNESS_GAS:
-        txt = "surrounded by a red cloud of gas";         break;
+        txt = "surrounded by a red cloud of gas";
+        break;
+
     case TRAP_TYPE_SLEEPING_GAS:
-        txt = "surrounded by a yellow cloud of gas";              break;
+        txt = "surrounded by a yellow cloud of gas";
+        break;
+
     case TRAP_TYPE_FLAME:
-        txt = "struck by a burst of flame";                       break;
+        txt = "struck by a burst of flame";
+        break;
+
     case TRAP_TYPE_EXPLOSION:
-        txt = "hit by an explosion";                              break;
+        txt = "hit by an explosion";
+        break;
+
     case TRAP_TYPE_ACID_SPRAY:
-        txt = "covered by a spray of acid";                       break;
+        txt = "covered by a spray of acid";
+        break;
+
     case TRAP_TYPE_ELECTRIC_SHOCK:
-        txt = "suddenly shocked";                         break;
+        txt = "suddenly shocked";
+        break;
+
     case TRAP_TYPE_BLADE:
-        txt = "sliced by a razor sharp blade";                    break;
+        txt = "sliced by a razor sharp blade";
+        break;
+
     case TRAP_TYPE_SEX_CHANGE:
-        txt = "surrounded by a mysterious aura";          break;
+        txt = "surrounded by a mysterious aura";
+        break;
     }
 
     dam = GetRandomNumberFromRange(obj->Value[OVAL_TRAP_STRENGTH], obj->Value[OVAL_TRAP_STRENGTH] * 2);
     sprintf(buf, "You are %s!", txt);
-    Act(AT_HITME, buf, ch, NULL, NULL, ActTarget::Char);
+    Act(AT_HITME, buf, ch, nullptr, nullptr, ActTarget::Char);
     sprintf(buf, "$n is %s.", txt);
-    Act(AT_ACTION, buf, ch, NULL, NULL, ActTarget::Room);
+    Act(AT_ACTION, buf, ch, nullptr, nullptr, ActTarget::Room);
 
     --obj->Value[OVAL_TRAP_CHARGE];
 
@@ -1975,7 +1998,7 @@ ch_ret SpringTrap(Character *ch, Object *obj)
 /*
  * Check an object for a trap                                   -Thoric
  */
-ch_ret CheckObjectForTrap(Character *ch, const Object *obj, int flag)
+ch_ret CheckObjectForTrap(Character *ch, std::shared_ptr<Object> obj, int flag)
 {
     ch_ret retcode = rNONE;
 
@@ -1984,7 +2007,7 @@ ch_ret CheckObjectForTrap(Character *ch, const Object *obj, int flag)
         return rNONE;
     }
 
-    for(Object *check : obj->Objects())
+    for(auto check : obj->Objects())
     {
         if(check->ItemType == ITEM_TRAP
            && IsBitSet(check->Value[OVAL_TRAP_FLAGS], flag))
@@ -2016,7 +2039,7 @@ ch_ret CheckRoomForTraps(Character *ch, int flag)
     if(!ch->InRoom || ch->InRoom->Objects().empty())
         return rNONE;
 
-    for(Object *check : ch->InRoom->Objects())
+    for(auto check : ch->InRoom->Objects())
     {
         if(check->ItemType == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM)
         {
@@ -2041,15 +2064,15 @@ ch_ret CheckRoomForTraps(Character *ch, int flag)
 /*
  * return true if an object contains a trap                     -Thoric
  */
-bool IsObjectTrapped(const Object *obj)
+bool IsObjectTrapped(std::shared_ptr<Object> obj)
 {
-    return GetTrap(obj);
+    return GetTrap(obj) != nullptr;
 }
 
 /*
  * If an object contains a trap, return the pointer to the trap -Thoric
  */
-Object *GetTrap(const Object *obj)
+std::shared_ptr<Object> GetTrap(std::shared_ptr<Object> obj)
 {
     return Find(obj->Objects(),
                 [](const auto check)
@@ -2244,7 +2267,7 @@ void ShowAffectToCharacter(const Character *ch, std::shared_ptr<Affect> paf)
 /*
  * Set the current global object to obj                         -Thoric
  */
-void SetCurrentGlobalObject(Object *obj)
+void SetCurrentGlobalObject(std::shared_ptr<Object> obj)
 {
     cur_obj = obj->Serial;
     cur_obj_extracted = false;
@@ -2254,7 +2277,7 @@ void SetCurrentGlobalObject(Object *obj)
 /*
  * Check the recently extracted object queue for obj            -Thoric
  */
-bool IsObjectExtracted(const Object *obj)
+bool IsObjectExtracted(std::shared_ptr<Object> obj)
 {
     assert(obj != nullptr);
 
@@ -2270,7 +2293,7 @@ bool IsObjectExtracted(const Object *obj)
 /*
  * Stick obj onto extraction queue
  */
-void QueueExtractedObject(Object *obj)
+void QueueExtractedObject(std::shared_ptr<Object> obj)
 {
     ++cur_qobjs;
     ExtractedObjectQueue.push_back(obj);
@@ -2281,12 +2304,7 @@ void QueueExtractedObject(Object *obj)
  */
 void CleanObjectQueue()
 {
-    for(Object *obj : ExtractedObjectQueue)
-    {
-        delete obj;
-        --cur_qobjs;
-    }
-
+    cur_qobjs = 0;
     ExtractedObjectQueue.clear();
 }
 
@@ -2458,9 +2476,9 @@ bool Chance(const Character *ch, short percent)
 /*
  * Make a simple clone of an object (no extras...yet)           -Thoric
  */
-Object *CopyObject(const Object *obj)
+std::shared_ptr<Object> CopyObject(std::shared_ptr<Object> obj)
 {
-    Object *clone = new Object(obj->Prototype, obj->Level);
+    auto clone = std::make_shared<Object>(obj->Prototype, obj->Level);
 
     clone->Name = obj->Name;
     clone->ShortDescr = obj->ShortDescr;
@@ -2488,7 +2506,7 @@ Object *CopyObject(const Object *obj)
     return clone;
 }
 
-static bool HasSameOvalues(const Object *a, const Object *b)
+static bool HasSameOvalues(std::shared_ptr<Object> a, std::shared_ptr<Object> b)
 {
     int oval = 0;
 
@@ -2511,7 +2529,7 @@ static bool HasSameOvalues(const Object *a, const Object *b)
  * as this will allow them to be grouped together both in memory, and in
  * the player files.
  */
-static Object *GroupObject(Object *obj1, Object *obj2)
+static std::shared_ptr<Object> GroupObject(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2)
 {
     assert(obj1 != nullptr);
     assert(obj2 != nullptr);
@@ -2554,7 +2572,7 @@ static Object *GroupObject(Object *obj1, Object *obj2)
  * Split off a grouped object                                   -Thoric
  * decreased obj's count to num, and creates a new object containing the rest
  */
-void SplitGroupedObject(Object *obj, int num)
+void SplitGroupedObject(std::shared_ptr<Object> obj, int num)
 {
     assert(obj != nullptr);
 
@@ -2565,7 +2583,7 @@ void SplitGroupedObject(Object *obj, int num)
         return;
     }
 
-    Object *rest = CopyObject(obj);
+    auto rest = CopyObject(obj);
     --obj->Prototype->Count;     /* since CopyObject() ups this value */
     --numobjsloaded;
     rest->Count = obj->Count - num;
@@ -2594,7 +2612,7 @@ void SplitGroupedObject(Object *obj, int num)
     }
 }
 
-void SeparateOneObjectFromGroup(Object *obj)
+void SeparateOneObjectFromGroup(std::shared_ptr<Object> obj)
 {
     SplitGroupedObject(obj, 1);
 }
@@ -2602,7 +2620,7 @@ void SeparateOneObjectFromGroup(Object *obj)
 /*
  * Empty an obj's contents... optionally into another obj, or a room
  */
-bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> destroom)
+bool EmptyObjectContents(std::shared_ptr<Object> obj, std::shared_ptr<Object> destobj, std::shared_ptr<Room> destroom)
 {
     assert(obj != nullptr);
 
@@ -2611,13 +2629,12 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
     if(destobj || (!destroom && !ch && (destobj = obj->InObject) != NULL))
     {
         bool movedsome = false;
-        std::list<Object *> objects(obj->Objects());
+        auto objects = obj->Objects();
 
-        for(Object *otmp : objects)
+        for(auto otmp : objects)
         {
             if(destobj->ItemType == ITEM_CONTAINER
-               && GetObjectWeight(otmp) + GetObjectWeight(destobj)
-    > destobj->Value[OVAL_CONTAINER_CAPACITY])
+               && GetObjectWeight(otmp) + GetObjectWeight(destobj) > destobj->Value[OVAL_CONTAINER_CAPACITY])
             {
                 continue;
             }
@@ -2637,7 +2654,7 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
         for(auto i = std::begin(obj->Objects()), i_next = std::end(obj->Objects());
             i != std::end(obj->Objects()); i = i_next)
         {
-            Object *otmp = *i;
+            std::shared_ptr<Object> otmp = *i;
             i_next = ++i;
 
             if(ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->Count > 1)
@@ -2673,9 +2690,9 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
     if(ch)
     {
         bool movedsome = false;
-        std::list<Object *> objects(obj->Objects());
+        auto objects = obj->Objects();
 
-        for(Object *otmp : objects)
+        for(auto otmp : objects)
         {
             ObjectFromObject(otmp);
             ObjectToCharacter(otmp, ch);

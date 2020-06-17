@@ -8,9 +8,9 @@
 class Bounty
 {
 public:
-  std::string Target;
-  long Reward = 0;
-  std::string Poster;
+    std::string Target;
+    long Reward = 0;
+    std::string Poster;
 };
 
 void AddBounty(const Character *ch, const Character *victim, long amount);

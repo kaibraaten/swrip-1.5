@@ -23,11 +23,11 @@ public:
     void Add(std::shared_ptr<Affect> affect);
     void Remove(std::shared_ptr<Affect> affect);
 
-    void Add(Object *object);
-    void Remove(Object *object);
-    const std::list<Object*> &Objects() const;
+    void Add(std::shared_ptr<Object> object);
+    void Remove(std::shared_ptr<Object> object);
+    const std::list<std::shared_ptr<Object>> &Objects() const;
 
-    Object *InObject = nullptr;
+    std::shared_ptr<Object> InObject;
     Character *CarriedBy = nullptr;
     std::shared_ptr<ProtoObject> Prototype;
     std::shared_ptr<Room> InRoom;

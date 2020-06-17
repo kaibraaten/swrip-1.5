@@ -209,7 +209,7 @@ void do_calculate(Character *ch, std::string argument)
     EchoToDockedShip(AT_YELLOW, ship, "The docking port link shows a new course being calculated.");
 
     Act(AT_PLAIN, "$n does some calculations using the ship's computer.", ch,
-        NULL, argument.c_str(), ActTarget::Room);
+        NULL, argument, ActTarget::Room);
 
     LearnFromSuccess(ch, gsn_navigation);
 

@@ -38,7 +38,7 @@ void do_ocreate(Character *ch, std::string argument)
 {
     std::string arg;
     std::string arg2;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     vnum_t vnum = INVALID_VNUM;
     vnum_t cvnum = INVALID_VNUM;
 

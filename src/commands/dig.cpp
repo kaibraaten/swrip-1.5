@@ -103,7 +103,7 @@ void do_dig(Character *ch, std::string arg)
     ch->SubState = SUB_NONE;
 
     /* not having a shovel makes it harder to succeed */
-    bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
+    bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL) != nullptr;
 
     /* dig out an EX_DIG exit... */
     if(!arg.empty())
@@ -133,7 +133,7 @@ void do_dig(Character *ch, std::string arg)
     }
 
     bool found = false;
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
 
     for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
     {

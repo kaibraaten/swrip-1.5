@@ -10,7 +10,7 @@ void do_circle(Character *ch, std::string argument)
 {
     std::string arg;
     Character *victim = NULL;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     int percent = 0;
 
     if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))

@@ -6,21 +6,32 @@
 /*
  * Generic object creating spell                                -Thoric
  */
-ch_ret spell_create_obj(int sn, int level, Character *ch, void *vo)
+ch_ret spell_create_obj(int sn, int level, Character *ch, const Vo &vo)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
     int lvl = 0;
     int vnum = skill->Value;
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
     std::shared_ptr<ProtoObject> oi;
 
     switch (SPELL_POWER(skill))
     {
     default:
-    case SP_NONE:        lvl = 10;      break;
-    case SP_MINOR:       lvl = 0;       break;
-    case SP_GREATER: lvl = level / 2; break;
-    case SP_MAJOR:       lvl = level;   break;
+    case SP_NONE:
+        lvl = 10;
+        break;
+
+    case SP_MINOR:
+        lvl = 0;
+        break;
+
+    case SP_GREATER:
+        lvl = level / 2;
+        break;
+
+    case SP_MAJOR:
+        lvl = level;
+        break;
     }
 
     if ((oi = GetProtoObject(vnum)) == NULL

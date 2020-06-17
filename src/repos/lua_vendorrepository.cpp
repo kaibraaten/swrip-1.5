@@ -50,13 +50,13 @@ void LuaVendorRepository::Save(const Character *vendor) const
     assert(vendor != nullptr);
     assert(IsNpc(vendor));
 
-    DeEquipCharacter(const_cast<Character*>(vendor));
+    DeEquipCharacter(const_cast<Character *>(vendor));
 
     LuaSaveDataFile(GetVendorFilename(vendor->Owner),
                     PushVendor,
                     "vendor", vendor);
 
-    ReEquipCharacter(const_cast<Character*>(vendor));
+    ReEquipCharacter(const_cast<Character *>(vendor));
 }
 
 bool LuaVendorRepository::HasVendor(const Character *pc) const
@@ -101,7 +101,7 @@ static int L_VendorEntry(lua_State *L)
 
         auto objects = LuaLoadObjects(L, "Objects");
 
-        for (auto obj : objects)
+        for(auto obj : objects)
         {
             int tmpWearLoc = obj->WearLoc;
             obj->WearLoc = WEAR_NONE;
@@ -110,7 +110,7 @@ static int L_VendorEntry(lua_State *L)
 
             obj->WearLoc = tmpWearLoc;
 
-            if (obj->WearLoc != WEAR_NONE)
+            if(obj->WearLoc != WEAR_NONE)
             {
                 EquipCharacter(mob, obj, obj->WearLoc);
             }
@@ -119,14 +119,14 @@ static int L_VendorEntry(lua_State *L)
         char buf[MAX_INPUT_LENGTH];
         char vnum1[MAX_INPUT_LENGTH];
 
-        if (inroom == INVALID_VNUM)
+        if(inroom == INVALID_VNUM)
         {
             inroom = ROOM_VNUM_VENSTOR;
         }
 
         mob->Home = GetRoom(inroom);
 
-        if (mob->Home == nullptr)
+        if(mob->Home == nullptr)
         {
             mob->Home = GetRoom(ROOM_VNUM_VENSTOR);
         }
@@ -135,11 +135,11 @@ static int L_VendorEntry(lua_State *L)
 
         /* the following code is to make sure no more than one player owned vendor
            is in the room - meckteck */
-        std::list<Character*> charactersInRoom(mob->InRoom->Characters());
+        std::list<Character *> charactersInRoom(mob->InRoom->Characters());
 
-        for (auto victim : charactersInRoom)
+        for(auto victim : charactersInRoom)
         {
-            if (victim->Home != nullptr)
+            if(victim->Home != nullptr)
             {
                 ExtractCharacter(victim, true);
                 break;
@@ -164,7 +164,7 @@ static int L_VendorEntry(lua_State *L)
 
 static void PushVendor(lua_State *L, const void *userData)
 {
-    auto vendor = static_cast<const Character*>(userData);
+    auto vendor = static_cast<const Character *>(userData);
 
     lua_pushinteger(L, 1);
     lua_newtable(L);

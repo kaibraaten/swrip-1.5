@@ -38,7 +38,7 @@ void do_sabotage(Character *ch, std::string arg)
         {
             ch->Echo("&GYou begin your work.\r\n");
             Act(AT_PLAIN, "$n begins working on the ship's $T.", ch,
-                NULL, arg.c_str(), ActTarget::Room);
+                nullptr, arg, ActTarget::Room);
 
             AddTimerToCharacter(ch, TIMER_CMD_FUN, 15, do_sabotage, SUB_PAUSE);
             ch->dest_buf = arg;
@@ -121,7 +121,7 @@ void do_sabotage(Character *ch, std::string arg)
     }
 
     Act(AT_PLAIN, "$n finishes the work.", ch,
-        NULL, arg.c_str(), ActTarget::Room);
+        nullptr, nullptr, ActTarget::Room);
 
     Log->Info("%s has sabotaged %s!", ch->Name.c_str(), ship->Name.c_str());
 

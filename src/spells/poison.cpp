@@ -1,9 +1,9 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-ch_ret spell_poison(int sn, int level, Character* ch, void* vo)
+ch_ret spell_poison(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character* victim = (Character*)vo;
+    Character *victim = vo.Ch;
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     int poison_chance;
     bool first = true;
@@ -15,10 +15,10 @@ ch_ret spell_poison(int sn, int level, Character* ch, void* vo)
 
     poison_chance = ModifySavingThrowBasedOnResistance(victim, level, Flag::Ris::Poison);
 
-    if (poison_chance == 1000 || SaveVsPoisonDeath(poison_chance, victim))
+    if(poison_chance == 1000 || SaveVsPoisonDeath(poison_chance, victim))
         return rSPELL_FAILED;
 
-    if (IsAffectedBy(victim, Flag::Affect::Poison))
+    if(IsAffectedBy(victim, Flag::Affect::Poison))
         first = false;
 
     af->Type = sn;
@@ -30,11 +30,10 @@ ch_ret spell_poison(int sn, int level, Character* ch, void* vo)
     SetCharacterColor(AT_MAGIC, victim);
     victim->Echo("You feel very sick.\r\n");
     victim->MentalState = urange(20, victim->MentalState
-        + (first ? 5 : 0), 100);
+                                 + (first ? 5 : 0), 100);
 
-    if (ch != victim)
+    if(ch != victim)
         ch->Echo("Ok.\r\n");
 
     return rNONE;
 }
-

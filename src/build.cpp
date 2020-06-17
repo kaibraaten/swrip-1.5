@@ -63,7 +63,7 @@ bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room)
     return false;
 }
 
-bool CanModifyObject(const Character *ch, const Object *obj)
+bool CanModifyObject(const Character *ch, std::shared_ptr<Object> obj)
 {
     vnum_t vnum = obj->Prototype->Vnum;
     std::shared_ptr<Area> pArea;
@@ -228,7 +228,7 @@ bool DelRExtra(std::shared_ptr<Room> room, const std::string &keywords)
     return true;
 }
 
-std::shared_ptr<ExtraDescription> SetOExtra(Object *obj, const std::string &keywords)
+std::shared_ptr<ExtraDescription> SetOExtra(std::shared_ptr<Object> obj, const std::string &keywords)
 {
     auto ed = Find(obj->ExtraDescriptions(),
                    [keywords](auto descr)
@@ -247,7 +247,7 @@ std::shared_ptr<ExtraDescription> SetOExtra(Object *obj, const std::string &keyw
     return ed;
 }
 
-bool DelOExtra(Object *obj, const std::string &keywords)
+bool DelOExtra(std::shared_ptr<Object> obj, const std::string &keywords)
 {
     auto rmed = Find(obj->ExtraDescriptions(),
                      [keywords](auto ed)

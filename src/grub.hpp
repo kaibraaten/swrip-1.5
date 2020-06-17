@@ -34,43 +34,45 @@ using GO_STRUCT = go_struct;
 
 struct field_struct         /* field table - info re each field          */
 {
-  char nam[MAX_FIELD_LENGTH];
-  bool num;             /* is field numeric or char string?          */
+    char nam[MAX_FIELD_LENGTH];
+    bool num;             /* is field numeric or char string?          */
 };
 
 struct operand_struct        /* operand table - info about each operand   */
 {
-  int             field;
-  int             op;
-  long            nval;        /* value for numeric operands            */
-  char            sval [MAX_FIELD_LENGTH];
-  bool            num;          /* is field numeric or char string?      */
+    int             field;
+    int             op;
+    long            nval;        /* value for numeric operands            */
+    char            sval[MAX_FIELD_LENGTH];
+    bool            num;          /* is field numeric or char string?      */
 };
 
 enum gr_field_type          /* enumerates the fields in the input record */
-  {name, sex, pclass, race, level, room, gold, clan, council,
-   site, last, pkill};
+{
+    name, sex, pclass, race, level, room, gold, clan, council,
+    site, last, pkill
+};
 
 struct gr_struct               /* input record containing pfile info    */
 {
-  char name[MAX_NAME_LENGTH];
-  char sex;
-  char pclass;
-  char race;
-  char level;
-  vnum_t room;
-  long gold;
-  char clan;
-  char council;
-  char site[MAX_SITE_LENGTH];
-  long last;
-  char pkill;
+    char name[MAX_NAME_LENGTH];
+    char sex;
+    char pclass;
+    char race;
+    char level;
+    vnum_t room;
+    long gold;
+    char clan;
+    char council;
+    char site[MAX_SITE_LENGTH];
+    long last;
+    char pkill;
 };
 
 struct go_struct                /* input record containing object data  */
 {
-  short n[22];
-  const char *s[2];
+    short n[22];
+    const char *s[2];
 };
 
 bool go_eval_str(const std::string &lval, int op, const std::string &rval);

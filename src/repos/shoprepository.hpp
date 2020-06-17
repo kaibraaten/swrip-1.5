@@ -8,10 +8,10 @@
 template<typename T>
 struct CompareShop
 {
-  bool operator()(const T lhs, const T rhs) const
-  {
-    return lhs->Keeper < rhs->Keeper;
-  }
+    bool operator()(const T lhs, const T rhs) const
+    {
+        return lhs->Keeper < rhs->Keeper;
+    }
 };
 
 using ShopRepositoryBase = Ceris::Repository<std::shared_ptr<Shop>, CompareShop<std::shared_ptr<Shop>>>;
@@ -21,7 +21,7 @@ class ShopRepository : public ShopRepositoryBase
 public:
 
 protected:
-  ShopRepository() = default;
+    ShopRepository() = default;
 };
 
 using RepairShopRepositoryBase = Ceris::Repository<std::shared_ptr<RepairShop>, CompareShop<std::shared_ptr<RepairShop>>>;
@@ -31,7 +31,7 @@ class RepairShopRepository : public RepairShopRepositoryBase
 public:
 
 protected:
-  RepairShopRepository() = default;
+    RepairShopRepository() = default;
 };
 
 extern std::shared_ptr<ShopRepository> Shops;

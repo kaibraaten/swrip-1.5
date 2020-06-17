@@ -10,7 +10,7 @@
 /*
  * Generic area attack                                          -Thoric
  */
-ch_ret spell_area_attack(int sn, int level, Character *ch, void *vo)
+ch_ret spell_area_attack(int sn, int level, Character *ch, const Vo &vo)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
     bool saved = false;

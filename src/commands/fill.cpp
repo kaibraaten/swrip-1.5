@@ -13,8 +13,8 @@ void do_fill(Character *ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
-    Object *obj = nullptr;
-    Object *source = nullptr;
+    std::shared_ptr<Object> obj;
+    std::shared_ptr<Object> source;
     ItemTypes dest_item = ITEM_NONE, src_item1 = ITEM_NONE, src_item2 = ITEM_NONE, src_item3 = ITEM_NONE, src_item4 = ITEM_NONE;
     int diff = 0;
     bool all = false;
@@ -51,7 +51,7 @@ void do_fill(Character *ch, std::string argument)
     switch(dest_item)
     {
     default:
-        Act(AT_ACTION, "$n tries to fill $p... (Don't ask me how)", ch, obj, NULL, ActTarget::Room);
+        Act(AT_ACTION, "$n tries to fill $p... (Don't ask me how)", ch, obj, nullptr, ActTarget::Room);
         ch->Echo("You cannot fill that.\r\n");
         return;
 
@@ -83,11 +83,11 @@ void do_fill(Character *ch, std::string argument)
     {
         if(IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-            Act(AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "The $d is closed.", ch, nullptr, obj->Name, ActTarget::Char);
             return;
         }
-        if(GetObjectWeight(obj) / obj->Count
-           >= obj->Value[OVAL_CONTAINER_CAPACITY])
+
+        if(GetObjectWeight(obj) / obj->Count >= obj->Value[OVAL_CONTAINER_CAPACITY])
         {
             ch->Echo("It's already full as it can be.\r\n");
             return;
@@ -162,7 +162,7 @@ void do_fill(Character *ch, std::string argument)
 
         SeparateOneObjectFromGroup(obj);
 
-        std::list<Object *> sources(ch->InRoom->Objects());
+        auto sources = ch->InRoom->Objects();
 
         for(auto i = std::begin(sources); i != std::end(sources); ++i)
         {
@@ -233,8 +233,8 @@ void do_fill(Character *ch, std::string argument)
 
         if(dest_item == ITEM_CONTAINER)
         {
-            Act(AT_ACTION, "You fill $p.", ch, obj, NULL, ActTarget::Char);
-            Act(AT_ACTION, "$n fills $p.", ch, obj, NULL, ActTarget::Room);
+            Act(AT_ACTION, "You fill $p.", ch, obj, nullptr, ActTarget::Char);
+            Act(AT_ACTION, "$n fills $p.", ch, obj, nullptr, ActTarget::Room);
             return;
         }
     }
@@ -315,7 +315,7 @@ void do_fill(Character *ch, std::string argument)
             if(source->ItemType == ITEM_CONTAINER  /* don't remove */
                && IsBitSet(source->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
             {
-                Act(AT_PLAIN, "The $d is closed.", ch, NULL, source->Name.c_str(), ActTarget::Char);
+                Act(AT_PLAIN, "The $d is closed.", ch, nullptr, source->Name, ActTarget::Char);
                 return;
             }
         case ITEM_DROID_CORPSE:
@@ -328,9 +328,9 @@ void do_fill(Character *ch, std::string argument)
 
             SeparateOneObjectFromGroup(obj);
 
-            std::list<Object *> contents(source->Objects());
+            auto contents = source->Objects();
 
-            for(Object *otmp : contents)
+            for(auto otmp : contents)
             {
                 if(!otmp->WearFlags.test(Flag::Wear::Take)
                    || (otmp->Flags.test(Flag::Obj::Prototype)

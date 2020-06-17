@@ -31,7 +31,7 @@
  /*
   * how resistant an object is to damage                         -Thoric
   */
-short GetObjectResistance(const Object *obj)
+short GetObjectResistance(std::shared_ptr<Object> obj)
 {
     short resist = NumberFuzzy(MAX_ITEM_IMPACT);
 
@@ -69,7 +69,7 @@ short GetObjectResistance(const Object *obj)
  * Make object into scraps if necessary.
  * Send message about damaged object.
  */
-obj_ret DamageObject(Object *obj)
+obj_ret DamageObject(std::shared_ptr<Object> obj)
 {
     Character *ch = obj->CarriedBy;
     obj_ret objcode = rNONE;
@@ -83,7 +83,7 @@ obj_ret DamageObject(Object *obj)
 
     if(ch)
     {
-        Act(AT_OBJECT, "($p gets damaged)", ch, obj, NULL, ActTarget::Char);
+        Act(AT_OBJECT, "($p gets damaged)", ch, obj, nullptr, ActTarget::Char);
     }
     else if(obj->InRoom && !obj->InRoom->Characters().empty())
     {
@@ -141,7 +141,7 @@ obj_ret DamageObject(Object *obj)
 }
 
 /* Make objects in rooms that are nofloor fall - Scryn 1/23/96 */
-void ObjectFallIfNoFloor(Object *obj, bool through)
+void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through)
 {
     static int fall_count;
     static bool is_falling; /* Stop loops from the call to ObjectToRoom()  -- Altrag */
@@ -260,7 +260,7 @@ void ObjectFallIfNoFloor(Object *obj, bool through)
 
 bool RemoveObject(Character *ch, WearLocation iWear, bool fReplace)
 {
-    Object *obj, *tmpobj;
+    std::shared_ptr<Object> obj, tmpobj;
 
     if((obj = GetEquipmentOnCharacter(ch, iWear)) == NULL)
         return true;
@@ -269,7 +269,7 @@ bool RemoveObject(Character *ch, WearLocation iWear, bool fReplace)
        && ch->CarryNumber + GetObjectCount(obj) > GetCarryCapacityNumber(ch))
     {
         Act(AT_PLAIN, "$d: you can't carry that many items.",
-            ch, NULL, obj->Name.c_str(), ActTarget::Char);
+            ch, NULL, obj->Name, ActTarget::Char);
         return false;
     }
 
@@ -294,7 +294,7 @@ bool RemoveObject(Character *ch, WearLocation iWear, bool fReplace)
     return true;
 }
 
-std::string GetObjectShortDescription(const Object *obj)
+std::string GetObjectShortDescription(std::shared_ptr<Object> obj)
 {
     if(obj->Count > 1)
     {

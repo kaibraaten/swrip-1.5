@@ -89,9 +89,9 @@ void do_induct(Character *ch, std::string argument)
     victim->PCData->ClanInfo.ClanName = clan->Name;
     UpdateClanMember(victim);
 
-    Act(AT_MAGIC, "You induct $N into $t", ch, clan->Name.c_str(), victim, ActTarget::Char);
-    Act(AT_MAGIC, "$n inducts $N into $t", ch, clan->Name.c_str(), victim, ActTarget::NotVict);
-    Act(AT_MAGIC, "$n inducts you into $t", ch, clan->Name.c_str(), victim, ActTarget::Vict);
+    Act(AT_MAGIC, "You induct $N into $t", ch, clan->Name, victim, ActTarget::Char);
+    Act(AT_MAGIC, "$n inducts $N into $t", ch, clan->Name, victim, ActTarget::NotVict);
+    Act(AT_MAGIC, "$n inducts you into $t", ch, clan->Name, victim, ActTarget::Vict);
     PlayerCharacters->Save(victim);
 }
 

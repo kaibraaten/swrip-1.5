@@ -9,5 +9,5 @@ class InMemoryObjectRepository : public ObjectRepository
 
 ObjectRepository *NewObjectRepository()
 {
-  return new InMemoryObjectRepository();
+    return new InMemoryObjectRepository();
 }

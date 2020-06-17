@@ -8,8 +8,8 @@
 #include "protoobject.hpp"
 #include "act.hpp"
 
-static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit);
-static bool can_layer(const Character *ch, const Object *obj, int wear_loc);
+static void wear_obj(Character *ch, std::shared_ptr<Object> obj, bool fReplace, int wear_bit);
+static bool can_layer(const Character *ch, std::shared_ptr<Object> obj, int wear_loc);
 static bool can_dual(const Character *ch);
 static bool could_dual(const Character *ch);
 
@@ -40,13 +40,13 @@ void do_wear(Character *ch, std::string argument)
 
     if(!StrCmp(arg1, "all"))
     {
-        std::list<Object *> objectsToWear = Filter(ch->Objects(),
-                                                   [ch](auto obj)
-                                                   {
-                                                       return obj->WearLoc == WEAR_NONE
-                                                           && CanSeeObject(ch, obj);
-                                                   });
-        for(Object *obj : objectsToWear)
+        auto objectsToWear = Filter(ch->Objects(),
+                                    [ch](auto obj)
+                                    {
+                                        return obj->WearLoc == WEAR_NONE
+                                            && CanSeeObject(ch, obj);
+                                    });
+        for(auto obj : objectsToWear)
         {
             wear_obj(ch, obj, false, -1);
         }
@@ -56,7 +56,7 @@ void do_wear(Character *ch, std::string argument)
     else
     {
         int wear_bit = -1;
-        Object *obj = GetCarriedObject(ch, arg1);
+        auto obj = GetCarriedObject(ch, arg1);
 
         if(obj == nullptr)
         {
@@ -79,10 +79,10 @@ void do_wear(Character *ch, std::string argument)
  * Big repetitive code, ick.
  * Restructured a bit to allow for specifying body location     -Thoric
  */
-static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
+static void wear_obj(Character *ch, std::shared_ptr<Object> obj, bool fReplace, int wear_bit)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
-    Object *tmpobj = NULL;
+    std::shared_ptr<Object> tmpobj;
     int bit = 0;
     int tmp = 0;
     bool check_size = false;
@@ -119,7 +119,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
     }
     else
     {
-        for(bit = -1, tmp = 1; tmp < 31; tmp++)
+        for(bit = -1, tmp = 1; tmp < Flag::MAX - 1; tmp++)
         {
             if(obj->WearFlags.test(tmp))
             {
@@ -219,9 +219,9 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
 
         if(obj->Flags.test(Flag::Obj::SmallSize))
         {
-            Act(AT_MAGIC, "That item is too small for you.", ch, NULL, NULL, ActTarget::Char);
+            Act(AT_MAGIC, "That item is too small for you.", ch, nullptr, nullptr, ActTarget::Char);
             Act(AT_ACTION, "$n tries to use $p, but it is too small.",
-                ch, obj, NULL, ActTarget::Room);
+                ch, obj, nullptr, ActTarget::Room);
             return;
         }
     }
@@ -231,16 +231,17 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
     {
         if(!RemoveObject(ch, WEAR_LIGHT, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n holds $p as a light.", ch, obj, NULL, ActTarget::Room);
-                Act(AT_ACTION, "You hold $p as your light.", ch, obj, NULL, ActTarget::Char);
+                Act(AT_ACTION, "$n holds $p as a light.", ch, obj, nullptr, ActTarget::Room);
+                Act(AT_ACTION, "You hold $p as your light.", ch, obj, nullptr, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
         }
+
         EquipCharacter(ch, obj, WEAR_LIGHT);
         ObjProgWearTrigger(ch, obj);
         return;
@@ -272,12 +273,12 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
 
         if(!GetEquipmentOnCharacter(ch, WEAR_FINGER_L))
         {
-            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+            if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
             {
                 if(obj->ActionDescription.empty())
                 {
-                    Act(AT_ACTION, "$n slips $s left finger into $p.", ch, obj, NULL, ActTarget::Room);
-                    Act(AT_ACTION, "You slip your left finger into $p.", ch, obj, NULL, ActTarget::Char);
+                    Act(AT_ACTION, "$n slips $s left finger into $p.", ch, obj, nullptr, ActTarget::Room);
+                    Act(AT_ACTION, "You slip your left finger into $p.", ch, obj, nullptr, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -289,12 +290,12 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
 
         if(!GetEquipmentOnCharacter(ch, WEAR_FINGER_R))
         {
-            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+            if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
             {
                 if(obj->ActionDescription.empty())
                 {
-                    Act(AT_ACTION, "$n slips $s right finger into $p.", ch, obj, NULL, ActTarget::Room);
-                    Act(AT_ACTION, "You slip your right finger into $p.", ch, obj, NULL, ActTarget::Char);
+                    Act(AT_ACTION, "$n slips $s right finger into $p.", ch, obj, nullptr, ActTarget::Room);
+                    Act(AT_ACTION, "You slip your right finger into $p.", ch, obj, nullptr, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -310,20 +311,20 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         return;
 
     case Flag::Wear::Neck:
-        if(GetEquipmentOnCharacter(ch, WEAR_NECK_1) != NULL
-           && GetEquipmentOnCharacter(ch, WEAR_NECK_2) != NULL
+        if(GetEquipmentOnCharacter(ch, WEAR_NECK_1) != nullptr
+           && GetEquipmentOnCharacter(ch, WEAR_NECK_2) != nullptr
            && !RemoveObject(ch, WEAR_NECK_1, fReplace)
            && !RemoveObject(ch, WEAR_NECK_2, fReplace))
             return;
 
         if(!GetEquipmentOnCharacter(ch, WEAR_NECK_1))
         {
-            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+            if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
             {
                 if(obj->ActionDescription.empty())
                 {
-                    Act(AT_ACTION, "$n wears $p around $s neck.", ch, obj, NULL, ActTarget::Room);
-                    Act(AT_ACTION, "You wear $p around your neck.", ch, obj, NULL, ActTarget::Char);
+                    Act(AT_ACTION, "$n wears $p around $s neck.", ch, obj, nullptr, ActTarget::Room);
+                    Act(AT_ACTION, "You wear $p around your neck.", ch, obj, nullptr, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -335,12 +336,12 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
 
         if(!GetEquipmentOnCharacter(ch, WEAR_NECK_2))
         {
-            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+            if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
             {
                 if(obj->ActionDescription.empty())
                 {
-                    Act(AT_ACTION, "$n wears $p around $s neck.", ch, obj, NULL, ActTarget::Room);
-                    Act(AT_ACTION, "You wear $p around your neck.", ch, obj, NULL, ActTarget::Char);
+                    Act(AT_ACTION, "$n wears $p around $s neck.", ch, obj, nullptr, ActTarget::Room);
+                    Act(AT_ACTION, "You wear $p around your neck.", ch, obj, nullptr, ActTarget::Char);
                 }
                 else
                     ActionDescription(ch, obj);
@@ -360,12 +361,12 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n fits $p on $s body.", ch, obj, NULL, ActTarget::Room);
-                Act(AT_ACTION, "You fit $p on your body.", ch, obj, NULL, ActTarget::Char);
+                Act(AT_ACTION, "$n fits $p on $s body.", ch, obj, nullptr, ActTarget::Room);
+                Act(AT_ACTION, "You fit $p on your body.", ch, obj, nullptr, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -382,12 +383,12 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         }
         if(!RemoveObject(ch, WEAR_HEAD, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
-                Act(AT_ACTION, "$n dons $p upon $s head.", ch, obj, NULL, ActTarget::Room);
-                Act(AT_ACTION, "You don $p upon your head.", ch, obj, NULL, ActTarget::Char);
+                Act(AT_ACTION, "$n dons $p upon $s head.", ch, obj, nullptr, ActTarget::Room);
+                Act(AT_ACTION, "You don $p upon your head.", ch, obj, nullptr, ActTarget::Char);
             }
             else
                 ActionDescription(ch, obj);
@@ -399,7 +400,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
     case Flag::Wear::Eyes:
         if(!RemoveObject(ch, WEAR_EYES, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -421,7 +422,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
         }
         if(!RemoveObject(ch, WEAR_EARS, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -447,7 +448,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -472,7 +473,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -492,7 +493,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -512,7 +513,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -533,7 +534,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             return;
         }
 
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -553,7 +554,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -576,7 +577,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
 
         if(!GetEquipmentOnCharacter(ch, WEAR_WRIST_L))
         {
-            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
             {
                 if(obj->ActionDescription.empty())
                 {
@@ -595,7 +596,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
 
         if(!GetEquipmentOnCharacter(ch, WEAR_WRIST_R))
         {
-            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
             {
                 if(obj->ActionDescription.empty())
                 {
@@ -619,7 +620,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
     case Flag::Wear::Shield:
         if(!RemoveObject(ch, WEAR_SHIELD, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -657,7 +658,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
                     return;
                 }
 
-                if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+                if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
                 {
                     if(obj->ActionDescription.empty())
                     {
@@ -682,7 +683,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             return;
         }
 
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -712,7 +713,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
            || obj->ItemType == ITEM_DRINK_CON
            || obj->ItemType == ITEM_SALVE
            || obj->ItemType == ITEM_KEY
-           || !ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+           || !ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             Act(AT_ACTION, "$n holds $p in $s hands.", ch, obj, NULL, ActTarget::Room);
             Act(AT_ACTION, "You hold $p in your hands.", ch, obj, NULL, ActTarget::Char);
@@ -727,7 +728,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -743,7 +744,7 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
     case Flag::Wear::Over:
         if(!RemoveObject(ch, WEAR_OVER, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
         {
             if(obj->ActionDescription.empty())
             {
@@ -763,12 +764,12 @@ static void wear_obj(Character *ch, Object *obj, bool fReplace, int wear_bit)
  * Check to see if there is room to wear another object on this location
  * (Layered clothing support)
  */
-static bool can_layer(const Character *ch, const Object *obj, int wear_loc)
+static bool can_layer(const Character *ch, std::shared_ptr<Object> obj, int wear_loc)
 {
     long bitlayers = 0;
     const long objlayers = obj->Prototype->Layers;
 
-    for(const Object *otmp : ch->Objects())
+    for(auto otmp : ch->Objects())
     {
         if(otmp->WearLoc == wear_loc)
         {

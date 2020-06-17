@@ -10,7 +10,7 @@
 
 void do_auction(Character *ch, std::string argument)
 {
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
     std::string arg1;
     std::string arg2;
     char buf[MAX_STRING_LENGTH];
@@ -28,7 +28,7 @@ void do_auction(Character *ch, std::string argument)
         return;
     }
 
-    if((time_info.Hour > 18 || time_info.Hour < 9) && OngoingAuction->Item == NULL)
+    if((time_info.Hour > 18 || time_info.Hour < 9) && OngoingAuction->Item.expired())
     {
         SetCharacterColor(AT_LBLUE, ch);
         ch->Echo("\r\nThe auctioneer has retired for the evening.\r\n");
@@ -37,9 +37,9 @@ void do_auction(Character *ch, std::string argument)
 
     if(arg1.empty())
     {
-        if(OngoingAuction->Item != NULL)
+        if(!OngoingAuction->Item.expired())
         {
-            obj = OngoingAuction->Item;
+            obj = OngoingAuction->Item.lock();
             SetCharacterColor(AT_BLUE, ch);
 
             /* show item data here */
@@ -110,25 +110,26 @@ void do_auction(Character *ch, std::string argument)
 
     if(IsImmortal(ch) && !StrCmp(arg1, "stop"))
     {
-        if(OngoingAuction->Item == NULL)
+        if(OngoingAuction->Item.expired())
         {
             ch->Echo("There is no auction to stop.\r\n");
             return;
         }
         else /* stop the auction */
         {
+            auto auctionItem = OngoingAuction->Item.lock();
             SetCharacterColor(AT_LBLUE, ch);
             sprintf(buf, "Sale of %s has been stopped by an Immortal.",
-                    OngoingAuction->Item->ShortDescr.c_str());
+                    auctionItem->ShortDescr.c_str());
             TalkAuction(buf);
-            ObjectToCharacter(OngoingAuction->Item, OngoingAuction->Seller);
+            ObjectToCharacter(auctionItem, OngoingAuction->Seller);
 
             if(SysData.SaveFlags.test(Flag::AutoSave::Auction))
             {
                 PlayerCharacters->Save(OngoingAuction->Seller);
             }
 
-            OngoingAuction->Item = NULL;
+            OngoingAuction->Item.reset();
 
             if(OngoingAuction->Buyer != NULL && OngoingAuction->Buyer != OngoingAuction->Seller) /* return money to the buyer */
             {
@@ -142,7 +143,7 @@ void do_auction(Character *ch, std::string argument)
 
     if(!StrCmp(arg1, "bid"))
     {
-        if(OngoingAuction->Item != NULL)
+        if(!OngoingAuction->Item.expired())
         {
             int newbet = 0;
 
@@ -205,7 +206,8 @@ void do_auction(Character *ch, std::string argument)
             OngoingAuction->Going = 0;
             OngoingAuction->Pulse = PULSE_AUCTION; /* start the auction over again */
 
-            sprintf(buf, "A bid of %d credits has been received on %s.\r\n", newbet, OngoingAuction->Item->ShortDescr.c_str());
+            auto auctionItem = OngoingAuction->Item.lock();
+            sprintf(buf, "A bid of %d credits has been received on %s.\r\n", newbet, auctionItem->ShortDescr.c_str());
             TalkAuction(buf);
             return;
         }
@@ -254,12 +256,13 @@ void do_auction(Character *ch, std::string argument)
         return;
     }
 
-    if(OngoingAuction->Item == NULL)
+    if(OngoingAuction->Item.expired())
     {
         switch(obj->ItemType)
         {
         default:
-            Act(AT_TELL, "You cannot auction $Ts.", ch, NULL, GetItemTypeName(obj), ActTarget::Char);
+            Act(AT_TELL, "You cannot auction $Ts.", ch, nullptr,
+                ActArg(GetItemTypeName(obj)), ActTarget::Char);
             return;
 
             /* insert any more item types.here... items with a timer MAY NOT BE
@@ -298,8 +301,8 @@ void do_auction(Character *ch, std::string argument)
     }
     else
     {
-        Act(AT_TELL, "Try again later - $p is being auctioned right now!", ch, OngoingAuction->Item, NULL, ActTarget::Char);
+        auto auctionItem = OngoingAuction->Item.lock();
+        Act(AT_TELL, "Try again later - $p is being auctioned right now!", ch, auctionItem, NULL, ActTarget::Char);
         SetWaitState(ch, 1.5 * PULSE_VIOLENCE);
-        return;
     }
 }

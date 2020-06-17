@@ -6,9 +6,9 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_farsight(int sn, int level, Character* ch, void* vo)
+ch_ret spell_farsight(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character* victim = nullptr;
+    Character *victim = nullptr;
     std::shared_ptr<Skill> skill = GetSkill(sn);
     int saving = 0;
 
@@ -21,14 +21,14 @@ ch_ret spell_farsight(int sn, int level, Character* ch, void* vo)
 
     saving = GetRandomPercent();
 
-    if ((victim = GetCharacterAnywhere(ch, spell_target_name)) == NULL
-        || victim == ch
-        || !victim->InRoom
-        || victim->InRoom->Flags.test(Flag::Room::Private)
-        || victim->InRoom->Flags.test(Flag::Room::Prototype)
-        || (IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
-        || (IsNpc(victim) && SaveVsSpellStaff(level, victim))
-        || saving <= 50)
+    if((victim = GetCharacterAnywhere(ch, spell_target_name)) == NULL
+       || victim == ch
+       || !victim->InRoom
+       || victim->InRoom->Flags.test(Flag::Room::Private)
+       || victim->InRoom->Flags.test(Flag::Room::Prototype)
+       || (IsNpc(victim) && victim->Flags.test(Flag::Mob::Prototype))
+       || (IsNpc(victim) && SaveVsSpellStaff(level, victim))
+       || saving <= 50)
     {
         FailedCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
@@ -36,7 +36,7 @@ ch_ret spell_farsight(int sn, int level, Character* ch, void* vo)
 
     auto location = victim->InRoom;
 
-    if (!location)
+    if(!location)
     {
         FailedCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;

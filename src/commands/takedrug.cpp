@@ -144,7 +144,7 @@ void do_takedrug(Character *ch, std::string argument)
         return;
     }
 
-    Object *obj = FindObject(ch, argument, true);
+    auto obj = FindObject(ch, argument, true);
 
     if(obj == nullptr)
     {
@@ -182,10 +182,10 @@ void do_takedrug(Character *ch, std::string argument)
     }
     else
     {
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
         {
-            Act(AT_ACTION, "$n takes $p.", ch, obj, NULL, ActTarget::Room);
-            Act(AT_ACTION, "You take $p.", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n takes $p.", ch, obj, nullptr, ActTarget::Room);
+            Act(AT_ACTION, "You take $p.", ch, obj, nullptr, ActTarget::Char);
         }
 
         if(IsNpc(ch))

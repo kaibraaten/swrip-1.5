@@ -2,9 +2,9 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-ch_ret spell_lightning_bolt(int sn, int level, Character* ch, void* vo)
+ch_ret spell_lightning_bolt(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character* victim = (Character*)vo;
+    Character *victim = vo.Ch;
     static const short dam_each[] =
     {
       1,
@@ -27,13 +27,13 @@ ch_ret spell_lightning_bolt(int sn, int level, Character* ch, void* vo)
     level = umin(level, sizeof(dam_each) / sizeof(dam_each[0]) - 1);
     level = umax(0, level);
     dam = GetRandomNumberFromRange(dam_each[level] / 2, dam_each[level] * 2);
-    
-    if (SaveVsSpellStaff(level, victim))
+
+    if(SaveVsSpellStaff(level, victim))
         dam /= 2;
-    
-    if (IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
+
+    if(IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         dam -= (int)(dam / 4);
-    
+
     return InflictDamage(ch, victim, dam, sn);
 }
 

@@ -6,10 +6,10 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_remove_trap(int sn, int level, Character* ch, void* vo)
+ch_ret spell_remove_trap(int sn, int level, Character* ch, const Vo &vo)
 {
-    Object* obj = nullptr;
-    Object* trap = nullptr;
+    std::shared_ptr<Object> obj;
+    std::shared_ptr<Object> trap;
     bool found = false;
     int retcode = rNONE;
     std::shared_ptr<Skill> skill = GetSkill(sn);

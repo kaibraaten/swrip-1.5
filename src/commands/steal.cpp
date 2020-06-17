@@ -13,7 +13,7 @@ void do_steal(Character *ch, std::string argument)
     std::string arg1;
     std::string arg2;
     Character *victim = NULL, *mst = NULL;
-    Object *obj = NULL, *obj_next = NULL;
+    std::shared_ptr<Object> obj, obj_next;
     int percent = 0, xp = 0;
 
     argument = OneArgument(argument, arg1);
@@ -98,7 +98,6 @@ void do_steal(Character *ch, std::string argument)
 
                 if(IsNpc(mst))
                     return;
-
             }
         }
 

@@ -10,8 +10,6 @@
 
 void do_throw(Character *ch, std::string argument)
 {
-    Object *obj = NULL;
-    Object *tmpobj = NULL;
     std::string arg;
     std::string arg2;
     std::string arg3;
@@ -32,7 +30,7 @@ void do_throw(Character *ch, std::string argument)
         return;
     }
 
-    obj = GetEquipmentOnCharacter(ch, WEAR_MISSILE_WIELD);
+    auto obj = GetEquipmentOnCharacter(ch, WEAR_MISSILE_WIELD);
 
     if(!obj || !NiftyIsName(arg, obj->Name))
         obj = GetEquipmentOnCharacter(ch, WEAR_HOLD);
@@ -224,6 +222,7 @@ void do_throw(Character *ch, std::string argument)
         return;
     }
 
+    std::shared_ptr<Object> tmpobj;
 
     if(obj == GetEquipmentOnCharacter(ch, WEAR_WIELD)
        && (tmpobj = GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD)) != NULL)

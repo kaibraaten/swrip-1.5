@@ -375,7 +375,7 @@ void HuntVictim(Character *ch)
 
     /* hunting with snipe */
     {
-        Object *wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
+        std::shared_ptr<Object> wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
         if (wield != NULL && wield->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER)
         {

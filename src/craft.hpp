@@ -63,7 +63,7 @@ class MaterialFoundEventArgs
 {
 public:
     class CraftingSession *CraftingSession = nullptr;
-    class Object *Object = nullptr;
+    std::shared_ptr<class Object> Object;
     bool KeepFinding = false;
 };
 
@@ -71,14 +71,14 @@ class SetObjectStatsEventArgs
 {
 public:
     class CraftingSession *CraftingSession = nullptr;
-    class Object *Object = nullptr;
+    std::shared_ptr<class Object> Object;
 };
 
 class FinishedCraftingEventArgs
 {
 public:
     class CraftingSession *CraftingSession = nullptr;
-    class Object *Object = nullptr;
+    std::shared_ptr<class Object> Object;
 };
 
 class CheckRequirementsEventArgs
@@ -104,27 +104,27 @@ public:
     std::bitset<Flag::MAX> Flags;
 };
 
-CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial*, int duration,
-    std::shared_ptr<ProtoObject> protoObject, std::initializer_list<size_t> flags);
-void FreeCraftRecipe(CraftRecipe*);
-CraftingSession *AllocateCraftingSession(CraftRecipe*, Character *engineer,
-    const std::string &commandArgument);
-void FreeCraftingSession(CraftingSession*);
-Character *GetEngineer(const CraftingSession*);
+CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial *, int duration,
+                                 std::shared_ptr<ProtoObject> protoObject, std::initializer_list<size_t> flags);
+void FreeCraftRecipe(CraftRecipe *);
+CraftingSession *AllocateCraftingSession(CraftRecipe *, Character *engineer,
+                                         const std::string &commandArgument);
+void FreeCraftingSession(CraftingSession *);
+Character *GetEngineer(const CraftingSession *);
 void AddInterpretArgumentsCraftingHandler(CraftingSession *session, void *userData,
-    void(*handler)(void*, InterpretArgumentsEventArgs*));
+                                          void(*handler)(void *, InterpretArgumentsEventArgs *));
 void AddCheckRequirementsCraftingHandler(CraftingSession *session, void *userData,
-    void(*handler)(void*, CheckRequirementsEventArgs*));
+                                         void(*handler)(void *, CheckRequirementsEventArgs *));
 void AddMaterialFoundCraftingHandler(CraftingSession *session, void *userData,
-    void(*handler)(void*, MaterialFoundEventArgs*));
+                                     void(*handler)(void *, MaterialFoundEventArgs *));
 void AddSetObjectStatsCraftingHandler(CraftingSession *session, void *userData,
-    void(*handler)(void*, SetObjectStatsEventArgs*));
+                                      void(*handler)(void *, SetObjectStatsEventArgs *));
 void AddFinishedCraftingHandler(CraftingSession *session, void *userData,
-    void(*handler)(void*, FinishedCraftingEventArgs*));
+                                void(*handler)(void *, FinishedCraftingEventArgs *));
 void AddAbortCraftingHandler(CraftingSession *session, void *userData,
-    void(*handler)(void*, AbortCraftingEventArgs*));
+                             void(*handler)(void *, AbortCraftingEventArgs *));
 
-void StartCrafting(CraftingSession*);
+void StartCrafting(CraftingSession *);
 
 bool IsCrafting(const Character *ch);
 

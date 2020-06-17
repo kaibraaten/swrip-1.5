@@ -87,13 +87,14 @@ class MProg;
 class Stats;
 class SaveVs;
 class Home;
+struct Vo;
 
 /*
  * Function types.
  */
-using CmdFun = void( Character *ch, std::string argument );
-using SpecFun = bool( Character *ch );
-using SpellFun = ch_ret( int sn, int level, Character *ch, void *vo );
+using CmdFun = void(Character *ch, std::string argument);
+using SpecFun = bool(Character *ch);
+using SpellFun = ch_ret(int sn, int level, Character *ch, const Vo &vo);
 
 using vnum_t = long;
 using LogType = int;

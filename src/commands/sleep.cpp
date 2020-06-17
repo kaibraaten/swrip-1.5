@@ -6,7 +6,7 @@
 
 void do_sleep(Character *ch, std::string argument)
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
 
     switch(ch->Position)
     {

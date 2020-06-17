@@ -133,7 +133,7 @@ void do_override(Character *ch, std::string argument)
     {
         ch->Echo("&RYou open the bay doors of the remote ship.");
         Act(AT_PLAIN, "$n flips a switch on the control panel.",
-            ch, NULL, argument.c_str(), ActTarget::Room);
+            ch, nullptr, argument, ActTarget::Room);
         eShip->BayOpen = true;
         sprintf(buf, "%s's bay doors open.", eShip->Name.c_str());
         EchoToNearbyShips(AT_YELLOW, ship, buf);

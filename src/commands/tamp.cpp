@@ -5,7 +5,7 @@
 
 void do_tamp(Character *ch, std::string arg)
 {
-    Object *pipe_obj = nullptr;
+    std::shared_ptr<Object> pipe_obj;
 
     if(arg.empty())
     {

@@ -4,9 +4,9 @@
 #include "skill.hpp"
 #include "race.hpp"
 
-ch_ret spell_dispel_magic(int sn, int level, Character* ch, void* vo)
+ch_ret spell_dispel_magic(int sn, int level, Character* ch, const Vo &vo)
 {
-    Character* victim = (Character*)vo;
+    Character* victim = vo.Ch;
     int affected_by = 0;
     int cnt = 0;
     std::shared_ptr<Skill> skill = GetSkill(sn);

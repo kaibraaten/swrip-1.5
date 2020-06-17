@@ -5,10 +5,10 @@
 
 void do_ammo(Character *ch, std::string argument)
 {
-    Object *ammo = nullptr;
+    std::shared_ptr<Object> ammo;
     bool checkammo = false;
     int charge = 0;
-    Object *wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
+    auto wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
     if(wield != nullptr)
     {

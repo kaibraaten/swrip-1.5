@@ -7,21 +7,21 @@
 
 struct UserData
 {
-  int Charge = 0;
-  bool HasStaff = false;
-  std::string ItemName;
+    int Charge = 0;
+    bool HasStaff = false;
+    std::string ItemName;
 };
 
-static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
-static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
-static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
-static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
-static void FreeUserData( struct UserData *ud );
+static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
+static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args);
+static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
+static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
+static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
+static void FreeUserData(struct UserData *ud);
 
-void do_makeblade( Character *ch, std::string argument )
+void do_makeblade(Character *ch, std::string argument)
 {
-  static const CraftingMaterial materials[] =
+    static const CraftingMaterial materials[] =
     {
      { ITEM_TOOLKIT,    {} },
      { ITEM_OVEN,       {} },
@@ -30,129 +30,129 @@ void do_makeblade( Character *ch, std::string argument )
      { ITEM_STAFF,      { Flag::Crafting::Extract, Flag::Crafting::Optional } },
      { ITEM_NONE,       {} }
     };
-  CraftRecipe *recipe = AllocateCraftRecipe( gsn_makeblade, materials,
-                                             25, GetProtoObject( OBJ_VNUM_CRAFTING_BLADE ),
-					     { Flag::Crafting::NeedsWorkshop } );
-  CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-  UserData *data = new UserData();
+    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makeblade, materials,
+                                              25, GetProtoObject(OBJ_VNUM_CRAFTING_BLADE),
+                                              { Flag::Crafting::NeedsWorkshop });
+    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    UserData *data = new UserData();
 
-  AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
-  AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
-  AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
-  AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
-  AddAbortCraftingHandler( session, data, AbortHandler );
+    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
+    AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
+    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
+    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
+    AddAbortCraftingHandler(session, data, AbortHandler);
 
-  StartCrafting( session );
+    StartCrafting(session);
 }
 
-static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
+static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
 {
-  Character *ch = GetEngineer( args->CraftingSession );
-  struct UserData *ud = (struct UserData*) userData;
+    Character *ch = GetEngineer(args->CraftingSession);
+    struct UserData *ud = (struct UserData *)userData;
 
-  if ( !args->CommandArguments.empty() )
+    if(!args->CommandArguments.empty())
     {
-      ud->ItemName = args->CommandArguments;
+        ud->ItemName = args->CommandArguments;
     }
-  else
+    else
     {
-      ch->Echo("&RUsage: Makeblade <name>\r\n&w" );
-      args->AbortSession = true;
-    }
-}
-
-static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
-{
-  struct UserData *ud = (struct UserData*) userData;
-
-  if( args->Object->ItemType == ITEM_STAFF )
-    {
-      ud->HasStaff = true;
-    }
-
-  if( args->Object->ItemType == ITEM_BATTERY )
-    {
-      ud->Charge = args->Object->Value[OVAL_BATTERY_CHARGE];
+        ch->Echo("&RUsage: Makeblade <name>\r\n&w");
+        args->AbortSession = true;
     }
 }
 
-static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
+static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args)
 {
-  struct UserData *ud = (struct UserData*) userData;
-  char buf[MAX_STRING_LENGTH] = {'\0'};
-  Object *weapon = args->Object;
+    struct UserData *ud = (struct UserData *)userData;
 
-  weapon->ItemType = ITEM_WEAPON;
-  weapon->WearFlags.set(Flag::Wear::Wield);
-  weapon->WearFlags.set(Flag::Wear::Take);
-  weapon->Weight = 3;
-
-  strcpy( buf, ud->ItemName.c_str() );
-
-  if (!ud->HasStaff )
+    if(args->Object->ItemType == ITEM_STAFF)
     {
-      strcat( buf, " vibro-blade blade" );
-    }
-  else
-    {
-      strcat( buf, " force pike" );
+        ud->HasStaff = true;
     }
 
-  weapon->Name = buf;
-  weapon->ShortDescr = ud->ItemName;
-  weapon->Description = Capitalize( weapon->ShortDescr + " was left here." );
-
-  auto backstab = std::make_shared<Affect>();
-  backstab->Type               = -1;
-  backstab->Duration           = -1;
-  backstab->Location           = GetAffectType( "backstab" );
-  backstab->Modifier           = weapon->Level / 3;
-  weapon->Add(backstab);
-  ++top_affect;
-
-  if ( !ud->HasStaff )
+    if(args->Object->ItemType == ITEM_BATTERY)
     {
-      auto hitroll = std::make_shared<Affect>();
-      hitroll->Type               = -1;
-      hitroll->Duration           = -1;
-      hitroll->Location           = GetAffectType( "hitroll" );
-      hitroll->Modifier           = -2;
-      weapon->Add(hitroll);
-      ++top_affect;
+        ud->Charge = args->Object->Value[OVAL_BATTERY_CHARGE];
     }
-
-  weapon->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
-
-  if( !ud->HasStaff )
-    {
-      weapon->Value[OVAL_WEAPON_TYPE] = WEAPON_VIBRO_BLADE;
-    }
-  else
-    {
-      weapon->Value[OVAL_WEAPON_TYPE] = WEAPON_FORCE_PIKE;
-    }
-
-  weapon->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (weapon->Level / 20 + 8 + weapon->Value[OVAL_WEAPON_TYPE]);
-  weapon->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (weapon->Level / 10 + 18 + weapon->Value[OVAL_WEAPON_TYPE]);
-
-  weapon->Value[OVAL_WEAPON_CHARGE] = ud->Charge;
-  weapon->Value[OVAL_WEAPON_MAX_CHARGE] = ud->Charge;
-  weapon->Cost = weapon->Value[OVAL_WEAPON_SIZE_DAM_DIE]*10;
 }
 
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
+static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
 {
-  struct UserData *ud = (struct UserData*) userData;
-  FreeUserData( ud );
+    UserData *ud = (UserData *)userData;
+    char buf[MAX_STRING_LENGTH] = { '\0' };
+    auto weapon = args->Object;
+
+    weapon->ItemType = ITEM_WEAPON;
+    weapon->WearFlags.set(Flag::Wear::Wield);
+    weapon->WearFlags.set(Flag::Wear::Take);
+    weapon->Weight = 3;
+
+    strcpy(buf, ud->ItemName.c_str());
+
+    if(!ud->HasStaff)
+    {
+        strcat(buf, " vibro-blade blade");
+    }
+    else
+    {
+        strcat(buf, " force pike");
+    }
+
+    weapon->Name = buf;
+    weapon->ShortDescr = ud->ItemName;
+    weapon->Description = Capitalize(weapon->ShortDescr + " was left here.");
+
+    auto backstab = std::make_shared<Affect>();
+    backstab->Type = -1;
+    backstab->Duration = -1;
+    backstab->Location = GetAffectType("backstab");
+    backstab->Modifier = weapon->Level / 3;
+    weapon->Add(backstab);
+    ++top_affect;
+
+    if(!ud->HasStaff)
+    {
+        auto hitroll = std::make_shared<Affect>();
+        hitroll->Type = -1;
+        hitroll->Duration = -1;
+        hitroll->Location = GetAffectType("hitroll");
+        hitroll->Modifier = -2;
+        weapon->Add(hitroll);
+        ++top_affect;
+    }
+
+    weapon->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+
+    if(!ud->HasStaff)
+    {
+        weapon->Value[OVAL_WEAPON_TYPE] = WEAPON_VIBRO_BLADE;
+    }
+    else
+    {
+        weapon->Value[OVAL_WEAPON_TYPE] = WEAPON_FORCE_PIKE;
+    }
+
+    weapon->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int)(weapon->Level / 20 + 8 + weapon->Value[OVAL_WEAPON_TYPE]);
+    weapon->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int)(weapon->Level / 10 + 18 + weapon->Value[OVAL_WEAPON_TYPE]);
+
+    weapon->Value[OVAL_WEAPON_CHARGE] = ud->Charge;
+    weapon->Value[OVAL_WEAPON_MAX_CHARGE] = ud->Charge;
+    weapon->Cost = weapon->Value[OVAL_WEAPON_SIZE_DAM_DIE] * 10;
 }
 
-static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
+static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
 {
-  struct UserData *ud = (struct UserData*) userData;
-  FreeUserData( ud );
+    struct UserData *ud = (struct UserData *)userData;
+    FreeUserData(ud);
 }
 
-static void FreeUserData( struct UserData *ud )
+static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
 {
-  delete ud;
+    struct UserData *ud = (struct UserData *)userData;
+    FreeUserData(ud);
+}
+
+static void FreeUserData(struct UserData *ud)
+{
+    delete ud;
 }

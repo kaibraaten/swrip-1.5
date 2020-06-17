@@ -63,7 +63,7 @@ void do_chaff(Character *ch, std::string argument)
 
         Act(AT_PLAIN, "You flip the chaff release switch.", ch, nullptr, nullptr, ActTarget::Char);
         Act(AT_PLAIN, "$n flips a switch on the control panel.", ch,
-            nullptr, argument.c_str(), ActTarget::Room);
+            nullptr, argument, ActTarget::Room);
         EchoToCockpit(AT_YELLOW, ship, "A burst of chaff is released from the ship.");
         LearnFromSuccess(ch, gsn_weaponsystems);
     }

@@ -3,9 +3,9 @@
 #include "character.hpp"
 #include "act.hpp"
 
-ch_ret spell_scorching_surge(int sn, int level, Character *ch, void *vo)
+ch_ret spell_scorching_surge(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character *victim = (Character *)vo;
+    Character *victim = vo.Ch;
     static const short dam_each[] =
     {
       1,
@@ -35,8 +35,8 @@ ch_ret spell_scorching_surge(int sn, int level, Character *ch, void *vo)
         dam -= (int)(dam / 4);
 
     Act(AT_MAGIC, "A fiery current lashes through $n's body!",
-        ch, NULL, NULL, ActTarget::Room);
+        ch, nullptr, nullptr, ActTarget::Room);
     Act(AT_MAGIC, "A fiery current lashes through your body!",
-        ch, NULL, NULL, ActTarget::Char);
+        ch, nullptr, nullptr, ActTarget::Char);
     return InflictDamage(ch, victim, (dam * 1.4), sn);
 }

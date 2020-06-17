@@ -82,14 +82,14 @@ void do_drag(Character *ch, std::string argument)
             if((ship = GetShipInRoom(ch->InRoom, argument)) == NULL)
             {
                 Act(AT_PLAIN, "I see no $T here.",
-                    ch, nullptr, argument.c_str(), ActTarget::Char);
+                    ch, nullptr, argument, ActTarget::Char);
                 return;
             }
 
             if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go in there riding THAT.", ch,
-                    nullptr, argument.c_str(), ActTarget::Char);
+                    nullptr, argument, ActTarget::Char);
                 return;
             }
 
@@ -121,23 +121,23 @@ void do_drag(Character *ch, std::string argument)
                 }
 
                 Act(AT_PLAIN, "$n enters $T.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    NULL, ship->Name, ActTarget::Room);
                 Act(AT_PLAIN, "You enter $T.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Char);
+                    NULL, ship->Name, ActTarget::Char);
                 CharacterFromRoom(ch);
                 CharacterToRoom(ch, to_room);
                 Act(AT_PLAIN, "$n enters the ship.", ch,
-                    NULL, argument.c_str(), ActTarget::Room);
+                    NULL, argument, ActTarget::Room);
                 do_look(ch, "auto");
 
                 Act(AT_PLAIN, "$n enters $T.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    NULL, ship->Name, ActTarget::Room);
                 Act(AT_PLAIN, "You enter $T.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Char);
+                    NULL, ship->Name, ActTarget::Char);
                 CharacterFromRoom(victim);
                 CharacterToRoom(victim, to_room);
                 Act(AT_PLAIN, "$n enters the ship.", victim,
-                    NULL, argument.c_str(), ActTarget::Room);
+                    NULL, argument, ActTarget::Room);
                 do_look(victim, "auto");
                 return;
             }
@@ -161,7 +161,7 @@ void do_drag(Character *ch, std::string argument)
             if(ch->Mount != nullptr)
             {
                 Act(AT_PLAIN, "You can't go out there riding THAT.",
-                    ch, NULL, argument.c_str(), ActTarget::Char);
+                    ch, NULL, argument, ActTarget::Char);
                 return;
             }
 
@@ -203,23 +203,23 @@ void do_drag(Character *ch, std::string argument)
                 }
 
                 Act(AT_PLAIN, "$n exits the ship.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    NULL, ship->Name, ActTarget::Room);
                 Act(AT_PLAIN, "You exits the ship.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Char);
+                    NULL, ship->Name, ActTarget::Char);
                 CharacterFromRoom(ch);
                 CharacterToRoom(ch, to_room);
                 Act(AT_PLAIN, "$n exits $T.", ch,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    NULL, ship->Name, ActTarget::Room);
                 do_look(ch, "auto");
 
                 Act(AT_PLAIN, "$n exits the ship.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    NULL, ship->Name, ActTarget::Room);
                 Act(AT_PLAIN, "You exits the ship.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Char);
+                    NULL, ship->Name, ActTarget::Char);
                 CharacterFromRoom(victim);
                 CharacterToRoom(victim, to_room);
                 Act(AT_PLAIN, "$n exits $T.", victim,
-                    NULL, ship->Name.c_str(), ActTarget::Room);
+                    NULL, ship->Name, ActTarget::Room);
                 do_look(victim, "auto");
                 return;
             }

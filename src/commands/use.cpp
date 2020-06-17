@@ -9,8 +9,8 @@ void do_use(Character *ch, std::string argument)
     std::string arg;
     std::string argd;
     Character *victim = nullptr;
-    Object *device = nullptr;
-    Object *obj = nullptr;
+    std::shared_ptr<Object> device;
+    std::shared_ptr<Object> obj;
     ch_ret retcode = rNONE;
 
     argument = OneArgument(argument, argd);
@@ -82,7 +82,7 @@ void do_use(Character *ch, std::string argument)
 
         if(victim)
         {
-            if(!ObjProgUseTrigger(ch, device, victim, NULL, NULL))
+            if(!ObjProgUseTrigger(ch, device, victim, nullptr, nullptr))
             {
                 Act(AT_MAGIC, "$n uses $p on $N.", ch, device, victim, ActTarget::Room);
                 Act(AT_MAGIC, "You use $p on $N.", ch, device, victim, ActTarget::Char);
@@ -90,7 +90,7 @@ void do_use(Character *ch, std::string argument)
         }
         else
         {
-            if(!ObjProgUseTrigger(ch, device, NULL, obj, NULL))
+            if(!ObjProgUseTrigger(ch, device, nullptr, obj, nullptr))
             {
                 Act(AT_MAGIC, "$n uses $p on $P.", ch, device, obj, ActTarget::Room);
                 Act(AT_MAGIC, "You use $p on $P.", ch, device, obj, ActTarget::Char);

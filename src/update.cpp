@@ -1013,10 +1013,10 @@ static bool MobShouldScavenge(const Character *ch)
 
 static void PerformScavenging(Character *ch)
 {
-    Object *obj_best = NULL;
+    std::shared_ptr<Object> obj_best;
     int max = 1;
 
-    for(Object *obj : ch->InRoom->Objects())
+    for(auto obj : ch->InRoom->Objects())
     {
         if(obj->WearFlags.test(Flag::Wear::Take)
            && obj->Cost > max
@@ -1739,7 +1739,7 @@ static void TickdownLightSources()
     {
         if(ch->TopLevel < LEVEL_IMMORTAL)
         {
-            Object *obj = GetEquipmentOnCharacter(ch, WEAR_LIGHT);
+            auto obj = GetEquipmentOnCharacter(ch, WEAR_LIGHT);
 
             if(obj != nullptr
                && obj->ItemType == ITEM_LIGHT
@@ -2065,12 +2065,11 @@ static void CharacterUpdate()
  */
 static void ObjectUpdate()
 {
-    Object *wield = NULL;
     short AT_TEMP = 0;
 
-    std::list<Object *> copyOfObjectList(Objects->Entities());
+    auto copyOfObjectList = Objects->Entities();
 
-    for(Object *obj : copyOfObjectList)
+    for(auto obj : copyOfObjectList)
     {
         if(IsObjectExtracted(obj))
         {
@@ -2203,7 +2202,7 @@ static void ObjectUpdate()
 
         if(obj->ItemType == ITEM_GRENADE && obj->CarriedBy)
         {
-            wield = GetEquipmentOnCharacter(obj->CarriedBy, WEAR_HOLD);
+            auto wield = GetEquipmentOnCharacter(obj->CarriedBy, WEAR_HOLD);
 
             if(wield == obj)
             {
@@ -2530,7 +2529,7 @@ static void CharacterCheck()
     }
 }
 
-static bool WeaponCanBackstab(const Object *obj)
+static bool WeaponCanBackstab(std::shared_ptr<Object> obj)
 {
     return obj->Value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
         || obj->Value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE;
@@ -2538,7 +2537,7 @@ static bool WeaponCanBackstab(const Object *obj)
 
 static bool PerformBackstab(Character *ch, Character *victim)
 {
-    const Object *obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
+    auto obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
     if(!ch->Mount
        && obj != nullptr
@@ -2927,7 +2926,7 @@ void UpdateHandler()
         RebootCheck(0);
     }
 
-    if(OngoingAuction->Item && --OngoingAuction->Pulse <= 0)
+    if(!OngoingAuction->Item.expired() && --OngoingAuction->Pulse <= 0)
     {
         OngoingAuction->Pulse = PULSE_AUCTION;
         AuctionUpdate();
@@ -2963,7 +2962,7 @@ void UpdateHandler()
     StopTiming(start_time);
 }
 
-void RemovePortal(Object *portal)
+void RemovePortal(std::shared_ptr<Object> portal)
 {
     auto fromRoom = portal->InRoom;
     Character *ch = NULL;
@@ -3053,14 +3052,15 @@ void RebootCheck(time_t reset)
     if(new_boot_time_t <= current_time)
     {
         Character *vch = NULL;
+        auto auctionItem = OngoingAuction->Item.lock();
 
-        if(OngoingAuction->Item)
+        if(auctionItem != nullptr)
         {
             sprintf(buf, "Sale of %s has been stopped by mud.",
-                    OngoingAuction->Item->ShortDescr.c_str());
+                    auctionItem->ShortDescr.c_str());
             TalkAuction(buf);
-            ObjectToCharacter(OngoingAuction->Item, OngoingAuction->Seller);
-            OngoingAuction->Item = NULL;
+            ObjectToCharacter(auctionItem, OngoingAuction->Seller);
+            OngoingAuction->Item.reset();
 
             if(OngoingAuction->Buyer && OngoingAuction->Buyer != OngoingAuction->Seller)
             {
@@ -3117,12 +3117,14 @@ static void AuctionUpdate()
     case GoingTwice:
         if(OngoingAuction->Bet > OngoingAuction->Starting)
         {
-            sprintf(buf, "%s: going %s for %d.", OngoingAuction->Item->ShortDescr.c_str(),
+            auto auctionItem = OngoingAuction->Item.lock();
+            sprintf(buf, "%s: going %s for %d.", auctionItem->ShortDescr.c_str(),
                     ((OngoingAuction->Going == GoingOnce) ? "once" : "twice"), OngoingAuction->Bet);
         }
         else
         {
-            sprintf(buf, "%s: going %s (bid not received yet).", OngoingAuction->Item->ShortDescr.c_str(),
+            auto auctionItem = OngoingAuction->Item.lock();
+            sprintf(buf, "%s: going %s (bid not received yet).", auctionItem->ShortDescr.c_str(),
                     ((OngoingAuction->Going == GoingOnce) ? "once" : "twice"));
         }
 
@@ -3138,28 +3140,29 @@ static void AuctionUpdate()
 
         if(OngoingAuction->Bet > 0 && OngoingAuction->Buyer != OngoingAuction->Seller)
         {
+            auto auctionItem = OngoingAuction->Item.lock();
             sprintf(buf, "%s sold to %s for %d.",
-                    OngoingAuction->Item->ShortDescr.c_str(),
+                    auctionItem->ShortDescr.c_str(),
                     IsNpc(OngoingAuction->Buyer) ? OngoingAuction->Buyer->ShortDescr.c_str() : OngoingAuction->Buyer->Name.c_str(),
                     OngoingAuction->Bet);
             TalkAuction(buf);
 
             Act(AT_ACTION, "The auctioneer materializes before you, and hands you $p.",
-                OngoingAuction->Buyer, OngoingAuction->Item, NULL, ActTarget::Char);
+                OngoingAuction->Buyer, auctionItem, NULL, ActTarget::Char);
             Act(AT_ACTION, "The auctioneer materializes before $n, and hands $m $p.",
-                OngoingAuction->Buyer, OngoingAuction->Item, NULL, ActTarget::Room);
+                OngoingAuction->Buyer, auctionItem, NULL, ActTarget::Room);
 
             if((OngoingAuction->Buyer->CarryWeight
-                + GetObjectWeight(OngoingAuction->Item))
+                + GetObjectWeight(auctionItem))
             > GetCarryCapacityWeight(OngoingAuction->Buyer))
             {
-                Act(AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, ActTarget::Char);
-                Act(AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, ActTarget::Room);
-                ObjectToRoom(OngoingAuction->Item, OngoingAuction->Buyer->InRoom);
+                Act(AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", OngoingAuction->Buyer, auctionItem, NULL, ActTarget::Char);
+                Act(AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", OngoingAuction->Buyer, auctionItem, NULL, ActTarget::Room);
+                ObjectToRoom(auctionItem, OngoingAuction->Buyer->InRoom);
             }
             else
             {
-                ObjectToCharacter(OngoingAuction->Item, OngoingAuction->Buyer);
+                ObjectToCharacter(auctionItem, OngoingAuction->Buyer);
             }
 
             pay = (int)OngoingAuction->Bet * 0.9;
@@ -3168,7 +3171,7 @@ static void AuctionUpdate()
             OngoingAuction->Seller->Gold += pay; /* give him the money, tax 10 % */
             OngoingAuction->Buyer->Echo("The auctioneer pays you %d gold, charging an auction fee of %d.\r\n",
                                         pay, tax);
-            OngoingAuction->Item = NULL; /* reset item */
+            OngoingAuction->Item.reset(); /* reset item */
 
             if(SysData.SaveFlags.test(Flag::AutoSave::Auction))
             {
@@ -3178,32 +3181,33 @@ static void AuctionUpdate()
         }
         else /* not sold */
         {
+            auto auctionItem = OngoingAuction->Item.lock();
             sprintf(buf, "No bids received for %s - object has been removed from auction\r\n.",
-                    OngoingAuction->Item->ShortDescr.c_str());
+                    auctionItem->ShortDescr.c_str());
             TalkAuction(buf);
             Act(AT_ACTION, "The auctioneer appears before you to return $p to you.",
-                OngoingAuction->Seller, OngoingAuction->Item, NULL, ActTarget::Char);
+                OngoingAuction->Seller, auctionItem, NULL, ActTarget::Char);
             Act(AT_ACTION, "The auctioneer appears before $n to return $p to $m.",
-                OngoingAuction->Seller, OngoingAuction->Item, NULL, ActTarget::Room);
+                OngoingAuction->Seller, auctionItem, NULL, ActTarget::Room);
 
             if((OngoingAuction->Seller->CarryWeight
-                + GetObjectWeight(OngoingAuction->Item))
+                + GetObjectWeight(auctionItem))
     > GetCarryCapacityWeight(OngoingAuction->Seller))
             {
                 Act(AT_PLAIN, "You drop $p as it is just too much to carry"
                     " with everything else you're carrying.", OngoingAuction->Seller,
-                    OngoingAuction->Item, NULL, ActTarget::Char);
+                    auctionItem, NULL, ActTarget::Char);
                 Act(AT_PLAIN, "$n drops $p as it is too much extra weight"
                     " for $m with everything else.", OngoingAuction->Seller,
-                    OngoingAuction->Item, NULL, ActTarget::Room);
-                ObjectToRoom(OngoingAuction->Item, OngoingAuction->Seller->InRoom);
+                    auctionItem, NULL, ActTarget::Room);
+                ObjectToRoom(auctionItem, OngoingAuction->Seller->InRoom);
             }
             else
             {
-                ObjectToCharacter(OngoingAuction->Item, OngoingAuction->Seller);
+                ObjectToCharacter(auctionItem, OngoingAuction->Seller);
             }
 
-            tax = (int)OngoingAuction->Item->Cost * 0.05;
+            tax = (int)auctionItem->Cost * 0.05;
             BoostEconomy(OngoingAuction->Seller->InRoom->Area, tax);
             OngoingAuction->Seller->Echo("The auctioneer charges you an auction fee of %d.\r\n", tax);
 
@@ -3222,6 +3226,6 @@ static void AuctionUpdate()
             }
         }
 
-        OngoingAuction->Item = NULL;
+        OngoingAuction->Item.reset();
     }
 }

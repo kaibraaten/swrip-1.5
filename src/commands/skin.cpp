@@ -7,9 +7,9 @@
 
 void do_skin(Character *ch, std::string argument)
 {
-    Object *corpse = nullptr;
-    Object *obj = nullptr;
-    Object *skin = nullptr;
+    std::shared_ptr<Object> corpse;
+    std::shared_ptr<Object> obj;
+    std::shared_ptr<Object> skin;
     std::string name;
     char buf[MAX_STRING_LENGTH];
 

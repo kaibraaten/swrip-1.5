@@ -409,7 +409,7 @@ void Interpret(Character *ch, std::string argument)
                     if(!pexit->Flags.test(Flag::Exit::Secret))
                     {
                         Act(AT_PLAIN, "The $d is closed.",
-                            ch, NULL, pexit->Keyword.c_str(), ActTarget::Char);
+                            ch, nullptr, pexit->Keyword, ActTarget::Char);
                     }
                     else
                     {

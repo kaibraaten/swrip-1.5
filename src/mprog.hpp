@@ -4,6 +4,7 @@
 #include <memory>
 #include <list>
 #include "types.hpp"
+#include "vo.hpp"
 
 class MProg
 {
@@ -33,8 +34,8 @@ class MPROG_ACT_LIST
 public:
     std::string buf;
     Character *ch = nullptr;
-    Object *obj = nullptr;
-    void *vo = nullptr;
+    std::shared_ptr<Object> obj;
+    Vo vo;
     std::shared_ptr<Room> room;
 };
 
@@ -58,42 +59,42 @@ void ProgBug(const std::string &str, const Character *mob);
 void InitializeSupermob();
 void ReleaseSupermob();
 void MobProgWordlistCheck(const std::string &arg, Character *mob,
-                          Character* actor, Object* object,
-                          void* vo, int type);
-void MobProgPercentCheck(Character *mob, Character* actor,
-                         Object* object, void* vo, int type);
-void MobProgActTrigger(const std::string &buf, Character* mob,
-                       Character* ch, Object* obj, void* vo);
-void MobProgBribeTrigger(Character* mob, Character* ch, int amount);
-void MobProgEntryTrigger(Character* mob);
-void MobProgGiveTrigger(Character* mob, Character* ch, Object* obj);
-void MobProgGreetTrigger(Character* mob);
-void MobProgFightTrigger(Character* mob, Character* ch);
-void MobProgHitPercentTrigger(Character* mob, Character* ch);
-void MobProgDeathTrigger(Character *killer, Character* mob);
-void MobProgRandomTrigger(Character* mob);
-void MobProgSpeechTrigger(const std::string &txt, Character* mob);
+                          Character *actor, std::shared_ptr<Object> object,
+                          const Vo &vo, int type);
+void MobProgPercentCheck(Character *mob, Character *actor,
+                         std::shared_ptr<Object> object, const Vo &vo, int type);
+void MobProgActTrigger(const std::string &buf, Character *mob,
+                       Character *ch, std::shared_ptr<Object> obj, const Vo &vo);
+void MobProgBribeTrigger(Character *mob, Character *ch, int amount);
+void MobProgEntryTrigger(Character *mob);
+void MobProgGiveTrigger(Character *mob, Character *ch, std::shared_ptr<Object> obj);
+void MobProgGreetTrigger(Character *mob);
+void MobProgFightTrigger(Character *mob, Character *ch);
+void MobProgHitPercentTrigger(Character *mob, Character *ch);
+void MobProgDeathTrigger(Character *killer, Character *mob);
+void MobProgRandomTrigger(Character *mob);
+void MobProgSpeechTrigger(const std::string &txt, Character *mob);
 void MobProgScriptTrigger(Character *mob);
 void MobProgHourTrigger(Character *mob);
 void MobProgTimeTrigger(Character *mob);
 void RoomProgSetSupermob(std::shared_ptr<Room> room);
 void ObjProgSpeechTrigger(const std::string &txt, Character *ch);
-void ObjProgRandomTrigger(Object *obj);
-void ObjProgWearTrigger(Character *ch, Object *obj);
-bool ObjProgUseTrigger(Character *ch, Object *obj,
-                       Character *vict, Object *targ, void *vo);
-void ObjProgRemoveTrigger(Character *ch, Object *obj);
-void ObjProgExamineTrigger(Character *ch, Object *obj);
-void ObjProgSacTrigger(Character *ch, Object *obj);
-void ObjProgDamageTrigger(Character *ch, Object *obj);
-void ObjProgRepairTrigger(Character *ch, Object *obj);
-void ObjProgDropTrigger(Character *ch, Object *obj);
-void ObjProgZapTrigger(Character *ch, Object *obj);
+void ObjProgRandomTrigger(std::shared_ptr<Object> obj);
+void ObjProgWearTrigger(Character *ch, std::shared_ptr<Object> obj);
+bool ObjProgUseTrigger(Character *ch, std::shared_ptr<Object> obj,
+                       Character *vict, std::shared_ptr<Object> targ, const Vo &vo);
+void ObjProgRemoveTrigger(Character *ch, std::shared_ptr<Object> obj);
+void ObjProgExamineTrigger(Character *ch, std::shared_ptr<Object> obj);
+void ObjProgSacTrigger(Character *ch, std::shared_ptr<Object> obj);
+void ObjProgDamageTrigger(Character *ch, std::shared_ptr<Object> obj);
+void ObjProgRepairTrigger(Character *ch, std::shared_ptr<Object> obj);
+void ObjProgDropTrigger(Character *ch, std::shared_ptr<Object> obj);
+void ObjProgZapTrigger(Character *ch, std::shared_ptr<Object> obj);
 void ObjProgGreetTrigger(Character *ch);
-void ObjProgGetTrigger(Character *ch, Object *obj);
+void ObjProgGetTrigger(Character *ch, std::shared_ptr<Object> obj);
 char *ObjProgTypeToName(int type);
-void ObjProgPullTrigger(Character *ch, Object *obj);
-void ObjProgPushTrigger(Character *ch, Object *obj);
+void ObjProgPullTrigger(Character *ch, std::shared_ptr<Object> obj);
+void ObjProgPushTrigger(Character *ch, std::shared_ptr<Object> obj);
 
 void RoomProgLeaveTrigger(Character *ch);
 void RoomProgEnterTrigger(Character *ch);
@@ -107,10 +108,10 @@ void RoomProgTimeTrigger(Character *ch);
 void RoomProgHourTrigger(Character *ch);
 char *RoomProgTypeToName(int type);
 
-void ObjProgActTrigger(const std::string &buf, Object *mobj, Character *ch,
-                       Object *obj, void *vo);
+void ObjProgActTrigger(const std::string &buf, std::shared_ptr<Object> mobj, Character *ch,
+                       std::shared_ptr<Object> obj, const Vo &vo);
 void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, Character *ch,
-                        Object *obj, void *vo);
+                        std::shared_ptr<Object> obj, const Vo &vo);
 
 
 #endif

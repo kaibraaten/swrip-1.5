@@ -11,7 +11,7 @@ static void appraise_all(Character *ch, Character *keeper, const char *fixstr);
 void do_appraise(Character *ch, std::string arg)
 {
     char buf[MAX_STRING_LENGTH];
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
     int cost = 0;
     const char *fixstr = nullptr;
 
@@ -80,7 +80,7 @@ static void appraise_all(Character *ch, Character *keeper, const char *fixstr)
     char buf[MAX_STRING_LENGTH], *pbuf = buf;
     int cost = 0, total = 0;
 
-    for(const Object *obj : ch->Objects())
+    for(auto obj : ch->Objects())
     {
         if(obj->WearLoc == WEAR_NONE
            && CanSeeObject(ch, obj)

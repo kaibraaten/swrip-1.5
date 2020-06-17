@@ -6,7 +6,7 @@
 
 void do_sit(Character *ch, std::string argument)
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
 
     if(ch->Position == POS_FIGHTING)
     {
@@ -19,14 +19,14 @@ void do_sit(Character *ch, std::string argument)
     {
         obj = GetObjectInList(ch, argument, ch->InRoom->Objects());
 
-        if(obj == NULL)
+        if(obj == nullptr)
         {
             ch->Echo("You don't see that here.\r\n");
             return;
         }
     }
 
-    if(obj != NULL)
+    if(obj != nullptr)
     {
         if(obj->ItemType != ITEM_FURNITURE
            || (!obj->Value[OVAL_FURNITURE_PREPOSITION]))
@@ -35,7 +35,7 @@ void do_sit(Character *ch, std::string argument)
             return;
         }
 
-        if(obj != NULL && ch->On != obj
+        if(obj != nullptr && ch->On != obj
            && CountCharactersOnObject(obj) >= obj->Value[OVAL_FURNITURE_CAPACITY])
         {
             Act(AT_ACTION, "There's no more room on $p.", ch, obj, NULL, ActTarget::Char);

@@ -9,7 +9,7 @@
 void do_backstab(Character *ch, std::string arg)
 {
     Character *victim = nullptr;
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
     int percent = 0;
 
     if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))

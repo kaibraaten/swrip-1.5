@@ -13,7 +13,7 @@
 
 void do_pick(Character *ch, std::string arg)
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     std::shared_ptr<Exit> pexit;
     std::shared_ptr<Ship> ship;
 
@@ -93,7 +93,7 @@ void do_pick(Character *ch, std::string arg)
         pexit->Flags.reset(Flag::Exit::Locked);
         ch->Echo("*Click*\r\n");
         Act(AT_ACTION, "$n picks the $d.",
-            ch, NULL, pexit->Keyword.c_str(), ActTarget::Room);
+            ch, nullptr, pexit->Keyword, ActTarget::Room);
         LearnFromSuccess(ch, gsn_pick_lock);
 
         /* pick the other side */
@@ -226,9 +226,9 @@ void do_pick(Character *ch, std::string arg)
         {
             ship->HatchOpen = true;
             Act(AT_PLAIN, "You pick the lock and open the hatch on $T.",
-                ch, NULL, ship->Name.c_str(), ActTarget::Char);
+                ch, nullptr, ship->Name, ActTarget::Char);
             Act(AT_PLAIN, "$n picks open the hatch on $T.",
-                ch, NULL, ship->Name.c_str(), ActTarget::Room);
+                ch, nullptr, ship->Name, ActTarget::Room);
             EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Entrance),
                        "The hatch opens from the outside.");
             LearnFromSuccess(ch, gsn_pickshiplock);

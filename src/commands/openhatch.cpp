@@ -37,7 +37,7 @@ void do_openhatch(Character *ch, std::string argument)
 
                 ship->HatchOpen = true;
                 ch->Echo("&GYou open the hatch.\r\n");
-                Act(AT_PLAIN, "$n opens the hatch.", ch, NULL, argument.c_str(), ActTarget::Room);
+                Act(AT_PLAIN, "$n opens the hatch.", ch, nullptr, argument, ActTarget::Room);
                 sprintf(buf, "The hatch on %s opens.", ship->Name.c_str());
                 EchoToRoom(AT_YELLOW, GetRoom(ship->Location), buf);
                 return;
@@ -54,7 +54,7 @@ void do_openhatch(Character *ch, std::string argument)
 
     if(!ship)
     {
-        Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), ActTarget::Char);
+        Act(AT_PLAIN, "I see no $T here.", ch, nullptr, argument, ActTarget::Char);
         return;
     }
 
@@ -74,13 +74,13 @@ void do_openhatch(Character *ch, std::string argument)
     {
         ship->HatchOpen = true;
         Act(AT_PLAIN, "You open the hatch on $T.",
-            ch, NULL, ship->Name.c_str(), ActTarget::Char);
+            ch, nullptr, ship->Name, ActTarget::Char);
         Act(AT_PLAIN, "$n opens the hatch on $T.",
-            ch, NULL, ship->Name.c_str(), ActTarget::Room);
+            ch, nullptr, ship->Name, ActTarget::Room);
         EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Entrance), "The hatch opens from the outside.");
-        return;
     }
-
-    ch->Echo("&GIt's already open!\r\n");
+    else
+    {
+        ch->Echo("&GIt's already open!\r\n");
+    }
 }
-

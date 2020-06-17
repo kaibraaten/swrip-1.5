@@ -35,7 +35,7 @@ void do_force(Character *ch, std::string argument)
             if(!IsNpc(vch) && GetTrustLevel(vch) < GetTrustLevel(ch))
             {
                 Act(AT_IMMORT, "$n forces you to '$t'.",
-                    ch, argument.c_str(), vch, ActTarget::Vict);
+                    ch, argument, vch, ActTarget::Vict);
                 Interpret(vch, argument);
             }
         }
@@ -64,7 +64,7 @@ void do_force(Character *ch, std::string argument)
         }
 
         Act(AT_IMMORT, "$n forces you to '$t'.",
-            ch, argument.c_str(), victim, ActTarget::Vict);
+            ch, argument, victim, ActTarget::Vict);
         Interpret(victim, argument);
     }
 

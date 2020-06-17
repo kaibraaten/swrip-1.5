@@ -888,19 +888,9 @@ Character *CreateMobile(std::shared_ptr<ProtoMobile> proto)
     return mob;
 }
 
-/*
- * Create an instance of an object.
- */
-static Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level)
+std::shared_ptr<Object> CreateObject(std::shared_ptr<ProtoObject> proto, int level)
 {
-    assert(pObjIndex != nullptr);
-    Object *obj = new Object(pObjIndex, level);
-    return obj;
-}
-
-Object *CreateObject(std::shared_ptr<ProtoObject> proto, int level)
-{
-    Object *obj = AllocateObject(proto, level);
+    auto obj = std::make_shared<Object>(proto, level);
     Objects->Add(obj);
     ++proto->Count;
     ++numobjsloaded;

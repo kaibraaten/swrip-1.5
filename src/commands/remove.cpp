@@ -16,9 +16,9 @@ void do_remove(Character *ch, std::string arg)
 
     if(!StrCmp(arg, "all"))  /* SB Remove all */
     {
-        std::list<Object *> carriedObjects(ch->Objects());
+        auto carriedObjects = ch->Objects();
 
-        for(Object *obj : carriedObjects)
+        for(auto obj : carriedObjects)
         {
             if(obj->WearLoc != WEAR_NONE && CanSeeObject(ch, obj))
             {
@@ -29,7 +29,7 @@ void do_remove(Character *ch, std::string arg)
         return;
     }
 
-    Object *obj = GetWornObject(ch, arg);
+    auto obj = GetWornObject(ch, arg);
 
     if(obj == nullptr)
     {
@@ -37,12 +37,12 @@ void do_remove(Character *ch, std::string arg)
         return;
     }
 
-    Object *alreadyWorn = GetEquipmentOnCharacter(ch, obj->WearLoc);
+    auto alreadyWorn = GetEquipmentOnCharacter(ch, obj->WearLoc);
 
     if(alreadyWorn != obj)
     {
         Act(AT_PLAIN, "You must remove $p first.",
-            ch, alreadyWorn, NULL, ActTarget::Char);
+            ch, alreadyWorn, nullptr, ActTarget::Char);
         return;
     }
 

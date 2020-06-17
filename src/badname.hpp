@@ -6,11 +6,11 @@
 class BadName
 {
 public:
-  std::string Name;
+    std::string Name;
 };
 
-bool IsBadName( const std::string &name );
-void AddBadName( const std::string &name );
-void RemoveBadName( const std::string &name );
+bool IsBadName(const std::string &name);
+void AddBadName(const std::string &name);
+void RemoveBadName(const std::string &name);
 
 #endif

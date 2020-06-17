@@ -10,75 +10,75 @@
    itself, but this had best be the last command in the MUDprogram
    otherwise ugly stuff will happen */
 
-void do_mppurge( Character *ch, std::string arg )
+void do_mppurge(Character *ch, std::string arg)
 {
     Character *victim = nullptr;
 
-    if ( IsAffectedBy( ch, Flag::Affect::Charm))
+    if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
-    if ( !IsNpc( ch ) )
+    if(!IsNpc(ch))
     {
         ch->Echo("Huh?\r\n");
         return;
     }
 
-    if ( arg.empty() )
+    if(arg.empty())
     {
-        std::list<Character*> npcsToPurge = Filter(ch->InRoom->Characters(),
-                                                   [ch](auto npc)
-                                                   {
-                                                       return IsNpc(npc) && npc != ch;
-                                                   });
+        auto npcsToPurge = Filter(ch->InRoom->Characters(),
+                                  [ch](auto npc)
+                                  {
+                                      return IsNpc(npc) && npc != ch;
+                                  });
 
-        for(Character *npc : npcsToPurge)
+        for(auto npc : npcsToPurge)
         {
             ExtractCharacter(npc, true);
         }
 
-        std::list<Object*> objectsToPurge(ch->InRoom->Objects());
+        auto objectsToPurge = ch->InRoom->Objects();
 
-        for(Object *obj : objectsToPurge)
+        for(auto obj : objectsToPurge)
         {
-            ExtractObject( obj );
+            ExtractObject(obj);
         }
 
         return;
     }
 
-    if ( (victim = GetCharacterInRoom( ch, arg )) == NULL )
+    if((victim = GetCharacterInRoom(ch, arg)) == NULL)
     {
-        Object *obj = GetObjectHere(ch, arg);
+        auto obj = GetObjectHere(ch, arg);
 
-        if ( obj != nullptr )
+        if(obj != nullptr)
         {
-            ExtractObject( obj );
+            ExtractObject(obj);
         }
         else
         {
-            ProgBug( "Mppurge - Bad argument", ch );
+            ProgBug("Mppurge - Bad argument", ch);
         }
 
         return;
     }
 
-    if ( !IsNpc( victim ) )
+    if(!IsNpc(victim))
     {
-        ProgBug( "Mppurge - Trying to purge a PC", ch );
+        ProgBug("Mppurge - Trying to purge a PC", ch);
         return;
     }
 
-    if ( victim == ch )
+    if(victim == ch)
     {
-        ProgBug( "Mppurge - Trying to purge oneself", ch );
+        ProgBug("Mppurge - Trying to purge oneself", ch);
         return;
     }
 
-    if ( IsNpc( victim ) && victim->Prototype->Vnum == MOB_VNUM_SUPERMOB )
+    if(IsNpc(victim) && victim->Prototype->Vnum == MOB_VNUM_SUPERMOB)
     {
-        ProgBug( "Mppurge: trying to purge supermob", ch );
+        ProgBug("Mppurge: trying to purge supermob", ch);
         return;
     }
 
-    ExtractCharacter( victim, true );
+    ExtractCharacter(victim, true);
 }

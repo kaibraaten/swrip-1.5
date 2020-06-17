@@ -37,7 +37,7 @@
   */
 void MakeFire(std::shared_ptr<Room> in_room, short timer)
 {
-    Object *fire = CreateObject(GetProtoObject(OBJ_VNUM_FIRE), 0);
+    auto fire = CreateObject(GetProtoObject(OBJ_VNUM_FIRE), 0);
 
     fire->Timer = NumberFuzzy(timer);
     ObjectToRoom(fire, in_room);
@@ -46,9 +46,9 @@ void MakeFire(std::shared_ptr<Room> in_room, short timer)
 /*
  * Make a trap.
  */
-Object *MakeTrap(int v0, int v1, int v2, int v3)
+std::shared_ptr<Object> MakeTrap(int v0, int v1, int v2, int v3)
 {
-    Object *trap = CreateObject(GetProtoObject(OBJ_VNUM_TRAP), 0);
+    auto trap = CreateObject(GetProtoObject(OBJ_VNUM_TRAP), 0);
 
     trap->Timer = 0;
     trap->Value[OVAL_TRAP_CHARGE] = v0;
@@ -63,11 +63,11 @@ Object *MakeTrap(int v0, int v1, int v2, int v3)
 /*
  * Turn an object into scraps.          -Thoric
  */
-void MakeScraps(Object *obj)
+void MakeScraps(std::shared_ptr<Object> obj)
 {
-    Object *scraps = CreateObject(GetProtoObject(OBJ_VNUM_SCRAPS), 0);
-    Object *tmpobj = NULL;
-    Character *ch = NULL;
+    auto scraps = CreateObject(GetProtoObject(OBJ_VNUM_SCRAPS), 0);
+    std::shared_ptr<Object> tmpobj;
+    Character *ch = nullptr;
 
     SeparateOneObjectFromGroup(obj);
     scraps->Timer = GetRandomNumberFromRange(5, 15);
@@ -144,7 +144,7 @@ void MakeScraps(Object *obj)
  */
 void MakeCorpse(Character *ch)
 {
-    Object *corpse = nullptr;
+    std::shared_ptr<Object> corpse;
     std::string name;
 
     if(IsNpc(ch))
@@ -201,9 +201,9 @@ void MakeCorpse(Character *ch)
     corpse->ShortDescr = FormatString(corpse->ShortDescr.c_str(), name.c_str());
     corpse->Description = FormatString(corpse->Description.c_str(), name.c_str());
 
-    std::list<Object *> carriedObjects(ch->Objects());
+    auto carriedObjects = ch->Objects();
 
-    for(Object *obj : carriedObjects)
+    for(auto obj : carriedObjects)
     {
         ObjectFromCharacter(obj);
 
@@ -223,7 +223,7 @@ void MakeCorpse(Character *ch)
 
 void MakeBloodstain(Character *ch)
 {
-    Object *obj = CreateObject(GetProtoObject(OBJ_VNUM_BLOODSTAIN), 0);
+    auto obj = CreateObject(GetProtoObject(OBJ_VNUM_BLOODSTAIN), 0);
     obj->Timer = GetRandomNumberFromRange(1, 2);
     ObjectToRoom(obj, ch->InRoom);
 }
@@ -231,11 +231,11 @@ void MakeBloodstain(Character *ch)
 /*
  * make some coinage
  */
-Object *CreateMoney(int amount)
+std::shared_ptr<Object> CreateMoney(int amount)
 {
     assert(amount > 0);
 
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
 
     if(amount == 1)
     {

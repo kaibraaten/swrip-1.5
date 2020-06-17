@@ -83,7 +83,7 @@ static size_t CountCraftingMaterials(const CraftingMaterial *material);
 static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMaterials);
 static bool CheckSkillLevel(const CraftingSession *session);
 static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo);
-static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, const Object *obj);
+static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, std::shared_ptr<Object> obj);
 static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *eventArgs);
 static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args);
 
@@ -126,7 +126,6 @@ static void AfterDelay(CraftingSession *session)
     int the_chance = ch->PCData->Learned[recipe->Skill];
     bool hasMaterials = CheckMaterials(session, true);
     int level = ch->PCData->Learned[recipe->Skill];
-    Object *object = NULL;
     std::shared_ptr<ProtoObject> proto = recipe->Prototype;
     std::string itemType = GetItemTypeNameExtended(proto->ItemType, proto->Value[OVAL_WEAPON_TYPE]);
     SetObjectStatsEventArgs eventArgs;
@@ -144,7 +143,7 @@ static void AfterDelay(CraftingSession *session)
         return;
     }
 
-    object = CreateObject(proto, level);
+    auto object = CreateObject(proto, level);
 
     eventArgs.CraftingSession = session;
     eventArgs.Object = object;
@@ -383,9 +382,9 @@ static bool CheckMaterials(CraftingSession *session, bool extract)
     bool foundAll = true;
     FoundMaterial *material = NULL;
 
-    std::list<Object *> carriedObjects(ch->Objects());
+    auto carriedObjects = ch->Objects();
 
-    for(Object *obj : carriedObjects)
+    for(auto obj : carriedObjects)
     {
         material = GetUnfoundMaterial(session, obj);
 
@@ -440,7 +439,7 @@ static bool CheckMaterials(CraftingSession *session, bool extract)
     return foundAll;
 }
 
-static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, const Object *obj)
+static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, std::shared_ptr<Object> obj)
 {
     FoundMaterial *material = session->FoundMaterials;
 

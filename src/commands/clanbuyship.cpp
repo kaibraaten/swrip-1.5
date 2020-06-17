@@ -47,7 +47,7 @@ void do_clanbuyship(Character *ch, std::string argument)
 
         if(!ship)
         {
-            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), ActTarget::Char);
+            Act(AT_PLAIN, "I see no $T here.", ch, NULL, argument, ActTarget::Char);
             return;
         }
     }
@@ -91,7 +91,7 @@ void do_clanbuyship(Character *ch, std::string argument)
              clan->Name.c_str(), price);
 
     Act(AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.", ch,
-        NULL, argument.c_str(), ActTarget::Room);
+        NULL, argument, ActTarget::Room);
 
     ship->Owner = clan->Name;
     Ships->Save(ship);

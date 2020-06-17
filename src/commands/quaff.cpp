@@ -8,7 +8,7 @@
 
 void do_quaff(Character *ch, std::string argument)
 {
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
     ch_ret retcode = rNONE;
 
     if(argument.empty())
@@ -26,8 +26,10 @@ void do_quaff(Character *ch, std::string argument)
             do_drink(ch, obj->Name);
         else
         {
-            Act(AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...", ch, obj, NULL, ActTarget::Room);
-            Act(AT_ACTION, "You bring $p up to your mouth and try to drink from it...", ch, obj, NULL, ActTarget::Char);
+            Act(AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...",
+                ch, obj, nullptr, ActTarget::Room);
+            Act(AT_ACTION, "You bring $p up to your mouth and try to drink from it...",
+                ch, obj, nullptr, ActTarget::Char);
         }
         return;
     }
@@ -47,8 +49,10 @@ void do_quaff(Character *ch, std::string argument)
 
     if(obj->InObject)
     {
-        Act(AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, ActTarget::Char);
-        Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, ActTarget::Room);
+        Act(AT_PLAIN, "You take $p from $P.", ch,
+            obj, obj->InObject, ActTarget::Char);
+        Act(AT_PLAIN, "$n takes $p from $P.",
+            ch, obj, obj->InObject, ActTarget::Room);
     }
 
     /*
@@ -57,13 +61,13 @@ void do_quaff(Character *ch, std::string argument)
     if(ch->Fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48))
     {
         Act(AT_MAGIC, "$n accidentally drops $p and it smashes into a thousand fragments.",
-            ch, obj, NULL, ActTarget::Room);
+            ch, obj, nullptr, ActTarget::Room);
         Act(AT_MAGIC, "Oops... $p gets knocked from your hands and smashes into pieces!",
-            ch, obj, NULL, ActTarget::Char);
+            ch, obj, nullptr, ActTarget::Char);
     }
     else
     {
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
         {
             Act(AT_ACTION, "$n quaffs $p.", ch, obj, NULL, ActTarget::Room);
             Act(AT_ACTION, "You quaff $p.", ch, obj, NULL, ActTarget::Char);
@@ -72,13 +76,13 @@ void do_quaff(Character *ch, std::string argument)
         SetWaitState(ch, PULSE_PER_SECOND / 4);
 
         GainCondition(ch, COND_THIRST, 1);
-        retcode = CastSpellWithObject(obj->Value[1], obj->Value[0], ch, ch, NULL);
+        retcode = CastSpellWithObject(obj->Value[1], obj->Value[0], ch, ch, nullptr);
 
         if(retcode == rNONE)
-            retcode = CastSpellWithObject(obj->Value[2], obj->Value[0], ch, ch, NULL);
+            retcode = CastSpellWithObject(obj->Value[2], obj->Value[0], ch, ch, nullptr);
 
         if(retcode == rNONE)
-            retcode = CastSpellWithObject(obj->Value[3], obj->Value[0], ch, ch, NULL);
+            retcode = CastSpellWithObject(obj->Value[3], obj->Value[0], ch, ch, nullptr);
     }
 
     if(cur_obj == obj->Serial)

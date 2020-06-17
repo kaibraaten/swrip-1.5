@@ -120,7 +120,7 @@ void do_target(Character *ch, std::string arg)
         {
             ch->Echo("&GTracking target.\r\n");
             Act(AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
-                NULL, arg.c_str(), ActTarget::Room);
+                nullptr, nullptr, ActTarget::Room);
             AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_target, SUB_PAUSE);
             ch->dest_buf = arg;
             return;

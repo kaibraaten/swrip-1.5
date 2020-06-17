@@ -9,7 +9,7 @@
 
 void do_brandish(Character *ch, std::string argument)
 {
-    Object *staff = NULL;
+    std::shared_ptr<Object> staff;
     ch_ret retcode = rNONE;
     int sn = 0;
 
@@ -37,7 +37,7 @@ void do_brandish(Character *ch, std::string argument)
 
     if(staff->Value[OVAL_STAFF_CHARGES] > 0)
     {
-        if(!ObjProgUseTrigger(ch, staff, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, staff, nullptr, nullptr, nullptr))
         {
             Act(AT_MAGIC, "$n brandishes $p.", ch, staff, NULL, ActTarget::Room);
             Act(AT_MAGIC, "You brandish $p.", ch, staff, NULL, ActTarget::Char);

@@ -270,9 +270,9 @@ static void ShowMapToCharacter(const Character *ch)
 void DrawMap(const Character *ch, const std::string &desc)
 {
     int x = 0, y = 0;
-    Object *device = NULL;
+    auto device = GetEquipmentOnCharacter(ch, WEAR_HOLD);
 
-    if ((device = GetEquipmentOnCharacter(ch, WEAR_HOLD)) == NULL)
+    if (device == nullptr)
     {
         ch->Echo("You must have a scanner to draw a map of the surrounding area.\r\n");
         return;

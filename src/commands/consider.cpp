@@ -4,7 +4,7 @@
 
 void do_consider(Character *ch, std::string arg)
 {
-    const Character *victim = nullptr;
+    Character *victim = nullptr;
     std::string msg;
     int diff = 0;
 

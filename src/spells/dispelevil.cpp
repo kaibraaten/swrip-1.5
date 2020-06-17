@@ -4,10 +4,10 @@
 #include "skill.hpp"
 #include "act.hpp"
 
-ch_ret spell_dispel_evil(int sn, int level, Character *ch, void *vo)
+ch_ret spell_dispel_evil(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character *victim = (Character *)vo;
-    int dam;
+    Character *victim = vo.Ch;
+    int dam = 0;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
     if(!IsNpc(ch) && IsEvil(ch))

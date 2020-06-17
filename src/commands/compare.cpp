@@ -17,7 +17,7 @@ void do_compare(Character *ch, std::string argument)
         return;
     }
 
-    const Object *obj1 = GetCarriedObject(ch, arg1);
+    auto obj1 = GetCarriedObject(ch, arg1);
 
     if(obj1 == nullptr)
     {
@@ -25,11 +25,11 @@ void do_compare(Character *ch, std::string argument)
         return;
     }
 
-    const Object *obj2 = nullptr;
+    std::shared_ptr<Object> obj2;
 
     if(arg2.empty())
     {
-        for(const Object *iter : ch->Objects())
+        for(auto iter : ch->Objects())
         {
             if(iter->WearLoc != WEAR_NONE
                && CanSeeObject(ch, iter)

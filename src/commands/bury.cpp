@@ -17,7 +17,7 @@ void do_bury(Character *ch, std::string arg)
         return;
     }
 
-    bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
+    bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL) != nullptr;
     auto obj = GetObjectInListReverse(ch, arg, ch->InRoom->Objects());
 
     if(obj == nullptr)

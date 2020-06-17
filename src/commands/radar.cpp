@@ -52,7 +52,7 @@ void do_radar(Character *ch, std::string argument)
         return;
     }
 
-    if(ship->Spaceobject == NULL)
+    if(ship->Spaceobject == nullptr)
     {
         ch->Echo("&RYou can't do that unless the ship is flying in realspace!\r\n");
         return;
@@ -68,7 +68,7 @@ void do_radar(Character *ch, std::string argument)
         return;
     }
 
-    Act(AT_PLAIN, "$n checks the radar.", ch, NULL, argument.c_str(), ActTarget::Room);
+    Act(AT_PLAIN, "$n checks the radar.", ch, nullptr, argument, ActTarget::Room);
     SetCharacterColor(AT_RED, ch);
 
     for(auto spaceobj : Spaceobjects)

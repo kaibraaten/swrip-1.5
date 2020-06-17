@@ -39,7 +39,7 @@ void LuaGetfield(lua_State *L, const std::string &key, T *value,
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         assignValue(L, idx, value);
     }
@@ -53,7 +53,7 @@ void LuaLoadTable(lua_State *L, const std::string &key, CallableT getFields, Use
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         getFields(L, ud);
     }
@@ -75,11 +75,11 @@ void LuaLoadArray(lua_State *L, const std::string &key,
     auto idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
 
-    if (!lua_isnil(L, ++idx))
+    if(!lua_isnil(L, ++idx))
     {
         lua_pushnil(L);
 
-        while (lua_next(L, -2))
+        while(lua_next(L, -2))
         {
             auto subscript = lua_tointeger(L, -2);
             callback(L, subscript, userData);
@@ -111,7 +111,7 @@ void LuaPushCollection(lua_State *L, CollectionT collection, const std::string &
 
 void LuaGetfieldString(lua_State *L, const std::string &key, std::string *value);
 void LuaGetfieldString(lua_State *L, const std::string &key,
-                       std::function<void(const std::string&)> assignValue);
+                       std::function<void(const std::string &)> assignValue);
 void LuaGetfieldInt(lua_State *L, const std::string &key, int *value);
 void LuaGetfieldInt(lua_State *L, const std::string &key,
                     std::function<void(int)> assignValue);
@@ -120,7 +120,7 @@ void LuaGetfieldLong(lua_State *L, const std::string &key,
                      std::function<void(long)> assignValue);
 void LuaGetfieldShort(lua_State *L, const std::string &key, short *value);
 void LuaGetfieldShort(lua_State *L, const std::string &key,
-                     std::function<void(short)> assignValue);
+                      std::function<void(short)> assignValue);
 void LuaGetfieldBool(lua_State *L, const std::string &key, bool *value);
 void LuaGetfieldBool(lua_State *L, const std::string &key,
                      std::function<void(bool)> assignValue);
@@ -132,18 +132,18 @@ void LuaLoadDataFile(const std::string &filename,
                      int(*callback)(lua_State *L),
                      const std::string &callbackFunctionName);
 void LuaSaveDataFile(const std::string &filename,
-                     void(*pushData)(lua_State *L, const void*),
+                     void(*pushData)(lua_State *L, const void *),
                      const std::string &data, const void *userData);
 void LuaPushFlags(lua_State *L, unsigned long flags,
-                  const std::array<const char * const, Flag::MAX> &nameArray,
+                  const std::array<const char *const, Flag::MAX> &nameArray,
                   const std::string &key);
 void LuaPushFlags(lua_State *L, unsigned long flags,
-                  const char * const nameArray[], const std::string &key);
+                  const char *const nameArray[], const std::string &key);
 void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
-                  const std::array<const char * const, Flag::MAX> &nameArray,
+                  const std::array<const char *const, Flag::MAX> &nameArray,
                   const std::string &key);
 void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
-                  const char * const nameArray[], const std::string &key);
+                  const char *const nameArray[], const std::string &key);
 std::bitset<Flag::MAX> LuaLoadFlags(lua_State *L, const std::string &key);
 void LuaPushLanguages(lua_State *L, unsigned long languages, const std::string &key);
 
@@ -160,12 +160,12 @@ std::list<std::shared_ptr<Affect>> LuaLoadObjectAffects(lua_State *L,
                                                         const std::string &key = "Affects");
 std::list<std::shared_ptr<Affect>> LuaLoadProtoObjectAffects(lua_State *L,
                                                              const std::string &key = "Affects");
-void LuaPushObjects(lua_State *L, const std::list<Object*> &objects,
+void LuaPushObjects(lua_State *L, const std::list<std::shared_ptr<Object>> &objects,
                     const std::string &key = "Objects");
-std::list<Object*> LuaLoadObjects(lua_State *L, const std::string &key = "Objects");
-void LuaPushMobiles(lua_State *L, const std::list<Character*> &mobiles,
+std::list<std::shared_ptr<Object>> LuaLoadObjects(lua_State *L, const std::string &key = "Objects");
+void LuaPushMobiles(lua_State *L, const std::list<Character *> &mobiles,
                     const std::string &key = "Mobiles");
-std::list<Character*> LuaLoadMobiles(lua_State *L, const std::string &key);
+std::list<Character *> LuaLoadMobiles(lua_State *L, const std::string &key);
 void LuaPushVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key);
 void LuaLoadVector3(lua_State *L, std::shared_ptr<Vector3> vec, const std::string &key);
 void LuaPushSaveVs(lua_State *L, const SaveVs *saveVs, const std::string &key = "SaveVs");
@@ -179,18 +179,18 @@ void LuaPushExtraDescriptions(lua_State *L,
                               const std::list<std::shared_ptr<ExtraDescription>> &extras);
 std::list<std::shared_ptr<ExtraDescription>> LuaLoadExtraDescriptions(lua_State *L);
 void LuaPushCharacter(lua_State *L, const Character *ch,
-                      std::function<void(lua_State*, const Character*)> pushExtra);
+                      std::function<void(lua_State *, const Character *)> pushExtra);
 void LuaLoadCharacter(lua_State *L, Character *ch,
-                      std::function<void(lua_State*, Character*)> loadExtra);
+                      std::function<void(lua_State *, Character *)> loadExtra);
 
 #define PushCurrentAndMax( L, key, structure ) LuaPushCurrentAndMax( (L), (key), (structure.Current), (structure.Max) )
 #define LoadCurrentAndMax( L, key, structure ) LuaLoadCurrentAndMax( (L), (key), (&structure.Current), (&structure.Max) )
 void LuaPushMudProgs(lua_State *L, const MProg *mprog);
 void LuaPushSpecFun(lua_State *L, size_t idx, SpecFun *specfun);
-void LuaLoadSpecFun(lua_State *L, size_t idx, std::vector<SpecFun*> *specfuns);
+void LuaLoadSpecFun(lua_State *L, size_t idx, std::vector<SpecFun *> *specfuns);
 
 template<typename EntityT>
-void AssignSpecFuns(const EntityT &mob, const std::vector<SpecFun*> &specfuns)
+void AssignSpecFuns(const EntityT &mob, const std::vector<SpecFun *> &specfuns)
 {
     if(!specfuns.empty())
     {
@@ -198,7 +198,7 @@ void AssignSpecFuns(const EntityT &mob, const std::vector<SpecFun*> &specfuns)
 
         if(specfuns.size() > 1)
         {
-            mob->spec_2  = specfuns[1];
+            mob->spec_2 = specfuns[1];
         }
     }
 }

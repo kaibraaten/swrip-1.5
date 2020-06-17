@@ -49,7 +49,7 @@ void do_recharge(Character *ch, std::string argument)
 
     ch->Echo("&GRecharging shields.\r\n");
     Act(AT_PLAIN, "$n pulls back a lever on the control panel.",
-        ch, NULL, argument.c_str(), ActTarget::Room);
+        ch, nullptr, argument, ActTarget::Room);
 
     LearnFromSuccess(ch, gsn_shipsystems);
 

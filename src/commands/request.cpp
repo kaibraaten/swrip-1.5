@@ -98,12 +98,13 @@ void do_request(Character *ch, std::string arg)
         ch->Echo("&RThat ship's bay doors are already open!\r\n");
         return;
     }
+
     if(the_chance && !CheckPilot(ch, eShip))
         LearnFromSuccess(ch, gsn_fake_signal);
 
     ch->Echo("You open the bay doors of the remote ship.\r\n");
     Act(AT_PLAIN, "$n flips a switch on the control panel.",
-        ch, nullptr, arg.c_str(), ActTarget::Room);
+        ch, nullptr, arg, ActTarget::Room);
     eShip->BayOpen = true;
     sprintf(buf, "%s's bay doors open.", eShip->Name.c_str());
     EchoToNearbyShips(AT_YELLOW, ship, buf);

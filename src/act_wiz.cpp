@@ -100,7 +100,7 @@ std::shared_ptr<Room> FindLocation(const Character *ch, const std::string &arg)
         return victim->InRoom;
     }
 
-    const Object *obj = GetObjectAnywhere(ch, arg);
+    auto obj = GetObjectAnywhere(ch, arg);
 
     if (obj != nullptr)
     {

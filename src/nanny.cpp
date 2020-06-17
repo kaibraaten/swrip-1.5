@@ -612,7 +612,6 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 
     if (ch->TopLevel == 0)
     {
-        Object *obj = nullptr;
         int iLang = 0;
 
         ch->PermStats.Lck = GetRandomNumberFromRange(6, 20);
@@ -725,7 +724,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 
         /* New players don't have to earn some eq */
 
-        obj = CreateObject(GetProtoObject(OBJ_VNUM_SCHOOL_GLOWROD), 0);
+        auto obj = CreateObject(GetProtoObject(OBJ_VNUM_SCHOOL_GLOWROD), 0);
         ObjectToCharacter(obj, ch);
         EquipCharacter(ch, obj, WEAR_LIGHT);
 

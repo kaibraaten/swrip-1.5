@@ -9,13 +9,13 @@ void do_purge(Character *ch, std::string arg)
 {
     if(arg.empty())
     {
-        const auto charactersToExtract = Filter(ch->InRoom->Characters(),
-                                                [ch](const auto victim)
-                                                {
-                                                    return IsNpc(victim)
-                                                        && victim != ch
-                                                        && !victim->Flags.test(Flag::Mob::Polymorphed);
-                                                });
+        auto charactersToExtract = Filter(ch->InRoom->Characters(),
+                                          [ch](const auto victim)
+                                          {
+                                              return IsNpc(victim)
+                                                  && victim != ch
+                                                  && !victim->Flags.test(Flag::Mob::Polymorphed);
+                                          });
         for(auto victim : charactersToExtract)
         {
             ExtractCharacter(victim, true);
@@ -37,7 +37,7 @@ void do_purge(Character *ch, std::string arg)
     }
 
     Character *victim = NULL;
-    Object *obj = NULL;
+    std::shared_ptr<Object> obj;
 
     /* fixed to get things in room first -- i.e., purge portal (obj),
      * no more purging mobs with that keyword in another room first

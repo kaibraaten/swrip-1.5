@@ -7,7 +7,7 @@
 
 void do_arm(Character *ch, std::string argument)
 {
-    Object *obj = nullptr;
+    std::shared_ptr<Object> obj;
 
     if(IsNpc(ch) || !ch->PCData)
     {

@@ -5,59 +5,59 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_possess(int sn, int level, Character* ch, void* vo)
+ch_ret spell_possess(int sn, int level, Character *ch, const Vo &vo)
 {
-    Character* victim = nullptr;
+    Character *victim = nullptr;
     char buf[MAX_STRING_LENGTH];
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (ch->Desc->Original)
+    if(ch->Desc->Original)
     {
         ch->Echo("You are not in your original state.\r\n");
         return rSPELL_FAILED;
     }
 
-    if ((victim = GetCharacterInRoom(ch, spell_target_name)) == NULL)
+    if((victim = GetCharacterInRoom(ch, spell_target_name)) == NULL)
     {
         ch->Echo("They aren't here!\r\n");
         return rSPELL_FAILED;
     }
 
-    if (victim == ch)
+    if(victim == ch)
     {
         ch->Echo("You can't possess yourself!\r\n");
         return rSPELL_FAILED;
     }
 
-    if (!IsNpc(victim))
+    if(!IsNpc(victim))
     {
         ch->Echo("You can't possess another player!\r\n");
         return rSPELL_FAILED;
     }
 
-    if (IsDroid(victim))
+    if(IsDroid(victim))
     {
         ch->Echo("The brain of a machine confuses you.\r\n");
         return rSPELL_FAILED;
     }
 
-    if (victim->Desc)
+    if(victim->Desc)
     {
         ch->Echo("%s is already possessed.\r\n", victim->ShortDescr.c_str());
         return rSPELL_FAILED;
     }
 
-    if (victim->Immune.test(Flag::Ris::Magic))
+    if(victim->Immune.test(Flag::Ris::Magic))
     {
         ImmuneCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;
     }
 
-    if (IsAffectedBy(victim, Flag::Affect::Possess)
-        || level < (victim->TopLevel + 30)
-        || victim->Desc
-        || !Chance(ch, 25))
+    if(IsAffectedBy(victim, Flag::Affect::Possess)
+       || level < (victim->TopLevel + 30)
+       || victim->Desc
+       || !Chance(ch, 25))
     {
         FailedCasting(skill, ch, victim, NULL);
         return rSPELL_FAILED;

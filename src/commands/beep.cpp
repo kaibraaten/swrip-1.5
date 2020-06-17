@@ -124,8 +124,8 @@ void do_beep(Character *ch, std::string argument)
 
     if(CharacterKnowsLanguage(victim, ch->Speaking, ch)
        || (IsNpc(ch) && !ch->Speaking))
-        Act(AT_WHITE, "$n beeps: '$t'", ch, argument.c_str(), victim, ActTarget::Vict);
+        Act(AT_WHITE, "$n beeps: '$t'", ch, argument, victim, ActTarget::Vict);
     else
         Act(AT_WHITE, "$n beeps: '$t'", ch,
-            Scramble(argument, ch->Speaking).c_str(), victim, ActTarget::Vict);
+            Scramble(argument, ch->Speaking), victim, ActTarget::Vict);
 }

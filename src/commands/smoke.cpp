@@ -7,7 +7,7 @@
 
 void do_smoke(Character *ch, std::string arg)
 {
-    Object *pipe_obj = NULL;
+    std::shared_ptr<Object> pipe_obj;
 
     if(arg.empty())
     {
@@ -42,10 +42,12 @@ void do_smoke(Character *ch, std::string arg)
 
     if(pipe_obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] > 0)
     {
-        if(!ObjProgUseTrigger(ch, pipe_obj, NULL, NULL, NULL))
+        if(!ObjProgUseTrigger(ch, pipe_obj, nullptr, nullptr, nullptr))
         {
-            Act(AT_ACTION, "You draw thoughtfully from $p.", ch, pipe_obj, NULL, ActTarget::Char);
-            Act(AT_ACTION, "$n draws thoughtfully from $p.", ch, pipe_obj, NULL, ActTarget::Room);
+            Act(AT_ACTION, "You draw thoughtfully from $p.",
+                ch, pipe_obj, nullptr, ActTarget::Char);
+            Act(AT_ACTION, "$n draws thoughtfully from $p.",
+                ch, pipe_obj, nullptr, ActTarget::Room);
         }
 
         if(IS_VALID_HERB(pipe_obj->Value[OVAL_PIPE_TOBACCO_HERB])

@@ -145,7 +145,7 @@ void do_tell(Character *ch, std::string argument)
         victim = switched_victim;
 
     Act(AT_TELL, "(&COutgoing Message&B) $N: '$t'",
-        ch, argument.c_str(), victim, ActTarget::Char);
+        ch, argument, victim, ActTarget::Char);
     position = victim->Position;
     victim->Position = POS_STANDING;
 
@@ -153,12 +153,12 @@ void do_tell(Character *ch, std::string argument)
        || (IsNpc(ch) && !ch->Speaking))
     {
         Act(AT_TELL, "(&CIncoming Message&B) $n: '$t'",
-            ch, argument.c_str(), victim, ActTarget::Vict);
+            ch, argument, victim, ActTarget::Vict);
     }
     else
     {
         Act(AT_TELL, "(&CIncoming Message&B) $n: '$t'",
-            ch, Scramble(argument, ch->Speaking).c_str(), victim, ActTarget::Vict);
+            ch, Scramble(argument, ch->Speaking), victim, ActTarget::Vict);
     }
 
     victim->Position = position;
@@ -175,7 +175,7 @@ void do_tell(Character *ch, std::string argument)
 
     if(!IsImmortal(ch) && !sameroom)
     {
-        for(Character *vch : ch->InRoom->Characters())
+        for(auto vch : ch->InRoom->Characters())
         {
             std::string sbuf = argument;
 
@@ -190,7 +190,7 @@ void do_tell(Character *ch, std::string argument)
 
             MOBtrigger = false;
             Act(AT_SAY, "$n says quietly into $s comlink '$t'",
-                ch, speech.c_str(), vch, ActTarget::Vict);
+                ch, speech, vch, ActTarget::Vict);
         }
 
         if(!IsImmortal(victim))

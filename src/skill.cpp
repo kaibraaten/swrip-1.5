@@ -118,9 +118,9 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     if(!skill->SkillFunction)
     {
         ch_ret retcode = rNONE;
-        void *vo = NULL;
+        Vo vo;
         Character *victim = NULL;
-        Object *obj = NULL;
+        std::shared_ptr<Object> obj;
 
         spell_target_name = "";
 
@@ -132,8 +132,6 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
             return true;
 
         case TAR_IGNORE:
-            vo = NULL;
-
             if(argument.empty())
             {
                 if((victim = GetFightingOpponent(ch)) != NULL)
@@ -166,7 +164,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
                 return true;
             }
 
-            vo = (void *)victim;
+            vo = victim;
             break;
 
         case TAR_CHAR_DEFENSIVE:
@@ -182,11 +180,11 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
                 victim = ch;
             }
 
-            vo = (void *)victim;
+            vo = victim;
             break;
 
         case TAR_CHAR_SELF:
-            vo = (void *)ch;
+            vo = ch;
             break;
 
         case TAR_OBJ_INV:
@@ -196,7 +194,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
                 return true;
             }
 
-            vo = (void *)obj;
+            vo = obj;
             break;
         }
 
@@ -206,7 +204,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
         /* check for failure */
         if((GetRandomPercent() + skill->Difficulty * 5) > (IsNpc(ch) ? 75 : GetSkillLevel(ch, sn)))
         {
-            FailedCasting(SkillTable[sn], ch, (Character *)vo, obj);
+            FailedCasting(SkillTable[sn], ch, vo.Ch, obj);
             LearnFromFailure(ch, sn);
 
             if(mana)

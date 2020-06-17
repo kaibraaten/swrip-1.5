@@ -11,7 +11,7 @@
 void do_cutdoor(Character *ch, std::string arg)
 {
     std::shared_ptr<Exit> pexit;
-    const Object *wield = nullptr;
+    std::shared_ptr<Object> wield;
 
     if((wield = GetEquipmentOnCharacter(ch, WEAR_WIELD)) == NULL
        || wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER)
@@ -77,8 +77,8 @@ void do_cutdoor(Character *ch, std::string arg)
 
             pexit->Flags.set(Flag::Exit::Bashed);
 
-            Act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword.c_str(), ActTarget::Char);
-            Act(AT_SKILL, "$n cuts open the $d!", ch, NULL, keyword.c_str(), ActTarget::Room);
+            Act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword, ActTarget::Char);
+            Act(AT_SKILL, "$n cuts open the $d!", ch, NULL, keyword, ActTarget::Room);
             LearnFromSuccess(ch, gsn_cutdoor);
 
             if((to_room = pexit->ToRoom) != NULL
@@ -97,7 +97,7 @@ void do_cutdoor(Character *ch, std::string arg)
                 for(Character *rch : to_room->Characters())
                 {
                     Act(AT_SKILL, "The $d falls open!",
-                        rch, NULL, pexit_rev->Keyword.c_str(), ActTarget::Char);
+                        rch, NULL, pexit_rev->Keyword, ActTarget::Char);
                 }
             }
 
@@ -106,9 +106,9 @@ void do_cutdoor(Character *ch, std::string arg)
         else
         {
             Act(AT_SKILL, "You cut at the $d, but you handle it badly and just score it.",
-                ch, NULL, keyword.c_str(), ActTarget::Char);
+                ch, NULL, keyword, ActTarget::Char);
             Act(AT_SKILL, "$n cuts at the $d, but just scores it.",
-                ch, NULL, keyword.c_str(), ActTarget::Room);
+                ch, NULL, keyword, ActTarget::Room);
             InflictDamage(ch, ch, (ch->HitPoints.Max / 20) + 10, gsn_cutdoor);
             LearnFromFailure(ch, gsn_cutdoor);
         }

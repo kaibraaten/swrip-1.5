@@ -5,38 +5,38 @@
 #include "repos/shiprepository.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_shutdown( Character *ch, std::string argument )
+void do_shutdown(Character *ch, std::string argument)
 {
-  char buf[MAX_STRING_LENGTH] = {'\0'};
-  Character *vch = NULL;
+    char buf[MAX_STRING_LENGTH] = { '\0' };
+    Character *vch = NULL;
 
-  if ( StrCmp( argument, "mud now" ) && StrCmp(argument, "nosave") )
+    if(StrCmp(argument, "mud now") && StrCmp(argument, "nosave"))
     {
-      ch->Echo("Syntax: 'shutdown mud now' or 'shutdown nosave'\r\n");
-      return;
+        ch->Echo("Syntax: 'shutdown mud now' or 'shutdown nosave'\r\n");
+        return;
     }
 
-  if ( OngoingAuction->Item )
-    do_auction( ch, "stop");
+    if(!OngoingAuction->Item.expired())
+        do_auction(ch, "stop");
 
-  sprintf( buf, "Shutdown by %s.", ch->Name.c_str() );
-  AppendFile( ch, SHUTDOWN_FILE, buf );
-  strcat( buf, "\r\n" );
-  do_echo( ch, buf );
+    sprintf(buf, "Shutdown by %s.", ch->Name.c_str());
+    AppendFile(ch, SHUTDOWN_FILE, buf);
+    strcat(buf, "\r\n");
+    do_echo(ch, buf);
 
-  /* Save all characters before booting. */
-  if ( StrCmp(argument, "nosave") )
+    /* Save all characters before booting. */
+    if(StrCmp(argument, "nosave"))
     {
-      for ( vch = FirstCharacter; vch; vch = vch->Next )
+        for(vch = FirstCharacter; vch; vch = vch->Next)
         {
-          if ( !IsNpc( vch ) )
+            if(!IsNpc(vch))
             {
-              PlayerCharacters->Save( vch );
+                PlayerCharacters->Save(vch);
             }
         }
-  
-      Ships->Save();
+
+        Ships->Save();
     }
 
-  mud_down = true;
+    mud_down = true;
 }
