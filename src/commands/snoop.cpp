@@ -62,7 +62,7 @@ void do_snoop(std::shared_ptr<Character> ch, std::string arg)
     {
         for(auto d = ch->Desc->SnoopBy; d; d = d->SnoopBy)
         {
-            if(d->Character == victim || d->Original == victim)
+            if(d->Char == victim || d->Original == victim)
             {
                 ch->Echo("No snoop loops.\r\n");
                 return;

@@ -31,7 +31,7 @@ void do_where(std::shared_ptr<Character> ch, std::string arg)
         for(auto d : Descriptors)
         {
             if((d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING)
-               && (victim = d->Character) != NULL
+               && (victim = d->Char) != NULL
                && !IsNpc(victim)
                && victim->InRoom
                && (victim->InRoom->Area == ch->InRoom->Area

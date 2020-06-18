@@ -388,35 +388,35 @@ static void HandleSocketInput()
             FD_CLR(d->Socket, &in_set);
             FD_CLR(d->Socket, &out_set);
 
-            if (d->Character
+            if (d->Char
                 && (d->ConnectionState == CON_PLAYING
                     || d->ConnectionState == CON_EDITING))
             {
-                PlayerCharacters->Save(d->Character);
+                PlayerCharacters->Save(d->Char);
             }
 
             d->OutBuffer.str("");
             CloseDescriptor(d, true);
             continue;
         }
-        else if ((d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
-                 && d->Idle > 7200 && !d->Character->Flags.test(Flag::Plr::Afk)) /* 30 minutes  */
+        else if ((d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : false)
+                 && d->Idle > 7200 && !d->Char->Flags.test(Flag::Plr::Afk)) /* 30 minutes  */
         {
-            if ((d->Character && d->Character->InRoom) ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
+            if ((d->Char && d->Char->InRoom) ? d->Char->TopLevel <= LEVEL_IMMORTAL : false)
             {
                 WriteToDescriptor(d.get(),
                                   "Idle 30 minutes. Activating AFK flag.\r\n", 0);
-                d->Character->Flags.set(Flag::Plr::Afk);
-                Act(AT_GREY, "$n is now afk due to idle time.", d->Character, nullptr, nullptr, ActTarget::Room);
+                d->Char->Flags.set(Flag::Plr::Afk);
+                Act(AT_GREY, "$n is now afk due to idle time.", d->Char, nullptr, nullptr, ActTarget::Room);
                 continue;
             }
         }
-        else if ((d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
-                 && ((!d->Character && d->Idle > 360)              /* 2 mins */
+        else if ((d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
+                 && ((!d->Char && d->Idle > 360)              /* 2 mins */
                      || (d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
                      || d->Idle > 28800))                             /* 2 hrs  */
         {
-            if (d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
+            if (d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
             {
                 WriteToDescriptor(d.get(),
                                   "Idle timeout... disconnecting.\r\n", 0);
@@ -433,20 +433,20 @@ static void HandleSocketInput()
             {
                 d->Idle = 0;
 
-                if (d->Character)
+                if (d->Char)
                 {
-                    d->Character->IdleTimer = 0;
+                    d->Char->IdleTimer = 0;
                 }
 
                 if (!d->Read())
                 {
                     FD_CLR(d->Socket, &out_set);
 
-                    if (d->Character
+                    if (d->Char
                         && (d->ConnectionState == CON_PLAYING
                             || d->ConnectionState == CON_EDITING))
                     {
-                        PlayerCharacters->Save(d->Character);
+                        PlayerCharacters->Save(d->Char);
                     }
 
                     d->OutBuffer.str("");
@@ -455,9 +455,9 @@ static void HandleSocketInput()
                 }
             }
 
-            if (d->Character && d->Character->Wait > 0)
+            if (d->Char && d->Char->Wait > 0)
             {
-                --d->Character->Wait;
+                --d->Char->Wait;
                 continue;
             }
 
@@ -466,14 +466,14 @@ static void HandleSocketInput()
             if (d->HasInput())
             {
                 d->fCommand = true;
-                StopIdling(d->Character);
+                StopIdling(d->Char);
 
                 std::string cmdline = d->InComm;
                 d->InComm[0] = '\0';
 
-                if (d->Character)
+                if (d->Char)
                 {
-                    SetCurrentGlobalCharacter(d->Character);
+                    SetCurrentGlobalCharacter(d->Char);
                 }
 
                 switch (d->ConnectionState)
@@ -483,12 +483,12 @@ static void HandleSocketInput()
                     break;
 
                 case CON_PLAYING:
-                    d->Character->CmdRecurse = 0;
-                    Interpret(d->Character, cmdline);
+                    d->Char->CmdRecurse = 0;
+                    Interpret(d->Char, cmdline);
                     break;
 
                 case CON_EDITING:
-                    EditBuffer(d->Character, cmdline);
+                    EditBuffer(d->Char, cmdline);
                     break;
                 }
             }
@@ -510,11 +510,11 @@ static void HandleSocketOutput()
         {
             if (!d->FlushBuffer(true))
             {
-                if (d->Character
+                if (d->Char
                     && (d->ConnectionState == CON_PLAYING
                         || d->ConnectionState == CON_EDITING))
                 {
-                    PlayerCharacters->Save(d->Character);
+                    PlayerCharacters->Save(d->Char);
                 }
 
                 d->OutBuffer.str("");
@@ -726,7 +726,7 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
     /* Check for switched people who go link-dead. -- Altrag */
     if (dclose->Original != nullptr)
     {
-        auto ch = dclose->Character;
+        auto ch = dclose->Char;
         
         if (ch != nullptr)
         {
@@ -736,18 +736,18 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
         {
             Log->Bug("Close_socket: dclose->Original without character %s",
                      !dclose->Original->Name.empty() ? dclose->Original->Name.c_str() : "unknown");
-            dclose->Character = dclose->Original;
+            dclose->Char = dclose->Original;
             dclose->Original = nullptr;
         }
     }
 
-    auto ch = dclose->Character;
+    auto ch = dclose->Char;
 
     if (ch != nullptr)
     {
         auto logBuf = FormatString("Closing link to %s.", ch->Name.c_str());
         Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
-        PlayerCharacters->Remove(dclose->Character);
+        PlayerCharacters->Remove(dclose->Char);
 
         if (dclose->ConnectionState == CON_PLAYING
             || dclose->ConnectionState == CON_EDITING)
@@ -758,8 +758,8 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
         else
         {
             /* clear descriptor pointer to get rid of bug message in log */
-            dclose->Character->Desc = nullptr;
-            FreeCharacter(dclose->Character);
+            dclose->Char->Desc = nullptr;
+            FreeCharacter(dclose->Char);
         }
     }
 
@@ -866,8 +866,8 @@ static std::string DefaultPrompt(std::shared_ptr<Character> ch)
 
 void DisplayPrompt(Descriptor *d)
 {
-    std::shared_ptr<Character> ch = d->Character;
-    std::shared_ptr<Character> och = d->Original ? d->Original : d->Character;
+    std::shared_ptr<Character> ch = d->Char;
+    std::shared_ptr<Character> och = d->Original ? d->Original : d->Char;
     const bool ansi = !IsNpc(och) && och->Flags.test(Flag::Plr::Ansi);
     std::string promptBuffer;
     const char *prompt = nullptr;

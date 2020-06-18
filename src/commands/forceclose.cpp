@@ -17,7 +17,7 @@ void do_forceclose(std::shared_ptr<Character> ch, std::string arg)
     {
         if (d->Socket == desc)
         {
-            if (d->Character && GetTrustLevel(d->Character) >= GetTrustLevel(ch))
+            if (d->Char && GetTrustLevel(d->Char) >= GetTrustLevel(ch))
             {
                 ch->Echo("They might not like that...\r\n");
                 return;

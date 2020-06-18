@@ -59,7 +59,7 @@ static std::list<std::shared_ptr<Object>> ExtractedObjectQueue;
 class ExtractedCharacter
 {
 public:
-    std::shared_ptr<class Character> Character;
+    std::shared_ptr<class Character> Char;
     std::shared_ptr<Room> InRoom;
     ch_ret RetCode = rNONE;
     bool Extract = false;
@@ -1285,9 +1285,9 @@ void ExtractCharacter(std::shared_ptr<Character> ch, bool fPull)
 
     if(ch->Desc != nullptr)
     {
-        assert(ch->Desc->Character == ch);
+        assert(ch->Desc->Char == ch);
 
-        ch->Desc->Character = NULL;
+        ch->Desc->Char = NULL;
         CloseDescriptor(ch->Desc, false);
         ch->Desc = NULL;
 
@@ -2326,7 +2326,7 @@ bool CharacterDiedRecently(std::shared_ptr<Character> ch)
     return Find(ExtractedCharacterQueue,
                 [ch](const auto &ccd)
                 {
-                    return ccd->Character == ch;
+                    return ccd->Char == ch;
                 }) != nullptr;
 }
 
@@ -2338,7 +2338,7 @@ void QueueExtractedCharacter(std::shared_ptr<Character> ch, bool extract)
     assert(ch != nullptr);
     std::shared_ptr<ExtractedCharacter> ccd = std::make_shared<ExtractedCharacter>();
 
-    ccd->Character = ch;
+    ccd->Char = ch;
     ccd->InRoom = ch->InRoom;
     ccd->Extract = extract;
 
@@ -2360,7 +2360,7 @@ void CleanCharacterQueue()
     {
         if(ccd->Extract)
         {
-            FreeCharacter(ccd->Character);
+            FreeCharacter(ccd->Char);
         }
 
         --cur_qchars;

@@ -75,9 +75,9 @@ void do_copyover(std::shared_ptr<Character> ch, std::string argument)
 
     for(auto d : descriptors)
     {
-        std::shared_ptr<Character> och = d->Original ? d->Original : d->Character;
+        std::shared_ptr<Character> och = d->Original ? d->Original : d->Char;
 
-        if(!d->Character || d->ConnectionState != CON_PLAYING)  /* drop those logging on */
+        if(!d->Char || d->ConnectionState != CON_PLAYING)  /* drop those logging on */
         {
             WriteToDescriptor(d.get(), "\r\nSorry, we are rebooting."
                               " Come back in a few minutes.\r\n", 0);
@@ -184,23 +184,23 @@ void RecoverFromCopyover()
 
             /* Just In Case,  Someone said this isn't necassary, but _why_
                do we want to dump someone in limbo? */
-            if(!d->Character->InRoom)
-                d->Character->InRoom = GetRoom(ROOM_VNUM_SCHOOL);
+            if(!d->Char->InRoom)
+                d->Char->InRoom = GetRoom(ROOM_VNUM_SCHOOL);
 
             /* Insert in the char_list */
-            AddCharacter(d->Character);
+            AddCharacter(d->Char);
 
-            auto homes = Homes->FindHomesForResident(d->Character->Name);
+            auto homes = Homes->FindHomesForResident(d->Char->Name);
 
             for(auto home : homes)
             {
                 Homes->Load(home);
             }
 
-            CharacterToRoom(d->Character, d->Character->InRoom);
-            do_look(d->Character, "auto noprog");
+            CharacterToRoom(d->Char, d->Char->InRoom);
+            do_look(d->Char, "auto noprog");
 
-            Act(AT_ACTION, "$n materializes!", d->Character, NULL, NULL,
+            Act(AT_ACTION, "$n materializes!", d->Char, NULL, NULL,
                 ActTarget::Room);
             d->ConnectionState = CON_PLAYING;
 

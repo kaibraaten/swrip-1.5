@@ -370,8 +370,8 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
 
     for(auto d : Descriptors)
     {
-        std::shared_ptr<Character> och = d->Original ? d->Original : d->Character;
-        std::shared_ptr<Character> vch = d->Character;
+        std::shared_ptr<Character> och = d->Original ? d->Original : d->Char;
+        std::shared_ptr<Character> vch = d->Char;
 
         if(d->ConnectionState == CON_PLAYING
            && vch != ch
@@ -516,8 +516,8 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
 
     for(auto d : Descriptors)
     {
-        std::shared_ptr<Character> och = d->Original ? d->Original : d->Character;
-        std::shared_ptr<Character> vch = d->Character;
+        std::shared_ptr<Character> och = d->Original ? d->Original : d->Char;
+        std::shared_ptr<Character> vch = d->Char;
 
         if(!och || !vch)
             continue;
@@ -666,7 +666,7 @@ void TalkAuction(const std::string &argument)
 
     for(auto d : Descriptors)
     {
-        std::shared_ptr<Character> original = d->Original ? d->Original : d->Character; /* if switched */
+        std::shared_ptr<Character> original = d->Original ? d->Original : d->Char; /* if switched */
 
         if((d->ConnectionState == CON_PLAYING)
            && !IsBitSet(original->Deaf, CHANNEL_AUCTION)

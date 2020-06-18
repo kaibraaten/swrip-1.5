@@ -28,9 +28,9 @@ void do_return( std::shared_ptr<Character> ch, std::string argument )
         ch->AffectedBy.reset(Flag::Affect::Possess);
     }
 
-    ch->Desc->Character       = ch->Desc->Original;
+    ch->Desc->Char       = ch->Desc->Original;
     ch->Desc->Original        = NULL;
-    ch->Desc->Character->Desc = ch->Desc;
-    ch->Desc->Character->Switched = NULL;
+    ch->Desc->Char->Desc = ch->Desc;
+    ch->Desc->Char->Switched = NULL;
     ch->Desc                  = NULL;
 }

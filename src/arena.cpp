@@ -143,7 +143,7 @@ static void StartGame()
     {
         if(!d->ConnectionState)
         {
-            auto i = d->Character;
+            auto i = d->Char;
 
             if(i == NULL)
             {
@@ -209,7 +209,7 @@ static void FindGameWinner()
 {
     for(auto d : Descriptors)
     {
-        auto ch = d->Original ? d->Original : d->Character;
+        auto ch = d->Original ? d->Original : d->Char;
 
         if(ch == NULL)
         {
@@ -305,7 +305,7 @@ static void DoEndGame()
     {
         if(!d->ConnectionState)
         {
-            auto ch = d->Character;
+            auto ch = d->Char;
 
             if(ch == NULL)
             {
@@ -341,7 +341,7 @@ int CharactersInArena()
 
     for(auto d : Descriptors)
     {
-        auto ch = d->Original ? d->Original : d->Character;
+        auto ch = d->Original ? d->Original : d->Char;
 
         if(ch == NULL)
         {
@@ -416,7 +416,7 @@ static void FindBetWinners(std::shared_ptr<Character> winner)
     {
         if(!d->ConnectionState)
         {
-            auto wch = d->Original ? d->Original : d->Character;
+            auto wch = d->Original ? d->Original : d->Char;
 
             if(wch == NULL)
             {

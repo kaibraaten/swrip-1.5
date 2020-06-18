@@ -47,7 +47,6 @@ void do_group(std::shared_ptr<Character> ch, std::string arg)
 
     if(!StrCmp(arg, "disband"))
     {
-        Character *gch = NULL;
         int count = 0;
 
         if(ch->Leader || ch->Master)

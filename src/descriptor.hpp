@@ -20,7 +20,7 @@ public:
     virtual bool HasInput() const;
 
     std::shared_ptr<Character> Original;
-    std::shared_ptr<class Character> Character;
+    std::shared_ptr<Character> Char;
     
     std::shared_ptr<Descriptor> SnoopBy;
 

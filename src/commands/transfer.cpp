@@ -26,12 +26,12 @@ void do_transfer(std::shared_ptr<Character> ch, std::string argument)
         for(auto d : Descriptors)
         {
             if(d->ConnectionState == CON_PLAYING
-               && d->Character != ch
-               && d->Character->InRoom
-               && CanSeeCharacter(ch, d->Character))
+               && d->Char != ch
+               && d->Char->InRoom
+               && CanSeeCharacter(ch, d->Char))
             {
                 char buf[MAX_STRING_LENGTH] = { '\0' };
-                sprintf(buf, "%s %s", d->Character->Name.c_str(), arg2.c_str());
+                sprintf(buf, "%s %s", d->Char->Name.c_str(), arg2.c_str());
                 do_transfer(ch, buf);
             }
         }

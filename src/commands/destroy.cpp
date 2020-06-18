@@ -120,9 +120,9 @@ static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name)
     std::shared_ptr<Descriptor> d = Find(Descriptors->Entities(),
                                          [name](const auto desc)
                                          {
-                                             return desc->Character != nullptr
-                                             && !IsNpc(desc->Character)
-                                             && !StrCmp(desc->Character->Name, name);
+                                             return desc->Char != nullptr
+                                             && !IsNpc(desc->Char)
+                                             && !StrCmp(desc->Char->Name, name);
                                          });
 
     if (d != nullptr)

@@ -77,7 +77,7 @@ ch_ret spell_possess(int sn, int level, std::shared_ptr<Character> ch, const Vo 
 
     sprintf(buf, "You have possessed %s!\r\n", victim->ShortDescr.c_str());
 
-    ch->Desc->Character = victim;
+    ch->Desc->Char = victim;
     ch->Desc->Original = ch;
     victim->Desc = ch->Desc;
     ch->Desc = NULL;

@@ -144,7 +144,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     char buf[MAX_STRING_LENGTH] = { '\0' };
     bool fOld = false;
     unsigned char chk = 0;
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
 
     if(argument.empty())
     {
@@ -168,7 +168,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 
     fOld = PlayerCharacters->Load(d, argument, true);
 
-    if(!d->Character)
+    if(!d->Char)
     {
         Log->Bug("Bad player file %s@%s.", argument.c_str(), d->Remote.Hostname.c_str());
         d->WriteToBuffer("Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0);
@@ -176,7 +176,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
         return;
     }
 
-    ch = d->Character;
+    ch = d->Char;
 
     auto pban = Bans->Find([d, ch](const auto &b)
                            {
@@ -253,7 +253,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 
 static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
     unsigned char chk = 0;
     char buf[MAX_STRING_LENGTH];
 
@@ -263,7 +263,7 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
     {
         d->WriteToBuffer("Wrong password.\r\n", 0);
         /* clear descriptor pointer to get rid of bug message in log */
-        d->Character->Desc = NULL;
+        d->Char->Desc = NULL;
         CloseDescriptor(d, false);
         return;
     }
@@ -279,9 +279,9 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
 
     if(chk == BERR)
     {
-        if(d->Character && d->Character->Desc)
+        if(d->Char && d->Char->Desc)
         {
-            d->Character->Desc = NULL;
+            d->Char->Desc = NULL;
         }
 
         CloseDescriptor(d, false);
@@ -299,10 +299,10 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
     }
 
     sprintf(buf, "%s", ch->Name.c_str());
-    d->Character->Desc = nullptr;
-    FreeCharacter(d->Character);
+    d->Char->Desc = nullptr;
+    FreeCharacter(d->Char);
     PlayerCharacters->Load(d, buf, false);
-    ch = d->Character;
+    ch = d->Char;
     auto logBuf = FormatString("%s@%s has connected.",
                                ch->Name.c_str(),
                                d->Remote.Hostname.c_str());
@@ -328,7 +328,7 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
 static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
 
     switch(argument[0])
     {
@@ -343,9 +343,9 @@ static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argum
     case 'n': case 'N':
         d->WriteToBuffer("Ok, what IS it, then? ", 0);
         /* clear descriptor pointer to get rid of bug message in log */
-        d->Character->Desc = NULL;
-        FreeCharacter(d->Character);
-        d->Character = NULL;
+        d->Char->Desc = NULL;
+        FreeCharacter(d->Char);
+        d->Char = NULL;
         d->ConnectionState = CON_GET_NAME;
         break;
 
@@ -358,7 +358,7 @@ static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argum
 static void NannyGetNewPassword(std::shared_ptr<Descriptor> d, std::string argument)
 {
     std::string pwdnew;
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
 
     d->WriteToBuffer("\r\n", 2);
 
@@ -383,7 +383,7 @@ static void NannyGetNewPassword(std::shared_ptr<Descriptor> d, std::string argum
 
 static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
 
     d->WriteToBuffer("\r\n", 2);
 
@@ -401,7 +401,7 @@ static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string a
 
 static void NannyGetNewSex(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
 
     switch(argument[0])
     {
@@ -428,7 +428,7 @@ static void NannyGetNewSex(std::shared_ptr<Descriptor> d, std::string argument)
 static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument)
 {
     std::string arg;
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
     int iRace = 0;
 
     argument = OneArgument(argument, arg);
@@ -484,7 +484,7 @@ static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument)
 static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument)
 {
     std::string arg;
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
     int iClass = 0;
 
     argument = OneArgument(argument, arg);
@@ -522,7 +522,7 @@ static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument
 
 static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
 
     switch(argument[0])
     {
@@ -546,7 +546,7 @@ static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument)
 
 static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
 
     if(ch->Flags.test(Flag::Plr::Ansi))
     {
@@ -604,7 +604,7 @@ static bool PutCharacterInCorrectShip(std::shared_ptr<Ship> ship, void *userData
 
 static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
     char buf[MAX_STRING_LENGTH];
 
     d->WriteToBuffer("\r\n&YWelcome to SWRiP 1.5&d\r\n\r\n");
@@ -940,7 +940,7 @@ static void AskForClass(std::shared_ptr<Descriptor> d)
 
 static void AskForStats(std::shared_ptr<Descriptor> d)
 {
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
     char buf[MAX_STRING_LENGTH];
 
     ch->PermStats.Str = GetRandomNumberFromRange(1, 6) + GetRandomNumberFromRange(1, 6) + GetRandomNumberFromRange(1, 6);
@@ -967,7 +967,7 @@ static void AskForStats(std::shared_ptr<Descriptor> d)
 
 static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
 {
-    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> ch = d->Char;
     int ability = 0;
 
     auto logBuf = FormatString("%s@%s new %s.",

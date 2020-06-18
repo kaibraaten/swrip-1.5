@@ -215,10 +215,10 @@ static void RemoveExpiredAffects(std::shared_ptr<Character> ch)
 
             if(paf->Type == gsn_possess)
             {
-                ch->Desc->Character = ch->Desc->Original;
+                ch->Desc->Char = ch->Desc->Original;
                 ch->Desc->Original = nullptr;
-                ch->Desc->Character->Desc = ch->Desc;
-                ch->Desc->Character->Switched = nullptr;
+                ch->Desc->Char->Desc = ch->Desc;
+                ch->Desc->Char->Switched = nullptr;
                 ch->Desc = nullptr;
             }
 
@@ -2648,7 +2648,7 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
             auto d = Find(Descriptors->Entities(),
                           [&victim](const auto descriptor)
                           {
-                              return (victim = descriptor->Character) && !IsNpc(victim);
+                              return (victim = descriptor->Char) && !IsNpc(victim);
                           });
 
             if(d != nullptr)

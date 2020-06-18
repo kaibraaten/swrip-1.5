@@ -155,8 +155,8 @@ void FileSystemLogger::LogStringPlus(const std::string &str, short log_type, sho
     {
         for(auto d : Descriptors)
         {
-            auto och = d->Original ? d->Original : d->Character;
-            auto vch = d->Character;
+            auto och = d->Original ? d->Original : d->Char;
+            auto vch = d->Char;
 
             if(!och || !vch)
             {

@@ -53,12 +53,12 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & 
                 d->WriteToBuffer("Already playing.\r\nName: ", 0);
                 d->ConnectionState = CON_GET_NAME;
 
-                if(d->Character != nullptr)
+                if(d->Char != nullptr)
                 {
                     /* clear descriptor pointer to get rid of bug message in log */
-                    d->Character->Desc = nullptr;
-                    FreeCharacter(d->Character);
-                    d->Character = nullptr;
+                    d->Char->Desc = nullptr;
+                    FreeCharacter(d->Char);
+                    d->Char = nullptr;
                 }
 
                 return BERR;
@@ -66,14 +66,14 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & 
 
             if(!fConn)
             {
-                d->Character->PCData->Password = ch->PCData->Password;
+                d->Char->PCData->Password = ch->PCData->Password;
             }
             else
             {
                 /* clear descriptor pointer to get rid of bug message in log */
-                d->Character->Desc = nullptr;
-                FreeCharacter(d->Character);
-                d->Character = ch;
+                d->Char->Desc = nullptr;
+                FreeCharacter(d->Char);
+                d->Char = ch;
                 ch->Desc = d;
                 ch->IdleTimer = 0;
                 ch->Echo("Reconnecting.\r\n");
@@ -96,13 +96,13 @@ bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string & name)
     for(auto dold : Descriptors)
     {
         if(dold != d
-           && (dold->Character || dold->Original)
+           && (dold->Char || dold->Original)
            && StrCmp(name, dold->Original
-                     ? dold->Original->Name : dold->Character->Name)
+                     ? dold->Original->Name : dold->Char->Name)
            && !StrCmp(dold->Remote.Hostname, d->Remote.Hostname))
         {
-            if(d->Character->TopLevel >= LEVEL_CREATOR
-               || (dold->Original ? dold->Original : dold->Character)->TopLevel >= LEVEL_CREATOR)
+            if(d->Char->TopLevel >= LEVEL_CREATOR
+               || (dold->Original ? dold->Original : dold->Char)->TopLevel >= LEVEL_CREATOR)
             {
                 return false;
             }
@@ -111,11 +111,11 @@ bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string & name)
             auto logBuf = FormatString("%s attempting to multiplay with %s.",
                                        dold->Original
                                        ? dold->Original->Name.c_str()
-                                       : dold->Character->Name.c_str(),
-                                       d->Character->Name.c_str());
+                                       : dold->Char->Name.c_str(),
+                                       d->Char->Name.c_str());
             Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
-            FreeCharacter(d->Character);
-            d->Character = nullptr;
+            FreeCharacter(d->Char);
+            d->Char = nullptr;
             return true;
         }
     }
@@ -128,12 +128,12 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
     for(auto dold : Descriptors)
     {
         if(dold != d
-           && (dold->Character || dold->Original)
+           && (dold->Char || dold->Original)
            && !StrCmp(name, dold->Original
-                      ? dold->Original->Name : dold->Character->Name))
+                      ? dold->Original->Name : dold->Char->Name))
         {
             const int cstate = dold->ConnectionState;
-            auto ch = dold->Original ? dold->Original : dold->Character;
+            auto ch = dold->Original ? dold->Original : dold->Char;
 
             if(ch->Name.empty()
                || (cstate != CON_PLAYING && cstate != CON_EDITING))
@@ -153,9 +153,9 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
             dold->WriteToBuffer("Kicking off old connection... bye!\r\n", 0);
             CloseDescriptor(dold, false);
             /* clear descriptor pointer to get rid of bug message in log */
-            d->Character->Desc = nullptr;
-            FreeCharacter(d->Character);
-            d->Character = ch;
+            d->Char->Desc = nullptr;
+            FreeCharacter(d->Char);
+            d->Char = ch;
             ch->Desc = d;
             ch->IdleTimer = 0;
 
@@ -183,7 +183,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
 bool Descriptor::FlushBuffer(bool fPrompt)
 {
     char buf[MAX_INPUT_LENGTH] = { '\0' };
-    auto ch = Original ? Original : Character;
+    auto ch = Original ? Original : Char;
 
     if(ch && ch->Fighting && ch->Fighting->Who)
         ShowCharacterCondition(ch, ch->Fighting->Who);
@@ -193,7 +193,7 @@ bool Descriptor::FlushBuffer(bool fPrompt)
      */
     if(fPrompt && !mud_down && ConnectionState == CON_PLAYING)
     {
-        ch = Original ? Original : Character;
+        ch = Original ? Original : Char;
 
         if(ch->Flags.test(Flag::Plr::Blank))
         {
@@ -225,13 +225,13 @@ bool Descriptor::FlushBuffer(bool fPrompt)
     if(SnoopBy)
     {
         /* without check, 'force mortal quit' while snooped caused crash, -h */
-        if(Character && !Character->Name.empty())
+        if(Char && !Char->Name.empty())
         {
             /* Show original snooped names. -- Altrag */
             if(Original && !Original->Name.empty())
-                sprintf(buf, "%s (%s)", Character->Name.c_str(), Original->Name.c_str());
+                sprintf(buf, "%s (%s)", Char->Name.c_str(), Original->Name.c_str());
             else
-                sprintf(buf, "%s", Character->Name.c_str());
+                sprintf(buf, "%s", Char->Name.c_str());
 
             SnoopBy->WriteToBuffer(buf);
         }
@@ -429,5 +429,5 @@ bool NullDescriptor::HasInput() const
 void MapCharacterAndDescriptor(std::shared_ptr<Character> ch, std::shared_ptr<Descriptor> d)
 {
     ch->Desc = d;
-    d->Character = ch;
+    d->Char = ch;
 }

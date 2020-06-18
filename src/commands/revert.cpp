@@ -13,22 +13,22 @@ void do_revert(std::shared_ptr<Character> ch, std::string argument)
     ch->Flags.reset(Flag::Mob::Polymorphed);
     CharacterFromRoom(ch->Desc->Original);
 
-    if(ch->Desc->Character)
+    if(ch->Desc->Char)
     {
-        auto mob = ch->Desc->Character;
-        CharacterToRoom(ch->Desc->Original, ch->Desc->Character->InRoom);
-        ch->Desc->Character = ch->Desc->Original;
+        auto mob = ch->Desc->Char;
+        CharacterToRoom(ch->Desc->Original, ch->Desc->Char->InRoom);
+        ch->Desc->Char = ch->Desc->Original;
         ch->Desc->Original = NULL;
-        ch->Desc->Character->Desc = ch->Desc;
-        ch->Desc->Character->Switched = NULL;
+        ch->Desc->Char->Desc = ch->Desc;
+        ch->Desc->Char->Switched = NULL;
         ch->Desc = NULL;
         ExtractCharacter(mob, true);
         return;
     }
 
-    ch->Desc->Character = ch->Desc->Original;
+    ch->Desc->Char = ch->Desc->Original;
     ch->Desc->Original = NULL;
-    ch->Desc->Character->Desc = ch->Desc;
-    ch->Desc->Character->Switched = NULL;
+    ch->Desc->Char->Desc = ch->Desc;
+    ch->Desc->Char->Switched = NULL;
     ch->Desc = NULL;
 }

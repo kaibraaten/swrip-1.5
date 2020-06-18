@@ -45,7 +45,7 @@ void do_switch(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    ch->Desc->Character = victim;
+    ch->Desc->Char = victim;
     ch->Desc->Original = ch;
     victim->Desc = ch->Desc;
     ch->Desc = NULL;

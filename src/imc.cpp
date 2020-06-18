@@ -939,14 +939,14 @@ static std::shared_ptr<Character> imc_find_user(const char *name)
     auto desc = Find(Descriptors->Entities(),
                      [name](const auto d)
                      {
-                         auto vch = d->Character ? d->Character : d->Original;
+                         auto vch = d->Char ? d->Char : d->Original;
 
                          return vch != nullptr
                              && !StrCmp(CH_IMCNAME(vch), name)
                              && d->ConnectionState == CON_PLAYING;
                      });
 
-    auto ch = desc->Character ? desc->Character : desc->Original;
+    auto ch = desc->Char ? desc->Char : desc->Original;
     return ch;
 }
 
@@ -1796,7 +1796,7 @@ PFUN(imc_recv_emote)
         std::shared_ptr<Character> ch;
 
         if(d->ConnectionState == CON_PLAYING
-           && (ch = d->Original ? d->Original : d->Character) != NULL
+           && (ch = d->Original ? d->Original : d->Char) != NULL
            && IMCPERM(ch) >= level)
         {
             imc_printf(ch, "~p[~GIMC~p] %s %s\r\n", imcgetname(q->from), txt);
@@ -1904,7 +1904,7 @@ static void imc_display_channel(IMC_CHANNEL *c, const char *from, char *txt, int
 
     for(auto d : Descriptors)
     {
-        auto ch = d->Original ? d->Original : d->Character;
+        auto ch = d->Original ? d->Original : d->Char;
 
         if(!ch || d->ConnectionState != CON_PLAYING)
             continue;
@@ -2035,7 +2035,7 @@ static const char *get_local_chanwho(IMC_CHANNEL *c)
 
     for(auto d : Descriptors)
     {
-        auto person = d->Original ? d->Original : d->Character;
+        auto person = d->Original ? d->Original : d->Char;
 
         if(!person)
             continue;
@@ -2321,7 +2321,7 @@ static char *imc_assemble_who(void)
 
     for(auto d : Descriptors)
     {
-        auto person = d->Original ? d->Original : d->Character;
+        auto person = d->Original ? d->Original : d->Char;
 
         if(person && d->ConnectionState == CON_PLAYING)
         {
@@ -2357,7 +2357,7 @@ static char *imc_assemble_who(void)
 
     for(auto d : Descriptors)
     {
-        auto person = d->Original ? d->Original : d->Character;
+        auto person = d->Original ? d->Original : d->Char;
 
         if(person && d->ConnectionState == CON_PLAYING)
         {

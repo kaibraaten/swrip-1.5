@@ -226,13 +226,13 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
         char force_char = ' ';
 
         if ((d->ConnectionState != CON_PLAYING && d->ConnectionState != CON_EDITING)
-            || (!CanSeeCharacter(ch, d->Character) && IsImmortal(d->Character))
+            || (!CanSeeCharacter(ch, d->Char) && IsImmortal(d->Char))
             || d->Original)
         {
             continue;
         }
 
-        auto wch = d->Original ? d->Original : d->Character;
+        auto wch = d->Original ? d->Original : d->Char;
 
         if (wch->TopLevel < iLevelLower
             || wch->TopLevel > iLevelUpper

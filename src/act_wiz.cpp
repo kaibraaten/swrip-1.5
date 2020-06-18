@@ -49,13 +49,13 @@ void EchoToAll(short AT_COLOR, const std::string &argument, short tar)
         if (d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING)
         {
             /* This one is kinda useless except for switched.. */
-            if (tar == ECHOTAR_PC && IsNpc(d->Character))
+            if (tar == ECHOTAR_PC && IsNpc(d->Char))
                 continue;
-            else if (tar == ECHOTAR_IMM && !IsImmortal(d->Character))
+            else if (tar == ECHOTAR_IMM && !IsImmortal(d->Char))
                 continue;
 
-            SetCharacterColor(AT_COLOR, d->Character);
-            d->Character->Echo("%s\r\n", argument.c_str());
+            SetCharacterColor(AT_COLOR, d->Char);
+            d->Char->Echo("%s\r\n", argument.c_str());
         }
     }
 }

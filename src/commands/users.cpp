@@ -22,7 +22,7 @@ void do_users(std::shared_ptr<Character> ch, std::string arg)
         if (arg.empty())
         {
             if (GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
-                || (d->Character && CanSeeCharacter(ch, d->Character)))
+                || (d->Char && CanSeeCharacter(ch, d->Char)))
             {
                 count++;
                 ch->Echo(" %3d| %2d|%4d|%6d| %s@%s ",
@@ -31,11 +31,11 @@ void do_users(std::shared_ptr<Character> ch, std::string arg)
                     d->Idle / 4,
                     d->Remote.Port,
                     d->Original ? d->Original->Name.c_str() :
-                    d->Character ? d->Character->Name.c_str() : "(none)",
+                    d->Char ? d->Char->Name.c_str() : "(none)",
                     d->Remote.HostIP.c_str());
 
                 if (ch->TopLevel >= LEVEL_GREATER
-                    && (!d->Character || d->Character->TopLevel <= LEVEL_GREATER))
+                    && (!d->Char || d->Char->TopLevel <= LEVEL_GREATER))
                     ch->Echo(" (%s)", d->Remote.Hostname.c_str());
 
                 ch->Echo("\r\n");
@@ -44,9 +44,9 @@ void do_users(std::shared_ptr<Character> ch, std::string arg)
         else
         {
             if ((GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
-                || (d->Character && CanSeeCharacter(ch, d->Character)))
+                || (d->Char && CanSeeCharacter(ch, d->Char)))
                 && (!StringPrefix(arg, d->Remote.Hostname)
-                    || (d->Character && !StringPrefix(arg, d->Character->Name))))
+                    || (d->Char && !StringPrefix(arg, d->Char->Name))))
             {
                 count++;
                 ch->Echo(" %3d| %2d|%4d|%6d| %-12s@%-16s ",
@@ -55,7 +55,7 @@ void do_users(std::shared_ptr<Character> ch, std::string arg)
                     d->Idle / 4,
                     d->Remote.Port,
                     d->Original ? d->Original->Name.c_str() :
-                    d->Character ? d->Character->Name.c_str() : "(none)",
+                    d->Char ? d->Char->Name.c_str() : "(none)",
                     d->Remote.Hostname.c_str()
                 );
 

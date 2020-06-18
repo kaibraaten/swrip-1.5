@@ -186,7 +186,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
 
             for(auto d : Descriptors->Entities())
             {
-                auto victim = d->Original ? d->Original : d->Character;
+                auto victim = d->Original ? d->Original : d->Char;
 
                 if(d->ConnectionState != CON_PLAYING)
                     continue;
@@ -241,7 +241,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
 
             for(auto d : Descriptors->Entities())
             {
-                auto victim = d->Original ? d->Original : d->Character;
+                auto victim = d->Original ? d->Original : d->Char;
 
                 if(d->ConnectionState != CON_PLAYING)
                     continue;
