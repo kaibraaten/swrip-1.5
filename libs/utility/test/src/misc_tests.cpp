@@ -102,9 +102,9 @@ TEST_F(MiscTests, StripColorCodes_StripsMixOfForeAndBackground)
     EXPECT_EQ(expected, actual);
 }
 
-#ifndef DEACTIVATE_FAILING_TESTS
 TEST_F(MiscTests, PunctuateNumber)
 {
+    EXPECT_EQ("0", PunctuateNumber(0));
     EXPECT_EQ("5", PunctuateNumber(5));
     EXPECT_EQ("50", PunctuateNumber(50));
     EXPECT_EQ("500", PunctuateNumber(500));
@@ -113,7 +113,6 @@ TEST_F(MiscTests, PunctuateNumber)
     EXPECT_EQ("-5", PunctuateNumber(-5));
     EXPECT_EQ("-5,000", PunctuateNumber(-5000));
 }
-#endif
 
 TEST_F(MiscTests, ToLong_InvalidArgumentDoesNotThrowException)
 {

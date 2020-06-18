@@ -1,12 +1,10 @@
 #include "utility.hpp"
+#include "algorithms.hpp"
 #include <ctime>
 #include <cstring>
 #include <cstdlib>
 #include <cctype>
-#ifndef _WIN32
-#include <clocale>
-#include <monetary.h>
-#endif
+#include <sstream>
 #include "random.hpp"
 
 std::string Scramble(const std::string &strToScamble, int modifier)
@@ -173,16 +171,28 @@ char *StripColorCodes(char *text)
 
 std::string PunctuateNumber(long number)
 {
-#ifdef _WIN32
-    return std::to_string(number);
-#else
-    char buffer[1024];
+    bool isNegative = number < 0;
+    auto str = std::to_string(abs(number));
+    std::ostringstream buf;
+    int counter = 0;
+    
+    for(auto i = str.rbegin(); i != str.rend(); ++i)
+    {
+        if(counter != 0 && counter % 3 == 0)
+        {
+            buf << ",";
+        }
 
-    setlocale(LC_MONETARY, "en_US");
-    strfmon(buffer, 1024, "%!#0.0n", (double)number);
+        ++counter;
+        buf << *i;
+    }
 
-    return TrimString(buffer, ' ');
-#endif
+    if(isNegative)
+    {
+        buf << "-";
+    }
+    
+    return Reverse(buf.str());
 }
 
 long ToLong(const std::string &str)
