@@ -61,4 +61,17 @@ void ForEach(const Container &container, UnaryFunction func)
     for_each(std::begin(container), std::end(container), func);
 }
 
+template<typename T>
+auto MergeSequences(const T &a, const T &b)
+{
+    T output = a;
+
+    for(const auto &element : b)
+    {
+        output.push_back(element);
+    }
+
+    return output;
+}
+
 #endif

@@ -26,4 +26,4 @@ target_include_directories(mud_tests PRIVATE src)
 gtest_discover_tests(mud_tests)
 add_custom_command(TARGET mud_tests
   POST_BUILD
-  COMMAND ctest)
+  COMMAND ctest --output-on-failure)

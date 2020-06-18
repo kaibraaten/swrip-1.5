@@ -20,6 +20,6 @@ target_compile_options(utility_tests
   )
 target_link_libraries(utility_tests gtest_main gmock utility)
 gtest_discover_tests(utility_tests)
-#add_custom_command(TARGET utility_tests
-#  POST_BUILD
-#  COMMAND ctest)
+add_custom_command(TARGET utility_tests
+  POST_BUILD
+  COMMAND ctest --output-on-failure)

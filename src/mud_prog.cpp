@@ -251,7 +251,8 @@ static int IfCheckEconomy(std::shared_ptr<Character> mob, const std::string &cva
                                  + room->Area->LowEconomy, opr, atoi(rval.c_str()), mob);
 }
 
-static int IfCheckMobInRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckMobInRoom(std::shared_ptr<Character> mob, const std::string &cvar,
+                            std::string opr, const std::string &rval)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -261,12 +262,12 @@ static int IfCheckMobInRoom(std::shared_ptr<Character> mob, const std::string &c
         return BERR;
     }
 
-    lhsvl = Count(mob->InRoom->Characters(),
-                  [vnum](auto oMob)
-                  {
-                      return IsNpc(oMob) && oMob->Prototype->Vnum == vnum;
-                  });
-    rhsvl = atoi(rval.c_str());
+    int lhsvl = Count(mob->InRoom->Characters(),
+                      [vnum](auto oMob)
+                      {
+                          return IsNpc(oMob) && oMob->Prototype->Vnum == vnum;
+                      });
+    int rhsvl = atoi(rval.c_str());
 
     if(rhsvl < 1)
     {
@@ -281,7 +282,8 @@ static int IfCheckMobInRoom(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckTimesKilled(std::shared_ptr<Character> mob, const std::string &cvar, const std::string &opr, const std::string &rval, std::shared_ptr<Character> chkchar)
+static int IfCheckTimesKilled(std::shared_ptr<Character> mob, const std::string &cvar,
+                              const std::string &opr, const std::string &rval, std::shared_ptr<Character> chkchar)
 {
     std::shared_ptr<ProtoMobile> pMob;
 
@@ -298,7 +300,8 @@ static int IfCheckTimesKilled(std::shared_ptr<Character> mob, const std::string 
     return MudProgCompareNumbers(pMob->Killed, opr, atoi(rval.c_str()), mob);
 }
 
-static int IfCheckOVnumHere(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumHere(std::shared_ptr<Character> mob, const std::string &cvar,
+                            std::string opr, const std::string &rval)
 {
     const vnum_t vnum = atoi(cvar.c_str());
 
@@ -308,25 +311,13 @@ static int IfCheckOVnumHere(std::shared_ptr<Character> mob, const std::string &c
         return BERR;
     }
 
-    lhsvl = 0;
-
-    for(auto pObj : mob->Objects())
-    {
-        if(CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
-        {
-            lhsvl++;
-        }
-    }
-
-    for(auto pObj : mob->InRoom->Objects())
-    {
-        if(CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
-        {
-            lhsvl++;
-        }
-    }
-
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    auto objects = MergeSequences(mob->Objects(), mob->InRoom->Objects());
+    int lhsvl = Count(objects,
+                      [mob, vnum](const auto &pObj)
+                      {
+                          return CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum;
+                      });
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
     {
@@ -341,7 +332,8 @@ static int IfCheckOVnumHere(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeHere(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeHere(std::shared_ptr<Character> mob, const std::string &cvar,
+                            std::string opr, const std::string &rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -356,25 +348,14 @@ static int IfCheckOTypeHere(std::shared_ptr<Character> mob, const std::string &c
         return BERR;
     }
 
-    lhsvl = 0;
+    auto objects = MergeSequences(mob->Objects(), mob->InRoom->Objects());
+    int lhsvl = Count(objects,
+                      [mob, type](const auto &pObj)
+                      {
+                          return CanSeeObject(mob, pObj) && pObj->ItemType == type;
+                      });
 
-    for(auto pObj : mob->Objects())
-    {
-        if(CanSeeObject(mob, pObj) && pObj->ItemType == type)
-        {
-            lhsvl++;
-        }
-    }
-
-    for(auto pObj : mob->InRoom->Objects())
-    {
-        if(CanSeeObject(mob, pObj) && pObj->ItemType == type)
-        {
-            lhsvl++;
-        }
-    }
-
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
     {
@@ -389,7 +370,7 @@ static int IfCheckOTypeHere(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
 {
     const vnum_t vnum = atoi(cvar.c_str());
 
@@ -399,13 +380,13 @@ static int IfCheckOVnumRoom(std::shared_ptr<Character> mob, const std::string &c
         return BERR;
     }
 
-    lhsvl = Count(mob->InRoom->Objects(),
-                  [mob, vnum](std::shared_ptr<Object> pObj)
-                  {
-                      return CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum;
-                  });
+    int lhsvl = Count(mob->InRoom->Objects(),
+                      [mob, vnum](std::shared_ptr<Object> pObj)
+                      {
+                          return CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum;
+                      });
 
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
     {
@@ -420,7 +401,7 @@ static int IfCheckOVnumRoom(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -439,17 +420,12 @@ static int IfCheckOTypeRoom(std::shared_ptr<Character> mob, const std::string &c
         return BERR;
     }
 
-    lhsvl = 0;
-
-    for(auto pObj : mob->InRoom->Objects())
-    {
-        if(CanSeeObject(mob, pObj) && pObj->ItemType == type)
-        {
-            lhsvl++;
-        }
-    }
-
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    int lhsvl = Count(mob->InRoom->Objects(),
+                      [mob, type](const auto &pObj)
+                      {
+                          return CanSeeObject(mob, pObj) && pObj->ItemType == type;
+                      });
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
     {
@@ -464,7 +440,7 @@ static int IfCheckOTypeRoom(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -474,17 +450,13 @@ static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, const std::string &
         return BERR;
     }
 
-    lhsvl = 0;
+    int lhsvl = Count(mob->Objects(),
+                      [mob, vnum](const auto &pObj)
+                      {
+                          return CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum;
+                      });
 
-    for(auto pObj : mob->Objects())
-    {
-        if(CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum)
-        {
-            lhsvl++;
-        }
-    }
-
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
     {
@@ -499,7 +471,7 @@ static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, const std::string &
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeCarry(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeCarry(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -518,17 +490,13 @@ static int IfCheckOTypeCarry(std::shared_ptr<Character> mob, const std::string &
         return BERR;
     }
 
-    lhsvl = 0;
+    int lhsvl = Count(mob->Objects(),
+                      [mob, type](const auto &pObj)
+                      {
+                          return CanSeeObject(mob, pObj) && pObj->ItemType == type;
+                      });
 
-    for(auto pObj : mob->Objects())
-    {
-        if(CanSeeObject(mob, pObj) && pObj->ItemType == type)
-        {
-            lhsvl++;
-        }
-    }
-
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
     {
@@ -543,7 +511,7 @@ static int IfCheckOTypeCarry(std::shared_ptr<Character> mob, const std::string &
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumWear(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumWear(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -553,18 +521,12 @@ static int IfCheckOVnumWear(std::shared_ptr<Character> mob, const std::string &c
         return BERR;
     }
 
-    lhsvl = 0;
-
-    for(auto pObj : mob->Objects())
-    {
-        if(pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
-           pObj->Prototype->Vnum == vnum)
-        {
-            lhsvl++;
-        }
-    }
-
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    int lhsvl = Count(mob->Objects(),
+                      [mob, vnum](const auto &pObj)
+                      {
+                          return pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum;
+                      });
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
     {
@@ -579,7 +541,7 @@ static int IfCheckOVnumWear(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeWear(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeWear(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -595,18 +557,12 @@ static int IfCheckOTypeWear(std::shared_ptr<Character> mob, const std::string &c
         return BERR;
     }
 
-    lhsvl = 0;
-
-    for(auto pObj : mob->Objects())
-    {
-        if(pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
-           pObj->ItemType == type)
-        {
-            lhsvl++;
-        }
-    }
-
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    int lhsvl = Count(mob->Objects(),
+                      [mob, type](const auto &pObj)
+                      {
+                          return pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) && pObj->ItemType == type;
+                      });
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
         rhsvl = 1;
@@ -617,7 +573,7 @@ static int IfCheckOTypeWear(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -627,18 +583,12 @@ static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, const std::stri
         return BERR;
     }
 
-    lhsvl = 0;
-
-    for(auto pObj : mob->Objects())
-    {
-        if(pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
-           pObj->Prototype->Vnum == vnum)
-        {
-            lhsvl++;
-        }
-    }
-
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    int lhsvl = Count(mob->Objects(),
+                      [mob, vnum](const auto &pObj)
+                      {
+                          return pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum;
+                      });
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
         rhsvl = 1;
@@ -651,7 +601,7 @@ static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, const std::stri
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeInventory(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeInventory(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -670,18 +620,12 @@ static int IfCheckOTypeInventory(std::shared_ptr<Character> mob, const std::stri
         return BERR;
     }
 
-    lhsvl = 0;
-
-    for(auto pObj : mob->Objects())
-    {
-        if(pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
-           pObj->ItemType == type)
-        {
-            lhsvl++;
-        }
-    }
-
-    rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+    int lhsvl = Count(mob->Objects(),
+                      [mob, type](const auto &pObj)
+                      {
+                          return pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) && pObj->ItemType == type;
+                      });
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
         rhsvl = 1;
@@ -784,7 +728,6 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
     char *pchck = chck;
     std::shared_ptr<Character> chkchar = nullptr;
     std::shared_ptr<Object> chkobj;
-    int lhsvl = 0, rhsvl = 0;
 
     if(!*point)
     {
@@ -935,7 +878,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
     }
     else if(!StrCmp(chck, "mobinroom"))
     {
-        return IfCheckMobInRoom(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckMobInRoom(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "timeskilled"))
     {
@@ -943,43 +886,43 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
     }
     else if(!StrCmp(chck, "ovnumhere"))
     {
-        return IfCheckOVnumHere(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOVnumHere(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "otypehere"))
     {
-        return IfCheckOTypeHere(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOTypeHere(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "ovnumroom"))
     {
-        return IfCheckOVnumRoom(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOVnumRoom(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "otyperoom"))
     {
-        return IfCheckOTypeRoom(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOTypeRoom(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "ovnumcarry"))
     {
-        return IfCheckOVnumCarry(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOVnumCarry(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "otypecarry"))
     {
-        return IfCheckOTypeCarry(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOTypeCarry(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "ovnumwear"))
     {
-        return IfCheckOVnumWear(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOVnumWear(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "otypewear"))
     {
-        return IfCheckOTypeWear(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOTypeWear(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "ovnuminv"))
     {
-        return IfCheckOVnumInventory(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOVnumInventory(mob, cvar, opr, rval);
     }
     else if(!StrCmp(chck, "otypeinv"))
     {
-        return IfCheckOTypeInventory(mob, cvar, opr, rval, lhsvl, rhsvl);
+        return IfCheckOTypeInventory(mob, cvar, opr, rval);
     }
 
     if(chkchar)
@@ -1207,7 +1150,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
             if(!IsNpc(chkchar))
                 return false;
 
-            lhsvl = chkchar == mob ? chkchar->Gold : chkchar->Prototype->Vnum;
+            int lhsvl = chkchar == mob ? chkchar->Gold : chkchar->Prototype->Vnum;
             return MudProgCompareNumbers(lhsvl, opr, atoi(rval), mob);
         }
         else if(chkobj != nullptr)

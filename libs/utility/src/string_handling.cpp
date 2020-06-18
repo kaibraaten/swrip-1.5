@@ -376,6 +376,11 @@ int NumberArgument(const std::string &orig_argument, std::string &arg)
 
 std::string OneArgument(const std::string &argument, std::string &arg_first)
 {
+    if(argument.empty())
+    {
+        return "";
+    }
+
     std::string::const_iterator argp = argument.begin();
     arg_first.erase();
 

@@ -228,3 +228,73 @@ TEST_F(AlgorithmsTests, RandomizeOrder_DifferentOrderThanOriginal)
     // Assert
     EXPECT_NE(randomized, original);
 }
+
+TEST_F(AlgorithmsTests, MergeSequences_BothEmptyYieldsEmpty)
+{
+    // Arrange
+    std::list<int> a;
+    std::list<int> b;
+    std::list<int> expected;
+
+    // Act
+    auto result = MergeSequences(a, b);
+
+    // Assert
+    EXPECT_EQ(expected, result);
+}
+
+TEST_F(AlgorithmsTests, MergeSequences_BothContainingValuesWorksCorrectly)
+{
+    // Arrange
+    std::list<int> a{ 2, 4, 1 };
+    std::list<int> b{ 1, 2, 3, 8, 5 };
+    std::list<int> expected{ 2, 4, 1, 1, 2, 3, 8, 5 };
+
+    // Act
+    auto result = MergeSequences(a, b);
+
+    // Assert
+    EXPECT_EQ(expected, result);
+}
+
+TEST_F(AlgorithmsTests, MergeSequences_FirstEmpty)
+{
+    // Arrange
+    std::list<int> a;
+    std::list<int> b{ 1, 2, 3, 8, 5 };
+    std::list<int> expected = b;
+
+    // Act
+    auto result = MergeSequences(a, b);
+
+    // Assert
+    EXPECT_EQ(expected, result);
+}
+
+TEST_F(AlgorithmsTests, MergeSequences_SecondEmpty)
+{
+    // Arrange
+    std::list<int> a{ 2, 4, 1 };
+    std::list<int> b;
+    std::list<int> expected = a;
+
+    // Act
+    auto result = MergeSequences(a, b);
+
+    // Assert
+    EXPECT_EQ(expected, result);
+}
+
+TEST_F(AlgorithmsTests, MergeSequences_WorksWithVectors)
+{
+    // Arrange
+    std::vector<int> a{ 2, 4, 1 };
+    std::vector<int> b{ 1, 2, 3, 8, 5 };
+    std::vector<int> expected{ 2, 4, 1, 1, 2, 3, 8, 5 };
+
+    // Act
+    auto result = MergeSequences(a, b);
+
+    // Assert
+    EXPECT_EQ(expected, result);
+}
