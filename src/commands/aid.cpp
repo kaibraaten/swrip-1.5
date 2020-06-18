@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_aid(Character *ch, std::string argument)
+void do_aid(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = nullptr;
     int percent = 0;

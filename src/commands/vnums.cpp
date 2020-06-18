@@ -3,7 +3,7 @@
 /*
  * Shows prototype vnums ranges, and if loaded
  */
-void do_vnums( Character *ch, std::string argument )
+void do_vnums( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg1;
     std::string arg2;

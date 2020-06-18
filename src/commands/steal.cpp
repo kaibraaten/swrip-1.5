@@ -7,7 +7,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_steal(Character *ch, std::string argument)
+void do_steal(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     std::string arg1;

@@ -3,7 +3,7 @@
 #include "systemdata.hpp"
 #include "act.hpp"
 
-void do_force(Character *ch, std::string argument)
+void do_force(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     bool mobsonly = false;

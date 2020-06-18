@@ -6,7 +6,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_backstab(Character *ch, std::string arg)
+void do_backstab(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = nullptr;
     std::shared_ptr<Object> obj;

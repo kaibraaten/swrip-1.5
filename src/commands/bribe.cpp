@@ -8,7 +8,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_bribe(Character *ch, std::string argument)
+void do_bribe(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     Character *victim = NULL;

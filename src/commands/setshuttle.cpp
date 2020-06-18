@@ -8,7 +8,7 @@
 #include "character.hpp"
 #include "repos/shuttlerepository.hpp"
 
-void do_setshuttle( Character *ch, std::string argument )
+void do_setshuttle( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;

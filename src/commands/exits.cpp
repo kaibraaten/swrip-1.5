@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 
-void do_exits(Character *ch, std::string argument)
+void do_exits(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     bool found = false;

@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_homepage( Character *ch, std::string argument )
+void do_homepage( std::shared_ptr<Character> ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
 

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "act.hpp"
 
-void do_disconnect(Character *ch, std::string arg)
+void do_disconnect(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = nullptr;
 

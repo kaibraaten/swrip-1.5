@@ -4,7 +4,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_junk(Character *ch, std::string arg)
+void do_junk(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Object> obj;
 

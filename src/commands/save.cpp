@@ -15,7 +15,7 @@ static void SetMissingBits(std::bitset<Flag::MAX> &bits, long missing)
     }
 }
 
-void do_save( Character *ch, std::string argument )
+void do_save( std::shared_ptr<Character> ch, std::string argument )
 {
     if ( IsNpc(ch) && ch->Flags.test(Flag::Mob::Polymorphed))
     {

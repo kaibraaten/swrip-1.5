@@ -6,7 +6,7 @@
 #include "room.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_clan_withdraw(Character *ch, std::string argument)
+void do_clan_withdraw(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Clan> clan;
     long amount = 0;

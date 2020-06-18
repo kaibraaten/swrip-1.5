@@ -8,10 +8,10 @@
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
 
-void do_pricevendor(Character *ch, std::string argument)
+void do_pricevendor(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *vendor = NULL;
-    Character *ch1 = NULL;
+    std::shared_ptr<Character> ch1 = NULL;
     std::string arg1;
     std::string arg2;
     std::shared_ptr<Object> obj;

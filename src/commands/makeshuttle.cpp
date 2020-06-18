@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/shuttlerepository.hpp"
 
-void do_makeshuttle (Character *ch, std::string argument)
+void do_makeshuttle (std::shared_ptr<Character> ch, std::string argument)
 {
   std::shared_ptr<Shuttle> shuttle;
 

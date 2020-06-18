@@ -5,7 +5,7 @@
 #include "planet.hpp"
 #include "repos/planetrepository.hpp"
 
-void do_setplanet( Character *ch, std::string argument )
+void do_setplanet( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;

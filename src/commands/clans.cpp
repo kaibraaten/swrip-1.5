@@ -5,7 +5,7 @@
 #include "repos/clanrepository.hpp"
 #include "repos/planetrepository.hpp"
 
-void do_clans( Character *ch, std::string argument )
+void do_clans( std::shared_ptr<Character> ch, std::string argument )
 {
   int count = 0;
 

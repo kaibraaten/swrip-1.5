@@ -6,7 +6,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_drive(Character *ch, std::string argument)
+void do_drive(std::shared_ptr<Character> ch, std::string argument)
 {
     DirectionType dir = DIR_INVALID;
     std::shared_ptr<Ship> ship;

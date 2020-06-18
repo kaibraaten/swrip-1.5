@@ -12,7 +12,7 @@ static int EnergyRequired(int current, int change)
     return abs((change - abs(current)) / 10);
 }
 
-void do_accelerate(Character *ch, std::string argument)
+void do_accelerate(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);

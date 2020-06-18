@@ -8,7 +8,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_propaganda(Character *ch, std::string arg1)
+void do_propaganda(std::shared_ptr<Character> ch, std::string arg1)
 {
     char buf[MAX_STRING_LENGTH];
     Character *victim = NULL;

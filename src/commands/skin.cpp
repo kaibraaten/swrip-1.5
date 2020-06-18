@@ -5,7 +5,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_skin(Character *ch, std::string argument)
+void do_skin(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> corpse;
     std::shared_ptr<Object> obj;

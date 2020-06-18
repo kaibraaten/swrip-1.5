@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "systemdata.hpp"
 
-void do_rdelete(Character *ch, std::string arg)
+void do_rdelete(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Room> location;
 

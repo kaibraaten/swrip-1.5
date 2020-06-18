@@ -6,7 +6,7 @@
 
 #define RESTORE_INTERVAL 21600
 
-void do_restore(Character *ch, std::string arg)
+void do_restore(std::shared_ptr<Character> ch, std::string arg)
 {
     if(arg.empty())
     {

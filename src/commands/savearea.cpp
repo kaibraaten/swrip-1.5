@@ -6,7 +6,7 @@
 #include "room.hpp"
 #include "repos/arearepository.hpp"
 
-void do_savearea(Character *ch, std::string argument)
+void do_savearea(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Area> tarea;
 

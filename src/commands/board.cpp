@@ -5,7 +5,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_board(Character *ch, std::string argument)
+void do_board(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Room> toroom;
     std::shared_ptr<Ship> ship;

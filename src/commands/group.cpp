@@ -4,7 +4,7 @@
 #include "race.hpp"
 #include "act.hpp"
 
-void do_group(Character *ch, std::string arg)
+void do_group(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = NULL;
 

@@ -6,7 +6,7 @@
 #include "systemdata.hpp"
 #include "act.hpp"
 
-void do_goto(Character *ch, std::string argument)
+void do_goto(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Area> pArea;

@@ -5,7 +5,7 @@
 #include "repos/arearepository.hpp"
 
 /* Check to make sure range of vnums is free - Scryn 2/27/96 */
-void do_check_vnums(Character *ch, std::string argument)
+void do_check_vnums(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     char buf2[MAX_STRING_LENGTH];

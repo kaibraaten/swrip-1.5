@@ -3,7 +3,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 
-void do_climb(Character *ch, std::string argument)
+void do_climb(std::shared_ptr<Character> ch, std::string argument)
 {
     if (argument.empty())
     {

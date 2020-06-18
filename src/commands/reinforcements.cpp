@@ -7,7 +7,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_reinforcements(Character *ch, std::string arg)
+void do_reinforcements(std::shared_ptr<Character> ch, std::string arg)
 {
     int the_chance = 0;
     long credits = 0;

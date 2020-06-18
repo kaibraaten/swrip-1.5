@@ -7,7 +7,7 @@
 #include "room.hpp"
 #include "repos/arearepository.hpp"
 
-void do_reset(Character *ch, std::string argument)
+void do_reset(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Area> pArea;
     std::string arg;

@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_at(Character *ch, std::string argument)
+void do_at(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Room> location;

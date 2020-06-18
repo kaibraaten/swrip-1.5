@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "descriptor.hpp"
 
-void do_return( Character *ch, std::string argument )
+void do_return( std::shared_ptr<Character> ch, std::string argument )
 {
     if ( !ch->Desc )
         return;

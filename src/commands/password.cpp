@@ -6,7 +6,7 @@
 #include "systemdata.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_password( Character *ch, std::string argument )
+void do_password( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;

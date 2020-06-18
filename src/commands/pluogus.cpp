@@ -6,9 +6,9 @@
 
 static constexpr int MAX_STOPS_TO_DISPLAY = 4;
 
-static void OutputShuttle(const Character *ch, std::shared_ptr<Shuttle> shuttle);
+static void OutputShuttle(const std::shared_ptr<Character> ch, std::shared_ptr<Shuttle> shuttle);
 
-void do_pluogus( Character *ch, std::string argument )
+void do_pluogus( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( !HasComlink( ch ) )
     {
@@ -33,7 +33,7 @@ void do_pluogus( Character *ch, std::string argument )
     }
 }
 
-static void OutputShuttle(const Character *ch, std::shared_ptr<Shuttle> shuttle)
+static void OutputShuttle(const std::shared_ptr<Character> ch, std::shared_ptr<Shuttle> shuttle)
 {
   assert(shuttle != nullptr);
   

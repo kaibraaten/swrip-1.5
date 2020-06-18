@@ -7,7 +7,7 @@
 #include "object.hpp"
 #include "descriptor.hpp"
 
-void do_loadup(Character *ch, std::string argument)
+void do_loadup(std::shared_ptr<Character> ch, std::string argument)
 {
 #if 1
     ch->Echo("Out of commission.\r\n");

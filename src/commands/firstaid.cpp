@@ -6,7 +6,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_first_aid(Character *ch, std::string argument)
+void do_first_aid(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
     int heal = 0;

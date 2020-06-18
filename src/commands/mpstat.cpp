@@ -6,7 +6,7 @@
  * enough to identify the mob and give its basic condition.  It does however,
  * show the MUDprograms which are set.
  */
-void do_mpstat( Character *ch, std::string arg )
+void do_mpstat( std::shared_ptr<Character> ch, std::string arg )
 {
   if ( arg.empty() )
     {

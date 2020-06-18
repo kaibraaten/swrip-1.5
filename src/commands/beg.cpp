@@ -6,7 +6,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_beg(Character *ch, std::string argument)
+void do_beg(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     Character *victim = nullptr;

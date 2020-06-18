@@ -4,7 +4,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_zap(Character *ch, std::string arg)
+void do_zap(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = nullptr;
     std::shared_ptr<Object> wand;

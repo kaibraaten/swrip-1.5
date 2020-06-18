@@ -7,7 +7,7 @@
 #include "room.hpp"
 #include "repos/arearepository.hpp"
 
-void do_astat(Character *ch, std::string argument)
+void do_astat(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Area> tarea;
     std::string filename;

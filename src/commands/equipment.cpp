@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "object.hpp"
 
-void do_equipment(Character *ch, std::string argument)
+void do_equipment(std::shared_ptr<Character> ch, std::string argument)
 {
     bool found = false;
 

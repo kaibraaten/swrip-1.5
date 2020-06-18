@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/banrepository.hpp"
 
-void do_allow( Character *ch, std::string argument )
+void do_allow( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( argument.empty() )
     {

@@ -16,7 +16,7 @@ struct UserData
 
 static bool CheckIfProtectingPlanet(std::shared_ptr<Ship> ship, void *userData);
 
-void do_capture( Character *ch , std::string argument )
+void do_capture( std::shared_ptr<Character> ch , std::string argument )
 {
   std::shared_ptr<Clan> clan;
   std::shared_ptr<Planet> planet;

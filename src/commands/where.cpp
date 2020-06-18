@@ -6,7 +6,7 @@
 #include "repos/descriptorrepository.hpp"
 #include "act.hpp"
 
-void do_where(Character *ch, std::string arg)
+void do_where(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = nullptr;
     bool found = false;

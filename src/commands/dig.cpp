@@ -10,7 +10,7 @@
 #include "exit.hpp"
 #include "act.hpp"
 
-void do_dig(Character *ch, std::string arg)
+void do_dig(std::shared_ptr<Character> ch, std::string arg)
 {
     switch(ch->SubState)
     {

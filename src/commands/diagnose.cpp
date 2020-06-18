@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_diagnose(Character *ch, std::string arg)
+void do_diagnose(std::shared_ptr<Character> ch, std::string arg)
 {
     ch->Echo("Not in use.\r\n");
 }
@@ -23,17 +23,17 @@ void do_diagnose(Character *ch, std::string arg)
 #include "descriptor.hpp"
 
 static int diag_int_comp(const void *i, const void *j);
-static void diagnose_help(Character *ch);
-static void diag_ins(ProtoObject *p, int siz, ProtoObject **f, Character *ch);
+static void diagnose_help(std::shared_ptr<Character> ch);
+static void diag_ins(ProtoObject *p, int siz, ProtoObject **f, std::shared_ptr<Character> ch);
 static void zero_sort(int *vnums, int *count, int left, int right);
-static void diag_visit_obj(Character *ch, Object *obj);
+static void diag_visit_obj(std::shared_ptr<Character> ch, Object *obj);
 
 /*
  * The "diagnose" command is designed to be expandable and take different
  * parameters to handle different diagnostic routines.
  */
 
-void do_diagnose(Character *ch, std::string argument)
+void do_diagnose(std::shared_ptr<Character> ch, std::string argument)
 {
 #define   DIAG_MAX_SIZE  1000
     std::shared_ptr<ProtoObject> pObj;
@@ -349,7 +349,7 @@ static int diag_int_comp(const void *i, const void *j)
 /*
  * Displays the help screen for the "diagnose" command
  */
-static void diagnose_help(Character *ch)
+static void diagnose_help(std::shared_ptr<Character> ch)
 {
     ch->Echo("Syntax:\r\n");
     ch->Echo("diagnose of n  -  object frequency top n objects\r\n");
@@ -372,7 +372,7 @@ static void diagnose_help(Character *ch)
  * frequency table which contains the "top n" frequently occurring objects.
  */
 
-static void diag_ins(ProtoObject *p, int siz, ProtoObject **f, Character *ch)
+static void diag_ins(ProtoObject *p, int siz, ProtoObject **f, std::shared_ptr<Character> ch)
 {
     int  cou = 0;                             /* temporary counter */
     int  ins = -1;                             /* insert pos in dynamic f array */
@@ -410,7 +410,7 @@ static void zero_sort(int *vnums, int *count, int left, int right)
     if (i < right) zero_sort(vnums, count, i, right);
 }
 
-static void diag_visit_obj(Character *ch, Object *obj)
+static void diag_visit_obj(std::shared_ptr<Character> ch, Object *obj)
 {
 #if 0
     ch->Echo("***obj=%s\r\n", obj->Name.c_str());

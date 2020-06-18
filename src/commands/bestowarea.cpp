@@ -6,7 +6,7 @@
 static void RemoveAreaNames(std::string inp, std::string &out);
 static void ExtractAreaNames(std::string inp, std::string &out);
 
-void do_bestowarea(Character *ch, std::string argument)
+void do_bestowarea(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     Character *victim = nullptr;

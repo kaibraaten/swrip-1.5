@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_arena(Character *ch, std::string argument)
+void do_arena(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_INPUT_LENGTH];
 

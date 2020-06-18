@@ -4,7 +4,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_bash( Character *ch, std::string argument )
+void do_bash( std::shared_ptr<Character> ch, std::string argument )
 {
   Character *victim = nullptr;
   int bash_chance = 0;

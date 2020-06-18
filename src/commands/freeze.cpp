@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_freeze( Character *ch, std::string argument )
+void do_freeze( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg;
     Character *victim = nullptr;

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "act.hpp"
 
-void do_slay(Character *ch, std::string argument)
+void do_slay(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = nullptr;
     std::string arg;

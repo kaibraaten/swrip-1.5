@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_i105( Character *ch, std::string argument )
+void do_i105( std::shared_ptr<Character> ch, std::string argument )
 {
   if (!IsAuthed(ch))
     {

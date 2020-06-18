@@ -7,12 +7,12 @@
 #include "repos/homerepository.hpp"
 #include "act.hpp"
 
-static bool CanQuitHere(const Character *ch, std::shared_ptr<Room> room)
+static bool CanQuitHere(const std::shared_ptr<Character> ch, std::shared_ptr<Room> room)
 {
     return CheckRoomFlag(ch->InRoom, Flag::Room::Hotel);
 }
 
-void do_quit(Character *ch, std::string argument)
+void do_quit(std::shared_ptr<Character> ch, std::string argument)
 {
     int x = 0, y = 0;
     int level = 0;

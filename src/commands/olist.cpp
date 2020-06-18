@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "protoobject.hpp"
 
-void do_olist(Character *ch, std::string argument)
+void do_olist(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

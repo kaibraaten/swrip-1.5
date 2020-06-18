@@ -9,7 +9,7 @@
 #include "protomob.hpp"
 #include "descriptor.hpp"
 
-void do_mstat( Character *ch, std::string arg )
+void do_mstat( std::shared_ptr<Character> ch, std::string arg )
 {
   SetCharacterColor( AT_PLAIN, ch );
 

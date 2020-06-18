@@ -16,7 +16,7 @@ static const char * const month_name[] =
     "The Fall of the Machine", "The Search for Rebellion", "The Rise of a Jedi"
   };
 
-void do_time( Character *ch, std::string argument )
+void do_time( std::shared_ptr<Character> ch, std::string argument )
 {
   extern std::string str_boot_time;
   extern std::string reboot_time;

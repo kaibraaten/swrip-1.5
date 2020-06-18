@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/shoprepository.hpp"
 
-void do_repairshops( Character *ch, std::string argument )
+void do_repairshops( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( RepairShops->Count() == 0)
     {

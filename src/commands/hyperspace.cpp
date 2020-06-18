@@ -13,7 +13,7 @@
 
 static bool LeaveHyperspaceIfDocked(std::shared_ptr<Ship> dockedShip, void *userData);
 
-void do_hyperspace(Character *ch, std::string argument)
+void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
 {
     int the_chance = 0;
     std::shared_ptr<Ship> ship;

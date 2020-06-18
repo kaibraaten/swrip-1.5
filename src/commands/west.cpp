@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_west( Character *ch, std::string argument )
+void do_west( std::shared_ptr<Character> ch, std::string argument )
 {
   MoveCharacter( ch, GetExit(ch->InRoom, DIR_WEST), 0 );
 }

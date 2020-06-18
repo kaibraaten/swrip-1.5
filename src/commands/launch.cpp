@@ -9,7 +9,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_launch(Character *ch, std::string argument)
+void do_launch(std::shared_ptr<Character> ch, std::string argument)
 {
     int the_chance = 0;
     long price = 0;

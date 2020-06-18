@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/boardrepository.hpp"
 
-void do_bset( Character *ch, std::string argument )
+void do_bset( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Board> board;
   std::string arg1;

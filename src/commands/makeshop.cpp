@@ -4,7 +4,7 @@
 #include "protomob.hpp"
 #include "repos/shoprepository.hpp"
 
-void do_makeshop(Character *ch, std::string argument)
+void do_makeshop(std::shared_ptr<Character> ch, std::string argument)
 {
     if (argument.empty())
     {

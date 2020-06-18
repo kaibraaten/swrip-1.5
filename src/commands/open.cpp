@@ -5,7 +5,7 @@
 #include "exit.hpp"
 #include "act.hpp"
 
-void do_open(Character *ch, std::string argument)
+void do_open(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Object> obj;

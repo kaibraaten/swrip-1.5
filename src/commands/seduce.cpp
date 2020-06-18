@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_seduce(Character *ch, std::string arg)
+void do_seduce(std::shared_ptr<Character> ch, std::string arg)
 {
     char buf[MAX_INPUT_LENGTH];
     Character *victim = NULL;

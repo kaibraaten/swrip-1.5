@@ -2,7 +2,7 @@
 #include "arena.hpp"
 #include "character.hpp"
 
-void do_chaos(Character *ch, std::string argument)
+void do_chaos(std::shared_ptr<Character> ch, std::string argument)
 {
   std::string lolimit;
   std::string hilimit;

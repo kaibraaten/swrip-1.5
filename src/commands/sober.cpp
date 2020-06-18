@@ -7,7 +7,7 @@
  * Saw no need for level restrictions on this.
  * Written by Narn, Apr/96
  */
-void do_sober( Character *ch, std::string arg1 )
+void do_sober( std::shared_ptr<Character> ch, std::string arg1 )
 {
   Character *victim = NULL;
 

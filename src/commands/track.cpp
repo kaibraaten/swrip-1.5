@@ -5,7 +5,7 @@
 #include "ship.hpp"
 #include "pcdata.hpp"
 
-void do_track( Character *ch, std::string arg )
+void do_track( std::shared_ptr<Character> ch, std::string arg )
 {
   Character *vict = NULL;
   char buf[MAX_STRING_LENGTH] = {'\0'};

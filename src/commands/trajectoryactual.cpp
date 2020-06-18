@@ -8,7 +8,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_trajectory_actual(Character *ch, std::string argument)
+void do_trajectory_actual(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     std::string arg2;

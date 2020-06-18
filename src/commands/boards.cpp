@@ -4,7 +4,7 @@
 #include "log.hpp"
 #include "repos/boardrepository.hpp"
 
-void do_boards( Character *ch, std::string argument )
+void do_boards( std::shared_ptr<Character> ch, std::string argument )
 {
   if (Boards->Count() == 0)
     {

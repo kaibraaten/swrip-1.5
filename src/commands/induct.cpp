@@ -5,7 +5,7 @@
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
 
-void do_induct(Character *ch, std::string argument)
+void do_induct(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     Character *victim = NULL;

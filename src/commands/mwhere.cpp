@@ -4,7 +4,7 @@
 #include "protomob.hpp"
 #include "act.hpp"
 
-void do_mwhere(Character *ch, std::string arg)
+void do_mwhere(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = NULL;
     bool found = false;

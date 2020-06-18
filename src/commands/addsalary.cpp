@@ -3,7 +3,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 
-void do_addsalary( Character *ch, std::string argument )
+void do_addsalary( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg;
   std::string arg2;

@@ -13,7 +13,7 @@
 static void SynchronizeTargetWithDockedShips(std::shared_ptr<Ship> ship,
                                              std::shared_ptr<Ship> target);
 
-void do_target(Character *ch, std::string arg)
+void do_target(std::shared_ptr<Character> ch, std::string arg)
 {
     int the_chance = 0;
     std::shared_ptr<Ship> ship;

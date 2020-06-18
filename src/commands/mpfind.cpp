@@ -2,12 +2,12 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-static void mpfind_help(Character *ch);
+static void mpfind_help(std::shared_ptr<Character> ch);
 
 /*
  * Search mobs for mob progs containing a specified text string.
  */
-void do_mpfind(Character *ch, std::string argument)
+void do_mpfind(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
@@ -85,7 +85,7 @@ void do_mpfind(Character *ch, std::string argument)
 /*
  * Displays the help screen for the "mpfind" command
  */
-static void mpfind_help(Character *ch)
+static void mpfind_help(std::shared_ptr<Character> ch)
 {
     ch->Echo("Syntax:\r\n");
     ch->Echo("mpfind n lo_vnum hi_vnum text \r\n"

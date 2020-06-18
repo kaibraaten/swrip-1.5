@@ -6,7 +6,7 @@
 #include "race.hpp"
 #include "act.hpp"
 
-void do_train(Character *ch, std::string arg)
+void do_train(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *mob = nullptr;
     bool successful = false;

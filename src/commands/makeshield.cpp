@@ -21,7 +21,7 @@ static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
 static CraftRecipe *MakeCraftRecipe(void);
 static void FreeUserData(struct UserData *ud);
 
-void do_makeshield(Character *ch, std::string argument)
+void do_makeshield(std::shared_ptr<Character> ch, std::string argument)
 {
     CraftRecipe *recipe = MakeCraftRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
@@ -58,7 +58,7 @@ static CraftRecipe *MakeCraftRecipe(void)
 static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
 {
     struct UserData *ud = (struct UserData *)userData;
-    Character *ch = GetEngineer(args->CraftingSession);
+    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
 
     if(args->CommandArguments.empty())
     {

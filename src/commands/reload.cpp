@@ -7,7 +7,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_reload(Character *ch, std::string arg)
+void do_reload(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Ship> ship;
     long price = 0;

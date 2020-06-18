@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_clanfunds( Character *ch, std::string argument )
+void do_clanfunds( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( !IsClanned( ch ) )
     {

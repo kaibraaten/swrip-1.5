@@ -22,7 +22,7 @@ static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
 static CraftRecipe *CreateMakeBowcasterCraftRecipe();
 static void FreeUserData(UserData *ud);
 
-void do_makebowcaster(Character *ch, std::string argument)
+void do_makebowcaster(std::shared_ptr<Character> ch, std::string argument)
 {
     CraftRecipe *recipe = CreateMakeBowcasterCraftRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
@@ -61,7 +61,7 @@ static CraftRecipe *CreateMakeBowcasterCraftRecipe()
 
 static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
 {
-    Character *ch = GetEngineer(args->CraftingSession);
+    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
     UserData *ud = static_cast<UserData *>(userData);
 
     if(args->CommandArguments.empty())
@@ -76,7 +76,7 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
 
 static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args)
 {
-    Character *ch = GetEngineer(args->CraftingSession);
+    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
 
     if(ch->Race != RACE_WOOKIEE && !IsImmortal(ch))
     {

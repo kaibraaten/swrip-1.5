@@ -3,7 +3,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 
-void do_oassign( Character *ch, std::string argument )
+void do_oassign( std::shared_ptr<Character> ch, std::string argument )
 {
 #if 1
     ch->Echo("This command is deprecated. Use VASSIGN instead.\r\n");

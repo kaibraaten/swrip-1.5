@@ -4,7 +4,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_sleep(Character *ch, std::string argument)
+void do_sleep(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> obj;
 

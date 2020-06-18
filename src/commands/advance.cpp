@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_advance( Character *ch, std::string argument )
+void do_advance( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;

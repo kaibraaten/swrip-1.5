@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_retran( Character *ch, std::string arg )
+void do_retran( std::shared_ptr<Character> ch, std::string arg )
 {
   Character *victim = nullptr;
   char buf[MAX_STRING_LENGTH];

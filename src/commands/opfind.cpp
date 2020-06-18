@@ -2,12 +2,12 @@
 #include "character.hpp"
 #include "protoobject.hpp"
 
-static void opfind_help(Character *ch);
+static void opfind_help(std::shared_ptr<Character> ch);
 
 /*
  * Search objects for obj progs containing a specified text string.
  */
-void do_opfind(Character *ch, std::string argument)
+void do_opfind(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
@@ -86,7 +86,7 @@ void do_opfind(Character *ch, std::string argument)
 /*
  * Displays the help screen for the "opfind" command
  */
-static void opfind_help(Character *ch)
+static void opfind_help(std::shared_ptr<Character> ch)
 {
     ch->Echo("Syntax:\r\n");
     ch->Echo("opfind n lo_vnum hi_vnum text \r\n"

@@ -7,7 +7,7 @@
 /*
  * Help editor                                                  -Thoric
  */
-void do_hedit( Character *ch, std::string argument )
+void do_hedit( std::shared_ptr<Character> ch, std::string argument )
 {
     if ( !ch->Desc )
     {

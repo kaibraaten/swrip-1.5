@@ -10,9 +10,9 @@
 #include "repos/storeroomrepository.hpp"
 #include "act.hpp"
 
-static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch);
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, std::shared_ptr<Character> ch);
 
-void do_drop(Character *ch, std::string argument)
+void do_drop(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     bool found = false;
@@ -246,7 +246,7 @@ void do_drop(Character *ch, std::string argument)
     } /* duping protector */
 }
 
-static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch)
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, std::shared_ptr<Character> ch)
 {
     if(clan->Storeroom == ch->InRoom->Vnum)
     {

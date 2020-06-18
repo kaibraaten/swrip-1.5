@@ -3,7 +3,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_ammo(Character *ch, std::string argument)
+void do_ammo(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> ammo;
     bool checkammo = false;

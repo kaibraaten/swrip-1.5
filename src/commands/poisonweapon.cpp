@@ -8,7 +8,7 @@
 #include "protoobject.hpp"
 #include "act.hpp"
 
-void do_poison_weapon(Character *ch, std::string arg)
+void do_poison_weapon(std::shared_ptr<Character> ch, std::string arg)
 {
     if(!IsNpc(ch)
        && ch->PCData->Learned[gsn_poison_weapon] <= 0)

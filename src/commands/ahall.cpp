@@ -4,7 +4,7 @@
 #include "arena.hpp"
 #include "character.hpp"
 
-void do_ahall(Character *ch, std::string argument)
+void do_ahall(std::shared_ptr<Character> ch, std::string argument)
 {
   if ( FameList.empty() )
     {

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "act.hpp"
 
-void do_newbieset(Character *ch, std::string arg1)
+void do_newbieset(std::shared_ptr<Character> ch, std::string arg1)
 {
     Character *victim = nullptr;
 

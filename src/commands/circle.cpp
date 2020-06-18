@@ -6,7 +6,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_circle(Character *ch, std::string argument)
+void do_circle(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     Character *victim = NULL;

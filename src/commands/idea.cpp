@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_idea( Character *ch, std::string argument )
+void do_idea( std::shared_ptr<Character> ch, std::string argument )
 {
   if( !argument.empty() )
     {

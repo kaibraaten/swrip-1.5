@@ -4,7 +4,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_bury(Character *ch, std::string arg)
+void do_bury(std::shared_ptr<Character> ch, std::string arg)
 {
     if(arg.empty())
     {

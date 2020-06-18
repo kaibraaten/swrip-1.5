@@ -5,7 +5,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_sell(Character *ch, std::string arg)
+void do_sell(std::shared_ptr<Character> ch, std::string arg)
 {
     char buf[MAX_STRING_LENGTH];
     Character *keeper = nullptr;

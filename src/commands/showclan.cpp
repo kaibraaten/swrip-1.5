@@ -4,7 +4,7 @@
 
 static const char *GetClanType(const std::shared_ptr<Clan> &clan);
 
-void do_showclan( Character *ch, std::string argument )
+void do_showclan( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Clan> clan;
 

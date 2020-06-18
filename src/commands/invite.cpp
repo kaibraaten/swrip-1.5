@@ -4,7 +4,7 @@
 #include "repos/homerepository.hpp"
 #include "act.hpp"
 
-void do_invite(Character *ch, std::string argument)
+void do_invite(std::shared_ptr<Character> ch, std::string argument)
 {
     auto home = ch->InRoom;
     Character *victim = nullptr;

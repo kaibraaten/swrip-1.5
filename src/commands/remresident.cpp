@@ -5,7 +5,7 @@
 #include "repos/homerepository.hpp"
 #include "act.hpp"
 
-void do_remresident(Character *ch, std::string argument)
+void do_remresident(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = nullptr;
     auto home = Homes->FindByVnum(ch->InRoom->Vnum);

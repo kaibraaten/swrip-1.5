@@ -3,7 +3,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_invis(Character *ch, std::string arg)
+void do_invis(std::shared_ptr<Character> ch, std::string arg)
 {
     short level = 0;
 

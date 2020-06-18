@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_wizlock( Character *ch, std::string argument )
+void do_wizlock( std::shared_ptr<Character> ch, std::string argument )
 {
   extern bool wizlock;
   wizlock = !wizlock;

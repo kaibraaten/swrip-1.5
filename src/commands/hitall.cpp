@@ -5,9 +5,9 @@
 #include "log.hpp"
 #include "room.hpp"
 
-static bool is_legal_kill(const Character *ch, const Character *vch);
+static bool is_legal_kill(const std::shared_ptr<Character> ch, const Character *vch);
 
-void do_hitall( Character *ch, std::string argument )
+void do_hitall( std::shared_ptr<Character> ch, std::string argument )
 {
     short nvict = 0;
     short nhit = 0;
@@ -71,7 +71,7 @@ void do_hitall( Character *ch, std::string argument )
         LearnFromFailure(ch, gsn_hitall);
 }
 
-static bool is_legal_kill(const Character *ch, const Character *vch)
+static bool is_legal_kill(const std::shared_ptr<Character> ch, const Character *vch)
 {
     if ( IsNpc(ch) || IsNpc(vch) )
         return true;

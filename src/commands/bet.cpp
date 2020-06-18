@@ -3,7 +3,7 @@
 #include "arena.hpp"
 #include "room.hpp"
 
-void do_bet(Character *ch, std::string argument)
+void do_bet(std::shared_ptr<Character> ch, std::string argument)
 {
   std::string arg;
   std::string buf1;

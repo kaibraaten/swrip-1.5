@@ -9,7 +9,7 @@
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
 
-void do_jail(Character *ch, std::string argument)
+void do_jail(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
     Clan *clan = NULL;

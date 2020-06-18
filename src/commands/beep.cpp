@@ -4,7 +4,7 @@
 #include "descriptor.hpp"
 #include "act.hpp"
 
-void do_beep(Character *ch, std::string argument)
+void do_beep(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
     std::string arg;

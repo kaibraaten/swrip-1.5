@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "protoobject.hpp"
 
-void do_ofind(Character *ch, std::string arg)
+void do_ofind(std::shared_ptr<Character> ch, std::string arg)
 {
     int nMatch = 0;
     bool fAll = false;

@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "act.hpp"
 
-void do_wake(Character *ch, std::string arg)
+void do_wake(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = NULL;
 

@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_empower( Character *ch , std::string argument )
+void do_empower( std::shared_ptr<Character> ch , std::string argument )
 {
   std::string arg;
   std::string arg2;

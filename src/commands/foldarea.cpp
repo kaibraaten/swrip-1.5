@@ -5,7 +5,7 @@
 #include "room.hpp"
 #include "repos/arearepository.hpp"
 
-void do_foldarea(Character *ch, std::string argument)
+void do_foldarea(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     bool fold_all_areas = false;

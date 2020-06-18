@@ -5,7 +5,7 @@
 #include "character.hpp"
 #include "repos/badnamerepository.hpp"
 
-void do_badname( Character *ch, std::string argument )
+void do_badname( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string command;
 

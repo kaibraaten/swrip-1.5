@@ -5,7 +5,7 @@
 #include "protomob.hpp"
 #include "act.hpp"
 
-void do_minvoke(Character *ch, std::string arg)
+void do_minvoke(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<ProtoMobile> pMobIndex;
     Character *victim = NULL;

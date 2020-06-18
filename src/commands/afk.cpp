@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "act.hpp"
 
-void do_afk(Character *ch, std::string argument)
+void do_afk(std::shared_ptr<Character> ch, std::string argument)
 {
     if(IsNpc(ch))
         return;

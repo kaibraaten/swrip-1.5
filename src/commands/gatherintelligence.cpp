@@ -9,7 +9,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_gather_intelligence( Character *ch, std::string argument )
+void do_gather_intelligence( std::shared_ptr<Character> ch, std::string argument )
 {
   Character *victim = NULL;
   char buf[MAX_STRING_LENGTH] = {'\0'};

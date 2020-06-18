@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "repos/arearepository.hpp"
 
-void do_loadarea(Character *ch, std::string argument)
+void do_loadarea(std::shared_ptr<Character> ch, std::string argument)
 {
 #if 1
     ch->Echo("This command is deprecated. Prototype areas are always loaded.\r\n");

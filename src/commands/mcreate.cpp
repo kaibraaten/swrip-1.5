@@ -5,7 +5,7 @@
 #include "log.hpp"
 #include "act.hpp"
 
-void do_mcreate(Character *ch, std::string argument)
+void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string arg2;

@@ -7,7 +7,7 @@
 #include "systemdata.hpp"
 #include "repos/arearepository.hpp"
 
-void do_aassign(Character *ch, std::string argument)
+void do_aassign(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Area> tarea;
 

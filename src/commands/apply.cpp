@@ -6,7 +6,7 @@
 /*
  * Apply a salve/ointment                                       -Thoric
  */
-void do_apply(Character *ch, std::string argument)
+void do_apply(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> obj;
     ch_ret retcode = rNONE;

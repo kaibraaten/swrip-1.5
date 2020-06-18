@@ -5,7 +5,7 @@
 #include "repos/shiprepository.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_shutdown(Character *ch, std::string argument)
+void do_shutdown(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     Character *vch = NULL;

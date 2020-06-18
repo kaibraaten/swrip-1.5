@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/socialrepository.hpp"
 
-void do_socials( Character *ch, std::string argument )
+void do_socials( std::shared_ptr<Character> ch, std::string argument )
 {
   const int NUMBER_OF_COLUMNS = 6;
   int col = 0;

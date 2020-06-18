@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_rescue(Character *ch, std::string arg)
+void do_rescue(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = NULL;
     Character *fch = NULL;

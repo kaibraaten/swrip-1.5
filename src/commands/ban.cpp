@@ -4,7 +4,7 @@
 #include "ban.hpp"
 #include "repos/banrepository.hpp"
 
-void do_ban( Character *ch, std::string argument )
+void do_ban( std::shared_ptr<Character> ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
   std::string arg;

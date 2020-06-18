@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_addbounty( Character *ch, std::string argument )
+void do_addbounty( std::shared_ptr<Character> ch, std::string argument )
 {
   constexpr long MINIMUM_BOUNTY = 5000;
   std::string arg;

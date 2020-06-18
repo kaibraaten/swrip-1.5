@@ -12,7 +12,7 @@ struct UpdateOwnerNameData
 
 static bool UpdateOwnerName(std::shared_ptr<Ship> ship, void *userData);
 
-void do_setclan( Character *ch, std::string argument )
+void do_setclan( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;

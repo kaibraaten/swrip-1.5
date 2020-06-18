@@ -4,7 +4,7 @@
 #include "protoobject.hpp"
 
 /* Opstat - Scryn 8/12*/
-void do_opstat(Character *ch, std::string arg)
+void do_opstat(std::shared_ptr<Character> ch, std::string arg)
 {
     if(arg.empty())
     {

@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_ansi( Character *ch, std::string argument )
+void do_ansi( std::shared_ptr<Character> ch, std::string argument )
 {
     if ( argument.empty() )
     {

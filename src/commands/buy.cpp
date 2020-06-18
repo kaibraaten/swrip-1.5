@@ -10,7 +10,7 @@
 #include "protoobject.hpp"
 #include "act.hpp"
 
-void do_buy(Character *ch, std::string argument)
+void do_buy(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     argument = OneArgument(argument, arg);

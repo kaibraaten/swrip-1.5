@@ -3,7 +3,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_unjail( Character *ch, std::string arg )
+void do_unjail( std::shared_ptr<Character> ch, std::string arg )
 {
   Character *victim = NULL;
 

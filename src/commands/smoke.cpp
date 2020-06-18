@@ -5,7 +5,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_smoke(Character *ch, std::string arg)
+void do_smoke(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Object> pipe_obj;
 

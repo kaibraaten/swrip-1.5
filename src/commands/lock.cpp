@@ -4,7 +4,7 @@
 #include "exit.hpp"
 #include "act.hpp"
 
-void do_lock(Character *ch, std::string arg)
+void do_lock(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Object> obj;
     std::shared_ptr<Exit> pexit;

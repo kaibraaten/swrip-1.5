@@ -5,7 +5,7 @@
 #include "repos/shiprepository.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_reboot(Character *ch, std::string argument)
+void do_reboot(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     Character *vch = NULL;

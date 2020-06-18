@@ -10,7 +10,7 @@
 
 static std::shared_ptr<Object> FindFountain(std::shared_ptr<Room> location);
 
-void do_drink(Character *ch, std::string argument)
+void do_drink(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Object> obj;

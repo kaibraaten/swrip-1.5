@@ -5,7 +5,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_info(Character *ch, std::string argument)
+void do_info(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Ship> ship;
     std::shared_ptr<Ship> target;

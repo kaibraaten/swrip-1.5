@@ -9,7 +9,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_sabotage(Character *ch, std::string arg)
+void do_sabotage(std::shared_ptr<Character> ch, std::string arg)
 {
     int the_chance = 0, change = 0;
     std::shared_ptr<Ship> ship;

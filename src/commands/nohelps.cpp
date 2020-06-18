@@ -6,11 +6,11 @@
 #include "area.hpp"
 #include "repos/arearepository.hpp"
 
-static void ShowMissingHelpsForCommands(const Character *ch);
-static void ShowMissingHelpsForSkills(const Character *ch);
-static void ShowMissingHelpsForAreas(const Character *ch);
+static void ShowMissingHelpsForCommands(const std::shared_ptr<Character> ch);
+static void ShowMissingHelpsForSkills(const std::shared_ptr<Character> ch);
+static void ShowMissingHelpsForAreas(const std::shared_ptr<Character> ch);
 
-void do_nohelps(Character *ch, std::string arg)
+void do_nohelps(std::shared_ptr<Character> ch, std::string arg)
 {
     if (!IsImmortal(ch) || IsNpc(ch))
     {
@@ -48,7 +48,7 @@ void do_nohelps(Character *ch, std::string arg)
     }
 }
 
-static void ShowMissingHelpsForCommands(const Character *ch)
+static void ShowMissingHelpsForCommands(const std::shared_ptr<Character> ch)
 {
     const List *commands = GetEntities(CommandRepository);
     ListIterator *iterator = AllocateListIterator(commands);
@@ -76,7 +76,7 @@ static void ShowMissingHelpsForCommands(const Character *ch)
     ch->Echo("\r\n");
 }
 
-static void ShowMissingHelpsForSkills(const Character *ch)
+static void ShowMissingHelpsForSkills(const std::shared_ptr<Character> ch)
 {
     int sn = 0;
     int col = 0;
@@ -102,7 +102,7 @@ static void ShowMissingHelpsForSkills(const Character *ch)
     ch->Echo("\r\n");
 }
 
-static void ShowMissingHelpsForAreas(const Character *ch)
+static void ShowMissingHelpsForAreas(const std::shared_ptr<Character> ch)
 {
     int col = 0;
     const int NUM_COLUMNS = 2;

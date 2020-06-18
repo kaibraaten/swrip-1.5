@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-void do_repairset(Character *ch, std::string argument)
+void do_repairset(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<RepairShop> repair;
     std::shared_ptr<ProtoMobile> mob;

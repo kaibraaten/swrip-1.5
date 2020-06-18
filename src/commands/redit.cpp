@@ -10,7 +10,7 @@
 #include "exit.hpp"
 #include "act.hpp"
 
-void do_redit(Character *ch, std::string argument)
+void do_redit(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string arg2;

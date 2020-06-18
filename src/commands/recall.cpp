@@ -6,7 +6,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_recall(Character *ch, std::string argument)
+void do_recall(std::shared_ptr<Character> ch, std::string argument)
 {
     auto location = GetRoom(WhereHome(ch));
     Character *opponent = NULL;

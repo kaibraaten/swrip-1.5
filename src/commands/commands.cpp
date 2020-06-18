@@ -12,7 +12,7 @@ static bool IsMortalCommand(const Command *command)
   return command->Level < LEVEL_IMMORTAL;
 }
 
-static bool IsWithinTrustLevel(const Command *command, const Character *ch)
+static bool IsWithinTrustLevel(const Command *command, const std::shared_ptr<Character> ch)
 {
   return command->Level <= GetTrustLevel(ch);
 }
@@ -22,7 +22,7 @@ static bool NameBeginsWith(const Command *command, const std::string &name)
   return StringPrefix(name, command->Name) == 0;
 }
 
-void do_commands( Character *ch, std::string argument )
+void do_commands( std::shared_ptr<Character> ch, std::string argument )
 {
   const List *commands = GetEntities(CommandRepository);
   const int NumColumns = 6;

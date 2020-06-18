@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_timecmd( Character *ch, std::string argument )
+void do_timecmd( std::shared_ptr<Character> ch, std::string argument )
 {
   struct timeval start_time;
   struct timeval etime;

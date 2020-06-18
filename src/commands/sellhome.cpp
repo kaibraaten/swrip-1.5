@@ -6,7 +6,7 @@
 #include "repos/arearepository.hpp"
 #include "repos/homerepository.hpp"
 
-void do_sellhome(Character *ch, std::string argument)
+void do_sellhome(std::shared_ptr<Character> ch, std::string argument)
 {
     constexpr auto sellHomeCreditReturn = 50000;
     std::shared_ptr<Room> room = ch->InRoom;

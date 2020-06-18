@@ -7,7 +7,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_add_patrol(Character *ch, std::string argument)
+void do_add_patrol(std::shared_ptr<Character> ch, std::string argument)
 {
     int the_chance, credits;
     std::shared_ptr<Clan> clan;

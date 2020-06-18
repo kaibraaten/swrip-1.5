@@ -3,7 +3,7 @@
 #include "alias.hpp"
 #include "pcdata.hpp"
 
-void do_alias( Character *ch, std::string argument )
+void do_alias( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg;
 

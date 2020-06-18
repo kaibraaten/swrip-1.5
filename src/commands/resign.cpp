@@ -5,7 +5,7 @@
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
 
-void do_resign(Character *ch, std::string argument)
+void do_resign(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Clan> clan;
     long xp_to_lose = 0;

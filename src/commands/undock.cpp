@@ -7,7 +7,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_undock(Character *ch, std::string argument)
+void do_undock(std::shared_ptr<Character> ch, std::string argument)
 {
   int the_chance = 0;
   std::shared_ptr<Ship> ship;

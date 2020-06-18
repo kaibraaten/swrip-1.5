@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "repos/clanrepository.hpp"
 
-void do_demote( Character *ch , std::string argument )
+void do_demote( std::shared_ptr<Character> ch , std::string argument )
 {
   if ( IsNpc( ch ) )
     return;

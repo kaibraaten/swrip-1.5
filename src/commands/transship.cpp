@@ -3,7 +3,7 @@
 #include "ship.hpp"
 #include "repos/shiprepository.hpp"
 
-void do_transship(Character *ch, std::string argument )
+void do_transship(std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;

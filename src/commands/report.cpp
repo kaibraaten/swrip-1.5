@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "act.hpp"
 
-void do_report(Character *ch, std::string argument)
+void do_report(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_INPUT_LENGTH] = { '\0' };
 

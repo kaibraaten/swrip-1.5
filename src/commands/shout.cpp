@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_shout( Character *ch, std::string argument )
+void do_shout( std::shared_ptr<Character> ch, std::string argument )
 {
   if (!IsAuthed(ch))
     {

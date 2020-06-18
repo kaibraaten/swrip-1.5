@@ -2,7 +2,7 @@
 #include "spaceobject.hpp"
 #include "character.hpp"
 
-static void showspaceobject( Character *ch, std::shared_ptr<Spaceobject> spaceobject )
+static void showspaceobject( std::shared_ptr<Character> ch, std::shared_ptr<Spaceobject> spaceobject )
 {
   ch->Echo("Space object: %s\r\n", spaceobject->Name.c_str());
   ch->Echo("Is simulator: %s\r\n", spaceobject->IsSimulator ? "Yes" : "No");
@@ -23,7 +23,7 @@ static void showspaceobject( Character *ch, std::shared_ptr<Spaceobject> spaceob
     }
 }
 
-void do_showspaceobject( Character *ch, std::string argument )
+void do_showspaceobject( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Spaceobject> spaceobject = GetSpaceobject( argument );
 

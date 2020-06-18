@@ -8,7 +8,7 @@
 #include "act.hpp"
 
 /* Allows PCs to learn spells embedded in object. Should prove interesting. - Samson 8-9-98 */
-void do_study(Character *ch, std::string argument) /* study by Absalom */
+void do_study(std::shared_ptr<Character> ch, std::string argument) /* study by Absalom */
 {
     std::shared_ptr<Object> obj;
     int sn = 0, bookskills = 0, book;

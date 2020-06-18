@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "act.hpp"
 
-void do_kill(Character *ch, std::string arg)
+void do_kill(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = nullptr;
 

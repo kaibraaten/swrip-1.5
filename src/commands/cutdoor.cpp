@@ -8,7 +8,7 @@
 #include "exit.hpp"
 #include "act.hpp"
 
-void do_cutdoor(Character *ch, std::string arg)
+void do_cutdoor(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Exit> pexit;
     std::shared_ptr<Object> wield;

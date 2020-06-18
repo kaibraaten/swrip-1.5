@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_unfocusalias(Character *ch, std::string argument)
+void do_unfocusalias(std::shared_ptr<Character> ch, std::string argument)
 {
   if ( IsNpc(ch) )
     {

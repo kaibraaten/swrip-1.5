@@ -9,7 +9,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_request(Character *ch, std::string arg)
+void do_request(std::shared_ptr<Character> ch, std::string arg)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     int the_chance = 0;

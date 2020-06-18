@@ -8,7 +8,7 @@
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
 
-void do_auction(Character *ch, std::string argument)
+void do_auction(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> obj;
     std::string arg1;

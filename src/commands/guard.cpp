@@ -7,7 +7,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_guard(Character *ch, std::string argument)
+void do_guard(std::shared_ptr<Character> ch, std::string argument)
 {
     int the_chance = 0;
     std::shared_ptr<Ship> ship;

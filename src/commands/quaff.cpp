@@ -6,7 +6,7 @@
 #include "systemdata.hpp"
 #include "act.hpp"
 
-void do_quaff(Character *ch, std::string argument)
+void do_quaff(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> obj;
     ch_ret retcode = rNONE;

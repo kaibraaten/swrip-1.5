@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_fixchar( Character *ch, std::string argument )
+void do_fixchar( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string name;
   Character *victim = nullptr;

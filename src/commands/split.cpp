@@ -7,7 +7,7 @@
 /*
  * 'Split' originally by Gnort, God of Chaos.
  */
-void do_split(Character *ch, std::string arg)
+void do_split(std::shared_ptr<Character> ch, std::string arg)
 {
     char buf[MAX_STRING_LENGTH];
     int amount = 0;

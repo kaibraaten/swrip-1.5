@@ -7,7 +7,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_brandish(Character *ch, std::string argument)
+void do_brandish(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> staff;
     ch_ret retcode = rNONE;

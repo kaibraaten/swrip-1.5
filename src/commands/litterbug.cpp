@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_litterbug( Character *ch, std::string arg )
+void do_litterbug( std::shared_ptr<Character> ch, std::string arg )
 {
     Character *victim = nullptr;
 

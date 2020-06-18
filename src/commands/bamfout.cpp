@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_bamfout( Character *ch, std::string argument )
+void do_bamfout( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( !IsNpc(ch) )
     {

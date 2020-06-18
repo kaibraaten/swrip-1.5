@@ -5,7 +5,7 @@
 #include "repos/homerepository.hpp"
 #include "act.hpp"
 
-void do_buzz(Character *ch, std::string arg)
+void do_buzz(std::shared_ptr<Character> ch, std::string arg)
 {
     DirectionType exit_dir = DIR_INVALID;
 

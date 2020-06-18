@@ -4,7 +4,7 @@
 #include "arena.hpp"
 #include "room.hpp"
 
-void do_awho(Character *ch, std::string argument)
+void do_awho(std::shared_ptr<Character> ch, std::string argument)
 {
   Character *tch = nullptr;
   std::ostringstream output;

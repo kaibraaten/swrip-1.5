@@ -4,9 +4,9 @@
 #include "room.hpp"
 
 static int rgrub_int_comp(const void *i, const void *j);
-static void rgrub_help(Character *ch);
+static void rgrub_help(std::shared_ptr<Character> ch);
 
-void do_rgrub(Character *ch, std::string argument)
+void do_rgrub(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
@@ -80,7 +80,7 @@ static int rgrub_int_comp(const void *i, const void *j)
 /*
  * Displays the help screen for the "rgrub" command
  */
-static void rgrub_help(Character *ch)
+static void rgrub_help(std::shared_ptr<Character> ch)
 {
     ch->Echo("Syntax:\r\n");
     ch->Echo("rgrub st n lo hi - sector type search.\r\n"

@@ -20,7 +20,7 @@ static bool CanGiveOrderTo(const Character *leader, const Character *follower)
         || IsOwnerOf(leader, follower);
 }
 
-void do_order(Character *ch, std::string argument)
+void do_order(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     Character *victim = NULL;

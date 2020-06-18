@@ -5,9 +5,9 @@
 #include "area.hpp"
 #include "repos/planetrepository.hpp"
 
-static void ShowEntry(std::shared_ptr<Planet> planet, const Character *ch);
+static void ShowEntry(std::shared_ptr<Planet> planet, const std::shared_ptr<Character> ch);
 
-void do_planets(Character *ch, std::string argument)
+void do_planets(std::shared_ptr<Character> ch, std::string argument)
 {
     auto planetList = Planets->Entities();
     planetList.sort([](const auto &a, const auto &b)
@@ -31,7 +31,7 @@ void do_planets(Character *ch, std::string argument)
     }
 }
 
-static void ShowEntry(std::shared_ptr<Planet> planet, const Character *ch)
+static void ShowEntry(std::shared_ptr<Planet> planet, const std::shared_ptr<Character> ch)
 {
     ch->Echo("&g--------------------------------------------------------------------------------&w\r\n");
     ch->Echo("&wPlanet: &G%-15s   &wGoverned By: &G%s %s\r\n",

@@ -3,7 +3,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_peace(Character *ch, std::string argument)
+void do_peace(std::shared_ptr<Character> ch, std::string argument)
 {
     Act(AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, ActTarget::Room);
 

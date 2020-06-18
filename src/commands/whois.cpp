@@ -7,7 +7,7 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 
-void do_whois( Character *ch, std::string argument)
+void do_whois( std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
     char buf[MAX_STRING_LENGTH / 2] = {'\0'};

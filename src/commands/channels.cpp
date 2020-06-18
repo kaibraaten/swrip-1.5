@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "systemdata.hpp"
 
-void do_channels( Character *ch, std::string arg )
+void do_channels( std::shared_ptr<Character> ch, std::string arg )
 {
     if ( arg.empty() )
     {

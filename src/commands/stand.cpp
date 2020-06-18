@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "act.hpp"
 
-void do_stand(Character *ch, std::string argument)
+void do_stand(std::shared_ptr<Character> ch, std::string argument)
 {
     switch(ch->Position)
     {

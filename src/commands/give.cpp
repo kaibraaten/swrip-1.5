@@ -15,7 +15,7 @@ static bool IsPlayerVendor(const Character *keeper)
         && keeper->Home != nullptr;
 }
 
-void do_give(Character *ch, std::string argument)
+void do_give(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

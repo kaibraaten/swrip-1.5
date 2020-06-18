@@ -23,27 +23,27 @@
 
 struct UserData
 {
-    const Character *ch = nullptr;
+    const std::shared_ptr<Character> ch = nullptr;
     std::shared_ptr<Ship> ship;
 };
 
 /* Locals */
-void show_char_to_char(const std::list<Character *> &list, Character *ch);
+void show_char_to_char(const std::list<Character *> &list, std::shared_ptr<Character> ch);
 
-static void LookThroughShipWindow(Character *ch, std::shared_ptr<Ship> ship);
+static void LookThroughShipWindow(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
 static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, void *userData);
-static void show_char_to_char_0(Character *victim, Character *ch);
-static void show_char_to_char_1(Character *victim, Character *ch);
-static void show_ships_to_char(std::shared_ptr<Room> room, const Character *ch);
-static void show_visible_affects_to_char(Character *victim, Character *ch);
-static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short door);
-static void show_no_arg(Character *ch, bool is_auto);
+static void show_char_to_char_0(Character *victim, std::shared_ptr<Character> ch);
+static void show_char_to_char_1(Character *victim, std::shared_ptr<Character> ch);
+static void show_ships_to_char(std::shared_ptr<Room> room, const std::shared_ptr<Character> ch);
+static void show_visible_affects_to_char(Character *victim, std::shared_ptr<Character> ch);
+static void show_exit_to_char(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit, short door);
+static void show_no_arg(std::shared_ptr<Character> ch, bool is_auto);
 
-static void look_under(Character *ch, const std::string &what, bool doexaprog);
-static void look_in(Character *ch, const std::string &what, bool doexaprog);
-static bool requirements_are_met(Character *ch);
+static void look_under(std::shared_ptr<Character> ch, const std::string &what, bool doexaprog);
+static void look_in(std::shared_ptr<Character> ch, const std::string &what, bool doexaprog);
+static bool requirements_are_met(std::shared_ptr<Character> ch);
 
-void do_look(Character *ch, std::string argument)
+void do_look(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string arg1;
@@ -241,7 +241,7 @@ void do_look(Character *ch, std::string argument)
     ch->Echo("You do not see that here.\r\n");
 }
 
-static void show_char_to_char_0(Character *victim, Character *ch)
+static void show_char_to_char_0(Character *victim, std::shared_ptr<Character> ch)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char buf1[MAX_STRING_LENGTH] = { '\0' };
@@ -544,7 +544,7 @@ static void show_char_to_char_0(Character *victim, Character *ch)
     show_visible_affects_to_char(victim, ch);
 }
 
-static void show_char_to_char_1(Character *victim, Character *ch)
+static void show_char_to_char_1(Character *victim, std::shared_ptr<Character> ch)
 {
     std::shared_ptr<Object> obj;
     int iWear = 0;
@@ -617,7 +617,7 @@ static void show_char_to_char_1(Character *victim, Character *ch)
             LearnFromFailure(ch, gsn_peek);
 }
 
-static void show_ships_to_char(std::shared_ptr<Room> room, const Character *ch)
+static void show_ships_to_char(std::shared_ptr<Room> room, const std::shared_ptr<Character> ch)
 {
     const int NUMBER_OF_COLUMNS = 2;
     int column = 0;
@@ -643,7 +643,7 @@ static void show_ships_to_char(std::shared_ptr<Room> room, const Character *ch)
     }
 }
 
-void show_char_to_char(const std::list<Character *> &list, Character *ch)
+void show_char_to_char(const std::list<Character *> &list, std::shared_ptr<Character> ch)
 {
     for(Character *rch : list)
     {
@@ -668,7 +668,7 @@ void show_char_to_char(const std::list<Character *> &list, Character *ch)
     }
 }
 
-static void show_visible_affects_to_char(Character *victim, Character *ch)
+static void show_visible_affects_to_char(Character *victim, std::shared_ptr<Character> ch)
 {
     char buf[MAX_STRING_LENGTH];
 
@@ -688,7 +688,7 @@ static void show_visible_affects_to_char(Character *victim, Character *ch)
     }
 }
 
-static void look_under(Character *ch, const std::string &what, bool doexaprog)
+static void look_under(std::shared_ptr<Character> ch, const std::string &what, bool doexaprog)
 {
     int count = 0;
     std::shared_ptr<Object> obj;
@@ -734,7 +734,7 @@ static void look_under(Character *ch, const std::string &what, bool doexaprog)
     }
 }
 
-static bool requirements_are_met(Character *ch)
+static bool requirements_are_met(std::shared_ptr<Character> ch)
 {
     if(!ch->Desc)
     {
@@ -776,7 +776,7 @@ static bool requirements_are_met(Character *ch)
     return true;
 }
 
-static void look_in(Character *ch, const std::string &what, bool doexaprog)
+static void look_in(std::shared_ptr<Character> ch, const std::string &what, bool doexaprog)
 {
     int count = 0;
 
@@ -879,7 +879,7 @@ static void look_in(Character *ch, const std::string &what, bool doexaprog)
     }
 }
 
-static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short door)
+static void show_exit_to_char(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit, short door)
 {
     if(!pexit->Keyword.empty())
     {
@@ -980,7 +980,7 @@ static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short 
 }
 
 /* 'look' or 'look auto' */
-static void show_no_arg(Character *ch, bool is_auto)
+static void show_no_arg(std::shared_ptr<Character> ch, bool is_auto)
 {
     SetCharacterColor(AT_RMNAME, ch);
     ch->Echo(GetRoomName(ch->InRoom));
@@ -1028,7 +1028,7 @@ static void show_no_arg(Character *ch, bool is_auto)
     }
 }
 
-static void LookThroughShipWindow(Character *ch, std::shared_ptr<Ship> ship)
+static void LookThroughShipWindow(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship)
 {
     SetCharacterColor(AT_WHITE, ch);
     ch->Echo("\r\nThrough the transparisteel windows you see:\r\n");
@@ -1077,7 +1077,7 @@ static void LookThroughShipWindow(Character *ch, std::shared_ptr<Ship> ship)
 static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, void *userData)
 {
     const UserData *data = (UserData *)userData;
-    const Character *ch = data->ch;
+    const std::shared_ptr<Character> ch = data->ch;
     std::shared_ptr<Ship> ship = data->ship;
 
     if(target != ship && target->Spaceobject)

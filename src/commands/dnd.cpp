@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_dnd( Character *ch, std::string argument )
+void do_dnd( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( !IsNpc(ch) && ch->PCData )
     {

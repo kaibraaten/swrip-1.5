@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_silence( Character *ch, std::string arg )
+void do_silence( std::shared_ptr<Character> ch, std::string arg )
 {
     Character *victim = nullptr;
 

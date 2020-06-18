@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_scatter(Character *ch, std::string arg)
+void do_scatter(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = nullptr;
     std::shared_ptr<Room> pRoomIndex;

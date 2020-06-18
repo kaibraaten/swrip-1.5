@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_recho( Character *ch, std::string argument )
+void do_recho( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg;
     short color = 0;

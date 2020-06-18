@@ -3,7 +3,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_say(Character *ch, std::string argument)
+void do_say(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     auto mobflags = ch->Flags;

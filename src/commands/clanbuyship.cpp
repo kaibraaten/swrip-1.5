@@ -8,7 +8,7 @@
 #include "repos/clanrepository.hpp"
 #include "act.hpp"
 
-void do_clanbuyship(Character *ch, std::string argument)
+void do_clanbuyship(std::shared_ptr<Character> ch, std::string argument)
 {
     long price = 0;
     std::shared_ptr<Ship> ship;

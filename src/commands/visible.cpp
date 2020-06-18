@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_visible( Character *ch, std::string argument )
+void do_visible( std::shared_ptr<Character> ch, std::string argument )
 {
     StripAffect( ch, gsn_invis );
     StripAffect( ch, gsn_mass_invis );

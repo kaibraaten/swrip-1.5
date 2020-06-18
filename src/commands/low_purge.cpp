@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "act.hpp"
 
-void do_low_purge(Character *ch, std::string arg)
+void do_low_purge(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = NULL;
     std::shared_ptr<Object> obj;

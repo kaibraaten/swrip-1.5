@@ -6,13 +6,13 @@
 #include "object.hpp"
 #include "act.hpp"
 
-static bool HasTakenOverdose(const Character *ch, int drug)
+static bool HasTakenOverdose(const std::shared_ptr<Character> ch, int drug)
 {
     return ch->PCData->DrugLevel[drug] >= 255
         || ch->PCData->DrugLevel[drug] > ch->PCData->Addiction[drug] + 100;
 }
 
-static void ApplyOverdose(Character *ch, int drug)
+static void ApplyOverdose(std::shared_ptr<Character> ch, int drug)
 {
     ch->MentalState = urange(20, ch->MentalState + 5, 100);
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
@@ -25,7 +25,7 @@ static void ApplyOverdose(Character *ch, int drug)
     ch->HitPoints.Current = 1;
 }
 
-static void ApplyLumni(Character *ch, int spiceGrade)
+static void ApplyLumni(std::shared_ptr<Character> ch, int spiceGrade)
 {
     int sn = LookupSkill("sanctuary");
 
@@ -43,7 +43,7 @@ static void ApplyLumni(Character *ch, int spiceGrade)
     }
 }
 
-static void ApplyGlitterstim(Character *ch, int spiceGrade)
+static void ApplyGlitterstim(std::shared_ptr<Character> ch, int spiceGrade)
 {
     int sn = LookupSkill("true sight");
 
@@ -61,7 +61,7 @@ static void ApplyGlitterstim(Character *ch, int spiceGrade)
     }
 }
 
-static void ApplyCarsanum(Character *ch, int spiceGrade)
+static void ApplyCarsanum(std::shared_ptr<Character> ch, int spiceGrade)
 {
     int sn = LookupSkill("heightened awareness");
 
@@ -79,7 +79,7 @@ static void ApplyCarsanum(Character *ch, int spiceGrade)
     }
 }
 
-static void ApplyRyll(Character *ch, int spiceGrade)
+static void ApplyRyll(std::shared_ptr<Character> ch, int spiceGrade)
 {
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     af->Type = -1;
@@ -109,7 +109,7 @@ static void ApplyRyll(Character *ch, int spiceGrade)
     AffectToCharacter(ch, af);
 }
 
-static void ApplyAndris(Character *ch, int spiceGrade)
+static void ApplyAndris(std::shared_ptr<Character> ch, int spiceGrade)
 {
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     af->Type = -1;
@@ -130,7 +130,7 @@ static void ApplyAndris(Character *ch, int spiceGrade)
     AffectToCharacter(ch, af);
 }
 
-void do_takedrug(Character *ch, std::string argument)
+void do_takedrug(std::shared_ptr<Character> ch, std::string argument)
 {
     if(argument.empty())
     {

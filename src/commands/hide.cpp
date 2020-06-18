@@ -4,7 +4,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_hide( Character *ch, std::string argument )
+void do_hide( std::shared_ptr<Character> ch, std::string argument )
 {
     if ( IsNpc(ch) && IsAffectedBy( ch, Flag::Affect::Charm))
     {

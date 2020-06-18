@@ -3,7 +3,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_bank( Character *ch, std::string argument )
+void do_bank( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;

@@ -6,7 +6,7 @@
 #include "exit.hpp"
 #include "act.hpp"
 
-void do_shove(Character *ch, std::string argument)
+void do_shove(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string arg2;

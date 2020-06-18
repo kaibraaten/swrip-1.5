@@ -3,7 +3,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_remove(Character *ch, std::string arg)
+void do_remove(std::shared_ptr<Character> ch, std::string arg)
 {
     if(arg.empty())
     {

@@ -6,7 +6,7 @@
 #include "systemdata.hpp"
 #include "act.hpp"
 
-void do_torture(Character *ch, std::string arg)
+void do_torture(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = NULL;
     int the_chance = 0, dam = 0;

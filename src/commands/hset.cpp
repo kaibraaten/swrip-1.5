@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "repos/helprepository.hpp"
 
-void do_hset( Character *ch, std::string argument )
+void do_hset( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<HelpFile> pHelp;
   std::string arg1;

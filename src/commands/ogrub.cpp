@@ -11,26 +11,26 @@ static struct operand_struct go_op[MAX_NUM_OPS];
 static struct field_struct go_fd[GO_NUM_FIELDS];
 
 static void go_init(void);
-static void display_operand_table(const Character *ch, int op_num);
-static bool go_parse_operand(const Character *ch, const char *arg, int *op_num, int *sor_ind,
+static void display_operand_table(const std::shared_ptr<Character> ch, int op_num);
+static bool go_parse_operand(const std::shared_ptr<Character> ch, const char *arg, int *op_num, int *sor_ind,
                              bool *sor_dir, bool *or_sw, bool *np_sw, bool *nm_sw, bool *ng_sw,
                              bool *do_sw, bool *d2_sw);
 static int go_fnam_to_num(const char *arg);
-static bool go_parse_operator(const Character *ch, const char *pch, int *op_num);
+static bool go_parse_operator(const std::shared_ptr<Character> ch, const char *pch, int *op_num);
 static int owear_to_num(const char *arg);
-static bool go_read(const Character *ch, int dis_num, int op_num, int sor_ind,
+static bool go_read(const std::shared_ptr<Character> ch, int dis_num, int op_num, int sor_ind,
                     bool sor_dir, bool or_sw, bool np_sw, bool nm_sw, bool ng_sw,
                     bool d2_sw);
 static short go_wear_ext(long arg);
-static void go_sort(const Character *ch, GO_STRUCT **p,
+static void go_sort(const std::shared_ptr<Character> ch, GO_STRUCT **p,
                     int ind, int left, int right, bool n_s, bool sor_dir);
 static void go_accum_aff(GO_STRUCT *r, int loc, int mod);
-static bool go_eval_and(const Character *ch, GO_STRUCT *r, int op_num);
-static bool go_eval_or(const Character *ch, GO_STRUCT *r, int op_num);
-static void go_display(const Character *ch, int dis_num, int tot_match, bool d2_sw, GO_STRUCT **p);
+static bool go_eval_and(const std::shared_ptr<Character> ch, GO_STRUCT *r, int op_num);
+static bool go_eval_or(const std::shared_ptr<Character> ch, GO_STRUCT *r, int op_num);
+static void go_display(const std::shared_ptr<Character> ch, int dis_num, int tot_match, bool d2_sw, GO_STRUCT **p);
 static const char *go_otype_to_disp(int arg);
 static const char *owear_to_disp(short arg);
-static bool go_read_names(const Character *ch, std::shared_ptr<Object> po, GO_STRUCT *r, bool np_sw,
+static bool go_read_names(const std::shared_ptr<Character> ch, std::shared_ptr<Object> po, GO_STRUCT *r, bool np_sw,
                           bool nm_sw, bool ng_sw);
 
 /*
@@ -60,7 +60,7 @@ static bool go_read_names(const Character *ch, std::shared_ptr<Object> po, GO_ST
   free(p); free(a);
 */
 
-void do_ogrub(Character *ch, std::string argument)
+void do_ogrub(std::shared_ptr<Character> ch, std::string argument)
 {
     enum
     {
@@ -173,7 +173,7 @@ static void go_init(void)
     strcpy(go_fd[23].nam, "name");
 }
 
-static void display_operand_table(const Character *ch, int op_num)
+static void display_operand_table(const std::shared_ptr<Character> ch, int op_num)
 {
     int cou;
     char opn[7][3] = { "eq", "ne", "su", "ge", "gt", "le", "lt" };
@@ -192,7 +192,7 @@ static void display_operand_table(const Character *ch, int op_num)
 /*
  * Store operand's field name in the operand table.
  */
-static bool go_parse_operand(const Character *ch, const char *arg, int *op_num, int *sor_ind,
+static bool go_parse_operand(const std::shared_ptr<Character> ch, const char *arg, int *op_num, int *sor_ind,
                              bool *sor_dir, bool *or_sw, bool *np_sw, bool *nm_sw, bool *ng_sw,
                              bool *do_sw, bool *d2_sw)
 {
@@ -249,7 +249,7 @@ static int go_fnam_to_num(const char *arg)
 /*
  *  Store operand's operator and value in operand table.
  */
-static bool go_parse_operator(const Character *ch, const char *pch, int *op_num)
+static bool go_parse_operator(const std::shared_ptr<Character> ch, const char *pch, int *op_num)
 {
     enum op_type
     {
@@ -342,7 +342,7 @@ static int owear_to_num(const char *arg)
     return 0;
 }
 
-static bool go_read(const Character *ch, int dis_num, int op_num, int sor_ind,
+static bool go_read(const std::shared_ptr<Character> ch, int dis_num, int op_num, int sor_ind,
                     bool sor_dir, bool or_sw, bool np_sw, bool nm_sw, bool ng_sw,
                     bool d2_sw)
 {
@@ -439,7 +439,7 @@ static short go_wear_ext(long arg)    /* extract bit set in arg ignoring pos 1 *
  * 5th parm is n_s - number/string - true is number - false is string
  * 6th parm is direction - true is ascending - false is descending
  */
-static void go_sort(const Character *ch, GO_STRUCT **p,
+static void go_sort(const std::shared_ptr<Character> ch, GO_STRUCT **p,
                     int ind, int left, int right, bool n_s, bool sor_dir)
 {
     GO_STRUCT *swap;
@@ -570,7 +570,7 @@ static void go_accum_aff(GO_STRUCT *r, int loc, int mod)
 /*
  * Evaluate one input record to see if it matches all search criteria
  */
-static bool go_eval_and(const Character *ch, GO_STRUCT *r, int op_num)
+static bool go_eval_and(const std::shared_ptr<Character> ch, GO_STRUCT *r, int op_num)
 {
     enum
     {
@@ -604,7 +604,7 @@ static bool go_eval_and(const Character *ch, GO_STRUCT *r, int op_num)
 /*
  * Evaluate one input record to see if it matches any search criteria
  */
-static bool go_eval_or(const Character *ch, GO_STRUCT *r, int op_num)
+static bool go_eval_or(const std::shared_ptr<Character> ch, GO_STRUCT *r, int op_num)
 {
     enum
     {
@@ -633,7 +633,7 @@ static bool go_eval_or(const Character *ch, GO_STRUCT *r, int op_num)
     return false;
 }
 
-static void go_display(const Character *ch, int dis_num, int tot_match, bool d2_sw,
+static void go_display(const std::shared_ptr<Character> ch, int dis_num, int tot_match, bool d2_sw,
                        GO_STRUCT **p)
 {
     enum
@@ -749,7 +749,7 @@ static const char *owear_to_disp(short arg)
  * it could be on the ground ... but ... growl ... it could also be
  * in a container carried by someone - or in a container on the ground.
  */
-static bool go_read_names(const Character *ch, std::shared_ptr<Object> po, GO_STRUCT *r, bool np_sw,
+static bool go_read_names(const std::shared_ptr<Character> ch, std::shared_ptr<Object> po, GO_STRUCT *r, bool np_sw,
                           bool nm_sw, bool ng_sw)
 {
     enum

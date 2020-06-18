@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_dismount(Character *ch, std::string argument)
+void do_dismount(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = ch->Mount;
 

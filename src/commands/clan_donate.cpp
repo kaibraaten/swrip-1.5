@@ -5,7 +5,7 @@
 #include "room.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_clan_donate( Character *ch, std::string argument )
+void do_clan_donate( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Clan> clan;
   long amount = 0;

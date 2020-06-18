@@ -9,7 +9,7 @@
 
 static void trunc1(char *s, size_t len);
 
-void do_owhere(Character *ch, std::string argument)
+void do_owhere(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH], field[MAX_INPUT_LENGTH];
     std::string arg;

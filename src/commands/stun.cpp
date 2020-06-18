@@ -6,7 +6,7 @@
 #include "systemdata.hpp"
 #include "act.hpp"
 
-void do_stun(Character *ch, std::string argument)
+void do_stun(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
     int stun_chance = 0;

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_retire( Character *ch, std::string arg )
+void do_retire( std::shared_ptr<Character> ch, std::string arg )
 {
   Character *victim = nullptr;
 

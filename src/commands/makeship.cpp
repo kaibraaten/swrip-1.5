@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "repos/shiprepository.hpp"
 
-void do_makeship( Character *ch, std::string argument )
+void do_makeship( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg;
 

@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-void do_shopstat(Character *ch, std::string argument)
+void do_shopstat(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Shop> shop;
     std::shared_ptr<ProtoMobile> mob;

@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_notell( Character *ch, std::string arg )
+void do_notell( std::shared_ptr<Character> ch, std::string arg )
 {
     Character *victim = nullptr;
 

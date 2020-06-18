@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "descriptor.hpp"
 
-void do_revert(Character *ch, std::string argument)
+void do_revert(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *mob = nullptr;
 

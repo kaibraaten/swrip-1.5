@@ -22,7 +22,7 @@ static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
 static void FreeUserData(struct UserData *ud);
 static bool CanUseWearLocation(int wearLocation);
 
-void do_makearmor(Character *ch, std::string argument)
+void do_makearmor(std::shared_ptr<Character> ch, std::string argument)
 {
     CraftRecipe *recipe = CreateMakeArmorRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
@@ -58,7 +58,7 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
     CraftingSession *session = eventArgs->CraftingSession;
     std::string argument = eventArgs->CommandArguments;
     std::string wearLoc;
-    Character *ch = GetEngineer(session);
+    std::shared_ptr<Character> ch = GetEngineer(session);
 
     argument = OneArgument(argument, wearLoc);
     std::string name = argument;

@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/shuttlerepository.hpp"
 
-void do_showshuttle( Character *ch, std::string argument )
+void do_showshuttle( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Shuttle> shuttle = Shuttles->FindByName(argument);
 

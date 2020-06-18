@@ -9,7 +9,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_detrap(Character *ch, std::string argument)
+void do_detrap(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Object> obj;

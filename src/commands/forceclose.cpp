@@ -3,7 +3,7 @@
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
 
-void do_forceclose(Character *ch, std::string arg)
+void do_forceclose(std::shared_ptr<Character> ch, std::string arg)
 {
     if (arg.empty())
     {

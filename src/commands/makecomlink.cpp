@@ -19,7 +19,7 @@ static void FreeUserData(UserData *ud);
 static bool CanUseWearLocation(int wearLocation);
 static CraftRecipe *MakeCraftRecipe(void);
 
-void do_makecomlink(Character *ch, std::string argument)
+void do_makecomlink(std::shared_ptr<Character> ch, std::string argument)
 {
     CraftRecipe *recipe = MakeCraftRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
@@ -53,7 +53,7 @@ static CraftRecipe *MakeCraftRecipe(void)
 static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
 {
     UserData *ud = (UserData *)userData;
-    Character *ch = GetEngineer(args->CraftingSession);
+    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
     std::string argument = args->CommandArguments;
     std::string wearLoc;
     std::string itemName;

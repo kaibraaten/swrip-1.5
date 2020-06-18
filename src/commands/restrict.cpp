@@ -3,7 +3,7 @@
 #include "command.hpp"
 #include "log.hpp"
 
-void do_restrict( Character *ch, std::string argument )
+void do_restrict( std::shared_ptr<Character> ch, std::string argument )
 {
   const List *commands = GetEntities(CommandRepository);
   ListIterator *iterator = NULL;

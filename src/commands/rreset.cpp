@@ -4,7 +4,7 @@
 #include "log.hpp"
 #include "room.hpp"
 
-void do_rreset(Character *ch, std::string argument)
+void do_rreset(std::shared_ptr<Character> ch, std::string argument)
 {
     auto pRoom = ch->InRoom;
 

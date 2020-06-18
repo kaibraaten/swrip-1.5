@@ -8,7 +8,7 @@
 /*
  * Based on last time modified, show when a player was last on  -Thoric
  */
-void do_last( Character *ch, std::string arg )
+void do_last( std::shared_ptr<Character> ch, std::string arg )
 {
     if ( arg.empty() )
     {

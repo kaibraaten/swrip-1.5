@@ -10,10 +10,10 @@
 #include "repos/homerepository.hpp"
 #include "act.hpp"
 
-static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch);
-static void get_obj(Character *ch, std::shared_ptr<Object> obj, std::shared_ptr<Object> container);
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, std::shared_ptr<Character> ch);
+static void get_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, std::shared_ptr<Object> container);
 
-void do_get(Character *ch, std::string argument)
+void do_get(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
@@ -377,7 +377,7 @@ void do_get(Character *ch, std::string argument)
     }
 }
 
-static void get_obj(Character *ch, std::shared_ptr<Object> obj, std::shared_ptr<Object> container)
+static void get_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, std::shared_ptr<Object> container)
 {
     int weight = 0;
 
@@ -465,7 +465,7 @@ static void get_obj(Character *ch, std::shared_ptr<Object> obj, std::shared_ptr<
     ObjProgGetTrigger(ch, obj);
 }
 
-static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch)
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, std::shared_ptr<Character> ch)
 {
     if(clan->Storeroom == ch->InRoom->Vnum)
     {

@@ -9,7 +9,7 @@
 #include "repos/vendorrepository.hpp"
 #include "act.hpp"
 
-void do_placevendor(Character *ch, std::string argument)
+void do_placevendor(std::shared_ptr<Character> ch, std::string argument)
 {
     if(FindKeeperQ(ch, false))
     {

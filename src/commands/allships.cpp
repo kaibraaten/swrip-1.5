@@ -7,7 +7,7 @@ static bool ShowShipVerbose(std::shared_ptr<Ship> ship, void *userData);
 
 struct UserData
 {
-  Character *ch = nullptr;
+  std::shared_ptr<Character> ch = nullptr;
   bool unowned = false;
   bool mobship = false;
   bool checkowner = false;
@@ -16,7 +16,7 @@ struct UserData
   std::string argument;
 };
 
-void do_allships( Character *ch, std::string argument )
+void do_allships( std::shared_ptr<Character> ch, std::string argument )
 {
   UserData data;
   data.ch = ch;
@@ -147,7 +147,7 @@ static bool ShowShipVerbose(std::shared_ptr<Ship> ship, void *userData)
 
 static bool ShowShipTerse(std::shared_ptr<Ship> ship, void *userData)
 {
-  Character *ch = (Character*) userData;
+  std::shared_ptr<Character> ch = (Character*) userData;
   char buf[MAX_STRING_LENGTH];
 
   if (ship->Type == MOB_SHIP && ship->Class != SHIP_DEBRIS )

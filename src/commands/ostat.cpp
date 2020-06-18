@@ -6,7 +6,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-void do_ostat(Character *ch, std::string arg)
+void do_ostat(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Object> obj;
     std::string pdesc;

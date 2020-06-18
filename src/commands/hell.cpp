@@ -5,7 +5,7 @@
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
 
-void do_hell(Character *ch, std::string argument)
+void do_hell(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
     std::string arg;

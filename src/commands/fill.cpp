@@ -9,7 +9,7 @@
  * Fill a container
  * Many enhancements added by Thoric (ie: filling non-drink containers)
  */
-void do_fill(Character *ch, std::string argument)
+void do_fill(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

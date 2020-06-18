@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "log.hpp"
 
-void do_bstat( Character *ch, std::string arg )
+void do_bstat( std::shared_ptr<Character> ch, std::string arg )
 {
   std::shared_ptr<Board> board;
 

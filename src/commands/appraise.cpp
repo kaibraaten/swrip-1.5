@@ -6,9 +6,9 @@
 #include "protomob.hpp"
 #include "act.hpp"
 
-static void appraise_all(Character *ch, Character *keeper, const char *fixstr);
+static void appraise_all(std::shared_ptr<Character> ch, Character *keeper, const char *fixstr);
 
-void do_appraise(Character *ch, std::string arg)
+void do_appraise(std::shared_ptr<Character> ch, std::string arg)
 {
     char buf[MAX_STRING_LENGTH];
     std::shared_ptr<Object> obj;
@@ -75,7 +75,7 @@ void do_appraise(Character *ch, std::string arg)
             NULL, keeper, ActTarget::Char);
 }
 
-static void appraise_all(Character *ch, Character *keeper, const char *fixstr)
+static void appraise_all(std::shared_ptr<Character> ch, Character *keeper, const char *fixstr)
 {
     char buf[MAX_STRING_LENGTH], *pbuf = buf;
     int cost = 0, total = 0;

@@ -4,7 +4,7 @@
 #include "protomob.hpp"
 #include "repos/shoprepository.hpp"
 
-void do_makerepair(Character *ch, std::string argument)
+void do_makerepair(std::shared_ptr<Character> ch, std::string argument)
 {
     if (argument.empty())
     {

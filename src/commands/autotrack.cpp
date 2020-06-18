@@ -7,7 +7,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_autotrack(Character *ch, std::string argument)
+void do_autotrack(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Ship> ship;
     int the_chance = 0;

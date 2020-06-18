@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_teach(Character *ch, std::string argument)
+void do_teach(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     int sn = 0;

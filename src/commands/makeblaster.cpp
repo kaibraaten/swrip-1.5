@@ -21,7 +21,7 @@ static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *a
 static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
 static void FreeUserData(struct UserData *ud);
 
-void do_makeblaster(Character *ch, std::string argument)
+void do_makeblaster(std::shared_ptr<Character> ch, std::string argument)
 {
     static const CraftingMaterial materials[] =
     {
@@ -53,7 +53,7 @@ void do_makeblaster(Character *ch, std::string argument)
 
 static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
 {
-    Character *ch = GetEngineer(args->CraftingSession);
+    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
     struct UserData *ud = (struct UserData *)userData;
 
     if(args->CommandArguments.empty())

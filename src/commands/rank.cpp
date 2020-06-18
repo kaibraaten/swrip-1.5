@@ -3,7 +3,7 @@
 #include "pcdata.hpp"
 #include "systemdata.hpp"
 
-void do_rank( Character *ch, std::string argument )
+void do_rank( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( IsNpc(ch) )
     return;

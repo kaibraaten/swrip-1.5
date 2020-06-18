@@ -6,7 +6,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_mine(Character *ch, std::string arg)
+void do_mine(std::shared_ptr<Character> ch, std::string arg)
 {
     if(ch->PCData->Learned[gsn_mine] <= 0)
     {

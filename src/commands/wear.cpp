@@ -8,12 +8,12 @@
 #include "protoobject.hpp"
 #include "act.hpp"
 
-static void wear_obj(Character *ch, std::shared_ptr<Object> obj, bool fReplace, int wear_bit);
-static bool can_layer(const Character *ch, std::shared_ptr<Object> obj, int wear_loc);
-static bool can_dual(const Character *ch);
-static bool could_dual(const Character *ch);
+static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, bool fReplace, int wear_bit);
+static bool can_layer(const std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, int wear_loc);
+static bool can_dual(const std::shared_ptr<Character> ch);
+static bool could_dual(const std::shared_ptr<Character> ch);
 
-void do_wear(Character *ch, std::string argument)
+void do_wear(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
@@ -79,7 +79,7 @@ void do_wear(Character *ch, std::string argument)
  * Big repetitive code, ick.
  * Restructured a bit to allow for specifying body location     -Thoric
  */
-static void wear_obj(Character *ch, std::shared_ptr<Object> obj, bool fReplace, int wear_bit)
+static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, bool fReplace, int wear_bit)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     std::shared_ptr<Object> tmpobj;
@@ -764,7 +764,7 @@ static void wear_obj(Character *ch, std::shared_ptr<Object> obj, bool fReplace, 
  * Check to see if there is room to wear another object on this location
  * (Layered clothing support)
  */
-static bool can_layer(const Character *ch, std::shared_ptr<Object> obj, int wear_loc)
+static bool can_layer(const std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, int wear_loc)
 {
     long bitlayers = 0;
     const long objlayers = obj->Prototype->Layers;
@@ -792,7 +792,7 @@ static bool can_layer(const Character *ch, std::shared_ptr<Object> obj, int wear
 /*
  * See if char could be capable of dual-wielding                -Thoric
  */
-static bool could_dual(const Character *ch)
+static bool could_dual(const std::shared_ptr<Character> ch)
 {
     if(IsNpc(ch))
         return true;
@@ -806,7 +806,7 @@ static bool could_dual(const Character *ch)
 /*
  * See if char can dual wield at this time                      -Thoric
  */
-static bool can_dual(const Character *ch)
+static bool can_dual(const std::shared_ptr<Character> ch)
 {
     if(!could_dual(ch))
     {

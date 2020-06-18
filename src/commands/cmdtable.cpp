@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_cmdtable( Character *ch, std::string argument )
+void do_cmdtable( std::shared_ptr<Character> ch, std::string argument )
 {
   const List *commands = GetEntities(CommandRepository);
   ListIterator *iterator = AllocateListIterator(commands);

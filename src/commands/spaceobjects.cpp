@@ -3,7 +3,7 @@
 #include "spaceobject.hpp"
 #include "repos/spaceobjectrepository.hpp"
 
-void do_spaceobjects( Character *ch, std::string argument )
+void do_spaceobjects( std::shared_ptr<Character> ch, std::string argument )
 {
   int count = 0;
 

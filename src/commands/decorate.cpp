@@ -5,7 +5,7 @@
 #include "repos/homerepository.hpp"
 #include "editor.hpp"
 
-void do_decorate(Character *ch, std::string argument)
+void do_decorate(std::shared_ptr<Character> ch, std::string argument)
 {
     if(ch->IsNpc())
     {

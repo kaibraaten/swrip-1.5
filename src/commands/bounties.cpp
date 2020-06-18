@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "repos/bountyrepository.hpp"
 
-void do_bounties( Character *ch, std::string argument )
+void do_bounties( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( ( GetTrustLevel(ch) < LEVEL_IMMORTAL)
        && (!IsClanned( ch )

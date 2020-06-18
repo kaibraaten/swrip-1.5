@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_autopilot(Character *ch, std::string argument)
+void do_autopilot(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);
 

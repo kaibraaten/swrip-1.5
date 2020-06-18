@@ -4,7 +4,7 @@
 /*
  * Shows installed areas, sorted. Mark unloaded areas with an X.
  */
-void do_zones( Character *ch, std::string argument )
+void do_zones( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg1;
     std::string arg2;

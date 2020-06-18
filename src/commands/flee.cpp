@@ -6,7 +6,7 @@
 #include "exit.hpp"
 #include "act.hpp"
 
-void do_flee(Character *ch, std::string argument)
+void do_flee(std::shared_ptr<Character> ch, std::string argument)
 {
     DirectionType door = DIR_INVALID;
 

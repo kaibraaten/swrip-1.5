@@ -5,7 +5,7 @@
 #include "log.hpp"
 #include "room.hpp"
 
-void do_rpedit( Character *ch, std::string argument )
+void do_rpedit( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg1;
     std::string arg2;

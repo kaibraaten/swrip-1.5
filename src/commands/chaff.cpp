@@ -7,7 +7,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_chaff(Character *ch, std::string argument)
+void do_chaff(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);
 

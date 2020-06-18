@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_wizhelp( Character *ch, std::string argument )
+void do_wizhelp( std::shared_ptr<Character> ch, std::string argument )
 {
   const int NUM_COLUMNS = 6;
   int column = 0;

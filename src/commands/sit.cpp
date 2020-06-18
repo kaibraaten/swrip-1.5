@@ -4,7 +4,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_sit(Character *ch, std::string argument)
+void do_sit(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> obj;
 

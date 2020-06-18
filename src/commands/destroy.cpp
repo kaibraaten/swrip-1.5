@@ -64,7 +64,7 @@ static bool RemoveShipOwner(std::shared_ptr<Ship> ship, void *userData)
     return true;
 }
 
-void do_destroy(Character *ch, std::string victimName)
+void do_destroy(std::shared_ptr<Character> ch, std::string victimName)
 {
     if (victimName.empty())
     {

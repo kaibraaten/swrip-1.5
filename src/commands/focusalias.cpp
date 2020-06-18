@@ -3,9 +3,9 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-static void SetTarget( Character *ch, const std::string &target );
+static void SetTarget( std::shared_ptr<Character> ch, const std::string &target );
 
-void do_focusalias( Character *ch, std::string arg )
+void do_focusalias( std::shared_ptr<Character> ch, std::string arg )
 {
   SmashTilde(arg);
 
@@ -37,7 +37,7 @@ void do_focusalias( Character *ch, std::string arg )
     }
 }
 
-static void SetTarget( Character *ch, const std::string &target )
+static void SetTarget( std::shared_ptr<Character> ch, const std::string &target )
 {
   ch->PCData->AliasFocus = target;
 }

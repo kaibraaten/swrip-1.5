@@ -4,7 +4,7 @@
 /*
  * Force a level one player to quit.             Gorog
  */
-void do_fquit( Character *ch, std::string arg1 )
+void do_fquit( std::shared_ptr<Character> ch, std::string arg1 )
 {
   Character *victim = nullptr;
 

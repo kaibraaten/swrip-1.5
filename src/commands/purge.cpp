@@ -5,7 +5,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_purge(Character *ch, std::string arg)
+void do_purge(std::shared_ptr<Character> ch, std::string arg)
 {
     if(arg.empty())
     {

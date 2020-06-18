@@ -5,9 +5,9 @@
 #include "repos/helprepository.hpp"
 
 static short str_similarity( const std::string &astr, const std::string &bstr );
-static void similar_help_files(Character *ch, const std::string &argument);
+static void similar_help_files(std::shared_ptr<Character> ch, const std::string &argument);
 
-void do_help( Character *ch, std::string argument )
+void do_help( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<HelpFile> pHelp;
   std::string help_text;
@@ -68,7 +68,7 @@ static short str_similarity( const std::string &stl_astr, const std::string &stl
   return matches;
 }
 
-static void similar_help_files(Character *ch, const std::string &argument)
+static void similar_help_files(std::shared_ptr<Character> ch, const std::string &argument)
 {
   short level = 0;
   bool single = false;

@@ -8,7 +8,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_hail(Character *ch, std::string argument)
+void do_hail(std::shared_ptr<Character> ch, std::string argument)
 {
     vnum_t vnum = INVALID_VNUM;
     long gold = 1;

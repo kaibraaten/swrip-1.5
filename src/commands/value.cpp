@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "act.hpp"
 
-void do_value(Character *ch, std::string argument)
+void do_value(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     Character *keeper = nullptr;

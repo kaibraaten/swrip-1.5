@@ -6,7 +6,7 @@
 #include "protoobject.hpp"
 #include "act.hpp"
 
-void do_oinvoke(Character *ch, std::string argument)
+void do_oinvoke(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

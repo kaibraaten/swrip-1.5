@@ -7,7 +7,7 @@
 #include "repos/planetrepository.hpp"
 #include "repos/arearepository.hpp"
 
-void do_aset(Character *ch, std::string argument)
+void do_aset(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Area> tarea;
     std::string arg1;

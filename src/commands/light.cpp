@@ -3,7 +3,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_light(Character *ch, std::string arg)
+void do_light(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Object> pipe_obj;
 

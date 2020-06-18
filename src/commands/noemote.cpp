@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_noemote( Character *ch, std::string arg )
+void do_noemote( std::shared_ptr<Character> ch, std::string arg )
 {
     Character *victim = nullptr;
 

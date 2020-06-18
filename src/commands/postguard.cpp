@@ -7,7 +7,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_postguard(Character *ch, std::string argument)
+void do_postguard(std::shared_ptr<Character> ch, std::string argument)
 {
     int the_chance = 0, credits = 0;
     std::shared_ptr<Clan> clan;

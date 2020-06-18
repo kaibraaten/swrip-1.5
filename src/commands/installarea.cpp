@@ -12,7 +12,7 @@
  * A complicated to use command as it currently exists.         -Thoric
  * Once area->Author and area->Name are cleaned up... it will be easier
  */
-void do_installarea(Character *ch, std::string argument)
+void do_installarea(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string oldfilename;
     std::string newfilename;

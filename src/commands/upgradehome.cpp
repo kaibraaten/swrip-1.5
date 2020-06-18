@@ -130,7 +130,7 @@ static void PerformUpgrade(std::shared_ptr<Home> home, int type)
     }
 }
 
-void do_upgradehome(Character *ch, std::string argument)
+void do_upgradehome(std::shared_ptr<Character> ch, std::string argument)
 {
     if(IsNpc(ch))
     {

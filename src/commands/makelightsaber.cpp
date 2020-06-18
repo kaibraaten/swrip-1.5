@@ -25,7 +25,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 
-void do_makelightsaber( Character *ch, std::string argument )
+void do_makelightsaber( std::shared_ptr<Character> ch, std::string argument )
 {
     static const CraftingMaterial materials[] =
         {
@@ -58,7 +58,7 @@ void do_makelightsaber( Character *ch, std::string argument )
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *eventArgs )
 {
-    Character *ch = GetEngineer( eventArgs->CraftingSession );
+    std::shared_ptr<Character> ch = GetEngineer( eventArgs->CraftingSession );
     struct UserData *ud = (struct UserData*) userData;
 
     if ( eventArgs->CommandArguments.empty() )
@@ -161,7 +161,7 @@ static void FreeUserData( struct UserData *ud )
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *eventArgs )
 {
-    Character *ch = GetEngineer( eventArgs->CraftingSession );
+    std::shared_ptr<Character> ch = GetEngineer( eventArgs->CraftingSession );
 
     // You can craft a lightsaber in your home even without the safe
     // and silence flags.

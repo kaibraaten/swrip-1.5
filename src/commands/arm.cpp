@@ -5,7 +5,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_arm(Character *ch, std::string argument)
+void do_arm(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> obj;
 

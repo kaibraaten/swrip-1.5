@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "act.hpp"
 
-void do_pull(Character *ch, std::string arg)
+void do_pull(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Object> obj;
 

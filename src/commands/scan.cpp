@@ -7,9 +7,9 @@
 #include "exit.hpp"
 #include "act.hpp"
 
-void show_char_to_char(const std::list<Character *> &list, Character *ch);
+void show_char_to_char(const std::list<Character *> &list, std::shared_ptr<Character> ch);
 
-void do_scan(Character *ch, std::string argument)
+void do_scan(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Exit> pexit;
     DirectionType dir = DIR_INVALID;

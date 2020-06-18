@@ -8,7 +8,7 @@
 
 static bool room_is_in_use(std::shared_ptr<Ship> ship, vnum_t room_vnum);
 
-void do_setship(Character *ch, std::string argument)
+void do_setship(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

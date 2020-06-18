@@ -13,13 +13,13 @@
 
 struct ShowShipData
 {
-    const Character *ch;
+    const std::shared_ptr<Character> ch;
     std::shared_ptr<Ship> ship;
 };
 
 static bool ShowShipIfInRadarRange(std::shared_ptr<Ship> target, void *userData);
 
-void do_radar(Character *ch, std::string argument)
+void do_radar(std::shared_ptr<Character> ch, std::string argument)
 {
     int the_chance = 0;
     std::shared_ptr<Ship> ship;
@@ -154,7 +154,7 @@ static bool ShowShipIfInRadarRange(std::shared_ptr<Ship> target, void *userData)
 {
     struct ShowShipData *data = (struct ShowShipData *)userData;
     std::shared_ptr<Ship> ship = data->ship;
-    const Character *ch = data->ch;
+    const std::shared_ptr<Character> ch = data->ch;
 
     if(target != ship && target->Spaceobject)
     {

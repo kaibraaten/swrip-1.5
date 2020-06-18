@@ -14,7 +14,7 @@ extern int pAbort;
 /*
  * Cast a spell.  Multi-caster and component support by Thoric
  */
-void do_cast(Character *ch, std::string argument)
+void do_cast(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string targetName;

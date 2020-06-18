@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "descriptor.hpp"
 
-void do_switch( Character *ch, std::string arg )
+void do_switch( std::shared_ptr<Character> ch, std::string arg )
 {
   Character *victim = nullptr;
 

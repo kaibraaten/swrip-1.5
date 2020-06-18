@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-void do_mfind(Character *ch, std::string argument)
+void do_mfind(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<ProtoMobile> pMobIndex;

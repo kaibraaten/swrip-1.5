@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_level( Character *ch, std::string argument )
+void do_level( std::shared_ptr<Character> ch, std::string argument )
 {
   for ( int ability = 0 ; ability < MAX_RL_ABILITY ; ability++ )
     {

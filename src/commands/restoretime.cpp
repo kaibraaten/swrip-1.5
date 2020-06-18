@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_restoretime( Character *ch, std::string argument )
+void do_restoretime( std::shared_ptr<Character> ch, std::string argument )
 {
   long int time_passed = 0;
   int hour = 0, minute = 0;

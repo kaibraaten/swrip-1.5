@@ -7,7 +7,7 @@
 #include "repos/arearepository.hpp"
 #include "repos/homerepository.hpp"
 
-void do_buyhome(Character *ch, std::string argument)
+void do_buyhome(std::shared_ptr<Character> ch, std::string argument)
 {
     constexpr auto houseCost = 100000;
 

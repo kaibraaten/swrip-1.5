@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "protomob.hpp"
 
-void do_mlist(Character *ch, std::string argument)
+void do_mlist(std::shared_ptr<Character> ch, std::string argument)
 {
     vnum_t vnum = INVALID_VNUM;
     std::string arg1;

@@ -5,7 +5,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_balzhur( Character *ch, std::string arg )
+void do_balzhur( std::shared_ptr<Character> ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH];
   Character *victim = nullptr;

@@ -6,7 +6,7 @@
 #include "race.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_name( Character *ch, std::string argument )
+void do_name( std::shared_ptr<Character> ch, std::string argument )
 {
     if ( IsAuthed(ch) || ch->PCData->AuthState != 2)
     {

@@ -40,9 +40,9 @@ target in them. Private rooms are not violated.
 #include "character.hpp"
 #include "room.hpp"
 
-static std::string name_expand(const Character *ch);
+static std::string name_expand(const std::shared_ptr<Character> ch);
 
-void do_for(Character *ch, std::string argument)
+void do_for(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string range;
     bool fGods = false, fMortals = false, fMobs = false, fEverywhere = false, found = false;
@@ -203,7 +203,7 @@ void do_for(Character *ch, std::string argument)
 /* Expand the name of a character into a string that identifies THAT
    character within a room. E.g. the second 'guard' -> 2. guard
 */
-static std::string name_expand(const Character *ch)
+static std::string name_expand(const std::shared_ptr<Character> ch)
 {
     int count = 1;
     std::string name;

@@ -8,7 +8,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_dock(Character *ch, std::string arg )
+void do_dock(std::shared_ptr<Character> ch, std::string arg )
 {
   int the_chance = 0;
   std::shared_ptr<Ship> ship;

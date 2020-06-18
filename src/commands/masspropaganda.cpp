@@ -8,7 +8,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_mass_propaganda(Character *ch, std::string argument)
+void do_mass_propaganda(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     std::string arg1;

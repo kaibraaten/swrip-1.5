@@ -7,7 +7,7 @@
    same you would see if you enter the room and have config +brief.
    -- Narn, winter '96
 */
-void do_glance(Character *ch, std::string argument)
+void do_glance(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     Character *victim = nullptr;

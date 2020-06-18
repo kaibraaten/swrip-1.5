@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_instaroom( Character *ch, std::string argument )
+void do_instaroom( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Room> pRoom;
   bool dodoors = false;

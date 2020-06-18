@@ -6,7 +6,7 @@
 #include "protomob.hpp"
 #include "act.hpp"
 
-void do_practice(Character *ch, std::string argument)
+void do_practice(std::shared_ptr<Character> ch, std::string argument)
 {
     if(IsNpc(ch))
         return;

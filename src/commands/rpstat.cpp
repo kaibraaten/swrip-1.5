@@ -3,7 +3,7 @@
 #include "room.hpp"
 
 /* Rpstat - Scryn 8/12 */
-void do_rpstat( Character *ch, std::string argument )
+void do_rpstat( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( ch->InRoom->mprog.MudProgs().empty() )
     {

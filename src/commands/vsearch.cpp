@@ -5,7 +5,7 @@
 #include "protoobject.hpp"
 #include "repos/objectrepository.hpp"
 
-void do_vsearch(Character *ch, std::string arg)
+void do_vsearch(std::shared_ptr<Character> ch, std::string arg)
 {
     bool found = false;
     int obj_counter = 1;

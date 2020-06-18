@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_shiptalk( Character *ch, std::string argument )
+void do_shiptalk( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);
 

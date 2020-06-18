@@ -35,7 +35,7 @@ public:
     int Type = 0;
 };
 
-void do_who(Character *ch, std::string argument)
+void do_who(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     std::string clan_name;

@@ -26,7 +26,7 @@
 #include "repos/shuttlerepository.hpp"
 #include "repos/arearepository.hpp"
 
-void do_test( Character *ch, std::string argument )
+void do_test( std::shared_ptr<Character> ch, std::string argument )
 {
 #ifdef HAVE_UNAME
     if( !StrCmp( argument, "uname" ) )

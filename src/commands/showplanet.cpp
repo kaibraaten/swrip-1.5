@@ -4,7 +4,7 @@
 #include "planet.hpp"
 #include "repos/planetrepository.hpp"
 
-void do_showplanet( Character *ch, std::string argument )
+void do_showplanet( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( IsNpc( ch ) )
     {

@@ -10,10 +10,10 @@ static struct field_struct gr_fd[GR_NUM_FIELDS];
 static char *gr_strc (char c);
 static bool gr_eval_and (GR_STRUCT r, int op_num);
 static bool gr_eval_or (GR_STRUCT r, int op_num);
-static bool gr_parse_operator (Character *ch, const char *pch, int *op_num);
+static bool gr_parse_operator (std::shared_ptr<Character> ch, const char *pch, int *op_num);
 static void gr_init (void);
-static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *op_num);
-static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num);
+static bool gr_parse_operand (std::shared_ptr<Character> ch, const char *arg, bool *or_sw, int *op_num);
+static void gr_read( std::shared_ptr<Character> ch, int op_num, bool or_sw, int dis_num);
 
 /*
  * GRUB (Gorog's Revenge on Unruly Bastards)
@@ -31,7 +31,7 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num);
  * It then compares the appropriate values from the input record to
  * each operand in the operand table.
  */
-void do_grub (Character *ch, std::string argument)
+void do_grub (std::shared_ptr<Character> ch, std::string argument)
 {
   std::string arg1;
   bool or_sw = false;                       /* or search criteria           */
@@ -226,7 +226,7 @@ static void gr_init (void)
 /*
  *  Store operand's operator and value in operand table.
  */
-static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
+static bool gr_parse_operator (std::shared_ptr<Character> ch, const char *pch, int *op_num)
 {
   enum op_type {EQ, NE, SU, GE, GT, LE, LT};
   int  cou;
@@ -282,7 +282,7 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
 /*
  * Store operand's field name in the operand table.
  */
-static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *op_num)
+static bool gr_parse_operand (std::shared_ptr<Character> ch, const char *arg, bool *or_sw, int *op_num)
 {
   int cou;
 
@@ -306,7 +306,7 @@ static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *
 /*
  * Read the input file to select records matching the search criteria
  */
-static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num)
+static void gr_read( std::shared_ptr<Character> ch, int op_num, bool or_sw, int dis_num)
 {
   FILE *fp;
   bool res;                                 /* result of a boolean exp   */

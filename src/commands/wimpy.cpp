@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_wimpy( Character *ch, std::string arg )
+void do_wimpy( std::shared_ptr<Character> ch, std::string arg )
 {
   int wimpy = 0;
 

@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/boardrepository.hpp"
 
-void do_makeboard( Character *ch, std::string argument )
+void do_makeboard( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( argument.empty() )
     {

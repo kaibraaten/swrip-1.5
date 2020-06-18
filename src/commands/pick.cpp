@@ -11,7 +11,7 @@
 #include "repos/descriptorrepository.hpp"
 #include "act.hpp"
 
-void do_pick(Character *ch, std::string arg)
+void do_pick(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<Object> obj;
     std::shared_ptr<Exit> pexit;

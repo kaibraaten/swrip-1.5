@@ -5,7 +5,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_list( Character *ch, std::string argument )
+void do_list( std::shared_ptr<Character> ch, std::string argument )
 {
     if ( ch->InRoom->Flags.test( Flag::Room::PetShop ) )
     {

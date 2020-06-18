@@ -10,7 +10,7 @@
  * doesn't list 1,000 lines for each shroud - just one line for the shroud.
  */
 
-void do_showlayers(Character *ch, std::string arg)
+void do_showlayers(std::shared_ptr<Character> ch, std::string arg)
 {
     int cou = 0;                                        /* display counter */
 

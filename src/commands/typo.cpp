@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_typo( Character *ch, std::string argument )
+void do_typo( std::shared_ptr<Character> ch, std::string argument )
 {
   if( !argument.empty() )
     {

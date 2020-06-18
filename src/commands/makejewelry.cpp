@@ -22,7 +22,7 @@ static CraftRecipe *MakeCraftRecipe( void );
 static void FreeUserData( struct UserData *ud );
 static bool CanUseWearLocation( int wearLocation );
 
-void do_makejewelry( Character *ch, std::string argument )
+void do_makejewelry( std::shared_ptr<Character> ch, std::string argument )
 {
     UserData *data = new UserData();
     CraftRecipe *recipe = MakeCraftRecipe();
@@ -58,7 +58,7 @@ static CraftRecipe *MakeCraftRecipe( void )
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
 {
     struct UserData *ud = (struct UserData*) userData;
-    Character *ch = GetEngineer( args->CraftingSession );
+    std::shared_ptr<Character> ch = GetEngineer( args->CraftingSession );
     std::string argument = args->CommandArguments;
     std::string wearLoc;
     std::string name;

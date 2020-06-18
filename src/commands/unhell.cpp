@@ -5,7 +5,7 @@
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
 
-void do_unhell(Character *ch, std::string arg)
+void do_unhell(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = NULL;
 

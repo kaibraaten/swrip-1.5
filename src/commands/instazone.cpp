@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_instazone(Character *ch, std::string argument)
+void do_instazone(std::shared_ptr<Character> ch, std::string argument)
 {
     int vnum = INVALID_VNUM;
     bool dodoors = false;

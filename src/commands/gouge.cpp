@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_gouge(Character *ch, std::string argument)
+void do_gouge(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
     short dam = 0;

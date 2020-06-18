@@ -3,7 +3,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 
-void do_enter(Character *ch, std::string argument)
+void do_enter(std::shared_ptr<Character> ch, std::string argument)
 {
     if (argument.empty())
     {

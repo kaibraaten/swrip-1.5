@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_gtell( Character *ch, std::string argument )
+void do_gtell( std::shared_ptr<Character> ch, std::string argument )
 {
     Character *gch = nullptr;
 

@@ -6,7 +6,7 @@
 #include "race.hpp"
 #include "act.hpp"
 
-void do_languages(Character *ch, std::string argument)
+void do_languages(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     int lang = 0;

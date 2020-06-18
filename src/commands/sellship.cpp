@@ -4,7 +4,7 @@
 #include "repos/shiprepository.hpp"
 #include "act.hpp"
 
-void do_sellship(Character *ch, std::string argument)
+void do_sellship(std::shared_ptr<Character> ch, std::string argument)
 {
     long price = 0;
     std::shared_ptr<Ship> ship;

@@ -8,7 +8,7 @@
 #include "repos/helprepository.hpp"
 #include "repos/shoprepository.hpp"
 
-void do_memory( Character *ch, std::string argument )
+void do_memory( std::shared_ptr<Character> ch, std::string argument )
 {
   ch->Echo("Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
   ch->Echo("ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );

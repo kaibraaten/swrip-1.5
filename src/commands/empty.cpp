@@ -6,7 +6,7 @@
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
 
-void do_empty(Character *ch, std::string argument)
+void do_empty(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Object> obj;
     std::string arg1;

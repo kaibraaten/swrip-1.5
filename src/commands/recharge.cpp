@@ -7,7 +7,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_recharge(Character *ch, std::string argument)
+void do_recharge(std::shared_ptr<Character> ch, std::string argument)
 {
     int recharge = 0;
     int the_chance = 0;

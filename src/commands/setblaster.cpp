@@ -3,7 +3,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_setblaster(Character *ch, std::string argument)
+void do_setblaster(std::shared_ptr<Character> ch, std::string argument)
 {
     auto wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 

@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/planetrepository.hpp"
 
-void do_makeplanet( Character *ch, std::string argument )
+void do_makeplanet( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( argument.empty() )
     {

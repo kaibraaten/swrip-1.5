@@ -4,7 +4,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-void do_use(Character *ch, std::string argument)
+void do_use(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string argd;

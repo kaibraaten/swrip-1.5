@@ -5,7 +5,7 @@
 #include "repos/playerrepository.hpp"
 #include "act.hpp"
 
-void do_outcast(Character *ch, std::string arg)
+void do_outcast(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = NULL;
     std::shared_ptr<Clan> clan;

@@ -9,9 +9,9 @@
 #include "repos/storeroomrepository.hpp"
 #include "act.hpp"
 
-static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch);
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, std::shared_ptr<Character> ch);
 
-void do_put(Character *ch, std::string argument)
+void do_put(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
@@ -270,7 +270,7 @@ void do_put(Character *ch, std::string argument)
     }
 }
 
-static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch)
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, std::shared_ptr<Character> ch)
 {
     if(clan->Storeroom == ch->InRoom->Vnum)
     {

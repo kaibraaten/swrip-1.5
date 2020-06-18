@@ -5,9 +5,9 @@
 #include "descriptor.hpp"
 #include "race.hpp"
 
-static Character *get_waiting_desc( const Character *ch, const std::string &name );
+static Character *get_waiting_desc( const std::shared_ptr<Character> ch, const std::string &name );
 
-void do_authorize( Character *ch, std::string argument )
+void do_authorize( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;
@@ -87,7 +87,7 @@ void do_authorize( Character *ch, std::string argument )
 /*
  * Check if the name prefix uniquely identifies a char descriptor
  */
-static Character *get_waiting_desc( const Character *ch, const std::string &name )
+static Character *get_waiting_desc( const std::shared_ptr<Character> ch, const std::string &name )
 {
   Character *ret_char = nullptr;
   unsigned int number_of_hits = 0;

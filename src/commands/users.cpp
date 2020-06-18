@@ -5,7 +5,7 @@
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
 
-void do_users(Character *ch, std::string arg)
+void do_users(std::shared_ptr<Character> ch, std::string arg)
 {
     int count = 0;
     std::ostringstream buf;

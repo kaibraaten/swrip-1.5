@@ -7,7 +7,7 @@
 #include "object.hpp"
 #include "exit.hpp"
 
-void do_rstat(Character *ch, std::string argument)
+void do_rstat(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Room> location;

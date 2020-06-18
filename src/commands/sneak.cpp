@@ -4,7 +4,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_sneak( Character *ch, std::string argument )
+void do_sneak( std::shared_ptr<Character> ch, std::string argument )
 {
     if ( IsNpc(ch) && IsAffectedBy( ch, Flag::Affect::Charm))
     {

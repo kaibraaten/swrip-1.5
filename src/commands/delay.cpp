@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "object.hpp"
 
-void do_delay( Character *ch, std::string argument )
+void do_delay( std::shared_ptr<Character> ch, std::string argument )
 {
   Character *victim = NULL;
   std::string arg;

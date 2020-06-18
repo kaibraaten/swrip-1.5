@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_closehatch(Character *ch, std::string argument)
+void do_closehatch(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Ship> ship;
     char buf[MAX_STRING_LENGTH];

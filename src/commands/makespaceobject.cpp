@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/spaceobjectrepository.hpp"
 
-void do_makespaceobject( Character *ch, std::string argument )
+void do_makespaceobject( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( argument.empty() )
     {

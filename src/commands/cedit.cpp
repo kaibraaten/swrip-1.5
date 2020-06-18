@@ -5,7 +5,7 @@
 /*
  * Command editor/displayer/save/delete                         -Thoric
  */
-void do_cedit( Character *ch, std::string argument )
+void do_cedit( std::shared_ptr<Character> ch, std::string argument )
 {
   Command *command;
   std::string commandName;

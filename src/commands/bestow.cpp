@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_bestow( Character *ch, std::string argument )
+void do_bestow( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg;
   Character *victim = NULL;

@@ -4,7 +4,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_disarm(Character *ch, std::string argument)
+void do_disarm(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
     std::shared_ptr<Object> obj;

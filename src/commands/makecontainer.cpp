@@ -20,7 +20,7 @@ static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
 static void FreeUserData(UserData *ud);
 static bool CanUseWearLocation(int wearLocation);
 
-void do_makecontainer(Character *ch, std::string argument)
+void do_makecontainer(std::shared_ptr<Character> ch, std::string argument)
 {
     static const CraftingMaterial materials[] =
     {
@@ -68,7 +68,7 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
     std::string argument = eventArgs->CommandArguments;
     std::string wearLoc;
     std::string itemName;
-    Character *ch = GetEngineer(session);
+    std::shared_ptr<Character> ch = GetEngineer(session);
 
     argument = OneArgument(argument, wearLoc);
     itemName = argument;

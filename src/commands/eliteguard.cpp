@@ -7,7 +7,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_elite_guard(Character *ch, std::string arg)
+void do_elite_guard(std::shared_ptr<Character> ch, std::string arg)
 {
     int the_chance = 0, credits = 0;
     std::shared_ptr<Clan> clan;

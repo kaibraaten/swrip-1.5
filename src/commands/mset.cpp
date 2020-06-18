@@ -12,7 +12,7 @@
 #include "repos/clanrepository.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_mset( Character *ch, std::string argument )
+void do_mset( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg1;
     std::string arg2;

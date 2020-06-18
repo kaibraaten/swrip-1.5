@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_prompt( Character *ch, std::string argument )
+void do_prompt( std::shared_ptr<Character> ch, std::string argument )
 {
   std::string arg;
 

@@ -3,7 +3,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 
-void do_leave(Character *ch, std::string argument)
+void do_leave(std::shared_ptr<Character> ch, std::string argument)
 {
     if (argument.empty())
     {

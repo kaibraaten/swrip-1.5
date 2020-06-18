@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_weather( Character *ch, std::string argument )
+void do_weather( std::shared_ptr<Character> ch, std::string argument )
 {
   static const char * const sky_look[] =
     {

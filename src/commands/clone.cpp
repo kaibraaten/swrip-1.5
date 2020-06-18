@@ -9,7 +9,7 @@
 
 #define CLONEGOLD 1000
 
-void do_clone(Character *ch, std::string argument)
+void do_clone(std::shared_ptr<Character> ch, std::string argument)
 {
     long credits = 0, bank = 0;
     long played = 0, frc_experience = 0;

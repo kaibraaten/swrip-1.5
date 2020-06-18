@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "repos/shiprepository.hpp"
 
-void do_copyship( Character *ch, std::string argument )
+void do_copyship( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Ship> ship;
   std::shared_ptr<Ship> old;

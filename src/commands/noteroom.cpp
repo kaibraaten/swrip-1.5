@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "board.hpp"
 
-void do_noteroom( Character *ch, std::string argument )
+void do_noteroom( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg;
     std::string arg_passed = argument;

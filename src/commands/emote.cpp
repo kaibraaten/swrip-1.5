@@ -5,7 +5,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_emote(Character *ch, std::string argument)
+void do_emote(std::shared_ptr<Character> ch, std::string argument)
 {
     auto flags = ch->Flags;
 

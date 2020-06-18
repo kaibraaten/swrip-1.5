@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "object.hpp"
 
-void do_examine(Character *ch, std::string arg)
+void do_examine(std::shared_ptr<Character> ch, std::string arg)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     std::shared_ptr<Object> obj;

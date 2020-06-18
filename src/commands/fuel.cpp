@@ -5,7 +5,7 @@
 
 static std::shared_ptr<Ship> GetFuelTarget(std::shared_ptr<Ship> fuelSource);
 
-void do_fuel(Character *ch, std::string argument )
+void do_fuel(std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Ship> fuelSource;
   std::shared_ptr<Ship> fuelTarget;

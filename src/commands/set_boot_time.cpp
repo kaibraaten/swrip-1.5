@@ -6,7 +6,7 @@
 extern std::string reboot_time;
 extern struct tm new_boot_struct;
 
-void do_set_boot_time( Character *ch, std::string argument)
+void do_set_boot_time( std::shared_ptr<Character> ch, std::string argument)
 {
   std::string arg;
   std::string arg1;

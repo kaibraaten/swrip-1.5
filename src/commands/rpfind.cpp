@@ -2,12 +2,12 @@
 #include "character.hpp"
 #include "room.hpp"
 
-static void rpfind_help(Character *ch);
+static void rpfind_help(std::shared_ptr<Character> ch);
 
 /*
  * Search rooms for room progs containing a specified text string.
  */
-void do_rpfind(Character *ch, std::string argument)   /* Gorog */
+void do_rpfind(std::shared_ptr<Character> ch, std::string argument)   /* Gorog */
 {
     std::string arg1;
     std::string arg2;
@@ -86,7 +86,7 @@ void do_rpfind(Character *ch, std::string argument)   /* Gorog */
 /*
  * Displays the help screen for the "rpfind" command
  */
-static void rpfind_help(Character *ch)
+static void rpfind_help(std::shared_ptr<Character> ch)
 {
     ch->Echo("Syntax:\r\n");
     ch->Echo("rpfind n lo_vnum hi_vnum text \r\n"

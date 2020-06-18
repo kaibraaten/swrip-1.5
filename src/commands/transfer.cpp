@@ -5,7 +5,7 @@
 #include "repos/descriptorrepository.hpp"
 #include "act.hpp"
 
-void do_transfer(Character *ch, std::string argument)
+void do_transfer(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

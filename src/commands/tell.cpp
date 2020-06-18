@@ -4,7 +4,7 @@
 #include "descriptor.hpp"
 #include "act.hpp"
 
-void do_tell(Character *ch, std::string argument)
+void do_tell(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     char buf[MAX_INPUT_LENGTH];

@@ -6,7 +6,7 @@
 #include "repos/objectrepository.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_bodybag(Character *ch, std::string arg)
+void do_bodybag(std::shared_ptr<Character> ch, std::string arg)
 {
     if(arg.empty())
     {

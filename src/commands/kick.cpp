@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
-void do_kick( Character *ch, std::string argument )
+void do_kick( std::shared_ptr<Character> ch, std::string argument )
 {
     Character *victim = NULL;
 

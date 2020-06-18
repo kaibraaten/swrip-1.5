@@ -2,7 +2,7 @@
 #include "arena.hpp"
 #include "character.hpp"
 
-void do_challenge(Character *ch, std::string argument )
+void do_challenge(std::shared_ptr<Character> ch, std::string argument )
 {
   Character *victim = nullptr;
   char buf[MAX_INPUT_LENGTH];

@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_speak( Character *ch, std::string arg )
+void do_speak( std::shared_ptr<Character> ch, std::string arg )
 {
   if ( !StrCmp( arg, "all" ) && IsImmortal( ch ) )
     {

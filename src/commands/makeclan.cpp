@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "repos/clanrepository.hpp"
 
-void do_makeclan( Character *ch, std::string argument )
+void do_makeclan( std::shared_ptr<Character> ch, std::string argument )
 {
   if ( argument.empty() )
     {

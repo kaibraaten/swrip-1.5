@@ -6,7 +6,7 @@
 /*
  * Social editor/displayer/save/delete                          -Thoric
  */
-void do_sedit( Character *ch, std::string argument )
+void do_sedit( std::shared_ptr<Character> ch, std::string argument )
 {
   std::shared_ptr<Social> social;
   std::string arg1;

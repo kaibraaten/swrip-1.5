@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_murder(Character *ch, std::string arg)
+void do_murder(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = nullptr;
 

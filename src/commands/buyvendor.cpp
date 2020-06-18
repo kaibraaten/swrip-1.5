@@ -4,7 +4,7 @@
 #include "mud.hpp"
 #include "log.hpp"
 
-void do_buyvendor (Character *ch, std::string argument)
+void do_buyvendor (std::shared_ptr<Character> ch, std::string argument)
 {
     if (IsNpc(ch))
     {

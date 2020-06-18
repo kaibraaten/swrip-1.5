@@ -3,7 +3,7 @@
 #include "arena.hpp"
 #include "room.hpp"
 
-void do_accept(Character *ch, std::string argument)
+void do_accept(std::shared_ptr<Character> ch, std::string argument)
 {
   char buf[MAX_INPUT_LENGTH];
 

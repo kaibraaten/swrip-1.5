@@ -10,7 +10,7 @@
 #include "repos/spaceobjectrepository.hpp"
 #include "act.hpp"
 
-void do_calculate(Character *ch, std::string argument)
+void do_calculate(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

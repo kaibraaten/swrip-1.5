@@ -6,7 +6,7 @@
 
 static std::list<std::string> GetUpgrades(std::shared_ptr<Home> home);
 
-void do_homestat(Character *ch, std::string argument)
+void do_homestat(std::shared_ptr<Character> ch, std::string argument)
 {
     if(ch->IsNpc())
     {

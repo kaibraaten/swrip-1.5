@@ -3,7 +3,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-void do_reply(Character *ch, std::string argument)
+void do_reply(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     Character *victim = NULL;

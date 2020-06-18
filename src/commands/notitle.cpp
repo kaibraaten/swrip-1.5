@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_notitle( Character *ch, std::string arg )
+void do_notitle( std::shared_ptr<Character> ch, std::string arg )
 {
   Character *victim = NULL;
 

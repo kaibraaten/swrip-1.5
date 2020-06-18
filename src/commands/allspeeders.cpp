@@ -6,11 +6,11 @@ static bool ShowShip(std::shared_ptr<Ship> ship, void *userData);
 
 struct UserData
 {
-  Character *ch = nullptr;
+  std::shared_ptr<Character> ch = nullptr;
   int count = 0;
 };
 
-void do_allspeeders( Character *ch, std::string argument )
+void do_allspeeders( std::shared_ptr<Character> ch, std::string argument )
 {
   UserData data;
   data.ch = ch;

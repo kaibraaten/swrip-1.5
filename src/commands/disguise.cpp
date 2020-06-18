@@ -5,7 +5,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_disguise( Character *ch, std::string argument )
+void do_disguise( std::shared_ptr<Character> ch, std::string argument )
 {
   int the_chance = 0;
   short gsn = 0;

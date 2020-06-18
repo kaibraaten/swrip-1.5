@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "act.hpp"
 
-void do_mount(Character *ch, std::string argument)
+void do_mount(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
 

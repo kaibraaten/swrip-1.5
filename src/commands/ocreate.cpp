@@ -34,7 +34,7 @@ static vnum_t GetNewObjectVnum(std::shared_ptr<Area> area, const std::string &ar
     return vnum;
 }
 
-void do_ocreate(Character *ch, std::string argument)
+void do_ocreate(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string arg2;
