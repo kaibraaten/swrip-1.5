@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-bool spec_police_undercover( Character *ch )
+bool spec_police_undercover( std::shared_ptr<Character> ch )
 {
   if ( !IsAwake(ch) || ch->Fighting )
     return false;

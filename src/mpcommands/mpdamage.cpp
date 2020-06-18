@@ -7,12 +7,12 @@
 #include "room.hpp"
 #include "act.hpp"
 
-static ch_ret simple_damage(Character *ch, Character *victim, int dam, int dt);
+static ch_ret simple_damage(std::shared_ptr<Character> ch, Character *victim, int dam, int dt);
 
 /*
  * syntax: mpdamage (character) (#hps)
  */
-void do_mp_damage(Character *ch, std::string argument)
+void do_mp_damage(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
@@ -89,7 +89,7 @@ void do_mp_damage(Character *ch, std::string argument)
  *
  *  note: should be careful about using victim afterwards
  */
-static ch_ret simple_damage(Character *ch, Character *victim, int dam, int dt)
+static ch_ret simple_damage(std::shared_ptr<Character> ch, Character *victim, int dam, int dt)
 {
     bool npcvict = false;
     std::shared_ptr<Object> damobj;

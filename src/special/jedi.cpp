@@ -4,7 +4,7 @@
 #include "skill.hpp"
 #include "room.hpp"
 
-bool spec_jedi( Character *ch )
+bool spec_jedi( std::shared_ptr<Character> ch )
 {
   Character *victim = nullptr;
 

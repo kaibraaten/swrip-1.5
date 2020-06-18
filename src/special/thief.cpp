@@ -5,7 +5,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-bool spec_thief(Character *ch)
+bool spec_thief(std::shared_ptr<Character> ch)
 {
     if(ch->Position != POS_STANDING)
         return false;

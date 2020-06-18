@@ -5,7 +5,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-bool spec_customs_alcohol(Character *ch)
+bool spec_customs_alcohol(std::shared_ptr<Character> ch)
 {
     char buf[MAX_STRING_LENGTH];
 

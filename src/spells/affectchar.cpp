@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-static bool IsAffectedBy(const Character *ch, std::bitset<Flag::MAX> &affectedBy)
+static bool IsAffectedBy(const std::shared_ptr<Character> ch, std::bitset<Flag::MAX> &affectedBy)
 {
     for(size_t i = 0; i < ch->AffectedBy.size(); ++i)
     {

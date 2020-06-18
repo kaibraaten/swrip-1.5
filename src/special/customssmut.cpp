@@ -5,7 +5,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-bool spec_customs_smut(Character *ch)
+bool spec_customs_smut(std::shared_ptr<Character> ch)
 {
     char buf[MAX_STRING_LENGTH];
 

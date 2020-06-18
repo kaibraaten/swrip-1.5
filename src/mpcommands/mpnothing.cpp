@@ -4,7 +4,7 @@
 /*
  * Does nothing.  Used for scripts.
  */
-void do_mpnothing( Character *ch, std::string argument )
+void do_mpnothing( std::shared_ptr<Character> ch, std::string argument )
 {
     if ( IsAffectedBy( ch, Flag::Affect::Charm))
         return;

@@ -3,7 +3,7 @@
 #include "act.hpp"
 
 /* Allow mobiles to go wizinvis with programs -- SB */
-void do_mpinvis(Character *ch, std::string arg)
+void do_mpinvis(std::shared_ptr<Character> ch, std::string arg)
 {
     if(!IsNpc(ch))
     {

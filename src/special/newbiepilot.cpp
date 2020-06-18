@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-bool spec_newbie_pilot( Character *ch )
+bool spec_newbie_pilot( std::shared_ptr<Character> ch )
 {
   std::list<Character*> newbies = Filter(ch->InRoom->Characters(),
                                          [](auto victim)

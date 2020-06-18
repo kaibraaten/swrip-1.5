@@ -3,7 +3,7 @@
 
 /* lets the mobile do a command at another location. Very useful */
 
-void do_mpat(Character *ch, std::string argument)
+void do_mpat(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Room> location;

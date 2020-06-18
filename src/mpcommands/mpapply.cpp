@@ -5,7 +5,7 @@
 #include "descriptor.hpp"
 #include "race.hpp"
 
-void do_mpapply( Character *ch, std::string argument )
+void do_mpapply( std::shared_ptr<Character> ch, std::string argument )
 {
     Character *victim = NULL;
 

@@ -6,7 +6,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-bool spec_police_jail(Character *ch)
+bool spec_police_jail(std::shared_ptr<Character> ch)
 {
     if(!IsAwake(ch) || ch->Fighting)
         return false;

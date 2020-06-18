@@ -9,7 +9,7 @@
  *
  *  won't mess with existing exits
  */
-void do_mp_open_passage(Character *ch, std::string argument)
+void do_mp_open_passage(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

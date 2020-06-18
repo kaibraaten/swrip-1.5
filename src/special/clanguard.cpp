@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-bool spec_clan_guard( Character *ch )
+bool spec_clan_guard( std::shared_ptr<Character> ch )
 {
   if ( !IsAwake(ch) || ch->Fighting )
     return false;

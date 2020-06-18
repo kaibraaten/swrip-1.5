@@ -6,7 +6,7 @@
 #include "race.hpp"
 #include "act.hpp"
 
-void do_mpapplyb(Character *ch, std::string argument)
+void do_mpapplyb(std::shared_ptr<Character> ch, std::string argument)
 {
     Character *victim = NULL;
 

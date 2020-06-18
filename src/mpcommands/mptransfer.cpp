@@ -6,7 +6,7 @@
 /* lets the mobile transfer people.  the all argument transfers
    everyone in the current room to the specified location */
 
-void do_mptransfer(Character *ch, std::string argument)
+void do_mptransfer(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

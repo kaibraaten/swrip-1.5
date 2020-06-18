@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-ch_ret spell_flamestrike(int sn, int level, Character *ch, const Vo &vo)
+ch_ret spell_flamestrike(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     Character *victim = vo.Ch;
     int dam = 0;

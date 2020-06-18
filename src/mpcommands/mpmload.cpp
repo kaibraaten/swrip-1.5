@@ -5,7 +5,7 @@
    are loaded into inventory.  you can specify a level with
    the load object portion as well. */
 
-void do_mpmload(Character *ch, std::string arg)
+void do_mpmload(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<ProtoMobile> pMobIndex;
     Character *victim = nullptr;

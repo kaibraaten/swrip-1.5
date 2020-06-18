@@ -5,7 +5,7 @@
 /*
  * Deposit some gold into the current area's economy            -Thoric
  */
-void do_mp_deposit( Character *ch, std::string arg )
+void do_mp_deposit( std::shared_ptr<Character> ch, std::string arg )
 {
   long gold = 0;
 

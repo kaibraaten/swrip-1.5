@@ -6,7 +6,7 @@
  *    with room sleep_progs
  *
  */
-void do_mpdream( Character *ch, std::string argument )
+void do_mpdream( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg1;
     Character *vict = nullptr;

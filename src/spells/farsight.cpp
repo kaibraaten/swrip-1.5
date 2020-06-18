@@ -6,7 +6,7 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_farsight(int sn, int level, Character *ch, const Vo &vo)
+ch_ret spell_farsight(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     Character *victim = nullptr;
     std::shared_ptr<Skill> skill = GetSkill(sn);

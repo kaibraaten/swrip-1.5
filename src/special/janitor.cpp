@@ -6,7 +6,7 @@
 #include "protoobject.hpp"
 #include "act.hpp"
 
-bool spec_janitor( Character *ch )
+bool spec_janitor( std::shared_ptr<Character> ch )
 {
     if ( !IsAwake(ch) )
         return false;

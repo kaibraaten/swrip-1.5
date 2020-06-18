@@ -7,7 +7,7 @@
    it can also destroy a worn object and it can destroy
    items using all.xxxxx or just plain all of them */
 
-void do_mpjunk(Character *ch, std::string arg)
+void do_mpjunk(std::shared_ptr<Character> ch, std::string arg)
 {
     if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;

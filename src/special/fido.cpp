@@ -5,7 +5,7 @@
 #include "object.hpp"
 #include "act.hpp"
 
-bool spec_fido(Character *ch)
+bool spec_fido(std::shared_ptr<Character> ch)
 {
     if(!IsAwake(ch))
         return false;

@@ -4,7 +4,7 @@
 /*
  * syntax: mpslay (character)
  */
-void do_mp_slay( Character *ch, std::string argument )
+void do_mp_slay( std::shared_ptr<Character> ch, std::string argument )
 {
   if( ch->TopLevel >= LEVEL_GREATER )
     {

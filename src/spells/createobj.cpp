@@ -6,7 +6,7 @@
 /*
  * Generic object creating spell                                -Thoric
  */
-ch_ret spell_create_obj(int sn, int level, Character *ch, const Vo &vo)
+ch_ret spell_create_obj(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
     int lvl = 0;

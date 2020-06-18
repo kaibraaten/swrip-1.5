@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "act.hpp"
 
-ch_ret spell_cure_poison(int sn, int level, Character *ch, const Vo &vo)
+ch_ret spell_cure_poison(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     Character *victim = vo.Ch;
     std::shared_ptr<Skill> skill = GetSkill(sn);

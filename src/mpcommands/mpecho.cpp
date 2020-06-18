@@ -4,7 +4,7 @@
 
 /* prints message to room at large. */
 
-void do_mpecho(Character *ch, std::string argument)
+void do_mpecho(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     short color = 0;

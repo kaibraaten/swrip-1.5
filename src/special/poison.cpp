@@ -4,7 +4,7 @@
 #include "skill.hpp"
 #include "act.hpp"
 
-bool spec_poison(Character *ch)
+bool spec_poison(std::shared_ptr<Character> ch)
 {
     Character *victim = nullptr;
 

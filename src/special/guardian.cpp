@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-bool spec_guardian( Character *ch )
+bool spec_guardian( std::shared_ptr<Character> ch )
 {
   char buf[MAX_STRING_LENGTH];
   const char *crime = "disturber of the peace";

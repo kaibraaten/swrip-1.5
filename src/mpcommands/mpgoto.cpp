@@ -3,7 +3,7 @@
 
 /* lets the mobile goto any location it wishes that is not private */
 
-void do_mpgoto(Character *ch, std::string argument)
+void do_mpgoto(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Room> location;

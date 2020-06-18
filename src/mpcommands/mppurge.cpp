@@ -10,7 +10,7 @@
    itself, but this had best be the last command in the MUDprogram
    otherwise ugly stuff will happen */
 
-void do_mppurge(Character *ch, std::string arg)
+void do_mppurge(std::shared_ptr<Character> ch, std::string arg)
 {
     Character *victim = nullptr;
 

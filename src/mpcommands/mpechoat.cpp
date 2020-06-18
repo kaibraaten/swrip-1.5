@@ -4,7 +4,7 @@
 
 /* prints message only to victim */
 
-void do_mpechoat(Character *ch, std::string argument)
+void do_mpechoat(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     Character *victim = nullptr;

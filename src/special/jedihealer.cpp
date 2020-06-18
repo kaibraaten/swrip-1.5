@@ -5,7 +5,7 @@
 #include "room.hpp"
 #include "act.hpp"
 
-bool spec_jedi_healer(Character *ch)
+bool spec_jedi_healer(std::shared_ptr<Character> ch)
 {
     Character *victim = nullptr;
 

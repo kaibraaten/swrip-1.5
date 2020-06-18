@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "object.hpp"
 
-void do_mpoload(Character *ch, std::string argument)
+void do_mpoload(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

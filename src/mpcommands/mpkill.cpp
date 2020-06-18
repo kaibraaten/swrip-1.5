@@ -4,7 +4,7 @@
 
 /* lets the mobile kill any player or mobile without murder*/
 
-void do_mpkill( Character *ch, std::string arg )
+void do_mpkill( std::shared_ptr<Character> ch, std::string arg )
 {
     Character *victim = nullptr;
 

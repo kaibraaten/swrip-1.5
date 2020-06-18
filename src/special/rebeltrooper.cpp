@@ -6,7 +6,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-bool spec_rebel_trooper( Character *ch )
+bool spec_rebel_trooper( std::shared_ptr<Character> ch )
 {
   if ( !IsAwake(ch) || ch->Fighting )
     return false;

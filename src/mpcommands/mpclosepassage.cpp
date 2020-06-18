@@ -9,7 +9,7 @@
  *
  * the exit must have EX_PASSAGE set
  */
-void do_mp_close_passage(Character *ch, std::string argument)
+void do_mp_close_passage(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;

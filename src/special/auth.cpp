@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-bool spec_auth(Character *ch)
+bool spec_auth(std::shared_ptr<Character> ch)
 {
     for (auto victim : ch->InRoom->Characters())
     {

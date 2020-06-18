@@ -8,7 +8,7 @@
 #include "protoobject.hpp"
 #include "act.hpp"
 
-bool spec_customs_weapons(Character *ch)
+bool spec_customs_weapons(std::shared_ptr<Character> ch)
 {
     char buf[MAX_STRING_LENGTH];
 

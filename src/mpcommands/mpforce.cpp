@@ -5,7 +5,7 @@
 /* lets the mobile force someone to do something.  must be mortal level
    and the all argument only affects those in the room with the mobile */
 
-void do_mpforce( Character *ch, std::string argument )
+void do_mpforce( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg;
 

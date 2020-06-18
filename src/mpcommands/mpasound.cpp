@@ -6,7 +6,7 @@
 #include "act.hpp"
 
 /* Prints the argument to all the rooms around the mobile */
-void do_mpasound(Character *ch, std::string argument)
+void do_mpasound(std::shared_ptr<Character> ch, std::string argument)
 {
     assert(ch != nullptr);
 

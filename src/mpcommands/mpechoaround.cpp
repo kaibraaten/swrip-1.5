@@ -4,7 +4,7 @@
 
 /* prints the message to everyone in the room other than the mob and victim */
 
-void do_mpechoaround(Character *ch, std::string argument)
+void do_mpechoaround(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     Character *victim = nullptr;
