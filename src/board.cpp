@@ -49,7 +49,7 @@
 class _IsNoteTo
 {
 public:
-    _IsNoteTo(const Character *recipient)
+    _IsNoteTo(std::shared_ptr<Character> recipient)
         : ch(recipient)
     {
 
@@ -73,14 +73,14 @@ public:
     }
 
 private:
-    const Character *ch;
+    std::shared_ptr<Character> ch;
 };
 
 static void RemoveNote(const std::shared_ptr<Board> &board, std::shared_ptr<Note> pnote);
-static bool CanRemove(const Character *ch, const std::shared_ptr<Board> &board);
-static bool CanRead(const Character *ch, const std::shared_ptr<Board> &board);
-static bool CanPost(const Character *ch, const std::shared_ptr<Board> &board);
-static std::shared_ptr<Object> FindQuill(const Character *ch);
+static bool CanRemove(std::shared_ptr<Character> ch, const std::shared_ptr<Board> &board);
+static bool CanRead(std::shared_ptr<Character> ch, const std::shared_ptr<Board> &board);
+static bool CanPost(std::shared_ptr<Character> ch, const std::shared_ptr<Board> &board);
+static std::shared_ptr<Object> FindQuill(std::shared_ptr<Character> ch);
 
 //////////////////////////////////////////////////////////////
 struct Board::Impl
@@ -117,7 +117,7 @@ const std::list<std::shared_ptr<Note>> &Board::Notes() const
 
 //////////////////////////////////////////////////////////////
 
-static bool CanRemove(const Character *ch, const std::shared_ptr<Board> &board)
+static bool CanRemove(std::shared_ptr<Character> ch, const std::shared_ptr<Board> &board)
 {
     /* If your trust is high enough, you can remove it. */
     if(GetTrustLevel(ch) >= board->MinRemoveLevel)
@@ -132,7 +132,7 @@ static bool CanRemove(const Character *ch, const std::shared_ptr<Board> &board)
     return false;
 }
 
-static bool CanRead(const Character *ch, const std::shared_ptr<Board> &board)
+static bool CanRead(std::shared_ptr<Character> ch, const std::shared_ptr<Board> &board)
 {
     /* If your trust is high enough, you can read it. */
     if(GetTrustLevel(ch) >= board->MinReadLevel)
@@ -162,7 +162,7 @@ static bool CanRead(const Character *ch, const std::shared_ptr<Board> &board)
     return false;
 }
 
-static bool CanPost(const Character *ch, const std::shared_ptr<Board> &board)
+static bool CanPost(std::shared_ptr<Character> ch, const std::shared_ptr<Board> &board)
 {
     /* If your trust is high enough, you can post. */
     if(GetTrustLevel(ch) >= board->MinPostLevel)
@@ -192,7 +192,7 @@ std::shared_ptr<Board> GetBoardFromObject(std::shared_ptr<Object> obj)
                         });
 }
 
-void AttachNote(Character *ch)
+void AttachNote(std::shared_ptr<Character> ch)
 {
     if(IsNpc(ch))
         return;
@@ -217,7 +217,7 @@ static void RemoveNote(const std::shared_ptr<Board> &board, std::shared_ptr<Note
     Boards->Save(board);
 }
 
-static std::shared_ptr<Object> FindQuill(const Character *ch)
+static std::shared_ptr<Object> FindQuill(std::shared_ptr<Character> ch)
 {
     auto result = Filter(ch->Objects(),
                          [ch](auto obj)
@@ -236,7 +236,7 @@ static std::shared_ptr<Object> FindQuill(const Character *ch)
     }
 }
 
-void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
+void OperateOnNote(std::shared_ptr<Character> ch, std::string arg_passed, bool IS_MAIL)
 {
     if(IsNpc(ch))
         return;
@@ -1100,7 +1100,7 @@ void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL)
     ch->Echo("Huh? Type 'help note' for usage.\r\n");
 }
 
-void CountMailMessages(const Character *ch)
+void CountMailMessages(std::shared_ptr<Character> ch)
 {
     size_t cnt = 0;
 
@@ -1118,7 +1118,7 @@ void CountMailMessages(const Character *ch)
     }
 }
 
-std::shared_ptr<Board> FindBoardHere(const Character *ch)
+std::shared_ptr<Board> FindBoardHere(std::shared_ptr<Character> ch)
 {
     for(auto obj : ch->InRoom->Objects())
     {

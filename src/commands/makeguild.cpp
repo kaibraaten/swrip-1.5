@@ -6,42 +6,42 @@
 #include "log.hpp"
 #include "repos/clanrepository.hpp"
 
-static bool IsGuildNameAcceptable(const std::string& name);
+static bool IsGuildNameAcceptable(const std::string &name);
 
-void do_makeguild(Character* ch, std::string argument)
+void do_makeguild(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string faction;
     std::shared_ptr<Clan> guild;
     std::shared_ptr<Clan> mainClan;
     argument = OneArgument(argument, faction);
 
-    if (faction.empty() || argument.empty())
+    if(faction.empty() || argument.empty())
     {
         ch->Echo("Usage: startguild <imperial|rebel|independent> <guild name>\r\n");
         return;
     }
 
-    if (IsClanned(ch))
+    if(IsClanned(ch))
     {
         ch->Echo("&RYou're already in a guild.&d\r\n");
         return;
     }
 
-    if (!IsGuildNameAcceptable(argument))
+    if(!IsGuildNameAcceptable(argument))
     {
         ch->Echo("&RThat name is not accepted.&d\r\n");
         return;
     }
 
-    if (!StrCmp(faction, "imperial"))
+    if(!StrCmp(faction, "imperial"))
     {
         mainClan = GetClan(BADGUY_CLAN);
     }
-    else if (!StrCmp(faction, "rebel"))
+    else if(!StrCmp(faction, "rebel"))
     {
         mainClan = GetClan(GOODGUY_CLAN);
     }
-    else if (!StrCmp(faction, "independent"))
+    else if(!StrCmp(faction, "independent"))
     {
         mainClan = GetClan(INDEPENDENT_CLAN);
     }
@@ -51,19 +51,19 @@ void do_makeguild(Character* ch, std::string argument)
         return;
     }
 
-    if (!mainClan)
+    if(!mainClan)
     {
         ch->Echo("&RSomething when wrong. Contact the administration.&d\r\n");
         Log->Bug("%s: Main clan %s does not exist.", __FUNCTION__,
-            !StrCmp(faction, "imperial") ? BADGUY_CLAN
-            : !StrCmp(faction, "rebel") ? GOODGUY_CLAN : INDEPENDENT_CLAN);
+                 !StrCmp(faction, "imperial") ? BADGUY_CLAN
+                 : !StrCmp(faction, "rebel") ? GOODGUY_CLAN : INDEPENDENT_CLAN);
         return;
     }
 
-    if (ch->Gold < GUILD_PRICE)
+    if(ch->Gold < GUILD_PRICE)
     {
         ch->Echo("&RStarting a guild costs %d credits. You don't have the funds.&d\r\n",
-            GUILD_PRICE);
+                 GUILD_PRICE);
         return;
     }
     else
@@ -89,11 +89,11 @@ void do_makeguild(Character* ch, std::string argument)
     UpdateClanMember(ch);
 
     ch->Echo("&GCongratulations, your new guild %s has been successfully created!\r\n",
-        guild->Name.c_str());
+             guild->Name.c_str());
     ch->Echo("See HELP GUILD to get started.&d\r\n");
 }
 
-static bool IsGuildNameAcceptable(const std::string& name)
+static bool IsGuildNameAcceptable(const std::string &name)
 {
     bool nameIsAvailable = GetClan(name) == nullptr;
 

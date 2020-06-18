@@ -31,9 +31,7 @@ ch_ret spell_remove_invis(int sn, int level, std::shared_ptr<Character> ch, cons
     }
     else
     {
-        Character *victim;
-
-        victim = GetCharacterInRoom(ch, spell_target_name);
+        auto victim = GetCharacterInRoom(ch, spell_target_name);
 
         if(victim)
         {

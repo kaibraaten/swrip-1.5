@@ -12,7 +12,7 @@ void do_mass_propaganda(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     std::string arg1;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Planet> planet;
     std::shared_ptr<Clan> clan;
     int percent = 0;

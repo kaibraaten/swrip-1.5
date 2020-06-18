@@ -56,7 +56,7 @@ static void FindGameWinner();
 static void DoEndGame();
 static void StartGame();
 static void SilentEnd();
-static void FindBetWinners(Character *winner);
+static void FindBetWinners(std::shared_ptr<Character> winner);
 static void ResetBets();
 
 void StartArena()
@@ -143,7 +143,7 @@ static void StartGame()
     {
         if(!d->ConnectionState)
         {
-            Character *i = d->Character;
+            auto i = d->Character;
 
             if(i == NULL)
             {
@@ -209,63 +209,63 @@ static void FindGameWinner()
 {
     for(auto d : Descriptors)
     {
-        Character *i = d->Original ? d->Original : d->Character;
+        auto ch = d->Original ? d->Original : d->Character;
 
-        if(i == NULL)
+        if(ch == NULL)
         {
             continue;
         }
 
-        if(IsInArena(i)
-           && !IsImmortal(i))
+        if(IsInArena(ch)
+           && !IsImmortal(ch))
         {
-            CharacterFromRoom(i);
-            CharacterToRoom(i, GetRoom(i->ReTran));
-            do_look(i, "auto");
-            Act(AT_YELLOW, "$n falls from the sky.", i, NULL, NULL, ActTarget::Room);
-            StopFighting(i, true);
+            CharacterFromRoom(ch);
+            CharacterToRoom(ch, GetRoom(ch->ReTran));
+            do_look(ch, "auto");
+            Act(AT_YELLOW, "$n falls from the sky.", ch, nullptr, nullptr, ActTarget::Room);
+            StopFighting(ch, true);
 
-            if(i->HitPoints.Current > 1)
+            if(ch->HitPoints.Current > 1)
             {
                 HallOfFameElement *fame_node = NULL;
                 char buf[MAX_INPUT_LENGTH];
 
                 if(arena.TimeLeftInGame == 1)
                 {
-                    sprintf(buf, "After 1 hour of battle %s is declared the winner", i->Name.c_str());
+                    sprintf(buf, "After 1 hour of battle %s is declared the winner", ch->Name.c_str());
                     ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
                 }
                 else
                 {
                     sprintf(buf, "After %d hours of battle %s is declared the winner",
-                            arena.GameLength - arena.TimeLeftInGame, i->Name.c_str());
+                            arena.GameLength - arena.TimeLeftInGame, ch->Name.c_str());
                     ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
                 }
 
-                i->Gold += arena.ArenaPot / 2;
-                i->Echo("You have been awarded %d credits for winning the arena\r\n",
-                        arena.ArenaPot / 2);
+                ch->Gold += arena.ArenaPot / 2;
+                ch->Echo("You have been awarded %d credits for winning the arena\r\n",
+                         arena.ArenaPot / 2);
 
-                Log->Info("%s awarded %d credits for winning arena", i->Name.c_str(),
+                Log->Info("%s awarded %d credits for winning arena", ch->Name.c_str(),
                           arena.ArenaPot / 2);
 
                 fame_node = new HallOfFameElement();
-                fame_node->Name = i->Name;
+                fame_node->Name = ch->Name;
                 fame_node->Date = time(0);
                 fame_node->Award = (arena.ArenaPot / 2);
                 FameList.push_front(fame_node);
 
                 SaveHallOfFame();
-                FindBetWinners(i);
+                FindBetWinners(ch);
                 arena.PeopleIsInArena = 0;
                 ResetBets();
                 arena.PeopleChallenged = 0;
             }
 
-            i->HitPoints.Current = i->HitPoints.Max;
-            i->Mana.Current = i->Mana.Max;
-            i->Fatigue.Current = i->Fatigue.Max;
-            i->Challenged = NULL;
+            ch->HitPoints.Current = ch->HitPoints.Max;
+            ch->Mana.Current = ch->Mana.Max;
+            ch->Fatigue.Current = ch->Fatigue.Max;
+            ch->Challenged.reset();
         }
     }
 }
@@ -305,24 +305,24 @@ static void DoEndGame()
     {
         if(!d->ConnectionState)
         {
-            Character *i = d->Character;
+            auto ch = d->Character;
 
-            if(i == NULL)
+            if(ch == NULL)
             {
                 continue;
             }
 
-            if(IsInArena(i))
+            if(IsInArena(ch))
             {
-                i->HitPoints.Current = i->HitPoints.Max;
-                i->Mana.Current = i->Mana.Max;
-                i->Fatigue.Current = i->Fatigue.Max;
-                i->Challenged = NULL;
-                StopFighting(i, true);
-                CharacterFromRoom(i);
-                CharacterToRoom(i, GetRoom(i->ReTran));
-                do_look(i, "auto");
-                Act(AT_TELL, "$n falls from the sky.", i, NULL, NULL, ActTarget::Room);
+                ch->HitPoints.Current = ch->HitPoints.Max;
+                ch->Mana.Current = ch->Mana.Max;
+                ch->Fatigue.Current = ch->Fatigue.Max;
+                ch->Challenged.reset();
+                StopFighting(ch, true);
+                CharacterFromRoom(ch);
+                CharacterToRoom(ch, GetRoom(ch->ReTran));
+                do_look(ch, "auto");
+                Act(AT_TELL, "$n falls from the sky.", ch, NULL, NULL, ActTarget::Room);
             }
         }
     }
@@ -341,16 +341,16 @@ int CharactersInArena()
 
     for(auto d : Descriptors)
     {
-        Character *i = d->Original ? d->Original : d->Character;
+        auto ch = d->Original ? d->Original : d->Character;
 
-        if(i == NULL)
+        if(ch == NULL)
         {
             continue;
         }
 
-        if(IsInArena(i))
+        if(IsInArena(ch))
         {
-            if(!IsImmortal(i) && i->HitPoints.Current > 1)
+            if(!IsImmortal(ch) && ch->HitPoints.Current > 1)
             {
                 num++;
             }
@@ -410,25 +410,25 @@ void SaveHallOfFame()
     LuaSaveDataFile(HALL_OF_FAME_FILE, PushHallOfFame, "halloffame", NULL);
 }
 
-static void FindBetWinners(Character *winner)
+static void FindBetWinners(std::shared_ptr<Character> winner)
 {
     for(auto d : Descriptors)
     {
         if(!d->ConnectionState)
         {
-            Character *wch = d->Original ? d->Original : d->Character;
+            auto wch = d->Original ? d->Original : d->Character;
 
             if(wch == NULL)
             {
                 continue;
             }
 
-            if((!IsNpc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
+            if((!IsNpc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch).lock() == winner))
             {
                 wch->Echo("You have won %d credits on your bet.\r\n",
                           (GET_BET_AMT(wch)) * 2);
                 wch->Gold += GET_BET_AMT(wch) * 2;
-                GET_BETTED_ON(wch) = NULL;
+                GET_BETTED_ON(wch).reset();
                 GET_BET_AMT(wch) = 0;
             }
         }
@@ -441,18 +441,15 @@ static void FindBetWinners(Character *winner)
  */
 static void ResetBets()
 {
-    Character *ch = NULL;
-
-    for(ch = FirstCharacter; ch; ch = ch->Next)
+    for(auto ch = FirstCharacter; ch; ch = ch->Next)
     {
         if(ch == NULL)
             continue;
 
         if(!IsNpc(ch))
         {
-            GET_BETTED_ON(ch) = NULL;
+            GET_BETTED_ON(ch).reset();
             GET_BET_AMT(ch) = 0;
         }
     }
 }
-

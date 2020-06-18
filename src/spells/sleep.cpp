@@ -13,7 +13,7 @@ ch_ret spell_sleep(int sn, int level, std::shared_ptr<Character> ch, const Vo &v
     int retcode = rNONE;
     int sleep_chance = 0;
     int tmp = 0;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
     if((victim = GetCharacterInRoom(ch, spell_target_name)) == NULL)
@@ -33,7 +33,7 @@ ch_ret spell_sleep(int sn, int level, std::shared_ptr<Character> ch, const Vo &v
 
     if(victim->Immune.test(Flag::Ris::Magic))
     {
-        ImmuneCasting(skill, ch, victim, NULL);
+        ImmuneCasting(skill, ch, victim, nullptr);
         return rSPELL_FAILED;
     }
 

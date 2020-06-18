@@ -38,7 +38,7 @@
  /*
   * Dummy function
   */
-void skill_notfound(Character *ch, std::string argument)
+void skill_notfound(std::shared_ptr<Character> ch, std::string argument)
 {
     ch->Echo("Huh?\r\n");
 }
@@ -48,7 +48,7 @@ void skill_notfound(Character *ch, std::string argument)
  * Caller must check for successful attack.
  * Check for loyalty flag (weapon disarms to inventory) for pkillers -Blodkai
  */
-void Disarm(Character *ch, Character *victim)
+void Disarm(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     std::shared_ptr<Object> obj;
     std::shared_ptr<Object> tmpobj;
@@ -103,7 +103,7 @@ void Disarm(Character *ch, Character *victim)
  * Trip a creature.
  * Caller must check for successful attack.
  */
-void Trip(Character *ch, Character *victim)
+void Trip(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     if(IsAffectedBy(victim, Flag::Affect::Flying)
        || IsAffectedBy(victim, Flag::Affect::Floating))
@@ -145,7 +145,7 @@ void Trip(Character *ch, Character *victim)
 /*
  * Check for parry.
  */
-bool CheckParry(Character *ch, Character *victim)
+bool CheckParry(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     int chances = 0;
     std::shared_ptr<Object> wield;
@@ -206,7 +206,7 @@ bool CheckParry(Character *ch, Character *victim)
 /*
  * Check for dodge.
  */
-bool CheckDodge(Character *ch, Character *victim)
+bool CheckDodge(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     int chances = 0;
 
@@ -253,7 +253,7 @@ bool CheckDodge(Character *ch, Character *victim)
     return true;
 }
 
-bool CheckGrip(Character *ch, Character *victim)
+bool CheckGrip(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     int grip_chance = 0;
 

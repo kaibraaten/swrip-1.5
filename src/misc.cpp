@@ -34,7 +34,7 @@
  /*
   * Function to handle the state changing of a triggerobject (lever)  -Thoric
   */
-void PullOrPush(Character *ch, std::shared_ptr<Object> obj, bool pull)
+void PullOrPush(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, bool pull)
 {
     char buf[MAX_STRING_LENGTH];
     std::shared_ptr<Room> room, to_room;
@@ -162,7 +162,7 @@ void PullOrPush(Character *ch, std::shared_ptr<Object> obj, bool pull)
 
         RandomizeExits(room, maxd);
 
-        for(const Character *rch : room->Characters())
+        for(auto rch : room->Characters())
         {
             rch->Echo("You hear a loud rumbling sound.\r\n");
             rch->Echo("Something seems different...\r\n");
@@ -286,7 +286,7 @@ void PullOrPush(Character *ch, std::shared_ptr<Object> obj, bool pull)
         {
             pexit->Flags.reset(Flag::Exit::Closed);
 
-            for(Character *rch : room->Characters())
+            for(auto rch : room->Characters())
             {
                 Act(AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword, ActTarget::Char);
             }
@@ -296,7 +296,7 @@ void PullOrPush(Character *ch, std::shared_ptr<Object> obj, bool pull)
             {
                 pexit_rev->Flags.reset(Flag::Exit::Closed);
 
-                for(Character *rch : to_room->Characters())
+                for(auto rch : to_room->Characters())
                 {
                     Act(AT_ACTION, "The $d opens.",
                         rch, NULL, pexit_rev->Keyword, ActTarget::Char);
@@ -312,7 +312,7 @@ void PullOrPush(Character *ch, std::shared_ptr<Object> obj, bool pull)
         {
             pexit->Flags.set(Flag::Exit::Closed);
 
-            for(Character *rch : room->Characters())
+            for(auto rch : room->Characters())
             {
                 Act(AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword, ActTarget::Char);
             }
@@ -322,7 +322,7 @@ void PullOrPush(Character *ch, std::shared_ptr<Object> obj, bool pull)
             {
                 pexit_rev->Flags.set(Flag::Exit::Closed);
 
-                for(Character *rch : to_room->Characters())
+                for(auto rch : to_room->Characters())
                 {
                     Act(AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword, ActTarget::Char);
                 }
@@ -334,7 +334,7 @@ void PullOrPush(Character *ch, std::shared_ptr<Object> obj, bool pull)
     }
 }
 
-void ActionDescription(Character *ch, std::shared_ptr<Object> obj)
+void ActionDescription(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     char charbuf[MAX_STRING_LENGTH];
     char roombuf[MAX_STRING_LENGTH];

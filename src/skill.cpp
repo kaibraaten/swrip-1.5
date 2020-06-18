@@ -43,7 +43,7 @@ Skill::Skill()
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-bool CheckSkill(Character *ch, const std::string &command, const std::string &argument)
+bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const std::string &argument)
 {
     int sn = 0;
     int first = gsn_first_skill;
@@ -119,7 +119,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     {
         ch_ret retcode = rNONE;
         Vo vo;
-        Character *victim = NULL;
+        std::shared_ptr<Character> victim = NULL;
         std::shared_ptr<Object> obj;
 
         spell_target_name = "";
@@ -279,12 +279,12 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     return true;
 }
 
-int GetSkillLevel(const Character *ch, short gsn)
+int GetSkillLevel(std::shared_ptr<Character> ch, short gsn)
 {
     return IsNpc(ch) ? ch->TopLevel : ch->PCData->Learned[gsn];
 }
 
-void LearnFromSuccess(Character *ch, int sn)
+void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
 {
     int adept = 0;
     int gain = 0;
@@ -370,7 +370,7 @@ void LearnFromSuccess(Character *ch, int sn)
     }
 }
 
-void LearnFromFailure(Character *ch, int sn)
+void LearnFromFailure(std::shared_ptr<Character> ch, int sn)
 {
 
 }
@@ -378,7 +378,7 @@ void LearnFromFailure(Character *ch, int sn)
 /*
  * Lookup a skill by name, only stopping at skills the player has.
  */
-int ChLookupSkill(const Character *ch, const std::string &name)
+int ChLookupSkill(std::shared_ptr<Character> ch, const std::string &name)
 {
     if(IsNpc(ch))
     {
@@ -563,7 +563,7 @@ int BSearchSkillExact(const std::string &name, int first, int top)
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-int ChBSearchSkill(const Character *ch, const std::string &name, int first, int top)
+int ChBSearchSkill(std::shared_ptr<Character> ch, const std::string &name, int first, int top)
 {
     for(;;)
     {

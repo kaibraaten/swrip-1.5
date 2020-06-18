@@ -8,7 +8,7 @@
 
 void do_stun(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     int stun_chance = 0;
     bool fail = false;
 

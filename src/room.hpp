@@ -69,9 +69,9 @@ public:
     void Remove(std::shared_ptr<Exit> xit);
     const std::list<std::shared_ptr<Exit>> &Exits() const;
 
-    void Add(Character *character);
-    void Remove(Character *character);
-    const std::list<Character *> &Characters() const;
+    void Add(std::shared_ptr<Character> character);
+    void Remove(std::shared_ptr<Character> character);
+    const std::list<std::shared_ptr<Character>> &Characters() const;
 
     void Add(std::shared_ptr<Object> object);
     void Remove(std::shared_ptr<Object> object);

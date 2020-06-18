@@ -53,11 +53,11 @@ static bool IsRoomReset(std::shared_ptr<Reset> pReset, std::shared_ptr<Room> aRo
 static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr<Object> obj, int v2, int v3);
 static void DeleteReset(std::shared_ptr<Area> pArea, std::shared_ptr<Reset> pReset);
 static std::shared_ptr<Reset> FindReset(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, int num);
-static void ListResets(const Character *ch, std::shared_ptr<Area> pArea,
+static void ListResets(std::shared_ptr<Character> ch, std::shared_ptr<Area> pArea,
                        std::shared_ptr<Room> pRoom, int start, int end);
-static std::shared_ptr<Reset> FindObjectReset(const Character *ch, std::shared_ptr<Area> pArea,
+static std::shared_ptr<Reset> FindObjectReset(std::shared_ptr<Character> ch, std::shared_ptr<Area> pArea,
                                               std::shared_ptr<Room> pRoom, const std::string &name);
-static std::shared_ptr<Reset> FindMobileReset(const Character *ch, std::shared_ptr<Area> pArea,
+static std::shared_ptr<Reset> FindMobileReset(std::shared_ptr<Character> ch, std::shared_ptr<Area> pArea,
                                               std::shared_ptr<Room> pRoom, const std::string &name);
 static int GenerateItemLevel(std::shared_ptr<Area> pArea, std::shared_ptr<ProtoObject> pObjIndex);
 
@@ -204,7 +204,7 @@ static bool IsRoomReset(std::shared_ptr<Reset> pReset, std::shared_ptr<Room> aRo
     return false;
 }
 
-std::shared_ptr<Room> FindRoom(const Character *ch, const std::string &arg, std::shared_ptr<Room> pRoom)
+std::shared_ptr<Room> FindRoom(std::shared_ptr<Character> ch, const std::string &arg, std::shared_ptr<Room> pRoom)
 {
     if(pRoom)
     {
@@ -326,7 +326,7 @@ static void DeleteReset(std::shared_ptr<Area> pArea, std::shared_ptr<Reset> pRes
 }
 #undef DEL_RESET
 
-static std::shared_ptr<Reset> FindObjectReset(const Character *ch, std::shared_ptr<Area> pArea,
+static std::shared_ptr<Reset> FindObjectReset(std::shared_ptr<Character> ch, std::shared_ptr<Area> pArea,
                                               std::shared_ptr<Room> pRoom, const std::string &name)
 {
     std::shared_ptr<Reset> reset = nullptr;
@@ -404,7 +404,7 @@ static std::shared_ptr<Reset> FindObjectReset(const Character *ch, std::shared_p
     return reset;
 }
 
-static std::shared_ptr<Reset> FindMobileReset(const Character *ch, std::shared_ptr<Area> pArea,
+static std::shared_ptr<Reset> FindMobileReset(std::shared_ptr<Character> ch, std::shared_ptr<Area> pArea,
                                               std::shared_ptr<Room> pRoom, const std::string &name)
 {
     std::shared_ptr<Reset> reset = nullptr;
@@ -475,7 +475,7 @@ static std::shared_ptr<Reset> FindMobileReset(const Character *ch, std::shared_p
     return reset;
 }
 
-void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
+void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
 {
     std::string arg;
     std::shared_ptr<Reset> pReset;
@@ -1299,7 +1299,7 @@ static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, std::shared_ptr
 
 void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool dodoors)
 {
-    for(const Character *rch : pRoom->Characters())
+    for(std::shared_ptr<Character> rch : pRoom->Characters())
     {
         if(!IsNpc(rch))
         {
@@ -1498,7 +1498,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
 {
     assert(pArea != nullptr);
 
-    Character *mob = NULL;
+    std::shared_ptr<Character> mob = NULL;
     std::shared_ptr<Object> obj;
     std::shared_ptr<Object> lastobj ;
     std::shared_ptr<Room> pRoomIndex;
@@ -2036,7 +2036,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
     }
 }
 
-static void ListResets(const Character *ch, std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom,
+static void ListResets(std::shared_ptr<Character> ch, std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom,
                        int start, int end)
 {
     std::shared_ptr<Room> room;
@@ -2736,7 +2736,7 @@ std::shared_ptr<Reset> PlaceReset(std::shared_ptr<Area> tarea, char letter, int 
     return pReset;
 }
 
-std::string SPrintReset(const Character *ch, std::shared_ptr<Reset> pReset, short num, bool rlist)
+std::string SPrintReset(std::shared_ptr<Character> ch, std::shared_ptr<Reset> pReset, short num, bool rlist)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char mobname[1024] = { '\0' };

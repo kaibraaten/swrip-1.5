@@ -7,16 +7,16 @@
 class Social
 {
 public:
-  std::string Name;
-  std::string CharNoArg;
-  std::string OthersNoArg;
-  std::string CharFound;
-  std::string OthersFound;
-  std::string VictimFound;
-  std::string CharAuto;
-  std::string OthersAuto;
+    std::string Name;
+    std::string CharNoArg;
+    std::string OthersNoArg;
+    std::string CharFound;
+    std::string OthersFound;
+    std::string VictimFound;
+    std::string CharAuto;
+    std::string OthersAuto;
 };
 
-bool CheckSocial( Character *ch, const std::string &command, const std::string &argument );
+bool CheckSocial(std::shared_ptr<Character> ch, const std::string &command, const std::string &argument);
 
 #endif

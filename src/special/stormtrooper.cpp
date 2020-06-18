@@ -6,37 +6,37 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-bool spec_stormtrooper( std::shared_ptr<Character> ch )
+bool spec_stormtrooper(std::shared_ptr<Character> ch)
 {
-  if ( !IsAwake(ch) || ch->Fighting )
-    return false;
+    if(!IsAwake(ch) || ch->Fighting)
+        return false;
 
-  std::vector<Character*> rebels(std::begin(ch->InRoom->Characters()),
-                                 std::end(ch->InRoom->Characters()));
-  
-  rebels = Filter(rebels,
-                  [ch](auto victim)
-                  {
-                    return CanSeeCharacter(ch, victim)
-                      && GetTimer(victim, TIMER_RECENTFIGHT) == 0
-                      && ( ( IsNpc( victim )
-                             && ( NiftyIsName( "rebel", victim->Name )
-                                  || NiftyIsName( "republic", victim->Name ) )
-                             && victim->Fighting
-                             && GetFightingOpponent( victim ) != ch )
-                           || ( !IsNpc( victim ) && IsClanned( victim )
-                                && IsAwake(victim)
-                                && ( NiftyIsName( "rebel" , victim->PCData->ClanInfo.Clan->Name )
-                                     || NiftyIsName( "republic", victim->PCData->ClanInfo.Clan->Name ))));
-                  });
+    std::vector<std::shared_ptr<Character>> rebels(std::begin(ch->InRoom->Characters()),
+                                                   std::end(ch->InRoom->Characters()));
 
-  for(Character *victim : RandomizeOrder(rebels))
+    rebels = Filter(rebels,
+                    [ch](auto victim)
+                    {
+                        return CanSeeCharacter(ch, victim)
+                            && GetTimer(victim, TIMER_RECENTFIGHT) == 0
+                            && ((IsNpc(victim)
+                                 && (NiftyIsName("rebel", victim->Name)
+                                     || NiftyIsName("republic", victim->Name))
+                                 && victim->Fighting
+                                 && GetFightingOpponent(victim) != ch)
+                                || (!IsNpc(victim) && IsClanned(victim)
+                                    && IsAwake(victim)
+                                    && (NiftyIsName("rebel", victim->PCData->ClanInfo.Clan->Name)
+                                        || NiftyIsName("republic", victim->PCData->ClanInfo.Clan->Name))));
+                    });
+
+    for(auto victim : RandomizeOrder(rebels))
     {
-      do_yell( ch, "Die Rebel Scum!" );
-      HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
-      return true;
+        do_yell(ch, "Die Rebel Scum!");
+        HitMultipleTimes(ch, victim, TYPE_UNDEFINED);
+        return true;
     }
 
-  return false;
+    return false;
 }
 

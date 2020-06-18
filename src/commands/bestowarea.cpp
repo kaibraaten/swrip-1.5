@@ -3,13 +3,13 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-static void RemoveAreaNames(std::string inp, std::string &out);
-static void ExtractAreaNames(std::string inp, std::string &out);
+static std::string RemoveAreaNames(std::string inp);
+static std::string ExtractAreaNames(std::string inp);
 
 void do_bestowarea(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
     argument = OneArgument(argument, arg);
 
@@ -49,16 +49,14 @@ void do_bestowarea(std::shared_ptr<Character> ch, std::string argument)
 
     if (argument.empty() || !StrCmp(argument, "list"))
     {
-        std::string buf;
-        ExtractAreaNames(victim->PCData->Bestowments, buf);
+        std::string buf = ExtractAreaNames(victim->PCData->Bestowments);
         ch->Echo("Bestowed areas: %s\r\n", buf.c_str());
         return;
     }
 
     if (!StrCmp(argument, "none"))
     {
-        std::string buf;
-        RemoveAreaNames(victim->PCData->Bestowments, buf);
+        std::string buf = RemoveAreaNames(victim->PCData->Bestowments);
         victim->PCData->Bestowments = buf;
         ch->Echo("Done.\r\n");
         return;
@@ -82,9 +80,9 @@ void do_bestowarea(std::shared_ptr<Character> ch, std::string argument)
  * e.g. "aset joe.are sedit susan.are cset" --> "joe.are susan.are"
  * - Gorog
  */
-static void ExtractAreaNames(std::string inp, std::string &out)
+static std::string ExtractAreaNames(std::string inp)
 {
-    out.erase();
+    std::string out;
 
     while (!inp.empty())
     {
@@ -101,6 +99,8 @@ static void ExtractAreaNames(std::string inp, std::string &out)
             out += segment;
         }
     }
+
+    return out;
 }
 
 /*
@@ -108,9 +108,9 @@ static void ExtractAreaNames(std::string inp, std::string &out)
  * e.g. "aset joe.are sedit susan.are cset" --> "aset sedit cset"
  * - Gorog
  */
-static void RemoveAreaNames(std::string inp, std::string &out)
+static std::string RemoveAreaNames(std::string inp)
 {
-    out.erase();
+    std::string out;
 
     while (!inp.empty())
     {
@@ -127,4 +127,6 @@ static void RemoveAreaNames(std::string inp, std::string &out)
             out += segment;
         }
     }
+
+    return out;
 }

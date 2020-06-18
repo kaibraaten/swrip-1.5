@@ -7,7 +7,7 @@
 
 void do_outcast(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Clan> clan;
 
     if(IsNpc(ch) || !IsClanned(ch))

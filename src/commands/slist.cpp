@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_slist(Character* ch, std::string argument)
+void do_slist(std::shared_ptr<Character> ch, std::string argument)
 {
     int sn = 0, i = 0;
     char skn[MAX_INPUT_LENGTH];
@@ -13,7 +13,7 @@ void do_slist(Character* ch, std::string argument)
     int ability = 0;
     int filter_ability = GetAbility(argument);
 
-    if (IsNpc(ch))
+    if(IsNpc(ch))
     {
         return;
     }
@@ -22,24 +22,24 @@ void do_slist(Character* ch, std::string argument)
     ch->Echo("SKILL LIST\r\n");
     ch->Echo("------------------\r\n");
 
-    for (ability = -1; ability < MAX_ABILITY; ability++)
+    for(ability = -1; ability < MAX_ABILITY; ability++)
     {
-        if (ability == FORCE_ABILITY && !IsImmortal(ch))
+        if(ability == FORCE_ABILITY && !IsImmortal(ch))
         {
             continue;
         }
 
-        if (ability == COMMANDO_ABILITY)
+        if(ability == COMMANDO_ABILITY)
         {
             continue;
         }
 
-        if (filter_ability != -1 && filter_ability != ability)
+        if(filter_ability != -1 && filter_ability != ability)
         {
             continue;
         }
 
-        if (ability >= 0)
+        if(ability >= 0)
         {
             sprintf(skn2, "** %s **", Capitalize(AbilityName[ability]).c_str());
             sprintf(skn, "\r\n\t\t\t  %s \r\n", skn2);
@@ -52,35 +52,35 @@ void do_slist(Character* ch, std::string argument)
         SetCharacterColor(AT_CYAN, ch);
         ch->Echo("%s", skn);
 
-        for (i = lowlev; i <= hilev; i++)
+        for(i = lowlev; i <= hilev; i++)
         {
-            for (sn = 0; sn < TopSN; sn++)
+            for(sn = 0; sn < TopSN; sn++)
             {
                 std::shared_ptr<Skill> skill = SkillTable[sn];
 
-                if (skill->Name.empty())
+                if(skill->Name.empty())
                 {
                     break;
                 }
 
-                if (skill->Guild != ability)
+                if(skill->Guild != ability)
                 {
                     continue;
                 }
 
-                if (ch->PCData->Learned[sn] == 0
-                    && SPELL_FLAG(skill, SF_SECRETSKILL))
+                if(ch->PCData->Learned[sn] == 0
+                   && SPELL_FLAG(skill, SF_SECRETSKILL))
                 {
                     continue;
                 }
 
-                if (i == skill->Level)
+                if(i == skill->Level)
                 {
                     SetCharacterColor(AT_LBLUE, ch);
                     ch->Echo("(%3d) %-18.18s  ",
-                        i, Capitalize(skill->Name).c_str());
+                             i, Capitalize(skill->Name).c_str());
 
-                    if (++col == 3)
+                    if(++col == 3)
                     {
                         ch->Echo("\r\n");
                         col = 0;
@@ -89,7 +89,7 @@ void do_slist(Character* ch, std::string argument)
             }
         }
 
-        if (col != 0)
+        if(col != 0)
         {
             ch->Echo("\r\n");
             col = 0;

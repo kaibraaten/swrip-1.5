@@ -8,7 +8,7 @@
 
 void do_first_aid(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     int heal = 0;
     char buf[MAX_STRING_LENGTH];
 

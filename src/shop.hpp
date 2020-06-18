@@ -61,12 +61,12 @@ public:
     } BusinessHours;
 };
 
-Character *FindFixer(const Character *ch);
-int GetRepairCost(const Character *keeper, std::shared_ptr<Object> obj);
-Character *FindKeeper(const Character *ch);
-Character *FindKeeperQ(const Character *ch, bool message);
-int GetObjectCost(const Character *ch, const Character *keeper, std::shared_ptr<Object> obj, bool fBuy);
+std::shared_ptr<Character> FindFixer(std::shared_ptr<Character> ch);
+int GetRepairCost(std::shared_ptr<Character> keeper, std::shared_ptr<Object> obj);
+std::shared_ptr<Character> FindKeeper(std::shared_ptr<Character> ch);
+std::shared_ptr<Character> FindKeeperQ(std::shared_ptr<Character> ch, bool message);
+int GetObjectCost(std::shared_ptr<Character> ch, std::shared_ptr<Character> keeper, std::shared_ptr<Object> obj, bool fBuy);
 void LoadVendors();
-void SaveVendor(Character *ch);
+void SaveVendor(std::shared_ptr<Character> ch);
 
 #endif

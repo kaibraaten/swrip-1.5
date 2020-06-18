@@ -36,7 +36,7 @@
 #include "repos/descriptorrepository.hpp"
 #include "act.hpp"
 
-std::string DrunkSpeech(const std::string &argument, Character *ch)
+std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> ch)
 {
     const char *arg = argument.c_str();
     char buf[MAX_INPUT_LENGTH * 2] = { '\0' };
@@ -184,7 +184,7 @@ std::string DrunkSpeech(const std::string &argument, Character *ch)
 /*
  * Generic channel function.
  */
-void TalkChannel(Character *ch, const std::string &text, int channel, const std::string &verb)
+void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int channel, const std::string &verb)
 {
     char buf[MAX_STRING_LENGTH];
     char buf2[MAX_STRING_LENGTH];
@@ -370,8 +370,8 @@ void TalkChannel(Character *ch, const std::string &text, int channel, const std:
 
     for(auto d : Descriptors)
     {
-        Character *och = d->Original ? d->Original : d->Character;
-        Character *vch = d->Character;
+        std::shared_ptr<Character> och = d->Original ? d->Original : d->Character;
+        std::shared_ptr<Character> vch = d->Character;
 
         if(d->ConnectionState == CON_PLAYING
            && vch != ch
@@ -516,8 +516,8 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
 
     for(auto d : Descriptors)
     {
-        Character *och = d->Original ? d->Original : d->Character;
-        Character *vch = d->Character;
+        std::shared_ptr<Character> och = d->Original ? d->Original : d->Character;
+        std::shared_ptr<Character> vch = d->Character;
 
         if(!och || !vch)
             continue;
@@ -546,9 +546,9 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
  * follow in a loop through an exit leading back into the same room
  * (Which exists in many maze areas)                    -Thoric
  */
-bool IsFollowingInCircle(const Character *ch, const Character *victim)
+bool IsFollowingInCircle(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    const Character *tmp;
+    std::shared_ptr<Character> tmp;
 
     for(tmp = victim; tmp; tmp = tmp->Master)
         if(tmp == ch)
@@ -557,7 +557,7 @@ bool IsFollowingInCircle(const Character *ch, const Character *victim)
     return false;
 }
 
-void StartFollowing(Character *ch, Character *master)
+void StartFollowing(std::shared_ptr<Character> ch, std::shared_ptr<Character> master)
 {
     if(ch->Master)
     {
@@ -581,7 +581,7 @@ void StartFollowing(Character *ch, Character *master)
     Act(AT_ACTION, "You now follow $N.", ch, NULL, master, ActTarget::Char);
 }
 
-void StopFollowing(Character *ch)
+void StopFollowing(std::shared_ptr<Character> ch)
 {
     if(!ch->Master)
     {
@@ -611,9 +611,9 @@ void StopFollowing(Character *ch)
     ch->Leader = NULL;
 }
 
-void DieFollower(Character *ch)
+void DieFollower(std::shared_ptr<Character> ch)
 {
-    Character *fch = NULL;
+    std::shared_ptr<Character> fch = NULL;
 
     if(ch->Master)
     {
@@ -642,7 +642,7 @@ void DieFollower(Character *ch)
  * (2) if A ~ B then B ~ A
  * (3) if A ~ B  and B ~ C, then A ~ C
  */
-bool IsInSameGroup(const Character *ach, const Character *bch)
+bool IsInSameGroup(std::shared_ptr<Character> ach, std::shared_ptr<Character> bch)
 {
     if(ach->Leader)
         ach = ach->Leader;
@@ -666,7 +666,7 @@ void TalkAuction(const std::string &argument)
 
     for(auto d : Descriptors)
     {
-        Character *original = d->Original ? d->Original : d->Character; /* if switched */
+        std::shared_ptr<Character> original = d->Original ? d->Original : d->Character; /* if switched */
 
         if((d->ConnectionState == CON_PLAYING)
            && !IsBitSet(original->Deaf, CHANNEL_AUCTION)
@@ -682,7 +682,7 @@ void TalkAuction(const std::string &argument)
  * Language support functions. -- Altrag
  * 07/01/96
  */
-bool CharacterKnowsLanguage(const Character *ch, int language, const Character *cch)
+bool CharacterKnowsLanguage(std::shared_ptr<Character> ch, int language, std::shared_ptr<Character> cch)
 {
     short sn;
 
@@ -725,7 +725,7 @@ bool CharacterKnowsLanguage(const Character *ch, int language, const Character *
     return false;
 }
 
-bool CharacterCanLearnLanguage(const Character *ch, int language)
+bool CharacterCanLearnLanguage(std::shared_ptr<Character> ch, int language)
 {
     if(language & LANG_CLAN)
         return false;

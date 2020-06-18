@@ -42,9 +42,9 @@
 #include "repos/homerepository.hpp"
 #include "act.hpp"
 
-extern Character *gch_prev;
+extern std::shared_ptr<Character> gch_prev;
 
-Character *cur_char = NULL;
+std::shared_ptr<Character> cur_char;
 std::shared_ptr<Room>  cur_room;
 bool cur_char_died = false;
 ch_ret global_retcode = rNONE;
@@ -59,7 +59,7 @@ static std::list<std::shared_ptr<Object>> ExtractedObjectQueue;
 class ExtractedCharacter
 {
 public:
-    class Character *Character = nullptr;
+    std::shared_ptr<class Character> Character;
     std::shared_ptr<Room> InRoom;
     ch_ret RetCode = rNONE;
     bool Extract = false;
@@ -69,8 +69,8 @@ static std::list<std::shared_ptr<ExtractedCharacter>> ExtractedCharacterQueue;
 
 static std::shared_ptr<Object> GroupObject(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2);
 
-static void ExplodeRoom(std::shared_ptr<Object> obj, Character *xch, std::shared_ptr<Room> room);
-static void ExplodeRoom_1(std::shared_ptr<Object> obj, Character *xch, std::shared_ptr<Room> room, int blast);
+static void ExplodeRoom(std::shared_ptr<Object> obj, std::shared_ptr<Character> xch, std::shared_ptr<Room> room);
+static void ExplodeRoom_1(std::shared_ptr<Object> obj, std::shared_ptr<Character> xch, std::shared_ptr<Room> room, int blast);
 static void ExplodeRoom_2(std::shared_ptr<Room> room, int blast);
 
 void Explode(std::shared_ptr<Object> obj)
@@ -78,7 +78,6 @@ void Explode(std::shared_ptr<Object> obj)
     if(!obj->ArmedBy.empty())
     {
         std::shared_ptr<Room> room;
-        Character *xch = NULL;
         bool held = false;
         auto objcont = obj;
 
@@ -87,7 +86,7 @@ void Explode(std::shared_ptr<Object> obj)
             objcont = objcont->InObject;
         }
 
-        for(xch = FirstCharacter; xch; xch = xch->Next)
+        for(auto xch = FirstCharacter; xch; xch = xch->Next)
         {
             if(!IsNpc(xch) && NiftyIsName(obj->ArmedBy, xch->Name))
             {
@@ -113,7 +112,7 @@ void Explode(std::shared_ptr<Object> obj)
                 {
                     if(!held && !room->Characters().empty())
                     {
-                        Character *ch = room->Characters().front();
+                        auto ch = room->Characters().front();
                         Act(AT_WHITE, "$p EXPLODES!", ch, obj, NULL, ActTarget::Room);
                     }
 
@@ -126,7 +125,7 @@ void Explode(std::shared_ptr<Object> obj)
     MakeScraps(obj);
 }
 
-static void ExplodeRoom(std::shared_ptr<Object> obj, Character *xch, std::shared_ptr<Room> room)
+static void ExplodeRoom(std::shared_ptr<Object> obj, std::shared_ptr<Character> xch, std::shared_ptr<Room> room)
 {
     int blast = (int)(obj->Value[OVAL_EXPLOSIVE_MAX_DMG] / 500);
 
@@ -134,16 +133,16 @@ static void ExplodeRoom(std::shared_ptr<Object> obj, Character *xch, std::shared
     ExplodeRoom_2(room, blast);
 }
 
-static void ExplodeRoom_1(std::shared_ptr<Object> obj, Character *xch, std::shared_ptr<Room> room, int blast)
+static void ExplodeRoom_1(std::shared_ptr<Object> obj, std::shared_ptr<Character> xch, std::shared_ptr<Room> room, int blast)
 {
     if(room->Flags.test(BFSMark))
         return;
 
     room->Flags.set(BFSMark);
 
-    std::list<Character *> copyOfCharacterList(room->Characters());
+    auto copyOfCharacterList = room->Characters();
 
-    for(Character *rch : copyOfCharacterList)
+    for(auto rch : copyOfCharacterList)
     {
         Act(AT_WHITE, "The shockwave from a massive explosion rips through your body!",
             room->Characters().front(), obj, nullptr, ActTarget::Room);
@@ -237,7 +236,7 @@ long GetRequiredXpForLevel(short level)
 /*
  * See if a player/mob can take a piece of prototype eq         -Thoric
  */
-bool CharacterCanTakePrototype(const Character *ch)
+bool CharacterCanTakePrototype(std::shared_ptr<Character> ch)
 {
     if(IsImmortal(ch))
         return true;
@@ -247,7 +246,7 @@ bool CharacterCanTakePrototype(const Character *ch)
         return false;
 }
 
-static void ApplySkillAffect(Character *ch, int sn, int mod)
+static void ApplySkillAffect(std::shared_ptr<Character> ch, int sn, int mod)
 {
     if(!IsNpc(ch) && ch->PCData->Learned[sn] > 0)
     {
@@ -258,7 +257,7 @@ static void ApplySkillAffect(Character *ch, int sn, int mod)
 /*
  * Apply or remove an affect to a character.
  */
-void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
+void ModifyAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf, bool fAdd)
 {
     std::shared_ptr<Object> wield;
     int mod = paf->Modifier;
@@ -494,8 +493,8 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
     case APPLY_REMOVESPELL:
         if(ch->InRoom->Flags.test(Flag::Room::NoMagic)
            || ch->Immune.test(Flag::Ris::Magic)
-           || saving_char == ch               /* so save/quit doesn't trigger */
-           || loading_char == ch)    /* so loading doesn't trigger */
+           || saving_char.lock() == ch               /* so save/quit doesn't trigger */
+           || loading_char.lock() == ch)    /* so loading doesn't trigger */
         {
             return;
         }
@@ -619,7 +618,7 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
      * Guard against recursion (for weapons with affects).
      */
     if(!IsNpc(ch)
-       && saving_char != ch
+       && saving_char.lock() != ch
        && (wield = GetEquipmentOnCharacter(ch, WEAR_WIELD)) != NULL
        && GetObjectWeight(wield) > StrengthBonus[GetCurrentStrength(ch)].Wield)
     {
@@ -640,7 +639,7 @@ void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
 /*
  * Give an affect to a char.
  */
-void AffectToCharacter(Character *ch, std::shared_ptr<Affect> paf)
+void AffectToCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf)
 {
     assert(ch != nullptr);
     assert(paf != nullptr);
@@ -660,7 +659,7 @@ void AffectToCharacter(Character *ch, std::shared_ptr<Affect> paf)
 /*
  * Remove an affect from a char.
  */
-void RemoveAffect(Character *ch, std::shared_ptr<Affect> paf)
+void RemoveAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf)
 {
     if(ch->Affects().empty())
     {
@@ -675,7 +674,7 @@ void RemoveAffect(Character *ch, std::shared_ptr<Affect> paf)
 /*
  * Strip all affects of a given sn.
  */
-void StripAffect(Character *ch, int sn)
+void StripAffect(std::shared_ptr<Character> ch, int sn)
 {
     auto affectsToRemove = Filter(ch->Affects(),
                                   [sn](const auto affect)
@@ -694,7 +693,7 @@ void StripAffect(Character *ch, int sn)
  * Limitations put in place by Thoric, they may be high... but at least
  * they're there :)
  */
-void JoinAffect(Character *ch, std::shared_ptr<Affect> paf)
+void JoinAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf)
 {
     for(auto paf_old : ch->Affects())
     {
@@ -722,7 +721,7 @@ void JoinAffect(Character *ch, std::shared_ptr<Affect> paf)
 /*
  * Move a char out of a room.
  */
-void CharacterFromRoom(Character *ch)
+void CharacterFromRoom(std::shared_ptr<Character> ch)
 {
     assert(ch != nullptr);
     assert(ch->InRoom != nullptr);
@@ -753,7 +752,7 @@ void CharacterFromRoom(Character *ch)
 /*
  * Move a char into a room.
  */
-void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex)
+void CharacterToRoom(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoomIndex)
 {
     assert(ch != nullptr);
     assert(pRoomIndex != nullptr);
@@ -797,7 +796,7 @@ void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex)
 /*
  * Give an obj to a char.
  */
-std::shared_ptr<Object> ObjectToCharacter(std::shared_ptr<Object> obj, Character *ch)
+std::shared_ptr<Object> ObjectToCharacter(std::shared_ptr<Object> obj, std::shared_ptr<Character> ch)
 {
     auto oret = obj;
     bool skipgroup = false, grouped = false;
@@ -814,17 +813,13 @@ std::shared_ptr<Object> ObjectToCharacter(std::shared_ptr<Object> obj, Character
         }
     }
 
-    if(loading_char == ch)
+    if(loading_char.lock() == ch)
     {
-        int x = 0;
-
-        for(x = 0; x < MAX_WEAR; x++)
+        for(int x = 0; x < MAX_WEAR; x++)
         {
-            int y = 0;
-
-            for(y = 0; y < MAX_LAYERS; y++)
+            for(int y = 0; y < MAX_LAYERS; y++)
             {
-                if(save_equipment[x][y] == obj)
+                if(save_equipment[x][y].lock() == obj)
                 {
                     skipgroup = true;
                     break;
@@ -873,7 +868,7 @@ std::shared_ptr<Object> ObjectToCharacter(std::shared_ptr<Object> obj, Character
  */
 void ObjectFromCharacter(std::shared_ptr<Object> obj)
 {
-    Character *ch = obj->CarriedBy;
+    auto ch = obj->CarriedBy;
     assert(ch != nullptr);
 
     if(obj->WearLoc != WEAR_NONE)
@@ -1184,7 +1179,7 @@ void ExtractObject(std::shared_ptr<Object> obj)
 /*
  * Extract a char from the world.
  */
-void ExtractCharacter(Character *ch, bool fPull)
+void ExtractCharacter(std::shared_ptr<Character> ch, bool fPull)
 {
     assert(ch != nullptr);
     assert(ch->InRoom != nullptr);
@@ -1226,7 +1221,7 @@ void ExtractCharacter(Character *ch, bool fPull)
 
     if(IsNpc(ch) && ch->Flags.test(Flag::Mob::Mounted))
     {
-        for(Character *wch = FirstCharacter; wch; wch = wch->Next)
+        for(auto wch = FirstCharacter; wch; wch = wch->Next)
         {
             if(wch->Mount == ch)
             {
@@ -1282,9 +1277,9 @@ void ExtractCharacter(Character *ch, bool fPull)
     if(ch->Desc && ch->Desc->Original)
         do_return(ch, "");
 
-    for(Character *wch = FirstCharacter; wch; wch = wch->Next)
-        if(wch->Reply == ch)
-            wch->Reply = NULL;
+    for(auto wch = FirstCharacter; wch; wch = wch->Next)
+        if(!wch->Reply.expired() && wch->Reply.lock() == ch)
+            wch->Reply.reset();
 
     UNLINK(ch, FirstCharacter, LastCharacter, Next, Previous);
 
@@ -1303,7 +1298,7 @@ void ExtractCharacter(Character *ch, bool fPull)
 /*
  * Find a char in the room.
  */
-Character *GetCharacterInRoom(const Character *ch, std::string argument)
+std::shared_ptr<Character> GetCharacterInRoom(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     vnum_t vnum = INVALID_VNUM;
@@ -1311,14 +1306,14 @@ Character *GetCharacterInRoom(const Character *ch, std::string argument)
     int number = NumberArgument(argument, arg);
 
     if(!StrCmp(arg, "self"))
-        return (Character *)ch;
+        return ch;
 
     if(GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber(arg))
         vnum = ToLong(arg);
 
     int count = 0;
 
-    for(Character *rch : ch->InRoom->Characters())
+    for(auto rch : ch->InRoom->Characters())
     {
         if(CanSeeCharacter(ch, rch)
            && (((NiftyIsName(arg, rch->Name)
@@ -1341,7 +1336,7 @@ Character *GetCharacterInRoom(const Character *ch, std::string argument)
     */
     count = 0;
 
-    for(Character *rch : ch->InRoom->Characters())
+    for(auto rch : ch->InRoom->Characters())
     {
         if(!CanSeeCharacter(ch, rch) ||
            (!NiftyIsNamePrefix(arg, rch->Name) &&
@@ -1354,13 +1349,13 @@ Character *GetCharacterInRoom(const Character *ch, std::string argument)
             return rch;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /*
  * Find a char in the world.
  */
-Character *GetCharacterAnywhere(const Character *ch, std::string argument)
+std::shared_ptr<Character> GetCharacterAnywhere(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     vnum_t vnum = INVALID_VNUM;
@@ -1369,7 +1364,7 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
     int count = 0;
 
     if(!StrCmp(arg, "self"))
-        return (Character *)ch;
+        return ch;
 
     /*
      * Allow reference by vnum for saints+                        -Thoric
@@ -1378,7 +1373,7 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
         vnum = ToLong(arg);
 
     /* check the room for an exact match */
-    for(Character *wch : ch->InRoom->Characters())
+    for(auto wch : ch->InRoom->Characters())
     {
         if((NiftyIsName(arg, wch->Name)
             || (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch, wch))
@@ -1393,7 +1388,7 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
     count = 0;
 
     /* check the world for an exact match */
-    for(Character *wch = FirstCharacter; wch; wch = wch->Next)
+    for(auto wch = FirstCharacter; wch; wch = wch->Next)
     {
         if((NiftyIsName(arg, wch->Name)
             || (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch, wch))
@@ -1416,7 +1411,7 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
      */
     count = 0;
 
-    for(Character *wch : ch->InRoom->Characters())
+    for(auto wch : ch->InRoom->Characters())
     {
         if(!NiftyIsNamePrefix(arg, wch->Name))
             continue;
@@ -1434,10 +1429,11 @@ Character *GetCharacterAnywhere(const Character *ch, std::string argument)
      */
     count = 0;
 
-    for(Character *wch = FirstCharacter; wch; wch = wch->Next)
+    for(auto wch = FirstCharacter; wch; wch = wch->Next)
     {
         if(!NiftyIsNamePrefix(arg, wch->Name))
             continue;
+
         if(number == 0 && !IsNpc(wch) && IsWizVis(ch, wch))
             return wch;
         else
@@ -1464,7 +1460,7 @@ std::shared_ptr<Object> GetInstanceOfObject(std::shared_ptr<ProtoObject> pObjInd
 /*
  * Find an obj in a list.
  */
-std::shared_ptr<Object> GetObjectInList(const Character *ch, std::string argument,
+std::shared_ptr<Object> GetObjectInList(std::shared_ptr<Character> ch, std::string argument,
                                         const std::list<std::shared_ptr<Object>> &list)
 {
     std::string arg;
@@ -1505,7 +1501,7 @@ std::shared_ptr<Object> GetObjectInList(const Character *ch, std::string argumen
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-std::shared_ptr<Object> GetObjectInListReverse(const Character *ch, std::string argument,
+std::shared_ptr<Object> GetObjectInListReverse(std::shared_ptr<Character> ch, std::string argument,
                                                const std::list<std::shared_ptr<Object>> &list)
 {
     std::string arg;
@@ -1546,7 +1542,7 @@ std::shared_ptr<Object> GetObjectInListReverse(const Character *ch, std::string 
 /*
  * Find an obj in the room or in inventory.
  */
-std::shared_ptr<Object> GetObjectHere(const Character *ch, std::string argument)
+std::shared_ptr<Object> GetObjectHere(std::shared_ptr<Character> ch, std::string argument)
 {
     if(!ch || !ch->InRoom)
         return NULL;
@@ -1568,7 +1564,7 @@ std::shared_ptr<Object> GetObjectHere(const Character *ch, std::string argument)
 /*
  * Find an obj in the world.
  */
-std::shared_ptr<Object> GetObjectAnywhere(const Character *ch, std::string argument)
+std::shared_ptr<Object> GetObjectAnywhere(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Object> obj;
@@ -1646,7 +1642,7 @@ std::shared_ptr<Object> GetObjectAnywhere(const Character *ch, std::string argum
  * Generic get obj function that supports optional containers.  -Thoric
  * currently only used for "eat" and "quaff".
  */
-std::shared_ptr<Object> FindObject(Character *ch, std::string argument, bool carryonly)
+std::shared_ptr<Object> FindObject(std::shared_ptr<Character> ch, std::string argument, bool carryonly)
 {
     std::string arg1;
     std::string arg2;
@@ -1762,7 +1758,7 @@ bool IsRoomDark(std::shared_ptr<Room> pRoomIndex)
 /*
  * True if room is private.
  */
-bool IsRoomPrivate(const Character *ch, std::shared_ptr<Room> pRoomIndex)
+bool IsRoomPrivate(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoomIndex)
 {
     assert(ch != nullptr);
     assert(pRoomIndex != nullptr);
@@ -1878,7 +1874,7 @@ const char *GetAffectLocationName(int location)
 /*
  * Set off a trap (obj) upon character (ch)                     -Thoric
  */
-ch_ret SpringTrap(Character *ch, std::shared_ptr<Object> obj)
+ch_ret SpringTrap(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     int dam = 0;
     const char *txt = nullptr;
@@ -1998,7 +1994,7 @@ ch_ret SpringTrap(Character *ch, std::shared_ptr<Object> obj)
 /*
  * Check an object for a trap                                   -Thoric
  */
-ch_ret CheckObjectForTrap(Character *ch, std::shared_ptr<Object> obj, int flag)
+ch_ret CheckObjectForTrap(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, int flag)
 {
     ch_ret retcode = rNONE;
 
@@ -2027,7 +2023,7 @@ ch_ret CheckObjectForTrap(Character *ch, std::shared_ptr<Object> obj, int flag)
 /*
  * Check the room for a trap                                    -Thoric
  */
-ch_ret CheckRoomForTraps(Character *ch, int flag)
+ch_ret CheckRoomForTraps(std::shared_ptr<Character> ch, int flag)
 {
     ch_ret retcode = rNONE;
 
@@ -2205,7 +2201,7 @@ void CleanMobile(std::shared_ptr<ProtoMobile> mob)
 /*
  * Show an affect verbosely to a character                      -Thoric
  */
-void ShowAffectToCharacter(const Character *ch, std::shared_ptr<Affect> paf)
+void ShowAffectToCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf)
 {
     assert(paf != nullptr);
 
@@ -2311,7 +2307,7 @@ void CleanObjectQueue()
 /*
  * Set the current global character to ch                       -Thoric
  */
-void SetCurrentGlobalCharacter(Character *ch)
+void SetCurrentGlobalCharacter(std::shared_ptr<Character> ch)
 {
     cur_char = ch;
     cur_char_died = false;
@@ -2322,7 +2318,7 @@ void SetCurrentGlobalCharacter(Character *ch)
 /*
  * Check to see if ch died recently                             -Thoric
  */
-bool CharacterDiedRecently(const Character *ch)
+bool CharacterDiedRecently(std::shared_ptr<Character> ch)
 {
     if(ch == cur_char && cur_char_died)
         return true;
@@ -2337,7 +2333,7 @@ bool CharacterDiedRecently(const Character *ch)
 /*
  * Add ch to the queue of recently extracted characters         -Thoric
  */
-void QueueExtractedCharacter(Character *ch, bool extract)
+void QueueExtractedCharacter(std::shared_ptr<Character> ch, bool extract)
 {
     assert(ch != nullptr);
     std::shared_ptr<ExtractedCharacter> ccd = std::make_shared<ExtractedCharacter>();
@@ -2377,7 +2373,7 @@ void CleanCharacterQueue()
  * Add a timer to ch                                            -Thoric
  * Support for "call back" time delayed commands
  */
-void AddTimerToCharacter(Character *ch, short type, short count, CmdFun *fun, int value)
+void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count, CmdFun *fun, int value)
 {
     auto timer = GetTimerPointer(ch, type);
 
@@ -2393,7 +2389,7 @@ void AddTimerToCharacter(Character *ch, short type, short count, CmdFun *fun, in
     timer->Value = value;
 }
 
-std::shared_ptr<Timer> GetTimerPointer(const Character *ch, short type)
+std::shared_ptr<Timer> GetTimerPointer(std::shared_ptr<Character> ch, short type)
 {
     return Find(ch->Timers(),
                 [type](auto timer)
@@ -2402,14 +2398,14 @@ std::shared_ptr<Timer> GetTimerPointer(const Character *ch, short type)
                 });
 }
 
-short GetTimer(const Character *ch, short type)
+short GetTimer(std::shared_ptr<Character> ch, short type)
 {
     std::shared_ptr<Timer> timer = GetTimerPointer(ch, type);
 
     return timer != nullptr ? timer->Count : 0;
 }
 
-void ExtractTimer(Character *ch, std::shared_ptr<Timer> timer)
+void ExtractTimer(std::shared_ptr<Character> ch, std::shared_ptr<Timer> timer)
 {
     assert(ch != nullptr);
     assert(timer != nullptr);
@@ -2417,7 +2413,7 @@ void ExtractTimer(Character *ch, std::shared_ptr<Timer> timer)
     ch->Remove(timer);
 }
 
-void RemoveTimer(Character *ch, short type)
+void RemoveTimer(std::shared_ptr<Character> ch, short type)
 {
     std::shared_ptr<Timer> timer = GetTimerPointer(ch, type);
 
@@ -2427,7 +2423,7 @@ void RemoveTimer(Character *ch, short type)
     }
 }
 
-bool InSoftRange(const Character *ch, std::shared_ptr<Area> tarea)
+bool InSoftRange(std::shared_ptr<Character> ch, std::shared_ptr<Area> tarea)
 {
     if(IsImmortal(ch))
         return true;
@@ -2439,7 +2435,7 @@ bool InSoftRange(const Character *ch, std::shared_ptr<Area> tarea)
         return false;
 }
 
-bool InHardRange(const Character *ch, std::shared_ptr<Area> tarea)
+bool InHardRange(std::shared_ptr<Character> ch, std::shared_ptr<Area> tarea)
 {
     if(IsImmortal(ch))
         return true;
@@ -2454,7 +2450,7 @@ bool InHardRange(const Character *ch, std::shared_ptr<Area> tarea)
 /*
  * Scryn, standard luck check 2/2/96
  */
-bool Chance(const Character *ch, short percent)
+bool Chance(std::shared_ptr<Character> ch, short percent)
 {
     assert(ch != nullptr);
 
@@ -2624,7 +2620,7 @@ bool EmptyObjectContents(std::shared_ptr<Object> obj, std::shared_ptr<Object> de
 {
     assert(obj != nullptr);
 
-    Character *ch = obj->CarriedBy;
+    auto ch = obj->CarriedBy;
 
     if(destobj || (!destroom && !ch && (destobj = obj->InObject) != NULL))
     {
@@ -2766,7 +2762,7 @@ bool EconomyHas(std::shared_ptr<Area> tarea, int gold)
  * Makes sure mob doesn't get more than 10% of that area's gold,
  * and reduces area economy by the amount of gold given to the mob
  */
-void EconomizeMobileGold(Character *mob)
+void EconomizeMobileGold(std::shared_ptr<Character> mob)
 {
     assert(mob->InRoom != nullptr);
 

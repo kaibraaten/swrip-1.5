@@ -9,10 +9,10 @@
 #include "repos/socialrepository.hpp"
 #include "act.hpp"
 
-bool CheckSocial(Character *ch, const std::string &command, const std::string &argument)
+bool CheckSocial(std::shared_ptr<Character> ch, const std::string &command, const std::string &argument)
 {
     std::string arg;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Social> social = Socials->FindByName(command);
 
     if(social == nullptr)

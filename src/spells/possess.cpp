@@ -7,7 +7,7 @@ extern std::string spell_target_name;
 
 ch_ret spell_possess(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     char buf[MAX_STRING_LENGTH];
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     std::shared_ptr<Skill> skill = GetSkill(sn);

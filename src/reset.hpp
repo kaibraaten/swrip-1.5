@@ -60,12 +60,12 @@ public:
 };
 
 
-std::shared_ptr<Room> FindRoom(const Character *ch, const std::string &argument, std::shared_ptr<Room> pRoom);
+std::shared_ptr<Room> FindRoom(std::shared_ptr<Character> ch, const std::string &argument, std::shared_ptr<Room> pRoom);
 void WipeResets(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom);
 void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool dodoors);
-void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom);
+void EditReset(std::shared_ptr<Character> ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom);
 void ResetArea(std::shared_ptr<Area> pArea);
-std::string SPrintReset(const Character *ch, std::shared_ptr<Reset> pReset, short num, bool rlist);
+std::string SPrintReset(std::shared_ptr<Character> ch, std::shared_ptr<Reset> pReset, short num, bool rlist);
 std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3);
 std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea, char letter, int extra,
                                 int arg1, int arg2, int arg3);

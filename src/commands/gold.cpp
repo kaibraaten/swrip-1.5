@@ -2,16 +2,16 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_gold(Character * ch, std::string argument)
+void do_gold(std::shared_ptr<Character> ch, std::string argument)
 {
-  SetCharacterColor( AT_GOLD, ch );
-  ch->Echo( "You have %d credits", ch->Gold );
+    SetCharacterColor(AT_GOLD, ch);
+    ch->Echo("You have %d credits", ch->Gold);
 
-  if( !IsNpc(ch) )
+    if(!IsNpc(ch))
     {
-      ch->Echo( ", and %ld credits in the bank", ch->PCData->Bank );
+        ch->Echo(", and %ld credits in the bank", ch->PCData->Bank);
     }
-  
-  ch->Echo( ".\r\n" );
+
+    ch->Echo(".\r\n");
 }
 

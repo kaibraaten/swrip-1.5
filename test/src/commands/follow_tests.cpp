@@ -16,9 +16,9 @@ protected:
     {
         Log = new FakeLogger();
         _protomob = MakeMobile(1, INVALID_VNUM, "Foo");
-        _follower = new Character(_protomob);
+        _follower = std::make_shared<Character>(_protomob);
         _follower->Name = "Follower";
-        _leader = new Character(_protomob);
+        _leader = std::make_shared<Character>(_protomob);
         _leader->Name = "Leader";
         _fromRoom = std::make_shared<Room>();
         _toRoom = std::make_shared<Room>();
@@ -31,12 +31,8 @@ protected:
 
     void TearDown() override
     {
-        delete _leader;
         _leader = nullptr;
-
-        delete _follower;
         _follower = nullptr;
-
         _protomob = nullptr;
         _fromRoom = nullptr;
         _toRoom = nullptr;
@@ -47,8 +43,8 @@ protected:
         Log = nullptr;
     }
 
-    Character *_leader = nullptr;
-    Character *_follower = nullptr;
+    std::shared_ptr<Character> _leader = nullptr;
+    std::shared_ptr<Character> _follower = nullptr;
     std::shared_ptr<ProtoMobile> _protomob;
     std::shared_ptr<Room> _fromRoom;
     std::shared_ptr<Room> _toRoom;

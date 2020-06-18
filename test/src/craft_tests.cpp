@@ -23,7 +23,7 @@
 
 constexpr short gsn_mycraftingskill = 0;
 
-static void CleanupCharacter(Character *ch)
+static void CleanupCharacter(std::shared_ptr<Character> ch)
 {
     auto timer = GetTimerPointer(ch, TIMER_CMD_FUN);
 
@@ -152,7 +152,7 @@ protected:
         _location->Area = _area;
         _location->Flags = CreateBitSet<Flag::MAX>({ Flag::Room::Factory, Flag::Room::Refinery });
 
-        _engineer = new Character(std::make_unique<PCData>());
+        _engineer = std::make_shared<Character>(std::make_unique<PCData>());
         MapCharacterAndDescriptor(_engineer, std::make_shared<NullDescriptor>());
         _engineer->PCData->Learned[gsn_mycraftingskill] = 100;
 
@@ -162,7 +162,6 @@ protected:
     void TearDown() override
     {
         CleanupCharacter(_engineer);
-        delete _engineer;
         _engineer = nullptr;
 
         _resultantObject = nullptr;
@@ -207,7 +206,7 @@ protected:
         return ++_lastVnum;
     }
 
-    Character *_engineer = nullptr;
+    std::shared_ptr<Character> _engineer;
     std::shared_ptr<ProtoObject> _resultantObject;
     std::shared_ptr<Room> _location;
     std::shared_ptr<Area> _area;
@@ -609,7 +608,7 @@ TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
     EXPECT_FALSE(IsCrafting(_engineer));
 }
 
-static bool HasObjectInstanceOf(const Character *ch, std::shared_ptr<ProtoObject> proto)
+static bool HasObjectInstanceOf(std::shared_ptr<Character> ch, std::shared_ptr<ProtoObject> proto)
 {
     return Find(ch->Objects(),
                 [proto](const auto obj)

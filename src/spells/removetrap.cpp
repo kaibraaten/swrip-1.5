@@ -6,7 +6,7 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_remove_trap(int sn, int level, Character* ch, const Vo &vo)
+ch_ret spell_remove_trap(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     std::shared_ptr<Object> obj;
     std::shared_ptr<Object> trap;
@@ -14,7 +14,7 @@ ch_ret spell_remove_trap(int sn, int level, Character* ch, const Vo &vo)
     int retcode = rNONE;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
-    if (spell_target_name.empty())
+    if(spell_target_name.empty())
     {
         ch->Echo("Remove trap on what?\r\n");
         return rSPELL_FAILED;
@@ -22,41 +22,41 @@ ch_ret spell_remove_trap(int sn, int level, Character* ch, const Vo &vo)
 
     found = false;
 
-    if (ch->InRoom->Objects().empty())
+    if(ch->InRoom->Objects().empty())
     {
         ch->Echo("You can't find that here.\r\n");
         return rNONE;
     }
 
-    for (auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
+    for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
     {
         obj = *i;
 
-        if (CanSeeObject(ch, obj) && NiftyIsName(spell_target_name, obj->Name))
+        if(CanSeeObject(ch, obj) && NiftyIsName(spell_target_name, obj->Name))
         {
             found = true;
             break;
         }
     }
 
-    if (!found)
+    if(!found)
     {
         ch->Echo("You can't find that here.\r\n");
         return rSPELL_FAILED;
     }
 
-    if ((trap = GetTrap(obj)) == NULL)
+    if((trap = GetTrap(obj)) == NULL)
     {
         FailedCasting(skill, ch, NULL, NULL);
         return rSPELL_FAILED;
     }
 
 
-    if (Chance(ch, 70 + GetCurrentWisdom(ch)))
+    if(Chance(ch, 70 + GetCurrentWisdom(ch)))
     {
         ch->Echo("Ooops!\r\n");
         retcode = SpringTrap(ch, trap);
-        if (retcode == rNONE)
+        if(retcode == rNONE)
             retcode = rSPELL_FAILED;
         return retcode;
     }

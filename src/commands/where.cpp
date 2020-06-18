@@ -8,7 +8,7 @@
 
 void do_where(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     bool found = false;
 
     if(GetTrustLevel(ch) < LEVEL_IMMORTAL)

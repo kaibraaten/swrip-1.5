@@ -56,8 +56,8 @@ struct map_type map[MAPX + 1][MAPY + 1];
 static void GetExitDirection(DirectionType dir, int *x, int *y, int xorig, int yorig);
 static void ClearCoordinate(int x, int y);
 static void ClearExitsForRoom(int x, int y);
-static void MapExits(const Character *ch, std::shared_ptr<Room> pRoom, int x, int y, int depth);
-static void ShowMapToCharacter(const Character *ch);
+static void MapExits(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoom, int x, int y, int depth);
+static void ShowMapToCharacter(std::shared_ptr<Character> ch);
 
 /* Take care of some repetitive code for later */
 static void GetExitDirection(DirectionType dir, int *x, int *y, int xorig, int yorig)
@@ -147,7 +147,7 @@ static void ClearExitsForRoom(int x, int y)
 }
 
 /* This function is recursive, ie it calls itself */
-static void MapExits(const Character *ch, std::shared_ptr<Room> pRoom, int x, int y, int depth)
+static void MapExits(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoom, int x, int y, int depth)
 {
     DirectionType door = DIR_INVALID;
 
@@ -226,7 +226,7 @@ static void MapExits(const Character *ch, std::shared_ptr<Room> pRoom, int x, in
 }
 
 /* Display the map to the player */
-static void ShowMapToCharacter(const Character *ch)
+static void ShowMapToCharacter(std::shared_ptr<Character> ch)
 {
     char buf[MAX_STRING_LENGTH * 2];
     int y = 0;
@@ -267,7 +267,7 @@ static void ShowMapToCharacter(const Character *ch)
 }
 
 /* Clear, generate and display the map */
-void DrawMap(const Character *ch, const std::string &desc)
+void DrawMap(std::shared_ptr<Character> ch, const std::string &desc)
 {
     int x = 0, y = 0;
     auto device = GetEquipmentOnCharacter(ch, WEAR_HOLD);

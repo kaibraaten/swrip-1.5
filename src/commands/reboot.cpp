@@ -8,7 +8,6 @@
 void do_reboot(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
-    Character *vch = NULL;
 
     if(StrCmp(argument, "mud now")
        && StrCmp(argument, "nosave")
@@ -35,7 +34,7 @@ void do_reboot(std::shared_ptr<Character> ch, std::string argument)
     /* Save all characters before booting. */
     if(StrCmp(argument, "nosave"))
     {
-        for(vch = FirstCharacter; vch; vch = vch->Next)
+        for(auto vch = FirstCharacter; vch; vch = vch->Next)
         {
             if(!IsNpc(vch))
             {

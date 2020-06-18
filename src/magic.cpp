@@ -40,15 +40,15 @@ int pAbort = 0;
  */
 std::string spell_target_name;
 
-static int ParseDiceExpression(const Character *ch, int level, const std::string &expr);
+static int ParseDiceExpression(std::shared_ptr<Character> ch, int level, const std::string &expr);
 
-ch_ret spell_null(int sn, int level, Character *ch, const Vo &vo)
+ch_ret spell_null(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     return spell_notfound(sn, level, ch, vo);
 }
 
 /* don't remove, may look redundant, but is important */
-ch_ret spell_notfound(int sn, int level, Character *ch, const Vo &vo)
+ch_ret spell_notfound(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     ch->Echo("That's not a Force power!\r\n");
     return rNONE;
@@ -57,7 +57,7 @@ ch_ret spell_notfound(int sn, int level, Character *ch, const Vo &vo)
 /*
  * Is immune to a damage type
  */
-bool IsImmuneToDamageType(const Character *ch, short damtype)
+bool IsImmuneToDamageType(std::shared_ptr<Character> ch, short damtype)
 {
     switch(damtype)
     {
@@ -120,8 +120,8 @@ bool IsImmuneToDamageType(const Character *ch, short damtype)
 /*
  * Fancy message handling for a successful casting              -Thoric
  */
-void SuccessfulCasting(std::shared_ptr<Skill> skill, Character *ch,
-                       Character *victim, std::shared_ptr<Object> obj)
+void SuccessfulCasting(std::shared_ptr<Skill> skill, std::shared_ptr<Character> ch,
+                       std::shared_ptr<Character> victim, std::shared_ptr<Object> obj)
 {
     short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
     short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -170,8 +170,8 @@ void SuccessfulCasting(std::shared_ptr<Skill> skill, Character *ch,
 /*
  * Fancy message handling for a failed casting                  -Thoric
  */
-void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
-                   Character *victim, std::shared_ptr<Object> obj)
+void FailedCasting(std::shared_ptr<Skill> skill, std::shared_ptr<Character> ch,
+                   std::shared_ptr<Character> victim, std::shared_ptr<Object> obj)
 {
     short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
     short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -227,8 +227,8 @@ void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
 /*
  * Fancy message handling for being immune to something         -Thoric
  */
-void ImmuneCasting(std::shared_ptr<Skill> skill, Character *ch,
-                   Character *victim, std::shared_ptr<Object> obj)
+void ImmuneCasting(std::shared_ptr<Skill> skill, std::shared_ptr<Character> ch,
+                   std::shared_ptr<Character> victim, std::shared_ptr<Object> obj)
 {
     short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
     short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -310,7 +310,7 @@ void ImmuneCasting(std::shared_ptr<Skill> skill, Character *ch,
 /*
  * Make adjustments to saving throw based in RIS                -Thoric
  */
-int ModifySavingThrowBasedOnResistance(const Character *ch, int save_chance, int ris)
+int ModifySavingThrowBasedOnResistance(std::shared_ptr<Character> ch, int save_chance, int ris)
 {
     short modifier = 10;
 
@@ -347,7 +347,7 @@ int ModifySavingThrowBasedOnResistance(const Character *ch, int save_chance, int
  * Used for spell dice parsing, ie: 3d8+L-6
  *
  */
-static int ParseDiceExpression(const Character *ch, int level, const std::string &argument)
+static int ParseDiceExpression(std::shared_ptr<Character> ch, int level, const std::string &argument)
 {
     int x, lop = 0, gop = 0, eop = 0;
     char operation = '\0';
@@ -546,7 +546,7 @@ static int ParseDiceExpression(const Character *ch, int level, const std::string
 }
 
 /* wrapper function so as not to destroy expr */
-int ParseDice(const Character *ch, int level, const std::string &expr)
+int ParseDice(std::shared_ptr<Character> ch, int level, const std::string &expr)
 {
     return ParseDiceExpression(ch, level, expr);
 }
@@ -555,7 +555,7 @@ int ParseDice(const Character *ch, int level, const std::string &expr)
  * Compute a saving throw.
  * Negative apply's make saving throw better.
  */
-bool SaveVsPoisonDeath(int level, const Character *victim)
+bool SaveVsPoisonDeath(int level, std::shared_ptr<Character> victim)
 {
     int save = 50 + (victim->TopLevel - level - victim->Saving.PoisonDeath) * 2;
 
@@ -569,7 +569,7 @@ bool SaveVsPoisonDeath(int level, const Character *victim)
     return Chance(victim, save);
 }
 
-bool SaveVsWands(int level, const Character *victim)
+bool SaveVsWands(int level, std::shared_ptr<Character> victim)
 {
     int save = 0;
 
@@ -584,7 +584,7 @@ bool SaveVsWands(int level, const Character *victim)
     return Chance(victim, save);
 }
 
-bool SaveVsParalyze(int level, const Character *victim)
+bool SaveVsParalyze(int level, std::shared_ptr<Character> victim)
 {
     int save = 50 + (victim->TopLevel - level - victim->Saving.ParaPetri) * 2;
 
@@ -597,7 +597,7 @@ bool SaveVsParalyze(int level, const Character *victim)
     return Chance(victim, save);
 }
 
-bool SaveVsBreath(int level, const Character *victim)
+bool SaveVsBreath(int level, std::shared_ptr<Character> victim)
 {
     int save = 50 + (victim->TopLevel - level - victim->Saving.Breath) * 2;
 
@@ -606,7 +606,7 @@ bool SaveVsBreath(int level, const Character *victim)
     return Chance(victim, save);
 }
 
-bool SaveVsSpellStaff(int level, const Character *victim)
+bool SaveVsSpellStaff(int level, std::shared_ptr<Character> victim)
 {
     int save = 0;
 
@@ -634,8 +634,8 @@ bool SaveVsSpellStaff(int level, const Character *victim)
 /*
  * Locate targets.
  */
-Vo LocateSpellTargets(Character *ch, const std::string &arg,
-                      int sn, Character **victim, std::shared_ptr<Object> *obj)
+Vo LocateSpellTargets(std::shared_ptr<Character> ch, const std::string &arg,
+                      int sn, std::shared_ptr<Character> *victim, std::shared_ptr<Object> *obj)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
     Vo vo;
@@ -765,7 +765,7 @@ Vo LocateSpellTargets(Character *ch, const std::string &arg,
 /*
  * Cast spells at targets using a magical object.
  */
-ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, std::shared_ptr<Object> obj)
+ch_ret CastSpellWithObject(int sn, int level, std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, std::shared_ptr<Object> obj)
 {
     Vo vo;
     ch_ret retcode = rNONE;
@@ -962,7 +962,7 @@ ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, 
  /*
   * saving throw check                                           -Thoric
   */
-bool CheckSavingThrow(int sn, int level, const Character *ch, const Character *victim)
+bool CheckSavingThrow(int sn, int level, std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
     bool saved = false;
@@ -1002,7 +1002,7 @@ bool CheckSavingThrow(int sn, int level, const Character *ch, const Character *v
     return saved;
 }
 
-int FindSpell(const Character *ch, const std::string &name, bool know)
+int FindSpell(std::shared_ptr<Character> ch, const std::string &name, bool know)
 {
     if(IsNpc(ch) || !know)
     {

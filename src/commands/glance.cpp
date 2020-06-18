@@ -10,7 +10,7 @@
 void do_glance(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
     if(!ch->Desc)
         return;

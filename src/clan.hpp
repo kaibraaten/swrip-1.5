@@ -65,11 +65,11 @@ public:
 
 constexpr auto GUILD_PRICE = 100000;
 
-void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,
+void ShowClanMembers(std::shared_ptr<Character> ch, const std::shared_ptr<Clan> &clan,
                      const std::string &format = "");
 std::shared_ptr<Clan> GetClan(const std::string &name);
-void UpdateClanMember(const Character *ch);
-void RemoveClanMember(const Character *ch);
+void UpdateClanMember(std::shared_ptr<Character> ch);
+void RemoveClanMember(std::shared_ptr<Character> ch);
 std::shared_ptr<Clan> AllocateClan();
 void FreeClan(const std::shared_ptr<Clan> &clan);
 void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild);

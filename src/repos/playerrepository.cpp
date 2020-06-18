@@ -36,46 +36,46 @@ public:
     void Load() override;
     bool Load(std::shared_ptr<Descriptor> d, const std::string &name, bool preload) override;
     void Save() const override;
-    void Save(const Character *pc) const override;
+    void Save(std::shared_ptr<Character> pc) const override;
     std::string MakeWizlist() const override;
     bool Exists(const std::string &name) const override;
-    void MakeClone(const Character *pc) override;
-    void RestoreClone(const Character *pc) override;
+    void MakeClone(std::shared_ptr<Character> pc) override;
+    void RestoreClone(std::shared_ptr<Character> pc) override;
     void Delete(const std::string &name) override;
     time_t LastOnline(const std::string &name) const override;
     
 protected:
-    void OnAdded(Character* &entity) override;
-    void OnRemoved(Character* &entity) override;
+    void OnAdded(std::shared_ptr<Character> &entity) override;
+    void OnRemoved(std::shared_ptr<Character> &entity) override;
 
 private:
     static constexpr int SAVE_VERSION = 1;
     static void PushPlayer(lua_State *L, const void *userData);
-    static void PushGuildData(lua_State *L, const Character *pc);
-    static void PushAliases(lua_State *L, const Character *pc);
-    static void PushAddictions(lua_State *L, const Character *pc);
-    static void PushDrugLevels(lua_State *L, const Character *pc);
-    static void PushHelled(lua_State *L, const Character *pc);
-    static void PushConditions(lua_State *L, const Character *pc);
-    static void PushSkills(lua_State *L, const Character *pc);
-    static void PushKilledData(lua_State *L, const Character *pc);
-    static void PushImcData(lua_State *L, const Character *pc);
-    static void PushComments(lua_State *L, const Character *pc);
-    static void PushPlayerData(lua_State *L, const Character *pc);
+    static void PushGuildData(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushAliases(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushAddictions(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushDrugLevels(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushHelled(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushConditions(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushSkills(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushKilledData(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushImcData(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushComments(lua_State *L, std::shared_ptr<Character> pc);
+    static void PushPlayerData(lua_State *L, std::shared_ptr<Character> pc);
 
     static int L_CharacterEntry(lua_State *L);
-    static void PreloadCharacter(lua_State *L, Character *ch);
-    static void LoadPlayerData(lua_State *L, Character *ch);
-    static void LoadGuildData(lua_State *L, Character *ch);
-    static void LoadImcData(lua_State *L, Character *ch);
-    static void LoadKilledData(lua_State *L, Character *ch);
-    static void LoadComments(lua_State *L, Character *ch);
-    static void LoadSkills(lua_State *L, Character *ch);
-    static void LoadConditions(lua_State *L, Character *ch);
-    static void LoadHelled(lua_State *L, Character *ch);
-    static void LoadDrugLevels(lua_State *L, Character *ch);
-    static void LoadAddictions(lua_State *L, Character *ch);
-    static void LoadAliases(lua_State *L, Character *ch);
+    static void PreloadCharacter(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadPlayerData(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadGuildData(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadImcData(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadKilledData(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadComments(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadSkills(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadConditions(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadHelled(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadDrugLevels(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadAddictions(lua_State *L, std::shared_ptr<Character> ch);
+    static void LoadAliases(lua_State *L, std::shared_ptr<Character> ch);
 };
 
 class Wizard
@@ -263,7 +263,7 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
     {
         for (int i = 0; i < MAX_LAYERS; i++)
         {
-            save_equipment[x][i] = NULL;
+            save_equipment[x][i].reset();
         }
     }
 
@@ -286,11 +286,11 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
     }
     else
     {
-        Character *ch = new Character(std::make_unique<PCData>());
+        std::shared_ptr<Character> ch = std::make_shared<Character>(std::make_unique<PCData>());
         MapCharacterAndDescriptor(ch, d);
         ch->Name = Capitalize(name);
         ImcInitializeCharacter(ch);
-        loading_char = nullptr;
+        loading_char.reset();
         return false;
     }
 
@@ -318,11 +318,11 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
     }
 
     lua_close(L);
-    loading_char = nullptr;
+    loading_char.reset();
     return found;
 }
 
-void InMemoryPlayerRepository::PreloadCharacter(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::PreloadCharacter(lua_State *L, std::shared_ptr<Character> ch)
 {
     LuaGetfieldString(L, "Name", &ch->Name);
     LuaGetfieldInt(L, "Level", &ch->TopLevel);
@@ -330,7 +330,7 @@ void InMemoryPlayerRepository::PreloadCharacter(lua_State *L, Character *ch)
     ch->Flags = LuaLoadFlags(L, "Flags").to_ulong();
 }
 
-void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, std::shared_ptr<Character> ch)
 {
     std::string saveVersion;
     LuaGetfieldString(L, "SaveVersion", &saveVersion);
@@ -372,7 +372,7 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, Character *ch)
     ch->PCData->Flags = LuaLoadFlags(L, "PcFlags");
     ch->PCData->WantedOn = LuaLoadFlags(L, "Wanted");
 
-    std::list<Character*> pets = LuaLoadMobiles(L, "Pets");
+    auto pets = LuaLoadMobiles(L, "Pets");
 
     if (!pets.empty())
     {
@@ -396,7 +396,7 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, Character *ch)
     LoadAliases(L, ch);
 }
 
-void InMemoryPlayerRepository::LoadGuildData(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadGuildData(lua_State *L, std::shared_ptr<Character> ch)
 {
     int outerIdx = lua_gettop(L);
     lua_getfield(L, outerIdx, "Guild");
@@ -447,12 +447,12 @@ void InMemoryPlayerRepository::LoadGuildData(lua_State *L, Character *ch)
     lua_pop(L, 1);
 }
 
-void InMemoryPlayerRepository::LoadImcData(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadImcData(lua_State *L, std::shared_ptr<Character> ch)
 {
     ImcLoadCharacter(L, ch);
 }
 
-void InMemoryPlayerRepository::LoadKilledData(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadKilledData(lua_State *L, std::shared_ptr<Character> ch)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Killed");
@@ -479,7 +479,7 @@ void InMemoryPlayerRepository::LoadKilledData(lua_State *L, Character *ch)
     lua_pop(L, 1);
 }
 
-void InMemoryPlayerRepository::LoadComments(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadComments(lua_State *L, std::shared_ptr<Character> ch)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Comments");
@@ -504,7 +504,7 @@ void InMemoryPlayerRepository::LoadComments(lua_State *L, Character *ch)
     lua_pop(L, 1);
 }
 
-void InMemoryPlayerRepository::LoadSkills(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadSkills(lua_State *L, std::shared_ptr<Character> ch)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Skills");
@@ -566,7 +566,7 @@ void InMemoryPlayerRepository::LoadSkills(lua_State *L, Character *ch)
     lua_pop(L, 1);
 }
 
-void InMemoryPlayerRepository::LoadConditions(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadConditions(lua_State *L, std::shared_ptr<Character> ch)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Conditions");
@@ -591,7 +591,7 @@ void InMemoryPlayerRepository::LoadConditions(lua_State *L, Character *ch)
     lua_pop(L, 1);
 }
 
-void InMemoryPlayerRepository::LoadHelled(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadHelled(lua_State *L, std::shared_ptr<Character> ch)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Helled");
@@ -607,7 +607,7 @@ void InMemoryPlayerRepository::LoadHelled(lua_State *L, Character *ch)
     lua_pop(L, 1);
 }
 
-void InMemoryPlayerRepository::LoadDrugLevels(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadDrugLevels(lua_State *L, std::shared_ptr<Character> ch)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "SpiceLevels");
@@ -632,7 +632,7 @@ void InMemoryPlayerRepository::LoadDrugLevels(lua_State *L, Character *ch)
     lua_pop(L, 1);
 }
 
-void InMemoryPlayerRepository::LoadAddictions(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadAddictions(lua_State *L, std::shared_ptr<Character> ch)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Addictions");
@@ -657,7 +657,7 @@ void InMemoryPlayerRepository::LoadAddictions(lua_State *L, Character *ch)
     lua_pop(L, 1);
 }
 
-void InMemoryPlayerRepository::LoadAliases(lua_State *L, Character *ch)
+void InMemoryPlayerRepository::LoadAliases(lua_State *L, std::shared_ptr<Character> ch)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Aliases");
@@ -698,7 +698,7 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
     bool preload = lua_toboolean(L, -1);
     lua_pop(L, 2);
 
-    Character *ch = new Character(std::make_unique<PCData>());
+    std::shared_ptr<Character> ch = std::make_shared<Character>(std::make_unique<PCData>());
     MapCharacterAndDescriptor(ch, d);
     loading_char = ch;
     ImcInitializeCharacter(ch);
@@ -726,10 +726,10 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
     {
         for (int x = 0; x < MAX_LAYERS; x++)
         {
-            if (save_equipment[i][x])
+            if (!save_equipment[i][x].expired())
             {
-                EquipCharacter(ch, save_equipment[i][x], (WearLocation)i);
-                save_equipment[i][x] = NULL;
+                EquipCharacter(ch, save_equipment[i][x].lock(), (WearLocation)i);
+                save_equipment[i][x].reset();
             }
             else
             {
@@ -741,7 +741,7 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
     return 0;
 }
 
-void InMemoryPlayerRepository::PushPlayerData(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Character> pc)
 {
     assert(!IsNpc(pc));
 
@@ -802,7 +802,7 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, const Character *pc)
     PushAliases(L, pc);
 }
 
-void InMemoryPlayerRepository::PushAliases(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushAliases(lua_State *L, std::shared_ptr<Character> pc)
 {
     lua_pushstring(L, "Aliases");
     lua_newtable(L);
@@ -816,7 +816,7 @@ void InMemoryPlayerRepository::PushAliases(lua_State *L, const Character *pc)
     lua_settable(L, -3);
 }
 
-void InMemoryPlayerRepository::PushAddictions(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushAddictions(lua_State *L, std::shared_ptr<Character> pc)
 {
     lua_pushstring(L, "Addictions");
     lua_newtable(L);
@@ -835,7 +835,7 @@ void InMemoryPlayerRepository::PushAddictions(lua_State *L, const Character *pc)
     lua_settable(L, -3);
 }
 
-void InMemoryPlayerRepository::PushDrugLevels(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushDrugLevels(lua_State *L, std::shared_ptr<Character> pc)
 {
     lua_pushstring(L, "SpiceLevels");
     lua_newtable(L);
@@ -854,7 +854,7 @@ void InMemoryPlayerRepository::PushDrugLevels(lua_State *L, const Character *pc)
     lua_settable(L, -3);
 }
 
-void InMemoryPlayerRepository::PushHelled(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushHelled(lua_State *L, std::shared_ptr<Character> pc)
 {
     lua_pushstring(L, "Helled");
     lua_newtable(L);
@@ -865,7 +865,7 @@ void InMemoryPlayerRepository::PushHelled(lua_State *L, const Character *pc)
     lua_settable(L, -3);
 }
 
-void InMemoryPlayerRepository::PushConditions(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushConditions(lua_State *L, std::shared_ptr<Character> pc)
 {
     lua_pushstring(L, "Conditions");
     lua_newtable(L);
@@ -884,7 +884,7 @@ void InMemoryPlayerRepository::PushConditions(lua_State *L, const Character *pc)
     lua_settable(L, -3);
 }
 
-void InMemoryPlayerRepository::PushSkills(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushSkills(lua_State *L, std::shared_ptr<Character> pc)
 {
     lua_pushstring(L, "Skills");
     lua_newtable(L);
@@ -909,7 +909,7 @@ void InMemoryPlayerRepository::PushSkills(lua_State *L, const Character *pc)
     lua_settable(L, -3);
 }
 
-void InMemoryPlayerRepository::PushComments(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushComments(lua_State *L, std::shared_ptr<Character> pc)
 {
     lua_pushstring(L, "Comments");
     lua_newtable(L);
@@ -932,7 +932,7 @@ void InMemoryPlayerRepository::PushComments(lua_State *L, const Character *pc)
     lua_settable(L, -3);
 }
 
-void InMemoryPlayerRepository::PushKilledData(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushKilledData(lua_State *L, std::shared_ptr<Character> pc)
 {
     lua_pushstring(L, "Killed");
     lua_newtable(L);
@@ -952,12 +952,12 @@ void InMemoryPlayerRepository::PushKilledData(lua_State *L, const Character *pc)
     lua_settable(L, -3);
 }
 
-void InMemoryPlayerRepository::PushImcData(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushImcData(lua_State *L, std::shared_ptr<Character> pc)
 {
     ImcSaveCharacter(L, pc);
 }
 
-void InMemoryPlayerRepository::PushGuildData(lua_State *L, const Character *pc)
+void InMemoryPlayerRepository::PushGuildData(lua_State *L, std::shared_ptr<Character> pc)
 {
     if (pc->PCData->ClanInfo.Clan != nullptr)
     {
@@ -974,7 +974,7 @@ void InMemoryPlayerRepository::PushGuildData(lua_State *L, const Character *pc)
 
 void InMemoryPlayerRepository::PushPlayer(lua_State *L, const void *userData)
 {
-    const Character *pc = static_cast<const Character*>(userData);
+    std::shared_ptr<Character> pc = *reinterpret_cast<std::shared_ptr<Character>*>((void*)userData);
 
     lua_pushinteger(L, 1);
     lua_newtable(L);
@@ -984,7 +984,7 @@ void InMemoryPlayerRepository::PushPlayer(lua_State *L, const void *userData)
     lua_setglobal(L, "character");
 }
 
-void InMemoryPlayerRepository::Save(const Character *pc) const
+void InMemoryPlayerRepository::Save(std::shared_ptr<Character> pc) const
 {
     if (IsNpc(pc) || !IsAuthed(pc))
     {
@@ -996,7 +996,7 @@ void InMemoryPlayerRepository::Save(const Character *pc) const
         pc = pc->Desc->Original;
     }
 
-    saving_char = const_cast<Character*>(pc);
+    saving_char = pc;
 
     if (IsClanned(pc))
     {
@@ -1012,25 +1012,25 @@ void InMemoryPlayerRepository::Save(const Character *pc) const
 
     LuaSaveDataFile(GetPlayerFilename(pc),
                     &InMemoryPlayerRepository::PushPlayer,
-                    "character", pc);
+                    "character", &pc);
 
     WriteCorpses(pc, "");
 
-    quitting_char = nullptr;
-    saving_char = nullptr;
+    quitting_char.reset();
+    saving_char.reset();
 }
 
-void InMemoryPlayerRepository::OnAdded(Character* &entity)
+void InMemoryPlayerRepository::OnAdded(std::shared_ptr<Character> &entity)
 {
     assert(!IsNpc(entity));
 }
 
-void InMemoryPlayerRepository::OnRemoved(Character* &entity)
+void InMemoryPlayerRepository::OnRemoved(std::shared_ptr<Character> &entity)
 {
 
 }
 
-void InMemoryPlayerRepository::MakeClone(const Character *pc)
+void InMemoryPlayerRepository::MakeClone(std::shared_ptr<Character> pc)
 {
     std::error_code ec;
     auto pfileFilename = GetPlayerFilename(pc);
@@ -1039,7 +1039,7 @@ void InMemoryPlayerRepository::MakeClone(const Character *pc)
     fs::copy(pfileFilename, cloneFilename, ec);
 }
 
-void InMemoryPlayerRepository::RestoreClone(const Character *pc)
+void InMemoryPlayerRepository::RestoreClone(std::shared_ptr<Character> pc)
 {
     std::error_code ec;
     auto cloneFilename = GetCloneFilename(pc->Name);
@@ -1075,7 +1075,7 @@ std::shared_ptr<PlayerRepository> NewPlayerRepository()
     return std::make_shared<InMemoryPlayerRepository>();
 }
 
-std::string GetPlayerFilename(const Character *pc)
+std::string GetPlayerFilename(std::shared_ptr<Character> pc)
 {
     return GetPlayerFilename(pc->Name);
 }

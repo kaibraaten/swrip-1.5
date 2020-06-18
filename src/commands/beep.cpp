@@ -6,7 +6,7 @@
 
 void do_beep(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     std::string arg;
     bool ch_comlink = false, victim_comlink = false;
 

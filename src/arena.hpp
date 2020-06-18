@@ -35,12 +35,12 @@ public:
 };
 
 extern Arena arena;
-extern std::list<HallOfFameElement *> FameList;
+extern std::list<HallOfFameElement*> FameList;
 
-void StartArena(void);
-void LoadHallOfFame(void);
-void SaveHallOfFame(void);
-void UpdateArena(void);
-int CharactersInArena(void);
+void StartArena();
+void LoadHallOfFame();
+void SaveHallOfFame();
+void UpdateArena();
+int CharactersInArena();
 
 #endif

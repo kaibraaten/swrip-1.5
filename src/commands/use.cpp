@@ -8,7 +8,7 @@ void do_use(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string argd;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Object> device;
     std::shared_ptr<Object> obj;
     ch_ret retcode = rNONE;

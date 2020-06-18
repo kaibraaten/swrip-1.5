@@ -13,7 +13,6 @@ void do_hijack(std::shared_ptr<Character> ch, std::string argument)
     std::shared_ptr<Ship> ship;
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char buf2[MAX_STRING_LENGTH] = { '\0' };
-    Character *p = NULL, *p_prev = NULL, *victim = NULL;
 
     if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
     {
@@ -122,7 +121,7 @@ void do_hijack(std::shared_ptr<Character> ch, std::string argument)
 
         LearnFromSuccess(ch, gsn_hijack);
 
-        for(p = LastCharacter; p; p = p_prev)
+        for(std::shared_ptr<Character> p = LastCharacter, p_prev; p; p = p_prev)
         {
             p_prev = p->Previous;  /* TRI */
 
@@ -140,7 +139,7 @@ void do_hijack(std::shared_ptr<Character> ch, std::string argument)
         if(!StrCmp("Public", ship->Owner))
             return;
 
-        for(victim = FirstCharacter; victim; victim = victim->Next)
+        for(auto victim = FirstCharacter; victim; victim = victim->Next)
         {
             if(!CheckPilot(victim, ship))
                 continue;
@@ -172,4 +171,3 @@ void do_hijack(std::shared_ptr<Character> ch, std::string argument)
     if(ship->Class == CAPITAL_SHIP)
         LearnFromFailure(ch, gsn_capitalships);
 }
-

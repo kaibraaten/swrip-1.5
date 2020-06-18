@@ -6,33 +6,33 @@
 
 void do_snoop(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("Snoop whom?\r\n");
         return;
     }
 
-    if ((victim = GetCharacterAnywhere(ch, arg)) == NULL)
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
         ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if (!victim->Desc)
+    if(!victim->Desc)
     {
         ch->Echo("No descriptor to snoop.\r\n");
         return;
     }
 
-    if (victim == ch)
+    if(victim == ch)
     {
         ch->Echo("Cancelling all snoops.\r\n");
 
-        for (auto d : Descriptors)
+        for(auto d : Descriptors)
         {
-            if (d->SnoopBy == ch->Desc)
+            if(d->SnoopBy == ch->Desc)
             {
                 d->SnoopBy = NULL;
             }
@@ -41,7 +41,7 @@ void do_snoop(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    if (victim->Desc->SnoopBy)
+    if(victim->Desc->SnoopBy)
     {
         ch->Echo("Busy already.\r\n");
         return;
@@ -51,18 +51,18 @@ void do_snoop(std::shared_ptr<Character> ch, std::string arg)
      * Minimum snoop level... a secret mset value
      * makes the snooper think that the victim is already being snooped
      */
-    if (GetTrustLevel(victim) >= GetTrustLevel(ch)
-        || (victim->PCData && victim->PCData->MinSnoop > GetTrustLevel(ch)))
+    if(GetTrustLevel(victim) >= GetTrustLevel(ch)
+       || (victim->PCData && victim->PCData->MinSnoop > GetTrustLevel(ch)))
     {
         ch->Echo("Busy already.\r\n");
         return;
     }
 
-    if (ch->Desc)
+    if(ch->Desc)
     {
-        for (auto d = ch->Desc->SnoopBy; d; d = d->SnoopBy)
+        for(auto d = ch->Desc->SnoopBy; d; d = d->SnoopBy)
         {
-            if (d->Character == victim || d->Original == victim)
+            if(d->Character == victim || d->Original == victim)
             {
                 ch->Echo("No snoop loops.\r\n");
                 return;

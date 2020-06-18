@@ -1,27 +1,27 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_fixchar( std::shared_ptr<Character> ch, std::string argument )
+void do_fixchar(std::shared_ptr<Character> ch, std::string argument)
 {
-  std::string name;
-  Character *victim = nullptr;
+    std::string name;
+    std::shared_ptr<Character> victim;
 
-  OneArgument( argument, name );
+    OneArgument(argument, name);
 
-  if ( name.empty() )
+    if(name.empty())
     {
-      ch->Echo( "Usage: fixchar <playername>\r\n" );
-      return;
+        ch->Echo("Usage: fixchar <playername>\r\n");
+        return;
     }
 
-  victim = GetCharacterInRoom( ch, name );
+    victim = GetCharacterInRoom(ch, name);
 
-  if ( !victim )
+    if(!victim)
     {
-      ch->Echo( "They're not here.\r\n" );
-      return;
+        ch->Echo("They're not here.\r\n");
+        return;
     }
 
-  FixCharacterStats( victim );
-  ch->Echo( "Done.\r\n" );
+    FixCharacterStats(victim);
+    ch->Echo("Done.\r\n");
 }

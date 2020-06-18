@@ -7,16 +7,16 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 
-void do_whois( std::shared_ptr<Character> ch, std::string argument)
+void do_whois(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = NULL;
-    char buf[MAX_STRING_LENGTH / 2] = {'\0'};
-    char buf2[MAX_STRING_LENGTH] = {'\0'};
+    std::shared_ptr<Character> victim;
+    char buf[MAX_STRING_LENGTH / 2] = { '\0' };
+    char buf2[MAX_STRING_LENGTH] = { '\0' };
 
     if(IsNpc(ch))
         return;
 
-    if( argument.empty() )
+    if(argument.empty())
     {
         ch->Echo("You must input the name of a player online.\r\n");
         return;
@@ -25,7 +25,7 @@ void do_whois( std::shared_ptr<Character> ch, std::string argument)
     strcat(buf, "0.");
     strcat(buf, argument.c_str());
 
-    if( ( ( victim = GetCharacterAnywhere(ch, buf) ) == NULL ))
+    if(((victim = GetCharacterAnywhere(ch, buf)) == NULL))
     {
         ch->Echo("No such player online.\r\n");
         return;
@@ -37,15 +37,15 @@ void do_whois( std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if( victim->PCData
-        && victim->PCData->WhoCloak
-        && ch->TopLevel < LEVEL_IMMORTAL )
+    if(victim->PCData
+       && victim->PCData->WhoCloak
+       && ch->TopLevel < LEVEL_IMMORTAL)
     {
         ch->Echo("No such player online.\r\n");
         return;
     }
 
-    if (IsGreater(ch))
+    if(IsGreater(ch))
     {
         ch->Echo("%s is a %s %s",
                  victim->Name.c_str(),
@@ -56,15 +56,15 @@ void do_whois( std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
-        ch->Echo("%s.\r\n", victim->Name.c_str() );
+        ch->Echo("%s.\r\n", victim->Name.c_str());
     }
-    
-    if ( IsClanned( victim )
-         && ( ( IsClanned( ch )
-                && ch->PCData->ClanInfo.Clan == victim->PCData->ClanInfo.Clan )
-              || IsImmortal( ch ) ) )
+
+    if(IsClanned(victim)
+       && ((IsClanned(ch)
+            && ch->PCData->ClanInfo.Clan == victim->PCData->ClanInfo.Clan)
+           || IsImmortal(ch)))
     {
-        if ( victim->PCData->ClanInfo.Clan->Type == CLAN_GUILD )
+        if(victim->PCData->ClanInfo.Clan->Type == CLAN_GUILD)
             ch->Echo(", and belongs to the guild ");
         else
             ch->Echo(", and belongs to organization ");
@@ -72,34 +72,34 @@ void do_whois( std::shared_ptr<Character> ch, std::string argument)
     }
     ch->Echo(".\r\n");
 
-    if( !victim->PCData->HomePage.empty() )
+    if(!victim->PCData->HomePage.empty())
         ch->Echo("%s's homepage can be found at %s.\r\n",
                  victim->Name.c_str(),
                  victim->PCData->HomePage.c_str());
 
-    if( !victim->PCData->Bio.empty() )
+    if(!victim->PCData->Bio.empty())
         ch->Echo("%s's personal bio:\r\n%s",
                  victim->Name.c_str(),
                  victim->PCData->Bio.c_str());
 
-    if( GetTrustLevel( ch ) >= LEVEL_GREATER )
+    if(GetTrustLevel(ch) >= LEVEL_GREATER)
     {
         ch->Echo("----------------------------------------------------\r\n");
 
         ch->Echo("Info for immortals:\r\n");
 
-        if ( !victim->PCData->AuthedBy.empty() )
+        if(!victim->PCData->AuthedBy.empty())
             ch->Echo("%s was authorized by %s.\r\n",
                      victim->Name.c_str(), victim->PCData->AuthedBy.c_str());
 
         ch->Echo("%s has killed %d mobiles, and been killed by a mobile %d times.\r\n",
-                 victim->Name.c_str(), victim->PCData->MKills, victim->PCData->MDeaths );
-        if ( victim->PCData->PKills || victim->PCData->PDeaths )
+                 victim->Name.c_str(), victim->PCData->MKills, victim->PCData->MDeaths);
+        if(victim->PCData->PKills || victim->PCData->PDeaths)
             ch->Echo("%s has killed %d players, and been killed by a player %d times.\r\n",
-                     victim->Name.c_str(), victim->PCData->PKills, victim->PCData->PDeaths );
-        if ( victim->PCData->IllegalPk )
+                     victim->Name.c_str(), victim->PCData->PKills, victim->PCData->PDeaths);
+        if(victim->PCData->IllegalPk)
             ch->Echo("%s has committed %d illegal player kills.\r\n",
-                     victim->Name.c_str(), victim->PCData->IllegalPk );
+                     victim->Name.c_str(), victim->PCData->IllegalPk);
 
         ch->Echo("%s is %shelled at the moment.\r\n",
                  victim->Name.c_str(),
@@ -137,25 +137,25 @@ void do_whois( std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("%s", buf2);
         }
 
-        if ( victim->Desc && !victim->Desc->Remote.Hostname.empty() )
+        if(victim->Desc && !victim->Desc->Remote.Hostname.empty())
         {
             sprintf(buf2, "%s's IP info: %s ",
                     victim->Name.c_str(), victim->Desc->Remote.HostIP.c_str());
 
-            if (GetTrustLevel(ch) > LEVEL_GREATER)
+            if(GetTrustLevel(ch) > LEVEL_GREATER)
             {
                 strcat(buf2, victim->Desc->Remote.Hostname.c_str());
             }
 
-            strcat( buf2, "\r\n" );
+            strcat(buf2, "\r\n");
             ch->Echo("%s", buf2);
         }
 
-        if (GetTrustLevel(ch) >= LEVEL_GREATER
-            && GetTrustLevel(ch) >= GetTrustLevel( victim )
-            && victim->PCData )
+        if(GetTrustLevel(ch) >= LEVEL_GREATER
+           && GetTrustLevel(ch) >= GetTrustLevel(victim)
+           && victim->PCData)
         {
-            sprintf (buf2, "Email: %s\r\n" , victim->PCData->Email.c_str() );
+            sprintf(buf2, "Email: %s\r\n", victim->PCData->Email.c_str());
             ch->Echo("%s", buf2);
         }
     }

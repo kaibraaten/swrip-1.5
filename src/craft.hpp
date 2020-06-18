@@ -107,10 +107,10 @@ public:
 CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial *, int duration,
                                  std::shared_ptr<ProtoObject> protoObject, std::initializer_list<size_t> flags);
 void FreeCraftRecipe(CraftRecipe *);
-CraftingSession *AllocateCraftingSession(CraftRecipe *, Character *engineer,
+CraftingSession *AllocateCraftingSession(CraftRecipe *, std::shared_ptr<Character> engineer,
                                          const std::string &commandArgument);
 void FreeCraftingSession(CraftingSession *);
-Character *GetEngineer(const CraftingSession *);
+std::shared_ptr<Character> GetEngineer(const CraftingSession *);
 void AddInterpretArgumentsCraftingHandler(CraftingSession *session, void *userData,
                                           void(*handler)(void *, InterpretArgumentsEventArgs *));
 void AddCheckRequirementsCraftingHandler(CraftingSession *session, void *userData,
@@ -126,6 +126,6 @@ void AddAbortCraftingHandler(CraftingSession *session, void *userData,
 
 void StartCrafting(CraftingSession *);
 
-bool IsCrafting(const Character *ch);
+bool IsCrafting(std::shared_ptr<Character> ch);
 
 #endif /* include guard */

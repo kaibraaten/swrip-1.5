@@ -8,9 +8,9 @@ void do_tell(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     char buf[MAX_INPUT_LENGTH];
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     PositionType position = POS_STANDING;
-    Character *switched_victim = NULL;
+    std::shared_ptr<Character> switched_victim;
     bool sameroom = false;
 
     if(IsBitSet(ch->Deaf, CHANNEL_TELLS) && !IsImmortal(ch))

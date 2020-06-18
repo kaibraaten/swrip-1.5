@@ -52,30 +52,30 @@
 #include "repos/homerepository.hpp"
 #include "act.hpp"
 
-extern Character *gch_prev;
+extern std::shared_ptr<Character> gch_prev;
 
 /*
  * Local functions.
  */
-static void ApplyWantedFlags(Character *ch, const Character *victim);
-static void UpdateKillStats(Character *ch, Character *victim);
-static void SendDamageMessages(Character *ch, Character *victim, int dam, int dt);
-static bool IsWieldingPoisonedWeapon(const Character *ch);
-static void GainGroupXP(Character *ch, Character *victim);
-static int CountGroupMembersInRoom(const Character *ch);
-static void CheckObjectAlignmentZapping(Character *ch);
-static int ComputeNewAlignment(const Character *gch, const Character *victim);
+static void ApplyWantedFlags(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+static void UpdateKillStats(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+static void SendDamageMessages(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dam, int dt);
+static bool IsWieldingPoisonedWeapon(std::shared_ptr<Character> ch);
+static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+static int CountGroupMembersInRoom(std::shared_ptr<Character> ch);
+static void CheckObjectAlignmentZapping(std::shared_ptr<Character> ch);
+static int ComputeNewAlignment(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim);
 static int GetObjectHitrollBonus(std::shared_ptr<Object> obj);
-static bool SprintForCover(Character *ch);
-static int GetWeaponProficiencyBonus(const Character *ch, std::shared_ptr<Object> wield, int *gsn_ptr);
-static short GetOffensiveShieldLevelModifier(const Character *ch, const Character *victim);
+static bool SprintForCover(std::shared_ptr<Character> ch);
+static int GetWeaponProficiencyBonus(std::shared_ptr<Character> ch, std::shared_ptr<Object> wield, int *gsn_ptr);
+static short GetOffensiveShieldLevelModifier(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 
 bool dual_flip = false;
 
 /*
  * Check to see if weapon is poisoned.
  */
-static bool IsWieldingPoisonedWeapon(const Character *ch)
+static bool IsWieldingPoisonedWeapon(std::shared_ptr<Character> ch)
 {
     auto obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
@@ -85,37 +85,37 @@ static bool IsWieldingPoisonedWeapon(const Character *ch)
 /*
  * hunting, hating and fearing code                             -Thoric
  */
-bool IsHunting(const Character *ch, const Character *victim)
+bool IsHunting(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     return ch->HHF.Hunting && ch->HHF.Hunting->Who == victim;
 }
 
-bool IsHating(const Character *ch, const Character *victim)
+bool IsHating(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     return ch->HHF.Hating && ch->HHF.Hating->Who == victim;
 }
 
-bool IsFearing(const Character *ch, const Character *victim)
+bool IsFearing(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     return ch->HHF.Fearing && ch->HHF.Fearing->Who == victim;
 }
 
-void StopHunting(Character *ch)
+void StopHunting(std::shared_ptr<Character> ch)
 {
     ch->HHF.Hunting.reset();
 }
 
-void StopHating(Character *ch)
+void StopHating(std::shared_ptr<Character> ch)
 {
     ch->HHF.Hating.reset();
 }
 
-void StopFearing(Character *ch)
+void StopFearing(std::shared_ptr<Character> ch)
 {
     ch->HHF.Fearing.reset();
 }
 
-void StartHunting(Character *ch, Character *victim)
+void StartHunting(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     if(ch->HHF.Hunting)
         StopHunting(ch);
@@ -125,7 +125,7 @@ void StartHunting(Character *ch, Character *victim)
     ch->HHF.Hunting->Who = victim;
 }
 
-void StartHating(Character *ch, Character *victim)
+void StartHating(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     if(ch->HHF.Hating)
         StopHating(ch);
@@ -135,7 +135,7 @@ void StartHating(Character *ch, Character *victim)
     ch->HHF.Hating->Who = victim;
 }
 
-void StartFearing(Character *ch, Character *victim)
+void StartFearing(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     if(ch->HHF.Fearing)
         StopFearing(ch);
@@ -145,7 +145,7 @@ void StartFearing(Character *ch, Character *victim)
     ch->HHF.Fearing->Who = victim;
 }
 
-static void ExpireCommandCallbackTimers(Character *ch)
+static void ExpireCommandCallbackTimers(std::shared_ptr<Character> ch)
 {
     auto characterTimers(ch->Timers());
 
@@ -173,7 +173,7 @@ static void ExpireCommandCallbackTimers(Character *ch)
     }
 }
 
-static void RemoveExpiredAffects(Character *ch)
+static void RemoveExpiredAffects(std::shared_ptr<Character> ch)
 {
     auto affects(ch->Affects());
 
@@ -237,7 +237,7 @@ static void RemoveExpiredAffects(Character *ch)
  */
 void ViolenceUpdate()
 {
-    for(Character *ch = LastCharacter; ch; ch = gch_prev)
+    for(std::shared_ptr<Character> ch = LastCharacter; ch; ch = gch_prev)
     {
         SetCurrentGlobalCharacter(ch);
 
@@ -275,7 +275,7 @@ void ViolenceUpdate()
 
         RemoveExpiredAffects(ch);
 
-        Character *victim = GetFightingOpponent(ch);
+        std::shared_ptr<Character> victim = GetFightingOpponent(ch);
 
         if(victim == nullptr || IsAffectedBy(ch, Flag::Affect::Paralysis))
         {
@@ -378,10 +378,10 @@ void ViolenceUpdate()
                     if(rch->Prototype == ch->Prototype
                        || NumberBits(3) == 0)
                     {
-                        Character *target = nullptr;
+                        std::shared_ptr<Character> target = nullptr;
                         int number = 0;
 
-                        for(Character *vch : ch->InRoom->Characters())
+                        for(std::shared_ptr<Character> vch : ch->InRoom->Characters())
                         {
                             if(CanSeeCharacter(rch, vch)
                                && IsInSameGroup(vch, victim)
@@ -403,7 +403,7 @@ void ViolenceUpdate()
     }
 }
 
-static ch_ret PerformNthAttack(Character *ch, Character *victim, int dt, int gsn,
+static ch_ret PerformNthAttack(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dt, int gsn,
                                std::function<int()> getHitChance)
 {
     int hit_chance = getHitChance();
@@ -426,7 +426,7 @@ static ch_ret PerformNthAttack(Character *ch, Character *victim, int dt, int gsn
     return rNONE;
 }
 
-static ch_ret Perform2ndAttack(Character *ch, Character *victim, int dual_bonus, int dt)
+static ch_ret Perform2ndAttack(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dual_bonus, int dt)
 {
     return PerformNthAttack(ch, victim, dt, gsn_second_attack,
                             [ch, dual_bonus]()
@@ -436,7 +436,7 @@ static ch_ret Perform2ndAttack(Character *ch, Character *victim, int dual_bonus,
                             });
 }
 
-static ch_ret Perform3rdAttack(Character *ch, Character *victim, int dual_bonus, int dt)
+static ch_ret Perform3rdAttack(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dual_bonus, int dt)
 {
     return PerformNthAttack(ch, victim, dt, gsn_third_attack,
                             [ch, dual_bonus]()
@@ -446,7 +446,7 @@ static ch_ret Perform3rdAttack(Character *ch, Character *victim, int dual_bonus,
                             });
 }
 
-static ch_ret Perform4thAttack(Character *ch, Character *victim, int dual_bonus, int dt)
+static ch_ret Perform4thAttack(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dual_bonus, int dt)
 {
     return PerformNthAttack(ch, victim, dt, gsn_fourth_attack,
                             [ch, dual_bonus]()
@@ -456,7 +456,7 @@ static ch_ret Perform4thAttack(Character *ch, Character *victim, int dual_bonus,
                             });
 }
 
-static ch_ret Perform5thAttack(Character *ch, Character *victim, int dual_bonus, int dt)
+static ch_ret Perform5thAttack(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dual_bonus, int dt)
 {
     return PerformNthAttack(ch, victim, dt, gsn_fifth_attack,
                             [ch, dual_bonus]()
@@ -469,7 +469,7 @@ static ch_ret Perform5thAttack(Character *ch, Character *victim, int dual_bonus,
 /*
  * Do one group of attacks.
  */
-ch_ret HitMultipleTimes(Character *ch, Character *victim, int dt)
+ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dt)
 {
     /* add timer if player is attacking another player */
     if(!IsNpc(ch) && !IsNpc(victim))
@@ -634,7 +634,7 @@ ch_ret HitMultipleTimes(Character *ch, Character *victim, int dt)
 /*
  * Weapon types, haus
  */
-static int GetWeaponProficiencyBonus(const Character *ch, std::shared_ptr<Object> wield, int *gsn_ptr)
+static int GetWeaponProficiencyBonus(std::shared_ptr<Character> ch, std::shared_ptr<Object> wield, int *gsn_ptr)
 {
     int bonus = 0;
 
@@ -733,7 +733,7 @@ static int GetObjectHitrollBonus(std::shared_ptr<Object> obj)
 /*
  * Offensive shield level modifier
  */
-static short GetOffensiveShieldLevelModifier(const Character *ch, const Character *victim)
+static short GetOffensiveShieldLevelModifier(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     if(!IsNpc(ch))            /* players get much less effect */
     {
@@ -763,17 +763,17 @@ static short GetOffensiveShieldLevelModifier(const Character *ch, const Characte
     }
 }
 
-static int GetBackstabDamageMultiplier(const Character *ch, const Character *victim)
+static int GetBackstabDamageMultiplier(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     return 2 + urange(2, GetAbilityLevel(ch, HUNTING_ABILITY) - (GetAbilityLevel(victim, COMBAT_ABILITY) / 4), 30) / 8;
 }
 
-static int GetCircleDamageMultiplier(const Character *ch, const Character *victim)
+static int GetCircleDamageMultiplier(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     return 2 + urange(2, GetAbilityLevel(ch, HUNTING_ABILITY) - (GetAbilityLevel(victim, COMBAT_ABILITY) / 2), 30) / 40;
 }
 
-static int GetEnhancedDamageModifier(const Character *ch, int dam)
+static int GetEnhancedDamageModifier(std::shared_ptr<Character> ch, int dam)
 {
     return (dam * ch->PCData->Learned[gsn_enhanced_damage]) / 120;
 }
@@ -786,7 +786,7 @@ static int GetVictimSleepingMultiplier()
 /*
  * Hit one guy once.
  */
-ch_ret HitOnce(Character *ch, Character *victim, int dt)
+ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dt)
 {
     /*
      * Can't beat a dead char!
@@ -1427,7 +1427,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
  * Calculate damage based on resistances, immunities and suceptibilities
  *                                      -Thoric
  */
-short ModifyDamageBasedOnResistance(const Character *ch, short dam, int ris)
+short ModifyDamageBasedOnResistance(std::shared_ptr<Character> ch, short dam, int ris)
 {
     short modifier = 10;
 
@@ -1449,7 +1449,7 @@ short ModifyDamageBasedOnResistance(const Character *ch, short dam, int ris)
     return (dam * modifier) / 10;
 }
 
-static void WimpOut(Character *ch, Character *victim, int dam)
+static void WimpOut(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dam)
 {
     if(IsNpc(victim) && dam > 0)
     {
@@ -1480,7 +1480,7 @@ static void WimpOut(Character *ch, Character *victim, int dam)
 /*
  * Inflict damage from a hit.
  */
-ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
+ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dam, int dt)
 {
     char buf1[MAX_STRING_LENGTH];
     bool loot = false;
@@ -2167,7 +2167,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
     return rNONE;
 }
 
-bool IsSafe(const Character *ch, const Character *victim)
+bool IsSafe(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     if(!victim)
         return false;
@@ -2194,7 +2194,7 @@ bool IsSafe(const Character *ch, const Character *victim)
 /*
  * just verify that a corpse looting is legal
  */
-bool CanLootVictim(const Character *ch, const Character *victim)
+bool CanLootVictim(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     /* pc's can now loot .. why not .. death is pretty final */
     if(!IsNpc(ch))
@@ -2207,7 +2207,7 @@ bool CanLootVictim(const Character *ch, const Character *victim)
     return false;
 }
 
-static void ApplyWantedFlags(Character *ch, const Character *victim)
+static void ApplyWantedFlags(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     if(IsAffectedBy(ch, Flag::Affect::Charm))
     {
@@ -2239,7 +2239,7 @@ static void ApplyWantedFlags(Character *ch, const Character *victim)
     }
 }
 
-static void UpdateKillStats(Character *ch, Character *victim)
+static void UpdateKillStats(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     if(IsAffectedBy(ch, Flag::Affect::Charm))
     {
@@ -2292,7 +2292,7 @@ static void UpdateKillStats(Character *ch, Character *victim)
 /*
  * Set position of a victim.
  */
-void UpdatePosition(Character *victim)
+void UpdatePosition(std::shared_ptr<Character> victim)
 {
     assert(victim != nullptr);
 
@@ -2362,7 +2362,7 @@ void UpdatePosition(Character *victim)
 /*
  * Start fights.
  */
-void StartFighting(Character *ch, Character *victim)
+void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     if(ch->Fighting)
     {
@@ -2405,7 +2405,7 @@ void StartFighting(Character *ch, Character *victim)
     }
 }
 
-Character *GetFightingOpponent(const Character *ch)
+std::shared_ptr<Character> GetFightingOpponent(std::shared_ptr<Character> ch)
 {
     assert(ch != nullptr);
 
@@ -2417,7 +2417,7 @@ Character *GetFightingOpponent(const Character *ch)
     return ch->Fighting->Who;
 }
 
-void FreeFight(Character *ch)
+void FreeFight(std::shared_ptr<Character> ch)
 {
     if(!ch)
     {
@@ -2456,7 +2456,7 @@ void FreeFight(Character *ch)
 /*
  * Stop fights.
  */
-void StopFighting(Character *ch, bool fBoth)
+void StopFighting(std::shared_ptr<Character> ch, bool fBoth)
 {
     FreeFight(ch);
     UpdatePosition(ch);
@@ -2466,7 +2466,7 @@ void StopFighting(Character *ch, bool fBoth)
         return;
     }
 
-    for(Character *fch = FirstCharacter; fch; fch = fch->Next)
+    for(std::shared_ptr<Character> fch = FirstCharacter; fch; fch = fch->Next)
     {
         if(GetFightingOpponent(fch) == ch)
         {
@@ -2478,7 +2478,7 @@ void StopFighting(Character *ch, bool fBoth)
 
 static bool RemoveShipOwner(std::shared_ptr<Ship> ship, void *userData)
 {
-    const Character *victim = (Character *)userData;
+    auto victim = (Character*)userData;
 
     if(!StrCmp(ship->Owner, victim->Name))
     {
@@ -2518,9 +2518,9 @@ private:
     std::string _resident;
 };
 
-void RawKill(Character *killer, Character *victim)
+void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victim)
 {
-    Character *victmp = nullptr;
+    std::shared_ptr<Character> victmp = nullptr;
 
     if(!victim)
     {
@@ -2600,7 +2600,7 @@ void RawKill(Character *killer, Character *victim)
 
     if(SysData.PermaDeath)
     {
-        ForEachShip(RemoveShipOwner, victim);
+        ForEachShip(RemoveShipOwner, victim.get());
         ForEach(Homes->FindHomesForResident(victim->Name), RemoveResident(victim->Name));
 
         if(victim->PCData && victim->PCData->ClanInfo.Clan)
@@ -2658,18 +2658,16 @@ void RawKill(Character *killer, Character *victim)
         }
         else
         {
-            int x, y;
-
             quitting_char = victim;
             PlayerCharacters->Save(victim);
-            saving_char = NULL;
+            saving_char.reset();
             ExtractCharacter(victim, true);
 
-            for(x = 0; x < MAX_WEAR; x++)
+            for(int x = 0; x < MAX_WEAR; x++)
             {
-                for(y = 0; y < MAX_LAYERS; y++)
+                for(int y = 0; y < MAX_LAYERS; y++)
                 {
-                    save_equipment[x][y] = NULL;
+                    save_equipment[x][y].reset();
                 }
             }
         }
@@ -2692,7 +2690,7 @@ void RawKill(Character *killer, Character *victim)
     }
 }
 
-static void CheckObjectAlignmentZapping(Character *ch)
+static void CheckObjectAlignmentZapping(std::shared_ptr<Character> ch)
 {
     auto carriedObjects = ch->Objects();
 
@@ -2722,7 +2720,7 @@ static void CheckObjectAlignmentZapping(Character *ch)
     }
 }
 
-static int CountGroupMembersInRoom(const Character *ch)
+static int CountGroupMembersInRoom(std::shared_ptr<Character> ch)
 {
     return Count(ch->InRoom->Characters(),
                  [ch](auto character)
@@ -2731,7 +2729,7 @@ static int CountGroupMembersInRoom(const Character *ch)
                  });
 }
 
-static void GainGroupXP(Character *ch, Character *victim)
+static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     /*
      * Monsters don't get kill xp's or alignment changes.
@@ -2750,9 +2748,9 @@ static void GainGroupXP(Character *ch, Character *victim)
         members = 1;
     }
 
-    Character *lch = ch->Leader ? ch->Leader : ch;
+    std::shared_ptr<Character> lch = ch->Leader ? ch->Leader : ch;
 
-    for(Character *gch : ch->InRoom->Characters())
+    for(std::shared_ptr<Character> gch : ch->InRoom->Characters())
     {
         if(!IsInSameGroup(gch, ch))
         {
@@ -2788,7 +2786,7 @@ static void GainGroupXP(Character *ch, Character *victim)
 }
 
 
-static int ComputeNewAlignment(const Character *gch, const Character *victim)
+static int ComputeNewAlignment(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim)
 {
     return urange(-1000,
                   (int)(gch->Alignment - victim->Alignment / 5),
@@ -2799,7 +2797,7 @@ static int ComputeNewAlignment(const Character *gch, const Character *victim)
  * Calculate how much XP gch should gain for killing victim
  * Lots of redesigning for new exp system by Thoric
  */
-long ComputeXP(const Character *gch, const Character *victim)
+long ComputeXP(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim)
 {
     long xp = (GetXPWorth(victim)
                * urange(1, (GetAbilityLevel(victim, COMBAT_ABILITY) - GetAbilityLevel(gch, COMBAT_ABILITY)) + 10, 20)) / 10;
@@ -2841,7 +2839,7 @@ long ComputeXP(const Character *gch, const Character *victim)
 /*
  * Revamped by Thoric to be more realistic
  */
-static void SendDamageMessages(Character *ch, Character *victim, int dam, int dt)
+static void SendDamageMessages(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dam, int dt)
 {
     char buf1[256], buf2[256], buf3[256];
     const char *vs = nullptr;
@@ -3095,7 +3093,7 @@ static void SendDamageMessages(Character *ch, Character *victim, int dam, int dt
     }
 }
 
-static bool SprintForCover(Character *ch)
+static bool SprintForCover(std::shared_ptr<Character> ch)
 {
     if(!GetFightingOpponent(ch))
         return false;

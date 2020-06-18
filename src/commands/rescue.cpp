@@ -7,8 +7,7 @@
 
 void do_rescue(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = NULL;
-    Character *fch = NULL;
+    std::shared_ptr<Character> victim;
     int percent = 0;
 
     if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
@@ -46,6 +45,8 @@ void do_rescue(std::shared_ptr<Character> ch, std::string arg)
         ch->Echo("Doesn't need your help!\r\n");
         return;
     }
+
+    std::shared_ptr<Character> fch;
 
     if((fch = GetFightingOpponent(victim)) == NULL)
     {

@@ -4,7 +4,7 @@
 
 void do_consider(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::string msg;
     int diff = 0;
 

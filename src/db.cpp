@@ -72,8 +72,8 @@ time_t last_restore_all_time = 0;
 std::shared_ptr<TeleportData> FirstTeleport;
 std::shared_ptr<TeleportData> LastTeleport;
 
-Character *FirstCharacter = NULL;
-Character *LastCharacter = NULL;
+std::shared_ptr<Character> FirstCharacter;
+std::shared_ptr<Character> LastCharacter;
 
 TimeInfo time_info;
 Weather weather_info;
@@ -297,7 +297,7 @@ void ShutdownMud(const std::string &reason)
 {
     FILE *fp;
 
-    if ((fp = fopen(SHUTDOWN_FILE, "a")) != NULL)
+    if((fp = fopen(SHUTDOWN_FILE, "a")) != NULL)
     {
         fprintf(fp, "%s\n", reason.c_str());
         fclose(fp);
@@ -331,15 +331,15 @@ void BootDatabase(bool fCopyOver)
 
     gsn_TopSN = TopSN;
 
-    for (int x = 0; x < TopSN; x++)
+    for(int x = 0; x < TopSN; x++)
     {
-        if (!gsn_first_spell && SkillTable[x]->Type == SKILL_SPELL)
+        if(!gsn_first_spell && SkillTable[x]->Type == SKILL_SPELL)
             gsn_first_spell = x;
-        else if (!gsn_first_skill && SkillTable[x]->Type == SKILL_SKILL)
+        else if(!gsn_first_skill && SkillTable[x]->Type == SKILL_SKILL)
             gsn_first_skill = x;
-        else if (!gsn_first_weapon && SkillTable[x]->Type == SKILL_WEAPON)
+        else if(!gsn_first_weapon && SkillTable[x]->Type == SKILL_WEAPON)
             gsn_first_weapon = x;
-        else if (!gsn_first_tongue && SkillTable[x]->Type == SKILL_TONGUE)
+        else if(!gsn_first_tongue && SkillTable[x]->Type == SKILL_TONGUE)
             gsn_first_tongue = x;
     }
 
@@ -348,7 +348,7 @@ void BootDatabase(bool fCopyOver)
 
     Log->Boot("Making wizlist");
     MakeWizlist();
-    
+
     fBootDb = true;
     SysData.MaxPlayersThisBoot = 0;
 
@@ -358,14 +358,14 @@ void BootDatabase(bool fCopyOver)
     cur_char_died = false;
     cur_obj_extracted = false;
     cur_room = NULL;
-    quitting_char = NULL;
-    loading_char = NULL;
-    saving_char = NULL;
+    quitting_char.reset();
+    loading_char.reset();
+    saving_char.reset();
     OngoingAuction = std::make_unique<Auction>();
 
-    for (int wear = 0; wear < MAX_WEAR; wear++)
-        for (int x = 0; x < MAX_LAYERS; x++)
-            save_equipment[wear][x] = NULL;
+    for(int wear = 0; wear < MAX_WEAR; wear++)
+        for(int x = 0; x < MAX_LAYERS; x++)
+            save_equipment[wear][x].reset();
 
     /*
      * Set time and weather.
@@ -382,13 +382,13 @@ void BootDatabase(bool fCopyOver)
     time_info.Month = lmonth % 17;
     time_info.Year = lmonth / 17;
 
-    if (time_info.Hour < 5)
+    if(time_info.Hour < 5)
         weather_info.Sunlight = SUN_DARK;
-    else if (time_info.Hour < 6)
+    else if(time_info.Hour < 6)
         weather_info.Sunlight = SUN_RISE;
-    else if (time_info.Hour < 19)
+    else if(time_info.Hour < 19)
         weather_info.Sunlight = SUN_LIGHT;
-    else if (time_info.Hour < 20)
+    else if(time_info.Hour < 20)
         weather_info.Sunlight = SUN_SET;
     else
         weather_info.Sunlight = SUN_DARK;
@@ -396,16 +396,16 @@ void BootDatabase(bool fCopyOver)
     weather_info.Change = 0;
     weather_info.Mmhg = 960;
 
-    if (time_info.Month >= 7 && time_info.Month <= 12)
+    if(time_info.Month >= 7 && time_info.Month <= 12)
         weather_info.Mmhg += GetRandomNumberFromRange(1, 50);
     else
         weather_info.Mmhg += GetRandomNumberFromRange(1, 80);
 
-    if (weather_info.Mmhg <= 980)
+    if(weather_info.Mmhg <= 980)
         weather_info.Sky = SKY_LIGHTNING;
-    else if (weather_info.Mmhg <= 1000)
+    else if(weather_info.Mmhg <= 1000)
         weather_info.Sky = SKY_RAINING;
-    else if (weather_info.Mmhg <= 1020)
+    else if(weather_info.Mmhg <= 1020)
         weather_info.Sky = SKY_CLOUDY;
     else
         weather_info.Sky = SKY_CLOUDLESS;
@@ -564,7 +564,7 @@ void BootDatabase(bool fCopyOver)
 
     Log->Boot("Reading in area files...");
     Areas->Load();
-    
+
     /*
      *   initialize supermob.
      *    must be done before ResetArea!
@@ -631,13 +631,13 @@ void BootDatabase(bool fCopyOver)
 
     Log->Boot("Loading player home meta data");
     Homes->Load();
-    
+
     Log->Boot("Resetting areas");
     AreaUpdate();
 
     MOBtrigger = true;
 
-    if (fCopyOver)
+    if(fCopyOver)
     {
         Log->Boot("Running RecoverFromCopyover.");
         RecoverFromCopyover();
@@ -647,11 +647,11 @@ void BootDatabase(bool fCopyOver)
 /*
  * Add a character to the list of all characters                -Thoric
  */
-void AddCharacter(Character *ch)
+void AddCharacter(std::shared_ptr<Character> ch)
 {
     LINK(ch, FirstCharacter, LastCharacter, Next, Previous);
 
-    if (!IsNpc(ch))
+    if(!IsNpc(ch))
     {
         PlayerCharacters->Add(ch);
     }
@@ -663,18 +663,18 @@ void AddCharacter(Character *ch)
  */
 static void InitializeEconomy()
 {
-    for (auto tarea : Areas)
+    for(auto tarea : Areas)
     {
         std::shared_ptr<ProtoMobile> mob;
         int idx = 0, gold = 0, rng = 0;
 
         /* skip area if they already got some gold */
-        if (tarea->HighEconomy > 0 || tarea->LowEconomy > 10000)
+        if(tarea->HighEconomy > 0 || tarea->LowEconomy > 10000)
             continue;
 
         rng = tarea->LevelRanges.Soft.High - tarea->LevelRanges.Soft.Low;
 
-        if (rng)
+        if(rng)
             rng /= 2;
         else
             rng = 25;
@@ -682,8 +682,8 @@ static void InitializeEconomy()
         gold = rng * rng * 10000;
         BoostEconomy(tarea, gold);
 
-        for (idx = tarea->VnumRanges.Mob.First; idx < tarea->VnumRanges.Mob.Last; idx++)
-            if ((mob = GetProtoMobile(idx)) != NULL)
+        for(idx = tarea->VnumRanges.Mob.First; idx < tarea->VnumRanges.Mob.Last; idx++)
+            if((mob = GetProtoMobile(idx)) != NULL)
                 BoostEconomy(tarea, mob->Gold * 10);
     }
 }
@@ -695,32 +695,32 @@ static void InitializeEconomy()
  */
 static void FixExits()
 {
-    for (int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
+    for(int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
     {
-        for (auto pRoomIndex = RoomIndexHash[iHash];
+        for(auto pRoomIndex = RoomIndexHash[iHash];
             pRoomIndex;
             pRoomIndex = pRoomIndex->Next)
         {
             bool fexit = false;
             auto copyOfExitList(pRoomIndex->Exits());
 
-            for (auto pexit : copyOfExitList)
+            for(auto pexit : copyOfExitList)
             {
                 pexit->ReverseVnum = pRoomIndex->Vnum;
 
-                if (pexit->Vnum <= 0
-                    || (pexit->ToRoom = GetRoom(pexit->Vnum)) == NULL)
+                if(pexit->Vnum <= 0
+                   || (pexit->ToRoom = GetRoom(pexit->Vnum)) == NULL)
                 {
-                    if (fBootDb)
+                    if(fBootDb)
                     {
                         Log->Boot("%s: room %ld, exit %s leads to bad vnum (%ld)",
-                            __FUNCTION__,
-                            pRoomIndex->Vnum, GetDirectionName(pexit->Direction),
-                            pexit->Vnum);
+                                  __FUNCTION__,
+                                  pRoomIndex->Vnum, GetDirectionName(pexit->Direction),
+                                  pexit->Vnum);
                     }
 
                     Log->Bug("Deleting %s exit in room %ld",
-                        GetDirectionName(pexit->Direction), pRoomIndex->Vnum);
+                             GetDirectionName(pexit->Direction), pRoomIndex->Vnum);
                     ExtractExit(pRoomIndex, pexit);
                 }
                 else
@@ -729,7 +729,7 @@ static void FixExits()
                 }
             }
 
-            if (!fexit)
+            if(!fexit)
             {
                 pRoomIndex->Flags.set(Flag::Room::NoMob);
             }
@@ -737,19 +737,19 @@ static void FixExits()
     }
 
     /* Set all the rexit pointers         -Thoric */
-    for (int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
+    for(int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
     {
-        for (auto pRoomIndex = RoomIndexHash[iHash];
+        for(auto pRoomIndex = RoomIndexHash[iHash];
             pRoomIndex;
             pRoomIndex = pRoomIndex->Next)
         {
-            for (auto pexit : pRoomIndex->Exits())
+            for(auto pexit : pRoomIndex->Exits())
             {
-                if (pexit->ToRoom && !pexit->ReverseExit)
+                if(pexit->ToRoom && !pexit->ReverseExit)
                 {
                     auto rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
 
-                    if (rev_exit)
+                    if(rev_exit)
                     {
                         pexit->ReverseExit = rev_exit;
                         rev_exit->ReverseExit = pexit;
@@ -772,9 +772,9 @@ static int ExitComparator(Exit **xit1, Exit **xit2)
     d1 = (*xit1)->Direction;
     d2 = (*xit2)->Direction;
 
-    if (d1 < d2)
+    if(d1 < d2)
         return -1;
-    if (d1 > d2)
+    if(d1 > d2)
         return 1;
     return 0;
 }
@@ -787,7 +787,7 @@ static void SortExits(std::shared_ptr<Room> room)
     Exit *exits[MAX_REXITS];
     int nexits = 0;
 
-    for (Exit *pexit : room->Exits())
+    for(Exit *pexit : room->Exits())
     {
         exits[nexits++] = pexit;
 
@@ -796,11 +796,11 @@ static void SortExits(std::shared_ptr<Room> room)
     }
 
     qsort(&exits[0], nexits, sizeof(Exit *),
-        (int(*)(const void *, const void *)) ExitComparator);
+          (int(*)(const void *, const void *)) ExitComparator);
 
-    for (int x = 0; x < nexits; x++)
+    for(int x = 0; x < nexits; x++)
     {
-        if (x > 0)
+        if(x > 0)
         {
             exits[x]->Previous = exits[x - 1];
         }
@@ -810,7 +810,7 @@ static void SortExits(std::shared_ptr<Room> room)
             room->FirstExit = exits[x];
         }
 
-        if (x >= (nexits - 1))
+        if(x >= (nexits - 1))
         {
             exits[x]->Next = NULL;
             room->LastExit = exits[x];
@@ -828,24 +828,24 @@ void RandomizeExits(std::shared_ptr<Room> room, short maxdir)
     int nexits = 0;
     DirectionType vdirs[MAX_REXITS];
 
-    for (std::shared_ptr<Exit> pexit : room->Exits())
+    for(std::shared_ptr<Exit> pexit : room->Exits())
     {
         vdirs[nexits++] = pexit->Direction;
     }
 
-    for (int d0 = 0; d0 < nexits; d0++)
+    for(int d0 = 0; d0 < nexits; d0++)
     {
-        if (vdirs[d0] > maxdir)
+        if(vdirs[d0] > maxdir)
             continue;
 
         int count = 0;
         int d1 = 0;
 
-        while (vdirs[(d1 = GetRandomNumberFromRange(d0, nexits - 1))] > maxdir
-            || ++count > 5)
+        while(vdirs[(d1 = GetRandomNumberFromRange(d0, nexits - 1))] > maxdir
+              || ++count > 5)
             ;
 
-        if (vdirs[d1] > maxdir)
+        if(vdirs[d1] > maxdir)
             continue;
 
         DirectionType door = vdirs[d0];
@@ -855,7 +855,7 @@ void RandomizeExits(std::shared_ptr<Room> room, short maxdir)
 
     int count = 0;
 
-    for (std::shared_ptr<Exit> pexit : room->Exits())
+    for(std::shared_ptr<Exit> pexit : room->Exits())
     {
         pexit->Direction = vdirs[count++];
     }
@@ -866,18 +866,15 @@ void RandomizeExits(std::shared_ptr<Room> room, short maxdir)
 /*
  * Create an instance of a mobile.
  */
-static Character *AllocateMobile(std::shared_ptr<ProtoMobile> pMobIndex)
+static std::shared_ptr<Character> AllocateMobile(std::shared_ptr<ProtoMobile> pMobIndex)
 {
     assert(pMobIndex != nullptr);
-
-    Character *mob = new Character(pMobIndex);
-
-    return mob;
+    return std::make_shared<Character>(pMobIndex);
 }
 
-Character *CreateMobile(std::shared_ptr<ProtoMobile> proto)
+std::shared_ptr<Character> CreateMobile(std::shared_ptr<ProtoMobile> proto)
 {
-    Character *mob = AllocateMobile(proto);
+    auto mob = AllocateMobile(proto);
 
     /*
      * Insert in list.
@@ -903,11 +900,11 @@ std::shared_ptr<Object> CreateObject(std::shared_ptr<ProtoObject> proto, int lev
  * Get an extra description from a list.
  */
 std::string GetExtraDescription(const std::string &name,
-    const std::list<std::shared_ptr<ExtraDescription>> &extras)
+                                const std::list<std::shared_ptr<ExtraDescription>> &extras)
 {
-    for (auto ed : extras)
+    for(auto ed : extras)
     {
-        if (IsName(name, ed->Keyword))
+        if(IsName(name, ed->Keyword))
         {
             return ed->Description;
         }
@@ -924,17 +921,17 @@ std::shared_ptr<ProtoMobile> GetProtoMobile(vnum_t vnum)
 {
     assert(vnum > 0);
 
-    for (auto pMobIndex = MobIndexHash[vnum % MAX_KEY_HASH];
+    for(auto pMobIndex = MobIndexHash[vnum % MAX_KEY_HASH];
         pMobIndex;
         pMobIndex = pMobIndex->Next)
     {
-        if (pMobIndex->Vnum == vnum)
+        if(pMobIndex->Vnum == vnum)
         {
             return pMobIndex;
         }
     }
 
-    if (fBootDb)
+    if(fBootDb)
     {
         Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
     }
@@ -950,16 +947,16 @@ std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum)
 {
     assert(vnum > 0);
 
-    for (std::shared_ptr<ProtoObject> pObjIndex = ObjectIndexHash[vnum % MAX_KEY_HASH];
+    for(std::shared_ptr<ProtoObject> pObjIndex = ObjectIndexHash[vnum % MAX_KEY_HASH];
         pObjIndex; pObjIndex = pObjIndex->Next)
     {
-        if (pObjIndex->Vnum == vnum)
+        if(pObjIndex->Vnum == vnum)
         {
             return pObjIndex;
         }
     }
 
-    if (fBootDb)
+    if(fBootDb)
     {
         Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
     }
@@ -974,13 +971,13 @@ std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum)
 std::shared_ptr<Room> GetRoom(vnum_t vnum)
 {
     assert(vnum > 0);
-    for (std::shared_ptr<Room> pRoomIndex = RoomIndexHash[vnum % MAX_KEY_HASH];
+    for(std::shared_ptr<Room> pRoomIndex = RoomIndexHash[vnum % MAX_KEY_HASH];
         pRoomIndex;
         pRoomIndex = pRoomIndex->Next)
-        if (pRoomIndex->Vnum == vnum)
+        if(pRoomIndex->Vnum == vnum)
             return pRoomIndex;
 
-    if (fBootDb)
+    if(fBootDb)
         Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
 
     return NULL;
@@ -989,28 +986,28 @@ std::shared_ptr<Room> GetRoom(vnum_t vnum)
 /*
  * Dump a text file to a player, a line at a time               -Thoric
  */
-void ShowFile(const Character *ch, const std::string &filename)
+void ShowFile(std::shared_ptr<Character> ch, const std::string &filename)
 {
     FILE *fp = nullptr;
 
-    if ((fp = fopen(filename.c_str(), "r")) != NULL)
+    if((fp = fopen(filename.c_str(), "r")) != NULL)
     {
         int num = 0;
         char buf[MAX_STRING_LENGTH];
 
-        while (!feof(fp))
+        while(!feof(fp))
         {
-            while ((buf[num] = fgetc(fp)) != (char)EOF
-                && buf[num] != '\n'
-                && buf[num] != '\r'
-                && num < (MAX_STRING_LENGTH - 2))
+            while((buf[num] = fgetc(fp)) != (char)EOF
+                  && buf[num] != '\n'
+                  && buf[num] != '\r'
+                  && num < (MAX_STRING_LENGTH - 2))
             {
                 num++;
             }
 
             int c = fgetc(fp);
 
-            if ((c != '\n' && c != '\r') || c == buf[num])
+            if((c != '\n' && c != '\r') || c == buf[num])
                 ungetc(c, fp);
 
             buf[num++] = '\n';
@@ -1034,18 +1031,18 @@ bool DeleteRoom(std::shared_ptr<Room> room)
     iHash = room->Vnum % MAX_KEY_HASH;
 
     /* Take the room index out of the hash list. */
-    for (tmp = RoomIndexHash[iHash]; tmp && tmp != room; tmp = tmp->Next)
+    for(tmp = RoomIndexHash[iHash]; tmp && tmp != room; tmp = tmp->Next)
     {
         prev = tmp;
     }
 
-    if (!tmp)
+    if(!tmp)
     {
         Log->Bug("%s: room not found", __FUNCTION__);
         return false;
     }
 
-    if (prev)
+    if(prev)
     {
         prev->Next = room->Next;
     }
@@ -1099,7 +1096,7 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
     std::shared_ptr<ProtoObject> cObjIndex;
     char buf[MAX_STRING_LENGTH];
 
-    if (cvnum > 0)
+    if(cvnum > 0)
     {
         cObjIndex = GetProtoObject(cvnum);
     }
@@ -1108,7 +1105,7 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
 
     pObjIndex->Name = name;
 
-    if (!cObjIndex)
+    if(!cObjIndex)
     {
         sprintf(buf, "A %s", name.c_str());
         pObjIndex->ShortDescr = buf;
@@ -1131,7 +1128,7 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
         pObjIndex->Weight = cObjIndex->Weight;
         pObjIndex->Cost = cObjIndex->Cost;
 
-        for (auto ced : cObjIndex->ExtraDescriptions())
+        for(auto ced : cObjIndex->ExtraDescriptions())
         {
             auto ed = std::make_shared<ExtraDescription>();
             ed->Keyword = ced->Keyword;
@@ -1140,7 +1137,7 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
             top_ed++;
         }
 
-        for (auto cpaf : cObjIndex->Affects())
+        for(auto cpaf : cObjIndex->Affects())
         {
             std::shared_ptr<Affect> paf = std::make_shared<Affect>();
             paf->Type = cpaf->Type;
@@ -1171,7 +1168,7 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
     std::shared_ptr<ProtoMobile> cMobIndex;
     char buf[MAX_STRING_LENGTH];
 
-    if (cvnum > 0)
+    if(cvnum > 0)
     {
         cMobIndex = GetProtoMobile(cvnum);
     }
@@ -1179,7 +1176,7 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
     std::shared_ptr<ProtoMobile> pMobIndex = std::make_shared<ProtoMobile>(vnum);
     pMobIndex->Name = name;
 
-    if (!cMobIndex)
+    if(!cMobIndex)
     {
         sprintf(buf, "A newly created %s", name.c_str());
         pMobIndex->ShortDescr = buf;
@@ -1263,12 +1260,12 @@ std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr
     pexit->Distance = 1;
     pexit->Keyword = keyword;
 
-    if (to_room)
+    if(to_room)
     {
         pexit->Vnum = to_room->Vnum;
         std::shared_ptr<Exit> texit = GetExitTo(to_room, GetReverseDirection(door), pRoomIndex->Vnum);
 
-        if (texit != nullptr)      /* assign reverse exit pointers */
+        if(texit != nullptr)      /* assign reverse exit pointers */
         {
             texit->ReverseExit = pexit;
             pexit->ReverseExit = texit;
@@ -1284,22 +1281,22 @@ std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr
  * Display vnums currently assigned to areas            -Altrag & Thoric
  * Sorted, and flagged if loaded.
  */
-void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl)
+void ShowVnums(std::shared_ptr<Character> ch, vnum_t low, vnum_t high, bool proto, bool shownl)
 {
     auto listToUse = proto ? Areas->AreasInProgress() : Areas->Entities();
     int count = 0;
 
     SetCharacterColor(AT_PLAIN, ch);
 
-    for (auto pArea : listToUse)
+    for(auto pArea : listToUse)
     {
-        if (pArea->VnumRanges.Room.First < low)
+        if(pArea->VnumRanges.Room.First < low)
             continue;
 
-        if (pArea->VnumRanges.Room.Last > high)
+        if(pArea->VnumRanges.Room.Last > high)
             break;
 
-        if (!shownl)
+        if(!shownl)
             continue;
 
         ch->Echo("%-22s| Rooms: %10ld - %-10ld"
@@ -1317,21 +1314,21 @@ void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool sh
 /*
  * Append a string to a file.
  */
-void AppendFile(const Character *ch, const std::string &file, const std::string &str)
+void AppendFile(std::shared_ptr<Character> ch, const std::string &file, const std::string &str)
 {
     FILE *fp;
 
-    if (IsNpc(ch) || str.empty())
+    if(IsNpc(ch) || str.empty())
         return;
 
-    if ((fp = fopen(file.c_str(), "a")) == NULL)
+    if((fp = fopen(file.c_str(), "a")) == NULL)
     {
         ch->Echo("Could not open the file!\n\r");
     }
     else
     {
         fprintf(fp, "[%5ld] %s: %s\n",
-            ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name.c_str(), str.c_str());
+                ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name.c_str(), str.c_str());
         fclose(fp);
     }
 }

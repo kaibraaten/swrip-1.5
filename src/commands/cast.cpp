@@ -18,7 +18,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string targetName;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Object> obj;
     Vo vo;
     int mana = 0;
@@ -232,7 +232,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
             int cnt = 1;
             std::shared_ptr<Timer> t;
 
-            for(Character *tmp : ch->InRoom->Characters())
+            for(auto tmp : ch->InRoom->Characters())
             {
                 if(tmp != ch
                    && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
@@ -246,7 +246,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
 
             if(cnt >= skill->Participants)
             {
-                for(Character *tmp : ch->InRoom->Characters())
+                for(auto tmp : ch->InRoom->Characters())
                 {
                     if(tmp != ch
                        && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
@@ -429,9 +429,9 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
        && !CharacterDiedRecently(victim)
        && victim != ch)
     {
-        std::list<Character *> copyOfCharactersInRoom(ch->InRoom->Characters());
+        auto copyOfCharactersInRoom = ch->InRoom->Characters();
 
-        for(Character *vch : copyOfCharactersInRoom)
+        for(auto vch : copyOfCharactersInRoom)
         {
             if(vch == victim)
             {

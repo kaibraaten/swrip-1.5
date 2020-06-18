@@ -75,7 +75,7 @@ int maxdesc = 0;
 /*
  * Other local functions (OS-independent).
  */
-static void StopIdling(Character *ch);
+static void StopIdling(std::shared_ptr<Character> ch);
 static void GameLoop();
 static void NewDescriptor(socket_t new_desc);
 static void ExecuteOnExit();
@@ -806,7 +806,7 @@ bool WriteToDescriptor(Descriptor *desc, const std::string &orig, int length)
     return true;
 }
 
-static void StopIdling(Character *ch)
+static void StopIdling(std::shared_ptr<Character> ch)
 {
     if (!ch
         || !ch->Desc
@@ -822,14 +822,14 @@ static void StopIdling(Character *ch)
     Act(AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, ActTarget::Room);
 }
 
-void SetCharacterColor(short AType, const Character *ch)
+void SetCharacterColor(short AType, std::shared_ptr<Character> ch)
 {
     if (ch == nullptr || ch->Desc == nullptr)
     {
         return;
     }
     
-    const Character *och = (ch->Desc->Original ? ch->Desc->Original : ch);
+    std::shared_ptr<Character> och = (ch->Desc->Original ? ch->Desc->Original : ch);
 
     if (!IsNpc(och) && och->Flags.test(Flag::Plr::Ansi))
     {
@@ -849,7 +849,7 @@ void SetCharacterColor(short AType, const Character *ch)
     }
 }
 
-static std::string DefaultPrompt(const Character *ch)
+static std::string DefaultPrompt(std::shared_ptr<Character> ch)
 {
     std::ostringstream buf;
 
@@ -866,8 +866,8 @@ static std::string DefaultPrompt(const Character *ch)
 
 void DisplayPrompt(Descriptor *d)
 {
-    const Character *ch = d->Character;
-    const Character *och = d->Original ? d->Original : d->Character;
+    std::shared_ptr<Character> ch = d->Character;
+    std::shared_ptr<Character> och = d->Original ? d->Original : d->Character;
     const bool ansi = !IsNpc(och) && och->Flags.test(Flag::Plr::Ansi);
     std::string promptBuffer;
     const char *prompt = nullptr;

@@ -1,32 +1,32 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_pardon( std::shared_ptr<Character> ch, std::string argument )
+void do_pardon(std::shared_ptr<Character> ch, std::string argument)
 {
-  std::string arg1;
-  std::string arg2;
-  Character *victim = nullptr;
+    std::string arg1;
+    std::string arg2;
+    std::shared_ptr<Character> victim;
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  if ( arg1.empty() || arg2.empty() )
+    if(arg1.empty() || arg2.empty())
     {
-      ch->Echo("Syntax: pardon <character> <planet>.\r\n");
-      return;
+        ch->Echo("Syntax: pardon <character> <planet>.\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
+    if((victim = GetCharacterAnywhere(ch, arg1)) == NULL)
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
-      ch->Echo("Not on NPC's.\r\n");
-      return;
+        ch->Echo("Not on NPC's.\r\n");
+        return;
     }
 
-  ch->Echo("Syntax: pardon <character> <planet>.... But it doesn't work .... Tell Durga to hurry up and finish it :p\r\n");
+    ch->Echo("Syntax: pardon <character> <planet>.... But it doesn't work .... Tell Durga to hurry up and finish it :p\r\n");
 }

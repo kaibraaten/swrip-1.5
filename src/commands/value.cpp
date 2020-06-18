@@ -6,7 +6,7 @@
 void do_value(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
-    Character *keeper = nullptr;
+    std::shared_ptr<Character> keeper;
     std::shared_ptr<Object> obj;
     int cost = 0;
 

@@ -6,7 +6,7 @@
 #include "protomob.hpp"
 #include "act.hpp"
 
-static void appraise_all(std::shared_ptr<Character> ch, Character *keeper, const char *fixstr);
+static void appraise_all(std::shared_ptr<Character> ch, std::shared_ptr<Character> keeper, const std::string &fixstr);
 
 void do_appraise(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -21,7 +21,7 @@ void do_appraise(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    Character *keeper = FindFixer(ch);
+    auto keeper = FindFixer(ch);
 
     if(keeper == nullptr)
         return;
@@ -75,7 +75,7 @@ void do_appraise(std::shared_ptr<Character> ch, std::string arg)
             NULL, keeper, ActTarget::Char);
 }
 
-static void appraise_all(std::shared_ptr<Character> ch, Character *keeper, const char *fixstr)
+static void appraise_all(std::shared_ptr<Character> ch, std::shared_ptr<Character> keeper, const std::string &fixstr)
 {
     char buf[MAX_STRING_LENGTH], *pbuf = buf;
     int cost = 0, total = 0;
@@ -107,7 +107,7 @@ static void appraise_all(std::shared_ptr<Character> ch, Character *keeper, const
             {
                 sprintf(buf,
                         "$N tells you, 'It will cost %d credit%s to %s %s'",
-                        cost, cost == 1 ? "" : "s", fixstr, obj->Name.c_str());
+                        cost, cost == 1 ? "" : "s", fixstr.c_str(), obj->Name.c_str());
                 Act(AT_TELL, buf, ch, NULL, keeper, ActTarget::Char);
                 total += cost;
             }

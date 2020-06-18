@@ -8,7 +8,7 @@
 
 void do_torture(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     int the_chance = 0, dam = 0;
     bool fail = false;
 

@@ -36,9 +36,9 @@
 #include "descriptor.hpp"
 #include "repos/playerrepository.hpp"
 
-static void RemoveComment( Character *ch, Character *victim, std::shared_ptr<Note> pnote );
+static void RemoveComment( std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, std::shared_ptr<Note> pnote );
 
-static void RemoveComment( Character *ch, Character *victim, std::shared_ptr<Note> pnote )
+static void RemoveComment( std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, std::shared_ptr<Note> pnote )
 {
     if ( IsNpc( victim ) )
     {
@@ -59,11 +59,11 @@ static void RemoveComment( Character *ch, Character *victim, std::shared_ptr<Not
     PlayerCharacters->Save(victim);
 }
 
-void do_comment( Character *ch, std::string argument )
+void do_comment( std::shared_ptr<Character> ch, std::string argument )
 {
     std::string arg;
     std::string arg1;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim = NULL;
     int noteNumber = 0;
     int anum = 0;
 
@@ -388,7 +388,7 @@ static void WriteToFile(std::shared_ptr<Note> pnote, FILE *fp)
     fprintf( fp,"text\n%s~\n",pnote->Text.c_str());
 }
 
-void WriteComments( const Character *ch, FILE *fp )
+void WriteComments( std::shared_ptr<Character> ch, FILE *fp )
 {
     assert(ch->PCData != NULL);
 
@@ -398,7 +398,7 @@ void WriteComments( const Character *ch, FILE *fp )
     }
 }
 
-void ReadComment( Character *ch, FILE *fp )
+void ReadComment( std::shared_ptr<Character> ch, FILE *fp )
 {
     if( IsNpc( ch ) )
         return;

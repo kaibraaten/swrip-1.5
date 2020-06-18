@@ -26,7 +26,7 @@ extern "C" {
 
 extern lua_State *LuaMasterState;
 
-lua_State *CreateLuaState(void);
+lua_State *CreateLuaState();
 lua_State *CreateChildThread(lua_State *master);
 void LuaSetfieldString(lua_State *L, const std::string &key, const std::string &value);
 void LuaSetfieldNumber(lua_State *L, const std::string &key, double value);
@@ -163,9 +163,9 @@ std::list<std::shared_ptr<Affect>> LuaLoadProtoObjectAffects(lua_State *L,
 void LuaPushObjects(lua_State *L, const std::list<std::shared_ptr<Object>> &objects,
                     const std::string &key = "Objects");
 std::list<std::shared_ptr<Object>> LuaLoadObjects(lua_State *L, const std::string &key = "Objects");
-void LuaPushMobiles(lua_State *L, const std::list<Character *> &mobiles,
+void LuaPushMobiles(lua_State *L, const std::list<std::shared_ptr<Character>> &mobiles,
                     const std::string &key = "Mobiles");
-std::list<Character *> LuaLoadMobiles(lua_State *L, const std::string &key);
+std::list<std::shared_ptr<Character>> LuaLoadMobiles(lua_State *L, const std::string &key);
 void LuaPushVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key);
 void LuaLoadVector3(lua_State *L, std::shared_ptr<Vector3> vec, const std::string &key);
 void LuaPushSaveVs(lua_State *L, const SaveVs *saveVs, const std::string &key = "SaveVs");
@@ -178,10 +178,10 @@ void LuaLoadOvalues(lua_State *L, std::array<int, MAX_OVAL> &values);
 void LuaPushExtraDescriptions(lua_State *L,
                               const std::list<std::shared_ptr<ExtraDescription>> &extras);
 std::list<std::shared_ptr<ExtraDescription>> LuaLoadExtraDescriptions(lua_State *L);
-void LuaPushCharacter(lua_State *L, const Character *ch,
-                      std::function<void(lua_State *, const Character *)> pushExtra);
-void LuaLoadCharacter(lua_State *L, Character *ch,
-                      std::function<void(lua_State *, Character *)> loadExtra);
+void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
+                      std::function<void(lua_State *, std::shared_ptr<Character>)> pushExtra);
+void LuaLoadCharacter(lua_State *L, std::shared_ptr<Character> ch,
+                      std::function<void(lua_State *, std::shared_ptr<Character>)> loadExtra);
 
 #define PushCurrentAndMax( L, key, structure ) LuaPushCurrentAndMax( (L), (key), (structure.Current), (structure.Max) )
 #define LoadCurrentAndMax( L, key, structure ) LuaLoadCurrentAndMax( (L), (key), (&structure.Current), (&structure.Max) )

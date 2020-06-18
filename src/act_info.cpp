@@ -94,7 +94,7 @@ int GetClassFromName(const std::string &arg)
     return iClass;
 }
 
-std::string FormatObjectToCharacter(std::shared_ptr<Object> obj, const Character *ch, bool fShort)
+std::string FormatObjectToCharacter(std::shared_ptr<Object> obj, std::shared_ptr<Character> ch, bool fShort)
 {
     std::ostringstream buf;
 
@@ -218,7 +218,7 @@ static std::string SeeHalucinatedObject(int ms, bool fShort)
  * Show a list to a character.
  * Can coalesce duplicated items.
  */
-void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, Character *ch,
+void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, std::shared_ptr<Character> ch,
                                bool fShort, bool fShowNothing)
 {
     char **prgpstrShow = nullptr;
@@ -426,7 +426,7 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, C
     FreeMemory(pitShow);
 }
 
-void ShowCharacterCondition(const Character *ch, const Character *victim)
+void ShowCharacterCondition(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     char buf[MAX_STRING_LENGTH];
     int percent;

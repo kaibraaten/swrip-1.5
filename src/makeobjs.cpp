@@ -67,7 +67,7 @@ void MakeScraps(std::shared_ptr<Object> obj)
 {
     auto scraps = CreateObject(GetProtoObject(OBJ_VNUM_SCRAPS), 0);
     std::shared_ptr<Object> tmpobj;
-    Character *ch = nullptr;
+    std::shared_ptr<Character> ch;
 
     SeparateOneObjectFromGroup(obj);
     scraps->Timer = GetRandomNumberFromRange(5, 15);
@@ -142,7 +142,7 @@ void MakeScraps(std::shared_ptr<Object> obj)
 /*
  * Make a corpse out of a character.
  */
-void MakeCorpse(Character *ch)
+void MakeCorpse(std::shared_ptr<Character> ch)
 {
     std::shared_ptr<Object> corpse;
     std::string name;
@@ -221,7 +221,7 @@ void MakeCorpse(Character *ch)
     ObjectToRoom(corpse, ch->InRoom);
 }
 
-void MakeBloodstain(Character *ch)
+void MakeBloodstain(std::shared_ptr<Character> ch)
 {
     auto obj = CreateObject(GetProtoObject(OBJ_VNUM_BLOODSTAIN), 0);
     obj->Timer = GetRandomNumberFromRange(1, 2);

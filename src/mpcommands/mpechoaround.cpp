@@ -7,7 +7,7 @@
 void do_mpechoaround(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     short color = 0;
 
     if(IsAffectedBy(ch, Flag::Affect::Charm))

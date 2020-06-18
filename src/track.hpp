@@ -33,7 +33,7 @@
 constexpr size_t BFSMark = Flag::Room::Reserved;
 
 int FindFirstStep(std::shared_ptr<Room> src, std::shared_ptr<Room> target, int maxdist);
-void FoundPrey(Character *ch, Character *victim);
-void HuntVictim(Character *ch);
+void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+void HuntVictim(std::shared_ptr<Character> ch);
 
 #endif

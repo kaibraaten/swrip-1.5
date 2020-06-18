@@ -6,17 +6,17 @@
 /*
  * Generic mob creating spell                                   -Thoric
  */
-ch_ret spell_create_mob(int sn, int level, Character* ch, const Vo &vo)
+ch_ret spell_create_mob(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
     int lvl;
     int vnum = skill->Value;
-    Character* mob;
+    std::shared_ptr<Character> mob;
     std::shared_ptr<ProtoMobile> mi;
     auto af = std::make_shared<Affect>();
 
     /* set maximum mob level */
-    switch (SPELL_POWER(skill))
+    switch(SPELL_POWER(skill))
     {
     default:
     case SP_NONE:
@@ -39,13 +39,13 @@ ch_ret spell_create_mob(int sn, int level, Character* ch, const Vo &vo)
     /*
      * Add predetermined mobiles here
      */
-    if (vnum == 0)
+    if(vnum == 0)
     {
         return rNONE;
     }
 
-    if ((mi = GetProtoMobile(vnum)) == NULL
-        || (mob = CreateMobile(mi)) == NULL)
+    if((mi = GetProtoMobile(vnum)) == NULL
+       || (mob = CreateMobile(mi)) == NULL)
     {
         FailedCasting(skill, ch, NULL, NULL);
         return rNONE;

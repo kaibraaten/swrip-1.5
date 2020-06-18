@@ -8,29 +8,28 @@
 void do_mpmload(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<ProtoMobile> pMobIndex;
-    Character *victim = nullptr;
 
-    if (IsAffectedBy(ch, Flag::Affect::Charm))
+    if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
-    if (!IsNpc(ch))
+    if(!IsNpc(ch))
     {
         ch->Echo("Huh?\r\n");
         return;
     }
 
-    if (arg.empty() || !IsNumber(arg))
+    if(arg.empty() || !IsNumber(arg))
     {
         ProgBug("Mpmload - Bad vnum as arg", ch);
         return;
     }
 
-    if ((pMobIndex = GetProtoMobile(ToLong(arg))) == NULL)
+    if((pMobIndex = GetProtoMobile(ToLong(arg))) == NULL)
     {
         ProgBug("Mpmload - Bad mob vnum", ch);
         return;
     }
 
-    victim = CreateMobile(pMobIndex);
+    auto victim = CreateMobile(pMobIndex);
     CharacterToRoom(victim, ch->InRoom);
 }

@@ -18,11 +18,11 @@
  *                        Alias module header information                   *
  ****************************************************************************/
 
-/******************************************************
-            Desolation of the Dragon MUD II
-      (C) 1997, 1998  Jesse DeFer and Heath Leach
- http://dotd.mudservices.com  dotd@dotd.mudservices.com
- ******************************************************/
+ /******************************************************
+             Desolation of the Dragon MUD II
+       (C) 1997, 1998  Jesse DeFer and Heath Leach
+  http://dotd.mudservices.com  dotd@dotd.mudservices.com
+  ******************************************************/
 
 #ifndef _SWRIP_ALIAS_HPP_
 #define _SWRIP_ALIAS_HPP_
@@ -34,15 +34,15 @@
 class Alias
 {
 public:
-  std::string Name;
-  std::string Command;
+    std::string Name;
+    std::string Command;
 };
 
-void FreeAliases( Character *ch );
-bool CheckAlias( Character *ch, const std::string &command, const std::string &argument );
-std::shared_ptr<Alias> FindAlias( const Character *ch, const std::string &argument );
-std::shared_ptr<Alias> AllocateAlias( const std::string &name, const std::string &command );
-void AddAlias( Character *ch, std::shared_ptr<Alias> alias );
-void UnlinkAlias( Character *ch, std::shared_ptr<Alias> alias );
+void FreeAliases(std::shared_ptr<Character> ch);
+bool CheckAlias(std::shared_ptr<Character> ch, const std::string &command, const std::string &argument);
+std::shared_ptr<Alias> FindAlias(std::shared_ptr<Character> ch, const std::string &argument);
+std::shared_ptr<Alias> AllocateAlias(const std::string &name, const std::string &command);
+void AddAlias(std::shared_ptr<Character> ch, std::shared_ptr<Alias> alias);
+void UnlinkAlias(std::shared_ptr<Character> ch, std::shared_ptr<Alias> alias);
 
 #endif

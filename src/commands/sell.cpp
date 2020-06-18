@@ -8,7 +8,7 @@
 void do_sell(std::shared_ptr<Character> ch, std::string arg)
 {
     char buf[MAX_STRING_LENGTH];
-    Character *keeper = nullptr;
+    std::shared_ptr<Character> keeper;
     std::shared_ptr<Object> obj;
     int cost = 0;
     bool spice = false;

@@ -15,7 +15,7 @@ void do_throw(std::shared_ptr<Character> ch, std::string argument)
     std::string arg3;
     DirectionType dir = DIR_INVALID;
     std::shared_ptr<Exit> pexit;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     char buf[MAX_STRING_LENGTH];
 
     argument = OneArgument(argument, arg);

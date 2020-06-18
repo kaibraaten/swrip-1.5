@@ -328,7 +328,7 @@ void ShuttleUpdate()
     }
 }
 
-void ShowShuttlesToCharacter(const std::list<std::shared_ptr<Shuttle>> &shuttles, const Character *ch)
+void ShowShuttlesToCharacter(const std::list<std::shared_ptr<Shuttle>> &shuttles, std::shared_ptr<Character> ch)
 {
     const int NUMBER_OF_COLUMNS = 2;
     int column = 0;

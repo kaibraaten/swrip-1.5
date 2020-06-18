@@ -34,7 +34,7 @@
 
 #define TRACK_THROUGH_DOORS
 
-static bool MobSnipe(Character *ch, Character *victim);
+static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 
 /* You can define or not define TRACK_THOUGH_DOORS, above, depending on
    whether or not you want track to find paths which lead through closed
@@ -225,7 +225,7 @@ int FindFirstStep(std::shared_ptr<Room> src, std::shared_ptr<Room> target, int m
     return BFS_NO_PATH;
 }
 
-void FoundPrey(Character *ch, Character *victim)
+void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     assert(victim != nullptr);
     assert(ch != nullptr);
@@ -335,10 +335,10 @@ void FoundPrey(Character *ch, Character *victim)
     HitMultipleTimes(ch, victim, TYPE_UNDEFINED);
 }
 
-void HuntVictim(Character *ch)
+void HuntVictim(std::shared_ptr<Character> ch)
 {
     bool found = false;
-    Character *tmp = NULL;
+    std::shared_ptr<Character> tmp;
     DirectionType ret;
 
     if (!ch || !ch->HHF.Hunting || !ch->HHF.Hunting->Who)
@@ -443,7 +443,7 @@ void HuntVictim(Character *ch)
     }
 }
 
-static bool MobSnipe(Character *ch, Character *victim)
+static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     DirectionType dir = DIR_INVALID;
     short dist = 0;

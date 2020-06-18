@@ -36,7 +36,7 @@
 static std::shared_ptr<Room> vroom_hash[64];
 
 static void DecorateVirtualRoom(std::shared_ptr<Room> room);
-static void TeleportCharacter(Character *ch, std::shared_ptr<Room> room, bool show);
+static void TeleportCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Room> room, bool show);
 
 static void DecorateVirtualRoom(std::shared_ptr<Room> room)
 {
@@ -191,7 +191,7 @@ std::shared_ptr<Exit> GetExitNumber(std::shared_ptr<Room> room, short count)
 /*
  * Check to see if a character can fall down, checks for looping   -Thoric
  */
-bool CharacterFallIfNoFloor(Character *ch, int fall)
+bool CharacterFallIfNoFloor(std::shared_ptr<Character> ch, int fall)
 {
     if (ch->InRoom->Flags.test(Flag::Room::NoFloor)
         && CAN_GO(ch, DIR_DOWN)
@@ -319,7 +319,7 @@ std::shared_ptr<Room> GenerateExit(std::shared_ptr<Room> in_room, std::shared_pt
     return room;
 }
 
-ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
+ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit, int fall)
 {
     char buf[MAX_STRING_LENGTH];
     const char *txt = nullptr;
@@ -944,9 +944,9 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
     {
         size_t count = 0;
         const size_t chars = from_room->Characters().size();
-        std::list<Character*> copyOfCharacterList(from_room->Characters());
+        auto copyOfCharacterList = from_room->Characters();
 
-        for (Character *fch : copyOfCharacterList)
+        for (std::shared_ptr<Character> fch : copyOfCharacterList)
         {
             if (count++ >= chars)
             {
@@ -1011,7 +1011,7 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
     return retcode;
 }
 
-std::shared_ptr<Exit> FindDoor(Character *ch, const std::string &arg, bool quiet)
+std::shared_ptr<Exit> FindDoor(std::shared_ptr<Character> ch, const std::string &arg, bool quiet)
 {
     std::shared_ptr<Exit> pexit;
     DirectionType door = DIR_INVALID;
@@ -1134,7 +1134,7 @@ void RemoveBExitFlag(std::shared_ptr<Exit> pexit, size_t flag)
 /*
  * teleport a character to another room
  */
-static void TeleportCharacter(Character *ch, std::shared_ptr<Room> room, bool show)
+static void TeleportCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Room> room, bool show)
 {
     if (IsRoomPrivate(ch, room))
         return;
@@ -1148,7 +1148,7 @@ static void TeleportCharacter(Character *ch, std::shared_ptr<Room> room, bool sh
         do_look(ch, "auto");
 }
 
-void Teleport(Character *ch, vnum_t room, int flags)
+void Teleport(std::shared_ptr<Character> ch, vnum_t room, int flags)
 {
     auto pRoomIndex = GetRoom(room);
 
@@ -1168,7 +1168,7 @@ void Teleport(Character *ch, vnum_t room, int flags)
 
     auto copyOfCharacterList(ch->InRoom->Characters());
 
-    for (Character *nch : copyOfCharacterList)
+    for (std::shared_ptr<Character> nch : copyOfCharacterList)
     {
         TeleportCharacter(nch, pRoomIndex, show);
     }

@@ -16,9 +16,6 @@ void do_restore(std::shared_ptr<Character> ch, std::string arg)
 
     if(!StrCmp(arg, "all"))
     {
-        Character *vch = nullptr;
-        Character *vch_next = nullptr;
-
         if(!ch->PCData)
             return;
 
@@ -45,7 +42,7 @@ void do_restore(std::shared_ptr<Character> ch, std::string arg)
         PlayerCharacters->Save(ch);
         ch->Echo("Ok.\r\n");
 
-        for(vch = FirstCharacter; vch; vch = vch_next)
+        for(std::shared_ptr<Character> vch = FirstCharacter, vch_next; vch; vch = vch_next)
         {
             vch_next = vch->Next;
 
@@ -62,7 +59,7 @@ void do_restore(std::shared_ptr<Character> ch, std::string arg)
     }
     else
     {
-        Character *victim = nullptr;
+        std::shared_ptr<Character> victim;
 
         if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
         {

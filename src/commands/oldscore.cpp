@@ -3,9 +3,9 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_oldscore(Character* ch, std::string argument)
+void do_oldscore(std::shared_ptr<Character> ch, std::string argument)
 {
-    if (IsAffectedBy(ch, Flag::Affect::Possess))
+    if(IsAffectedBy(ch, Flag::Affect::Possess))
     {
         ch->Echo("You can't do that in your current state of mind!\r\n");
         return;
@@ -17,11 +17,11 @@ void do_oldscore(Character* ch, std::string argument)
              IsNpc(ch) ? "" : ch->PCData->Title.c_str(),
              ch->TopLevel);
 
-    if (GetTrustLevel(ch) != ch->TopLevel)
+    if(GetTrustLevel(ch) != ch->TopLevel)
         ch->Echo("You are trusted at level %d.\r\n",
                  GetTrustLevel(ch));
 
-    if (ch->Flags.test(Flag::Mob::MobInvis))
+    if(ch->Flags.test(Flag::Mob::MobInvis))
         ch->Echo("You are mobinvis at level %d.\r\n",
                  ch->MobInvis);
 
@@ -51,16 +51,16 @@ void do_oldscore(Character* ch, std::string argument)
 
     ch->Echo("Wimpy set to %d hit points.\r\n", ch->Wimpy);
 
-    if (!IsNpc(ch) && ch->PCData->Condition[COND_DRUNK] > 10)
+    if(!IsNpc(ch) && ch->PCData->Condition[COND_DRUNK] > 10)
         ch->Echo("You are drunk.\r\n");
 
-    if (!IsNpc(ch) && ch->PCData->Condition[COND_THIRST] == 0)
+    if(!IsNpc(ch) && ch->PCData->Condition[COND_THIRST] == 0)
         ch->Echo("You are thirsty.\r\n");
 
-    if (!IsNpc(ch) && ch->PCData->Condition[COND_FULL] == 0)
+    if(!IsNpc(ch) && ch->PCData->Condition[COND_FULL] == 0)
         ch->Echo("You are hungry.\r\n");
 
-    switch (ch->MentalState / 10)
+    switch(ch->MentalState / 10)
     {
     default:
         ch->Echo("You're completely messed up!\r\n");
@@ -151,7 +151,7 @@ void do_oldscore(Character* ch, std::string argument)
         break;
     }
 
-    switch (ch->Position)
+    switch(ch->Position)
     {
     case POS_DEAD:
         ch->Echo("You are DEAD!!\r\n");
@@ -201,77 +201,77 @@ void do_oldscore(Character* ch, std::string argument)
         break;
     }
 
-    if (ch->TopLevel >= 25)
+    if(ch->TopLevel >= 25)
         ch->Echo("AC: %d.  ", GetArmorClass(ch));
 
     ch->Echo("You are ");
 
-    if (GetArmorClass(ch) >= 101)
+    if(GetArmorClass(ch) >= 101)
         ch->Echo("WORSE than naked!\r\n");
-    else if (GetArmorClass(ch) >= 80)
+    else if(GetArmorClass(ch) >= 80)
         ch->Echo("naked.\r\n");
-    else if (GetArmorClass(ch) >= 60)
+    else if(GetArmorClass(ch) >= 60)
         ch->Echo("wearing clothes.\r\n");
-    else if (GetArmorClass(ch) >= 40)
+    else if(GetArmorClass(ch) >= 40)
         ch->Echo("slightly armored.\r\n");
-    else if (GetArmorClass(ch) >= 20)
+    else if(GetArmorClass(ch) >= 20)
         ch->Echo("somewhat armored.\r\n");
-    else if (GetArmorClass(ch) >= 0)
+    else if(GetArmorClass(ch) >= 0)
         ch->Echo("armored.\r\n");
-    else if (GetArmorClass(ch) >= -20)
+    else if(GetArmorClass(ch) >= -20)
         ch->Echo("well armored.\r\n");
-    else if (GetArmorClass(ch) >= -40)
+    else if(GetArmorClass(ch) >= -40)
         ch->Echo("strongly armored.\r\n");
-    else if (GetArmorClass(ch) >= -60)
+    else if(GetArmorClass(ch) >= -60)
         ch->Echo("heavily armored.\r\n");
-    else if (GetArmorClass(ch) >= -80)
+    else if(GetArmorClass(ch) >= -80)
         ch->Echo("superbly armored.\r\n");
-    else if (GetArmorClass(ch) >= -100)
+    else if(GetArmorClass(ch) >= -100)
         ch->Echo("divinely armored.\r\n");
     else
         ch->Echo("invincible!\r\n");
 
-    if (ch->TopLevel >= 15)
+    if(ch->TopLevel >= 15)
         ch->Echo("Hitroll: %d  Damroll: %d.\r\n",
                  GetHitRoll(ch), GetDamageRoll(ch));
 
-    if (ch->TopLevel >= 10)
+    if(ch->TopLevel >= 10)
         ch->Echo("Alignment: %d.  ", ch->Alignment);
 
     ch->Echo("You are ");
 
-    if (ch->Alignment > 900)
+    if(ch->Alignment > 900)
         ch->Echo("angelic.\r\n");
-    else if (ch->Alignment > 700)
+    else if(ch->Alignment > 700)
         ch->Echo("saintly.\r\n");
-    else if (ch->Alignment > 350)
+    else if(ch->Alignment > 350)
         ch->Echo("good.\r\n");
-    else if (ch->Alignment > 100)
+    else if(ch->Alignment > 100)
         ch->Echo("kind.\r\n");
-    else if (ch->Alignment > -100)
+    else if(ch->Alignment > -100)
         ch->Echo("neutral.\r\n");
-    else if (ch->Alignment > -350)
+    else if(ch->Alignment > -350)
         ch->Echo("mean.\r\n");
-    else if (ch->Alignment > -700)
+    else if(ch->Alignment > -700)
         ch->Echo("evil.\r\n");
-    else if (ch->Alignment > -900)
+    else if(ch->Alignment > -900)
         ch->Echo("demonic.\r\n");
     else
         ch->Echo("satanic.\r\n");
 
-    if (!ch->Affects().empty())
+    if(!ch->Affects().empty())
     {
         ch->Echo("You are affected by:\r\n");
 
-        for (auto paf : ch->Affects())
+        for(auto paf : ch->Affects())
         {
             std::shared_ptr<Skill> skill = GetSkill(paf->Type);
 
-            if (skill != nullptr)
+            if(skill != nullptr)
             {
                 ch->Echo("Spell: '%s'", skill->Name.c_str());
 
-                if (ch->TopLevel >= 20)
+                if(ch->TopLevel >= 20)
                 {
                     ch->Echo(" modifies %s by %d for %d rounds",
                              GetAffectLocationName(paf->Location),
@@ -284,23 +284,23 @@ void do_oldscore(Character* ch, std::string argument)
         }
     }
 
-    if (!IsNpc(ch) && IsImmortal(ch))
+    if(!IsNpc(ch) && IsImmortal(ch))
     {
         ch->Echo("WizInvis level: %d   WizInvis is %s\r\n",
                  ch->PCData->WizInvis,
                  ch->Flags.test(Flag::Plr::WizInvis) ? "ON" : "OFF");
 
-        if (ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last)
+        if(ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last)
             ch->Echo("Room Range: %ld - %ld\r\n",
                      ch->PCData->Build.VnumRanges.Room.First,
                      ch->PCData->Build.VnumRanges.Room.Last);
 
-        if (ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last)
+        if(ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last)
             ch->Echo("Obj Range : %ld - %ld\r\n",
                      ch->PCData->Build.VnumRanges.Object.First,
                      ch->PCData->Build.VnumRanges.Object.Last);
 
-        if (ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last)
+        if(ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last)
             ch->Echo("Mob Range : %ld - %ld\r\n",
                      ch->PCData->Build.VnumRanges.Mob.First,
                      ch->PCData->Build.VnumRanges.Mob.Last);

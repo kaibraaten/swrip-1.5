@@ -1,24 +1,24 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_retran( std::shared_ptr<Character> ch, std::string arg )
+void do_retran(std::shared_ptr<Character> ch, std::string arg)
 {
-  Character *victim = nullptr;
-  char buf[MAX_STRING_LENGTH];
+    std::shared_ptr<Character> victim;
+    char buf[MAX_STRING_LENGTH];
 
-  if ( arg.empty() )
+    if(arg.empty())
     {
-      ch->Echo("Retransfer whom?\r\n");
-      return;
+        ch->Echo("Retransfer whom?\r\n");
+        return;
     }
 
-  if ( !(victim = GetCharacterAnywhere(ch, arg)) )
+    if(!(victim = GetCharacterAnywhere(ch, arg)))
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  sprintf(buf, "'%s' %ld", victim->Name.c_str(), victim->ReTran);
-  do_transfer(ch, buf);
+    sprintf(buf, "'%s' %ld", victim->Name.c_str(), victim->ReTran);
+    do_transfer(ch, buf);
 }
 

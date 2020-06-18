@@ -6,7 +6,7 @@
 #include "protomob.hpp"
 #include "act.hpp"
 
-static void repair_one_obj(std::shared_ptr<Character> ch, Character *keeper, std::shared_ptr<Object> obj,
+static void repair_one_obj(std::shared_ptr<Character> ch, std::shared_ptr<Character> keeper, std::shared_ptr<Object> obj,
                            std::string arg, int maxgold,
                            const std::string &fixstr, const std::string &fixstr2);
 
@@ -18,7 +18,7 @@ void do_repair(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    Character *keeper = FindFixer(ch);
+    auto keeper = FindFixer(ch);
 
     if(keeper == nullptr)
         return;
@@ -71,7 +71,7 @@ void do_repair(std::shared_ptr<Character> ch, std::string argument)
     repair_one_obj(ch, keeper, obj, argument, maxgold, fixstr, fixstr2);
 }
 
-static void repair_one_obj(std::shared_ptr<Character> ch, Character *keeper, std::shared_ptr<Object> obj,
+static void repair_one_obj(std::shared_ptr<Character> ch, std::shared_ptr<Character> keeper, std::shared_ptr<Object> obj,
                            std::string arg, int maxgold,
                            const std::string &fixstr, const std::string &fixstr2)
 {

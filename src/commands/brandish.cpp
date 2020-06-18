@@ -43,9 +43,9 @@ void do_brandish(std::shared_ptr<Character> ch, std::string argument)
             Act(AT_MAGIC, "You brandish $p.", ch, staff, NULL, ActTarget::Char);
         }
 
-        std::list<Character *> copyOfCharactersInRoom(ch->InRoom->Characters());
+        auto copyOfCharactersInRoom = ch->InRoom->Characters();
 
-        for(Character *vch : copyOfCharactersInRoom)
+        for(auto vch : copyOfCharactersInRoom)
         {
             if(!IsNpc(vch) && vch->Flags.test(Flag::Plr::WizInvis)
                && vch->PCData->WizInvis >= LEVEL_IMMORTAL)

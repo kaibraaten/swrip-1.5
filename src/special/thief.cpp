@@ -10,7 +10,7 @@ bool spec_thief(std::shared_ptr<Character> ch)
     if(ch->Position != POS_STANDING)
         return false;
 
-    for(Character *victim : RandomizeOrder(ch->InRoom->Characters()))
+    for(auto victim : RandomizeOrder(ch->InRoom->Characters()))
     {
         if(GetTrustLevel(victim) >= LEVEL_IMMORTAL
            || NumberBits(2) != 0

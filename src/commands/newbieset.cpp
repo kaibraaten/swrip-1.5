@@ -4,7 +4,7 @@
 
 void do_newbieset(std::shared_ptr<Character> ch, std::string arg1)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
     if(arg1.empty())
     {

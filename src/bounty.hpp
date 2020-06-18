@@ -13,11 +13,11 @@ public:
     std::string Poster;
 };
 
-void AddBounty(const Character *ch, const Character *victim, long amount);
+void AddBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, long amount);
 std::shared_ptr<Bounty> GetBounty(const std::string &target);
 void LoadBounties();
 void RemoveBounty(std::shared_ptr<Bounty> bounty);
-void ClaimBounty(Character *ch, const Character *victim);
-bool IsBountyOn(const Character *victim);
+void ClaimBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+bool IsBountyOn(std::shared_ptr<Character> victim);
 
 #endif

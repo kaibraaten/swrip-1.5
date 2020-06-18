@@ -27,16 +27,16 @@
 #include "pcdata.hpp"
 #include "repos/clanrepository.hpp"
 
-//////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////
 struct Clan::Impl
 {
-  std::list<std::shared_ptr<Clan>> Subclans;
-  std::list<std::shared_ptr<ClanMember>> Members;
+    std::list<std::shared_ptr<Clan>> Subclans;
+    std::list<std::shared_ptr<ClanMember>> Members;
 };
 
 //////////////////////////////////////////////////////////////
 Clan::Clan()
-  : pImpl(std::make_unique<Impl>())
+    : pImpl(std::make_unique<Impl>())
 {
 
 }
@@ -48,36 +48,36 @@ Clan::~Clan()
 
 void Clan::Add(const std::shared_ptr<Clan> &guild)
 {
-  pImpl->Subclans.push_back(guild);
+    pImpl->Subclans.push_back(guild);
 
-  guild->Type = CLAN_GUILD;
-  guild->MainClan = GetClan(this->Name);
+    guild->Type = CLAN_GUILD;
+    guild->MainClan = GetClan(this->Name);
 }
 
 void Clan::Remove(const std::shared_ptr<Clan> &guild)
 {
-  pImpl->Subclans.remove(guild);
-  guild->MainClan = nullptr;
+    pImpl->Subclans.remove(guild);
+    guild->MainClan = nullptr;
 }
 
 const std::list<std::shared_ptr<Clan>> &Clan::Subclans() const
 {
-  return pImpl->Subclans;
+    return pImpl->Subclans;
 }
 
 void Clan::Add(const std::shared_ptr<ClanMember> &member)
 {
-  pImpl->Members.push_back(member);
+    pImpl->Members.push_back(member);
 }
 
 void Clan::Remove(const std::shared_ptr<ClanMember> &member)
 {
-  pImpl->Members.remove(member);
+    pImpl->Members.remove(member);
 }
 
 const std::list<std::shared_ptr<ClanMember>> &Clan::Members() const
 {
-  return pImpl->Members;
+    return pImpl->Members;
 }
 
 //////////////////////////////////////////////////////////////
@@ -85,215 +85,215 @@ const std::list<std::shared_ptr<ClanMember>> &Clan::Members() const
 /*
  * Get pointer to clan structure from clan name.
  */
-std::shared_ptr<Clan> GetClan( const std::string &name )
+std::shared_ptr<Clan> GetClan(const std::string &name)
 {
-  return Clans->Find([name](const auto &clan)
-                     {
-                       return StrCmp(clan->Name, name) == 0;
-                     });
+    return Clans->Find([name](const auto &clan)
+                       {
+                           return StrCmp(clan->Name, name) == 0;
+                       });
 }
 
 void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild)
 {
-  std::shared_ptr<Clan> mainClan = GetClan( guild->MainClanName );
-  AssignGuildToMainclan( guild, mainClan );
+    std::shared_ptr<Clan> mainClan = GetClan(guild->MainClanName);
+    AssignGuildToMainclan(guild, mainClan);
 }
 
 void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild,
-                           const std::shared_ptr<Clan> &mainClan )
+                           const std::shared_ptr<Clan> &mainClan)
 {
-  if ( mainClan )
+    if(mainClan)
     {
-      mainClan->Add(guild);
+        mainClan->Add(guild);
     }
 }
 
 static int MoreKillsThan(const std::shared_ptr<ClanMember> &lhv,
                          const std::shared_ptr<ClanMember> &rhv)
 {
-  return lhv->Kills > rhv->Kills ? -1 : lhv->Kills < rhv->Kills ? 1 : 0;
+    return lhv->Kills > rhv->Kills ? -1 : lhv->Kills < rhv->Kills ? 1 : 0;
 }
 
 static int MoreDeathsThan(const std::shared_ptr<ClanMember> &lhv,
                           const std::shared_ptr<ClanMember> &rhv)
 {
-  return lhv->Deaths > rhv->Deaths ? -1 : lhv->Deaths < rhv->Deaths ? 1 : 0;
+    return lhv->Deaths > rhv->Deaths ? -1 : lhv->Deaths < rhv->Deaths ? 1 : 0;
 }
 
 static int LessName(const std::shared_ptr<ClanMember> &lhv,
                     const std::shared_ptr<ClanMember> &rhv)
 {
-  return StrCmp(lhv->Name, rhv->Name);
+    return StrCmp(lhv->Name, rhv->Name);
 }
 
-void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,
-                     const std::string &format )
+void ShowClanMembers(std::shared_ptr<Character> ch, const std::shared_ptr<Clan> &clan,
+                     const std::string &format)
 {
-  int members = 0;
+    int members = 0;
 
-  assert(clan != nullptr);
+    assert(clan != nullptr);
 
-  ch->Echo( "\r\nMembers of %s\r\n", clan->Name.c_str() );
-  ch->Echo( "------------------------------------------------------------------------------\r\n" );
-  ch->Echo( "Leader: %s\r\n", clan->Leadership.Leader.c_str() );
-  ch->Echo( "Number1: %s\r\n", clan->Leadership.Number1.c_str() );
-  ch->Echo( "Number2: %s\r\n", clan->Leadership.Number2.c_str() );
-  ch->Echo( "Spacecraft: %d  Vehicles: %d\r\n", clan->Spacecraft, clan->Vehicles );
-  ch->Echo( "------------------------------------------------------------------------------\r\n" );
-  ch->Echo( "Lvl  Name            Class                 Kills    Deaths              Joined\r\n\r\n" );
+    ch->Echo("\r\nMembers of %s\r\n", clan->Name.c_str());
+    ch->Echo("------------------------------------------------------------------------------\r\n");
+    ch->Echo("Leader: %s\r\n", clan->Leadership.Leader.c_str());
+    ch->Echo("Number1: %s\r\n", clan->Leadership.Number1.c_str());
+    ch->Echo("Number2: %s\r\n", clan->Leadership.Number2.c_str());
+    ch->Echo("Spacecraft: %d  Vehicles: %d\r\n", clan->Spacecraft, clan->Vehicles);
+    ch->Echo("------------------------------------------------------------------------------\r\n");
+    ch->Echo("Lvl  Name            Class                 Kills    Deaths              Joined\r\n\r\n");
 
-  if( !format.empty() )
+    if(!format.empty())
     {
-      if( !StrCmp( format, "kills" )
-          || !StrCmp( format, "deaths" )
-          || !StrCmp( format, "alpha" ))
+        if(!StrCmp(format, "kills")
+           || !StrCmp(format, "deaths")
+           || !StrCmp(format, "alpha"))
         {
-          std::list<std::shared_ptr<ClanMember>> sortedList;
+            std::list<std::shared_ptr<ClanMember>> sortedList;
 
-          for( const auto &member : clan->Members() )
+            for(const auto &member : clan->Members())
             {
-              if( StrCmp( member->Name, clan->Leadership.Leader ) != 0
-                  && StrCmp( member->Name, clan->Leadership.Number1 ) != 0
-                  && StrCmp( member->Name, clan->Leadership.Number2 ) != 0 )
+                if(StrCmp(member->Name, clan->Leadership.Leader) != 0
+                   && StrCmp(member->Name, clan->Leadership.Number1) != 0
+                   && StrCmp(member->Name, clan->Leadership.Number2) != 0)
                 {
-                  sortedList.push_back(member);
+                    sortedList.push_back(member);
                 }
             }
 
-          if( !StrCmp( format, "kills" ))
+            if(!StrCmp(format, "kills"))
             {
-              sortedList.sort(MoreKillsThan);
+                sortedList.sort(MoreKillsThan);
             }
-          else if( !StrCmp( format, "deaths" ))
+            else if(!StrCmp(format, "deaths"))
             {
-              sortedList.sort(MoreDeathsThan);
+                sortedList.sort(MoreDeathsThan);
             }
-          else if( !StrCmp( format, "alpha" ))
+            else if(!StrCmp(format, "alpha"))
             {
-              sortedList.sort(LessName);
+                sortedList.sort(LessName);
             }
 
-          for(const auto &member : sortedList)
+            for(const auto &member : sortedList)
             {
-              members++;
-              ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
-                        member->Level,
-                        Capitalize(member->Name).c_str(),
-                        AbilityName[member->Ability],
-                        member->Kills,
-                        member->Deaths,
-                        FormatDate( &member->Since ).c_str() );
-	    }
+                members++;
+                ch->Echo("%3d  %-15s %-17s %9d %9d %19s\r\n",
+                         member->Level,
+                         Capitalize(member->Name).c_str(),
+                         AbilityName[member->Ability],
+                         member->Kills,
+                         member->Deaths,
+                         FormatDate(&member->Since).c_str());
+            }
         }
-      else
+        else
         {
-          for(const auto &member : clan->Members())
+            for(const auto &member : clan->Members())
             {
-              if( !StringPrefix( format, member->Name ) )
+                if(!StringPrefix(format, member->Name))
                 {
-                  members++;
-                  ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
-                            member->Level,
-                            Capitalize(member->Name ).c_str(),
-                            AbilityName[member->Ability],
-                            member->Kills,
-                            member->Deaths,
-                            FormatDate( &member->Since ).c_str() );
+                    members++;
+                    ch->Echo("%3d  %-15s %-17s %9d %9d %19s\r\n",
+                             member->Level,
+                             Capitalize(member->Name).c_str(),
+                             AbilityName[member->Ability],
+                             member->Kills,
+                             member->Deaths,
+                             FormatDate(&member->Since).c_str());
                 }
             }
         }
     }
-  else
+    else
     {
-      for(const auto &member : clan->Members())
-	{
-	  members++;
-	  ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
-                    member->Level,
-                    Capitalize(member->Name).c_str(),
-                    AbilityName[member->Ability],
-                    member->Kills,
-                    member->Deaths,
-                    FormatDate( &member->Since ).c_str() );
-	}
+        for(const auto &member : clan->Members())
+        {
+            members++;
+            ch->Echo("%3d  %-15s %-17s %9d %9d %19s\r\n",
+                     member->Level,
+                     Capitalize(member->Name).c_str(),
+                     AbilityName[member->Ability],
+                     member->Kills,
+                     member->Deaths,
+                     FormatDate(&member->Since).c_str());
+        }
     }
 
-  ch->Echo( "------------------------------------------------------------------------------\r\n" );
-  ch->Echo( "Total Members: %d\r\n", members );
-  ch->Echo( "------------------------------------------------------------------------------\r\n" );
+    ch->Echo("------------------------------------------------------------------------------\r\n");
+    ch->Echo("Total Members: %d\r\n", members);
+    ch->Echo("------------------------------------------------------------------------------\r\n");
 }
 
-void RemoveClanMember( const Character *ch )
+void RemoveClanMember(std::shared_ptr<Character> ch)
 {
-  if( !ch->PCData )
+    if(!ch->PCData)
     {
-      return;
+        return;
     }
 
-  std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
+    std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
 
-  if(clan != nullptr)
+    if(clan != nullptr)
     {
-      std::string name = ch->Name;
-      std::shared_ptr<ClanMember> member = Find(clan->Members(),
-                                                [name](const auto m)
-                                                {
-                                                  return StrCmp(m->Name, name) == 0;
-                                                });
-      
-      if( member != nullptr )
-	{
-          clan->Remove(member);
-	  Clans->Save( ch->PCData->ClanInfo.Clan );
-	}
+        std::string name = ch->Name;
+        std::shared_ptr<ClanMember> member = Find(clan->Members(),
+                                                  [name](const auto m)
+                                                  {
+                                                      return StrCmp(m->Name, name) == 0;
+                                                  });
+
+        if(member != nullptr)
+        {
+            clan->Remove(member);
+            Clans->Save(ch->PCData->ClanInfo.Clan);
+        }
     }
 }
 
-void UpdateClanMember( const Character *ch )
+void UpdateClanMember(std::shared_ptr<Character> ch)
 {
-  if( IsNpc( ch ) || IsImmortal(ch) || !IsClanned( ch ) )
+    if(IsNpc(ch) || IsImmortal(ch) || !IsClanned(ch))
     {
-      return;
+        return;
     }
 
-  std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
+    std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
 
-  if( clan != nullptr )
+    if(clan != nullptr)
     {
-      std::string name = ch->Name;
-      std::shared_ptr<ClanMember> member = Find(clan->Members(),
-                                                [name](const auto m)
-                                                {
-                                                  return StrCmp(m->Name, name) == 0;
-                                                });
+        std::string name = ch->Name;
+        std::shared_ptr<ClanMember> member = Find(clan->Members(),
+                                                  [name](const auto m)
+                                                  {
+                                                      return StrCmp(m->Name, name) == 0;
+                                                  });
 
-      if( member == nullptr )
-	{
-          member = std::make_shared<ClanMember>();
-	  member->Name = ch->Name;
-	  member->Since = current_time;
+        if(member == nullptr)
+        {
+            member = std::make_shared<ClanMember>();
+            member->Name = ch->Name;
+            member->Since = current_time;
 
-          clan->Add(member);
-	}
+            clan->Add(member);
+        }
 
-      member->Kills = ch->PCData->PKills;
-      member->Deaths = ch->PCData->Clones;
-      member->Ability = ch->Ability.Main;
-      member->Level = ch->TopLevel;
-      member->LastActivity = current_time;
-      
-      Clans->Save( ch->PCData->ClanInfo.Clan );
+        member->Kills = ch->PCData->PKills;
+        member->Deaths = ch->PCData->Clones;
+        member->Ability = ch->Ability.Main;
+        member->Level = ch->TopLevel;
+        member->LastActivity = current_time;
+
+        Clans->Save(ch->PCData->ClanInfo.Clan);
     }
 }
 
 std::shared_ptr<Clan> AllocateClan()
 {
-  return std::make_shared<Clan>();
+    return std::make_shared<Clan>();
 }
 
 bool IsBountyHuntersGuild(const std::string &clanName)
 {
-  return !StrCmp(clanName, "the hunters guild")
-    || !StrCmp(clanName, "the bounty hunters guild")
-    || !StrCmp(clanName, "the assassins guild");
+    return !StrCmp(clanName, "the hunters guild")
+        || !StrCmp(clanName, "the bounty hunters guild")
+        || !StrCmp(clanName, "the assassins guild");
 }

@@ -11,7 +11,7 @@
 
 void do_collectgold(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *vendor = NULL;
+    std::shared_ptr<Character> vendor;
     std::shared_ptr<Character> ch1 = NULL;
     long gold = 0;
     std::string name;

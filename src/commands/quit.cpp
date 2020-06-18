@@ -14,7 +14,6 @@ static bool CanQuitHere(const std::shared_ptr<Character> ch, std::shared_ptr<Roo
 
 void do_quit(std::shared_ptr<Character> ch, std::string argument)
 {
-    int x = 0, y = 0;
     int level = 0;
     char qbuf[MAX_INPUT_LENGTH] = { '\0' };
 
@@ -57,10 +56,10 @@ void do_quit(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(ch->Challenged)
+    if(!ch->Challenged.expired())
     {
         sprintf(qbuf, "%s has quit! Challenge is void. WHAT A WUSS!", ch->Name.c_str());
-        ch->Challenged = NULL;
+        ch->Challenged.reset();
         ToChannel(qbuf, CHANNEL_ARENA, "&RArena&W", 5);
     }
 
@@ -83,15 +82,15 @@ void do_quit(std::shared_ptr<Character> ch, std::string argument)
         ExtractCharacter(ch->PCData->Pet, true);
     }
 
-    saving_char = NULL;
+    saving_char.reset();
     level = GetTrustLevel(ch);
     ExtractCharacter(ch, true);
 
-    for(x = 0; x < MAX_WEAR; x++)
+    for(int x = 0; x < MAX_WEAR; x++)
     {
-        for(y = 0; y < MAX_LAYERS; y++)
+        for(int y = 0; y < MAX_LAYERS; y++)
         {
-            save_equipment[x][y] = NULL;
+            save_equipment[x][y].reset();
         }
     }
 

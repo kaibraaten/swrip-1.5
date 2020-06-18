@@ -6,29 +6,29 @@
  *    with room sleep_progs
  *
  */
-void do_mpdream( std::shared_ptr<Character> ch, std::string argument )
+void do_mpdream(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
-    Character *vict = nullptr;
+    std::shared_ptr<Character> vict;
 
-    if ( IsAffectedBy( ch, Flag::Affect::Charm))
+    if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
-    if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
+    if(!IsNpc(ch) || (ch->Desc && GetTrustLevel(ch) < LEVEL_IMMORTAL))
     {
         ch->Echo("Huh?\r\n");
         return;
     }
 
-    argument = OneArgument( argument, arg1 );
+    argument = OneArgument(argument, arg1);
 
-    if (  (vict =GetCharacterAnywhere(ch, arg1)) == NULL )
+    if((vict = GetCharacterAnywhere(ch, arg1)) == NULL)
     {
-        ProgBug( "Mpdream: No such character", ch );
+        ProgBug("Mpdream: No such character", ch);
         return;
     }
 
-    if( vict->Position <= POS_SLEEPING)
+    if(vict->Position <= POS_SLEEPING)
     {
         vict->Echo(argument);
         vict->Echo("\r\n");

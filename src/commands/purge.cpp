@@ -36,7 +36,7 @@ void do_purge(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Object> obj;
 
     /* fixed to get things in room first -- i.e., purge portal (obj),

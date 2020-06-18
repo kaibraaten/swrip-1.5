@@ -9,7 +9,7 @@
 void do_recall(std::shared_ptr<Character> ch, std::string argument)
 {
     auto location = GetRoom(WhereHome(ch));
-    Character *opponent = NULL;
+    std::shared_ptr<Character> opponent;
 
     if(GetTrustLevel(ch) < LEVEL_IMMORTAL)
     {
@@ -48,7 +48,6 @@ void do_recall(std::shared_ptr<Character> ch, std::string argument)
 
     if((opponent = GetFightingOpponent(ch)) != NULL)
     {
-
         if(NumberBits(1) == 0 || (!IsNpc(opponent) && NumberBits(3) > 1))
         {
             SetWaitState(ch, 4);

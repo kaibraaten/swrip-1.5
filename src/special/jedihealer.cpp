@@ -7,7 +7,7 @@
 
 bool spec_jedi_healer(std::shared_ptr<Character> ch)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
     if(!IsAwake(ch))
         return false;

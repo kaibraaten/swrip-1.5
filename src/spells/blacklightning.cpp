@@ -5,10 +5,9 @@
 
 ch_ret spell_black_lightning(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = vo.Ch;
-    int dam;
+    std::shared_ptr<Character> victim = vo.Ch;
+    int dam = 100;
 
-    dam = 100;
     if(IsAffectedBy(victim, Flag::Affect::Protect) && IsEvil(ch))
         dam -= (int)(dam / 2);
 
@@ -38,4 +37,3 @@ ch_ret spell_black_lightning(int sn, int level, std::shared_ptr<Character> ch, c
         return rNONE;
     }
 }
-

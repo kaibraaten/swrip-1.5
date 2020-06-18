@@ -7,7 +7,7 @@
 
 void do_aid(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     int percent = 0;
 
     if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))

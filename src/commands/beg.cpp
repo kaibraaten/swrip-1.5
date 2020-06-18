@@ -9,7 +9,7 @@
 void do_beg(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     int percent = 0, xp = 0;
     int amount = 0;
 

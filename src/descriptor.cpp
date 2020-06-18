@@ -41,7 +41,7 @@ void Descriptor::WriteToBuffer(const std::string & txt, size_t length)
 
 unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & name, bool fConn)
 {
-    for(class Character *ch = FirstCharacter; ch; ch = ch->Next)
+    for(auto ch = FirstCharacter; ch; ch = ch->Next)
     {
         if(!IsNpc(ch)
            && (!fConn || !ch->Desc)
@@ -133,7 +133,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
                       ? dold->Original->Name : dold->Character->Name))
         {
             const int cstate = dold->ConnectionState;
-            Character *ch = dold->Original ? dold->Original : dold->Character;
+            auto ch = dold->Original ? dold->Original : dold->Character;
 
             if(ch->Name.empty()
                || (cstate != CON_PLAYING && cstate != CON_EDITING))
@@ -183,7 +183,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
 bool Descriptor::FlushBuffer(bool fPrompt)
 {
     char buf[MAX_INPUT_LENGTH] = { '\0' };
-    class Character *ch = Original ? Original : Character;
+    auto ch = Original ? Original : Character;
 
     if(ch && ch->Fighting && ch->Fighting->Who)
         ShowCharacterCondition(ch, ch->Fighting->Who);
@@ -426,7 +426,7 @@ bool NullDescriptor::HasInput() const
     return false;
 }
 
-void MapCharacterAndDescriptor(Character * ch, std::shared_ptr<Descriptor> d)
+void MapCharacterAndDescriptor(std::shared_ptr<Character> ch, std::shared_ptr<Descriptor> d)
 {
     ch->Desc = d;
     d->Character = ch;

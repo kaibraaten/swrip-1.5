@@ -140,14 +140,14 @@ public:
     MProg mprog;
 
     // Player AND mob
-    Character *Next = NULL;
-    Character *Previous = NULL;
-    Character *Master = NULL;
-    Character *Leader = NULL;
+    std::shared_ptr<Character> Next;
+    std::shared_ptr<Character> Previous;
+    std::shared_ptr<Character> Master;
+    std::shared_ptr<Character> Leader;
     std::unique_ptr<Fight> Fighting;
-    Character *Reply = NULL;
-    Character *Switched = NULL;
-    Character *Mount = NULL;
+    std::weak_ptr<Character> Reply;
+    std::shared_ptr<Character> Switched = NULL;
+    std::shared_ptr<Character> Mount = NULL;
     std::shared_ptr<Room> InRoom;
     std::shared_ptr<Room> WasInRoom;
     std::shared_ptr<Room> WasSentinel;
@@ -175,14 +175,14 @@ public:
     std::string MobClan;    /* for spec_clan_guard.. set by postguard */
     std::shared_ptr<Room> BuzzedHome;
     std::shared_ptr<Room> BuzzedFromRoom;
-    Character *Challenged = NULL;
-    Character *BettedOn = NULL;
+    std::weak_ptr<Character> Challenged;
+    std::weak_ptr<Character> BettedOn;
     int BetAmount = 0;
     std::string Owner;
     std::shared_ptr<Room> Home;
     int CmdRecurse = 0;
     std::shared_ptr<Object> On;
-    Character *Pet = nullptr;
+    std::shared_ptr<Character> Pet;
 
     struct
     {
@@ -203,247 +203,247 @@ private:
     std::unique_ptr<Impl> pImpl;
 };
 
-bool IsWizVis(const Character *ch, const Character *victim);
+bool IsWizVis(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 
 /*
  * Return how much exp a char has for a specified ability.
  */
-long GetAbilityXP(const Character *ch, short ability);
+long GetAbilityXP(std::shared_ptr<Character> ch, short ability);
 
-void SetAbilityXP(Character *ch, short ability, long xp);
+void SetAbilityXP(std::shared_ptr<Character> ch, short ability, long xp);
 
 /*
  * Calculate roughly how much experience a character is worth
  */
-int GetXPWorth(const Character *ch);
+int GetXPWorth(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve a character's trusted level for permission checking.
  */
-short GetTrustLevel(const Character *ch);
+short GetTrustLevel(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve a character's age.
  */
-short GetAge(const Character *ch);
+short GetAge(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve character's current strength.
  */
-short GetCurrentStrength(const Character *ch);
+short GetCurrentStrength(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve character's current intelligence.
  */
-short GetCurrentIntelligence(const Character *ch);
+short GetCurrentIntelligence(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve character's current wisdom.
  */
-short GetCurrentWisdom(const Character *ch);
+short GetCurrentWisdom(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve character's current dexterity.
  */
-short GetCurrentDexterity(const Character *ch);
+short GetCurrentDexterity(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve character's current constitution.
  */
-short GetCurrentConstitution(const Character *ch);
+short GetCurrentConstitution(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve character's current charisma.
  */
-short GetCurrentCharisma(const Character *ch);
+short GetCurrentCharisma(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve character's current luck.
  */
-short GetCurrentLuck(const Character *ch);
+short GetCurrentLuck(std::shared_ptr<Character> ch);
 
-short GetCurrentForce(const Character *ch);
+short GetCurrentForce(std::shared_ptr<Character> ch);
 
 /*
  * Add another notch on that there belt... ;)
  * Keep track of the last so many kills by vnum                 -Thoric
  */
-void AddKill(Character *ch, const Character *mob);
+void AddKill(std::shared_ptr<Character> ch, std::shared_ptr<Character> mob);
 
 /*
  * Return how many times this player has killed this mob        -Thoric
  * Only keeps track of so many (MAX_KILLTRACK), and keeps track by vnum
  */
-int TimesKilled(const Character *ch, const Character *mob);
+int TimesKilled(std::shared_ptr<Character> ch, std::shared_ptr<Character> mob);
 
-bool HasComlink(const Character *ch);
+bool HasComlink(std::shared_ptr<Character> ch);
 
-bool HasDiploma(const Character *ch);
+bool HasDiploma(std::shared_ptr<Character> ch);
 
-std::shared_ptr<Object> GetFirstObjectOfType(const Character *ch, ItemTypes type);
+std::shared_ptr<Object> GetFirstObjectOfType(std::shared_ptr<Character> ch, ItemTypes type);
 
-short GetAbilityLevel(const Character *ch, short ability);
+short GetAbilityLevel(std::shared_ptr<Character> ch, short ability);
 
 /*
  * Return true if a char is affected by a spell.
  */
-bool IsAffected(const Character *ch, int sn);
+bool IsAffected(std::shared_ptr<Character> ch, int sn);
 
 /*
  * Return true if a certain ch->affected_by bit is set.
  */
-bool IsAffectedBy(const Character *ch, size_t affected_by_bit);
+bool IsAffectedBy(std::shared_ptr<Character> ch, size_t affected_by_bit);
 
 /*
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-std::shared_ptr<Object> GetEquipmentOnCharacter(const Character *ch, WearLocation iWear);
+std::shared_ptr<Object> GetEquipmentOnCharacter(std::shared_ptr<Character> ch, WearLocation iWear);
 
 /*
  * Equip a char with an obj.
  */
-void EquipCharacter(Character *ch, std::shared_ptr<Object> obj, WearLocation iWear);
+void EquipCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, WearLocation iWear);
 
 /*
  * Unequip a char with an obj.
  */
-void UnequipCharacter(Character *ch, std::shared_ptr<Object> obj);
+void UnequipCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 
 /*
  * Find an obj in player's inventory.
  */
-std::shared_ptr<Object> GetCarriedObject(const Character *ch, const std::string &argument);
+std::shared_ptr<Object> GetCarriedObject(std::shared_ptr<Character> ch, const std::string &argument);
 
 /*
  * Find an obj in player's equipment.
  */
-std::shared_ptr<Object> GetWornObject(const Character *ch, const std::string &argument);
+std::shared_ptr<Object> GetWornObject(std::shared_ptr<Character> ch, const std::string &argument);
 
 /*
  * How mental state could affect finding an object              -Thoric
  * Used by get/drop/put/quaff/recite/etc
  * Increasingly freaky based on mental state and drunkeness
  */
-bool HasMentalStateToFindObject(const Character *ch);
+bool HasMentalStateToFindObject(std::shared_ptr<Character> ch);
 
 /*
  * True if char can see victim.
  */
-bool CanSeeCharacter(const Character *ch, const Character *victim);
+bool CanSeeCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 
 /*
  * True if char can see obj.
  */
-bool CanSeeObject(const Character *ch, std::shared_ptr<Object> obj);
+bool CanSeeObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 
 /*
  * True if char can drop obj.
  */
-bool CanDropObject(const Character *ch, std::shared_ptr<Object> obj);
+bool CanDropObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 
 /*
  * "Fix" a character's stats                                    -Thoric
  */
-void FixCharacterStats(Character *ch);
+void FixCharacterStats(std::shared_ptr<Character> ch);
 
 /*
  * Improve mental state                                         -Thoric
  */
-void ImproveMentalState(Character *ch, int mod);
+void ImproveMentalState(std::shared_ptr<Character> ch, int mod);
 
 /*
  * Deteriorate mental state                                     -Thoric
  */
-void WorsenMentalState(Character *ch, int mod);
+void WorsenMentalState(std::shared_ptr<Character> ch, int mod);
 
 /*
  * Retrieve a character's carry capacity.
  */
-int GetCarryCapacityWeight(const Character *ch);
+int GetCarryCapacityWeight(std::shared_ptr<Character> ch);
 
 /*
  * Retrieve a character's carry capacity.
  * Vastly reduced (finally) due to containers           -Thoric
  */
-int GetCarryCapacityNumber(const Character *ch);
+int GetCarryCapacityNumber(std::shared_ptr<Character> ch);
 
-bool IsImmortal(const Character *ch);
+bool IsImmortal(std::shared_ptr<Character> ch);
 
-bool IsGreater(const Character *ch);
+bool IsGreater(std::shared_ptr<Character> ch);
 
-bool IsAvatar(const Character *ch);
+bool IsAvatar(std::shared_ptr<Character> ch);
 
-bool IsGood(const Character *ch);
+bool IsGood(std::shared_ptr<Character> ch);
 
-bool IsEvil(const Character *ch);
+bool IsEvil(std::shared_ptr<Character> ch);
 
-bool IsNeutral(const Character *ch);
+bool IsNeutral(std::shared_ptr<Character> ch);
 
-bool IsAwake(const Character *ch);
+bool IsAwake(std::shared_ptr<Character> ch);
 
-int GetArmorClass(const Character *ch);
+int GetArmorClass(std::shared_ptr<Character> ch);
 
-int GetHitRoll(const Character *ch);
+int GetHitRoll(std::shared_ptr<Character> ch);
 
-int GetDamageRoll(const Character *ch);
+int GetDamageRoll(std::shared_ptr<Character> ch);
 
-bool IsDrunk(const Character *ch);
+bool IsDrunk(std::shared_ptr<Character> ch);
 
-bool IsRetiredImmortal(const Character *ch);
+bool IsRetiredImmortal(std::shared_ptr<Character> ch);
 
-bool IsAuthed(const Character *ch);
+bool IsAuthed(std::shared_ptr<Character> ch);
 
-bool IsWaitingForAuth(const Character *ch);
+bool IsWaitingForAuth(std::shared_ptr<Character> ch);
 
-std::string PERS(const Character *ch, const Character *looker);
+std::string PERS(std::shared_ptr<Character> ch, std::shared_ptr<Character> looker);
 
-bool IsClanned(const Character *ch);
+bool IsClanned(std::shared_ptr<Character> ch);
 
-void SetWaitState(Character *ch, short number_of_pulses);
+void SetWaitState(std::shared_ptr<Character> ch, short number_of_pulses);
 
-bool IsJedi(const Character *ch);
+bool IsJedi(std::shared_ptr<Character> ch);
 
-bool IsDroid(const Character *ch);
+bool IsDroid(std::shared_ptr<Character> ch);
 
-void ResetPlayerOnDeath(Character *ch);
+void ResetPlayerOnDeath(std::shared_ptr<Character> ch);
 
-bool IsBlind(const Character *ch);
+bool IsBlind(std::shared_ptr<Character> ch);
 
-bool HasKey(const Character *ch, vnum_t key);
+bool HasKey(std::shared_ptr<Character> ch, vnum_t key);
 
-short GetCarryEncumbrance(const Character *ch, short move);
+short GetCarryEncumbrance(std::shared_ptr<Character> ch, short move);
 
-vnum_t WhereHome(const Character *ch);
+vnum_t WhereHome(std::shared_ptr<Character> ch);
 
-void FreeCharacter(Character *ch);
+void FreeCharacter(std::shared_ptr<Character> ch);
 
-bool IsInArena(const Character *ch);
+bool IsInArena(std::shared_ptr<Character> ch);
 
-void ApplyJediBonus(Character *ch);
+void ApplyJediBonus(std::shared_ptr<Character> ch);
 
-void ApplySithPenalty(Character *ch);
+void ApplySithPenalty(std::shared_ptr<Character> ch);
 
-const char *HeSheIt(const Character *ch);
+const char *HeSheIt(std::shared_ptr<Character> ch);
 
-const char *HimHerIt(const Character *ch);
+const char *HimHerIt(std::shared_ptr<Character> ch);
 
-const char *HisHersIts(const Character *ch);
+const char *HisHersIts(std::shared_ptr<Character> ch);
 
-void AddReinforcements(Character *ch);
+void AddReinforcements(std::shared_ptr<Character> ch);
 
-void SetCharacterTitle(Character *ch, const std::string &title);
+void SetCharacterTitle(std::shared_ptr<Character> ch, const std::string &title);
 
-bool HasPermanentSneak(const Character *ch);
+bool HasPermanentSneak(std::shared_ptr<Character> ch);
 
-bool HasPermanentHide(const Character *ch);
+bool HasPermanentHide(std::shared_ptr<Character> ch);
 
-unsigned int GetKillTrackCount(const Character *ch);
+unsigned int GetKillTrackCount(std::shared_ptr<Character> ch);
 
-bool IS_OUTSIDE(const Character *ch);
+bool IS_OUTSIDE(std::shared_ptr<Character> ch);
 
-void SetAbilityLevel(Character* ch, short ability, int newlevel);
+void SetAbilityLevel(std::shared_ptr<Character> ch, short ability, int newlevel);
 
-bool IsNpc(const Character* ch);
+bool IsNpc(std::shared_ptr<Character> ch);
 
 #endif

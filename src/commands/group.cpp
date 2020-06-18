@@ -6,16 +6,14 @@
 
 void do_group(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
 
     if(arg.empty())
     {
-        Character *gch = NULL;
-
         SetCharacterColor(AT_GREEN, ch);
         ch->Echo("%s's group:\r\n", PERS(ch, ch).c_str());
 
-        for(gch = FirstCharacter; gch; gch = gch->Next)
+        for(auto gch = FirstCharacter; gch; gch = gch->Next)
         {
             if(IsInSameGroup(gch, ch))
             {
@@ -58,7 +56,7 @@ void do_group(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        for(gch = FirstCharacter; gch; gch = gch->Next)
+        for(auto gch = FirstCharacter; gch; gch = gch->Next)
         {
             if(IsInSameGroup(ch, gch)
                && (ch != gch))
@@ -82,7 +80,7 @@ void do_group(std::shared_ptr<Character> ch, std::string arg)
     {
         int count = 0;
 
-        for(Character *rch : ch->InRoom->Characters())
+        for(auto rch : ch->InRoom->Characters())
         {
             if(ch != rch
                && !IsNpc(rch)

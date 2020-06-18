@@ -84,7 +84,7 @@ void Nanny(std::shared_ptr<Descriptor> d, std::string argument)
 
     argument = TrimStringStart(argument);
 
-    switch (d->ConnectionState)
+    switch(d->ConnectionState)
     {
     default:
         Log->Bug("Nanny: bad d->ConnectionState %d.", d->ConnectionState);
@@ -144,9 +144,9 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     char buf[MAX_STRING_LENGTH] = { '\0' };
     bool fOld = false;
     unsigned char chk = 0;
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
 
-    if (argument.empty())
+    if(argument.empty())
     {
         CloseDescriptor(d, false);
         return;
@@ -154,13 +154,13 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 
     argument[0] = CharToUppercase(argument[0]);
 
-    if (!IsNameAcceptable(argument))
+    if(!IsNameAcceptable(argument))
     {
         d->WriteToBuffer("Illegal name, try another.\r\nName: ", 0);
         return;
     }
 
-    if (CheckPlaying(d, argument, false) == BERR)
+    if(CheckPlaying(d, argument, false) == BERR)
     {
         d->WriteToBuffer("Name: ", 0);
         return;
@@ -168,7 +168,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 
     fOld = PlayerCharacters->Load(d, argument, true);
 
-    if (!d->Character)
+    if(!d->Character)
     {
         Log->Bug("Bad player file %s@%s.", argument.c_str(), d->Remote.Hostname.c_str());
         d->WriteToBuffer("Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0);
@@ -179,20 +179,20 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     ch = d->Character;
 
     auto pban = Bans->Find([d, ch](const auto &b)
-    {
-        return (StringPrefix(b->Site, d->Remote.Hostname) == 0
-            || StringSuffix(b->Site, d->Remote.Hostname) == 0)
-            && b->Level >= ch->TopLevel;
-    });
+                           {
+                               return (StringPrefix(b->Site, d->Remote.Hostname) == 0
+                                       || StringSuffix(b->Site, d->Remote.Hostname) == 0)
+                                   && b->Level >= ch->TopLevel;
+                           });
 
-    if (pban != nullptr)
+    if(pban != nullptr)
     {
         d->WriteToBuffer("Your site has been banned from this Mud.\r\n", 0);
         CloseDescriptor(d, false);
         return;
     }
 
-    if (ch->Flags.test(Flag::Plr::Deny))
+    if(ch->Flags.test(Flag::Plr::Deny))
     {
         auto logBuf = FormatString("Denying access to %s@%s.",
                                    argument.c_str(), d->Remote.Hostname.c_str());
@@ -205,18 +205,18 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 
     chk = CheckReconnect(d, argument, false);
 
-    if (chk == BERR)
+    if(chk == BERR)
     {
         return;
     }
 
-    if (chk)
+    if(chk)
     {
         fOld = true;
     }
     else
     {
-        if (wizlock && !IsImmortal(ch))
+        if(wizlock && !IsImmortal(ch))
         {
             d->WriteToBuffer("The game is wizlocked. Only immortals can connect now.\r\n", 0);
             d->WriteToBuffer("Please try back later.\r\n", 0);
@@ -225,7 +225,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
         }
     }
 
-    if (fOld)
+    if(fOld)
     {
         /* Old player */
         d->WriteToBuffer("Password: ", 0);
@@ -235,7 +235,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     }
     else
     {
-        if (IsBadName(ch->Name))
+        if(IsBadName(ch->Name))
         {
             d->WriteToBuffer("\r\nThat name is unacceptable, please choose another.\r\n", 0);
             d->WriteToBuffer("Name: ", 0);
@@ -253,13 +253,13 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 
 static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
     unsigned char chk = 0;
     char buf[MAX_STRING_LENGTH];
 
     d->WriteToBuffer("\r\n", 2);
 
-    if (StrCmp(EncodeString(argument), ch->PCData->Password))
+    if(StrCmp(EncodeString(argument), ch->PCData->Password))
     {
         d->WriteToBuffer("Wrong password.\r\n", 0);
         /* clear descriptor pointer to get rid of bug message in log */
@@ -270,16 +270,16 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
 
     d->WriteToBuffer(echo_on_str, 0);
 
-    if (CheckPlaying(d, ch->Name, true))
+    if(CheckPlaying(d, ch->Name, true))
     {
         return;
     }
 
     chk = CheckReconnect(d, ch->Name, true);
 
-    if (chk == BERR)
+    if(chk == BERR)
     {
-        if (d->Character && d->Character->Desc)
+        if(d->Character && d->Character->Desc)
         {
             d->Character->Desc = NULL;
         }
@@ -287,12 +287,12 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
         CloseDescriptor(d, false);
         return;
     }
-    else if (chk == 1)
+    else if(chk == 1)
     {
         return;
     }
 
-    if (!SysData.AllowMultiplaying && CheckMultiplaying(d, ch->Name))
+    if(!SysData.AllowMultiplaying && CheckMultiplaying(d, ch->Name))
     {
         CloseDescriptor(d, false);
         return;
@@ -307,7 +307,7 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
                                ch->Name.c_str(),
                                d->Remote.Hostname.c_str());
 
-    if (ch->TopLevel < LEVEL_CREATOR)
+    if(ch->TopLevel < LEVEL_CREATOR)
     {
         Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
     }
@@ -319,7 +319,7 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
     d->WriteToBuffer("Press enter...\r\n", 0);
     d->ConnectionState = CON_PRESS_ENTER;
 
-    if (ch->PCData->Build.Area)
+    if(ch->PCData->Build.Area)
     {
         do_loadarea(ch, "");
     }
@@ -328,14 +328,14 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
 static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
 
-    switch (argument[0])
+    switch(argument[0])
     {
     case 'y': case 'Y':
         sprintf(buf, "\r\nMake sure to use a password that won't be easily guessed by someone else."
-            "\r\nPick a good password for %s: %s",
-            ch->Name.c_str(), echo_off_str);
+                "\r\nPick a good password for %s: %s",
+                ch->Name.c_str(), echo_off_str);
         d->WriteToBuffer(buf, 0);
         d->ConnectionState = CON_GET_NEW_PASSWORD;
         break;
@@ -358,11 +358,11 @@ static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argum
 static void NannyGetNewPassword(std::shared_ptr<Descriptor> d, std::string argument)
 {
     std::string pwdnew;
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
 
     d->WriteToBuffer("\r\n", 2);
 
-    if (argument.size() < 5)
+    if(argument.size() < 5)
     {
         d->WriteToBuffer("Password must be at least five characters long.\r\nPassword: ");
         return;
@@ -370,7 +370,7 @@ static void NannyGetNewPassword(std::shared_ptr<Descriptor> d, std::string argum
 
     pwdnew = EncodeString(argument);
 
-    if (pwdnew.find('~') != std::string::npos)
+    if(pwdnew.find('~') != std::string::npos)
     {
         d->WriteToBuffer("New password not acceptable, try again.\r\nPassword: ");
         return;
@@ -383,11 +383,11 @@ static void NannyGetNewPassword(std::shared_ptr<Descriptor> d, std::string argum
 
 static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
 
     d->WriteToBuffer("\r\n", 2);
 
-    if (StrCmp(EncodeString(argument), ch->PCData->Password))
+    if(StrCmp(EncodeString(argument), ch->PCData->Password))
     {
         d->WriteToBuffer("Passwords don't match.\r\nRetype password: ", 0);
         d->ConnectionState = CON_GET_NEW_PASSWORD;
@@ -401,9 +401,9 @@ static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string a
 
 static void NannyGetNewSex(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
 
-    switch (argument[0])
+    switch(argument[0])
     {
     case 'm':
     case 'M':
@@ -428,47 +428,47 @@ static void NannyGetNewSex(std::shared_ptr<Descriptor> d, std::string argument)
 static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument)
 {
     std::string arg;
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
     int iRace = 0;
 
     argument = OneArgument(argument, arg);
 
-    if (!StrCmp(arg, "help"))
+    if(!StrCmp(arg, "help"))
     {
         do_help(ch, argument);
         d->WriteToBuffer("Please choose a race: ", 0);
         return;
     }
 
-    if (!StrCmp(arg, "showstat"))
+    if(!StrCmp(arg, "showstat"))
     {
         do_showstatistic(ch, argument);
         d->WriteToBuffer("Please choose a race: ", 0);
         return;
     }
 
-    for (iRace = 0; iRace < MAX_RACE; iRace++)
+    for(iRace = 0; iRace < MAX_RACE; iRace++)
     {
         const Race *race = &RaceTable[iRace];
 
-        if (toupper(arg[0]) == toupper(race->Name[0])
-            && !StringPrefix(arg, race->Name)
-            && RaceIsAvailableToPlayers(race))
+        if(toupper(arg[0]) == toupper(race->Name[0])
+           && !StringPrefix(arg, race->Name)
+           && RaceIsAvailableToPlayers(race))
         {
             ch->Race = iRace;
             break;
         }
     }
 
-    if (iRace == MAX_RACE || iRace == RACE_GOD
-        || IsNullOrEmpty(RaceTable[iRace].Name))
+    if(iRace == MAX_RACE || iRace == RACE_GOD
+       || IsNullOrEmpty(RaceTable[iRace].Name))
     {
         d->WriteToBuffer("That's not a race.\r\n", 0);
         AskForRace(d);
         return;
     }
 
-    if (IsDroid(ch))
+    if(IsDroid(ch))
     {
         ch->Sex = SEX_NEUTRAL;
         AskForClass(d);
@@ -484,31 +484,31 @@ static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument)
 static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument)
 {
     std::string arg;
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
     int iClass = 0;
 
     argument = OneArgument(argument, arg);
 
-    if (!StrCmp(arg, "help"))
+    if(!StrCmp(arg, "help"))
     {
         do_help(ch, argument);
         d->WriteToBuffer("Please choose an ability class: ", 0);
         return;
     }
 
-    for (iClass = 0; iClass < MAX_ABILITY; iClass++)
+    for(iClass = 0; iClass < MAX_ABILITY; iClass++)
     {
-        if (toupper(arg[0]) == toupper(AbilityName[iClass][0])
-            && !StringPrefix(arg, AbilityName[iClass]))
+        if(toupper(arg[0]) == toupper(AbilityName[iClass][0])
+           && !StringPrefix(arg, AbilityName[iClass]))
         {
             ch->Ability.Main = iClass;
             break;
         }
     }
 
-    if (iClass == MAX_ABILITY
-        || (iClass == FORCE_ABILITY && !SysData.CanChooseJedi)
-        || IsNullOrEmpty(AbilityName[iClass]))
+    if(iClass == MAX_ABILITY
+       || (iClass == FORCE_ABILITY && !SysData.CanChooseJedi)
+       || IsNullOrEmpty(AbilityName[iClass]))
     {
         d->WriteToBuffer("That's not a skill class.\r\n", 0);
         AskForClass(d);
@@ -522,9 +522,9 @@ static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument
 
 static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
 
-    switch (argument[0])
+    switch(argument[0])
     {
     case 'y':
     case 'Y':
@@ -546,9 +546,9 @@ static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument)
 
 static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
 
-    if (ch->Flags.test(Flag::Plr::Ansi))
+    if(ch->Flags.test(Flag::Plr::Ansi))
     {
         ch->Echo("\033[2J");
     }
@@ -557,25 +557,25 @@ static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
         ch->Echo("\014");
     }
 
-    if (IsImmortal(ch))
+    if(IsImmortal(ch))
     {
         ch->Echo("&WImmortal Message of the Day&w\r\n");
         do_help(ch, "imotd");
     }
 
-    if (ch->TopLevel > 0)
+    if(ch->TopLevel > 0)
     {
         ch->Echo("\r\n&WMessage of the Day&w\r\n");
         do_help(ch, "motd");
     }
 
-    if (ch->TopLevel >= 100)
+    if(ch->TopLevel >= 100)
     {
         ch->Echo("\r\n&WAvatar Message of the Day&w\r\n");
         do_help(ch, "amotd");
     }
 
-    if (ch->TopLevel == 0)
+    if(ch->TopLevel == 0)
     {
         do_help(ch, "nmotd");
     }
@@ -586,12 +586,13 @@ static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
 
 static bool PutCharacterInCorrectShip(std::shared_ptr<Ship> ship, void *userData)
 {
-    Character *ch = (Character*)userData;
-
-    if (ch->InRoom->Vnum >= ship->Rooms.First
-        && ch->InRoom->Vnum <= ship->Rooms.Last)
+    Vo *vo = (Vo *)userData;
+    std::shared_ptr<Character> ch = vo->Ch;
+    
+    if(ch->InRoom->Vnum >= ship->Rooms.First
+       && ch->InRoom->Vnum <= ship->Rooms.Last)
     {
-        if (ship->Class != SHIP_PLATFORM || ship->Spaceobject != NULL)
+        if(ship->Class != SHIP_PLATFORM || ship->Spaceobject != NULL)
         {
             CharacterToRoom(ch, ch->InRoom);
             return false;
@@ -603,14 +604,14 @@ static bool PutCharacterInCorrectShip(std::shared_ptr<Ship> ship, void *userData
 
 static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 {
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
     char buf[MAX_STRING_LENGTH];
 
     d->WriteToBuffer("\r\n&YWelcome to SWRiP 1.5&d\r\n\r\n");
     AddCharacter(ch);
     d->ConnectionState = CON_PLAYING;
 
-    if (ch->TopLevel == 0)
+    if(ch->TopLevel == 0)
     {
         int iLang = 0;
 
@@ -620,7 +621,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
         ch->PermStats.Lck += RaceTable[ch->Race].Stats.ModLck;
         ch->PermStats.Frc += RaceTable[ch->Race].Stats.ModFrc;
 
-        if (ch->Ability.Main == FORCE_ABILITY)
+        if(ch->Ability.Main == FORCE_ABILITY)
         {
             // People who pick Jedi will always have max Frc stat.
             ch->PermStats.Frc = 20;
@@ -632,33 +633,33 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 
         /* Hunters do not recieve force */
 
-        if (ch->Ability.Main == HUNTING_ABILITY)
+        if(ch->Ability.Main == HUNTING_ABILITY)
         {
             ch->PermStats.Frc = 0;
         }
 
         /* Droids do not recieve force */
 
-        if (IsDroid(ch))
+        if(IsDroid(ch))
         {
             ch->PermStats.Frc = 0;
         }
 
-        for (iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++)
+        for(iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++)
         {
-            if (LanguageArray[iLang] == RaceTable[ch->Race].Language)
+            if(LanguageArray[iLang] == RaceTable[ch->Race].Language)
             {
                 break;
             }
         }
 
-        if (LanguageArray[iLang] == LANG_UNKNOWN)
+        if(LanguageArray[iLang] == LANG_UNKNOWN)
         {
             Log->Bug("Nanny: invalid racial language.");
         }
         else
         {
-            if ((iLang = LookupSkill(LanguageNames[iLang])) < 0)
+            if((iLang = LookupSkill(LanguageNames[iLang])) < 0)
             {
                 Log->Bug("Nanny: cannot find racial language.");
             }
@@ -667,15 +668,15 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
                 ch->PCData->Learned[iLang] = 100;
                 ch->Speaking = RaceTable[ch->Race].Language;
 
-                if (ch->Race == RACE_QUARREN
-                    && (iLang = LookupSkill("quarren")) >= 0)
+                if(ch->Race == RACE_QUARREN
+                   && (iLang = LookupSkill("quarren")) >= 0)
                 {
                     ch->PCData->Learned[iLang] = 100;
                     SetBit(ch->Speaks, LANG_QUARREN);
                 }
 
-                if (ch->Race == RACE_MON_CALAMARI
-                    && (iLang = LookupSkill("common")) >= 0)
+                if(ch->Race == RACE_MON_CALAMARI
+                   && (iLang = LookupSkill("common")) >= 0)
                 {
                     ch->PCData->Learned[iLang] = 100;
                 }
@@ -688,7 +689,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
         {
             int ability;
 
-            for (ability = 0; ability < MAX_ABILITY; ability++)
+            for(ability = 0; ability < MAX_ABILITY; ability++)
             {
                 SetAbilityLevel(ch, ability, 1);
                 SetAbilityXP(ch, ability, 0);
@@ -703,7 +704,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
         ch->Fatigue.Current = ch->Fatigue.Max;
         ch->Gold = NEW_CHARACTER_START_CREDITS;
 
-        if (ch->PermStats.Frc > 0)
+        if(ch->PermStats.Frc > 0)
         {
             ch->Mana.Max = 200;
         }
@@ -737,13 +738,13 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
         /* comlink */
         std::shared_ptr<ProtoObject> obj_ind = GetProtoObject(OBJ_VNUM_SCHOOL_COMLINK);
 
-        if (obj_ind != NULL)
+        if(obj_ind != NULL)
         {
             obj = CreateObject(obj_ind, 0);
             ObjectToCharacter(obj, ch);
         }
 
-        if (!SysData.NewPlayersMustWaitForAuth)
+        if(!SysData.NewPlayersMustWaitForAuth)
         {
             CharacterToRoom(ch, GetRoom(ROOM_VNUM_SCHOOL));
             ch->PCData->AuthState = 3;
@@ -755,9 +756,9 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
             ch->PCData->Flags.set(Flag::PCData::Unauthed);
         }
     }
-    else if (!IsImmortal(ch) && ch->PCData->ReleaseDate > current_time)
+    else if(!IsImmortal(ch) && ch->PCData->ReleaseDate > current_time)
     {
-        if (ch->PCData->JailVnum)
+        if(ch->PCData->JailVnum)
         {
             CharacterToRoom(ch, GetRoom(ch->PCData->JailVnum));
         }
@@ -766,17 +767,18 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
             CharacterToRoom(ch, GetRoom(ROOM_VNUM_HELL));
         }
     }
-    else if (ch->InRoom && !IsImmortal(ch)
-        && !ch->InRoom->Flags.test(Flag::Room::Spacecraft)
-        && ch->InRoom != GetRoom(ROOM_VNUM_HELL))
+    else if(ch->InRoom && !IsImmortal(ch)
+            && !ch->InRoom->Flags.test(Flag::Room::Spacecraft)
+            && ch->InRoom != GetRoom(ROOM_VNUM_HELL))
     {
         CharacterToRoom(ch, ch->InRoom);
     }
-    else if (ch->InRoom && !IsImmortal(ch)
-        && ch->InRoom->Flags.test(Flag::Room::Spacecraft)
-        && ch->InRoom != GetRoom(ROOM_VNUM_HELL))
+    else if(ch->InRoom && !IsImmortal(ch)
+            && ch->InRoom->Flags.test(Flag::Room::Spacecraft)
+            && ch->InRoom != GetRoom(ROOM_VNUM_HELL))
     {
-        ForEachShip(PutCharacterInCorrectShip, ch);
+        Vo vo(ch);
+        ForEachShip(PutCharacterInCorrectShip, &vo);
     }
     else
     {
@@ -785,18 +787,18 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 
     ch->Flags.reset(Flag::Mob::Polymorphed);
 
-    if (GetTimer(ch, TIMER_SHOVEDRAG) > 0)
+    if(GetTimer(ch, TIMER_SHOVEDRAG) > 0)
         RemoveTimer(ch, TIMER_SHOVEDRAG);
 
-    if (GetTimer(ch, TIMER_PKILLED) > 0)
+    if(GetTimer(ch, TIMER_PKILLED) > 0)
         RemoveTimer(ch, TIMER_PKILLED);
 
     for(auto home : Homes->FindHomesForResident(ch->Name))
     {
         Homes->Load(home);
     }
-    
-    if (ch->PCData->Pet)
+
+    if(ch->PCData->Pet)
     {
         Act(AT_ACTION, "$n returns with $s master.",
             ch->PCData->Pet, NULL, ch, ActTarget::NotVict);
@@ -819,29 +821,29 @@ bool IsNameAcceptable(const std::string &name)
     /*
      * Reserved words.
      */
-    if (IsName(name, "all auto someone immortal self god supreme demigod dog guard cityguard cat cornholio spock hicaine hithoric death ass fuck shit piss crap quit"))
+    if(IsName(name, "all auto someone immortal self god supreme demigod dog guard cityguard cat cornholio spock hicaine hithoric death ass fuck shit piss crap quit"))
         return false;
 
     /*
      * Length restrictions.
      */
-    if (name.size() < MIN_NAME_LENGTH || name.size() > MAX_NAME_LENGTH)
+    if(name.size() < MIN_NAME_LENGTH || name.size() > MAX_NAME_LENGTH)
         return false;
 
     /*
      * Alphanumerics only.
      * Lock out IllIll twits.
      */
-    for (pc = name.c_str(); !IsNullOrEmpty(pc); pc++)
+    for(pc = name.c_str(); !IsNullOrEmpty(pc); pc++)
     {
-        if (!isalpha(*pc))
+        if(!isalpha(*pc))
             return false;
 
-        if (CharToLowercase(*pc) != 'i' && CharToLowercase(*pc) != 'l')
+        if(CharToLowercase(*pc) != 'i' && CharToLowercase(*pc) != 'l')
             fIll = false;
     }
 
-    if (fIll)
+    if(fIll)
     {
         return false;
     }
@@ -863,21 +865,21 @@ static void AskForRace(std::shared_ptr<Descriptor> d)
 
     d->WriteToBuffer("\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n", 0);
 
-    for (iRace = 0; iRace < MAX_RACE; iRace++)
+    for(iRace = 0; iRace < MAX_RACE; iRace++)
     {
         const Race *race = &RaceTable[iRace];
 
-        if (iRace == RACE_GOD || !RaceIsAvailableToPlayers(race))
+        if(iRace == RACE_GOD || !RaceIsAvailableToPlayers(race))
         {
             continue;
         }
 
-        if (!IsNullOrEmpty(race->Name))
+        if(!IsNullOrEmpty(race->Name))
         {
             sprintf(buf2, "%-20s", race->Name);
             strcat(buf, buf2);
 
-            if (++columns % 3 == 0)
+            if(++columns % 3 == 0)
             {
                 strcat(buf, "\r\n");
             }
@@ -887,7 +889,7 @@ static void AskForRace(std::shared_ptr<Descriptor> d)
         }
     }
 
-    if (columns % 3 != 0)
+    if(columns % 3 != 0)
     {
         strcat(buf, "\r\n");
     }
@@ -905,19 +907,19 @@ static void AskForClass(std::shared_ptr<Descriptor> d)
 
     d->WriteToBuffer("\r\nPlease choose a main ability from the following classes:\r\n", 0);
 
-    for (iClass = 0; iClass < MAX_ABILITY; iClass++)
+    for(iClass = 0; iClass < MAX_ABILITY; iClass++)
     {
-        if (iClass == FORCE_ABILITY && !SysData.CanChooseJedi)
+        if(iClass == FORCE_ABILITY && !SysData.CanChooseJedi)
         {
             continue;
         }
 
-        if (!IsNullOrEmpty(AbilityName[iClass]))
+        if(!IsNullOrEmpty(AbilityName[iClass]))
         {
             sprintf(buf2, "%-20s", Capitalize(AbilityName[iClass]).c_str());
             strcat(buf, buf2);
 
-            if (++columns % 2 == 0)
+            if(++columns % 2 == 0)
             {
                 strcat(buf, "\r\n");
             }
@@ -927,7 +929,7 @@ static void AskForClass(std::shared_ptr<Descriptor> d)
         }
     }
 
-    if (columns % 2 != 0)
+    if(columns % 2 != 0)
     {
         strcat(buf, "\r\n");
     }
@@ -938,7 +940,7 @@ static void AskForClass(std::shared_ptr<Descriptor> d)
 
 static void AskForStats(std::shared_ptr<Descriptor> d)
 {
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
     char buf[MAX_STRING_LENGTH];
 
     ch->PermStats.Str = GetRandomNumberFromRange(1, 6) + GetRandomNumberFromRange(1, 6) + GetRandomNumberFromRange(1, 6);
@@ -956,8 +958,8 @@ static void AskForStats(std::shared_ptr<Descriptor> d)
     ch->PermStats.Cha += RaceTable[ch->Race].Stats.ModCha;
 
     sprintf(buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n",
-        ch->PermStats.Str, ch->PermStats.Int, ch->PermStats.Wis,
-        ch->PermStats.Dex, ch->PermStats.Con, ch->PermStats.Cha);
+            ch->PermStats.Str, ch->PermStats.Int, ch->PermStats.Wis,
+            ch->PermStats.Dex, ch->PermStats.Con, ch->PermStats.Cha);
 
     d->WriteToBuffer(buf, 0);
     d->WriteToBuffer("\r\nAre these stats OK, (Y/N)? ", 0);
@@ -965,7 +967,7 @@ static void AskForStats(std::shared_ptr<Descriptor> d)
 
 static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
 {
-    Character *ch = d->Character;
+    std::shared_ptr<Character> ch = d->Character;
     int ability = 0;
 
     auto logBuf = FormatString("%s@%s new %s.",
@@ -976,7 +978,7 @@ static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
     d->WriteToBuffer("Press [ENTER] ", 0);
     d->WriteToBuffer("Press enter...\r\n", 0);
 
-    for (ability = 0; ability < MAX_ABILITY; ability++)
+    for(ability = 0; ability < MAX_ABILITY; ability++)
     {
         SetAbilityLevel(ch, ability, 0);
     }

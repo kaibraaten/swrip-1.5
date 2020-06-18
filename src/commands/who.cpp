@@ -69,7 +69,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
     {
         NullCh = true;
         auto desc = std::make_shared<NullDescriptor>();
-        ch = new Character(std::make_unique<PCData>());
+        ch = std::make_shared<Character>(std::make_unique<PCData>());
         MapCharacterAndDescriptor(ch, desc);
         ch->TopLevel = 1;
         ch->InRoom = GetRoom(ROOM_VNUM_LIMBO);
@@ -222,7 +222,6 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
     /* start from last to first to get it in the proper order */
     for (auto d : Reverse(Descriptors->Entities()))
     {
-        const Character *wch = nullptr;
         std::string race;
         char force_char = ' ';
 
@@ -233,7 +232,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
             continue;
         }
 
-        wch = d->Original ? d->Original : d->Character;
+        auto wch = d->Original ? d->Original : d->Character;
 
         if (wch->TopLevel < iLevelLower
             || wch->TopLevel > iLevelUpper
@@ -455,7 +454,6 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
     {
         fprintf(whoout, "%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s");
         fclose(whoout);
-        delete ch;
         return;
     }
 

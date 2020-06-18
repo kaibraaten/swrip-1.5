@@ -2,54 +2,54 @@
 #include "mud.hpp"
 #include "descriptor.hpp"
 
-void do_switch( std::shared_ptr<Character> ch, std::string arg )
+void do_switch(std::shared_ptr<Character> ch, std::string arg)
 {
-  Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
-  if ( arg.empty() )
+    if(arg.empty())
     {
-      ch->Echo("Switch into whom?\r\n");
-      return;
+        ch->Echo("Switch into whom?\r\n");
+        return;
     }
 
-  if ( !ch->Desc )
-    return;
+    if(!ch->Desc)
+        return;
 
-  if ( ch->Desc->Original )
+    if(ch->Desc->Original)
     {
-      ch->Echo("You are already switched.\r\n");
-      return;
+        ch->Echo("You are already switched.\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( victim == ch )
+    if(victim == ch)
     {
-      ch->Echo("Ok.\r\n");
-      return;
+        ch->Echo("Ok.\r\n");
+        return;
     }
 
-  if ( victim->Desc )
+    if(victim->Desc)
     {
-      ch->Echo("Character in use.\r\n");
-      return;
+        ch->Echo("Character in use.\r\n");
+        return;
     }
 
-  if ( !IsNpc(victim) && GetTrustLevel(ch) < LEVEL_GREATER )
+    if(!IsNpc(victim) && GetTrustLevel(ch) < LEVEL_GREATER)
     {
-      ch->Echo("You cannot switch into a player!\r\n");
-      return;
+        ch->Echo("You cannot switch into a player!\r\n");
+        return;
     }
 
-  ch->Desc->Character = victim;
-  ch->Desc->Original  = ch;
-  victim->Desc        = ch->Desc;
-  ch->Desc            = NULL;
-  ch->Switched  = victim;
-  victim->Echo("Ok.\r\n");
+    ch->Desc->Character = victim;
+    ch->Desc->Original = ch;
+    victim->Desc = ch->Desc;
+    ch->Desc = NULL;
+    ch->Switched = victim;
+    victim->Echo("Ok.\r\n");
 }
 

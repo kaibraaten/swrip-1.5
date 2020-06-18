@@ -71,7 +71,7 @@ short GetObjectResistance(std::shared_ptr<Object> obj)
  */
 obj_ret DamageObject(std::shared_ptr<Object> obj)
 {
-    Character *ch = obj->CarriedBy;
+    std::shared_ptr<Character> ch = obj->CarriedBy;
     obj_ret objcode = rNONE;
 
     if(ch != nullptr && IsInArena(ch))
@@ -178,7 +178,7 @@ void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through)
 
         if(!obj->InRoom->Characters().empty())
         {
-            Character *ch = obj->InRoom->Characters().front();
+            std::shared_ptr<Character> ch = obj->InRoom->Characters().front();
             Act(AT_PLAIN, "$p falls far below...", ch, obj, NULL, ActTarget::Room);
             Act(AT_PLAIN, "$p falls far below...", ch, obj, NULL, ActTarget::Char);
         }
@@ -190,7 +190,7 @@ void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through)
 
         if(!obj->InRoom->Characters().empty())
         {
-            Character *ch = obj->InRoom->Characters().front();
+            std::shared_ptr<Character> ch = obj->InRoom->Characters().front();
             Act(AT_PLAIN, "$p falls from above...", ch, obj, NULL, ActTarget::Room);
             Act(AT_PLAIN, "$p falls from above...", ch, obj, NULL, ActTarget::Char);
         }
@@ -203,10 +203,10 @@ void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through)
             /* Damage players */
             if(!obj->InRoom->Characters().empty() && GetRandomPercent() > 15)
             {
-                Character *vch = NULL;
+                std::shared_ptr<Character> vch = NULL;
                 int chcnt = 0;
 
-                for(Character *rch : obj->InRoom->Characters())
+                for(std::shared_ptr<Character> rch : obj->InRoom->Characters())
                 {
                     if(GetRandomNumberFromRange(0, chcnt) == 0)
                     {
@@ -229,7 +229,7 @@ void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through)
                 {
                     if(!obj->InRoom->Characters().empty())
                     {
-                        Character *ch = obj->InRoom->Characters().front();
+                        std::shared_ptr<Character> ch = obj->InRoom->Characters().front();
                         Act(AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, ActTarget::Room);
                         Act(AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, ActTarget::Char);
                     }
@@ -243,7 +243,7 @@ void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through)
                 {
                     if(!obj->InRoom->Characters().empty())
                     {
-                        Character *ch = obj->InRoom->Characters().front();
+                        std::shared_ptr<Character> ch = obj->InRoom->Characters().front();
                         Act(AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, ActTarget::Room);
                         Act(AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, ActTarget::Char);
                     }
@@ -258,7 +258,7 @@ void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through)
     }
 }
 
-bool RemoveObject(Character *ch, WearLocation iWear, bool fReplace)
+bool RemoveObject(std::shared_ptr<Character> ch, WearLocation iWear, bool fReplace)
 {
     std::shared_ptr<Object> obj, tmpobj;
 

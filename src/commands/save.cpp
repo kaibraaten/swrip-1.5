@@ -15,35 +15,35 @@ static void SetMissingBits(std::bitset<Flag::MAX> &bits, long missing)
     }
 }
 
-void do_save( std::shared_ptr<Character> ch, std::string argument )
+void do_save(std::shared_ptr<Character> ch, std::string argument)
 {
-    if ( IsNpc(ch) && ch->Flags.test(Flag::Mob::Polymorphed))
+    if(IsNpc(ch) && ch->Flags.test(Flag::Mob::Polymorphed))
     {
         ch->Echo("You can't save while polymorphed.\r\n");
         return;
     }
 
-    if ( IsNpc(ch) )
+    if(IsNpc(ch))
         return;
 
     SetMissingBits(ch->AffectedBy, RaceTable[ch->Race].Affected);
     SetMissingBits(ch->Resistant, RaceTable[ch->Race].Resistant);
     SetMissingBits(ch->Susceptible, RaceTable[ch->Race].Susceptible);
 
-    if ( !IsAuthed(ch) )
+    if(!IsAuthed(ch))
     {
         ch->Echo("You can't save until after you've graduated from the academy.\r\n");
         return;
     }
 
-    PlayerCharacters->Save( ch );
+    PlayerCharacters->Save(ch);
     SaveHome(ch);
-    
-    if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+
+    if(ch->InRoom->Flags.test(Flag::Room::ClanStoreroom))
     {
-        SaveStoreroom( ch->InRoom );
+        SaveStoreroom(ch->InRoom);
     }
 
-    saving_char = NULL;
+    saving_char.reset();
     ch->Echo("Ok.\r\n");
 }

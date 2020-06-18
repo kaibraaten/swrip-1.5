@@ -3,54 +3,54 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_unjail( std::shared_ptr<Character> ch, std::string arg )
+void do_unjail(std::shared_ptr<Character> ch, std::string arg)
 {
-  Character *victim = NULL;
+    std::shared_ptr<Character> victim;
 
-  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
+    if((victim = GetCharacterInRoom(ch, arg)) == NULL)
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( victim == ch )
+    if(victim == ch)
     {
-      ch->Echo("That's pointless.\r\n");
-      return;
+        ch->Echo("That's pointless.\r\n");
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
-      ch->Echo("That would be a waste of time.\r\n");
-      return;
+        ch->Echo("That would be a waste of time.\r\n");
+        return;
     }
 
-  if ( ch->InRoom->Flags.test( Flag::Room::Safe ) )
+    if(ch->InRoom->Flags.test(Flag::Room::Safe))
     {
-      SetCharacterColor( AT_MAGIC, ch );
-      ch->Echo("This isn't a good place to do that.\r\n");
-      return;
+        SetCharacterColor(AT_MAGIC, ch);
+        ch->Echo("This isn't a good place to do that.\r\n");
+        return;
     }
 
-  if ( ch->Position == POS_FIGHTING )
+    if(ch->Position == POS_FIGHTING)
     {
-      ch->Echo("Interesting combat technique.\r\n" );
-      return;
+        ch->Echo("Interesting combat technique.\r\n");
+        return;
     }
 
-  if ( ch->Position <= POS_SLEEPING )
+    if(ch->Position <= POS_SLEEPING)
     {
-      ch->Echo("In your dreams or what?\r\n" );
-      return;
+        ch->Echo("In your dreams or what?\r\n");
+        return;
     }
 
-  if ( victim->InRoom->Vnum == ROOM_VNUM_HELL)
+    if(victim->InRoom->Vnum == ROOM_VNUM_HELL)
     {
-      ch->Echo("Only an immortal can unhell someone.\r\n");
-      return;
+        ch->Echo("Only an immortal can unhell someone.\r\n");
+        return;
     }
 
-  ch->Echo("Jail restrictions released.\r\n");
-  victim->PCData->JailVnum = 0;
-  victim->PCData->ReleaseDate = 0;
+    ch->Echo("Jail restrictions released.\r\n");
+    victim->PCData->JailVnum = 0;
+    victim->PCData->ReleaseDate = 0;
 }

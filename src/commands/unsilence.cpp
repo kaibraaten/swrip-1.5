@@ -1,35 +1,35 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_unsilence( std::shared_ptr<Character> ch, std::string arg )
+void do_unsilence(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
-    if ( arg.empty() )
+    if(arg.empty())
     {
         ch->Echo("Unsilence whom?\r\n");
         return;
     }
 
-    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
         ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
         ch->Echo("Not on NPC's.\r\n");
         return;
     }
 
-    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if(GetTrustLevel(victim) >= GetTrustLevel(ch))
     {
         ch->Echo("You failed.\r\n");
         return;
     }
 
-    if (victim->Flags.test(Flag::Plr::Silence))
+    if(victim->Flags.test(Flag::Plr::Silence))
     {
         victim->Flags.reset(Flag::Plr::Silence);
         victim->Echo("You can use channels again.\r\n");

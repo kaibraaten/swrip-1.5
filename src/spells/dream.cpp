@@ -5,7 +5,7 @@ extern std::string spell_target_name;
 
 ch_ret spell_dream(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim;
+    std::shared_ptr<Character> victim;
     std::string arg;
 
     spell_target_name = OneArgument(spell_target_name, arg);

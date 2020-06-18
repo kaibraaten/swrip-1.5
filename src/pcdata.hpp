@@ -116,7 +116,7 @@ public:
     std::string BettedOn;
     int BetAmount = 0;
 
-    Character *Pet = NULL;
+    std::shared_ptr<Character> Pet;
     std::string AliasFocus;
     std::shared_ptr<class Note> Note;
     int Clones = 0;

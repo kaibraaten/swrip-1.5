@@ -22,7 +22,7 @@ void do_teach(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
-        Character *victim = nullptr;
+        std::shared_ptr<Character> victim;
         int adept = 0;
 
         if(!IsAwake(ch))

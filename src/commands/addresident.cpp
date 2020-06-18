@@ -27,7 +27,7 @@ void do_addresident(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    Character *victim = GetCharacterInRoom(ch, argument);
+    auto victim = GetCharacterInRoom(ch, argument);
 
     if (victim == nullptr)
     {

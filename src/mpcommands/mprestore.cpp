@@ -4,52 +4,52 @@
 /*
  * syntax: mprestore (character) (#hps)                Gorog
  */
-void do_mp_restore( std::shared_ptr<Character> ch, std::string argument )
+void do_mp_restore(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     int hp = 0;
 
-    if ( IsAffectedBy( ch, Flag::Affect::Charm))
+    if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
-    if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
+    if(!IsNpc(ch) || (ch->Desc && GetTrustLevel(ch) < LEVEL_IMMORTAL))
     {
         ch->Echo("Huh?\r\n");
         return;
     }
 
-    argument = OneArgument( argument, arg1 );
-    argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-    if ( arg1.empty() )
+    if(arg1.empty())
     {
         ch->Echo("mprestore whom?\r\n");
-        ProgBug( "Mprestore: invalid argument1", ch );
+        ProgBug("Mprestore: invalid argument1", ch);
         return;
     }
 
-    if ( arg2.empty() )
+    if(arg2.empty())
     {
         ch->Echo("mprestore how many hps?\r\n");
-        ProgBug( "Mprestore: invalid argument2", ch );
+        ProgBug("Mprestore: invalid argument2", ch);
         return;
     }
 
-    if ( ( victim = GetCharacterInRoomMudProg( ch, arg1 ) ) == NULL )
+    if((victim = GetCharacterInRoomMudProg(ch, arg1)) == NULL)
     {
         ch->Echo("Victim must be in room.\r\n");
-        ProgBug( "Mprestore: victim not in room", ch );
+        ProgBug("Mprestore: victim not in room", ch);
         return;
     }
 
     hp = ToLong(arg2);
 
-    if( hp < 0 || hp > 32000 )
+    if(hp < 0 || hp > 32000)
     {
         ch->Echo("Mprestore how much?\r\n");
-        ProgBug( "Mprestore: invalid (nonexistent?) argument", ch );
+        ProgBug("Mprestore: invalid (nonexistent?) argument", ch);
         return;
     }
 

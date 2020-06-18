@@ -36,14 +36,14 @@ class LuaAreaRepository : public AreaRepository
 public:
     void Load() override;
     void Save() const override;
-    void Save(const std::shared_ptr<Area>&) const override;
-    void Save(const std::shared_ptr<Area>&, bool install) const override;
+    void Save(const std::shared_ptr<Area> &) const override;
+    void Save(const std::shared_ptr<Area> &, bool install) const override;
     std::string GetAreaFilename(std::shared_ptr<Area> area) const override;
     void Install(std::shared_ptr<Area> area, const std::string &newfilename) override;
     void ChangeFilename(std::shared_ptr<Area> area, const std::string &newfilename) override;
-    
+
 private:
-    void PushMetaData(lua_State*, std::shared_ptr<Area>) const;
+    void PushMetaData(lua_State *, std::shared_ptr<Area>) const;
     void PushLevelRanges(lua_State *L, std::shared_ptr<Area>) const;
     void PushVnumRanges(lua_State *L, std::shared_ptr<Area>) const;
     void PushExits(lua_State *L, const std::shared_ptr<Room> room) const;
@@ -60,7 +60,7 @@ private:
     void PushOvalues(lua_State *L, const std::shared_ptr<ProtoObject> obj) const;
     void PushResets(lua_State *L, const std::shared_ptr<Area> area) const;
     void PushReset(lua_State *L, const std::shared_ptr<Reset> reset, size_t idx) const;
-    static void PushArea(lua_State* L, const void* userData);
+    static void PushArea(lua_State *L, const void *userData);
 
     static void LoadMetaData(lua_State *L, std::shared_ptr<Area> area);
     static void LoadLevelRanges(lua_State *L, std::shared_ptr<Area> area);
@@ -78,8 +78,8 @@ private:
     static void LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
     static void LoadObjectsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
     static void LoadRoomsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
-    static int L_AreaEntry(lua_State* L);
-    static void ExecuteAreaFile(const std::string& filePath, void* userData);
+    static int L_AreaEntry(lua_State *L);
+    static void ExecuteAreaFile(const std::string &filePath, void *userData);
 };
 
 void LuaAreaRepository::Install(std::shared_ptr<Area> area, const std::string &newfilename)
@@ -135,7 +135,9 @@ void LuaAreaRepository::Save(const std::shared_ptr<Area> &area) const
 
 struct SaveData
 {
-    SaveData(const LuaAreaRepository *r, std::shared_ptr<Area> a, bool i) : Repos(r), area(a), Install(i) {}
+    SaveData(const LuaAreaRepository *r, std::shared_ptr<Area> a, bool i) : Repos(r), area(a), Install(i)
+    {
+    }
     const LuaAreaRepository *Repos;
     std::shared_ptr<Area> area;
     bool Install = false;
@@ -162,7 +164,7 @@ void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install) co
 
 static std::string EnsureProperFilename(std::string filename)
 {
-    if (StringEndsWith(filename, ".are"))
+    if(StringEndsWith(filename, ".are"))
     {
         // Chop off legacy file extension.
         filename = filename.substr(0, filename.size() - 4);
@@ -232,9 +234,9 @@ void LuaAreaRepository::PushMetaData(lua_State *L, std::shared_ptr<Area> area) c
     PushVnumRanges(L, area);
 }
 
-void LuaAreaRepository::PushArea(lua_State* L, const void* userData)
+void LuaAreaRepository::PushArea(lua_State *L, const void *userData)
 {
-    const SaveData *data = static_cast<const SaveData*>(userData);
+    const SaveData *data = static_cast<const SaveData *>(userData);
     const std::shared_ptr<Area> area = data->area;
     const LuaAreaRepository *repos = data->Repos;
 
@@ -256,7 +258,7 @@ void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> res
     {
         bool includeArg3 = false;
 
-        switch (reset->Command) /* extra arg1 arg2 arg3 */
+        switch(reset->Command) /* extra arg1 arg2 arg3 */
         {
         case 'm':
         case 'M':
@@ -307,7 +309,7 @@ void LuaAreaRepository::PushResets(lua_State *L, const std::shared_ptr<Area> are
     lua_newtable(L);
     size_t idx = 0;
 
-    for (auto reset = area->FirstReset; reset; reset = reset->Next)
+    for(auto reset = area->FirstReset; reset; reset = reset->Next)
     {
         PushReset(L, reset, ++idx);
     }
@@ -355,31 +357,31 @@ void LuaAreaRepository::PushOvalues(lua_State *L, const std::shared_ptr<ProtoObj
 {
     auto ovalues = obj->Value;
 
-    switch (obj->ItemType)
+    switch(obj->ItemType)
     {
     case ITEM_PILL:
     case ITEM_POTION:
     case ITEM_SCROLL:
-        if (IS_VALID_SN(ovalues[OVAL_POTION_SPELL1]))
+        if(IS_VALID_SN(ovalues[OVAL_POTION_SPELL1]))
             ovalues[OVAL_POTION_SPELL1] = SkillTable[ovalues[OVAL_POTION_SPELL1]]->Slot;
 
-        if (IS_VALID_SN(ovalues[OVAL_POTION_SPELL2]))
+        if(IS_VALID_SN(ovalues[OVAL_POTION_SPELL2]))
             ovalues[OVAL_POTION_SPELL2] = SkillTable[ovalues[OVAL_POTION_SPELL2]]->Slot;
 
-        if (IS_VALID_SN(ovalues[OVAL_POTION_SPELL3]))
+        if(IS_VALID_SN(ovalues[OVAL_POTION_SPELL3]))
             ovalues[OVAL_POTION_SPELL3] = SkillTable[ovalues[OVAL_POTION_SPELL3]]->Slot;
         break;
 
     case ITEM_DEVICE:
-        if (IS_VALID_SN(ovalues[OVAL_DEVICE_SPELL]))
+        if(IS_VALID_SN(ovalues[OVAL_DEVICE_SPELL]))
             ovalues[OVAL_DEVICE_SPELL] = SkillTable[ovalues[OVAL_DEVICE_SPELL]]->Slot;
         break;
 
     case ITEM_SALVE:
-        if (IS_VALID_SN(ovalues[OVAL_SALVE_SPELL1]))
+        if(IS_VALID_SN(ovalues[OVAL_SALVE_SPELL1]))
             ovalues[OVAL_SALVE_SPELL1] = SkillTable[ovalues[OVAL_SALVE_SPELL1]]->Slot;
 
-        if (IS_VALID_SN(ovalues[OVAL_SALVE_SPELL2]))
+        if(IS_VALID_SN(ovalues[OVAL_SALVE_SPELL2]))
             ovalues[OVAL_SALVE_SPELL2] = SkillTable[ovalues[OVAL_SALVE_SPELL2]]->Slot;
         break;
 
@@ -396,13 +398,13 @@ void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room,
     {
         room->Flags.reset(Flag::Room::Prototype);
 
-        std::list<Character*> charactersToExtract = Filter(room->Characters(),
-                                                           [](auto victim)
-                                                           {
-                                                               return IsNpc(victim);
-                                                           });
+        auto charactersToExtract = Filter(room->Characters(),
+                                          [](auto victim)
+                                          {
+                                              return IsNpc(victim);
+                                          });
 
-        for (Character *victim : charactersToExtract)
+        for(auto victim : charactersToExtract)
         {
             ExtractCharacter(victim, true);
         }
@@ -410,7 +412,7 @@ void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room,
         /* purge room of (prototyped) objects */
         auto objectsToExtract = room->Objects();
 
-        for (auto obj : objectsToExtract)
+        for(auto obj : objectsToExtract)
         {
             ExtractObject(obj);
         }
@@ -440,14 +442,14 @@ void LuaAreaRepository::PushRooms(lua_State *L, const std::shared_ptr<Area> &are
     lua_newtable(L);
     vnum_t vnum = INVALID_VNUM;
 
-    for (vnum = area->VnumRanges.Room.First; vnum <= area->VnumRanges.Room.Last; vnum++)
+    for(vnum = area->VnumRanges.Room.First; vnum <= area->VnumRanges.Room.Last; vnum++)
     {
         if(vnum != INVALID_VNUM)
         {
             auto room = GetRoom(vnum);
 
 
-            if (room != nullptr)
+            if(room != nullptr)
             {
                 PushRoom(L, room, install);
             }
@@ -456,7 +458,7 @@ void LuaAreaRepository::PushRooms(lua_State *L, const std::shared_ptr<Area> &are
 
     lua_settable(L, -3);
 
-    if (install && vnum < area->VnumRanges.Room.Last)
+    if(install && vnum < area->VnumRanges.Room.Last)
     {
         area->VnumRanges.Room.Last = vnum - 1;
     }
@@ -464,7 +466,7 @@ void LuaAreaRepository::PushRooms(lua_State *L, const std::shared_ptr<Area> &are
 
 void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObject> obj, bool install) const
 {
-    if (install)
+    if(install)
     {
         obj->Flags.reset(Flag::Obj::Prototype);
     }
@@ -497,14 +499,14 @@ void LuaAreaRepository::PushObjects(lua_State *L, const std::shared_ptr<Area> &a
     lua_newtable(L);
     vnum_t vnum = INVALID_VNUM;
 
-    for (vnum = area->VnumRanges.Object.First; vnum <= area->VnumRanges.Object.Last; vnum++)
+    for(vnum = area->VnumRanges.Object.First; vnum <= area->VnumRanges.Object.Last; vnum++)
     {
         if(vnum != INVALID_VNUM)
         {
             auto obj = GetProtoObject(vnum);
 
 
-            if (obj != nullptr)
+            if(obj != nullptr)
             {
                 PushObject(L, obj, install);
             }
@@ -513,7 +515,7 @@ void LuaAreaRepository::PushObjects(lua_State *L, const std::shared_ptr<Area> &a
 
     lua_settable(L, -3);
 
-    if (install && vnum < area->VnumRanges.Object.Last)
+    if(install && vnum < area->VnumRanges.Object.Last)
     {
         area->VnumRanges.Object.Last = vnum - 1;
     }
@@ -525,14 +527,14 @@ void LuaAreaRepository::PushMobiles(lua_State *L, const std::shared_ptr<Area> &a
     lua_newtable(L);
     vnum_t vnum = INVALID_VNUM;
 
-    for (vnum = area->VnumRanges.Mob.First; vnum <= area->VnumRanges.Mob.Last; vnum++)
+    for(vnum = area->VnumRanges.Mob.First; vnum <= area->VnumRanges.Mob.Last; vnum++)
     {
         if(vnum != INVALID_VNUM)
         {
             auto mob = GetProtoMobile(vnum);
 
 
-            if (mob != nullptr)
+            if(mob != nullptr)
             {
                 PushMobile(L, mob, install);
             }
@@ -541,7 +543,7 @@ void LuaAreaRepository::PushMobiles(lua_State *L, const std::shared_ptr<Area> &a
 
     lua_settable(L, -3);
 
-    if (install && vnum < area->VnumRanges.Mob.Last)
+    if(install && vnum < area->VnumRanges.Mob.Last)
     {
         area->VnumRanges.Mob.Last = vnum - 1;
     }
@@ -549,7 +551,7 @@ void LuaAreaRepository::PushMobiles(lua_State *L, const std::shared_ptr<Area> &a
 
 void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobile> mob, bool install) const
 {
-    if (install)
+    if(install)
     {
         mob->Flags.reset(Flag::Mob::Prototype);
     }
@@ -621,7 +623,7 @@ void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobi
     }
 
     PushSpecials(L, mob);
-    
+
     lua_settable(L, -3);
 }
 
@@ -650,7 +652,7 @@ static void PushBuyTypes(lua_State *L, const std::array<ItemTypes, N> itemTypes,
         lua_pushstring(L, ObjectTypes[itemTypes[i]]);
         lua_settable(L, -3);
     }
-    
+
     lua_settable(L, -3);
 }
 
@@ -666,7 +668,7 @@ void LuaAreaRepository::PushShop(lua_State *L, const std::shared_ptr<ProtoMobile
     PushBusinessHours(L, shop->BusinessHours);
     PushBuyTypes<MAX_TRADE>(L, shop->BuyType, "BuyTypes");
     LuaSetfieldString(L, "KeeperShortDescr", keeper->ShortDescr);
-    
+
     lua_settable(L, -3);
 }
 
@@ -688,7 +690,7 @@ void LuaAreaRepository::PushRepairShop(lua_State *L, const std::shared_ptr<Proto
 
 void LuaAreaRepository::PushSpecials(lua_State *L, const std::shared_ptr<ProtoMobile> mob) const
 {
-    std::vector<SpecFun*> specfuns;
+    std::vector<SpecFun *> specfuns;
 
     if(mob->spec_fun != nullptr)
     {
@@ -699,7 +701,7 @@ void LuaAreaRepository::PushSpecials(lua_State *L, const std::shared_ptr<ProtoMo
     {
         specfuns.push_back(mob->spec_2);
     }
-    
+
     LuaPushCollection(L, specfuns, "SpecFuns", LuaPushSpecFun);
 }
 
@@ -713,13 +715,13 @@ static void GetLevelRangeFields(lua_State *L, T &range)
 void LuaAreaRepository::LoadLevelRanges(lua_State *L, std::shared_ptr<Area> area)
 {
     LuaLoadTable(L, "LevelRanges",
-                 [L](lua_State*, auto &ranges)
+                 [L](lua_State *, auto &ranges)
                  {
                      LuaLoadTable(L, "Soft",
-                                  GetLevelRangeFields<decltype(ranges->Soft)*>,
+                                  GetLevelRangeFields<decltype(ranges->Soft) *>,
                                   &ranges->Soft);
                      LuaLoadTable(L, "Hard",
-                                  GetLevelRangeFields<decltype(ranges->Hard)*>,
+                                  GetLevelRangeFields<decltype(ranges->Hard) *>,
                                   &ranges->Soft);
                  },
                  &area->LevelRanges);
@@ -735,16 +737,16 @@ static void GetVnumRangeFields(lua_State *L, T &range)
 void LuaAreaRepository::LoadVnumRanges(lua_State *L, std::shared_ptr<Area> area)
 {
     LuaLoadTable(L, "VnumRanges",
-                 [L](lua_State*, auto &ranges)
+                 [L](lua_State *, auto &ranges)
                  {
                      LuaLoadTable(L, "Room",
-                                  GetVnumRangeFields<decltype(ranges->Room)*>,
+                                  GetVnumRangeFields<decltype(ranges->Room) *>,
                                   &ranges->Room);
                      LuaLoadTable(L, "Mob",
-                                  GetVnumRangeFields<decltype(ranges->Mob)*>,
+                                  GetVnumRangeFields<decltype(ranges->Mob) *>,
                                   &ranges->Mob);
                      LuaLoadTable(L, "Object",
-                                  GetVnumRangeFields<decltype(ranges->Object)*>,
+                                  GetVnumRangeFields<decltype(ranges->Object) *>,
                                   &ranges->Object);
                  },
                  &area->VnumRanges);
@@ -815,12 +817,12 @@ static void LoadLanguages(lua_State *L, std::shared_ptr<ProtoMobile> mob)
     mob->Speaks = LuaLoadFlags(L, "Speaks").to_ulong();
     mob->Speaking = LuaLoadFlags(L, "Speaking").to_ulong();
 
-    if (mob->Speaks == 0)
+    if(mob->Speaks == 0)
     {
         mob->Speaks = RaceTable[mob->Race].Language | LANG_COMMON;
     }
-    
-    if (!mob->Speaking)
+
+    if(!mob->Speaking)
     {
         mob->Speaking = RaceTable[mob->Race].Language;
     }
@@ -904,7 +906,7 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     LuaGetfieldInt(L, "NumberOfAttacks", &mob->NumberOfAttacks);
     LuaGetfieldInt(L, "HitRoll", &mob->HitRoll);
     LuaGetfieldInt(L, "DamRoll", &mob->DamRoll);
-    
+
     mob->Flags = LuaLoadFlags(L, "Flags");
     mob->Flags.set(Flag::Mob::Npc);
     mob->AffectedBy = LuaLoadFlags(L, "AffectedBy");
@@ -914,22 +916,22 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     mob->Immune = LuaLoadFlags(L, "Immune");
     mob->Susceptible = LuaLoadFlags(L, "Susceptible");
     mob->VipFlags = LuaLoadFlags(L, "VipFlags");
-    
+
     LuaLoadTable(L, "HitChance", LoadHitChance, mob);
     LuaLoadTable(L, "Damage", LoadDamage, mob);
     LuaLoadTable(L, "Languages", LoadLanguages, mob);
 
     // Load progs
     LuaLoadArray(L, "MudProgs", LoadMudProg, &mob->mprog);
-    
+
     // Load shop
     LuaLoadTable(L, "Shop", LoadShop, mob);
-    
+
     // Load repair shop
     LuaLoadTable(L, "RepairShop", LoadRepairShop, mob);
-    
+
     // Load specials
-    std::vector<SpecFun*> specfuns;
+    std::vector<SpecFun *> specfuns;
     LuaLoadArray(L, "SpecFuns", LuaLoadSpecFun, &specfuns);
     AssignSpecFuns(mob, specfuns);
 }
@@ -937,24 +939,24 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
 void LuaAreaRepository::LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area)
 {
 #if 0
-    if (GetProtoMobile(vnum))
+    if(GetProtoMobile(vnum))
     {
         Log->Bug("%s: vnum %ld duplicated.", __FUNCTION__, vnum);
         ShutdownMud("duplicate vnum");
         exit(1);
     }
 #endif
-    
+
     auto mob = std::make_shared<ProtoMobile>(vnum);
     LoadMobile(L, mob);
 
-    if (area->VnumRanges.Mob.First == INVALID_VNUM
-        || vnum < area->VnumRanges.Mob.First)
+    if(area->VnumRanges.Mob.First == INVALID_VNUM
+       || vnum < area->VnumRanges.Mob.First)
     {
         area->VnumRanges.Mob.First = vnum;
     }
 
-    if (vnum > area->VnumRanges.Mob.Last)
+    if(vnum > area->VnumRanges.Mob.Last)
     {
         area->VnumRanges.Mob.Last = vnum;
     }
@@ -973,24 +975,24 @@ void LuaAreaRepository::LoadMobiles(lua_State *L, std::shared_ptr<Area> area)
 void LuaAreaRepository::LoadObjectsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area)
 {
 #if 0
-    if (GetProtoObject(vnum))
+    if(GetProtoObject(vnum))
     {
         Log->Bug("%s: vnum %ld duplicated.", __FUNCTION__, vnum);
         ShutdownMud("duplicate vnum");
         exit(1);
     }
 #endif
-    
+
     auto obj = std::make_shared<ProtoObject>(vnum);
     LoadObject(L, obj);
 
-    if (area->VnumRanges.Object.First == INVALID_VNUM
-        || vnum < area->VnumRanges.Object.First)
+    if(area->VnumRanges.Object.First == INVALID_VNUM
+       || vnum < area->VnumRanges.Object.First)
     {
         area->VnumRanges.Object.First = vnum;
     }
 
-    if (vnum > area->VnumRanges.Object.Last)
+    if(vnum > area->VnumRanges.Object.Last)
     {
         area->VnumRanges.Object.Last = vnum;
     }
@@ -1010,7 +1012,7 @@ void LuaAreaRepository::LoadOvalues(lua_State *L, std::shared_ptr<ProtoObject> o
 {
     LuaLoadOvalues(L, obj->Value);
 
-    switch (obj->ItemType)
+    switch(obj->ItemType)
     {
     case ITEM_PILL:
     case ITEM_POTION:
@@ -1037,7 +1039,7 @@ static void LoadExtraDescriptions(lua_State *L, std::shared_ptr<ProtoObject> obj
 {
     auto extraDescriptions = LuaLoadExtraDescriptions(L);
 
-    for (auto extra : extraDescriptions)
+    for(auto extra : extraDescriptions)
     {
         obj->Add(extra);
     }
@@ -1082,26 +1084,26 @@ void LuaAreaRepository::LoadObject(lua_State *L, std::shared_ptr<ProtoObject> ob
 void LuaAreaRepository::LoadRoomsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area)
 {
 #if 0
-    if (GetRoom(vnum) != nullptr)
+    if(GetRoom(vnum) != nullptr)
     {
         Log->Bug("%s: vnum %ld duplicated.", __FUNCTION__, vnum);
         ShutdownMud("duplicate vnum");
         exit(1);
     }
 #endif
-    
+
     auto room = std::make_shared<Room>();
     room->Vnum = vnum;
     room->Area = area;
     LoadRoom(L, room);
 
-    if (area->VnumRanges.Room.First == INVALID_VNUM
-        || vnum < area->VnumRanges.Room.First)
+    if(area->VnumRanges.Room.First == INVALID_VNUM
+       || vnum < area->VnumRanges.Room.First)
     {
         area->VnumRanges.Room.First = vnum;
     }
 
-    if (vnum > area->VnumRanges.Room.Last)
+    if(vnum > area->VnumRanges.Room.Last)
     {
         area->VnumRanges.Room.Last = vnum;
     }
@@ -1121,7 +1123,7 @@ static void LoadExtraDescriptions(lua_State *L, std::shared_ptr<Room> room)
 {
     auto extraDescriptions = LuaLoadExtraDescriptions(L);
 
-    for (auto extra : extraDescriptions)
+    for(auto extra : extraDescriptions)
     {
         room->Add(extra);
     }
@@ -1158,8 +1160,8 @@ void LuaAreaRepository::LoadRoom(lua_State *L, std::shared_ptr<Room> room)
                       {
                           room->Sector = GetSectorType(sector);
 
-                          if (room->Sector <= SECT_INVALID
-                              || room->Sector >= SECT_MAX)
+                          if(room->Sector <= SECT_INVALID
+                             || room->Sector >= SECT_MAX)
                           {
                               Log->Bug("%s: vnum %ld has bad sector_type %d.",
                                        __FUNCTION__, room->Vnum,
@@ -1190,7 +1192,7 @@ void LuaAreaRepository::LoadResets(lua_State *L, std::shared_ptr<Area> area)
     for(auto tuple : resets)
     {
         auto reset = tuple.second;
-        
+
         if(reset->Command != '*')
         {
             AddReset(area, reset->Command, reset->MiscData, reset->Arg1, reset->Arg2, reset->Arg3);
@@ -1234,7 +1236,7 @@ int LuaAreaRepository::L_AreaEntry(lua_State *L)
     area->Age = 15;
     area->LevelRanges.Soft.High = MAX_LEVEL;
     area->LevelRanges.Hard.High = MAX_LEVEL;
-    
+
     LoadMetaData(L, area);
     LoadMobiles(L, area);
     LoadObjects(L, area);
@@ -1246,7 +1248,7 @@ int LuaAreaRepository::L_AreaEntry(lua_State *L)
     {
         top_area++;
     }
-    
+
     fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
             area->Filename.c_str(),
             area->VnumRanges.Room.First, area->VnumRanges.Room.Last,
@@ -1271,7 +1273,7 @@ std::string LuaAreaRepository::GetAreaFilename(std::shared_ptr<Area> area) const
 {
     std::string filename = area->Filename;
 
-    if (StringEndsWith(filename, ".are"))
+    if(StringEndsWith(filename, ".are"))
     {
         // Chop off legacy file extension.
         filename = filename.substr(0, filename.size() - 4);

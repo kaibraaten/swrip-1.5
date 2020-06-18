@@ -13,23 +13,20 @@ class AliasTests : public ::testing::Test
 protected:
     void SetUp() override
     {
-        _testCharacter = new Character(std::make_unique<PCData>());
+        _testCharacter = std::make_shared<Character>(std::make_unique<PCData>());
         MapCharacterAndDescriptor(_testCharacter, std::make_shared<NullDescriptor>());
         auto protoMob = MakeMobile(1, INVALID_VNUM, "Foo");
-        _testNpc = new Character(protoMob);
+        _testNpc = std::make_shared<Character>(protoMob);
     }
 
     void TearDown() override
     {
-        delete _testCharacter;
         _testCharacter = nullptr;
-
-        delete _testNpc;
         _testNpc = nullptr;
     }
 
-    Character *_testCharacter = nullptr;
-    Character *_testNpc = nullptr;
+    std::shared_ptr<Character> _testCharacter;
+    std::shared_ptr<Character> _testNpc;
     const std::string _expectedAliasName = "alias";
     const std::string _expectedCommand = "command";
 };

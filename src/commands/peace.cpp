@@ -7,7 +7,7 @@ void do_peace(std::shared_ptr<Character> ch, std::string argument)
 {
     Act(AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, ActTarget::Room);
 
-    for(Character *rch : ch->InRoom->Characters())
+    for(auto rch : ch->InRoom->Characters())
     {
         if(rch->Fighting)
         {

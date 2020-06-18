@@ -46,7 +46,7 @@ void do_close(std::shared_ptr<Character> ch, std::string argument)
         {
             pexit_rev->Flags.set(Flag::Exit::Closed);
 
-            for(Character *rch : pexit->ToRoom->Characters())
+            for(auto rch : pexit->ToRoom->Characters())
             {
                 Act(AT_ACTION, "The $d closes.",
                     rch, NULL, pexit_rev->Keyword, ActTarget::Char);

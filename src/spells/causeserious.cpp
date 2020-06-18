@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-ch_ret spell_cause_serious(int sn, int level, Character* ch, const Vo &vo)
+ch_ret spell_cause_serious(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     ch->Echo("You feel the hatred grow within you!\r\n");
     ch->Alignment -= 90;

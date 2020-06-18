@@ -6,7 +6,7 @@
 
 void do_murder(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
     if(arg.empty())
     {

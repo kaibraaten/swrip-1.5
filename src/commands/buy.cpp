@@ -37,7 +37,7 @@ void do_buy(std::shared_ptr<Character> ch, std::string argument)
 
         auto in_room = ch->InRoom;
         ch->InRoom = pRoomIndexNext;
-        Character *pet = GetCharacterInRoom(ch, arg);
+        auto pet = GetCharacterInRoom(ch, arg);
         ch->InRoom = in_room;
 
         if(pet == nullptr || !IsNpc(pet) || !pet->Flags.test(Flag::Mob::Pet))

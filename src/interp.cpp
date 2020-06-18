@@ -43,13 +43,13 @@
   */
 bool fLogAll = false;
 
-static std::string ParseTarget(const Character *ch, std::string oldstring);
+static std::string ParseTarget(std::shared_ptr<Character> ch, std::string oldstring);
 static std::string GetMultiCommand(std::shared_ptr<Descriptor> d, std::string argument);
 
 /*
  * Character not in position for command?
  */
-bool CheckPosition(const Character *ch, PositionType position)
+bool CheckPosition(std::shared_ptr<Character> ch, PositionType position)
 {
     if(ch->Position < position)
     {
@@ -98,7 +98,7 @@ bool CheckPosition(const Character *ch, PositionType position)
  * The main entry point for executing commands.
  * Can be recursively called from 'at', 'order', 'force'.
  */
-static std::string ParseTarget(const Character *ch, std::string oldstring)
+static std::string ParseTarget(std::shared_ptr<Character> ch, std::string oldstring)
 {
     const char *str = oldstring.c_str();
     int count = 0;
@@ -185,7 +185,7 @@ static std::string GetMultiCommand(std::shared_ptr<Descriptor> d, std::string ar
 
 struct CommandFindData
 {
-    Character *ch = nullptr;
+    std::shared_ptr<Character> ch;
     std::string command;
 };
 
@@ -194,7 +194,7 @@ static bool _CheckTrustAndBestowments(void *c, const void *d)
     const Command *cmd = static_cast<const Command *>(c);
     const CommandFindData *data = static_cast<const CommandFindData *>(d);
     std::string command = data->command;
-    const Character *ch = data->ch;
+    std::shared_ptr<Character> ch = data->ch;
     int trust = GetTrustLevel(ch);
 
     if(!StringPrefix(command, cmd->Name)
@@ -211,7 +211,7 @@ static bool _CheckTrustAndBestowments(void *c, const void *d)
     }
 }
 
-void Interpret(Character *ch, std::string argument)
+void Interpret(std::shared_ptr<Character> ch, std::string argument)
 {
     assert(ch != nullptr);
 
@@ -475,7 +475,7 @@ void Interpret(Character *ch, std::string argument)
     }
 }
 
-void SendTimer(std::shared_ptr<timerset> vtime, Character *ch)
+void SendTimer(std::shared_ptr<timerset> vtime, std::shared_ptr<Character> ch)
 {
     timeval ntime;
     int carry = 0;

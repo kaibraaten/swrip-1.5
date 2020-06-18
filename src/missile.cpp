@@ -30,19 +30,19 @@
 std::list<std::shared_ptr<Missile>> Missiles;
 
 void NewMissile(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
-    const std::string &firedBy, MissileType missiletype)
+                const std::string &firedBy, MissileType missiletype)
 {
-    if (ship == NULL)
+    if(ship == NULL)
     {
         return;
     }
 
-    if (target == NULL)
+    if(target == NULL)
     {
         return;
     }
 
-    if (ship->Spaceobject == nullptr)
+    if(ship->Spaceobject == nullptr)
     {
         return;
     }
@@ -56,15 +56,15 @@ void NewMissile(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
     missile->Type = missiletype;
     missile->Age = 0;
 
-    if (missile->Type == HEAVY_BOMB)
+    if(missile->Type == HEAVY_BOMB)
     {
         missile->Speed = 20;
     }
-    else if (missile->Type == PROTON_TORPEDO)
+    else if(missile->Type == PROTON_TORPEDO)
     {
         missile->Speed = 200;
     }
-    else if (missile->Type == CONCUSSION_MISSILE)
+    else if(missile->Type == CONCUSSION_MISSILE)
     {
         missile->Speed = 300;
     }
@@ -87,42 +87,41 @@ void UpdateMissile(std::shared_ptr<Missile> missile)
     std::shared_ptr<Ship> ship = missile->FiredFrom;
     std::shared_ptr<Ship> target = missile->Target;
 
-    if (target->Spaceobject && IsMissileInRange(ship, missile))
+    if(target->Spaceobject && IsMissileInRange(ship, missile))
     {
         SetMissileCourseTowardsShip(missile, target);
         MoveMissile(missile);
 
-        if (GetMissileDistanceToShip(missile, target) <= 20)
+        if(GetMissileDistanceToShip(missile, target) <= 20)
         {
-            if (target->Defenses.ChaffReleased <= 0)
+            if(target->Defenses.ChaffReleased <= 0)
             {
                 bool ch_found = false;
-                Character *ch = NULL;
                 char buf[MAX_STRING_LENGTH];
 
                 EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Gunseat),
-                    "Your missile hits its target dead on!");
+                           "Your missile hits its target dead on!");
                 EchoToCockpit(AT_BLOOD, target,
-                    "The ship is hit by a missile.");
+                              "The ship is hit by a missile.");
                 EchoToShip(AT_RED, target,
-                    "A loud explosion shakes thee ship violently!");
+                           "A loud explosion shakes thee ship violently!");
                 sprintf(buf, "You see a small explosion as %s is hit by a missile",
-                    target->Name.c_str());
+                        target->Name.c_str());
                 EchoToNearbyShips(AT_ORANGE, target, buf, { ship });
 
-                for (ch = FirstCharacter; ch; ch = ch->Next)
+                for(auto ch = FirstCharacter; ch; ch = ch->Next)
                 {
-                    if (!IsNpc(ch) && NiftyIsName(missile->FiredBy, ch->Name))
+                    if(!IsNpc(ch) && NiftyIsName(missile->FiredBy, ch->Name))
                     {
                         ch_found = true;
                         DamageShip(target, 30 + missile->Type * missile->Type * 30, 50 + missile->Type * missile->Type * missile->Type * 50, ch, NULL);
                     }
                 }
 
-                if (!ch_found)
+                if(!ch_found)
                 {
-                    DamageShip(target, 20 + missile->Type*missile->Type * 20,
-                        30 + missile->Type*missile->Type*ship->Type * 30, NULL, ship);
+                    DamageShip(target, 20 + missile->Type * missile->Type * 20,
+                               30 + missile->Type * missile->Type * ship->Type * 30, NULL, ship);
                 }
 
                 ExtractMissile(missile);
@@ -140,7 +139,7 @@ void UpdateMissile(std::shared_ptr<Missile> missile)
         {
             missile->Age++;
 
-            if (missile->Age >= 50)
+            if(missile->Age >= 50)
             {
                 ExtractMissile(missile);
                 return;
@@ -151,7 +150,7 @@ void UpdateMissile(std::shared_ptr<Missile> missile)
     {
         missile->Age++;
 
-        if (missile->Age >= 50)
+        if(missile->Age >= 50)
         {
             ExtractMissile(missile);
         }

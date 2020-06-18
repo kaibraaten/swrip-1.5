@@ -10,7 +10,7 @@
 
 void do_pricevendor(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *vendor = NULL;
+    std::shared_ptr<Character> vendor;
     std::shared_ptr<Character> ch1 = NULL;
     std::string arg1;
     std::string arg2;

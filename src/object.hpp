@@ -28,7 +28,7 @@ public:
     const std::list<std::shared_ptr<Object>> &Objects() const;
 
     std::shared_ptr<Object> InObject;
-    Character *CarriedBy = nullptr;
+    std::shared_ptr<Character> CarriedBy;
     std::shared_ptr<ProtoObject> Prototype;
     std::shared_ptr<Room> InRoom;
     std::string ArmedBy;

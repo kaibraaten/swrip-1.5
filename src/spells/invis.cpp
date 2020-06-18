@@ -8,7 +8,7 @@ extern std::string spell_target_name;
 
 ch_ret spell_invis(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
     /* Modifications on 1/2/96 to work on player/object - Scryn */

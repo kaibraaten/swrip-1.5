@@ -6,7 +6,7 @@
 
 void do_disarm(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Object> obj;
     int percent = 0;
 

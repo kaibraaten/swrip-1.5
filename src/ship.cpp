@@ -51,7 +51,7 @@ static bool CaughtInGravity(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobj
 static bool WillCollideWithSun(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun);
 static void EvadeCollisionWithSun(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun);
 static bool ShipHasState(std::shared_ptr<Ship> ship, ShipState state);
-static void DockShip(Character *ch, std::shared_ptr<Ship> ship);
+static void DockShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
 
 static bool WillCollideWithSun(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun)
 {
@@ -381,7 +381,7 @@ static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
     std::shared_ptr<Ship> target;
     char buf[MAX_STRING_LENGTH] = { '\0' };
     vnum_t destination = INVALID_VNUM;
-    Character *ch = NULL;
+    std::shared_ptr<Character> ch = NULL;
     const LandingSite *site = GetLandingSiteFromLocationName(ship->Spaceobject, arg);
 
     if(site)
@@ -676,7 +676,7 @@ static void MakeDebris(std::shared_ptr<Ship> ship)
     CopyVector(debris->Heading, ship->Heading);
 }
 
-static void DockShip(Character *ch, std::shared_ptr<Ship> ship)
+static void DockShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship)
 {
     if(ship->DockingState == SHIP_DISABLED)
     {
@@ -833,7 +833,7 @@ bool CheckHostile(std::shared_ptr<Ship> ship)
     return false;
 }
 
-ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit> pexit, int fall)
+ch_ret DriveShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit> pexit, int fall)
 {
     char buf[MAX_STRING_LENGTH];
     const char *txt = NULL;
@@ -1113,9 +1113,9 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit
     sprintf(buf, "%s %s from %s.", ship->Name.c_str(), txt, dtxt);
     EchoToRoom(AT_ACTION, GetRoom(ship->Location), buf);
 
-    std::list<Character *> charactersInRoom(Reverse(ch->InRoom->Characters()));
+    std::list<std::shared_ptr<Character> > charactersInRoom(Reverse(ch->InRoom->Characters()));
 
-    for(Character *rch : charactersInRoom)
+    for(std::shared_ptr<Character> rch : charactersInRoom)
     {
         auto original = rch->InRoom;
         CharacterFromRoom(rch);
@@ -2509,7 +2509,7 @@ void ShipFromSpaceobject(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject
     }
 }
 
-bool IsShipRental(const Character *ch, std::shared_ptr<Ship> ship)
+bool IsShipRental(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship)
 {
     if(!StrCmp("Public", ship->Owner))
     {
@@ -2568,7 +2568,7 @@ bool CanDock(std::shared_ptr<Ship> ship)
     return true;
 }
 
-bool CheckPilot(const Character *ch, std::shared_ptr<Ship> ship)
+bool CheckPilot(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship)
 {
     if(!StrCmp(ch->Name, ship->Owner)
        || !StrCmp(ch->Name, ship->Pilot)
@@ -2669,7 +2669,7 @@ bool ExtractShip(std::shared_ptr<Ship> ship)
 }
 
 void DamageShip(std::shared_ptr<Ship> ship, int min, int max,
-                Character *ch, std::shared_ptr<Ship> assaulter)
+                std::shared_ptr<Character> ch, std::shared_ptr<Ship> assaulter)
 {
     short ionFactor = 1;
     int dmg = 0;
@@ -2787,7 +2787,7 @@ void DamageShip(std::shared_ptr<Ship> ship, int min, int max,
     }
 }
 
-void DestroyShip(std::shared_ptr<Ship> ship, Character *killer)
+void DestroyShip(std::shared_ptr<Ship> ship, std::shared_ptr<Character> killer)
 {
     char buf[MAX_STRING_LENGTH];
 
@@ -2828,7 +2828,7 @@ void DestroyShip(std::shared_ptr<Ship> ship, Character *killer)
         {
             while(!room->Characters().empty())
             {
-                Character *rch = room->Characters().front();
+                std::shared_ptr<Character> rch = room->Characters().front();
 
                 if(IsImmortal(rch))
                 {
@@ -2903,7 +2903,7 @@ bool ShipToRoom(std::shared_ptr<Ship> ship, vnum_t vnum)
     return true;
 }
 
-bool RentShip(Character *ch, std::shared_ptr<Ship> ship)
+bool RentShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship)
 {
     long price = 0;
 

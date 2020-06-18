@@ -58,14 +58,14 @@ public:
     int Alignment = 0;              // for jedi powers
 };
 
-extern const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName;
+extern const std::array<const char *const, SKILLTYPE_MAX> SkillTypeName;
 extern std::array<std::shared_ptr<Skill>, MAX_SKILL> SkillTable;
 extern std::array<std::shared_ptr<Skill>, MAX_SKILL> HerbTable;
 extern int TopSN;
 extern int TopHerb;
-extern const std::array<const char * const, SKILLTARGETTYPE_MAX> SpellTargetName;
-extern const std::array<const char * const, SAVETYPE_MAX> SpellSaveName;
-extern const std::array<const char * const, Flag::MAX> SpellFlag;
+extern const std::array<const char *const, SKILLTARGETTYPE_MAX> SpellTargetName;
+extern const std::array<const char *const, SAVETYPE_MAX> SpellSaveName;
+extern const std::array<const char *const, Flag::MAX> SpellFlag;
 
 /*
  * These are LookupSkill return values for common skills and spells.
@@ -249,18 +249,18 @@ bool IS_ENERGY(int dt);
 bool IS_DRAIN(int dt);
 bool IS_POISON(int dt);
 
-bool CheckSkill(Character *ch, const std::string &command, const std::string &argument);
-void LearnFromSuccess(Character *ch, int sn);
-void LearnFromFailure(Character *ch, int sn);
-int GetSkillLevel(const Character *ch, short gsn);
+bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const std::string &argument);
+void LearnFromSuccess(std::shared_ptr<Character> ch, int sn);
+void LearnFromFailure(std::shared_ptr<Character> ch, int sn);
+int GetSkillLevel(std::shared_ptr<Character> ch, short gsn);
 
-int ChLookupSkill(const Character *ch, const std::string &name);
+int ChLookupSkill(std::shared_ptr<Character> ch, const std::string &name);
 int LookupSkill(const std::string &name);
 int LookupHerb(const std::string &name);
 int SkillNumberFromSlot(int slot);
 int BSearchSkill(const std::string &name, int first, int top);
 int BSearchSkillExact(const std::string &name, int first, int top);
-int ChBSearchSkill(const Character *ch, const std::string &name, int first, int top);
+int ChBSearchSkill(std::shared_ptr<Character> ch, const std::string &name, int first, int top);
 std::shared_ptr<Skill> GetSkill(int sn);
 SkillType GetSkillType(const std::string &skilltype);
 void LoadSkills();

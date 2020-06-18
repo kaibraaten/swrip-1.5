@@ -11,7 +11,7 @@ void do_drag(std::shared_ptr<Character> ch, std::string argument)
     std::string arg;
     std::string arg2;
     DirectionType exit_dir = DIR_INVALID;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Exit> pexit;
     std::shared_ptr<Room> to_room;
     bool nogo = false;

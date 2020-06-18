@@ -60,17 +60,12 @@ namespace fs = std::filesystem;
 #include "repos/homerepository.hpp"
 
 /*
- * Increment with every major format change.
- */
-#define SAVEVERSION     3
-
-/*
  * Array to keep track of equipment temporarily.                -Thoric
  */
-std::shared_ptr<Object> save_equipment[MAX_WEAR][8];
-Character *quitting_char = NULL;
-Character *loading_char = NULL;
-Character *saving_char = NULL;
+std::weak_ptr<Object> save_equipment[MAX_WEAR][8];
+std::weak_ptr<Character> quitting_char;
+std::weak_ptr<Character> loading_char;
+std::weak_ptr<Character> saving_char;
 
 int file_ver = 0;
 
@@ -92,13 +87,13 @@ static bool HasAnyOvalues(std::shared_ptr<Object> obj);
  * Un-equip character before saving to ensure proper    -Thoric
  * stats are saved in case of changes to or removal of EQ
  */
-void DeEquipCharacter(Character *ch)
+void DeEquipCharacter(std::shared_ptr<Character> ch)
 {
     for (int x = 0; x < MAX_WEAR; x++)
     {
         for (int y = 0; y < MAX_LAYERS; y++)
         {
-            save_equipment[x][y] = NULL;
+            save_equipment[x][y].reset();
         }
     }
 
@@ -110,7 +105,7 @@ void DeEquipCharacter(Character *ch)
 
             for (x = 0; x < MAX_LAYERS; x++)
             {
-                if (!save_equipment[obj->WearLoc][x])
+                if (save_equipment[obj->WearLoc][x].expired())
                 {
                     save_equipment[obj->WearLoc][x] = obj;
                     break;
@@ -131,7 +126,7 @@ void DeEquipCharacter(Character *ch)
 /*
  * Re-equip character                                   -Thoric
  */
-void ReEquipCharacter(Character *ch)
+void ReEquipCharacter(std::shared_ptr<Character> ch)
 {
     int x = 0;
     int y = 0;
@@ -140,14 +135,14 @@ void ReEquipCharacter(Character *ch)
     {
         for (y = 0; y < MAX_LAYERS; y++)
         {
-            if (save_equipment[x][y] != NULL)
+            if (!save_equipment[x][y].expired())
             {
-                if (quitting_char != ch)
+                if (!quitting_char.expired() && quitting_char.lock() != ch)
                 {
-                    EquipCharacter(ch, save_equipment[x][y], (WearLocation)x);
+                    EquipCharacter(ch, save_equipment[x][y].lock(), (WearLocation)x);
                 }
 
-                save_equipment[x][y] = NULL;
+                save_equipment[x][y].reset();
             }
             else
             {
@@ -157,7 +152,7 @@ void ReEquipCharacter(Character *ch)
     }
 }
 
-void SaveHome(const Character *ch)
+void SaveHome(std::shared_ptr<Character> ch)
 {
     for(auto home : Homes->FindHomesForResident(ch->Name))
     {
@@ -165,7 +160,7 @@ void SaveHome(const Character *ch)
     }
 }
 
-void SaveClone(Character *ch)
+void SaveClone(std::shared_ptr<Character> ch)
 {
     assert(ch != nullptr);
 
@@ -190,8 +185,8 @@ void SaveClone(Character *ch)
     ReEquipCharacter(ch);
     PlayerCharacters->Save(ch);
     WriteCorpses(ch, "");
-    quitting_char = NULL;
-    saving_char = NULL;
+    quitting_char.reset();
+    saving_char.reset();
 }
 
 static bool HasAnyOvalues(std::shared_ptr<Object> obj)
@@ -212,7 +207,7 @@ static bool HasAnyOvalues(std::shared_ptr<Object> obj)
 /*
  * Write an object and its contents.
  */
-void WriteObject(const Character *ch, std::shared_ptr<Object> obj, FILE *fp, int iNest, short os_type)
+void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FILE *fp, int iNest, short os_type)
 {
     short wear = 0, wear_loc = 0, x = 0;
 
@@ -311,12 +306,12 @@ void WriteObject(const Character *ch, std::shared_ptr<Object> obj, FILE *fp, int
     {
         for (x = 0; x < MAX_LAYERS; x++)
         {
-            if (obj == save_equipment[wear][x])
+            if (obj == save_equipment[wear][x].lock())
             {
                 wear_loc = wear;
                 break;
             }
-            else if (!save_equipment[wear][x])
+            else if (save_equipment[wear][x].expired())
             {
                 break;
             }
@@ -461,7 +456,7 @@ void WriteObject(const Character *ch, std::shared_ptr<Object> obj, FILE *fp, int
     }
 }
 
-void ReadObject(Character *ch, FILE *fp, short os_type)
+void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
 {
     int iNest = 0;
     bool fNest = true; /* Yes, these should             */
@@ -620,7 +615,7 @@ void ReadObject(Character *ch, FILE *fp, short os_type)
 
                             for (x = 0; x < MAX_LAYERS; x++)
                             {
-                                if (!save_equipment[wear_loc][x])
+                                if (save_equipment[wear_loc][x].expired())
                                 {
                                     save_equipment[wear_loc][x] = obj;
                                     slot = x;
@@ -806,7 +801,7 @@ void SetAlarm(long seconds)
 #endif
 }
 
-void WriteCorpses(const Character *ch, std::string name)
+void WriteCorpses(std::shared_ptr<Character> ch, std::string name)
 {
     FILE *fp = NULL;
 

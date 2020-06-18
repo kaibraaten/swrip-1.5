@@ -94,7 +94,7 @@ void do_cutdoor(std::shared_ptr<Character> ch, std::string arg)
 
                 pexit_rev->Flags.set(Flag::Exit::Bashed);
 
-                for(Character *rch : to_room->Characters())
+                for(auto rch : to_room->Characters())
                 {
                     Act(AT_SKILL, "The $d falls open!",
                         rch, NULL, pexit_rev->Keyword, ActTarget::Char);
@@ -125,7 +125,7 @@ void do_cutdoor(std::shared_ptr<Character> ch, std::string arg)
 
     if(!CharacterDiedRecently(ch))
     {
-        for(Character *gch : ch->InRoom->Characters())
+        for(auto gch : ch->InRoom->Characters())
         {
             if(IsAwake(gch)
                && !gch->Fighting

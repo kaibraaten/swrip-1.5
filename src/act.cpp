@@ -13,15 +13,15 @@
 /*
  * The primary output interface for formatted output.
  */
-static std::string NAME(const Character *ch)
+static std::string NAME(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch) ? ch->ShortDescr : ch->Name;
 }
 
 static std::string SubstituteActSequence(char code,
-                                         const Character *ch,
-                                         const Character *vch,
-                                         const Character *to,
+                                         std::shared_ptr<Character> ch,
+                                         std::shared_ptr<Character> vch,
+                                         std::shared_ptr<Character> to,
                                          std::shared_ptr<Object> obj1,
                                          std::shared_ptr<Object> obj2,
                                          const std::string &arg1,
@@ -118,7 +118,7 @@ static std::string SubstituteActSequence(char code,
     return i;
 }
 
-static std::string ActString(const std::string &format, Character *to, Character *ch,
+static std::string ActString(const std::string &format, std::shared_ptr<Character> to, std::shared_ptr<Character> ch,
                              const ActArg &arg1, const ActArg &arg2)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
@@ -144,7 +144,7 @@ static std::string ActString(const std::string &format, Character *to, Character
         }
         else
         {
-            Character *vch = arg2.Ch;
+            std::shared_ptr<Character> vch = arg2.Ch;
             std::shared_ptr<Object> obj1 = arg1.Obj;
             std::shared_ptr<Object> obj2 = arg2.Obj;
             i = SubstituteActSequence(*str,
@@ -171,12 +171,12 @@ static std::string ActString(const std::string &format, Character *to, Character
     return buf;
 }
 
-void Act(short AType, const std::string &format, Character *ch, const ActArg &arg1, const ActArg &arg2, ActTarget type)
+void Act(short AType, const std::string &format, std::shared_ptr<Character> ch, const ActArg &arg1, const ActArg &arg2, ActTarget type)
 {
     assert(ch != nullptr);
     std::string txt;
-    Character *to = nullptr;
-    Character *vch = arg2.Ch;
+    std::shared_ptr<Character> to;
+    std::shared_ptr<Character> vch = arg2.Ch;
 
     /*
      * Discard null and zero-length messages.
@@ -244,7 +244,7 @@ void Act(short AType, const std::string &format, Character *ch, const ActArg &ar
         }
     }
 
-    std::list<Character *> charactersInRoom;
+    std::list<std::shared_ptr<Character>> charactersInRoom;
 
     if(type == ActTarget::Char || type == ActTarget::Vict)
     {

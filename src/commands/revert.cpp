@@ -4,9 +4,7 @@
 
 void do_revert(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *mob = nullptr;
-
-    if ( !IsNpc(ch) || !ch->Flags.test(Flag::Mob::Polymorphed))
+    if(!IsNpc(ch) || !ch->Flags.test(Flag::Mob::Polymorphed))
     {
         ch->Echo("You are not polymorphed.\r\n");
         return;
@@ -17,20 +15,20 @@ void do_revert(std::shared_ptr<Character> ch, std::string argument)
 
     if(ch->Desc->Character)
     {
-        mob = ch->Desc->Character;
+        auto mob = ch->Desc->Character;
         CharacterToRoom(ch->Desc->Original, ch->Desc->Character->InRoom);
-        ch->Desc->Character       = ch->Desc->Original;
-        ch->Desc->Original        = NULL;
+        ch->Desc->Character = ch->Desc->Original;
+        ch->Desc->Original = NULL;
         ch->Desc->Character->Desc = ch->Desc;
         ch->Desc->Character->Switched = NULL;
-        ch->Desc                  = NULL;
+        ch->Desc = NULL;
         ExtractCharacter(mob, true);
         return;
     }
 
-    ch->Desc->Character       = ch->Desc->Original;
-    ch->Desc->Original        = NULL;
+    ch->Desc->Character = ch->Desc->Original;
+    ch->Desc->Original = NULL;
     ch->Desc->Character->Desc = ch->Desc;
     ch->Desc->Character->Switched = NULL;
-    ch->Desc                  = NULL;
+    ch->Desc = NULL;
 }

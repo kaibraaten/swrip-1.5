@@ -12,7 +12,7 @@ void do_shove(std::shared_ptr<Character> ch, std::string argument)
     std::string arg2;
     DirectionType exit_dir = DIR_NORTH;
     std::shared_ptr<Exit> pexit;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     bool nogo = false;
     int shove_chance = 0;
 

@@ -8,7 +8,7 @@
 
 void do_train(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *mob = nullptr;
+    std::shared_ptr<Character> mob;
     bool successful = false;
 
     if(IsNpc(ch))
@@ -30,7 +30,7 @@ void do_train(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        for(Character *potentialTrainer : ch->InRoom->Characters())
+        for(auto potentialTrainer : ch->InRoom->Characters())
         {
             if(IsNpc(potentialTrainer) && potentialTrainer->Flags.test(Flag::Mob::Train))
             {

@@ -175,13 +175,13 @@ class HuntHateFear
 {
 public:
     std::string Name;
-    Character *Who = nullptr;
+    std::shared_ptr<Character> Who;
 };
 
 class Fight
 {
 public:
-    Character *Who = nullptr;
+    std::shared_ptr<Character> Who;
     long Xp = 0;
     short Align = 0;
     short Duration = 0;
@@ -248,8 +248,8 @@ class Auction
 {
 public:
     std::weak_ptr<Object> Item;   /* a pointer to the item */
-    Character *Seller = nullptr; /* a pointer to the seller - which may NOT quit */
-    Character *Buyer = nullptr;  /* a pointer to the buyer - which may NOT quit */
+    std::shared_ptr<Character> Seller = nullptr; /* a pointer to the seller - which may NOT quit */
+    std::shared_ptr<Character> Buyer = nullptr;  /* a pointer to the buyer - which may NOT quit */
     int        Bet = 0;    /* last bet - or 0 if noone has bet anything */
     short      Going = 0;  /* 1,2, sold */
     short      Pulse = 0;  /* how many pulses (.25 sec) until another call-out ? */
@@ -354,7 +354,7 @@ extern int cur_qchars;
 extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
-extern Character *cur_char;
+extern std::shared_ptr<Character> cur_char;
 extern std::shared_ptr<Room>             cur_room;
 extern bool             cur_char_died;
 extern ch_ret           global_retcode;
@@ -364,15 +364,15 @@ extern int              cur_obj_serial;
 extern bool             cur_obj_extracted;
 extern obj_ret          global_objcode;
 
-extern Character *FirstCharacter;
-extern Character *LastCharacter;
+extern std::shared_ptr<Character> FirstCharacter;
+extern std::shared_ptr<Character> LastCharacter;
 
 extern std::shared_ptr<TeleportData> FirstTeleport;
 extern std::shared_ptr<TeleportData> LastTeleport;
-extern std::shared_ptr<Object> save_equipment[MAX_WEAR][MAX_LAYERS];
-extern Character *quitting_char;
-extern Character *loading_char;
-extern Character *saving_char;
+extern std::weak_ptr<Object> save_equipment[MAX_WEAR][MAX_LAYERS];
+extern std::weak_ptr<Character> quitting_char;
+extern std::weak_ptr<Character> loading_char;
+extern std::weak_ptr<Character> saving_char;
 extern std::shared_ptr<Object> all_obj;
 extern time_t           current_time;
 extern bool             fLogAll;
@@ -975,51 +975,51 @@ DECLARE_SPEC_FUN(spec_newbie_pilot);
 void RecoverFromCopyover();
 
 bool IsNameAcceptable(const std::string &name);
-std::string DrunkSpeech(const std::string &argument, Character *ch);
-void TalkChannel(Character *ch, const std::string &text,
+std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> ch);
+void TalkChannel(std::shared_ptr<Character> ch, const std::string &text,
                  int channel, const std::string &verb);
-bool IsFollowingInCircle(const Character *ch, const Character *victim);
-void StartFollowing(Character *ch, Character *master);
-void StopFollowing(Character *ch);
-void DieFollower(Character *ch);
-bool IsInSameGroup(const Character *ach, const Character *bch);
+bool IsFollowingInCircle(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+void StartFollowing(std::shared_ptr<Character> ch, std::shared_ptr<Character> master);
+void StopFollowing(std::shared_ptr<Character> ch);
+void DieFollower(std::shared_ptr<Character> ch);
+bool IsInSameGroup(std::shared_ptr<Character> ach, std::shared_ptr<Character> bch);
 void ToChannel(const std::string &argument, int channel,
                const std::string &verb, short level);
 void TalkAuction(const std::string &argument);
-bool CharacterKnowsLanguage(const Character *ch, int language, const Character *cch);
-bool CharacterCanLearnLanguage(const Character *ch, int language);
+bool CharacterKnowsLanguage(std::shared_ptr<Character> ch, int language, std::shared_ptr<Character> cch);
+bool CharacterCanLearnLanguage(std::shared_ptr<Character> ch, int language);
 int CountLanguages(int languages);
 
 /* act_info.c */
 bool RaceIsAvailableToPlayers(const Race *race);
 int GetRaceFromName(const std::string &arg);
 int GetClassFromName(const std::string &arg);
-void ShowCharacterCondition(const Character *ch, const Character *victim);
-std::string FormatObjectToCharacter(std::shared_ptr<Object> obj, const Character *ch, bool fShort);
-void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, Character *ch,
+void ShowCharacterCondition(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+std::string FormatObjectToCharacter(std::shared_ptr<Object> obj, std::shared_ptr<Character> ch, bool fShort);
+void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, std::shared_ptr<Character> ch,
                                bool fShort, bool fShowNothing);
 /* act_move.c */
 void SetBExitFlag(std::shared_ptr<Exit> pexit, size_t flag);
 void RemoveBExitFlag(std::shared_ptr<Exit> pexit, size_t flag);
 std::shared_ptr<Room> GenerateExit(std::shared_ptr<Room> in_room, std::shared_ptr<Exit> &pexit);
 void ClearVirtualRooms();
-std::shared_ptr<Exit> FindDoor(Character *ch, const std::string &arg, bool quiet);
+std::shared_ptr<Exit> FindDoor(std::shared_ptr<Character> ch, const std::string &arg, bool quiet);
 std::shared_ptr<Exit> GetExit(std::shared_ptr<Room> room, DirectionType dir);
 std::shared_ptr<Exit> GetExitTo(std::shared_ptr<Room> room, DirectionType dir, vnum_t vnum);
 std::shared_ptr<Exit> GetExitNumber(std::shared_ptr<Room> room, short count);
-ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall = 0);
-void Teleport(Character *ch, vnum_t room, int flags);
-bool CharacterFallIfNoFloor(Character *ch, int fall);
+ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit, int fall = 0);
+void Teleport(std::shared_ptr<Character> ch, vnum_t room, int flags);
+bool CharacterFallIfNoFloor(std::shared_ptr<Character> ch, int fall);
 
 /* act_obj.c */
 std::string GetObjectShortDescription(std::shared_ptr<Object> obj);
-bool RemoveObject(Character *ch, WearLocation iWear, bool fReplace);
+bool RemoveObject(std::shared_ptr<Character> ch, WearLocation iWear, bool fReplace);
 obj_ret DamageObject(std::shared_ptr<Object> obj);
 short GetObjectResistance(std::shared_ptr<Object> obj);
 void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through);
 
 /* act_wiz.c */
-std::shared_ptr<Room> FindLocation(const Character *ch, const std::string &arg);
+std::shared_ptr<Room> FindLocation(std::shared_ptr<Character> ch, const std::string &arg);
 void EchoToRoom(short AT_COLOR, std::shared_ptr<Room> room, const std::string &argument);
 void EchoToRoomNoNewline(int ecolor, std::shared_ptr<Room> room, const std::string &argument);
 void RealEchoToRoom(short color, std::shared_ptr<Room> room, const std::string &text, bool sendNewline);
@@ -1107,23 +1107,23 @@ void Nanny(std::shared_ptr<Descriptor> d, std::string argument);
 void DisplayPrompt(Descriptor *d);
 void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force);
 bool WriteToDescriptor(Descriptor *desc, const std::string &txt, int length = 0);
-void SetCharacterColor(short AType, const Character *ch);
+void SetCharacterColor(short AType, std::shared_ptr<Character> ch);
 socket_t InitializeSocket(unsigned short port);
 void FreeDescriptor(std::shared_ptr<Descriptor> d);
 
 /* comments.c */
-void ReadComment(Character *ch, FILE *fp);
-void WriteComments(const Character *ch, FILE *fp);
+void ReadComment(std::shared_ptr<Character> ch, FILE *fp);
+void WriteComments(std::shared_ptr<Character> ch, FILE *fp);
 
 /* db.c */
 void MakeWizlist();
 void ShutdownMud(const std::string &reason);
-void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl);
-void AppendFile(const Character *ch, const std::string &file, const std::string &str);
-void ShowFile(const Character *ch, const std::string &filename);
+void ShowVnums(std::shared_ptr<Character> ch, vnum_t low, vnum_t high, bool proto, bool shownl);
+void AppendFile(std::shared_ptr<Character> ch, const std::string &file, const std::string &str);
+void ShowFile(std::shared_ptr<Character> ch, const std::string &filename);
 void BootDatabase(bool fCopyover);
-void AddCharacter(Character *ch);
-Character *CreateMobile(std::shared_ptr<ProtoMobile> pMobIndex);
+void AddCharacter(std::shared_ptr<Character> ch);
+std::shared_ptr<Character> CreateMobile(std::shared_ptr<ProtoMobile> pMobIndex);
 std::shared_ptr<Object> CreateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
 std::string GetExtraDescription(const std::string &name, const std::list<std::shared_ptr<ExtraDescription>> &extras);
 std::shared_ptr<ProtoMobile> GetProtoMobile(vnum_t vnum);
@@ -1140,15 +1140,15 @@ bool DeleteObject(std::shared_ptr<ProtoObject> obj);
 bool DeleteMobile(std::shared_ptr<ProtoMobile> mob);
 
 /* build.c */
-void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
-void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
-void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
+void EditMobProg(std::shared_ptr<Character> ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
+void EditRoomProg(std::shared_ptr<Character> ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
+void EditObjProg(std::shared_ptr<Character> ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
 
-bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room);
-bool CanModifyObject(const Character *ch, std::shared_ptr<Object> obj);
-bool CanModifyCharacter(const Character *ch, const Character *mob);
+bool CanModifyRoom(std::shared_ptr<Character> ch, std::shared_ptr<Room> room);
+bool CanModifyObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
+bool CanModifyCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Character> mob);
 
-bool CanMedit(const Character *ch, std::shared_ptr<ProtoMobile> mob);
+bool CanMedit(std::shared_ptr<Character> ch, std::shared_ptr<ProtoMobile> mob);
 void FreeReset(std::shared_ptr<Area> are, std::shared_ptr<Reset> res);
 std::shared_ptr<ExtraDescription> SetRExtra(std::shared_ptr<Room> room, const std::string &keywords);
 bool DelRExtra(std::shared_ptr<Room> room, const std::string &keywords);
@@ -1156,75 +1156,75 @@ std::shared_ptr<ExtraDescription> SetOExtra(std::shared_ptr<Object> obj, const s
 bool DelOExtra(std::shared_ptr<Object> obj, const std::string &keywords);
 std::shared_ptr<ExtraDescription> SetOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
 bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
-std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argument, const Character *ch);
+std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argument, std::shared_ptr<Character> ch);
 
 /* fight.c */
-ch_ret HitOnce(Character *ch, Character *victim, int dt);
-long ComputeXP(const Character *gch, const Character *victim);
+ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dt);
+long ComputeXP(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim);
 void ViolenceUpdate(void);
-ch_ret HitMultipleTimes(Character *ch, Character *victim, int dt);
-short ModifyDamageBasedOnResistance(const Character *ch, short dam, int ris);
-ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt);
-void UpdatePosition(Character *victim);
-void StartFighting(Character *ch, Character *victim);
-void StopFighting(Character *ch, bool fBoth);
-void FreeFight(Character *ch);
-Character *GetFightingOpponent(const Character *ch);
-void StopHunting(Character *ch);
-void StopHating(Character *ch);
-void StopFearing(Character *ch);
-void StartHunting(Character *ch, Character *victim);
-void StartHating(Character *ch, Character *victim);
-void StartFearing(Character *ch, Character *victim);
-bool IsHunting(const Character *ch, const Character *victim);
-bool IsHating(const Character *ch, const Character *victim);
-bool IsFearing(const Character *ch, const Character *victim);
-bool IsSafe(const Character *ch, const Character *victim);
-bool CanLootVictim(const Character *ch, const Character *victim);
-void RawKill(Character *killer, Character *victim);
+ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dt);
+short ModifyDamageBasedOnResistance(std::shared_ptr<Character> ch, short dam, int ris);
+ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dam, int dt);
+void UpdatePosition(std::shared_ptr<Character> victim);
+void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+void StopFighting(std::shared_ptr<Character> ch, bool fBoth);
+void FreeFight(std::shared_ptr<Character> ch);
+std::shared_ptr<Character> GetFightingOpponent(std::shared_ptr<Character> ch);
+void StopHunting(std::shared_ptr<Character> ch);
+void StopHating(std::shared_ptr<Character> ch);
+void StopFearing(std::shared_ptr<Character> ch);
+void StartHunting(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+void StartHating(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+void StartFearing(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+bool IsHunting(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+bool IsHating(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+bool IsFearing(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+bool IsSafe(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+bool CanLootVictim(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victim);
 
 /* makeobjs.c */
-void MakeCorpse(Character *ch);
-void MakeBloodstain(Character *ch);
+void MakeCorpse(std::shared_ptr<Character> ch);
+void MakeBloodstain(std::shared_ptr<Character> ch);
 void MakeScraps(std::shared_ptr<Object> obj);
 void MakeFire(std::shared_ptr<Room> in_room, short timer);
 std::shared_ptr<Object> MakeTrap(int v0, int v1, int v2, int v3);
 std::shared_ptr<Object> CreateMoney(int amount);
 
 /* mapper.c */
-void DrawMap(const Character *ch, const std::string &desc);
+void DrawMap(std::shared_ptr<Character> ch, const std::string &desc);
 
 /* misc.c */
 bool IsValidLanguage(int language);
-void PullOrPush(Character *ch, std::shared_ptr<Object> obj, bool pull);
+void PullOrPush(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, bool pull);
 std::string FormatDate(const time_t *);
-void ActionDescription(Character *ch, std::shared_ptr<Object> obj);
+void ActionDescription(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 
 /* mud_comm.c */
-Character *GetCharacterInRoomMudProg(Character *ch, std::string argument);
+std::shared_ptr<Character> GetCharacterInRoomMudProg(std::shared_ptr<Character> ch, std::string argument);
 int GetColor(const std::string &argument);
 const char *MobProgTypeToName(int type);
 int MobProgNameToType(const std::string &name);
 
 /* skills.c */
-bool CheckParry(Character *ch, Character *victim);
-bool CheckDodge(Character *ch, Character *victim);
-bool CheckGrip(Character *ch, Character *victim);
-void Disarm(Character *ch, Character *victim);
-void Trip(Character *ch, Character *victim);
+bool CheckParry(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+bool CheckDodge(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+bool CheckGrip(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+void Disarm(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+void Trip(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 
 /* handler.c */
-bool CharacterCanTakePrototype(const Character *ch);
+bool CharacterCanTakePrototype(std::shared_ptr<Character> ch);
 void Explode(std::shared_ptr<Object> obj);
 long GetRequiredXpForLevel(short level);
-void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd);
-void AffectToCharacter(Character *ch, std::shared_ptr<Affect> paf);
-void RemoveAffect(Character *ch, std::shared_ptr<Affect> paf);
-void StripAffect(Character *ch, int sn);
-void JoinAffect(Character *ch, std::shared_ptr<Affect> paf);
-void CharacterFromRoom(Character *ch);
-void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex);
-std::shared_ptr<Object> ObjectToCharacter(std::shared_ptr<Object> obj, Character *ch);
+void ModifyAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf, bool fAdd);
+void AffectToCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf);
+void RemoveAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf);
+void StripAffect(std::shared_ptr<Character> ch, int sn);
+void JoinAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf);
+void CharacterFromRoom(std::shared_ptr<Character> ch);
+void CharacterToRoom(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoomIndex);
+std::shared_ptr<Object> ObjectToCharacter(std::shared_ptr<Object> obj, std::shared_ptr<Character> ch);
 void ObjectFromCharacter(std::shared_ptr<Object> obj);
 int GetObjectArmorClass(std::shared_ptr<Object> obj, int iWear);
 int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj, const std::list<std::shared_ptr<Object>> &list);
@@ -1237,52 +1237,52 @@ void ExtractExit(std::shared_ptr<Room> room, std::shared_ptr<Exit> pexit);
 void CleanRoom(std::shared_ptr<Room> room);
 void CleanObject(std::shared_ptr<ProtoObject> obj);
 void CleanMobile(std::shared_ptr<ProtoMobile> mob);
-void ExtractCharacter(Character *ch, bool fPull);
-Character *GetCharacterInRoom(const Character *ch, std::string argument);
-Character *GetCharacterAnywhere(const Character *ch, std::string argument);
+void ExtractCharacter(std::shared_ptr<Character> ch, bool fPull);
+std::shared_ptr<Character> GetCharacterInRoom(std::shared_ptr<Character> ch, std::string argument);
+std::shared_ptr<Character> GetCharacterAnywhere(std::shared_ptr<Character> ch, std::string argument);
 std::shared_ptr<Object> GetInstanceOfObject(std::shared_ptr<ProtoObject> pObjIndexData);
-std::shared_ptr<Object> GetObjectInList(const Character *ch, std::string objName,
+std::shared_ptr<Object> GetObjectInList(std::shared_ptr<Character> ch, std::string objName,
                                         const std::list<std::shared_ptr<Object>> &list);
-std::shared_ptr<Object> GetObjectInListReverse(const Character *ch, std::string objName,
+std::shared_ptr<Object> GetObjectInListReverse(std::shared_ptr<Character> ch, std::string objName,
                                                const std::list<std::shared_ptr<Object>> &list);
-std::shared_ptr<Object> GetObjectHere(const Character *ch, std::string argument);
-std::shared_ptr<Object> GetObjectAnywhere(const Character *ch, std::string argument);
+std::shared_ptr<Object> GetObjectHere(std::shared_ptr<Character> ch, std::string argument);
+std::shared_ptr<Object> GetObjectAnywhere(std::shared_ptr<Character> ch, std::string argument);
 int GetObjectCount(std::shared_ptr<Object> obj);
 int GetObjectWeight(std::shared_ptr<Object> obj);
 bool IsRoomDark(std::shared_ptr<Room> pRoomIndex);
-bool IsRoomPrivate(const Character *ch, std::shared_ptr<Room> pRoomIndex);
+bool IsRoomPrivate(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoomIndex);
 const char *GetItemTypeName(std::shared_ptr<Object> obj);
 const char *GetAffectLocationName(int location);
-ch_ret CheckObjectForTrap(Character *ch, std::shared_ptr<Object> obj, int flag);
-ch_ret CheckRoomForTraps(Character *ch, int flag);
+ch_ret CheckObjectForTrap(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, int flag);
+ch_ret CheckRoomForTraps(std::shared_ptr<Character> ch, int flag);
 bool IsObjectTrapped(std::shared_ptr<Object> obj);
 std::shared_ptr<Object> GetTrap(std::shared_ptr<Object> obj);
-ch_ret SpringTrap(Character *ch, std::shared_ptr<Object> obj);
-void ShowAffectToCharacter(const Character *ch, std::shared_ptr<Affect> paf);
+ch_ret SpringTrap(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
+void ShowAffectToCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf);
 void SetCurrentGlobalObject(std::shared_ptr<Object> obj);
 bool IsObjectExtracted(std::shared_ptr<Object> obj);
 void QueueExtractedObject(std::shared_ptr<Object> obj);
 void CleanObjectQueue();
-void SetCurrentGlobalCharacter(Character *ch);
-bool CharacterDiedRecently(const Character *ch);
-void QueueExtractedCharacter(Character *ch, bool extract);
+void SetCurrentGlobalCharacter(std::shared_ptr<Character> ch);
+bool CharacterDiedRecently(std::shared_ptr<Character> ch);
+void QueueExtractedCharacter(std::shared_ptr<Character> ch, bool extract);
 void CleanCharacterQueue(void);
-void AddTimerToCharacter(Character *ch, short type, short count, CmdFun *fun, int value);
-std::shared_ptr<Timer> GetTimerPointer(const Character *ch, short type);
-short GetTimer(const Character *ch, short type);
-void ExtractTimer(Character *ch, std::shared_ptr<Timer> timer);
-void RemoveTimer(Character *ch, short type);
-bool InSoftRange(const Character *ch, std::shared_ptr<Area> tarea);
-bool InHardRange(const Character *ch, std::shared_ptr<Area> tarea);
-bool Chance(const Character *ch, short percent);
+void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count, CmdFun *fun, int value);
+std::shared_ptr<Timer> GetTimerPointer(std::shared_ptr<Character> ch, short type);
+short GetTimer(std::shared_ptr<Character> ch, short type);
+void ExtractTimer(std::shared_ptr<Character> ch, std::shared_ptr<Timer> timer);
+void RemoveTimer(std::shared_ptr<Character> ch, short type);
+bool InSoftRange(std::shared_ptr<Character> ch, std::shared_ptr<Area> tarea);
+bool InHardRange(std::shared_ptr<Character> ch, std::shared_ptr<Area> tarea);
+bool Chance(std::shared_ptr<Character> ch, short percent);
 std::shared_ptr<Object> CopyObject(std::shared_ptr<Object> obj);
 void SplitGroupedObject(std::shared_ptr<Object> obj, int num);
 void SeparateOneObjectFromGroup(std::shared_ptr<Object> obj);
 bool EmptyObjectContents(std::shared_ptr<Object> obj, std::shared_ptr<Object> destobj, std::shared_ptr<Room> destroom);
-std::shared_ptr<Object> FindObject(Character *ch, std::string argument, bool carryonly);
+std::shared_ptr<Object> FindObject(std::shared_ptr<Character> ch, std::string argument, bool carryonly);
 void BoostEconomy(std::shared_ptr<Area> tarea, int gold);
 void LowerEconomy(std::shared_ptr<Area> tarea, int gold);
-void EconomizeMobileGold(Character *mob);
+void EconomizeMobileGold(std::shared_ptr<Character> mob);
 bool EconomyHas(std::shared_ptr<Area> tarea, int gold);
 int CountCharactersOnObject(std::shared_ptr<Object> obj);
 std::string GetRoomName(std::shared_ptr<Room> room);
@@ -1290,44 +1290,44 @@ std::string GetRoomDescription(std::shared_ptr<Room> room);
 bool CheckRoomFlag(std::shared_ptr<Room> room, size_t flag);
 
 /* interp.c */
-bool CheckPosition(const Character *ch, PositionType position);
-void Interpret(Character *ch, std::string argument);
-void SendTimer(std::shared_ptr<timerset> vtime, Character *ch);
+bool CheckPosition(std::shared_ptr<Character> ch, PositionType position);
+void Interpret(std::shared_ptr<Character> ch, std::string argument);
+void SendTimer(std::shared_ptr<timerset> vtime, std::shared_ptr<Character> ch);
 void UpdateNumberOfTimesUsed(timeval *time_used, std::shared_ptr<timerset> userec);
 
 /* magic.c */
-int ModifySavingThrowBasedOnResistance(const Character *ch, int save_chance, int ris);
-void SuccessfulCasting(std::shared_ptr<Skill> skill, Character *ch,
-                       Character *victim, std::shared_ptr<Object> obj);
-void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
-                   Character *victim, std::shared_ptr<Object> obj);
-bool IsImmuneToDamageType(const Character *ch, short damtype);
-bool CheckSavingThrow(int sn, int level, const Character *ch, const Character *victim);
-void ImmuneCasting(std::shared_ptr<Skill> skill, Character *ch, Character *victim, std::shared_ptr<Object> obj);
-Vo LocateSpellTargets(Character *ch, const std::string &arg,
-                      int sn, Character **victim, std::shared_ptr<Object> *obj);
-int FindSpell(const Character *ch, const std::string &name, bool know);
-bool SaveVsPoisonDeath(int level, const Character *victim);
-bool SaveVsWands(int level, const Character *victim);
-bool SaveVsParalyze(int level, const Character *victim);
-bool SaveVsBreath(int level, const Character *victim);
-bool SaveVsSpellStaff(int level, const Character *victim);
-ch_ret CastSpellWithObject(int sn, int level, Character *ch, Character *victim, std::shared_ptr<Object> obj);
-int ParseDice(const Character *ch, int level, const std::string &exp);
+int ModifySavingThrowBasedOnResistance(std::shared_ptr<Character> ch, int save_chance, int ris);
+void SuccessfulCasting(std::shared_ptr<Skill> skill, std::shared_ptr<Character> ch,
+                       std::shared_ptr<Character> victim, std::shared_ptr<Object> obj);
+void FailedCasting(std::shared_ptr<Skill> skill, std::shared_ptr<Character> ch,
+                   std::shared_ptr<Character> victim, std::shared_ptr<Object> obj);
+bool IsImmuneToDamageType(std::shared_ptr<Character> ch, short damtype);
+bool CheckSavingThrow(int sn, int level, std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
+void ImmuneCasting(std::shared_ptr<Skill> skill, std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, std::shared_ptr<Object> obj);
+Vo LocateSpellTargets(std::shared_ptr<Character> ch, const std::string &arg,
+                      int sn, std::shared_ptr<Character> *victim, std::shared_ptr<Object> *obj);
+int FindSpell(std::shared_ptr<Character> ch, const std::string &name, bool know);
+bool SaveVsPoisonDeath(int level, std::shared_ptr<Character> victim);
+bool SaveVsWands(int level, std::shared_ptr<Character> victim);
+bool SaveVsParalyze(int level, std::shared_ptr<Character> victim);
+bool SaveVsBreath(int level, std::shared_ptr<Character> victim);
+bool SaveVsSpellStaff(int level, std::shared_ptr<Character> victim);
+ch_ret CastSpellWithObject(int sn, int level, std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, std::shared_ptr<Object> obj);
+int ParseDice(std::shared_ptr<Character> ch, int level, const std::string &exp);
 
 /* save.c */
-void SaveClone(Character *ch);
+void SaveClone(std::shared_ptr<Character> ch);
 void SetAlarm(long seconds);
-void WriteObject(const Character *ch, std::shared_ptr<Object> obj, FILE *fp,
+void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FILE *fp,
                  int iNest, short os_type);
-void ReadObject(Character *ch, FILE *fp, short os_type);
-void DeEquipCharacter(Character *ch);
-void ReEquipCharacter(Character *ch);
+void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type);
+void DeEquipCharacter(std::shared_ptr<Character> ch);
+void ReEquipCharacter(std::shared_ptr<Character> ch);
 void SaveStoreroom(std::shared_ptr<Room> room);
 void LoadStorerooms();
 void LoadCorpses();
-void WriteCorpses(const Character *ch, std::string name);
-void SaveHome(const Character *ch);
+void WriteCorpses(std::shared_ptr<Character> ch, std::string name);
+void SaveHome(std::shared_ptr<Character> ch);
 
 /* special.c */
 SpecFun *SpecialLookup(const std::string &name);
@@ -1338,17 +1338,17 @@ SpellFun *GetSpellFunction(const std::string &name);
 CmdFun *GetSkillFunction(const std::string &name);
 
 /* update.c */
-void AdvanceLevel(Character *ch, int ability);
-void GainXP(Character *ch, short ability, long gain);
-long LoseXP(Character *ch, short ability, long loss);
-void GainCondition(Character *ch, int iCond, int value);
+void AdvanceLevel(std::shared_ptr<Character> ch, int ability);
+void GainXP(std::shared_ptr<Character> ch, short ability, long gain);
+long LoseXP(std::shared_ptr<Character> ch, short ability, long loss);
+void GainCondition(std::shared_ptr<Character> ch, int iCond, int value);
 void UpdateHandler(void);
 void RebootCheck(time_t reset);
 void RemovePortal(std::shared_ptr<Object> portal);
-int GetMaxAbilityLevel(const Character *ch, int ability);
+int GetMaxAbilityLevel(std::shared_ptr<Character> ch, int ability);
 
 /* newscore.c */
-const char *GetCharacterRace(const Character *ch);
+const char *GetCharacterRace(std::shared_ptr<Character> ch);
 
 #define GET_BETTED_ON(ch)    ((ch)->BettedOn)
 #define GET_BET_AMT(ch) ((ch)->BetAmount)

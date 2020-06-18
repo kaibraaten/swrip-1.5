@@ -1,35 +1,35 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_litterbug( std::shared_ptr<Character> ch, std::string arg )
+void do_litterbug(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
-    if ( arg.empty() )
+    if(arg.empty())
     {
         ch->Echo("Set litterbug flag on whom?\r\n");
         return;
     }
 
-    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
         ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
         ch->Echo("Not on NPC's.\r\n");
         return;
     }
 
-    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if(GetTrustLevel(victim) >= GetTrustLevel(ch))
     {
         ch->Echo("You failed.\r\n");
         return;
     }
 
-    if (victim->Flags.test(Flag::Plr::Litterbug))
+    if(victim->Flags.test(Flag::Plr::Litterbug))
     {
         victim->Flags.reset(Flag::Plr::Litterbug);
         victim->Echo("You can drop items again.\r\n");

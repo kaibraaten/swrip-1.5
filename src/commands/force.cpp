@@ -19,16 +19,13 @@ void do_force(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg, "all"))
     {
-        Character *vch = nullptr;
-        Character *vch_next = nullptr;
-
         if(mobsonly)
         {
             ch->Echo("Force whom to do what?\r\n");
             return;
         }
 
-        for(vch = FirstCharacter; vch; vch = vch_next)
+        for(std::shared_ptr<Character> vch = FirstCharacter, vch_next; vch; vch = vch_next)
         {
             vch_next = vch->Next;
 
@@ -42,9 +39,9 @@ void do_force(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
-        Character *victim = nullptr;
+        std::shared_ptr<Character> victim = GetCharacterAnywhere(ch, arg);
 
-        if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
+        if(victim == nullptr)
         {
             ch->Echo("They aren't here.\r\n");
             return;

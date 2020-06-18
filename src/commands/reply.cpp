@@ -6,7 +6,7 @@
 void do_reply(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     PositionType position = POS_STANDING;
     bool sameroom = false;
 
@@ -24,7 +24,7 @@ void do_reply(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if((victim = ch->Reply) == NULL)
+    if((victim = ch->Reply.lock()) == NULL)
     {
         ch->Echo("They can't hear you.\r\n");
         return;
@@ -121,7 +121,7 @@ void do_reply(std::shared_ptr<Character> ch, std::string argument)
 
     if(!IsImmortal(ch) && !sameroom)
     {
-        for(Character *vch : ch->InRoom->Characters())
+        for(auto vch : ch->InRoom->Characters())
         {
             std::string sbuf = argument;
 

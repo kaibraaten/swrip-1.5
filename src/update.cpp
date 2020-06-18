@@ -61,10 +61,10 @@
  /*
   * Local functions.
   */
-static int GainHitPoints(const Character *ch);
-static int GainMana(const Character *ch);
-static int GainMove(const Character *ch);
-static void GainAddiction(Character *ch);
+static int GainHitPoints(std::shared_ptr<Character> ch);
+static int GainMana(std::shared_ptr<Character> ch);
+static int GainMove(std::shared_ptr<Character> ch);
+static void GainAddiction(std::shared_ptr<Character> ch);
 static void MobileUpdate();
 static void UpdateDruggedPlayers();
 static void WeatherUpdate();
@@ -75,26 +75,26 @@ static void CharacterUpdate();
 static void ObjectUpdate();
 static void AggroUpdate();
 static void CharacterCheck();
-static void PerformRandomDrunkBehavior(Character *ch);
-static void SufferHallucinations(Character *ch);
+static void PerformRandomDrunkBehavior(std::shared_ptr<Character> ch);
+static void SufferHallucinations(std::shared_ptr<Character> ch);
 static void AuctionUpdate();
 static void TeleportUpdate();
 
-static int GetMaxCombatLevel(const Character *ch);
-static int GetMaxPilotingLevel(const Character *ch);
-static int GetMaxEngineeringLevel(const Character *ch);
-static int GetMaxBountyHuntingLevel(const Character *ch);
-static int GetMaxSmugglingLevel(const Character *ch);
-static int GetMaxLeadershipLevel(const Character *ch);
-static int GetMaxDiplomacyLevel(const Character *ch);
-static int GetMaxForceLevel(const Character *ch);
+static int GetMaxCombatLevel(std::shared_ptr<Character> ch);
+static int GetMaxPilotingLevel(std::shared_ptr<Character> ch);
+static int GetMaxEngineeringLevel(std::shared_ptr<Character> ch);
+static int GetMaxBountyHuntingLevel(std::shared_ptr<Character> ch);
+static int GetMaxSmugglingLevel(std::shared_ptr<Character> ch);
+static int GetMaxLeadershipLevel(std::shared_ptr<Character> ch);
+static int GetMaxDiplomacyLevel(std::shared_ptr<Character> ch);
+static int GetMaxForceLevel(std::shared_ptr<Character> ch);
 
 /*
  * Global Variables
  */
 
-Character *gch_prev = NULL;
-Character *timechar = NULL;
+std::shared_ptr<Character> gch_prev;
+std::weak_ptr<Character> timechar;
 
 const char *const corpse_descs[] =
 {
@@ -117,7 +117,7 @@ const char *const d_corpse_descs[] =
 /*
  * Advancement stuff.
  */
-int GetMaxAbilityLevel(const Character *ch, int ability)
+int GetMaxAbilityLevel(std::shared_ptr<Character> ch, int ability)
 {
     int level = 0;
 
@@ -169,7 +169,7 @@ int GetMaxAbilityLevel(const Character *ch, int ability)
     return level;
 }
 
-static int GetMaxCombatLevel(const Character *ch)
+static int GetMaxCombatLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
     int statbonus = ch->PermStats.Con + ch->PermStats.Dex + ch->PermStats.Str;
@@ -203,7 +203,7 @@ static int GetMaxCombatLevel(const Character *ch)
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
 
-static int GetMaxPilotingLevel(const Character *ch)
+static int GetMaxPilotingLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
@@ -231,7 +231,7 @@ static int GetMaxPilotingLevel(const Character *ch)
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
 
-static int GetMaxEngineeringLevel(const Character *ch)
+static int GetMaxEngineeringLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
@@ -247,7 +247,7 @@ static int GetMaxEngineeringLevel(const Character *ch)
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
 
-static int GetMaxBountyHuntingLevel(const Character *ch)
+static int GetMaxBountyHuntingLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
@@ -259,7 +259,7 @@ static int GetMaxBountyHuntingLevel(const Character *ch)
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
 
-static int GetMaxSmugglingLevel(const Character *ch)
+static int GetMaxSmugglingLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
@@ -281,7 +281,7 @@ static int GetMaxSmugglingLevel(const Character *ch)
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
 
-static int GetMaxLeadershipLevel(const Character *ch)
+static int GetMaxLeadershipLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
@@ -300,7 +300,7 @@ static int GetMaxLeadershipLevel(const Character *ch)
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
 
-static int GetMaxDiplomacyLevel(const Character *ch)
+static int GetMaxDiplomacyLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
@@ -319,7 +319,7 @@ static int GetMaxDiplomacyLevel(const Character *ch)
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
 
-static int GetMaxForceLevel(const Character *ch)
+static int GetMaxForceLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
@@ -333,7 +333,7 @@ static int GetMaxForceLevel(const Character *ch)
     return level;
 }
 
-void AdvanceLevel(Character *ch, int ability)
+void AdvanceLevel(std::shared_ptr<Character> ch, int ability)
 {
     if(ch->TopLevel < GetAbilityLevel(ch, ability) && ch->TopLevel < 100)
     {
@@ -351,7 +351,7 @@ void AdvanceLevel(Character *ch, int ability)
     }
 }
 
-void GainXP(Character *ch, short ability, long gain)
+void GainXP(std::shared_ptr<Character> ch, short ability, long gain)
 {
     if(IsNpc(ch))
     {
@@ -391,7 +391,7 @@ void GainXP(Character *ch, short ability, long gain)
     UpdateClanMember(ch);
 }
 
-long LoseXP(Character *ch, short ability, long loss)
+long LoseXP(std::shared_ptr<Character> ch, short ability, long loss)
 {
     if(IsNpc(ch))
     {
@@ -410,7 +410,7 @@ long LoseXP(Character *ch, short ability, long loss)
 /*
  * Regeneration stuff.
  */
-static int GainHitPoints(const Character *ch)
+static int GainHitPoints(std::shared_ptr<Character> ch)
 {
     int gain = 0;
 
@@ -472,7 +472,7 @@ static int GainHitPoints(const Character *ch)
     return umin(gain, ch->HitPoints.Max - ch->HitPoints.Current);
 }
 
-static int GainMana(const Character *ch)
+static int GainMana(std::shared_ptr<Character> ch)
 {
     int gain = 0;
 
@@ -527,7 +527,7 @@ static int GainMana(const Character *ch)
     return umin(gain, ch->Mana.Max - ch->Mana.Current);
 }
 
-static int GainMove(const Character *ch)
+static int GainMove(std::shared_ptr<Character> ch)
 {
     int gain = 0;
 
@@ -584,7 +584,7 @@ static int GainMove(const Character *ch)
     return umin(gain, ch->Fatigue.Max - ch->Fatigue.Current);
 }
 
-static void AffectCharacterWithGlitterstim(Character *ch, int drug)
+static void AffectCharacterWithGlitterstim(std::shared_ptr<Character> ch, int drug)
 {
     if(!IsAffectedBy(ch, Flag::Affect::Blind))
     {
@@ -598,7 +598,7 @@ static void AffectCharacterWithGlitterstim(Character *ch, int drug)
     }
 }
 
-static void AffectCharacterWithCarsanum(Character *ch, int drug)
+static void AffectCharacterWithCarsanum(std::shared_ptr<Character> ch, int drug)
 {
     if(!IsAffectedBy(ch, Flag::Affect::Weaken))
     {
@@ -612,7 +612,7 @@ static void AffectCharacterWithCarsanum(Character *ch, int drug)
     }
 }
 
-static void AffectCharacterWithRyll(Character *ch, int drug)
+static void AffectCharacterWithRyll(std::shared_ptr<Character> ch, int drug)
 {
     if(!IsAffectedBy(ch, Flag::Affect::Weaken))
     {
@@ -626,7 +626,7 @@ static void AffectCharacterWithRyll(Character *ch, int drug)
     }
 }
 
-static void AffectCharacterWithAndris(Character *ch, int drug)
+static void AffectCharacterWithAndris(std::shared_ptr<Character> ch, int drug)
 {
     if(!IsAffectedBy(ch, Flag::Affect::Weaken))
     {
@@ -640,7 +640,7 @@ static void AffectCharacterWithAndris(Character *ch, int drug)
     }
 }
 
-static void GainAddiction(Character *ch)
+static void GainAddiction(std::shared_ptr<Character> ch)
 {
     short drug = 0;
 
@@ -719,7 +719,7 @@ static void GainAddiction(Character *ch)
     }
 }
 
-void GainCondition(Character *ch, int iCond, int value)
+void GainCondition(std::shared_ptr<Character> ch, int iCond, int value)
 {
     if(value == 0
        || IsNpc(ch)
@@ -871,7 +871,7 @@ void GainCondition(Character *ch, int iCond, int value)
 
 static void UpdateDruggedPlayers()
 {
-    for(Character *ch = LastCharacter; ch; ch = gch_prev)
+    for(std::shared_ptr<Character> ch = LastCharacter; ch; ch = gch_prev)
     {
         SetCurrentGlobalCharacter(ch);
         gch_prev = ch->Previous;
@@ -884,12 +884,12 @@ static void UpdateDruggedPlayers()
     }
 }
 
-static bool IsAnimatedCorpse(const Character *ch)
+static bool IsAnimatedCorpse(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch) && ch->Prototype->Vnum == MOB_VNUM_ANIMATED_CORPSE;
 }
 
-static void CleanUpAnimatedCorpse(Character *ch)
+static void CleanUpAnimatedCorpse(std::shared_ptr<Character> ch)
 {
     assert(IsAnimatedCorpse(ch));
 
@@ -902,14 +902,14 @@ static void CleanUpAnimatedCorpse(Character *ch)
     ExtractCharacter(ch, true);
 }
 
-static bool IsHunting(const Character *ch)
+static bool IsHunting(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch) && !ch->Flags.test(Flag::Mob::Running)
         && !ch->Flags.test(Flag::Mob::Sentinel)
         && !ch->Fighting && ch->HHF.Hunting;
 }
 
-static void UpdateHunt(Character *ch)
+static void UpdateHunt(std::shared_ptr<Character> ch)
 {
     assert(IsHunting(ch));
 
@@ -941,7 +941,7 @@ static void UpdateHunt(Character *ch)
     HuntVictim(ch);
 }
 
-static bool IsSentinelWhoIsReadyToReturn(const Character *ch)
+static bool IsSentinelWhoIsReadyToReturn(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && !ch->Fighting && !ch->HHF.Hunting
@@ -949,7 +949,7 @@ static bool IsSentinelWhoIsReadyToReturn(const Character *ch)
         && ch->WasSentinel && ch->Position >= POS_STANDING;
 }
 
-static void ReturnSentinelToHome(Character *ch)
+static void ReturnSentinelToHome(std::shared_ptr<Character> ch)
 {
     assert(IsSentinelWhoIsReadyToReturn(ch));
 
@@ -961,7 +961,7 @@ static void ReturnSentinelToHome(Character *ch)
     ch->WasSentinel = nullptr;
 }
 
-static bool NpcShouldNotBeUpdated(const Character *ch)
+static bool NpcShouldNotBeUpdated(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && (!ch->InRoom
@@ -969,41 +969,41 @@ static bool NpcShouldNotBeUpdated(const Character *ch)
             || IsAffectedBy(ch, Flag::Affect::Paralysis));
 }
 
-static bool IsReadyToPerformSpecFun(const Character *ch)
+static bool IsReadyToPerformSpecFun(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && !ch->Flags.test(Flag::Mob::Running)
         && ch->spec_fun != nullptr;
 }
 
-static bool TryPerformSpecFun(Character *ch)
+static bool TryPerformSpecFun(std::shared_ptr<Character> ch)
 {
     assert(IsReadyToPerformSpecFun(ch));
 
     return ch->spec_fun(ch);
 }
 
-static bool IsReadyToPerformSpecFun2(const Character *ch)
+static bool IsReadyToPerformSpecFun2(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && !ch->Flags.test(Flag::Mob::Running)
         && ch->spec_2 != nullptr;
 }
 
-static bool TryPerformSpecFun2(Character *ch)
+static bool TryPerformSpecFun2(std::shared_ptr<Character> ch)
 {
     assert(IsReadyToPerformSpecFun2(ch));
 
     return ch->spec_2(ch);
 }
 
-static bool MobHasScriptTrigger(const Character *ch)
+static bool MobHasScriptTrigger(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && IsBitSet(ch->Prototype->mprog.progtypes, SCRIPT_PROG);
 }
 
-static bool MobShouldScavenge(const Character *ch)
+static bool MobShouldScavenge(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
         && ch->Flags.test(Flag::Mob::Scavenger)
@@ -1011,7 +1011,7 @@ static bool MobShouldScavenge(const Character *ch)
         && NumberBits(2) == 0;
 }
 
-static void PerformScavenging(Character *ch)
+static void PerformScavenging(std::shared_ptr<Character> ch)
 {
     std::shared_ptr<Object> obj_best;
     int max = 1;
@@ -1035,7 +1035,7 @@ static void PerformScavenging(Character *ch)
     }
 }
 
-static bool MobShouldWander(const Character *ch, DirectionType door)
+static bool MobShouldWander(std::shared_ptr<Character> ch, DirectionType door)
 {
     std::shared_ptr<Exit> pexit = GetExit(ch->InRoom, door);
 
@@ -1050,7 +1050,7 @@ static bool MobShouldWander(const Character *ch, DirectionType door)
             || pexit->ToRoom->Area == ch->InRoom->Area);
 }
 
-static bool MobShouldFlee(const Character *ch, DirectionType door)
+static bool MobShouldFlee(std::shared_ptr<Character> ch, DirectionType door)
 {
     std::shared_ptr<Exit> pexit = GetExit(ch->InRoom, door);
 
@@ -1062,11 +1062,11 @@ static bool MobShouldFlee(const Character *ch, DirectionType door)
         && !pexit->ToRoom->Flags.test(Flag::Room::NoMob);
 }
 
-static void PerformFlee(Character *ch, DirectionType door)
+static void PerformFlee(std::shared_ptr<Character> ch, DirectionType door)
 {
     bool found = false;
 
-    for(Character *rch : ch->InRoom->Characters())
+    for(std::shared_ptr<Character> rch : ch->InRoom->Characters())
     {
         if(IsFearing(ch, rch))
         {
@@ -1111,7 +1111,7 @@ static void PerformFlee(Character *ch, DirectionType door)
 static void MobileUpdate()
 {
     /* Examine all mobs. */
-    for(Character *ch = LastCharacter; ch; ch = gch_prev)
+    for(std::shared_ptr<Character> ch = LastCharacter; ch; ch = gch_prev)
     {
         SetCurrentGlobalCharacter(ch);
         gch_prev = ch->Previous;
@@ -1318,7 +1318,7 @@ static void TaxUpdate()
 
 static void ApplyBankInterest()
 {
-    for(const Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         /* Interest */
         ch->PCData->Bank *= 1.0071428571428571;
@@ -1329,7 +1329,7 @@ static void ApplyBankInterest()
 
 static void PaySalaries()
 {
-    for(const Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         auto clanInfo = ch->PCData->ClanInfo;
 
@@ -1404,7 +1404,7 @@ static void WeatherUpdate()
 
     if(!IsNullOrEmpty(buf))
     {
-        for(Character *ch : PlayerCharacters)
+        for(std::shared_ptr<Character> ch : PlayerCharacters)
         {
             if(IS_OUTSIDE(ch)
                && IsAwake(ch)
@@ -1507,7 +1507,7 @@ static void WeatherUpdate()
 
     if(!IsNullOrEmpty(buf))
     {
-        for(Character *ch : PlayerCharacters)
+        for(std::shared_ptr<Character> ch : PlayerCharacters)
         {
             if(IS_OUTSIDE(ch)
                && IsAwake(ch))
@@ -1518,7 +1518,7 @@ static void WeatherUpdate()
     }
 }
 
-static void SanitizeAlignment(Character *ch)
+static void SanitizeAlignment(std::shared_ptr<Character> ch)
 {
     if(ch->Alignment < -1000)
     {
@@ -1535,7 +1535,7 @@ static void AutosavePlayerCharacters()
 {
     short save_count = 0;
 
-    for(const Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         if(SysData.SaveFlags.test(Flag::AutoSave::Auto)
            && IsAuthed(ch)
@@ -1547,7 +1547,7 @@ static void AutosavePlayerCharacters()
     }
 }
 
-static std::shared_ptr<Room> GetOwnedHome(const Character *ch,
+static std::shared_ptr<Room> GetOwnedHome(std::shared_ptr<Character> ch,
                                           std::list<std::shared_ptr<Home>> homes)
 {
     auto home = Find(homes,
@@ -1566,7 +1566,7 @@ static std::shared_ptr<Room> GetOwnedHome(const Character *ch,
     }
 }
 
-static std::shared_ptr<Room> GetRoomToQuitIn(const Character *ch)
+static std::shared_ptr<Room> GetRoomToQuitIn(std::shared_ptr<Character> ch)
 {
     std::shared_ptr<Room> room;
 
@@ -1597,9 +1597,9 @@ static std::shared_ptr<Room> GetRoomToQuitIn(const Character *ch)
     return room;
 }
 
-static std::list<Character *> GetLinkdeadCharacters()
+static std::list<std::shared_ptr<Character> > GetLinkdeadCharacters()
 {
-    std::list<Character *> linkdeads;
+    std::list<std::shared_ptr<Character> > linkdeads;
 
     for(auto ch = FirstCharacter; ch; ch = ch->Next)
     {
@@ -1637,7 +1637,7 @@ static void KickOutLinkdeadCharacters()
 
 static void GainAddictionsForPlayerCharacters()
 {
-    for(Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         GainAddiction(ch);
     }
@@ -1645,7 +1645,7 @@ static void GainAddictionsForPlayerCharacters()
 
 static void WorsenMentalStateForPlayerCharacters()
 {
-    for(Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         if(ch->TopLevel < LEVEL_IMMORTAL && ch->PCData->Condition[COND_DRUNK] > 8)
         {
@@ -1656,7 +1656,7 @@ static void WorsenMentalStateForPlayerCharacters()
 
 static void ImproveConditionIfNotThirsty()
 {
-    for(Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         if(ch->PCData->Condition[COND_THIRST] > 1)
         {
@@ -1696,7 +1696,7 @@ static void ImproveConditionIfNotThirsty()
 
 static void ImproveConditionIfNotHungry()
 {
-    for(Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         if(ch->PCData->Condition[COND_FULL] > 1)
         {
@@ -1735,7 +1735,7 @@ static void ImproveConditionIfNotHungry()
 
 static void TickdownLightSources()
 {
-    for(Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         if(ch->TopLevel < LEVEL_IMMORTAL)
         {
@@ -1765,7 +1765,7 @@ static void TickdownLightSources()
 
 static void SoberUp()
 {
-    for(Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         GainCondition(ch, COND_DRUNK, -1);
     }
@@ -1773,7 +1773,7 @@ static void SoberUp()
 
 static void IncreaseHunger()
 {
-    for(Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         if(ch->TopLevel < LEVEL_IMMORTAL)
         {
@@ -1784,7 +1784,7 @@ static void IncreaseHunger()
 
 static void IncreaseThirst()
 {
-    for(Character *ch : PlayerCharacters)
+    for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
         if(ch->TopLevel < LEVEL_IMMORTAL
            && ch->InRoom != nullptr)
@@ -1826,7 +1826,7 @@ static void PlayerCharacterUpdate()
     AutosavePlayerCharacters();
 }
 
-static void CheckReinforcementArrival(Character *ch)
+static void CheckReinforcementArrival(std::shared_ptr<Character> ch)
 {
     if(ch->BackupWait > 0)
     {
@@ -1845,7 +1845,7 @@ static void CheckReinforcementArrival(Character *ch)
  */
 static void CharacterUpdate()
 {
-    Character *ch = NULL;
+    std::shared_ptr<Character> ch = NULL;
 
     for(ch = LastCharacter; ch; ch = gch_prev)
     {
@@ -2076,7 +2076,7 @@ static void ObjectUpdate()
             continue;
         }
 
-        Character *rch = NULL;
+        std::shared_ptr<Character> rch = NULL;
         const char *message = NULL;
 
         SetCurrentGlobalObject(obj);
@@ -2359,7 +2359,7 @@ static void CharacterCheck()
 
     cnt = (cnt + 1) % 2;
 
-    for(Character *ch = FirstCharacter, *ch_next = nullptr; ch; ch = ch_next)
+    for(std::shared_ptr<Character> ch = FirstCharacter, ch_next = nullptr; ch; ch = ch_next)
     {
         int retcode = rNONE;
 
@@ -2535,7 +2535,7 @@ static bool WeaponCanBackstab(std::shared_ptr<Object> obj)
         || obj->Value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE;
 }
 
-static bool PerformBackstab(Character *ch, Character *victim)
+static bool PerformBackstab(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     auto obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
@@ -2574,7 +2574,7 @@ static bool PerformBackstab(Character *ch, Character *victim)
  */
 static void AggroUpdate()
 {
-    for(Character *ch = FirstCharacter, *wch_next = nullptr; ch; ch = wch_next)
+    for(std::shared_ptr<Character> ch = FirstCharacter, wch_next = nullptr; ch; ch = wch_next)
     {
         wch_next = ch->Next;
 
@@ -2590,9 +2590,9 @@ static void AggroUpdate()
             continue;
         }
 
-        std::list<Character *> charactersInRoom(RandomizeOrder(ch->InRoom->Characters()));
+        std::list<std::shared_ptr<Character> > charactersInRoom(RandomizeOrder(ch->InRoom->Characters()));
 
-        for(Character *wch : charactersInRoom)
+        for(std::shared_ptr<Character> wch : charactersInRoom)
         {
             if(IsHating(ch, wch))
             {
@@ -2613,7 +2613,7 @@ static void AggroUpdate()
                 continue;
             }
 
-            Character *victim = wch;
+            std::shared_ptr<Character> victim = wch;
 
             if(GetTimer(victim, TIMER_RECENTFIGHT) > 0)
             {
@@ -2639,9 +2639,9 @@ static void AggroUpdate()
  * drunk randoms        - Tricops
  * (Made part of mobile_update  -Thoric)
  */
-static void PerformRandomDrunkBehavior(Character *ch)
+static void PerformRandomDrunkBehavior(std::shared_ptr<Character> ch)
 {
-    Character *rvch = nullptr;
+    std::shared_ptr<Character> rvch = nullptr;
     short drunk = 0;
     PositionType position = POS_DEAD;
 
@@ -2683,7 +2683,7 @@ static void PerformRandomDrunkBehavior(Character *ch)
     else if(drunk > (10 + (GetCurrentConstitution(ch) / 5))
             && GetRandomPercent() < (2 * drunk / 18))
     {
-        for(Character *vch : ch->InRoom->Characters())
+        for(std::shared_ptr<Character> vch : ch->InRoom->Characters())
         {
             if(GetRandomPercent() < 10)
             {
@@ -2698,7 +2698,7 @@ static void PerformRandomDrunkBehavior(Character *ch)
     ch->Position = position;
 }
 
-static void SufferHallucinations(Character *ch)
+static void SufferHallucinations(std::shared_ptr<Character> ch)
 {
     if(ch->MentalState >= 30
        && NumberBits(5 - (ch->MentalState >= 50) - (ch->MentalState >= 75)) == 0)
@@ -2814,26 +2814,28 @@ static void TeleportUpdate()
 
 static void StartTiming(timeval &start_time)
 {
-    if(timechar)
+    if(!timechar.expired())
     {
-        SetCharacterColor(AT_PLAIN, timechar);
-        timechar->Echo("Starting update timer.\r\n");
+        auto ch = timechar.lock();
+        SetCharacterColor(AT_PLAIN, ch);
+        ch->Echo("Starting update timer.\r\n");
         gettimeofday(&start_time, nullptr);
     }
 }
 
 static void StopTiming(timeval &start_time)
 {
-    if(timechar)
+    if(!timechar.expired())
     {
+        auto ch = timechar.lock();
         timeval etime;
         gettimeofday(&etime, NULL);
-        SetCharacterColor(AT_PLAIN, timechar);
-        timechar->Echo("Update timing complete.\r\n");
+        SetCharacterColor(AT_PLAIN, ch);
+        ch->Echo("Update timing complete.\r\n");
         SubtractTimes(&etime, &start_time);
-        timechar->Echo("Timing took %ld.%06ld seconds.\r\n",
+        ch->Echo("Timing took %ld.%06ld seconds.\r\n",
                        etime.tv_sec, etime.tv_usec);
-        timechar = nullptr;
+        timechar.reset();
     }
 }
 
@@ -2965,7 +2967,7 @@ void UpdateHandler()
 void RemovePortal(std::shared_ptr<Object> portal)
 {
     auto fromRoom = portal->InRoom;
-    Character *ch = NULL;
+    std::shared_ptr<Character> ch = NULL;
     std::shared_ptr<Exit> pexit;
 
     const auto &exitIter = Find(fromRoom->Exits(),
@@ -3051,7 +3053,7 @@ void RebootCheck(time_t reset)
 
     if(new_boot_time_t <= current_time)
     {
-        Character *vch = NULL;
+        std::shared_ptr<Character> vch = NULL;
         auto auctionItem = OngoingAuction->Item.lock();
 
         if(auctionItem != nullptr)

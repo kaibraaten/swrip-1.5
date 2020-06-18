@@ -121,7 +121,7 @@ public:
         } TractorBeam;
 
         std::shared_ptr<Ship> Target; /* Not persisted */
-        std::vector<Turret*> Turrets = std::vector<Turret*>(MAX_NUMBER_OF_TURRETS_IN_SHIP);
+        std::vector<Turret *> Turrets = std::vector<Turret *>(MAX_NUMBER_OF_TURRETS_IN_SHIP);
     } WeaponSystems;
 
     struct
@@ -176,12 +176,12 @@ public:
     bool Autopilot = false;
     bool OpenTube = false;
     std::shared_ptr<Ship> Docked;
-    Character *Ch = nullptr;
+    std::shared_ptr<Character> Ch;
     std::shared_ptr<class Spaceobject> InOrbitOf;
     int Count = 0;
 };
 
-ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit> exit, int fall);
+ch_ret DriveShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit> exit, int fall);
 void ResetShip(std::shared_ptr<Ship> ship);
 void EchoToDockedShip(int color, std::shared_ptr<Ship> ship, const std::string &argument);
 bool CanDock(std::shared_ptr<Ship> ship);
@@ -207,28 +207,28 @@ void UpdateShipMovement();
 void RechargeShips();
 void ShipUpdate();
 void UpdateSpaceCombat();
-bool IsShipRental(const Character *ch, std::shared_ptr<Ship> ship);
+bool IsShipRental(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
 void EchoToShip(int color, std::shared_ptr<Ship> ship, const std::string &argument);
 void EchoToCockpit(int color, std::shared_ptr<Ship> ship, const std::string &argument);
 void EchoToNearbyShips(int color, std::shared_ptr<Ship> ship, const std::string &argument,
-    std::list<std::shared_ptr<Ship>> ignore = {});
+                       std::list<std::shared_ptr<Ship>> ignore = {});
 bool ExtractShip(std::shared_ptr<Ship> ship);
 bool ShipToRoom(std::shared_ptr<Ship> ship, vnum_t vnum);
 long GetShipValue(std::shared_ptr<Ship> ship);
 long GetRentalPrice(std::shared_ptr<Ship> ship);
-bool RentShip(Character *ch, std::shared_ptr<Ship> ship);
-void DamageShip(std::shared_ptr<Ship> ship, int min, int max, Character *ch,
-    std::shared_ptr<Ship> assaulter);
-void DestroyShip(std::shared_ptr<Ship> ship, Character *killer);
+bool RentShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
+void DamageShip(std::shared_ptr<Ship> ship, int min, int max, std::shared_ptr<Character> ch,
+                std::shared_ptr<Ship> assaulter);
+void DestroyShip(std::shared_ptr<Ship> ship, std::shared_ptr<Character> killer);
 void ShipToSpaceobject(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobject);
 void ShipFromSpaceobject(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobject);
 std::shared_ptr<Ship> GetShipInRoom(std::shared_ptr<Room> room, const std::string &name);
 void TransferShip(std::shared_ptr<Ship> ship, vnum_t destination);
 bool IsShipAutoflying(std::shared_ptr<Ship> ship);
-bool CheckPilot(const Character *ch, std::shared_ptr<Ship> ship);
+bool CheckPilot(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
 bool ShipNameAndPersonalnameComboIsUnique(const std::string &name,
-    const std::string &personalname);
-void ForEachShip(std::function<bool(std::shared_ptr<Ship>, void*)> callback,
-    void *userData);
+                                          const std::string &personalname);
+void ForEachShip(std::function<bool(std::shared_ptr<Ship>, void *)> callback,
+                 void *userData);
 
 #endif

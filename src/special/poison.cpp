@@ -6,7 +6,7 @@
 
 bool spec_poison(std::shared_ptr<Character> ch)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
     if(ch->Position != POS_FIGHTING
        || (victim = GetFightingOpponent(ch)) == NULL

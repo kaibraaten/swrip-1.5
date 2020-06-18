@@ -9,7 +9,7 @@
 void do_circle(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Object> obj;
     int percent = 0;
 

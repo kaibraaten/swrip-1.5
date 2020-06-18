@@ -30,15 +30,15 @@
 #include <utility/vector3.hpp>
 #include "types.hpp"
 
-/*
- * To check if a ship is facing a specific position, which can be another
- * ship, a planet, an asteroid, etc.
- *
- * if( IsShipFacingShip( ship, &target->Position.) )
- * {
- *   ... your code here
- * }
- */
+ /*
+  * To check if a ship is facing a specific position, which can be another
+  * ship, a planet, an asteroid, etc.
+  *
+  * if( IsShipFacingShip( ship, &target->Position.) )
+  * {
+  *   ... your code here
+  * }
+  */
 bool IsShipFacingShip(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target);
 
 bool IsShipFacingSpaceobject(std::shared_ptr<Ship> ship,
@@ -61,7 +61,7 @@ void TurnShip180(std::shared_ptr<Ship> ship);
  * Etc, etc...
  */
 void SetShipCourse(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Vector3> destination);
+                   std::shared_ptr<Vector3> destination);
 
 void SetShipCourseTowardsShip(std::shared_ptr<Ship> ship,
                               std::shared_ptr<Ship> target);

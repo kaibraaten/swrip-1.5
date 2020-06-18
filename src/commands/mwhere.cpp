@@ -6,7 +6,6 @@
 
 void do_mwhere(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = NULL;
     bool found = false;
 
     if(arg.empty())
@@ -17,7 +16,7 @@ void do_mwhere(std::shared_ptr<Character> ch, std::string arg)
 
     SetCharacterColor(AT_PLAIN, ch);
 
-    for(victim = FirstCharacter; victim; victim = victim->Next)
+    for(auto victim = FirstCharacter; victim; victim = victim->Next)
     {
         if(IsNpc(victim)
            && victim->InRoom

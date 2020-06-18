@@ -92,7 +92,7 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
-        Character *mob = nullptr;
+        std::shared_ptr<Character> mob;
         int adept = 0;
         bool can_prac = true;
         std::shared_ptr<Skill> skill;
@@ -104,7 +104,7 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        for(Character *potentialTeacher : ch->InRoom->Characters())
+        for(auto potentialTeacher : ch->InRoom->Characters())
         {
             if(IsNpc(potentialTeacher) && potentialTeacher->Flags.test(Flag::Mob::Practice))
             {

@@ -49,10 +49,10 @@ private:
 
 std::shared_ptr<Board> AllocateBoard(const std::string &name);
 std::shared_ptr<Board> GetBoardFromObject(std::shared_ptr<Object> obj);
-std::shared_ptr<Board> FindBoardHere(const Character *ch);
+std::shared_ptr<Board> FindBoardHere(std::shared_ptr<Character> ch);
 std::shared_ptr<Board> GetBoard(const std::string &name);
-void OperateOnNote(Character *ch, std::string arg_passed, bool IS_MAIL);
-void AttachNote(Character *ch);
-void CountMailMessages(const Character *ch);
+void OperateOnNote(std::shared_ptr<Character> ch, std::string arg_passed, bool IS_MAIL);
+void AttachNote(std::shared_ptr<Character> ch);
+void CountMailMessages(std::shared_ptr<Character> ch);
 
 #endif

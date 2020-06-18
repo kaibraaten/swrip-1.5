@@ -3,39 +3,39 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_viewskills(Character* ch, std::string arg)
+void do_viewskills(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character* victim = NULL;
+    std::shared_ptr<Character> victim;
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ch->Echo("&zSyntax: skills <player>\r\n");
         return;
     }
 
-    if ((victim = GetCharacterAnywhere(ch, arg)) == NULL)
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
         ch->Echo("No such person in the game.\r\n");
         return;
     }
 
-    if (!IsNpc(victim))
+    if(!IsNpc(victim))
     {
         int col = 0;
         SetCharacterColor(AT_MAGIC, ch);
 
-        for (int sn = 0; sn < TopSN && SkillTable[sn] && !SkillTable[sn]->Name.empty(); sn++)
+        for(int sn = 0; sn < TopSN && SkillTable[sn] && !SkillTable[sn]->Name.empty(); sn++)
         {
-            if (SkillTable[sn]->Name.empty())
+            if(SkillTable[sn]->Name.empty())
                 break;
 
-            if (victim->PCData->Learned[sn] == 0)
+            if(victim->PCData->Learned[sn] == 0)
                 continue;
 
             ch->Echo("%20s %3d%% ", SkillTable[sn]->Name.c_str(),
-                victim->PCData->Learned[sn]);
+                     victim->PCData->Learned[sn]);
 
-            if (++col % 3 == 0)
+            if(++col % 3 == 0)
                 ch->Echo("\r\n");
         }
     }

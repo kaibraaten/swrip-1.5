@@ -19,8 +19,9 @@ public:
     virtual bool Read();
     virtual bool HasInput() const;
 
-    class Character *Character = nullptr;
-    class Character *Original = nullptr;
+    std::shared_ptr<Character> Original;
+    std::shared_ptr<class Character> Character;
+    
     std::shared_ptr<Descriptor> SnoopBy;
 
     struct
@@ -59,6 +60,6 @@ public:
 unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string &name, bool fConn);
 unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string &name, bool kick);
 bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string &name);
-void MapCharacterAndDescriptor(Character* ch, std::shared_ptr<Descriptor> d);
+void MapCharacterAndDescriptor(std::shared_ptr<Character> ch, std::shared_ptr<Descriptor> d);
 
 #endif

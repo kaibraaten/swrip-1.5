@@ -39,7 +39,7 @@
 #include "exit.hpp"
 #include "repos/arearepository.hpp"
 
-bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room)
+bool CanModifyRoom(std::shared_ptr<Character> ch, std::shared_ptr<Room> room)
 {
     vnum_t vnum = room->Vnum;
     std::shared_ptr<Area> pArea;
@@ -63,7 +63,7 @@ bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room)
     return false;
 }
 
-bool CanModifyObject(const Character *ch, std::shared_ptr<Object> obj)
+bool CanModifyObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     vnum_t vnum = obj->Prototype->Vnum;
     std::shared_ptr<Area> pArea;
@@ -87,7 +87,7 @@ bool CanModifyObject(const Character *ch, std::shared_ptr<Object> obj)
     return false;
 }
 
-bool CanModifyCharacter(const Character *ch, const Character *mob)
+bool CanModifyCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Character> mob)
 {
     vnum_t vnum = INVALID_VNUM;
     std::shared_ptr<Area> pArea;
@@ -139,7 +139,7 @@ bool CanModifyCharacter(const Character *ch, const Character *mob)
     return false;
 }
 
-bool CanMedit(const Character *ch, std::shared_ptr<ProtoMobile> mob)
+bool CanMedit(std::shared_ptr<Character> ch, std::shared_ptr<ProtoMobile> mob)
 {
     vnum_t vnum = mob->Vnum;
     std::shared_ptr<Area> pArea;
@@ -305,7 +305,7 @@ bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keyword
 /*
  * Parse a reset command string into a reset_data structure
  */
-std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argument, const Character *ch)
+std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argument, std::shared_ptr<Character> ch)
 {
     std::string arg1;
     std::string arg2;
@@ -589,7 +589,7 @@ std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argum
         return MakeReset(letter, extra, val1, val3, val2);
 }
 
-void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
+void EditMobProg(std::shared_ptr<Character> ch, std::shared_ptr<MPROG_DATA> mprg,
                  int mptype, const std::string &argument)
 {
     if (mptype != -1)
@@ -606,7 +606,7 @@ void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
     SetEditorDesc(ch, "MOBPROG script");
 }
 
-void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
+void EditObjProg(std::shared_ptr<Character> ch, std::shared_ptr<MPROG_DATA> mprg,
                  int mptype, const std::string &argument)
 {
     if (mptype != -1)
@@ -626,7 +626,7 @@ void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
 /*
  * RoomProg Support
  */
-void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
+void EditRoomProg(std::shared_ptr<Character> ch, std::shared_ptr<MPROG_DATA> mprg,
                   int mptype, const std::string &argument)
 {
     if (mptype != -1)

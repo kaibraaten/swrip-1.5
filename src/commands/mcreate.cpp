@@ -9,7 +9,7 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string arg2;
-    Character *mob = NULL;
+    std::shared_ptr<Character> mob;
     vnum_t vnum = 0, cvnum = 0;
 
     if(IsNpc(ch))

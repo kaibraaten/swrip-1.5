@@ -5,7 +5,6 @@ void do_at(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Room> location;
-    Character *wch = nullptr;
 
     argument = OneArgument(argument, arg);
 
@@ -44,7 +43,7 @@ void do_at(std::shared_ptr<Character> ch, std::string argument)
      * See if 'ch' still exists before continuing!
      * Handles 'at XXXX quit' case.
      */
-    for (wch = FirstCharacter; wch; wch = wch->Next)
+    for (auto wch = FirstCharacter; wch; wch = wch->Next)
     {
         if (wch == ch)
         {

@@ -7,7 +7,7 @@
 void do_seduce(std::shared_ptr<Character> ch, std::string arg)
 {
     char buf[MAX_INPUT_LENGTH];
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
 
     if(arg.empty())
     {

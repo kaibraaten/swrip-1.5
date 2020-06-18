@@ -74,7 +74,7 @@ void RealEchoToRoom(short color, std::shared_ptr<Room> room, const std::string &
 {
     assert(room != nullptr);
 
-    for (const Character *vic : room->Characters())
+    for (std::shared_ptr<Character> vic : room->Characters())
     {
         SetCharacterColor(color, vic);
         vic->Echo("%s", text.c_str());
@@ -86,14 +86,14 @@ void RealEchoToRoom(short color, std::shared_ptr<Room> room, const std::string &
     }
 }
 
-std::shared_ptr<Room> FindLocation(const Character *ch, const std::string &arg)
+std::shared_ptr<Room> FindLocation(std::shared_ptr<Character> ch, const std::string &arg)
 {
     if (IsNumber(arg))
     {
         return GetRoom(strtol(arg.c_str(), nullptr, 10));
     }
 
-    const Character *victim = GetCharacterAnywhere(ch, arg);
+    std::shared_ptr<Character> victim = GetCharacterAnywhere(ch, arg);
 
     if (victim != nullptr)
     {

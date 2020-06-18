@@ -46,83 +46,83 @@ void do_for(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string range;
     bool fGods = false, fMortals = false, fMobs = false, fEverywhere = false, found = false;
-    std::shared_ptr<Room> room, old_room ;
-    Character *p = nullptr, *p_prev = nullptr;
+    std::shared_ptr<Room> room, old_room;
+    std::shared_ptr<Character> p, p_prev;
     int i = 0;
 
     argument = OneArgument(argument, range);
 
-    if (range.empty() || argument.empty())
+    if(range.empty() || argument.empty())
     {
         do_help(ch, "for");
         return;
     }
 
-    if (!StringPrefix("quit", argument))
+    if(!StringPrefix("quit", argument))
     {
         ch->Echo("Are you trying to crash the MUD or something?\r\n");
         return;
     }
 
-    if (!StrCmp(range, "all"))
+    if(!StrCmp(range, "all"))
     {
         fMortals = true;
         fGods = true;
     }
-    else if (!StrCmp(range, "gods"))
+    else if(!StrCmp(range, "gods"))
         fGods = true;
-    else if (!StrCmp(range, "mortals"))
+    else if(!StrCmp(range, "mortals"))
         fMortals = true;
-    else if (!StrCmp(range, "mobs"))
+    else if(!StrCmp(range, "mobs"))
         fMobs = true;
-    else if (!StrCmp(range, "everywhere"))
+    else if(!StrCmp(range, "everywhere"))
         fEverywhere = true;
     else
         do_help(ch, "for"); /* show syntax */
 
       /* do not allow # to make it easier */
-    if (fEverywhere && strchr(argument.c_str(), '#'))
+    if(fEverywhere && strchr(argument.c_str(), '#'))
     {
         ch->Echo("Cannot use FOR EVERYWHERE with the # thingy.\r\n");
         return;
     }
 
-    if (strchr(argument.c_str(), '#')) /* replace # ? */
+    if(strchr(argument.c_str(), '#')) /* replace # ? */
     {
         /* char_list - LastCharacter, p_next - gch_prev -- TRI */
-        for (p = LastCharacter; p; p = p_prev)
+        for(p = LastCharacter; p; p = p_prev)
         {
             p_prev = p->Previous;  /* TRI */
             /*    p_next = p->next; */ /* In case someone DOES try to AT MOBS SLAY # */
             found = false;
 
-            if (!(p->InRoom) || IsRoomPrivate(p, p->InRoom) || (p == ch))
+            if(!(p->InRoom) || IsRoomPrivate(p, p->InRoom) || (p == ch))
                 continue;
 
-            if (IsNpc(p) && fMobs)
+            if(IsNpc(p) && fMobs)
                 found = true;
-            else if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_IMMORTAL && fGods)
+            else if(!IsNpc(p) && GetTrustLevel(p) >= LEVEL_IMMORTAL && fGods)
                 found = true;
-            else if (!IsNpc(p) && GetTrustLevel(p) < LEVEL_IMMORTAL && fMortals)
+            else if(!IsNpc(p) && GetTrustLevel(p) < LEVEL_IMMORTAL && fMortals)
                 found = true;
 
             /* It looks ugly to me.. but it works :) */
-            if (found) /* p is 'appropriate' */
+            if(found) /* p is 'appropriate' */
             {
                 const char *pSource = argument.c_str(); /* head of buffer to be parsed */
                 char buf[MAX_STRING_LENGTH];
                 char *pDest = buf; /* parse into this */
 
-                while (*pSource)
+                while(*pSource)
                 {
-                    if (*pSource == '#') /* Replace # with name of target */
+                    if(*pSource == '#') /* Replace # with name of target */
                     {
                         std::string namebuf = name_expand(p);
                         const char *namebufptr = namebuf.c_str();
 
-                        if (namebufptr) /* in case there is no mob name ?? */
+                        if(namebufptr) /* in case there is no mob name ?? */
                         {
-                            while (*namebufptr) /* copy name over */
+                            while(*namebufptr) /* copy name over */
                             {
                                 *(pDest++) = *(namebufptr++);
                             }
@@ -150,31 +150,31 @@ void do_for(std::shared_ptr<Character> ch, std::string argument)
     }
     else /* just for every room with the appropriate people in it */
     {
-        for (i = 0; i < MAX_KEY_HASH; i++) /* run through all the buckets */
-            for (room = RoomIndexHash[i]; room; room = room->Next)
+        for(i = 0; i < MAX_KEY_HASH; i++) /* run through all the buckets */
+            for(room = RoomIndexHash[i]; room; room = room->Next)
             {
                 found = false;
 
                 /* Anyone in here at all? */
-                if (fEverywhere) /* Everywhere executes always */
+                if(fEverywhere) /* Everywhere executes always */
                     found = true;
-                else if (room->Characters().empty()) /* Skip it if room is empty */
+                else if(room->Characters().empty()) /* Skip it if room is empty */
                     continue;
                 /* ->people changed to first_person -- TRI */
 
                 /* Check if there is anyone here of the requried type */
                 /* Stop as soon as a match is found or there are no more ppl in room */
                 /* ->people to ->first_person -- TRI */
-                for (Character *tmp : room->Characters())
+                for(auto tmp : room->Characters())
                 {
-                    if (tmp == ch)
+                    if(tmp == ch)
                     {
                         continue;
                     }
 
-                    if ((IsNpc(p) && fMobs)
-                        || (!IsNpc(p) && (GetTrustLevel(p) >= LEVEL_IMMORTAL) && fGods)
-                        || (!IsNpc(p) && (GetTrustLevel(p) <= LEVEL_IMMORTAL) && fMortals))
+                    if((IsNpc(p) && fMobs)
+                       || (!IsNpc(p) && (GetTrustLevel(p) >= LEVEL_IMMORTAL) && fGods)
+                       || (!IsNpc(p) && (GetTrustLevel(p) <= LEVEL_IMMORTAL) && fMortals))
                     {
                         p = tmp;
                         found = true;
@@ -182,7 +182,7 @@ void do_for(std::shared_ptr<Character> ch, std::string argument)
                     }
                 }
 
-                if (found && !IsRoomPrivate(p, room)) /* Any of the required type here AND room not private? */
+                if(found && !IsRoomPrivate(p, room)) /* Any of the required type here AND room not private? */
                 {
                     /* This may be ineffective. Consider moving character out of old_room
                        once at beginning of command then moving back at the end.
@@ -208,24 +208,24 @@ static std::string name_expand(const std::shared_ptr<Character> ch)
     int count = 1;
     std::string name;
 
-    if (!IsNpc(ch))
+    if(!IsNpc(ch))
         return ch->Name;
 
     OneArgument(ch->Name, name); /* copy the first word into name */
 
-    if (name.empty())
+    if(name.empty())
     {
         return "";
     }
 
     /* ->people changed to ->first_person -- TRI */
-    for (const Character *rch : ch->InRoom->Characters())
+    for(auto rch : ch->InRoom->Characters())
     {
-        if (rch == ch)
+        if(rch == ch)
         {
             break;
         }
-        else if (IsName(name, rch->Name))
+        else if(IsName(name, rch->Name))
         {
             ++count;
         }

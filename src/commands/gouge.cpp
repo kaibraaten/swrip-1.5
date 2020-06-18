@@ -7,7 +7,7 @@
 
 void do_gouge(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     short dam = 0;
     int percent = 0;
 

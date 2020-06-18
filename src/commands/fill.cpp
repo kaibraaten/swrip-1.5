@@ -242,7 +242,6 @@ void do_fill(std::shared_ptr<Character> ch, std::string argument)
     if(dest_item == ITEM_CONTAINER)
     {
         std::string name;
-        Character *gch = nullptr;
         std::string pd;
         bool found = false;
 
@@ -293,7 +292,7 @@ void do_fill(std::shared_ptr<Character> ch, std::string argument)
             {
                 bool fGroup = false;
 
-                for(gch = FirstCharacter; gch; gch = gch->Next)
+                for(auto gch = FirstCharacter; gch; gch = gch->Next)
                 {
                     if(!IsNpc(gch)
                        && IsInSameGroup(ch, gch)

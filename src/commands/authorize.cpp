@@ -5,115 +5,115 @@
 #include "descriptor.hpp"
 #include "race.hpp"
 
-static Character *get_waiting_desc( const std::shared_ptr<Character> ch, const std::string &name );
+static std::shared_ptr<Character> get_waiting_desc(const std::shared_ptr<Character> ch, const std::string &name);
 
-void do_authorize( std::shared_ptr<Character> ch, std::string argument )
+void do_authorize(std::shared_ptr<Character> ch, std::string argument)
 {
-  std::string arg1;
-  std::string arg2;
-  char buf[MAX_STRING_LENGTH];
+    std::string arg1;
+    std::string arg2;
+    char buf[MAX_STRING_LENGTH];
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  if ( arg1.empty() )
+    if(arg1.empty())
     {
-      ch->Echo( "Usage:  authorize <player> <yes|name|no/deny>\r\n" );
-      ch->Echo( "Pending authorizations:\r\n" );
-      ch->Echo( " Chosen Character Name\r\n" );
-      ch->Echo( "---------------------------------------------\r\n" );
+        ch->Echo("Usage:  authorize <player> <yes|name|no/deny>\r\n");
+        ch->Echo("Pending authorizations:\r\n");
+        ch->Echo(" Chosen Character Name\r\n");
+        ch->Echo("---------------------------------------------\r\n");
 
-      for(const Character *unauthed : PlayerCharacters->Entities())
+        for(auto unauthed : PlayerCharacters)
         {
-          if(IsWaitingForAuth(unauthed))
+            if(IsWaitingForAuth(unauthed))
             {
-              ch->Echo( " %s@%s new %s...\r\n",
-                        unauthed->Name.c_str(),
-                        unauthed->Desc->Remote.Hostname.c_str(),
-                        RaceTable[unauthed->Race].Name );
+                ch->Echo(" %s@%s new %s...\r\n",
+                         unauthed->Name.c_str(),
+                         unauthed->Desc->Remote.Hostname.c_str(),
+                         RaceTable[unauthed->Race].Name);
             }
         }
-      
-      return;
+
+        return;
     }
 
-  Character *victim = get_waiting_desc( ch, arg1 );
+    auto victim = get_waiting_desc(ch, arg1);
 
-  if ( victim == NULL )
-    return;
+    if(victim == NULL)
+        return;
 
-  if ( arg2.empty() || !StrCmp( arg2, "accept" ) || !StrCmp( arg2, "yes" ))
+    if(arg2.empty() || !StrCmp(arg2, "accept") || !StrCmp(arg2, "yes"))
     {
-      victim->PCData->AuthState = 3;
-      victim->PCData->Flags.reset( Flag::PCData::Unauthed );
+        victim->PCData->AuthState = 3;
+        victim->PCData->Flags.reset(Flag::PCData::Unauthed);
 
-      victim->PCData->AuthedBy = ch->Name;
-      sprintf( buf, "%s authorized %s", ch->Name.c_str(),
-               victim->Name.c_str() );
-      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
-      ch->Echo( "You have authorized %s.\r\n", victim->Name.c_str());
+        victim->PCData->AuthedBy = ch->Name;
+        sprintf(buf, "%s authorized %s", ch->Name.c_str(),
+                victim->Name.c_str());
+        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel);
+        ch->Echo("You have authorized %s.\r\n", victim->Name.c_str());
 
-      victim->Echo("The MUD Administrators have accepted the name %s.\r\n"
-                   "You are now fully authorized to play Rise in Power.\r\n",
-                   victim->Name.c_str());
+        victim->Echo("The MUD Administrators have accepted the name %s.\r\n"
+                     "You are now fully authorized to play Rise in Power.\r\n",
+                     victim->Name.c_str());
     }
-  else if ( !StrCmp( arg2, "no" ) || !StrCmp( arg2, "deny" ) )
+    else if(!StrCmp(arg2, "no") || !StrCmp(arg2, "deny"))
     {
-      victim->Echo( "You have been denied access.\r\n" );
-      sprintf( buf, "%s denied authorization to %s", ch->Name.c_str(),
-               victim->Name.c_str() );
-      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
-      ch->Echo( "You have denied %s.\r\n", victim->Name.c_str());
-      do_quit(victim, "");
+        victim->Echo("You have been denied access.\r\n");
+        sprintf(buf, "%s denied authorization to %s", ch->Name.c_str(),
+                victim->Name.c_str());
+        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel);
+        ch->Echo("You have denied %s.\r\n", victim->Name.c_str());
+        do_quit(victim, "");
     }
-  else if ( !StrCmp( arg2, "name" ) || !StrCmp(arg2, "n" ) )
+    else if(!StrCmp(arg2, "name") || !StrCmp(arg2, "n"))
     {
-      sprintf( buf, "%s has denied %s's name", ch->Name.c_str(),
-               victim->Name.c_str() );
-      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
-      victim->Echo("The MUD Administrators have found the name %s "
-                   "to be unacceptable.\r\n"
-                   "Use 'name' to change it to something more apropriate.\r\n",
-                   victim->Name.c_str());
-      ch->Echo( "You requested %s change names.\r\n", victim->Name.c_str());
-      victim->PCData->AuthState = 2;
+        sprintf(buf, "%s has denied %s's name", ch->Name.c_str(),
+                victim->Name.c_str());
+        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel);
+        victim->Echo("The MUD Administrators have found the name %s "
+                     "to be unacceptable.\r\n"
+                     "Use 'name' to change it to something more apropriate.\r\n",
+                     victim->Name.c_str());
+        ch->Echo("You requested %s change names.\r\n", victim->Name.c_str());
+        victim->PCData->AuthState = 2;
     }
-  else
+    else
     {
-      ch->Echo("Invalid argument.\r\n");
+        ch->Echo("Invalid argument.\r\n");
     }
 }
 
 /*
  * Check if the name prefix uniquely identifies a char descriptor
  */
-static Character *get_waiting_desc( const std::shared_ptr<Character> ch, const std::string &name )
+static std::shared_ptr<Character> get_waiting_desc(const std::shared_ptr<Character> ch, const std::string &name)
 {
-  Character *ret_char = nullptr;
-  unsigned int number_of_hits = 0;
+    std::shared_ptr<Character> ret_char;
+    unsigned int number_of_hits = 0;
 
-  for(Character *victim : PlayerCharacters->Entities())
+    for(auto victim : PlayerCharacters)
     {
-      if(IsWaitingForAuth(victim) && !StringPrefix(name, victim->Name))
+        if(IsWaitingForAuth(victim) && !StringPrefix(name, victim->Name))
         {
-          if ( ++number_of_hits > 1 )
+            if(++number_of_hits > 1)
             {
-              ch->Echo( "%s does not uniquely identify a char.\r\n", name.c_str() );
-              return nullptr;
+                ch->Echo("%s does not uniquely identify a char.\r\n", name.c_str());
+                return nullptr;
             }
         }
 
-      ret_char = victim;
+        ret_char = victim;
     }
-  
-  if ( number_of_hits==1 )
+
+    if(number_of_hits == 1)
     {
-      return ret_char;
+        return ret_char;
     }
-  else
+    else
     {
-      ch->Echo( "No one like that waiting for authorization.\r\n" );
-      return nullptr;
+        ch->Echo("No one like that waiting for authorization.\r\n");
+        return nullptr;
     }
 }
 

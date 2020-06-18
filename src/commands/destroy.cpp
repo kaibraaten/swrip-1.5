@@ -19,8 +19,8 @@
 namespace fs = std::filesystem;
 
 static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name);
-static void ExtractVictim(Character *victim);
-static Character *GetVictimInWorld(const std::string &name);
+static void ExtractVictim(std::shared_ptr<Character> victim);
+static std::shared_ptr<Character> GetVictimInWorld(const std::string &name);
 
 class RemoveResident
 {
@@ -72,7 +72,7 @@ void do_destroy(std::shared_ptr<Character> ch, std::string victimName)
         return;
     }
 
-    Character *victim = GetVictimInWorld(victimName);
+    auto victim = GetVictimInWorld(victimName);
 
     if (!victim)
     {
@@ -131,25 +131,25 @@ static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name)
     }
 }
 
-static void ExtractVictim(Character *victim)
+static void ExtractVictim(std::shared_ptr<Character> victim)
 {
     quitting_char = victim;
     PlayerCharacters->Save(victim);
-    saving_char = NULL;
+    saving_char.reset();
     ExtractCharacter(victim, true);
 
     for (int x = 0; x < MAX_WEAR; x++)
     {
         for (int y = 0; y < MAX_LAYERS; y++)
         {
-            save_equipment[x][y] = NULL;
+            save_equipment[x][y].reset();
         }
     }
 }
 
-static Character *GetVictimInWorld(const std::string &name)
+static std::shared_ptr<Character> GetVictimInWorld(const std::string &name)
 {
-    for (Character *victim = FirstCharacter; victim; victim = victim->Next)
+    for (auto victim = FirstCharacter; victim; victim = victim->Next)
     {
         if (!IsNpc(victim) && !StrCmp(victim->Name, name))
         {

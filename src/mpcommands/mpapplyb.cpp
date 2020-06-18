@@ -8,7 +8,7 @@
 
 void do_mpapplyb(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
 
     if(!IsNpc(ch))
     {

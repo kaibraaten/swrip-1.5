@@ -10,7 +10,7 @@ void do_transfer(std::shared_ptr<Character> ch, std::string argument)
     std::string arg1;
     std::string arg2;
     std::shared_ptr<Room> location;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);

@@ -8,9 +8,8 @@ extern std::string spell_target_name;
 
 ch_ret spell_farsight(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Skill> skill = GetSkill(sn);
-    int saving = 0;
 
     /* The spell fails if the victim isn't playing, the victim is the caster,
        the target room has private, solitary, noastral, death or proto flags,
@@ -19,7 +18,7 @@ ch_ret spell_farsight(int sn, int level, std::shared_ptr<Character> ch, const Vo
        flag on the caster is not the same as on the victim.  Got it?
     */
 
-    saving = GetRandomPercent();
+    int saving = GetRandomPercent();
 
     if((victim = GetCharacterAnywhere(ch, spell_target_name)) == NULL
        || victim == ch

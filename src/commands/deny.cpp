@@ -1,36 +1,36 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_deny( std::shared_ptr<Character> ch, std::string arg )
+void do_deny(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
-    if ( arg.empty() )
+    if(arg.empty())
     {
-        ch->Echo( "Deny whom?\r\n" );
+        ch->Echo("Deny whom?\r\n");
         return;
     }
 
-    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
-        ch->Echo( "They aren't here.\r\n" );
+        ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
-        ch->Echo( "Not on NPC's.\r\n" );
+        ch->Echo("Not on NPC's.\r\n");
         return;
     }
 
-    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if(GetTrustLevel(victim) >= GetTrustLevel(ch))
     {
-        ch->Echo( "You failed.\r\n" );
+        ch->Echo("You failed.\r\n");
         return;
     }
 
     victim->Flags.set(Flag::Plr::Deny);
-    victim->Echo( "You are denied access!\r\n" );
-    ch->Echo( "OK.\r\n" );
-    do_quit( victim, "" );
+    victim->Echo("You are denied access!\r\n");
+    ch->Echo("OK.\r\n");
+    do_quit(victim, "");
 }

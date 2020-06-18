@@ -76,7 +76,7 @@ void do_split(std::shared_ptr<Character> ch, std::string arg)
     sprintf(buf, "$n splits %d credits. Your share is %d credits.",
             amount, share);
 
-    for(Character *gch : ch->InRoom->Characters())
+    for(auto gch : ch->InRoom->Characters())
     {
         if(gch != ch && IsInSameGroup(gch, ch))
         {

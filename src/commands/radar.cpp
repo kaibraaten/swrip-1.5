@@ -13,7 +13,7 @@
 
 struct ShowShipData
 {
-    const std::shared_ptr<Character> ch;
+    std::shared_ptr<Character> ch;
     std::shared_ptr<Ship> ship;
 };
 

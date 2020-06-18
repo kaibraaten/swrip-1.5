@@ -92,9 +92,9 @@ struct Vo;
 /*
  * Function types.
  */
-using CmdFun = void(Character *ch, std::string argument);
-using SpecFun = bool(Character *ch);
-using SpellFun = ch_ret(int sn, int level, Character *ch, const Vo &vo);
+using CmdFun = void(std::shared_ptr<Character> ch, std::string argument);
+using SpecFun = bool(std::shared_ptr<Character> ch);
+using SpellFun = ch_ret(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo);
 
 using vnum_t = long;
 using LogType = int;

@@ -4,7 +4,7 @@
 
 ch_ret spell_flamestrike(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = vo.Ch;
+    std::shared_ptr<Character> victim = vo.Ch;
     int dam = 0;
 
     ch->Echo("You feel the hatred grow within you!\r\n");

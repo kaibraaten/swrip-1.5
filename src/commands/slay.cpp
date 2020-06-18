@@ -4,7 +4,7 @@
 
 void do_slay(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::string arg;
     std::string arg2;
 

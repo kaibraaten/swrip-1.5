@@ -12,7 +12,7 @@
 ch_ret spell_affect(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
     std::shared_ptr<Skill> skill = GetSkill(sn);
-    Character *victim = vo.Ch;
+    std::shared_ptr<Character> victim = vo.Ch;
     bool groupsp = false;
     bool areasp = false;
     bool hitchar = false, hitroom = false, hitvict = false;
@@ -132,10 +132,10 @@ ch_ret spell_affect(int sn, int level, std::shared_ptr<Character> ch, const Vo &
         return rSPELL_FAILED;
     }
 
-    std::list<Character *>::const_iterator begin = find(std::cbegin(victim->InRoom->Characters()),
-                                                        std::cend(victim->InRoom->Characters()),
-                                                        victim);
-    std::list<Character *>::const_iterator end = std::cend(victim->InRoom->Characters());
+    auto begin = find(std::cbegin(victim->InRoom->Characters()),
+                      std::cend(victim->InRoom->Characters()),
+                      victim);
+    auto end = std::cend(victim->InRoom->Characters());
 
     for(auto i = begin; i != end; ++i)
     {

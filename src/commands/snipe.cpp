@@ -16,7 +16,7 @@ void do_snipe(std::shared_ptr<Character> ch, std::string argument)
     short dist = 0;
     short max_dist = 1;
     std::shared_ptr<Exit> pexit;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     int the_chance = 0;
     char buf[MAX_STRING_LENGTH];
     bool pfound = false;

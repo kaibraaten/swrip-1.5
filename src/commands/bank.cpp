@@ -3,136 +3,136 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_bank( std::shared_ptr<Character> ch, std::string argument )
+void do_bank(std::shared_ptr<Character> ch, std::string argument)
 {
-  std::string arg1;
-  std::string arg2;
-  std::string arg3;
-  long amount = 0;
-  Character *victim = nullptr;
+    std::string arg1;
+    std::string arg2;
+    std::string arg3;
+    long amount = 0;
+    std::shared_ptr<Character> victim;
 
-  argument = OneArgument( argument , arg1 );
-  argument = OneArgument( argument , arg2 );
-  argument = OneArgument( argument , arg3 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
+    argument = OneArgument(argument, arg3);
 
-  if ( IsNpc(ch) || !ch->PCData )
+    if(IsNpc(ch) || !ch->PCData)
     {
-      return;
-    }
-  
-  if ( !IsAuthed(ch) )
-    {
-      ch->Echo("You can not access your bank account until after you've graduated from the academy.\r\n");
-      return;
+        return;
     }
 
-  if ( !HasComlink( ch ) )
+    if(!IsAuthed(ch))
     {
-      if (!ch->InRoom->Flags.test( Flag::Room::Bank ) )
-	{
-          ch->Echo( "You must be in a bank or have a comlink to do that!\r\n" );
-          return;
-        }
+        ch->Echo("You can not access your bank account until after you've graduated from the academy.\r\n");
+        return;
     }
 
-  if ( arg1.empty() )
+    if(!HasComlink(ch))
     {
-      ch->Echo( "Usage: BANK <deposit|withdraw|balance|transfer> [amount] [receivee]\r\n" );
-      return;
-    }
-
-  if ( !arg2.empty() )
-    {
-      amount = strtol( arg2.c_str(), nullptr, 10 );
-    }
-  
-  if ( !StringPrefix( arg1 , "deposit" ) )
-    {
-      if ( amount <= 0 )
+        if(!ch->InRoom->Flags.test(Flag::Room::Bank))
         {
-          ch->Echo( "You may only deposit amounts greater than zero.\r\n" );
-          do_bank( ch , "" );
-          return;
+            ch->Echo("You must be in a bank or have a comlink to do that!\r\n");
+            return;
         }
-
-      if ( ch->Gold < amount )
-        {
-          ch->Echo( "You don't have that many credits on you.\r\n" );
-          return;
-        }
-
-      ch->Gold -= amount;
-      ch->PCData->Bank += amount;
-
-      ch->Echo( "You deposit %ld credits into your account.\r\n", amount );
-      return;
     }
-  else if ( !StringPrefix( arg1 , "withdraw" ) )
+
+    if(arg1.empty())
     {
-      if ( amount <= 0 )
-        {
-          ch->Echo( "You may only withdraw amounts greater than zero.\r\n" );
-          do_bank( ch , "" );
-          return;
-        }
-
-      if ( ch->PCData->Bank < amount )
-        {
-          ch->Echo( "You don't have that many credits in your account.\r\n" );
-          return;
-        }
-
-      ch->Gold += amount;
-      ch->PCData->Bank -= amount;
-
-      ch->Echo( "You withdraw %ld credits from your account.\r\n", amount );
-      return;
+        ch->Echo("Usage: BANK <deposit|withdraw|balance|transfer> [amount] [receivee]\r\n");
+        return;
     }
-  else if ( !StringPrefix( arg1 , "balance" ) )
+
+    if(!arg2.empty())
     {
-      ch->Echo( "You have %ld credits in your account.\r\n", ch->PCData->Bank );
-      return;
+        amount = strtol(arg2.c_str(), nullptr, 10);
     }
-  else if ( !StringPrefix( arg1 , "transfer" ) )
+
+    if(!StringPrefix(arg1, "deposit"))
     {
-      if( ( ( victim = GetCharacterAnywhere(ch, arg3) ) == NULL ))
+        if(amount <= 0)
         {
-          ch->Echo("No such player online.\r\n");
-          return;
+            ch->Echo("You may only deposit amounts greater than zero.\r\n");
+            do_bank(ch, "");
+            return;
         }
 
-      if( ( IsNpc(victim)))
+        if(ch->Gold < amount)
         {
-          ch->Echo("No such player online.\r\n");
-          return;
+            ch->Echo("You don't have that many credits on you.\r\n");
+            return;
         }
 
-      if ( amount <= 0 )
-        {
-          ch->Echo( "You may only transfer amounts greater than zero.\r\n" );
-          do_bank( ch , "" );
-          return;
-        }
+        ch->Gold -= amount;
+        ch->PCData->Bank += amount;
 
-      if ( ch->PCData->Bank < amount )
-        {
-          ch->Echo( "You don't have that many credits in your account.\r\n" );
-          return;
-        }
-
-      ch->PCData->Bank -= amount;
-      victim->PCData->Bank += amount;
-
-      ch->Echo( "You transfer %ld credits to %s's account.\r\n",
-                amount, victim->Name.c_str() );
-      victim->Echo( "%s transfers %ld credits to your account.\r\n",
-                    ch->Name.c_str(), amount);
-      return;
+        ch->Echo("You deposit %ld credits into your account.\r\n", amount);
+        return;
     }
-  else
+    else if(!StringPrefix(arg1, "withdraw"))
     {
-      do_bank( ch , "" );
-      return;
+        if(amount <= 0)
+        {
+            ch->Echo("You may only withdraw amounts greater than zero.\r\n");
+            do_bank(ch, "");
+            return;
+        }
+
+        if(ch->PCData->Bank < amount)
+        {
+            ch->Echo("You don't have that many credits in your account.\r\n");
+            return;
+        }
+
+        ch->Gold += amount;
+        ch->PCData->Bank -= amount;
+
+        ch->Echo("You withdraw %ld credits from your account.\r\n", amount);
+        return;
+    }
+    else if(!StringPrefix(arg1, "balance"))
+    {
+        ch->Echo("You have %ld credits in your account.\r\n", ch->PCData->Bank);
+        return;
+    }
+    else if(!StringPrefix(arg1, "transfer"))
+    {
+        if(((victim = GetCharacterAnywhere(ch, arg3)) == NULL))
+        {
+            ch->Echo("No such player online.\r\n");
+            return;
+        }
+
+        if((IsNpc(victim)))
+        {
+            ch->Echo("No such player online.\r\n");
+            return;
+        }
+
+        if(amount <= 0)
+        {
+            ch->Echo("You may only transfer amounts greater than zero.\r\n");
+            do_bank(ch, "");
+            return;
+        }
+
+        if(ch->PCData->Bank < amount)
+        {
+            ch->Echo("You don't have that many credits in your account.\r\n");
+            return;
+        }
+
+        ch->PCData->Bank -= amount;
+        victim->PCData->Bank += amount;
+
+        ch->Echo("You transfer %ld credits to %s's account.\r\n",
+                 amount, victim->Name.c_str());
+        victim->Echo("%s transfers %ld credits to your account.\r\n",
+                     ch->Name.c_str(), amount);
+        return;
+    }
+    else
+    {
+        do_bank(ch, "");
+        return;
     }
 }
 

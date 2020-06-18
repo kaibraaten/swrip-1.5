@@ -7,7 +7,7 @@
 
 void do_hell(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     std::string arg;
     short hell_time = 0;
     bool h_d = false;

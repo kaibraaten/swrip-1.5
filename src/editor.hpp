@@ -5,10 +5,10 @@
 #include <string>
 #include "types.hpp"
 
-void SetEditorDesc(Character *ch, const char *desc_fmt, ...);
-void StartEditing(Character *ch, const std::string &old_text,
+void SetEditorDesc(std::shared_ptr<Character> ch, const char *desc_fmt, ...);
+void StartEditing(std::shared_ptr<Character> ch, const std::string &old_text,
                   std::function<void(const std::string &)> onSave);
-void StopEditing(Character *ch);
-void EditBuffer(Character *ch, std::string argument);
+void StopEditing(std::shared_ptr<Character> ch);
+void EditBuffer(std::shared_ptr<Character> ch, std::string argument);
 
 #endif

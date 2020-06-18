@@ -52,7 +52,7 @@
 /*  Warm reboot stuff, gotta make sure to thank Erwin for this :) */
 extern socket_t control;                /* Controlling descriptor       */
 
-void do_copyover(Character * ch, std::string argument)
+void do_copyover(std::shared_ptr<Character> ch, std::string argument)
 {
     char buf[100];
     FILE *fp = fopen(COPYOVER_FILE, "w");
@@ -60,7 +60,7 @@ void do_copyover(Character * ch, std::string argument)
     char buf3[100];
     char filename[256];
 
-    if (!fp)
+    if(!fp)
     {
         ch->Echo("Copyover file not writeable, aborted.\r\n");
         Log->Bug("Could not write to copyover file: %s", COPYOVER_FILE);
@@ -73,14 +73,14 @@ void do_copyover(Character * ch, std::string argument)
     /* For each playing descriptor, save its state */
     auto descriptors(Descriptors->Entities());
 
-    for (auto d : descriptors)
+    for(auto d : descriptors)
     {
-        Character *och = d->Original ? d->Original : d->Character;
+        std::shared_ptr<Character> och = d->Original ? d->Original : d->Character;
 
-        if (!d->Character || d->ConnectionState != CON_PLAYING)  /* drop those logging on */
+        if(!d->Character || d->ConnectionState != CON_PLAYING)  /* drop those logging on */
         {
             WriteToDescriptor(d.get(), "\r\nSorry, we are rebooting."
-                " Come back in a few minutes.\r\n", 0);
+                              " Come back in a few minutes.\r\n", 0);
             CloseDescriptor(d, false);  /* throw'em out */
         }
         else
@@ -88,7 +88,7 @@ void do_copyover(Character * ch, std::string argument)
             socket_t cur_desc = d->Socket;
 
             fprintf(fp, "%d %d %s %s %s\n", cur_desc, 0,
-                och->Name.c_str(), d->Remote.HostIP.c_str(), d->Remote.Hostname.c_str());
+                    och->Name.c_str(), d->Remote.HostIP.c_str(), d->Remote.Hostname.c_str());
             PlayerCharacters->Save(och);
             WriteToDescriptor(d.get(), buf, 0);
         }
@@ -111,7 +111,7 @@ void do_copyover(Character * ch, std::string argument)
 #define _execl execl
 
     _execl(filename, filename,
-        buf, "copyover", buf2, buf3, NULL);
+           buf, "copyover", buf2, buf3, NULL);
 
     /* Failed - sucessful exec will not return */
     perror("do_copyover: execl");
@@ -135,7 +135,7 @@ void RecoverFromCopyover()
 
     fp = fopen(COPYOVER_FILE, "r");
 
-    if (!fp)
+    if(!fp)
     {
         perror("RecoverFromCopyover:fopen");
         Log->Bug("Copyover file not found. Exitting.\r\n");
@@ -144,11 +144,11 @@ void RecoverFromCopyover()
 
     remove(COPYOVER_FILE);      /* In case something crashes
                                      - doesn't prevent reading */
-    for (;; )
+    for(;; )
     {
         fscanf(fp, "%d %d %s %s %s\n", &desc, &use_mccp, name, ip, host);
 
-        if (desc == -1 || feof(fp))
+        if(desc == -1 || feof(fp))
         {
             break;
         }
@@ -158,7 +158,7 @@ void RecoverFromCopyover()
         d->Remote.HostIP = ip;
 
         /* Write something, and check if it goes error-free */
-        if (!WriteToDescriptor(d.get(), "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0))
+        if(!WriteToDescriptor(d.get(), "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0))
         {
             Log->Bug("RecoverFromCopyover: couldn't write to socket %d", desc);
             FreeDescriptor(d);
@@ -171,11 +171,11 @@ void RecoverFromCopyover()
         /* Now, find the pfile */
         fOld = PlayerCharacters->Load(d, name, false);
 
-        if (!fOld)               /* Player file not found?! */
+        if(!fOld)               /* Player file not found?! */
         {
             WriteToDescriptor(d.get(),
-                "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
-                0);
+                              "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
+                              0);
             CloseDescriptor(d, false);
         }
         else                      /* ok! */
@@ -184,7 +184,7 @@ void RecoverFromCopyover()
 
             /* Just In Case,  Someone said this isn't necassary, but _why_
                do we want to dump someone in limbo? */
-            if (!d->Character->InRoom)
+            if(!d->Character->InRoom)
                 d->Character->InRoom = GetRoom(ROOM_VNUM_SCHOOL);
 
             /* Insert in the char_list */
@@ -196,7 +196,7 @@ void RecoverFromCopyover()
             {
                 Homes->Load(home);
             }
-            
+
             CharacterToRoom(d->Character, d->Character->InRoom);
             do_look(d->Character, "auto noprog");
 
@@ -204,7 +204,7 @@ void RecoverFromCopyover()
                 ActTarget::Room);
             d->ConnectionState = CON_PLAYING;
 
-            if (++num_descriptors > SysData.MaxPlayersEver)
+            if(++num_descriptors > SysData.MaxPlayersEver)
             {
                 SysData.MaxPlayersEver = num_descriptors;
             }

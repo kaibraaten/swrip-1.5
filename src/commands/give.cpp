@@ -8,7 +8,7 @@
 #include "repos/vendorrepository.hpp"
 #include "act.hpp"
 
-static bool IsPlayerVendor(const Character *keeper)
+static bool IsPlayerVendor(std::shared_ptr<Character> keeper)
 {
     return IsNpc(keeper)
         && keeper->Prototype->Shop != nullptr
@@ -20,7 +20,7 @@ void do_give(std::shared_ptr<Character> ch, std::string argument)
     std::string arg1;
     std::string arg2;
     char buf[MAX_INPUT_LENGTH];
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Object> obj;
 
     argument = OneArgument(argument, arg1);

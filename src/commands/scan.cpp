@@ -7,7 +7,7 @@
 #include "exit.hpp"
 #include "act.hpp"
 
-void show_char_to_char(const std::list<Character *> &list, std::shared_ptr<Character> ch);
+void show_char_to_char(const std::list<std::shared_ptr<Character>> &list, std::shared_ptr<Character> ch);
 
 void do_scan(std::shared_ptr<Character> ch, std::string argument)
 {

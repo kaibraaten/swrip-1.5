@@ -1,35 +1,35 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_silence( std::shared_ptr<Character> ch, std::string arg )
+void do_silence(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
-    if ( arg.empty() )
+    if(arg.empty())
     {
-        ch->Echo("Silence whom?");
+        ch->Echo("Silence whom?\r\n");
         return;
     }
 
-    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
         ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
         ch->Echo("Not on NPC's.\r\n");
         return;
     }
 
-    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+    if(GetTrustLevel(victim) >= GetTrustLevel(ch))
     {
         ch->Echo("You failed.\r\n");
         return;
     }
 
-    if (victim->Flags.test(Flag::Plr::Silence))
+    if(victim->Flags.test(Flag::Plr::Silence))
     {
         ch->Echo("Player already silenced, use unsilence to remove.\r\n");
     }

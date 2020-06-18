@@ -19,11 +19,11 @@
  *                        Alias module                                      *
  ****************************************************************************/
 
-/******************************************************
-            Desolation of the Dragon MUD II
-      (C) 1997, 1998  Jesse DeFer and Heath Leach
- http://dotd.mudservices.com  dotd@dotd.mudservices.com
- ******************************************************/
+ /******************************************************
+             Desolation of the Dragon MUD II
+       (C) 1997, 1998  Jesse DeFer and Heath Leach
+  http://dotd.mudservices.com  dotd@dotd.mudservices.com
+  ******************************************************/
 
 #include <utility/algorithms.hpp>
 #include <cstring>
@@ -33,122 +33,121 @@
 #include "pcdata.hpp"
 #include "alias.hpp"
 
-std::shared_ptr<Alias> FindAlias( const Character *ch, const std::string &argument )
+std::shared_ptr<Alias> FindAlias(std::shared_ptr<Character> ch, const std::string &argument)
 {
-  std::string alias_name;
+    std::string alias_name;
 
-  if (!ch || !ch->PCData)
+    if(!ch || !ch->PCData)
     {
-      return nullptr;
+        return nullptr;
     }
 
-  OneArgument(argument, alias_name);
+    OneArgument(argument, alias_name);
 
-  auto alias = Find(ch->PCData->Aliases(),
-                    [alias_name](auto a)
-                    {
-                      return StringPrefix(alias_name, a->Name) == 0;
-                    });
+    auto alias = Find(ch->PCData->Aliases(),
+                      [alias_name](auto a)
+                      {
+                          return StringPrefix(alias_name, a->Name) == 0;
+                      });
 
-  return alias;
+    return alias;
 }
 
-std::shared_ptr<Alias> AllocateAlias( const std::string &name, const std::string &command )
+std::shared_ptr<Alias> AllocateAlias(const std::string &name, const std::string &command)
 {
-  std::shared_ptr<Alias> alias = std::make_shared<Alias>();
-  alias->Name = name;
-  alias->Command = command;
+    std::shared_ptr<Alias> alias = std::make_shared<Alias>();
+    alias->Name = name;
+    alias->Command = command;
 
-  return alias;
+    return alias;
 }
 
-void FreeAliases( Character *ch )
+void FreeAliases(std::shared_ptr<Character> ch)
 {
-  assert(ch != nullptr);
-  
-  if (IsNpc(ch))
+    assert(ch != nullptr);
+
+    if(IsNpc(ch))
     {
-      return;
+        return;
     }
 
-  while(!ch->PCData->Aliases().empty())
+    while(!ch->PCData->Aliases().empty())
     {
-      auto alias = ch->PCData->Aliases().front();
-      ch->PCData->Remove(alias);
+        auto alias = ch->PCData->Aliases().front();
+        ch->PCData->Remove(alias);
     }
 }
 
-bool CheckAlias( Character *ch, const std::string &command, const std::string &argument )
+bool CheckAlias(std::shared_ptr<Character> ch, const std::string &command, const std::string &argument)
 {
-  char arg[MAX_INPUT_LENGTH] = {'\0'};
-  bool nullarg = true;
+    char arg[MAX_INPUT_LENGTH] = { '\0' };
+    bool nullarg = true;
 
-  if ( !argument.empty() )
+    if(!argument.empty())
     {
-      nullarg = false;
+        nullarg = false;
     }
 
-  auto alias = FindAlias(ch, command);
+    auto alias = FindAlias(ch, command);
 
-  if(alias == nullptr)
+    if(alias == nullptr)
     {
-      return false;
+        return false;
     }
 
-  if ( alias->Command.empty() )
+    if(alias->Command.empty())
     {
-      return false;
+        return false;
     }
 
-  sprintf(arg, "%s", alias->Command.c_str());
+    sprintf(arg, "%s", alias->Command.c_str());
 
-  if (ch->CmdRecurse == -1 || ++ch->CmdRecurse > 50)
+    if(ch->CmdRecurse == -1 || ++ch->CmdRecurse > 50)
     {
-      if (ch->CmdRecurse != -1)
+        if(ch->CmdRecurse != -1)
         {
-          ch->Echo("Unable to further process command, recurses too much.\r\n");
-          ch->CmdRecurse = -1;
+            ch->Echo("Unable to further process command, recurses too much.\r\n");
+            ch->CmdRecurse = -1;
         }
 
-      return false;
+        return false;
     }
 
-  if ( !argument.empty() && !nullarg)
+    if(!argument.empty() && !nullarg)
     {
-      strcat(arg, " ");
-      strcat(arg, argument.c_str());
+        strcat(arg, " ");
+        strcat(arg, argument.c_str());
     }
 
-  Interpret(ch, arg);
-  return true;
+    Interpret(ch, arg);
+    return true;
 }
 
-void AddAlias( Character *ch, std::shared_ptr<Alias> alias )
+void AddAlias(std::shared_ptr<Character> ch, std::shared_ptr<Alias> alias)
 {
-  if(IsNpc(ch))
+    if(IsNpc(ch))
     {
-      return;
+        return;
     }
-  
-  bool alreadyExists = Find(ch->PCData->Aliases(),
-                            [alias](auto a)
-                            {
-                              return StrCmp(alias->Name, a->Name) == 0;
-                            }) ? true : false;
 
-  if( !alreadyExists )
+    bool alreadyExists = Find(ch->PCData->Aliases(),
+                              [alias](auto a)
+                              {
+                                  return StrCmp(alias->Name, a->Name) == 0;
+                              }) ? true : false;
+
+    if(!alreadyExists)
     {
-      ch->PCData->Add(alias);
+        ch->PCData->Add(alias);
     }
 }
 
-void UnlinkAlias( Character *ch, std::shared_ptr<Alias> alias )
+void UnlinkAlias(std::shared_ptr<Character> ch, std::shared_ptr<Alias> alias)
 {
-  if(IsNpc(ch))
+    if(IsNpc(ch))
     {
-      return;
+        return;
     }
-  
-  ch->PCData->Remove(alias);
-}
 
+    ch->PCData->Remove(alias);
+}

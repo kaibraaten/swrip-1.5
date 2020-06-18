@@ -6,11 +6,11 @@
 #include "log.hpp"
 #include "act.hpp"
 
-static bool AffParalysis(std::shared_ptr<Character> ch, Character *victim);
+static bool AffParalysis(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 
 void do_bind(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
     if(argument.empty())
     {
@@ -74,7 +74,7 @@ void do_bind(std::shared_ptr<Character> ch, std::string argument)
     LearnFromSuccess(ch, gsn_bind);
 }
 
-static bool AffParalysis(std::shared_ptr<Character> ch, Character *victim)
+static bool AffParalysis(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
 

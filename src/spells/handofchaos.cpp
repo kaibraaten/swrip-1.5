@@ -5,7 +5,7 @@
 
 ch_ret spell_hand_of_chaos(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = vo.Ch;
+    std::shared_ptr<Character> victim = vo.Ch;
     int dam = 0;
 
     level = umax(0, level);

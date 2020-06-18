@@ -143,12 +143,13 @@ void CloseArea(std::shared_ptr<Area> pArea)
     std::shared_ptr<ProtoMobile> mid;
     std::shared_ptr<ProtoMobile> mid_next;
 
-    for(Character *ech = FirstCharacter, *ech_next; ech; ech = ech_next)
+    for(std::shared_ptr<Character>  ech = FirstCharacter, ech_next; ech; ech = ech_next)
     {
         ech_next = ech->Next;
 
         if(ech->Fighting)
             StopFighting(ech, true);
+
         if(IsNpc(ech))
         {
             /* if mob is in area, or part of area. */
@@ -200,9 +201,9 @@ void CloseArea(std::shared_ptr<Area> pArea)
             {
                 Log->Bug("CloseArea: room with people #%ld", rid->Vnum);
 
-                std::list<Character *> copyOfCharacterList(rid->Characters());
+                auto copyOfCharacterList = rid->Characters();
 
-                for(Character *ech : copyOfCharacterList)
+                for(auto ech : copyOfCharacterList)
                 {
                     if(ech->Fighting)
                         StopFighting(ech, true);
@@ -384,7 +385,7 @@ static void CopyVnumRanges(const SourceT &source, TargetT &target)
     target.Mob.Last = source.Mob.Last;
 }
 
-void AssignAreaTo(Character *ch)
+void AssignAreaTo(std::shared_ptr<Character> ch)
 {
     if(IsNpc(ch))
     {

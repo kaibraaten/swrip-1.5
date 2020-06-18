@@ -4,11 +4,11 @@
 #include "spaceobject.hpp"
 #include "character.hpp"
 
-void do_resetship(Character* ch, std::string argument)
+void do_resetship(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Ship> ship = GetShipAnywhere(argument);
 
-    if (ship == NULL)
+    if(ship == NULL)
     {
         ch->Echo("&RNo such ship!");
         return;
@@ -16,12 +16,12 @@ void do_resetship(Character* ch, std::string argument)
 
     ResetShip(ship);
 
-    if ((ship->Class == SHIP_PLATFORM || ship->Type == MOB_SHIP || ship->Class == CAPITAL_SHIP)
-        && !ship->Home.empty())
+    if((ship->Class == SHIP_PLATFORM || ship->Type == MOB_SHIP || ship->Class == CAPITAL_SHIP)
+       && !ship->Home.empty())
     {
         ShipToSpaceobject(ship, GetSpaceobject(ship->Home));
 
-        if (ship->Spaceobject)
+        if(ship->Spaceobject)
         {
             CopyVector(ship->Position, ship->Spaceobject->Position);
         }

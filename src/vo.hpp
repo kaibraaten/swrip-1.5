@@ -13,7 +13,7 @@ struct Vo
 
     }
 
-    Vo(Character *ch)
+    Vo(std::shared_ptr<Character> ch)
         : Ch(ch)
     {
 
@@ -31,7 +31,7 @@ struct Vo
 
     }
 
-    Vo(Character *ch, std::shared_ptr<Object> obj)
+    Vo(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
         : Ch(ch), Obj(obj)
     {
 
@@ -45,10 +45,13 @@ struct Vo
 
     bool IsNull() const
     {
-        return Ch == nullptr && Obj == nullptr && Room == nullptr && IntPtr == nullptr;
+        return Ch == nullptr
+            && Obj == nullptr
+            && Room == nullptr
+            && IntPtr == nullptr;
     }
 
-    Character *Ch = nullptr;
+    std::shared_ptr<Character> Ch;
     std::shared_ptr<Object> Obj;
     std::shared_ptr<class Room> Room;
     int *IntPtr = nullptr;

@@ -5,7 +5,7 @@
 
 ch_ret spell_know_alignment(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = vo.Ch;
+    std::shared_ptr<Character> victim = vo.Ch;
     const char *msg = nullptr;
     int ap = 0;
     std::shared_ptr<Skill> skill = GetSkill(sn);

@@ -74,7 +74,7 @@ void FixAreaExits(std::shared_ptr<Area> tarea);
 void AreaUpdate();
 void CloseArea(std::shared_ptr<Area> pArea);
 void FreeArea(std::shared_ptr<Area> are);
-void AssignAreaTo(Character *ch);
+void AssignAreaTo(std::shared_ptr<Character> ch);
 void CleanResets(std::shared_ptr<Area> tarea);
 
 #endif

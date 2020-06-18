@@ -4,7 +4,7 @@
 
 ch_ret spell_lightning_bolt(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = vo.Ch;
+    std::shared_ptr<Character> victim = vo.Ch;
     static const short dam_each[] =
     {
       1,
@@ -36,4 +36,3 @@ ch_ret spell_lightning_bolt(int sn, int level, std::shared_ptr<Character> ch, co
 
     return InflictDamage(ch, victim, dam, sn);
 }
-

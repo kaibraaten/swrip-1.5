@@ -7,7 +7,7 @@
 
 ch_ret spell_charm_person(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = vo.Ch;
+    std::shared_ptr<Character> victim = vo.Ch;
     std::shared_ptr<Affect> af = std::make_shared<Affect>();
     int charm_chance = 0;
     char buf[MAX_STRING_LENGTH] = { '\0' };

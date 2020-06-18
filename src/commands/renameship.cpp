@@ -6,13 +6,13 @@
 #include "room.hpp"
 #include "repos/shiprepository.hpp"
 
-void do_renameship(Character* ch, std::string argument)
+void do_renameship(std::shared_ptr<Character> ch, std::string argument)
 {
     constexpr auto COST_TO_RENAME = 50000;
 
     std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);
-    
-    if (ship == nullptr)
+
+    if(ship == nullptr)
     {
         ch->Echo("You must be in the cockpit of a ship to do that!\r\n");
         return;
@@ -20,23 +20,23 @@ void do_renameship(Character* ch, std::string argument)
 
     std::shared_ptr<Clan> clan = GetClan(ship->Owner);
 
-    if (clan == nullptr || StrCmp(clan->Leadership.Leader, ch->Name))
+    if(clan == nullptr || StrCmp(clan->Leadership.Leader, ch->Name))
     {
-        if (StrCmp(ship->Owner, ch->Name))
+        if(StrCmp(ship->Owner, ch->Name))
         {
             ch->Echo("&RImperial Database: &WYou do not own this ship.\r\n");
             return;
         }
     }
 
-    if (GetShipAnywhere(argument) != NULL)
+    if(GetShipAnywhere(argument) != NULL)
     {
         ch->Echo("&RImperial Database: &WA ship of that name already exists.\r\n");
         return;
     }
 
 
-    if (ch->Gold < COST_TO_RENAME)
+    if(ch->Gold < COST_TO_RENAME)
     {
         ch->Echo("&RImperial Database: &WYou do not have enough credits for this request.\r\n");
         return;

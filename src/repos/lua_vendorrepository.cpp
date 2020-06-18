@@ -24,9 +24,9 @@ class LuaVendorRepository : public VendorRepository
 public:
     void Load() override;
     void Save() const override;
-    void Save(const Character *vendor) const override;
-    bool HasVendor(const Character *pc) const override;
-    void RemoveVendor(Character *pc) const override;
+    void Save(std::shared_ptr<Character> vendor) const override;
+    bool HasVendor(std::shared_ptr<Character> pc) const override;
+    void RemoveVendor(std::shared_ptr<Character> pc) const override;
 };
 
 
@@ -45,28 +45,28 @@ void LuaVendorRepository::Save() const
 
 }
 
-void LuaVendorRepository::Save(const Character *vendor) const
+void LuaVendorRepository::Save(std::shared_ptr<Character> vendor) const
 {
     assert(vendor != nullptr);
     assert(IsNpc(vendor));
 
-    DeEquipCharacter(const_cast<Character *>(vendor));
+    DeEquipCharacter(vendor);
 
     LuaSaveDataFile(GetVendorFilename(vendor->Owner),
                     PushVendor,
-                    "vendor", vendor);
+                    "vendor", vendor.get());
 
-    ReEquipCharacter(const_cast<Character *>(vendor));
+    ReEquipCharacter(vendor);
 }
 
-bool LuaVendorRepository::HasVendor(const Character *pc) const
+bool LuaVendorRepository::HasVendor(std::shared_ptr<Character> pc) const
 {
     auto filename = GetVendorFilename(pc->Name);
     std::error_code ec;
     return fs::exists(filename, ec);
 }
 
-void LuaVendorRepository::RemoveVendor(Character *pc) const
+void LuaVendorRepository::RemoveVendor(std::shared_ptr<Character> pc) const
 {
     auto filename = GetVendorFilename(pc->Name);
     std::error_code ec;
@@ -135,7 +135,7 @@ static int L_VendorEntry(lua_State *L)
 
         /* the following code is to make sure no more than one player owned vendor
            is in the room - meckteck */
-        std::list<Character *> charactersInRoom(mob->InRoom->Characters());
+        std::list<std::shared_ptr<Character> > charactersInRoom(mob->InRoom->Characters());
 
         for(auto victim : charactersInRoom)
         {
@@ -164,7 +164,7 @@ static int L_VendorEntry(lua_State *L)
 
 static void PushVendor(lua_State *L, const void *userData)
 {
-    auto vendor = static_cast<const Character *>(userData);
+    auto vendor = reinterpret_cast<const Character*>(userData);
 
     lua_pushinteger(L, 1);
     lua_newtable(L);

@@ -7,7 +7,7 @@
 void do_invite(std::shared_ptr<Character> ch, std::string argument)
 {
     auto home = ch->InRoom;
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
     if(!home->Flags.test(Flag::Room::PlayerHome)
        || !Homes->IsResidentOf(ch->Name, home->Vnum))

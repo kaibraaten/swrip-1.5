@@ -5,8 +5,7 @@
 
 ch_ret spell_harm(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = vo.Ch;
-    int dam = 0;
+    std::shared_ptr<Character> victim = vo.Ch;
     std::shared_ptr<Skill> skill = GetSkill(sn);
 
     if(victim->Immune.test(Flag::Ris::Magic))
@@ -21,7 +20,7 @@ ch_ret spell_harm(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo
     ApplySithPenalty(ch);
 
 
-    dam = umax(20, victim->HitPoints.Current - RollDice(1, 4));
+    int dam = umax(20, victim->HitPoints.Current - RollDice(1, 4));
 
     if(SaveVsSpellStaff(level, victim))
         dam = umin(50, dam / 4);
@@ -32,4 +31,3 @@ ch_ret spell_harm(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo
 
     return InflictDamage(ch, victim, dam, sn);
 }
-

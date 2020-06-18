@@ -18,20 +18,21 @@ enum class ActTarget
 
 struct ActArg
 {
+	ActArg(std::nullptr_t) { }
     ActArg(const std::string &str) : Str(str) { }
     ActArg(std::shared_ptr<Object> obj) : Obj(obj) { }
-    ActArg(Character *ch) : Ch(ch) { }
+    ActArg(std::shared_ptr<Character> ch) : Ch(ch) { }
     bool IsNull() const
     {
         return Str.empty() && Obj == nullptr && Ch == nullptr;
     }
     std::string Str;
     std::shared_ptr<Object> Obj;
-    Character *Ch = nullptr;
+	std::shared_ptr<Character> Ch;
 };
 
 /*
-void Act(short AType, const std::string &format, Character *ch,
+void Act(short AType, const std::string &format, std::shared_ptr<Character> ch,
 		 const ActArg &arg1, const ActArg &arg2, ActTarget type)
 
 	short AType;
@@ -45,7 +46,7 @@ void Act(short AType, const std::string &format, Character *ch,
 	by '$' (just as 'printf' introduces its formatting sequences with '%').
 	Typically this is a complete sentence with a subject and an object.
 
-	CHAR_DATA *ch;
+	std::shared_ptr<Character> ch;
 
 	This is the subject of the sentence.
 
@@ -139,7 +140,7 @@ Here are all the '$' sequences supported by 'act':
 	keyword lists.
 */
 
-void Act(short AType, const std::string &format, Character *ch,
+void Act(short AType, const std::string &format, std::shared_ptr<Character> ch,
          const ActArg &arg1, const ActArg &arg2, ActTarget type);
 
 #endif

@@ -21,7 +21,6 @@ void do_get(std::shared_ptr<Character> ch, std::string argument)
     short number = 0;
     bool found = false;
     bool foundowner = false;
-    Character *p = NULL, *p_prev = NULL;
 
     argument = OneArgument(argument, arg1);
 
@@ -73,7 +72,7 @@ void do_get(std::shared_ptr<Character> ch, std::string argument)
     {
         if(!Homes->IsResidentOf(ch->Name, ch->InRoom->Vnum))
         {
-            for(p = LastCharacter; p; p = p_prev)
+            for(std::shared_ptr<Character> p = LastCharacter, p_prev; p; p = p_prev)
             {
                 p_prev = p->Previous;
 

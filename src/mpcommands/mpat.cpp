@@ -8,12 +8,11 @@ void do_mpat(std::shared_ptr<Character> ch, std::string argument)
     std::string arg;
     std::shared_ptr<Room> location;
     std::shared_ptr<Room> original;
-    Character *wch = nullptr;
 
-    if (IsAffectedBy(ch, Flag::Affect::Charm))
+    if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
-    if (!IsNpc(ch))
+    if(!IsNpc(ch))
     {
         ch->Echo("Huh?\r\n");
         return;
@@ -21,13 +20,13 @@ void do_mpat(std::shared_ptr<Character> ch, std::string argument)
 
     argument = OneArgument(argument, arg);
 
-    if (arg.empty() || argument.empty())
+    if(arg.empty() || argument.empty())
     {
         ProgBug("Mpat - Bad argument", ch);
         return;
     }
 
-    if ((location = FindLocation(ch, arg)) == NULL)
+    if((location = FindLocation(ch, arg)) == NULL)
     {
         ProgBug("Mpat - No such location", ch);
         return;
@@ -42,9 +41,9 @@ void do_mpat(std::shared_ptr<Character> ch, std::string argument)
      * See if 'ch' still exists before continuing!
      * Handles 'at XXXX quit' case.
      */
-    for (wch = FirstCharacter; wch; wch = wch->Next)
+    for(auto wch = FirstCharacter; wch; wch = wch->Next)
     {
-        if (wch == ch)
+        if(wch == ch)
         {
             CharacterFromRoom(ch);
             CharacterToRoom(ch, original);

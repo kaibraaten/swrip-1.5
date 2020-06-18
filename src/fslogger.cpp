@@ -34,12 +34,12 @@ void FileSystemLogger::Bug(const char *str, ...)
     FILE *fp = NULL;
     struct stat fst;
 
-    if (fpArea != NULL)
+    if(fpArea != NULL)
     {
         int iLine = 0;
         int iChar = 0;
 
-        if (fpArea == stdin)
+        if(fpArea == stdin)
         {
             iLine = 0;
         }
@@ -48,9 +48,9 @@ void FileSystemLogger::Bug(const char *str, ...)
             iChar = ftell(fpArea);
             fseek(fpArea, 0, 0);
 
-            for (iLine = 0; ftell(fpArea) < iChar; iLine++)
+            for(iLine = 0; ftell(fpArea) < iChar; iLine++)
             {
-                while (getc(fpArea) != '\n')
+                while(getc(fpArea) != '\n')
                     ;
             }
 
@@ -60,9 +60,9 @@ void FileSystemLogger::Bug(const char *str, ...)
         sprintf(buf, "[*****] FILE: %s LINE: %d", strArea, iLine);
         Log->Info("%s", buf);
 
-        if (stat(SHUTDOWN_FILE, &fst) != -1)  /* file exists */
+        if(stat(SHUTDOWN_FILE, &fst) != -1)  /* file exists */
         {
-            if ((fp = fopen(SHUTDOWN_FILE, "a")) != NULL)
+            if((fp = fopen(SHUTDOWN_FILE, "a")) != NULL)
             {
                 fprintf(fp, "[*****] %s\n", buf);
                 fclose(fp);
@@ -79,7 +79,7 @@ void FileSystemLogger::Bug(const char *str, ...)
 
     Log->Info("%s", buf);
 
-    if ((fp = fopen(BUG_FILE, "a")) != NULL)
+    if((fp = fopen(BUG_FILE, "a")) != NULL)
     {
         fprintf(fp, "%s\n", buf);
         fclose(fp);
@@ -98,7 +98,7 @@ void FileSystemLogger::Boot(const char *str, ...)
     va_end(param);
     Log->Info("%s", buf);
 
-    if ((fp = fopen(BOOTLOG_FILE, "a")) != NULL)
+    if((fp = fopen(BOOTLOG_FILE, "a")) != NULL)
     {
         fprintf(fp, "%s\n", buf);
         fclose(fp);
@@ -115,13 +115,13 @@ void FileSystemLogger::LogStringPlus(const std::string &str, short log_type, sho
     strtime[strlen(strtime) - 1] = '\0';
     fprintf(stderr, "%s :: %s\n", strtime, str.c_str());
 
-    if (Descriptors == nullptr)
+    if(Descriptors == nullptr)
     {
         // Repository hasn't been allocated yet.
         return;
     }
 
-    if (strncmp(str.c_str(), "Log ", 4) == 0)
+    if(strncmp(str.c_str(), "Log ", 4) == 0)
     {
         offset = 4;
     }
@@ -132,7 +132,7 @@ void FileSystemLogger::LogStringPlus(const std::string &str, short log_type, sho
 
     sprintf(buf, "%s&R&w", str.c_str() + offset);
 
-    switch (log_type)
+    switch(log_type)
     {
     case LOG_BUILD:
         ToChannel(buf, CHANNEL_BUILD, "Build", level);
@@ -151,27 +151,27 @@ void FileSystemLogger::LogStringPlus(const std::string &str, short log_type, sho
         break;
     }
 
-    if (lognone)
+    if(lognone)
     {
-        for (auto d : Descriptors)
+        for(auto d : Descriptors)
         {
-            Character *och = d->Original ? d->Original : d->Character;
-            Character *vch = d->Character;
+            auto och = d->Original ? d->Original : d->Character;
+            auto vch = d->Character;
 
-            if (!och || !vch)
+            if(!och || !vch)
             {
                 continue;
             }
 
-            if ((vch->TopLevel < SysData.LevelOfLogChannel)
-                || (vch->TopLevel < level))
+            if((vch->TopLevel < SysData.LevelOfLogChannel)
+               || (vch->TopLevel < level))
             {
                 continue;
             }
 
-            if (d->ConnectionState == CON_PLAYING
-                && !IsBitSet(och->Deaf, CHANNEL_LOG)
-                && vch->TopLevel >= level)
+            if(d->ConnectionState == CON_PLAYING
+               && !IsBitSet(och->Deaf, CHANNEL_LOG)
+               && vch->TopLevel >= level)
             {
                 SetCharacterColor(AT_LOG, vch);
                 vch->Echo("Log: %s&R&w\r\n", str.c_str() + offset);

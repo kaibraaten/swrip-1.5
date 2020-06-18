@@ -27,7 +27,7 @@
 
 std::string HelpGreeting;
 
-std::shared_ptr<HelpFile> GetHelpFile(const Character *ch, std::string argument)
+std::shared_ptr<HelpFile> GetHelpFile(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string argall;
     std::string argone;

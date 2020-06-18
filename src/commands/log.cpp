@@ -1,19 +1,19 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_log( std::shared_ptr<Character> ch, std::string arg )
+void do_log(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
 
-    if ( arg.empty() )
+    if(arg.empty())
     {
         ch->Echo("Log whom?\r\n");
         return;
     }
 
-    if ( !StrCmp( arg, "all" ) )
+    if(!StrCmp(arg, "all"))
     {
-        if ( fLogAll )
+        if(fLogAll)
         {
             fLogAll = false;
             ch->Echo("Log ALL off.\r\n");
@@ -26,13 +26,13 @@ void do_log( std::shared_ptr<Character> ch, std::string arg )
         return;
     }
 
-    if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
         ch->Echo("They aren't here.\r\n");
         return;
     }
 
-    if ( IsNpc(victim) )
+    if(IsNpc(victim))
     {
         ch->Echo("Not on NPC's.\r\n");
         return;
@@ -41,7 +41,7 @@ void do_log( std::shared_ptr<Character> ch, std::string arg )
     /*
      * No level check, gods can log anyone.
      */
-    if (victim->Flags.test(Flag::Plr::Log))
+    if(victim->Flags.test(Flag::Plr::Log))
     {
         victim->Flags.reset(Flag::Plr::Log);
         ch->Echo("LOG removed.\r\n");

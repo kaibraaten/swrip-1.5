@@ -32,10 +32,10 @@ void show_char_to_char(const std::list<Character *> &list, std::shared_ptr<Chara
 
 static void LookThroughShipWindow(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
 static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, void *userData);
-static void show_char_to_char_0(Character *victim, std::shared_ptr<Character> ch);
-static void show_char_to_char_1(Character *victim, std::shared_ptr<Character> ch);
+static void show_char_to_char_0(std::shared_ptr<Character> victim, std::shared_ptr<Character> ch);
+static void show_char_to_char_1(std::shared_ptr<Character> victim, std::shared_ptr<Character> ch);
 static void show_ships_to_char(std::shared_ptr<Room> room, const std::shared_ptr<Character> ch);
-static void show_visible_affects_to_char(Character *victim, std::shared_ptr<Character> ch);
+static void show_visible_affects_to_char(std::shared_ptr<Character> victim, std::shared_ptr<Character> ch);
 static void show_exit_to_char(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit, short door);
 static void show_no_arg(std::shared_ptr<Character> ch, bool is_auto);
 
@@ -49,7 +49,7 @@ void do_look(std::shared_ptr<Character> ch, std::string argument)
     std::string arg1;
     std::string arg2;
     std::string arg3;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     std::string pdesc;
     bool doexaprog = false;
     DirectionType door = DIR_INVALID;
@@ -241,7 +241,7 @@ void do_look(std::shared_ptr<Character> ch, std::string argument)
     ch->Echo("You do not see that here.\r\n");
 }
 
-static void show_char_to_char_0(Character *victim, std::shared_ptr<Character> ch)
+static void show_char_to_char_0(std::shared_ptr<Character> victim, std::shared_ptr<Character> ch)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char buf1[MAX_STRING_LENGTH] = { '\0' };
@@ -544,7 +544,7 @@ static void show_char_to_char_0(Character *victim, std::shared_ptr<Character> ch
     show_visible_affects_to_char(victim, ch);
 }
 
-static void show_char_to_char_1(Character *victim, std::shared_ptr<Character> ch)
+static void show_char_to_char_1(std::shared_ptr<Character> victim, std::shared_ptr<Character> ch)
 {
     std::shared_ptr<Object> obj;
     int iWear = 0;
@@ -643,9 +643,9 @@ static void show_ships_to_char(std::shared_ptr<Room> room, const std::shared_ptr
     }
 }
 
-void show_char_to_char(const std::list<Character *> &list, std::shared_ptr<Character> ch)
+void show_char_to_char(const std::list<std::shared_ptr<Character>> &list, std::shared_ptr<Character> ch)
 {
-    for(Character *rch : list)
+    for(auto rch : list)
     {
         if(rch == ch)
             continue;
@@ -668,7 +668,7 @@ void show_char_to_char(const std::list<Character *> &list, std::shared_ptr<Chara
     }
 }
 
-static void show_visible_affects_to_char(Character *victim, std::shared_ptr<Character> ch)
+static void show_visible_affects_to_char(std::shared_ptr<Character> victim, std::shared_ptr<Character> ch)
 {
     char buf[MAX_STRING_LENGTH];
 

@@ -71,14 +71,14 @@ static float CostEquation(std::shared_ptr<Object> obj)
 /*
  * Shopping commands.
  */
-Character *FindKeeper(const Character *ch)
+std::shared_ptr<Character> FindKeeper(std::shared_ptr<Character> ch)
 {
     return FindKeeperQ(ch, true);
 }
 
-Character *FindKeeperQ(const Character *ch, bool message)
+std::shared_ptr<Character> FindKeeperQ(std::shared_ptr<Character> ch, bool message)
 {
-    Character *keeper = nullptr;
+    std::shared_ptr<Character> keeper;
     std::shared_ptr<Shop> pShop;
 
     for(auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
@@ -141,9 +141,9 @@ Character *FindKeeperQ(const Character *ch, bool message)
 /*
  * repair commands.
  */
-Character *FindFixer(const Character *ch)
+std::shared_ptr<Character> FindFixer(std::shared_ptr<Character> ch)
 {
-    Character *keeper = NULL;
+    std::shared_ptr<Character> keeper;
     std::shared_ptr<RepairShop> rShop;
 
     for(auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
@@ -186,7 +186,7 @@ Character *FindFixer(const Character *ch)
     return keeper;
 }
 
-int GetObjectCost(const Character *ch, const Character *keeper, std::shared_ptr<Object> obj, bool fBuy)
+int GetObjectCost(std::shared_ptr<Character> ch, std::shared_ptr<Character> keeper, std::shared_ptr<Object> obj, bool fBuy)
 {
     std::shared_ptr<Shop> pShop;
     int cost = 0;
@@ -262,7 +262,7 @@ int GetObjectCost(const Character *ch, const Character *keeper, std::shared_ptr<
     return cost;
 }
 
-int GetRepairCost(const Character *keeper, std::shared_ptr<Object> obj)
+int GetRepairCost(std::shared_ptr<Character> keeper, std::shared_ptr<Object> obj)
 {
     std::shared_ptr<RepairShop> rShop;
     int cost = 0;
@@ -337,7 +337,7 @@ int GetRepairCost(const Character *keeper, std::shared_ptr<Object> obj)
     return cost;
 }
 
-void SaveVendor(Character *ch)
+void SaveVendor(std::shared_ptr<Character> ch)
 {
     Vendors->Save(ch);
 }

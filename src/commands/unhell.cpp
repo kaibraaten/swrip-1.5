@@ -7,7 +7,7 @@
 
 void do_unhell(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
 
     if(arg.empty())
     {

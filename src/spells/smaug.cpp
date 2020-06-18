@@ -14,7 +14,6 @@ ch_ret spell_smaug(int sn, int level, std::shared_ptr<Character> ch, const Vo &v
     switch(skill->Target)
     {
     case TAR_IGNORE:
-
         /* offensive area spell */
         if(SPELL_FLAG(skill, SF_AREA)
            && ((SPELL_ACTION(skill) == SA_DESTROY
@@ -55,11 +54,10 @@ ch_ret spell_smaug(int sn, int level, std::shared_ptr<Character> ch, const Vo &v
         return spell_affect(sn, level, ch, vo);
 
     case TAR_CHAR_DEFENSIVE:
-
     case TAR_CHAR_SELF:
         if(!vo.IsNull() && SPELL_ACTION(skill) == SA_DESTROY)
         {
-            Character *victim = vo.Ch;
+            std::shared_ptr<Character> victim = vo.Ch;
 
             /* cure poison */
             if(SPELL_DAMAGE(skill) == SD_POISON)
@@ -94,4 +92,3 @@ ch_ret spell_smaug(int sn, int level, std::shared_ptr<Character> ch, const Vo &v
     }
     return rNONE;
 }
-

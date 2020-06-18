@@ -11,8 +11,7 @@
 
 void do_jail(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = NULL;
-    Clan *clan = NULL;
+    std::shared_ptr<Character> victim;
     std::string arg;
     short jail_time = 0;
     bool h_d = false;
@@ -29,6 +28,7 @@ void do_jail(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+    auto clan = ch->PCData->ClanInfo.Clan;
     auto jail = GetRoom(clan->Jail);
 
     if(!jail && clan->MainClan)

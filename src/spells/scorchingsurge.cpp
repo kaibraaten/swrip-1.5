@@ -5,7 +5,7 @@
 
 ch_ret spell_scorching_surge(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *victim = vo.Ch;
+    std::shared_ptr<Character> victim = vo.Ch;
     static const short dam_each[] =
     {
       1,
@@ -17,7 +17,6 @@ ch_ret spell_scorching_surge(int sn, int level, std::shared_ptr<Character> ch, c
       132, 134, 136, 138, 140,          142, 144, 146, 148, 150,
       152, 154, 156, 158, 160,          162, 164, 166, 168, 170
     };
-    int dam;
 
     ch->Echo("You feel the hatred grow within you!\r\n");
     ch->Alignment = ch->Alignment - 100;
@@ -26,7 +25,7 @@ ch_ret spell_scorching_surge(int sn, int level, std::shared_ptr<Character> ch, c
 
     level = umin(level / 2, sizeof(dam_each) / sizeof(dam_each[0]) - 1);
     level = umax(0, level);
-    dam = GetRandomNumberFromRange(dam_each[level], dam_each[level] * 10);
+    int dam = GetRandomNumberFromRange(dam_each[level], dam_each[level] * 10);
 
     if(SaveVsSpellStaff(level, victim))
         dam /= 2;

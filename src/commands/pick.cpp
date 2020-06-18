@@ -41,7 +41,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
     SetWaitState(ch, SkillTable[gsn_pick_lock]->Beats);
 
     /* look for guards */
-    for(Character *gch : ch->InRoom->Characters())
+    for(auto gch : ch->InRoom->Characters())
     {
         if(IsNpc(gch) && IsAwake(gch) && GetAbilityLevel(ch, SMUGGLING_ABILITY) < gch->TopLevel)
         {
@@ -186,7 +186,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
 
             for(auto d : Descriptors->Entities())
             {
-                const Character *victim = d->Original ? d->Original : d->Character;
+                auto victim = d->Original ? d->Original : d->Character;
 
                 if(d->ConnectionState != CON_PLAYING)
                     continue;
@@ -241,7 +241,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
 
             for(auto d : Descriptors->Entities())
             {
-                const Character *victim = d->Original ? d->Original : d->Character;
+                auto victim = d->Original ? d->Original : d->Character;
 
                 if(d->ConnectionState != CON_PLAYING)
                     continue;

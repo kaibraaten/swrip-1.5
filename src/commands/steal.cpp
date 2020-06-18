@@ -12,7 +12,7 @@ void do_steal(std::shared_ptr<Character> ch, std::string argument)
     char buf[MAX_STRING_LENGTH];
     std::string arg1;
     std::string arg2;
-    Character *victim = NULL, *mst = NULL;
+    std::shared_ptr<Character> victim, mst;
     std::shared_ptr<Object> obj, obj_next;
     int percent = 0, xp = 0;
 

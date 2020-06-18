@@ -19,15 +19,15 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-/* IMC2 Freedom Client - Developed by Mud Domain.
- *
- * Copyright 2004-2008 by Roger Libiez ( Samson )
- * Contributions by Johnathan Walker ( Xorith ), Copyright 2004
- * Additional contributions by Jesse Defer ( Garil ), Copyright 2004
- * Additional contributions by Rogel, Copyright 2004
- * Comments and suggestions welcome: http://www.mudbytes.net/imc2-support-forum
- * License terms are available in the imc2freedom.license file.
- */
+ /* IMC2 Freedom Client - Developed by Mud Domain.
+  *
+  * Copyright 2004-2008 by Roger Libiez ( Samson )
+  * Contributions by Johnathan Walker ( Xorith ), Copyright 2004
+  * Additional contributions by Jesse Defer ( Garil ), Copyright 2004
+  * Additional contributions by Rogel, Copyright 2004
+  * Comments and suggestions welcome: http://www.mudbytes.net/imc2-support-forum
+  * License terms are available in the imc2freedom.license file.
+  */
 
 #ifndef _SWRIP_IMC2_HPP_
 #define _SWRIP_IMC2_HPP_
@@ -40,20 +40,20 @@ using IMC_CHARDATA = imcchar_data;  /* Player flags     */
 
 extern SiteInfo *this_imcmud;
 
-bool ImcCommandHook( Character * ch, const std::string &command,
-                     const std::string &argument );
-void ImcCopyover( void );
-void ImcStartup( bool force, socket_t desc, bool connected );
-void ImcShutdown( bool reconnect );
-void ImcInitializeCharacter( Character * ch );
-bool ImcLoadCharacter( Character * ch, FILE * fp, const std::string &word );
-void ImcSaveCharacter( const Character * ch, FILE * fp );
-void ImcFreeCharacter( Character * ch );
-void ImcLoop( void );
-socket_t ImcGetSocket( SiteInfo* );
+bool ImcCommandHook(std::shared_ptr<Character> ch, const std::string &command,
+                    const std::string &argument);
+void ImcCopyover(void);
+void ImcStartup(bool force, socket_t desc, bool connected);
+void ImcShutdown(bool reconnect);
+void ImcInitializeCharacter(std::shared_ptr<Character> ch);
+//bool ImcLoadCharacter(std::shared_ptr<Character> ch, FILE *fp, const std::string &word);
+//void ImcSaveCharacter(std::shared_ptr<Character> ch, FILE *fp);
+void ImcFreeCharacter(std::shared_ptr<Character> ch);
+void ImcLoop();
+socket_t ImcGetSocket(SiteInfo *);
 
 struct lua_State;
-void ImcSaveCharacter( lua_State *L, const Character *ch );
-void ImcLoadCharacter( lua_State *L, Character *ch );
+void ImcSaveCharacter(lua_State *L, std::shared_ptr<Character> ch);
+void ImcLoadCharacter(lua_State *L, std::shared_ptr<Character> ch);
 
 #endif

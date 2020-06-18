@@ -8,8 +8,6 @@
 
 ch_ret spell_earthquake(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo)
 {
-    Character *vch = NULL;
-    Character *vch_next = NULL;
     bool ch_died = false;
     ch_ret retcode = rNONE;
     std::shared_ptr<Skill> skill = GetSkill(sn);
@@ -29,7 +27,7 @@ ch_ret spell_earthquake(int sn, int level, std::shared_ptr<Character> ch, const 
     Act(AT_MAGIC, "The earth trembles beneath your feet!", ch, NULL, NULL, ActTarget::Char);
     Act(AT_MAGIC, "$n makes the earth tremble and shiver.", ch, NULL, NULL, ActTarget::Room);
 
-    for(vch = FirstCharacter; vch; vch = vch_next)
+    for(std::shared_ptr<Character> vch = FirstCharacter, vch_next; vch; vch = vch_next)
     {
         vch_next = vch->Next;
 

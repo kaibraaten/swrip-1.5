@@ -8,7 +8,7 @@
 void do_minvoke(std::shared_ptr<Character> ch, std::string arg)
 {
     std::shared_ptr<ProtoMobile> pMobIndex;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     vnum_t vnum = INVALID_VNUM;
 
     if(arg.empty())

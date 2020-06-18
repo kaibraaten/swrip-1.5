@@ -7,13 +7,13 @@
 #include "room.hpp"
 #include "act.hpp"
 
-static bool IsOwnerOf(const Character *owner, const Character *pet)
+static bool IsOwnerOf(std::shared_ptr<Character> owner, std::shared_ptr<Character> pet)
 {
     return owner->PCData != nullptr
         && owner->PCData->Pet == pet;
 }
 
-static bool CanGiveOrderTo(const Character *leader, const Character *follower)
+static bool CanGiveOrderTo(std::shared_ptr<Character> leader, std::shared_ptr<Character> follower)
 {
     return (IsAffectedBy(follower, Flag::Affect::Charm)
             && follower->Master == leader)
@@ -23,7 +23,7 @@ static bool CanGiveOrderTo(const Character *leader, const Character *follower)
 void do_order(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
-    Character *victim = NULL;
+    std::shared_ptr<Character> victim;
     bool fAll = false;
     std::string argbuf = argument;
 
@@ -72,16 +72,16 @@ void do_order(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    std::list<Character *> charactersToOrder = Filter(ch->InRoom->Characters(),
-                                                      [ch, fAll, victim](auto och)
-                                                      {
-                                                          return CanGiveOrderTo(ch, och)
-                                                              && (fAll || och == victim);
-                                                      });
+    auto charactersToOrder = Filter(ch->InRoom->Characters(),
+                                    [ch, fAll, victim](auto och)
+                                    {
+                                        return CanGiveOrderTo(ch, och)
+                                            && (fAll || och == victim);
+                                    });
 
     if(!charactersToOrder.empty())
     {
-        for(Character *och : charactersToOrder)
+        for(auto och : charactersToOrder)
         {
             Act(AT_ACTION, "$n orders you to '$t'.",
                 ch, argument, och, ActTarget::Vict);

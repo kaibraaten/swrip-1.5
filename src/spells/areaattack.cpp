@@ -41,9 +41,9 @@ ch_ret spell_area_attack(int sn, int level, std::shared_ptr<Character> ch, const
         Act(AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, ActTarget::Room);
     }
 
-    std::list<Character *> charactersToAttack(ch->InRoom->Characters());
+    auto charactersToAttack = ch->InRoom->Characters();
 
-    for(Character *vch : charactersToAttack)
+    for(auto vch : charactersToAttack)
     {
         if(!IsNpc(vch) && vch->Flags.test(Flag::Plr::WizInvis)
            && vch->PCData->WizInvis >= LEVEL_IMMORTAL)

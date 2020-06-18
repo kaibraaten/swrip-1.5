@@ -7,7 +7,7 @@
 
 void do_remresident(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     auto home = Homes->FindByVnum(ch->InRoom->Vnum);
 
     if(home == nullptr || StrCmp(home->Owner(), ch->Name) != 0)

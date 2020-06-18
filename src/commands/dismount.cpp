@@ -7,7 +7,7 @@
 
 void do_dismount(std::shared_ptr<Character> ch, std::string argument)
 {
-    Character *victim = ch->Mount;
+    auto victim = ch->Mount;
 
     if(victim == nullptr)
     {

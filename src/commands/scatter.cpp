@@ -6,7 +6,7 @@
 
 void do_scatter(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Room> pRoomIndex;
 
     SetCharacterColor(AT_IMMORT, ch);

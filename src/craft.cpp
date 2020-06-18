@@ -64,7 +64,7 @@ public:
     Ceris::Event<FinishedCraftingEventArgs *> OnFinishedCrafting;
     Ceris::Event<AbortCraftingEventArgs *> OnAbort;
 
-    Character *Engineer = nullptr;
+    std::shared_ptr<Character> Engineer;
     CraftRecipe *Recipe = nullptr;
     FoundMaterial *FoundMaterials = nullptr;
     std::string CommandArgument;
@@ -95,7 +95,7 @@ CraftingMaterial::CraftingMaterial(ItemTypes type,
 
 }
 
-void do_craftingengine(Character *ch, std::string argument)
+void do_craftingengine(std::shared_ptr<Character> ch, std::string argument)
 {
     assert(!IsNpc(ch));
 
@@ -122,7 +122,7 @@ void do_craftingengine(Character *ch, std::string argument)
 static void AfterDelay(CraftingSession *session)
 {
     CraftRecipe *recipe = session->Recipe;
-    Character *ch = session->Engineer;
+    std::shared_ptr<Character> ch = session->Engineer;
     int the_chance = ch->PCData->Learned[recipe->Skill];
     bool hasMaterials = CheckMaterials(session, true);
     int level = ch->PCData->Learned[recipe->Skill];
@@ -162,7 +162,7 @@ static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *e
 {
     CraftingSession *session = eventArgs->CraftingSession;
     FinishedCraftingUserData *data = (FinishedCraftingUserData *)userData;
-    Character *ch = GetEngineer(session);
+    auto ch = GetEngineer(session);
     std::string itemType = GetItemTypeNameExtended(eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE]);
     char actBuf[MAX_STRING_LENGTH];
     long xpgain = 0;
@@ -186,7 +186,7 @@ static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *e
 
 static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args)
 {
-    Character *ch = GetEngineer(args->CraftingSession);
+    auto ch = GetEngineer(args->CraftingSession);
 
     if(args->CraftingSession->Recipe->Flags.test(Flag::Crafting::NeedsWorkshop)
        && !CheckRoomFlag(ch->InRoom, Flag::Room::Factory))
@@ -205,7 +205,7 @@ static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs 
 
 static void AbortSession(CraftingSession *session)
 {
-    Character *ch = session->Engineer;
+    auto ch = session->Engineer;
     AbortCraftingEventArgs abortEventArgs;
 
     ch->SubState = SUB_NONE;
@@ -218,7 +218,7 @@ static void AbortSession(CraftingSession *session)
     FreeCraftingSession(session);
 }
 
-Character *GetEngineer(const CraftingSession *session)
+std::shared_ptr<Character> GetEngineer(const CraftingSession *session)
 {
     return session->Engineer;
 }
@@ -285,7 +285,7 @@ static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMater
     return foundMaterials;
 }
 
-CraftingSession *AllocateCraftingSession(CraftRecipe *recipe, Character *engineer,
+CraftingSession *AllocateCraftingSession(CraftRecipe *recipe, std::shared_ptr<Character> engineer,
                                          const std::string &commandArgument)
 {
     CraftingSession *session = new CraftingSession();
@@ -320,7 +320,7 @@ void FreeCraftingSession(CraftingSession *session)
 
 static bool CheckSkillLevel(const CraftingSession *session)
 {
-    Character *ch = session->Engineer;
+    auto ch = session->Engineer;
     int the_chance = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[session->Recipe->Skill]);
 
     if(GetRandomPercent() >= the_chance)
@@ -335,7 +335,7 @@ static bool CheckSkillLevel(const CraftingSession *session)
 
 void StartCrafting(CraftingSession *session)
 {
-    Character *ch = session->Engineer;
+    auto ch = session->Engineer;
     InterpretArgumentsEventArgs interpretArgumentsEventArgs;
     CheckRequirementsEventArgs checkRequirementsEventArgs;
 
@@ -378,7 +378,7 @@ void StartCrafting(CraftingSession *session)
 
 static bool CheckMaterials(CraftingSession *session, bool extract)
 {
-    Character *ch = GetEngineer(session);
+    std::shared_ptr<Character> ch = GetEngineer(session);
     bool foundAll = true;
     FoundMaterial *material = NULL;
 
@@ -509,7 +509,7 @@ void AddAbortCraftingHandler(CraftingSession *session, void *userData,
     session->OnAbort.Add(userData, handler);
 }
 
-bool IsCrafting(const Character *ch)
+bool IsCrafting(std::shared_ptr<Character> ch)
 {
     return ch->PCData->CraftingSession != nullptr;
 }

@@ -6,7 +6,7 @@
 
 void do_zap(std::shared_ptr<Character> ch, std::string arg)
 {
-    Character *victim = nullptr;
+    std::shared_ptr<Character> victim;
     std::shared_ptr<Object> wand;
     std::shared_ptr<Object> obj;
     ch_ret retcode = rNONE;

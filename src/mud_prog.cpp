@@ -84,7 +84,7 @@ bool MOBtrigger = false;
 /*
  *  Mudprogram additions
  */
-Character *supermob = nullptr;
+std::shared_ptr<Character> supermob;
 static std::list<std::shared_ptr<act_prog_data>> room_act_list;
 static std::list<std::shared_ptr<act_prog_data>> obj_act_list;
 static std::list<std::shared_ptr<act_prog_data>> mob_act_list;
@@ -92,30 +92,30 @@ static std::list<std::shared_ptr<act_prog_data>> mob_act_list;
 /*
  * Local function prototypes
  */
-static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
-                            std::shared_ptr<Object> obj, const Vo &vo, Character *rndm,
+static int MudProgDoCommand(char *cmnd, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+                            std::shared_ptr<Object> obj, const Vo &vo, std::shared_ptr<Character> rndm,
                             bool ignore, bool ignore_ors);
 static char *MudProgNextCommand(char *clist);
-static bool MudProgCompareStrings(const std::string &lhs, const std::string &opr, const std::string &rhs, Character *mob);
-static bool MudProgCompareNumbers(int lhs, const std::string &opr, int rhs, Character *mob);
-static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Character *actor,
-                            std::shared_ptr<Object> obj, const Vo &vo, Character *rndm);
-static void MudProgTranslate(char ch, char *t, Character *mob,
-                             Character *actor, std::shared_ptr<Object> obj,
-                             const Vo &vo, Character *rndm);
-static void MudProgDriver(std::string com_list, Character *mob,
-                          Character *actor, std::shared_ptr<Object> obj,
+static bool MudProgCompareStrings(const std::string &lhs, const std::string &opr, const std::string &rhs, std::shared_ptr<Character> mob);
+static bool MudProgCompareNumbers(int lhs, const std::string &opr, int rhs, std::shared_ptr<Character> mob);
+static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+                            std::shared_ptr<Object> obj, const Vo &vo, std::shared_ptr<Character> rndm);
+static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob,
+                             std::shared_ptr<Character> actor, std::shared_ptr<Object> obj,
+                             const Vo &vo, std::shared_ptr<Character> rndm);
+static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob,
+                          std::shared_ptr<Character> actor, std::shared_ptr<Object> obj,
                           const Vo &vo, bool single_step);
 static bool MudProgKeywordCheck(const std::string &argu, const std::string &argl);
-static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
+static void ObjProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                                  std::shared_ptr<Object> obj, const Vo &vo,
                                  int type, std::shared_ptr<Object> iobj);
 static void MudProgSetSupermob(std::shared_ptr<Object> obj);
-static bool ObjProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj, const Vo &vo, int type);
-static void RoomProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj, const Vo &vo, int type);
-static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
+static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor, std::shared_ptr<Object> obj, const Vo &vo, int type);
+static void RoomProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor, std::shared_ptr<Object> obj, const Vo &vo, int type);
+static void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                                   std::shared_ptr<Object> obj, const Vo &vo, int type, std::shared_ptr<Room> room);
-static void MobileActAdd(Character *mob);
+static void MobileActAdd(std::shared_ptr<Character> mob);
 static void ObjectActAdd(std::shared_ptr<Object> obj);
 static void RoomActAdd(std::shared_ptr<Room> room);
 
@@ -164,7 +164,7 @@ static char *MudProgNextCommand(char *clist)
  *  "guard" and "guard " are not equal.
  */
 static bool MudProgCompareStrings(const std::string &lhs, const std::string &opr,
-                                  const std::string &rhs, Character *mob)
+                                  const std::string &rhs, std::shared_ptr<Character> mob)
 {
     if(!StrCmp(opr, "=="))
         return !StrCmp(lhs, rhs);
@@ -183,7 +183,7 @@ static bool MudProgCompareStrings(const std::string &lhs, const std::string &opr
     return false;
 }
 
-static bool MudProgCompareNumbers(int lhs, const std::string &opr, int rhs, Character *mob)
+static bool MudProgCompareNumbers(int lhs, const std::string &opr, int rhs, std::shared_ptr<Character> mob)
 {
     if(!StrCmp(opr, "=="))
         return lhs == rhs;
@@ -220,7 +220,7 @@ static int IfCheckRandom(const std::string &cvar)
     return GetRandomPercent() <= strtol(cvar.c_str(), nullptr, 10);
 }
 
-static int IfCheckEconomy(Character *mob, const std::string &cvar, const std::string &opr, const std::string &rval)
+static int IfCheckEconomy(std::shared_ptr<Character> mob, const std::string &cvar, const std::string &opr, const std::string &rval)
 {
     const int idx = strtol(cvar.c_str(), nullptr, 10);
     std::shared_ptr<Room> room;
@@ -251,7 +251,7 @@ static int IfCheckEconomy(Character *mob, const std::string &cvar, const std::st
                                  + room->Area->LowEconomy, opr, atoi(rval.c_str()), mob);
 }
 
-static int IfCheckMobInRoom(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckMobInRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -281,7 +281,7 @@ static int IfCheckMobInRoom(Character *mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckTimesKilled(Character *mob, const std::string &cvar, const std::string &opr, const std::string &rval, const Character *chkchar)
+static int IfCheckTimesKilled(std::shared_ptr<Character> mob, const std::string &cvar, const std::string &opr, const std::string &rval, std::shared_ptr<Character> chkchar)
 {
     std::shared_ptr<ProtoMobile> pMob;
 
@@ -298,7 +298,7 @@ static int IfCheckTimesKilled(Character *mob, const std::string &cvar, const std
     return MudProgCompareNumbers(pMob->Killed, opr, atoi(rval.c_str()), mob);
 }
 
-static int IfCheckOVnumHere(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumHere(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     const vnum_t vnum = atoi(cvar.c_str());
 
@@ -341,7 +341,7 @@ static int IfCheckOVnumHere(Character *mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeHere(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeHere(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -389,7 +389,7 @@ static int IfCheckOTypeHere(Character *mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumRoom(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     const vnum_t vnum = atoi(cvar.c_str());
 
@@ -420,7 +420,7 @@ static int IfCheckOVnumRoom(Character *mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeRoom(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -464,7 +464,7 @@ static int IfCheckOTypeRoom(Character *mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumCarry(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -499,7 +499,7 @@ static int IfCheckOVnumCarry(Character *mob, const std::string &cvar, std::strin
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeCarry(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeCarry(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -543,7 +543,7 @@ static int IfCheckOTypeCarry(Character *mob, const std::string &cvar, std::strin
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumWear(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumWear(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -579,7 +579,7 @@ static int IfCheckOVnumWear(Character *mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeWear(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeWear(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -617,7 +617,7 @@ static int IfCheckOTypeWear(Character *mob, const std::string &cvar, std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumInventory(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -651,7 +651,7 @@ static int IfCheckOVnumInventory(Character *mob, const std::string &cvar, std::s
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeInventory(Character *mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
+static int IfCheckOTypeInventory(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval, int lhsvl, int rhsvl)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -694,7 +694,7 @@ static int IfCheckOTypeInventory(Character *mob, const std::string &cvar, std::s
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckIsAffected(const Character *mob, const std::string &rval, const Character *chkchar)
+static int IfCheckIsAffected(std::shared_ptr<Character> mob, const std::string &rval, std::shared_ptr<Character> chkchar)
 {
     int value = GetAffectFlag(rval);
 
@@ -707,7 +707,7 @@ static int IfCheckIsAffected(const Character *mob, const std::string &rval, cons
     return IsAffectedBy(chkchar, 1 << value);
 }
 
-static int IfCheckIsCarrying(const Character *mob, const std::string &opr, const std::string &rval, const Character *chkchar)
+static int IfCheckIsCarrying(std::shared_ptr<Character> mob, const std::string &opr, const std::string &rval, std::shared_ptr<Character> chkchar)
 {
     int vnum = atoi(rval.c_str());
 
@@ -730,7 +730,7 @@ static int IfCheckIsCarrying(const Character *mob, const std::string &opr, const
     return false;
 }
 
-static int IfCheckIsWearing(const Character *mob, const std::string &opr, const Character *chkchar, vnum_t vnum)
+static int IfCheckIsWearing(std::shared_ptr<Character> mob, const std::string &opr, std::shared_ptr<Character> chkchar, vnum_t vnum)
 {
     if(vnum < 1 || vnum > 2097152000)
     {
@@ -773,8 +773,8 @@ static int IfCheckIsWearing(const Character *mob, const std::string &opr, const 
  * Redone by Altrag.. kill all that big copy-code that performs the
  * same action on each variable..
  */
-static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Character *actor,
-                            std::shared_ptr<Object> obj, const Vo &vo, Character *rndm)
+static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+                            std::shared_ptr<Object> obj, const Vo &vo, std::shared_ptr<Character> rndm)
 {
     char cvar[MAX_INPUT_LENGTH] = { '\0' };
     char chck[MAX_INPUT_LENGTH] = { '\0' };
@@ -782,7 +782,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
     char rval[MAX_INPUT_LENGTH] = { '\0' };
     const char *point = ifcheck.c_str();
     char *pchck = chck;
-    Character *chkchar = nullptr;
+    std::shared_ptr<Character> chkchar = nullptr;
     std::shared_ptr<Object> chkobj;
     int lhsvl = 0, rhsvl = 0;
 
@@ -1257,10 +1257,10 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
   *
   *  Added char_died and obj_extracted checks    -Thoric
   */
-static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
-                             std::shared_ptr<Object> obj, const Vo &vo, Character *rndm)
+static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+                             std::shared_ptr<Object> obj, const Vo &vo, std::shared_ptr<Character> rndm)
 {
-    Character *vict = vo.Ch;
+    std::shared_ptr<Character> vict = vo.Ch;
     std::shared_ptr<Object> v_obj = vo.Obj;
 
     *t = '\0';
@@ -1747,13 +1747,13 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
  *  This function rewritten by Narn for Realms of Despair, Dec/95.
  *
  */
-static void MudProgDriver(std::string com_list, Character *mob, Character *actor,
+static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                           std::shared_ptr<Object> obj, const Vo &vo, bool single_step)
 {
     char tmpcmndlst[MAX_STRING_LENGTH];
     char *command_list = nullptr;
     char *cmnd = nullptr;
-    Character *rndm = nullptr;
+    std::shared_ptr<Character> rndm = nullptr;
     int count = 0;
     int ignorelevel = 0;
     int iflevel = 0, result = 0;
@@ -2054,8 +2054,8 @@ static void MudProgDriver(std::string com_list, Character *mob, Character *actor
  * checks what the line is, executes if/or checks and calls Interpret
  * to perform the the commands.  Written by Narn, Dec 95.
  */
-static int MudProgDoCommand(char *cmnd, Character *mob, Character *actor,
-                            std::shared_ptr<Object> obj, const Vo &vo, Character *rndm,
+static int MudProgDoCommand(char *cmnd, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+                            std::shared_ptr<Object> obj, const Vo &vo, std::shared_ptr<Character> rndm,
                             bool ignore, bool ignore_ors)
 {
     /* Isolate the first word of the line, it gives us a clue what
@@ -2241,7 +2241,7 @@ static bool MudProgKeywordCheck(const std::string &argu, const std::string &argl
  *  on a certain percent, or trigger on a keyword or word phrase.
  *  To see how this works, look at the various trigger routines..
  */
-void MobProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
+void MobProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                           std::shared_ptr<Object> obj, const Vo &vo, int type)
 {
     for(auto mprg : mob->Prototype->mprog.MudProgs())
@@ -2325,7 +2325,7 @@ void MobProgWordlistCheck(const std::string &arg, Character *mob, Character *act
     }
 }
 
-void MobProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor, std::shared_ptr<Object> obj,
                          const Vo &vo, int type)
 {
     for(auto mprg : mob->Prototype->mprog.MudProgs())
@@ -2341,7 +2341,7 @@ void MobProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Objec
     }
 }
 
-static void mprog_time_check(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+static void mprog_time_check(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor, std::shared_ptr<Object> obj,
                              const Vo &vo, int type)
 {
     for(auto mprg : mob->Prototype->mprog.MudProgs())
@@ -2365,7 +2365,7 @@ static void mprog_time_check(Character *mob, Character *actor, std::shared_ptr<O
     }
 }
 
-static void MobileActAdd(Character *mob)
+static void MobileActAdd(std::shared_ptr<Character> mob)
 {
     bool alreadyInList = Find(room_act_list, [mob](const auto runner)
                               {
@@ -2387,7 +2387,7 @@ void MobActUpdate()
     while(!mob_act_list.empty())
     {
         std::shared_ptr<act_prog_data> apdtmp = mob_act_list.front();
-        Character *wch = apdtmp->vo.Ch;
+        std::shared_ptr<Character> wch = apdtmp->vo.Ch;
 
         if(!CharacterDiedRecently(wch) && wch->mprog.mpactnum > 0)
         {
@@ -2424,7 +2424,7 @@ void MobActUpdate()
  * make sure you remember to modify the variable names to the ones in the
  * trigger calls.
  */
-void MobProgActTrigger(const std::string &buf, Character *mob, Character *ch,
+void MobProgActTrigger(const std::string &buf, std::shared_ptr<Character> mob, std::shared_ptr<Character> ch,
                        std::shared_ptr<Object> obj, const Vo &vo)
 {
     if(IsNpc(mob)
@@ -2466,7 +2466,7 @@ void MobProgActTrigger(const std::string &buf, Character *mob, Character *ch,
     }
 }
 
-void MobProgBribeTrigger(Character *mob, Character *ch, int amount)
+void MobProgBribeTrigger(std::shared_ptr<Character> mob, std::shared_ptr<Character> ch, int amount)
 {
     if(IsNpc(mob)
        && mob->Prototype->mprog.progtypes & BRIBE_PROG)
@@ -2496,7 +2496,7 @@ void MobProgBribeTrigger(Character *mob, Character *ch, int amount)
     }
 }
 
-void MobProgDeathTrigger(Character *killer, Character *mob)
+void MobProgDeathTrigger(std::shared_ptr<Character> killer, std::shared_ptr<Character> mob)
 {
     if(IsNpc(mob) && killer != mob
        && mob->Prototype->mprog.progtypes & DEATH_PROG)
@@ -2505,7 +2505,7 @@ void MobProgDeathTrigger(Character *killer, Character *mob)
     }
 }
 
-void MobProgEntryTrigger(Character *mob)
+void MobProgEntryTrigger(std::shared_ptr<Character> mob)
 {
     if(IsNpc(mob)
        && mob->Prototype->mprog.progtypes & ENTRY_PROG)
@@ -2514,7 +2514,7 @@ void MobProgEntryTrigger(Character *mob)
     }
 }
 
-void MobProgFightTrigger(Character *mob, Character *ch)
+void MobProgFightTrigger(std::shared_ptr<Character> mob, std::shared_ptr<Character> ch)
 {
     if(IsNpc(mob)
        && mob->Prototype->mprog.progtypes & FIGHT_PROG)
@@ -2523,7 +2523,7 @@ void MobProgFightTrigger(Character *mob, Character *ch)
     }
 }
 
-void MobProgGiveTrigger(Character *mob, Character *ch, std::shared_ptr<Object> obj)
+void MobProgGiveTrigger(std::shared_ptr<Character> mob, std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(IsNpc(mob)
        && mob->Prototype->mprog.progtypes & GIVE_PROG)
@@ -2552,9 +2552,9 @@ void MobProgGiveTrigger(Character *mob, Character *ch, std::shared_ptr<Object> o
     }
 }
 
-void MobProgGreetTrigger(Character *ch)
+void MobProgGreetTrigger(std::shared_ptr<Character> ch)
 {
-    std::list<Character *> copyOfCharacterList(ch->InRoom->Characters());
+    std::list<std::shared_ptr<Character> > copyOfCharacterList(ch->InRoom->Characters());
 
     for(auto vmob : copyOfCharacterList)
     {
@@ -2583,7 +2583,7 @@ void MobProgGreetTrigger(Character *ch)
     }
 }
 
-void MobProgHitPercentTrigger(Character *mob, Character *ch)
+void MobProgHitPercentTrigger(std::shared_ptr<Character> mob, std::shared_ptr<Character> ch)
 {
     if(IsNpc(mob)
        && mob->Prototype->mprog.progtypes & HITPRCNT_PROG)
@@ -2600,27 +2600,27 @@ void MobProgHitPercentTrigger(Character *mob, Character *ch)
     }
 }
 
-void MobProgRandomTrigger(Character *mob)
+void MobProgRandomTrigger(std::shared_ptr<Character> mob)
 {
     if(mob->Prototype->mprog.progtypes & RAND_PROG)
         MobProgPercentCheck(mob, nullptr, nullptr, nullptr, RAND_PROG);
 }
 
-void MobProgTimeTrigger(Character *mob)
+void MobProgTimeTrigger(std::shared_ptr<Character> mob)
 {
     if(mob->Prototype->mprog.progtypes & TIME_PROG)
         mprog_time_check(mob, nullptr, nullptr, nullptr, TIME_PROG);
 }
 
-void MobProgHourTrigger(Character *mob)
+void MobProgHourTrigger(std::shared_ptr<Character> mob)
 {
     if(mob->Prototype->mprog.progtypes & HOUR_PROG)
         mprog_time_check(mob, nullptr, nullptr, nullptr, HOUR_PROG);
 }
 
-void MobProgSpeechTrigger(const std::string &txt, Character *actor)
+void MobProgSpeechTrigger(const std::string &txt, std::shared_ptr<Character> actor)
 {
-    std::list<Character *> copyOfCharacterList(actor->InRoom->Characters());
+    std::list<std::shared_ptr<Character> > copyOfCharacterList(actor->InRoom->Characters());
 
     for(auto vmob : copyOfCharacterList)
     {
@@ -2634,7 +2634,7 @@ void MobProgSpeechTrigger(const std::string &txt, Character *actor)
     }
 }
 
-void MobProgScriptTrigger(Character *mob)
+void MobProgScriptTrigger(std::shared_ptr<Character> mob)
 {
     if(mob->Prototype->mprog.progtypes & SCRIPT_PROG)
     {
@@ -2704,7 +2704,7 @@ void ReleaseSupermob()
     CharacterToRoom(supermob, GetRoom(ROOM_VNUM_POLY));
 }
 
-static bool ObjProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor, std::shared_ptr<Object> obj,
                                 const Vo &vo, int type)
 {
     bool executed = false;
@@ -2728,7 +2728,7 @@ static bool ObjProgPercentCheck(Character *mob, Character *actor, std::shared_pt
 /*
  * Triggers follow
  */
-void ObjProgGreetTrigger(Character *ch)
+void ObjProgGreetTrigger(std::shared_ptr<Character> ch)
 {
     auto objectsWithGreetTrigger = Filter(ch->InRoom->Objects(),
                                           [](auto vobj)
@@ -2744,7 +2744,7 @@ void ObjProgGreetTrigger(Character *ch)
     }
 }
 
-void ObjProgSpeechTrigger(const std::string &txt, Character *ch)
+void ObjProgSpeechTrigger(const std::string &txt, std::shared_ptr<Character> ch)
 {
     auto objectsWithSpeechTrigger = Filter(ch->InRoom->Objects(),
                                            [](auto vobj)
@@ -2781,7 +2781,7 @@ void ObjProgRandomTrigger(std::shared_ptr<Object> obj)
  * in wear_obj, between each successful EquipCharacter
  * the subsequent return
  */
-void ObjProgWearTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgWearTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & WEAR_PROG)
     {
@@ -2791,7 +2791,7 @@ void ObjProgWearTrigger(Character *ch, std::shared_ptr<Object> obj)
     }
 }
 
-bool ObjProgUseTrigger(Character *ch, std::shared_ptr<Object> obj, Character *vict,
+bool ObjProgUseTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, std::shared_ptr<Character> vict,
                        std::shared_ptr<Object> targ, const Vo &vo)
 {
     bool executed = false;
@@ -2827,7 +2827,7 @@ bool ObjProgUseTrigger(Character *ch, std::shared_ptr<Object> obj, Character *vi
  * do a if(!ch) return right after, and return true (?)
  * if !ch
  */
-void ObjProgRemoveTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgRemoveTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & REMOVE_PROG)
     {
@@ -2840,7 +2840,7 @@ void ObjProgRemoveTrigger(Character *ch, std::shared_ptr<Object> obj)
 /*
  * call in do_sac, right before ExtractObject
  */
-void ObjProgSacTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgSacTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & SAC_PROG)
     {
@@ -2854,7 +2854,7 @@ void ObjProgSacTrigger(Character *ch, std::shared_ptr<Object> obj)
  * call in do_get, right before CheckObjectForTrap
  * do a if(!ch) return right after
  */
-void ObjProgGetTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgGetTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & GET_PROG)
     {
@@ -2867,7 +2867,7 @@ void ObjProgGetTrigger(Character *ch, std::shared_ptr<Object> obj)
 /*
  * called in DamageObject in act_obj.c
  */
-void ObjProgDamageTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgDamageTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & DAMAGE_PROG)
     {
@@ -2880,7 +2880,7 @@ void ObjProgDamageTrigger(Character *ch, std::shared_ptr<Object> obj)
 /*
  * called in do_repair in shops.c
  */
-void ObjProgRepairTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgRepairTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & REPAIR_PROG)
     {
@@ -2894,7 +2894,7 @@ void ObjProgRepairTrigger(Character *ch, std::shared_ptr<Object> obj)
  * call twice in do_drop, right after the Act( AT_ACTION,...)
  * do a if(!ch) return right after
  */
-void ObjProgDropTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgDropTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & DROP_PROG)
     {
@@ -2907,7 +2907,7 @@ void ObjProgDropTrigger(Character *ch, std::shared_ptr<Object> obj)
 /*
  * call towards end of do_examine, right before CheckObjectForTrap
  */
-void ObjProgExamineTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgExamineTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & EXA_PROG)
     {
@@ -2920,7 +2920,7 @@ void ObjProgExamineTrigger(Character *ch, std::shared_ptr<Object> obj)
 /*
  * call in fight.c, group_gain, after (?) the ObjectToRoom
  */
-void ObjProgZapTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgZapTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & ZAP_PROG)
     {
@@ -2934,7 +2934,7 @@ void ObjProgZapTrigger(Character *ch, std::shared_ptr<Object> obj)
  * call in levers.c, towards top of do_push_or_pull
  *  see note there
  */
-void ObjProgPullTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgPullTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & PULL_PROG)
     {
@@ -2948,7 +2948,7 @@ void ObjProgPullTrigger(Character *ch, std::shared_ptr<Object> obj)
  * call in levers.c, towards top of do_push_or_pull
  *  see note there
  */
-void ObjProgPushTrigger(Character *ch, std::shared_ptr<Object> obj)
+void ObjProgPushTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(obj->Prototype->mprog.progtypes & PUSH_PROG)
     {
@@ -2958,7 +2958,7 @@ void ObjProgPushTrigger(Character *ch, std::shared_ptr<Object> obj)
     }
 }
 
-void ObjProgActTrigger(const std::string &buf, std::shared_ptr<Object> mobj, Character *ch,
+void ObjProgActTrigger(const std::string &buf, std::shared_ptr<Object> mobj, std::shared_ptr<Character> ch,
                        std::shared_ptr<Object> obj, const Vo &vo)
 {
     if(mobj->Prototype->mprog.progtypes & ACT_PROG)
@@ -2976,7 +2976,7 @@ void ObjProgActTrigger(const std::string &buf, std::shared_ptr<Object> mobj, Cha
     }
 }
 
-static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
+static void ObjProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                                  std::shared_ptr<Object> obj, const Vo &vo,
                                  int type, std::shared_ptr<Object> iobj)
 {
@@ -3088,7 +3088,7 @@ void RoomProgSetSupermob(std::shared_ptr<Room> room)
     }
 }
 
-static void RoomProgPercentCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+static void RoomProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor, std::shared_ptr<Object> obj,
                                  const Vo &vo, int type)
 {
     if(!mob->InRoom)
@@ -3116,7 +3116,7 @@ static void RoomProgPercentCheck(Character *mob, Character *actor, std::shared_p
   *  Hold on this
   * Unhold. -- Alty
   */
-void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, Character *ch,
+void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, std::shared_ptr<Character> ch,
                         std::shared_ptr<Object> obj, const Vo &vo)
 {
     if(room->mprog.progtypes & ACT_PROG)
@@ -3138,7 +3138,7 @@ void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, Char
 /*
  *
  */
-void RoomProgLeaveTrigger(Character *ch)
+void RoomProgLeaveTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & LEAVE_PROG)
     {
@@ -3148,7 +3148,7 @@ void RoomProgLeaveTrigger(Character *ch)
     }
 }
 
-void RoomProgEnterTrigger(Character *ch)
+void RoomProgEnterTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & ENTER_PROG)
     {
@@ -3158,7 +3158,7 @@ void RoomProgEnterTrigger(Character *ch)
     }
 }
 
-void RoomProgSleepTrigger(Character *ch)
+void RoomProgSleepTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & SLEEP_PROG)
     {
@@ -3168,7 +3168,7 @@ void RoomProgSleepTrigger(Character *ch)
     }
 }
 
-void RoomProgRestTrigger(Character *ch)
+void RoomProgRestTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & REST_PROG)
     {
@@ -3178,7 +3178,7 @@ void RoomProgRestTrigger(Character *ch)
     }
 }
 
-void RoomProgFightTrigger(Character *ch)
+void RoomProgFightTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & RFIGHT_PROG)
     {
@@ -3188,7 +3188,7 @@ void RoomProgFightTrigger(Character *ch)
     }
 }
 
-void RoomProgDeathTrigger(Character *killer, Character *ch)
+void RoomProgDeathTrigger(std::shared_ptr<Character> killer, std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & RDEATH_PROG)
     {
@@ -3198,7 +3198,7 @@ void RoomProgDeathTrigger(Character *killer, Character *ch)
     }
 }
 
-void RoomProgSpeechTrigger(const std::string &txt, Character *ch)
+void RoomProgSpeechTrigger(const std::string &txt, std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & SPEECH_PROG)
     {
@@ -3207,7 +3207,7 @@ void RoomProgSpeechTrigger(const std::string &txt, Character *ch)
     }
 }
 
-void RoomProgRandomTrigger(Character *ch)
+void RoomProgRandomTrigger(std::shared_ptr<Character> ch)
 {
 
     if(ch->InRoom->mprog.progtypes & RAND_PROG)
@@ -3218,7 +3218,7 @@ void RoomProgRandomTrigger(Character *ch)
     }
 }
 
-static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
+static void RoomProgWordlistCheck(const std::string &arg, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                                   std::shared_ptr<Object> obj, const Vo &vo, int type, std::shared_ptr<Room> room)
 {
     if(actor != nullptr && !CharacterDiedRecently(actor) && actor->InRoom)
@@ -3310,7 +3310,7 @@ static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Charac
     }
 }
 
-static void RoomProgTimeCheck(Character *mob, Character *actor, std::shared_ptr<Object> obj,
+static void RoomProgTimeCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor, std::shared_ptr<Object> obj,
                               const Vo &vo, int type)
 {
     auto room = vo.Room;
@@ -3336,7 +3336,7 @@ static void RoomProgTimeCheck(Character *mob, Character *actor, std::shared_ptr<
     }
 }
 
-void RoomProgTimeTrigger(Character *ch)
+void RoomProgTimeTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & TIME_PROG)
     {
@@ -3346,7 +3346,7 @@ void RoomProgTimeTrigger(Character *ch)
     }
 }
 
-void RoomProgHourTrigger(Character *ch)
+void RoomProgHourTrigger(std::shared_ptr<Character> ch)
 {
     if(ch->InRoom->mprog.progtypes & HOUR_PROG)
     {
@@ -3357,7 +3357,7 @@ void RoomProgHourTrigger(Character *ch)
 }
 
 /* Written by Jenny, Nov 29/95 */
-void ProgBug(const std::string &str, const Character *mob)
+void ProgBug(const std::string &str, std::shared_ptr<Character> mob)
 {
     /* Check if we're dealing with supermob, which means the bug occurred
        in a room or obj prog. */
@@ -3519,7 +3519,7 @@ int MobProgNameToType(const std::string &name)
     return ERROR_PROG;
 }
 
-Character *GetCharacterInRoomMudProg(Character *ch, std::string argument)
+std::shared_ptr<Character> GetCharacterInRoomMudProg(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     int count = 0;

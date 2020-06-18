@@ -110,7 +110,7 @@ void ShuttleUpdate();
 std::shared_ptr<Shuttle> NewShuttle(const std::string &name);
 bool ExtractShuttle(std::shared_ptr<Shuttle> shuttle);
 bool InsertShuttle(std::shared_ptr<Shuttle> shuttle, std::shared_ptr<Room> room);
-void ShowShuttlesToCharacter(const std::list<std::shared_ptr<Shuttle>> &shuttles, const Character *ch);
+void ShowShuttlesToCharacter(const std::list<std::shared_ptr<Shuttle>> &shuttles, std::shared_ptr<Character> ch);
 std::shared_ptr<Shuttle> GetShuttleInRoom(std::shared_ptr<Room> room, const std::string &name);
 std::shared_ptr<Shuttle> GetShuttleFromEntrance(vnum_t vnum);
 std::shared_ptr<ShuttleStop> AllocateShuttleStop();

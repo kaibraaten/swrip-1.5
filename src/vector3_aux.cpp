@@ -67,18 +67,18 @@
 #include "missile.hpp"
 
 static bool IsShipFacing(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Vector3> target);
+                         std::shared_ptr<Vector3> target);
 static void HandleMovement(std::shared_ptr<Vector3> pos,
-    std::shared_ptr<Vector3> head, const int speed);
+                           std::shared_ptr<Vector3> head, const int speed);
 
 bool IsShipFacingShip(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Ship> target)
+                      std::shared_ptr<Ship> target)
 {
     return IsShipFacing(ship, target->Position);
 }
 
 bool IsShipFacingSpaceobject(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Spaceobject> target)
+                             std::shared_ptr<Spaceobject> target)
 {
     return IsShipFacing(ship, target->Position);
 }
@@ -105,7 +105,7 @@ void TurnShip180(std::shared_ptr<Ship> ship)
  * Etc, etc...
  */
 void SetShipCourse(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Vector3> destination)
+                   std::shared_ptr<Vector3> destination)
 {
     ship->Heading->x = destination->x - ship->Position->x;
     ship->Heading->y = destination->y - ship->Position->y;
@@ -114,19 +114,19 @@ void SetShipCourse(std::shared_ptr<Ship> ship,
 }
 
 void SetShipCourseTowardsShip(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Ship> target)
+                              std::shared_ptr<Ship> target)
 {
     SetShipCourse(ship, target->Position);
 }
 
 void SetShipCourseTowardsSpaceobject(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Spaceobject> target)
+                                     std::shared_ptr<Spaceobject> target)
 {
     SetShipCourse(ship, target->Position);
 }
 
 void SetMissileCourseTowardsShip(std::shared_ptr<Missile> missile,
-    std::shared_ptr<Ship> target)
+                                 std::shared_ptr<Ship> target)
 {
     missile->Heading->x = target->Position->x - missile->Position->x;
     missile->Heading->y = target->Position->y - missile->Position->y;
@@ -139,7 +139,7 @@ void SetMissileCourseTowardsShip(std::shared_ptr<Missile> missile,
  * Useful for grouped ships, docked ships, etc.
  */
 void AlignShipTrajectory(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Ship> target)
+                         std::shared_ptr<Ship> target)
 {
     CopyVector(ship->Heading, target->Heading);
 }
@@ -160,19 +160,19 @@ void MoveMissile(std::shared_ptr<Missile> missile)
 }
 
 double GetShipDistanceToShip(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Ship> target)
+                             std::shared_ptr<Ship> target)
 {
     return GetDistanceBetweenVectors(ship->Position, target->Position);
 }
 
 double GetShipDistanceToSpaceobject(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Spaceobject> spaceobject)
+                                    std::shared_ptr<Spaceobject> spaceobject)
 {
     return GetDistanceBetweenVectors(ship->Position, spaceobject->Position);
 }
 
 double GetMissileDistanceToShip(std::shared_ptr<Missile> missile,
-    std::shared_ptr<Ship> target)
+                                std::shared_ptr<Ship> target)
 {
     return GetDistanceBetweenVectors(missile->Position, target->Position);
 }
@@ -188,13 +188,13 @@ void RandomizeVector(std::shared_ptr<Vector3> vec, int from, int to)
  * Calculate new position based on heading and speed.
  */
 static void HandleMovement(std::shared_ptr<Vector3> pos,
-    std::shared_ptr<Vector3> head, const int speed)
+                           std::shared_ptr<Vector3> head, const int speed)
 {
-    if (speed > 0)
+    if(speed > 0)
     {
         const double change = GetVectorLength(head);
 
-        if (change > 0)
+        if(change > 0)
         {
             Vector3 tmpv;
             tmpv.x = head->x / change;
@@ -217,7 +217,7 @@ static void HandleMovement(std::shared_ptr<Vector3> pos,
  * }
  */
 static bool IsShipFacing(std::shared_ptr<Ship> ship,
-    std::shared_ptr<Vector3> target)
+                         std::shared_ptr<Vector3> target)
 {
     std::shared_ptr<Vector3> h = std::make_shared<Vector3>();
     std::shared_ptr<Vector3> d = std::make_shared<Vector3>();
@@ -232,7 +232,7 @@ static bool IsShipFacing(std::shared_ptr<Ship> ship,
 
     cosofa = GetVectorDotProduct(h, d) / (GetVectorLength(h) + GetVectorLength(d));
 
-    if (cosofa > 0.75)
+    if(cosofa > 0.75)
         facing = true;
 
     return facing;
