@@ -23,8 +23,8 @@
   OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef _CERIS_EVENT_HPP_
-#define _CERIS_EVENT_HPP_
+#ifndef _CERIS_OLDEVENT_HPP_
+#define _CERIS_OLDEVENT_HPP_
 
 #include <memory>
 #include <map>
@@ -40,11 +40,11 @@ namespace Ceris
     // Event
 
     template< typename EventArgsT >
-    class Event
+    class OldEvent
     {
     public:
-        Event() = default;
-        ~Event() = default;
+        OldEvent() = default;
+        ~OldEvent() = default;
 
         // Dispatch event notification to subscribers.
         void operator()(const EventArgsT &args) const;
@@ -70,8 +70,8 @@ namespace Ceris
         // Unsubscribe a non-member function eventhandler.
         void Remove(void *userdata, std::function<void(void *, EventArgsT)> fun);
 
-        Event &operator=(const Event &) = delete;
-        Event(const Event &) = delete;
+        OldEvent &operator=(const OldEvent &) = delete;
+        OldEvent(const OldEvent &) = delete;
 
     private:
         using HandlerContainer = std::multimap< void *, std::shared_ptr<HandlerFunctionBase<EventArgsT>> >;
@@ -199,7 +199,7 @@ namespace Ceris
 
     template< typename EventArgsT >
     template< typename T >
-    auto Event< EventArgsT >::Find(T *instance, void (T:: *memFn)(EventArgsT)) const
+    auto OldEvent< EventArgsT >::Find(T *instance, void (T:: *memFn)(EventArgsT)) const
     {
         MemberFunctionHandler< T, EventArgsT > handler(instance, memFn);
 
@@ -215,7 +215,7 @@ namespace Ceris
     }
 
     template< typename EventArgsT >
-    auto Event< EventArgsT >::Find(void *userdata, std::function<void(void *, EventArgsT)> fun) const
+    auto OldEvent< EventArgsT >::Find(void *userdata, std::function<void(void *, EventArgsT)> fun) const
     {
         GlobalFunctionHandler< EventArgsT > handler(userdata, fun);
 
@@ -232,7 +232,7 @@ namespace Ceris
 
     template< typename EventArgsT >
     template< typename T >
-    void Event< EventArgsT >::Add(T *instance, void (T:: *memFn)(EventArgsT))
+    void OldEvent< EventArgsT >::Add(T *instance, void (T:: *memFn)(EventArgsT))
     {
         if(Find(instance, memFn) == _Handlers.end())
         {
@@ -241,7 +241,7 @@ namespace Ceris
     }
 
     template< typename EventArgsT >
-    void Event< EventArgsT >::Add(void *userdata,
+    void OldEvent< EventArgsT >::Add(void *userdata,
                                   std::function<void(void *, EventArgsT)> fun)
     {
         if(Find(userdata, fun) == _Handlers.end())
@@ -251,13 +251,13 @@ namespace Ceris
     }
 
     template< typename EventArgsT >
-    void Event< EventArgsT >::Add(std::function<void(void *, EventArgsT)> fun)
+    void OldEvent< EventArgsT >::Add(std::function<void(void *, EventArgsT)> fun)
     {
         Add(nullptr, fun);
     }
 
     template< typename EventArgsT >
-    void Event< EventArgsT >::Remove(void *thingy)
+    void OldEvent< EventArgsT >::Remove(void *thingy)
     {
         if(thingy)
         {
@@ -266,7 +266,7 @@ namespace Ceris
     }
 
     template< typename EventArgsT >
-    void Event< EventArgsT >::Remove(void *userdata,
+    void OldEvent< EventArgsT >::Remove(void *userdata,
                                      std::function<void(void *, EventArgsT)> fun)
     {
         GlobalFunctionHandler< EventArgsT > handler(userdata, fun);
@@ -283,7 +283,7 @@ namespace Ceris
 
     template< typename EventArgsT >
     template< typename T >
-    void Event< EventArgsT >::Remove(T *instance, void (T:: *memFn)(EventArgsT))
+    void OldEvent< EventArgsT >::Remove(T *instance, void (T:: *memFn)(EventArgsT))
     {
         MemberFunctionHandler< T, EventArgsT > handler(instance, memFn);
 
@@ -298,7 +298,7 @@ namespace Ceris
     }
 
     template< typename EventArgsT >
-    void Event< EventArgsT >::operator()(const EventArgsT &args) const
+    void OldEvent< EventArgsT >::operator()(const EventArgsT &args) const
     {
         // Use a copy so it's safe for handlers to unregister during dispatch
         HandlerContainer tmp = _Handlers;

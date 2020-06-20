@@ -6,10 +6,10 @@ enable_testing()
 add_executable(utility_tests
   src/algorithms_tests.cpp
   src/bet_tests.cpp
-  src/event_tests.cpp
   src/learning_tests.cpp
   src/main.cpp
   src/misc_tests.cpp
+  src/oldevent_tests.cpp
   src/repository_tests.cpp
   src/string_handling_tests.cpp
   )

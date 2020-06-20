@@ -21,7 +21,7 @@
 
 #include <algorithm>
 #include <cassert>
-#include <utility/event.hpp>
+#include <utility/oldevent.hpp>
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "craft.hpp"
@@ -57,12 +57,12 @@ public:
 class CraftingSession
 {
 public:
-    Ceris::Event<InterpretArgumentsEventArgs *> OnInterpretArguments;
-    Ceris::Event<CheckRequirementsEventArgs *> OnCheckRequirements;
-    Ceris::Event<MaterialFoundEventArgs *> OnMaterialFound;
-    Ceris::Event<SetObjectStatsEventArgs *> OnSetObjectStats;
-    Ceris::Event<FinishedCraftingEventArgs *> OnFinishedCrafting;
-    Ceris::Event<AbortCraftingEventArgs *> OnAbort;
+    Ceris::OldEvent<InterpretArgumentsEventArgs *> OnInterpretArguments;
+    Ceris::OldEvent<CheckRequirementsEventArgs *> OnCheckRequirements;
+    Ceris::OldEvent<MaterialFoundEventArgs *> OnMaterialFound;
+    Ceris::OldEvent<SetObjectStatsEventArgs *> OnSetObjectStats;
+    Ceris::OldEvent<FinishedCraftingEventArgs *> OnFinishedCrafting;
+    Ceris::OldEvent<AbortCraftingEventArgs *> OnAbort;
 
     std::shared_ptr<Character> Engineer;
     CraftRecipe *Recipe = nullptr;

@@ -1,11 +1,11 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include <utility/event.hpp>
+#include <utility/oldevent.hpp>
 
 using ::testing::_;
 
-class EventTests : public ::testing::Test
+class OldEventTests : public ::testing::Test
 {
 protected:
     void SetUp() override
@@ -25,9 +25,9 @@ static void addOneToUserdata(void *userdata, void *eventargs)
     (*counter)++;
 }
 
-TEST_F(EventTests, Glb_AddedEventIsRaisedExactlyOnce)
+TEST_F(OldEventTests, Glb_AddedEventIsRaisedExactlyOnce)
 {
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     int counter = 0;
     event.Add(&counter, addOneToUserdata);
 
@@ -58,9 +58,9 @@ struct MockObserver : public Observer<void *>
     MOCK_METHOD1(EventHandler3, void(void *));
 };
 
-TEST_F(EventTests, Mbr_AddedEventIsRaisedExactlyOnce)
+TEST_F(OldEventTests, Mbr_AddedEventIsRaisedExactlyOnce)
 {
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     MockObserver observer;
     EXPECT_CALL(observer, EventHandler1(_)).Times(1);
     event.Add(&observer, &MockObserver::EventHandler1);
@@ -68,9 +68,9 @@ TEST_F(EventTests, Mbr_AddedEventIsRaisedExactlyOnce)
     event(nullptr);
 }
 
-TEST_F(EventTests, Glb_RemovedEventIsNeverRaised)
+TEST_F(OldEventTests, Glb_RemovedEventIsNeverRaised)
 {
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     int counter = 0;
     event.Add(&counter, addOneToUserdata);
     event.Remove(&counter, addOneToUserdata);
@@ -80,9 +80,9 @@ TEST_F(EventTests, Glb_RemovedEventIsNeverRaised)
     EXPECT_EQ(0, counter);
 }
 
-TEST_F(EventTests, Mbr_RemovedEventIsNeverRaised)
+TEST_F(OldEventTests, Mbr_RemovedEventIsNeverRaised)
 {
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     MockObserver observer;
     EXPECT_CALL(observer, EventHandler1(_)).Times(0);
     event.Add(&observer, &MockObserver::EventHandler1);
@@ -104,9 +104,9 @@ static void EventArgsArePassedAlong_eventHandler(void *userdata, EventArgs *args
     }
 }
 
-TEST_F(EventTests, Glb_EventArgsArePassedAlong)
+TEST_F(OldEventTests, Glb_EventArgsArePassedAlong)
 {
-    Ceris::Event<EventArgs *> event;
+    Ceris::OldEvent<EventArgs *> event;
     EventArgs args;
     event.Add(EventArgsArePassedAlong_eventHandler);
 
@@ -115,9 +115,9 @@ TEST_F(EventTests, Glb_EventArgsArePassedAlong)
     EXPECT_TRUE(args.WasPassedAlong);
 }
 
-TEST_F(EventTests, Glb_AllHandlersWithSameUserdataAreRemovedTogether)
+TEST_F(OldEventTests, Glb_AllHandlersWithSameUserdataAreRemovedTogether)
 {
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     int counter = 0;
     event.Add(&counter, addOneToUserdata);
     event.Add(&counter, addOneToUserdata);
@@ -129,9 +129,9 @@ TEST_F(EventTests, Glb_AllHandlersWithSameUserdataAreRemovedTogether)
     EXPECT_EQ(0, counter);
 }
 
-TEST_F(EventTests, Glb_IdenticalHandlersCannotBeAdded)
+TEST_F(OldEventTests, Glb_IdenticalHandlersCannotBeAdded)
 {
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     int counter = 0;
     event.Add(&counter, addOneToUserdata);
     event.Add(&counter, addOneToUserdata);
@@ -142,9 +142,9 @@ TEST_F(EventTests, Glb_IdenticalHandlersCannotBeAdded)
     EXPECT_EQ(1, counter);
 }
 
-TEST_F(EventTests, Mbr_IdenticalHandlersCannotBeAdded)
+TEST_F(OldEventTests, Mbr_IdenticalHandlersCannotBeAdded)
 {
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     MockObserver observer;
     EXPECT_CALL(observer, EventHandler1(_)).Times(1);
     event.Add(&observer, &MockObserver::EventHandler1);
@@ -154,9 +154,9 @@ TEST_F(EventTests, Mbr_IdenticalHandlersCannotBeAdded)
     event(nullptr);
 }
 
-TEST_F(EventTests, Glb_NullUserdataWorks)
+TEST_F(OldEventTests, Glb_NullUserdataWorks)
 {
-    Ceris::Event<EventArgs *> event;
+    Ceris::OldEvent<EventArgs *> event;
     EventArgs args;
     event.Add(EventArgsArePassedAlong_eventHandler);
 
@@ -183,10 +183,10 @@ static void eh3(void *ud, void *args)
     (*counter)++;
 }
 
-TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_AllAreDispatched)
+TEST_F(OldEventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_AllAreDispatched)
 {
     int userdata = 0;
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     event.Add(&userdata, eh1);
     event.Add(&userdata, eh2);
     event.Add(&userdata, eh3);
@@ -196,9 +196,9 @@ TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_AllAreDispatched)
     EXPECT_EQ(3, userdata);
 }
 
-TEST_F(EventTests, Mbr_OnOneObserverWithMultipleHandlerFuns_AllAreDispatched)
+TEST_F(OldEventTests, Mbr_OnOneObserverWithMultipleHandlerFuns_AllAreDispatched)
 {
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     MockObserver observer;
     EXPECT_CALL(observer, EventHandler1(_)).Times(1);
     EXPECT_CALL(observer, EventHandler2(_)).Times(1);
@@ -233,10 +233,10 @@ static void eh6(void *ud, void *args)
     (*mask) |= EH6;
 }
 
-TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_CorrectOneIsRemoved)
+TEST_F(OldEventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_CorrectOneIsRemoved)
 {
     unsigned long bits = 0;
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     event.Add(&bits, eh4);
     event.Add(&bits, eh5);
     event.Add(&bits, eh6);
@@ -248,10 +248,10 @@ TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_CorrectOneIsRemoved)
     EXPECT_TRUE(bits & EH6);
 }
 
-TEST_F(EventTests, Gbl_LambdaWorks)
+TEST_F(OldEventTests, Gbl_LambdaWorks)
 {
     int counter = 0;
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     event.Add([&counter](void *, void *)
               {
                   ++counter;
@@ -277,10 +277,10 @@ private:
     int &_counter;
 };
 
-TEST_F(EventTests, Gbl_FunctorWorks)
+TEST_F(OldEventTests, Gbl_FunctorWorks)
 {
     int counter = 0;
-    Ceris::Event<void *> event;
+    Ceris::OldEvent<void *> event;
     event.Add(MyFunctor(counter));
 
     event(nullptr);
