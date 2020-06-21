@@ -231,9 +231,8 @@ const std::vector<CraftingMaterial> CraftTests::_materials =
 };
 
 template<typename EventArgs>
-static void Counting_EventHandler(void *userData, EventArgs e)
+static void Counting_EventHandler(int *callCounter, EventArgs e)
 {
-    int *callCounter = static_cast<int *>(userData);
     ++(*callCounter);
 }
 
@@ -244,8 +243,7 @@ TEST_F(CraftTests, InterpretArgumentsHandler_IsCalledExactlyOnce)
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddInterpretArgumentsCraftingHandler(session, &callCounter,
-                                         Counting_EventHandler);
+    session->OnInterpretArguments.Add(&callCounter, Counting_EventHandler<std::shared_ptr<InterpretArgumentsEventArgs>>);
 
     StartCrafting(session);
 
@@ -259,8 +257,7 @@ TEST_F(CraftTests, CheckRequirementsHandler_IsCalledExactlyOnce)
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddCheckRequirementsCraftingHandler(session, &callCounter,
-                                        Counting_EventHandler);
+    session->OnCheckRequirements.Add(&callCounter, Counting_EventHandler<std::shared_ptr<CheckRequirementsEventArgs>>);
 
     StartCrafting(session);
 
@@ -268,7 +265,7 @@ TEST_F(CraftTests, CheckRequirementsHandler_IsCalledExactlyOnce)
 }
 
 template<typename EventArgs>
-static void Failing_EventHandler(void *userData, EventArgs e)
+static void Failing_EventHandler(EventArgs e)
 {
     e->AbortSession = true;
 }
@@ -279,8 +276,7 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Fails_SessionNotStarted)
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddInterpretArgumentsCraftingHandler(session, nullptr,
-                                         Failing_EventHandler);
+    session->OnInterpretArguments.Add(Failing_EventHandler<std::shared_ptr<InterpretArgumentsEventArgs>>);
 
     StartCrafting(session);
 
@@ -293,8 +289,7 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_SessionNotStarted)
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddCheckRequirementsCraftingHandler(session, nullptr,
-                                        Failing_EventHandler);
+    session->OnCheckRequirements.Add(Failing_EventHandler<std::shared_ptr<CheckRequirementsEventArgs>>);
 
     StartCrafting(session);
 
@@ -302,7 +297,7 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_SessionNotStarted)
 }
 
 template<typename EventArgs>
-static void DoNothing_EventHandler(void *userData, EventArgs e)
+static void DoNothing_EventHandler(EventArgs e)
 {
     // Intentionally empty
 }
@@ -313,8 +308,7 @@ TEST_F(CraftTests, When_CheckArgumentsHandler_Succeeds_SessionIsStarted)
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddCheckRequirementsCraftingHandler(session, nullptr,
-                                        DoNothing_EventHandler);
+    session->OnCheckRequirements.Add(DoNothing_EventHandler<std::shared_ptr<CheckRequirementsEventArgs>>);
 
     StartCrafting(session);
 
@@ -327,8 +321,7 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Succeeds_SessionIsStarted)
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddInterpretArgumentsCraftingHandler(session, nullptr,
-                                         DoNothing_EventHandler);
+    session->OnInterpretArguments.Add(DoNothing_EventHandler<std::shared_ptr<InterpretArgumentsEventArgs>>);
 
     StartCrafting(session);
 
@@ -369,8 +362,7 @@ TEST_F(CraftTests, WhenUnskilled_AbortCraftingHandler_IsCalledExactlyOnce)
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddAbortCraftingHandler(session, &callCounter,
-                            Counting_EventHandler);
+    session->OnAbort.Add(&callCounter, Counting_EventHandler<std::shared_ptr<AbortCraftingEventArgs>>);
 
     StartCrafting(session);
 
@@ -384,10 +376,9 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Fails_AbortCraftingHandler_IsC
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddInterpretArgumentsCraftingHandler(session, nullptr,
-                                         Failing_EventHandler);
-    AddAbortCraftingHandler(session, &callCounter,
-                            Counting_EventHandler);
+    session->OnInterpretArguments.Add(Failing_EventHandler<std::shared_ptr<InterpretArgumentsEventArgs>>);
+    session->OnAbort.Add(&callCounter, Counting_EventHandler<std::shared_ptr<AbortCraftingEventArgs>>);
+
     StartCrafting(session);
 
     EXPECT_EQ(callCounter, 1);
@@ -400,10 +391,8 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_AbortCraftingHandler_IsCa
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddCheckRequirementsCraftingHandler(session, nullptr,
-                                        Failing_EventHandler);
-    AddAbortCraftingHandler(session, &callCounter,
-                            Counting_EventHandler);
+    session->OnCheckRequirements.Add(Failing_EventHandler<std::shared_ptr<CheckRequirementsEventArgs>>);
+    session->OnAbort.Add(&callCounter, Counting_EventHandler<std::shared_ptr<AbortCraftingEventArgs>>);
 
     StartCrafting(session);
 
@@ -639,7 +628,7 @@ TEST_F(CraftTests, AfterCallback_SetObjectStatsEventHandler_IsCalledExactlyOnce)
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddSetObjectStatsCraftingHandler(session, &callCounter, Counting_EventHandler);
+    session->OnSetObjectStats.Add(&callCounter, Counting_EventHandler<std::shared_ptr<SetObjectStatsEventArgs>>);
     StartCrafting(session);
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
     _engineer->SubState = timer->Value;
@@ -656,7 +645,8 @@ TEST_F(CraftTests, AfterCallback_FinishedCraftingEventHandler_IsCalledExactlyOnc
     CraftRecipe *recipe = AllocateCraftRecipe(gsn_mycraftingskill, &material, 0,
                                               _resultantObject, {});
     CraftingSession *session = AllocateCraftingSession(recipe, _engineer, "");
-    AddFinishedCraftingHandler(session, &callCounter, Counting_EventHandler);
+    session->OnFinishedCrafting.Add(&callCounter, Counting_EventHandler<std::shared_ptr<FinishedCraftingEventArgs>>);
+
     StartCrafting(session);
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
     _engineer->SubState = timer->Value;
