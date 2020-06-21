@@ -86,8 +86,9 @@ static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMater
 static bool CheckSkillLevel(const CraftingSession *session);
 static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo);
 static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, std::shared_ptr<Object> obj);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> eventArgs);
-static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> args);
+static void FinishedCraftingHandler(std::shared_ptr<FinishedCraftingUserData> data,
+                                    std::shared_ptr<FinishedCraftingEventArgs> eventArgs);
+static void CheckRequirementsHandler(std::shared_ptr<CheckRequirementsEventArgs> args);
 
 CraftingMaterial::CraftingMaterial(ItemTypes type,
                                    std::initializer_list<size_t> flagBits)
@@ -160,10 +161,10 @@ static void AfterDelay(CraftingSession *session)
     FreeCraftingSession(session);
 }
 
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> eventArgs)
+static void FinishedCraftingHandler(std::shared_ptr<FinishedCraftingUserData> data,
+                                    std::shared_ptr<FinishedCraftingEventArgs> eventArgs)
 {
     CraftingSession *session = eventArgs->CraftingSession;
-    FinishedCraftingUserData *data = (FinishedCraftingUserData *)userData;
     auto ch = GetEngineer(session);
     std::string itemType = GetItemTypeNameExtended(eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE]);
     char actBuf[MAX_STRING_LENGTH];
@@ -182,11 +183,9 @@ static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraf
     ch->Echo("You gain %ld %s experience.", xpgain, AbilityName[skill->Guild]);
 
     LearnFromSuccess(ch, data->Recipe->Skill);
-
-    delete data;
 }
 
-static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> args)
+static void CheckRequirementsHandler(std::shared_ptr<CheckRequirementsEventArgs> args)
 {
     auto ch = GetEngineer(args->CraftingSession);
 
@@ -289,9 +288,9 @@ CraftingSession *AllocateCraftingSession(CraftRecipe *recipe, std::shared_ptr<Ch
                                          const std::string &commandArgument)
 {
     CraftingSession *session = new CraftingSession();
-    FinishedCraftingUserData *finishedCraftingUserData = new FinishedCraftingUserData();
+    auto finishedCraftingUserData = std::make_shared<FinishedCraftingUserData>();
     finishedCraftingUserData->Recipe = recipe;
-    AddFinishedCraftingHandler(session, finishedCraftingUserData, FinishedCraftingHandler);
+    session->OnFinishedCrafting.Add(finishedCraftingUserData, FinishedCraftingHandler);
 
     session->pImpl->Engineer = engineer;
     session->pImpl->Recipe = recipe;
@@ -300,7 +299,7 @@ CraftingSession *AllocateCraftingSession(CraftRecipe *recipe, std::shared_ptr<Ch
 
     engineer->PCData->CraftingSession = session;
 
-    AddCheckRequirementsCraftingHandler(session, NULL, CheckRequirementsHandler);
+    session->OnCheckRequirements.Add(CheckRequirementsHandler);
 
     return session;
 }
