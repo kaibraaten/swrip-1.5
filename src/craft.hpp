@@ -25,6 +25,8 @@
 #include <initializer_list>
 #include <bitset>
 #include <cstddef>
+#include <memory>
+#include <utility/event.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -50,6 +52,22 @@ class MaterialFoundEventArgs;
 class FinishedCraftingEventArgs;
 class CheckRequirementsEventArgs;
 class AbortCraftingEventArgs;
+
+class CraftingSession
+{
+public:
+    CraftingSession();
+    ~CraftingSession();
+    Ceris::Event<std::shared_ptr<InterpretArgumentsEventArgs>> OnInterpretArguments;
+    Ceris::Event<std::shared_ptr<CheckRequirementsEventArgs>> OnCheckRequirements;
+    Ceris::Event<std::shared_ptr<MaterialFoundEventArgs>> OnMaterialFound;
+    Ceris::Event<std::shared_ptr<SetObjectStatsEventArgs>> OnSetObjectStats;
+    Ceris::Event<std::shared_ptr<FinishedCraftingEventArgs>> OnFinishedCrafting;
+    Ceris::Event<std::shared_ptr<AbortCraftingEventArgs>> OnAbort;
+
+    struct Impl;
+    std::unique_ptr<Impl> pImpl;
+};
 
 class InterpretArgumentsEventArgs
 {

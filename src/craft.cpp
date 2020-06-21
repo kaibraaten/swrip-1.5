@@ -21,7 +21,6 @@
 
 #include <algorithm>
 #include <cassert>
-#include <utility/event.hpp>
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "craft.hpp"
@@ -54,21 +53,24 @@ public:
     bool KeepFinding = false;
 };
 
-class CraftingSession
+struct CraftingSession::Impl
 {
-public:
-    Ceris::Event<std::shared_ptr<InterpretArgumentsEventArgs>> OnInterpretArguments;
-    Ceris::Event<std::shared_ptr<CheckRequirementsEventArgs>> OnCheckRequirements;
-    Ceris::Event<std::shared_ptr<MaterialFoundEventArgs>> OnMaterialFound;
-    Ceris::Event<std::shared_ptr<SetObjectStatsEventArgs>> OnSetObjectStats;
-    Ceris::Event<std::shared_ptr<FinishedCraftingEventArgs>> OnFinishedCrafting;
-    Ceris::Event<std::shared_ptr<AbortCraftingEventArgs>> OnAbort;
-
     std::shared_ptr<Character> Engineer;
     CraftRecipe *Recipe = nullptr;
     FoundMaterial *FoundMaterials = nullptr;
     std::string CommandArgument;
 };
+
+CraftingSession::CraftingSession()
+    : pImpl(std::make_unique<Impl>())
+{
+
+}
+
+CraftingSession::~CraftingSession()
+{
+
+}
 
 class FinishedCraftingUserData
 {
@@ -121,8 +123,8 @@ void do_craftingengine(std::shared_ptr<Character> ch, std::string argument)
 
 static void AfterDelay(CraftingSession *session)
 {
-    CraftRecipe *recipe = session->Recipe;
-    std::shared_ptr<Character> ch = session->Engineer;
+    CraftRecipe *recipe = session->pImpl->Recipe;
+    std::shared_ptr<Character> ch = session->pImpl->Engineer;
     int the_chance = ch->PCData->Learned[recipe->Skill];
     bool hasMaterials = CheckMaterials(session, true);
     int level = ch->PCData->Learned[recipe->Skill];
@@ -188,14 +190,14 @@ static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequir
 {
     auto ch = GetEngineer(args->CraftingSession);
 
-    if(args->CraftingSession->Recipe->Flags.test(Flag::Crafting::NeedsWorkshop)
+    if(args->CraftingSession->pImpl->Recipe->Flags.test(Flag::Crafting::NeedsWorkshop)
        && !CheckRoomFlag(ch->InRoom, Flag::Room::Factory))
     {
         ch->Echo("&RYou need to be in a factory or workshop to do that.&d\r\n");
         args->AbortSession = true;
     }
 
-    if(args->CraftingSession->Recipe->Flags.test(Flag::Crafting::NeedsRefinery)
+    if(args->CraftingSession->pImpl->Recipe->Flags.test(Flag::Crafting::NeedsRefinery)
        && !CheckRoomFlag(ch->InRoom, Flag::Room::Refinery))
     {
         ch->Echo("&RYou need to be in a refinery to do that.&d\r\n");
@@ -205,7 +207,7 @@ static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequir
 
 static void AbortSession(CraftingSession *session)
 {
-    auto ch = session->Engineer;
+    auto ch = session->pImpl->Engineer;
     ch->SubState = SUB_NONE;
     ch->Echo("&RYou are interrupted and fail to finish your work.&d\r\n");
 
@@ -218,7 +220,7 @@ static void AbortSession(CraftingSession *session)
 
 std::shared_ptr<Character> GetEngineer(const CraftingSession *session)
 {
-    return session->Engineer;
+    return session->pImpl->Engineer;
 }
 
 CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial *materialList, int duration,
@@ -291,10 +293,10 @@ CraftingSession *AllocateCraftingSession(CraftRecipe *recipe, std::shared_ptr<Ch
     finishedCraftingUserData->Recipe = recipe;
     AddFinishedCraftingHandler(session, finishedCraftingUserData, FinishedCraftingHandler);
 
-    session->Engineer = engineer;
-    session->Recipe = recipe;
-    session->FoundMaterials = AllocateFoundMaterials(recipe->Materials);
-    session->CommandArgument = commandArgument;
+    session->pImpl->Engineer = engineer;
+    session->pImpl->Recipe = recipe;
+    session->pImpl->FoundMaterials = AllocateFoundMaterials(recipe->Materials);
+    session->pImpl->CommandArgument = commandArgument;
 
     engineer->PCData->CraftingSession = session;
 
@@ -305,12 +307,12 @@ CraftingSession *AllocateCraftingSession(CraftRecipe *recipe, std::shared_ptr<Ch
 
 void FreeCraftingSession(CraftingSession *session)
 {
-    FreeCraftRecipe(session->Recipe);
-    delete[] session->FoundMaterials;
+    FreeCraftRecipe(session->pImpl->Recipe);
+    delete[] session->pImpl->FoundMaterials;
 
-    if(session->Engineer)
+    if(session->pImpl->Engineer)
     {
-        session->Engineer->PCData->CraftingSession = NULL;
+        session->pImpl->Engineer->PCData->CraftingSession = NULL;
     }
 
     delete session;
@@ -318,13 +320,13 @@ void FreeCraftingSession(CraftingSession *session)
 
 static bool CheckSkillLevel(const CraftingSession *session)
 {
-    auto ch = session->Engineer;
-    int the_chance = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[session->Recipe->Skill]);
+    auto ch = session->pImpl->Engineer;
+    int the_chance = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[session->pImpl->Recipe->Skill]);
 
     if(GetRandomPercent() >= the_chance)
     {
         ch->Echo("&RYou can't figure out what to do.&d\r\n");
-        LearnFromFailure(ch, session->Recipe->Skill);
+        LearnFromFailure(ch, session->pImpl->Recipe->Skill);
         return false;
     }
 
@@ -333,7 +335,7 @@ static bool CheckSkillLevel(const CraftingSession *session)
 
 void StartCrafting(CraftingSession *session)
 {
-    auto ch = session->Engineer;
+    auto ch = session->pImpl->Engineer;
     
     auto checkRequirementsEventArgs = std::make_shared<CheckRequirementsEventArgs>();
     checkRequirementsEventArgs->CraftingSession = session;
@@ -341,7 +343,7 @@ void StartCrafting(CraftingSession *session)
 
     auto interpretArgumentsEventArgs = std::make_shared<InterpretArgumentsEventArgs>();
     interpretArgumentsEventArgs->CraftingSession = session;
-    interpretArgumentsEventArgs->CommandArguments = session->CommandArgument;
+    interpretArgumentsEventArgs->CommandArguments = session->pImpl->CommandArgument;
     interpretArgumentsEventArgs->AbortSession = false;
     session->OnInterpretArguments.Raise(interpretArgumentsEventArgs);
 
@@ -362,21 +364,21 @@ void StartCrafting(CraftingSession *session)
         return;
     }
 
-    std::shared_ptr<ProtoObject> obj = session->Recipe->Prototype;
+    std::shared_ptr<ProtoObject> obj = session->pImpl->Recipe->Prototype;
 
     ch->Echo("&GYou begin the long process of creating %s.&d\r\n",
              AOrAn(GetItemTypeNameExtended(obj->ItemType, obj->Value[OVAL_WEAPON_TYPE])).c_str());
 
     Act(AT_PLAIN, "$n takes $s tools and some material and begins to work.",
-        ch, NULL, NULL, ActTarget::Room);
-    AddTimerToCharacter(ch, TIMER_CMD_FUN, session->Recipe->Duration, do_craftingengine, SUB_PAUSE);
+        ch, nullptr, nullptr, ActTarget::Room);
+    AddTimerToCharacter(ch, TIMER_CMD_FUN, session->pImpl->Recipe->Duration, do_craftingengine, SUB_PAUSE);
 }
 
 static bool CheckMaterials(CraftingSession *session, bool extract)
 {
     std::shared_ptr<Character> ch = GetEngineer(session);
     bool foundAll = true;
-    FoundMaterial *material = NULL;
+    FoundMaterial *material = nullptr;
 
     auto carriedObjects = ch->Objects();
 
@@ -410,14 +412,14 @@ static bool CheckMaterials(CraftingSession *session, bool extract)
         }
     }
 
-    material = session->FoundMaterials;
+    material = session->pImpl->FoundMaterials;
 
     while(material->Material.ItemType != ITEM_NONE)
     {
         if(!material->Found
            && !material->Material.Flags.test(Flag::Crafting::Optional))
         {
-            std::shared_ptr<ProtoObject> proto = session->Recipe->Prototype;
+            std::shared_ptr<ProtoObject> proto = session->pImpl->Recipe->Prototype;
             std::string itemTypeName = GetItemTypeNameExtended(material->Material.ItemType, 0);
             ReplaceChar(itemTypeName, '_', ' ');
             foundAll = false;
@@ -429,15 +431,15 @@ static bool CheckMaterials(CraftingSession *session, bool extract)
         ++material;
     }
 
-    delete[] session->FoundMaterials;
-    session->FoundMaterials = AllocateFoundMaterials(session->Recipe->Materials);
+    delete[] session->pImpl->FoundMaterials;
+    session->pImpl->FoundMaterials = AllocateFoundMaterials(session->pImpl->Recipe->Materials);
 
     return foundAll;
 }
 
 static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, std::shared_ptr<Object> obj)
 {
-    FoundMaterial *material = session->FoundMaterials;
+    FoundMaterial *material = session->pImpl->FoundMaterials;
 
     while(material->Material.ItemType != ITEM_NONE)
     {
