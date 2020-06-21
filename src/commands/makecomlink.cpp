@@ -5,17 +5,17 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-struct UserData
+class MakeComlink
 {
-    std::string ItemName;
-    int WearLocation = 0;
+public:
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
+
+private:
+    std::string _itemName;
+    int _wearLocation = 0;
 };
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
-static void FreeUserData(UserData *ud);
 static bool CanUseWearLocation(int wearLocation);
 static CraftRecipe *MakeCraftRecipe();
 
@@ -23,12 +23,9 @@ void do_makecomlink(std::shared_ptr<Character> ch, std::string argument)
 {
     CraftRecipe *recipe = MakeCraftRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *ud = new UserData();
-
-    AddInterpretArgumentsCraftingHandler(session, ud, InterpretArgumentsHandler);
-    AddSetObjectStatsCraftingHandler(session, ud, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, ud, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, ud, AbortHandler);
+    auto data = std::make_shared<MakeComlink>();
+    session->OnInterpretArguments.Add(data, &MakeComlink::InterpretArguments);
+    session->OnSetObjectStats.Add(data, &MakeComlink::SetObjectStats);
 
     StartCrafting(session);
 }
@@ -50,9 +47,8 @@ static CraftRecipe *MakeCraftRecipe()
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
+void MakeComlink::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    UserData *ud = (UserData *)userData;
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
     std::string argument = args->CommandArguments;
     std::string wearLoc;
@@ -63,62 +59,44 @@ static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretA
 
     if(itemName.empty())
     {
-        ch->Echo("&RUsage: Makecomlink <wearloc> <name>\r\n&w");
+        ch->Echo("&RUsage: makecomlink <wearloc> <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->WearLocation = GetWearFlag(wearLoc);
+    _wearLocation = GetWearFlag(wearLoc);
 
-    if(ud->WearLocation == -1)
+    if(_wearLocation == -1)
     {
         ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc.c_str());
         args->AbortSession = true;
         return;
     }
 
-    if(!CanUseWearLocation(ud->WearLocation))
+    if(!CanUseWearLocation(_wearLocation))
     {
-        ch->Echo("&RYou cannot make a comlink for that body part.\r\n&w");
+        ch->Echo("&RYou cannot make a comlink for that body part.\r\n&d");
         args->AbortSession = true;
         return;
     }
 
-    ud->ItemName = itemName;
+    _itemName = itemName;
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
+void MakeComlink::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    UserData *ud = (UserData *)userData;
     auto comlink = args->Object;
 
     comlink->WearFlags.set(Flag::Wear::Take);
-    comlink->WearFlags.set(ud->WearLocation);
+    comlink->WearFlags.set(_wearLocation);
 
     comlink->Weight = 1;
 
-    comlink->Name = ud->ItemName + " comlink";
-    comlink->ShortDescr = ud->ItemName;
-    comlink->Description = Capitalize(ud->ItemName + " was left here.");
+    comlink->Name = _itemName + " comlink";
+    comlink->ShortDescr = _itemName;
+    comlink->Description = Capitalize(_itemName + " was left here.");
 
     comlink->Cost = 50;
-}
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    UserData *ud = (UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    UserData *ud = (UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(UserData *ud)
-{
-    delete ud;
 }
 
 static bool CanUseWearLocation(int wearLocation)

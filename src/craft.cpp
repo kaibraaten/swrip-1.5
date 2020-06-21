@@ -470,42 +470,6 @@ static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo)
     return type;
 }
 
-void AddInterpretArgumentsCraftingHandler(CraftingSession *session, void *userData,
-                                          void(*handler)(void *, std::shared_ptr<InterpretArgumentsEventArgs>))
-{
-    session->OnInterpretArguments.Add(userData, handler);
-}
-
-void AddCheckRequirementsCraftingHandler(CraftingSession *session, void *userData,
-                                         void(*handler)(void *, std::shared_ptr<CheckRequirementsEventArgs>))
-{
-    session->OnCheckRequirements.Add(userData, handler);
-}
-
-void AddMaterialFoundCraftingHandler(CraftingSession *session, void *userData,
-                                     void(*handler)(void *, std::shared_ptr<MaterialFoundEventArgs>))
-{
-    session->OnMaterialFound.Add(userData, handler);
-}
-
-void AddSetObjectStatsCraftingHandler(CraftingSession *session, void *userData,
-                                      void(*handler)(void *, std::shared_ptr<SetObjectStatsEventArgs>))
-{
-    session->OnSetObjectStats.Add(userData, handler);
-}
-
-void AddFinishedCraftingHandler(CraftingSession *session, void *userData,
-                                void(*handler)(void *, std::shared_ptr<FinishedCraftingEventArgs>))
-{
-    session->OnFinishedCrafting.Add(userData, handler);
-}
-
-void AddAbortCraftingHandler(CraftingSession *session, void *userData,
-                             void(*handler)(void *, std::shared_ptr<AbortCraftingEventArgs>))
-{
-    session->OnAbort.Add(userData, handler);
-}
-
 bool IsCrafting(std::shared_ptr<Character> ch)
 {
     return ch->PCData->CraftingSession != nullptr;

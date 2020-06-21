@@ -5,37 +5,34 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-struct UserData
+class MakeShield
 {
-    std::string ItemName;
-    int Charge = 0;
-    int GemType = 0;
+public:
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
+
+private:
+    std::string _itemName;
+    int _charge = 0;
+    int _gemType = 0;
 };
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
 static CraftRecipe *MakeCraftRecipe();
-static void FreeUserData(struct UserData *ud);
 
 void do_makeshield(std::shared_ptr<Character> ch, std::string argument)
 {
     CraftRecipe *recipe = MakeCraftRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *data = new UserData();
-
-    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
-    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, data, AbortHandler);
+    auto data = std::make_shared<MakeShield>();
+    session->OnInterpretArguments.Add(data, &MakeShield::InterpretArguments);
+    session->OnMaterialFound.Add(data, &MakeShield::MaterialFound);
+    session->OnSetObjectStats.Add(data, &MakeShield::SetObjectStats);
 
     StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe(void)
+static CraftRecipe *MakeCraftRecipe()
 {
     static const CraftingMaterial materials[] =
     {
@@ -53,39 +50,35 @@ static CraftRecipe *MakeCraftRecipe(void)
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
+void MakeShield::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
+    auto ch = GetEngineer(args->CraftingSession);
 
     if(args->CommandArguments.empty())
     {
-        ch->Echo("&RUsage: Makeshield <name>\r\n&w");
+        ch->Echo("&RUsage: makeshield <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->ItemName = args->CommandArguments;
+    _itemName = args->CommandArguments;
 }
 
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
+void MakeShield::MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
-
     if(args->Object->ItemType == ITEM_BATTERY)
     {
-        ud->Charge = umin(args->Object->Value[OVAL_BATTERY_CHARGE], 10);
+        _charge = umin(args->Object->Value[OVAL_BATTERY_CHARGE], 10);
     }
 
     if(args->Object->ItemType == ITEM_CRYSTAL)
     {
-        ud->GemType = args->Object->Value[OVAL_CRYSTAL_TYPE];
+       _gemType = args->Object->Value[OVAL_CRYSTAL_TYPE];
     }
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
+void MakeShield::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
     auto shield = args->Object;
 
     shield->ItemType = ITEM_ARMOR;
@@ -93,30 +86,13 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     shield->WearFlags.set(Flag::Wear::Shield);
     shield->Weight = 2;
 
-    shield->Name = ud->ItemName + " energy shield";
-    shield->ShortDescr = ud->ItemName;
-    shield->Description = Capitalize(ud->ItemName) + " was carelessly misplaced here.";
+    shield->Name = _itemName + " energy shield";
+    shield->ShortDescr = _itemName;
+    shield->Description = Capitalize(_itemName) + " was carelessly misplaced here.";
 
-    shield->Value[OVAL_ARMOR_CONDITION] = (int)(shield->Level / 10 + ud->GemType * 2);
-    shield->Value[OVAL_ARMOR_AC] = (int)(shield->Level / 10 + ud->GemType * 2);
-    shield->Value[OVAL_ARMOR_SHIELD_CHARGE] = ud->Charge;
-    shield->Value[OVAL_ARMOR_SHIELD_MAX_CHARGE] = ud->Charge;
+    shield->Value[OVAL_ARMOR_CONDITION] = (int)(shield->Level / 10 + _gemType * 2);
+    shield->Value[OVAL_ARMOR_AC] = (int)(shield->Level / 10 + _gemType * 2);
+    shield->Value[OVAL_ARMOR_SHIELD_CHARGE] = _charge;
+    shield->Value[OVAL_ARMOR_SHIELD_MAX_CHARGE] = _charge;
     shield->Cost = shield->Value[OVAL_ARMOR_AC] * 100;
-}
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(struct UserData *ud)
-{
-    delete ud;
 }

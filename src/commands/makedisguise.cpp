@@ -5,30 +5,27 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-struct UserData
+class MakeDisguise
 {
-    int Race = 0;
-    int Sex = 0;
-    std::string Name;
+public:
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
+
+private:
+    int _race = 0;
+    int _sex = 0;
+    std::string _name;
 };
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
-static void FreeUserData(UserData *ud);
 static CraftRecipe *MakeCraftRecipe();
 
 void do_makedisguise(std::shared_ptr<Character> ch, std::string argument)
 {
     CraftRecipe *recipe = MakeCraftRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *data = new UserData();
-
-    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, data, AbortHandler);
+    auto data = std::make_shared<MakeDisguise>();
+    session->OnInterpretArguments.Add(data, &MakeDisguise::InterpretArguments);
+    session->OnSetObjectStats.Add(data, &MakeDisguise::SetObjectStats);
 
     StartCrafting(session);
 }
@@ -49,9 +46,8 @@ static CraftRecipe *MakeCraftRecipe()
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
+void MakeDisguise::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    UserData *ud = (UserData *)userData;
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
     std::string argument = args->CommandArguments;
     std::string sex;
@@ -62,70 +58,52 @@ static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretA
 
     if(argument.empty() || sex.empty() || race.empty())
     {
-        ch->Echo("&RUsage: Makedisguise <sex> <race> <name>\r\n&w");
+        ch->Echo("&RUsage: makedisguise <sex> <race> <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->Sex = GetSex(sex);
+    _sex = GetSex(sex);
 
-    if(ud->Sex == -1)
+    if(_sex == -1)
     {
         ch->Echo("Sex must be male, female or neutral.&w\r\n");
         args->AbortSession = true;
         return;
     }
 
-    ud->Race = GetRaceFromName(race);
+    _race = GetRaceFromName(race);
 
-    if(ud->Race < 0)
+    if(_race < 0)
     {
         ch->Echo("&R'%s' is not a valid race.&w\r\n", race.c_str());
         args->AbortSession = true;
         return;
     }
 
-    ud->Name = argument;
+    _name = argument;
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
+void MakeDisguise::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    UserData *ud = (UserData *)userData;
     char buf[MAX_STRING_LENGTH];
     auto disguise = args->Object;
 
     disguise->WearFlags.set(Flag::Wear::Disguise);
     disguise->WearFlags.set(Flag::Wear::Take);
 
-    strcpy(buf, ud->Name.c_str());
+    strcpy(buf, _name.c_str());
     strcat(buf, " disguise");
     disguise->Name = buf;
 
-    strcpy(buf, ud->Name.c_str());
+    strcpy(buf, _name.c_str());
     disguise->ShortDescr = buf;
 
     disguise->Description.erase();
 
     disguise->Value[OVAL_DISGUISE_MAX_CONDITION] = INIT_WEAPON_CONDITION;
     disguise->Value[OVAL_DISGUISE_CONDITION] = INIT_WEAPON_CONDITION;
-    disguise->Value[OVAL_DISGUISE_RACE] = ud->Race;
-    disguise->Value[OVAL_DISGUISE_SEX] = ud->Sex;
+    disguise->Value[OVAL_DISGUISE_RACE] = _race;
+    disguise->Value[OVAL_DISGUISE_SEX] = _sex;
     disguise->Cost = 5000;
-}
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(struct UserData *ud)
-{
-    delete ud;
 }

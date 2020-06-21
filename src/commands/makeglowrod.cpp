@@ -5,36 +5,34 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-struct UserData
+class MakeGlowrod
 {
-    std::string ItemName;
-    int Charge = 0;
+public:
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
+
+private:
+    std::string _itemName;
+    int _charge = 0;
 };
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
 static CraftRecipe *MakeCraftRecipe();
-static void FreeUserData(struct UserData *ud);
 
 void do_makeglowrod(std::shared_ptr<Character> ch, std::string argument)
 {
     CraftRecipe *recipe = MakeCraftRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *data = new UserData();
 
-    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
-    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, data, AbortHandler);
+    auto data = std::make_shared<MakeGlowrod>();
+    session->OnInterpretArguments.Add(data, &MakeGlowrod::InterpretArguments);
+    session->OnMaterialFound.Add(data, &MakeGlowrod::MaterialFound);
+    session->OnSetObjectStats.Add(data, &MakeGlowrod::SetObjectStats);
 
     StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe(void)
+static CraftRecipe *MakeCraftRecipe()
 {
     static const CraftingMaterial materials[] =
     {
@@ -52,34 +50,30 @@ static CraftRecipe *MakeCraftRecipe(void)
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
+void MakeGlowrod::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
+    auto ch = GetEngineer(args->CraftingSession);
 
     if(args->CommandArguments.empty())
     {
-        ch->Echo("&RUsage: Makeglowrod <name>\r\n&w");
+        ch->Echo("&RUsage: makeglowrod <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->ItemName = args->CommandArguments;
+    _itemName = args->CommandArguments;
 }
 
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
+void MakeGlowrod::MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
-
     if(args->Object->ItemType == ITEM_BATTERY)
     {
-        ud->Charge = args->Object->Value[OVAL_BATTERY_CHARGE];
+        _charge = args->Object->Value[OVAL_BATTERY_CHARGE];
     }
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
+void MakeGlowrod::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
     char buf[MAX_STRING_LENGTH];
     auto glowrod = args->Object;
 
@@ -87,35 +81,16 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     glowrod->WearFlags.set(Flag::Wear::Take);
     glowrod->Weight = 3;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     strcat(buf, " glowrod");
     glowrod->Name = buf;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     glowrod->ShortDescr = buf;
 
     strcat(buf, " was carelessly misplaced here.");
     glowrod->Description = Capitalize(buf);
 
-    glowrod->Value[OVAL_LIGHT_POWER] = ud->Charge;
+    glowrod->Value[OVAL_LIGHT_POWER] = _charge;
     glowrod->Cost = glowrod->Value[OVAL_LIGHT_POWER];
 }
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(struct UserData *ud)
-{
-    delete ud;
-}
-
-

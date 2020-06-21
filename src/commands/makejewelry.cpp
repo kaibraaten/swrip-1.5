@@ -5,33 +5,30 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-struct UserData
+class MakeJewelry
 {
-    std::string ItemName;
-    int WearLocation = 0;
-    long Cost = 0;
+public:
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
+
+private:
+    std::string _itemName;
+    int _wearLocation = 0;
+    long _cost = 0;
 };
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
 static CraftRecipe *MakeCraftRecipe();
-static void FreeUserData(UserData *ud);
 static bool CanUseWearLocation(int wearLocation);
 
 void do_makejewelry(std::shared_ptr<Character> ch, std::string argument)
 {
-    UserData *data = new UserData();
     CraftRecipe *recipe = MakeCraftRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-
-    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
-    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, data, AbortHandler);
+    auto data = std::make_shared<MakeJewelry>();
+    session->OnInterpretArguments.Add(data, &MakeJewelry::InterpretArguments);
+    session->OnMaterialFound.Add(data, &MakeJewelry::MaterialFound);
+    session->OnSetObjectStats.Add(data, &MakeJewelry::SetObjectStats);
 
     StartCrafting(session);
 }
@@ -53,9 +50,8 @@ static CraftRecipe *MakeCraftRecipe()
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
+void MakeJewelry::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    UserData *ud = (UserData *)userData;
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
     std::string argument = args->CommandArguments;
     std::string wearLoc;
@@ -66,59 +62,56 @@ static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretA
 
     if(name.empty())
     {
-        ch->Echo("&RUsage: Makejewelry <wearloc> <name>\r\n&w");
+        ch->Echo("&RUsage: makejewelry <wearloc> <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->WearLocation = GetWearFlag(wearLoc);
+    _wearLocation = GetWearFlag(wearLoc);
 
-    if(ud->WearLocation == -1)
+    if(_wearLocation == -1)
     {
         ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc.c_str());
         args->AbortSession = true;
         return;
     }
 
-    if(!CanUseWearLocation(ud->WearLocation))
+    if(!CanUseWearLocation(_wearLocation))
     {
         ch->Echo("&RYou cannot make jewelry for that body part.\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->ItemName = name;
+    _itemName = name;
 }
 
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
+void MakeJewelry::MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
-
     if(args->Object->ItemType == ITEM_RARE_METAL)
     {
-        ud->Cost += args->Object->Cost;
+        _cost += args->Object->Cost;
     }
 
     if(args->Object->ItemType == ITEM_CRYSTAL)
     {
-        ud->Cost += args->Object->Cost;
+        _cost += args->Object->Cost;
         args->KeepFinding = true;
     }
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
+void MakeJewelry::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
     char buf[MAX_STRING_LENGTH];
     auto obj = args->Object;
 
     obj->WearFlags.set(Flag::Wear::Take);
-    obj->WearFlags.set(ud->WearLocation);
+    obj->WearFlags.set(_wearLocation);
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     obj->Name = buf;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     obj->ShortDescr = buf;
 
     strcat(buf, " was dropped here.");
@@ -126,24 +119,7 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
 
     obj->Value[OVAL_ARMOR_CONDITION] = obj->Value[OVAL_ARMOR_AC];
 
-    obj->Cost += ud->Cost;
-}
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(struct UserData *ud)
-{
-    delete ud;
+    obj->Cost += _cost;
 }
 
 static bool CanUseWearLocation(int wearLocation)

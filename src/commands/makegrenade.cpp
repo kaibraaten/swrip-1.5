@@ -6,20 +6,20 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 
-struct UserData
+class MakeGrenade
 {
-    int Strength = 0;
-    int Weight = 0;
-    int Level = 0;
-    std::string ItemName;
-};
+public:
+    MakeGrenade(int level);
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
-static void FreeUserData(struct UserData *ud);
+private:
+    int _strength = 0;
+    int _weight = 0;
+    int _level = 0;
+    std::string _itemName;
+};
 
 void do_makegrenade(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -36,38 +36,38 @@ void do_makegrenade(std::shared_ptr<Character> ch, std::string argument)
                                               25, GetProtoObject(OBJ_VNUM_CRAFTING_GRENADE),
                                               { Flag::Crafting::NeedsWorkshop });
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *data = new UserData();
-
-    data->Level = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_makegrenade]);
-
-    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
-    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, data, AbortHandler);
+    
+    auto level = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_makegrenade]);
+    auto data = std::make_shared<MakeGrenade>(level);
+    session->OnInterpretArguments.Add(data, &MakeGrenade::InterpretArguments);
+    session->OnMaterialFound.Add(data, &MakeGrenade::MaterialFound);
+    session->OnSetObjectStats.Add(data, &MakeGrenade::SetObjectStats);
 
     StartCrafting(session);
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
+MakeGrenade::MakeGrenade(int level)
+    : _level(level)
 {
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
-    struct UserData *ud = (struct UserData *)userData;
+
+}
+
+void MakeGrenade::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
+{
+    auto ch = GetEngineer(args->CraftingSession);
 
     if(args->CommandArguments.empty())
     {
-        ch->Echo("&RUsage: Makegrenade <name>\r\n&w");
+        ch->Echo("&RUsage: makegrenade <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->ItemName = args->CommandArguments;
+    _itemName = args->CommandArguments;
 }
 
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
+void MakeGrenade::MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
-
     if(args->Object->ItemType == ITEM_DRINK_CON
        && args->Object->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] > 0)
     {
@@ -76,51 +76,31 @@ static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEv
 
     if(args->Object->ItemType == ITEM_CHEMICAL)
     {
-        ud->Strength = urange(10, args->Object->Value[OVAL_CHEMICAL_STRENGTH], ud->Level * 5);
-        ud->Weight = args->Object->Weight;
+        _strength = urange(10, args->Object->Value[OVAL_CHEMICAL_STRENGTH], _level * 5);
+        _weight = args->Object->Weight;
     }
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
+void MakeGrenade::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
     char buf[MAX_STRING_LENGTH];
     auto grenade = args->Object;
 
     grenade->WearFlags.set(Flag::Wear::Hold);
     grenade->WearFlags.set(Flag::Wear::Take);
-    grenade->Weight = ud->Weight;
+    grenade->Weight = _weight;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     strcat(buf, " grenade");
     grenade->Name = buf;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     grenade->ShortDescr = buf;
 
     strcat(buf, " was carelessly misplaced here.");
     grenade->Description = Capitalize(buf);
 
-    grenade->Value[OVAL_EXPLOSIVE_MIN_DMG] = ud->Strength / 2;
-    grenade->Value[OVAL_EXPLOSIVE_MAX_DMG] = ud->Strength;
+    grenade->Value[OVAL_EXPLOSIVE_MIN_DMG] = _strength / 2;
+    grenade->Value[OVAL_EXPLOSIVE_MAX_DMG] = _strength;
     grenade->Cost = grenade->Value[OVAL_EXPLOSIVE_MAX_DMG] * 5;
 }
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(struct UserData *ud)
-{
-    delete ud;
-}
-
-

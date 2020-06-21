@@ -7,17 +7,17 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-struct UserData
+class MakeContainer
 {
-    int WearLocation = 0;
-    std::string ItemName;
+public:
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
+
+private:
+    int _wearLocation = 0;
+    std::string _itemName;
 };
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
-static void FreeUserData(UserData *ud);
 static bool CanUseWearLocation(int wearLocation);
 
 void do_makecontainer(std::shared_ptr<Character> ch, std::string argument)
@@ -33,27 +33,23 @@ void do_makecontainer(std::shared_ptr<Character> ch, std::string argument)
                                               10, GetProtoObject(OBJ_VNUM_CRAFTING_CONTAINER),
                                               { Flag::Crafting::NeedsWorkshop });
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *ud = new UserData();
-
-    AddInterpretArgumentsCraftingHandler(session, ud, InterpretArgumentsHandler);
-    AddSetObjectStatsCraftingHandler(session, ud, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, ud, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, ud, AbortHandler);
+    auto data = std::make_shared<MakeContainer>();
+    session->OnInterpretArguments.Add(data, &MakeContainer::InterpretArguments);
+    session->OnSetObjectStats.Add(data, &MakeContainer::SetObjectStats);
 
     StartCrafting(session);
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> eventArgs)
+void MakeContainer::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> eventArgs)
 {
-    UserData *ud = (UserData *)userData;
     auto container = eventArgs->Object;
 
     container->WearFlags.set(Flag::Wear::Take);
-    container->WearFlags.set(ud->WearLocation);
+    container->WearFlags.set(_wearLocation);
 
-    container->Name = ud->ItemName;
-    container->ShortDescr = ud->ItemName;
-    container->Description = Capitalize(ud->ItemName) + " was dropped here.";
+    container->Name = _itemName;
+    container->ShortDescr = _itemName;
+    container->Description = Capitalize(_itemName) + " was dropped here.";
 
     container->Value[OVAL_CONTAINER_CAPACITY] = container->Level;
     container->Value[OVAL_CONTAINER_FLAGS] = 0;
@@ -61,9 +57,8 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     container->Value[OVAL_CONTAINER_CONDITION] = 10;
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> eventArgs)
+void MakeContainer::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> eventArgs)
 {
-    UserData *ud = (UserData *)userData;
     CraftingSession *session = eventArgs->CraftingSession;
     std::string argument = eventArgs->CommandArguments;
     std::string wearLoc;
@@ -75,45 +70,28 @@ static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretA
 
     if(itemName.empty())
     {
-        ch->Echo("&RUsage: Makecontainer <body|about|take|hold> <name>\r\n&w");
+        ch->Echo("&RUsage: makecontainer <body|about|take|hold> <name>\r\n&d");
         eventArgs->AbortSession = true;
         return;
     }
 
-    ud->WearLocation = GetWearFlag(wearLoc);
+    _wearLocation = GetWearFlag(wearLoc);
 
-    if(ud->WearLocation == -1)
+    if(_wearLocation == -1)
     {
-        ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc.c_str());
+        ch->Echo("&R'%s' is not a wear location.&d\r\n", wearLoc.c_str());
         eventArgs->AbortSession = true;
         return;
     }
 
-    if(!CanUseWearLocation(ud->WearLocation))
+    if(!CanUseWearLocation(_wearLocation))
     {
-        ch->Echo("&RYou cannot make a container for that body part.\r\n&w");
+        ch->Echo("&RYou cannot make a container for that body part.\r\n&d");
         eventArgs->AbortSession = true;
         return;
     }
 
-    ud->ItemName = itemName;
-}
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    UserData *ud = (UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    UserData *ud = (UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(UserData *ud)
-{
-    delete ud;
+    _itemName = itemName;
 }
 
 static bool CanUseWearLocation(int wearLocation)

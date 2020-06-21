@@ -5,35 +5,32 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-struct UserData
+struct MakeBowcaster
 {
-    int Ammo = 0;
-    int Tinder = 0;
-    int Lenses = 0;
-    std::string ItemName;
+public:
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void CheckRequirements(std::shared_ptr<CheckRequirementsEventArgs> args);
+    void MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
+
+private:
+    int _ammo = 0;
+    int _tinder = 0;
+    int _lenses = 0;
+    std::string _itemName;
 };
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> args);
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
 static CraftRecipe *CreateMakeBowcasterCraftRecipe();
-static void FreeUserData(UserData *ud);
 
 void do_makebowcaster(std::shared_ptr<Character> ch, std::string argument)
 {
     CraftRecipe *recipe = CreateMakeBowcasterCraftRecipe();
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *data = new UserData();
-
-    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddCheckRequirementsCraftingHandler(session, data, CheckRequirementsHandler);
-    AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
-    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, data, AbortHandler);
+    auto data = std::make_shared<MakeBowcaster>();
+    session->OnInterpretArguments.Add(data, &MakeBowcaster::InterpretArguments);
+    session->OnCheckRequirements.Add(data, &MakeBowcaster::CheckRequirements);
+    session->OnMaterialFound.Add(data, &MakeBowcaster::MaterialFound);
+    session->OnSetObjectStats.Add(data, &MakeBowcaster::SetObjectStats);
 
     StartCrafting(session);
 }
@@ -59,22 +56,21 @@ static CraftRecipe *CreateMakeBowcasterCraftRecipe()
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
+void MakeBowcaster::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
-    UserData *ud = static_cast<UserData *>(userData);
 
     if(args->CommandArguments.empty())
     {
-        ch->Echo("&RUsage: Makebowcaster <name>\r\n&w");
+        ch->Echo("&RUsage: makebowcaster <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->ItemName = args->CommandArguments;
+    _itemName = args->CommandArguments;
 }
 
-static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> args)
+void MakeBowcaster::CheckRequirements(std::shared_ptr<CheckRequirementsEventArgs> args)
 {
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
 
@@ -85,31 +81,28 @@ static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequir
     }
 }
 
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
+void MakeBowcaster::MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args)
 {
-    UserData *ud = (UserData *)userData;
-
     if(args->Object->ItemType == ITEM_BOLT)
     {
-        ud->Ammo = args->Object->Value[OVAL_BOLT_CHARGE];
+        _ammo = args->Object->Value[OVAL_BOLT_CHARGE];
     }
 
-    if(args->Object->ItemType == ITEM_LENS && ud->Lenses < 2)
+    if(args->Object->ItemType == ITEM_LENS && _lenses < 2)
     {
-        ++ud->Lenses;
-        args->KeepFinding = ud->Lenses < 2;
+        ++_lenses;
+        args->KeepFinding = _lenses < 2;
     }
 
-    if(args->Object->ItemType == ITEM_TINDER && ud->Tinder < 4)
+    if(args->Object->ItemType == ITEM_TINDER && _tinder < 4)
     {
-        ++ud->Tinder;
-        args->KeepFinding = ud->Tinder < 4;
+        ++_tinder;
+        args->KeepFinding = _tinder < 4;
     }
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
+void MakeBowcaster::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    UserData *ud = static_cast<UserData *>(userData);
     char buf[MAX_STRING_LENGTH];
     auto obj = args->Object;
 
@@ -118,11 +111,11 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     obj->WearFlags.set(Flag::Wear::Take);
     obj->Weight = 2 + obj->Level / 7;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     strcat(buf, " bowcaster");
     obj->Name = buf;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     obj->ShortDescr = buf;
 
     strcat(buf, " was carefully placed here.");
@@ -132,7 +125,7 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     hitroll->Type = -1;
     hitroll->Duration = -1;
     hitroll->Location = GetAffectType("hitroll");
-    hitroll->Modifier = urange(0, 1 + ud->Lenses, obj->Level / 30);
+    hitroll->Modifier = urange(0, 1 + _lenses, obj->Level / 30);
     obj->Add(hitroll);
     ++top_affect;
 
@@ -140,7 +133,7 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     damroll->Type = -1;
     damroll->Duration = -1;
     damroll->Location = GetAffectType("damroll");
-    damroll->Modifier = urange(0, ud->Tinder, obj->Level / 30);
+    damroll->Modifier = urange(0, _tinder, obj->Level / 30);
     obj->Add(damroll);
     ++top_affect;
 
@@ -148,24 +141,7 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     obj->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int)(obj->Level / 10 + 25);
     obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int)(obj->Level / 5 + 25);
     obj->Value[OVAL_WEAPON_TYPE] = WEAPON_BOWCASTER;
-    obj->Value[OVAL_WEAPON_CHARGE] = ud->Ammo;
+    obj->Value[OVAL_WEAPON_CHARGE] = _ammo;
     obj->Value[OVAL_WEAPON_MAX_CHARGE] = 250;
     obj->Cost = obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] * 50;
-}
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    UserData *ud = (UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    UserData *ud = (UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(UserData *ud)
-{
-    delete ud;
 }

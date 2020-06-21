@@ -5,19 +5,18 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-struct UserData
+class MakeBlade
 {
-    int Charge = 0;
-    bool HasStaff = false;
-    std::string ItemName;
-};
+public:
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
-static void FreeUserData(struct UserData *ud);
+private:
+    int _charge = 0;
+    bool _hasStaff = false;
+    std::string _itemName;
+};
 
 void do_makeblade(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -34,51 +33,44 @@ void do_makeblade(std::shared_ptr<Character> ch, std::string argument)
                                               25, GetProtoObject(OBJ_VNUM_CRAFTING_BLADE),
                                               { Flag::Crafting::NeedsWorkshop });
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *data = new UserData();
-
-    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
-    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, data, AbortHandler);
+    auto data = std::make_shared<MakeBlade>();
+    session->OnInterpretArguments.Add(data, &MakeBlade::InterpretArguments);
+    session->OnMaterialFound.Add(data, &MakeBlade::MaterialFound);
+    session->OnSetObjectStats.Add(data, &MakeBlade::SetObjectStats);
 
     StartCrafting(session);
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
+void MakeBlade::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
-    struct UserData *ud = (struct UserData *)userData;
 
     if(!args->CommandArguments.empty())
     {
-        ud->ItemName = args->CommandArguments;
+        _itemName = args->CommandArguments;
     }
     else
     {
-        ch->Echo("&RUsage: Makeblade <name>\r\n&w");
+        ch->Echo("&RUsage: makeblade <name>\r\n&w");
         args->AbortSession = true;
     }
 }
 
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
+void MakeBlade::MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
-
     if(args->Object->ItemType == ITEM_STAFF)
     {
-        ud->HasStaff = true;
+        _hasStaff = true;
     }
 
     if(args->Object->ItemType == ITEM_BATTERY)
     {
-        ud->Charge = args->Object->Value[OVAL_BATTERY_CHARGE];
+        _charge = args->Object->Value[OVAL_BATTERY_CHARGE];
     }
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
+void MakeBlade::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    UserData *ud = (UserData *)userData;
     char buf[MAX_STRING_LENGTH] = { '\0' };
     auto weapon = args->Object;
 
@@ -87,9 +79,9 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     weapon->WearFlags.set(Flag::Wear::Take);
     weapon->Weight = 3;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
 
-    if(!ud->HasStaff)
+    if(!_hasStaff)
     {
         strcat(buf, " vibro-blade blade");
     }
@@ -99,7 +91,7 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     }
 
     weapon->Name = buf;
-    weapon->ShortDescr = ud->ItemName;
+    weapon->ShortDescr = _itemName;
     weapon->Description = Capitalize(weapon->ShortDescr + " was left here.");
 
     auto backstab = std::make_shared<Affect>();
@@ -110,7 +102,7 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     weapon->Add(backstab);
     ++top_affect;
 
-    if(!ud->HasStaff)
+    if(!_hasStaff)
     {
         auto hitroll = std::make_shared<Affect>();
         hitroll->Type = -1;
@@ -123,7 +115,7 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
 
     weapon->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
 
-    if(!ud->HasStaff)
+    if(!_hasStaff)
     {
         weapon->Value[OVAL_WEAPON_TYPE] = WEAPON_VIBRO_BLADE;
     }
@@ -135,24 +127,7 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     weapon->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int)(weapon->Level / 20 + 8 + weapon->Value[OVAL_WEAPON_TYPE]);
     weapon->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int)(weapon->Level / 10 + 18 + weapon->Value[OVAL_WEAPON_TYPE]);
 
-    weapon->Value[OVAL_WEAPON_CHARGE] = ud->Charge;
-    weapon->Value[OVAL_WEAPON_MAX_CHARGE] = ud->Charge;
+    weapon->Value[OVAL_WEAPON_CHARGE] = _charge;
+    weapon->Value[OVAL_WEAPON_MAX_CHARGE] = _charge;
     weapon->Cost = weapon->Value[OVAL_WEAPON_SIZE_DAM_DIE] * 10;
-}
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(struct UserData *ud)
-{
-    delete ud;
 }

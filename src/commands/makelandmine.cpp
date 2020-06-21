@@ -6,20 +6,20 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 
-struct UserData
+class MakeLandmine
 {
-    int Strength = 0;
-    int Weight = 0;
-    int Level = 0;
-    std::string ItemName;
-};
+public:
+    MakeLandmine(int level);
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
-static void FreeUserData(struct UserData *ud);
+private:
+    int _strength = 0;
+    int _weight = 0;
+    int _level = 0;
+    std::string _itemName;
+};
 
 void do_makelandmine(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -36,37 +36,37 @@ void do_makelandmine(std::shared_ptr<Character> ch, std::string argument)
                                               25, GetProtoObject(OBJ_VNUM_CRAFTING_LANDMINE),
                                               { Flag::Crafting::NeedsWorkshop });
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *data = new UserData();
-    data->Level = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_makelandmine]);
-
-    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
-    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, data, AbortHandler);
+    auto level = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_makelandmine]);
+    auto data = std::make_shared<MakeLandmine>(level);
+    session->OnInterpretArguments.Add(data, &MakeLandmine::InterpretArguments);
+    session->OnMaterialFound.Add(data, &MakeLandmine::MaterialFound);
+    session->OnSetObjectStats.Add(data, &MakeLandmine::SetObjectStats);
 
     StartCrafting(session);
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
+MakeLandmine::MakeLandmine(int level)
+    : _level(level)
 {
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
-    struct UserData *ud = (struct UserData *)userData;
+
+}
+
+void MakeLandmine::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
+{
+    auto ch = GetEngineer(args->CraftingSession);
 
     if(args->CommandArguments.empty())
     {
-        ch->Echo("&RUsage: Makelandmine <name>\r\n&w");
+        ch->Echo("&RUsage: makelandmine <name>\r\n&w");
         args->AbortSession = true;
         return;
     }
 
-    ud->ItemName = args->CommandArguments;
+    _itemName = args->CommandArguments;
 }
 
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
+void MakeLandmine::MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
-
     if(args->Object->ItemType == ITEM_DRINK_CON
        && args->Object->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] > 0)
     {
@@ -75,49 +75,31 @@ static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEv
 
     if(args->Object->ItemType == ITEM_CHEMICAL)
     {
-        ud->Strength = urange(10, args->Object->Value[OVAL_CHEMICAL_STRENGTH], ud->Level * 5);
-        ud->Weight = args->Object->Weight;
+        _strength = urange(10, args->Object->Value[OVAL_CHEMICAL_STRENGTH], _level * 5);
+        _weight = args->Object->Weight;
     }
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
+void MakeLandmine::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
     char buf[MAX_STRING_LENGTH];
     auto landmine = args->Object;
 
     landmine->WearFlags.set(Flag::Wear::Hold);
     landmine->WearFlags.set(Flag::Wear::Take);
-    landmine->Weight = ud->Weight;
+    landmine->Weight = _weight;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     strcat(buf, " landmine");
     landmine->Name = buf;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     landmine->ShortDescr = buf;
 
     strcat(buf, " was carelessly misplaced here.");
     landmine->Description = Capitalize(buf);
 
-    landmine->Value[OVAL_EXPLOSIVE_MIN_DMG] = ud->Strength / 2;
-    landmine->Value[OVAL_EXPLOSIVE_MAX_DMG] = ud->Strength;
+    landmine->Value[OVAL_EXPLOSIVE_MIN_DMG] = _strength / 2;
+    landmine->Value[OVAL_EXPLOSIVE_MAX_DMG] = _strength;
     landmine->Cost = landmine->Value[OVAL_EXPLOSIVE_MAX_DMG] * 5;
-}
-
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    struct UserData *ud = (struct UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(struct UserData *ud)
-{
-    delete ud;
 }

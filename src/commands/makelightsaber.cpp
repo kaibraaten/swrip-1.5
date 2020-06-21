@@ -9,21 +9,20 @@
 
 #define MAX_NUMBER_OF_CRYSTALS 3
 
-struct UserData
+class MakeLightsaber
 {
-    std::string ItemName;
-    int GemType = 0;
-    int GemCount = 0;
-    int Charge = 0;
-};
+public:
+    void InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args);
+    void CheckRequirements(std::shared_ptr<CheckRequirementsEventArgs> args);
+    void MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args);
+    void SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args);
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
-static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> args);
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
-static void FreeUserData(UserData *ud);
+private:
+    std::string _itemName;
+    int _gemType = 0;
+    int _gemCount = 0;
+    int _charge = 0;
+};
 
 void do_makelightsaber(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -44,58 +43,51 @@ void do_makelightsaber(std::shared_ptr<Character> ch, std::string argument)
                                               25, GetProtoObject(OBJ_VNUM_CRAFTING_LIGHTSABER),
                                               {});
     CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    UserData *data = new UserData();
-
-    AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddCheckRequirementsCraftingHandler(session, data, CheckRequirementsHandler);
-    AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
-    AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
-    AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
-    AddAbortCraftingHandler(session, data, AbortHandler);
+    auto data = std::make_shared<MakeLightsaber>();
+    session->OnInterpretArguments.Add(data, &MakeLightsaber::InterpretArguments);
+    session->OnCheckRequirements.Add(data, &MakeLightsaber::CheckRequirements);
+    session->OnMaterialFound.Add(data, &MakeLightsaber::MaterialFound);
+    session->OnSetObjectStats.Add(data, &MakeLightsaber::SetObjectStats);
 
     StartCrafting(session);
 }
 
-static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> eventArgs)
+void MakeLightsaber::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> eventArgs)
 {
-    std::shared_ptr<Character> ch = GetEngineer(eventArgs->CraftingSession);
-    UserData *ud = (UserData *)userData;
+    auto ch = GetEngineer(eventArgs->CraftingSession);
 
     if(eventArgs->CommandArguments.empty())
     {
-        ch->Echo("&RUsage: Makelightsaber <name>\r\n&w");
+        ch->Echo("&RUsage: makelightsaber <name>\r\n&w");
         eventArgs->AbortSession = true;
         return;
     }
 
-    ud->ItemName = eventArgs->CommandArguments;
+    _itemName = eventArgs->CommandArguments;
 }
 
-static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> eventArgs)
+void MakeLightsaber::MaterialFound(std::shared_ptr<MaterialFoundEventArgs> eventArgs)
 {
-    UserData *ud = (UserData *)userData;
-
     if(eventArgs->Object->ItemType == ITEM_BATTERY)
     {
-        ud->Charge = umax(eventArgs->Object->Value[OVAL_BATTERY_CHARGE], 10);
+        _charge = umax(eventArgs->Object->Value[OVAL_BATTERY_CHARGE], 10);
     }
 
     if(eventArgs->Object->ItemType == ITEM_CRYSTAL
-       && ud->GemCount < MAX_NUMBER_OF_CRYSTALS)
+       && _gemCount < MAX_NUMBER_OF_CRYSTALS)
     {
-        ++ud->GemCount;
-        eventArgs->KeepFinding = ud->GemCount < MAX_NUMBER_OF_CRYSTALS;
+        ++_gemCount;
+        eventArgs->KeepFinding = _gemCount < MAX_NUMBER_OF_CRYSTALS;
 
-        if(ud->GemType < eventArgs->Object->Value[OVAL_CRYSTAL_TYPE])
+        if(_gemType < eventArgs->Object->Value[OVAL_CRYSTAL_TYPE])
         {
-            ud->GemType = eventArgs->Object->Value[OVAL_CRYSTAL_TYPE];
+            _gemType = eventArgs->Object->Value[OVAL_CRYSTAL_TYPE];
         }
     }
 }
 
-static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> eventArgs)
+void MakeLightsaber::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> eventArgs)
 {
-    UserData *ud = (UserData *)userData;
     auto lightsaber = eventArgs->Object;
     char buf[MAX_STRING_LENGTH];
 
@@ -106,14 +98,14 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
 
     lightsaber->Name = "lightsaber saber";
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     lightsaber->ShortDescr = buf;
 
     sprintf(buf, "%s was carelessly misplaced here.",
-            Capitalize(ud->ItemName).c_str());
+            Capitalize(_itemName).c_str());
     lightsaber->Description = buf;
 
-    strcpy(buf, ud->ItemName.c_str());
+    strcpy(buf, _itemName.c_str());
     strcat(buf, " ignites with a hum and a soft glow.");
     lightsaber->ActionDescription = buf;
 
@@ -121,7 +113,7 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     hitroll->Type = -1;
     hitroll->Duration = -1;
     hitroll->Location = GetAffectType("hitroll");
-    hitroll->Modifier = urange(0, ud->GemCount, lightsaber->Level / 30);
+    hitroll->Modifier = urange(0, _gemCount, lightsaber->Level / 30);
     lightsaber->Add(hitroll);
     ++top_affect;
 
@@ -134,34 +126,17 @@ static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStats
     ++top_affect;
 
     lightsaber->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
-    lightsaber->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int)(lightsaber->Level / 10 + ud->GemType * 2);
-    lightsaber->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int)(lightsaber->Level / 5 + ud->GemType * 6);
+    lightsaber->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int)(lightsaber->Level / 10 + _gemType * 2);
+    lightsaber->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int)(lightsaber->Level / 5 + _gemType * 6);
     lightsaber->Value[OVAL_WEAPON_TYPE] = WEAPON_LIGHTSABER;
-    lightsaber->Value[OVAL_WEAPON_CHARGE] = ud->Charge;
-    lightsaber->Value[OVAL_WEAPON_MAX_CHARGE] = ud->Charge;
+    lightsaber->Value[OVAL_WEAPON_CHARGE] = _charge;
+    lightsaber->Value[OVAL_WEAPON_MAX_CHARGE] = _charge;
     lightsaber->Cost = lightsaber->Value[OVAL_WEAPON_SIZE_DAM_DIE] * 75;
 }
 
-static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
+void MakeLightsaber::CheckRequirements(std::shared_ptr<CheckRequirementsEventArgs> eventArgs)
 {
-    UserData *ud = (UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
-{
-    UserData *ud = (UserData *)userData;
-    FreeUserData(ud);
-}
-
-static void FreeUserData(UserData *ud)
-{
-    delete ud;
-}
-
-static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> eventArgs)
-{
-    std::shared_ptr<Character> ch = GetEngineer(eventArgs->CraftingSession);
+    auto ch = GetEngineer(eventArgs->CraftingSession);
 
     // You can craft a lightsaber in your home even without the safe
     // and silence flags.
