@@ -13,12 +13,12 @@ struct UserData
     std::string ItemName;
 };
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
-static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args);
-static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args);
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
+static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> args);
+static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
 static CraftRecipe *CreateMakeBowcasterCraftRecipe();
 static void FreeUserData(UserData *ud);
 
@@ -59,7 +59,7 @@ static CraftRecipe *CreateMakeBowcasterCraftRecipe()
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
     UserData *ud = static_cast<UserData *>(userData);
@@ -74,7 +74,7 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
     ud->ItemName = args->CommandArguments;
 }
 
-static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args)
+static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> args)
 {
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
 
@@ -85,9 +85,9 @@ static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs 
     }
 }
 
-static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args)
+static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (UserData *)userData;
 
     if(args->Object->ItemType == ITEM_BOLT)
     {
@@ -107,7 +107,7 @@ static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args)
     }
 }
 
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
 {
     UserData *ud = static_cast<UserData *>(userData);
     char buf[MAX_STRING_LENGTH];
@@ -153,19 +153,19 @@ static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
     obj->Cost = obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] * 50;
 }
 
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (UserData *)userData;
     FreeUserData(ud);
 }
 
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (UserData *)userData;
     FreeUserData(ud);
 }
 
-static void FreeUserData(struct UserData *ud)
+static void FreeUserData(UserData *ud)
 {
     delete ud;
 }

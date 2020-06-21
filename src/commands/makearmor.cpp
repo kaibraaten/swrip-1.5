@@ -13,13 +13,13 @@ struct UserData
     std::string ItemName;
 };
 
-static CraftRecipe *CreateMakeArmorRecipe(void);
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
-static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args);
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
-static void FreeUserData(struct UserData *ud);
+static CraftRecipe *CreateMakeArmorRecipe();
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
+static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
+static void FreeUserData(UserData *ud);
 static bool CanUseWearLocation(int wearLocation);
 
 void do_makearmor(std::shared_ptr<Character> ch, std::string argument)
@@ -37,7 +37,7 @@ void do_makearmor(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static CraftRecipe *CreateMakeArmorRecipe(void)
+static CraftRecipe *CreateMakeArmorRecipe()
 {
     static const CraftingMaterial materials[] =
     {
@@ -52,9 +52,9 @@ static CraftRecipe *CreateMakeArmorRecipe(void)
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *eventArgs)
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> eventArgs)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (UserData *)userData;
     CraftingSession *session = eventArgs->CraftingSession;
     std::string argument = eventArgs->CommandArguments;
     std::string wearLoc;
@@ -89,7 +89,7 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
     ud->ItemName = name;
 }
 
-static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *eventArgs)
+static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> eventArgs)
 {
     if(eventArgs->Object->ItemType == ITEM_FABRIC)
     {
@@ -98,7 +98,7 @@ static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *eventAr
     }
 }
 
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *eventArgs)
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> eventArgs)
 {
     UserData *ud = (UserData *)userData;
     auto armor = eventArgs->Object;
@@ -116,19 +116,19 @@ static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *event
     armor->Cost *= 10;
 }
 
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (UserData *)userData;
     FreeUserData(ud);
 }
 
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (UserData *)userData;
     FreeUserData(ud);
 }
 
-static void FreeUserData(struct UserData *ud)
+static void FreeUserData(UserData *ud)
 {
     delete ud;
 }

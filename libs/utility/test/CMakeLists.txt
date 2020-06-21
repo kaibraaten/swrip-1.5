@@ -6,6 +6,7 @@ enable_testing()
 add_executable(utility_tests
   src/algorithms_tests.cpp
   src/bet_tests.cpp
+  src/event_tests.cpp
   src/learning_tests.cpp
   src/main.cpp
   src/misc_tests.cpp
@@ -20,7 +21,7 @@ target_compile_options(utility_tests
   )
 target_link_libraries(utility_tests gtest_main gmock utility)
 gtest_discover_tests(utility_tests)
-#add_custom_command(TARGET utility_tests
-#  POST_BUILD
+add_custom_command(TARGET utility_tests
+  POST_BUILD
 #  COMMAND ctest)
-#  COMMAND ctest --output-on-failure)
+  COMMAND ctest --output-on-failure)

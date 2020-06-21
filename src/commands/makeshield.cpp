@@ -12,13 +12,12 @@ struct UserData
     int GemType = 0;
 };
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
-static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args);
-static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args);
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
-static CraftRecipe *MakeCraftRecipe(void);
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
+static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
+static CraftRecipe *MakeCraftRecipe();
 static void FreeUserData(struct UserData *ud);
 
 void do_makeshield(std::shared_ptr<Character> ch, std::string argument)
@@ -28,7 +27,6 @@ void do_makeshield(std::shared_ptr<Character> ch, std::string argument)
     UserData *data = new UserData();
 
     AddInterpretArgumentsCraftingHandler(session, data, InterpretArgumentsHandler);
-    AddCheckRequirementsCraftingHandler(session, data, CheckRequirementsHandler);
     AddMaterialFoundCraftingHandler(session, data, MaterialFoundHandler);
     AddSetObjectStatsCraftingHandler(session, data, SetObjectStatsHandler);
     AddFinishedCraftingHandler(session, data, FinishedCraftingHandler);
@@ -55,7 +53,7 @@ static CraftRecipe *MakeCraftRecipe(void)
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
     struct UserData *ud = (struct UserData *)userData;
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
@@ -70,12 +68,7 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
     ud->ItemName = args->CommandArguments;
 }
 
-static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args)
-{
-
-}
-
-static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args)
+static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
 {
     struct UserData *ud = (struct UserData *)userData;
 
@@ -90,7 +83,7 @@ static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args)
     }
 }
 
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
 {
     struct UserData *ud = (struct UserData *)userData;
     auto shield = args->Object;
@@ -111,13 +104,13 @@ static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
     shield->Cost = shield->Value[OVAL_ARMOR_AC] * 100;
 }
 
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
 {
     struct UserData *ud = (struct UserData *)userData;
     FreeUserData(ud);
 }
 
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
 {
     struct UserData *ud = (struct UserData *)userData;
     FreeUserData(ud);

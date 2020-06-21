@@ -11,13 +11,13 @@ struct UserData
     int WearLocation = 0;
 };
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
 static void FreeUserData(UserData *ud);
 static bool CanUseWearLocation(int wearLocation);
-static CraftRecipe *MakeCraftRecipe(void);
+static CraftRecipe *MakeCraftRecipe();
 
 void do_makecomlink(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -33,7 +33,7 @@ void do_makecomlink(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe(void)
+static CraftRecipe *MakeCraftRecipe()
 {
     static const CraftingMaterial materials[] =
     {
@@ -50,7 +50,7 @@ static CraftRecipe *MakeCraftRecipe(void)
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
     UserData *ud = (UserData *)userData;
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
@@ -87,7 +87,7 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
     ud->ItemName = itemName;
 }
 
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
 {
     UserData *ud = (UserData *)userData;
     auto comlink = args->Object;
@@ -104,13 +104,13 @@ static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
     comlink->Cost = 50;
 }
 
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
 {
     UserData *ud = (UserData *)userData;
     FreeUserData(ud);
 }
 
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
 {
     UserData *ud = (UserData *)userData;
     FreeUserData(ud);

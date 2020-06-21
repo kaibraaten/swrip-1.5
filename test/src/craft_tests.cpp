@@ -231,7 +231,7 @@ const std::vector<CraftingMaterial> CraftTests::_materials =
 };
 
 template<typename EventArgs>
-static void Counting_EventHandler(void *userData, EventArgs *e)
+static void Counting_EventHandler(void *userData, EventArgs e)
 {
     int *callCounter = static_cast<int *>(userData);
     ++(*callCounter);
@@ -268,7 +268,7 @@ TEST_F(CraftTests, CheckRequirementsHandler_IsCalledExactlyOnce)
 }
 
 template<typename EventArgs>
-static void Failing_EventHandler(void *userData, EventArgs *e)
+static void Failing_EventHandler(void *userData, EventArgs e)
 {
     e->AbortSession = true;
 }
@@ -302,7 +302,7 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_SessionNotStarted)
 }
 
 template<typename EventArgs>
-static void DoNothing_EventHandler(void *userData, EventArgs *e)
+static void DoNothing_EventHandler(void *userData, EventArgs e)
 {
     // Intentionally empty
 }

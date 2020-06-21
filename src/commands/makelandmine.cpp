@@ -14,11 +14,11 @@ struct UserData
     std::string ItemName;
 };
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
-static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args);
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
+static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args);
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
 static void FreeUserData(struct UserData *ud);
 
 void do_makelandmine(std::shared_ptr<Character> ch, std::string argument)
@@ -48,7 +48,7 @@ void do_makelandmine(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
     struct UserData *ud = (struct UserData *)userData;
@@ -63,7 +63,7 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
     ud->ItemName = args->CommandArguments;
 }
 
-static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args)
+static void MaterialFoundHandler(void *userData, std::shared_ptr<MaterialFoundEventArgs> args)
 {
     struct UserData *ud = (struct UserData *)userData;
 
@@ -80,7 +80,7 @@ static void MaterialFoundHandler(void *userData, MaterialFoundEventArgs *args)
     }
 }
 
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
 {
     struct UserData *ud = (struct UserData *)userData;
     char buf[MAX_STRING_LENGTH];
@@ -105,13 +105,13 @@ static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
     landmine->Cost = landmine->Value[OVAL_EXPLOSIVE_MAX_DMG] * 5;
 }
 
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
 {
     struct UserData *ud = (struct UserData *)userData;
     FreeUserData(ud);
 }
 
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
 {
     struct UserData *ud = (struct UserData *)userData;
     FreeUserData(ud);

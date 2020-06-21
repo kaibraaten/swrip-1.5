@@ -112,17 +112,17 @@ CraftingSession *AllocateCraftingSession(CraftRecipe *, std::shared_ptr<Characte
 void FreeCraftingSession(CraftingSession *);
 std::shared_ptr<Character> GetEngineer(const CraftingSession *);
 void AddInterpretArgumentsCraftingHandler(CraftingSession *session, void *userData,
-                                          void(*handler)(void *, InterpretArgumentsEventArgs *));
+                                          void(*handler)(void *, std::shared_ptr<InterpretArgumentsEventArgs>));
 void AddCheckRequirementsCraftingHandler(CraftingSession *session, void *userData,
-                                         void(*handler)(void *, CheckRequirementsEventArgs *));
+                                         void(*handler)(void *, std::shared_ptr<CheckRequirementsEventArgs>));
 void AddMaterialFoundCraftingHandler(CraftingSession *session, void *userData,
-                                     void(*handler)(void *, MaterialFoundEventArgs *));
+                                     void(*handler)(void *, std::shared_ptr<MaterialFoundEventArgs>));
 void AddSetObjectStatsCraftingHandler(CraftingSession *session, void *userData,
-                                      void(*handler)(void *, SetObjectStatsEventArgs *));
+                                      void(*handler)(void *, std::shared_ptr<SetObjectStatsEventArgs>));
 void AddFinishedCraftingHandler(CraftingSession *session, void *userData,
-                                void(*handler)(void *, FinishedCraftingEventArgs *));
+                                void(*handler)(void *, std::shared_ptr<FinishedCraftingEventArgs>));
 void AddAbortCraftingHandler(CraftingSession *session, void *userData,
-                             void(*handler)(void *, AbortCraftingEventArgs *));
+                             void(*handler)(void *, std::shared_ptr<AbortCraftingEventArgs>));
 
 void StartCrafting(CraftingSession *);
 

@@ -13,10 +13,10 @@ struct UserData
     std::string ItemName;
 };
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
 static void FreeUserData(UserData *ud);
 static bool CanUseWearLocation(int wearLocation);
 
@@ -43,7 +43,7 @@ void do_makecontainer(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *eventArgs)
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> eventArgs)
 {
     UserData *ud = (UserData *)userData;
     auto container = eventArgs->Object;
@@ -61,7 +61,7 @@ static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *event
     container->Value[OVAL_CONTAINER_CONDITION] = 10;
 }
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *eventArgs)
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> eventArgs)
 {
     UserData *ud = (UserData *)userData;
     CraftingSession *session = eventArgs->CraftingSession;
@@ -99,13 +99,13 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
     ud->ItemName = itemName;
 }
 
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
 {
     UserData *ud = (UserData *)userData;
     FreeUserData(ud);
 }
 
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
 {
     UserData *ud = (UserData *)userData;
     FreeUserData(ud);

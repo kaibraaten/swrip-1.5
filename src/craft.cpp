@@ -21,7 +21,7 @@
 
 #include <algorithm>
 #include <cassert>
-#include <utility/oldevent.hpp>
+#include <utility/event.hpp>
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "craft.hpp"
@@ -57,12 +57,12 @@ public:
 class CraftingSession
 {
 public:
-    Ceris::OldEvent<InterpretArgumentsEventArgs *> OnInterpretArguments;
-    Ceris::OldEvent<CheckRequirementsEventArgs *> OnCheckRequirements;
-    Ceris::OldEvent<MaterialFoundEventArgs *> OnMaterialFound;
-    Ceris::OldEvent<SetObjectStatsEventArgs *> OnSetObjectStats;
-    Ceris::OldEvent<FinishedCraftingEventArgs *> OnFinishedCrafting;
-    Ceris::OldEvent<AbortCraftingEventArgs *> OnAbort;
+    Ceris::Event<std::shared_ptr<InterpretArgumentsEventArgs>> OnInterpretArguments;
+    Ceris::Event<std::shared_ptr<CheckRequirementsEventArgs>> OnCheckRequirements;
+    Ceris::Event<std::shared_ptr<MaterialFoundEventArgs>> OnMaterialFound;
+    Ceris::Event<std::shared_ptr<SetObjectStatsEventArgs>> OnSetObjectStats;
+    Ceris::Event<std::shared_ptr<FinishedCraftingEventArgs>> OnFinishedCrafting;
+    Ceris::Event<std::shared_ptr<AbortCraftingEventArgs>> OnAbort;
 
     std::shared_ptr<Character> Engineer;
     CraftRecipe *Recipe = nullptr;
@@ -84,8 +84,8 @@ static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMater
 static bool CheckSkillLevel(const CraftingSession *session);
 static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo);
 static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, std::shared_ptr<Object> obj);
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *eventArgs);
-static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args);
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> eventArgs);
+static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> args);
 
 CraftingMaterial::CraftingMaterial(ItemTypes type,
                                    std::initializer_list<size_t> flagBits)
@@ -128,8 +128,6 @@ static void AfterDelay(CraftingSession *session)
     int level = ch->PCData->Learned[recipe->Skill];
     std::shared_ptr<ProtoObject> proto = recipe->Prototype;
     std::string itemType = GetItemTypeNameExtended(proto->ItemType, proto->Value[OVAL_WEAPON_TYPE]);
-    SetObjectStatsEventArgs eventArgs;
-    FinishedCraftingEventArgs finishedCraftingEventArgs;
 
     ch->SubState = SUB_NONE;
 
@@ -145,20 +143,22 @@ static void AfterDelay(CraftingSession *session)
 
     auto object = CreateObject(proto, level);
 
-    eventArgs.CraftingSession = session;
-    eventArgs.Object = object;
-    session->OnSetObjectStats(&eventArgs);
+    auto eventArgs = std::make_shared<SetObjectStatsEventArgs>();
+    eventArgs->CraftingSession = session;
+    eventArgs->Object = object;
+    session->OnSetObjectStats.Raise(eventArgs);
 
     object = ObjectToCharacter(object, ch);
 
-    finishedCraftingEventArgs.CraftingSession = session;
-    finishedCraftingEventArgs.Object = object;
-    session->OnFinishedCrafting(&finishedCraftingEventArgs);
+    auto finishedCraftingEventArgs = std::make_shared<FinishedCraftingEventArgs>();
+    finishedCraftingEventArgs->CraftingSession = session;
+    finishedCraftingEventArgs->Object = object;
+    session->OnFinishedCrafting.Raise(finishedCraftingEventArgs);
 
     FreeCraftingSession(session);
 }
 
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *eventArgs)
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> eventArgs)
 {
     CraftingSession *session = eventArgs->CraftingSession;
     FinishedCraftingUserData *data = (FinishedCraftingUserData *)userData;
@@ -184,7 +184,7 @@ static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *e
     delete data;
 }
 
-static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args)
+static void CheckRequirementsHandler(void *userData, std::shared_ptr<CheckRequirementsEventArgs> args)
 {
     auto ch = GetEngineer(args->CraftingSession);
 
@@ -206,14 +206,12 @@ static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs 
 static void AbortSession(CraftingSession *session)
 {
     auto ch = session->Engineer;
-    AbortCraftingEventArgs abortEventArgs;
-
     ch->SubState = SUB_NONE;
-    abortEventArgs.CraftingSession = session;
-
     ch->Echo("&RYou are interrupted and fail to finish your work.&d\r\n");
 
-    session->OnAbort(&abortEventArgs);
+    auto abortEventArgs = std::make_shared<AbortCraftingEventArgs>();
+    abortEventArgs->CraftingSession = session;
+    session->OnAbort.Raise(abortEventArgs);
 
     FreeCraftingSession(session);
 }
@@ -336,32 +334,30 @@ static bool CheckSkillLevel(const CraftingSession *session)
 void StartCrafting(CraftingSession *session)
 {
     auto ch = session->Engineer;
-    InterpretArgumentsEventArgs interpretArgumentsEventArgs;
-    CheckRequirementsEventArgs checkRequirementsEventArgs;
+    
+    auto checkRequirementsEventArgs = std::make_shared<CheckRequirementsEventArgs>();
+    checkRequirementsEventArgs->CraftingSession = session;
+    checkRequirementsEventArgs->AbortSession = false;
 
-    interpretArgumentsEventArgs.CraftingSession = session;
-    interpretArgumentsEventArgs.CommandArguments = session->CommandArgument;
-    interpretArgumentsEventArgs.AbortSession = false;
+    auto interpretArgumentsEventArgs = std::make_shared<InterpretArgumentsEventArgs>();
+    interpretArgumentsEventArgs->CraftingSession = session;
+    interpretArgumentsEventArgs->CommandArguments = session->CommandArgument;
+    interpretArgumentsEventArgs->AbortSession = false;
+    session->OnInterpretArguments.Raise(interpretArgumentsEventArgs);
 
-    checkRequirementsEventArgs.CraftingSession = session;
-    checkRequirementsEventArgs.AbortSession = false;
-
-    session->OnInterpretArguments(&interpretArgumentsEventArgs);
-
-    if(!interpretArgumentsEventArgs.AbortSession)
+    if(!interpretArgumentsEventArgs->AbortSession)
     {
-        session->OnCheckRequirements(&checkRequirementsEventArgs);
+        session->OnCheckRequirements.Raise(checkRequirementsEventArgs);
     }
 
-    if(interpretArgumentsEventArgs.AbortSession
-       || checkRequirementsEventArgs.AbortSession
+    if(interpretArgumentsEventArgs->AbortSession
+       || checkRequirementsEventArgs->AbortSession
        || !CheckMaterials(session, false)
        || !CheckSkillLevel(session))
     {
-        AbortCraftingEventArgs abortEventArgs;
-        abortEventArgs.CraftingSession = session;
-
-        session->OnAbort(&abortEventArgs);
+        auto abortEventArgs = std::make_shared<AbortCraftingEventArgs>();
+        abortEventArgs->CraftingSession = session;
+        session->OnAbort.Raise(abortEventArgs);
         FreeCraftingSession(session);
         return;
     }
@@ -397,10 +393,10 @@ static bool CheckMaterials(CraftingSession *session, bool extract)
 
         if(extract)
         {
-            MaterialFoundEventArgs args;
-            args.CraftingSession = session;
-            args.Object = obj;
-            args.KeepFinding = false;
+            auto args = std::make_shared<MaterialFoundEventArgs>();
+            args->CraftingSession = session;
+            args->Object = obj;
+            args->KeepFinding = false;
 
             if(material->Material.Flags.test(Flag::Crafting::Extract))
             {
@@ -409,8 +405,8 @@ static bool CheckMaterials(CraftingSession *session, bool extract)
                 ExtractObject(obj);
             }
 
-            session->OnMaterialFound(&args);
-            material->KeepFinding = args.KeepFinding;
+            session->OnMaterialFound.Raise(args);
+            material->KeepFinding = args->KeepFinding;
         }
     }
 
@@ -474,37 +470,37 @@ static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo)
 }
 
 void AddInterpretArgumentsCraftingHandler(CraftingSession *session, void *userData,
-                                          void(*handler)(void *, InterpretArgumentsEventArgs *))
+                                          void(*handler)(void *, std::shared_ptr<InterpretArgumentsEventArgs>))
 {
     session->OnInterpretArguments.Add(userData, handler);
 }
 
 void AddCheckRequirementsCraftingHandler(CraftingSession *session, void *userData,
-                                         void(*handler)(void *, CheckRequirementsEventArgs *))
+                                         void(*handler)(void *, std::shared_ptr<CheckRequirementsEventArgs>))
 {
     session->OnCheckRequirements.Add(userData, handler);
 }
 
 void AddMaterialFoundCraftingHandler(CraftingSession *session, void *userData,
-                                     void(*handler)(void *, MaterialFoundEventArgs *))
+                                     void(*handler)(void *, std::shared_ptr<MaterialFoundEventArgs>))
 {
     session->OnMaterialFound.Add(userData, handler);
 }
 
 void AddSetObjectStatsCraftingHandler(CraftingSession *session, void *userData,
-                                      void(*handler)(void *, SetObjectStatsEventArgs *))
+                                      void(*handler)(void *, std::shared_ptr<SetObjectStatsEventArgs>))
 {
     session->OnSetObjectStats.Add(userData, handler);
 }
 
 void AddFinishedCraftingHandler(CraftingSession *session, void *userData,
-                                void(*handler)(void *, FinishedCraftingEventArgs *))
+                                void(*handler)(void *, std::shared_ptr<FinishedCraftingEventArgs>))
 {
     session->OnFinishedCrafting.Add(userData, handler);
 }
 
 void AddAbortCraftingHandler(CraftingSession *session, void *userData,
-                             void(*handler)(void *, AbortCraftingEventArgs *))
+                             void(*handler)(void *, std::shared_ptr<AbortCraftingEventArgs>))
 {
     session->OnAbort.Add(userData, handler);
 }

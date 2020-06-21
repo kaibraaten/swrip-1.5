@@ -12,12 +12,12 @@ struct UserData
     std::string Name;
 };
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args);
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args);
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args);
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args);
-static void FreeUserData(struct UserData *ud);
-static CraftRecipe *MakeCraftRecipe(void);
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args);
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args);
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args);
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args);
+static void FreeUserData(UserData *ud);
+static CraftRecipe *MakeCraftRecipe();
 
 void do_makedisguise(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -33,7 +33,7 @@ void do_makedisguise(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe(void)
+static CraftRecipe *MakeCraftRecipe()
 {
     static const CraftingMaterial materials[] =
     {
@@ -49,9 +49,9 @@ static CraftRecipe *MakeCraftRecipe(void)
     return recipe;
 }
 
-static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArgs *args)
+static void InterpretArgumentsHandler(void *userData, std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (UserData *)userData;
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
     std::string argument = args->CommandArguments;
     std::string sex;
@@ -88,9 +88,9 @@ static void InterpretArgumentsHandler(void *userData, InterpretArgumentsEventArg
     ud->Name = argument;
 }
 
-static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
+static void SetObjectStatsHandler(void *userData, std::shared_ptr<SetObjectStatsEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (UserData *)userData;
     char buf[MAX_STRING_LENGTH];
     auto disguise = args->Object;
 
@@ -113,15 +113,15 @@ static void SetObjectStatsHandler(void *userData, SetObjectStatsEventArgs *args)
     disguise->Cost = 5000;
 }
 
-static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *args)
+static void FinishedCraftingHandler(void *userData, std::shared_ptr<FinishedCraftingEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (struct UserData *)userData;
     FreeUserData(ud);
 }
 
-static void AbortHandler(void *userData, AbortCraftingEventArgs *args)
+static void AbortHandler(void *userData, std::shared_ptr<AbortCraftingEventArgs> args)
 {
-    struct UserData *ud = (struct UserData *)userData;
+    UserData *ud = (struct UserData *)userData;
     FreeUserData(ud);
 }
 
