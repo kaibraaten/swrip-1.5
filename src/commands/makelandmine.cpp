@@ -32,10 +32,10 @@ void do_makelandmine(std::shared_ptr<Character> ch, std::string argument)
      { ITEM_CHEMICAL,  { Flag::Crafting::Extract } },
      { ITEM_NONE,      {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makelandmine, materials,
-                                              25, GetProtoObject(OBJ_VNUM_CRAFTING_LANDMINE),
-                                              { Flag::Crafting::NeedsWorkshop });
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = AllocateCraftRecipe(gsn_makelandmine, materials,
+                                      25, GetProtoObject(OBJ_VNUM_CRAFTING_LANDMINE),
+                                      { Flag::Crafting::NeedsWorkshop });
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto level = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_makelandmine]);
     auto data = std::make_shared<MakeLandmine>(level);
     session->OnInterpretArguments.Add(data, &MakeLandmine::InterpretArguments);

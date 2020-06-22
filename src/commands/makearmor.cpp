@@ -24,8 +24,8 @@ static CraftRecipe *CreateMakeArmorRecipe();
 
 void do_makearmor(std::shared_ptr<Character> ch, std::string argument)
 {
-    CraftRecipe *recipe = CreateMakeArmorRecipe();
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = CreateMakeArmorRecipe();
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeArmor>();
 
     session->OnInterpretArguments.Add(data, &MakeArmor::InterpretArguments);
@@ -52,7 +52,7 @@ static CraftRecipe *CreateMakeArmorRecipe()
 
 void MakeArmor::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> eventArgs)
 {
-    CraftingSession *session = eventArgs->CraftingSession;
+    auto session = eventArgs->CraftingSession;
     std::string argument = eventArgs->CommandArguments;
     std::string wearLoc;
     std::shared_ptr<Character> ch = GetEngineer(session);

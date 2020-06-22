@@ -23,8 +23,8 @@ static bool CanUseWearLocation(int wearLocation);
 
 void do_makejewelry(std::shared_ptr<Character> ch, std::string argument)
 {
-    CraftRecipe *recipe = MakeCraftRecipe();
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = MakeCraftRecipe();
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeJewelry>();
     session->OnInterpretArguments.Add(data, &MakeJewelry::InterpretArguments);
     session->OnMaterialFound.Add(data, &MakeJewelry::MaterialFound);
@@ -43,9 +43,9 @@ static CraftRecipe *MakeCraftRecipe()
         { ITEM_CRYSTAL,     { Flag::Crafting::Extract, Flag::Crafting::Optional } },
         { ITEM_NONE,        {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makejewelry, materials,
-                                              15, GetProtoObject(OBJ_VNUM_CRAFTING_ARMOR),
-                                              { Flag::Crafting::NeedsWorkshop });
+    auto recipe = AllocateCraftRecipe(gsn_makejewelry, materials,
+                                      15, GetProtoObject(OBJ_VNUM_CRAFTING_ARMOR),
+                                      { Flag::Crafting::NeedsWorkshop });
 
     return recipe;
 }

@@ -182,7 +182,6 @@ public:
     std::shared_ptr<Room> Home;
     int CmdRecurse = 0;
     std::shared_ptr<Object> On;
-    std::shared_ptr<Character> Pet;
 
     struct
     {

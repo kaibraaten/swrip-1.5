@@ -33,10 +33,10 @@ void do_makeblaster(std::shared_ptr<Character> ch, std::string argument)
      { ITEM_LENS,            { Flag::Crafting::Extract, Flag::Crafting::Optional } },
      { ITEM_NONE,            {} },
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makeblaster, materials,
-                                              25, GetProtoObject(OBJ_VNUM_CRAFTING_BLASTER),
-                                              { Flag::Crafting::NeedsWorkshop });
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = AllocateCraftRecipe(gsn_makeblaster, materials,
+                                      25, GetProtoObject(OBJ_VNUM_CRAFTING_BLASTER),
+                                      { Flag::Crafting::NeedsWorkshop });
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeBlaster>();
     session->OnInterpretArguments.Add(data, &MakeBlaster::InterpretArguments);
     session->OnMaterialFound.Add(data, &MakeBlaster::MaterialFound);

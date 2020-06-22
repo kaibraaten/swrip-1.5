@@ -29,10 +29,10 @@ void do_makecontainer(std::shared_ptr<Character> ch, std::string argument)
         { ITEM_NONE,   {} }
     };
 
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makecontainer, materials,
-                                              10, GetProtoObject(OBJ_VNUM_CRAFTING_CONTAINER),
-                                              { Flag::Crafting::NeedsWorkshop });
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = AllocateCraftRecipe(gsn_makecontainer, materials,
+                                      10, GetProtoObject(OBJ_VNUM_CRAFTING_CONTAINER),
+                                      { Flag::Crafting::NeedsWorkshop });
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeContainer>();
     session->OnInterpretArguments.Add(data, &MakeContainer::InterpretArguments);
     session->OnSetObjectStats.Add(data, &MakeContainer::SetObjectStats);
@@ -59,7 +59,7 @@ void MakeContainer::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> even
 
 void MakeContainer::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> eventArgs)
 {
-    CraftingSession *session = eventArgs->CraftingSession;
+    auto session = eventArgs->CraftingSession;
     std::string argument = eventArgs->CommandArguments;
     std::string wearLoc;
     std::string itemName;

@@ -32,11 +32,11 @@ void do_makegrenade(std::shared_ptr<Character> ch, std::string argument)
      { ITEM_CHEMICAL,        { Flag::Crafting::Extract } },
      { ITEM_NONE,            {} },
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makegrenade, materials,
-                                              25, GetProtoObject(OBJ_VNUM_CRAFTING_GRENADE),
-                                              { Flag::Crafting::NeedsWorkshop });
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
-    
+    auto recipe = AllocateCraftRecipe(gsn_makegrenade, materials,
+                                      25, GetProtoObject(OBJ_VNUM_CRAFTING_GRENADE),
+                                      { Flag::Crafting::NeedsWorkshop });
+    auto session = AllocateCraftingSession(recipe, ch, argument);
+
     auto level = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_makegrenade]);
     auto data = std::make_shared<MakeGrenade>(level);
     session->OnInterpretArguments.Add(data, &MakeGrenade::InterpretArguments);

@@ -76,7 +76,7 @@ public:
 
     long RestoreTime = 0;         /* The last time the char did a restore all */
 
-    Editor *TextEditor = nullptr;
+    std::shared_ptr<Editor> TextEditor;
     
     struct
     {
@@ -123,7 +123,7 @@ public:
     int Played = 0;
     time_t Logon = 0;
     time_t SaveTime = 0;
-    class CraftingSession *CraftingSession = NULL;
+    std::shared_ptr<class CraftingSession> CraftingSession;
     IMC_CHARDATA *imcchardata = NULL;
 
 private:

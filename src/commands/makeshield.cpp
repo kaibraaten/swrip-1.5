@@ -22,8 +22,8 @@ static CraftRecipe *MakeCraftRecipe();
 
 void do_makeshield(std::shared_ptr<Character> ch, std::string argument)
 {
-    CraftRecipe *recipe = MakeCraftRecipe();
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = MakeCraftRecipe();
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeShield>();
     session->OnInterpretArguments.Add(data, &MakeShield::InterpretArguments);
     session->OnMaterialFound.Add(data, &MakeShield::MaterialFound);
@@ -43,9 +43,9 @@ static CraftRecipe *MakeCraftRecipe()
      { ITEM_CRYSTAL,         { Flag::Crafting::Extract } },
      { ITEM_NONE,            {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makeshield, materials,
-                                              20, GetProtoObject(OBJ_VNUM_CRAFTING_SHIELD),
-                                              { Flag::Crafting::NeedsWorkshop });
+    auto recipe = AllocateCraftRecipe(gsn_makeshield, materials,
+                                      20, GetProtoObject(OBJ_VNUM_CRAFTING_SHIELD),
+                                      { Flag::Crafting::NeedsWorkshop });
 
     return recipe;
 }
@@ -73,7 +73,7 @@ void MakeShield::MaterialFound(std::shared_ptr<MaterialFoundEventArgs> args)
 
     if(args->Object->ItemType == ITEM_CRYSTAL)
     {
-       _gemType = args->Object->Value[OVAL_CRYSTAL_TYPE];
+        _gemType = args->Object->Value[OVAL_CRYSTAL_TYPE];
     }
 }
 

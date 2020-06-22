@@ -21,8 +21,8 @@ static CraftRecipe *MakeCraftRecipe();
 
 void do_makeglowrod(std::shared_ptr<Character> ch, std::string argument)
 {
-    CraftRecipe *recipe = MakeCraftRecipe();
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = MakeCraftRecipe();
+    auto session = AllocateCraftingSession(recipe, ch, argument);
 
     auto data = std::make_shared<MakeGlowrod>();
     session->OnInterpretArguments.Add(data, &MakeGlowrod::InterpretArguments);
@@ -43,9 +43,9 @@ static CraftRecipe *MakeCraftRecipe()
      { ITEM_LENS,      { Flag::Crafting::Extract } },
      { ITEM_NONE,      {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makeglowrod, materials,
-                                              10, GetProtoObject(OBJ_VNUM_CRAFTING_GLOWROD),
-                                              { Flag::Crafting::NeedsWorkshop });
+    auto recipe = AllocateCraftRecipe(gsn_makeglowrod, materials,
+                                      10, GetProtoObject(OBJ_VNUM_CRAFTING_GLOWROD),
+                                      { Flag::Crafting::NeedsWorkshop });
 
     return recipe;
 }

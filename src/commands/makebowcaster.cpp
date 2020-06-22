@@ -24,8 +24,8 @@ static CraftRecipe *CreateMakeBowcasterCraftRecipe();
 
 void do_makebowcaster(std::shared_ptr<Character> ch, std::string argument)
 {
-    CraftRecipe *recipe = CreateMakeBowcasterCraftRecipe();
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = CreateMakeBowcasterCraftRecipe();
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeBowcaster>();
     session->OnInterpretArguments.Add(data, &MakeBowcaster::InterpretArguments);
     session->OnCheckRequirements.Add(data, &MakeBowcaster::CheckRequirements);
@@ -49,9 +49,9 @@ static CraftRecipe *CreateMakeBowcasterCraftRecipe()
      { ITEM_BOLT,       { Flag::Crafting::Extract, Flag::Crafting::Optional } },
      { ITEM_NONE,       {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makebowcaster, materials,
-                                              25, GetProtoObject(OBJ_VNUM_CRAFTING_BOWCASTER),
-                                              { Flag::Crafting::NeedsWorkshop });
+    auto recipe = AllocateCraftRecipe(gsn_makebowcaster, materials,
+                                      25, GetProtoObject(OBJ_VNUM_CRAFTING_BOWCASTER),
+                                      { Flag::Crafting::NeedsWorkshop });
 
     return recipe;
 }

@@ -29,10 +29,10 @@ void do_makeblade(std::shared_ptr<Character> ch, std::string argument)
      { ITEM_STAFF,      { Flag::Crafting::Extract, Flag::Crafting::Optional } },
      { ITEM_NONE,       {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makeblade, materials,
-                                              25, GetProtoObject(OBJ_VNUM_CRAFTING_BLADE),
-                                              { Flag::Crafting::NeedsWorkshop });
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = AllocateCraftRecipe(gsn_makeblade, materials,
+                                      25, GetProtoObject(OBJ_VNUM_CRAFTING_BLADE),
+                                      { Flag::Crafting::NeedsWorkshop });
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeBlade>();
     session->OnInterpretArguments.Add(data, &MakeBlade::InterpretArguments);
     session->OnMaterialFound.Add(data, &MakeBlade::MaterialFound);

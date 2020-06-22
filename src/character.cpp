@@ -1475,10 +1475,7 @@ void FreeCharacter(std::shared_ptr<Character> ch)
             ch->PCData->Note.reset();
         }
 
-        if(ch->PCData->CraftingSession)
-        {
-            FreeCraftingSession(ch->PCData->CraftingSession);
-        }
+        ch->PCData->CraftingSession = nullptr;
 
         while(!ch->PCData->Comments().empty())
         {

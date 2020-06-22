@@ -21,8 +21,8 @@ static CraftRecipe *MakeCraftRecipe();
 
 void do_makecomlink(std::shared_ptr<Character> ch, std::string argument)
 {
-    CraftRecipe *recipe = MakeCraftRecipe();
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = MakeCraftRecipe();
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeComlink>();
     session->OnInterpretArguments.Add(data, &MakeComlink::InterpretArguments);
     session->OnSetObjectStats.Add(data, &MakeComlink::SetObjectStats);

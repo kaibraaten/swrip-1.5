@@ -39,10 +39,10 @@ void do_makelightsaber(std::shared_ptr<Character> ch, std::string argument)
         { ITEM_SUPERCONDUCTOR, { Flag::Crafting::Extract } },
         { ITEM_NONE,           {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_lightsaber_crafting, materials,
-                                              25, GetProtoObject(OBJ_VNUM_CRAFTING_LIGHTSABER),
-                                              {});
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = AllocateCraftRecipe(gsn_lightsaber_crafting, materials,
+                                      25, GetProtoObject(OBJ_VNUM_CRAFTING_LIGHTSABER),
+                                      {});
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeLightsaber>();
     session->OnInterpretArguments.Add(data, &MakeLightsaber::InterpretArguments);
     session->OnCheckRequirements.Add(data, &MakeLightsaber::CheckRequirements);

@@ -24,8 +24,8 @@ static CraftRecipe *MakeCraftRecipe();
 
 void do_makespice(std::shared_ptr<Character> ch, std::string argument)
 {
-    CraftRecipe *recipe = MakeCraftRecipe();
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = MakeCraftRecipe();
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeSpice>();
     session->OnInterpretArguments.Add(data, &MakeSpice::InterpretArguments);
     session->OnMaterialFound.Add(data, &MakeSpice::MaterialFound);
@@ -41,9 +41,9 @@ static CraftRecipe *MakeCraftRecipe()
      { ITEM_RAWSPICE, { Flag::Crafting::Extract } },
      { ITEM_NONE,     {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_spice_refining, materials,
-                                              10, GetProtoObject(OBJ_VNUM_CRAFTING_SPICE),
-                                              { Flag::Crafting::NeedsRefinery });
+    auto recipe = AllocateCraftRecipe(gsn_spice_refining, materials,
+                                      10, GetProtoObject(OBJ_VNUM_CRAFTING_SPICE),
+                                      { Flag::Crafting::NeedsRefinery });
 
     return recipe;
 }

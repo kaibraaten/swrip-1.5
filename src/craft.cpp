@@ -55,11 +55,18 @@ public:
 
 struct CraftingSession::Impl
 {
+    ~Impl();
     std::shared_ptr<Character> Engineer;
     CraftRecipe *Recipe = nullptr;
     FoundMaterial *FoundMaterials = nullptr;
     std::string CommandArgument;
 };
+
+CraftingSession::Impl::~Impl()
+{
+    delete Recipe;
+    delete[] FoundMaterials;
+}
 
 CraftingSession::CraftingSession()
     : pImpl(std::make_unique<Impl>())
@@ -78,14 +85,14 @@ public:
     CraftRecipe *Recipe = nullptr;
 };
 
-static void AfterDelay(CraftingSession *session);
-static void AbortSession(CraftingSession *session);
-static bool CheckMaterials(CraftingSession *session, bool extract);
+static void AfterDelay(std::shared_ptr<CraftingSession> session);
+static void AbortSession(std::shared_ptr<CraftingSession> session);
+static bool CheckMaterials(std::shared_ptr<CraftingSession> session, bool extract);
 static size_t CountCraftingMaterials(const CraftingMaterial *material);
 static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMaterials);
-static bool CheckSkillLevel(const CraftingSession *session);
+static bool CheckSkillLevel(std::shared_ptr<CraftingSession> session);
 static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo);
-static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, std::shared_ptr<Object> obj);
+static FoundMaterial *GetUnfoundMaterial(std::shared_ptr<CraftingSession> session, std::shared_ptr<Object> obj);
 static void FinishedCraftingHandler(std::shared_ptr<FinishedCraftingUserData> data,
                                     std::shared_ptr<FinishedCraftingEventArgs> eventArgs);
 static void CheckRequirementsHandler(std::shared_ptr<CheckRequirementsEventArgs> args);
@@ -102,7 +109,7 @@ void do_craftingengine(std::shared_ptr<Character> ch, std::string argument)
 {
     assert(!IsNpc(ch));
 
-    CraftingSession *session = ch->PCData->CraftingSession;
+    auto session = ch->PCData->CraftingSession;
 
     assert(session != nullptr);
     assert(ch->SubState == SUB_PAUSE || ch->SubState == SUB_TIMER_DO_ABORT);
@@ -122,10 +129,10 @@ void do_craftingengine(std::shared_ptr<Character> ch, std::string argument)
     }
 }
 
-static void AfterDelay(CraftingSession *session)
+static void AfterDelay(std::shared_ptr<CraftingSession> session)
 {
     CraftRecipe *recipe = session->pImpl->Recipe;
-    std::shared_ptr<Character> ch = session->pImpl->Engineer;
+    std::shared_ptr<Character> ch = GetEngineer(session);
     int the_chance = ch->PCData->Learned[recipe->Skill];
     bool hasMaterials = CheckMaterials(session, true);
     int level = ch->PCData->Learned[recipe->Skill];
@@ -140,7 +147,7 @@ static void AfterDelay(CraftingSession *session)
         ch->Echo("&RIt suddenly dawns upon you that you have created the most useless\r\n");
         ch->Echo("&R%s you've ever seen. You quickly hide your mistake...&d\r\n", itemType.c_str());
         LearnFromFailure(ch, recipe->Skill);
-        FreeCraftingSession(session);
+        ch->PCData->CraftingSession = nullptr;
         return;
     }
 
@@ -157,14 +164,13 @@ static void AfterDelay(CraftingSession *session)
     finishedCraftingEventArgs->CraftingSession = session;
     finishedCraftingEventArgs->Object = object;
     session->OnFinishedCrafting.Raise(finishedCraftingEventArgs);
-
-    FreeCraftingSession(session);
+    ch->PCData->CraftingSession = nullptr;
 }
 
 static void FinishedCraftingHandler(std::shared_ptr<FinishedCraftingUserData> data,
                                     std::shared_ptr<FinishedCraftingEventArgs> eventArgs)
 {
-    CraftingSession *session = eventArgs->CraftingSession;
+    auto session = eventArgs->CraftingSession;
     auto ch = GetEngineer(session);
     std::string itemType = GetItemTypeNameExtended(eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE]);
     char actBuf[MAX_STRING_LENGTH];
@@ -204,9 +210,9 @@ static void CheckRequirementsHandler(std::shared_ptr<CheckRequirementsEventArgs>
     }
 }
 
-static void AbortSession(CraftingSession *session)
+static void AbortSession(std::shared_ptr<CraftingSession> session)
 {
-    auto ch = session->pImpl->Engineer;
+    auto ch = GetEngineer(session);
     ch->SubState = SUB_NONE;
     ch->Echo("&RYou are interrupted and fail to finish your work.&d\r\n");
 
@@ -214,10 +220,10 @@ static void AbortSession(CraftingSession *session)
     abortEventArgs->CraftingSession = session;
     session->OnAbort.Raise(abortEventArgs);
 
-    FreeCraftingSession(session);
+    ch->PCData->CraftingSession = nullptr;
 }
 
-std::shared_ptr<Character> GetEngineer(const CraftingSession *session)
+std::shared_ptr<Character> GetEngineer(std::shared_ptr<CraftingSession> session)
 {
     return session->pImpl->Engineer;
 }
@@ -247,11 +253,6 @@ CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial *materialList, i
     }
 
     return recipe;
-}
-
-void FreeCraftRecipe(CraftRecipe *recipe)
-{
-    delete recipe;
 }
 
 static size_t CountCraftingMaterials(const CraftingMaterial *material)
@@ -284,10 +285,10 @@ static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMater
     return foundMaterials;
 }
 
-CraftingSession *AllocateCraftingSession(CraftRecipe *recipe, std::shared_ptr<Character> engineer,
-                                         const std::string &commandArgument)
+std::shared_ptr<CraftingSession> AllocateCraftingSession(CraftRecipe *recipe, std::shared_ptr<Character> engineer,
+                                                         const std::string &commandArgument)
 {
-    CraftingSession *session = new CraftingSession();
+    auto session = std::make_shared<CraftingSession>();
     auto finishedCraftingUserData = std::make_shared<FinishedCraftingUserData>();
     finishedCraftingUserData->Recipe = recipe;
     session->OnFinishedCrafting.Add(finishedCraftingUserData, FinishedCraftingHandler);
@@ -304,22 +305,9 @@ CraftingSession *AllocateCraftingSession(CraftRecipe *recipe, std::shared_ptr<Ch
     return session;
 }
 
-void FreeCraftingSession(CraftingSession *session)
+static bool CheckSkillLevel(std::shared_ptr<CraftingSession> session)
 {
-    FreeCraftRecipe(session->pImpl->Recipe);
-    delete[] session->pImpl->FoundMaterials;
-
-    if(session->pImpl->Engineer)
-    {
-        session->pImpl->Engineer->PCData->CraftingSession = NULL;
-    }
-
-    delete session;
-}
-
-static bool CheckSkillLevel(const CraftingSession *session)
-{
-    auto ch = session->pImpl->Engineer;
+    auto ch = GetEngineer(session);
     int the_chance = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[session->pImpl->Recipe->Skill]);
 
     if(GetRandomPercent() >= the_chance)
@@ -332,10 +320,10 @@ static bool CheckSkillLevel(const CraftingSession *session)
     return true;
 }
 
-void StartCrafting(CraftingSession *session)
+void StartCrafting(std::shared_ptr<CraftingSession> session)
 {
-    auto ch = session->pImpl->Engineer;
-    
+    auto ch = GetEngineer(session);
+
     auto checkRequirementsEventArgs = std::make_shared<CheckRequirementsEventArgs>();
     checkRequirementsEventArgs->CraftingSession = session;
     checkRequirementsEventArgs->AbortSession = false;
@@ -359,7 +347,7 @@ void StartCrafting(CraftingSession *session)
         auto abortEventArgs = std::make_shared<AbortCraftingEventArgs>();
         abortEventArgs->CraftingSession = session;
         session->OnAbort.Raise(abortEventArgs);
-        FreeCraftingSession(session);
+        ch->PCData->CraftingSession = nullptr;
         return;
     }
 
@@ -373,7 +361,7 @@ void StartCrafting(CraftingSession *session)
     AddTimerToCharacter(ch, TIMER_CMD_FUN, session->pImpl->Recipe->Duration, do_craftingengine, SUB_PAUSE);
 }
 
-static bool CheckMaterials(CraftingSession *session, bool extract)
+static bool CheckMaterials(std::shared_ptr<CraftingSession> session, bool extract)
 {
     std::shared_ptr<Character> ch = GetEngineer(session);
     bool foundAll = true;
@@ -436,7 +424,7 @@ static bool CheckMaterials(CraftingSession *session, bool extract)
     return foundAll;
 }
 
-static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, std::shared_ptr<Object> obj)
+static FoundMaterial *GetUnfoundMaterial(std::shared_ptr<CraftingSession> session, std::shared_ptr<Object> obj)
 {
     FoundMaterial *material = session->pImpl->FoundMaterials;
 

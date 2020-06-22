@@ -97,12 +97,12 @@ class Editor
 public:
     Editor();
     Editor(const Editor &);
-    static void Discard(Editor *);
+    static void Discard(std::shared_ptr<Editor>);
     std::string EditDataToStr() const;
     void PrintInfo(std::shared_ptr<Character>) const;
     void Help(std::shared_ptr<Character>, std::string) const;
-    static void ClearBuf(Editor *, std::shared_ptr<Character>, std::string);
-    static void SearchAndReplace(Editor *, std::shared_ptr<Character>, std::string);
+    static void ClearBuf(std::shared_ptr<Editor>, std::shared_ptr<Character>, std::string);
+    static void SearchAndReplace(std::shared_ptr<Editor>, std::shared_ptr<Character>, std::string);
     void InsertLine(std::shared_ptr<Character>, std::string);
     void DeleteLine(std::shared_ptr<Character>, std::string);
     void GotoLine(std::shared_ptr<Character>, std::string);
@@ -142,7 +142,7 @@ private:
 
  /* funcs to manipulate editor datas */
 static EditorLine *make_new_line(const char *);
-static Editor *str_to_editdata(const std::string &, int);
+static std::shared_ptr<Editor> str_to_editdata(const std::string &, int);
 
 /* misc functions */
 static char *finer_OneArgument(char *, char *);
@@ -195,7 +195,7 @@ static EditorLine *make_new_line(const char *str)
     return new_line;
 }
 
-void Editor::Discard(Editor *edd)
+void Editor::Discard(std::shared_ptr<Editor> edd)
 {
     EditorLine *eline = 0;
     EditorLine *elnext = 0;
@@ -209,8 +209,6 @@ void Editor::Discard(Editor *edd)
         delete eline;
         eline = elnext;
     }
-
-    delete edd;
 }
 
 Editor::Editor(const Editor &edd)
@@ -238,12 +236,12 @@ Editor::Editor(const Editor &edd)
     OnSave = edd.OnSave;
 }
 
-static Editor *str_to_editdata(const std::string &str, int max_size)
+static std::shared_ptr<Editor> str_to_editdata(const std::string &str, int max_size)
 {
     const char *p = str.c_str();
     int i = 0;
     int tsize = 0, line_count = 1;
-    Editor *edd = new Editor();
+    auto edd = std::shared_ptr<Editor>();
     EditorLine *eline = make_new_line("");
 
     edd->first_line = eline;
@@ -388,7 +386,6 @@ void StopEditing(std::shared_ptr<Character> ch)
 void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
 {
     auto d = ch->Desc;
-    Editor *edd = 0;
     EditorLine *newline = 0;
     std::string cmd;
     int linelen = 0;
@@ -415,7 +412,7 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    edd = ch->PCData->TextEditor;
+    auto edd = ch->PCData->TextEditor;
 
     if(argument[0] == '/' || argument[0] == '\\')
     {
@@ -699,7 +696,7 @@ void Editor::Help(std::shared_ptr<Character> ch, std::string argument) const
     }
 }
 
-void Editor::ClearBuf(Editor *edd, std::shared_ptr<Character> ch, std::string)
+void Editor::ClearBuf(std::shared_ptr<Editor> edd, std::shared_ptr<Character> ch, std::string)
 {
     int edd_max_size = edd->max_size;
     std::string desc = edd->desc;
@@ -712,14 +709,13 @@ void Editor::ClearBuf(Editor *edd, std::shared_ptr<Character> ch, std::string)
     ch->Echo("Buffer cleared.\r\n");
 }
 
-void Editor::SearchAndReplace(Editor *edd, std::shared_ptr<Character> ch, std::string a)
+void Editor::SearchAndReplace(std::shared_ptr<Editor> edd, std::shared_ptr<Character> ch, std::string a)
 {
     char argBuf[MAX_INPUT_LENGTH];
     snprintf(argBuf, MAX_STRING_LENGTH, "%s", a.c_str());
     char *argument = argBuf;
     char word_src[MAX_INPUT_LENGTH];
     char word_dst[MAX_INPUT_LENGTH];
-    Editor *cloned_edd = 0;
     EditorLine *eline = 0;
     char *new_text = 0;
     size_t new_size = 0;
@@ -750,7 +746,7 @@ void Editor::SearchAndReplace(Editor *edd, std::shared_ptr<Character> ch, std::s
      * * and a warning is given to the user
      */
 
-    cloned_edd = new Editor(*edd);
+    auto cloned_edd = std::make_shared<Editor>(*edd);
 
     eline = cloned_edd->first_line;
     repl_count = 0;

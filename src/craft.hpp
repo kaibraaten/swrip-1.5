@@ -72,7 +72,7 @@ public:
 class InterpretArgumentsEventArgs
 {
 public:
-    class CraftingSession *CraftingSession = nullptr;
+    std::shared_ptr<class CraftingSession> CraftingSession;
     std::string CommandArguments;
     bool AbortSession = false;
 };
@@ -80,7 +80,7 @@ public:
 class MaterialFoundEventArgs
 {
 public:
-    class CraftingSession *CraftingSession = nullptr;
+    std::shared_ptr<class CraftingSession> CraftingSession;
     std::shared_ptr<class Object> Object;
     bool KeepFinding = false;
 };
@@ -88,28 +88,28 @@ public:
 class SetObjectStatsEventArgs
 {
 public:
-    class CraftingSession *CraftingSession = nullptr;
+    std::shared_ptr<class CraftingSession> CraftingSession;
     std::shared_ptr<class Object> Object;
 };
 
 class FinishedCraftingEventArgs
 {
 public:
-    class CraftingSession *CraftingSession = nullptr;
+    std::shared_ptr<class CraftingSession> CraftingSession;
     std::shared_ptr<class Object> Object;
 };
 
 class CheckRequirementsEventArgs
 {
 public:
-    class CraftingSession *CraftingSession = nullptr;
+    std::shared_ptr<class CraftingSession> CraftingSession;
     bool AbortSession = false;
 };
 
 class AbortCraftingEventArgs
 {
 public:
-    class CraftingSession *CraftingSession = nullptr;
+    std::shared_ptr<class CraftingSession> CraftingSession;
 };
 
 class CraftingMaterial
@@ -124,12 +124,10 @@ public:
 
 CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial *, int duration,
                                  std::shared_ptr<ProtoObject> protoObject, std::initializer_list<size_t> flags);
-void FreeCraftRecipe(CraftRecipe *);
-CraftingSession *AllocateCraftingSession(CraftRecipe *, std::shared_ptr<Character> engineer,
+std::shared_ptr<CraftingSession> AllocateCraftingSession(CraftRecipe *, std::shared_ptr<Character> engineer,
                                          const std::string &commandArgument);
-void FreeCraftingSession(CraftingSession *);
-std::shared_ptr<Character> GetEngineer(const CraftingSession *);
-void StartCrafting(CraftingSession *);
+std::shared_ptr<Character> GetEngineer(std::shared_ptr<CraftingSession>);
+void StartCrafting(std::shared_ptr<CraftingSession>);
 bool IsCrafting(std::shared_ptr<Character> ch);
 
 #endif /* include guard */

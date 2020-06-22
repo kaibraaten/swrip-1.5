@@ -21,8 +21,8 @@ static CraftRecipe *MakeCraftRecipe();
 
 void do_makedisguise(std::shared_ptr<Character> ch, std::string argument)
 {
-    CraftRecipe *recipe = MakeCraftRecipe();
-    CraftingSession *session = AllocateCraftingSession(recipe, ch, argument);
+    auto recipe = MakeCraftRecipe();
+    auto session = AllocateCraftingSession(recipe, ch, argument);
     auto data = std::make_shared<MakeDisguise>();
     session->OnInterpretArguments.Add(data, &MakeDisguise::InterpretArguments);
     session->OnSetObjectStats.Add(data, &MakeDisguise::SetObjectStats);
