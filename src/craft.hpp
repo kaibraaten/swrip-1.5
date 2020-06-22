@@ -122,10 +122,11 @@ public:
     std::bitset<Flag::MAX> Flags;
 };
 
-CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial *, int duration,
-                                 std::shared_ptr<ProtoObject> protoObject, std::initializer_list<size_t> flags);
-std::shared_ptr<CraftingSession> AllocateCraftingSession(CraftRecipe *, std::shared_ptr<Character> engineer,
-                                         const std::string &commandArgument);
+std::shared_ptr<CraftRecipe> AllocateCraftRecipe(int sn, const CraftingMaterial *, int duration,
+                                                 std::shared_ptr<ProtoObject> protoObject, std::initializer_list<size_t> flags);
+std::shared_ptr<CraftingSession> AllocateCraftingSession(std::shared_ptr<CraftRecipe> recipe,
+                                                         std::shared_ptr<Character> engineer,
+                                                         const std::string &commandArgument);
 std::shared_ptr<Character> GetEngineer(std::shared_ptr<CraftingSession>);
 void StartCrafting(std::shared_ptr<CraftingSession>);
 bool IsCrafting(std::shared_ptr<Character> ch);

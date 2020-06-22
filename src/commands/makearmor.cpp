@@ -20,7 +20,7 @@ private:
 };
 
 static bool CanUseWearLocation(int wearLocation);
-static CraftRecipe *CreateMakeArmorRecipe();
+static std::shared_ptr<CraftRecipe> CreateMakeArmorRecipe();
 
 void do_makearmor(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -35,7 +35,7 @@ void do_makearmor(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static CraftRecipe *CreateMakeArmorRecipe()
+static std::shared_ptr<CraftRecipe> CreateMakeArmorRecipe()
 {
     static const CraftingMaterial materials[] =
     {
@@ -43,9 +43,9 @@ static CraftRecipe *CreateMakeArmorRecipe()
         { ITEM_FABRIC, { Flag::Crafting::Extract } },
         { ITEM_NONE, {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makearmor, materials,
-                                              15, GetProtoObject(OBJ_VNUM_CRAFTING_ARMOR),
-                                              { Flag::Crafting::NeedsWorkshop });
+    auto recipe = AllocateCraftRecipe(gsn_makearmor, materials,
+                                      15, GetProtoObject(OBJ_VNUM_CRAFTING_ARMOR),
+                                      { Flag::Crafting::NeedsWorkshop });
 
     return recipe;
 }

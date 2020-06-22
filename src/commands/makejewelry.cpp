@@ -18,7 +18,7 @@ private:
     long _cost = 0;
 };
 
-static CraftRecipe *MakeCraftRecipe();
+static std::shared_ptr<CraftRecipe> MakeCraftRecipe();
 static bool CanUseWearLocation(int wearLocation);
 
 void do_makejewelry(std::shared_ptr<Character> ch, std::string argument)
@@ -33,7 +33,7 @@ void do_makejewelry(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe()
+static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 {
     static const CraftingMaterial materials[] =
     {

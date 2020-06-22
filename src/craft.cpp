@@ -57,14 +57,13 @@ struct CraftingSession::Impl
 {
     ~Impl();
     std::shared_ptr<Character> Engineer;
-    CraftRecipe *Recipe = nullptr;
+    std::shared_ptr<CraftRecipe> Recipe;
     FoundMaterial *FoundMaterials = nullptr;
     std::string CommandArgument;
 };
 
 CraftingSession::Impl::~Impl()
 {
-    delete Recipe;
     delete[] FoundMaterials;
 }
 
@@ -82,7 +81,7 @@ CraftingSession::~CraftingSession()
 class FinishedCraftingUserData
 {
 public:
-    CraftRecipe *Recipe = nullptr;
+    std::shared_ptr<CraftRecipe> Recipe;
 };
 
 static void AfterDelay(std::shared_ptr<CraftingSession> session);
@@ -131,7 +130,7 @@ void do_craftingengine(std::shared_ptr<Character> ch, std::string argument)
 
 static void AfterDelay(std::shared_ptr<CraftingSession> session)
 {
-    CraftRecipe *recipe = session->pImpl->Recipe;
+    auto recipe = session->pImpl->Recipe;
     std::shared_ptr<Character> ch = GetEngineer(session);
     int the_chance = ch->PCData->Learned[recipe->Skill];
     bool hasMaterials = CheckMaterials(session, true);
@@ -228,11 +227,11 @@ std::shared_ptr<Character> GetEngineer(std::shared_ptr<CraftingSession> session)
     return session->pImpl->Engineer;
 }
 
-CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial *materialList, int duration,
-                                 std::shared_ptr<ProtoObject> prototypeObject,
-                                 std::initializer_list<size_t> flagBits)
+std::shared_ptr<CraftRecipe> AllocateCraftRecipe(int sn, const CraftingMaterial *materialList, int duration,
+                                                 std::shared_ptr<ProtoObject> prototypeObject,
+                                                 std::initializer_list<size_t> flagBits)
 {
-    CraftRecipe *recipe = new CraftRecipe();
+    auto recipe = std::make_shared<CraftRecipe>();
 
     recipe->Skill = sn;
     recipe->Materials = materialList;
@@ -285,7 +284,7 @@ static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMater
     return foundMaterials;
 }
 
-std::shared_ptr<CraftingSession> AllocateCraftingSession(CraftRecipe *recipe, std::shared_ptr<Character> engineer,
+std::shared_ptr<CraftingSession> AllocateCraftingSession(std::shared_ptr<CraftRecipe> recipe, std::shared_ptr<Character> engineer,
                                                          const std::string &commandArgument)
 {
     auto session = std::make_shared<CraftingSession>();

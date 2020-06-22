@@ -18,7 +18,7 @@ private:
     int _gemType = 0;
 };
 
-static CraftRecipe *MakeCraftRecipe();
+static std::shared_ptr<CraftRecipe> MakeCraftRecipe();
 
 void do_makeshield(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -32,7 +32,7 @@ void do_makeshield(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe()
+static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 {
     static const CraftingMaterial materials[] =
     {

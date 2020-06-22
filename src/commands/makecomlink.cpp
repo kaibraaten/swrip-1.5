@@ -17,7 +17,7 @@ private:
 };
 
 static bool CanUseWearLocation(int wearLocation);
-static CraftRecipe *MakeCraftRecipe();
+static std::shared_ptr<CraftRecipe> MakeCraftRecipe();
 
 void do_makecomlink(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -30,7 +30,7 @@ void do_makecomlink(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe()
+static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 {
     static const CraftingMaterial materials[] =
     {
@@ -40,9 +40,9 @@ static CraftRecipe *MakeCraftRecipe()
         { ITEM_CRYSTAL,  { Flag::Crafting::Extract } },
         { ITEM_NONE,     {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_makecomlink, materials,
-                                              10, GetProtoObject(OBJ_VNUM_CRAFTING_COMLINK),
-                                              { Flag::Crafting::NeedsWorkshop });
+    auto recipe = AllocateCraftRecipe(gsn_makecomlink, materials,
+                                      10, GetProtoObject(OBJ_VNUM_CRAFTING_COMLINK),
+                                      { Flag::Crafting::NeedsWorkshop });
 
     return recipe;
 }

@@ -20,7 +20,7 @@ private:
     std::string _itemName;
 };
 
-static CraftRecipe *CreateMakeBowcasterCraftRecipe();
+static std::shared_ptr<CraftRecipe> CreateMakeBowcasterCraftRecipe();
 
 void do_makebowcaster(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -35,7 +35,7 @@ void do_makebowcaster(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static CraftRecipe *CreateMakeBowcasterCraftRecipe()
+static std::shared_ptr<CraftRecipe> CreateMakeBowcasterCraftRecipe()
 {
     static const CraftingMaterial materials[] =
     {

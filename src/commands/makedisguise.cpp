@@ -17,7 +17,7 @@ private:
     std::string _name;
 };
 
-static CraftRecipe *MakeCraftRecipe();
+static std::shared_ptr<CraftRecipe> MakeCraftRecipe();
 
 void do_makedisguise(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -30,7 +30,7 @@ void do_makedisguise(std::shared_ptr<Character> ch, std::string argument)
     StartCrafting(session);
 }
 
-static CraftRecipe *MakeCraftRecipe()
+static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 {
     static const CraftingMaterial materials[] =
     {
@@ -39,9 +39,9 @@ static CraftRecipe *MakeCraftRecipe()
         { ITEM_HAIR,        { Flag::Crafting::Extract } },
         { ITEM_NONE,        {} }
     };
-    CraftRecipe *recipe = AllocateCraftRecipe(gsn_disguise, materials,
-                                              25, GetProtoObject(OBJ_VNUM_CRAFTING_DISGUISE),
-                                              { Flag::Crafting::NeedsWorkshop });
+    auto recipe = AllocateCraftRecipe(gsn_disguise, materials,
+                                      25, GetProtoObject(OBJ_VNUM_CRAFTING_DISGUISE),
+                                      { Flag::Crafting::NeedsWorkshop });
 
     return recipe;
 }
