@@ -31,6 +31,8 @@ namespace fs = std::filesystem;
 static constexpr int CURRENT_FILEFORMAT_VERSION = 1;
 static int FILEFORMAT_VERSION_BEING_LOADED = CURRENT_FILEFORMAT_VERSION;
 
+class SaveData;
+
 class LuaAreaRepository : public AreaRepository
 {
 public:
@@ -60,7 +62,7 @@ private:
     void PushOvalues(lua_State *L, const std::shared_ptr<ProtoObject> obj) const;
     void PushResets(lua_State *L, const std::shared_ptr<Area> area) const;
     void PushReset(lua_State *L, const std::shared_ptr<Reset> reset, size_t idx) const;
-    static void PushArea(lua_State *L, const void *userData);
+    static void PushArea(lua_State *L, const SaveData *data);
 
     static void LoadMetaData(lua_State *L, std::shared_ptr<Area> area);
     static void LoadLevelRanges(lua_State *L, std::shared_ptr<Area> area);
@@ -234,9 +236,8 @@ void LuaAreaRepository::PushMetaData(lua_State *L, std::shared_ptr<Area> area) c
     PushVnumRanges(L, area);
 }
 
-void LuaAreaRepository::PushArea(lua_State *L, const void *userData)
+void LuaAreaRepository::PushArea(lua_State *L, const SaveData *data)
 {
-    const SaveData *data = static_cast<const SaveData *>(userData);
     const std::shared_ptr<Area> area = data->area;
     const LuaAreaRepository *repos = data->Repos;
 

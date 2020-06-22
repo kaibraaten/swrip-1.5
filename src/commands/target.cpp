@@ -204,9 +204,8 @@ struct UserData
     std::shared_ptr<Ship> target;
 };
 
-static bool SetSameTargetAsMothership(std::shared_ptr<Ship> dockedShip, void *userData)
+static bool SetSameTargetAsMothership(std::shared_ptr<Ship> dockedShip, UserData *data)
 {
-    struct UserData *data = (struct UserData *)userData;
     std::shared_ptr<Ship> ship = data->ship;
     std::shared_ptr<Ship> target = data->target;
 

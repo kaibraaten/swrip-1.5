@@ -8,7 +8,7 @@
 static int L_StoreroomEntry(lua_State *L);
 static void ExecuteStoreroomFile(const std::string &filename, void *userData);
 static std::string ToString(long number);
-static void PushStoreroom(lua_State *L, const void *userData);
+static void PushStoreroom(lua_State *L, const std::shared_ptr<Room> &storeroom);
 
 class LuaStoreroomRepository : public StoreroomRepository
 {
@@ -33,7 +33,7 @@ void LuaStoreroomRepository::Save(std::shared_ptr<Room> storeroom)
     std::string filename = FormatString("%s%s",
                                         STOREROOM_DIR,
                                         ConvertToLuaFilename(ToString(storeroom->Vnum)).c_str());
-    LuaSaveDataFile(filename, PushStoreroom, "storeroom", storeroom.get());
+    LuaSaveDataFile(filename, PushStoreroom, "storeroom", storeroom);
 }
 
 //////////////////////////////////////////////////////////////
@@ -68,12 +68,11 @@ static std::string ToString(long number)
     return FormatString("%ld", number);
 }
 
-static void PushStoreroom(lua_State *L, const void *userData)
+static void PushStoreroom(lua_State *L, const std::shared_ptr<Room> &storeroom)
 {
     lua_pushinteger(L, 1);
     lua_newtable(L);
 
-    const auto storeroom = (const Room *)userData;
     LuaSetfieldNumber(L, "Vnum", storeroom->Vnum);
     LuaPushObjects(L, storeroom->Objects(), "Contents");
 

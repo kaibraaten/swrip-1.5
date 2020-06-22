@@ -166,15 +166,9 @@ void LuaLoadDataFile(const std::string &filename,
     lua_close(L);
 }
 
-void LuaSaveDataFile(const std::string &filename,
-                     void(*pushData)(lua_State *L, const void *),
-                     const std::string &data, const void *userData)
+void LuaSaveDataFile(lua_State *L, const std::string &filename, const std::string &data)
 {
-    lua_State *L = CreateLuaState();
     char buffer[MAX_STRING_LENGTH];
-
-    pushData(L, userData);
-
     sprintf(buffer, "%ssavers.lua", SCRIPT_DIR);
     int error = luaL_dofile(L, buffer);
 
@@ -198,8 +192,6 @@ void LuaSaveDataFile(const std::string &filename,
                      __FILE__, __FUNCTION__, __LINE__, lua_tostring(L, -1));
         }
     }
-
-    lua_close(L);
 }
 
 void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,

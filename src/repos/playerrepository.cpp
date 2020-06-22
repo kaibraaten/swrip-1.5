@@ -50,7 +50,7 @@ protected:
 
 private:
     static constexpr int SAVE_VERSION = 1;
-    static void PushPlayer(lua_State *L, const void *userData);
+    static void PushPlayer(lua_State *L, const std::shared_ptr<Character> &pc);
     static void PushGuildData(lua_State *L, std::shared_ptr<Character> pc);
     static void PushAliases(lua_State *L, std::shared_ptr<Character> pc);
     static void PushAddictions(lua_State *L, std::shared_ptr<Character> pc);
@@ -972,10 +972,8 @@ void InMemoryPlayerRepository::PushGuildData(lua_State *L, std::shared_ptr<Chara
     }
 }
 
-void InMemoryPlayerRepository::PushPlayer(lua_State *L, const void *userData)
+void InMemoryPlayerRepository::PushPlayer(lua_State *L, const std::shared_ptr<Character> &pc)
 {
-    std::shared_ptr<Character> pc = *reinterpret_cast<std::shared_ptr<Character>*>((void*)userData);
-
     lua_pushinteger(L, 1);
     lua_newtable(L);
 
@@ -1012,7 +1010,7 @@ void InMemoryPlayerRepository::Save(std::shared_ptr<Character> pc) const
 
     LuaSaveDataFile(GetPlayerFilename(pc),
                     &InMemoryPlayerRepository::PushPlayer,
-                    "character", &pc);
+                    "character", pc);
 
     WriteCorpses(pc, "");
 

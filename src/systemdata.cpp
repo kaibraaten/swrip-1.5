@@ -5,7 +5,7 @@
 
 SystemData SysData;
 
-static void PushSystemData(lua_State *L, const void *userData)
+static void PushSystemData(lua_State *L)
 {
     lua_newtable(L);
 
@@ -105,5 +105,5 @@ void SystemData::Load()
 
 void SystemData::Save() const
 {
-    LuaSaveDataFile(SYSTEMDATA_FILE, PushSystemData, "systemdata", NULL);
+    LuaSaveDataFile(SYSTEMDATA_FILE, PushSystemData, "systemdata");
 }

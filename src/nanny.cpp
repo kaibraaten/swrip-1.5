@@ -584,10 +584,9 @@ static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
     d->ConnectionState = CON_READ_MOTD;
 }
 
-static bool PutCharacterInCorrectShip(std::shared_ptr<Ship> ship, void *userData)
+static bool PutCharacterInCorrectShip(std::shared_ptr<Ship> ship, const Vo &vo)
 {
-    Vo *vo = (Vo *)userData;
-    std::shared_ptr<Character> ch = vo->Ch;
+    std::shared_ptr<Character> ch = vo.Ch;
     
     if(ch->InRoom->Vnum >= ship->Rooms.First
        && ch->InRoom->Vnum <= ship->Rooms.Last)
@@ -778,7 +777,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
             && ch->InRoom != GetRoom(ROOM_VNUM_HELL))
     {
         Vo vo(ch);
-        ForEachShip(PutCharacterInCorrectShip, &vo);
+        ForEachShip(PutCharacterInCorrectShip, vo);
     }
     else
     {

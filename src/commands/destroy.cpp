@@ -48,10 +48,8 @@ private:
     std::string _resident;
 };
 
-static bool RemoveShipOwner(std::shared_ptr<Ship> ship, void *userData)
+static bool RemoveShipOwner(std::shared_ptr<Ship> ship, const std::string &victim)
 {
-    const char *victim = (char*)userData;
-
     if (StrCmp(ship->Owner, victim) == 0)
     {
         ship->Owner.erase();

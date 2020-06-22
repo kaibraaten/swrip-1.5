@@ -393,7 +393,7 @@ static void PushFameElement(lua_State *L, const HallOfFameElement *fame)
     lua_settable(L, -3);
 }
 
-static void PushHallOfFame(lua_State *L, const void *userData)
+static void PushHallOfFame(lua_State *L)
 {
     lua_newtable(L);
 
@@ -407,7 +407,7 @@ static void PushHallOfFame(lua_State *L, const void *userData)
 
 void SaveHallOfFame()
 {
-    LuaSaveDataFile(HALL_OF_FAME_FILE, PushHallOfFame, "halloffame", NULL);
+    LuaSaveDataFile(HALL_OF_FAME_FILE, PushHallOfFame, "halloffame");
 }
 
 static void FindBetWinners(std::shared_ptr<Character> winner)

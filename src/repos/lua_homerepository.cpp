@@ -11,7 +11,7 @@
 namespace fs = std::filesystem;
 
 static std::string GetHomeFilename(vnum_t roomVnum);
-static void PushHome(lua_State *L, const void *userData);
+static void PushHome(lua_State *L, const std::shared_ptr<Home> &home);
 static int L_HomeEntryFull(lua_State *L);
 static int L_HomeEntryMeta(lua_State *L);
 
@@ -104,19 +104,14 @@ void LuaHomeRepository::Load(std::shared_ptr<Home> home)
 void LuaHomeRepository::Save(std::shared_ptr<Home> home) const
 {
     auto filename = GetHomeFilename(home->Vnum());
-    LuaSaveDataFile(filename, PushHome, "home", home.get());
-}
-
-static std::string ToString(long number)
-{
-    return FormatString("%ld", number);
+    LuaSaveDataFile(filename, PushHome, "home", home);
 }
 
 static std::string GetHomeFilename(vnum_t roomVnum)
 {
     return FormatString("%s%s",
                         HOME_DIR,
-                        ConvertToLuaFilename(ToString(roomVnum)).c_str());
+                        ConvertToLuaFilename(std::to_string(roomVnum)).c_str());
 }
 
 static void PushResident(lua_State *L, size_t idx, std::shared_ptr<Resident> resident)
@@ -128,9 +123,8 @@ static void PushResident(lua_State *L, size_t idx, std::shared_ptr<Resident> res
     lua_settable(L, -3);
 }
 
-static void PushHome(lua_State *L, const void *userData)
+static void PushHome(lua_State *L, const std::shared_ptr<Home> &home)
 {
-    const auto home = (const Home*)userData;
     lua_pushinteger(L, 1);
     lua_newtable(L);
 

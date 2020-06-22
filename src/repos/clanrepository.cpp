@@ -19,7 +19,7 @@ public:
 private:
     static void PushMember(lua_State *L, const std::shared_ptr<ClanMember> &member, int idx);
     static void PushMembers(lua_State *L, const std::shared_ptr<Clan> &clan);
-    static void PushClan(lua_State *L, const void *userData);
+    static void PushClan(lua_State *L, const std::shared_ptr<Clan> &clan);
     static void LoadOneMember(lua_State *L, const std::shared_ptr<Clan> &clan);
     static void LoadMembers(lua_State *L, const std::shared_ptr<Clan> &clan);
     static void LoadStoreroom(lua_State *L, const std::shared_ptr<Clan> &clan);
@@ -47,7 +47,7 @@ void LuaClanRepository::Save() const
 
 void LuaClanRepository::Save(const std::shared_ptr<Clan> &clan) const
 {
-    LuaSaveDataFile(GetClanFilename(clan), PushClan, "clan", &clan);
+    LuaSaveDataFile(GetClanFilename(clan), PushClan, "clan", clan);
 }
 
 void LuaClanRepository::PushMember(lua_State *L,
@@ -81,9 +81,8 @@ void LuaClanRepository::PushMembers(lua_State *L, const std::shared_ptr<Clan> &c
     lua_settable(L, -3);
 }
 
-void LuaClanRepository::PushClan(lua_State *L, const void *userData)
+void LuaClanRepository::PushClan(lua_State *L, const std::shared_ptr<Clan> &clan)
 {
-    const std::shared_ptr<Clan> clan = *static_cast<const std::shared_ptr<Clan>*>(userData);
     static int idx = 0;
     lua_pushinteger(L, ++idx);
     lua_newtable(L);

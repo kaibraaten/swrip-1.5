@@ -2942,16 +2942,3 @@ bool ShipNameAndPersonalnameComboIsUnique(const std::string &name,
 
     return nameIsUnique;
 }
-
-void ForEachShip(std::function<bool(std::shared_ptr<Ship>, void *)> callback, void *userData)
-{
-    for(auto ship : Ships)
-    {
-        bool keepGoing = callback(ship, userData);
-
-        if(!keepGoing)
-        {
-            break;
-        }
-    }
-}

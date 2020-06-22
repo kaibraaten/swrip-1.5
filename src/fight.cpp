@@ -2476,10 +2476,8 @@ void StopFighting(std::shared_ptr<Character> ch, bool fBoth)
     }
 }
 
-static bool RemoveShipOwner(std::shared_ptr<Ship> ship, void *userData)
+static bool RemoveShipOwner(std::shared_ptr<Ship> ship, const std::shared_ptr<Character> &victim)
 {
-    auto victim = (Character*)userData;
-
     if(!StrCmp(ship->Owner, victim->Name))
     {
         ship->Owner.erase();
@@ -2600,7 +2598,7 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
 
     if(SysData.PermaDeath)
     {
-        ForEachShip(RemoveShipOwner, victim.get());
+        ForEachShip(RemoveShipOwner, victim);
         ForEach(Homes->FindHomesForResident(victim->Name), RemoveResident(victim->Name));
 
         if(victim->PCData && victim->PCData->ClanInfo.Clan)

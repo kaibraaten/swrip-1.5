@@ -11,7 +11,7 @@
 #include "repos/spaceobjectrepository.hpp"
 #include "act.hpp"
 
-static bool LeaveHyperspaceIfDocked(std::shared_ptr<Ship> dockedShip, void *userData);
+static bool LeaveHyperspaceIfDocked(std::shared_ptr<Ship> dockedShip, std::shared_ptr<Ship> ship);
 
 void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -150,7 +150,7 @@ void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
                 Ships->Save(ship);
             }
 
-            ForEachShip(LeaveHyperspaceIfDocked, &ship);
+            ForEachShip(LeaveHyperspaceIfDocked, ship);
             return;
         }
     }
@@ -245,10 +245,8 @@ void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
         LearnFromSuccess(ch, gsn_capitalships);
 }
 
-static bool LeaveHyperspaceIfDocked(std::shared_ptr<Ship> dockedShip, void *userData)
+static bool LeaveHyperspaceIfDocked(std::shared_ptr<Ship> dockedShip, std::shared_ptr<Ship> ship)
 {
-    std::shared_ptr<Ship> ship = *static_cast<const std::shared_ptr<Ship> *>(userData);
-
     if(dockedShip->Docked == ship)
     {
         char buf[MAX_STRING_LENGTH] = { '\0' };

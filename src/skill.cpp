@@ -25,12 +25,12 @@ std::array<std::shared_ptr<Skill>, MAX_SKILL> HerbTable;
 extern std::string spell_target_name;       /* from magic.c */
 
 static int CompareSkills(std::shared_ptr<Skill> *sk1, std::shared_ptr<Skill> *sk2);
-static void PushSkillTable(lua_State *L, const void *);
+static void PushSkillTable(lua_State *L);
 static void PushSkill(lua_State *L, std::shared_ptr<Skill> skill);
 static void PushSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill);
 static int L_SkillEntry(lua_State *L);
 static std::shared_ptr<Skill> LoadSkillOrHerb(lua_State *L);
-static void PushHerbTable(lua_State *L, const void *userData);
+static void PushHerbTable(lua_State *L);
 
 Skill::Skill()
     : UseRec(std::make_shared<timerset>())
@@ -825,7 +825,7 @@ static void PushSkill(lua_State *L, std::shared_ptr<Skill> skill)
     lua_settable(L, -3);
 }
 
-static void PushSkillTable(lua_State *L, const void *userData)
+static void PushSkillTable(lua_State *L)
 {
     lua_newtable(L);
 
@@ -844,7 +844,7 @@ static void PushSkillTable(lua_State *L, const void *userData)
 
 void SaveSkills()
 {
-    LuaSaveDataFile(SKILL_DATA_FILE, PushSkillTable, "skills", NULL);
+    LuaSaveDataFile(SKILL_DATA_FILE, PushSkillTable, "skills");
 }
 
 static void LoadSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
@@ -1109,7 +1109,7 @@ void LoadSkills()
     LuaLoadDataFile(SKILL_DATA_FILE, L_SkillEntry, "SkillEntry");
 }
 
-static void PushHerbTable(lua_State *L, const void *userData)
+static void PushHerbTable(lua_State *L)
 {
     int sn = 0;
     lua_newtable(L);
@@ -1129,7 +1129,7 @@ static void PushHerbTable(lua_State *L, const void *userData)
 
 void SaveHerbs()
 {
-    LuaSaveDataFile(HERB_DATA_FILE, PushHerbTable, "herbs", NULL);
+    LuaSaveDataFile(HERB_DATA_FILE, PushHerbTable, "herbs");
 }
 
 void LoadHerbs()

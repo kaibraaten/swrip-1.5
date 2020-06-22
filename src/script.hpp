@@ -131,9 +131,29 @@ bool FieldExists(lua_State *L, const std::string &key);
 void LuaLoadDataFile(const std::string &filename,
                      int(*callback)(lua_State *L),
                      const std::string &callbackFunctionName);
+void LuaSaveDataFile(lua_State *L, const std::string &filename, const std::string &data);
+
+template<typename CallableT, typename UserDataT>
 void LuaSaveDataFile(const std::string &filename,
-                     void(*pushData)(lua_State *L, const void *),
-                     const std::string &data, const void *userData);
+                     CallableT pushData,
+                     const std::string &data, UserDataT userData)
+{
+    lua_State *L = CreateLuaState();
+    pushData(L, userData);
+    LuaSaveDataFile(L, filename, data);
+    lua_close(L);
+}
+
+template<typename CallbackT>
+void LuaSaveDataFile(const std::string &filename,
+                     CallbackT pushData, const std::string &data)
+{
+    lua_State *L = CreateLuaState();
+    pushData(L);
+    LuaSaveDataFile(L, filename, data);
+    lua_close(L);
+}
+
 void LuaPushFlags(lua_State *L, unsigned long flags,
                   const std::array<const char *const, Flag::MAX> &nameArray,
                   const std::string &key);

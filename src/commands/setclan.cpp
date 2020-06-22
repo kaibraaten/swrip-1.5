@@ -6,200 +6,198 @@
 
 struct UpdateOwnerNameData
 {
-  std::string OldName;
-  std::string NewName;
+    std::string OldName;
+    std::string NewName;
 };
 
-static bool UpdateOwnerName(std::shared_ptr<Ship> ship, void *userData);
+static bool UpdateOwnerName(std::shared_ptr<Ship> ship, UpdateOwnerNameData *data);
 
-void do_setclan( std::shared_ptr<Character> ch, std::string argument )
+void do_setclan(std::shared_ptr<Character> ch, std::string argument)
 {
-  std::string arg1;
-  std::string arg2;
-  std::shared_ptr<Clan> clan;
+    std::string arg1;
+    std::string arg2;
+    std::shared_ptr<Clan> clan;
 
-  if ( IsNpc( ch ) )
+    if(IsNpc(ch))
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  if ( arg1.empty() || arg2.empty() || argument.empty() )
+    if(arg1.empty() || arg2.empty() || argument.empty())
     {
-      ch->Echo("Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n");
-      ch->Echo("\r\nField being one of:\r\n");
-      ch->Echo("  leader number1 number2 addguild enlist1 jail\r\n");
-      ch->Echo("  enlist2 board storage funds\r\n");
+        ch->Echo("Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n");
+        ch->Echo("\r\nField being one of:\r\n");
+        ch->Echo("  leader number1 number2 addguild enlist1 jail\r\n");
+        ch->Echo("  enlist2 board storage funds\r\n");
 
-      if ( GetTrustLevel( ch ) >= LEVEL_SUB_IMPLEM )
+        if(GetTrustLevel(ch) >= LEVEL_SUB_IMPLEM)
         {
-          ch->Echo("  name desc\r\n");
+            ch->Echo("  name desc\r\n");
         }
 
-      return;
+        return;
     }
 
-  clan = GetClan( arg1 );
+    clan = GetClan(arg1);
 
-  if ( !clan )
+    if(!clan)
     {
-      ch->Echo("No such clan.\r\n");
-      return;
+        ch->Echo("No such clan.\r\n");
+        return;
     }
 
-  if ( !StrCmp( arg2, "enlistroom1" ) )
+    if(!StrCmp(arg2, "enlistroom1"))
     {
-      clan->EnlistRoom1 = ToLong( argument );
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->EnlistRoom1 = ToLong(argument);
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( !StrCmp( arg2, "enlistroom2" ) )
+    if(!StrCmp(arg2, "enlistroom2"))
     {
-      clan->EnlistRoom2 = ToLong( argument );
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->EnlistRoom2 = ToLong(argument);
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( !StrCmp( arg2, "leader" ) )
+    if(!StrCmp(arg2, "leader"))
     {
-      clan->Leadership.Leader = argument;
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->Leadership.Leader = argument;
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( !StrCmp( arg2, "addguild" ) )
+    if(!StrCmp(arg2, "addguild"))
     {
-      std::shared_ptr<Clan> guild = GetClan( argument );
+        std::shared_ptr<Clan> guild = GetClan(argument);
 
-      if ( !guild )
+        if(!guild)
         {
-          ch->Echo("Guild does't exist.\r\n");
-          return;
+            ch->Echo("Guild does't exist.\r\n");
+            return;
         }
 
-      if ( guild->Type == CLAN_GUILD || guild->MainClan )
+        if(guild->Type == CLAN_GUILD || guild->MainClan)
         {
-          ch->Echo("Guild is already part of another faction.\r\n");
-          return;
+            ch->Echo("Guild is already part of another faction.\r\n");
+            return;
         }
 
-      if (!guild->Subclans().empty())
+        if(!guild->Subclans().empty())
         {
-          ch->Echo("Guild has guilds of its own that need removing first.\r\n");
-          return;
+            ch->Echo("Guild has guilds of its own that need removing first.\r\n");
+            return;
         }
 
-      AssignGuildToMainclan(clan, guild);
+        AssignGuildToMainclan(clan, guild);
 
-      Clans->Save(clan);
-      Clans->Save(guild);
-      return;
+        Clans->Save(clan);
+        Clans->Save(guild);
+        return;
     }
 
-  if ( !StrCmp( arg2, "number1" ) )
+    if(!StrCmp(arg2, "number1"))
     {
-      clan->Leadership.Number1 = argument;
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->Leadership.Number1 = argument;
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( !StrCmp( arg2, "number2" ) )
+    if(!StrCmp(arg2, "number2"))
     {
-      clan->Leadership.Number2 = argument;
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->Leadership.Number2 = argument;
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( !StrCmp( arg2, "board" ) )
+    if(!StrCmp(arg2, "board"))
     {
-      clan->Board = ToLong( argument );
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->Board = ToLong(argument);
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( !StrCmp( arg2, "funds" ) )
+    if(!StrCmp(arg2, "funds"))
     {
-      clan->Funds = ToLong( argument );
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->Funds = ToLong(argument);
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( !StrCmp( arg2, "storage" ) )
+    if(!StrCmp(arg2, "storage"))
     {
-      clan->Storeroom = ToLong( argument );
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->Storeroom = ToLong(argument);
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( !StrCmp( arg2, "jail" ) )
+    if(!StrCmp(arg2, "jail"))
     {
-      clan->Jail = ToLong( argument );
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->Jail = ToLong(argument);
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( GetTrustLevel( ch ) < LEVEL_SUB_IMPLEM )
+    if(GetTrustLevel(ch) < LEVEL_SUB_IMPLEM)
     {
-      do_setclan( ch, "" );
-      return;
+        do_setclan(ch, "");
+        return;
     }
 
-  if ( !StrCmp( arg2, "name" ) )
+    if(!StrCmp(arg2, "name"))
     {
-      UpdateOwnerNameData data;
+        UpdateOwnerNameData data;
 
-      data.OldName = clan->Name;
-      data.NewName = argument;
+        data.OldName = clan->Name;
+        data.NewName = argument;
 
-      if( GetClan( argument ) )
-	{
-          ch->Echo("There's already another guild with that name." );
-	  return;
-	}
+        if(GetClan(argument))
+        {
+            ch->Echo("There's already another guild with that name.");
+            return;
+        }
 
-      ForEachShip(UpdateOwnerName, &data);
+        ForEachShip(UpdateOwnerName, &data);
 
-      unlink( GetClanFilename( clan ).c_str() );
+        unlink(GetClanFilename(clan).c_str());
 
-      clan->Name = argument;
+        clan->Name = argument;
 
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  if ( !StrCmp( arg2, "desc" ) )
+    if(!StrCmp(arg2, "desc"))
     {
-      clan->Description = argument;
-      ch->Echo("Done.\r\n");
-      Clans->Save(clan);
-      return;
+        clan->Description = argument;
+        ch->Echo("Done.\r\n");
+        Clans->Save(clan);
+        return;
     }
 
-  do_setclan( ch, "" );
+    do_setclan(ch, "");
 }
 
-static bool UpdateOwnerName(std::shared_ptr<Ship> ship, void *userData)
+static bool UpdateOwnerName(std::shared_ptr<Ship> ship, UpdateOwnerNameData *data)
 {
-  UpdateOwnerNameData *data = (UpdateOwnerNameData*)userData;
-
-  if( !StrCmp( ship->Owner, data->OldName ) )
+    if(!StrCmp(ship->Owner, data->OldName))
     {
-      ship->Owner = data->NewName;
+        ship->Owner = data->NewName;
     }
 
-  return true;
+    return true;
 }

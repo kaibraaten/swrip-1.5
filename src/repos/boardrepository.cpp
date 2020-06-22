@@ -29,7 +29,7 @@ private:
     static int L_BoardEntry(lua_State *L);
     static void ExecuteBoardFile(const std::string &filePath, void *userData);
     static void PushNotes(lua_State *L, const std::shared_ptr<Board> &board);
-    static void PushBoard(lua_State *L, const void *userData);
+    static void PushBoard(lua_State *L, const std::shared_ptr<Board> &board);
 };
 
 void LuaBoardRepository::Load()
@@ -47,7 +47,7 @@ void LuaBoardRepository::Save() const
 
 void LuaBoardRepository::Save(const std::shared_ptr<Board> &board) const
 {
-    LuaSaveDataFile(GetBoardFilename(board), PushBoard, "board", &board);
+    LuaSaveDataFile(GetBoardFilename(board), PushBoard, "board", board);
 }
 
 void LuaBoardRepository::LoadNote(lua_State *L, const std::shared_ptr<Board> &board)
@@ -150,9 +150,8 @@ void LuaBoardRepository::PushNotes(lua_State *L, const std::shared_ptr<Board> &b
     }
 }
 
-void LuaBoardRepository::PushBoard(lua_State *L, const void *userData)
+void LuaBoardRepository::PushBoard(lua_State *L, const std::shared_ptr<Board> &board)
 {
-    const std::shared_ptr<Board> board = *static_cast<const std::shared_ptr<Board> *>(userData);
     lua_pushinteger(L, 1);
     lua_newtable(L);
 

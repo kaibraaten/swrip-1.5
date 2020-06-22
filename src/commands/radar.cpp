@@ -17,13 +17,12 @@ struct ShowShipData
     std::shared_ptr<Ship> ship;
 };
 
-static bool ShowShipIfInRadarRange(std::shared_ptr<Ship> target, void *userData);
+static bool ShowShipIfInRadarRange(std::shared_ptr<Ship> target, ShowShipData *data);
 
 void do_radar(std::shared_ptr<Character> ch, std::string argument)
 {
     int the_chance = 0;
     std::shared_ptr<Ship> ship;
-    ShowShipData showShipData;
 
     if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
     {
@@ -125,6 +124,7 @@ void do_radar(std::shared_ptr<Character> ch, std::string argument)
 
     ch->Echo("\r\n");
 
+    ShowShipData showShipData;
     showShipData.ch = ch;
     showShipData.ship = ship;
     ForEachShip(ShowShipIfInRadarRange, &showShipData);
@@ -150,9 +150,8 @@ void do_radar(std::shared_ptr<Character> ch, std::string argument)
     LearnFromSuccess(ch, gsn_navigation);
 }
 
-static bool ShowShipIfInRadarRange(std::shared_ptr<Ship> target, void *userData)
+static bool ShowShipIfInRadarRange(std::shared_ptr<Ship> target, ShowShipData *data)
 {
-    struct ShowShipData *data = (struct ShowShipData *)userData;
     std::shared_ptr<Ship> ship = data->ship;
     const std::shared_ptr<Character> ch = data->ch;
 

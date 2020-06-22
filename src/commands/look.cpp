@@ -31,7 +31,7 @@ struct UserData
 void show_char_to_char(const std::list<Character *> &list, std::shared_ptr<Character> ch);
 
 static void LookThroughShipWindow(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
-static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, void *userData);
+static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, const UserData *data);
 static void show_char_to_char_0(std::shared_ptr<Character> victim, std::shared_ptr<Character> ch);
 static void show_char_to_char_1(std::shared_ptr<Character> victim, std::shared_ptr<Character> ch);
 static void show_ships_to_char(std::shared_ptr<Room> room, const std::shared_ptr<Character> ch);
@@ -1069,14 +1069,14 @@ static void LookThroughShipWindow(std::shared_ptr<Character> ch, std::shared_ptr
         {
             ch, ship
         };
+
         ForEachShip(ShowShipIfInVincinity, &data);
         ch->Echo("\r\n");
     }
 }
 
-static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, void *userData)
+static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, const UserData *data)
 {
-    const UserData *data = (UserData *)userData;
     const std::shared_ptr<Character> ch = data->ch;
     std::shared_ptr<Ship> ship = data->ship;
 

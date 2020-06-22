@@ -15,7 +15,7 @@
 namespace fs = std::filesystem;
 
 static std::string GetVendorFilename(const std::string &pc);
-static void PushVendor(lua_State *L, const void *userData);
+static void PushVendor(lua_State *L, const std::shared_ptr<Character> &vendor);
 static void ExecuteVendorFile(const std::string &filename, void *userData);
 static int L_VendorEntry(lua_State *L);
 
@@ -54,7 +54,7 @@ void LuaVendorRepository::Save(std::shared_ptr<Character> vendor) const
 
     LuaSaveDataFile(GetVendorFilename(vendor->Owner),
                     PushVendor,
-                    "vendor", vendor.get());
+                    "vendor", vendor);
 
     ReEquipCharacter(vendor);
 }
@@ -162,10 +162,8 @@ static int L_VendorEntry(lua_State *L)
     return 0;
 }
 
-static void PushVendor(lua_State *L, const void *userData)
+static void PushVendor(lua_State *L, const std::shared_ptr<Character> &vendor)
 {
-    auto vendor = reinterpret_cast<const Character*>(userData);
-
     lua_pushinteger(L, 1);
     lua_newtable(L);
 

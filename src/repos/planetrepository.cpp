@@ -24,7 +24,7 @@ private:
     static int L_PlanetEntry(lua_State *L);
     static void LoadPlanet(const std::string &filePath, void *userData);
     static void LuaPushAreas(lua_State *L, std::shared_ptr<Planet> planet);
-    static void PushPlanet(lua_State *L, const void *userData);
+    static void PushPlanet(lua_State *L, const std::shared_ptr<Planet> &planet);
 };
 
 void LuaPlanetRepository::Save() const
@@ -37,7 +37,7 @@ void LuaPlanetRepository::Save() const
 
 void LuaPlanetRepository::Save(std::shared_ptr<Planet> planet) const
 {
-    LuaSaveDataFile(GetPlanetFilename(planet), PushPlanet, "planet", &planet);
+    LuaSaveDataFile(GetPlanetFilename(planet), PushPlanet, "planet", planet);
 }
 
 void LuaPlanetRepository::Load()
@@ -125,9 +125,8 @@ void LuaPlanetRepository::LuaPushAreas(lua_State *L, std::shared_ptr<Planet> pla
     }
 }
 
-void LuaPlanetRepository::PushPlanet(lua_State *L, const void *userData)
+void LuaPlanetRepository::PushPlanet(lua_State *L, const std::shared_ptr<Planet> &planet)
 {
-    std::shared_ptr<Planet> planet = *static_cast<const std::shared_ptr<Planet>*>(userData);
     static int idx = 0;
     lua_pushinteger(L, ++idx);
     lua_newtable(L);

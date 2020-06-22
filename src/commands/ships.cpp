@@ -10,8 +10,8 @@ struct UserData
     int count = 0;
 };
 
-static bool ShowIfPilotable(std::shared_ptr<Ship> ship, void *userData);
-static bool ShowIfInRoom(std::shared_ptr<Ship> ship, void *userData);
+static bool ShowIfPilotable(std::shared_ptr<Ship> ship, UserData *data);
+static bool ShowIfInRoom(std::shared_ptr<Ship> ship, UserData *data);
 
 void do_ships(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -42,9 +42,8 @@ void do_ships(std::shared_ptr<Character> ch, std::string argument)
     }
 }
 
-static bool ShowIfInRoom(std::shared_ptr<Ship> ship, void *userData)
+static bool ShowIfInRoom(std::shared_ptr<Ship> ship, UserData *data)
 {
-    struct UserData *data = (struct UserData *)userData;
     std::shared_ptr<Character> ch = data->ch;
     char buf[MAX_STRING_LENGTH];
 
@@ -82,9 +81,8 @@ static bool ShowIfInRoom(std::shared_ptr<Ship> ship, void *userData)
     return true;
 }
 
-static bool ShowIfPilotable(std::shared_ptr<Ship> ship, void *userData)
+static bool ShowIfPilotable(std::shared_ptr<Ship> ship, UserData *data)
 {
-    struct UserData *data = (struct UserData *)userData;
     std::shared_ptr<Character> ch = data->ch;
 
     bool owned = false, set = false;

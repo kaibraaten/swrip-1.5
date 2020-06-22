@@ -2,8 +2,10 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-static bool ShowShipTerse(std::shared_ptr<Ship> ship, void *userData);
-static bool ShowShipVerbose(std::shared_ptr<Ship> ship, void *userData);
+struct UserData;
+
+static bool ShowShipTerse(std::shared_ptr<Ship> ship, std::shared_ptr<Character> ch);
+static bool ShowShipVerbose(std::shared_ptr<Ship> ship, UserData *data);
 
 struct UserData
 {
@@ -61,7 +63,7 @@ void do_allships(std::shared_ptr<Character> ch, std::string argument)
 
     if(IsImmortal(ch) && !data.unowned && !data.checkowner && data.type < 0)
     {
-        ForEachShip(ShowShipTerse, ch.get());
+        ForEachShip(ShowShipTerse, ch);
     }
 
     if(!data.mobship)
@@ -76,11 +78,10 @@ void do_allships(std::shared_ptr<Character> ch, std::string argument)
     }
 }
 
-static bool ShowShipVerbose(std::shared_ptr<Ship> ship, void *userData)
+static bool ShowShipVerbose(std::shared_ptr<Ship> ship, UserData *data)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     int shipType = ship->Type;
-    UserData *data = (UserData *)userData;
 
     if(ship->Class > SHIP_PLATFORM)
     {
@@ -145,9 +146,8 @@ static bool ShowShipVerbose(std::shared_ptr<Ship> ship, void *userData)
     return true;
 }
 
-static bool ShowShipTerse(std::shared_ptr<Ship> ship, void *userData)
+static bool ShowShipTerse(std::shared_ptr<Ship> ship, std::shared_ptr<Character> ch)
 {
-    Character *ch = (Character *)userData;
     char buf[MAX_STRING_LENGTH];
 
     if(ship->Type == MOB_SHIP && ship->Class != SHIP_DEBRIS)

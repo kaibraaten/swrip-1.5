@@ -30,6 +30,7 @@
 #include <list>
 #include <vector>
 #include <utility/vector3.hpp>
+#include "repos/shiprepository.hpp"
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -228,7 +229,32 @@ bool IsShipAutoflying(std::shared_ptr<Ship> ship);
 bool CheckPilot(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship);
 bool ShipNameAndPersonalnameComboIsUnique(const std::string &name,
                                           const std::string &personalname);
-void ForEachShip(std::function<bool(std::shared_ptr<Ship>, void *)> callback,
-                 void *userData);
+template<typename CallbackT, typename UserDataT>
+void ForEachShip(CallbackT callback, UserDataT userData)
+{
+    for(auto ship : Ships)
+    {
+        bool keepGoing = callback(ship, userData);
+
+        if(!keepGoing)
+        {
+            break;
+        }
+    }
+}
+
+template<typename CallbackT>
+void ForEachShip(CallbackT callback)
+{
+    for(auto ship : Ships)
+    {
+        bool keepGoing = callback(ship);
+
+        if(!keepGoing)
+        {
+            break;
+        }
+    }
+}
 
 #endif

@@ -80,10 +80,8 @@ struct SpaceobjectSearch
     std::shared_ptr<Spaceobject> spaceobject;
 };
 
-static bool FindSpaceobjectFromHangar(std::shared_ptr<Ship> ship, void *userData)
+static bool FindSpaceobjectFromHangar(std::shared_ptr<Ship> ship, SpaceobjectSearch *data)
 {
-    SpaceobjectSearch *data = (SpaceobjectSearch*)userData;
-
     if (data->vnum == ship->Rooms.Hangar)
     {
         if (ship->BayOpen)
@@ -113,7 +111,6 @@ std::shared_ptr<Spaceobject> GetSpaceobjectFromDockVnum(vnum_t vnum)
 
     SpaceobjectSearch data;
     data.vnum = vnum;
-    data.spaceobject = NULL;
     ForEachShip(FindSpaceobjectFromHangar, &data);
 
     if (data.spaceobject != NULL)

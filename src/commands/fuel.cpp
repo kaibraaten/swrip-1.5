@@ -5,105 +5,103 @@
 
 static std::shared_ptr<Ship> GetFuelTarget(std::shared_ptr<Ship> fuelSource);
 
-void do_fuel(std::shared_ptr<Character> ch, std::string argument )
+void do_fuel(std::shared_ptr<Character> ch, std::string argument)
 {
-  std::shared_ptr<Ship> fuelSource;
-  std::shared_ptr<Ship> fuelTarget;
-  int amount = 0;
-  std::string arg1;
-  char buf[MAX_STRING_LENGTH] = { '\0' };
+    std::shared_ptr<Ship> fuelSource;
+    std::shared_ptr<Ship> fuelTarget;
+    int amount = 0;
+    std::string arg1;
+    char buf[MAX_STRING_LENGTH] = { '\0' };
 
-  argument = OneArgument( argument, arg1 );
+    argument = OneArgument(argument, arg1);
 
-  if ((fuelSource = GetShipFromHangar(ch->InRoom->Vnum)) == NULL
-      && (fuelSource = GetShipFromEntrance(ch->InRoom->Vnum)) == NULL)
+    if((fuelSource = GetShipFromHangar(ch->InRoom->Vnum)) == NULL
+       && (fuelSource = GetShipFromEntrance(ch->InRoom->Vnum)) == NULL)
     {
-      ch->Echo("&RYou must be in the hangar or the entrance of a ship to do that!\r\n");
-      return;
+        ch->Echo("&RYou must be in the hangar or the entrance of a ship to do that!\r\n");
+        return;
     }
 
-  if( arg1.empty() || !IsNumber(arg1) )
+    if(arg1.empty() || !IsNumber(arg1))
     {
-      ch->Echo( "Syntax: Fuel <amount> <ship>");
-      return;
+        ch->Echo("Syntax: Fuel <amount> <ship>");
+        return;
     }
 
-  if( argument.empty() )
+    if(argument.empty())
     {
-      fuelTarget = GetFuelTarget(fuelSource);
+        fuelTarget = GetFuelTarget(fuelSource);
     }
 
-  if( fuelTarget == NULL )
+    if(fuelTarget == NULL)
     {
-      ch->Echo( "Ship not docked. Fuel what ship?" );
-      return;
+        ch->Echo("Ship not docked. Fuel what ship?");
+        return;
     }
 
-  amount = ToLong(arg1);
+    amount = ToLong(arg1);
 
-  if(fuelSource->Thrusters.Energy.Current <= amount)
+    if(fuelSource->Thrusters.Energy.Current <= amount)
     {
-      ch->Echo("&RError: Ordered energy over current stock. Sending everything but 1 unit.&w\r\n");
-      amount = fuelSource->Thrusters.Energy.Current - 1;
+        ch->Echo("&RError: Ordered energy over current stock. Sending everything but 1 unit.&w\r\n");
+        amount = fuelSource->Thrusters.Energy.Current - 1;
     }
 
-  if(fuelTarget->Thrusters.Energy.Max < fuelTarget->Thrusters.Energy.Current + amount)
+    if(fuelTarget->Thrusters.Energy.Max < fuelTarget->Thrusters.Energy.Current + amount)
     {
-      ch->Echo( "&rError: Ordered energy over target capacity. Filling tanks.\r\n" );
-      amount = fuelTarget->Thrusters.Energy.Max - fuelTarget->Thrusters.Energy.Current;
+        ch->Echo("&rError: Ordered energy over target capacity. Filling tanks.\r\n");
+        amount = fuelTarget->Thrusters.Energy.Max - fuelTarget->Thrusters.Energy.Current;
     }
 
-  if( fuelSource->Class != SHIP_PLATFORM )
+    if(fuelSource->Class != SHIP_PLATFORM)
     {
-      fuelSource->Thrusters.Energy.Current -= amount;
+        fuelSource->Thrusters.Energy.Current -= amount;
     }
 
-  fuelTarget->Thrusters.Energy.Current += amount;
+    fuelTarget->Thrusters.Energy.Current += amount;
 
-  sprintf( buf, "&YFuel order filled: &O%s: %d\r\n",
-           fuelTarget->Name.c_str(), amount );
-  EchoToCockpit( AT_YELLOW, fuelSource, buf );
-  ch->Echo("%s", buf);
-  sprintf( buf, "&YFuel remaining: %d\r\n", fuelSource->Thrusters.Energy.Current );
-  EchoToCockpit( AT_YELLOW, fuelSource, buf );
-  ch->Echo("%s", buf);
+    sprintf(buf, "&YFuel order filled: &O%s: %d\r\n",
+            fuelTarget->Name.c_str(), amount);
+    EchoToCockpit(AT_YELLOW, fuelSource, buf);
+    ch->Echo("%s", buf);
+    sprintf(buf, "&YFuel remaining: %d\r\n", fuelSource->Thrusters.Energy.Current);
+    EchoToCockpit(AT_YELLOW, fuelSource, buf);
+    ch->Echo("%s", buf);
 }
 
 struct UserData
 {
-  std::shared_ptr<Ship> fuelSource;
-  std::shared_ptr<Ship> fuelTarget;
+    std::shared_ptr<Ship> fuelSource;
+    std::shared_ptr<Ship> fuelTarget;
 };
 
-static bool FindDockedShip(std::shared_ptr<Ship> fuelTarget, void *userData)
+static bool FindDockedShip(std::shared_ptr<Ship> fuelTarget, UserData *data)
 {
-  UserData *data = (UserData*)userData;
-
-  if( fuelTarget->Docked == data->fuelSource )
+    if(fuelTarget->Docked == data->fuelSource)
     {
-      data->fuelTarget = fuelTarget;
-      return false;
+        data->fuelTarget = fuelTarget;
+        return false;
     }
 
-  return true;
+    return true;
 }
 
 static std::shared_ptr<Ship> GetFuelTarget(std::shared_ptr<Ship> fuelSource)
 {
-  std::shared_ptr<Ship> fuelTarget;
+    std::shared_ptr<Ship> fuelTarget;
 
-  if( fuelSource->Docked != NULL )
+    if(fuelSource->Docked != NULL)
     {
-      fuelTarget = fuelSource->Docked;
+        fuelTarget = fuelSource->Docked;
     }
-  else
+    else
     {
-      UserData data;
-      data.fuelSource = fuelSource;
-      data.fuelTarget = NULL;
-      ForEachShip(FindDockedShip, &data);
-      fuelTarget = data.fuelTarget;
+        UserData data;
+        data.fuelSource = fuelSource;
+        data.fuelTarget = NULL;
+        ForEachShip(FindDockedShip, &data);
+        fuelTarget = data.fuelTarget;
     }
 
-  return fuelTarget;
+    return fuelTarget;
 }
