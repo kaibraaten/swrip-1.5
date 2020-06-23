@@ -23,14 +23,13 @@ private:
 
 void do_makelandmine(std::shared_ptr<Character> ch, std::string argument)
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
      { ITEM_TOOLKIT,   {} },
      { ITEM_BATTERY,   { Flag::Crafting::Extract } },
      { ITEM_CIRCUIT,   { Flag::Crafting::Extract } },
      { ITEM_DRINK_CON, { Flag::Crafting::Extract } },
-     { ITEM_CHEMICAL,  { Flag::Crafting::Extract } },
-     { ITEM_NONE,      {} }
+     { ITEM_CHEMICAL,  { Flag::Crafting::Extract } }
     };
     auto recipe = AllocateCraftRecipe(gsn_makelandmine, materials,
                                       25, GetProtoObject(OBJ_VNUM_CRAFTING_LANDMINE),

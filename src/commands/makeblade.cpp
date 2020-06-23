@@ -20,14 +20,13 @@ private:
 
 void do_makeblade(std::shared_ptr<Character> ch, std::string argument)
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
      { ITEM_TOOLKIT,    {} },
      { ITEM_OVEN,       {} },
      { ITEM_DURASTEEL,  { Flag::Crafting::Extract } },
      { ITEM_BATTERY,    { Flag::Crafting::Extract } },
-     { ITEM_STAFF,      { Flag::Crafting::Extract, Flag::Crafting::Optional } },
-     { ITEM_NONE,       {} }
+     { ITEM_STAFF,      { Flag::Crafting::Extract, Flag::Crafting::Optional } }
     };
     auto recipe = AllocateCraftRecipe(gsn_makeblade, materials,
                                       25, GetProtoObject(OBJ_VNUM_CRAFTING_BLADE),
@@ -43,7 +42,7 @@ void do_makeblade(std::shared_ptr<Character> ch, std::string argument)
 
 void MakeBlade::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
+    auto ch = GetEngineer(args->CraftingSession);
 
     if(!args->CommandArguments.empty())
     {

@@ -32,13 +32,12 @@ void do_makecomlink(std::shared_ptr<Character> ch, std::string argument)
 
 static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
         { ITEM_TOOLKIT,  {} },
         { ITEM_OVEN,     {} },
         { ITEM_CIRCUIT,  { Flag::Crafting::Extract } },
-        { ITEM_CRYSTAL,  { Flag::Crafting::Extract } },
-        { ITEM_NONE,     {} }
+        { ITEM_CRYSTAL,  { Flag::Crafting::Extract } }
     };
     auto recipe = AllocateCraftRecipe(gsn_makecomlink, materials,
                                       10, GetProtoObject(OBJ_VNUM_CRAFTING_COMLINK),
@@ -49,7 +48,7 @@ static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 
 void MakeComlink::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
+    auto ch = GetEngineer(args->CraftingSession);
     std::string argument = args->CommandArguments;
     std::string wearLoc;
     std::string itemName;

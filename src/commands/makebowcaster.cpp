@@ -37,7 +37,7 @@ void do_makebowcaster(std::shared_ptr<Character> ch, std::string argument)
 
 static std::shared_ptr<CraftRecipe> CreateMakeBowcasterCraftRecipe()
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials
     {
      { ITEM_TOOLKIT,    {} },
      { ITEM_OVEN,       {} },
@@ -46,8 +46,7 @@ static std::shared_ptr<CraftRecipe> CreateMakeBowcasterCraftRecipe()
      { ITEM_TINDER,     { Flag::Crafting::Extract } },
      { ITEM_CROSSBOW,   { Flag::Crafting::Extract } },
      { ITEM_LENS,       { Flag::Crafting::Extract, Flag::Crafting::Optional } },
-     { ITEM_BOLT,       { Flag::Crafting::Extract, Flag::Crafting::Optional } },
-     { ITEM_NONE,       {} }
+     { ITEM_BOLT,       { Flag::Crafting::Extract, Flag::Crafting::Optional } }
     };
     auto recipe = AllocateCraftRecipe(gsn_makebowcaster, materials,
                                       25, GetProtoObject(OBJ_VNUM_CRAFTING_BOWCASTER),
@@ -58,7 +57,7 @@ static std::shared_ptr<CraftRecipe> CreateMakeBowcasterCraftRecipe()
 
 void MakeBowcaster::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
+    auto ch = GetEngineer(args->CraftingSession);
 
     if(args->CommandArguments.empty())
     {
@@ -72,7 +71,7 @@ void MakeBowcaster::InterpretArguments(std::shared_ptr<InterpretArgumentsEventAr
 
 void MakeBowcaster::CheckRequirements(std::shared_ptr<CheckRequirementsEventArgs> args)
 {
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
+    auto ch = GetEngineer(args->CraftingSession);
 
     if(ch->Race != RACE_WOOKIEE && !IsImmortal(ch))
     {

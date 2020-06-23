@@ -32,12 +32,11 @@ void do_makedisguise(std::shared_ptr<Character> ch, std::string argument)
 
 static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
         { ITEM_THREAD,      {} },
         { ITEM_DIS_FABRIC,  { Flag::Crafting::Extract } },
-        { ITEM_HAIR,        { Flag::Crafting::Extract } },
-        { ITEM_NONE,        {} }
+        { ITEM_HAIR,        { Flag::Crafting::Extract } }
     };
     auto recipe = AllocateCraftRecipe(gsn_disguise, materials,
                                       25, GetProtoObject(OBJ_VNUM_CRAFTING_DISGUISE),
@@ -48,7 +47,7 @@ static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 
 void MakeDisguise::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
+    auto ch = GetEngineer(args->CraftingSession);
     std::string argument = args->CommandArguments;
     std::string sex;
     std::string race;

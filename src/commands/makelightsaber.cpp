@@ -26,7 +26,7 @@ private:
 
 void do_makelightsaber(std::shared_ptr<Character> ch, std::string argument)
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
         { ITEM_TOOLKIT,        {} },
         { ITEM_OVEN,           {} },
@@ -36,8 +36,7 @@ void do_makelightsaber(std::shared_ptr<Character> ch, std::string argument)
         { ITEM_DURAPLAST,      { Flag::Crafting::Extract } },
         { ITEM_BATTERY,        { Flag::Crafting::Extract } },
         { ITEM_CIRCUIT,        { Flag::Crafting::Extract } },
-        { ITEM_SUPERCONDUCTOR, { Flag::Crafting::Extract } },
-        { ITEM_NONE,           {} }
+        { ITEM_SUPERCONDUCTOR, { Flag::Crafting::Extract } }
     };
     auto recipe = AllocateCraftRecipe(gsn_lightsaber_crafting, materials,
                                       25, GetProtoObject(OBJ_VNUM_CRAFTING_LIGHTSABER),

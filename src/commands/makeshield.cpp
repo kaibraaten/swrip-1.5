@@ -34,14 +34,13 @@ void do_makeshield(std::shared_ptr<Character> ch, std::string argument)
 
 static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
      { ITEM_TOOLKIT,         {} },
      { ITEM_BATTERY,         { Flag::Crafting::Extract } },
      { ITEM_SUPERCONDUCTOR,  { Flag::Crafting::Extract } },
      { ITEM_CIRCUIT,         { Flag::Crafting::Extract } },
-     { ITEM_CRYSTAL,         { Flag::Crafting::Extract } },
-     { ITEM_NONE,            {} }
+     { ITEM_CRYSTAL,         { Flag::Crafting::Extract } }
     };
     auto recipe = AllocateCraftRecipe(gsn_makeshield, materials,
                                       20, GetProtoObject(OBJ_VNUM_CRAFTING_SHIELD),

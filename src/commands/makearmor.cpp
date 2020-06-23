@@ -37,11 +37,10 @@ void do_makearmor(std::shared_ptr<Character> ch, std::string argument)
 
 static std::shared_ptr<CraftRecipe> CreateMakeArmorRecipe()
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
         { ITEM_THREAD, {} },
-        { ITEM_FABRIC, { Flag::Crafting::Extract } },
-        { ITEM_NONE, {} }
+        { ITEM_FABRIC, { Flag::Crafting::Extract } }
     };
     auto recipe = AllocateCraftRecipe(gsn_makearmor, materials,
                                       15, GetProtoObject(OBJ_VNUM_CRAFTING_ARMOR),
@@ -55,7 +54,7 @@ void MakeArmor::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> 
     auto session = eventArgs->CraftingSession;
     std::string argument = eventArgs->CommandArguments;
     std::string wearLoc;
-    std::shared_ptr<Character> ch = GetEngineer(session);
+    auto ch = GetEngineer(session);
 
     argument = OneArgument(argument, wearLoc);
     std::string name = argument;

@@ -20,7 +20,7 @@ private:
 
 void do_makeblaster(std::shared_ptr<Character> ch, std::string argument)
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
      { ITEM_TOOLKIT,         {} },
      { ITEM_OVEN,            {} },
@@ -30,8 +30,7 @@ void do_makeblaster(std::shared_ptr<Character> ch, std::string argument)
      { ITEM_CIRCUIT,         { Flag::Crafting::Extract } },
      { ITEM_AMMO,            { Flag::Crafting::Extract, Flag::Crafting::Optional } },
      { ITEM_SCOPE,           { Flag::Crafting::Extract, Flag::Crafting::Optional } },
-     { ITEM_LENS,            { Flag::Crafting::Extract, Flag::Crafting::Optional } },
-     { ITEM_NONE,            {} },
+     { ITEM_LENS,            { Flag::Crafting::Extract, Flag::Crafting::Optional } }
     };
     auto recipe = AllocateCraftRecipe(gsn_makeblaster, materials,
                                       25, GetProtoObject(OBJ_VNUM_CRAFTING_BLASTER),
@@ -47,7 +46,7 @@ void do_makeblaster(std::shared_ptr<Character> ch, std::string argument)
 
 void MakeBlaster::InterpretArguments(std::shared_ptr<InterpretArgumentsEventArgs> args)
 {
-    std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
+    auto ch = GetEngineer(args->CraftingSession);
 
     if(args->CommandArguments.empty())
     {

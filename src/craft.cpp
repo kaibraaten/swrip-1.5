@@ -39,7 +39,7 @@ class CraftRecipe
 {
 public:
     int Skill = 0;
-    const CraftingMaterial *Materials = nullptr;
+    std::list<CraftingMaterial> Materials;
     int Duration = 0;
     std::shared_ptr<ProtoObject> Prototype;
     std::bitset<Flag::MAX> Flags;
@@ -87,8 +87,7 @@ public:
 static void AfterDelay(std::shared_ptr<CraftingSession> session);
 static void AbortSession(std::shared_ptr<CraftingSession> session);
 static bool CheckMaterials(std::shared_ptr<CraftingSession> session, bool extract);
-static size_t CountCraftingMaterials(const CraftingMaterial *material);
-static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMaterials);
+static FoundMaterial* AllocateFoundMaterials(const std::list<CraftingMaterial> &recipeMaterials);
 static bool CheckSkillLevel(std::shared_ptr<CraftingSession> session);
 static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo);
 static FoundMaterial *GetUnfoundMaterial(std::shared_ptr<CraftingSession> session, std::shared_ptr<Object> obj);
@@ -131,11 +130,11 @@ void do_craftingengine(std::shared_ptr<Character> ch, std::string argument)
 static void AfterDelay(std::shared_ptr<CraftingSession> session)
 {
     auto recipe = session->pImpl->Recipe;
-    std::shared_ptr<Character> ch = GetEngineer(session);
+    auto ch = GetEngineer(session);
     int the_chance = ch->PCData->Learned[recipe->Skill];
     bool hasMaterials = CheckMaterials(session, true);
     int level = ch->PCData->Learned[recipe->Skill];
-    std::shared_ptr<ProtoObject> proto = recipe->Prototype;
+    auto proto = recipe->Prototype;
     std::string itemType = GetItemTypeNameExtended(proto->ItemType, proto->Value[OVAL_WEAPON_TYPE]);
 
     ch->SubState = SUB_NONE;
@@ -172,14 +171,13 @@ static void FinishedCraftingHandler(std::shared_ptr<FinishedCraftingUserData> da
     auto session = eventArgs->CraftingSession;
     auto ch = GetEngineer(session);
     std::string itemType = GetItemTypeNameExtended(eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE]);
-    char actBuf[MAX_STRING_LENGTH];
     long xpgain = 0;
     std::shared_ptr<Skill> skill = Skills->GetSkill(data->Recipe->Skill);
 
     ch->Echo("&GYou finish your work and hold up your newly created %s.&d\r\n",
              itemType.c_str());
-    sprintf(actBuf, "$n finishes making $s new %s.", itemType.c_str());
-    Act(AT_PLAIN, actBuf, ch, NULL, NULL, ActTarget::Room);
+    std::string actBuf = FormatString("$n finishes making $s new %s.", itemType.c_str());
+    Act(AT_PLAIN, actBuf, ch, nullptr, nullptr, ActTarget::Room);
 
     xpgain = umin(eventArgs->Object->Cost * 100,
                   GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild) + 1)
@@ -227,7 +225,7 @@ std::shared_ptr<Character> GetEngineer(std::shared_ptr<CraftingSession> session)
     return session->pImpl->Engineer;
 }
 
-std::shared_ptr<CraftRecipe> AllocateCraftRecipe(int sn, const CraftingMaterial *materialList, int duration,
+std::shared_ptr<CraftRecipe> AllocateCraftRecipe(int sn, std::initializer_list<CraftingMaterial> materialList, int duration,
                                                  std::shared_ptr<ProtoObject> prototypeObject,
                                                  std::initializer_list<size_t> flagBits)
 {
@@ -254,33 +252,19 @@ std::shared_ptr<CraftRecipe> AllocateCraftRecipe(int sn, const CraftingMaterial 
     return recipe;
 }
 
-static size_t CountCraftingMaterials(const CraftingMaterial *material)
+static FoundMaterial *AllocateFoundMaterials(const std::list<CraftingMaterial> &recipeMaterials)
 {
-    size_t numberOfElements = 0;
+    FoundMaterial *foundMaterials = new FoundMaterial[recipeMaterials.size() + 1]; // Plus one to accomodate end-marker (ITEM_NONE).
+    int i = 0;
 
-    while(material->ItemType != ITEM_NONE)
+    for(const auto &recmat : recipeMaterials)
     {
-        ++numberOfElements;
-        ++material;
+        foundMaterials[i].Material = recmat;
+        ++i;
     }
 
-    ++numberOfElements; /* include ITEM_NONE */
-
-    return numberOfElements;
-}
-
-static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMaterials)
-{
-    size_t numberOfElements = CountCraftingMaterials(recipeMaterials);
-    FoundMaterial *foundMaterials = new FoundMaterial[numberOfElements];
-
-    for(size_t i = 0; i < numberOfElements; ++i)
-    {
-        foundMaterials[i].Material = recipeMaterials[i];
-        foundMaterials[i].Found = false;
-        foundMaterials[i].KeepFinding = false;
-    }
-
+    CraftingMaterial endMarker;
+    foundMaterials[i].Material = endMarker;
     return foundMaterials;
 }
 
@@ -350,7 +334,7 @@ void StartCrafting(std::shared_ptr<CraftingSession> session)
         return;
     }
 
-    std::shared_ptr<ProtoObject> obj = session->pImpl->Recipe->Prototype;
+    auto obj = session->pImpl->Recipe->Prototype;
 
     ch->Echo("&GYou begin the long process of creating %s.&d\r\n",
              AOrAn(GetItemTypeNameExtended(obj->ItemType, obj->Value[OVAL_WEAPON_TYPE])).c_str());
@@ -362,15 +346,13 @@ void StartCrafting(std::shared_ptr<CraftingSession> session)
 
 static bool CheckMaterials(std::shared_ptr<CraftingSession> session, bool extract)
 {
-    std::shared_ptr<Character> ch = GetEngineer(session);
+    auto ch = GetEngineer(session);
     bool foundAll = true;
-    FoundMaterial *material = nullptr;
-
     auto carriedObjects = ch->Objects();
 
     for(auto obj : carriedObjects)
     {
-        material = GetUnfoundMaterial(session, obj);
+        FoundMaterial *material = GetUnfoundMaterial(session, obj);
 
         if(!material)
         {
@@ -398,7 +380,7 @@ static bool CheckMaterials(std::shared_ptr<CraftingSession> session, bool extrac
         }
     }
 
-    material = session->pImpl->FoundMaterials;
+    FoundMaterial *material = session->pImpl->FoundMaterials;
 
     while(material->Material.ItemType != ITEM_NONE)
     {

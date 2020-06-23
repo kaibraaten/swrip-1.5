@@ -22,11 +22,10 @@ static bool CanUseWearLocation(int wearLocation);
 
 void do_makecontainer(std::shared_ptr<Character> ch, std::string argument)
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
         { ITEM_FABRIC, { Flag::Crafting::Extract } },
-        { ITEM_THREAD, {} },
-        { ITEM_NONE,   {} }
+        { ITEM_THREAD, {} }
     };
 
     auto recipe = AllocateCraftRecipe(gsn_makecontainer, materials,
@@ -63,7 +62,7 @@ void MakeContainer::InterpretArguments(std::shared_ptr<InterpretArgumentsEventAr
     std::string argument = eventArgs->CommandArguments;
     std::string wearLoc;
     std::string itemName;
-    std::shared_ptr<Character> ch = GetEngineer(session);
+    auto ch = GetEngineer(session);
 
     argument = OneArgument(argument, wearLoc);
     itemName = argument;

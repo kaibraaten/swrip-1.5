@@ -34,14 +34,13 @@ void do_makeglowrod(std::shared_ptr<Character> ch, std::string argument)
 
 static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
      { ITEM_TOOLKIT,   {} },
      { ITEM_BATTERY,   { Flag::Crafting::Extract } },
      { ITEM_CIRCUIT,   { Flag::Crafting::Extract } },
      { ITEM_CHEMICAL,  { Flag::Crafting::Extract } },
-     { ITEM_LENS,      { Flag::Crafting::Extract } },
-     { ITEM_NONE,      {} }
+     { ITEM_LENS,      { Flag::Crafting::Extract } }
     };
     auto recipe = AllocateCraftRecipe(gsn_makeglowrod, materials,
                                       10, GetProtoObject(OBJ_VNUM_CRAFTING_GLOWROD),

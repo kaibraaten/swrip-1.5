@@ -36,10 +36,9 @@ void do_makespice(std::shared_ptr<Character> ch, std::string argument)
 
 static std::shared_ptr<CraftRecipe> MakeCraftRecipe()
 {
-    static const CraftingMaterial materials[] =
+    static std::initializer_list<CraftingMaterial> materials =
     {
-     { ITEM_RAWSPICE, { Flag::Crafting::Extract } },
-     { ITEM_NONE,     {} }
+     { ITEM_RAWSPICE, { Flag::Crafting::Extract } }
     };
     auto recipe = AllocateCraftRecipe(gsn_spice_refining, materials,
                                       10, GetProtoObject(OBJ_VNUM_CRAFTING_SPICE),
