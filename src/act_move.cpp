@@ -22,6 +22,7 @@
 #include <cstring>
 #include <cctype>
 #include <cassert>
+#include <sstream>
 #include <utility/random.hpp>
 #include "character.hpp"
 #include "mud.hpp"
@@ -40,26 +41,24 @@ static void TeleportCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Roo
 
 static void DecorateVirtualRoom(std::shared_ptr<Room> room)
 {
-    char buf[MAX_STRING_LENGTH] = { '\0' };
-    char buf2[MAX_STRING_LENGTH] = { '\0' };
-    int nRand = 0;
-    int iRand = 0, len = 0;
+    std::ostringstream buf;
     int previous[8];
-    SectorType sector = room->Sector;
+    const SectorType sector = room->Sector;
 
     room->Name = SectorNames[sector][0];
-    nRand = GetRandomNumberFromRange(1, umin(8, SentTotal[sector]));
+    const size_t nRand = GetRandomNumberFromRange(1, umin(8, SentTotal[sector]));
 
-    for (iRand = 0; iRand < nRand; iRand++)
+    for(size_t iRand = 0; iRand < nRand; iRand++)
+    {
         previous[iRand] = -1;
+    }
 
-    for (iRand = 0; iRand < nRand; iRand++)
+    for (size_t iRand = 0; iRand < nRand; iRand++)
     {
         while (previous[iRand] == -1)
         {
-            int x, z;
-
-            x = GetRandomNumberFromRange(0, SentTotal[sector] - 1);
+            int z = 0;
+            int x = GetRandomNumberFromRange(0, SentTotal[sector] - 1);
 
             for (z = 0; z < iRand; z++)
                 if (previous[z] == x)
@@ -70,22 +69,24 @@ static void DecorateVirtualRoom(std::shared_ptr<Room> room)
 
             previous[iRand] = x;
 
-            len = strlen(buf);
-            sprintf(buf2, "%s", RoomSents[sector][x]);
-            if (len > 5 && buf[len - 1] == '.')
+            size_t len = buf.str().size();
+            std::string buf2 = FormatString("%s", RoomSents[sector][x]);
+            
+            if (len > 5 && buf.str()[len - 1] == '.')
             {
-                strcat(buf, "  ");
+                buf << "  ";
                 buf2[0] = CharToUppercase(buf2[0]);
             }
-            else
-                if (len == 0)
-                    buf2[0] = CharToUppercase(buf2[0]);
-            strcat(buf, buf2);
+            else if(len == 0)
+            {
+                buf2[0] = CharToUppercase(buf2[0]);
+            }
+
+            buf << buf2;
         }
     }
 
-    sprintf(buf2, "%s\r\n", WordWrap(buf, 78).c_str());
-    room->Description = buf2;
+    room->Description = WordWrap(buf.str(), 78) + "\r\n";
 }
 
 /*

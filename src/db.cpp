@@ -959,8 +959,6 @@ std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum)
 
         return nullptr;
     }
-
-    return nullptr;
 }
 
 /*

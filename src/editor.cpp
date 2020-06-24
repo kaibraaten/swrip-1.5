@@ -539,9 +539,9 @@ void Editor::FormatLines(std::shared_ptr<Character> ch, std::string argument)
 {
     EditorLine *eline = first_line;
     int srclen = 0, x = 0, inp = 0;
-    char src[MAX_STRING_LENGTH];
-    char newsrc[MAX_STRING_LENGTH];
-    char newsrc2[MAX_STRING_LENGTH];
+    char src[MAX_STRING_LENGTH] = { '\0' };
+    char newsrc[MAX_STRING_LENGTH] = { '\0' };
+    char newsrc2[MAX_STRING_LENGTH] = { '\0' };
 
     while(eline)
     {

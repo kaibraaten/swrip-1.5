@@ -31,7 +31,7 @@ namespace fs = std::filesystem;
 static constexpr int CURRENT_FILEFORMAT_VERSION = 1;
 static int FILEFORMAT_VERSION_BEING_LOADED = CURRENT_FILEFORMAT_VERSION;
 
-class SaveData;
+struct SaveData;
 
 class LuaAreaRepository : public AreaRepository
 {
