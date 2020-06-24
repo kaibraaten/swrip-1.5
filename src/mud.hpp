@@ -373,7 +373,6 @@ extern std::weak_ptr<Object> save_equipment[MAX_WEAR][MAX_LAYERS];
 extern std::weak_ptr<Character> quitting_char;
 extern std::weak_ptr<Character> loading_char;
 extern std::weak_ptr<Character> saving_char;
-extern std::shared_ptr<Object> all_obj;
 extern time_t           current_time;
 extern bool             fLogAll;
 extern TimeInfo   time_info;
