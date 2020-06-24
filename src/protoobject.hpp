@@ -23,7 +23,6 @@ public:
     void Add(std::shared_ptr<Affect> affect);
     void Remove(std::shared_ptr<Affect> affect);
 
-    std::shared_ptr<ProtoObject> Next;
     std::shared_ptr<ProtoObject> NextSort;
     std::string Name;
     std::string ShortDescr;

@@ -962,10 +962,7 @@ void LuaAreaRepository::LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shar
         area->VnumRanges.Mob.Last = vnum;
     }
 
-    int iHash = vnum % MAX_KEY_HASH;
-    mob->Next = MobIndexHash[iHash];
-    MobIndexHash[iHash] = mob;
-    top_mob_index++;
+    ProtoMobs.insert(std::make_pair(vnum, mob));
 }
 
 void LuaAreaRepository::LoadMobiles(lua_State *L, std::shared_ptr<Area> area)
@@ -998,10 +995,7 @@ void LuaAreaRepository::LoadObjectsCallback(lua_State *L, vnum_t vnum, std::shar
         area->VnumRanges.Object.Last = vnum;
     }
 
-    int iHash = vnum % MAX_KEY_HASH;
-    obj->Next = ObjectIndexHash[iHash];
-    ObjectIndexHash[iHash] = obj;
-    top_obj_index++;
+    ProtoObjects.insert(std::make_pair(vnum, obj));
 }
 
 void LuaAreaRepository::LoadObjects(lua_State *L, std::shared_ptr<Area> area)

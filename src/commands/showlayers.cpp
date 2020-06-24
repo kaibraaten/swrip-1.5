@@ -24,20 +24,16 @@ void do_showlayers(std::shared_ptr<Character> ch, std::string arg)
     int displayLimit = ToLong(arg);
     ch->Echo("      Vnum      Wear Layer   Description \r\n");
 
-    for (int hash = 0; hash < MAX_KEY_HASH; hash++)
+    for(const auto &i : ProtoObjects)
     {
-        if (ObjectIndexHash[hash])
+        const auto &pObj = i.second;
+        
+        if (pObj->Layers > 0)
         {
-            for (std::shared_ptr<ProtoObject> pObj = ObjectIndexHash[hash]; pObj; pObj = pObj->Next)
-            {
-                if (pObj->Layers > 0)
-                {
-                    if (++cou <= displayLimit)
-                        ch->Echo("%4d&R&w %5ld&R&w %9ld&R&w %5d&R&w   %s&R&w\r\n",
-                                 cou, pObj->Vnum, pObj->WearFlags.to_ulong(), pObj->Layers,
-                                 pObj->ShortDescr.c_str());
-                }
-            }
+            if (++cou <= displayLimit)
+                ch->Echo("%4d&R&w %5ld&R&w %9ld&R&w %5d&R&w   %s&R&w\r\n",
+                         cou, pObj->Vnum, pObj->WearFlags.to_ulong(), pObj->Layers,
+                         pObj->ShortDescr.c_str());
         }
     }
 }

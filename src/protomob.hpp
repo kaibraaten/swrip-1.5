@@ -15,7 +15,6 @@ public:
     ProtoMobile(vnum_t vnum);
     virtual ~ProtoMobile();
 
-    std::shared_ptr<ProtoMobile> Next;
     std::shared_ptr<ProtoMobile> NextSort;
     SpecFun *spec_fun = nullptr;
     SpecFun *spec_2 = nullptr;

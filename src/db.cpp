@@ -259,8 +259,8 @@ short gsn_TopSN = 0;
 /*
  * Locals.
  */
-std::shared_ptr<ProtoMobile> MobIndexHash[MAX_KEY_HASH];
-std::shared_ptr<ProtoObject> ObjectIndexHash[MAX_KEY_HASH];
+std::unordered_map<vnum_t, std::shared_ptr<ProtoMobile>> ProtoMobs;
+std::unordered_map<vnum_t, std::shared_ptr<ProtoObject>> ProtoObjects;
 std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 
 int top_affect = 0;
@@ -920,23 +920,21 @@ std::string GetExtraDescription(const std::string &name,
 std::shared_ptr<ProtoMobile> GetProtoMobile(vnum_t vnum)
 {
     assert(vnum > 0);
+    const auto &i = ProtoMobs.find(vnum);
 
-    for(auto pMobIndex = MobIndexHash[vnum % MAX_KEY_HASH];
-        pMobIndex;
-        pMobIndex = pMobIndex->Next)
+    if(i != ProtoMobs.end())
     {
-        if(pMobIndex->Vnum == vnum)
+        return i->second;
+    }
+    else
+    {
+        if(fBootDb)
         {
-            return pMobIndex;
+            Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
         }
-    }
 
-    if(fBootDb)
-    {
-        Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
+        return nullptr;
     }
-
-    return nullptr;
 }
 
 /*
@@ -946,19 +944,20 @@ std::shared_ptr<ProtoMobile> GetProtoMobile(vnum_t vnum)
 std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum)
 {
     assert(vnum > 0);
+    const auto &i = ProtoObjects.find(vnum);
 
-    for(std::shared_ptr<ProtoObject> pObjIndex = ObjectIndexHash[vnum % MAX_KEY_HASH];
-        pObjIndex; pObjIndex = pObjIndex->Next)
+    if(i != ProtoObjects.end())
     {
-        if(pObjIndex->Vnum == vnum)
-        {
-            return pObjIndex;
-        }
+        return i->second;
     }
-
-    if(fBootDb)
+    else
     {
-        Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
+        if(fBootDb)
+        {
+            Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
+        }
+
+        return nullptr;
     }
 
     return nullptr;
@@ -1151,10 +1150,7 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
     }
 
     pObjIndex->Flags.set(Flag::Obj::Prototype);
-    int iHash = vnum % MAX_KEY_HASH;
-    pObjIndex->Next = ObjectIndexHash[iHash];
-    ObjectIndexHash[iHash] = pObjIndex;
-    top_obj_index++;
+    ProtoObjects.insert(std::make_pair(vnum, pObjIndex));
 
     return pObjIndex;
 }
@@ -1238,10 +1234,7 @@ std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::st
         pMobIndex->DefenseFlags = cMobIndex->DefenseFlags;
     }
 
-    int iHash = vnum % MAX_KEY_HASH;
-    pMobIndex->Next = MobIndexHash[iHash];
-    MobIndexHash[iHash] = pMobIndex;
-    top_mob_index++;
+    ProtoMobs.insert(std::make_pair(vnum, pMobIndex));
 
     return pMobIndex;
 }

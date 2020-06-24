@@ -47,34 +47,32 @@ void do_oinvoke(std::shared_ptr<Character> ch, std::string argument)
     if(!IsNumber(arg1))
     {
         std::string arg;
-        int  count = NumberArgument(arg1, arg);
-
-        vnum = -1;
-
-        for(int hash = 0, cnt = 0; hash < MAX_KEY_HASH; hash++)
+        int count = NumberArgument(arg1, arg);
+        int cnt = 0;
+        
+        for(const auto &i : ProtoObjects)
         {
-            for(std::shared_ptr<ProtoObject> pObjIndex = ObjectIndexHash[hash];
-                pObjIndex;
-                pObjIndex = pObjIndex->Next)
+            auto pObjIndex = i.second;
+
+            if(NiftyIsName(arg, pObjIndex->Name)
+               && ++cnt == count)
             {
-                if(NiftyIsName(arg, pObjIndex->Name)
-                   && ++cnt == count)
-                {
-                    vnum = pObjIndex->Vnum;
-                    break;
-                }
+                vnum = pObjIndex->Vnum;
+                break;
             }
         }
 
-        if(vnum == -1)
+        if(vnum == INVALID_VNUM)
         {
             ch->Echo("No such object exists.\r\n");
             return;
         }
     }
     else
+    {
         vnum = ToLong(arg1);
-
+    }
+    
     if(GetTrustLevel(ch) < LEVEL_CREATOR)
     {
         std::shared_ptr<Area> pArea;
@@ -99,7 +97,7 @@ void do_oinvoke(std::shared_ptr<Character> ch, std::string argument)
         }
     }
 
-    std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(vnum);
+    auto pObjIndex = GetProtoObject(vnum);
 
     if(pObjIndex == nullptr)
     {

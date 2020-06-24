@@ -26,6 +26,7 @@
 #include <array>
 #include <list>
 #include <string>
+#include <unordered_map>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -344,8 +345,6 @@ extern int top_affect;
 extern int top_area;
 extern int top_ed;
 extern int top_exit;
-extern int top_mob_index;
-extern int top_obj_index;
 extern int top_reset;
 extern int top_room;
 extern int top_repair;
@@ -378,8 +377,8 @@ extern bool             fLogAll;
 extern TimeInfo   time_info;
 extern Weather     weather_info;
 extern std::unique_ptr<Auction> OngoingAuction;
-extern std::shared_ptr<ProtoMobile> MobIndexHash[MAX_KEY_HASH];
-extern std::shared_ptr<ProtoObject> ObjectIndexHash[MAX_KEY_HASH];
+extern std::unordered_map<vnum_t, std::shared_ptr<ProtoMobile>> ProtoMobs;
+extern std::unordered_map<vnum_t, std::shared_ptr<ProtoObject>> ProtoObjects;
 extern std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 
 /*

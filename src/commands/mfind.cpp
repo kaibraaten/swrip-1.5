@@ -5,8 +5,6 @@
 void do_mfind(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
-    std::shared_ptr<ProtoMobile> pMobIndex;
-    int hash = 0;
     int nMatch = 0;
 
     OneArgument(argument, arg);
@@ -20,17 +18,18 @@ void do_mfind(std::shared_ptr<Character> ch, std::string argument)
     bool fAll = !StrCmp(arg, "all");
     SetCharacterColor(AT_PLAIN, ch);
 
-    for (hash = 0; hash < MAX_KEY_HASH; hash++)
-        for (pMobIndex = MobIndexHash[hash];
-            pMobIndex;
-            pMobIndex = pMobIndex->Next)
-            if (fAll || NiftyIsName(arg, pMobIndex->Name))
-            {
-                nMatch++;
-                ch->Echo("[%5ld] %s\r\n",
-                    pMobIndex->Vnum, Capitalize(pMobIndex->ShortDescr).c_str());
-            }
-
+    for(const auto &i : ProtoMobs)
+    {
+        auto pMobIndex = i.second;
+        
+        if (fAll || NiftyIsName(arg, pMobIndex->Name))
+        {
+            nMatch++;
+            ch->Echo("[%5ld] %s\r\n",
+                     pMobIndex->Vnum, Capitalize(pMobIndex->ShortDescr).c_str());
+        }
+    }
+    
     if (nMatch)
         ch->Echo("Number of matches: %d\n", nMatch);
     else

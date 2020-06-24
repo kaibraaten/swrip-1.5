@@ -7,7 +7,6 @@
 
 void do_minvoke(std::shared_ptr<Character> ch, std::string arg)
 {
-    std::shared_ptr<ProtoMobile> pMobIndex;
     std::shared_ptr<Character> victim;
     vnum_t vnum = INVALID_VNUM;
 
@@ -21,18 +20,20 @@ void do_minvoke(std::shared_ptr<Character> ch, std::string arg)
     {
         std::string arg2;
         int count = NumberArgument(arg, arg2);
-
-        for(int hash = 0, cnt = 0; hash < MAX_KEY_HASH; hash++)
-            for(pMobIndex = MobIndexHash[hash];
-                pMobIndex;
-                pMobIndex = pMobIndex->Next)
-                if(NiftyIsName(arg2, pMobIndex->Name)
-                   && ++cnt == count)
-                {
-                    vnum = pMobIndex->Vnum;
-                    break;
-                }
-
+        int cnt = 0;
+        
+        for(const auto &i : ProtoMobs)
+        {
+            auto pMobIndex = i.second;
+            
+            if(NiftyIsName(arg2, pMobIndex->Name)
+               && ++cnt == count)
+            {
+                vnum = pMobIndex->Vnum;
+                break;
+            }
+        }
+        
         if(vnum == INVALID_VNUM)
         {
             ch->Echo("No such mobile exists.\r\n");
@@ -68,14 +69,17 @@ void do_minvoke(std::shared_ptr<Character> ch, std::string arg)
         }
     }
 
-    if((pMobIndex = GetProtoMobile(vnum)) == NULL)
+    auto pMobIndex = GetProtoMobile(vnum);
+    
+    if((pMobIndex != nullptr))
+    {
+        victim = CreateMobile(pMobIndex);
+        CharacterToRoom(victim, ch->InRoom);
+        Act(AT_IMMORT, "$n has created $N!", ch, NULL, victim, ActTarget::Room);
+        ch->Echo("Ok.\r\n");
+    }
+    else
     {
         ch->Echo("No mobile has that vnum.\r\n");
-        return;
     }
-
-    victim = CreateMobile(pMobIndex);
-    CharacterToRoom(victim, ch->InRoom);
-    Act(AT_IMMORT, "$n has created $N!", ch, NULL, victim, ActTarget::Room);
-    ch->Echo("Ok.\r\n");
 }

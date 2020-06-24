@@ -135,14 +135,6 @@ void AreaUpdate()
  */
 void CloseArea(std::shared_ptr<Area> pArea)
 {
-    int icnt = 0;
-    std::shared_ptr<Room> rid;
-    std::shared_ptr<Room> rid_next;
-    std::shared_ptr<ProtoObject> oid;
-    std::shared_ptr<ProtoObject> oid_next;
-    std::shared_ptr<ProtoMobile> mid;
-    std::shared_ptr<ProtoMobile> mid_next;
-
     for(std::shared_ptr<Character>  ech = FirstCharacter, ech_next; ech; ech = ech_next)
     {
         ech_next = ech->Next;
@@ -179,9 +171,9 @@ void CloseArea(std::shared_ptr<Area> pArea)
         ExtractObject(obj);
     }
 
-    for(icnt = 0; icnt < MAX_KEY_HASH; icnt++)
+    for(int icnt = 0; icnt < MAX_KEY_HASH; icnt++)
     {
-        for(rid = RoomIndexHash[icnt]; rid; rid = rid_next)
+        for(std::shared_ptr<Room> rid = RoomIndexHash[icnt], rid_next; rid; rid = rid_next)
         {
             std::list<std::shared_ptr<Exit>> copyOfExitList(rid->Exits());
             rid_next = rid->Next;
@@ -267,9 +259,11 @@ void CloseArea(std::shared_ptr<Area> pArea)
             }
         }
 
-        for(mid = MobIndexHash[icnt]; mid; mid = mid_next)
+        auto protoMobs = ProtoMobs;
+        
+        for(const auto &i : protoMobs)
         {
-            mid_next = mid->Next;
+            auto mid = i.second;
 
             if(mid->Vnum < pArea->VnumRanges.Mob.First
                || mid->Vnum > pArea->VnumRanges.Mob.Last)
@@ -292,28 +286,15 @@ void CloseArea(std::shared_ptr<Area> pArea)
                 mid->mprog.Remove(mprog);
             }
 
-            if(mid == MobIndexHash[icnt])
-            {
-                MobIndexHash[icnt] = mid->Next;
-            }
-            else
-            {
-                std::shared_ptr<ProtoMobile> tmid;
-
-                for(tmid = MobIndexHash[icnt]; tmid; tmid = tmid->Next)
-                    if(tmid->Next == mid)
-                        break;
-
-                if(!tmid)
-                    Log->Bug("Close_area: mid not in hash list %ld", mid->Vnum);
-                else
-                    tmid->Next = mid->Next;
-            }
+            ProtoMobs.erase(mid->Vnum);
         }
 
-        for(oid = ObjectIndexHash[icnt]; oid; oid = oid_next)
+        auto protoObjects = ProtoObjects;
+        
+        for(const auto &i : protoObjects)
+
         {
-            oid_next = oid->Next;
+            auto oid = i.second;
 
             if(oid->Vnum < pArea->VnumRanges.Object.First
                || oid->Vnum > pArea->VnumRanges.Object.Last)
@@ -340,23 +321,7 @@ void CloseArea(std::shared_ptr<Area> pArea)
                 oid->mprog.Remove(mprog);
             }
 
-            if(oid == ObjectIndexHash[icnt])
-            {
-                ObjectIndexHash[icnt] = oid->Next;
-            }
-            else
-            {
-                std::shared_ptr<ProtoObject> toid;
-
-                for(toid = ObjectIndexHash[icnt]; toid; toid = toid->Next)
-                    if(toid->Next == oid)
-                        break;
-
-                if(!toid)
-                    Log->Bug("Close_area: oid not in hash list %ld", oid->Vnum);
-                else
-                    toid->Next = oid->Next;
-            }
+            ProtoObjects.erase(oid->Vnum);
         }
     }
 
