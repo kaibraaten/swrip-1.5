@@ -3930,7 +3930,7 @@ void ImcInitializeCharacter(std::shared_ptr<Character> ch)
  * Network Startup and Shutdown functions. *
  *******************************************/
 
-static void imc_loadhistory(void)
+static void imc_loadhistory()
 {
     char filename[256];
     FILE *tempfile;
@@ -3959,7 +3959,7 @@ static void imc_loadhistory(void)
     }
 }
 
-static void imc_savehistory(void)
+static void imc_savehistory()
 {
     char filename[256];
     FILE *tempfile;
@@ -3988,7 +3988,7 @@ static void imc_savehistory(void)
     }
 }
 
-static void imc_save_channels(void)
+static void imc_save_channels()
 {
     IMC_CHANNEL *c;
     FILE *fp;
@@ -4019,13 +4019,10 @@ static void imc_save_channels(void)
 
 static void imc_readchannel(IMC_CHANNEL *channel, FILE *fp)
 {
-    const char *word;
-    bool fMatch;
-
     for(;; )
     {
-        word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
-        fMatch = false;
+        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        bool fMatch = false;
 
         switch(word[0])
         {
@@ -4071,11 +4068,13 @@ static void imc_readchannel(IMC_CHANNEL *channel, FILE *fp)
         }
 
         if(!fMatch)
-            imcbug("imc_readchannel: no match: %s", word);
+        {
+            imcbug("imc_readchannel: no match: %s", word.c_str());
+        }
     }
 }
 
-static void imc_loadchannels(void)
+static void imc_loadchannels()
 {
     FILE *fp;
     IMC_CHANNEL *channel;
@@ -4093,10 +4092,8 @@ static void imc_loadchannels(void)
 
     for(;; )
     {
-        char letter;
-        char *word;
+        char letter = ReadChar(fp, Log, fBootDb);
 
-        letter = ReadChar(fp, Log, fBootDb);
         if(letter == '*')
         {
             ReadToEndOfLine(fp, Log, fBootDb);
@@ -4105,19 +4102,18 @@ static void imc_loadchannels(void)
 
         if(letter != '#')
         {
-            imcbug("%s", "imc_loadchannels: # not found.");
+            imcbug("imc_loadchannels: # not found.");
             break;
         }
 
-        word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, Log, fBootDb);
+
         if(!StrCmp(word, "IMCCHAN"))
         {
-            int x;
-
             IMCCREATE(channel, IMC_CHANNEL, 1);
             imc_readchannel(channel, fp);
 
-            for(x = 0; x < MAX_IMCHISTORY; x++)
+            for(int x = 0; x < MAX_IMCHISTORY; x++)
                 channel->history[x] = NULL;
 
             channel->refreshed = false;   /* Prevents crash trying to use a bogus channel */
@@ -4129,7 +4125,7 @@ static void imc_loadchannels(void)
             break;
         else
         {
-            imcbug("imc_loadchannels: bad section: %s.", word);
+            imcbug("imc_loadchannels: bad section: %s.", word.c_str());
             continue;
         }
     }
@@ -4137,7 +4133,7 @@ static void imc_loadchannels(void)
 }
 
 /* Save current mud-level ban list. Short, simple. */
-static void imc_savebans(void)
+static void imc_savebans()
 {
     FILE *out;
     IMC_BAN *ban;
@@ -4158,11 +4154,9 @@ static void imc_savebans(void)
     IMCFCLOSE(out);
 }
 
-static void imc_readbans(void)
+static void imc_readbans()
 {
     FILE *inf;
-    char *word;
-    char temp[SMST];
 
     imclog("%s", "Loading ban list...");
 
@@ -4172,7 +4166,7 @@ static void imc_readbans(void)
         return;
     }
 
-    word = ReadWord(inf, Log, fBootDb);
+    std::string word = ReadWord(inf, Log, fBootDb);
 
     if(StrCmp(word, "#IGNORES"))
     {
@@ -4183,14 +4177,15 @@ static void imc_readbans(void)
 
     while(!feof(inf) && !ferror(inf))
     {
-        strncpy(temp, ReadWord(inf, Log, fBootDb), SMST);
+        std::string temp = ReadWord(inf, Log, fBootDb);
 
         if(!StrCmp(temp, "#END"))
         {
             IMCFCLOSE(inf);
             return;
         }
-        imc_addban(temp);
+
+        imc_addban(temp.c_str());
     }
 
     if(ferror(inf))
@@ -4205,13 +4200,10 @@ static void imc_readbans(void)
 
 static void imc_readcolor(IMC_COLOR *color, FILE *fp)
 {
-    const char *word;
-    bool fMatch;
-
     for(;; )
     {
-        word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
-        fMatch = false;
+        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        bool fMatch = false;
 
         switch(word[0])
         {
@@ -4238,11 +4230,11 @@ static void imc_readcolor(IMC_COLOR *color, FILE *fp)
             break;
         }
         if(!fMatch)
-            imcbug("imc_readcolor: no match: %s", word);
+            imcbug("imc_readcolor: no match: %s", word.c_str());
     }
 }
 
-static void imc_load_color_table(void)
+static void imc_load_color_table()
 {
     FILE *fp;
     IMC_COLOR *color;
@@ -4259,10 +4251,8 @@ static void imc_load_color_table(void)
 
     for(;; )
     {
-        char letter;
-        char *word;
+        char letter = ReadChar(fp, Log, fBootDb);
 
-        letter = ReadChar(fp, Log, fBootDb);
         if(letter == '*')
         {
             ReadToEndOfLine(fp, Log, fBootDb);
@@ -4275,7 +4265,8 @@ static void imc_load_color_table(void)
             break;
         }
 
-        word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, Log, fBootDb);
+
         if(!StrCmp(word, "COLOR"))
         {
             IMCCREATE(color, IMC_COLOR, 1);
@@ -4287,17 +4278,16 @@ static void imc_load_color_table(void)
             break;
         else
         {
-            imcbug("imc_load_color_table: bad section: %s.", word);
+            imcbug("imc_load_color_table: bad section: %s.", word.c_str());
             continue;
         }
     }
     IMCFCLOSE(fp);
 }
 
-static void imc_savehelps(void)
+static void imc_savehelps()
 {
     FILE *fp;
-    IMC_HelpFile *help;
 
     if(!(fp = fopen(IMC_HELP_FILE, "w")))
     {
@@ -4305,7 +4295,7 @@ static void imc_savehelps(void)
         return;
     }
 
-    for(help = first_imc_help; help; help = help->next)
+    for(IMC_HelpFile *help = first_imc_help; help; help = help->next)
     {
         fprintf(fp, "%s", "#HELP\n");
         fprintf(fp, "Name %s\n", help->Name);
@@ -4319,15 +4309,10 @@ static void imc_savehelps(void)
 
 static void imc_readhelp(IMC_HelpFile *help, FILE *fp)
 {
-    const char *word;
-    char hbuf[LGST];
-    int permvalue;
-    bool fMatch;
-
     for(;; )
     {
-        word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
-        fMatch = false;
+        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        bool fMatch = false;
 
         switch(word[0])
         {
@@ -4349,7 +4334,7 @@ static void imc_readhelp(IMC_HelpFile *help, FILE *fp)
             if(!StrCmp(word, "Perm"))
             {
                 word = ReadWord(fp, Log, fBootDb);
-                permvalue = get_imcpermvalue(word);
+                int permvalue = get_imcpermvalue(word.c_str());
 
                 if(permvalue < 0 || permvalue > IMCPERM_IMP)
                 {
@@ -4367,10 +4352,12 @@ static void imc_readhelp(IMC_HelpFile *help, FILE *fp)
             if(!StrCmp(word, "Text"))
             {
                 int num = 0;
+                char hbuf[LGST];
 
                 while((signed char)(hbuf[num] = fgetc(fp)) != EOF
                       && hbuf[num] != '¢' && num < (LGST - 2))
                     num++;
+
                 hbuf[num] = '\0';
                 help->text = IMCSTRALLOC(hbuf);
                 fMatch = true;
@@ -4378,12 +4365,13 @@ static void imc_readhelp(IMC_HelpFile *help, FILE *fp)
             }
             break;
         }
+
         if(!fMatch)
-            imcbug("imc_readhelp: no match: %s", word);
+            imcbug("imc_readhelp: no match: %s", word.c_str());
     }
 }
 
-static void imc_LoadHelpFiles(void)
+static void imc_LoadHelpFiles()
 {
     FILE *fp;
     IMC_HelpFile *help;
@@ -4400,10 +4388,8 @@ static void imc_LoadHelpFiles(void)
 
     for(;; )
     {
-        char letter;
-        char *word;
+        char letter = ReadChar(fp, Log, fBootDb);
 
-        letter = ReadChar(fp, Log, fBootDb);
         if(letter == '*')
         {
             ReadToEndOfLine(fp, Log, fBootDb);
@@ -4416,7 +4402,8 @@ static void imc_LoadHelpFiles(void)
             break;
         }
 
-        word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, Log, fBootDb);
+
         if(!StrCmp(word, "HELP"))
         {
             IMCCREATE(help, IMC_HelpFile, 1);
@@ -4428,37 +4415,38 @@ static void imc_LoadHelpFiles(void)
             break;
         else
         {
-            imcbug("imc_LoadHelpFiles: bad section: %s.", word);
+            imcbug("imc_LoadHelpFiles: bad section: %s.", word.c_str());
             continue;
         }
     }
     IMCFCLOSE(fp);
 }
 
-static void imc_savecommands(void)
+static void imc_savecommands()
 {
     FILE *fp;
-    IMC_CMD_DATA *cmd;
-    IMC_ALIAS *alias;
-
     if(!(fp = fopen(IMC_CMD_FILE, "w")))
     {
         imclog("%s", "Couldn't write to IMC2 command file.");
         return;
     }
 
-    for(cmd = first_imc_command; cmd; cmd = cmd->next)
+    for(IMC_CMD_DATA *cmd = first_imc_command; cmd; cmd = cmd->next)
     {
         fprintf(fp, "%s", "#COMMAND\n");
         fprintf(fp, "Name      %s\n", cmd->Name);
+
         if(cmd->function != NULL)
             fprintf(fp, "Code      %s\n", imc_funcname(cmd->function));
         else
             fprintf(fp, "%s", "Code      NULL\n");
+
         fprintf(fp, "Perm      %s\n", imcperm_names[cmd->level]);
         fprintf(fp, "Connected %d\n", cmd->connected);
-        for(alias = cmd->first_alias; alias; alias = alias->next)
+
+        for(IMC_ALIAS *alias = cmd->first_alias; alias; alias = alias->next)
             fprintf(fp, "Alias     %s\n", alias->Name);
+
         fprintf(fp, "%s", "End\n\n");
     }
     fprintf(fp, "%s", "#END\n");
@@ -4467,15 +4455,10 @@ static void imc_savecommands(void)
 
 static void imc_readcommand(IMC_CMD_DATA *cmd, FILE *fp)
 {
-    IMC_ALIAS *alias;
-    const char *word;
-    int permvalue;
-    bool fMatch;
-
     for(;; )
     {
-        word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
-        fMatch = false;
+        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        bool fMatch = false;
 
         switch(word[0])
         {
@@ -4492,6 +4475,7 @@ static void imc_readcommand(IMC_CMD_DATA *cmd, FILE *fp)
         case 'A':
             if(!StrCmp(word, "Alias"))
             {
+                IMC_ALIAS *alias = nullptr;
                 IMCCREATE(alias, IMC_ALIAS, 1);
                 alias->Name = imcReadLine(fp);
                 IMCLINK(alias, cmd->first_alias, cmd->last_alias, next, prev);
@@ -4502,12 +4486,15 @@ static void imc_readcommand(IMC_CMD_DATA *cmd, FILE *fp)
 
         case 'C':
             KEY("Connected", cmd->connected, ReadInt(fp, Log, fBootDb));
+
             if(!StrCmp(word, "Code"))
             {
                 word = ReadWord(fp, Log, fBootDb);
-                cmd->function = imc_function(word);
+                cmd->function = imc_function(word.c_str());
+
                 if(cmd->function == NULL)
                     imcbug("imc_readcommand: Command %s loaded with invalid function. Set to NULL.", cmd->Name);
+
                 fMatch = true;
                 break;
             }
@@ -4521,7 +4508,7 @@ static void imc_readcommand(IMC_CMD_DATA *cmd, FILE *fp)
             if(!StrCmp(word, "Perm"))
             {
                 word = ReadWord(fp, Log, fBootDb);
-                permvalue = get_imcpermvalue(word);
+                int permvalue = get_imcpermvalue(word.c_str());
 
                 if(permvalue < 0 || permvalue > IMCPERM_IMP)
                 {
@@ -4529,14 +4516,18 @@ static void imc_readcommand(IMC_CMD_DATA *cmd, FILE *fp)
                     cmd->level = IMCPERM_IMP;
                 }
                 else
+                {
                     cmd->level = permvalue;
+                }
+
                 fMatch = true;
                 break;
             }
             break;
         }
+
         if(!fMatch)
-            imcbug("imc_readcommand: no match: %s", word);
+            imcbug("imc_readcommand: no match: %s", word.c_str());
     }
 }
 
@@ -4557,10 +4548,8 @@ static bool imc_LoadCommands(void)
 
     for(;; )
     {
-        char letter;
-        char *word;
+        char letter = ReadChar(fp, Log, fBootDb);
 
-        letter = ReadChar(fp, Log, fBootDb);
         if(letter == '*')
         {
             ReadToEndOfLine(fp, Log, fBootDb);
@@ -4573,7 +4562,8 @@ static bool imc_LoadCommands(void)
             break;
         }
 
-        word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, Log, fBootDb);
+
         if(!StrCmp(word, "COMMAND"))
         {
             IMCCREATE(cmd, IMC_CMD_DATA, 1);
@@ -4585,7 +4575,7 @@ static bool imc_LoadCommands(void)
             break;
         else
         {
-            imcbug("imc_LoadCommands: bad section: %s.", word);
+            imcbug("imc_LoadCommands: bad section: %s.", word.c_str());
             continue;
         }
     }
@@ -4595,13 +4585,10 @@ static bool imc_LoadCommands(void)
 
 static void imc_readucache(IMCUCACHE_DATA *user, FILE *fp)
 {
-    const char *word;
-    bool fMatch;
-
     for(;; )
     {
-        word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
-        fMatch = false;
+        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        bool fMatch = false;
 
         switch(word[0])
         {
@@ -4627,12 +4614,13 @@ static void imc_readucache(IMCUCACHE_DATA *user, FILE *fp)
                 return;
             break;
         }
+
         if(!fMatch)
-            imcbug("imc_readucache: no match: %s", word);
+            imcbug("imc_readucache: no match: %s", word.c_str());
     }
 }
 
-static void imc_load_ucache(void)
+static void imc_load_ucache()
 {
     FILE *fp;
     IMCUCACHE_DATA *user;
@@ -4647,10 +4635,8 @@ static void imc_load_ucache(void)
 
     for(;; )
     {
-        char letter;
-        char *word;
+        char letter = ReadChar(fp, Log, fBootDb);
 
-        letter = ReadChar(fp, Log, fBootDb);
         if(letter == '*')
         {
             ReadToEndOfLine(fp, Log, fBootDb);
@@ -4663,7 +4649,8 @@ static void imc_load_ucache(void)
             break;
         }
 
-        word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, Log, fBootDb);
+
         if(!StrCmp(word, "UCACHE"))
         {
             IMCCREATE(user, IMCUCACHE_DATA, 1);
@@ -4675,7 +4662,7 @@ static void imc_load_ucache(void)
             break;
         else
         {
-            imcbug("imc_load_ucache: bad section: %s.", word);
+            imcbug("imc_load_ucache: bad section: %s.", word.c_str());
             continue;
         }
     }
@@ -4684,7 +4671,7 @@ static void imc_load_ucache(void)
     imcucache_clock = imc_time + 86400;
 }
 
-static void imc_save_config(void)
+static void imc_save_config()
 {
     FILE *fp;
 
@@ -4719,12 +4706,14 @@ static void imc_save_config(void)
     fprintf(fp, "ServerPwd      %s\n", this_imcmud->serverpw);
     fprintf(fp, "#SHA256 auth: 0 = disabled, 1 = enabled\n");
     fprintf(fp, "SHA256         %d\n", this_imcmud->sha256);
+
     if(this_imcmud->sha256pass)
     {
         fprintf(fp, "%s",
                 "#Your server is expecting SHA256 authentication now. Do not remove this line unless told to do so.\n");
         fprintf(fp, "SHA256Pwd      %d\n", this_imcmud->sha256pass);
     }
+
     fprintf(fp, "%s", "End\n\n");
     fprintf(fp, "%s", "$END\n");
     IMCFCLOSE(fp);
@@ -4732,13 +4721,10 @@ static void imc_save_config(void)
 
 static void imcfread_config_file(FILE *fin)
 {
-    const char *word;
-    bool fMatch;
-
     for(;; )
     {
-        word = feof(fin) ? "end" : ReadWord(fin, Log, fBootDb);
-        fMatch = false;
+        std::string word = feof(fin) ? "end" : ReadWord(fin, Log, fBootDb);
+        bool fMatch = false;
 
         switch(word[0])
         {
@@ -4807,8 +4793,9 @@ static void imcfread_config_file(FILE *fin)
             KEY("SHA256Pwd", this_imcmud->sha256pass, ReadInt(fin, Log, fBootDb));
             break;
         }
+
         if(!fMatch)
-            imcbug("%s: Bad keyword: %s\r\n", __FUNCTION__, word);
+            imcbug("%s: Bad keyword: %s\r\n", __FUNCTION__, word.c_str());
     }
 }
 
@@ -4817,9 +4804,10 @@ static bool imc_read_config(socket_t desc)
     FILE *fin;
     char cbase[SMST];
 
-    if(this_imcmud != NULL)
+    if(this_imcmud != nullptr)
         imc_delete_info();
-    this_imcmud = NULL;
+
+    this_imcmud = nullptr;
 
     imclog("%s", "Loading IMC2 network data...");
 
@@ -4832,10 +4820,7 @@ static bool imc_read_config(socket_t desc)
 
     for(;; )
     {
-        char letter;
-        char *word;
-
-        letter = ReadChar(fin, Log, fBootDb);
+        char letter = ReadChar(fin, Log, fBootDb);
 
         if(letter == '#')
         {
@@ -4849,7 +4834,7 @@ static bool imc_read_config(socket_t desc)
             break;
         }
 
-        word = ReadWord(fin, Log, fBootDb);
+        std::string word = ReadWord(fin, Log, fBootDb);
 
         if(!StrCmp(word, "IMCCONFIG") && this_imcmud == NULL)
         {
@@ -4874,7 +4859,7 @@ static bool imc_read_config(socket_t desc)
             break;
         else
         {
-            imcbug("imc_read_config: Bad section in config file: %s", word);
+            imcbug("imc_read_config: Bad section in config file: %s", word.c_str());
             continue;
         }
     }
@@ -4981,13 +4966,10 @@ static void imc_delete_who_template(void)
     IMCDISPOSE(whot);
 }
 
-static void imc_load_who_template(void)
+static void imc_load_who_template()
 {
     FILE *fp;
-    char hbuf[LGST];
-    char *word;
-    int num;
-
+    
     imclog("%s", "Loading IMC2 who template...");
 
     if(!(fp = fopen(IMC_WHO_FILE, "r")))
@@ -4999,18 +4981,20 @@ static void imc_load_who_template(void)
 
     if(whot)
         imc_delete_who_template();
+
     IMCCREATE(whot, WHO_TEMPLATE, 1);
 
     do
     {
-        word = ReadWord(fp, Log, fBootDb);
-        hbuf[0] = '\0';
-        num = 0;
+        std::string word = ReadWord(fp, Log, fBootDb);
+        char hbuf[LGST] = { '\0' };
+        int num = 0;
 
         if(!StrCmp(word, "Head:"))
         {
             while((signed char)(hbuf[num] = fgetc(fp)) != EOF && hbuf[num] != '¢' && num < (LGST - 2))
                 ++num;
+
             hbuf[num] = '\0';
             whot->head = IMCSTRALLOC(parse_who_header(hbuf));
         }
@@ -5060,12 +5044,12 @@ static void imc_load_who_template(void)
     IMCFCLOSE(fp);
 }
 
-static void imc_load_templates(void)
+static void imc_load_templates()
 {
     imc_load_who_template();
 }
 
-static socket_t ipv4_connect(void)
+static socket_t ipv4_connect()
 {
     struct sockaddr_in sa;
     socket_t desc = INVALID_SOCKET;

@@ -289,10 +289,10 @@ bool StringEndsWith(const std::string &str, const std::string &ending);
 char ReadChar(FILE *fp, Logger *log, bool fBootDb);
 float ReadFloat(FILE *fp, Logger *log, bool fBootDb);
 int ReadInt(FILE *fp, Logger *log, bool fBootDb);
-char *ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb);
+std::string ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb);
 void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb);
-char *ReadWord(FILE *fp, Logger *log, bool fBootDb);
-char *ReadLine(FILE *fp, Logger *log, bool fBootDb);
+std::string ReadWord(FILE *fp, Logger *log, bool fBootDb);
+std::string ReadLine(FILE *fp, Logger *log, bool fBootDb);
 void ForEachLuaFileInDir(const std::string &pathToDir,
                          const std::function<void(const std::string &, void *)> &doOnFile,
                          void *userData);

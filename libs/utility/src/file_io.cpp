@@ -1,6 +1,8 @@
 #define _DEFAULT_SOURCE
 #define _BSD_SOURCE
 #include <iostream>
+#include <filesystem>
+#include <fstream>
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
@@ -8,7 +10,6 @@
 #include <cctype>
 #include "utility.hpp"
 #include "logger.hpp"
-#include <filesystem>
 
 /*
  * Added lots of EOF checks, as most of the file crashes are based on them.
@@ -51,10 +52,7 @@ char ReadChar(FILE *fp, Logger *log, bool fBootDb)
  */
 float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
 {
-    float number = 0.0;
-    bool sign = false, decimal = false;
     char c = '\0';
-    double place = 0.0;
 
     do
     {
@@ -69,11 +67,16 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
 
             return 0;
         }
+
         c = fgetc(fp);
     } while(isspace(c));
 
+    bool sign = false;
+
     if(c == '+')
+    {
         c = fgetc(fp);
+    }
     else if(c == '-')
     {
         sign = true;
@@ -88,6 +91,10 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
             exit(EXIT_FAILURE);
         return 0;
     }
+
+    float number = 0.0;
+    bool decimal = false;
+    double place = 0.0;
 
     while(true)
     {
@@ -104,7 +111,10 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
                 log->Bug("%s: EOF encountered on read.", __FUNCTION__);
 
                 if(fBootDb)
+                {
                     exit(EXIT_FAILURE);
+                }
+
                 return number;
             }
 
@@ -127,7 +137,9 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
     }
 
     if(sign)
+    {
         number = 0 - number;
+    }
 
     if(c == '|')
     {
@@ -140,7 +152,9 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
             log->Bug("ReadFloat: EOF encountered on ungetc.\r\n");
 
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
+            }
         }
     }
 
@@ -152,8 +166,6 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
  */
 int ReadInt(FILE *fp, Logger *log, bool fBootDb)
 {
-    int number = 0;
-    bool sign = false;
     char c = 0;
 
     do
@@ -161,12 +173,18 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
         if(feof(fp))
         {
             log->Bug("ReadInt: EOF encountered on read.\r\n");
+
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
+            }
+
             return 0;
         }
         c = fgetc(fp);
     } while(isspace(c));
+
+    bool sign = false;
 
     if(c == '+')
     {
@@ -183,26 +201,37 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
         log->Bug("ReadInt: bad format. (%c)", c);
 
         if(fBootDb)
+        {
             exit(EXIT_FAILURE);
+        }
 
         return 0;
     }
+
+    int number = 0;
 
     while(isdigit((int)c))
     {
         if(feof(fp))
         {
             log->Bug("ReadInt: EOF encountered on read.\r\n");
+
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
+            }
+
             return number;
         }
+
         number = number * 10 + c - '0';
         c = fgetc(fp);
     }
 
     if(sign)
-        number = 0 - number;
+    {
+        number *= -1;
+    }
 
     if(c == '|')
     {
@@ -215,7 +244,9 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
             log->Bug("ReadInt: EOF encountered on ungetc.\r\n");
 
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
+            }
         }
     }
 
@@ -225,12 +256,9 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
 /*
  * Read a string from file fp
  */
-char *ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
+std::string ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
 {
-    char buf[MAX_STRING_LENGTH] = { '\0' };
-    char *plast = buf;
     char c = 0;
-    int ln = 0;
 
     /*
      * Skip blanks.
@@ -241,15 +269,26 @@ char *ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
         if(feof(fp))
         {
             log->Bug("ReadStringToTilde: EOF encountered on read.\r\n");
+
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
-            return CopyString("");
+            }
+
+            return "";
         }
         c = fgetc(fp);
     } while(isspace(c));
 
+    char buf[MAX_STRING_LENGTH] = { '\0' };
+    char *plast = buf;
+
     if((*plast++ = c) == '~')
-        return CopyString("");
+    {
+        return "";
+    }
+
+    int ln = 0;
 
     for(;; )
     {
@@ -257,26 +296,27 @@ char *ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
         {
             log->Bug("ReadStringToTilde: string too long");
             *plast = '\0';
-            return CopyString(buf);
+            return buf;
         }
+
         switch((int)(*plast = fgetc(fp)))
         {
-        default:
-            plast++; ln++;
-            break;
-
         case EOF:
             log->Bug("ReadStringToTilde: EOF");
 
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
+            }
 
             *plast = '\0';
-            return CopyString(buf);
+            return buf;
 
         case '\n':
-            plast++;  ln++;
-            *plast++ = '\r';  ln++;
+            plast++;
+            ln++;
+            *plast++ = '\r';
+            ln++;
             break;
 
         case '\r':
@@ -284,7 +324,12 @@ char *ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
 
         case '~':
             *plast = '\0';
-            return CopyString(buf);
+            return buf;
+
+        default:
+            plast++;
+            ln++;
+            break;
         }
     }
 }
@@ -301,8 +346,12 @@ void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb)
         if(feof(fp))
         {
             log->Bug("ReadToEndOfLine: EOF encountered on read.\r\n");
+
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
+            }
+
             return;
         }
         c = fgetc(fp);
@@ -318,21 +367,19 @@ void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb)
         log->Bug("ReadToEndOfLine: EOF encountered on ungetc.\r\n");
 
         if(fBootDb)
+        {
             exit(EXIT_FAILURE);
+        }
     }
 }
 
 /*
  * Read to end of line into static buffer                       -Thoric
  */
-char *ReadLine(FILE *fp, Logger *log, bool fBootDb)
+std::string ReadLine(FILE *fp, Logger *log, bool fBootDb)
 {
-    static char line[MAX_STRING_LENGTH];
-    char *pline = line;
+    
     char c = 0;
-    int ln = 0;
-
-    line[0] = '\0';
 
     /*
      * Skip blanks.
@@ -343,10 +390,13 @@ char *ReadLine(FILE *fp, Logger *log, bool fBootDb)
         if(feof(fp))
         {
             log->Bug("ReadLine: EOF encountered on read.\r\n");
+
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
-            strcpy(line, "");
-            return line;
+            }
+
+            return "";
         }
         c = fgetc(fp);
     } while(isspace((int)c));
@@ -356,21 +406,34 @@ char *ReadLine(FILE *fp, Logger *log, bool fBootDb)
         log->Bug("ReadLine: EOF encountered on ungetc.\r\n");
 
         if(fBootDb)
+        {
             exit(EXIT_FAILURE);
+        }
     }
+
+    char line[MAX_STRING_LENGTH] = { '\0' };
+    char *pline = line;
+    int ln = 0;
 
     do
     {
         if(feof(fp))
         {
             log->Bug("ReadLine: EOF encountered on read.\r\n");
+
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
+            }
+
             *pline = '\0';
             return line;
         }
+
         c = fgetc(fp);
-        *pline++ = c; ln++;
+        *pline++ = c;
+        ln++;
+
         if(ln >= (MAX_STRING_LENGTH - 1))
         {
             log->Bug("ReadLine: line too long");
@@ -388,7 +451,9 @@ char *ReadLine(FILE *fp, Logger *log, bool fBootDb)
         log->Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
 
         if(fBootDb)
+        {
             exit(EXIT_FAILURE);
+        }
     }
 
     *pline = '\0';
@@ -398,10 +463,8 @@ char *ReadLine(FILE *fp, Logger *log, bool fBootDb)
 /*
  * Read one word (into static buffer).
  */
-char *ReadWord(FILE *fp, Logger *log, bool fBootDb)
+std::string ReadWord(FILE *fp, Logger *log, bool fBootDb)
 {
-    static char word[MAX_INPUT_LENGTH];
-    char *pword = NULL;
     char cEnd = '\0';
 
     do
@@ -409,13 +472,19 @@ char *ReadWord(FILE *fp, Logger *log, bool fBootDb)
         if(feof(fp))
         {
             log->Bug("ReadWord: EOF encountered on read.\r\n");
+
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
-            word[0] = '\0';
-            return word;
+            }
+
+            return "";
         }
         cEnd = fgetc(fp);
     } while(isspace(cEnd));
+
+    char word[MAX_INPUT_LENGTH] = { '\0' };
+    char *pword = nullptr;
 
     if(cEnd == '\'' || cEnd == '"')
     {
@@ -433,12 +502,18 @@ char *ReadWord(FILE *fp, Logger *log, bool fBootDb)
         if(feof(fp))
         {
             log->Bug("ReadWord: EOF encountered on read.\r\n");
+
             if(fBootDb)
+            {
                 exit(EXIT_FAILURE);
+            }
+
             *pword = '\0';
             return word;
         }
+
         *pword = fgetc(fp);
+
         if(cEnd == ' ' ? isspace((int)*pword) : *pword == cEnd)
         {
             if(cEnd == ' ')
@@ -448,7 +523,9 @@ char *ReadWord(FILE *fp, Logger *log, bool fBootDb)
                     log->Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
 
                     if(fBootDb)
+                    {
                         exit(EXIT_FAILURE);
+                    }
                 }
             }
 
@@ -459,20 +536,19 @@ char *ReadWord(FILE *fp, Logger *log, bool fBootDb)
 
     log->Bug("ReadWord: word too long");
     exit(EXIT_FAILURE);
-    return NULL;
+    return "";
 }
 
 /*
  * Append a string to a file.
  */
-void AppendToFile(const std::string &file, const std::string &str)
+void AppendToFile(const std::string &filename, const std::string &str)
 {
-    FILE *fp = fopen(file.c_str(), "a");
+    std::ofstream file(filename, std::ofstream::app);
 
-    if(fp != nullptr)
+    if(file.is_open())
     {
-        fprintf(fp, "%s\n", str.c_str());
-        fclose(fp);
+        file << str << "\n";
     }
 }
 
@@ -506,10 +582,9 @@ void ForEachLuaFileInDir(const std::string &pathToDir, const std::function<void(
 
 std::string ConvertToLuaFilename(const std::string &name)
 {
-    char buf[MAX_STRING_LENGTH];
-    strcpy(buf, ToLower(name).c_str());
+    std::string buf = ToLower(name);
 
-    for(size_t n = 0; n < strlen(buf); ++n)
+    for(size_t n = 0; n < buf.size(); ++n)
     {
         if(buf[n] == ' ')
         {
@@ -519,7 +594,7 @@ std::string ConvertToLuaFilename(const std::string &name)
 
     if(!StringEndsWith(buf, ".lua"))
     {
-        strcat(buf, ".lua");
+        buf += ".lua";
     }
 
     return buf;

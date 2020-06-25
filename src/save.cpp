@@ -466,7 +466,7 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
 
     for (; ; )
     {
-        const char *word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
         bool fMatch = false;
 
         switch (CharToUppercase(word[0]))
@@ -725,9 +725,9 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
             if (!StrCmp(word, "Values"))
             {
                 int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0;
-                const char *ln = ReadLine(fp, Log, fBootDb);
+                std::string ln = ReadLine(fp, Log, fBootDb);
 
-                sscanf(ln, "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6);
+                sscanf(ln.c_str(), "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6);
 
                 obj->Value[0] = x1;
                 obj->Value[1] = x2;
@@ -774,7 +774,7 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
         if (!fMatch)
         {
             Log->Bug("Fread_obj: no match.");
-            Log->Bug("%s", word);
+            Log->Bug("%s", word.c_str());
             ReadToEndOfLine(fp, Log, fBootDb);
 
             while (!obj->ExtraDescriptions().empty())
@@ -895,7 +895,7 @@ void LoadCorpses()
                         break;
                     }
 
-                    const char *word = ReadWord(fpArea, Log, fBootDb);
+                    std::string word = ReadWord(fpArea, Log, fBootDb);
 
                     if (!StrCmp(word, "CORPSE"))
                     {
