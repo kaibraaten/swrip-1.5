@@ -16,7 +16,7 @@ namespace fs = std::filesystem;
 
 static std::string GetVendorFilename(const std::string &pc);
 static void PushVendor(lua_State *L, const std::shared_ptr<Character> &vendor);
-static void ExecuteVendorFile(const std::string &filename, void *userData);
+static void ExecuteVendorFile(const std::string &filename);
 static int L_VendorEntry(lua_State *L);
 
 class LuaVendorRepository : public VendorRepository
@@ -35,7 +35,7 @@ void LuaVendorRepository::Load()
     extern int falling;
     falling = 1;
 
-    ForEachLuaFileInDir(VENDOR_DIR, ExecuteVendorFile, nullptr);
+    ForEachLuaFileInDir(VENDOR_DIR, ExecuteVendorFile);
 
     falling = 0;
 }
@@ -73,7 +73,7 @@ void LuaVendorRepository::RemoveVendor(std::shared_ptr<Character> pc) const
     fs::remove(filename, ec);
 }
 
-static void ExecuteVendorFile(const std::string &filename, void *userData)
+static void ExecuteVendorFile(const std::string &filename)
 {
     LuaLoadDataFile(filename, L_VendorEntry, "VendorEntry");
 }

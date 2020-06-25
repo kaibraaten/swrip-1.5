@@ -22,7 +22,7 @@ public:
 private:
     static void LoadPlanetAreas(lua_State *L, std::shared_ptr<Planet> planet);
     static int L_PlanetEntry(lua_State *L);
-    static void LoadPlanet(const std::string &filePath, void *userData);
+    static void LoadPlanet(const std::string &filePath);
     static void LuaPushAreas(lua_State *L, std::shared_ptr<Planet> planet);
     static void PushPlanet(lua_State *L, const std::shared_ptr<Planet> &planet);
 };
@@ -42,7 +42,7 @@ void LuaPlanetRepository::Save(std::shared_ptr<Planet> planet) const
 
 void LuaPlanetRepository::Load()
 {
-    ForEachLuaFileInDir(PLANET_DIR, LoadPlanet, NULL);
+    ForEachLuaFileInDir(PLANET_DIR, LoadPlanet);
 }
 
 std::shared_ptr<Planet> LuaPlanetRepository::FindByName(const std::string &name) const
@@ -101,7 +101,7 @@ int LuaPlanetRepository::L_PlanetEntry(lua_State *L)
     return 0;
 }
 
-void LuaPlanetRepository::LoadPlanet(const std::string &filePath, void *userData)
+void LuaPlanetRepository::LoadPlanet(const std::string &filePath)
 {
     LuaLoadDataFile(filePath, L_PlanetEntry, "PlanetEntry");
 }

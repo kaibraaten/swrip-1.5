@@ -12,7 +12,7 @@
 
 std::shared_ptr<ShipRepository> Ships;
 
-static void ExecuteShipFile(const std::string &filePath, void *userData);
+static void ExecuteShipFile(const std::string &filePath);
 static void ReadyShipAfterLoad(std::shared_ptr<Ship> ship);
 static void PushShip(lua_State *L, const void *userData);
 
@@ -48,7 +48,7 @@ void LuaShipRepository::Save() const
 
 void LuaShipRepository::Load()
 {
-    ForEachLuaFileInDir(SHIP_DIR, ExecuteShipFile, nullptr);
+    ForEachLuaFileInDir(SHIP_DIR, ExecuteShipFile);
 }
 
 static void PushInstruments(lua_State *L, std::shared_ptr<Ship> ship)
@@ -605,7 +605,7 @@ static void ReadyShipAfterLoad(std::shared_ptr<Ship> ship)
     ship->Docking = SHIP_READY;
 }
 
-static void ExecuteShipFile(const std::string &filePath, void *userData)
+static void ExecuteShipFile(const std::string &filePath)
 {
     LuaLoadDataFile(filePath, L_ShipEntry, "ShipEntry");
 }

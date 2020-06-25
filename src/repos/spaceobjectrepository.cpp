@@ -25,12 +25,12 @@ private:
     static void LoadLandingSite(lua_State *L, LandingSite *site);
     static void LoadLandingSites(lua_State *L, std::shared_ptr<Spaceobject> spaceobj);
     static int L_SpaceobjectEntry(lua_State *L);
-    static void ExecuteSpaceobjectFile(const std::string &filePath, void *userData);
+    static void ExecuteSpaceobjectFile(const std::string &filePath);
 };
 
 void LuaSpaceobjectRepository::Load()
 {
-    ForEachLuaFileInDir(SPACE_DIR, ExecuteSpaceobjectFile, nullptr);
+    ForEachLuaFileInDir(SPACE_DIR, ExecuteSpaceobjectFile);
 }
 
 void LuaSpaceobjectRepository::Save() const
@@ -223,7 +223,7 @@ int LuaSpaceobjectRepository::L_SpaceobjectEntry(lua_State *L)
     return 0;
 }
 
-void LuaSpaceobjectRepository::ExecuteSpaceobjectFile(const std::string &filePath, void *userData)
+void LuaSpaceobjectRepository::ExecuteSpaceobjectFile(const std::string &filePath)
 {
     LuaLoadDataFile(filePath, L_SpaceobjectEntry, "SpaceobjectEntry");
 }

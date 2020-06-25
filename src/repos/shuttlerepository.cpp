@@ -26,7 +26,7 @@ private:
     static void LoadStop(lua_State *L, std::shared_ptr<Shuttle> shuttle);
     static void LoadStops(lua_State *L, std::shared_ptr<Shuttle> shuttle);
     static int L_ShuttleEntry(lua_State *L);
-    static void ExecuteShuttleFile(const std::string &filePath, void *userData);
+    static void ExecuteShuttleFile(const std::string &filePath);
 };
 
 std::shared_ptr<Shuttle> LuaShuttleRepository::FindByName(const std::string &name) const
@@ -62,7 +62,7 @@ void LuaShuttleRepository::Save() const
 
 void LuaShuttleRepository::Load()
 {
-    ForEachLuaFileInDir(SHUTTLE_DIR, ExecuteShuttleFile, nullptr);
+    ForEachLuaFileInDir(SHUTTLE_DIR, ExecuteShuttleFile);
 }
 
 void LuaShuttleRepository::PushStop(lua_State *L, std::shared_ptr<ShuttleStop> stop,
@@ -224,7 +224,7 @@ int LuaShuttleRepository::L_ShuttleEntry(lua_State *L)
     return 0;
 }
 
-void LuaShuttleRepository::ExecuteShuttleFile(const std::string &filePath, void *userData)
+void LuaShuttleRepository::ExecuteShuttleFile(const std::string &filePath)
 {
     LuaLoadDataFile(filePath, L_ShuttleEntry, "ShuttleEntry");
 }

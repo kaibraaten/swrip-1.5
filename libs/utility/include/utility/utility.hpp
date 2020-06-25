@@ -293,9 +293,6 @@ std::string ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb);
 void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb);
 std::string ReadWord(FILE *fp, Logger *log, bool fBootDb);
 std::string ReadLine(FILE *fp, Logger *log, bool fBootDb);
-void ForEachLuaFileInDir(const std::string &pathToDir,
-                         const std::function<void(const std::string &, void *)> &doOnFile,
-                         void *userData);
 std::string ConvertToLuaFilename(const std::string &name);
 
 /* misc stuff */
@@ -366,5 +363,7 @@ std::string FlagString(int bitvector, const char *const flagarray[]);
  * \param str The text to append.
  */
 void AppendToFile(const std::string &file, const std::string &str);
+
+void ForEachLuaFileInDir(const std::string &pathToDir, std::function<void(const std::string &path)> doOnFile);
 
 #endif /* include guard */

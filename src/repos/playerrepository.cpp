@@ -139,7 +139,7 @@ static int L_WizardEntry(lua_State *L)
     return 0;
 }
 
-static void AddIfWizard(const std::string &filename, void *userData)
+static void AddIfWizard(const std::string &filename)
 {
     LuaLoadDataFile(filename, L_WizardEntry, "CharacterEntry");
 }
@@ -159,7 +159,7 @@ std::string InMemoryPlayerRepository::MakeWizlist() const
                 const auto &path = entry.path();
                 std::string dirname = path.string();
                 Log->Info("Scanning directory %s", dirname.c_str());
-                ForEachLuaFileInDir(dirname, AddIfWizard, nullptr);
+                ForEachLuaFileInDir(dirname, AddIfWizard);
             }
         }
 

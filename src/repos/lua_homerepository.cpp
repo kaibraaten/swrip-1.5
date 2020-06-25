@@ -80,14 +80,14 @@ std::list<std::shared_ptr<Home>> LuaHomeRepository::FindHomesForResident(const s
     return homes;
 }
 
-static void ExecuteHomeFile(const std::string &filename, void *userData)
+static void ExecuteHomeFile(const std::string &filename)
 {
     LuaLoadDataFile(filename, L_HomeEntryMeta, "HomeEntry");
 }
 
 void LuaHomeRepository::Load()
 {
-    ForEachLuaFileInDir(HOME_DIR, ExecuteHomeFile, nullptr);
+    ForEachLuaFileInDir(HOME_DIR, ExecuteHomeFile);
 }
 
 void LuaHomeRepository::Save() const

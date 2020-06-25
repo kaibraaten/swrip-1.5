@@ -27,14 +27,14 @@ private:
     static void LoadNote(lua_State *L, const std::shared_ptr<Board> &board);
     static void LoadNotes(lua_State *L, const std::shared_ptr<Board> &board);
     static int L_BoardEntry(lua_State *L);
-    static void ExecuteBoardFile(const std::string &filePath, void *userData);
+    static void ExecuteBoardFile(const std::string &filePath);
     static void PushNotes(lua_State *L, const std::shared_ptr<Board> &board);
     static void PushBoard(lua_State *L, const std::shared_ptr<Board> &board);
 };
 
 void LuaBoardRepository::Load()
 {
-    ForEachLuaFileInDir(BOARD_DIR, ExecuteBoardFile, NULL);
+    ForEachLuaFileInDir(BOARD_DIR, ExecuteBoardFile);
 }
 
 void LuaBoardRepository::Save() const
@@ -114,7 +114,7 @@ int LuaBoardRepository::L_BoardEntry(lua_State *L)
     return 0;
 }
 
-void LuaBoardRepository::ExecuteBoardFile(const std::string &filePath, void *userData)
+void LuaBoardRepository::ExecuteBoardFile(const std::string &filePath)
 {
     LuaLoadDataFile(filePath, L_BoardEntry, "BoardEntry");
 }

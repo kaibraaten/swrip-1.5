@@ -11,6 +11,8 @@
 #include "utility.hpp"
 #include "logger.hpp"
 
+namespace fs = std::filesystem;
+
 /*
  * Added lots of EOF checks, as most of the file crashes are based on them.
  * If an area file encounters EOF, the fread_* functions will shutdown the
@@ -552,11 +554,11 @@ void AppendToFile(const std::string &filename, const std::string &str)
     }
 }
 
-void ForEachLuaFileInDir(const std::string &pathToDir, const std::function<void(const std::string &, void *)> &doOnFile, void *userData)
+void ForEachLuaFileInDir(const std::string &pathToDir, std::function<void(const std::string &path)> doOnFile)
 {
     try
     {
-        for(const auto &entry : std::filesystem::directory_iterator(pathToDir.empty() ? "." : pathToDir))
+        for(const auto &entry : fs::directory_iterator(pathToDir.empty() ? "." : pathToDir))
         {
             if(!entry.is_regular_file())
             {
@@ -570,10 +572,10 @@ void ForEachLuaFileInDir(const std::string &pathToDir, const std::function<void(
                 continue;
             }
 
-            doOnFile(path.string(), userData);
+            doOnFile(path.string());
         }
     }
-    catch(const std::filesystem::filesystem_error &ex)
+    catch(const fs::filesystem_error &ex)
     {
         perror(ex.what());
         exit(1);

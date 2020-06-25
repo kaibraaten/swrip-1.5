@@ -81,7 +81,7 @@ private:
     static void LoadObjectsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
     static void LoadRoomsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
     static int L_AreaEntry(lua_State *L);
-    static void ExecuteAreaFile(const std::string &filePath, void *userData);
+    static void ExecuteAreaFile(const std::string &filePath);
 };
 
 void LuaAreaRepository::Install(std::shared_ptr<Area> area, const std::string &newfilename)
@@ -118,8 +118,8 @@ void LuaAreaRepository::ChangeFilename(std::shared_ptr<Area> area,
 
 void LuaAreaRepository::Load()
 {
-    ForEachLuaFileInDir(AREA_DIR, ExecuteAreaFile, nullptr);
-    ForEachLuaFileInDir(BUILD_DIR, ExecuteAreaFile, nullptr);
+    ForEachLuaFileInDir(AREA_DIR, ExecuteAreaFile);
+    ForEachLuaFileInDir(BUILD_DIR, ExecuteAreaFile);
 }
 
 void LuaAreaRepository::Save() const
@@ -1253,7 +1253,7 @@ int LuaAreaRepository::L_AreaEntry(lua_State *L)
     return 0;
 }
 
-void LuaAreaRepository::ExecuteAreaFile(const std::string &filename, void *userData)
+void LuaAreaRepository::ExecuteAreaFile(const std::string &filename)
 {
     LuaLoadDataFile(filename, L_AreaEntry, "AreaEntry");
 }

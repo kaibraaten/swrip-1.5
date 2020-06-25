@@ -24,12 +24,12 @@ private:
     static void LoadMembers(lua_State *L, const std::shared_ptr<Clan> &clan);
     static void LoadStoreroom(lua_State *L, const std::shared_ptr<Clan> &clan);
     static int L_ClanEntry(lua_State *L);
-    static void ExecuteClanFile(const std::string &filePath, void *userData);
+    static void ExecuteClanFile(const std::string &filePath);
 };
 
 void LuaClanRepository::Load()
 {
-    ForEachLuaFileInDir(CLAN_DIR, ExecuteClanFile, NULL);
+    ForEachLuaFileInDir(CLAN_DIR, ExecuteClanFile);
 
     for (const auto &clan : Clans)
     {
@@ -232,7 +232,7 @@ int LuaClanRepository::L_ClanEntry(lua_State *L)
     return 0;
 }
 
-void LuaClanRepository::ExecuteClanFile(const std::string &filePath, void *userData)
+void LuaClanRepository::ExecuteClanFile(const std::string &filePath)
 {
     LuaLoadDataFile(filePath, L_ClanEntry, "ClanEntry");
 }
