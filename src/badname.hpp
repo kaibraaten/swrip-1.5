@@ -3,14 +3,8 @@
 
 #include <string>
 
-class BadName
-{
-public:
-    std::string Name;
-};
-
-bool IsBadName(const std::string &name);
-void AddBadName(const std::string &name);
-void RemoveBadName(const std::string &name);
+bool IsBadName(std::string name);
+void AddBadName(std::string name);
+void RemoveBadName(std::string name);
 
 #endif

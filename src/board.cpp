@@ -200,7 +200,7 @@ void AttachNote(std::shared_ptr<Character> ch)
     if(ch->PCData->Note)
         return;
 
-    std::shared_ptr<Note> pnote = std::make_shared<Note>();
+    auto pnote = std::make_shared<Note>();
     pnote->Sender = ch->Name;
     ch->PCData->Note = pnote;
 }
@@ -832,7 +832,7 @@ void OperateOnNote(std::shared_ptr<Character> ch, std::string arg_passed, bool I
             return;
         }
 
-        const auto extraDescriptions(paper->ExtraDescriptions());
+        auto extraDescriptions = paper->ExtraDescriptions();
 
         std::string subject = GetExtraDescription("_subject_", extraDescriptions);
 

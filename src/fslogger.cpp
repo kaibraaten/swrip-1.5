@@ -12,7 +12,7 @@
 #include "repos/descriptorrepository.hpp"
 
 extern FILE *fpArea;
-extern char strArea[];
+extern std::string strArea;
 
 Logger *Log = nullptr;
 
@@ -57,7 +57,7 @@ void FileSystemLogger::Bug(const char *str, ...)
             fseek(fpArea, iChar, 0);
         }
 
-        sprintf(buf, "[*****] FILE: %s LINE: %d", strArea, iLine);
+        sprintf(buf, "[*****] FILE: %s LINE: %d", strArea.c_str(), iLine);
         Log->Info("%s", buf);
 
         if(stat(SHUTDOWN_FILE, &fst) != -1)  /* file exists */

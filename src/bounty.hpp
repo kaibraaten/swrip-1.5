@@ -15,7 +15,6 @@ public:
 
 void AddBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, long amount);
 std::shared_ptr<Bounty> GetBounty(const std::string &target);
-void LoadBounties();
 void RemoveBounty(std::shared_ptr<Bounty> bounty);
 void ClaimBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 bool IsBountyOn(std::shared_ptr<Character> victim);

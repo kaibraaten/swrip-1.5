@@ -251,12 +251,10 @@ bool Descriptor::FlushBuffer(bool fPrompt)
 
 bool Descriptor::Read()
 {
-    size_t iStart = 0;
-
     if(!IsNullOrEmpty(InComm))
         return true;
 
-    iStart = strlen(pImpl->InBuffer);
+    size_t iStart = strlen(pImpl->InBuffer);
 
     if(iStart >= sizeof(pImpl->InBuffer) - 10)
     {
@@ -313,7 +311,8 @@ void Descriptor::ReadFromBuffer()
     /*
      * Look for at least one new line.
   */
-    for(int i = 0; pImpl->InBuffer[i] != '\n' && pImpl->InBuffer[i] != '\r' && i < MAX_INBUF_SIZE;
+    for(int i = 0;
+        pImpl->InBuffer[i] != '\n' && pImpl->InBuffer[i] != '\r' && i < MAX_INBUF_SIZE;
         i++)
     {
         if(pImpl->InBuffer[i] == '\0')

@@ -212,9 +212,13 @@ bool IsWizVis(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
     if(!IsNpc(victim)
        && victim->Flags.test(Flag::Plr::WizInvis)
        && GetTrustLevel(ch) < victim->PCData->WizInvis)
+    {
         return false;
-
-    return true;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 /*
@@ -223,9 +227,13 @@ bool IsWizVis(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 long GetAbilityXP(std::shared_ptr<Character> ch, short ability)
 {
     if(ability >= MAX_ABILITY || ability < 0)
+    {
         return 0;
-
-    return ch->Ability.Experience[ability];
+    }
+    else
+    {
+        return ch->Ability.Experience[ability];
+    }
 }
 
 void SetAbilityXP(std::shared_ptr<Character> ch, short ability, long xp)
@@ -250,9 +258,7 @@ void SetAbilityXP(std::shared_ptr<Character> ch, short ability, long xp)
  */
 int GetXPWorth(std::shared_ptr<Character> ch)
 {
-    int xp = 0;
-
-    xp = GetAbilityLevel(ch, COMBAT_ABILITY) * ch->TopLevel * 50;
+    int xp = GetAbilityLevel(ch, COMBAT_ABILITY) * ch->TopLevel * 50;
     xp += ch->HitPoints.Max * 2;
     xp -= (ch->ArmorClass - 50) * 2;
     xp += (ch->BareNumDie * ch->BareSizeDie + GetDamageRoll(ch)) * 50;
@@ -294,15 +300,21 @@ short GetTrustLevel(std::shared_ptr<Character> ch)
     return ch->GetTrustLevel();
 }
 
+constexpr short BASE_AGE = 17;
+
 /*
  * Retrieve a character's age.
  */
 short GetAge(std::shared_ptr<Character> ch)
 {
     if(IsNpc(ch))
-        return 17;
-
-    return 17 + (ch->PCData->Played + (current_time - ch->PCData->Logon)) / 1515800;
+    {
+        return BASE_AGE;
+    }
+    else
+    {
+        return BASE_AGE + (ch->PCData->Played + (current_time - ch->PCData->Logon)) / 1515800;
+    }
 }
 
 /*
@@ -310,7 +322,7 @@ short GetAge(std::shared_ptr<Character> ch)
  */
 short GetCurrentStrength(std::shared_ptr<Character> ch)
 {
-    short max = 25;
+    constexpr short max = 25;
     return urange(3, ch->PermStats.Str + ch->StatMods.Str, max);
 }
 
@@ -319,7 +331,7 @@ short GetCurrentStrength(std::shared_ptr<Character> ch)
  */
 short GetCurrentIntelligence(std::shared_ptr<Character> ch)
 {
-    short max = 25;
+    constexpr short max = 25;
     return urange(3, ch->PermStats.Int + ch->StatMods.Int, max);
 }
 
@@ -328,7 +340,7 @@ short GetCurrentIntelligence(std::shared_ptr<Character> ch)
  */
 short GetCurrentWisdom(std::shared_ptr<Character> ch)
 {
-    short max = 25;
+    constexpr short max = 25;
     return urange(3, ch->PermStats.Wis + ch->StatMods.Wis, max);
 }
 
@@ -337,7 +349,7 @@ short GetCurrentWisdom(std::shared_ptr<Character> ch)
  */
 short GetCurrentDexterity(std::shared_ptr<Character> ch)
 {
-    short max = 25;
+    constexpr short max = 25;
     return urange(3, ch->PermStats.Dex + ch->StatMods.Dex, max);
 }
 
@@ -346,7 +358,7 @@ short GetCurrentDexterity(std::shared_ptr<Character> ch)
  */
 short GetCurrentConstitution(std::shared_ptr<Character> ch)
 {
-    short max = 25;
+    constexpr short max = 25;
     return urange(3, ch->PermStats.Con + ch->StatMods.Con, max);
 }
 
@@ -355,7 +367,7 @@ short GetCurrentConstitution(std::shared_ptr<Character> ch)
  */
 short GetCurrentCharisma(std::shared_ptr<Character> ch)
 {
-    short max = 25;
+    constexpr short max = 25;
     return urange(3, ch->PermStats.Cha + ch->StatMods.Cha, max);
 }
 
@@ -364,7 +376,7 @@ short GetCurrentCharisma(std::shared_ptr<Character> ch)
  */
 short GetCurrentLuck(std::shared_ptr<Character> ch)
 {
-    short max = 25;
+    constexpr short max = 25;
     return urange(3, ch->PermStats.Lck + ch->StatMods.Lck, max);
 }
 
@@ -451,9 +463,11 @@ bool HasComlink(std::shared_ptr<Character> ch)
     {
         return true;
     }
-
-    std::shared_ptr<Object> comlink = GetFirstObjectOfType(ch, ITEM_COMLINK);
-    return comlink != nullptr;
+    else
+    {
+        auto comlink = GetFirstObjectOfType(ch, ITEM_COMLINK);
+        return comlink != nullptr;
+    }
 }
 
 bool HasDiploma(std::shared_ptr<Character> ch)
@@ -589,7 +603,9 @@ void EquipCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, 
 
     if(obj->Flags.test(Flag::Obj::Magic)
        || obj->WearLoc == WEAR_FLOATING)
+    {
         ch->CarryWeight -= GetObjectWeight(obj);
+    }
 
     for(auto paf : obj->Prototype->Affects())
     {
@@ -604,7 +620,9 @@ void EquipCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, 
     if(obj->ItemType == ITEM_LIGHT
        && obj->Value[OVAL_LIGHT_POWER] != 0
        && ch->InRoom)
+    {
         ++ch->InRoom->Light;
+    }
 }
 
 /*
@@ -619,27 +637,40 @@ void UnequipCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj
     }
 
     ch->CarryNumber += GetObjectCount(obj);
+
     if(obj->Flags.test(Flag::Obj::Magic) || obj->WearLoc == WEAR_FLOATING)
+    {
         ch->CarryWeight += GetObjectWeight(obj);
+    }
 
     ch->ArmorClass += GetObjectArmorClass(obj, obj->WearLoc);
     obj->WearLoc = WEAR_NONE;
 
     for(auto paf : obj->Prototype->Affects())
+    {
         ModifyAffect(ch, paf, false);
+    }
 
     if(obj->CarriedBy)
+    {
         for(auto paf : obj->Affects())
+        {
             ModifyAffect(ch, paf, false);
+        }
+    }
 
     if(!obj->CarriedBy)
+    {
         return;
+    }
 
     if(obj->ItemType == ITEM_LIGHT
        && obj->Value[OVAL_LIGHT_POWER] != 0
        && ch->InRoom
        && ch->InRoom->Light > 0)
+    {
         --ch->InRoom->Light;
+    }
 }
 
 /*
@@ -674,7 +705,7 @@ std::shared_ptr<Object> GetCarriedObject(std::shared_ptr<Character> ch, const st
 
     if(vnum != INVALID_VNUM)
     {
-        return NULL;
+        return nullptr;
     }
 
     /* If we didn't find an exact match, run through the list of objects
@@ -696,7 +727,7 @@ std::shared_ptr<Object> GetCarriedObject(std::shared_ptr<Character> ch, const st
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /*
@@ -722,14 +753,22 @@ std::shared_ptr<Object> GetWornObject(std::shared_ptr<Character> ch, const std::
     }
 
     for(auto obj : Reverse(ch->Objects()))
+    {
         if(obj->WearLoc != WEAR_NONE
            && CanSeeObject(ch, obj)
            && (NiftyIsName(arg, obj->Name) || obj->Prototype->Vnum == vnum))
+        {
             if(++count == number)
+            {
                 return obj;
+            }
+        }
+    }
 
     if(vnum != INVALID_VNUM)
-        return NULL;
+    {
+        return nullptr;
+    }
 
     /* If we didn't find an exact match, run through the list of objects
        again looking for prefix matching, ie swo == sword.
@@ -738,13 +777,19 @@ std::shared_ptr<Object> GetWornObject(std::shared_ptr<Character> ch, const std::
     count = 0;
 
     for(auto obj : Reverse(ch->Objects()))
+    {
         if(obj->WearLoc != WEAR_NONE
            && CanSeeObject(ch, obj)
            && NiftyIsNamePrefix(arg, obj->Name))
+        {
             if(++count == number)
+            {
                 return obj;
+            }
+        }
+    }
 
-    return NULL;
+    return nullptr;
 }
 
 /*
@@ -916,30 +961,23 @@ bool CanSeeCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
 
     if(ch == victim)
         return true;
-
-    if(!IsNpc(victim)
+    else if(!IsNpc(victim)
        && victim->Flags.test(Flag::Plr::WizInvis)
        && GetTrustLevel(ch) < victim->PCData->WizInvis)
         return false;
-
-    if(victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
+    else if(victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
         return true;
-
-    if(victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
+    else if(victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
         return true;
-
-    /* SB */
-    if(IsNpc(victim)
+    else if(IsNpc(victim)
        && victim->Flags.test(Flag::Mob::MobInvis)
        && GetTrustLevel(ch) < victim->MobInvis)
         return false;
-
-    if(!IsImmortal(ch) && !IsNpc(victim) && !victim->Desc
+    else if(!IsImmortal(ch) && !IsNpc(victim) && !victim->Desc
        && GetTimer(victim, TIMER_RECENTFIGHT) > 0
        && (!victim->Switched || !IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
         return false;
-
-    if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
+    else if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return true;
 
     /* The miracle cure for blindness? -- Altrag */
@@ -947,20 +985,17 @@ bool CanSeeCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
     {
         if(IsAffectedBy(ch, Flag::Affect::Blind))
             return false;
-
-        if(IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
+        else if(IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
             return false;
-
-        if(IsAffectedBy(victim, Flag::Affect::Hide)
+        else if(IsAffectedBy(victim, Flag::Affect::Hide)
            && !IsAffectedBy(ch, Flag::Affect::DetectHidden)
            && !victim->Fighting)
         {
             if(ch->Race == RACE_DEFEL && victim->Race == RACE_DEFEL)
                 return true;
-
-            return false;
+            else
+                return false;
         }
-
 
         if(IsAffectedBy(victim, Flag::Affect::Invisible)
            && !IsAffectedBy(ch, Flag::Affect::DetectInvis))
@@ -977,29 +1012,22 @@ bool CanSeeObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return true;
-
-    if(obj->Flags.test(Flag::Obj::Burried))
+    else if(obj->Flags.test(Flag::Obj::Burried))
         return false;
-
-    if(IsAffectedBy(ch, Flag::Affect::TrueSight))
+    else if(IsAffectedBy(ch, Flag::Affect::TrueSight))
         return true;
-
-    if(IsAffectedBy(ch, Flag::Affect::Blind))
+    else if(IsAffectedBy(ch, Flag::Affect::Blind))
         return false;
-
-    if(obj->Flags.test(Flag::Obj::Hidden))
+    else if(obj->Flags.test(Flag::Obj::Hidden))
         return false;
-
-    if(obj->ItemType == ITEM_LIGHT && obj->Value[OVAL_LIGHT_POWER] != 0)
+    else if(obj->ItemType == ITEM_LIGHT && obj->Value[OVAL_LIGHT_POWER] != 0)
         return true;
-
-    if(IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
+    else if(IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
         return false;
-
-    if(obj->Flags.test(Flag::Obj::Invis) && !IsAffectedBy(ch, Flag::Affect::DetectInvis))
+    else if(obj->Flags.test(Flag::Obj::Invis) && !IsAffectedBy(ch, Flag::Affect::DetectInvis))
         return false;
-
-    return true;
+    else
+        return true;
 }
 
 /*
@@ -1009,14 +1037,12 @@ bool CanDropObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
 {
     if(!obj->Flags.test(Flag::Obj::NoDrop))
         return true;
-
-    if(!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
+    else if(!IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL)
         return true;
-
-    if(IsNpc(ch) && ch->Prototype->Vnum == MOB_VNUM_SUPERMOB)
+    else if(IsNpc(ch) && ch->Prototype->Vnum == MOB_VNUM_SUPERMOB)
         return true;
-
-    return false;
+    else
+        return false;
 }
 
 /*
@@ -1024,7 +1050,7 @@ bool CanDropObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj)
  */
 void FixCharacterStats(std::shared_ptr<Character> ch)
 {
-    std::shared_ptr<Object> carry[MAX_LEVEL * 200];
+    std::vector<std::shared_ptr<Object>> carry(MAX_LEVEL * 200);
     int ncarry = 0;
 
     DeEquipCharacter(ch);

@@ -55,7 +55,7 @@ std::shared_ptr<Alias> FindAlias(std::shared_ptr<Character> ch, const std::strin
 
 std::shared_ptr<Alias> AllocateAlias(const std::string &name, const std::string &command)
 {
-    std::shared_ptr<Alias> alias = std::make_shared<Alias>();
+    auto alias = std::make_shared<Alias>();
     alias->Name = name;
     alias->Command = command;
 
@@ -80,7 +80,6 @@ void FreeAliases(std::shared_ptr<Character> ch)
 
 bool CheckAlias(std::shared_ptr<Character> ch, const std::string &command, const std::string &argument)
 {
-    char arg[MAX_INPUT_LENGTH] = { '\0' };
     bool nullarg = true;
 
     if(!argument.empty())
@@ -100,7 +99,7 @@ bool CheckAlias(std::shared_ptr<Character> ch, const std::string &command, const
         return false;
     }
 
-    sprintf(arg, "%s", alias->Command.c_str());
+    std::string arg = alias->Command;
 
     if(ch->CmdRecurse == -1 || ++ch->CmdRecurse > 50)
     {
@@ -115,8 +114,7 @@ bool CheckAlias(std::shared_ptr<Character> ch, const std::string &command, const
 
     if(!argument.empty() && !nullarg)
     {
-        strcat(arg, " ");
-        strcat(arg, argument.c_str());
+        arg += " " + argument;
     }
 
     Interpret(ch, arg);
@@ -131,7 +129,7 @@ void AddAlias(std::shared_ptr<Character> ch, std::shared_ptr<Alias> alias)
     }
 
     bool alreadyExists = Find(ch->PCData->Aliases(),
-                              [alias](auto a)
+                              [alias](const auto &a)
                               {
                                   return StrCmp(alias->Name, a->Name) == 0;
                               }) ? true : false;

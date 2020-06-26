@@ -54,11 +54,7 @@ extern socket_t control;                /* Controlling descriptor       */
 
 void do_copyover(std::shared_ptr<Character> ch, std::string argument)
 {
-    char buf[100];
     FILE *fp = fopen(COPYOVER_FILE, "w");
-    char buf2[100];
-    char buf3[100];
-    char filename[256];
 
     if(!fp)
     {
@@ -68,7 +64,7 @@ void do_copyover(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    sprintf(buf, "%s", "\r\nA Blinding Flash of light starts heading towards you, before you can think it engulfs you!\r\n");
+    std::string buf = "\r\nA Blinding Flash of light starts heading towards you, before you can think it engulfs you!\r\n";
 
     /* For each playing descriptor, save its state */
     auto descriptors(Descriptors->Entities());
@@ -98,20 +94,20 @@ void do_copyover(std::shared_ptr<Character> ch, std::string argument)
     fclose(fp);
 
     ImcCopyover();
-    sprintf(buf3, "%d", ImcGetSocket(this_imcmud));
-
-    /* exec - descriptors are inherited */
-    sprintf(buf, "%d", SysData.Port);
-    sprintf(buf2, "%d", control);
 
 #ifdef _WIN32
-    sprintf(filename, "\"%s\"", "swrip");
+    std::string filename = "\"swrip\"";
 #else
-    sprintf(filename, "%s", "./swrip");
+    std::string buf3 = std::to_string(ImcGetSocket(this_imcmud));
+
+    /* exec - descriptors are inherited */
+    buf = std::to_string(SysData.Port);
+    std::string buf2 = std::to_string(control);
+    std::string filename = "./swrip";
 #define _execl execl
 
-    _execl(filename, filename,
-           buf, "copyover", buf2, buf3, NULL);
+    _execl(filename.c_str(), filename.c_str(),
+           buf.c_str(), "copyover", buf2.c_str(), buf3.c_str(), nullptr);
 
     /* Failed - sucessful exec will not return */
     perror("do_copyover: execl");
@@ -123,17 +119,15 @@ void do_copyover(std::shared_ptr<Character> ch, std::string argument)
 /* Recover from a copyover - load players */
 void RecoverFromCopyover()
 {
-    FILE *fp = NULL;
-    char name[100];
-    char host[MAX_STRING_LENGTH];
-    char ip[MAX_STRING_LENGTH];
+    /*
     socket_t desc = 0;
     bool fOld = false;
     int use_mccp = 0;
+    */
 
     Log->Info("Copyover recovery initiated");
 
-    fp = fopen(COPYOVER_FILE, "r");
+    FILE *fp = fopen(COPYOVER_FILE, "r");
 
     if(!fp)
     {
@@ -146,6 +140,12 @@ void RecoverFromCopyover()
                                      - doesn't prevent reading */
     for(;; )
     {
+        int use_mccp = 0;
+        socket_t desc = 0;
+        char buf[MAX_STRING_LENGTH];
+        char ip[MAX_STRING_LENGTH];
+        char host[MAX_STRING_LENGTH];
+        char name[MAX_STRING_LENGTH];
         fscanf(fp, "%d %d %s %s %s\n", &desc, &use_mccp, name, ip, host);
 
         if(desc == -1 || feof(fp))
@@ -153,7 +153,7 @@ void RecoverFromCopyover()
             break;
         }
 
-        std::shared_ptr<Descriptor> d = std::make_shared<Descriptor>(desc);
+        auto d = std::make_shared<Descriptor>(desc);
         d->Remote.Hostname = host;
         d->Remote.HostIP = ip;
 
@@ -169,12 +169,12 @@ void RecoverFromCopyover()
         d->ConnectionState = CON_COPYOVER_RECOVER; /* negative so CloseDescriptor will cut them off */
 
         /* Now, find the pfile */
-        fOld = PlayerCharacters->Load(d, name, false);
+        bool fOld = PlayerCharacters->Load(d, name, false);
 
         if(!fOld)               /* Player file not found?! */
         {
             WriteToDescriptor(d.get(),
-                              "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
+                              "\r\nSomehow, your character was lost in the copyover. Sorry.\r\n",
                               0);
             CloseDescriptor(d, false);
         }
@@ -200,7 +200,7 @@ void RecoverFromCopyover()
             CharacterToRoom(d->Char, d->Char->InRoom);
             do_look(d->Char, "auto noprog");
 
-            Act(AT_ACTION, "$n materializes!", d->Char, NULL, NULL,
+            Act(AT_ACTION, "$n materializes!", d->Char, nullptr, nullptr,
                 ActTarget::Room);
             d->ConnectionState = CON_PLAYING;
 

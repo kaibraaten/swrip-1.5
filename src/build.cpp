@@ -584,7 +584,7 @@ std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argum
     }
 
     if (letter == '*')
-        return NULL;
+        return nullptr;
     else
         return MakeReset(letter, extra, val1, val3, val2);
 }

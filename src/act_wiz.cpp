@@ -39,19 +39,18 @@ time_t new_boot_time_t;
 
 void EchoToAll(short AT_COLOR, const std::string &argument, short tar)
 {
-    if (argument.empty())
+    if(argument.empty())
         return;
 
-    for (auto d : Descriptors)
+    for(auto d : Descriptors)
     {
         /* Added showing echoes to players who are editing, so they won't
            miss out on important info like upcoming reboots. --Narn */
-        if (d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING)
+        if(d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING)
         {
             /* This one is kinda useless except for switched.. */
-            if (tar == ECHOTAR_PC && IsNpc(d->Char))
-                continue;
-            else if (tar == ECHOTAR_IMM && !IsImmortal(d->Char))
+            if((tar == ECHOTAR_PC && IsNpc(d->Char))
+               || (tar == ECHOTAR_IMM && !IsImmortal(d->Char)))
                 continue;
 
             SetCharacterColor(AT_COLOR, d->Char);
@@ -74,12 +73,12 @@ void RealEchoToRoom(short color, std::shared_ptr<Room> room, const std::string &
 {
     assert(room != nullptr);
 
-    for (std::shared_ptr<Character> vic : room->Characters())
+    for(std::shared_ptr<Character> vic : room->Characters())
     {
         SetCharacterColor(color, vic);
-        vic->Echo("%s", text.c_str());
+        vic->Echo(text);
 
-        if (sendNewline)
+        if(sendNewline)
         {
             vic->Echo("\r\n");
         }
@@ -88,26 +87,28 @@ void RealEchoToRoom(short color, std::shared_ptr<Room> room, const std::string &
 
 std::shared_ptr<Room> FindLocation(std::shared_ptr<Character> ch, const std::string &arg)
 {
-    if (IsNumber(arg))
+    if(IsNumber(arg))
     {
         return GetRoom(strtol(arg.c_str(), nullptr, 10));
     }
 
     std::shared_ptr<Character> victim = GetCharacterAnywhere(ch, arg);
 
-    if (victim != nullptr)
+    if(victim != nullptr)
     {
         return victim->InRoom;
     }
 
     auto obj = GetObjectAnywhere(ch, arg);
 
-    if (obj != nullptr)
+    if(obj != nullptr)
     {
         return obj->InRoom;
     }
-
-    return nullptr;
+    else
+    {
+        return nullptr;
+    }
 }
 
 void GenerateRebootString()

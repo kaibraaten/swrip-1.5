@@ -5,77 +5,77 @@
 #include "character.hpp"
 #include "repos/badnamerepository.hpp"
 
-void do_badname( std::shared_ptr<Character> ch, std::string argument )
+void do_badname(std::shared_ptr<Character> ch, std::string argument)
 {
-  std::string command;
+    std::string command;
 
-  if( !StrCmp( argument, "list" ) )
+    if(!StrCmp(argument, "list"))
     {
-      int currentColumn = 0;
-      const int numberOfColumns = 4;
+        int currentColumn = 0;
+        const int numberOfColumns = 4;
 
-      for(const std::shared_ptr<BadName> badname : BadNames)
+        for(const auto &badname : BadNames)
         {
-          ch->Echo( "%-19s", badname->Name.c_str() );
+            ch->Echo("%-19s", badname.c_str());
 
-          if( ++currentColumn % numberOfColumns == 0 )
+            if(++currentColumn % numberOfColumns == 0)
             {
-              ch->Echo( "\r\n" );
+                ch->Echo("\r\n");
             }
         }
 
-      if( currentColumn % numberOfColumns != 0 )
+        if(currentColumn % numberOfColumns != 0)
         {
-          ch->Echo( "\r\n" );
+            ch->Echo("\r\n");
         }
 
-      if( currentColumn == 0)
+        if(currentColumn == 0)
         {
-          ch->Echo( "No badnames registered.\r\n" );
+            ch->Echo("No badnames registered.\r\n");
         }
 
-      return;
-    }
-  
-  argument = OneArgument( argument, command );
-  
-  if( argument.empty() || command.empty() )
-    {
-      ch->Echo( "Usage: badname <command> <name>\r\n" );
-      ch->Echo( "Commands:\r\n" );
-      ch->Echo( "\tadd remove list\r\n" );
-      return;
+        return;
     }
 
-  if( !StrCmp( command, "add" ) )
-    {
-      if( IsBadName( argument ) )
-	{
-	  ch->Echo("That name is already in the badname list.\r\n");
-	}
-      else
-	{
-	  AddBadName( argument );
-          BadNames->Save();
-	  ch->Echo("Name successfully added to the badname list.\r\n");
-	}
+    argument = OneArgument(argument, command);
 
-      return;
+    if(argument.empty() || command.empty())
+    {
+        ch->Echo("Usage: badname <command> <name>\r\n");
+        ch->Echo("Commands:\r\n");
+        ch->Echo("\tadd remove list\r\n");
+        return;
     }
-  else if( !StrCmp( command, "remove" ) || !StrCmp( command, "rm" ) )
+
+    if(!StrCmp(command, "add"))
     {
-      if( !IsBadName( argument ) )
+        if(IsBadName(argument))
         {
-          ch->Echo("That name isn't in the badname list.\r\n");
+            ch->Echo("That name is already in the badname list.\r\n");
         }
-      else
+        else
         {
-          RemoveBadName( argument );
-          BadNames->Save();
-          ch->Echo("Name successfully removed from the badname list.\r\n");
+            AddBadName(argument);
+            BadNames->Save();
+            ch->Echo("Name successfully added to the badname list.\r\n");
         }
 
-      return;
+        return;
+    }
+    else if(!StrCmp(command, "remove") || !StrCmp(command, "rm"))
+    {
+        if(!IsBadName(argument))
+        {
+            ch->Echo("That name isn't in the badname list.\r\n");
+        }
+        else
+        {
+            RemoveBadName(argument);
+            BadNames->Save();
+            ch->Echo("Name successfully removed from the badname list.\r\n");
+        }
+
+        return;
     }
 }
 

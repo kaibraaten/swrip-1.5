@@ -95,7 +95,7 @@ std::shared_ptr<Clan> GetClan(const std::string &name)
 
 void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild)
 {
-    std::shared_ptr<Clan> mainClan = GetClan(guild->MainClanName);
+    auto mainClan = GetClan(guild->MainClanName);
     AssignGuildToMainclan(guild, mainClan);
 }
 

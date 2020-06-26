@@ -2,36 +2,26 @@
 #include "badname.hpp"
 #include "repos/badnamerepository.hpp"
 
-static std::shared_ptr<BadName> GetBadName(const std::string &name)
+bool IsBadName(std::string name)
 {
-    return BadNames->Find([&name](auto entity)
-                          {
-                              return StrCmp(entity->Name, name) == 0;
-                          });
+    auto foundName = BadNames->Find([&name](const auto &badName)
+                                    {
+                                        return StrCmp(badName, name) == 0;
+                                    });
+    return foundName.empty();
 }
 
-bool IsBadName(const std::string &name)
-{
-    return GetBadName(name) != nullptr;
-}
-
-void AddBadName(const std::string &name)
+void AddBadName(std::string name)
 {
     if(IsBadName(name))
     {
         return;
     }
 
-    std::shared_ptr<BadName> badName = std::shared_ptr<BadName>(new BadName{ name });
-    BadNames->Add(badName);
+    BadNames->Add(name);
 }
 
-void RemoveBadName(const std::string &name)
+void RemoveBadName(std::string name)
 {
-    std::shared_ptr<BadName> badname = GetBadName(name);
-
-    if(badname != nullptr)
-    {
-        BadNames->Remove(badname);
-    }
+    BadNames->Remove(name);
 }

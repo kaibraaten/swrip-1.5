@@ -5,14 +5,7 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
-struct CompareBadName
-{
-  bool operator()(const std::shared_ptr<BadName> &lhs, const std::shared_ptr<BadName> &rhs) const;
-};
-
-using BadNameRepositoryBase = Ceris::Repository<std::shared_ptr<BadName>, CompareBadName>;
-
-class BadNameRepository : public BadNameRepositoryBase
+class BadNameRepository : public Ceris::Repository<std::string>
 {
 public:
   virtual void Load() = 0;

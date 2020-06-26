@@ -28,7 +28,7 @@
 
 bool IsBountyOn(std::shared_ptr<Character> victim)
 {
-    return GetBounty(victim->Name) != NULL;
+    return GetBounty(victim->Name) != nullptr;
 }
 
 std::shared_ptr<Bounty> GetBounty(const std::string &name)
@@ -41,8 +41,7 @@ std::shared_ptr<Bounty> GetBounty(const std::string &name)
 
 void AddBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, long amount)
 {
-    char buf[MAX_STRING_LENGTH] = { '\0' };
-    std::shared_ptr<Bounty> bounty = GetBounty(victim->Name);
+    auto bounty = GetBounty(victim->Name);
 
     if(bounty == nullptr)
     {
@@ -57,8 +56,8 @@ void AddBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
     Bounties->Save();
 
     victim->Echo("&RSomeone has added %ld credits to the bounty on you!\r\n", amount);
-    sprintf(buf, "&R%s has added %ld credits to the bounty on %s.\r\n",
-            ch->Name.c_str(), amount, victim->Name.c_str());
+    std::string buf = FormatString("&R%s has added %ld credits to the bounty on %s.\r\n",
+                                   ch->Name.c_str(), amount, victim->Name.c_str());
     ch->Echo("%s", buf);
 
     for(auto echoTo = LastCharacter; echoTo; echoTo = echoTo->Previous)
@@ -67,7 +66,7 @@ void AddBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
             || IsImmortal(echoTo))
            && echoTo != ch)
         {
-            echoTo->Echo("%s", buf);
+            echoTo->Echo(buf);
         }
     }
 }
@@ -80,37 +79,34 @@ void RemoveBounty(std::shared_ptr<Bounty> bounty)
 
 void ClaimBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    long xp = 0;
-    char buf[MAX_STRING_LENGTH];
-
     if(IsNpc(victim))
     {
         return;
     }
 
-    std::shared_ptr<Bounty> bounty = GetBounty(victim->Name);
+    auto bounty = GetBounty(victim->Name);
 
     if(ch == victim)
     {
-        if(bounty != NULL)
+        if(bounty != nullptr)
             RemoveBounty(bounty);
 
         return;
     }
 
-    if(bounty != NULL
+    if(bounty != nullptr
        && (!IsClanned(ch)
            || !IsBountyHuntersGuild(ch->PCData->ClanInfo.Clan->Name)))
     {
         RemoveBounty(bounty);
-        bounty = NULL;
+        bounty = nullptr;
     }
 
-    if(bounty == NULL)
+    if(bounty == nullptr)
     {
         if(victim->Flags.test(Flag::Plr::Killer) && !IsNpc(ch))
         {
-            xp = urange(1, ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY))));
+            long xp = urange(1, ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY))));
             GainXP(ch, HUNTING_ABILITY, xp);
             SetCharacterColor(AT_BLOOD, ch);
             ch->Echo("You receive %ld hunting experience for executing a wanted killer.\r\n", xp);
@@ -120,26 +116,26 @@ void ClaimBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victi
             ch->Flags.set(Flag::Plr::Killer);
             ch->Echo("You are now wanted for the murder of %s.\r\n", victim->Name.c_str());
         }
-
-        return;
     }
-
-    ch->Gold += bounty->Reward;
-
-    xp = urange(1, bounty->Reward + ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY))));
-    GainXP(ch, HUNTING_ABILITY, xp);
-
-    SetCharacterColor(AT_BLOOD, ch);
-    ch->Echo("You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n",
-             xp, bounty->Reward, bounty->Target.c_str());
-
-    sprintf(buf, "The disintegration bounty on %s has been claimed!", victim->Name.c_str());
-    EchoToAll(AT_RED, buf, 0);
-
-    if(!victim->Flags.test(Flag::Plr::Killer))
+    else
     {
-        ch->Flags.set(Flag::Plr::Killer);
-    }
+        ch->Gold += bounty->Reward;
 
-    RemoveBounty(bounty);
+        long xp = urange(1, bounty->Reward + ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY))));
+        GainXP(ch, HUNTING_ABILITY, xp);
+
+        SetCharacterColor(AT_BLOOD, ch);
+        ch->Echo("You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n",
+                 xp, bounty->Reward, bounty->Target.c_str());
+
+        std::string buf = FormatString("The disintegration bounty on %s has been claimed!", victim->Name.c_str());
+        EchoToAll(AT_RED, buf, 0);
+
+        if(!victim->Flags.test(Flag::Plr::Killer))
+        {
+            ch->Flags.set(Flag::Plr::Killer);
+        }
+
+        RemoveBounty(bounty);
+    }
 }

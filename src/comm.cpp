@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #ifdef __STRICT_ANSI__
-/* To include the prototype for gethostname() */
+ /* To include the prototype for gethostname() */
 #define _DEFAULT_SOURCE
 #define _BSD_SOURCE
 #endif
@@ -117,7 +117,7 @@ static void InitializeTime()
     new_boot_struct = *new_boot_time;
     new_boot_time = &new_boot_struct;
     new_boot_time->tm_mday += 1;
-    if (new_boot_time->tm_hour > 12)
+    if(new_boot_time->tm_hour > 12)
         new_boot_time->tm_mday += 1;
     new_boot_time->tm_sec = 0;
     new_boot_time->tm_min = 0;
@@ -148,20 +148,20 @@ int SwripMain(int argc, char *argv[])
 
     InitializeTime();
 
-    if (argc > 1)
+    if(argc > 1)
     {
-        if (!IsNumber(argv[1]))
+        if(!IsNumber(argv[1]))
         {
             fprintf(stderr, "Usage: %s [port #]\n", argv[0]);
             exit(1);
         }
-        else if ((SysData.Port = atoi(argv[1])) <= 1024)
+        else if((SysData.Port = atoi(argv[1])) <= 1024)
         {
             fprintf(stderr, "Port number must be above 1024.\n");
             exit(1);
         }
 
-        if (argv[2] && argv[2][0])
+        if(argv[2] && argv[2][0])
         {
             fCopyOver = true;
             control = atoi(argv[3]);
@@ -190,7 +190,7 @@ int SwripMain(int argc, char *argv[])
 
     Log->Info("Initializing socket");
 
-    if (!fCopyOver)
+    if(!fCopyOver)
     {
         control = InitializeSocket(SysData.Port);
     }
@@ -220,14 +220,14 @@ socket_t InitializeSocket(unsigned short port)
     socklen_t optlen = sizeof(optval);
     socket_t fd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
-    if (fd == INVALID_SOCKET)
+    if(fd == INVALID_SOCKET)
     {
         perror("Init_socket: socket");
         exit(1);
     }
 
-    if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR,
-                   &optval, optlen) == SOCKET_ERROR)
+    if(setsockopt(fd, SOL_SOCKET, SO_REUSEADDR,
+                  &optval, optlen) == SOCKET_ERROR)
     {
         perror("Init_socket: SO_REUSEADDR");
         closesocket(fd);
@@ -240,8 +240,8 @@ socket_t InitializeSocket(unsigned short port)
     ld.l_onoff = 1;
     ld.l_linger = 1000;
 
-    if (setsockopt(fd, SOL_SOCKET, SO_DONTLINGER,
-                   (const char*)&ld, sizeof(ld)) == SOCKET_ERROR)
+    if(setsockopt(fd, SOL_SOCKET, SO_DONTLINGER,
+                  (const char *)&ld, sizeof(ld)) == SOCKET_ERROR)
     {
         perror("Init_socket: SO_DONTLINGER");
         closesocket(fd);
@@ -253,14 +253,14 @@ socket_t InitializeSocket(unsigned short port)
     sa.sin_family = AF_INET; /* hp->h_addrtype; */
     sa.sin_port = htons(port);
 
-    if (bind(fd, (struct sockaddr *) &sa, sizeof(sa)) == SOCKET_ERROR)
+    if(bind(fd, (struct sockaddr *)&sa, sizeof(sa)) == SOCKET_ERROR)
     {
         perror("Init_socket: bind");
         closesocket(fd);
         exit(1);
     }
 
-    if (listen(fd, 50) == SOCKET_ERROR)
+    if(listen(fd, 50) == SOCKET_ERROR)
     {
         perror("Init_socket: listen");
         closesocket(fd);
@@ -278,7 +278,7 @@ static void CaughtAlarm(int dummy)
     Log->Bug("ALARM CLOCK!");
     EchoToAll(AT_IMMORT, "Alas, the hideous mandalorian entity known only as 'Lag' rises once more!\r\n", ECHOTAR_ALL);
 
-    if (newdesc)
+    if(newdesc)
     {
         FD_CLR(newdesc, &in_set);
         FD_CLR(newdesc, &out_set);
@@ -294,7 +294,7 @@ static void CaughtAlarm(int dummy)
 
 static bool CheckBadSocket(socket_t desc)
 {
-    if (FD_ISSET(desc, &exc_set))
+    if(FD_ISSET(desc, &exc_set))
     {
         FD_CLR(desc, &in_set);
         FD_CLR(desc, &out_set);
@@ -319,7 +319,7 @@ static void AcceptNewSocket(socket_t ctrl)
     maxdesc = ctrl;
     newdesc = 0;
 
-    for (auto d : Descriptors)
+    for(auto d : Descriptors)
     {
         maxdesc = umax(maxdesc, d->Socket);
         FD_SET(d->Socket, &in_set);
@@ -329,19 +329,19 @@ static void AcceptNewSocket(socket_t ctrl)
 
     int result = select(maxdesc + 1, &in_set, &out_set, &exc_set, &null_time);
 
-    if (result == SOCKET_ERROR)
+    if(result == SOCKET_ERROR)
     {
         perror("AcceptNewSocket: select: poll");
         exit(EXIT_FAILURE);
     }
 
-    if (FD_ISSET(ctrl, &exc_set))
+    if(FD_ISSET(ctrl, &exc_set))
     {
         Log->Bug("Exception raise on controlling descriptor %d", ctrl);
         FD_CLR(ctrl, &in_set);
         FD_CLR(ctrl, &out_set);
     }
-    else if (FD_ISSET(ctrl, &in_set))
+    else if(FD_ISSET(ctrl, &in_set))
     {
         newdesc = ctrl;
         NewDescriptor(newdesc);
@@ -360,7 +360,7 @@ static void GameLoop()
     current_time = (time_t)last_time.tv_sec;
 
     /* Main loop */
-    while (!mud_down)
+    while(!mud_down)
     {
         AcceptNewSocket(control);
         HandleSocketInput();
@@ -377,20 +377,20 @@ static void HandleSocketInput()
      * Kick out descriptors with raised exceptions
      * or have been idle, then check for input.
      */
-    auto inputDescriptors(Descriptors->Entities());
+    auto inputDescriptors = Descriptors->Entities();
 
-    for (auto d : inputDescriptors)
+    for(auto d : inputDescriptors)
     {
         d->Idle++;    /* make it so a descriptor can idle out */
 
-        if (FD_ISSET(d->Socket, &exc_set))
+        if(FD_ISSET(d->Socket, &exc_set))
         {
             FD_CLR(d->Socket, &in_set);
             FD_CLR(d->Socket, &out_set);
 
-            if (d->Char
-                && (d->ConnectionState == CON_PLAYING
-                    || d->ConnectionState == CON_EDITING))
+            if(d->Char
+               && (d->ConnectionState == CON_PLAYING
+                   || d->ConnectionState == CON_EDITING))
             {
                 PlayerCharacters->Save(d->Char);
             }
@@ -399,10 +399,10 @@ static void HandleSocketInput()
             CloseDescriptor(d, true);
             continue;
         }
-        else if ((d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : false)
-                 && d->Idle > 7200 && !d->Char->Flags.test(Flag::Plr::Afk)) /* 30 minutes  */
+        else if((d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : false)
+                && d->Idle > 7200 && !d->Char->Flags.test(Flag::Plr::Afk)) /* 30 minutes  */
         {
-            if ((d->Char && d->Char->InRoom) ? d->Char->TopLevel <= LEVEL_IMMORTAL : false)
+            if((d->Char && d->Char->InRoom) ? d->Char->TopLevel <= LEVEL_IMMORTAL : false)
             {
                 WriteToDescriptor(d.get(),
                                   "Idle 30 minutes. Activating AFK flag.\r\n", 0);
@@ -411,12 +411,12 @@ static void HandleSocketInput()
                 continue;
             }
         }
-        else if ((d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
-                 && ((!d->Char && d->Idle > 360)              /* 2 mins */
-                     || (d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
-                     || d->Idle > 28800))                             /* 2 hrs  */
+        else if((d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
+                && ((!d->Char && d->Idle > 360)              /* 2 mins */
+                    || (d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
+                    || d->Idle > 28800))                             /* 2 hrs  */
         {
-            if (d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
+            if(d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
             {
                 WriteToDescriptor(d.get(),
                                   "Idle timeout... disconnecting.\r\n", 0);
@@ -429,22 +429,22 @@ static void HandleSocketInput()
         {
             d->fCommand = false;
 
-            if (FD_ISSET(d->Socket, &in_set))
+            if(FD_ISSET(d->Socket, &in_set))
             {
                 d->Idle = 0;
 
-                if (d->Char)
+                if(d->Char)
                 {
                     d->Char->IdleTimer = 0;
                 }
 
-                if (!d->Read())
+                if(!d->Read())
                 {
                     FD_CLR(d->Socket, &out_set);
 
-                    if (d->Char
-                        && (d->ConnectionState == CON_PLAYING
-                            || d->ConnectionState == CON_EDITING))
+                    if(d->Char
+                       && (d->ConnectionState == CON_PLAYING
+                           || d->ConnectionState == CON_EDITING))
                     {
                         PlayerCharacters->Save(d->Char);
                     }
@@ -455,7 +455,7 @@ static void HandleSocketInput()
                 }
             }
 
-            if (d->Char && d->Char->Wait > 0)
+            if(d->Char && d->Char->Wait > 0)
             {
                 --d->Char->Wait;
                 continue;
@@ -463,7 +463,7 @@ static void HandleSocketInput()
 
             d->ReadFromBuffer();
 
-            if (d->HasInput())
+            if(d->HasInput())
             {
                 d->fCommand = true;
                 StopIdling(d->Char);
@@ -471,12 +471,12 @@ static void HandleSocketInput()
                 std::string cmdline = d->InComm;
                 d->InComm[0] = '\0';
 
-                if (d->Char)
+                if(d->Char)
                 {
                     SetCurrentGlobalCharacter(d->Char);
                 }
 
-                switch (d->ConnectionState)
+                switch(d->ConnectionState)
                 {
                 default:
                     Nanny(d, cmdline);
@@ -501,18 +501,18 @@ static void HandleSocketOutput()
     /*
      * Output.
      */
-    auto outputDescriptors(Descriptors->Entities());
+    auto outputDescriptors = Descriptors->Entities();
 
-    for (auto d : outputDescriptors)
+    for(auto d : outputDescriptors)
     {
-        if ((d->fCommand || !d->OutBuffer.str().empty())
-            && FD_ISSET(d->Socket, &out_set))
+        if((d->fCommand || !d->OutBuffer.str().empty())
+           && FD_ISSET(d->Socket, &out_set))
         {
-            if (!d->FlushBuffer(true))
+            if(!d->FlushBuffer(true))
             {
-                if (d->Char
-                    && (d->ConnectionState == CON_PLAYING
-                        || d->ConnectionState == CON_EDITING))
+                if(d->Char
+                   && (d->ConnectionState == CON_PLAYING
+                       || d->ConnectionState == CON_EDITING))
                 {
                     PlayerCharacters->Save(d->Char);
                 }
@@ -537,19 +537,19 @@ static void Sleep(timeval &last_time)
         + 1000000 / PULSE_PER_SECOND;
     long secDelta = ((int)last_time.tv_sec) - ((int)now_time.tv_sec);
 
-    while (usecDelta < 0)
+    while(usecDelta < 0)
     {
         usecDelta += 1000000;
         secDelta -= 1;
     }
 
-    while (usecDelta >= 1000000)
+    while(usecDelta >= 1000000)
     {
         usecDelta -= 1000000;
         secDelta += 1;
     }
 
-    if (secDelta > 0 || (secDelta == 0 && usecDelta > 0))
+    if(secDelta > 0 || (secDelta == 0 && usecDelta > 0))
     {
         timeval stall_time;
         int result = 0;
@@ -566,7 +566,7 @@ static void Sleep(timeval &last_time)
 #else
         result = select(0, NULL, NULL, NULL, &stall_time);
 #endif
-        if (result == SOCKET_ERROR)
+        if(result == SOCKET_ERROR)
         {
             perror("game_loop: select: stall");
             exit(1);
@@ -579,7 +579,7 @@ static void Sleep(timeval &last_time)
 
 static void NewDescriptor(socket_t new_desc)
 {
-    hostent  *from = nullptr;
+    hostent *from = nullptr;
     sockaddr_in sock;
     socket_t desc = 0;
     socklen_t size = 0;
@@ -587,7 +587,7 @@ static void NewDescriptor(socket_t new_desc)
     SetAlarm(20);
     size = sizeof(sock);
 
-    if (CheckBadSocket(new_desc))
+    if(CheckBadSocket(new_desc))
     {
         SetAlarm(0);
         return;
@@ -595,14 +595,14 @@ static void NewDescriptor(socket_t new_desc)
 
     SetAlarm(20);
 
-    if ((desc = accept(new_desc, (struct sockaddr *) &sock, &size)) == INVALID_SOCKET)
+    if((desc = accept(new_desc, (struct sockaddr *)&sock, &size)) == INVALID_SOCKET)
     {
         perror("New_descriptor: accept");
         SetAlarm(0);
         return;
     }
 
-    if (CheckBadSocket(new_desc))
+    if(CheckBadSocket(new_desc))
     {
         SetAlarm(0);
         return;
@@ -613,14 +613,14 @@ static void NewDescriptor(socket_t new_desc)
 
     SetAlarm(20);
 
-    if (SetNonBlockingSocket(desc) == SOCKET_ERROR)
+    if(SetNonBlockingSocket(desc) == SOCKET_ERROR)
     {
         perror("New_descriptor: fcntl: FNDELAY");
         SetAlarm(0);
         return;
     }
 
-    if (CheckBadSocket(new_desc))
+    if(CheckBadSocket(new_desc))
     {
         return;
     }
@@ -635,7 +635,7 @@ static void NewDescriptor(socket_t new_desc)
 
     dnew->Remote.HostIP = buf;
 
-    if (!SysData.NoNameResolving)
+    if(!SysData.NoNameResolving)
     {
         from = gethostbyaddr((char *)&sock.sin_addr,
                              sizeof(sock.sin_addr), AF_INET);
@@ -651,10 +651,10 @@ static void NewDescriptor(socket_t new_desc)
                            {
                                return (StringPrefix(b->Site, dnew->Remote.Hostname) == 0
                                        || StringSuffix(b->Site, dnew->Remote.Hostname) == 0)
-                               && b->Level >= LEVEL_IMPLEMENTOR;
+                                   && b->Level >= LEVEL_IMPLEMENTOR;
                            });
 
-    if (pban != nullptr)
+    if(pban != nullptr)
     {
         WriteToDescriptor(dnew.get(), "Your site has been banned from this Mud.\r\n", 0);
         FreeDescriptor(dnew);
@@ -670,22 +670,22 @@ static void NewDescriptor(socket_t new_desc)
     /*
      * Send the greeting.
      */
-    if (HelpGreeting[0] == '.')
+    if(HelpGreeting[0] == '.')
         dnew->WriteToBuffer(HelpGreeting.substr(1));
     else
         dnew->WriteToBuffer(HelpGreeting);
 
-    if (++num_descriptors > SysData.MaxPlayersThisBoot)
+    if(++num_descriptors > SysData.MaxPlayersThisBoot)
     {
         SysData.MaxPlayersThisBoot = num_descriptors;
     }
 
-    if (SysData.MaxPlayersThisBoot > SysData.MaxPlayersEver)
+    if(SysData.MaxPlayersThisBoot > SysData.MaxPlayersEver)
     {
         SysData.TimeOfMaxPlayersEver = FormatString("%24.24s", ctime(&current_time));
         SysData.MaxPlayersEver = SysData.MaxPlayersThisBoot;
         logBuf = FormatString("Broke all-time maximum player record: %d",
-                                   SysData.MaxPlayersEver);
+                              SysData.MaxPlayersEver);
         Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
         ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
         SysData.Save();
@@ -703,32 +703,32 @@ void FreeDescriptor(std::shared_ptr<Descriptor> d)
 void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
 {
     /* flush outbuf */
-    if (!force && !dclose->OutBuffer.str().empty())
+    if(!force && !dclose->OutBuffer.str().empty())
     {
         dclose->FlushBuffer(false);
     }
-    
+
     /* say bye to whoever's snooping this descriptor */
-    if (dclose->SnoopBy != nullptr)
+    if(dclose->SnoopBy != nullptr)
     {
         dclose->SnoopBy->WriteToBuffer("Your victim has left the game.\r\n");
     }
-    
+
     /* stop snooping everyone else */
-    for (const auto &d : Descriptors)
+    for(const auto &d : Descriptors)
     {
-        if (d->SnoopBy == dclose)
+        if(d->SnoopBy == dclose)
         {
             d->SnoopBy = nullptr;
         }
     }
-    
+
     /* Check for switched people who go link-dead. -- Altrag */
-    if (dclose->Original != nullptr)
+    if(dclose->Original != nullptr)
     {
         auto ch = dclose->Char;
-        
-        if (ch != nullptr)
+
+        if(ch != nullptr)
         {
             do_return(ch, "");
         }
@@ -743,14 +743,14 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
 
     auto ch = dclose->Char;
 
-    if (ch != nullptr)
+    if(ch != nullptr)
     {
         auto logBuf = FormatString("Closing link to %s.", ch->Name.c_str());
         Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
         PlayerCharacters->Remove(dclose->Char);
 
-        if (dclose->ConnectionState == CON_PLAYING
-            || dclose->ConnectionState == CON_EDITING)
+        if(dclose->ConnectionState == CON_PLAYING
+           || dclose->ConnectionState == CON_EDITING)
         {
             Act(AT_ACTION, "$n has lost $s link.", ch, nullptr, nullptr, ActTarget::Room);
             ch->Desc = nullptr;
@@ -765,11 +765,11 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
 
     Descriptors->Remove(dclose);
 
-    if (dclose->Socket == maxdesc)
+    if(dclose->Socket == maxdesc)
     {
         --maxdesc;
     }
-    
+
     FreeDescriptor(dclose);
 }
 
@@ -784,17 +784,17 @@ bool WriteToDescriptor(Descriptor *desc, const std::string &orig, int length)
     std::string txt = ColorParser::Smaug2Ansi(orig);
     ssize_t nWrite = 0;
 
-    if (length <= 0)
+    if(length <= 0)
     {
         length = txt.size();
     }
 
-    for (int iStart = 0; iStart < length; iStart += nWrite)
+    for(int iStart = 0; iStart < length; iStart += nWrite)
     {
         int nBlock = umin(length - iStart, 4096);
         nWrite = send(desc->Socket, txt.c_str() + iStart, nBlock, 0);
 
-        if (nWrite == SOCKET_ERROR)
+        if(nWrite == SOCKET_ERROR)
         {
             Log->Bug("Write_to_descriptor: error on socket %d: %s",
                      desc->Socket, strerror(GETERROR));
@@ -808,34 +808,34 @@ bool WriteToDescriptor(Descriptor *desc, const std::string &orig, int length)
 
 static void StopIdling(std::shared_ptr<Character> ch)
 {
-    if (!ch
-        || !ch->Desc
-        || ch->Desc->ConnectionState != CON_PLAYING
-        || !ch->WasInRoom
-        || ch->InRoom != GetRoom(ROOM_VNUM_LIMBO))
+    if(!ch
+       || !ch->Desc
+       || ch->Desc->ConnectionState != CON_PLAYING
+       || !ch->WasInRoom
+       || ch->InRoom != GetRoom(ROOM_VNUM_LIMBO))
         return;
 
     ch->IdleTimer = 0;
     CharacterFromRoom(ch);
     CharacterToRoom(ch, ch->WasInRoom);
     ch->WasInRoom = NULL;
-    Act(AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, ActTarget::Room);
+    Act(AT_ACTION, "$n has returned from the void.", ch, nullptr, nullptr, ActTarget::Room);
 }
 
 void SetCharacterColor(short AType, std::shared_ptr<Character> ch)
 {
-    if (ch == nullptr || ch->Desc == nullptr)
+    if(ch == nullptr || ch->Desc == nullptr)
     {
         return;
     }
-    
+
     std::shared_ptr<Character> och = (ch->Desc->Original ? ch->Desc->Original : ch);
 
-    if (!IsNpc(och) && och->Flags.test(Flag::Plr::Ansi))
+    if(!IsNpc(och) && och->Flags.test(Flag::Plr::Ansi))
     {
         std::string buf;
-        
-        if (AType == 7)
+
+        if(AType == 7)
         {
             buf = "\033[m";
         }
@@ -853,7 +853,7 @@ static std::string DefaultPrompt(std::shared_ptr<Character> ch)
 {
     std::ostringstream buf;
 
-    if (IsJedi(ch) || IsImmortal(ch))
+    if(IsJedi(ch) || IsImmortal(ch))
     {
         buf << "&pForce:&P$m/&p$M  &pAlign:&P$a\r\n";
     }
@@ -878,11 +878,11 @@ void DisplayPrompt(Descriptor *d)
 
     assert(ch != nullptr);
 
-    if (!IsNpc(ch) && ch->SubState != SUB_NONE && !ch->PCData->SubPrompt.empty())
+    if(!IsNpc(ch) && ch->SubState != SUB_NONE && !ch->PCData->SubPrompt.empty())
     {
         prompt = ch->PCData->SubPrompt.c_str();
     }
-    else if (IsNpc(ch) || ch->PCData->Prompt.empty())
+    else if(IsNpc(ch) || ch->PCData->Prompt.empty())
     {
         promptBuffer = DefaultPrompt(ch);
         prompt = promptBuffer.c_str();
@@ -892,14 +892,14 @@ void DisplayPrompt(Descriptor *d)
         prompt = ch->PCData->Prompt.c_str();
     }
 
-    if (ansi)
+    if(ansi)
     {
         strcpy(pbuf, "\033[m");
         d->PreviousColor = 0x07;
         pbuf += 3;
     }
 
-    for (; *prompt; prompt++)
+    for(; *prompt; prompt++)
     {
         /*
          * '&' = foreground color/intensity bit
@@ -907,7 +907,7 @@ void DisplayPrompt(Descriptor *d)
          * '$' = prompt commands
          * Note: foreground changes will revert background to 0 (black)
          */
-        if (*prompt != variableMarker)
+        if(*prompt != variableMarker)
         {
             *(pbuf++) = *prompt;
             continue;
@@ -915,16 +915,16 @@ void DisplayPrompt(Descriptor *d)
 
         ++prompt;
 
-        if (!*prompt)
+        if(!*prompt)
             break;
 
-        if (*prompt == *(prompt - 1))
+        if(*prompt == *(prompt - 1))
         {
             *(pbuf++) = *prompt;
             continue;
         }
 
-        switch (*(prompt - 1))
+        switch(*(prompt - 1))
         {
         default:
             Log->Bug("Display_prompt: bad command char '%c'.", *(prompt - 1));
@@ -934,7 +934,7 @@ void DisplayPrompt(Descriptor *d)
             *pbuf = '\0';
             the_stat = 0x80000000;
 
-            switch (*prompt)
+            switch(*prompt)
             {
             case variableMarker:
                 *pbuf++ = variableMarker;
@@ -942,11 +942,11 @@ void DisplayPrompt(Descriptor *d)
                 break;
 
             case 'a':
-                if (ch->TopLevel >= 10)
+                if(ch->TopLevel >= 10)
                     the_stat = ch->Alignment;
-                else if (IsGood(ch))
+                else if(IsGood(ch))
                     strcpy(pbuf, "good");
-                else if (IsEvil(ch))
+                else if(IsEvil(ch))
                     strcpy(pbuf, "evil");
                 else
                     strcpy(pbuf, "neutral");
@@ -961,25 +961,25 @@ void DisplayPrompt(Descriptor *d)
                 break;
 
             case 'm':
-                if (IsImmortal(ch) || IsJedi(ch))
+                if(IsImmortal(ch) || IsJedi(ch))
                     the_stat = ch->Mana.Current;
                 else
                     the_stat = 0;
                 break;
 
             case 'M':
-                if (IsImmortal(ch) || IsJedi(ch))
+                if(IsImmortal(ch) || IsJedi(ch))
                     the_stat = ch->Mana.Max;
                 else
                     the_stat = 0;
                 break;
 
             case 'p':
-                if (ch->Position == POS_RESTING)
+                if(ch->Position == POS_RESTING)
                     strcpy(pbuf, "resting");
-                else if (ch->Position == POS_SLEEPING)
+                else if(ch->Position == POS_SLEEPING)
                     strcpy(pbuf, "sleeping");
-                else if (ch->Position == POS_SITTING)
+                else if(ch->Position == POS_SITTING)
                     strcpy(pbuf, "sitting");
                 break;
 
@@ -1004,22 +1004,22 @@ void DisplayPrompt(Descriptor *d)
                 break;
 
             case 'r':
-                if (IsImmortal(och))
+                if(IsImmortal(och))
                     the_stat = ch->InRoom->Vnum;
                 break;
 
             case 'R':
-                if (ch->Flags.test(Flag::Plr::RoomVnum))
+                if(ch->Flags.test(Flag::Plr::RoomVnum))
                     sprintf(pbuf, "<#%ld> ", ch->InRoom->Vnum);
                 break;
 
             case 'i':
-                if ((!IsNpc(ch) && ch->Flags.test(Flag::Plr::WizInvis))
-                    || (IsNpc(ch) && ch->Flags.test(Flag::Mob::MobInvis)))
+                if((!IsNpc(ch) && ch->Flags.test(Flag::Plr::WizInvis))
+                   || (IsNpc(ch) && ch->Flags.test(Flag::Mob::MobInvis)))
                 {
                     sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->MobInvis : ch->PCData->WizInvis));
                 }
-                else if (IsAffectedBy(ch, Flag::Affect::Invisible))
+                else if(IsAffectedBy(ch, Flag::Affect::Invisible))
                 {
                     sprintf(pbuf, "(Invis) ");
                 }
@@ -1032,7 +1032,7 @@ void DisplayPrompt(Descriptor *d)
                 break;
             }
 
-            if ((unsigned int)the_stat != 0x80000000)
+            if((unsigned int)the_stat != 0x80000000)
                 sprintf(pbuf, "%d", the_stat);
 
             pbuf += strlen(pbuf);

@@ -6,12 +6,6 @@ std::shared_ptr<BadNameRepository> BadNames;
 
 #define BADNAME_FILE DATA_DIR "badnames.lua"
 
-bool CompareBadName::operator()(const std::shared_ptr<BadName> &lhs,
-                                const std::shared_ptr<BadName> &rhs) const
-{
-    return StrCmp(lhs->Name, rhs->Name) < 0;
-}
-
 class LuaBadNameRepository : public BadNameRepository
 {
 public:
@@ -19,7 +13,7 @@ public:
     void Save() const override;
 
 private:
-    static void PushBadName(lua_State *L, const std::shared_ptr<BadName> &badName);
+    static void PushBadName(lua_State *L, const std::string &badName);
     static void PushBadNames(lua_State *L);
     static int L_BadNameEntry(lua_State *L);
 };
@@ -39,13 +33,13 @@ std::shared_ptr<BadNameRepository> NewBadNameRepository()
     return std::make_shared<LuaBadNameRepository>();
 }
 
-void LuaBadNameRepository::PushBadName(lua_State *L, const std::shared_ptr<BadName> &badName)
+void LuaBadNameRepository::PushBadName(lua_State *L, const std::string &badName)
 {
     static int idx = 0;
     lua_pushinteger(L, ++idx);
     lua_newtable(L);
 
-    LuaSetfieldString(L, "Name", badName->Name);
+    LuaSetfieldString(L, "Name", badName);
 
     lua_settable(L, -3);
 }
@@ -54,7 +48,7 @@ void LuaBadNameRepository::PushBadNames(lua_State *L)
 {
     lua_newtable(L);
 
-    for(const std::shared_ptr<BadName> &badName : BadNames)
+    for(const auto &badName : BadNames)
     {
         PushBadName(L, badName);
     }

@@ -163,51 +163,129 @@ static std::string SeeHalucinatedObject(int ms, bool fShort)
     {
         switch(GetRandomNumberFromRange(6 - urange(1, sms / 2, 5), sms))
         {
-        case  1: return "a sword";
-        case  2: return "a stick";
-        case  3: return "something shiny";
-        case  4: return "something";
-        case  5: return "something interesting";
-        case  6: return "something colorful";
-        case  7: return "something that looks cool";
-        case  8: return "a nifty thing";
-        case  9: return "a cloak of flowing colors";
-        case 10: return "a mystical flaming sword";
-        case 11: return "a swarm of insects";
-        case 12: return "a deathbane";
-        case 13: return "a figment of your imagination";
-        case 14: return "your gravestone";
-        case 15: return "the long lost boots of Ranger Thoric";
-        case 16: return "a glowing tome of arcane knowledge";
-        case 17: return "a long sought secret";
-        case 18: return "the meaning of it all";
-        case 19: return "the answer";
-        case 20: return "the key to life, the universe and everything";
+        case  1:
+            return "a sword";
+
+        case  2:
+            return "a stick";
+
+        case  3:
+            return "something shiny";
+
+        case  4:
+            return "something";
+
+        case  5:
+            return "something interesting";
+
+        case  6:
+            return "something colorful";
+
+        case  7:
+            return "something that looks cool";
+
+        case  8:
+            return "a nifty thing";
+
+        case  9:
+            return "a cloak of flowing colors";
+
+        case 10:
+            return "a mystical flaming sword";
+
+        case 11:
+            return "a swarm of insects";
+
+        case 12:
+            return "a deathbane";
+
+        case 13:
+            return "a figment of your imagination";
+
+        case 14:
+            return "your gravestone";
+
+        case 15:
+            return "the long lost boots of Ranger Thoric";
+
+        case 16:
+            return "a glowing tome of arcane knowledge";
+
+        case 17:
+            return "a long sought secret";
+
+        case 18:
+            return "the meaning of it all";
+
+        case 19:
+            return "the answer";
+
+        case 20:
+            return "the key to life, the universe and everything";
         }
     }
 
     switch(GetRandomNumberFromRange(6 - urange(1, sms / 2, 5), sms))
     {
-    case  1: return "A nice looking sword catches your eye.";
-    case  2: return "The ground is covered in small sticks.";
-    case  3: return "Something shiny catches your eye.";
-    case  4: return "Something catches your attention.";
-    case  5: return "Something interesting catches your eye.";
-    case  6: return "Something colorful flows by.";
-    case  7: return "Something that looks cool calls out to you.";
-    case  8: return "A nifty thing of great importance stands here.";
-    case  9: return "A cloak of flowing colors asks you to wear it.";
-    case 10: return "A mystical flaming sword awaits your grasp.";
-    case 11: return "A swarm of insects buzzes in your face!";
-    case 12: return "The extremely rare Deathbane lies at your feet.";
-    case 13: return "A figment of your imagination is at your command.";
-    case 14: return "You notice a gravestone here... upon closer examination, it reads your name.";
-    case 15: return "The long lost boots of Ranger Thoric lie off to the side.";
-    case 16: return "A glowing tome of arcane knowledge hovers in the air before you.";
-    case 17: return "A long sought secret of all mankind is now clear to you.";
-    case 18: return "The meaning of it all, so simple, so clear... of course!";
-    case 19: return "The answer.  One.  It's always been One.";
-    case 20: return "The key to life, the universe and everything awaits your hand.";
+    case  1:
+        return "A nice looking sword catches your eye.";
+
+    case  2:
+        return "The ground is covered in small sticks.";
+
+    case  3:
+        return "Something shiny catches your eye.";
+
+    case  4:
+        return "Something catches your attention.";
+
+    case  5:
+        return "Something interesting catches your eye.";
+
+    case  6:
+        return "Something colorful flows by.";
+
+    case  7:
+        return "Something that looks cool calls out to you.";
+
+    case  8:
+        return "A nifty thing of great importance stands here.";
+
+    case  9:
+        return "A cloak of flowing colors asks you to wear it.";
+
+    case 10:
+        return "A mystical flaming sword awaits your grasp.";
+
+    case 11:
+        return "A swarm of insects buzzes in your face!";
+
+    case 12:
+        return "The extremely rare Deathbane lies at your feet.";
+
+    case 13:
+        return "A figment of your imagination is at your command.";
+
+    case 14:
+        return "You notice a gravestone here... upon closer examination, it reads your name.";
+
+    case 15:
+        return "The long lost boots of Ranger Thoric lie off to the side.";
+
+    case 16:
+        return "A glowing tome of arcane knowledge hovers in the air before you.";
+
+    case 17:
+        return "A long sought secret of all mankind is now clear to you.";
+
+    case 18:
+        return "The meaning of it all, so simple, so clear... of course!";
+
+    case 19:
+        return "The answer.  One.  It's always been One.";
+
+    case 20:
+        return "The key to life, the universe and everything awaits your hand.";
     }
 
     return "Whoa!!!";
@@ -221,14 +299,6 @@ static std::string SeeHalucinatedObject(int ms, bool fShort)
 void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, std::shared_ptr<Character> ch,
                                bool fShort, bool fShowNothing)
 {
-    char **prgpstrShow = nullptr;
-    int *prgnShow = nullptr;
-    int *pitShow = nullptr;
-    int nShow = 0;
-    int iShow = 0;
-    int count = list.size(), offcount = 0, tmp = 0, cnt = 0;
-    bool fCombine = false;
-
     if(!ch->Desc)
         return;
 
@@ -244,14 +314,17 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, s
 
             ch->Echo("Nothing.\r\n");
         }
+
         return;
     }
+
     /*
      * Alloc space for output lines.
      */
-
     int ms = (ch->MentalState ? ch->MentalState : 1)
         * (IsNpc(ch) ? 1 : (ch->PCData->Condition[COND_DRUNK] ? (ch->PCData->Condition[COND_DRUNK] / 12) : 1));
+    int offcount = 0;
+    int count = list.size();
 
     /*
      * If not mentally stable...
@@ -259,6 +332,7 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, s
     if(abs(ms) > 40)
     {
         offcount = urange(-(count), (count * ms) / 100, count * 2);
+
         if(offcount < 0)
             offcount += GetRandomNumberFromRange(0, abs(offcount));
         else
@@ -266,7 +340,9 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, s
                 offcount -= GetRandomNumberFromRange(0, offcount);
     }
     else
+    {
         offcount = 0;
+    }
 
     if(count + offcount <= 0)
     {
@@ -277,15 +353,19 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, s
 
             ch->Echo("Nothing.\r\n");
         }
+
         return;
     }
 
+    char **prgpstrShow = nullptr;
+    int *prgnShow = nullptr;
+    int *pitShow = nullptr;
     AllocateMemory(prgpstrShow, char *, count + ((offcount > 0) ? offcount : 0));
     AllocateMemory(prgnShow, int, count + ((offcount > 0) ? offcount : 0));
     AllocateMemory(pitShow, int, count + ((offcount > 0) ? offcount : 0));
-    nShow = 0;
-    tmp = (offcount > 0) ? offcount : 0;
-    cnt = 0;
+    int nShow = 0;
+    int tmp = (offcount > 0) ? offcount : 0;
+    int cnt = 0;
 
     /*
      * Format the list of objects.
@@ -310,7 +390,7 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, s
            && (obj->ItemType != ITEM_TRAP || IsAffectedBy(ch, Flag::Affect::DetectTraps)))
         {
             std::string pstrShow = FormatObjectToCharacter(obj, ch, fShort);
-            fCombine = false;
+            bool fCombine = false;
 
             if(IsNpc(ch) || ch->Flags.test(Flag::Plr::Combine))
             {
@@ -318,7 +398,7 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, s
                  * Look for duplicates, case sensitive.
                  * Matches tend to be near end so run loop backwords.
                  */
-                for(iShow = nShow - 1; iShow >= 0; iShow--)
+                for(int iShow = nShow - 1; iShow >= 0; iShow--)
                 {
                     if(!StrCmp(prgpstrShow[iShow], pstrShow))
                     {
@@ -341,10 +421,10 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, s
             }
         }
     }
+
     if(tmp > 0)
     {
-        int x;
-        for(x = 0; x < tmp; x++)
+        for(int x = 0; x < tmp; x++)
         {
             prgpstrShow[nShow] = CopyString(SeeHalucinatedObject(ms, fShort));
             prgnShow[nShow] = 1;
@@ -356,7 +436,7 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, s
     /*
      * Output the formatted list.         -Color support by Thoric
      */
-    for(iShow = 0; iShow < nShow; iShow++)
+    for(int iShow = 0; iShow < nShow; iShow++)
     {
         switch(pitShow[iShow])
         {
@@ -428,51 +508,68 @@ void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, s
 
 void ShowCharacterCondition(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    char buf[MAX_STRING_LENGTH];
-    int percent;
+    int percent = 0;
 
     if(victim->HitPoints.Max > 0)
         percent = (100 * victim->HitPoints.Current) / victim->HitPoints.Max;
     else
         percent = -1;
 
-
-    strcpy(buf, PERS(victim, ch).c_str());
+    std::string buf = PERS(victim, ch);
 
     if((IsNpc(victim) && victim->Flags.test(Flag::Mob::Droid))
        || IsDroid(victim))
     {
 
-        if(percent >= 100) strcat(buf, " is in perfect condition.\r\n");
-        else if(percent >= 90) strcat(buf, " is slightly scratched.\r\n");
-        else if(percent >= 80) strcat(buf, " has a few scrapes.\r\n");
-        else if(percent >= 70) strcat(buf, " has some dents.\r\n");
-        else if(percent >= 60) strcat(buf, " has a couple holes in its plating.\r\n");
-        else if(percent >= 50) strcat(buf, " has a many broken pieces.\r\n");
-        else if(percent >= 40) strcat(buf, " has many exposed circuits.\r\n");
-        else if(percent >= 30) strcat(buf, " is leaking oil.\r\n");
-        else if(percent >= 20) strcat(buf, " has smoke coming out of it.\r\n");
-        else if(percent >= 10) strcat(buf, " is almost completely broken.\r\n");
-        else                       strcat(buf, " is about to EXPLODE.\r\n");
-
+        if(percent >= 100)
+            buf += " is in perfect condition.\r\n";
+        else if(percent >= 90)
+            buf += " is slightly scratched.\r\n";
+        else if(percent >= 80)
+            buf += " has a few scrapes.\r\n";
+        else if(percent >= 70)
+            buf += " has some dents.\r\n";
+        else if(percent >= 60)
+            buf += " has a couple holes in its plating.\r\n";
+        else if(percent >= 50)
+            buf += " has a many broken pieces.\r\n";
+        else if(percent >= 40)
+            buf += " has many exposed circuits.\r\n";
+        else if(percent >= 30)
+            buf += " is leaking oil.\r\n";
+        else if(percent >= 20)
+            buf += " has smoke coming out of it.\r\n";
+        else if(percent >= 10)
+            buf += " is almost completely broken.\r\n";
+        else
+            buf += " is about to EXPLODE.\r\n";
     }
     else
     {
-
-        if(percent >= 100) strcat(buf, " is in perfect health.\r\n");
-        else if(percent >= 90) strcat(buf, " is slightly scratched.\r\n");
-        else if(percent >= 80) strcat(buf, " has a few bruises.\r\n");
-        else if(percent >= 70) strcat(buf, " has some cuts.\r\n");
-        else if(percent >= 60) strcat(buf, " has several wounds.\r\n");
-        else if(percent >= 50) strcat(buf, " has many nasty wounds.\r\n");
-        else if(percent >= 40) strcat(buf, " is bleeding freely.\r\n");
-        else if(percent >= 30) strcat(buf, " is covered in blood.\r\n");
-        else if(percent >= 20) strcat(buf, " is leaking guts.\r\n");
-        else if(percent >= 10) strcat(buf, " is almost dead.\r\n");
-        else                       strcat(buf, " is DYING.\r\n");
-
+        if(percent >= 100)
+            buf += " is in perfect health.\r\n";
+        else if(percent >= 90)
+            buf += " is slightly scratched.\r\n";
+        else if(percent >= 80)
+            buf += " has a few bruises.\r\n";
+        else if(percent >= 70)
+            buf += " has some cuts.\r\n";
+        else if(percent >= 60)
+            buf += " has several wounds.\r\n";
+        else if(percent >= 50)
+            buf += " has many nasty wounds.\r\n";
+        else if(percent >= 40)
+            buf += " is bleeding freely.\r\n";
+        else if(percent >= 30)
+            buf += " is covered in blood.\r\n";
+        else if(percent >= 20)
+            buf += " is leaking guts.\r\n";
+        else if(percent >= 10)
+            buf += " is almost dead.\r\n";
+        else
+            buf += " is DYING.\r\n";
     }
 
     buf[0] = CharToUppercase(buf[0]);
-    ch->Echo("%s", buf);
+    ch->Echo(buf);
 }

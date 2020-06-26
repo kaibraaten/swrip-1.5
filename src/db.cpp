@@ -22,6 +22,7 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
+#include <fstream>
 #include <cassert>
 #include <ctime>
 #include <cstring>
@@ -279,8 +280,8 @@ int top_vroom = 0;
  * Semi-locals.
  */
 bool fBootDb = false;
-FILE *fpArea = NULL;
-char strArea[MAX_INPUT_LENGTH];
+FILE *fpArea = nullptr;
+std::string strArea;
 
 /*
  * Local booting procedures.
@@ -295,9 +296,9 @@ static void SortExits(std::shared_ptr<Room> room);
 
 void ShutdownMud(const std::string &reason)
 {
-    FILE *fp;
+    FILE *fp = fopen(SHUTDOWN_FILE, "a");
 
-    if((fp = fopen(SHUTDOWN_FILE, "a")) != NULL)
+    if(fp != nullptr)
     {
         fprintf(fp, "%s\n", reason.c_str());
         fclose(fp);
@@ -370,15 +371,13 @@ void BootDatabase(bool fCopyOver)
     /*
      * Set time and weather.
      */
-    long lhour = 0, lday = 0, lmonth = 0;
-
     Log->Boot("Setting time and weather");
 
-    lhour = (current_time - 650336715) / (PULSE_TICK / PULSE_PER_SECOND);
+    long lhour = (current_time - 650336715) / (PULSE_TICK / PULSE_PER_SECOND);
     time_info.Hour = lhour % 24;
-    lday = lhour / 24;
+    long lday = lhour / 24;
     time_info.Day = lday % 35;
-    lmonth = lday / 35;
+    long lmonth = lday / 35;
     time_info.Month = lmonth % 17;
     time_info.Year = lmonth / 17;
 
@@ -665,26 +664,29 @@ static void InitializeEconomy()
 {
     for(auto tarea : Areas)
     {
-        std::shared_ptr<ProtoMobile> mob;
-        int idx = 0, gold = 0, rng = 0;
-
         /* skip area if they already got some gold */
         if(tarea->HighEconomy > 0 || tarea->LowEconomy > 10000)
             continue;
 
-        rng = tarea->LevelRanges.Soft.High - tarea->LevelRanges.Soft.Low;
+        int rng = tarea->LevelRanges.Soft.High - tarea->LevelRanges.Soft.Low;
 
-        if(rng)
+        if(rng != 0)
             rng /= 2;
         else
             rng = 25;
 
-        gold = rng * rng * 10000;
+        int gold = rng * rng * 10000;
         BoostEconomy(tarea, gold);
 
-        for(idx = tarea->VnumRanges.Mob.First; idx < tarea->VnumRanges.Mob.Last; idx++)
-            if((mob = GetProtoMobile(idx)) != NULL)
+        for(int idx = tarea->VnumRanges.Mob.First; idx < tarea->VnumRanges.Mob.Last; idx++)
+        {
+            auto mob = GetProtoMobile(idx);
+
+            if(mob != nullptr)
+            {
                 BoostEconomy(tarea, mob->Gold * 10);
+            }
+        }
     }
 }
 
@@ -968,16 +970,23 @@ std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum)
 std::shared_ptr<Room> GetRoom(vnum_t vnum)
 {
     assert(vnum > 0);
+
     for(std::shared_ptr<Room> pRoomIndex = RoomIndexHash[vnum % MAX_KEY_HASH];
         pRoomIndex;
         pRoomIndex = pRoomIndex->Next)
+    {
         if(pRoomIndex->Vnum == vnum)
+        {
             return pRoomIndex;
+        }
+    }
 
     if(fBootDb)
+    {
         Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
+    }
 
-    return NULL;
+    return nullptr;
 }
 
 /*
@@ -985,9 +994,9 @@ std::shared_ptr<Room> GetRoom(vnum_t vnum)
  */
 void ShowFile(std::shared_ptr<Character> ch, const std::string &filename)
 {
-    FILE *fp = nullptr;
+    FILE *fp = fopen(filename.c_str(), "r");
 
-    if((fp = fopen(filename.c_str(), "r")) != NULL)
+    if(fp != nullptr)
     {
         int num = 0;
         char buf[MAX_STRING_LENGTH];
@@ -1033,13 +1042,13 @@ bool DeleteRoom(std::shared_ptr<Room> room)
         prev = tmp;
     }
 
-    if(!tmp)
+    if(tmp == nullptr)
     {
         Log->Bug("%s: room not found", __FUNCTION__);
         return false;
     }
 
-    if(prev)
+    if(prev != nullptr)
     {
         prev->Next = room->Next;
     }
@@ -1305,22 +1314,20 @@ void ShowVnums(std::shared_ptr<Character> ch, vnum_t low, vnum_t high, bool prot
 /*
  * Append a string to a file.
  */
-void AppendFile(std::shared_ptr<Character> ch, const std::string &file, const std::string &str)
+void AppendFile(std::shared_ptr<Character> ch, const std::string &filename, const std::string &str)
 {
-    FILE *fp;
-
     if(IsNpc(ch) || str.empty())
         return;
 
-    if((fp = fopen(file.c_str(), "a")) == NULL)
+    std::ofstream file(filename);
+
+    if(file.is_open())
     {
-        ch->Echo("Could not open the file!\n\r");
+        file << "[" << (ch->InRoom ? ch->InRoom->Vnum : INVALID_VNUM) << "] " << ch->Name << ": " << str << '\n';
     }
     else
     {
-        fprintf(fp, "[%5ld] %s: %s\n",
-                ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name.c_str(), str.c_str());
-        fclose(fp);
+        ch->Echo("Could not open the file!\n\r");
     }
 }
 

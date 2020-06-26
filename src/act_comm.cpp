@@ -76,7 +76,9 @@ std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> 
                 *txt++ = 'h';
             }
             else
+            {
                 *txt++ = *arg;
+            }
         }
         else if(toupper(*arg) == 'X')
         {
@@ -85,7 +87,9 @@ std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> 
                 *txt++ = 'c', *txt++ = 's', *txt++ = 'h';
             }
             else
+            {
                 *txt++ = *arg;
+            }
         }
         else if(GetRandomPercent() < (drunk * 2 / 5))  /* slurred letters */
         {
@@ -114,15 +118,22 @@ std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> 
         if(GetRandomPercent() < (2 * drunk / 2.5))
         {
             if(isupper(*txt))
+            {
                 *txt1 = tolower(*txt);
+            }
+            else if(islower(*txt))
+            {
+                *txt1 = toupper(*txt);
+            }
             else
-                if(islower(*txt))
-                    *txt1 = toupper(*txt);
-                else
-                    *txt1 = *txt;
+            {
+                *txt1 = *txt;
+            }
         }
         else
+        {
             *txt1 = *txt;
+        }
 
         txt1++, txt++;
     }
@@ -137,7 +148,9 @@ std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> 
         {                        /* along there somewhere soon */
 
             while(*txt1 == ' ')  /* Don't stutter on spaces */
+            {
                 *txt++ = *txt1++;
+            }
 
             if((GetRandomPercent() < (2 * drunk / 4)) && !IsNullOrEmpty(txt1))
             {
@@ -145,7 +158,9 @@ std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> 
                 short pos = 0;
 
                 while(!IsNullOrEmpty(txt1) && pos < offset)
+                {
                     *txt++ = *txt1++, pos++;
+                }
 
                 if(*txt1 == ' ')  /* Make sure not to stutter a space after */
                 {                    /* the initial offset into the word */
@@ -160,20 +175,26 @@ std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> 
                 {
                     *txt++ = *txt1;
                     pos++;
+
                     if(*txt1 == ' ' || pos == offset)  /* Make sure we don't stick */
                     {                          /* A hyphen right before a space */
                         txt1--;
                         break;
                     }
+
                     *txt++ = '-';
                 }
 
                 if(!IsNullOrEmpty(txt1))
+                {
                     txt1++;
+                }
             }
         }
         else
+        {
             *txt++ = *txt1++;
+        }
     }
 
     *txt = '\0';
@@ -186,8 +207,6 @@ std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> 
  */
 void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int channel, const std::string &verb)
 {
-    char buf[MAX_STRING_LENGTH];
-    char buf2[MAX_STRING_LENGTH];
     PositionType position = 0;
     std::shared_ptr<Clan> clan;
 
@@ -255,67 +274,68 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
     }
 
     RemoveBit(ch->Deaf, channel);
+    std::string buf;
 
     switch(channel)
     {
     default:
         SetCharacterColor(AT_GOSSIP, ch);
         ch->Echo("&z&CYou %s over the public network&c, '&C%s&c'\r\n", verb.c_str(), text.c_str());
-        sprintf(buf, "&z&C$n &C%ss over the public network&c, '&C$t&c'", verb.c_str());
+        buf = FormatString("&z&C$n &C%ss over the public network&c, '&C$t&c'", verb.c_str());
         break;
 
     case CHANNEL_CLANTALK:
         SetCharacterColor(AT_CLAN, ch);
         ch->Echo("&z&POver the organizations private network you say&R, '&P%s&R'\r\n", text.c_str());
-        sprintf(buf, "&z&P$n &Pspeaks over the organizations network&R, '&P$t&R'");
+        buf = "&z&P$n &Pspeaks over the organizations network&R, '&P$t&R'";
         break;
 
     case CHANNEL_ALLCLAN:
         SetCharacterColor(AT_CLAN, ch);
         ch->Echo("&z&POver the entire organizations private network you say&R, '&P%s&R'\r\n", text.c_str());
-        sprintf(buf, "&z&P$n &Pspeaks over the entire organizations network&R, '&P$t&R'");
+        buf = "&z&P$n &Pspeaks over the entire organizations network&R, '&P$t&R'";
         break;
 
     case CHANNEL_SHIP:
         SetCharacterColor(AT_SHIP, ch);
         ch->Echo("&z&rYou tell the ship&P, '%s'\r\n", text.c_str());
-        sprintf(buf, "&z&r$n &rsays over the ships com system,&P '$t'");
+        buf = "&z&r$n &rsays over the ships com system,&P '$t'";
         break;
 
     case CHANNEL_SYSTEM:
         SetCharacterColor(AT_GOSSIP, ch);
         ch->Echo("&z&R(System): '&W%s&r'\r\n", text.c_str());
-        sprintf(buf, "&z&R(System) &R$n&r: '&W$t&r'");
+        buf = "&z&R(System) &R$n&r: '&W$t&r'";
         break;
 
     case CHANNEL_SPACE:
         SetCharacterColor(AT_GOSSIP, ch);
         ch->Echo("&z&rYou space &g(&GOOC&g):, '&W%s&r'\r\n", text.c_str());
-        sprintf(buf, "&z&g(&GOOC&g)&R(Space) &R$n&r: '&W$t&r'");
+        buf = "&z&g(&GOOC&g)&R(Space) &R$n&r: '&W$t&r'";
         break;
 
     case CHANNEL_YELL:
     case CHANNEL_SHOUT:
         SetCharacterColor(AT_GOSSIP, ch);
         ch->Echo("You %s, '%s'\r\n", verb.c_str(), text.c_str());
-        sprintf(buf, "$n %ss, '$t'", verb.c_str());
+        buf = FormatString("$n %ss, '$t'", verb.c_str());
         break;
 
     case CHANNEL_ASK:
         SetCharacterColor(AT_OOC, ch);
         ch->Echo("&z&g(&GOOC&g)&Y You %s, '%s'\r\n", verb.c_str(), text.c_str());
-        sprintf(buf, "&z&g(&GOOC&g)&Y $n &Y%ss, '$t'", verb.c_str());
+        buf = FormatString("&z&g(&GOOC&g)&Y $n &Y%ss, '$t'", verb.c_str());
         break;
 
     case CHANNEL_NEWBIE:
         SetCharacterColor(AT_OOC, ch);
         ch->Echo("&z&r(&RNEWBIE&r)&Y %s: %s\r\n", ch->Name.c_str(), text.c_str());
-        sprintf(buf, "&z&r(&RNEWBIE&r)&Y $n&Y: $t");
+        buf = "&z&r(&RNEWBIE&r)&Y $n&Y: $t";
         break;
 
     case CHANNEL_OOC:
         SetCharacterColor(AT_OOC, ch);
-        sprintf(buf, "&z&g(&GOOC&g)&Y $n&Y: $t");
+        buf = "&z&g(&GOOC&g)&Y $n&Y: $t";
         position = ch->Position;
         ch->Position = POS_STANDING;
         Act(AT_OOC, buf, ch, text, nullptr, ActTarget::Char);
@@ -325,7 +345,7 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
     case CHANNEL_WARTALK:
         SetCharacterColor(AT_WARTALK, ch);
         ch->Echo("&z&cYou %s '&R%s&c'\r\n", verb.c_str(), text.c_str());
-        sprintf(buf, "&z&c$n &c%ss '&R$t&c'", verb.c_str());
+        buf = FormatString("&z&c$n &c%ss '&R$t&c'", verb.c_str());
         break;
 
     case CHANNEL_AVTALK:
@@ -335,36 +355,36 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
     case CHANNEL_105:
         if(channel == CHANNEL_AVTALK)
         {
-            sprintf(buf, "$n&c: $t");
+            buf = "$n&c: $t";
         }
         else if(channel == CHANNEL_IMMTALK)
         {
-            sprintf(buf, "$n&Y>&W $t");
+            buf = "$n&Y>&W $t";
         }
         else if(channel == CHANNEL_103)
         {
-            sprintf(buf, "&z&Y(&Wi103&Y)&W $n&Y>&W $t");
+            buf = "&z&Y(&Wi103&Y)&W $n&Y>&W $t";
         }
         else if(channel == CHANNEL_104)
         {
-            sprintf(buf, "&z&Y(&Wi104&Y)&W $n&Y>&W $t");
+            buf = "&z&Y(&Wi104&Y)&W $n&Y>&W $t";
         }
         else if(channel == CHANNEL_105)
         {
-            sprintf(buf, "&z&Y(&Wi105&Y)&W $n&Y>&W $t");
+            buf = "&z&Y(&Wi105&Y)&W $n&Y>&W $t";
         }
 
         position = ch->Position;
         ch->Position = POS_STANDING;
-        Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, text, NULL, ActTarget::Char);
+        Act(channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, text, nullptr, ActTarget::Char);
         ch->Position = position;
         break;
     }
 
     if(ch->InRoom->Flags.test(Flag::Room::LogSpeech))
     {
-        sprintf(buf2, "%s: %s (%s)", IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str(),
-                text.c_str(), verb.c_str());
+        std::string buf2 = FormatString("%s: %s (%s)", IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str(),
+                                        text.c_str(), verb.c_str());
         AppendToFile(LOG_FILE, buf2);
     }
 
@@ -500,6 +520,7 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
                 Act(AT_CLAN, buf, ch, sbuf, vch, ActTarget::Vict);
             else
                 Act(AT_GOSSIP, buf, ch, sbuf, vch, ActTarget::Vict);
+
             vch->Position = position;
         }
     }
@@ -507,12 +528,12 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
 
 void ToChannel(const std::string &argument, int channel, const std::string &verb, short level)
 {
-    char buf[MAX_STRING_LENGTH];
-
     if(Descriptors->Count() == 0 || argument.empty())
+    {
         return;
+    }
 
-    sprintf(buf, "%s: %s\r\n", verb.c_str(), argument.c_str());
+    std::string buf = FormatString("%s: %s\r\n", verb.c_str(), argument.c_str());
 
     for(auto d : Descriptors)
     {
@@ -548,9 +569,7 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
  */
 bool IsFollowingInCircle(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    std::shared_ptr<Character> tmp;
-
-    for(tmp = victim; tmp; tmp = tmp->Master)
+    for(auto tmp = victim; tmp; tmp = tmp->Master)
         if(tmp == ch)
             return true;
 
@@ -566,7 +585,7 @@ void StartFollowing(std::shared_ptr<Character> ch, std::shared_ptr<Character> ma
     }
 
     ch->Master = master;
-    ch->Leader = NULL;
+    ch->Leader = nullptr;
 
     if(IsNpc(ch) && ch->Flags.test(Flag::Mob::Pet) && !IsNpc(master))
     {
@@ -575,10 +594,10 @@ void StartFollowing(std::shared_ptr<Character> ch, std::shared_ptr<Character> ma
 
     if(CanSeeCharacter(master, ch))
     {
-        Act(AT_ACTION, "$n now follows you.", ch, NULL, master, ActTarget::Vict);
+        Act(AT_ACTION, "$n now follows you.", ch, nullptr, master, ActTarget::Vict);
     }
 
-    Act(AT_ACTION, "You now follow $N.", ch, NULL, master, ActTarget::Char);
+    Act(AT_ACTION, "You now follow $N.", ch, nullptr, master, ActTarget::Char);
 }
 
 void StopFollowing(std::shared_ptr<Character> ch)
@@ -591,7 +610,7 @@ void StopFollowing(std::shared_ptr<Character> ch)
 
     if(IsNpc(ch) && !IsNpc(ch->Master) && ch->Master->PCData->Pet == ch)
     {
-        ch->Master->PCData->Pet = NULL;
+        ch->Master->PCData->Pet = nullptr;
     }
 
     if(IsAffectedBy(ch, Flag::Affect::Charm))
@@ -602,27 +621,25 @@ void StopFollowing(std::shared_ptr<Character> ch)
 
     if(CanSeeCharacter(ch->Master, ch))
     {
-        Act(AT_ACTION, "$n stops following you.", ch, NULL, ch->Master, ActTarget::Vict);
+        Act(AT_ACTION, "$n stops following you.", ch, nullptr, ch->Master, ActTarget::Vict);
     }
 
-    Act(AT_ACTION, "You stop following $N.", ch, NULL, ch->Master, ActTarget::Char);
+    Act(AT_ACTION, "You stop following $N.", ch, nullptr, ch->Master, ActTarget::Char);
 
-    ch->Master = NULL;
-    ch->Leader = NULL;
+    ch->Master = nullptr;
+    ch->Leader = nullptr;
 }
 
 void DieFollower(std::shared_ptr<Character> ch)
 {
-    std::shared_ptr<Character> fch = NULL;
-
     if(ch->Master)
     {
         StopFollowing(ch);
     }
 
-    ch->Leader = NULL;
+    ch->Leader = nullptr;
 
-    for(fch = FirstCharacter; fch; fch = fch->Next)
+    for(auto fch = FirstCharacter; fch; fch = fch->Next)
     {
         if(fch->Master == ch)
         {
@@ -660,9 +677,7 @@ bool IsInSameGroup(std::shared_ptr<Character> ach, std::shared_ptr<Character> bc
 
 void TalkAuction(const std::string &argument)
 {
-    char buf[MAX_STRING_LENGTH];
-
-    sprintf(buf, "Auction: %s", argument.c_str()); /* last %s to reset color */
+    std::string buf = FormatString("Auction: %s", argument.c_str());
 
     for(auto d : Descriptors)
     {
@@ -673,7 +688,7 @@ void TalkAuction(const std::string &argument)
            && !original->InRoom->Flags.test(Flag::Room::Silence)
            && IsAuthed(original))
         {
-            Act(AT_GOSSIP, buf, original, NULL, NULL, ActTarget::Char);
+            Act(AT_GOSSIP, buf, original, nullptr, nullptr, ActTarget::Char);
         }
     }
 }
@@ -684,14 +699,15 @@ void TalkAuction(const std::string &argument)
  */
 bool CharacterKnowsLanguage(std::shared_ptr<Character> ch, int language, std::shared_ptr<Character> cch)
 {
-    short sn;
-
     if(!IsNpc(ch) && IsImmortal(ch))
         return true;
+
     if(IsNpc(ch) && !ch->Speaks) /* No langs = knows all for npcs */
         return true;
+
     if(IsNpc(ch) && IsBitSet(ch->Speaks, (language & ~LANG_CLAN)))
         return true;
+
     /* everyone does not KNOW common tongue
        if ( IsBitSet(language, LANG_COMMON) )
        return true;
@@ -701,10 +717,12 @@ bool CharacterKnowsLanguage(std::shared_ptr<Character> ch, int language, std::sh
         /* Clan = common for mobs.. snicker.. -- Altrag */
         if(IsNpc(ch) || IsNpc(cch))
             return true;
+
         if(ch->PCData->ClanInfo.Clan == cch->PCData->ClanInfo.Clan
            && ch->PCData->ClanInfo.Clan != nullptr)
             return true;
     }
+
     if(!IsNpc(ch))
     {
         /* Racial languages for PCs */
@@ -712,16 +730,21 @@ bool CharacterKnowsLanguage(std::shared_ptr<Character> ch, int language, std::sh
             return true;
 
         for(int lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++)
+        {
             if(IsBitSet(language, LanguageArray[lang]) &&
                IsBitSet(ch->Speaks, LanguageArray[lang]))
             {
-                if((sn = LookupSkill(LanguageNames[lang])) != -1)
+                short sn = LookupSkill(LanguageNames[lang]);
+
+                if(sn != -1)
                 {
                     if(GetRandomPercent() - 1 < ch->PCData->Learned[sn])
                         return true;
                 }
             }
+        }
     }
+
     return false;
 }
 
@@ -729,23 +752,25 @@ bool CharacterCanLearnLanguage(std::shared_ptr<Character> ch, int language)
 {
     if(language & LANG_CLAN)
         return false;
+
     if(IsNpc(ch) || IsImmortal(ch))
         return false;
+
     if(RaceTable[ch->Race].Language & language)
         return false;
+
     if(ch->Speaks & language)
     {
-        int lang;
-
-        for(lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++)
+        for(int lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++)
+        {
             if(language & LanguageArray[lang])
             {
-                int sn;
-
                 if(!IsValidLanguage(LanguageArray[lang]))
                     return false;
 
-                if((sn = LookupSkill(LanguageNames[lang])) < 0)
+                int sn = LookupSkill(LanguageNames[lang]);
+
+                if(sn < 0)
                 {
                     Log->Bug("Can_learn_lang: valid language without sn: %d", lang);
                     continue;
@@ -754,6 +779,7 @@ bool CharacterCanLearnLanguage(std::shared_ptr<Character> ch, int language)
                 if(ch->PCData->Learned[sn] >= 99)
                     return false;
             }
+        }
     }
 
     if(IsValidLanguage(language))
@@ -766,9 +792,8 @@ bool CharacterCanLearnLanguage(std::shared_ptr<Character> ch, int language)
 int CountLanguages(int languages)
 {
     int numlangs = 0;
-    int looper = 0;
 
-    for(looper = 0; LanguageArray[looper] != LANG_UNKNOWN; looper++)
+    for(int looper = 0; LanguageArray[looper] != LANG_UNKNOWN; looper++)
     {
         if(LanguageArray[looper] == LANG_CLAN)
         {
@@ -783,4 +808,3 @@ int CountLanguages(int languages)
 
     return numlangs;
 }
-

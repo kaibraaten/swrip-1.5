@@ -47,8 +47,8 @@ std::list<HallOfFameElement *> FameList;
 
 #define ARENA_FIRST_ROOM 29
 #define ARENA_LAST_ROOM  43
-#define ARENA_END   41   /* vnum of last real arena room*/
-#define ARENA_START GetRandomNumberFromRange( ARENA_FIRST_ROOM, ARENA_END)
+#define ARENA_END        41   /* vnum of last real arena room*/
+#define ARENA_START GetRandomNumberFromRange(ARENA_FIRST_ROOM, ARENA_END)
 #define HALL_OF_FAME_FILE DATA_DIR "halloffame.lua"
 
 static void ShowJackpot();
@@ -61,9 +61,6 @@ static void ResetBets();
 
 void StartArena()
 {
-    char buf1[MAX_INPUT_LENGTH];
-    char buf2[MAX_INPUT_LENGTH];
-
     if(!arena.PeopleChallenged)
     {
         if(arena.TimeToStart == 0)
@@ -81,21 +78,18 @@ void StartArena()
 
             if(arena.TimeToStart > 1)
             {
-                sprintf(buf1, "&WThe Killing Fields are open to levels &R%d &Wthru &R%d\r\n",
-                        arena.MinLevel, arena.MaxLevel);
-                outbuf1 << buf1;
-                sprintf(buf1, "%d &Whours to start\r\n", arena.TimeToStart);
-                outbuf1 << buf1;
+                outbuf1 << FormatString("&WThe Killing Fields are open to levels &R%d &Wthru &R%d\r\n",
+                                        arena.MinLevel, arena.MaxLevel);
+                outbuf1 << FormatString("%d &Whours to start\r\n", arena.TimeToStart);
 
                 outbuf2 << "The killing fields are open.\r\n";
-                sprintf(buf2, "&R%d &Whour to start\r\n", arena.TimeToStart);
-                outbuf2 << buf2;
+                outbuf2 << FormatString("&R%d &Whour to start\r\n", arena.TimeToStart);
             }
             else
             {
-                sprintf(buf1, "&WThe Killing Fields are open to levels &R%d &Wthru &R%d\r\n",
-                        arena.MinLevel, arena.MaxLevel);
-                outbuf1 << buf1 << "1 &Whour to start\r\n";
+                outbuf1 << FormatString("&WThe Killing Fields are open to levels &R%d &Wthru &R%d\r\n",
+                                        arena.MinLevel, arena.MaxLevel)
+                    << "1 &Whour to start\r\n";
 
                 outbuf2 << "The killing fields are open.\r\n"
                     << "&R1 &Whour to start\r\n";
@@ -121,14 +115,16 @@ void StartArena()
         }
         else
         {
+            std::string buf1;
+
             if(arena.TimeToStart > 1)
             {
-                sprintf(buf1, "The duel will start in %d hours. Place your bets!",
-                        arena.TimeToStart);
+                buf1 = FormatString("The duel will start in %d hours. Place your bets!",
+                                    arena.TimeToStart);
             }
             else
             {
-                sprintf(buf1, "The duel will start in 1 hour. Place your bets!");
+                buf1 = "The duel will start in 1 hour. Place your bets!";
             }
 
             ToChannel(buf1, CHANNEL_ARENA, "&RArena&W", 5);
@@ -165,8 +161,6 @@ static void StartGame()
 
 void UpdateArena()
 {
-    char buf[MAX_INPUT_LENGTH];
-
     if(CharactersInArena() == 1)
     {
         arena.PeopleIsInArena = 0;
@@ -185,20 +179,20 @@ void UpdateArena()
     }
     else if(arena.TimeLeftInGame % 5)
     {
-        sprintf(buf, "With %d hours left in the game there are %d players left.",
-                arena.TimeLeftInGame, CharactersInArena());
+        std::string buf = FormatString("With %d hours left in the game there are %d players left.",
+                                       arena.TimeLeftInGame, CharactersInArena());
         ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
     }
     else if(arena.TimeLeftInGame == 1)
     {
-        sprintf(buf, "With 1 hour left in the game there are %d players left.",
-                CharactersInArena());
+        std::string buf = FormatString("With 1 hour left in the game there are %d players left.",
+                                       CharactersInArena());
         ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
     }
     else if(arena.TimeLeftInGame <= 4)
     {
-        sprintf(buf, "With %d hours left in the game there are %d players left.",
-                arena.TimeLeftInGame, CharactersInArena());
+        std::string buf = FormatString("With %d hours left in the game there are %d players left.",
+                                       arena.TimeLeftInGame, CharactersInArena());
         ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
     }
 
@@ -281,8 +275,6 @@ static void ShowJackpot()
 
 static void SilentEnd()
 {
-    char buf[MAX_INPUT_LENGTH];
-
     arena.PeopleIsInArena = 0;
     arena.PeopleChallenged = 0;
     arena.InStartArena = 0;
@@ -292,15 +284,13 @@ static void SilentEnd()
     arena.TimeLeftInGame = 0;
     arena.ArenaPot = 0;
     arena.BetPot = 0;
-    sprintf(buf, "It looks like no one was brave enough to enter the Arena.");
-    ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
+
+    ToChannel("It looks like no one was brave enough to enter the Arena.", CHANNEL_ARENA, "&RArena&W", 5);
     ResetBets();
 }
 
 static void DoEndGame()
 {
-    char buf[MAX_INPUT_LENGTH];
-
     for(auto d : Descriptors)
     {
         if(!d->ConnectionState)
@@ -327,7 +317,7 @@ static void DoEndGame()
         }
     }
 
-    sprintf(buf, "After %d hours of battle the Match is a draw", arena.GameLength);
+    std::string buf = FormatString("After %d hours of battle the Match is a draw", arena.GameLength);
     ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
     arena.TimeLeftInGame = 0;
     arena.PeopleIsInArena = 0;
@@ -343,7 +333,7 @@ int CharactersInArena()
     {
         auto ch = d->Original ? d->Original : d->Char;
 
-        if(ch == NULL)
+        if(ch == nullptr)
         {
             continue;
         }
@@ -365,9 +355,11 @@ static int L_HallOfFameEntry(lua_State *L)
     HallOfFameElement *fameNode = new HallOfFameElement();
 
     LuaGetfieldString(L, "Name", &fameNode->Name);
-    long fameDate;
-    LuaGetfieldLong(L, "Date", &fameDate);
-    fameNode->Date = fameDate;
+    LuaGetfieldLong(L, "Date",
+                    [fameNode](time_t fameDate)
+                    {
+                        fameNode->Date = fameDate;
+                    });
     LuaGetfieldInt(L, "Award", &fameNode->Award);
 
     FameList.push_front(fameNode);
@@ -418,7 +410,7 @@ static void FindBetWinners(std::shared_ptr<Character> winner)
         {
             auto wch = d->Original ? d->Original : d->Char;
 
-            if(wch == NULL)
+            if(wch == nullptr)
             {
                 continue;
             }
@@ -443,8 +435,10 @@ static void ResetBets()
 {
     for(auto ch = FirstCharacter; ch; ch = ch->Next)
     {
-        if(ch == NULL)
+        if(ch == nullptr)
+        {
             continue;
+        }
 
         if(!IsNpc(ch))
         {

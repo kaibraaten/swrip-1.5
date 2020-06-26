@@ -36,13 +36,11 @@
 #include "descriptor.hpp"
 #include "repos/playerrepository.hpp"
 
-static void RemoveComment( std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, std::shared_ptr<Note> pnote );
-
-static void RemoveComment( std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, std::shared_ptr<Note> pnote )
+static void RemoveComment(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, std::shared_ptr<Note> pnote)
 {
-    if ( IsNpc( victim ) )
+    if(IsNpc(victim))
     {
-        Log->Bug( "comment remove: NPC" );
+        Log->Bug("comment remove: NPC");
         return;
     }
 
@@ -59,7 +57,7 @@ static void RemoveComment( std::shared_ptr<Character> ch, std::shared_ptr<Charac
     PlayerCharacters->Save(victim);
 }
 
-void do_comment( std::shared_ptr<Character> ch, std::string argument )
+void do_comment(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string arg1;
@@ -67,41 +65,41 @@ void do_comment( std::shared_ptr<Character> ch, std::string argument )
     int noteNumber = 0;
     int anum = 0;
 
-    if ( IsNpc(ch) )
+    if(IsNpc(ch))
     {
         ch->Echo("Mobs can't use the comment command.\r\n");
         return;
     }
 
-    if ( !ch->Desc )
+    if(!ch->Desc)
     {
-        Log->Bug( "do_comment: no descriptor" );
+        Log->Bug("do_comment: no descriptor");
         return;
     }
 
     /* Put in to prevent crashing when someone issues a comment command
        from within the editor. -Narn */
-    if ( ch->Desc->ConnectionState == CON_EDITING )
+    if(ch->Desc->ConnectionState == CON_EDITING)
     {
         ch->Echo("You can't use the comment command from within the editor.\r\n");
         return;
     }
 
-    SetCharacterColor( AT_NOTE, ch );
-    argument = OneArgument( argument, arg );
-    SmashTilde( argument );
+    SetCharacterColor(AT_NOTE, ch);
+    argument = OneArgument(argument, arg);
+    SmashTilde(argument);
 
-    if ( !StrCmp( arg, "about" ) )
+    if(!StrCmp(arg, "about"))
     {
         victim = GetCharacterAnywhere(ch, argument);
 
-        if (!victim)
+        if(!victim)
         {
             ch->Echo("They're not logged on!\r\n");
             return;
         }
 
-        if ( IsNpc(victim) )
+        if(IsNpc(victim))
         {
             ch->Echo("No comments about mobs\r\n");
             return;
@@ -109,91 +107,91 @@ void do_comment( std::shared_ptr<Character> ch, std::string argument )
     }
 
 
-    if ( !StrCmp( arg, "list" ) )
+    if(!StrCmp(arg, "list"))
     {
         victim = GetCharacterAnywhere(ch, argument);
 
-        if (!victim)
+        if(!victim)
         {
             ch->Echo("They're not logged on!\r\n");   /* maybe fix this? */
             return;
         }
 
-        if ( IsNpc(victim) )
+        if(IsNpc(victim))
         {
             ch->Echo("No comments about mobs\r\n");
             return;
         }
 
-        if ( GetTrustLevel(victim) >= GetTrustLevel( ch ) )
+        if(GetTrustLevel(victim) >= GetTrustLevel(ch))
         {
-            ch->Echo( "You're not of the right caliber to do this...\r\n" );
+            ch->Echo("You're not of the right caliber to do this...\r\n");
             return;
         }
 
-        if ( victim->PCData->Comments().empty() )
+        if(victim->PCData->Comments().empty())
         {
-            ch->Echo( "There are no relevant comments.\r\n" );
+            ch->Echo("There are no relevant comments.\r\n");
             return;
         }
 
         for(auto pnote : victim->PCData->Comments())
         {
             noteNumber++;
-            ch->Echo( "%2d) %-10s [%s] %s\r\n",
-                      noteNumber,
-                      pnote->Sender.c_str(),
-                      pnote->Date.c_str(),
-                      pnote->Subject.c_str() );
+            ch->Echo("%2d) %-10s [%s] %s\r\n",
+                     noteNumber,
+                     pnote->Sender.c_str(),
+                     pnote->Date.c_str(),
+                     pnote->Subject.c_str());
         }
 
         return;
     }
 
-    if ( !StrCmp( arg, "read" ) )
+    if(!StrCmp(arg, "read"))
     {
         bool fAll = false;
 
-        argument = OneArgument( argument, arg1 );
+        argument = OneArgument(argument, arg1);
         victim = GetCharacterAnywhere(ch, arg1);
 
-        if (!victim)
+        if(!victim)
         {
             ch->Echo("They're not logged on!\r\n");
             return;
         }
 
-        if ( IsNpc(victim) )
+        if(IsNpc(victim))
         {
             ch->Echo("No comments about mobs\r\n");
             return;
         }
 
-        if ( GetTrustLevel(victim) >= GetTrustLevel( ch ) )
+        if(GetTrustLevel(victim) >= GetTrustLevel(ch))
         {
-            ch->Echo( "You're not of the right caliber to do this...\r\n" );
+            ch->Echo("You're not of the right caliber to do this...\r\n");
             return;
         }
 
-        if ( victim->PCData->Comments().empty() )
+        if(victim->PCData->Comments().empty())
         {
-            ch->Echo( "There are no relevant comments.\r\n" );
+            ch->Echo("There are no relevant comments.\r\n");
             return;
         }
 
-        if ( !StrCmp( argument, "all" ) )
+        if(!StrCmp(argument, "all"))
         {
             fAll = true;
             anum = 0;
         }
-        else if ( IsNumber( argument ) )
+        else if(IsNumber(argument))
         {
             fAll = false;
-            anum = ToLong( argument );
+            anum = ToLong(argument);
         }
         else
         {
-            ch->Echo( "Note read which number?\r\n" );
+            ch->Echo("Note read which number?\r\n");
             return;
         }
 
@@ -203,110 +201,110 @@ void do_comment( std::shared_ptr<Character> ch, std::string argument )
         {
             noteNumber++;
 
-            if ( noteNumber == anum || fAll )
+            if(noteNumber == anum || fAll)
             {
-                ch->Echo( "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n",
-                          noteNumber,
-                          pnote->Sender.c_str(),
-                          pnote->Subject.c_str(),
-                          pnote->Date.c_str(),
-                          pnote->ToList.c_str());
+                ch->Echo("[%3d] %s: %s\r\n%s\r\nTo: %s\r\n",
+                         noteNumber,
+                         pnote->Sender.c_str(),
+                         pnote->Subject.c_str(),
+                         pnote->Date.c_str(),
+                         pnote->ToList.c_str());
 
-                ch->Echo( pnote->Text );
+                ch->Echo(pnote->Text);
                 return;
             }
         }
 
-        ch->Echo( "No such comment.\r\n" );
+        ch->Echo("No such comment.\r\n");
         return;
     }
 
-    if ( !StrCmp( arg, "write" ) )
+    if(!StrCmp(arg, "write"))
     {
-        AttachNote( ch );
+        AttachNote(ch);
         StartEditing(ch, ch->PCData->Note->Text,
                      [ch](const auto &txt)
                      {
                          ch->PCData->Note->Text = txt;
                      });
-        SetEditorDesc( ch, "Player comment" );
+        SetEditorDesc(ch, "Player comment");
         return;
     }
 
-    if ( !StrCmp( arg, "subject" ) )
+    if(!StrCmp(arg, "subject"))
     {
-        AttachNote( ch );
+        AttachNote(ch);
         ch->PCData->Note->Subject = argument;
-        ch->Echo( "Ok.\r\n" );
+        ch->Echo("Ok.\r\n");
         return;
     }
 
-    if ( !StrCmp( arg, "to" ) )
+    if(!StrCmp(arg, "to"))
     {
-        AttachNote( ch );
+        AttachNote(ch);
         ch->PCData->Note->ToList = argument;
-        ch->Echo( "Ok.\r\n" );
+        ch->Echo("Ok.\r\n");
         return;
     }
 
-    if ( !StrCmp( arg, "clear" ) )
+    if(!StrCmp(arg, "clear"))
     {
         ch->PCData->Note.reset();
-        ch->Echo( "Ok.\r\n" );
+        ch->Echo("Ok.\r\n");
         return;
     }
 
-    if ( !StrCmp( arg, "show" ) )
+    if(!StrCmp(arg, "show"))
     {
-        if ( ch->PCData->Note == nullptr )
+        if(ch->PCData->Note == nullptr)
         {
-            ch->Echo( "You have no comment in progress.\r\n" );
+            ch->Echo("You have no comment in progress.\r\n");
             return;
         }
 
-        ch->Echo( "%s: %s\r\nTo: %s\r\n",
-                  ch->PCData->Note->Sender.c_str(),
-                  ch->PCData->Note->Subject.c_str(),
-                  ch->PCData->Note->ToList.c_str());
-        ch->Echo( "%s", ch->PCData->Note->Text.c_str() );
+        ch->Echo("%s: %s\r\nTo: %s\r\n",
+                 ch->PCData->Note->Sender.c_str(),
+                 ch->PCData->Note->Subject.c_str(),
+                 ch->PCData->Note->ToList.c_str());
+        ch->Echo("%s", ch->PCData->Note->Text.c_str());
         return;
     }
 
-    if ( !StrCmp( arg, "post" ) )
+    if(!StrCmp(arg, "post"))
     {
         char *strtime = nullptr;
 
-        if ( !ch->PCData->Note )
+        if(!ch->PCData->Note)
         {
-            ch->Echo( "You have no comment in progress.\r\n" );
+            ch->Echo("You have no comment in progress.\r\n");
             return;
         }
 
         argument = OneArgument(argument, arg1);
         victim = GetCharacterAnywhere(ch, arg1);
 
-        if (!victim)
+        if(!victim)
         {
             ch->Echo("They're not logged on!\r\n");   /* maybe fix this? */
             return;
         }
 
-        if ( IsNpc(victim) )
+        if(IsNpc(victim))
         {
             ch->Echo("No comments about mobs\r\n");
             return;
         }
 
-        if (  GetTrustLevel(victim) > GetTrustLevel( ch ) )
+        if(GetTrustLevel(victim) > GetTrustLevel(ch))
         {
-            ch->Echo( "You're not of the right caliber to do this...\r\n");
+            ch->Echo("You're not of the right caliber to do this...\r\n");
             return;
         }
 
         /* Act( AT_ACTION, "$n posts a note.", ch, NULL, NULL, ActTarget::Room ); */
 
-        strtime                           = ctime( &current_time );
-        strtime[strlen(strtime)-1]        = '\0';
+        strtime = ctime(&current_time);
+        strtime[strlen(strtime) - 1] = '\0';
         ch->PCData->Note->Date = strtime;
 
         std::shared_ptr<Note> pnote = ch->PCData->Note;
@@ -315,53 +313,53 @@ void do_comment( std::shared_ptr<Character> ch, std::string argument )
 
         PlayerCharacters->Save(victim);
 
-        ch->Echo( "Ok.\r\n");
+        ch->Echo("Ok.\r\n");
         return;
     }
 
-    if ( !StrCmp( arg, "remove" ) )
+    if(!StrCmp(arg, "remove"))
     {
         bool found = false;
         argument = OneArgument(argument, arg1);
         victim = GetCharacterAnywhere(ch, arg1);
 
-        if (!victim)
+        if(!victim)
         {
             ch->Echo("They're not logged on!\r\n");   /* maybe fix this? */
             return;
         }
 
-        if ( IsNpc(victim) )
+        if(IsNpc(victim))
         {
             ch->Echo("No comments about mobs\r\n");
             return;
         }
 
-        if ( ( GetTrustLevel(victim) >= GetTrustLevel( ch ) )
-             || !IsGreater( ch ) )
+        if((GetTrustLevel(victim) >= GetTrustLevel(ch))
+           || !IsGreater(ch))
         {
-            ch->Echo( "You're not of the right caliber to do this...\r\n");
+            ch->Echo("You're not of the right caliber to do this...\r\n");
             return;
         }
 
         /*argument = OneArgument(argument, arg); */
-        if ( !IsNumber( argument ) )
+        if(!IsNumber(argument))
         {
-            ch->Echo( "Comment remove which number?\r\n");
+            ch->Echo("Comment remove which number?\r\n");
             return;
         }
 
-        anum = ToLong( argument );
+        anum = ToLong(argument);
         noteNumber = 0;
 
         for(auto pnote : victim->PCData->Comments())
         {
             noteNumber++;
 
-            if ( IsGreater( ch ) && noteNumber == anum )
+            if(IsGreater(ch) && noteNumber == anum)
             {
-                RemoveComment( ch, victim, pnote );
-                ch->Echo( "Ok.\r\n" );
+                RemoveComment(ch, victim, pnote);
+                ch->Echo("Ok.\r\n");
                 found = true;
                 break;
             }
@@ -369,26 +367,26 @@ void do_comment( std::shared_ptr<Character> ch, std::string argument )
 
         if(!found)
         {
-            ch->Echo( "No such comment.\r\n" );
+            ch->Echo("No such comment.\r\n");
         }
 
         return;
     }
 
-    ch->Echo( "Huh? Type 'help comment' for usage.\r\n" );
+    ch->Echo("Huh? Type 'help comment' for usage.\r\n");
 }
 
 static void WriteToFile(std::shared_ptr<Note> pnote, FILE *fp)
 {
-    fprintf( fp,"#COMMENT\n" );
-    fprintf( fp,"sender       %s~\n",pnote->Sender.c_str());
-    fprintf( fp,"date         %s~\n",pnote->Date.c_str());
-    fprintf( fp,"to           %s~\n",pnote->ToList.c_str());
-    fprintf( fp,"subject      %s~\n",pnote->Subject.c_str());
-    fprintf( fp,"text\n%s~\n",pnote->Text.c_str());
+    fprintf(fp, "#COMMENT\n");
+    fprintf(fp, "sender       %s~\n", pnote->Sender.c_str());
+    fprintf(fp, "date         %s~\n", pnote->Date.c_str());
+    fprintf(fp, "to           %s~\n", pnote->ToList.c_str());
+    fprintf(fp, "subject      %s~\n", pnote->Subject.c_str());
+    fprintf(fp, "text\n%s~\n", pnote->Text.c_str());
 }
 
-void WriteComments( std::shared_ptr<Character> ch, FILE *fp )
+void WriteComments(std::shared_ptr<Character> ch, FILE *fp)
 {
     assert(ch->PCData != NULL);
 
@@ -398,61 +396,60 @@ void WriteComments( std::shared_ptr<Character> ch, FILE *fp )
     }
 }
 
-void ReadComment( std::shared_ptr<Character> ch, FILE *fp )
+void ReadComment(std::shared_ptr<Character> ch, FILE *fp)
 {
-    if( IsNpc( ch ) )
+    if(IsNpc(ch))
         return;
 
-    for ( ; ; )
+    for(; ; )
     {
         char letter = 0;
 
         do
         {
-            letter = getc( fp );
+            letter = getc(fp);
 
-            if ( feof(fp) )
+            if(feof(fp))
             {
-                fclose( fp );
+                fclose(fp);
                 return;
             }
-        }
-        while ( isspace(letter) );
+        } while(isspace(letter));
 
-        ungetc( letter, fp );
+        ungetc(letter, fp);
 
         std::shared_ptr<Note> pnote = std::make_shared<Note>();
 
-        if ( StrCmp( ReadWord( fp, Log, fBootDb ), "sender" ) )
+        if(StrCmp(ReadWord(fp, Log, fBootDb), "sender"))
             break;
 
-        pnote->Sender = ReadStringToTilde( fp, Log, fBootDb );
+        pnote->Sender = ReadStringToTilde(fp, Log, fBootDb);
 
-        if ( StrCmp( ReadWord( fp, Log, fBootDb ), "date" ) )
+        if(StrCmp(ReadWord(fp, Log, fBootDb), "date"))
             break;
 
-        pnote->Date = ReadStringToTilde( fp, Log, fBootDb );
+        pnote->Date = ReadStringToTilde(fp, Log, fBootDb);
 
-        if ( StrCmp( ReadWord( fp, Log, fBootDb ), "to" ) )
+        if(StrCmp(ReadWord(fp, Log, fBootDb), "to"))
             break;
 
-        pnote->ToList = ReadStringToTilde( fp, Log, fBootDb );
+        pnote->ToList = ReadStringToTilde(fp, Log, fBootDb);
 
-        if ( StrCmp( ReadWord( fp, Log, fBootDb ), "subject" ) )
+        if(StrCmp(ReadWord(fp, Log, fBootDb), "subject"))
             break;
 
-        pnote->Subject = ReadStringToTilde( fp, Log, fBootDb );
+        pnote->Subject = ReadStringToTilde(fp, Log, fBootDb);
 
-        if ( StrCmp( ReadWord( fp, Log, fBootDb ), "text" ) )
+        if(StrCmp(ReadWord(fp, Log, fBootDb), "text"))
             break;
 
-        pnote->Text = ReadStringToTilde( fp, Log, fBootDb );
+        pnote->Text = ReadStringToTilde(fp, Log, fBootDb);
 
         ch->PCData->Add(pnote);
         return;
     }
 
-    Log->Bug( "%s: bad key word. strap in!", __FUNCTION__ );
+    Log->Bug("%s: bad key word. strap in!", __FUNCTION__);
 }
 
 /*

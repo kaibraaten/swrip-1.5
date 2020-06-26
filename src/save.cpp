@@ -70,7 +70,7 @@ std::weak_ptr<Character> saving_char;
 int file_ver = 0;
 
 extern FILE *fpArea;
-extern char strArea[MAX_INPUT_LENGTH];
+extern std::string strArea;
 extern int falling;
 
 /*
@@ -865,17 +865,17 @@ void LoadCorpses()
 
         for(const auto &entry : fs::directory_iterator(CORPSE_DIR))
         {
-            const char *filename = entry.path().filename().string().c_str();
+            std::string filename = entry.path().filename().string();
 
             if (filename[0] != '.')
             {
-                sprintf(strArea, "%s%s", CORPSE_DIR, filename);
-                fprintf(stderr, "Corpse -> %s\n", strArea);
-                fpArea = fopen(strArea, "r");
+                strArea = CORPSE_DIR + filename;
+                fprintf(stderr, "Corpse -> %s\n", strArea.c_str());
+                fpArea = fopen(strArea.c_str(), "r");
 
                 if (fpArea == nullptr)
                 {
-                    perror(strArea);
+                    perror(strArea.c_str());
                     continue;
                 }
 
@@ -927,7 +927,7 @@ void LoadCorpses()
     }
 
     fpArea = nullptr;
-    strcpy(strArea, "$");
+    strArea = "$";
     falling = 0;
 }
 
