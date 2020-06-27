@@ -1171,6 +1171,7 @@ bool CanLootVictim(std::shared_ptr<Character> ch, std::shared_ptr<Character> vic
 void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victim);
 bool IsFighting(const std::shared_ptr<Character> &ch);
 std::shared_ptr<Character> WhoFighting(const std::shared_ptr<Character> &ch);
+int NumFighting(const std::shared_ptr<Character> &ch);
 
 /* makeobjs.c */
 void MakeCorpse(std::shared_ptr<Character> ch);

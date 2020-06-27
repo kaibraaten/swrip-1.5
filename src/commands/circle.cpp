@@ -68,7 +68,7 @@ void do_circle(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(victim->NumFighting < 2)
+    if(NumFighting(victim) < 2)
     {
         Act(AT_PLAIN, "You can't circle around them without a distraction.",
             ch, NULL, victim, ActTarget::Char);

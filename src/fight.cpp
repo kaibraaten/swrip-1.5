@@ -62,6 +62,7 @@ public:
     std::shared_ptr<Character> Who;
     long Xp = 0;
     short Duration = 0;
+    int NumFighting = 0;
 };
 
 Fight::Fight(const std::shared_ptr<Character> &who)
@@ -101,6 +102,18 @@ static bool IsWieldingPoisonedWeapon(std::shared_ptr<Character> ch)
     auto obj = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
     return obj != nullptr && obj->Flags.test(Flag::Obj::Poisoned);
+}
+
+int NumFighting(const std::shared_ptr<Character> &ch)
+{
+    if(IsFighting(ch))
+    {
+        return ch->Fighting->NumFighting;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 bool IsFighting(const std::shared_ptr<Character> &ch)
@@ -2442,7 +2455,7 @@ void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> vic
     }
 
     /* Limit attackers -Thoric */
-    if(victim->NumFighting > MAX_NUMBER_OF_FIGHTERS)
+    if(NumFighting(victim) > MAX_NUMBER_OF_FIGHTERS)
     {
         ch->Echo("There are too many people fighting for you to join in.\r\n");
         return;
@@ -2451,9 +2464,9 @@ void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> vic
     ch->Fighting = std::make_shared<Fight>(victim);
     ch->Fighting->Xp = ComputeXP(ch, victim);
 
-    ch->NumFighting = 1;
+    ch->Fighting->NumFighting = 1;
     ch->Position = POS_FIGHTING;
-    victim->NumFighting++;
+    victim->Fighting->NumFighting++;
 
     if(victim->Switched && IsAffectedBy(victim->Switched, Flag::Affect::Possess))
     {
@@ -2474,7 +2487,7 @@ void FreeFight(std::shared_ptr<Character> ch)
     {
         if(!CharacterDiedRecently(ch->Fighting->Who))
         {
-            --ch->Fighting->Who->NumFighting;
+            --ch->Fighting->Who->Fighting->NumFighting;
         }
     }
 

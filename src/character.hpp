@@ -155,7 +155,6 @@ public:
     CmdFun *PreviousCommand = NULL;   /* mapping */
     std::string dest_buf;
     int tempnum = 0;
-    int NumFighting = 0;
     CharacterSubState SubState = SUB_NONE;
     int Trust = 0;
     int IdleTimer = 0;

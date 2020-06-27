@@ -1344,7 +1344,6 @@ void ResetPlayerOnDeath(std::shared_ptr<Character> ch)
     }
 
     ch->AffectedBy = RaceTable[ch->Race].Affected;
-    ch->NumFighting = 0;
     ch->HitPoints.Current = 1;
 
     if(IsJedi(ch))
