@@ -8,7 +8,7 @@
 
 bool spec_rebel_trooper(std::shared_ptr<Character> ch)
 {
-    if(!IsAwake(ch) || ch->Fighting)
+    if(!IsAwake(ch) || IsFighting(ch))
         return false;
 
     std::vector<std::shared_ptr<Character>> imperials(std::begin(ch->InRoom->Characters()),
@@ -20,7 +20,7 @@ bool spec_rebel_trooper(std::shared_ptr<Character> ch)
                            return CanSeeCharacter(ch, victim)
                                && GetTimer(victim, TIMER_RECENTFIGHT) == 0
                                && ((IsNpc(victim) && NiftyIsName("imperial", victim->Name)
-                                    && victim->Fighting && GetFightingOpponent(victim) != ch)
+                                    && IsFighting(victim) && WhoFighting(victim) != ch)
                                    || (!IsNpc(victim) && IsClanned(victim) && IsAwake(victim)
                                        && NiftyIsName("empire", victim->PCData->ClanInfo.Clan->Name)));
                        });

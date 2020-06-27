@@ -144,7 +144,7 @@ public:
     std::shared_ptr<Character> Previous;
     std::shared_ptr<Character> Master;
     std::shared_ptr<Character> Leader;
-    std::unique_ptr<Fight> Fighting;
+    std::shared_ptr<Fight> Fighting;
     std::weak_ptr<Character> Reply;
     std::shared_ptr<Character> Switched = NULL;
     std::shared_ptr<Character> Mount = NULL;

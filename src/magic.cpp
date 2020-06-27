@@ -655,7 +655,7 @@ Vo LocateSpellTargets(std::shared_ptr<Character> ch, const std::string &arg,
     case TAR_CHAR_OFFENSIVE:
         if(arg.empty())
         {
-            *victim = GetFightingOpponent(ch);
+            *victim = WhoFighting(ch);
 
             if(*victim == nullptr)
             {
@@ -860,7 +860,7 @@ ch_ret CastSpellWithObject(int sn, int level, std::shared_ptr<Character> ch, std
         {
             if(!victim)
             {
-                victim = GetFightingOpponent(ch);
+                victim = WhoFighting(ch);
             }
 
             if(!victim || !IsNpc(victim))
@@ -940,11 +940,11 @@ ch_ret CastSpellWithObject(int sn, int level, std::shared_ptr<Character> ch, std
        && victim != ch
        && !CharacterDiedRecently(victim))
     {
-        auto copyOfCharacterList = ch->InRoom->Characters();
+        auto charactersInRoom = ch->InRoom->Characters();
 
-        for(auto vch : copyOfCharacterList)
+        for(auto vch : charactersInRoom)
         {
-            if(victim == vch && !victim->Fighting && victim->Master != ch)
+            if(victim == vch && !IsFighting(victim) && victim->Master != ch)
             {
                 retcode = HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
                 break;

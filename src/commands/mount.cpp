@@ -46,7 +46,7 @@ void do_mount(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(victim->Position == POS_FIGHTING || victim->Fighting)
+    if(IsFighting(victim))
     {
         ch->Echo("Your mount is moving around too much.\r\n");
         return;

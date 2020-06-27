@@ -9,13 +9,13 @@ bool spec_guardian(std::shared_ptr<Character> ch)
     int max_evil = 300;
     std::shared_ptr<Character> victim;
 
-    if(!IsAwake(ch) || ch->Fighting)
+    if(!IsAwake(ch) || IsFighting(ch))
         return false;
 
     for(auto ech : ch->InRoom->Characters())
     {
-        if(ech->Fighting
-           && GetFightingOpponent(ech) != ch
+        if(IsFighting(ech)
+           && WhoFighting(ech) != ch
            && ech->Alignment < max_evil)
         {
             max_evil = ech->Alignment;

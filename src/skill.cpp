@@ -134,7 +134,7 @@ bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const
         case TAR_IGNORE:
             if(argument.empty())
             {
-                if((victim = GetFightingOpponent(ch)) != NULL)
+                if((victim = WhoFighting(ch)) != nullptr)
                 {
                     spell_target_name = victim->Name;
                 }
@@ -147,7 +147,7 @@ bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const
 
         case TAR_CHAR_OFFENSIVE:
             if(argument.empty()
-               && (victim = GetFightingOpponent(ch)) == NULL)
+               && (victim = WhoFighting(ch)) == nullptr)
             {
                 ch->Echo("%s who?\r\n", Capitalize(skill->Name).c_str());
                 return true;
@@ -253,7 +253,7 @@ bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const
 
             for(auto vch : charactersInRoom)
             {
-                if(victim == vch && !victim->Fighting && victim->Master != ch)
+                if(victim == vch && !IsFighting(victim) && victim->Master != ch)
                 {
                     retcode = HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
                     break;
@@ -359,7 +359,7 @@ void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
         {
             gain = 10 * sklvl;
 
-            if(!ch->Fighting && sn != gsn_hide && sn != gsn_sneak)
+            if(!IsFighting(ch) && sn != gsn_hide && sn != gsn_sneak)
             {
                 SetCharacterColor(AT_WHITE, ch);
                 ch->Echo("You gain %d experience points from your success!\r\n", gain);

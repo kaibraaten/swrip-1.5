@@ -61,7 +61,7 @@ void do_pricevendor(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(ch->Fighting)
+    if(IsFighting(ch))
     {
         ch->Echo("Not while you're fighting!\r\n");
         return;

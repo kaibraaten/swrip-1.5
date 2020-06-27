@@ -79,7 +79,7 @@ void do_transfer(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(victim->Fighting)
+    if(IsFighting(victim))
         StopFighting(victim, true);
 
     Act(AT_MAGIC, "$n disappears in a cloud of swirling colors.",

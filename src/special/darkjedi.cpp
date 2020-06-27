@@ -10,12 +10,12 @@ bool spec_dark_jedi(std::shared_ptr<Character> ch)
     std::string spell;
     int sn = 0;
 
-    if(ch->Position != POS_FIGHTING)
+    if(!IsFighting(ch))
         return false;
 
     for(auto fighter : ch->InRoom->Characters())
     {
-        if(GetFightingOpponent(fighter) && NumberBits(2) == 0)
+        if(IsFighting(fighter) && NumberBits(2) == 0)
         {
             victim = fighter;
             break;

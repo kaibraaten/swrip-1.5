@@ -24,7 +24,7 @@ void do_bashdoor(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    if(ch->Fighting)
+    if(IsFighting(ch))
     {
         ch->Echo("You can't break off your fight.\r\n");
         return;
@@ -120,7 +120,7 @@ void do_bashdoor(std::shared_ptr<Character> ch, std::string arg)
         for(auto gch : ch->InRoom->Characters())
         {
             if(IsAwake(gch)
-               && !gch->Fighting
+               && !IsFighting(gch)
                && (IsNpc(gch) && !IsAffectedBy(gch, Flag::Affect::Charm))
                && (ch->TopLevel - gch->TopLevel <= 4)
                && NumberBits(2) == 0)

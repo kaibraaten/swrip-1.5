@@ -179,16 +179,6 @@ public:
     std::shared_ptr<Character> Who;
 };
 
-class Fight
-{
-public:
-    std::shared_ptr<Character> Who;
-    long Xp = 0;
-    short Align = 0;
-    short Duration = 0;
-    short TimesKilled = 0;
-};
-
 class KilledData
 {
 public:
@@ -1156,7 +1146,7 @@ std::shared_ptr<ExtraDescription> SetOExtraProto(std::shared_ptr<ProtoObject> ob
 bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
 std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argument, std::shared_ptr<Character> ch);
 
-/* fight.c */
+/* fight.cpp */
 ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dt);
 long ComputeXP(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim);
 void ViolenceUpdate(void);
@@ -1167,7 +1157,6 @@ void UpdatePosition(std::shared_ptr<Character> victim);
 void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 void StopFighting(std::shared_ptr<Character> ch, bool fBoth);
 void FreeFight(std::shared_ptr<Character> ch);
-std::shared_ptr<Character> GetFightingOpponent(std::shared_ptr<Character> ch);
 void StopHunting(std::shared_ptr<Character> ch);
 void StopHating(std::shared_ptr<Character> ch);
 void StopFearing(std::shared_ptr<Character> ch);
@@ -1180,6 +1169,8 @@ bool IsFearing(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 bool IsSafe(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 bool CanLootVictim(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victim);
+bool IsFighting(const std::shared_ptr<Character> &ch);
+std::shared_ptr<Character> WhoFighting(const std::shared_ptr<Character> &ch);
 
 /* makeobjs.c */
 void MakeCorpse(std::shared_ptr<Character> ch);

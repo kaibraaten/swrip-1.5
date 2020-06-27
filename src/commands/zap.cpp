@@ -11,7 +11,7 @@ void do_zap(std::shared_ptr<Character> ch, std::string arg)
     std::shared_ptr<Object> obj;
     ch_ret retcode = rNONE;
 
-    if(arg.empty() && !ch->Fighting)
+    if(arg.empty() && !IsFighting(ch))
     {
         ch->Echo("Zap whom or what?\r\n");
         return;
@@ -31,9 +31,9 @@ void do_zap(std::shared_ptr<Character> ch, std::string arg)
 
     if(arg.empty())
     {
-        if(ch->Fighting)
+        if(IsFighting(ch))
         {
-            victim = GetFightingOpponent(ch);
+            victim = WhoFighting(ch);
         }
         else
         {

@@ -8,7 +8,7 @@
 
 bool spec_police_fine(std::shared_ptr<Character> ch)
 {
-    if(!IsAwake(ch) || ch->Fighting)
+    if(!IsAwake(ch) || IsFighting(ch))
         return false;
 
     auto potentialCriminals = Filter(ch->InRoom->Characters(),

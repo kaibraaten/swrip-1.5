@@ -22,7 +22,7 @@ ch_ret spell_sleep(int sn, int level, std::shared_ptr<Character> ch, const Vo &v
         return rSPELL_FAILED;
     }
 
-    if(!IsNpc(victim) && victim->Fighting)
+    if(!IsNpc(victim) && IsFighting(victim))
     {
         ch->Echo("You cannot sleep a fighting player.\r\n");
         return rSPELL_FAILED;
@@ -49,13 +49,17 @@ ch_ret spell_sleep(int sn, int level, std::shared_ptr<Character> ch, const Vo &v
        || SaveVsSpellStaff(sleep_chance, victim))
     {
         FailedCasting(skill, ch, victim, NULL);
+
         if(ch == victim)
             return rSPELL_FAILED;
-        if(!victim->Fighting)
+
+        if(!IsFighting(victim))
         {
             retcode = HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
+
             if(retcode == rNONE)
                 retcode = rSPELL_FAILED;
+
             return retcode;
         }
     }

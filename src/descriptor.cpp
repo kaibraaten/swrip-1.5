@@ -185,8 +185,8 @@ bool Descriptor::FlushBuffer(bool fPrompt)
     char buf[MAX_INPUT_LENGTH] = { '\0' };
     auto ch = Original ? Original : Char;
 
-    if(ch && ch->Fighting && ch->Fighting->Who)
-        ShowCharacterCondition(ch, ch->Fighting->Who);
+    if(ch != nullptr && IsFighting(ch))
+        ShowCharacterCondition(ch, WhoFighting(ch));
 
     /*
      * Bust a prompt.

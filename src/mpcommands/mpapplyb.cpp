@@ -66,7 +66,7 @@ void do_mpapplyb(std::shared_ptr<Character> ch, std::string argument)
         victim->Echo("The gods permit you to enter the Star Wars Reality.\r\n");
         victim->PCData->Flags.reset(Flag::PCData::Unauthed);
 
-        if(victim->Fighting)
+        if(IsFighting(victim))
             StopFighting(victim, true);
 
         CharacterFromRoom(victim);

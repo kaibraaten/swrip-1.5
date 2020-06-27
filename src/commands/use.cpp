@@ -54,9 +54,9 @@ void do_use(std::shared_ptr<Character> ch, std::string argument)
 
     if(arg.empty())
     {
-        if(ch->Fighting)
+        if(IsFighting(ch))
         {
-            victim = GetFightingOpponent(ch);
+            victim = WhoFighting(ch);
         }
         else
         {

@@ -48,7 +48,7 @@ void do_rescue(std::shared_ptr<Character> ch, std::string arg)
 
     std::shared_ptr<Character> fch;
 
-    if((fch = GetFightingOpponent(victim)) == NULL)
+    if((fch = WhoFighting(victim)) == NULL)
     {
         ch->Echo("They are not fighting right now.\r\n");
         return;
@@ -88,7 +88,7 @@ void do_rescue(std::shared_ptr<Character> ch, std::string arg)
     StopFighting(fch, false);
     StopFighting(victim, false);
 
-    if(ch->Fighting)
+    if(IsFighting(ch))
         StopFighting(ch, false);
 
     StartFighting(ch, fch);

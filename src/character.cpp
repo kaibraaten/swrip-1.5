@@ -989,7 +989,7 @@ bool CanSeeCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
             return false;
         else if(IsAffectedBy(victim, Flag::Affect::Hide)
            && !IsAffectedBy(ch, Flag::Affect::DetectHidden)
-           && !victim->Fighting)
+           && !IsFighting(victim))
         {
             if(ch->Race == RACE_DEFEL && victim->Race == RACE_DEFEL)
                 return true;
@@ -1335,8 +1335,8 @@ void ResetPlayerOnDeath(std::shared_ptr<Character> ch)
     }
 
     FixCharacterStats(ch);
-    ch->Fighting = NULL;
-    ch->Mount = NULL;
+    ch->Fighting.reset();
+    ch->Mount.reset();
 
     while(!ch->Affects().empty())
     {
@@ -1354,7 +1354,7 @@ void ResetPlayerOnDeath(std::shared_ptr<Character> ch)
 
     ch->Fatigue.Current = 1;
     ch->EmotionalState = 0;
-    ch->On = NULL;
+    ch->On.reset();
     StopHunting(ch);
     StopHating(ch);
     StopFearing(ch);

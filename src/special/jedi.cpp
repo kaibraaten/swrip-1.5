@@ -8,7 +8,7 @@ bool spec_jedi(std::shared_ptr<Character> ch)
 {
     std::shared_ptr<Character> victim;
 
-    if(!IsAwake(ch) || ch->Fighting)
+    if(!IsAwake(ch) || IsFighting(ch))
         return false;
 
     for(auto potentialVictim : ch->InRoom->Characters())

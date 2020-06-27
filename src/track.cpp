@@ -78,12 +78,12 @@ static bool IsValidEdge(std::shared_ptr<Room> room, DirectionType door)
     std::shared_ptr<Room> to_room;
     std::shared_ptr<Exit> pexit = GetExit(room, door);
 
-    if (pexit
-        && (to_room = pexit->ToRoom) != NULL
+    if(pexit
+       && (to_room = pexit->ToRoom) != NULL
 #ifndef TRACK_THROUGH_DOORS
-        && !pexit->Flags.test(Flag::Exit::Closed)
+       && !pexit->Flags.test(Flag::Exit::Closed)
 #endif
-        && !IS_MARKED(to_room))
+       && !IS_MARKED(to_room))
     {
         return true;
     }
@@ -99,7 +99,7 @@ static void bfs_enqueue(std::shared_ptr<Room> room, DirectionType dir)
     curr->room = room;
     curr->dir = dir;
 
-    if (queue_tail)
+    if(queue_tail)
     {
         queue_tail->Next = curr;
         queue_tail = curr;
@@ -114,7 +114,7 @@ static void bfs_dequeue()
 {
     bfs_queue_struct *curr = queue_head;
 
-    if (!(queue_head = queue_head->Next))
+    if(!(queue_head = queue_head->Next))
     {
         queue_tail = NULL;
     }
@@ -124,7 +124,7 @@ static void bfs_dequeue()
 
 static void bfs_clear_queue()
 {
-    while (queue_head)
+    while(queue_head)
     {
         bfs_dequeue();
     }
@@ -144,7 +144,7 @@ static void CleanRoom_queue()
     bfs_queue_struct *curr = NULL;
     bfs_queue_struct *curr_next = NULL;
 
-    for (curr = room_queue; curr; curr = curr_next)
+    for(curr = room_queue; curr; curr = curr_next)
     {
         UNMARK(curr->room);
         curr_next = curr->Next;
@@ -162,12 +162,12 @@ int FindFirstStep(std::shared_ptr<Room> src, std::shared_ptr<Room> target, int m
     DirectionType curr_dir = DIR_INVALID;
     int count = 0;
 
-    if (src == target)
+    if(src == target)
     {
         return BFS_ALREADY_THERE;
     }
 
-    if (src->Area != target->Area)
+    if(src->Area != target->Area)
     {
         return BFS_NO_PATH;
     }
@@ -176,9 +176,9 @@ int FindFirstStep(std::shared_ptr<Room> src, std::shared_ptr<Room> target, int m
     MARK(src);
 
     /* first, enqueue the first steps, saving which direction we're going. */
-    for (curr_dir = DIR_NORTH; curr_dir < DIR_SOMEWHERE; curr_dir = (DirectionType)(curr_dir + 1))
+    for(curr_dir = DIR_NORTH; curr_dir < DIR_SOMEWHERE; curr_dir = (DirectionType)(curr_dir + 1))
     {
-        if (IsValidEdge(src, curr_dir))
+        if(IsValidEdge(src, curr_dir))
         {
             MARK(ToRoom(src, curr_dir));
             room_enqueue(ToRoom(src, curr_dir));
@@ -188,16 +188,16 @@ int FindFirstStep(std::shared_ptr<Room> src, std::shared_ptr<Room> target, int m
 
     count = 0;
 
-    while (queue_head)
+    while(queue_head)
     {
-        if (++count > maxdist)
+        if(++count > maxdist)
         {
             bfs_clear_queue();
             CleanRoom_queue();
             return BFS_NO_PATH;
         }
 
-        if (queue_head->room == target)
+        if(queue_head->room == target)
         {
             curr_dir = queue_head->dir;
             bfs_clear_queue();
@@ -206,9 +206,9 @@ int FindFirstStep(std::shared_ptr<Room> src, std::shared_ptr<Room> target, int m
         }
         else
         {
-            for (curr_dir = DIR_NORTH; curr_dir < DIR_SOMEWHERE; curr_dir = (DirectionType)(curr_dir + 1))
+            for(curr_dir = DIR_NORTH; curr_dir < DIR_SOMEWHERE; curr_dir = (DirectionType)(curr_dir + 1))
             {
-                if (IsValidEdge(queue_head->room, curr_dir))
+                if(IsValidEdge(queue_head->room, curr_dir))
                 {
                     MARK(ToRoom(queue_head->room, curr_dir));
                     room_enqueue(ToRoom(queue_head->room, curr_dir));
@@ -235,16 +235,16 @@ void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
     char victname[1024];
 
     sprintf(victname, "%s",
-        IsNpc(victim) ? victim->ShortDescr.c_str() : victim->Name.c_str());
+            IsNpc(victim) ? victim->ShortDescr.c_str() : victim->Name.c_str());
 
-    if (!CanSeeCharacter(ch, victim))
+    if(!CanSeeCharacter(ch, victim))
     {
-        if (GetRandomPercent() < 90)
+        if(GetRandomPercent() < 90)
         {
             return;
         }
 
-        switch (NumberBits(2))
+        switch(NumberBits(2))
         {
         case 0:
             sprintf(buf, "Don't make me find you!");
@@ -272,14 +272,14 @@ void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
         return;
     }
 
-    if (ch->InRoom->Flags.test(Flag::Room::Safe))
+    if(ch->InRoom->Flags.test(Flag::Room::Safe))
     {
-        if (GetRandomPercent() < 90)
+        if(GetRandomPercent() < 90)
         {
             return;
         }
 
-        switch (NumberBits(2))
+        switch(NumberBits(2))
         {
         case 0:
             do_say(ch, "C'mon out, you coward!");
@@ -306,7 +306,7 @@ void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
         return;
     }
 
-    switch (NumberBits(2))
+    switch(NumberBits(2))
     {
     case 0:
         sprintf(buf, "Your blood is mine!");
@@ -341,30 +341,30 @@ void HuntVictim(std::shared_ptr<Character> ch)
     std::shared_ptr<Character> tmp;
     DirectionType ret;
 
-    if (!ch || !ch->HHF.Hunting || !ch->HHF.Hunting->Who)
+    if(!ch || !ch->HHF.Hunting || !ch->HHF.Hunting->Who)
     {
         return;
     }
 
     /* make sure the char still exists */
-    for (found = false, tmp = FirstCharacter; tmp && !found; tmp = tmp->Next)
+    for(found = false, tmp = FirstCharacter; tmp && !found; tmp = tmp->Next)
     {
-        if (ch->HHF.Hunting->Who == tmp)
+        if(ch->HHF.Hunting->Who == tmp)
         {
             found = true;
         }
     }
 
-    if (!found)
+    if(!found)
     {
         do_say(ch, "Damn! My prey is gone!");
         StopHunting(ch);
         return;
     }
 
-    if (ch->InRoom == ch->HHF.Hunting->Who->InRoom)
+    if(ch->InRoom == ch->HHF.Hunting->Who->InRoom)
     {
-        if (ch->Fighting)
+        if(IsFighting(ch))
         {
             return;
         }
@@ -377,14 +377,14 @@ void HuntVictim(std::shared_ptr<Character> ch)
     {
         std::shared_ptr<Object> wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
-        if (wield != NULL && wield->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER)
+        if(wield != NULL && wield->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER)
         {
-            if (MobSnipe(ch, ch->HHF.Hunting->Who) == true)
+            if(MobSnipe(ch, ch->HHF.Hunting->Who) == true)
             {
                 return;
             }
         }
-        else if (!IsDroid(ch))
+        else if(!IsDroid(ch))
         {
             do_hide(ch, "");
         }
@@ -392,26 +392,26 @@ void HuntVictim(std::shared_ptr<Character> ch)
 
     ret = (DirectionType)FindFirstStep(ch->InRoom, ch->HHF.Hunting->Who->InRoom, 5000);
 
-    if (ret == BFS_NO_PATH)
+    if(ret == BFS_NO_PATH)
     {
         std::shared_ptr<Exit> pexit;
         int attempt = 0;
 
-        for (attempt = 0; attempt < 25; attempt++)
+        for(attempt = 0; attempt < 25; attempt++)
         {
             ret = (DirectionType)GetRandomDoor();
 
-            if ((pexit = GetExit(ch->InRoom, ret)) == NULL
-                || !pexit->ToRoom
-                || pexit->Flags.test(Flag::Exit::Closed)
-                || pexit->ToRoom->Flags.test(Flag::Room::NoMob))
+            if((pexit = GetExit(ch->InRoom, ret)) == NULL
+               || !pexit->ToRoom
+               || pexit->Flags.test(Flag::Exit::Closed)
+               || pexit->ToRoom->Flags.test(Flag::Room::NoMob))
             {
                 continue;
             }
         }
     }
 
-    if (ret < 0)
+    if(ret < 0)
     {
         do_say(ch, "Damn! Lost my prey!");
         StopHunting(ch);
@@ -421,12 +421,12 @@ void HuntVictim(std::shared_ptr<Character> ch)
     {
         MoveCharacter(ch, GetExit(ch->InRoom, ret), false);
 
-        if (CharacterDiedRecently(ch))
+        if(CharacterDiedRecently(ch))
         {
             return;
         }
 
-        if (!ch->HHF.Hunting)
+        if(!ch->HHF.Hunting)
         {
             assert(ch->InRoom != nullptr);
 
@@ -434,7 +434,7 @@ void HuntVictim(std::shared_ptr<Character> ch)
             return;
         }
 
-        if (ch->InRoom == ch->HHF.Hunting->Who->InRoom)
+        if(ch->InRoom == ch->HHF.Hunting->Who->InRoom)
         {
             FoundPrey(ch, ch->HHF.Hunting->Who);
         }
@@ -454,50 +454,50 @@ static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
     char buf[MAX_STRING_LENGTH];
     bool pfound = false;
 
-    if (!ch->InRoom || !victim->InRoom)
+    if(!ch->InRoom || !victim->InRoom)
     {
         return false;
     }
 
-    if (ch->InRoom->Flags.test(Flag::Room::Safe))
+    if(ch->InRoom->Flags.test(Flag::Room::Safe))
     {
         return false;
     }
 
-    for (dir = DIR_NORTH; dir <= DIR_SOMEWHERE; dir = (DirectionType)(dir + 1))
+    for(dir = DIR_NORTH; dir <= DIR_SOMEWHERE; dir = (DirectionType)(dir + 1))
     {
-        if ((pexit = GetExit(ch->InRoom, dir)) == NULL)
+        if((pexit = GetExit(ch->InRoom, dir)) == NULL)
         {
             continue;
         }
 
-        if (pexit->Flags.test(Flag::Exit::Closed))
+        if(pexit->Flags.test(Flag::Exit::Closed))
         {
             continue;
         }
 
         was_in_room = ch->InRoom;
 
-        for (dist = 0; dist <= max_dist; dist++)
+        for(dist = 0; dist <= max_dist; dist++)
         {
-            if (pexit->Flags.test(Flag::Exit::Closed))
+            if(pexit->Flags.test(Flag::Exit::Closed))
             {
                 break;
             }
 
-            if (!pexit->ToRoom)
+            if(!pexit->ToRoom)
             {
                 break;
             }
 
             to_room = NULL;
 
-            if (pexit->Distance > 1)
+            if(pexit->Distance > 1)
             {
                 to_room = GenerateExit(ch->InRoom, pexit);
             }
 
-            if (to_room == NULL)
+            if(to_room == NULL)
             {
                 to_room = pexit->ToRoom;
             }
@@ -505,13 +505,13 @@ static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
             CharacterFromRoom(ch);
             CharacterToRoom(ch, to_room);
 
-            if (ch->InRoom == victim->InRoom)
+            if(ch->InRoom == victim->InRoom)
             {
                 pfound = true;
                 break;
             }
 
-            if ((pexit = GetExit(ch->InRoom, dir)) == NULL)
+            if((pexit = GetExit(ch->InRoom, dir)) == NULL)
             {
                 break;
             }
@@ -520,39 +520,39 @@ static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         CharacterFromRoom(ch);
         CharacterToRoom(ch, was_in_room);
 
-        if (!pfound)
+        if(!pfound)
         {
             CharacterFromRoom(ch);
             CharacterToRoom(ch, was_in_room);
             continue;
         }
 
-        if (victim->InRoom->Flags.test(Flag::Room::Safe))
+        if(victim->InRoom->Flags.test(Flag::Room::Safe))
         {
             return false;
         }
 
-        if (IsSafe(ch, victim))
+        if(IsSafe(ch, victim))
         {
             return false;
         }
 
-        if (IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
+        if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == victim)
         {
             return false;
         }
 
-        if (ch->Position == POS_FIGHTING)
+        if(ch->Position == POS_FIGHTING)
         {
             return false;
         }
 
-        if (!CanSeeCharacter(ch, victim))
+        if(!CanSeeCharacter(ch, victim))
         {
             return false;
         }
 
-        switch (dir)
+        switch(dir)
         {
         case DIR_NORTH:
         case DIR_EAST:
@@ -590,23 +590,23 @@ static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         CharacterToRoom(ch, victim->InRoom);
 
         sprintf(buf, "A blaster shot fires at you from the %s.",
-            GetDirectionName(dir));
+                GetDirectionName(dir));
         Act(AT_ACTION, buf, victim, NULL, ch, ActTarget::Char);
         Act(AT_ACTION, "You fire at $N.", ch, NULL, victim, ActTarget::Char);
         sprintf(buf, "A blaster shot fires at $N from the %s.",
-            GetDirectionName(dir));
+                GetDirectionName(dir));
         Act(AT_ACTION, buf, ch, NULL, victim, ActTarget::NotVict);
 
         HitOnce(ch, victim, TYPE_UNDEFINED);
 
-        if (CharacterDiedRecently(ch))
+        if(CharacterDiedRecently(ch))
         {
             return true;
         }
 
         StopFighting(ch, true);
 
-        if (victim && !CharacterDiedRecently(victim) && victim->HitPoints.Current < 0)
+        if(victim && !CharacterDiedRecently(victim) && victim->HitPoints.Current < 0)
         {
             StopHunting(ch);
             StopHating(ch);

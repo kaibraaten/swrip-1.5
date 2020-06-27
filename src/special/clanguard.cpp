@@ -6,7 +6,7 @@
 
 bool spec_clan_guard(std::shared_ptr<Character> ch)
 {
-    if(!IsAwake(ch) || ch->Fighting)
+    if(!IsAwake(ch) || IsFighting(ch))
         return false;
 
     std::shared_ptr<Clan> clan = GetClan(ch->Name);

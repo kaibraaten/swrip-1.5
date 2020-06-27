@@ -521,13 +521,13 @@ static void show_char_to_char_0(std::shared_ptr<Character> victim, std::shared_p
     case POS_FIGHTING:
         strcat(buf, " is here, fighting ");
 
-        if(!victim->Fighting)
+        if(!IsFighting(victim))
             strcat(buf, "thin air???");
-        else if(GetFightingOpponent(victim) == ch)
+        else if(WhoFighting(victim) == ch)
             strcat(buf, "YOU!");
-        else if(victim->InRoom == victim->Fighting->Who->InRoom)
+        else if(victim->InRoom == WhoFighting(victim)->InRoom)
         {
-            strcat(buf, PERS(victim->Fighting->Who, ch).c_str());
+            strcat(buf, PERS(WhoFighting(victim), ch).c_str());
             strcat(buf, ".");
         }
         else

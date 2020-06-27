@@ -8,7 +8,7 @@
 
 bool spec_stormtrooper(std::shared_ptr<Character> ch)
 {
-    if(!IsAwake(ch) || ch->Fighting)
+    if(!IsAwake(ch) || IsFighting(ch))
         return false;
 
     std::vector<std::shared_ptr<Character>> rebels(std::begin(ch->InRoom->Characters()),
@@ -22,8 +22,8 @@ bool spec_stormtrooper(std::shared_ptr<Character> ch)
                             && ((IsNpc(victim)
                                  && (NiftyIsName("rebel", victim->Name)
                                      || NiftyIsName("republic", victim->Name))
-                                 && victim->Fighting
-                                 && GetFightingOpponent(victim) != ch)
+                                 && IsFighting(victim)
+                                 && WhoFighting(victim) != ch)
                                 || (!IsNpc(victim) && IsClanned(victim)
                                     && IsAwake(victim)
                                     && (NiftyIsName("rebel", victim->PCData->ClanInfo.Clan->Name)

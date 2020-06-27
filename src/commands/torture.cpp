@@ -58,7 +58,7 @@ void do_torture(std::shared_ptr<Character> ch, std::string arg)
     if(IsSafe(ch, victim))
         return;
 
-    if(victim->Fighting)
+    if(IsFighting(victim))
     {
         ch->Echo("You can't torture someone who is in combat.\r\n");
         return;

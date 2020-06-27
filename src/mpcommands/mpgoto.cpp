@@ -8,10 +8,10 @@ void do_mpgoto(std::shared_ptr<Character> ch, std::string argument)
     std::string arg;
     std::shared_ptr<Room> location;
 
-    if (IsAffectedBy(ch, Flag::Affect::Charm))
+    if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
 
-    if (!IsNpc(ch))
+    if(!IsNpc(ch))
     {
         ch->Echo("Huh?\r\n");
         return;
@@ -19,19 +19,19 @@ void do_mpgoto(std::shared_ptr<Character> ch, std::string argument)
 
     OneArgument(argument, arg);
 
-    if (arg.empty())
+    if(arg.empty())
     {
         ProgBug("Mpgoto - No argument", ch);
         return;
     }
 
-    if ((location = FindLocation(ch, arg)) == NULL)
+    if((location = FindLocation(ch, arg)) == NULL)
     {
         ProgBug("Mpgoto - No such location", ch);
         return;
     }
 
-    if (ch->Fighting)
+    if(IsFighting(ch))
         StopFighting(ch, true);
 
     CharacterFromRoom(ch);

@@ -10,7 +10,7 @@ void do_flee(std::shared_ptr<Character> ch, std::string argument)
 {
     DirectionType door = DIR_INVALID;
 
-    if(!GetFightingOpponent(ch))
+    if(!IsFighting(ch))
     {
         if(ch->Position == POS_FIGHTING)
         {
@@ -55,8 +55,9 @@ void do_flee(std::shared_ptr<Character> ch, std::string argument)
             ch->AffectedBy.reset(Flag::Affect::Sneak);
         }
 
-        if(ch->Mount && ch->Mount->Fighting)
+        if(ch->Mount && IsFighting(ch->Mount))
             StopFighting(ch->Mount, true);
+
         MoveCharacter(ch, pexit, 0);
 
         MobProgEntryTrigger(ch);

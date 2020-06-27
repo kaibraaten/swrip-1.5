@@ -48,7 +48,7 @@ void do_scatter(std::shared_ptr<Character> ch, std::string arg)
         }
     }
 
-    if(victim->Fighting)
+    if(IsFighting(victim))
         StopFighting(victim, true);
 
     Act(AT_MAGIC, "With the sweep of an arm, $n flings $N to the winds.",

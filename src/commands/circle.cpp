@@ -56,13 +56,13 @@ void do_circle(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(!ch->Fighting)
+    if(!IsFighting(ch))
     {
         ch->Echo("You can't circle when you aren't fighting.\r\n");
         return;
     }
 
-    if(!victim->Fighting)
+    if(!IsFighting(victim))
     {
         ch->Echo("You can't circle around a person who is not fighting.\r\n");
         return;

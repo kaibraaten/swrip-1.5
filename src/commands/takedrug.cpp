@@ -174,7 +174,7 @@ void do_takedrug(std::shared_ptr<Character> ch, std::string argument)
         Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, ActTarget::Room);
     }
 
-    if(ch->Fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48))
+    if(IsFighting(ch) && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48))
     {
         Act(AT_MAGIC, "$n accidentally drops $p rendering it useless.", ch, obj, NULL, ActTarget::Room);
         Act(AT_MAGIC, "Oops... $p gets knocked from your hands rendering it completely useless!",

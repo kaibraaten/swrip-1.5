@@ -962,7 +962,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         }
         else if(!StrCmp(chck, "isfight"))
         {
-            return GetFightingOpponent(chkchar) ? true : false;
+            return IsFighting(chkchar);
         }
         else if(!StrCmp(chck, "isimmort"))
         {
@@ -2502,7 +2502,7 @@ void MobProgGreetTrigger(std::shared_ptr<Character> ch)
     for(auto vmob : copyOfCharacterList)
     {
         if(!IsNpc(vmob)
-           || vmob->Fighting
+           || IsFighting(vmob)
            || !IsAwake(vmob))
         {
             continue;

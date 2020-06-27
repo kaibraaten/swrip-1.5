@@ -9,7 +9,7 @@ void do_peace(std::shared_ptr<Character> ch, std::string argument)
 
     for(auto rch : ch->InRoom->Characters())
     {
-        if(rch->Fighting)
+        if(IsFighting(rch))
         {
             StopFighting(rch, true);
             do_sit(rch, "");

@@ -266,7 +266,7 @@ static void EraseRooms(const std::shared_ptr<Area> &pArea)
 
                 for(auto ech : copyOfCharacterList)
                 {
-                    if(ech->Fighting)
+                    if(IsFighting(ech))
                         StopFighting(ech, true);
 
                     if(IsNpc(ech))
@@ -355,7 +355,7 @@ static void ExtractCharactersFromArea(const std::shared_ptr<Area> &pArea)
     {
         ech_next = ech->Next;
 
-        if(ech->Fighting)
+        if(IsFighting(ech))
             StopFighting(ech, true);
 
         if(IsNpc(ech))

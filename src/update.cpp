@@ -906,7 +906,7 @@ static bool IsHunting(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch) && !ch->Flags.test(Flag::Mob::Running)
         && !ch->Flags.test(Flag::Mob::Sentinel)
-        && !ch->Fighting && ch->HHF.Hunting;
+        && !IsFighting(ch) && ch->HHF.Hunting;
 }
 
 static void UpdateHunt(std::shared_ptr<Character> ch)
@@ -944,7 +944,7 @@ static void UpdateHunt(std::shared_ptr<Character> ch)
 static bool IsSentinelWhoIsReadyToReturn(std::shared_ptr<Character> ch)
 {
     return IsNpc(ch)
-        && !ch->Fighting && !ch->HHF.Hunting
+        && !IsFighting(ch) && !ch->HHF.Hunting
         && !ch->Flags.test(Flag::Mob::Running)
         && ch->WasSentinel && ch->Position >= POS_STANDING;
 }
@@ -2383,7 +2383,7 @@ static void CharacterCheck()
             if(ch->Flags.test(Flag::Mob::Running))
             {
                 if(!ch->Flags.test(Flag::Mob::Sentinel)
-                   && !ch->Fighting && ch->HHF.Hunting)
+                   && !IsFighting(ch) && ch->HHF.Hunting)
                 {
                     SetWaitState(ch, 2 * PULSE_VIOLENCE);
                     HuntVictim(ch);
@@ -2542,7 +2542,7 @@ static bool PerformBackstab(std::shared_ptr<Character> ch, std::shared_ptr<Chara
     if(!ch->Mount
        && obj != nullptr
        && WeaponCanBackstab(obj)
-       && !victim->Fighting
+       && !IsFighting(victim)
        && victim->HitPoints.Current >= victim->HitPoints.Max)
     {
         SetWaitState(ch, SkillTable[gsn_backstab]->Beats);
@@ -2574,12 +2574,12 @@ static bool PerformBackstab(std::shared_ptr<Character> ch, std::shared_ptr<Chara
  */
 static void AggroUpdate()
 {
-    for(std::shared_ptr<Character> ch = FirstCharacter, wch_next = nullptr; ch; ch = wch_next)
+    for(std::shared_ptr<Character> ch = FirstCharacter, wch_next; ch; ch = wch_next)
     {
         wch_next = ch->Next;
 
         if(!IsNpc(ch)
-           || ch->Fighting
+           || IsFighting(ch)
            || IsAffectedBy(ch, Flag::Affect::Charm)
            || !IsAwake(ch)
            || ch->Flags.test(Flag::Mob::Wimpy)

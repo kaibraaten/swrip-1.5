@@ -106,7 +106,7 @@ void do_mstat(std::shared_ptr<Character> ch, std::string arg)
              GetHitRoll(victim), GetDamageRoll(victim),
              victim->Position, victim->Wimpy);
     ch->Echo("Fighting: %s    Master: %s    Leader: %s\r\n",
-             victim->Fighting ? victim->Fighting->Who->Name.c_str() : "(none)",
+             IsFighting(victim) ? WhoFighting(victim)->Name.c_str() : "(none)",
              victim->Master ? victim->Master->Name.c_str() : "(none)",
              victim->Leader ? victim->Leader->Name.c_str() : "(none)");
 

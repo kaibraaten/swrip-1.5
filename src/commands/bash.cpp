@@ -7,7 +7,6 @@
 void do_bash(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Character> victim;
-    int bash_chance = 0;
 
     if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
     {
@@ -22,18 +21,19 @@ void do_bash(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if((victim = GetFightingOpponent(ch)) == NULL)
+    if((victim = WhoFighting(ch)) == nullptr)
     {
         ch->Echo("You aren't fighting anyone.\r\n");
         return;
     }
 
-    bash_chance = (((GetCurrentDexterity(victim) + GetCurrentStrength(victim))
-                    - (GetCurrentDexterity(ch) + GetCurrentStrength(ch))) * 10) + 10;
+    int bash_chance = (((GetCurrentDexterity(victim) + GetCurrentStrength(victim))
+                        - (GetCurrentDexterity(ch) + GetCurrentStrength(ch))) * 10) + 10;
+
     if(!IsNpc(ch) && !IsNpc(victim))
         bash_chance += 25;
 
-    if(victim->Fighting && victim->Fighting->Who != ch)
+    if(IsFighting(victim) && WhoFighting(victim) != ch)
         bash_chance += 19;
 
     SetWaitState(ch, SkillTable[gsn_bash]->Beats);

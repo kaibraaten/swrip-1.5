@@ -325,7 +325,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
         switch(NumberBits(2))
         {
         case 0: /* too busy */
-            if(ch->Fighting)
+            if(IsFighting(ch))
                 ch->Echo("This round of battle is too hectic to concentrate properly.\r\n");
             else
                 ch->Echo("You lost your concentration.\r\n");
@@ -360,7 +360,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
             break;
 
         case 2: /* not enough time */
-            if(ch->Fighting)
+            if(IsFighting(ch))
                 ch->Echo("There wasn't enough time this round to complete your concentration.\r\n");
             else
                 ch->Echo("You lost your concentration.\r\n");
@@ -410,7 +410,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
         int force_exp = skill->Level * skill->Level * 10;
         force_exp = urange(0, force_exp, (GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY))) / 35);
 
-        if(!ch->Fighting)
+        if(!IsFighting(ch))
         {
             ch->Echo("You gain %d force experience.\r\n", force_exp);
         }
@@ -436,7 +436,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
             if(vch == victim)
             {
                 if(victim->Master != ch
-                   && !victim->Fighting)
+                   && !IsFighting(victim))
                 {
                     retcode = HitMultipleTimes(victim, ch, TYPE_UNDEFINED);
                 }

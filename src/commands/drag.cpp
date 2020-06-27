@@ -46,7 +46,7 @@ void do_drag(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(victim->Fighting)
+    if(IsFighting(victim))
     {
         ch->Echo("You try, but can't get close enough.\r\n");
         return;

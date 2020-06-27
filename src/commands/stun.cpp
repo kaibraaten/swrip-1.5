@@ -25,7 +25,7 @@ void do_stun(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if((victim = GetFightingOpponent(ch)) == NULL)
+    if((victim = WhoFighting(ch)) == NULL)
     {
         ch->Echo("You aren't fighting anyone.\r\n");
         return;

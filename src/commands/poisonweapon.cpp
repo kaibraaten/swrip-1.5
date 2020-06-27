@@ -23,7 +23,7 @@ void do_poison_weapon(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    if(ch->Fighting)
+    if(IsFighting(ch))
     {
         ch->Echo("While you're fighting? Nice try.\r\n");
         return;

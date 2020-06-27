@@ -98,7 +98,7 @@ void do_mptransfer(std::shared_ptr<Character> ch, std::string argument)
        && location->Flags.test(Flag::Room::Prototype))
         return;
 
-    if(victim->Fighting)
+    if(IsFighting(victim))
         StopFighting(victim, true);
 
     CharacterFromRoom(victim);

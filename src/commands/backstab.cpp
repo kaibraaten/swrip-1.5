@@ -54,7 +54,7 @@ void do_backstab(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    if(victim->Fighting)
+    if(IsFighting(victim))
     {
         ch->Echo("You can't backstab someone who is in combat.\r\n");
         return;

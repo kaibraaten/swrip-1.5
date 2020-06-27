@@ -58,7 +58,8 @@ void do_quaff(std::shared_ptr<Character> ch, std::string argument)
     /*
      * If fighting, chance of dropping potion                     -Thoric
      */
-    if(ch->Fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48))
+    if(IsFighting(ch)
+       && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48))
     {
         Act(AT_MAGIC, "$n accidentally drops $p and it smashes into a thousand fragments.",
             ch, obj, nullptr, ActTarget::Room);

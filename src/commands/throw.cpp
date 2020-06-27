@@ -63,9 +63,9 @@ void do_throw(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(ch->Position == POS_FIGHTING)
+    if(IsFighting(ch))
     {
-        victim = GetFightingOpponent(ch);
+        victim = WhoFighting(ch);
 
         if(CharacterDiedRecently(victim))
             return;

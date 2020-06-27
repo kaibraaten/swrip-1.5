@@ -22,7 +22,7 @@ void do_punch(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    if((victim = GetFightingOpponent(ch)) == NULL)
+    if((victim = WhoFighting(ch)) == NULL)
     {
         if(arg.empty())
         {

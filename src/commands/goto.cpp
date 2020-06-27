@@ -95,7 +95,7 @@ void do_goto(std::shared_ptr<Character> ch, std::string argument)
 
     auto in_room = ch->InRoom;
 
-    if(ch->Fighting)
+    if(IsFighting(ch))
         StopFighting(ch, true);
 
     if(!ch->Flags.test(Flag::Plr::WizInvis))

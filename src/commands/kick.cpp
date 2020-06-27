@@ -15,7 +15,7 @@ void do_kick(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if((victim = GetFightingOpponent(ch)) == NULL)
+    if((victim = WhoFighting(ch)) == nullptr)
     {
         ch->Echo("You aren't fighting anyone.\r\n");
         return;
@@ -23,8 +23,8 @@ void do_kick(std::shared_ptr<Character> ch, std::string argument)
 
     if(victim->Flags.test(Flag::Plr::Afk))
     {
-        Log->Info("%s just attacked %s with an afk flag on!"
-                  , ch->Name.c_str(), victim->Name.c_str());
+        Log->Info("%s just attacked %s with an afk flag on!",
+                  ch->Name.c_str(), victim->Name.c_str());
     }
 
     SetWaitState(ch, SkillTable[gsn_kick]->Beats);

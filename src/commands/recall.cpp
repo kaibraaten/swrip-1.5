@@ -46,7 +46,7 @@ void do_recall(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if((opponent = GetFightingOpponent(ch)) != NULL)
+    if((opponent = WhoFighting(ch)) != NULL)
     {
         if(NumberBits(1) == 0 || (!IsNpc(opponent) && NumberBits(3) > 1))
         {
