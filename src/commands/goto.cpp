@@ -26,13 +26,13 @@ void do_goto(std::shared_ptr<Character> ch, std::string argument)
     {
         vnum = ToLong(arg);
 
-        if(vnum < 0 || GetRoom(vnum))
+        if(vnum <= 0 || GetRoom(vnum))
         {
             ch->Echo("You cannot find that...\r\n");
             return;
         }
 
-        if(vnum < 1 || IsNpc(ch) || !ch->PCData->Build.Area)
+        if(IsNpc(ch) || !ch->PCData->Build.Area)
         {
             ch->Echo("No such location.\r\n");
             return;

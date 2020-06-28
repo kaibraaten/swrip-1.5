@@ -1510,6 +1510,8 @@ void FreeCharacter(std::shared_ptr<Character> ch)
         FreeAliases(ch);
         ImcFreeCharacter(ch);
     }
+
+    ch->NumFighting = 0;
 }
 
 bool IsInArena(std::shared_ptr<Character> ch)

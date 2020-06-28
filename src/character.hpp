@@ -153,6 +153,7 @@ public:
     std::shared_ptr<Room> WasSentinel;
     CmdFun *LastCommand = NULL;
     CmdFun *PreviousCommand = NULL;   /* mapping */
+    int NumFighting = 0;
     std::string dest_buf;
     int tempnum = 0;
     CharacterSubState SubState = SUB_NONE;

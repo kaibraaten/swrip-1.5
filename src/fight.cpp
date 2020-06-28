@@ -62,7 +62,6 @@ public:
     std::shared_ptr<Character> Who;
     long Xp = 0;
     short Duration = 0;
-    int NumFighting = 0;
 };
 
 Fight::Fight(const std::shared_ptr<Character> &who)
@@ -106,14 +105,7 @@ static bool IsWieldingPoisonedWeapon(std::shared_ptr<Character> ch)
 
 int NumFighting(const std::shared_ptr<Character> &ch)
 {
-    if(IsFighting(ch))
-    {
-        return ch->Fighting->NumFighting;
-    }
-    else
-    {
-        return 0;
-    }
+    return ch->NumFighting;
 }
 
 bool IsFighting(const std::shared_ptr<Character> &ch)
@@ -1558,14 +1550,6 @@ static void WimpOut(std::shared_ptr<Character> ch, std::shared_ptr<Character> vi
  */
 ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, int dam, int dt)
 {
-    //char buf1[MAX_STRING_LENGTH];
-    //bool loot = false;
-    //long xp_gain = 0;
-    //std::shared_ptr<Object> damobj;
-    //ch_ret retcode = rNONE;
-    //short dampmod = 0;
-    //int init_gold = 0, new_gold = 0, gold_diff = 0;
-
     if(!ch)
     {
         Log->Bug("%s: null ch!", __FUNCTION__);
@@ -2464,9 +2448,9 @@ void StartFighting(std::shared_ptr<Character> ch, std::shared_ptr<Character> vic
     ch->Fighting = std::make_shared<Fight>(victim);
     ch->Fighting->Xp = ComputeXP(ch, victim);
 
-    ch->Fighting->NumFighting = 1;
+    ch->NumFighting = 1;
     ch->Position = POS_FIGHTING;
-    victim->Fighting->NumFighting++;
+    victim->NumFighting++;
 
     if(victim->Switched && IsAffectedBy(victim->Switched, Flag::Affect::Possess))
     {
@@ -2487,7 +2471,7 @@ void FreeFight(std::shared_ptr<Character> ch)
     {
         if(!CharacterDiedRecently(ch->Fighting->Who))
         {
-            --ch->Fighting->Who->Fighting->NumFighting;
+            --ch->Fighting->Who->NumFighting;
         }
     }
 
