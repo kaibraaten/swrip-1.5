@@ -12,7 +12,7 @@ void do_bashdoor(std::shared_ptr<Character> ch, std::string arg)
     std::shared_ptr<Exit> pexit;
 
     if(!IsNpc(ch)
-       && ch->PCData->Learned[gsn_bashdoor] <= 0)
+       && GetSkillLevel(ch, gsn_bashdoor) <= 0)
     {
         ch->Echo("You're not enough of a warrior to bash doors!\r\n");
         return;
@@ -51,7 +51,7 @@ void do_bashdoor(std::shared_ptr<Character> ch, std::string arg)
             keyword = pexit->Keyword;
 
         if(!IsNpc(ch))
-            bash_chance = ch->PCData->Learned[gsn_bashdoor] / 2;
+            bash_chance = GetSkillLevel(ch, gsn_bashdoor) / 2;
         else
             bash_chance = 90;
 

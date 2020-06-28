@@ -96,7 +96,7 @@ void do_mass_propaganda(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_masspropaganda]->Beats);
 
-    if(percent - GetCurrentCharisma(ch) + victim->TopLevel > ch->PCData->Learned[gsn_masspropaganda])
+    if(percent - GetCurrentCharisma(ch) + victim->TopLevel > GetSkillLevel(ch, gsn_masspropaganda))
     {
         if(planet->GovernedBy != clan)
         {

@@ -36,7 +36,7 @@ void do_elite_guard(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        the_chance = (int)(ch->PCData->Learned[gsn_eliteguard]);
+        the_chance = GetSkillLevel(ch, gsn_eliteguard);
 
         if(GetRandomPercent() < the_chance)
         {

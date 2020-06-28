@@ -17,7 +17,7 @@ void do_dismount(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_mount]->Beats);
 
-    if(IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_mount])
+    if(IsNpc(ch) || GetRandomPercent() < GetSkillLevel(ch, gsn_mount))
     {
         Act(AT_SKILL, "You dismount $N.", ch, NULL, victim, ActTarget::Char);
         Act(AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, ActTarget::NotVict);

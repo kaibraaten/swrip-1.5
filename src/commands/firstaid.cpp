@@ -45,7 +45,7 @@ void do_first_aid(std::shared_ptr<Character> ch, std::string argument)
 
     heal = GetRandomNumberFromRange(1, 150);
 
-    if(heal > ch->PCData->Learned[gsn_first_aid] * 2)
+    if(heal > GetSkillLevel(ch, gsn_first_aid) * 2)
     {
         ch->Echo("You fail in your attempt at first aid.\r\n");
         LearnFromFailure(ch, gsn_first_aid);

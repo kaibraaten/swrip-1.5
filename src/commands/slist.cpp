@@ -68,7 +68,7 @@ void do_slist(std::shared_ptr<Character> ch, std::string argument)
                     continue;
                 }
 
-                if(ch->PCData->Learned[sn] == 0
+                if(GetSkillLevel(ch, sn) == 0
                    && SPELL_FLAG(skill, SF_SECRETSKILL))
                 {
                     continue;

@@ -76,8 +76,7 @@ void do_calculate_diff(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PCData->Learned[gsn_navigation]);
+    the_chance = GetSkillLevel(ch, gsn_navigation);
 
     if(GetRandomPercent() > the_chance)
     {

@@ -10,7 +10,7 @@ void do_mount(std::shared_ptr<Character> ch, std::string argument)
     std::shared_ptr<Character> victim;
 
     if(!IsNpc(ch)
-       && ch->PCData->Learned[gsn_mount] <= 0)
+       && GetSkillLevel(ch, gsn_mount) <= 0)
     {
         ch->Echo("I don't think that would be a good idea...\r\n");
         return;
@@ -54,7 +54,7 @@ void do_mount(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_mount]->Beats);
 
-    if(IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_mount])
+    if(IsNpc(ch) || GetRandomPercent() < GetSkillLevel(ch, gsn_mount))
     {
         victim->Flags.set(Flag::Mob::Mounted);
         ch->Mount = victim;

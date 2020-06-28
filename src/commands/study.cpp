@@ -55,17 +55,17 @@ void do_study(std::shared_ptr<Character> ch, std::string argument) /* study by A
 
     SetWaitState(ch, SkillTable[gsn_study]->Beats);
 
-    if(GetRandomPercent() >= 55 + ch->PCData->Learned[gsn_study] * 4 / 5)
+    if(GetRandomPercent() >= 55 + GetSkillLevel(ch, gsn_study) * 4 / 5)
     {
         ch->Echo("You cannot glean any knowledge from it.\r\n");
         LearnFromFailure(ch, gsn_study);
         return;
     }
 
-    if(ch->PCData->Learned[sn] <= 0)
+    if(GetSkillLevel(ch, sn) <= 0)
         Act(AT_MAGIC, "You have begun learning the ability to $t!",
             ch, SkillTable[sn]->Name, nullptr, ActTarget::Char);
-    else if(ch->PCData->Learned[sn] < 15)
+    else if(GetSkillLevel(ch, sn) < 15)
         Act(AT_MAGIC, "You have learned a bit more of the ability to $t!",
             ch, SkillTable[sn]->Name, nullptr, ActTarget::Char);
     else

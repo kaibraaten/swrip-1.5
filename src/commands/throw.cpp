@@ -255,7 +255,7 @@ void do_throw(std::shared_ptr<Character> ch, std::string argument)
     {
         SetWaitState(ch, SkillTable[gsn_throw]->Beats);
 
-        if(IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_throw])
+        if(IsNpc(ch) || GetRandomPercent() < GetSkillLevel(ch, gsn_throw))
         {
             LearnFromSuccess(ch, gsn_throw);
             global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(obj->Weight * 2, (obj->Weight * 2 + ch->PermStats.Str)), TYPE_HIT);

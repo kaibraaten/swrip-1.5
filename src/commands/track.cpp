@@ -11,7 +11,7 @@ void do_track(std::shared_ptr<Character> ch, std::string arg)
     char buf[MAX_STRING_LENGTH] = { '\0' };
     int maxdist = 0;
 
-    if(!IsNpc(ch) && !ch->PCData->Learned[gsn_track])
+    if(!IsNpc(ch) && GetSkillLevel(ch, gsn_track) <= 0)
     {
         ch->Echo("You do not know of this skill yet.\r\n");
         return;
@@ -34,7 +34,7 @@ void do_track(std::shared_ptr<Character> ch, std::string arg)
     maxdist = 100 + ch->TopLevel * 30;
 
     if(!IsNpc(ch))
-        maxdist = (maxdist * ch->PCData->Learned[gsn_track]) / 100;
+        maxdist = (maxdist * GetSkillLevel(ch, gsn_track)) / 100;
 
     DirectionType dir = FindFirstStep(ch->InRoom, vict->InRoom, maxdist);
 

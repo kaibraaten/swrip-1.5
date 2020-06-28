@@ -36,7 +36,7 @@ void do_add_patrol(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        the_chance = (int)(ch->PCData->Learned[gsn_addpatrol]);
+        the_chance = GetSkillLevel(ch, gsn_addpatrol);
 
         if(GetRandomPercent() < the_chance)
         {

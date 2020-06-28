@@ -35,7 +35,7 @@ void do_seduce(std::shared_ptr<Character> ch, std::string arg)
 
     SetWaitState(ch, SkillTable[gsn_seduce]->Beats);
 
-    if(victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->Learned[gsn_seduce])
+    if(victim->TopLevel - GetCurrentCharisma(ch) > GetSkillLevel(ch, gsn_seduce))
     {
         ch->Echo("You failed.\r\n");
         sprintf(buf, "%s failed to seduce you.", ch->Name.c_str());

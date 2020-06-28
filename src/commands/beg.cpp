@@ -85,7 +85,7 @@ void do_beg(std::shared_ptr<Character> ch, std::string argument)
     SetWaitState(ch, SkillTable[gsn_beg]->Beats);
     percent = GetRandomPercent() + GetAbilityLevel(ch, SMUGGLING_ABILITY) + victim->TopLevel;
 
-    if(percent > ch->PCData->Learned[gsn_beg])
+    if(percent > GetSkillLevel(ch, gsn_beg))
     {
         /*
          * Failure.

@@ -36,7 +36,7 @@ void do_special_forces(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        the_chance = (int)(ch->PCData->Learned[gsn_specialforces]);
+        the_chance = GetSkillLevel(ch, gsn_specialforces);
 
         if(GetRandomPercent() < the_chance)
         {

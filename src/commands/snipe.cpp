@@ -44,8 +44,8 @@ void do_snipe(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(!IsNpc(ch) && ch->PCData->Learned[gsn_snipe] > 100)
-        max_dist += (ch->PCData->Learned[gsn_snipe]) / 15;
+    if(!IsNpc(ch) && GetSkillLevel(ch, gsn_snipe) > 100)
+        max_dist += GetSkillLevel(ch, gsn_snipe) / 15;
 
     argument = OneArgument(argument, arg);
     argument = OneArgument(argument, arg2);
@@ -150,8 +150,7 @@ void do_snipe(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    the_chance = IsNpc(ch) ? 100
-        : (int)(ch->PCData->Learned[gsn_snipe]);
+    the_chance = IsNpc(ch) ? 100 : GetSkillLevel(ch, gsn_snipe);
 
     switch(dir)
     {
@@ -223,9 +222,9 @@ void do_snipe(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
-        if(GetRandomPercent() < ch->PCData->Learned[gsn_third_attack])
+        if(GetRandomPercent() < GetSkillLevel(ch, gsn_third_attack))
             SetWaitState(ch, 1 * PULSE_PER_SECOND);
-        else if(GetRandomPercent() < ch->PCData->Learned[gsn_second_attack])
+        else if(GetRandomPercent() < GetSkillLevel(ch, gsn_second_attack))
             SetWaitState(ch, 2 * PULSE_PER_SECOND);
         else
             SetWaitState(ch, 3 * PULSE_PER_SECOND);

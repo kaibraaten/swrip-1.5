@@ -53,8 +53,7 @@ void do_chaff(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    int the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PCData->Learned[gsn_weaponsystems]);
+    int the_chance = GetSkillLevel(ch, gsn_weaponsystems);
 
     if(GetRandomPercent() <= the_chance)
     {

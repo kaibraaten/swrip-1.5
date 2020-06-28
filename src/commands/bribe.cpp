@@ -113,7 +113,7 @@ void do_bribe(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_bribe]->Beats);
 
-    if(percent - amount + victim->TopLevel > ch->PCData->Learned[gsn_bribe])
+    if(percent - amount + victim->TopLevel > GetSkillLevel(ch, gsn_bribe))
         return;
 
     if((clan = ch->PCData->ClanInfo.Clan->MainClan) == NULL)

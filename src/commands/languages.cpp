@@ -55,8 +55,8 @@ void do_languages(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(RaceTable[ch->Race].Language & LanguageArray[lang] ||
-           ch->PCData->Learned[sn] >= 99)
+        if(RaceTable[ch->Race].Language & LanguageArray[lang]
+           || GetSkillLevel(ch, sn) >= 99)
         {
             Act(AT_PLAIN, "You are already fluent in $t.", ch,
                 ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
@@ -94,23 +94,23 @@ void do_languages(std::shared_ptr<Character> ch, std::string argument)
         /* Max 12% (5 + 4 + 3) at 24+ int and 21+ wis. -- Altrag */
         prct = 5 + (GetCurrentIntelligence(ch) / 6) + (GetCurrentWisdom(ch) / 7);
         ch->PCData->Learned[sn] += prct;
-        ch->PCData->Learned[sn] = umin(ch->PCData->Learned[sn], 99);
+        ch->PCData->Learned[sn] = umin(GetSkillLevel(ch, sn), 99);
         SetBit(ch->Speaks, LanguageArray[lang]);
 
-        if(ch->PCData->Learned[sn] == prct)
+        if(GetSkillLevel(ch, sn) == prct)
             Act(AT_PLAIN, "You begin lessons in $t.", ch,
                 ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
-        else if(ch->PCData->Learned[sn] < 60)
+        else if(GetSkillLevel(ch, sn) < 60)
             Act(AT_PLAIN, "You continue lessons in $t.", ch,
                 ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
-        else if(ch->PCData->Learned[sn] < 60 + prct)
+        else if(GetSkillLevel(ch, sn) < 60 + prct)
             Act(AT_PLAIN, "You feel you can start communicating in $t.", ch,
                 ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
-        else if(ch->PCData->Learned[sn] < 99)
+        else if(GetSkillLevel(ch, sn) < 99)
             Act(AT_PLAIN, "You become more fluent in $t.", ch,
                 ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
         else
-            Act(AT_PLAIN, "You now speak perfect $t.", ch, 
+            Act(AT_PLAIN, "You now speak perfect $t.", ch,
                 ActArg(LanguageNames[lang]), nullptr, ActTarget::Char);
         return;
     }
@@ -128,7 +128,7 @@ void do_languages(std::shared_ptr<Character> ch, std::string argument)
         if((sn = LookupSkill(LanguageNames[lang])) < 0)
             ch->Echo("(  0) ");
         else
-            ch->Echo("(%3d) ", ch->PCData->Learned[sn]);
+            ch->Echo("(%3d) ", GetSkillLevel(ch, sn));
 
         ch->Echo("%s\r\n", LanguageNames[lang]);
     }

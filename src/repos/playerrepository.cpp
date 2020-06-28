@@ -893,14 +893,14 @@ void InMemoryPlayerRepository::PushSkills(lua_State *L, std::shared_ptr<Characte
     {
         std::shared_ptr<Skill> skill = SkillTable[sn];
 
-        if (!skill->Name.empty() && pc->PCData->Learned[sn] > 0)
+        if (!skill->Name.empty() && GetSkillLevel(pc, sn) > 0)
         {
             lua_pushnumber(L, sn);
             lua_newtable(L);
 
             LuaSetfieldString(L, "Type", SkillTypeName[skill->Type]);
             LuaSetfieldString(L, "Name", skill->Name);
-            LuaSetfieldNumber(L, "Level", pc->PCData->Learned[sn]);
+            LuaSetfieldNumber(L, "Level", GetSkillLevel(pc, sn));
 
             lua_settable(L, -3);
         }

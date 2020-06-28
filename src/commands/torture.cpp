@@ -13,7 +13,7 @@ void do_torture(std::shared_ptr<Character> ch, std::string arg)
     bool fail = false;
 
     if(!IsNpc(ch)
-       && ch->PCData->Learned[gsn_torture] <= 0)
+       && GetSkillLevel(ch, gsn_torture) <= 0)
     {
         ch->Echo("Your mind races as you realize you have no idea how to do that.\r\n");
         return;
@@ -84,7 +84,7 @@ void do_torture(std::shared_ptr<Character> ch, std::string arg)
 
     if(!fail
        && (IsNpc(ch)
-           || (GetRandomPercent() + the_chance) < ch->PCData->Learned[gsn_torture]))
+           || (GetRandomPercent() + the_chance) < GetSkillLevel(ch, gsn_torture)))
     {
         LearnFromSuccess(ch, gsn_torture);
         SetWaitState(ch, 2 * PULSE_VIOLENCE);

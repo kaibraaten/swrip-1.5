@@ -88,7 +88,7 @@ void do_smalltalk(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_smalltalk]->Beats);
 
-    if(percent - GetAbilityLevel(ch, DIPLOMACY_ABILITY) + victim->TopLevel > ch->PCData->Learned[gsn_smalltalk])
+    if(percent - GetAbilityLevel(ch, DIPLOMACY_ABILITY) + victim->TopLevel > GetSkillLevel(ch, gsn_smalltalk))
     {
         /*
          * Failure.

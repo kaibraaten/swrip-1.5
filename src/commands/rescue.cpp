@@ -68,7 +68,7 @@ void do_rescue(std::shared_ptr<Character> ch, std::string arg)
 
     SetWaitState(ch, SkillTable[gsn_rescue]->Beats);
 
-    if(!IsNpc(ch) && percent > ch->PCData->Learned[gsn_rescue])
+    if(!IsNpc(ch) && percent > GetSkillLevel(ch, gsn_rescue))
     {
         ch->Echo("You fail the rescue.\r\n");
         Act(AT_SKILL, "$n tries to rescue you!", ch, NULL, victim, ActTarget::Vict);

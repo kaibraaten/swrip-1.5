@@ -83,16 +83,13 @@ void do_launch(std::shared_ptr<Character> ch, std::string argument)
     }
 
     if(ship->Class <= FIGHTER_SHIP)
-        the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PCData->Learned[gsn_starfighters]);
+        the_chance = GetSkillLevel(ch, gsn_starfighters);
 
     if(ship->Class == MIDSIZE_SHIP)
-        the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PCData->Learned[gsn_midships]);
+        the_chance = GetSkillLevel(ch, gsn_midships);
 
     if(ship->Class == CAPITAL_SHIP)
-        the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PCData->Learned[gsn_capitalships]);
+        the_chance = GetSkillLevel(ch, gsn_capitalships);
 
     if(GetRandomPercent() < the_chance)
     {

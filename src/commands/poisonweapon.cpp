@@ -11,7 +11,7 @@
 void do_poison_weapon(std::shared_ptr<Character> ch, std::string arg)
 {
     if(!IsNpc(ch)
-       && ch->PCData->Learned[gsn_poison_weapon] <= 0)
+       && GetSkillLevel(ch, gsn_poison_weapon) <= 0)
     {
         ch->Echo("What do you think you are, a bounty hunter?\r\n");
         return;
@@ -103,7 +103,7 @@ void do_poison_weapon(std::shared_ptr<Character> ch, std::string arg)
     SeparateOneObjectFromGroup(wobj);
 
     if(!IsNpc(ch)
-       && percent > ch->PCData->Learned[gsn_poison_weapon])
+       && percent > GetSkillLevel(ch, gsn_poison_weapon))
     {
         SetCharacterColor(AT_RED, ch);
         ch->Echo("You failed and spill some on yourself. Ouch!\r\n");

@@ -131,9 +131,9 @@ static void AfterDelay(std::shared_ptr<CraftingSession> session)
 {
     auto recipe = session->pImpl->Recipe;
     auto ch = GetEngineer(session);
-    int the_chance = ch->PCData->Learned[recipe->Skill];
+    int the_chance = GetSkillLevel(ch, recipe->Skill);
     bool hasMaterials = CheckMaterials(session, true);
-    int level = ch->PCData->Learned[recipe->Skill];
+    int level = GetSkillLevel(ch, recipe->Skill);
     auto proto = recipe->Prototype;
     std::string itemType = GetItemTypeNameExtended(proto->ItemType, proto->Value[OVAL_WEAPON_TYPE]);
 
@@ -291,7 +291,7 @@ std::shared_ptr<CraftingSession> AllocateCraftingSession(std::shared_ptr<CraftRe
 static bool CheckSkillLevel(std::shared_ptr<CraftingSession> session)
 {
     auto ch = GetEngineer(session);
-    int the_chance = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[session->pImpl->Recipe->Skill]);
+    int the_chance = GetSkillLevel(ch, session->pImpl->Recipe->Skill);
 
     if(GetRandomPercent() >= the_chance)
     {

@@ -738,7 +738,7 @@ bool CharacterKnowsLanguage(std::shared_ptr<Character> ch, int language, std::sh
 
                 if(sn != -1)
                 {
-                    if(GetRandomPercent() - 1 < ch->PCData->Learned[sn])
+                    if(GetRandomPercent() - 1 < GetSkillLevel(ch, sn))
                         return true;
                 }
             }
@@ -776,7 +776,7 @@ bool CharacterCanLearnLanguage(std::shared_ptr<Character> ch, int language)
                     continue;
                 }
 
-                if(ch->PCData->Learned[sn] >= 99)
+                if(GetSkillLevel(ch, sn) >= 99)
                     return false;
             }
         }

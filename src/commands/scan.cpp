@@ -35,7 +35,7 @@ void do_scan(std::shared_ptr<Character> ch, std::string argument)
         ActArg(GetDirectionName(dir)), nullptr, ActTarget::Room);
 
     if(IsNpc(ch)
-       || (GetRandomPercent() > ch->PCData->Learned[gsn_scan]))
+       || (GetRandomPercent() > GetSkillLevel(ch, gsn_scan)))
     {
         Act(AT_GREY, "You stop scanning $t as your vision blurs.", ch,
             ActArg(GetDirectionName(dir)), nullptr, ActTarget::Char);

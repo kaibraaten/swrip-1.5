@@ -60,7 +60,7 @@ void do_aid(std::shared_ptr<Character> ch, std::string argument)
     percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
     SetWaitState(ch, SkillTable[gsn_aid]->Beats);
 
-    if(!IsNpc(ch) && percent > ch->PCData->Learned[gsn_aid])
+    if(!IsNpc(ch) && percent > GetSkillLevel(ch, gsn_aid))
     {
         ch->Echo("You fail.\r\n");
         LearnFromFailure(ch, gsn_aid);

@@ -123,7 +123,7 @@ void do_search(std::shared_ptr<Character> ch, std::string arg)
         if((pexit = GetExit(ch->InRoom, door)) != NULL
            && pexit->Flags.test(Flag::Exit::Secret)
            && pexit->Flags.test(Flag::Exit::Searchable)
-           && percent < (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_search]))
+           && percent < (IsNpc(ch) ? 80 : GetSkillLevel(ch, gsn_search)))
         {
             Act(AT_SKILL, "Your search reveals the $d!",
                 ch, nullptr, pexit->Keyword, ActTarget::Char);
@@ -138,7 +138,7 @@ void do_search(std::shared_ptr<Character> ch, std::string arg)
         for(auto hiddenObject : searchList)
         {
             if(obj->Flags.test(Flag::Obj::Hidden)
-               && percent < ch->PCData->Learned[gsn_search])
+               && percent < GetSkillLevel(ch, gsn_search))
             {
                 obj = hiddenObject;
                 found = true;

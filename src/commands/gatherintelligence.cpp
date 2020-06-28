@@ -42,9 +42,8 @@ void do_gather_intelligence(std::shared_ptr<Character> ch, std::string argument)
 
     percent = GetRandomPercent() * 2;
 
-    if(IsNpc(ch) || percent < ch->PCData->Learned[gsn_gather_intelligence])
+    if(IsNpc(ch) || percent < GetSkillLevel(ch, gsn_gather_intelligence))
     {
-
         if(ch == victim)
         {
             ch->Echo("I am sure you know enough about yourself right now.\r\n");

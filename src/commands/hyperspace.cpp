@@ -184,18 +184,15 @@ void do_hyperspace(std::shared_ptr<Character> ch, std::string argument)
     }
 
     if(ship->Class == FIGHTER_SHIP)
-        the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PCData->Learned[gsn_starfighters]);
+        the_chance = GetSkillLevel(ch, gsn_starfighters);
 
     if(ship->Class == MIDSIZE_SHIP)
-        the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PCData->Learned[gsn_midships]);
+        the_chance = GetSkillLevel(ch, gsn_midships);
 
     /* changed mobs so they can not fly capital ships. Forcers could possess mobs
        and fly them - Darrik Vequir */
     if(ship->Class == CAPITAL_SHIP)
-        the_chance = IsNpc(ch) ? 0
-        : (int)(ch->PCData->Learned[gsn_capitalships]);
+        the_chance = IsNpc(ch) ? 0 : GetSkillLevel(ch, gsn_capitalships);
 
     if(GetRandomPercent() > the_chance)
     {

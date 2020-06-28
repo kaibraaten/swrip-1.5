@@ -32,8 +32,8 @@ void do_sabotage(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        the_chance = IsNpc(ch) ? ch->TopLevel
-            : (int)(ch->PCData->Learned[gsn_sabotage]);
+        the_chance = GetSkillLevel(ch, gsn_sabotage);
+
         if(GetRandomPercent() < the_chance)
         {
             ch->Echo("&GYou begin your work.\r\n");
@@ -78,7 +78,7 @@ void do_sabotage(std::shared_ptr<Character> ch, std::string arg)
     if(!StrCmp(arg, "hull"))
     {
         change = urange(0,
-                        GetRandomNumberFromRange((int)(ch->PCData->Learned[gsn_sabotage] / 2), (int)(ch->PCData->Learned[gsn_sabotage])),
+                        GetRandomNumberFromRange((int)(GetSkillLevel(ch, gsn_sabotage) / 2), GetSkillLevel(ch, gsn_sabotage)),
                         ship->Defenses.Hull.Current);
         ship->Defenses.Hull.Current -= change;
         ch->Echo("&GSabotage complete. Hull strength decreased by %d points.\r\n", change);

@@ -84,7 +84,7 @@ void do_request(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    the_chance = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_fake_signal]);
+    the_chance = GetSkillLevel(ch, gsn_fake_signal);
 
     if((eShip->Class == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance))
        && !CheckPilot(ch, eShip))

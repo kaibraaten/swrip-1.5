@@ -21,7 +21,7 @@ void do_cutdoor(std::shared_ptr<Character> ch, std::string arg)
     }
 
     if(!IsNpc(ch)
-       && (ch->PCData->Learned[gsn_lightsabers] <= 0 || ch->PCData->Learned[gsn_cutdoor] <= 0))
+       && (GetSkillLevel(ch, gsn_lightsabers) <= 0 || GetSkillLevel(ch, gsn_cutdoor) <= 0))
     {
         ch->Echo("You can not use it well enough to cut a door open.\r\n");
         return;
@@ -60,7 +60,7 @@ void do_cutdoor(std::shared_ptr<Character> ch, std::string arg)
             keyword = pexit->Keyword;
 
         if(!IsNpc(ch))
-            the_chance = ch->PCData->Learned[gsn_cutdoor] / 2;
+            the_chance = GetSkillLevel(ch, gsn_cutdoor) / 2;
         else
             the_chance = 90;
 

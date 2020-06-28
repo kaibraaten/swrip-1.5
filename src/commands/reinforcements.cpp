@@ -37,7 +37,7 @@ void do_reinforcements(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        the_chance = (int)(ch->PCData->Learned[gsn_reinforcements]);
+        the_chance = GetSkillLevel(ch, gsn_reinforcements);
 
         if(GetRandomPercent() < the_chance)
         {

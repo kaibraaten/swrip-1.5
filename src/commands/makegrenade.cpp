@@ -36,7 +36,7 @@ void do_makegrenade(std::shared_ptr<Character> ch, std::string argument)
                                       { Flag::Crafting::NeedsWorkshop });
     auto session = AllocateCraftingSession(recipe, ch, argument);
 
-    auto level = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_makegrenade]);
+    int level = GetSkillLevel(ch, gsn_makegrenade);
     auto data = std::make_shared<MakeGrenade>(level);
     session->OnInterpretArguments.Add(data, &MakeGrenade::InterpretArguments);
     session->OnMaterialFound.Add(data, &MakeGrenade::MaterialFound);

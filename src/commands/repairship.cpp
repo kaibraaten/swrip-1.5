@@ -37,8 +37,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        the_chance = IsNpc(ch) ? ch->TopLevel
-            : (int)(ch->PCData->Learned[gsn_shipmaintenance]);
+        the_chance = GetSkillLevel(ch, gsn_shipmaintenance);
 
         if(GetRandomPercent() < the_chance)
         {
@@ -88,7 +87,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
     if(!StrCmp(argument, "hull"))
     {
         change = urange(0,
-                        GetRandomNumberFromRange((int)(ch->PCData->Learned[gsn_shipmaintenance] / 2), (int)(ch->PCData->Learned[gsn_shipmaintenance])),
+                        GetRandomNumberFromRange((int)(GetSkillLevel(ch, gsn_shipmaintenance) / 2), (int)(GetSkillLevel(ch, gsn_shipmaintenance))),
                         ship->Defenses.Hull.Max - ship->Defenses.Hull.Current);
         ship->Defenses.Hull.Current += change;
         ch->Echo("&GRepair complete. Hull strength increased by %d points.\r\n", change);

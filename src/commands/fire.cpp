@@ -52,12 +52,12 @@ void do_fire(std::shared_ptr<Character> ch, std::string argument)
     }
 
     the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PermStats.Dex * 2 + ch->PCData->Learned[gsn_spacecombat] / 3
-                + ch->PCData->Learned[gsn_spacecombat2] / 3 + ch->PCData->Learned[gsn_spacecombat3] / 3);
+        : (int)(ch->PermStats.Dex * 2 + GetSkillLevel(ch, gsn_spacecombat) / 3
+                + GetSkillLevel(ch, gsn_spacecombat2) / 3 + GetSkillLevel(ch, gsn_spacecombat3) / 3);
     origthe_chance = the_chance;
 
     if(ship->Class > SHIP_PLATFORM && !IsNpc(ch))
-        ((ch->PCData->Learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->PCData->Learned[gsn_speedercombat]) : (the_chance = 0));
+        ((GetSkillLevel(ch, gsn_speeders) == 100) ? (the_chance -= 100 - GetSkillLevel(ch, gsn_speedercombat)) : (the_chance = 0));
 
     if(ch->InRoom->Vnum == ship->Rooms.Gunseat && !StringPrefix(argument, "lasers"))
     {

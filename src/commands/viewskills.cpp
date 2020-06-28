@@ -29,11 +29,11 @@ void do_viewskills(std::shared_ptr<Character> ch, std::string arg)
             if(SkillTable[sn]->Name.empty())
                 break;
 
-            if(victim->PCData->Learned[sn] == 0)
+            if(GetSkillLevel(victim, sn) == 0)
                 continue;
 
             ch->Echo("%20s %3d%% ", SkillTable[sn]->Name.c_str(),
-                     victim->PCData->Learned[sn]);
+                     GetSkillLevel(victim, sn));
 
             if(++col % 3 == 0)
                 ch->Echo("\r\n");

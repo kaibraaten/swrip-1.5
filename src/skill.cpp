@@ -293,14 +293,14 @@ void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
     int percent = 0;
     int learn_chance = 0;
 
-    if(IsNpc(ch) || ch->PCData->Learned[sn] <= 0)
+    if(IsNpc(ch) || GetSkillLevel(ch, sn) <= 0)
     {
         return;
     }
 
     if(sn == Skills->LookupSkill("meditate") && !IsJedi(ch))
     {
-        if(ch->PCData->Learned[sn] < 50
+        if(GetSkillLevel(ch, sn) < 50
            || (GetAbilityLevel(ch, FORCE_ABILITY) == 1
                && ch->PermStats.Frc > 0))
         {
@@ -318,7 +318,7 @@ void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
     adept = (GetAbilityLevel(ch, SkillTable[sn]->Guild) - SkillTable[sn]->Level) * 5 + 50;
     adept = umin(adept, 100);
 
-    if(ch->PCData->Learned[sn] >= adept)
+    if(GetSkillLevel(ch, sn) >= adept)
     {
         return;
     }
@@ -328,9 +328,9 @@ void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
         sklvl = GetAbilityLevel(ch, SkillTable[sn]->Guild);
     }
 
-    if(ch->PCData->Learned[sn] < 100)
+    if(GetSkillLevel(ch, sn) < 100)
     {
-        learn_chance = ch->PCData->Learned[sn] + (5 * SkillTable[sn]->Difficulty);
+        learn_chance = GetSkillLevel(ch, sn) + (5 * SkillTable[sn]->Difficulty);
         percent = GetRandomPercent();
 
         if(percent >= learn_chance)
@@ -348,7 +348,7 @@ void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
 
         ch->PCData->Learned[sn] = umin(adept, ch->PCData->Learned[sn] + learn);
 
-        if(ch->PCData->Learned[sn] == 100)      /* fully learned! */
+        if(GetSkillLevel(ch, sn) == 100)      /* fully learned! */
         {
             gain = 50 * sklvl;
             SetCharacterColor(AT_WHITE, ch);
@@ -392,7 +392,7 @@ int ChLookupSkill(std::shared_ptr<Character> ch, const std::string &name)
             break;
         }
 
-        if(ch->PCData->Learned[sn] > 0
+        if(GetSkillLevel(ch, sn) > 0
            && CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
            && !StringPrefix(name, SkillTable[sn]->Name))
         {
@@ -571,7 +571,7 @@ int ChBSearchSkill(std::shared_ptr<Character> ch, const std::string &name, int f
 
         if(CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
            && !StringPrefix(name, SkillTable[sn]->Name)
-           && ch->PCData->Learned[sn] > 0)
+           && GetSkillLevel(ch, sn) > 0)
         {
             return sn;
         }

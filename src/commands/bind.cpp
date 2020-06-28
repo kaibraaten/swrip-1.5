@@ -58,7 +58,7 @@ void do_bind(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, 1 * PULSE_VIOLENCE);
 
-    if(IsNpc(victim) || GetRandomPercent() > ch->PCData->Learned[gsn_bind])
+    if(IsNpc(victim) || GetRandomPercent() > GetSkillLevel(ch, gsn_bind))
     {
         ch->Echo("You fail.\r\n");
         return;

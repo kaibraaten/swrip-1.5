@@ -76,7 +76,7 @@ void MakeSpice::SetObjectStats(std::shared_ptr<SetObjectStatsEventArgs> args)
     auto spice = args->Object;
     std::shared_ptr<Character> ch = GetEngineer(args->CraftingSession);
 
-    spice->Value[OVAL_SPICE_GRADE] = urange(10, _spiceGrade, (IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_spice_refining])) + 10);
+    spice->Value[OVAL_SPICE_GRADE] = urange(10, _spiceGrade, GetSkillLevel(ch, gsn_spice_refining) + 10);
 
     strcpy(buf, _itemName.c_str());
     strcat(buf, " drug spice ");

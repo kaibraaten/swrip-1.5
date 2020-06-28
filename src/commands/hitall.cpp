@@ -24,7 +24,7 @@ void do_hitall( std::shared_ptr<Character> ch, std::string argument )
         return;
     }
 
-    short percent = IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_hitall];
+    short percent = IsNpc(ch) ? 80 : GetSkillLevel(ch, gsn_hitall);
 
     for(auto vch : ch->InRoom->Characters())
     {

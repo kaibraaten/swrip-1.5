@@ -57,7 +57,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
         if(GetTrustLevel(ch) < LEVEL_GREATER)
         {
             if((sn = FindSpell(ch, arg1, true)) < 0
-               || (!IsNpc(ch) && ch->PCData->Learned[sn] <= 0))
+               || (!IsNpc(ch) && GetSkillLevel(ch, sn) <= 0))
             {
                 ch->Echo("You can't do that.\r\n");
                 return;
@@ -319,7 +319,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
     }
 
     if(!IsNpc(ch)
-       && (GetRandomPercent() + skill->Difficulty * 5) > ch->PCData->Learned[sn])
+       && (GetRandomPercent() + skill->Difficulty * 5) > GetSkillLevel(ch, sn))
     {
         /* Some more interesting loss of concentration messages  -Thoric */
         switch(NumberBits(2))

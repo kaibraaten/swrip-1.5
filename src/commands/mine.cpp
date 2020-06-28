@@ -8,7 +8,7 @@
 
 void do_mine(std::shared_ptr<Character> ch, std::string arg)
 {
-    if(ch->PCData->Learned[gsn_mine] <= 0)
+    if(GetSkillLevel(ch, gsn_mine) <= 0)
     {
         ch->Echo("You have no idea how to do that.\r\n");
         return;

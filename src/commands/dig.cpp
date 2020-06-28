@@ -116,7 +116,7 @@ void do_dig(std::shared_ptr<Character> ch, std::string arg)
         {
             /* 4 times harder to dig open a passage without a shovel */
             if((GetRandomPercent() * (shovel ? 1 : 4)) <
-               (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]))
+               (IsNpc(ch) ? 80 : GetSkillLevel(ch, gsn_dig)))
             {
                 pexit->Flags.reset(Flag::Exit::Closed);
                 ch->Echo("You dig open a passageway!\r\n");
@@ -142,7 +142,7 @@ void do_dig(std::shared_ptr<Character> ch, std::string arg)
         /* twice as hard to find something without a shovel */
         if(obj->Flags.test(Flag::Obj::Burried)
            && (GetRandomPercent() * (shovel ? 1 : 2)) <
-           (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]))
+           (IsNpc(ch) ? 80 : GetSkillLevel(ch, gsn_dig)))
         {
             found = true;
             break;

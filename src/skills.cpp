@@ -176,7 +176,7 @@ bool CheckParry(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim
             }
         }
 
-        chances = (int)(victim->PCData->Learned[gsn_parry]);
+        chances = GetSkillLevel(victim, gsn_parry);
     }
 
     chances = urange(10, chances, 90);
@@ -226,7 +226,7 @@ bool CheckDodge(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim
     }
     else
     {
-        chances = (int)(victim->PCData->Learned[gsn_dodge] / 2);
+        chances = GetSkillLevel(victim, gsn_dodge) / 2;
     }
 
     chances += 5 * (GetCurrentDexterity(victim) - 20);
@@ -273,7 +273,7 @@ bool CheckGrip(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
     }
     else
     {
-        grip_chance = (int)(victim->PCData->Learned[gsn_grip] / 2);
+        grip_chance = GetSkillLevel(victim, gsn_grip) / 2;
     }
 
     /* Consider luck as a factor */

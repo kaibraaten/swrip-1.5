@@ -17,7 +17,7 @@ void do_disarm(std::shared_ptr<Character> ch, std::string argument)
     }
 
     if(!IsNpc(ch)
-       && ch->PCData->Learned[gsn_disarm] <= 0)
+       && GetSkillLevel(ch, gsn_disarm) <= 0)
     {
         ch->Echo("You don't know how to disarm opponents.\r\n");
         return;
@@ -49,7 +49,7 @@ void do_disarm(std::shared_ptr<Character> ch, std::string argument)
     if(!CanSeeObject(ch, obj))
         percent += 10;
 
-    if(IsNpc(ch) || percent < ch->PCData->Learned[gsn_disarm] * 2 / 3)
+    if(IsNpc(ch) || percent < GetSkillLevel(ch, gsn_disarm) * 2 / 3)
     {
         Disarm(ch, victim);
     }

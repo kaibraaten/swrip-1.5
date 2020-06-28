@@ -564,7 +564,7 @@ ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit,
             if(!found && !ch->Mount)
             {
 
-                if((!IsNpc(ch) && GetRandomPercent() > ch->PCData->Learned[gsn_climb])
+                if((!IsNpc(ch) && GetRandomPercent() > GetSkillLevel(ch, gsn_climb))
                    || drunk || ch->MentalState < -90)
                 {
                     bool ch_rope = GetFirstObjectOfType(ch, ITEM_ROPE) != nullptr;

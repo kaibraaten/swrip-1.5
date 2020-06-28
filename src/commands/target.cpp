@@ -113,8 +113,7 @@ void do_target(std::shared_ptr<Character> ch, std::string arg)
             }
         }
 
-        the_chance = IsNpc(ch) ? ch->TopLevel
-            : (int)(ch->PCData->Learned[gsn_weaponsystems]);
+        the_chance = GetSkillLevel(ch, gsn_weaponsystems);
 
         if(GetRandomPercent() < the_chance)
         {

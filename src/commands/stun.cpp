@@ -19,7 +19,7 @@ void do_stun(std::shared_ptr<Character> ch, std::string argument)
     }
 
     if(!IsNpc(ch)
-       && ch->PCData->Learned[gsn_stun] <= 0)
+       && GetSkillLevel(ch, gsn_stun) <= 0)
     {
         ch->Echo("Your mind races as you realize you have no idea how to do that.\r\n");
         return;
@@ -58,7 +58,7 @@ void do_stun(std::shared_ptr<Character> ch, std::string argument)
 
     if(!fail
        && (IsNpc(ch)
-           || (GetRandomPercent() + stun_chance) < ch->PCData->Learned[gsn_stun]))
+           || (GetRandomPercent() + stun_chance) < GetSkillLevel(ch, gsn_stun)))
     {
         LearnFromSuccess(ch, gsn_stun);
         /*    DO *NOT* CHANGE!    -Thoric    */

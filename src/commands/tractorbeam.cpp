@@ -140,8 +140,7 @@ void do_tractorbeam(std::shared_ptr<Character> ch, std::string arg)
             }
         }
 
-        the_chance = IsNpc(ch) ? ch->TopLevel
-            : (int)(ch->PCData->Learned[gsn_tractorbeams]);
+        the_chance = GetSkillLevel(ch, gsn_tractorbeams);
 
         if(GetRandomPercent() < the_chance)
         {
@@ -191,8 +190,7 @@ void do_tractorbeam(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PCData->Learned[gsn_tractorbeams]);
+    the_chance = GetSkillLevel(ch, gsn_tractorbeams);
 
     the_chance += target->Class - ship->Class;
     the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;

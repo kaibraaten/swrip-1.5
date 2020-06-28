@@ -20,7 +20,7 @@ void do_berserk(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    percent = IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_berserk];
+    percent = IsNpc(ch) ? 80 : GetSkillLevel(ch, gsn_berserk);
     SetWaitState(ch, SkillTable[gsn_berserk]->Beats);
 
     if(!Chance(ch, percent))

@@ -56,8 +56,7 @@ void do_jumpvector(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)(ch->PCData->Learned[gsn_jumpvector]);
+    the_chance = GetSkillLevel(ch, gsn_jumpvector);
 
     if(GetRandomPercent() > the_chance)
     {

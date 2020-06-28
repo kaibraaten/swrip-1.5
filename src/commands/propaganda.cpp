@@ -113,7 +113,7 @@ void do_propaganda(std::shared_ptr<Character> ch, std::string arg1)
 
     SetWaitState(ch, SkillTable[gsn_propaganda]->Beats);
 
-    if(victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->Learned[gsn_propaganda])
+    if(victim->TopLevel - GetCurrentCharisma(ch) > GetSkillLevel(ch, gsn_propaganda))
     {
         if(IsClanned(ch) ? planet->GovernedBy != clan : true)
         {

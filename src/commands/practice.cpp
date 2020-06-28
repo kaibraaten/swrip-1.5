@@ -62,26 +62,26 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
             if(skill->Guild < 0 || skill->Guild >= MAX_ABILITY)
                 continue;
 
-            if(ch->PCData->Learned[sn] <= 0
+            if(GetSkillLevel(ch, sn) <= 0
                && GetAbilityLevel(ch, skill->Guild) < skill->Level)
                 continue;
 
-            if(ch->PCData->Learned[sn] == 0
+            if(GetSkillLevel(ch, sn) == 0
                && SPELL_FLAG(skill, SF_SECRETSKILL))
                 continue;
 
             ++cnt;
 
-            if(ch->PCData->Learned[sn] >= 100)
+            if(GetSkillLevel(ch, sn) >= 100)
             {
                 ch->Echo("&R%18s %3d%%  &r",
                          Capitalize(skill->Name).c_str(),
-                         ch->PCData->Learned[sn]);
+                         GetSkillLevel(ch, sn));
             }
             else
                 ch->Echo("&r%18s %3d%%  ",
                          Capitalize(skill->Name).c_str(),
-                         ch->PCData->Learned[sn]);
+                         GetSkillLevel(ch, sn));
 
             if(++col % 3 == 0)
                 ch->Echo("\r\n&r");
@@ -185,7 +185,7 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(ch->PCData->Learned[sn] >= adept)
+        if(GetSkillLevel(ch, sn) >= adept)
         {
             sprintf(buf, "$n tells you, 'I've taught you everything I can about %s.'",
                     skill->Name.c_str());
@@ -202,7 +202,7 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
             Act(AT_ACTION, "$n practices $T.",
                 ch, nullptr, skill->Name, ActTarget::Room);
 
-            if(ch->PCData->Learned[sn] >= adept)
+            if(GetSkillLevel(ch, sn) >= adept)
             {
                 ch->PCData->Learned[sn] = adept;
                 Act(AT_TELL,

@@ -15,7 +15,7 @@ void do_bash(std::shared_ptr<Character> ch, std::string argument)
     }
 
     if(!IsNpc(ch)
-       && ch->PCData->Learned[gsn_bash] <= 0)
+       && GetSkillLevel(ch, gsn_bash) <= 0)
     {
         ch->Echo("Your mind races as you realize you have no idea how to do that.\r\n");
         return;
@@ -39,7 +39,7 @@ void do_bash(std::shared_ptr<Character> ch, std::string argument)
     SetWaitState(ch, SkillTable[gsn_bash]->Beats);
 
     if(IsNpc(ch)
-       || (GetRandomPercent() + bash_chance) < ch->PCData->Learned[gsn_bash])
+       || (GetRandomPercent() + bash_chance) < GetSkillLevel(ch, gsn_bash))
     {
         LearnFromSuccess(ch, gsn_bash);
         /* do not change anything here!  -Thoric */

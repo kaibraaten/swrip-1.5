@@ -794,13 +794,8 @@ static bool can_layer(const std::shared_ptr<Character> ch, std::shared_ptr<Objec
  */
 static bool could_dual(const std::shared_ptr<Character> ch)
 {
-    if(IsNpc(ch))
-        return true;
-
-    if(ch->PCData->Learned[gsn_dual_wield])
-        return true;
-
-    return false;
+    return IsNpc(ch)
+        || GetSkillLevel(ch, gsn_dual_wield) > 0;
 }
 
 /*

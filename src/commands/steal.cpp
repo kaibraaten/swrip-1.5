@@ -61,7 +61,7 @@ void do_steal(std::shared_ptr<Character> ch, std::string argument)
     if((victim->Immune.test(Flag::Ris::Steal))
        || (victim->Position != POS_STUNNED
            && (victim->Position == POS_FIGHTING
-               || percent > (IsNpc(ch) ? 90 : ch->PCData->Learned[gsn_steal]))))
+               || percent > (IsNpc(ch) ? 90 : GetSkillLevel(ch, gsn_steal)))))
     {
         /*
          * Failure.
@@ -124,7 +124,7 @@ void do_steal(std::shared_ptr<Character> ch, std::string argument)
         victim->Gold -= amount;
         ch->Echo("Aha!  You got %d credits.\r\n", amount);
 
-        if(!IsNpc(victim) || (ch->PCData->Learned[gsn_steal] < 50))
+        if(!IsNpc(victim) || GetSkillLevel(ch, gsn_steal) < 50)
             LearnFromSuccess(ch, gsn_steal);
 
         if(IsNpc(victim))
@@ -187,7 +187,7 @@ void do_steal(std::shared_ptr<Character> ch, std::string argument)
 
     ch->Echo("Ok.\r\n");
 
-    if(IsNpc(victim) || ch->PCData->Learned[gsn_steal])
+    if(IsNpc(victim) || GetSkillLevel(ch, gsn_steal) > 0)
         LearnFromSuccess(ch, gsn_steal);
 
     if(IsNpc(victim))

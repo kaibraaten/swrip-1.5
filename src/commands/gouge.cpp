@@ -17,7 +17,7 @@ void do_gouge(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(!IsNpc(ch) && !ch->PCData->Learned[gsn_gouge])
+    if(!IsNpc(ch) && GetSkillLevel(ch, gsn_gouge) <= 0)
     {
         ch->Echo("You do not yet know of this skill.\r\n");
         return;
@@ -37,7 +37,7 @@ void do_gouge(std::shared_ptr<Character> ch, std::string argument)
 
     percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
 
-    if(IsNpc(ch) || percent < ch->PCData->Learned[gsn_gouge])
+    if(IsNpc(ch) || percent < GetSkillLevel(ch, gsn_gouge))
     {
         dam = GetRandomNumberFromRange(1, GetAbilityLevel(ch, COMBAT_ABILITY));
         global_retcode = InflictDamage(ch, victim, dam, gsn_gouge);

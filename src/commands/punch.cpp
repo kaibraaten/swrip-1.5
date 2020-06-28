@@ -16,7 +16,7 @@ void do_punch(std::shared_ptr<Character> ch, std::string arg)
     }
 
     if(!IsNpc(ch)
-       && ch->PCData->Learned[gsn_punch] <= 0)
+       && GetSkillLevel(ch, gsn_punch) <= 0)
     {
         ch->Echo("Your mind races as you realize you have no idea how to do that.\r\n");
         return;
@@ -64,7 +64,7 @@ void do_punch(std::shared_ptr<Character> ch, std::string arg)
 
     SetWaitState(ch, SkillTable[gsn_punch]->Beats);
 
-    if(IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_punch])
+    if(IsNpc(ch) || GetRandomPercent() < GetSkillLevel(ch, gsn_punch))
     {
         LearnFromSuccess(ch, gsn_punch);
         global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, COMBAT_ABILITY)), gsn_punch);

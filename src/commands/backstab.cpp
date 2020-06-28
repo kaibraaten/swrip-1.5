@@ -77,7 +77,7 @@ void do_backstab(std::shared_ptr<Character> ch, std::string arg)
 
     if(!IsAwake(victim)
        || IsNpc(ch)
-       || percent < ch->PCData->Learned[gsn_backstab])
+       || percent < GetSkillLevel(ch,gsn_backstab))
     {
         LearnFromSuccess(ch, gsn_backstab);
         global_retcode = HitMultipleTimes(ch, victim, gsn_backstab);

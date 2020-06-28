@@ -28,7 +28,7 @@ void do_detrap(std::shared_ptr<Character> ch, std::string argument)
 
         argument = OneArgument(argument, arg);
 
-        if(!IsNpc(ch) && !ch->PCData->Learned[gsn_detrap])
+        if(!IsNpc(ch) && GetSkillLevel(ch, gsn_detrap) <= 0)
         {
             ch->Echo("You do not yet know of this skill.\r\n");
             return;
@@ -136,7 +136,7 @@ void do_detrap(std::shared_ptr<Character> ch, std::string argument)
 
     SeparateOneObjectFromGroup(obj);
 
-    if(!IsNpc(ch) || percent > ch->PCData->Learned[gsn_detrap])
+    if(!IsNpc(ch) || percent > GetSkillLevel(ch, gsn_detrap))
     {
         ch->Echo("Ooops!\r\n");
         SpringTrap(ch, trap);

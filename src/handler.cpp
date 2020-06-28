@@ -248,10 +248,9 @@ bool CharacterCanTakePrototype(std::shared_ptr<Character> ch)
 
 static void ApplySkillAffect(std::shared_ptr<Character> ch, int sn, int mod)
 {
-    if(!IsNpc(ch) && ch->PCData->Learned[sn] > 0)
+    if(!IsNpc(ch) && GetSkillLevel(ch, sn) > 0)
     {
-        ch->PCData->Learned[sn] =
-            (ch->PCData->Learned[sn] >= 100 ? 100 : urange(1, ch->PCData->Learned[sn] + mod, 100));
+        ch->PCData->Learned[sn] = (ch->PCData->Learned[sn] >= 100 ? 100 : urange(1, ch->PCData->Learned[sn] + mod, 100));
     }
 }
 /*

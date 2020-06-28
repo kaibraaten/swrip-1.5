@@ -83,7 +83,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        if(!IsNpc(ch) && GetRandomPercent() > ch->PCData->Learned[gsn_pick_lock])
+        if(!IsNpc(ch) && GetRandomPercent() > GetSkillLevel(ch, gsn_pick_lock))
         {
             ch->Echo("You failed.\r\n");
             LearnFromFailure(ch, gsn_pick_lock);
@@ -141,7 +141,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        if(!IsNpc(ch) && GetRandomPercent() > ch->PCData->Learned[gsn_pick_lock])
+        if(!IsNpc(ch) && GetRandomPercent() > GetSkillLevel(ch, gsn_pick_lock))
         {
             ch->Echo("You failed.\r\n");
             LearnFromFailure(ch, gsn_pick_lock);
@@ -173,7 +173,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
 
         SetWaitState(ch, SkillTable[gsn_pickshiplock]->Beats);
 
-        if(IsNpc(ch) || !ch->PCData || GetRandomPercent() > ch->PCData->Learned[gsn_pickshiplock])
+        if(IsNpc(ch) || !ch->PCData || GetRandomPercent() > GetSkillLevel(ch, gsn_pickshiplock))
         {
             ch->Echo("You failed.\r\n");
             LearnFromFailure(ch, gsn_pickshiplock);

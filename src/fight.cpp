@@ -483,7 +483,7 @@ static ch_ret Perform2ndAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
                             [ch, dual_bonus]()
                             {
                                 return IsNpc(ch) ? ch->TopLevel
-                                    : (int)((ch->PCData->Learned[gsn_second_attack] + dual_bonus) / 1.5);
+                                    : (int)((GetSkillLevel(ch, gsn_second_attack) + dual_bonus) / 1.5);
                             });
 }
 
@@ -493,7 +493,7 @@ static ch_ret Perform3rdAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
                             [ch, dual_bonus]()
                             {
                                 return IsNpc(ch) ? ch->TopLevel
-                                    : (int)((ch->PCData->Learned[gsn_third_attack] + (dual_bonus * 1.5)) / 2);
+                                    : (int)((GetSkillLevel(ch, gsn_third_attack) + (dual_bonus * 1.5)) / 2);
                             });
 }
 
@@ -503,7 +503,7 @@ static ch_ret Perform4thAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
                             [ch, dual_bonus]()
                             {
                                 return IsNpc(ch) ? ch->TopLevel
-                                    : (int)((ch->PCData->Learned[gsn_fourth_attack] + (dual_bonus * 1.5)) / 2);
+                                    : (int)((GetSkillLevel(ch, gsn_fourth_attack) + (dual_bonus * 1.5)) / 2);
                             });
 }
 
@@ -513,7 +513,7 @@ static ch_ret Perform5thAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
                             [ch, dual_bonus]()
                             {
                                 return IsNpc(ch) ? ch->TopLevel
-                                    : (int)((ch->PCData->Learned[gsn_fifth_attack] + (dual_bonus * 1.5)) / 2);
+                                    : (int)((GetSkillLevel(ch, gsn_fifth_attack) + (dual_bonus * 1.5)) / 2);
                             });
 }
 
@@ -557,7 +557,7 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
     /* Very high chance of hitting compared to chance of going berserk */
     /* 40% or higher is always hit.. don't learn anything here though. */
     /* -- Altrag */
-    int hit_chance = IsNpc(ch) ? 100 : (ch->PCData->Learned[gsn_berserk] * 5 / 2);
+    int hit_chance = IsNpc(ch) ? 100 : (GetSkillLevel(ch, gsn_berserk) * 5 / 2);
 
     if(IsAffectedBy(ch, Flag::Affect::Berserk) && GetRandomPercent() < hit_chance)
     {
@@ -575,12 +575,12 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
 
     if(GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD))
     {
-        dual_bonus = IsNpc(ch) ? (GetAbilityLevel(ch, COMBAT_ABILITY) / 10) : (ch->PCData->Learned[gsn_dual_wield] / 10);
+        dual_bonus = IsNpc(ch) ? (GetAbilityLevel(ch, COMBAT_ABILITY) / 10) : (GetSkillLevel(ch, gsn_dual_wield) / 10);
 
         retcode = PerformNthAttack(ch, victim, dt, gsn_dual_wield,
                                    [ch]()
                                    {
-                                       return IsNpc(ch) ? ch->TopLevel : ch->PCData->Learned[gsn_dual_wield];
+                                       return GetSkillLevel(ch, gsn_dual_wield);
                                    });
 
         if(retcode != rNONE || WhoFighting(ch) != victim)
@@ -734,7 +734,7 @@ static int GetWeaponProficiencyBonus(std::shared_ptr<Character> ch, std::shared_
 
         if(*gsn_ptr != -1)
         {
-            bonus = (int)(ch->PCData->Learned[*gsn_ptr]);
+            bonus = GetSkillLevel(ch, *gsn_ptr);
         }
     }
 
@@ -826,7 +826,7 @@ static int GetCircleDamageMultiplier(std::shared_ptr<Character> ch, std::shared_
 
 static int GetEnhancedDamageModifier(std::shared_ptr<Character> ch, int dam)
 {
-    return (dam * ch->PCData->Learned[gsn_enhanced_damage]) / 120;
+    return (dam * GetSkillLevel(ch, gsn_enhanced_damage)) / 120;
 }
 
 static int GetVictimSleepingMultiplier()
@@ -1029,7 +1029,7 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
         dam *= 1 + prof_bonus / 100;
     }
 
-    if(!IsNpc(ch) && ch->PCData->Learned[gsn_enhanced_damage] > 0)
+    if(!IsNpc(ch) && GetSkillLevel(ch, gsn_enhanced_damage) > 0)
     {
         dam += GetEnhancedDamageModifier(ch, dam);
         LearnFromSuccess(ch, gsn_enhanced_damage);

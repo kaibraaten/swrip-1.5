@@ -1054,7 +1054,7 @@ ch_ret DriveShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship, std:
         }
     }
 
-    the_chance = IsNpc(ch) ? ch->TopLevel : ch->PCData->Learned[gsn_speeders];
+    the_chance = GetSkillLevel(ch, gsn_speeders);
 
     if(GetRandomPercent() > the_chance)
     {

@@ -75,13 +75,13 @@ void do_teach(std::shared_ptr<Character> ch, std::string argument)
 
         adept = 20;
 
-        if(victim->PCData->Learned[sn] >= adept)
+        if(GetSkillLevel(victim, sn) >= adept)
         {
             Act(AT_TELL, "$n must practice that on their own.", victim, NULL, ch, ActTarget::Vict);
             return;
         }
 
-        if(ch->PCData->Learned[sn] < 100)
+        if(GetSkillLevel(ch, sn) < 100)
         {
             Act(AT_TELL, "You must perfect that yourself before teaching others.",
                 victim, NULL, ch, ActTarget::Vict);

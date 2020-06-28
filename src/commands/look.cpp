@@ -606,15 +606,14 @@ static void show_char_to_char_1(std::shared_ptr<Character> victim, std::shared_p
     if(IsNpc(ch) || victim == ch)
         return;
 
-    if(GetRandomPercent() < ch->PCData->Learned[gsn_peek])
+    if(GetRandomPercent() < GetSkillLevel(ch, gsn_peek))
     {
         ch->Echo("\r\nYou peek at the inventory:\r\n");
         ShowObjectListToCharacter(victim->Objects(), ch, true, true);
         LearnFromSuccess(ch, gsn_peek);
     }
-    else
-        if(ch->PCData->Learned[gsn_peek])
-            LearnFromFailure(ch, gsn_peek);
+    else if(GetSkillLevel(ch, gsn_peek))
+        LearnFromFailure(ch, gsn_peek);
 }
 
 static void show_ships_to_char(std::shared_ptr<Room> room, const std::shared_ptr<Character> ch)

@@ -15,7 +15,7 @@ void do_arm(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(ch->PCData->Learned[gsn_grenades] <= 0)
+    if(GetSkillLevel(ch, gsn_grenades) <= 0)
     {
         ch->Echo("You have no idea how to do that.\r\n");
         return;

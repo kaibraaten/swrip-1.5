@@ -29,7 +29,7 @@ void do_kick(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_kick]->Beats);
 
-    if(IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_kick])
+    if(IsNpc(ch) || GetRandomPercent() < GetSkillLevel(ch, gsn_kick))
     {
         LearnFromSuccess(ch, gsn_kick);
         global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, COMBAT_ABILITY)), gsn_kick);
