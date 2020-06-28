@@ -58,7 +58,7 @@ void AddBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
     victim->Echo("&RSomeone has added %ld credits to the bounty on you!\r\n", amount);
     std::string buf = FormatString("&R%s has added %ld credits to the bounty on %s.\r\n",
                                    ch->Name.c_str(), amount, victim->Name.c_str());
-    ch->Echo("%s", buf);
+    ch->Echo(buf);
 
     for(auto echoTo = LastCharacter; echoTo; echoTo = echoTo->Previous)
     {

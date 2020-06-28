@@ -142,7 +142,6 @@ void RecoverFromCopyover()
     {
         int use_mccp = 0;
         socket_t desc = 0;
-        char buf[MAX_STRING_LENGTH];
         char ip[MAX_STRING_LENGTH];
         char host[MAX_STRING_LENGTH];
         char name[MAX_STRING_LENGTH];

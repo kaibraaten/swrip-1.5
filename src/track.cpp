@@ -376,8 +376,6 @@ void HuntVictim(std::shared_ptr<Character> ch)
 
     if(ret == BFS_NO_PATH)
     {
-        std::shared_ptr<Exit> pexit;
-
         for(int attempt = 0; attempt < 25; attempt++)
         {
             ret = (DirectionType)GetRandomDoor();

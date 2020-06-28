@@ -556,7 +556,7 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
            && vch->TopLevel >= level)
         {
             SetCharacterColor(AT_LOG, vch);
-            vch->Echo("%s", buf);
+            vch->Echo(buf);
         }
     }
 }
