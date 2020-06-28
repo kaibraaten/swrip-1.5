@@ -16,6 +16,7 @@
 #include "ban.hpp"
 #include "arena.hpp"
 #include "room.hpp"
+#include "area.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/badnamerepository.hpp"
 #include "repos/banrepository.hpp"
@@ -127,6 +128,31 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
         }
 
         ch->Echo("%d player homes reset to default values. Nothing persisted.\r\n", homeCount);
+    }
+    else if(StrCmp(argument, "findhomes") == 0)
+    {
+        std::set<std::string> homes;
+        
+        for (int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
+        {
+            for (auto room = RoomIndexHash[iHash];
+                 room;
+                 room = room->Next)
+            {
+                if(room->Flags.test(Flag::Room::PlayerHome))
+                {
+                    std::string entry = FormatString("%5ld) %s",
+                                                     room->Vnum,
+                                                     room->Area->Filename.c_str());
+                    homes.insert(entry);
+                }
+            }
+        }
+
+        for(auto entry : homes)
+        {
+            ch->Echo("%s\r\n", entry.c_str());
+        }
     }
     else
     {
