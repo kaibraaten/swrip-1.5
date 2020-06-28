@@ -53,18 +53,18 @@ void Disarm(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
     std::shared_ptr<Object> obj;
     std::shared_ptr<Object> tmpobj;
 
-    if((obj = GetEquipmentOnCharacter(victim, WEAR_WIELD)) == NULL)
+    if((obj = GetEquipmentOnCharacter(victim, WEAR_WIELD)) == nullptr)
     {
         return;
     }
 
-    if((tmpobj = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) != NULL
+    if((tmpobj = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) != nullptr
        && NumberBits(1) == 0)
     {
         obj = tmpobj;
     }
 
-    if(GetEquipmentOnCharacter(ch, WEAR_WIELD) == NULL
+    if(GetEquipmentOnCharacter(ch, WEAR_WIELD) == nullptr
        && NumberBits(1) == 0)
     {
         LearnFromFailure(ch, gsn_disarm);
@@ -90,7 +90,7 @@ void Disarm(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
     LearnFromSuccess(ch, gsn_disarm);
 
     if(obj == GetEquipmentOnCharacter(victim, WEAR_WIELD)
-       && (tmpobj = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) != NULL)
+       && (tmpobj = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) != nullptr)
     {
         tmpobj->WearLoc = WEAR_WIELD;
     }
@@ -166,11 +166,11 @@ bool CheckParry(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim
     }
     else
     {
-        if((wield = GetEquipmentOnCharacter(victim, WEAR_WIELD)) == NULL ||
-           (wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER))
+        if((wield = GetEquipmentOnCharacter(victim, WEAR_WIELD)) == nullptr
+           || (wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER))
         {
-            if((wield = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) == NULL ||
-               (wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER))
+            if((wield = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) == nullptr
+               || (wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER))
             {
                 return false;
             }
@@ -190,13 +190,13 @@ bool CheckParry(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim
     if(!IsNpc(victim)
        && !victim->PCData->Flags.test(Flag::PCData::Gag))
     {
-        Act(AT_SKILL, "You parry $n's attack.", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_SKILL, "You parry $n's attack.", ch, nullptr, victim, ActTarget::Vict);
     }
 
     if(!IsNpc(ch)
        && !ch->PCData->Flags.test(Flag::PCData::Gag))
     {
-        Act(AT_SKILL, "$N parries your attack.", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$N parries your attack.", ch, nullptr, victim, ActTarget::Char);
     }
 
     LearnFromSuccess(victim, gsn_parry);
@@ -240,13 +240,13 @@ bool CheckDodge(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim
     if(!IsNpc(victim)
        && !victim->PCData->Flags.test(Flag::PCData::Gag))
     {
-        Act(AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_SKILL, "You dodge $n's attack.", ch, nullptr, victim, ActTarget::Vict);
     }
 
     if(!IsNpc(ch)
        && !ch->PCData->Flags.test(Flag::PCData::Gag))
     {
-        Act(AT_SKILL, "$N dodges your attack.", ch, NULL, victim, ActTarget::Char);
+        Act(AT_SKILL, "$N dodges your attack.", ch, nullptr, victim, ActTarget::Char);
     }
 
     LearnFromSuccess(victim, gsn_dodge);
@@ -285,10 +285,9 @@ bool CheckGrip(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
         return false;
     }
 
-    Act(AT_SKILL, "You evade $n's attempt to disarm you.", ch, NULL, victim, ActTarget::Vict);
+    Act(AT_SKILL, "You evade $n's attempt to disarm you.", ch, nullptr, victim, ActTarget::Vict);
     Act(AT_SKILL, "$N holds $S weapon strongly, and is not disarmed.",
-        ch, NULL, victim, ActTarget::Char);
+        ch, nullptr, victim, ActTarget::Char);
     LearnFromSuccess(victim, gsn_grip);
     return true;
 }
-

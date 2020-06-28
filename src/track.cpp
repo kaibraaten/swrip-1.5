@@ -45,12 +45,12 @@ struct bfs_queue_struct
 {
     std::shared_ptr<Room> room;
     DirectionType dir = DIR_INVALID;
-    bfs_queue_struct *Next = nullptr;
+    std::shared_ptr<bfs_queue_struct> Next;
 };
 
-static bfs_queue_struct *queue_head = NULL;
-static bfs_queue_struct *queue_tail = NULL;
-static bfs_queue_struct *room_queue = NULL;
+static std::shared_ptr<bfs_queue_struct> queue_head;
+static std::shared_ptr<bfs_queue_struct> queue_tail;
+static std::shared_ptr<bfs_queue_struct> room_queue;
 
 /* Utility macros */
 static void MARK(std::shared_ptr<Room> room)
@@ -70,7 +70,7 @@ static bool IS_MARKED(std::shared_ptr<Room> room)
 
 static std::shared_ptr<Room> ToRoom(std::shared_ptr<Room> room, DirectionType door)
 {
-    return (GetExit(room, door)->ToRoom);
+    return GetExit(room, door)->ToRoom;
 }
 
 static bool IsValidEdge(std::shared_ptr<Room> room, DirectionType door)
@@ -95,7 +95,7 @@ static bool IsValidEdge(std::shared_ptr<Room> room, DirectionType door)
 
 static void bfs_enqueue(std::shared_ptr<Room> room, DirectionType dir)
 {
-    auto curr = new bfs_queue_struct();
+    auto curr = std::make_shared<bfs_queue_struct>();
     curr->room = room;
     curr->dir = dir;
 
@@ -112,19 +112,17 @@ static void bfs_enqueue(std::shared_ptr<Room> room, DirectionType dir)
 
 static void bfs_dequeue()
 {
-    bfs_queue_struct *curr = queue_head;
+    queue_head = queue_head->Next;
 
-    if(!(queue_head = queue_head->Next))
+    if(queue_head == nullptr)
     {
-        queue_tail = NULL;
+        queue_tail = nullptr;
     }
-
-    delete curr;
 }
 
 static void bfs_clear_queue()
 {
-    while(queue_head)
+    while(queue_head != nullptr)
     {
         bfs_dequeue();
     }
@@ -132,7 +130,7 @@ static void bfs_clear_queue()
 
 static void room_enqueue(std::shared_ptr<Room> room)
 {
-    auto curr = new bfs_queue_struct();
+    auto curr = std::make_shared<bfs_queue_struct>();
     curr->room = room;
     curr->Next = room_queue;
 
@@ -141,17 +139,13 @@ static void room_enqueue(std::shared_ptr<Room> room)
 
 static void CleanRoom_queue()
 {
-    bfs_queue_struct *curr = NULL;
-    bfs_queue_struct *curr_next = NULL;
-
-    for(curr = room_queue; curr; curr = curr_next)
+    for(std::shared_ptr<bfs_queue_struct> curr = room_queue, curr_next; curr; curr = curr_next)
     {
         UNMARK(curr->room);
         curr_next = curr->Next;
-        delete curr;
     }
 
-    room_queue = NULL;
+    room_queue = nullptr;
 }
 
 int FindFirstStep(std::shared_ptr<Room> src, std::shared_ptr<Room> target, int maxdist)
@@ -188,7 +182,7 @@ int FindFirstStep(std::shared_ptr<Room> src, std::shared_ptr<Room> target, int m
 
     count = 0;
 
-    while(queue_head)
+    while(queue_head != nullptr)
     {
         if(++count > maxdist)
         {
@@ -231,12 +225,6 @@ void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
     assert(ch != nullptr);
     assert(victim->InRoom != nullptr);
 
-    char buf[MAX_STRING_LENGTH];
-    char victname[1024];
-
-    sprintf(victname, "%s",
-            IsNpc(victim) ? victim->ShortDescr.c_str() : victim->Name.c_str());
-
     if(!CanSeeCharacter(ch, victim))
     {
         if(GetRandomPercent() < 90)
@@ -247,21 +235,18 @@ void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
         switch(NumberBits(2))
         {
         case 0:
-            sprintf(buf, "Don't make me find you!");
-            do_say(ch, buf);
+            do_say(ch, "Don't make me find you!");
             break;
 
         case 1:
-            Act(AT_ACTION, "$n sniffs around the room for someone.", ch, NULL, victim, ActTarget::NotVict);
-            Act(AT_ACTION, "You sniff around the room for someone.", ch, NULL, victim, ActTarget::Char);
-            Act(AT_ACTION, "$n sniffs around the room for someone.", ch, NULL, victim, ActTarget::Vict);
-            sprintf(buf, "I can smell your blood!");
-            do_say(ch, buf);
+            Act(AT_ACTION, "$n sniffs around the room for someone.", ch, nullptr, victim, ActTarget::NotVict);
+            Act(AT_ACTION, "You sniff around the room for someone.", ch, nullptr, victim, ActTarget::Char);
+            Act(AT_ACTION, "$n sniffs around the room for someone.", ch, nullptr, victim, ActTarget::Vict);
+            do_say(ch, "I can smell your blood!");
             break;
 
         case 2:
-            sprintf(buf, "I'm going to tear you apart!");
-            do_yell(ch, buf);
+            do_yell(ch, "I'm going to tear you apart!");
             break;
 
         case 3:
@@ -279,20 +264,24 @@ void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
             return;
         }
 
+        std::string victname = IsNpc(victim) ? victim->ShortDescr : victim->Name;
+        std::string buf;
+
         switch(NumberBits(2))
         {
         case 0:
             do_say(ch, "C'mon out, you coward!");
-            sprintf(buf, "%s is a bloody coward!", victname);
+            buf = FormatString("%s is a bloody coward!", victname.c_str());
             do_yell(ch, buf);
             break;
 
-        case 1: sprintf(buf, "Let's take this outside, %s", victname);
+        case 1:
+            buf = FormatString("Let's take this outside, %s.", victname.c_str());
             do_say(ch, buf);
             break;
 
         case 2:
-            sprintf(buf, "%s is a yellow-bellied wimp!", victname);
+            buf = FormatString("%s is a yellow-bellied wimp!", victname.c_str());
             do_yell(ch, buf);
             break;
 
@@ -309,24 +298,21 @@ void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
     switch(NumberBits(2))
     {
     case 0:
-        sprintf(buf, "Your blood is mine!");
-        do_yell(ch, buf);
+        do_yell(ch, "Your blood is mine!");
         break;
 
     case 1:
-        sprintf(buf, "Alas, we meet again!");
-        do_say(ch, buf);
+        do_say(ch, "Alas, we meet again!");
         break;
 
     case 2:
-        sprintf(buf, "What do you want on your tombstone?");
-        do_say(ch, buf);
+        do_say(ch, "What do you want on your tombstone?");
         break;
 
     case 3:
-        Act(AT_ACTION, "$n lunges at $N from out of nowhere!", ch, NULL, victim, ActTarget::NotVict);
-        Act(AT_ACTION, "You lunge at $N catching $M off guard!", ch, NULL, victim, ActTarget::Char);
-        Act(AT_ACTION, "$n lunges at you from out of nowhere!", ch, NULL, victim, ActTarget::Vict);
+        Act(AT_ACTION, "$n lunges at $N from out of nowhere!", ch, nullptr, victim, ActTarget::NotVict);
+        Act(AT_ACTION, "You lunge at $N catching $M off guard!", ch, nullptr, victim, ActTarget::Char);
+        Act(AT_ACTION, "$n lunges at you from out of nowhere!", ch, nullptr, victim, ActTarget::Vict);
         break;
     }
 
@@ -338,8 +324,6 @@ void FoundPrey(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 void HuntVictim(std::shared_ptr<Character> ch)
 {
     bool found = false;
-    std::shared_ptr<Character> tmp;
-    DirectionType ret;
 
     if(!ch || !ch->HHF.Hunting || !ch->HHF.Hunting->Who)
     {
@@ -347,7 +331,7 @@ void HuntVictim(std::shared_ptr<Character> ch)
     }
 
     /* make sure the char still exists */
-    for(found = false, tmp = FirstCharacter; tmp && !found; tmp = tmp->Next)
+    for(auto tmp = FirstCharacter; tmp && !found; tmp = tmp->Next)
     {
         if(ch->HHF.Hunting->Who == tmp)
         {
@@ -374,34 +358,32 @@ void HuntVictim(std::shared_ptr<Character> ch)
     }
 
     /* hunting with snipe */
-    {
-        std::shared_ptr<Object> wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
+    std::shared_ptr<Object> wield = GetEquipmentOnCharacter(ch, WEAR_WIELD);
 
-        if(wield != NULL && wield->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER)
+    if(wield != nullptr && wield->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER)
+    {
+        if(MobSnipe(ch, ch->HHF.Hunting->Who) == true)
         {
-            if(MobSnipe(ch, ch->HHF.Hunting->Who) == true)
-            {
-                return;
-            }
-        }
-        else if(!IsDroid(ch))
-        {
-            do_hide(ch, "");
+            return;
         }
     }
+    else if(!IsDroid(ch))
+    {
+        do_hide(ch, "");
+    }
 
-    ret = (DirectionType)FindFirstStep(ch->InRoom, ch->HHF.Hunting->Who->InRoom, 5000);
+    DirectionType ret = (DirectionType)FindFirstStep(ch->InRoom, ch->HHF.Hunting->Who->InRoom, 5000);
 
     if(ret == BFS_NO_PATH)
     {
         std::shared_ptr<Exit> pexit;
-        int attempt = 0;
 
-        for(attempt = 0; attempt < 25; attempt++)
+        for(int attempt = 0; attempt < 25; attempt++)
         {
             ret = (DirectionType)GetRandomDoor();
+            auto pexit = GetExit(ch->InRoom, ret);
 
-            if((pexit = GetExit(ch->InRoom, ret)) == NULL
+            if(pexit == nullptr
                || !pexit->ToRoom
                || pexit->Flags.test(Flag::Exit::Closed)
                || pexit->ToRoom->Flags.test(Flag::Room::NoMob))
@@ -415,7 +397,6 @@ void HuntVictim(std::shared_ptr<Character> ch)
     {
         do_say(ch, "Damn! Lost my prey!");
         StopHunting(ch);
-        return;
     }
     else
     {
@@ -438,21 +419,12 @@ void HuntVictim(std::shared_ptr<Character> ch)
         {
             FoundPrey(ch, ch->HHF.Hunting->Who);
         }
-
-        return;
     }
 }
 
 static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    DirectionType dir = DIR_INVALID;
-    short dist = 0;
-    short max_dist = 3;
-    std::shared_ptr<Exit> pexit;
-    std::shared_ptr<Room> was_in_room;
-    std::shared_ptr<Room> to_room;
-    char buf[MAX_STRING_LENGTH];
-    bool pfound = false;
+    constexpr short max_dist = 3;
 
     if(!ch->InRoom || !victim->InRoom)
     {
@@ -464,9 +436,11 @@ static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         return false;
     }
 
-    for(dir = DIR_NORTH; dir <= DIR_SOMEWHERE; dir = (DirectionType)(dir + 1))
+    for(DirectionType dir = DIR_NORTH; dir <= DIR_SOMEWHERE; dir = (DirectionType)(dir + 1))
     {
-        if((pexit = GetExit(ch->InRoom, dir)) == NULL)
+        auto pexit = GetExit(ch->InRoom, dir);
+
+        if(pexit == nullptr)
         {
             continue;
         }
@@ -476,9 +450,10 @@ static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
             continue;
         }
 
-        was_in_room = ch->InRoom;
+        auto was_in_room = ch->InRoom;
+        bool pfound = false;
 
-        for(dist = 0; dist <= max_dist; dist++)
+        for(short dist = 0; dist <= max_dist; dist++)
         {
             if(pexit->Flags.test(Flag::Exit::Closed))
             {
@@ -490,14 +465,14 @@ static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
                 break;
             }
 
-            to_room = NULL;
+            std::shared_ptr<Room> to_room;
 
             if(pexit->Distance > 1)
             {
                 to_room = GenerateExit(ch->InRoom, pexit);
             }
 
-            if(to_room == NULL)
+            if(to_room == nullptr)
             {
                 to_room = pexit->ToRoom;
             }
@@ -589,12 +564,12 @@ static bool MobSnipe(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         CharacterFromRoom(ch);
         CharacterToRoom(ch, victim->InRoom);
 
-        sprintf(buf, "A blaster shot fires at you from the %s.",
-                GetDirectionName(dir));
+        std::string buf = FormatString("A blaster shot fires at you from the %s.",
+                                       GetDirectionName(dir));
         Act(AT_ACTION, buf, victim, NULL, ch, ActTarget::Char);
         Act(AT_ACTION, "You fire at $N.", ch, NULL, victim, ActTarget::Char);
-        sprintf(buf, "A blaster shot fires at $N from the %s.",
-                GetDirectionName(dir));
+        buf = FormatString("A blaster shot fires at $N from the %s.",
+                           GetDirectionName(dir));
         Act(AT_ACTION, buf, ch, NULL, victim, ActTarget::NotVict);
 
         HitOnce(ch, victim, TYPE_UNDEFINED);
