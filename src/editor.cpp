@@ -241,7 +241,7 @@ static std::shared_ptr<Editor> str_to_editdata(const std::string &str, int max_s
     const char *p = str.c_str();
     int i = 0;
     int tsize = 0, line_count = 1;
-    auto edd = std::shared_ptr<Editor>();
+    auto edd = std::make_shared<Editor>();
     EditorLine *eline = make_new_line("");
 
     edd->first_line = eline;

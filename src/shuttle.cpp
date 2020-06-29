@@ -134,13 +134,13 @@ static void HandleStateTakingOff(const std::shared_ptr<Shuttle> &shuttle)
     if (shuttle->Type == SHUTTLE_TURBOCAR)
     {
         buf = FormatString("An electronic voice says, 'Preparing for departure.'\r\n"
-            "It continues, 'Next stop, %s'",
+            "It continues, 'Next stop, %s.'",
             shuttle->CurrentStop()->Name.c_str());
     }
     else
     {
         buf = FormatString("An electronic voice says, 'Preparing for launch.'\r\n"
-            "It continues, 'Next stop, %s'",
+            "It continues, 'Next stop, %s.'",
             shuttle->CurrentStop()->Name.c_str());
     }
 
@@ -229,7 +229,7 @@ static void HandleStateLanding(const std::shared_ptr<Shuttle> &shuttle)
     * The hatch opens.
     */
 
-    std::string buf = FormatString("An electronic voice says, 'Welcome to %s'\r\n"
+    std::string buf = FormatString("An electronic voice says, 'Welcome to %s.'\r\n"
                                    "It continues, 'Please exit through the %s. Enjoy your stay.'",
                                    shuttle->CurrentStop()->Name.c_str(),
                                    shuttle->Type == SHUTTLE_TURBOCAR ? "doors" : "main ramp");

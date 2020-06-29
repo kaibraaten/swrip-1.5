@@ -1302,6 +1302,7 @@ namespace Flag
         {
             Glow,
                 Hum,
+                _02,
                 HuttSize,
                 Contraband,
                 Invis,
@@ -1566,7 +1567,7 @@ constexpr vnum_t ROOM_VNUM_TEMPLE = 32144;
 constexpr vnum_t ROOM_VNUM_ALTAR = 32144;
 constexpr vnum_t ROOM_VNUM_SCHOOL = 10300;
 constexpr vnum_t ROOM_AUTH_START = 10300;
-constexpr vnum_t ROOM_START_PLAYER = 201;
+constexpr vnum_t ROOM_START_PLAYER = 31604;
 constexpr vnum_t ROOM_START_IMMORTAL = 100;
 constexpr vnum_t ROOM_LIMBO_SHIPYARD = 45;
 constexpr vnum_t ROOM_PLUOGUS_QUIT = 32148;

@@ -89,7 +89,7 @@ void do_rstat(std::shared_ptr<Character> ch, std::string argument)
 
     ch->Echo("Vnum: %ld  Sector: %s  Light: %d  TeleDelay: %d  TeleVnum: %ld  Tunnel: %d\r\n",
              location->Vnum,
-             SectorNames[location->Sector][0],
+             SectorNames[location->Sector][1],
              location->Light,
              location->TeleDelay,
              location->TeleVnum,

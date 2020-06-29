@@ -995,6 +995,9 @@ static void show_no_arg(std::shared_ptr<Character> ch, bool is_auto)
 
             SetCharacterColor(AT_CYAN, ch);
             ch->Echo("[%s]", FlagString(ch->InRoom->Flags, RoomFlags).c_str());
+
+            SetCharacterColor(AT_DGREEN, ch);
+            ch->Echo("(%s)", SectorNames[ch->InRoom->Sector][1]);
         }
     }
 
