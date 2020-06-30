@@ -3576,7 +3576,7 @@ void DiscardComments(std::list<std::string> &document)
 
 void RewriteElIfs(std::list<std::string> &document)
 {
-    for(auto &i = document.begin(); i != document.end(); ++i)
+    for(auto i = document.begin(); i != document.end(); ++i)
     {
         if(StringPrefix("elif ", *i) == 0)
         {
@@ -3600,7 +3600,7 @@ void RewriteElIfs(std::list<std::string> &document)
 
 void RewriteIfAnd(std::list<std::string> &document)
 {
-    for(auto &i = document.begin(); i != document.end(); ++i)
+    for(auto i = document.begin(); i != document.end(); ++i)
     {
         if(StringPrefix("and ", *i) == 0)
         {
