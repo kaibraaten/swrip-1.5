@@ -996,11 +996,49 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         }
         else if(!StrCmp(chck, "sex"))
         {
-            return MudProgCompareNumbers(chkchar->Sex, opr, atoi(rval), mob);
+            int sex = -1;
+
+            if(IsNumber(rval))
+            {
+                sex = atoi(rval);
+            }
+            else
+            {
+                sex = GetSex(rval);
+            }
+
+            if(sex >= 0 && sex < SexNames.size())
+            {
+                return MudProgCompareNumbers(chkchar->Sex, opr, sex, mob);
+            }
+            else
+            {
+                ProgBug("Invalid sex", mob);
+                return BERR;
+            }
         }
         else if(!StrCmp(chck, "position"))
         {
-            return MudProgCompareNumbers(chkchar->Position, opr, atoi(rval), mob);
+            int pos = -1;
+            
+            if(IsNumber(rval))
+            {
+                pos = atoi(rval);
+            }
+            else
+            {
+                pos = GetPosition(rval);
+            }
+
+            if(pos >= 0 && pos < PositionName.size())
+            {
+                return MudProgCompareNumbers(chkchar->Position, opr, pos, mob);
+            }
+            else
+            {
+                ProgBug("Invalid position", mob);
+                return BERR;
+            }
         }
         else if(!StrCmp(chck, "ishelled"))
         {
@@ -1690,7 +1728,8 @@ static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob, s
  *  This function rewritten by Narn for Realms of Despair, Dec/95.
  *
  */
-static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob,
+                          std::shared_ptr<Character> actor,
                           std::shared_ptr<Object> obj, const Vo &vo, bool single_step)
 {
     char tmpcmndlst[MAX_STRING_LENGTH];
@@ -1704,6 +1743,7 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob, 
 
     if(IsAffectedBy(mob, Flag::Affect::Charm))
     {
+        ProgBug("affected by charm", mob);
         return;
     }
 
@@ -1762,12 +1802,23 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob, 
         }
     }
 
+    if(actor != nullptr && IsImmortal(actor))
+    {
+        Log->Info("%s", com_list.c_str());
+    }
+    
     auto script = SplitIntoLines(com_list);
     DiscardComments(script);
     RewriteElIfs(script);
     RewriteIfAnd(script);
+    com_list = JoinAsString(script);
 
-    strcpy(tmpcmndlst, JoinAsString(script).c_str());
+    if(actor != nullptr && IsImmortal(actor))
+    {
+        Log->Info("%s", com_list.c_str());
+    }
+    
+    strcpy(tmpcmndlst, com_list.c_str());
     command_list = tmpcmndlst;
 
     if(single_step)

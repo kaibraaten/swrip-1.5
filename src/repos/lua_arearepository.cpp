@@ -811,6 +811,7 @@ static void LoadMudProg(lua_State *L, int subscript, MProg *mprog)
                       });
     LuaGetfieldString(L, "Code", &prog->comlist);
     mprog->Add(prog);
+    mprog->progtypes |= prog->type;
 }
 
 static void LoadLanguages(lua_State *L, std::shared_ptr<ProtoMobile> mob)
