@@ -1697,9 +1697,8 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob, 
     char *command_list = nullptr;
     char *cmnd = nullptr;
     std::shared_ptr<Character> rndm = nullptr;
-    int count = 0;
     int ignorelevel = 0;
-    int iflevel = 0, result = 0;
+    int result = 0;
     bool ifstate[MAX_IFS][DO_ELSE + 1];
     static int prog_nest = 0;
 
@@ -1723,15 +1722,13 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob, 
     }
 
     /* Make sure all ifstate bools are set to false */
-    for(iflevel = 0; iflevel < MAX_IFS; iflevel++)
+    for(int iflevel = 0; iflevel < MAX_IFS; iflevel++)
     {
-        for(count = 0; count < DO_ELSE; count++)
+        for(int i = 0; i < DO_ELSE; i++)
         {
-            ifstate[iflevel][count] = false;
+            ifstate[iflevel][i] = false;
         }
     }
-
-    iflevel = 0;
 
     /*
      * get a random visible player who is in the room with the mob.
@@ -1750,7 +1747,7 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob, 
      *
      */
 
-    count = 0;
+    int count = 0;
 
     for(auto vch : mob->InRoom->Characters())
     {
@@ -1765,7 +1762,12 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob, 
         }
     }
 
-    strcpy(tmpcmndlst, com_list.c_str());
+    auto script = SplitIntoLines(com_list);
+    DiscardComments(script);
+    RewriteElIfs(script);
+    RewriteIfAnd(script);
+
+    strcpy(tmpcmndlst, JoinAsString(script).c_str());
     command_list = tmpcmndlst;
 
     if(single_step)
@@ -1791,6 +1793,7 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob, 
        logiclevel (MAX_IFS) is defined at the beginning of this file,
        use it to increase/decrease max allowed nesting.  -Narn
     */
+    int iflevel = 0;
 
     while(true)
     {
@@ -3522,4 +3525,95 @@ std::shared_ptr<Character> GetCharacterInRoomMudProg(std::shared_ptr<Character> 
     }
 
     return nullptr;
+}
+
+std::list<std::string> SplitIntoLines(std::string input)
+{
+    std::list<std::string> output;
+
+    if(!input.empty())
+    {
+        input = StripCarriageReturn(input);
+
+        if(input[input.size() - 1] != '\n')
+        {
+            input += '\n';
+        }
+
+        size_t start = 0;
+        size_t end = 0;
+
+        while((end = input.find('\n', start)) != std::string::npos)
+        {
+            std::string line = TrimString(input.substr(start, end - start));
+
+            if(!line.empty())
+            {
+                output.push_back(line);
+            }
+
+            start = end + 1;
+        }
+    }
+
+    return output;
+}
+
+void DiscardComments(std::list<std::string> &document)
+{
+    for(auto it = document.begin(); it != document.end(); )
+    {
+        if(StringPrefix("--", *it) == 0)
+        {
+            it = document.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+}
+
+void RewriteElIfs(std::list<std::string> &document)
+{
+    for(auto &i = document.begin(); i != document.end(); ++i)
+    {
+        if(StringPrefix("elif ", *i) == 0)
+        {
+            std::string ifcheck = (*i).substr(2);
+            *i = "else";
+
+            for(auto endifIter = i; endifIter != document.end(); ++endifIter)
+            {
+                if(*endifIter == "endif")
+                {
+                    document.insert(endifIter, "endif");
+                    break;
+                }
+            }
+
+            ++i;
+            document.insert(i, ifcheck);
+        }
+    }
+}
+
+void RewriteIfAnd(std::list<std::string> &document)
+{
+    for(auto &i = document.begin(); i != document.end(); ++i)
+    {
+        if(StringPrefix("and ", *i) == 0)
+        {
+            *i = "if" + (*i).substr(3);
+
+            for(auto endblockIter = i; endblockIter != document.end(); ++endblockIter)
+            {
+                if(*endblockIter == "endif" || *endblockIter == "else" || *endblockIter == "elif")
+                {
+                    document.insert(endblockIter, "endif");
+                    break;
+                }
+            }
+        }
+    }
 }

@@ -10,6 +10,7 @@ add_executable(mud_tests $<TARGET_OBJECTS:mud>
   src/flag_tests.cpp
   src/lua_tests.cpp
   src/main.cpp
+  src/mudprog_tests.cpp
   src/commands/follow_tests.cpp
   )
 target_compile_features(mud_tests PRIVATE cxx_std_17)

@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <list>
+#include <sstream>
 #include "types.hpp"
 #include "vo.hpp"
 
@@ -113,5 +114,23 @@ void ObjProgActTrigger(const std::string &buf, std::shared_ptr<Object> mobj, std
 void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, std::shared_ptr<Character> ch,
                         std::shared_ptr<Object> obj, const Vo &vo);
 
+
+std::list<std::string> SplitIntoLines(std::string input);
+void DiscardComments(std::list<std::string> &document);
+void RewriteElIfs(std::list<std::string> &document);
+void RewriteIfAnd(std::list<std::string> &document);
+
+template<typename ContainerT>
+std::string JoinAsString(const ContainerT &container)
+{
+    std::ostringstream buf;
+
+    for(const auto &i : container)
+    {
+        buf << i << "\r\n";
+    }
+
+    return buf.str();
+}
 
 #endif
