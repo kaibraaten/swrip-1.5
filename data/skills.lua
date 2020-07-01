@@ -1,603 +1,9020 @@
 -- Skills
--- Last saved Monday 27-Aug-2018 11:44:02
+-- Last saved Tuesday 30-Jun-2020 18:36:19
 
 SkillEntry
 {
-   Mana = 12, 
-   Type = "Force Power", 
-   Name = "harden", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 5, 
-         Modifier = "4", 
-         Duration = "l*30", 
-      }, 
-      [3] = 
-      {
-         Location = 27, 
-         Modifier = "8192", 
-         Duration = "l*30", 
-      }, 
-      [4] = 
-      {
-         Location = 13, 
-         Modifier = "l*4", 
-         Duration = "l*30", 
-      }, 
-   }, 
+   Ability = "force", 
+   Level = 2, 
    Messages = 
    {
-      Success = 
+      WearOff = "!Cause Light!", 
+      VictimImmune = 
       {
-         ToRoom = "$N's face hardens.", 
-         ToVictim = "You steel yourself against pain.", 
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "You soften.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "spell", 
    }, 
-   Beats = 18, 
+   Mana = 15, 
+   Beats = 12, 
+   Alignment = -1001, 
+   Flags = 
+   {
+      [2] = "_02", 
+   }, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Flags = 
-   {
-      [27] = "SecretSkill", 
-   }, 
-   Position = "dead", 
-   Function = "spell_smaug", 
-   Level = 55, 
-   Target = "self", 
-   Alignment = -1001, 
-   Ability = "force", 
+   Function = "spell_cause_light", 
+   Slot = 62, 
+   Type = "Force Power", 
+   Target = "offensive", 
+   Name = "force spray", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 15, 
-   Type = "unknown", 
    Ability = "force", 
-   Slot = 22, 
+   Level = 28, 
    Messages = 
    {
-      Success = 
+      WearOff = "Furrowing your brow, you sense the weight of wisdom leave you.", 
+      VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      VictimImmune = 
+      Success = 
       {
+         ToRoom = "$N grows serious as wisdom takes root within $M.", 
+         ToVictim = "The wisdom of the Force blossoms within you.", 
+         ToCaster = "$N grows serious as wisdom takes root within $M.", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "!Dispel Evil!", 
-      NounDamage = "dispel evil", 
+      NounDamage = "", 
    }, 
+   Mana = 12, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "1+(l/17)", 
+         Location = 4, 
+         Duration = "l*24", 
+      }, 
+   }, 
+   Alignment = 1001, 
    Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
+   Function = "spell_smaug", 
+   Slot = 228, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "forethought", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 11, 
+   Messages = 
+   {
+      WearOff = "The protection of the Force fades away.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N beams as a powerful blessing is laid upon $M.", 
+         ToVictim = "A powerful blessing is laid upon you.", 
+         ToCaster = "You lay the blessing of the Force upon $N.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 5, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "l/8", 
+         Location = 18, 
+         Duration = "l*23", 
+      }, 
+      [3] = 
+      {
+         Modifier = "-(l/8)", 
+         Location = 24, 
+         Duration = "l*23", 
+      }, 
+   }, 
+   Alignment = 999, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 3, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "good fortune", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 43, 
+   Messages = 
+   {
+      WearOff = "You are no longer masked.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N fades from existence.", 
+         ToVictim = "You fade from existence.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 20, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "mass invis", 
+         Location = 26, 
+         Duration = "l*11", 
+      }, 
+   }, 
+   Beats = 24, 
    Flags = 
    {
-      [27] = "SecretSkill", 
+      [24] = "Group", 
    }, 
-   Position = "fighting", 
-   Function = "spell_dispel_evil", 
-   Level = 105, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 69, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "group masking", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 56, 
+   Messages = 
+   {
+      WearOff = "!WEAROFF!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "Hand of Chaos", 
+   }, 
+   Mana = 15, 
+   Beats = 8, 
+   Alignment = -1001, 
+   Flags = 
+   {
+      [8] = "_08", 
+      [9] = "_09", 
+      [2] = "_02", 
+      [3] = "_03", 
+      [7] = "_07", 
+   }, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_hand_of_chaos", 
+   Slot = 307, 
+   Type = "Force Power", 
    Target = "offensive", 
+   Name = "Hand of Darkness", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 26, 
+   Messages = 
+   {
+      WearOff = "!Harm!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "harm spell", 
+   }, 
+   Mana = 35, 
+   Beats = 12, 
+   Alignment = -1001, 
+   Flags = 
+   {
+      [2] = "_02", 
+   }, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_harm", 
+   Slot = 27, 
+   Type = "Force Power", 
+   Target = "offensive", 
+   Name = "harm", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 30, 
+   Messages = 
+   {
+      WearOff = "!Heal!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "A warm feeling fills your body.", 
+         ToCaster = "You lay a hand of healing upon $N.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 50, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 13, 
+         Modifier = "100", 
+      }, 
+   }, 
    Alignment = 1001, 
-   Name = "dispel dark", 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 28, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "heal", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
+   Ability = "force", 
+   Level = 15, 
+   Mana = 5, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
+      WearOff = "You feel less aware of your surroundings.", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N's senses are heightened to those of an animal.", 
+         ToVictim = "Your senses are heightened to those of an animal.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "detect hidden", 
+         Location = 26, 
+         Duration = "l*24", 
       }, 
    }, 
-   Type = "unknown", 
-   Ability = "combat", 
-   Position = "dead", 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
    Function = "spell_smaug", 
-   Level = 105, 
+   Slot = 44, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "heightened awareness", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Messages = 
+   {
+      WearOff = "!Continual Light!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "Shards of iridescent light collide to form a dazzling ball...", 
+         ToVictim = "", 
+         ToCaster = "Shards of iridescent light collide to form a dazzling ball...", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Level = 4, 
+   Beats = 12, 
+   Mana = 7, 
+   Flags = 
+   {
+      [9] = "_09", 
+      [25] = "Object", 
+      [3] = "_03", 
+   }, 
+   Value = 21, 
    Target = "ignore", 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 57, 
+   Type = "Force Power", 
+   Dice = "0", 
+   Name = "illuminate", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 55, 
+   Messages = 
+   {
+      WearOff = "You soften.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N's face hardens.", 
+         ToVictim = "You steel yourself against pain.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 12, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "8192", 
+         Location = 27, 
+         Duration = "l*30", 
+      }, 
+      [3] = 
+      {
+         Modifier = "5", 
+         Location = 5, 
+         Duration = "l*20", 
+      }, 
+      [4] = 
+      {
+         Modifier = "l*4", 
+         Location = 13, 
+         Duration = "l*30", 
+      }, 
+   }, 
+   Alignment = 1001, 
+   Beats = 18, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 66, 
+   Type = "Force Power", 
+   Target = "self", 
+   Name = "inner fortress", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 10, 
+   Messages = 
+   {
+      WearOff = "!Cause Serious!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "spell", 
+   }, 
+   Mana = 17, 
+   Beats = 12, 
+   Alignment = -1001, 
+   Flags = 
+   {
+      [2] = "_02", 
+   }, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_cause_serious", 
+   Slot = 64, 
+   Type = "Force Power", 
+   Target = "offensive", 
+   Name = "invade essence", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 20, 
+   Mana = 12, 
+   Messages = 
+   {
+      WearOff = "!Identify!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Beats = 24, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_identify", 
+   Slot = 53, 
+   Type = "Force Power", 
+   Target = "ignore", 
+   Name = "know essence", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 5, 
+   Mana = 5, 
+   Messages = 
+   {
+      WearOff = "You are no longer invisible.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "A momentary lapse in attention, and $N is out of sight.", 
+         ToVictim = "You fade from existence.", 
+         ToCaster = "A momentary lapse in attention, and $N is out of sight.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "invis", 
+         Location = 26, 
+         Duration = "l*11", 
+      }, 
+   }, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+      [7310] = "jedi salesman", 
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_invis", 
+   Slot = 29, 
+   Type = "Force Power", 
+   Target = "ignore", 
+   Name = "mask", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 13, 
+   Mana = 10, 
+   Messages = 
+   {
+      WearOff = "You feel less sick.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "poison", 
+   }, 
+   Alignment = -1001, 
+   Beats = 20, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_poison", 
+   Slot = 33, 
+   Type = "Force Power", 
+   Target = "offensive", 
+   Name = "poison", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 150, 
+   Messages = 
+   {
+      WearOff = "You return to your body.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "possess", 
+   }, 
+   Mana = 120, 
+   Beats = 12, 
+   Alignment = -1001, 
    Flags = 
    {
       [27] = "SecretSkill", 
    }, 
-   Name = "stun", 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_possess", 
+   Slot = 232, 
+   Type = "Force Power", 
+   Target = "ignore", 
+   Name = "possess", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
+   Ability = "force", 
+   Level = 12, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
+      WearOff = "You feel less protected from the Dark Side.", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N is blessed with a protection from the Dark Side.", 
+         ToVictim = "You are blessed with a protection from the Dark Side.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 5, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "protection", 
+         Location = 26, 
+         Duration = "l*10", 
       }, 
    }, 
-   Type = "unknown", 
-   Ability = "combat", 
-   Position = "dead", 
+   Alignment = 1001, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
    Function = "spell_smaug", 
+   Slot = 34, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "protection from darkness", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 6, 
+   Messages = 
+   {
+      WearOff = "!Refresh!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "Blooming vitality flows through you.", 
+         ToCaster = "You allow blooming vitality to flow from you to $N.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "refresh", 
+   }, 
+   Mana = 12, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 14, 
+         Modifier = "l", 
+      }, 
+   }, 
+   Alignment = 1001, 
+   Beats = 18, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 81, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "refresh", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 8, 
+   Mana = 10, 
+   Messages = 
+   {
+      WearOff = "!Remove Invis!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_remove_invis", 
+   Slot = 230, 
+   Type = "Force Power", 
+   Target = "ignore", 
+   Name = "remove masking", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 29, 
+   Mana = 35, 
+   Messages = 
+   {
+      WearOff = "!Remove trap!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_remove_trap", 
+   Slot = 87, 
+   Type = "Force Power", 
+   Target = "ignore", 
+   Name = "remove trap", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "???", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
    Level = 101, 
+   Position = "standing", 
    Target = "ignore", 
-   Flags = 
-   {
-      [27] = "SecretSkill", 
-   }, 
-   Name = "unknown", 
+   Name = "reserved", 
+   Type = "Force Power", 
 }
 
 SkillEntry
 {
+   Ability = "force", 
    Messages = 
    {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "A warm feeling flows through $N.", 
+         ToVictim = "A warm feeling flows through you.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 13, 
+         Modifier = "200", 
+      }, 
+   }, 
+   Level = 60, 
+   Beats = 20, 
+   Mana = 80, 
+   Flags = 
+   {
+      [24] = "Group", 
+      [22] = "NoScribe", 
+      [23] = "NoBrew", 
+   }, 
+   Alignment = 1001, 
+   Participants = 2, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 113, 
+   Type = "Force Power", 
+   Target = "ignore", 
+   Name = "restoration", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 27, 
+   Messages = 
+   {
+      WearOff = "The luminous aura about your body fades away.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "A luminous aura spreads slowly over $N's body.", 
+         ToVictim = "A luminous aura spreads slowly over your body.", 
+         ToCaster = "A luminous aura spreads slowly over $N's body.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 75, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "sanctuary", 
+         Location = 26, 
+         Duration = "(l*4)+30", 
+      }, 
+   }, 
+   Alignment = 1001, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 36, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "sanctuary", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 73, 
+   Messages = 
+   {
+      WearOff = "!Scorching Surge!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "scorching surge", 
+   }, 
+   Mana = 25, 
+   Beats = 12, 
+   Alignment = -1001, 
+   Flags = 
+   {
+      [0] = "_00", 
+   }, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_scorching_surge", 
+   Slot = 296, 
+   Type = "Force Power", 
+   Target = "offensive", 
+   Name = "scorching surge", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 26, 
+   Messages = 
+   {
+      WearOff = "Your force shield shimmers then fades away.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "A force shield of shimmering blue surrounds $N.", 
+         ToVictim = "A force shield of shimmering blue surrounds you.", 
+         ToCaster = "A force shield of shimmering blue surrounds $N.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 12, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "-50", 
+         Location = 17, 
+         Duration = "l*20", 
+      }, 
+   }, 
+   Alignment = 1001, 
+   Beats = 18, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 67, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "shield", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 14, 
+   Messages = 
+   {
+      WearOff = "!Shocking Grasp!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "shocking grasp", 
+   }, 
+   Mana = 15, 
+   Beats = 12, 
+   Alignment = -1001, 
+   Flags = 
+   {
+      [1] = "_01", 
+      [0] = "_00", 
+   }, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_shocking_grasp", 
+   Slot = 51, 
+   Type = "Force Power", 
+   Target = "offensive", 
+   Name = "shocking grasp", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Messages = 
+   {
+      WearOff = "The torrents of cascading energy suddenly fade away.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "Torrents of cascading energy form around $N.", 
+         ToVictim = "Torrents of cascading energy form around you.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Level = 72, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "shockshield", 
+         AffectedBy = "Blind", 
+         Location = 26, 
+         Duration = "(l*3)+14", 
+      }, 
+   }, 
+   Mana = 95, 
+   Beats = 12, 
+   Alignment = -1001, 
+   Flags = 
+   {
+      [1] = "_01", 
+      [0] = "_00", 
+   }, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 89, 
+   Type = "Force Power", 
+   Target = "self", 
+   Name = "shockshield", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 24, 
+   Mana = 15, 
+   Messages = 
+   {
+      WearOff = "You feel less tired.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_sleep", 
+   Slot = 38, 
+   Type = "Force Power", 
+   Target = "ignore", 
+   Name = "sleep", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 18, 
+   Messages = 
+   {
+      WearOff = "You suddenly feel less coordinated...", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N suddenly appears more agile...", 
+         ToVictim = "You suddenly feel more nimble...", 
+         ToCaster = "$N suddenly appears more agile...", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 12, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 40, 
+      }, 
+      [3] = 
+      {
+         Modifier = "1+(l/17)", 
+         Location = 2, 
+         Duration = "l*24", 
+      }, 
+      [4] = 
+      {
+         Modifier = "l/8", 
+         Location = 40, 
+         Duration = "l*20", 
+      }, 
+   }, 
+   Alignment = 1001, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 205, 
+   Type = "Force Power", 
+   Target = "defensive", 
+   Name = "slink", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 77, 
+   Mana = 70, 
+   Messages = 
+   {
+      WearOff = "Your vision descends to the material plane.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N's eyes begin to glow a soft white.", 
+         ToVictim = "Your vision is elevated to the highest plane.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "truesight", 
+         AffectedBy = "Blind", 
+         Location = 26, 
+         Duration = "l*5", 
+      }, 
+   }, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 235, 
+   Type = "Force Power", 
+   Target = "self", 
+   Name = "true sight", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 66, 
+   Messages = 
+   {
+      WearOff = "Your intricate defenses are restored to their original quality.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "Your spell has no effect upon $N.", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N's eyes widen in fear as $S defenses are unravelled.", 
+         ToVictim = "Your defenses are unravelled before your very eyes.", 
+         ToCaster = "$N's eyes widen in fear as $S defenses are unravelled.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 70, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "8192", 
+         Location = 29, 
+         Duration = "(l*3)+25", 
+      }, 
+      [3] = 
+      {
+         Modifier = "1048576", 
+         Location = 29, 
+         Duration = "(l*3)+25", 
+      }, 
+   }, 
+   Beats = 15, 
+   Flags = 
+   {
+      [22] = "NoScribe", 
+      [23] = "NoBrew", 
+   }, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 110, 
+   Type = "Force Power", 
+   Target = "offensive", 
+   Name = "unravel defense", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 9, 
+   Mana = 5, 
+   Messages = 
+   {
+      WearOff = "!Ventriloquate!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_ventriloquate", 
+   Slot = 41, 
+   Type = "Force Power", 
+   Target = "ignore", 
+   Name = "ventriloquate", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 3, 
+   Mana = 20, 
+   Messages = 
+   {
+      WearOff = "You feel stronger.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "spell", 
+   }, 
+   Alignment = -1001, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_weaken", 
+   Slot = 68, 
+   Type = "Force Power", 
+   Target = "offensive", 
+   Name = "weaken", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 50, 
+   Beats = 20, 
+   Messages = 
+   {
+      WearOff = "&cYour mind is no longer focused enough to see those hidden from you.&R&w", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "&cYou focus your senses to find those that would hide from you.&R&W", 
+         ToCaster = "You focus your senses to find those that would hide from you.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "&RYou fail to focus your senses.&R&W", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "detect hidden", 
+         Location = 26, 
+         Duration = "l*5", 
+      }, 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "AcuteAwareness", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 99, 
+   Beats = 20, 
+   Messages = 
+   {
+      WearOff = "&cYour mind relaxes its focus on increasing your damage.&R&w", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "&cYou focus your strength to increase your damage.&R&W", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "&RYou fail to focus your abilities.&R&W", 
+      }, 
+      NounDamage = "You focus on your opponents weak points increasing your damage.", 
+   }, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "2+(l/33)", 
+         Location = 19, 
+         Duration = "l*10", 
+      }, 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "AcuteDamage", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "leadership", 
+   Level = 50, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_add_patrol", 
+   Name = "AddPatrol", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "diplomacy", 
+   Level = 1, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10340] = "Domick Dom teacher", 
+      [32006] = "old teacher master man human scholar", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Aid!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_aid", 
+   Name = "aid", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 35, 
+   Beats = 6, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "&RYou fumble with the binds.&R&W", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Flags = 
+   {
+      [19] = "SaveNegates", 
+   }, 
+   Target = "offensive", 
+   Type = "Skill", 
+   Function = "spell_charm_person", 
+   Name = "apprehend", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 6, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Backstab!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "backstab", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_backstab", 
+   Name = "backstab", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 47, 
+   Beats = 8, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Bash!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "bash", 
+   }, 
+   Target = "offensive", 
+   Type = "Skill", 
+   Function = "do_bash", 
+   Name = "bash", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 1, 
+   Beats = 20, 
+   Teachers = 
+   {
+      [210] = "begger", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Beg!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_beg", 
+   Name = "beg", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 85, 
+   Beats = 4, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "???", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "offensive", 
+   Type = "Skill", 
+   Function = "do_berserk", 
+   Name = "berserk", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 45, 
+   Beats = 3, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "offensive", 
+   Type = "Skill", 
+   Function = "do_bind", 
+   Name = "bind", 
+   Position = "dead", 
+}
+
+SkillEntry
+{
+   Ability = "diplomacy", 
+   Level = 25, 
+   Beats = 12, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_bribe", 
+   Name = "bribe", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 90, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "capital ships", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 50, 
+   Beats = 16, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Circle!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "circle", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_circle", 
+   Name = "circle", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 7, 
+   Beats = 10, 
+   Teachers = 
+   {
+      [410] = "old wookiee woman", 
+      [32009] = "suspicious fellow", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!climb!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "climb", 
+   }, 
+   Target = "offensive", 
+   Type = "Skill", 
+   Function = "do_climb", 
+   Name = "climb", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 35, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "dead", 
+   Name = "cloak", 
+   Function = "do_disguise", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 20, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "dead", 
+   Name = "cutdoor", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 32, 
+   Beats = 24, 
+   Teachers = 
+   {
+      [32009] = "suspicious fellow", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Detrap!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_detrap", 
+   Name = "detrap", 
+   Position = "sitting", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 2, 
+   Beats = 20, 
+   Teachers = 
+   {
+      [6805] = "mine foreman Krauota", 
+      [206] = "technician", 
+      [6819] = "boss Hityii", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_dig", 
+   Name = "dig", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 45, 
+   Beats = 24, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Disarm!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_disarm", 
+   Name = "disarm", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 70, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32009] = "suspicious fellow", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!disguise!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_disguise", 
+   Name = "disguise", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 50, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Dodge!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "fighting", 
+   Name = "dodge", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "leadership", 
+   Level = 75, 
+   Beats = 12, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "&BYou fail.&R&W", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Flags = 
+   {
+      [19] = "SaveNegates", 
+   }, 
+   Target = "offensive", 
+   Type = "Skill", 
+   Function = "spell_charm_person", 
+   Name = "dominate", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 10, 
+   Beats = 24, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Bash Door!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "bashdoor", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_bashdoor", 
+   Name = "doorbash", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 27, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Dual Wield!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "standing", 
+   Name = "dual wield", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "leadership", 
+   Level = 85, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_elite_guard", 
+   Name = "EliteGuard", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 10, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Enhanced Damage!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "fighting", 
+   Name = "enhanced damage", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 105, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "dead", 
+   Name = "fake signal", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 140, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Fifth Attack!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "fighting", 
+   Name = "fifth attack", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "diplomacy", 
+   Level = 1, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10340] = "Domick Dom teacher", 
+      [32006] = "old teacher master man human scholar", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!First Aid!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_first_aid", 
+   Name = "FirstAid", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 70, 
+   Beats = 20, 
+   Messages = 
+   {
+      WearOff = "&cYour mind wanders from strengthening your body.&R&w", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "&cA strong mind leads to a stronger body.&R&W", 
+         ToCaster = "A strong mind leads to a stronger body.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "&RYou fail to focus your energy.&R&W", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "2+(l/33)", 
+         Location = 1, 
+         Duration = "l*10", 
+      }, 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "FocusStrength", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 115, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Fourth Attack!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "fighting", 
+   Name = "fourth attack", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "leadership", 
+   Level = 100, 
+   Beats = 40, 
+   Difficulty = 4, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_gather_intelligence", 
+   Name = "GatherIntelligence", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 30, 
+   Beats = 10, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Gouge!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "gouge", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_gouge", 
+   Name = "gouge", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 61, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "grenades", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 50, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Grip!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "fighting", 
+   Name = "grip", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 85, 
+   Beats = 20, 
+   Messages = 
+   {
+      WearOff = "&cYou lose your focus on your opponent.&R&w", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "&cYou focus on your ability to hit your opponent.&R&W", 
+         ToCaster = "You focus on your ability to hit your oponent.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "&RYou fail to focus your skills.&R&W", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "2+(l/33)", 
+         Location = 18, 
+         Duration = "l*10", 
+      }, 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "HeightenedAccuracy", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 95, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32009] = "suspicious fellow", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Hijack!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_hijack", 
+   Name = "hijack", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 87, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!HitAll!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "hit", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_hitall", 
+   Name = "hitall", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 80, 
+   Beats = 20, 
+   Messages = 
+   {
+      WearOff = "&cYou soften against all pain.&R&w", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "&cYou harden yourself against all pain.&R&W", 
+         ToCaster = "You harden yourself against pain.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "&RYou fail to focus your energy.&R&W", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "32", 
+         Location = 27, 
+         Duration = "l*10", 
+      }, 
+      [3] = 
+      {
+         Modifier = "8192", 
+         Location = 27, 
+         Duration = "l*10", 
+      }, 
+      [4] = 
+      {
+         Modifier = "2097152", 
+         Location = 27, 
+         Duration = "l*10", 
+      }, 
+      [5] = 
+      {
+         Modifier = "8", 
+         Location = 27, 
+         Duration = "l*10", 
+      }, 
+      [6] = 
+      {
+         Modifier = "1+(l/50)", 
+         Location = 5, 
+         Duration = "l*10", 
+      }, 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "InnerStrength", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "leadership", 
+   Level = 25, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [408] = "human police officer cop", 
+      [10504] = "Corellian Diktat", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_jail", 
+   Name = "jail", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 80, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "dead", 
+   Name = "jumpvector", 
+   Function = "do_jumpvector", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 6, 
+   Beats = 8, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Kick!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "kick", 
+   }, 
+   Target = "offensive", 
+   Type = "Skill", 
+   Function = "do_kick", 
+   Name = "kick", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 20, 
+   Beats = 24, 
+   Teachers = 
+   {
+      [32009] = "suspicious fellow", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Steal!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_steal", 
+   Name = "lift", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 25, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "lightsaber crafting", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 90, 
+   Beats = 20, 
+   Messages = 
+   {
+      WearOff = "&cYour muscles stiffen as your efforts to relax them fade.&R&w", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "&cYou relax your muscles becoming more limber and agile.&R&W", 
+         ToCaster = "You relax your muscles becoming limber and agile.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "&RYou can't become any more limber.&R&W", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "2+(l/33)", 
+         Location = 2, 
+         Duration = "l*10", 
+      }, 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "limber", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 58, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makearmor", 
+   Function = "do_makearmor", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 40, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makeblade", 
+   Function = "do_makeblade", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 95, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makeblaster", 
+   Function = "do_makeblaster", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 40, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Flags = 
+   {
+      [27] = "SecretSkill", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makebowcaster", 
+   Function = "do_makebowcaster", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 5, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makecomlink", 
+   Function = "do_makecomlink", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 1, 
+   Teachers = 
+   {
+      [10340] = "Domick Dom teacher", 
+      [206] = "technician", 
+      [32010] = "Twilek craftswoman woman", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makecontainer", 
+   Function = "do_makecontainer", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 10, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makeglowrod", 
+   Function = "do_makeglowrod", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 95, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makegrenade", 
+   Function = "do_makegrenade", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 60, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makejewelry", 
+   Function = "do_makejewelry", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 80, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makelandmine", 
+   Function = "do_makelandmine", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 70, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "makeshield", 
+   Function = "do_makeshield", 
+}
+
+SkillEntry
+{
+   Ability = "diplomacy", 
+   Level = 80, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_mass_propaganda", 
+   Name = "MassPropaganda", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 1, 
+   Beats = 25, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "You meditate peacefully, tuning yourself to the Force.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "You spend several minutes in deep concentration, but fail to find the Force.", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 12, 
+         Modifier = "l", 
+      }, 
+   }, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [31900] = "zim failed jedi", 
+   }, 
+   Flags = 
+   {
+      [22] = "NoScribe", 
+      [23] = "NoBrew", 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "meditate", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 30, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "midships", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 90, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!mine!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_mine", 
+   Name = "mine", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 7, 
+   Beats = 10, 
+   Teachers = 
+   {
+      [412] = "Self Defence Trainer", 
+      [10509] = "An instructor", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Search!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_mount", 
+   Name = "mount", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 1, 
+   Teachers = 
+   {
+      [32040] = "imperial flight lieutenant", 
+      [10340] = "Domick Dom teacher", 
+      [32008] = "Rebel Alliance flight instructor", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "navigation", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 25, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Parry!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "fighting", 
+   Name = "parry", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 20, 
+   Teachers = 
+   {
+      [410] = "old wookiee woman", 
+      [32009] = "suspicious fellow", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Peek!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "standing", 
+   Name = "peek", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 55, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32009] = "suspicious fellow", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Pick!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_pick", 
+   Name = "pick lock", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 90, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32009] = "suspicious fellow", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Pickshiplock!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_pickshiplock", 
+   Name = "pick ship lock", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 30, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Poison Weapon!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "poisonous concoction", 
+   }, 
+   Target = "objinv", 
+   Type = "Skill", 
+   Function = "do_poison_weapon", 
+   Name = "PoisonWeapon", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "leadership", 
+   Level = 35, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!post guard!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_postguard", 
+   Name = "PostGuard", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "diplomacy", 
+   Level = 50, 
+   Beats = 4, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_propaganda", 
+   Name = "propaganda", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 40, 
+   Beats = 8, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Punch!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "punch", 
+   }, 
+   Target = "offensive", 
+   Type = "Skill", 
+   Function = "do_punch", 
+   Name = "punch", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "leadership", 
+   Level = 60, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!reinforcements!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_reinforcements", 
+   Name = "reinforcements", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 8, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Rescue!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_rescue", 
+   Name = "rescue", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 120, 
+   Teachers = 
+   {
+      [32040] = "imperial flight lieutenant", 
+      [10340] = "Domick Dom teacher", 
+      [32008] = "Rebel Alliance flight instructor", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "dead", 
+   Name = "sabotage", 
+   Function = "do_sabotage", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 1, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [10340] = "Domick Dom teacher", 
+      [320] = "human citizen", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Scan!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_scan", 
+   Name = "scan", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 3, 
+   Beats = 20, 
+   Teachers = 
+   {
+      [410] = "old wookiee woman", 
+      [32009] = "suspicious fellow", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Search!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_search", 
+   Name = "search", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 45, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Second Attack!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "fighting", 
+   Name = "second attack", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "diplomacy", 
+   Level = 65, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_seduce", 
+   Name = "seduce", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 60, 
+   Beats = 20, 
+   Messages = 
+   {
+      WearOff = "&cYour focus to see the unseen relaxes.&R&w", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "&cYou focus your senses in an effort to detect the unseen.&R&W", 
+         ToCaster = "You focus your senses in an effort to detect the unseen.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "&RYou fail to focus your mind.&R&W", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "detect invis", 
+         Location = 26, 
+         Duration = "l*5", 
+      }, 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "SeeMasking", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 30, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "dead", 
+   Name = "ship docking", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 25, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "ship maintenance", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 1, 
+   Teachers = 
+   {
+      [32040] = "imperial flight lieutenant", 
+      [10340] = "Domick Dom teacher", 
+      [32008] = "Rebel Alliance flight instructor", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "ship systems", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 1, 
+   Beats = 5, 
+   Teachers = 
+   {
+      [328] = "Sleejat", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_skin", 
+   Name = "skin", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 105, 
+   Beats = 3, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Flags = 
+   {
+      [27] = "SecretSkill", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "spell_null", 
+   Name = "slicing", 
+   Position = "dead", 
+}
+
+SkillEntry
+{
+   Ability = "diplomacy", 
+   Level = 10, 
+   Beats = 4, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_smalltalk", 
+   Name = "smalltalk", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 5, 
+   Beats = 1, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "You attempt to move silently.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "You attempt to move silently.", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [410] = "old wookiee woman", 
+      [32009] = "suspicious fellow", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "sneak", 
+         Location = 26, 
+         Duration = "l*23", 
+      }, 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "sneak", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 2, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!snipe!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_snipe", 
+   Name = "snipe", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 25, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "space combat 1", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 50, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "space combat 2", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 75, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "space combat 3", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "leadership", 
+   Level = 95, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_special_forces", 
+   Name = "SpecialForces", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 75, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "dead", 
+   Name = "speeder combat", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 30, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "dead", 
+   Name = "speeders", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "engineering", 
+   Level = 50, 
+   Teachers = 
+   {
+      [32029] = "hutt crimelord", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "spice refining", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 1, 
+   Teachers = 
+   {
+      [32040] = "imperial flight lieutenant", 
+      [10340] = "Domick Dom teacher", 
+      [32008] = "Rebel Alliance flight instructor", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "starfighters", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "smuggling", 
+   Level = 50, 
+   Beats = 12, 
+   Messages = 
+   {
+      WearOff = "You are no longer hidden.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "You attempt to hide.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "You attempt to hide.", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Teachers = 
+   {
+      [410] = "old wookiee woman", 
+      [32009] = "suspicious fellow", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "hide", 
+         Location = 26, 
+         Duration = "l*23", 
+      }, 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "do_hide", 
+   Name = "stealth", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "diplomacy", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10340] = "Domick Dom teacher", 
+      [32006] = "old teacher master man human scholar", 
+   }, 
+   Function = "do_study", 
+   Type = "Skill", 
+   Target = "objinv", 
+   Name = "study", 
+   Position = "dead", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Level = 105, 
+   Beats = 8, 
+   Messages = 
+   {
+      WearOff = "You regain consciousness.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "stun", 
+   }, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Flags = 
+   {
+      [2] = "_02", 
+   }, 
+   Target = "offensive", 
+   Type = "Skill", 
+   Function = "do_punch", 
+   Name = "stun", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 95, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Third Attack!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "fighting", 
+   Name = "third attack", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 5, 
+   Beats = 3, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!throw!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_throw", 
+   Name = "throw", 
+   Position = "sitting", 
+}
+
+SkillEntry
+{
+   Ability = "leadership", 
+   Level = 85, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [10504] = "Corellian Diktat", 
+      [32029] = "hutt crimelord", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!torture!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_torture", 
+   Name = "torture", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "bounty hunting", 
+   Level = 3, 
+   Beats = 14, 
+   Teachers = 
+   {
+      [32050] = "rodian hunter bounty mercenary", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Track!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Function = "do_track", 
+   Name = "track", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 35, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "tractor beams", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 60, 
+   Beats = 32, 
+   Messages = 
+   {
+      WearOff = "!TRANCE!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "You enter a peaceful trance, tuning yourself to the Force.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "You spend several minutes in a deep trance, but fail to find the Force.", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 12, 
+         Modifier = "l*2", 
+      }, 
+   }, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Flags = 
+   {
+      [22] = "NoScribe", 
+      [23] = "NoBrew", 
+   }, 
+   Target = "self", 
+   Type = "Skill", 
+   Function = "spell_smaug", 
+   Name = "trance", 
+   Position = "resting", 
+}
+
+SkillEntry
+{
+   Ability = "piloting", 
+   Level = 2, 
+   Teachers = 
+   {
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+      [32007] = "imperial flight officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!done!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Skill", 
+   Position = "resting", 
+   Name = "weapon systems", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 2, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Blasters!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Weapon", 
+   Position = "fighting", 
+   Name = "blasters", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Bludgeons!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 101, 
+   Position = "fighting", 
+   Function = "spell_null", 
+   Name = "bludgeons", 
+   Type = "Weapon", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 4, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Weapon", 
+   Position = "fighting", 
+   Name = "bowcasters", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Flexible Arms!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 101, 
+   Position = "fighting", 
+   Function = "spell_null", 
+   Name = "flexible arms", 
+   Type = "Weapon", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 3, 
+   Teachers = 
+   {
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [32011] = "new repulic training officer", 
+   }, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Weapon", 
+   Position = "dead", 
+   Name = "force pikes", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 2, 
+   Teachers = 
+   {
+      [31900] = "zim failed jedi", 
+      [605] = "ancient sith spirit teacher sith9870", 
+      [50] = "Master Yoda", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Lightsabers!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Weapon", 
+   Position = "fighting", 
+   Name = "lightsabers", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Talonous Arms!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 101, 
+   Position = "fighting", 
+   Function = "spell_null", 
+   Name = "talonous arms", 
+   Type = "Weapon", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 1, 
+   Teachers = 
+   {
+      [32011] = "new repulic training officer", 
+      [32012] = "imperial trooper drill seargent", 
+      [10509] = "An instructor", 
+      [412] = "Self Defence Trainer", 
+      [10340] = "Domick Dom teacher", 
+   }, 
+   Messages = 
+   {
+      WearOff = "!Vibro-Blades!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Type = "Weapon", 
+   Position = "fighting", 
+   Name = "vibro-blades", 
+   Function = "spell_null", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Adarian!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "adarese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_smaug", 
+   Name = "antarian", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "barabel", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Common!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "basic", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_smaug", 
+   Name = "binary", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "bothese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "chadra-fan", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "coyn", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "defel", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_smaug", 
+   Name = "devaronese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "dosh", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "durese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "ewokese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_smaug", 
+   Name = "falleen", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "firrerreo", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Gamorrean!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "gamorrese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "gand", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Hutt!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "huttese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_smaug", 
+   Name = "ithorese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Jawa!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "jawaese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "kubazian", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Mon Calamari!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "mon calamarian", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "quarrenese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Rodian!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "rodese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Noghri!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "shistavanen", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Wookiee!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "shyriiwook", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "sullustese", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "togorian", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!Dwarven!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "twileki", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "!!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Target = "ignore", 
+   Level = 1, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "verpine", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Target = "ignore", 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Position = "dead", 
+   Function = "spell_null", 
+   Name = "yevethan", 
+   Type = "Tongue", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 55, 
+   Messages = 
+   {
+      WearOff = "You soften.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N's face hardens.", 
+         ToVictim = "You steel yourself against pain.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Mana = 12, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "8192", 
+         Location = 27, 
+         Duration = "l*30", 
+      }, 
+      [3] = 
+      {
+         Modifier = "4", 
+         Location = 5, 
+         Duration = "l*30", 
+      }, 
+      [4] = 
+      {
+         Modifier = "l*4", 
+         Location = 13, 
+         Duration = "l*30", 
+      }, 
+   }, 
+   Alignment = -1001, 
+   Flags = 
+   {
+      [27] = "SecretSkill", 
+   }, 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Beats = 18, 
+   Function = "spell_smaug", 
+   Type = "Force Power", 
+   Target = "self", 
+   Name = "harden", 
+   Position = "dead", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 105, 
+   Messages = 
+   {
+      WearOff = "!Dispel Evil!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "dispel evil", 
+   }, 
+   Mana = 15, 
+   Beats = 12, 
+   Alignment = 1001, 
+   Flags = 
+   {
+      [27] = "SecretSkill", 
+   }, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_dispel_evil", 
+   Slot = 22, 
+   Type = "unknown", 
+   Target = "offensive", 
+   Name = "dispel dark", 
+   Position = "fighting", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 105, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Flags = 
+   {
+      [27] = "SecretSkill", 
+   }, 
+   Target = "ignore", 
+   Type = "unknown", 
+   Position = "dead", 
+   Name = "stun", 
+   Function = "spell_smaug", 
+}
+
+SkillEntry
+{
+   Ability = "combat", 
+   Level = 101, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Flags = 
+   {
+      [27] = "SecretSkill", 
+   }, 
+   Target = "ignore", 
+   Type = "unknown", 
+   Position = "dead", 
+   Name = "unknown", 
+   Function = "spell_smaug", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Messages = 
+   {
+      WearOff = "Your pent up energy disperses into the deck.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N's eyelids seem heavy for a moment.", 
          ToVictim = "You prepare to absorb incoming energy.", 
          ToCaster = "$N's eyelids seem heavy for a moment.", 
       }, 
-      VictimDeath = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "Your pent up energy disperses into the deck.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
-   Mana = 50, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 85, 
    Affects = 
    {
       [2] = 
       {
-         Location = 28, 
          Modifier = "8", 
+         Location = 28, 
          Duration = "l*5", 
       }, 
    }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
+   Level = 60, 
    Beats = 4, 
+   Mana = 50, 
    Flags = 
    {
       [9] = "_09", 
    }, 
-   Level = 60, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Dice = "none", 
-   Target = "self", 
    Value = 30, 
-   Name = "absorb energy", 
-}
-
-SkillEntry
-{
-   Mana = 5, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 7, 
-   Beats = 12, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You feel more self-confident.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "standing", 
-   Function = "spell_charm_person", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Target = "offensive", 
-   Level = 28, 
-   Name = "affect mind", 
-}
-
-SkillEntry
-{
-   Mana = 60, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 102, 
-   Beats = 15, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N's eyes dart about the room in an alert manner.", 
-         ToVictim = "You suddenly feel alert.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You are suddenly less alert.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 27, 
-         Modifier = "1024", 
-         Duration = "l*15", 
-      }, 
-      [3] = 
-      {
-         Location = 27, 
-         Modifier = "4194304", 
-         Duration = "l*15", 
-      }, 
-      [4] = 
-      {
-         Location = 27, 
-         Modifier = "8", 
-         Duration = "l*15", 
-      }, 
-      [5] = 
-      {
-         Location = 28, 
-         Modifier = "32", 
-         Duration = "l*15", 
-      }, 
-   }, 
-   Position = "standing", 
-   Function = "spell_smaug", 
+   Target = "self", 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Target = "self", 
-   Level = 26, 
-   Name = "alertness", 
+   Function = "spell_smaug", 
+   Slot = 85, 
+   Type = "Force Power", 
+   Dice = "none", 
+   Name = "absorb energy", 
+   Position = "resting", 
 }
 
 SkillEntry
 {
-   Mana = 50, 
-   Type = "Force Power", 
-   Ability = "none", 
-   Slot = 236, 
+   Ability = "force", 
+   Level = 28, 
+   Mana = 5, 
    Messages = 
    {
+      WearOff = "You feel more self-confident.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Beats = 12, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
+   Function = "spell_charm_person", 
+   Slot = 7, 
+   Type = "Force Power", 
+   Target = "offensive", 
+   Name = "affect mind", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "force", 
+   Level = 26, 
+   Mana = 60, 
+   Messages = 
+   {
+      WearOff = "You are suddenly less alert.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "$N's eyes dart about the room in an alert manner.", 
+         ToVictim = "You suddenly feel alert.", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
+   }, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Modifier = "4194304", 
+         Location = 27, 
+         Duration = "l*15", 
+      }, 
+      [3] = 
+      {
+         Modifier = "1024", 
+         Location = 27, 
+         Duration = "l*15", 
+      }, 
+      [4] = 
+      {
+         Modifier = "32", 
+         Location = 28, 
+         Duration = "l*15", 
+      }, 
+      [5] = 
+      {
+         Modifier = "8", 
+         Location = 27, 
+         Duration = "l*15", 
+      }, 
+   }, 
+   Beats = 15, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Function = "spell_smaug", 
+   Slot = 102, 
+   Type = "Force Power", 
+   Target = "self", 
+   Name = "alertness", 
+   Position = "standing", 
+}
+
+SkillEntry
+{
+   Ability = "none", 
+   Messages = 
+   {
+      WearOff = "Your lungs revert to their original state.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N's lungs take on the ability to breathe water...", 
          ToVictim = "Your lungs take on the ability to breathe water...", 
          ToCaster = "$N's lungs take on the ability to breathe water...", 
       }, 
-      VictimDeath = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "Your lungs revert to their original state.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
+   Level = 101, 
    Affects = 
    {
       [2] = 
       {
-         Location = 26, 
          Modifier = "aqua breath", 
+         Location = 26, 
          Duration = "l*23", 
       }, 
    }, 
+   Mana = 50, 
    Beats = 12, 
+   Alignment = 100, 
+   Flags = 
+   {
+      [21] = "Recastable", 
+   }, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Flags = 
-   {
-      [21] = "Recastable", 
-   }, 
-   Position = "standing", 
    Function = "spell_smaug", 
-   Level = 101, 
+   Slot = 236, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Alignment = 100, 
    Name = "aqua breath", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 1, 
+   Level = 5, 
    Messages = 
    {
+      WearOff = "Your armor returns to its mundane value.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N's armor begins to glow softly as it is enhanced by the Force.", 
          ToVictim = "Your armor begins to glow softly as it is enhanced by the Force.", 
          ToCaster = "$N's armor begins to glow softly as it is enhanced by the Force.", 
       }, 
-      VictimDeath = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "Your armor returns to its mundane value.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
-   Beats = 12, 
+   Mana = 5, 
    Affects = 
    {
       [2] = 
       {
-         Location = 17, 
          Modifier = "-20", 
+         Location = 17, 
          Duration = "l*20", 
       }, 
    }, 
+   Alignment = 1001, 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Position = "standing", 
    Function = "spell_smaug", 
-   Level = 5, 
+   Slot = 1, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Alignment = 1001, 
    Name = "armor", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
-   Mana = 14, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 226, 
+   Level = 6, 
    Messages = 
    {
+      WearOff = "You stop enhancing yourself.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N suddenly seems like a much nicer person.", 
          ToVictim = "Drawing the Force, you change yourself to be more likeable.", 
          ToCaster = "$N seems more jovial.", 
       }, 
-      VictimDeath = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "You stop enhancing yourself.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
-   Beats = 12, 
+   Mana = 14, 
    Affects = 
    {
       [2] = 
       {
-         Location = 25, 
          Modifier = "1+(l/17)", 
+         Location = 25, 
          Duration = "l*24", 
       }, 
    }, 
+   Alignment = 1001, 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Position = "standing", 
    Function = "spell_smaug", 
-   Level = 6, 
+   Slot = 226, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Alignment = 1001, 
    Name = "beauty", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 4, 
-   Beats = 12, 
+   Level = 10, 
+   Mana = 5, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "You can see again.", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
+   Alignment = -1001, 
+   Beats = 12, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Position = "fighting", 
    Function = "spell_blindness", 
-   Level = 10, 
+   Slot = 4, 
+   Type = "Force Power", 
    Target = "ignore", 
-   Alignment = -1001, 
    Name = "blindness", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 20, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 63, 
+   Level = 20, 
    Messages = 
    {
+      WearOff = "!Cause Critical!", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N begins to claw at $S throat.", 
          ToVictim = "You feel a tight pressure around your throat.", 
          ToCaster = "Stretching out with the force you slowly choke your victim.", 
       }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "!Cause Critical!", 
       NounDamage = "spell", 
    }, 
+   Mana = 20, 
    Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
+   Alignment = -1001, 
    Flags = 
    {
       [2] = "_02", 
    }, 
-   Position = "fighting", 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
    Function = "spell_cause_critical", 
-   Level = 20, 
+   Slot = 63, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Alignment = -1001, 
    Name = "choke", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 14, 
-   Beats = 12, 
+   Level = 8, 
+   Mana = 5, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "!Cure Blindness!", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
+   Alignment = 1001, 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Position = "fighting", 
    Function = "spell_cure_blindness", 
-   Level = 8, 
+   Slot = 14, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Alignment = 1001, 
    Name = "cure blindness", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 20, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 15, 
+   Level = 18, 
    Messages = 
    {
-      Success = 
-      {
-         ToVictim = "Your critical wounds close and your pain ebbs away.", 
-         ToCaster = "You cure $N's critical wounds.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "!Cure Critical!", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "Your critical wounds close and your pain ebbs away.", 
+         ToCaster = "You cure $N's critical wounds.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
-   Beats = 12, 
+   Mana = 20, 
    Affects = 
    {
       [2] = 
@@ -606,43 +9023,54 @@ SkillEntry
          Modifier = "3d8+(l-6)", 
       }, 
    }, 
+   Alignment = 1001, 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Position = "fighting", 
    Function = "spell_smaug", 
-   Level = 18, 
+   Slot = 15, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Alignment = 1001, 
    Name = "cure critical", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 10, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 16, 
+   Level = 2, 
    Messages = 
    {
-      Success = 
-      {
-         ToVictim = "Your light wounds mend and your pain ebbs slightly.", 
-         ToCaster = "You cure $N's light wounds.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "Your ability to see in the dark fades away.", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "Your light wounds mend and your pain ebbs slightly.", 
+         ToCaster = "You cure $N's light wounds.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
-   Beats = 12, 
+   Mana = 10, 
    Affects = 
    {
       [2] = 
@@ -651,79 +9079,103 @@ SkillEntry
          Modifier = "1d8+(l/3)", 
       }, 
    }, 
+   Alignment = 1001, 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [7310] = "jedi salesman", 
+      [31900] = "zim failed jedi", 
    }, 
-   Position = "fighting", 
    Function = "spell_smaug", 
-   Level = 2, 
+   Slot = 16, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Alignment = 1001, 
    Name = "cure light", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 43, 
-   Beats = 12, 
+   Level = 16, 
+   Mana = 5, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "!Cure Poison!", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
+   Alignment = 1001, 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Position = "standing", 
    Function = "spell_cure_poison", 
-   Level = 16, 
+   Slot = 43, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Alignment = 1001, 
    Name = "cure poison", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
-   Mana = 15, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 61, 
+   Level = 10, 
    Messages = 
    {
-      Success = 
-      {
-         ToVictim = "Your serious wounds mend and your pain ebbs away.", 
-         ToCaster = "You cure $N's serious wounds.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "!Cure Serious!", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "Your serious wounds mend and your pain ebbs away.", 
+         ToCaster = "You cure $N's serious wounds.", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
-   Beats = 12, 
+   Mana = 15, 
    Affects = 
    {
       [2] = 
@@ -732,720 +9184,921 @@ SkillEntry
          Modifier = "2d8+(l/2)", 
       }, 
    }, 
+   Alignment = 1001, 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Position = "fighting", 
    Function = "spell_smaug", 
-   Level = 10, 
+   Slot = 61, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Alignment = 1001, 
    Name = "cure serious", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 18, 
+   Level = 5, 
    Messages = 
    {
+      WearOff = "You stop focusing on the Dark Side.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "A tint of red appears in $N's eyes, mirroring his own vision.", 
          ToVictim = "Traces of red outline all those who abuse the Force.", 
-      }, 
-      VictimDeath = 
-      {
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "You stop focusing on the Dark Side.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
-   Beats = 12, 
+   Mana = 5, 
    Affects = 
    {
       [2] = 
       {
-         Location = 26, 
          Modifier = "detect evil", 
+         Location = 26, 
          Duration = "l*24", 
       }, 
    }, 
+   Alignment = 1001, 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Position = "resting", 
    Function = "spell_smaug", 
-   Level = 5, 
+   Slot = 18, 
+   Type = "Force Power", 
    Target = "self", 
-   Alignment = 1001, 
    Name = "detect darkness", 
+   Position = "resting", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 20, 
-   Beats = 12, 
+   Level = 5, 
+   Mana = 5, 
    Messages = 
    {
+      WearOff = "The blue outlines disappear from your vision.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "A tint of blue in $N's eyes mirrors $S own perception.", 
          ToVictim = "Traces of blue outline objects touched by the Force.", 
-      }, 
-      VictimDeath = 
-      {
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "The blue outlines disappear from your vision.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
    Affects = 
    {
       [2] = 
       {
-         Location = 26, 
          Modifier = "detect magic", 
+         Location = 26, 
          Duration = "l*24", 
       }, 
    }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
+   Function = "spell_smaug", 
+   Slot = 20, 
+   Type = "Force Power", 
    Target = "self", 
-   Level = 5, 
    Name = "detect force", 
+   Position = "resting", 
 }
 
 SkillEntry
 {
-   Mana = 9, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 58, 
-   Beats = 12, 
+   Level = 8, 
+   Mana = 9, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "!Know Alignment!", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
-   Position = "fighting", 
-   Function = "spell_know_alignment", 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_know_alignment", 
+   Slot = 58, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Level = 8, 
    Name = "detect intent", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 19, 
-   Beats = 12, 
+   Level = 4, 
+   Mana = 5, 
    Messages = 
    {
+      WearOff = "You no longer see invisible objects.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N's eyes fixate as they gain the ability to see the unseen.", 
          ToVictim = "Your eyes fixate as they gain the ability to see the unseen.", 
-      }, 
-      VictimDeath = 
-      {
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "You no longer see invisible objects.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
    Affects = 
    {
       [2] = 
       {
-         Location = 26, 
          Modifier = "detect invis", 
+         Location = 26, 
          Duration = "l*24", 
       }, 
    }, 
-   Position = "sitting", 
-   Function = "spell_smaug", 
+   Beats = 12, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
       [7310] = "jedi salesman", 
       [50] = "Master Yoda", 
    }, 
+   Function = "spell_smaug", 
+   Slot = 19, 
+   Type = "Force Power", 
    Target = "self", 
-   Level = 4, 
    Name = "detect masking", 
+   Position = "sitting", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 21, 
-   Beats = 12, 
+   Level = 9, 
+   Mana = 5, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "!Detect Poison!", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
-   Position = "standing", 
-   Function = "spell_detect_poison", 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_detect_poison", 
+   Slot = 21, 
+   Type = "Force Power", 
    Target = "objinv", 
-   Level = 9, 
    Name = "detect poison", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
-   Mana = 15, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 86, 
-   Beats = 12, 
+   Level = 13, 
+   Mana = 15, 
    Messages = 
    {
+      WearOff = "You feel less aware of the dangers about you.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N peers about the room, intent on finding all manner of danger.", 
          ToVictim = "You suddenly grow aware of the dangers about you.", 
-      }, 
-      VictimDeath = 
-      {
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "You feel less aware of the dangers about you.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
    Affects = 
    {
       [2] = 
       {
-         Location = 26, 
          Modifier = "detect traps", 
+         Location = 26, 
          Duration = "l*24", 
       }, 
    }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_smaug", 
+   Slot = 86, 
+   Type = "Force Power", 
    Target = "self", 
-   Level = 13, 
    Name = "detect traps", 
+   Position = "resting", 
 }
 
 SkillEntry
 {
-   Mana = 15, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 59, 
-   Beats = 12, 
+   Level = 20, 
+   Mana = 15, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "!Dispel Magic!", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
-   Position = "fighting", 
-   Function = "spell_dispel_magic", 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_dispel_magic", 
+   Slot = 59, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Level = 20, 
    Name = "dispel force", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 35, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 25, 
+   Level = 27, 
    Messages = 
    {
-      Success = 
+      WearOff = "!Energy Drain!", 
+      VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      VictimImmune = 
+      Success = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "!Energy Drain!", 
       NounDamage = "energy drain", 
    }, 
+   Mana = 35, 
    Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
+   Alignment = -1001, 
    Flags = 
    {
       [2] = "_02", 
    }, 
-   Position = "fighting", 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
    Function = "spell_energy_drain", 
-   Level = 27, 
+   Slot = 25, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Alignment = -1001, 
    Name = "drain essence", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 233, 
-   Beats = 12, 
+   Level = 35, 
+   Mana = 5, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "!Dream!", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
-   Position = "standing", 
-   Function = "spell_dream", 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_dream", 
+   Slot = 233, 
+   Type = "Force Power", 
    Target = "ignore", 
-   Level = 35, 
    Name = "dream", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
-   Mana = 15, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 23, 
-   Beats = 12, 
+   Level = 15, 
+   Mana = 15, 
    Messages = 
    {
-      Success = 
+      WearOff = "!Earthquake!", 
+      VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      VictimImmune = 
+      Success = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "!Earthquake!", 
       NounDamage = "earthquake", 
    }, 
+   Alignment = -1001, 
+   Beats = 12, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Position = "fighting", 
    Function = "spell_earthquake", 
-   Level = 15, 
+   Slot = 23, 
+   Type = "Force Power", 
    Target = "ignore", 
-   Alignment = -1001, 
    Name = "earthquake", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 15, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 222, 
-   Beats = 12, 
+   Level = 70, 
+   Mana = 15, 
    Messages = 
    {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
       WearOff = "!Farsight!", 
       VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "", 
    }, 
-   Position = "sitting", 
-   Function = "spell_farsight", 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_farsight", 
+   Slot = 222, 
+   Type = "Force Power", 
    Target = "ignore", 
-   Level = 70, 
    Name = "farsight", 
+   Position = "sitting", 
 }
 
 SkillEntry
 {
-   Mana = 60, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 103, 
+   Level = 46, 
    Messages = 
    {
+      WearOff = "You no longer feel so sleepy.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "Mysteriously, $N was not affected by your spell.", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N suddenly appears very tired and drowsy.", 
          ToVictim = "You suddenly grow very tired and drowsy.", 
          ToCaster = "$N suddenly appears very tired and drowsy.", 
       }, 
-      VictimDeath = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "You no longer feel so sleepy.", 
-      VictimImmune = 
-      {
-         ToCaster = "Mysteriously, $N was not affected by your spell.", 
-      }, 
+      NounDamage = "", 
    }, 
-   Beats = 15, 
+   Mana = 60, 
    Affects = 
    {
       [2] = 
       {
-         Location = 29, 
          Modifier = "1024", 
+         Location = 29, 
          Duration = "l*15", 
       }, 
    }, 
+   Alignment = -1001, 
+   Beats = 15, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Position = "fighting", 
    Function = "spell_smaug", 
-   Level = 46, 
+   Slot = 103, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Alignment = -1001, 
    Name = "fatigue", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 30, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 107, 
    Messages = 
    {
+      WearOff = "You no longer feel so feeble.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "$N is not affected by your spell.", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$n lays a curse of feebleness upon $N.", 
          ToVictim = "You grow feeble from a powerful curse.", 
          ToCaster = "You lay a curse of feebleness upon $N.", 
       }, 
-      VictimDeath = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "You no longer feel so feeble.", 
-      VictimImmune = 
-      {
-         ToCaster = "$N is not affected by your spell.", 
-      }, 
+      NounDamage = "", 
    }, 
+   Level = 80, 
    Affects = 
    {
       [2] = 
       {
-         Location = 29, 
          Modifier = "512", 
+         Location = 29, 
          Duration = "l*19", 
       }, 
    }, 
+   Mana = 30, 
    Beats = 10, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
+   Alignment = -1001, 
    Flags = 
    {
       [22] = "NoScribe", 
       [23] = "NoBrew", 
    }, 
-   Position = "fighting", 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
    Function = "spell_smaug", 
-   Level = 80, 
+   Slot = 107, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Alignment = -1001, 
    Name = "feebleness", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 15, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 26, 
+   Level = 18, 
    Messages = 
    {
-      Success = 
+      WearOff = "!Fireball!", 
+      VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      VictimImmune = 
+      Success = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "!Fireball!", 
       NounDamage = "fireball", 
    }, 
+   Mana = 15, 
    Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
+   Alignment = -1001, 
    Flags = 
    {
       [0] = "_00", 
    }, 
-   Position = "fighting", 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
    Function = "spell_fireball", 
-   Level = 18, 
+   Slot = 26, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Alignment = -1001, 
    Name = "fireball", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 20, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 65, 
+   Level = 26, 
    Messages = 
    {
-      Success = 
+      WearOff = "!Flamestrike!", 
+      VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      VictimImmune = 
+      Success = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "!Flamestrike!", 
       NounDamage = "flamestrike", 
    }, 
+   Mana = 20, 
    Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
+   Alignment = -1001, 
    Flags = 
    {
       [0] = "_00", 
    }, 
-   Position = "fighting", 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
    Function = "spell_flamestrike", 
-   Level = 26, 
+   Slot = 65, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Alignment = -1001, 
    Name = "flamestrike", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 8, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 292, 
-   Beats = 18, 
+   Level = 10, 
+   Mana = 8, 
    Messages = 
    {
+      WearOff = "Your feet float slowly to the surface.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N begins to float in mid-air...", 
          ToVictim = "You begin to float in mid-air...", 
          ToCaster = "$N begins to float in mid-air...", 
       }, 
-      VictimDeath = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "Your feet float slowly to the surface.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
    Affects = 
    {
       [2] = 
       {
-         Location = 26, 
          Modifier = "float", 
+         Location = 26, 
          Duration = "l*24", 
       }, 
    }, 
-   Position = "standing", 
-   Function = "spell_smaug", 
+   Beats = 18, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_smaug", 
+   Slot = 292, 
+   Type = "Force Power", 
    Target = "defensive", 
-   Level = 10, 
    Name = "float", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      NounDamage = "spiritual wrath", 
-   }, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 115, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Position = "fighting", 
-   Target = "ignore", 
-   Mana = 120, 
-   Name = "force blast wrath", 
    Beats = 24, 
+   Alignment = -1001, 
+   Type = "Force Power", 
+   Dice = "44*W", 
+   Slot = 115, 
    Affects = 
    {
       [2] = 
       {
-         Location = 26, 
          Modifier = "blindness", 
+         Location = 26, 
          Duration = "6", 
       }, 
    }, 
+   Participants = 3, 
+   Mana = 120, 
+   Messages = 
+   {
+      WearOff = "", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Success = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      Failure = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      NounDamage = "spiritual wrath", 
+   }, 
+   Ability = "force", 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
+   Level = 50, 
    Flags = 
    {
       [8] = "_08", 
@@ -1456,182 +10109,221 @@ SkillEntry
       [22] = "NoScribe", 
       [7] = "_07", 
    }, 
+   Position = "fighting", 
+   Target = "ignore", 
+   Name = "force blast wrath", 
    Function = "spell_smaug", 
-   Level = 50, 
-   Participants = 3, 
-   Alignment = -1001, 
-   Dice = "44*W", 
 }
 
 SkillEntry
 {
-   Mana = 15, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 30, 
+   Level = 27, 
    Messages = 
    {
-      Success = 
+      WearOff = "!Lightning Bolt!", 
+      VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      VictimImmune = 
+      Success = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "!Lightning Bolt!", 
       NounDamage = "lightning bolt", 
    }, 
+   Mana = 15, 
    Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
+   Alignment = -1001, 
    Flags = 
    {
       [1] = "_01", 
       [0] = "_00", 
    }, 
-   Position = "fighting", 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
    Function = "spell_lightning_bolt", 
-   Level = 27, 
+   Slot = 30, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Alignment = -1001, 
    Name = "force bolt", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 40, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 224, 
+   Level = 90, 
    Messages = 
    {
+      WearOff = "The shimmering shell and its protection from the Force fade away...", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "A shimmering translucent shell forms about $N.", 
          ToVictim = "A shimmering translucent shell forms about you.", 
-      }, 
-      VictimDeath = 
-      {
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "The shimmering shell and its protection from the Force fade away...", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
-   Beats = 12, 
+   Mana = 40, 
    Affects = 
    {
       [2] = 
       {
-         Location = 17, 
-         Modifier = "-80", 
-         Duration = "l*20", 
+         Modifier = "2907151", 
+         Location = 27, 
+         Duration = "l*24", 
       }, 
       [3] = 
       {
-         Location = 27, 
-         Modifier = "2907151", 
-         Duration = "l*24", 
+         Modifier = "-80", 
+         Location = 17, 
+         Duration = "l*20", 
       }, 
    }, 
+   Alignment = 1001, 
+   Beats = 12, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Position = "standing", 
    Function = "spell_smaug", 
-   Level = 90, 
+   Slot = 224, 
+   Type = "Force Power", 
    Target = "self", 
-   Alignment = 1001, 
    Name = "force bubble", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
-   Mana = 75, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 218, 
+   Level = 43, 
    Messages = 
    {
+      WearOff = "The funnel of Force about you ceases to exist.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "The Force funnel dissipates before it reaches $N.", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "A Force funnel forms about $N...", 
          ToVictim = "An aura surrounds you, channeling violent energies in your direction!", 
          ToCaster = "You erect a Force funnel about $N...", 
       }, 
-      VictimDeath = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "The funnel of Force about you ceases to exist.", 
-      VictimImmune = 
-      {
-         ToCaster = "The Force funnel dissipates before it reaches $N.", 
-      }, 
+      NounDamage = "", 
    }, 
-   Beats = 22, 
+   Mana = 75, 
    Affects = 
    {
       [2] = 
       {
-         Location = 29, 
          Modifier = "8", 
+         Location = 29, 
          Duration = "l*23", 
       }, 
    }, 
+   Alignment = -1001, 
+   Beats = 22, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Position = "fighting", 
    Function = "spell_smaug", 
-   Level = 43, 
+   Slot = 218, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Alignment = -1001, 
    Name = "force funnel", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 35, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 303, 
+   Level = 90, 
    Messages = 
    {
-      Success = 
+      WearOff = "!WEAROFF!", 
+      VictimImmune = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       VictimDeath = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      VictimImmune = 
+      Success = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "!WEAROFF!", 
       NounDamage = "Force Lightning", 
    }, 
+   Mana = 35, 
    Beats = 8, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
+   Alignment = -1001, 
    Flags = 
    {
       [8] = "_08", 
@@ -1640,6148 +10332,133 @@ SkillEntry
       [3] = "_03", 
       [7] = "_07", 
    }, 
-   Position = "fighting", 
+   Teachers = 
+   {
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
    Function = "spell_black_lightning", 
-   Level = 90, 
+   Slot = 303, 
+   Type = "Force Power", 
    Target = "offensive", 
-   Alignment = -1001, 
    Name = "force lightning", 
+   Position = "fighting", 
 }
 
 SkillEntry
 {
-   Mana = 75, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 217, 
+   Level = 80, 
    Messages = 
    {
+      WearOff = "You are returned to the mundane energy continuum.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "A shield of Force divides $N from the mundane energy continuum.", 
          ToVictim = "You fade from the mundane energy continuum.", 
-      }, 
-      VictimDeath = 
-      {
+         ToCaster = "", 
       }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "You are returned to the mundane energy continuum.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
-   Beats = 22, 
+   Mana = 75, 
    Affects = 
    {
       [2] = 
       {
-         Location = 17, 
-         Modifier = "-50", 
-         Duration = "l*20", 
+         Modifier = "1048576", 
+         Location = 27, 
+         Duration = "l*24", 
       }, 
       [3] = 
       {
-         Location = 27, 
-         Modifier = "1048576", 
-         Duration = "l*24", 
+         Modifier = "-50", 
+         Location = 17, 
+         Duration = "l*20", 
       }, 
    }, 
+   Alignment = 1001, 
+   Beats = 22, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Position = "standing", 
    Function = "spell_smaug", 
-   Level = 80, 
+   Slot = 217, 
+   Type = "Force Power", 
    Target = "self", 
-   Alignment = 1001, 
    Name = "force shield", 
+   Position = "standing", 
 }
 
 SkillEntry
 {
-   Mana = 5, 
-   Type = "Force Power", 
    Ability = "force", 
-   Slot = 77, 
-   Beats = 18, 
+   Level = 4, 
+   Mana = 5, 
    Messages = 
    {
+      WearOff = "You no longer see in the dark.", 
+      VictimImmune = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
+      VictimDeath = 
+      {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
+      }, 
       Success = 
       {
          ToRoom = "$N's eyes dart about as they grow accustomed to Force sight.", 
          ToVictim = "Heat appears red through your eyes.", 
          ToCaster = "$N's eyes dart about as they grow accustomed to Force sight.", 
       }, 
-      VictimDeath = 
-      {
-      }, 
       Failure = 
       {
+         ToRoom = "", 
+         ToVictim = "", 
+         ToCaster = "", 
       }, 
-      WearOff = "You no longer see in the dark.", 
-      VictimImmune = 
-      {
-      }, 
+      NounDamage = "", 
    }, 
    Affects = 
    {
       [2] = 
       {
-         Location = 26, 
          Modifier = "infravision", 
+         Location = 26, 
          Duration = "l*24", 
       }, 
    }, 
-   Position = "standing", 
-   Function = "spell_smaug", 
+   Beats = 18, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
+   Function = "spell_smaug", 
+   Slot = 77, 
+   Type = "Force Power", 
    Target = "self", 
-   Level = 4, 
    Name = "force sight", 
-}
-
-SkillEntry
-{
-   Mana = 15, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 62, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Cause Light!", 
-      NounDamage = "spell", 
-   }, 
-   Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Flags = 
-   {
-      [2] = "_02", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_cause_light", 
-   Level = 2, 
-   Target = "offensive", 
-   Alignment = -1001, 
-   Name = "force spray", 
-}
-
-SkillEntry
-{
-   Mana = 12, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 228, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N grows serious as wisdom takes root within $M.", 
-         ToVictim = "The wisdom of the Force blossoms within you.", 
-         ToCaster = "$N grows serious as wisdom takes root within $M.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "Furrowing your brow, you sense the weight of wisdom leave you.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Beats = 12, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 4, 
-         Modifier = "1+(l/17)", 
-         Duration = "l*24", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Level = 28, 
-   Target = "defensive", 
-   Alignment = 1001, 
-   Name = "forethought", 
-}
-
-SkillEntry
-{
-   Mana = 5, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 3, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N beams as a powerful blessing is laid upon $M.", 
-         ToVictim = "A powerful blessing is laid upon you.", 
-         ToCaster = "You lay the blessing of the Force upon $N.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "The protection of the Force fades away.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Beats = 12, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 24, 
-         Modifier = "-(l/8)", 
-         Duration = "l*23", 
-      }, 
-      [3] = 
-      {
-         Location = 18, 
-         Modifier = "l/8", 
-         Duration = "l*23", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Level = 11, 
-   Target = "defensive", 
-   Alignment = 999, 
-   Name = "good fortune", 
-}
-
-SkillEntry
-{
-   Mana = 20, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 69, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N fades from existence.", 
-         ToVictim = "You fade from existence.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You are no longer masked.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Beats = 24, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "mass invis", 
-         Duration = "l*11", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
    Position = "standing", 
-   Function = "spell_smaug", 
-   Level = 43, 
-   Target = "defensive", 
-   Flags = 
-   {
-      [24] = "Group", 
-   }, 
-   Name = "group masking", 
-}
-
-SkillEntry
-{
-   Mana = 15, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 307, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!WEAROFF!", 
-      NounDamage = "Hand of Chaos", 
-   }, 
-   Beats = 8, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Flags = 
-   {
-      [8] = "_08", 
-      [9] = "_09", 
-      [2] = "_02", 
-      [3] = "_03", 
-      [7] = "_07", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_hand_of_chaos", 
-   Level = 56, 
-   Target = "offensive", 
-   Alignment = -1001, 
-   Name = "Hand of Darkness", 
-}
-
-SkillEntry
-{
-   Mana = 35, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 27, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Harm!", 
-      NounDamage = "harm spell", 
-   }, 
-   Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Flags = 
-   {
-      [2] = "_02", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_harm", 
-   Level = 26, 
-   Target = "offensive", 
-   Alignment = -1001, 
-   Name = "harm", 
-}
-
-SkillEntry
-{
-   Mana = 50, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 28, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "A warm feeling fills your body.", 
-         ToCaster = "You lay a hand of healing upon $N.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Heal!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Beats = 12, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 13, 
-         Modifier = "100", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_smaug", 
-   Level = 30, 
-   Target = "defensive", 
-   Alignment = 1001, 
-   Name = "heal", 
-}
-
-SkillEntry
-{
-   Mana = 5, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 44, 
-   Beats = 12, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N's senses are heightened to those of an animal.", 
-         ToVictim = "Your senses are heightened to those of an animal.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You feel less aware of your surroundings.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "detect hidden", 
-         Duration = "l*24", 
-      }, 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Target = "defensive", 
-   Level = 15, 
-   Name = "heightened awareness", 
-}
-
-SkillEntry
-{
-   Mana = 7, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 57, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "Shards of iridescent light collide to form a dazzling ball...", 
-         ToCaster = "Shards of iridescent light collide to form a dazzling ball...", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Continual Light!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Beats = 12, 
-   Flags = 
-   {
-      [9] = "_09", 
-      [25] = "Object", 
-      [3] = "_03", 
-   }, 
-   Level = 4, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Dice = "0", 
-   Target = "ignore", 
-   Value = 21, 
-   Name = "illuminate", 
-}
-
-SkillEntry
-{
-   Mana = 12, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 66, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N's face hardens.", 
-         ToVictim = "You steel yourself against pain.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You soften.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Beats = 18, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 5, 
-         Modifier = "5", 
-         Duration = "l*20", 
-      }, 
-      [3] = 
-      {
-         Location = 27, 
-         Modifier = "8192", 
-         Duration = "l*30", 
-      }, 
-      [4] = 
-      {
-         Location = 13, 
-         Modifier = "l*4", 
-         Duration = "l*30", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Level = 55, 
-   Target = "self", 
-   Alignment = 1001, 
-   Name = "inner fortress", 
-}
-
-SkillEntry
-{
-   Mana = 17, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 64, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Cause Serious!", 
-      NounDamage = "spell", 
-   }, 
-   Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Flags = 
-   {
-      [2] = "_02", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_cause_serious", 
-   Level = 10, 
-   Target = "offensive", 
-   Alignment = -1001, 
-   Name = "invade essence", 
-}
-
-SkillEntry
-{
-   Mana = 12, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 53, 
-   Beats = 24, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Identify!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "standing", 
-   Function = "spell_identify", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Target = "ignore", 
-   Level = 20, 
-   Name = "know essence", 
-}
-
-SkillEntry
-{
-   Mana = 5, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 29, 
-   Beats = 12, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "A momentary lapse in attention, and $N is out of sight.", 
-         ToVictim = "You fade from existence.", 
-         ToCaster = "A momentary lapse in attention, and $N is out of sight.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You are no longer invisible.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "invis", 
-         Duration = "l*11", 
-      }, 
-   }, 
-   Position = "resting", 
-   Function = "spell_invis", 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-      [7310] = "jedi salesman", 
-      [50] = "Master Yoda", 
-   }, 
-   Target = "ignore", 
-   Level = 5, 
-   Name = "mask", 
-}
-
-SkillEntry
-{
-   Mana = 10, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 33, 
-   Beats = 20, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You feel less sick.", 
-      NounDamage = "poison", 
-   }, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Position = "standing", 
-   Function = "spell_poison", 
-   Level = 13, 
-   Target = "offensive", 
-   Alignment = -1001, 
-   Name = "poison", 
-}
-
-SkillEntry
-{
-   Mana = 120, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 232, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You return to your body.", 
-      NounDamage = "possess", 
-   }, 
-   Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Flags = 
-   {
-      [27] = "SecretSkill", 
-   }, 
-   Position = "standing", 
-   Function = "spell_possess", 
-   Level = 150, 
-   Target = "ignore", 
-   Alignment = -1001, 
-   Name = "possess", 
-}
-
-SkillEntry
-{
-   Mana = 5, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 34, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N is blessed with a protection from the Dark Side.", 
-         ToVictim = "You are blessed with a protection from the Dark Side.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You feel less protected from the Dark Side.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Beats = 12, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "protection", 
-         Duration = "l*10", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Level = 12, 
-   Target = "defensive", 
-   Alignment = 1001, 
-   Name = "protection from darkness", 
-}
-
-SkillEntry
-{
-   Mana = 12, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 81, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "Blooming vitality flows through you.", 
-         ToCaster = "You allow blooming vitality to flow from you to $N.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Refresh!", 
-      NounDamage = "refresh", 
-   }, 
-   Beats = 18, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 14, 
-         Modifier = "l", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Level = 6, 
-   Target = "defensive", 
-   Alignment = 1001, 
-   Name = "refresh", 
-}
-
-SkillEntry
-{
-   Mana = 10, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 230, 
-   Beats = 12, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Remove Invis!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "standing", 
-   Function = "spell_remove_invis", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Target = "ignore", 
-   Level = 8, 
-   Name = "remove masking", 
-}
-
-SkillEntry
-{
-   Mana = 35, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 87, 
-   Beats = 12, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Remove trap!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "standing", 
-   Function = "spell_remove_trap", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Target = "ignore", 
-   Level = 29, 
-   Name = "remove trap", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "???", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "standing", 
-   Name = "reserved", 
-   Level = 101, 
-   Target = "ignore", 
-   Type = "Force Power", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "A warm feeling flows through $N.", 
-         ToVictim = "A warm feeling flows through you.", 
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Mana = 80, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 113, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 13, 
-         Modifier = "200", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Beats = 20, 
-   Flags = 
-   {
-      [24] = "Group", 
-      [22] = "NoScribe", 
-      [23] = "NoBrew", 
-   }, 
-   Level = 60, 
-   Position = "fighting", 
-   Function = "spell_smaug", 
-   Participants = 2, 
-   Target = "ignore", 
-   Alignment = 1001, 
-   Name = "restoration", 
-}
-
-SkillEntry
-{
-   Mana = 75, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 36, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "A luminous aura spreads slowly over $N's body.", 
-         ToVictim = "A luminous aura spreads slowly over your body.", 
-         ToCaster = "A luminous aura spreads slowly over $N's body.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "The luminous aura about your body fades away.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Beats = 12, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "sanctuary", 
-         Duration = "(l*4)+30", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Level = 27, 
-   Target = "defensive", 
-   Alignment = 1001, 
-   Name = "sanctuary", 
-}
-
-SkillEntry
-{
-   Mana = 25, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 296, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Scorching Surge!", 
-      NounDamage = "scorching surge", 
-   }, 
-   Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Flags = 
-   {
-      [0] = "_00", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_scorching_surge", 
-   Level = 73, 
-   Target = "offensive", 
-   Alignment = -1001, 
-   Name = "scorching surge", 
-}
-
-SkillEntry
-{
-   Mana = 12, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 67, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "A force shield of shimmering blue surrounds $N.", 
-         ToVictim = "A force shield of shimmering blue surrounds you.", 
-         ToCaster = "A force shield of shimmering blue surrounds $N.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "Your force shield shimmers then fades away.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Beats = 18, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 17, 
-         Modifier = "-50", 
-         Duration = "l*20", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Level = 26, 
-   Target = "defensive", 
-   Alignment = 1001, 
-   Name = "shield", 
-}
-
-SkillEntry
-{
-   Mana = 15, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 51, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Shocking Grasp!", 
-      NounDamage = "shocking grasp", 
-   }, 
-   Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Flags = 
-   {
-      [1] = "_01", 
-      [0] = "_00", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_shocking_grasp", 
-   Level = 14, 
-   Target = "offensive", 
-   Alignment = -1001, 
-   Name = "shocking grasp", 
-}
-
-SkillEntry
-{
-   Mana = 95, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 89, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "Torrents of cascading energy form around $N.", 
-         ToVictim = "Torrents of cascading energy form around you.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "The torrents of cascading energy suddenly fade away.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "shockshield", 
-         AffectedBy = "Blind", 
-         Duration = "(l*3)+14", 
-      }, 
-   }, 
-   Beats = 12, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Flags = 
-   {
-      [1] = "_01", 
-      [0] = "_00", 
-   }, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Level = 72, 
-   Target = "self", 
-   Alignment = -1001, 
-   Name = "shockshield", 
-}
-
-SkillEntry
-{
-   Mana = 15, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 38, 
-   Beats = 12, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You feel less tired.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "standing", 
-   Function = "spell_sleep", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Target = "ignore", 
-   Level = 24, 
-   Name = "sleep", 
-}
-
-SkillEntry
-{
-   Mana = 12, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 205, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N suddenly appears more agile...", 
-         ToVictim = "You suddenly feel more nimble...", 
-         ToCaster = "$N suddenly appears more agile...", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You suddenly feel less coordinated...", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Beats = 12, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 2, 
-         Modifier = "1+(l/17)", 
-         Duration = "l*24", 
-      }, 
-      [3] = 
-      {
-         Location = 40, 
-      }, 
-      [4] = 
-      {
-         Location = 40, 
-         Modifier = "l/8", 
-         Duration = "l*20", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Level = 18, 
-   Target = "defensive", 
-   Alignment = 1001, 
-   Name = "slink", 
-}
-
-SkillEntry
-{
-   Mana = 70, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 235, 
-   Beats = 12, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N's eyes begin to glow a soft white.", 
-         ToVictim = "Your vision is elevated to the highest plane.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "Your vision descends to the material plane.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "truesight", 
-         AffectedBy = "Blind", 
-         Duration = "l*5", 
-      }, 
-   }, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Target = "self", 
-   Level = 77, 
-   Name = "true sight", 
-}
-
-SkillEntry
-{
-   Mana = 70, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 110, 
-   Messages = 
-   {
-      Success = 
-      {
-         ToRoom = "$N's eyes widen in fear as $S defenses are unravelled.", 
-         ToVictim = "Your defenses are unravelled before your very eyes.", 
-         ToCaster = "$N's eyes widen in fear as $S defenses are unravelled.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "Your intricate defenses are restored to their original quality.", 
-      VictimImmune = 
-      {
-         ToCaster = "Your spell has no effect upon $N.", 
-      }, 
-   }, 
-   Beats = 15, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 29, 
-         Modifier = "1048576", 
-         Duration = "(l*3)+25", 
-      }, 
-      [3] = 
-      {
-         Location = 29, 
-         Modifier = "8192", 
-         Duration = "(l*3)+25", 
-      }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_smaug", 
-   Level = 66, 
-   Target = "offensive", 
-   Flags = 
-   {
-      [22] = "NoScribe", 
-      [23] = "NoBrew", 
-   }, 
-   Name = "unravel defense", 
-}
-
-SkillEntry
-{
-   Mana = 5, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 41, 
-   Beats = 12, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Ventriloquate!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "standing", 
-   Function = "spell_ventriloquate", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Target = "ignore", 
-   Level = 9, 
-   Name = "ventriloquate", 
-}
-
-SkillEntry
-{
-   Mana = 20, 
-   Type = "Force Power", 
-   Ability = "force", 
-   Slot = 68, 
-   Beats = 12, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You feel stronger.", 
-      NounDamage = "spell", 
-   }, 
-   Teachers = 
-   {
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_weaken", 
-   Level = 3, 
-   Target = "offensive", 
-   Alignment = -1001, 
-   Name = "weaken", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "&cYou focus your senses to find those that would hide from you.&R&W", 
-         ToCaster = "You focus your senses to find those that would hide from you.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "&RYou fail to focus your senses.&R&W", 
-      }, 
-      WearOff = "&cYour mind is no longer focused enough to see those hidden from you.&R&w", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "AcuteAwareness", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "detect hidden", 
-         Duration = "l*5", 
-      }, 
-   }, 
-   Beats = 20, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "self", 
-   Level = 50, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "&cYou focus your strength to increase your damage.&R&W", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "&RYou fail to focus your abilities.&R&W", 
-      }, 
-      WearOff = "&cYour mind relaxes its focus on increasing your damage.&R&w", 
-      NounDamage = "You focus on your opponents weak points increasing your damage.", 
-   }, 
-   Type = "Skill", 
-   Name = "AcuteDamage", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 19, 
-         Modifier = "2+(l/33)", 
-         Duration = "l*10", 
-      }, 
-   }, 
-   Beats = 20, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "self", 
-   Level = 99, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "AddPatrol", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_add_patrol", 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 50, 
-   Ability = "leadership", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Aid!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "aid", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_aid", 
-   Teachers = 
-   {
-      [10340] = "Domick Dom teacher", 
-      [32006] = "old teacher master man human scholar", 
-   }, 
-   Target = "ignore", 
-   Level = 1, 
-   Ability = "diplomacy", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "&RYou fumble with the binds.&R&W", 
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "apprehend", 
-   Beats = 6, 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Position = "standing", 
-   Function = "spell_charm_person", 
-   Level = 35, 
-   Target = "offensive", 
-   Flags = 
-   {
-      [19] = "SaveNegates", 
-   }, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Backstab!", 
-      NounDamage = "backstab", 
-   }, 
-   Type = "Skill", 
-   Name = "backstab", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_backstab", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "ignore", 
-   Level = 6, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Bash!", 
-      NounDamage = "bash", 
-   }, 
-   Type = "Skill", 
-   Name = "bash", 
-   Beats = 8, 
-   Position = "fighting", 
-   Function = "do_bash", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "offensive", 
-   Level = 47, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Beg!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "beg", 
-   Beats = 20, 
-   Position = "standing", 
-   Function = "do_beg", 
-   Teachers = 
-   {
-      [210] = "begger", 
-   }, 
-   Target = "ignore", 
-   Level = 1, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "???", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "berserk", 
-   Beats = 4, 
-   Position = "fighting", 
-   Function = "do_berserk", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "offensive", 
-   Level = 85, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "bind", 
-   Beats = 3, 
-   Position = "dead", 
-   Function = "do_bind", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "offensive", 
-   Level = 45, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "bribe", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_bribe", 
-   Target = "ignore", 
-   Level = 25, 
-   Ability = "diplomacy", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "capital ships", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 90, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Circle!", 
-      NounDamage = "circle", 
-   }, 
-   Type = "Skill", 
-   Name = "circle", 
-   Beats = 16, 
-   Position = "fighting", 
-   Function = "do_circle", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "ignore", 
-   Level = 50, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!climb!", 
-      NounDamage = "climb", 
-   }, 
-   Type = "Skill", 
-   Name = "climb", 
-   Beats = 10, 
-   Position = "standing", 
-   Function = "do_climb", 
-   Teachers = 
-   {
-      [410] = "old wookiee woman", 
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "offensive", 
-   Level = 7, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "cloak", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Position = "dead", 
-   Function = "do_disguise", 
-   Target = "ignore", 
-   Ability = "force", 
-   Level = 35, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "cutdoor", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "dead", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "force", 
-   Level = 20, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Detrap!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "detrap", 
-   Beats = 24, 
-   Position = "sitting", 
-   Function = "do_detrap", 
-   Teachers = 
-   {
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "ignore", 
-   Level = 32, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "dig", 
-   Beats = 20, 
-   Position = "standing", 
-   Function = "do_dig", 
-   Teachers = 
-   {
-      [6805] = "mine foreman Krauota", 
-      [206] = "technician", 
-      [6819] = "boss Hityii", 
-   }, 
-   Target = "ignore", 
-   Level = 2, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Disarm!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "disarm", 
-   Beats = 24, 
-   Position = "fighting", 
-   Function = "do_disarm", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 45, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!disguise!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "disguise", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_disguise", 
-   Teachers = 
-   {
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "ignore", 
-   Level = 70, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Dodge!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "dodge", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 50, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "&BYou fail.&R&W", 
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "dominate", 
-   Beats = 12, 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "standing", 
-   Function = "spell_charm_person", 
-   Level = 75, 
-   Target = "offensive", 
-   Flags = 
-   {
-      [19] = "SaveNegates", 
-   }, 
-   Ability = "leadership", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Bash Door!", 
-      NounDamage = "bashdoor", 
-   }, 
-   Type = "Skill", 
-   Name = "doorbash", 
-   Beats = 24, 
-   Position = "standing", 
-   Function = "do_bashdoor", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "ignore", 
-   Level = 10, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Dual Wield!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "dual wield", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "standing", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 27, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "EliteGuard", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_elite_guard", 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 85, 
-   Ability = "leadership", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Enhanced Damage!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "enhanced damage", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 10, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "fake signal", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "dead", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 105, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Fifth Attack!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "fifth attack", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 140, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!First Aid!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "FirstAid", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_first_aid", 
-   Teachers = 
-   {
-      [10340] = "Domick Dom teacher", 
-      [32006] = "old teacher master man human scholar", 
-   }, 
-   Target = "ignore", 
-   Level = 1, 
-   Ability = "diplomacy", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "&cA strong mind leads to a stronger body.&R&W", 
-         ToCaster = "A strong mind leads to a stronger body.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "&RYou fail to focus your energy.&R&W", 
-      }, 
-      WearOff = "&cYour mind wanders from strengthening your body.&R&w", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "FocusStrength", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 1, 
-         Modifier = "2+(l/33)", 
-         Duration = "l*10", 
-      }, 
-   }, 
-   Beats = 20, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "self", 
-   Level = 70, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Fourth Attack!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "fourth attack", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 115, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "GatherIntelligence", 
-   Beats = 40, 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "standing", 
-   Function = "do_gather_intelligence", 
-   Difficulty = 4, 
-   Target = "ignore", 
-   Level = 100, 
-   Ability = "leadership", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Gouge!", 
-      NounDamage = "gouge", 
-   }, 
-   Type = "Skill", 
-   Name = "gouge", 
-   Beats = 10, 
-   Position = "fighting", 
-   Function = "do_gouge", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 30, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "grenades", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 61, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Grip!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "grip", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 50, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "&cYou focus on your ability to hit your opponent.&R&W", 
-         ToCaster = "You focus on your ability to hit your oponent.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "&RYou fail to focus your skills.&R&W", 
-      }, 
-      WearOff = "&cYou lose your focus on your opponent.&R&w", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "HeightenedAccuracy", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 18, 
-         Modifier = "2+(l/33)", 
-         Duration = "l*10", 
-      }, 
-   }, 
-   Beats = 20, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "self", 
-   Level = 85, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Hijack!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "hijack", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_hijack", 
-   Teachers = 
-   {
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "ignore", 
-   Level = 95, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!HitAll!", 
-      NounDamage = "hit", 
-   }, 
-   Type = "Skill", 
-   Name = "hitall", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_hitall", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 87, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "&cYou harden yourself against all pain.&R&W", 
-         ToCaster = "You harden yourself against pain.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "&RYou fail to focus your energy.&R&W", 
-      }, 
-      WearOff = "&cYou soften against all pain.&R&w", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "InnerStrength", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 5, 
-         Modifier = "1+(l/50)", 
-         Duration = "l*10", 
-      }, 
-      [3] = 
-      {
-         Location = 27, 
-         Modifier = "8", 
-         Duration = "l*10", 
-      }, 
-      [4] = 
-      {
-         Location = 27, 
-         Modifier = "2097152", 
-         Duration = "l*10", 
-      }, 
-      [5] = 
-      {
-         Location = 27, 
-         Modifier = "8192", 
-         Duration = "l*10", 
-      }, 
-      [6] = 
-      {
-         Location = 27, 
-         Modifier = "32", 
-         Duration = "l*10", 
-      }, 
-   }, 
-   Beats = 20, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "self", 
-   Level = 80, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "jail", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_jail", 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-      [408] = "human police officer cop", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 25, 
-   Ability = "leadership", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "jumpvector", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "dead", 
-   Function = "do_jumpvector", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 80, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Kick!", 
-      NounDamage = "kick", 
-   }, 
-   Type = "Skill", 
-   Name = "kick", 
-   Beats = 8, 
-   Position = "fighting", 
-   Function = "do_kick", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "offensive", 
-   Level = 6, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Steal!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "lift", 
-   Beats = 24, 
-   Position = "standing", 
-   Function = "do_steal", 
-   Teachers = 
-   {
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "ignore", 
-   Level = 20, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "lightsaber crafting", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "force", 
-   Level = 25, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "&cYou relax your muscles becoming more limber and agile.&R&W", 
-         ToCaster = "You relax your muscles becoming limber and agile.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "&RYou can't become any more limber.&R&W", 
-      }, 
-      WearOff = "&cYour muscles stiffen as your efforts to relax them fade.&R&w", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "limber", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 2, 
-         Modifier = "2+(l/33)", 
-         Duration = "l*10", 
-      }, 
-   }, 
-   Beats = 20, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "self", 
-   Level = 90, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makearmor", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "do_makearmor", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 58, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makeblade", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "do_makeblade", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 40, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makeblaster", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "do_makeblaster", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 95, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Ability = "engineering", 
-   Position = "resting", 
-   Function = "do_makebowcaster", 
-   Level = 40, 
-   Target = "ignore", 
-   Flags = 
-   {
-      [27] = "SecretSkill", 
-   }, 
-   Name = "makebowcaster", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makecomlink", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "do_makecomlink", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 5, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makecontainer", 
-   Teachers = 
-   {
-      [10340] = "Domick Dom teacher", 
-      [206] = "technician", 
-      [32010] = "Twilek craftswoman woman", 
-   }, 
-   Position = "resting", 
-   Function = "do_makecontainer", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 1, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makeglowrod", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "do_makeglowrod", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 10, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makegrenade", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "do_makegrenade", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 95, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makejewelry", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "do_makejewelry", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 60, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makelandmine", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "do_makelandmine", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 80, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "makeshield", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "do_makeshield", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 70, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "MassPropaganda", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_mass_propaganda", 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-   }, 
-   Target = "ignore", 
-   Level = 80, 
-   Ability = "diplomacy", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "You meditate peacefully, tuning yourself to the Force.", 
-      }, 
-      Failure = 
-      {
-         ToVictim = "You spend several minutes in deep concentration, but fail to find the Force.", 
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "meditate", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 12, 
-         Modifier = "l", 
-      }, 
-   }, 
-   Beats = 25, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Level = 1, 
-   Target = "self", 
-   Flags = 
-   {
-      [22] = "NoScribe", 
-      [23] = "NoBrew", 
-   }, 
-   Ability = "force", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "midships", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 30, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!mine!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "mine", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_mine", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 90, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Search!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "mount", 
-   Beats = 10, 
-   Position = "standing", 
-   Function = "do_mount", 
-   Teachers = 
-   {
-      [412] = "Self Defence Trainer", 
-      [10509] = "An instructor", 
-   }, 
-   Target = "ignore", 
-   Level = 7, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "navigation", 
-   Teachers = 
-   {
-      [10340] = "Domick Dom teacher", 
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 1, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Parry!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "parry", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "force", 
-   Level = 25, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Peek!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "peek", 
-   Teachers = 
-   {
-      [410] = "old wookiee woman", 
-      [32009] = "suspicious fellow", 
-   }, 
-   Position = "standing", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "smuggling", 
-   Level = 20, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Pick!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "pick lock", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_pick", 
-   Teachers = 
-   {
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "ignore", 
-   Level = 55, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Pickshiplock!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "pick ship lock", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_pickshiplock", 
-   Teachers = 
-   {
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "ignore", 
-   Level = 90, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Poison Weapon!", 
-      NounDamage = "poisonous concoction", 
-   }, 
-   Type = "Skill", 
-   Name = "PoisonWeapon", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_poison_weapon", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "objinv", 
-   Level = 30, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!post guard!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "PostGuard", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_postguard", 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 35, 
-   Ability = "leadership", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "propaganda", 
-   Beats = 4, 
-   Position = "standing", 
-   Function = "do_propaganda", 
-   Target = "ignore", 
-   Level = 50, 
-   Ability = "diplomacy", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Punch!", 
-      NounDamage = "punch", 
-   }, 
-   Type = "Skill", 
-   Name = "punch", 
-   Beats = 8, 
-   Position = "fighting", 
-   Function = "do_punch", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "offensive", 
-   Level = 40, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!reinforcements!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "reinforcements", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_reinforcements", 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 60, 
-   Ability = "leadership", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Rescue!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "rescue", 
-   Beats = 12, 
-   Position = "fighting", 
-   Function = "do_rescue", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 8, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "sabotage", 
-   Teachers = 
-   {
-      [10340] = "Domick Dom teacher", 
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "dead", 
-   Function = "do_sabotage", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 120, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Scan!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "scan", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_scan", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [10340] = "Domick Dom teacher", 
-      [320] = "human citizen", 
-   }, 
-   Target = "ignore", 
-   Level = 1, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Search!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "search", 
-   Beats = 20, 
-   Position = "standing", 
-   Function = "do_search", 
-   Teachers = 
-   {
-      [410] = "old wookiee woman", 
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "ignore", 
-   Level = 3, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Second Attack!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "second attack", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 45, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "seduce", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_seduce", 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-   }, 
-   Target = "ignore", 
-   Level = 65, 
-   Ability = "diplomacy", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "&cYou focus your senses in an effort to detect the unseen.&R&W", 
-         ToCaster = "You focus your senses in an effort to detect the unseen.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "&RYou fail to focus your mind.&R&W", 
-      }, 
-      WearOff = "&cYour focus to see the unseen relaxes.&R&w", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "SeeMasking", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "detect invis", 
-         Duration = "l*5", 
-      }, 
-   }, 
-   Beats = 20, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "self", 
-   Level = 60, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "ship docking", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "dead", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 30, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "ship maintenance", 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 25, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "ship systems", 
-   Teachers = 
-   {
-      [10340] = "Domick Dom teacher", 
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 1, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "skin", 
-   Beats = 5, 
-   Position = "resting", 
-   Function = "do_skin", 
-   Teachers = 
-   {
-      [328] = "Sleejat", 
-   }, 
-   Target = "ignore", 
-   Level = 1, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "slicing", 
-   Beats = 3, 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
-   Position = "dead", 
-   Function = "spell_null", 
-   Level = 105, 
-   Target = "ignore", 
-   Flags = 
-   {
-      [27] = "SecretSkill", 
-   }, 
-   Ability = "force", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "smalltalk", 
-   Beats = 4, 
-   Position = "standing", 
-   Function = "do_smalltalk", 
-   Target = "ignore", 
-   Level = 10, 
-   Ability = "diplomacy", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "You attempt to move silently.", 
-      }, 
-      Failure = 
-      {
-         ToCaster = "You attempt to move silently.", 
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "sneak", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "sneak", 
-         Duration = "l*23", 
-      }, 
-   }, 
-   Beats = 1, 
-   Position = "standing", 
-   Function = "spell_smaug", 
-   Teachers = 
-   {
-      [410] = "old wookiee woman", 
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "self", 
-   Level = 5, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!snipe!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "snipe", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_snipe", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 2, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "space combat 1", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 25, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "space combat 2", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 50, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "space combat 3", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 75, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "SpecialForces", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_special_forces", 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 95, 
-   Ability = "leadership", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "speeder combat", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "dead", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 75, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "speeders", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "dead", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 30, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "spice refining", 
-   Teachers = 
-   {
-      [32029] = "hutt crimelord", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "engineering", 
-   Level = 50, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "starfighters", 
-   Teachers = 
-   {
-      [10340] = "Domick Dom teacher", 
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 1, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "You attempt to hide.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-         ToCaster = "You attempt to hide.", 
-      }, 
-      WearOff = "You are no longer hidden.", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "stealth", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 26, 
-         Modifier = "hide", 
-         Duration = "l*23", 
-      }, 
-   }, 
-   Beats = 12, 
-   Position = "resting", 
-   Function = "do_hide", 
-   Teachers = 
-   {
-      [410] = "old wookiee woman", 
-      [32009] = "suspicious fellow", 
-   }, 
-   Target = "self", 
-   Level = 50, 
-   Ability = "smuggling", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "study", 
-   Beats = 12, 
-   Position = "dead", 
-   Function = "do_study", 
-   Target = "objinv", 
-   Teachers = 
-   {
-      [10340] = "Domick Dom teacher", 
-      [32006] = "old teacher master man human scholar", 
-   }, 
-   Ability = "diplomacy", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "You regain consciousness.", 
-      NounDamage = "stun", 
-   }, 
-   Type = "Skill", 
-   Name = "stun", 
-   Beats = 8, 
-   Teachers = 
-   {
-      [412] = "Self Defence Trainer", 
-      [32012] = "imperial trooper drill seargent", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "do_punch", 
-   Level = 105, 
-   Target = "offensive", 
-   Flags = 
-   {
-      [2] = "_02", 
-   }, 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Third Attack!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "third attack", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 95, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!throw!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "throw", 
-   Beats = 3, 
-   Position = "sitting", 
-   Function = "do_throw", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Target = "ignore", 
-   Level = 5, 
-   Ability = "combat", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!torture!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "torture", 
-   Beats = 12, 
-   Position = "standing", 
-   Function = "do_torture", 
-   Teachers = 
-   {
-      [10504] = "Corellian Diktat", 
-      [32029] = "hutt crimelord", 
-   }, 
-   Target = "ignore", 
-   Level = 85, 
-   Ability = "leadership", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Track!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "track", 
-   Beats = 14, 
-   Position = "standing", 
-   Function = "do_track", 
-   Teachers = 
-   {
-      [32050] = "rodian hunter bounty mercenary", 
-   }, 
-   Target = "ignore", 
-   Level = 3, 
-   Ability = "bounty hunting", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "tractor beams", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 35, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-         ToVictim = "You enter a peaceful trance, tuning yourself to the Force.", 
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-         ToVictim = "You spend several minutes in a deep trance, but fail to find the Force.", 
-      }, 
-      WearOff = "!TRANCE!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "trance", 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = 12, 
-         Modifier = "l*2", 
-      }, 
-   }, 
-   Beats = 32, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Position = "resting", 
-   Function = "spell_smaug", 
-   Level = 60, 
-   Target = "self", 
-   Flags = 
-   {
-      [22] = "NoScribe", 
-      [23] = "NoBrew", 
-   }, 
-   Ability = "force", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!done!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Skill", 
-   Name = "weapon systems", 
-   Teachers = 
-   {
-      [32040] = "imperial flight lieutenant", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
-   }, 
-   Position = "resting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "piloting", 
-   Level = 2, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Blasters!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Weapon", 
-   Name = "blasters", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 2, 
-}
-
-SkillEntry
-{
-   Level = 101, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Bludgeons!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "fighting", 
-   Name = "bludgeons", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Weapon", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Weapon", 
-   Name = "bowcasters", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 4, 
-}
-
-SkillEntry
-{
-   Level = 101, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Flexible Arms!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "fighting", 
-   Name = "flexible arms", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Weapon", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Type = "Weapon", 
-   Name = "force pikes", 
-   Teachers = 
-   {
-      [32012] = "imperial trooper drill seargent", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
-   }, 
-   Position = "dead", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 3, 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Lightsabers!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Weapon", 
-   Name = "lightsabers", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "force", 
-   Level = 2, 
-}
-
-SkillEntry
-{
-   Level = 101, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Talonous Arms!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "fighting", 
-   Name = "talonous arms", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Weapon", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Vibro-Blades!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Type = "Weapon", 
-   Name = "vibro-blades", 
-   Teachers = 
-   {
-      [32011] = "new repulic training officer", 
-      [10340] = "Domick Dom teacher", 
-      [10509] = "An instructor", 
-      [412] = "Self Defence Trainer", 
-      [32012] = "imperial trooper drill seargent", 
-   }, 
-   Position = "fighting", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Ability = "combat", 
-   Level = 1, 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Adarian!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "adarese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "barabel", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "binary", 
-   Function = "spell_smaug", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "bothese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "chadra-fan", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Common!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "basic", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "coyn", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "defel", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "devaronese", 
-   Function = "spell_smaug", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "durese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "ewokese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "falleen", 
-   Function = "spell_smaug", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "firrerreo", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Gamorrean!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "gamorrese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "gand", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "antarian", 
-   Function = "spell_smaug", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Hutt!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "huttese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "ithorese", 
-   Function = "spell_smaug", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Jawa!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "jawaese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "kubazian", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Mon Calamari!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "mon calamarian", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "quarrenese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Rodian!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "rodese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Noghri!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "shistavanen", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "sullustese", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "togorian", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "dosh", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Dwarven!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "twileki", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "verpine", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Level = 1, 
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      WearOff = "!Wookiee!", 
-      VictimImmune = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "shyriiwook", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
-}
-
-SkillEntry
-{
-   Messages = 
-   {
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-   }, 
-   Position = "dead", 
-   Name = "yevethan", 
-   Function = "spell_null", 
-   Target = "ignore", 
-   Type = "Tongue", 
-   Ability = "none", 
 }

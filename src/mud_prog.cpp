@@ -1136,6 +1136,10 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         {
             return MudProgCompareNumbers(GetCurrentLuck(chkchar), opr, atoi(rval), mob);
         }
+        else if(!StrCmp(chck, "frc"))
+        {
+            return MudProgCompareNumbers(GetCurrentForce(chkchar), opr, atoi(rval), mob);
+        }
         else if(!StrCmp(chck, "iscarrying"))
         {
             return IfCheckIsCarrying(mob, opr, rval, chkchar);
@@ -1802,22 +1806,12 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob,
         }
     }
 
-    if(actor != nullptr && IsImmortal(actor))
-    {
-        Log->Info("%s", com_list.c_str());
-    }
-    
     auto script = SplitIntoLines(com_list);
     DiscardComments(script);
     RewriteElIfs(script);
-    RewriteIfAnd(script);
+    //RewriteIfAnd(script);
     com_list = JoinAsString(script);
 
-    if(actor != nullptr && IsImmortal(actor))
-    {
-        Log->Info("%s", com_list.c_str());
-    }
-    
     strcpy(tmpcmndlst, com_list.c_str());
     command_list = tmpcmndlst;
 

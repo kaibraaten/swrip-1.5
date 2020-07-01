@@ -761,93 +761,93 @@ static void LuaPushObject(lua_State *L, std::shared_ptr<Object> obj, size_t idx)
         LuaPushOvalues(L, obj->Value);
     }
 
-                   if(obj->Level != 0)
-                   {
-                       LuaSetfieldNumber(L, "Level", obj->Level);
-                   }
+    if(obj->Level != 0)
+    {
+        LuaSetfieldNumber(L, "Level", obj->Level);
+    }
 
-                   if(obj->Timer != 0)
-                   {
-                       LuaSetfieldNumber(L, "Timer", obj->Timer);
-                   }
+    if(obj->Timer != 0)
+    {
+        LuaSetfieldNumber(L, "Timer", obj->Timer);
+    }
 
-                   int wear_loc = -1;
+    int wear_loc = -1;
 
-                   for(size_t wear = 0; wear < MAX_WEAR; wear++)
-                   {
-                       for(size_t x = 0; x < MAX_LAYERS; x++)
-                       {
-                           if(obj == save_equipment[wear][x].lock())
-                           {
-                               wear_loc = wear;
-                               break;
-                           }
-                           else if(save_equipment[wear][x].expired())
-                           {
-                               break;
-                           }
-                       }
-                   }
+    for(size_t wear = 0; wear < MAX_WEAR; wear++)
+    {
+        for(size_t x = 0; x < MAX_LAYERS; x++)
+        {
+            if(obj == save_equipment[wear][x].lock())
+            {
+                wear_loc = wear;
+                break;
+            }
+            else if(save_equipment[wear][x].expired())
+            {
+                break;
+            }
+        }
+    }
 
-                   if(wear_loc != -1)
-                   {
-                       LuaSetfieldNumber(L, "WearLocation", wear_loc);
-                   }
+    if(wear_loc != -1)
+    {
+        LuaSetfieldNumber(L, "WearLocation", wear_loc);
+    }
 
-                   switch(obj->ItemType)
-                   {
-                   case ITEM_PILL:
-                   case ITEM_POTION:
-                       if(IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]))
-                       {
-                           LuaSetfieldString(L, "Spell1",
-                                             SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name);
-                       }
+    switch(obj->ItemType)
+    {
+    case ITEM_PILL:
+    case ITEM_POTION:
+        if(IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]))
+        {
+            LuaSetfieldString(L, "Spell1",
+                              SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name);
+        }
 
-                       if(IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]))
-                       {
-                           LuaSetfieldString(L, "Spell2",
-                                             SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name);
-                       }
+        if(IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]))
+        {
+            LuaSetfieldString(L, "Spell2",
+                              SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name);
+        }
 
-                       if(IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]))
-                       {
-                           LuaSetfieldString(L, "Spell3",
-                                             SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name);
-                       }
-                       break;
+        if(IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]))
+        {
+            LuaSetfieldString(L, "Spell3",
+                              SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name);
+        }
+        break;
 
-                   case ITEM_DEVICE:
-                       if(IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]))
-                       {
-                           LuaSetfieldString(L, "Spell3",
-                                             SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name);
-                       }
-                       break;
+    case ITEM_DEVICE:
+        if(IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]))
+        {
+            LuaSetfieldString(L, "Spell3",
+                              SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name);
+        }
+        break;
 
-                   case ITEM_SALVE:
-                       if(IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]))
-                       {
-                           LuaSetfieldString(L, "Spell4",
-                                             SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name);
-                       }
+    case ITEM_SALVE:
+        if(IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]))
+        {
+            LuaSetfieldString(L, "Spell4",
+                              SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name);
+        }
 
-                       if(IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]))
-                       {
-                           LuaSetfieldString(L, "Spell5",
-                                             SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name);
-                       }
+        if(IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]))
+        {
+            LuaSetfieldString(L, "Spell5",
+                              SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name);
+        }
 
-                       break;
+        break;
 
-                   default:
-                       break;
-                   }
+    default:
+        break;
+    }
 
-                   LuaPushObjectAffects(L, obj->Affects(), "Affects");
-                   LuaPushExtraDescriptions(L, obj->ExtraDescriptions());
-                   LuaPushObjects(L, obj->Objects(), "Contents");
-                   lua_settable(L, -3);
+    LuaPushObjectAffects(L, obj->Affects(), "Affects");
+    LuaPushExtraDescriptions(L, obj->ExtraDescriptions());
+    LuaPushObjects(L, obj->Objects(), "Contents");
+    lua_settable(L, -3);
 }
 
 void LuaPushObjects(lua_State *L, const std::list<std::shared_ptr<Object>> &objects,
@@ -1040,7 +1040,6 @@ static void LuaPushCharacterStats(lua_State *L, std::shared_ptr<Character> ch)
 void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
                       std::function<void(lua_State *, std::shared_ptr<Character>)> pushExtra)
 {
-    // NOT a fan of this cast, but it can't be avoided.
     DeEquipCharacter(ch);
 
     LuaSetfieldString(L, "Name", ch->Name);
@@ -1081,7 +1080,6 @@ void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
 
     pushExtra(L, ch);
 
-    // NOT a fan of this cast, but it can't be avoided.
     ReEquipCharacter(ch);
 }
 

@@ -137,7 +137,7 @@ void ReEquipCharacter(std::shared_ptr<Character> ch)
         {
             if (!save_equipment[x][y].expired())
             {
-                if (!quitting_char.expired() && quitting_char.lock() != ch)
+                if (quitting_char.lock() != ch)
                 {
                     EquipCharacter(ch, save_equipment[x][y].lock(), (WearLocation)x);
                 }

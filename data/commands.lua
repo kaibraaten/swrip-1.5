@@ -3,6 +3,15 @@
 
 CommandEntry
 {
+   Position = "resting",
+   Function = "do_buy",
+   Level = 0,
+   Log = "normal",
+   Name = "buy",
+}
+
+CommandEntry
+{
    Position = "dead", 
    Function = "do_buyvendor", 
    Level = 1, 
@@ -4076,15 +4085,6 @@ CommandEntry
    Level = 0, 
    Log = "always", 
    Name = "bounty", 
-}
-
-CommandEntry
-{
-   Position = "resting", 
-   Function = "do_buy", 
-   Level = 0, 
-   Log = "normal", 
-   Name = "buy", 
 }
 
 CommandEntry
