@@ -1918,13 +1918,13 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
     case POS_MORTAL:
         Act(AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
             victim, nullptr, nullptr, ActTarget::Room);
-        victim->Echo("&RYou are mortally wounded, and will die soon, if not aided.");
+        victim->Echo("&RYou are mortally wounded, and will die soon, if not aided.\r\n");
         break;
 
     case POS_INCAP:
         Act(AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
             victim, nullptr, nullptr, ActTarget::Room);
-        victim->Echo("&RYou are incapacitated and will slowly die, if not aided.");
+        victim->Echo("&RYou are incapacitated and will slowly die, if not aided.\r\n");
         break;
 
     case POS_STUNNED:
@@ -1932,7 +1932,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         {
             Act(AT_ACTION, "$n is stunned, but will probably recover.",
                 victim, nullptr, nullptr, ActTarget::Room);
-            victim->Echo("&RYou are stunned, but will probably recover.");
+            victim->Echo("&RYou are stunned, but will probably recover.\r\n");
         }
         break;
 

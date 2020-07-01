@@ -49,6 +49,7 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 #include "race.hpp"
+#include "skill.hpp"
 
  /* Defines by Narn for new mudprog parsing, used as
     return values from mprog_do_command. */
@@ -945,7 +946,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         }
         else if(!StrCmp(chck, "ispc"))
         {
-            return IsNpc(chkchar) == boolCheck;
+            return IsNpc(chkchar) != boolCheck;
         }
         else if(!StrCmp(chck, "isnpc"))
         {
@@ -1088,6 +1089,20 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
             std::string abilityName = AbilityName[chkchar->Ability.Main];
 
             return MudProgCompareStrings(abilityName, opr, rval, mob);
+        }
+        else if(StrCmp(chck, "knowsskill") == 0)
+        {
+            int sn = LookupSkill(rval);
+
+            if(sn >= 0)
+            {
+                return (GetSkillLevel(chkchar, sn) > 0) == boolCheck;
+            }
+            else
+            {
+                ProgBug(FormatString("Unknown skill '%s'", rval), mob);
+                return BERR;
+            }
         }
         else if(!StrCmp(chck, "clan"))
         {
