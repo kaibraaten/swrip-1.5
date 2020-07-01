@@ -728,7 +728,8 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
     char *pchck = chck;
     std::shared_ptr<Character> chkchar = nullptr;
     std::shared_ptr<Object> chkobj;
-
+    bool boolCheck = true;
+    
     if(!*point)
     {
         ProgBug("Null ifcheck", mob);
@@ -748,6 +749,12 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         else if(*point == ' ')
         {
             point++;
+        }
+        else if(StringPrefix("not ", point) == 0)
+        {
+            boolCheck = !boolCheck;
+            point += 4;
+            *pchck = '\0';
         }
         else
         {
@@ -929,7 +936,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
     {
         if(!StrCmp(chck, "ismobinvis"))
         {
-            return IsNpc(chkchar) && chkchar->Flags.test(Flag::Mob::MobInvis);
+            return (IsNpc(chkchar) && chkchar->Flags.test(Flag::Mob::MobInvis)) == boolCheck;
         }
         else if(!StrCmp(chck, "mobinvislevel"))
         {
@@ -938,48 +945,48 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         }
         else if(!StrCmp(chck, "ispc"))
         {
-            return IsNpc(chkchar) ? false : true;
+            return IsNpc(chkchar) == boolCheck;
         }
         else if(!StrCmp(chck, "isnpc"))
         {
-            return IsNpc(chkchar) ? true : false;
+            return IsNpc(chkchar) == boolCheck;
         }
         else if(!StrCmp(chck, "ismounted"))
         {
-            return chkchar->Position == POS_MOUNTED;
+            return (chkchar->Position == POS_MOUNTED) == boolCheck;
         }
         else if(!StrCmp(chck, "isgood"))
         {
-            return IsGood(chkchar) ? true : false;
+            return IsGood(chkchar) == boolCheck;
         }
         else if(!StrCmp(chck, "isneutral"))
         {
-            return IsNeutral(chkchar) ? true : false;
+            return IsNeutral(chkchar) == boolCheck;
         }
         else if(!StrCmp(chck, "isevil"))
         {
-            return IsEvil(chkchar) ? true : false;
+            return IsEvil(chkchar) == boolCheck;
         }
         else if(!StrCmp(chck, "isfight"))
         {
-            return IsFighting(chkchar);
+            return IsFighting(chkchar) == boolCheck;
         }
         else if(!StrCmp(chck, "isimmort"))
         {
-            return GetTrustLevel(chkchar) >= LEVEL_IMMORTAL;
+            return (GetTrustLevel(chkchar) >= LEVEL_IMMORTAL) == boolCheck;
         }
         else if(!StrCmp(chck, "ischarmed"))
         {
-            return IsAffectedBy(chkchar, Flag::Affect::Charm);
+            return IsAffectedBy(chkchar, Flag::Affect::Charm) == boolCheck;
         }
         else if(!StrCmp(chck, "isfollow"))
         {
-            return chkchar->Master != nullptr &&
-                chkchar->Master->InRoom == chkchar->InRoom;
+            return (chkchar->Master != nullptr &&
+                    chkchar->Master->InRoom == chkchar->InRoom) == boolCheck;
         }
         else if(!StrCmp(chck, "isaffected"))
         {
-            return IfCheckIsAffected(mob, rval, chkchar);
+            return IfCheckIsAffected(mob, rval, chkchar) == boolCheck;
         }
         else if(!StrCmp(chck, "hitprcnt"))
         {
@@ -1063,13 +1070,13 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
             return MudProgCompareStrings(RaceTable[chkchar->Race].Name, opr,
                                          rval, mob);
         }
-        else if(!StrCmp(chck, "droid"))
+        else if(StrCmp(chck, "droid") == 0 || StrCmp(chck, "isdroid") == 0)
         {
-            return IsDroid(chkchar);
+            return IsDroid(chkchar) == boolCheck;
         }
         else if(!StrCmp(chck, "isjedi"))
         {
-            return IsJedi(chkchar);
+            return (IsJedi(chkchar) || chkchar->PermStats.Frc > 0) == boolCheck;
         }
         else if(!StrCmp(chck, "class"))
         {
