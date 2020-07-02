@@ -441,7 +441,52 @@ static int IfCheckOTypeRoom(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
+static int IfCheckOVnumInObject(std::shared_ptr<Object> inobj, const std::string &cvar,
+                                std::string opr, const std::string &rval)
+{
+    if(inobj == nullptr)
+    {
+        ProgBug("Ovnuminobj: only works with objprogs", supermob);
+        return BERR;
+    }
+    
+    int vnum = atoi(cvar.c_str());
+
+    if(vnum < MIN_VNUM || vnum > MAX_VNUM)
+    {
+        ProgBug("Ovnuminobj: bad vnum", supermob);
+        return BERR;
+    }
+
+    auto objects = inobj->Objects();
+    int lhsvl = accumulate(std::begin(objects), std::end(objects), 0,
+                           [vnum](int sumSoFar, const std::shared_ptr<Object> &obj)
+                           {
+                               if(obj->Prototype->Vnum == vnum)
+                               {
+                                   sumSoFar += obj->Count;
+                               }
+
+                               return sumSoFar;
+                           });
+    
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+
+    if(rhsvl < 1)
+    {
+        rhsvl = 1;
+    }
+
+    if(opr.empty())
+    {
+        opr = "==";
+    }
+
+    return MudProgCompareNumbers(lhsvl, opr, rhsvl, supermob);
+}
+
+static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, const std::string &cvar,
+                             std::string opr, const std::string &rval)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -602,12 +647,6 @@ static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, const std::stri
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int ObjectCounter(int sumSoFar, const std::shared_ptr<Object> &obj)
-{
-    return sumSoFar + obj->Count;
-    
-}
-
 static int IfCheckOTypeInObject(std::shared_ptr<Object> obj, const std::string &cvar,
                                 std::string opr, const std::string &rval)
 {
@@ -635,7 +674,17 @@ static int IfCheckOTypeInObject(std::shared_ptr<Object> obj, const std::string &
     }
 
     auto objects = obj->Objects();
-    int lhsvl = accumulate(std::begin(objects), std::end(objects), 0, ObjectCounter);
+    int lhsvl = accumulate(std::begin(objects), std::end(objects), 0,
+                           [type](int sumSoFar, const std::shared_ptr<Object> iter)
+                           {
+                               if(iter->ItemType == type)
+                               {
+                                   sumSoFar += iter->Count;
+                               }
+
+                               return sumSoFar;
+                           });
+                           
     int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
@@ -983,6 +1032,10 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
     else if(StrCmp(chck, "otypeinobj") == 0)
     {
         return IfCheckOTypeInObject(obj, cvar, opr, rval);
+    }
+    else if(StrCmp(chck, "ovnuminobj") == 0)
+    {
+        IfCheckOVnumInObject(obj, cvar, opr, rval);
     }
     
     if(chkchar)

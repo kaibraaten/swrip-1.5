@@ -417,11 +417,11 @@ static void get_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, 
     {
         Act(AT_ACTION,
             container->Flags.test(Flag::Obj::Covering)
-            ? "You get $p from beneath $P." : "You get $p from $P",
+            ? "You get $p from beneath $P." : "You get $p from $P.",
             ch, obj, container, ActTarget::Char);
         Act(AT_ACTION,
             container->Flags.test(Flag::Obj::Covering)
-            ? "$n gets $p from beneath $P." : "$n gets $p from $P",
+            ? "$n gets $p from beneath $P." : "$n gets $p from $P.",
             ch, obj, container, ActTarget::Room);
         ObjectFromObject(obj);
     }
