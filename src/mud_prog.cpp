@@ -602,7 +602,55 @@ static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, const std::stri
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeInventory(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
+static int ObjectCounter(int sumSoFar, const std::shared_ptr<Object> &obj)
+{
+    return sumSoFar + obj->Count;
+    
+}
+
+static int IfCheckOTypeInObject(std::shared_ptr<Object> obj, const std::string &cvar,
+                                std::string opr, const std::string &rval)
+{
+    if(obj == nullptr)
+    {
+        ProgBug("otypeinobj: only works with objprogs", supermob);
+        return BERR;
+    }
+    
+    ItemTypes type = ITEM_NONE;
+
+    if(IsNumber(cvar))
+    {
+        type = (ItemTypes)atoi(cvar.c_str());
+    }
+    else
+    {
+        type = GetObjectType(cvar);
+    }
+
+    if(type < 0 || type > MAX_ITEM_TYPE)
+    {
+        ProgBug("otypeinobj: bad type", supermob);
+        return BERR;
+    }
+
+    auto objects = obj->Objects();
+    int lhsvl = accumulate(std::begin(objects), std::end(objects), 0, ObjectCounter);
+    int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
+
+    if(rhsvl < 1)
+        rhsvl = 1;
+
+    if(opr.empty())
+    {
+        opr = "==";
+    }
+
+    return MudProgCompareNumbers(lhsvl, opr, rhsvl, supermob);
+}
+
+static int IfCheckOTypeInventory(std::shared_ptr<Character> mob, const std::string &cvar,
+                                 std::string opr, const std::string &rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -932,7 +980,11 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
     {
         return IfCheckOTypeInventory(mob, cvar, opr, rval);
     }
-
+    else if(StrCmp(chck, "otypeinobj") == 0)
+    {
+        return IfCheckOTypeInObject(obj, cvar, opr, rval);
+    }
+    
     if(chkchar)
     {
         if(!StrCmp(chck, "ismobinvis"))
@@ -1057,7 +1109,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         {
             return MudProgCompareNumbers(GetTrustLevel(chkchar), opr, atoi(rval), mob);
         }
-        else if(!StrCmp(chck, "goldamt"))
+        else if(StrCmp(chck, "goldamt") == 0 || StrCmp(chck, "credits") == 0)
         {
             return MudProgCompareNumbers(chkchar->Gold, opr, atoi(rval), mob);
         }
@@ -1833,7 +1885,7 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob,
     RewriteElIfs(script);
     //RewriteIfAnd(script);
     com_list = JoinAsString(script);
-
+    
     strcpy(tmpcmndlst, com_list.c_str());
     command_list = tmpcmndlst;
 
@@ -2673,7 +2725,6 @@ void MudProgSetSupermob(std::shared_ptr<Object> obj)
 {
     std::shared_ptr<Room> room;
     std::shared_ptr<Object> in_obj;
-    char buf[200];
 
     if(!supermob)
         supermob = CreateMobile(GetProtoMobile(MOB_VNUM_SUPERMOB));
@@ -2701,9 +2752,9 @@ void MudProgSetSupermob(std::shared_ptr<Object> obj)
 
     /* Added by Jenny to allow bug messages to show the vnum
        of the object, and not just supermob's vnum */
-    sprintf(buf, "Object #%ld", obj->Prototype->Vnum);
-    supermob->Description = buf;
-
+    supermob->Description = FormatString("Object #%ld", obj->Prototype->Vnum);
+    supermob->ActingAsObject = obj;
+    
     if(room != nullptr)
     {
         CharacterFromRoom(supermob);
@@ -2715,9 +2766,12 @@ void ReleaseSupermob()
 {
     CharacterFromRoom(supermob);
     CharacterToRoom(supermob, GetRoom(ROOM_VNUM_POLY));
+    supermob->Description = "";
+    supermob->ActingAsObject.reset();
 }
 
-static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor, std::shared_ptr<Object> obj,
+static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
+                                std::shared_ptr<Object> obj,
                                 const Vo &vo, int type)
 {
     bool executed = false;
@@ -3683,4 +3737,14 @@ void RewriteIfAnd(std::list<std::string> &document)
             }
         }
     }
+}
+
+std::shared_ptr<Object> GetObjectFromSupermob(const std::shared_ptr<Character> mob)
+{
+    if(mob != supermob)
+    {
+        return nullptr;
+    }
+
+    return mob->ActingAsObject.lock();
 }

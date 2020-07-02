@@ -876,6 +876,7 @@ DECLARE_CMD_FUN(do_mpkill);
 DECLARE_CMD_FUN(do_mpmload);
 DECLARE_CMD_FUN(do_mpnothing);
 DECLARE_CMD_FUN(do_mpoload);
+DECLARE_CMD_FUN(do_opoload);
 DECLARE_CMD_FUN(do_mppurge);
 DECLARE_CMD_FUN(do_mpstat);
 DECLARE_CMD_FUN(do_opstat);

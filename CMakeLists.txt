@@ -583,6 +583,7 @@ src/mpcommands/mprestore.cpp
 src/mpcommands/mpslay.cpp
 src/mpcommands/mptransfer.cpp
 src/mpcommands/mpwithdraw.cpp
+src/mpcommands/opoload.cpp
 src/repos/arearepository.cpp
 src/repos/badnamerepository.cpp
 src/repos/banrepository.cpp

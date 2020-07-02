@@ -119,6 +119,7 @@ std::list<std::string> SplitIntoLines(std::string input);
 void DiscardComments(std::list<std::string> &document);
 void RewriteElIfs(std::list<std::string> &document);
 void RewriteIfAnd(std::list<std::string> &document);
+std::shared_ptr<Object> GetObjectFromSupermob(const std::shared_ptr<Character> supermob);
 
 template<typename ContainerT>
 std::string JoinAsString(const ContainerT &container)

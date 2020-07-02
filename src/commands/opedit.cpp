@@ -270,7 +270,7 @@ void do_opedit(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg2, "add"))
     {
-        int mptype = GetMudProgFlag(arg2);
+        int mptype = GetMudProgFlag(arg3);
 
         if(mptype == -1)
         {

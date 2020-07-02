@@ -5,12 +5,14 @@
 #include "log.hpp"
 #include "act.hpp"
 
+static vnum_t GetNextVnum(const std::shared_ptr<Area> &area);
+
 void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::string arg2;
     std::shared_ptr<Character> mob;
-    vnum_t vnum = 0, cvnum = 0;
+    vnum_t vnum = INVALID_VNUM, cvnum = INVALID_VNUM;
 
     if(IsNpc(ch))
     {
@@ -20,9 +22,15 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
 
     argument = OneArgument(argument, arg);
 
-    vnum = IsNumber(arg) ? ToLong(arg) : -1;
+    if(StrCmp(arg, "auto") == 0 && ch->PCData->Build.Area != nullptr)
+    {
+        arg = std::to_string(GetNextVnum(ch->PCData->Build.Area));
+    }
 
-    if(vnum == -1 || argument.empty())
+    vnum = IsNumber(arg) ? ToLong(arg) : INVALID_VNUM;
+
+    
+    if(vnum == INVALID_VNUM || argument.empty())
     {
         ch->Echo("Usage: mcreate <vnum> [cvnum] <mobile name>\r\n");
         return;
@@ -85,4 +93,19 @@ void do_mcreate(std::shared_ptr<Character> ch, std::string argument)
         ch, NULL, mob, ActTarget::Room);
     Act(AT_IMMORT, "You wave your arms about, and $N appears at your command!",
         ch, NULL, mob, ActTarget::Char);
+}
+
+static vnum_t GetNextVnum(const std::shared_ptr<Area> &area)
+{
+    for(vnum_t vnum = area->VnumRanges.Mob.First;
+        vnum <= area->VnumRanges.Mob.Last;
+        ++vnum)
+    {
+        if(GetProtoMobile(vnum) == nullptr)
+        {
+            return vnum;
+        }
+    }
+
+    return INVALID_VNUM;
 }

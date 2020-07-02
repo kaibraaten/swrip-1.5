@@ -138,7 +138,8 @@ public:
 
     // Mob only
     MProg mprog;
-
+    std::weak_ptr<Object> ActingAsObject;
+    
     // Player AND mob
     std::shared_ptr<Character> Next;
     std::shared_ptr<Character> Previous;

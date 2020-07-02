@@ -6,12 +6,14 @@
 #include "systemdata.hpp"
 #include "act.hpp"
 
+static vnum_t GetNextVnum(const std::shared_ptr<Area> &area);
+
 void do_goto(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
     std::shared_ptr<Area> pArea;
     vnum_t vnum = INVALID_VNUM;
-
+    
     OneArgument(argument, arg);
 
     if(arg.empty())
@@ -22,10 +24,16 @@ void do_goto(std::shared_ptr<Character> ch, std::string argument)
 
     auto location = FindLocation(ch, arg);
 
+    if(StrCmp(arg, "auto") == 0 && !IsNpc(ch) && ch->PCData->Build.Area != nullptr)
+    {
+        location = nullptr;
+        arg = std::to_string(GetNextVnum(ch->PCData->Build.Area));
+    }
+    
     if(location == nullptr)
     {
         vnum = ToLong(arg);
-
+        
         if(vnum <= 0 || GetRoom(vnum))
         {
             ch->Echo("You cannot find that...\r\n");
@@ -140,4 +148,19 @@ void do_goto(std::shared_ptr<Character> ch, std::string argument)
             do_goto(fch, argument);
         }
     }
+}
+
+static vnum_t GetNextVnum(const std::shared_ptr<Area> &area)
+{
+    for(vnum_t vnum = area->VnumRanges.Room.First;
+        vnum <= area->VnumRanges.Room.Last;
+        ++vnum)
+    {
+        if(GetRoom(vnum) == nullptr)
+        {
+            return vnum;
+        }
+    }
+
+    return INVALID_VNUM;
 }
