@@ -1962,7 +1962,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
             Act(AT_YELLOW, "$n flees for $s life... barely escaping certain death!",
                 victim, 0, 0, ActTarget::Room);
         }
-        else if(IsNpc(victim))
+        else if(IsDroid(victim))
         {
             Act(AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, ActTarget::Room);
         }
