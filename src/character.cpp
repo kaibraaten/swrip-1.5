@@ -1743,5 +1743,6 @@ std::shared_ptr<Object> GetFirstObjectOfType(std::shared_ptr<Character> ch, Item
 bool IS_OUTSIDE(std::shared_ptr<Character> ch)
 {
     return !ch->InRoom->Flags.test(Flag::Room::Indoors)
-        && !ch->InRoom->Flags.test(Flag::Room::Spacecraft);
+        && !ch->InRoom->Flags.test(Flag::Room::Spacecraft)
+        && ch->InRoom->Sector != SECT_UNDERGROUND;
 }

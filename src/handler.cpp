@@ -2786,8 +2786,34 @@ std::string GetRoomName(std::shared_ptr<Room> room)
 
 std::string GetRoomDescription(std::shared_ptr<Room> room)
 {
+    std::string description;
     auto home = Homes->FindByVnum(room->Vnum);
-    return home != nullptr && !home->Description().empty() ? home->Description() : room->Description;
+
+    if(home != nullptr && !home->Description().empty())
+    {
+        description = home->Description();
+    }
+    else if(room->Description.size() > 1 && room->Description[0] == '#')
+    {
+        vnum_t copyFrom = strtol(room->Description.substr(1).c_str(), nullptr, 10);
+
+        if(copyFrom != INVALID_VNUM)
+        {
+            auto otherRoom = GetRoom(copyFrom);
+
+            if(otherRoom != nullptr && otherRoom != room)
+            {
+                description = GetRoomDescription(otherRoom);
+            }
+        }
+    }
+
+    if(description.empty())
+    {
+        description = room->Description;
+    }
+
+    return description;
 }
 
 bool CheckRoomFlag(std::shared_ptr<Room> room, size_t flag)

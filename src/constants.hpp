@@ -1288,7 +1288,6 @@ constexpr auto SLEEP_IN = 3;
 constexpr auto PUT_AT = 1;
 constexpr auto PUT_ON = 2;
 constexpr auto PUT_IN = 3;
-constexpr auto PUT_INSIDE = 4;
 
 /*
  * Extra flags.

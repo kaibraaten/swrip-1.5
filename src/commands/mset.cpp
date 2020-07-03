@@ -796,7 +796,8 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(!StrCmp(arg2, "description"))
+    if(StrCmp(arg2, "description") == 0
+       || StrCmp(arg2, "desc") == 0)
     {
         if(arg3[0])
         {

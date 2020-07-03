@@ -8513,23 +8513,34 @@ HelpEntry
 {
    Text = "A mobile may be any of the following races:\
  \
-human         elf         dwarf        halfling     pixie        vampire   \
-half-ogre     half-orc    half-troll   half-elf     gith         ant       \
-ape           baboon      bat          bear         bee          beetle       \
-boar          bugbear     cat          dog          dragon       ferret    \
-fly           gargoyle    gelatin      ghoul        gnoll        gnome       \
-goblin        golem       gorgon       harpy        hobgoblin    kobold       \
-lizardman     locust      lycanthrope  minotaur     mold         mule \
-neanderthal   ooze        orc          rat          rustmonster  shadow \
-shapeshifter  shrew       shrieker     skeleton     slime        snake \
-spider        stirge      thoul        troglodyte   undead       wight \
-wolf          worm        zombie       bovine       canine       feline\
-porcine       mammal      rodent       avis         reptile      amphibian \
-fish          crustacean  insect       spirit       magical      horse \
-animal        humanoid    monster      god\
+Sentient races\
+----\
+Human          Wookiee           Twi'lek          Rodian\
+Hutt           Mon Calamari      Shistavanen      Gamorrean\
+Jawa           Adarian           Ewok             Verpine\
+Defel          Trandoshan        Chadra-Fan       Quarren\
+Sullustan      Falleen           Ithorian         Devaronian\
+Gotal          Firrerreo         Barabel          Bothan\
+Togorian       Dug               Kubaz            Selonian\
+Gran           Yevetha           Gand             Duros\
+Coynite        Saurin            Snivvian         Gand\
+Gungan         Weequay           Bith             Ortolan\
+Snit           Cerean            Ugnaught         Tusken\
+Gherkin        Zabrak            Noghri\
+\
+Droids\
+---\
+Droid                Protocol Droid       Assassin Droid\
+Gladiator Droid      Astromech Droid      Interrogation Droid\
+\
+Creatures\
+---\
+Creature      Mammal         Rodent      Reptile\
+Sarlacc       Taun Taun      Bantha      Dewback\
+Rancor        Ronto\
  \
 See also: ACTFLAGS, SPECFUNCS, SAVINGTHROWS, RIS, \
-          ATTACKS, LANGUAGES, DEFENSES, MSTAT, MCREATE, MMENU.\
+          ATTACKS, LANGUAGES, DEFENSES, MSTAT, MCREATE.\
  \
 ", 
    Level = 101, 

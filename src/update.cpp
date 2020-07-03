@@ -1510,7 +1510,11 @@ static void WeatherUpdate()
         for(std::shared_ptr<Character> ch : PlayerCharacters)
         {
             if(IS_OUTSIDE(ch)
-               && IsAwake(ch))
+               && IsAwake(ch)
+               && ch->InRoom != nullptr
+               && ch->InRoom->Sector != SECT_UNDERWATER
+               && ch->InRoom->Sector != SECT_OCEANFLOOR
+               && ch->InRoom->Sector != SECT_UNDERGROUND)
             {
                 Act(AT_TEMP, buf, ch, nullptr, nullptr, ActTarget::Char);
             }

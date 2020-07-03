@@ -8,6 +8,8 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
+static int GetFurniturePreposition(const std::string &name);
+
 void do_oset(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg1;
@@ -61,8 +63,10 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("  cflags key capacity      tflags\r\n");
         ch->Echo("For rawspice:            For ammo and batteries:\r\n");
         ch->Echo("  spicetype  grade         charges (at least 1000 for ammo)\r\n");
-        ch->Echo("For crystals:\r\n");
-        ch->Echo("  gemtype\r\n");
+        ch->Echo("For crystals:            For furniture:\r\n");
+        ch->Echo("  gemtype                  capacity  preposition\r\n");
+        ch->Echo("For fabrics:\r\n");
+        ch->Echo("  strength\r\n");
         return;
     }
 
@@ -749,33 +753,33 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
                 return;
             }
 
-            tmp = 3;
+            tmp = OVAL_WEAPON_TYPE;
             break;
         }
 
-        if(!StrCmp(arg2, "condition"))      tmp = 0;
-        if(!StrCmp(arg2, "numdamdie"))        tmp = 1;
-        if(!StrCmp(arg2, "sizedamdie"))       tmp = 2;
-        if(!StrCmp(arg2, "charges"))          tmp = 4;
-        if(!StrCmp(arg2, "maxcharges"))       tmp = 5;
-        if(!StrCmp(arg2, "charge"))          tmp = 4;
-        if(!StrCmp(arg2, "maxcharge"))       tmp = 5;
+        if(!StrCmp(arg2, "condition"))      tmp = OVAL_WEAPON_CONDITION;
+        if(!StrCmp(arg2, "numdamdie"))        tmp = OVAL_WEAPON_NUM_DAM_DIE;
+        if(!StrCmp(arg2, "sizedamdie"))       tmp = OVAL_WEAPON_SIZE_DAM_DIE;
+        if(!StrCmp(arg2, "charges"))          tmp = OVAL_WEAPON_CHARGE;
+        if(!StrCmp(arg2, "maxcharges"))       tmp = OVAL_WEAPON_MAX_CHARGE;
+        if(!StrCmp(arg2, "charge"))          tmp = OVAL_WEAPON_CHARGE;
+        if(!StrCmp(arg2, "maxcharge"))       tmp = OVAL_WEAPON_MAX_CHARGE;
         break;
 
     case ITEM_BOLT:
     case ITEM_AMMO:
-        if(!StrCmp(arg2, "charges"))          tmp = 0;
-        if(!StrCmp(arg2, "charge"))          tmp = 0;
+        if(!StrCmp(arg2, "charges"))          tmp = OVAL_AMMO_CHARGE;
+        if(!StrCmp(arg2, "charge"))          tmp = OVAL_AMMO_CHARGE;
         break;
 
     case ITEM_BATTERY:
-        if(!StrCmp(arg2, "charges"))          tmp = 0;
-        if(!StrCmp(arg2, "charge"))          tmp = 0;
+        if(!StrCmp(arg2, "charges"))          tmp = OVAL_BATTERY_CHARGE;
+        if(!StrCmp(arg2, "charge"))          tmp = OVAL_BATTERY_CHARGE;
         break;
 
     case ITEM_RAWSPICE:
     case ITEM_SPICE:
-        if(!StrCmp(arg2, "grade"))          tmp = 1;
+        if(!StrCmp(arg2, "grade"))          tmp = OVAL_SPICE_GRADE;
         if(!StrCmp(arg2, "spicetype"))
         {
             value = GetSpiceType(arg3);
@@ -794,7 +798,8 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
                 ch->Echo("\r\n");
                 return;
             }
-            tmp = 0;
+            
+            tmp = OVAL_SPICE_TYPE;
             break;
         }
         break;
@@ -819,50 +824,73 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
                 return;
             }
 
-            tmp = 0;
+            tmp = OVAL_CRYSTAL_TYPE;
             break;
         }
         break;
 
     case ITEM_ARMOR:
-        if(!StrCmp(arg2, "condition"))      tmp = 0;
-        if(!StrCmp(arg2, "ac"))               tmp = 1;
+        if(!StrCmp(arg2, "condition"))      tmp = OVAL_ARMOR_CONDITION;
+        if(!StrCmp(arg2, "ac"))               tmp = OVAL_ARMOR_AC;
         break;
 
+    case ITEM_FURNITURE:
+        if(StrCmp(arg2, "capacity") == 0)
+        {
+            tmp = OVAL_FURNITURE_CAPACITY;
+        }
+        else if(StrCmp(arg2, "preposition") == 0)
+        {
+            tmp = OVAL_FURNITURE_PREPOSITION;
+            value = GetFurniturePreposition(arg3);
+
+            if(value == -1)
+            {
+                ch->Echo("&RValid prepositions are ON, AT and IN.&d\r\n");
+                return;
+            }
+        }
+
+        break;
+        
     case ITEM_SALVE:
-        if(!StrCmp(arg2, "slevel"))               tmp = 0;
-        if(!StrCmp(arg2, "maxdoses"))               tmp = 1;
-        if(!StrCmp(arg2, "doses"))               tmp = 2;
-        if(!StrCmp(arg2, "delay"))               tmp = 3;
-        if(!StrCmp(arg2, "spell1"))               tmp = 4;
-        if(!StrCmp(arg2, "spell2"))               tmp = 5;
+        if(!StrCmp(arg2, "slevel"))               tmp = OVAL_SALVE_LEVEL;
+        if(!StrCmp(arg2, "maxdoses"))               tmp = OVAL_SALVE_MAX_DOSES;
+        if(!StrCmp(arg2, "doses"))               tmp = OVAL_SALVE_DOSES;
+        if(!StrCmp(arg2, "delay"))               tmp = OVAL_SALVE_DELAY;
+        if(!StrCmp(arg2, "spell1"))               tmp = OVAL_SALVE_SPELL1;
+        if(!StrCmp(arg2, "spell2"))               tmp = OVAL_SALVE_SPELL2;
         if(tmp >= 4 && tmp <= 5)                        value = LookupSkill(arg3);
         break;
 
     case ITEM_POTION:
     case ITEM_PILL:
-        if(!StrCmp(arg2, "slevel"))         tmp = 0;
-        if(!StrCmp(arg2, "spell1"))         tmp = 1;
-        if(!StrCmp(arg2, "spell2"))         tmp = 2;
-        if(!StrCmp(arg2, "spell3"))         tmp = 3;
+        if(!StrCmp(arg2, "slevel"))         tmp = OVAL_POTION_LEVEL;
+        if(!StrCmp(arg2, "spell1"))         tmp = OVAL_POTION_SPELL1;
+        if(!StrCmp(arg2, "spell2"))         tmp = OVAL_POTION_SPELL2;
+        if(!StrCmp(arg2, "spell3"))         tmp = OVAL_POTION_SPELL3;
         if(tmp >= 1 && tmp <= 3)                        value = LookupSkill(arg3);
         break;
 
     case ITEM_DEVICE:
-        if(!StrCmp(arg2, "slevel"))         tmp = 0;
+        if(!StrCmp(arg2, "slevel"))         tmp = OVAL_DEVICE_LEVEL;
         if(!StrCmp(arg2, "spell"))
         {
-            tmp = 3;
+            tmp = OVAL_DEVICE_SPELL;
             value = LookupSkill(arg3);
         }
-        if(!StrCmp(arg2, "maxcharges"))       tmp = 1;
-        if(!StrCmp(arg2, "charges"))                tmp = 2;
+        if(!StrCmp(arg2, "maxcharges"))       tmp = OVAL_DEVICE_MAX_CHARGES;
+        if(!StrCmp(arg2, "charges"))                tmp = OVAL_DEVICE_CHARGES;
         break;
 
     case ITEM_CONTAINER:
-        if(!StrCmp(arg2, "capacity"))               tmp = 0;
-        if(!StrCmp(arg2, "cflags"))         tmp = 1;
-        if(!StrCmp(arg2, "key"))            tmp = 2;
+        if(!StrCmp(arg2, "capacity"))               tmp = OVAL_CONTAINER_CAPACITY;
+        if(!StrCmp(arg2, "cflags"))
+        {
+            tmp = OVAL_CONTAINER_FLAGS;
+        }
+        
+        if(!StrCmp(arg2, "key"))            tmp = OVAL_CONTAINER_KEY;
         break;
 
     case ITEM_SWITCH:
@@ -870,16 +898,19 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
     case ITEM_BUTTON:
         if(!StrCmp(arg2, "tflags"))
         {
-            tmp = 0;
+            tmp = OVAL_BUTTON_TRIGFLAGS;
             value = GetTrapTriggerFlag(arg3);
         }
         break;
 
+    case ITEM_FABRIC:
+        if(StrCmp(arg2, "strength") == 0)
+            tmp = OVAL_FABRIC_STRENGTH;
     default:
         break;
     }
 
-    if(tmp >= 0 && tmp <= 5)
+    if(tmp >= 0 && tmp < obj->Value.size())
     {
         if(!CanModifyObject(ch, obj))
             return;
@@ -896,4 +927,28 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
      * Generate usage message.
      */
     do_oset(ch, "");
+}
+
+static int GetFurniturePreposition(const std::string &name)
+{
+    int preposition = -1;
+    
+    if(StrCmp(name, "at") == 0)
+    {
+        preposition = SIT_AT;
+    }
+    else if(StrCmp(name, "on") == 0)
+    {
+        preposition = SIT_ON;
+    }
+    else if(StrCmp(name, "in") == 0)
+    {
+        preposition = SIT_IN;
+    }
+    else
+    {
+        preposition = -1;
+    }
+
+    return preposition;
 }
