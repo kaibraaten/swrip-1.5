@@ -17,6 +17,7 @@
 #include "arena.hpp"
 #include "room.hpp"
 #include "area.hpp"
+#include "protoobject.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/badnamerepository.hpp"
 #include "repos/banrepository.hpp"
@@ -26,6 +27,8 @@
 #include "repos/spaceobjectrepository.hpp"
 #include "repos/shuttlerepository.hpp"
 #include "repos/arearepository.hpp"
+
+static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
 
 void do_test( std::shared_ptr<Character> ch, std::string argument )
 {
@@ -154,8 +157,40 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
             ch->Echo("%s\r\n", entry.c_str());
         }
     }
+    else if(StrCmp(argument, "fabrics") == 0)
+    {
+        for(const auto &i : ProtoObjects)
+        {
+            auto obj = i.second;
+
+            if(obj->ItemType == ITEM_FABRIC)
+            {
+                auto area = GetAreaFromObjVnum(obj->Vnum);
+                
+                ch->Echo("%5ld) Strength %d  (%s) (%s)\r\n",
+                         obj->Vnum,
+                         obj->Value[OVAL_FABRIC_STRENGTH],
+                         obj->ShortDescr.c_str(),
+                         area->Filename.c_str());
+            }
+        }
+    }
     else
     {
         ch->Echo("Unknown argument.\r\n");
     }
+}
+
+static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum)
+{
+    for(auto area : Areas)
+    {
+        if(vnum >= area->VnumRanges.Object.First
+           && vnum <= area->VnumRanges.Object.Last)
+        {
+            return area;
+        }
+    }
+
+    return nullptr;
 }

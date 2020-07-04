@@ -216,12 +216,13 @@ static bool MudProgCompareNumbers(int lhs, const std::string &opr, int rhs, std:
     return false;
 }
 
-static int IfCheckRandom(const std::string &cvar)
+static int IfCheckRandom(std::string cvar)
 {
     return GetRandomPercent() <= strtol(cvar.c_str(), nullptr, 10);
 }
 
-static int IfCheckEconomy(std::shared_ptr<Character> mob, const std::string &cvar, const std::string &opr, const std::string &rval)
+static int IfCheckEconomy(std::shared_ptr<Character> mob, std::string cvar,
+                          std::string opr, std::string rval)
 {
     const int idx = strtol(cvar.c_str(), nullptr, 10);
     std::shared_ptr<Room> room;
@@ -252,8 +253,8 @@ static int IfCheckEconomy(std::shared_ptr<Character> mob, const std::string &cva
                                  + room->Area->LowEconomy, opr, atoi(rval.c_str()), mob);
 }
 
-static int IfCheckMobInRoom(std::shared_ptr<Character> mob, const std::string &cvar,
-                            std::string opr, const std::string &rval)
+static int IfCheckMobInRoom(std::shared_ptr<Character> mob, std::string cvar,
+                            std::string opr, std::string rval)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -283,8 +284,9 @@ static int IfCheckMobInRoom(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckTimesKilled(std::shared_ptr<Character> mob, const std::string &cvar,
-                              const std::string &opr, const std::string &rval, std::shared_ptr<Character> chkchar)
+static int IfCheckTimesKilled(std::shared_ptr<Character> mob, std::string cvar,
+                              std::string opr, std::string rval,
+                              std::shared_ptr<Character> chkchar)
 {
     std::shared_ptr<ProtoMobile> pMob;
 
@@ -301,8 +303,8 @@ static int IfCheckTimesKilled(std::shared_ptr<Character> mob, const std::string 
     return MudProgCompareNumbers(pMob->Killed, opr, atoi(rval.c_str()), mob);
 }
 
-static int IfCheckOVnumHere(std::shared_ptr<Character> mob, const std::string &cvar,
-                            std::string opr, const std::string &rval)
+static int IfCheckOVnumHere(std::shared_ptr<Character> mob, std::string cvar,
+                            std::string opr, std::string rval)
 {
     const vnum_t vnum = atoi(cvar.c_str());
 
@@ -333,8 +335,8 @@ static int IfCheckOVnumHere(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeHere(std::shared_ptr<Character> mob, const std::string &cvar,
-                            std::string opr, const std::string &rval)
+static int IfCheckOTypeHere(std::shared_ptr<Character> mob, std::string cvar,
+                            std::string opr, std::string rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -371,7 +373,8 @@ static int IfCheckOTypeHere(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
+static int IfCheckOVnumRoom(std::shared_ptr<Character> mob, std::string cvar,
+                            std::string opr, std::string rval)
 {
     const vnum_t vnum = atoi(cvar.c_str());
 
@@ -402,7 +405,8 @@ static int IfCheckOVnumRoom(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeRoom(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
+static int IfCheckOTypeRoom(std::shared_ptr<Character> mob, std::string cvar,
+                            std::string opr, std::string rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -441,8 +445,8 @@ static int IfCheckOTypeRoom(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumInObject(std::shared_ptr<Object> inobj, const std::string &cvar,
-                                std::string opr, const std::string &rval)
+static int IfCheckOVnumInObject(std::shared_ptr<Object> inobj, std::string cvar,
+                                std::string opr, std::string rval)
 {
     if(inobj == nullptr)
     {
@@ -485,8 +489,8 @@ static int IfCheckOVnumInObject(std::shared_ptr<Object> inobj, const std::string
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, supermob);
 }
 
-static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, const std::string &cvar,
-                             std::string opr, const std::string &rval)
+static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, std::string cvar,
+                             std::string opr, std::string rval)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -517,7 +521,8 @@ static int IfCheckOVnumCarry(std::shared_ptr<Character> mob, const std::string &
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeCarry(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
+static int IfCheckOTypeCarry(std::shared_ptr<Character> mob, std::string cvar,
+                             std::string opr, std::string rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -557,7 +562,8 @@ static int IfCheckOTypeCarry(std::shared_ptr<Character> mob, const std::string &
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumWear(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
+static int IfCheckOVnumWear(std::shared_ptr<Character> mob, std::string cvar,
+                            std::string opr, std::string rval)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -587,7 +593,8 @@ static int IfCheckOVnumWear(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeWear(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
+static int IfCheckOTypeWear(std::shared_ptr<Character> mob, std::string cvar,
+                            std::string opr, std::string rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -619,7 +626,8 @@ static int IfCheckOTypeWear(std::shared_ptr<Character> mob, const std::string &c
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, const std::string &cvar, std::string opr, const std::string &rval)
+static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, std::string cvar,
+                                 std::string opr, std::string rval)
 {
     int vnum = atoi(cvar.c_str());
 
@@ -647,8 +655,8 @@ static int IfCheckOVnumInventory(std::shared_ptr<Character> mob, const std::stri
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckOTypeInObject(std::shared_ptr<Object> obj, const std::string &cvar,
-                                std::string opr, const std::string &rval)
+static int IfCheckOTypeInObject(std::shared_ptr<Object> obj, std::string cvar,
+                                std::string opr, std::string rval)
 {
     if(obj == nullptr)
     {
@@ -698,8 +706,8 @@ static int IfCheckOTypeInObject(std::shared_ptr<Object> obj, const std::string &
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, supermob);
 }
 
-static int IfCheckOTypeInventory(std::shared_ptr<Character> mob, const std::string &cvar,
-                                 std::string opr, const std::string &rval)
+static int IfCheckOTypeInventory(std::shared_ptr<Character> mob, std::string cvar,
+                                 std::string opr, std::string rval)
 {
     ItemTypes type = ITEM_NONE;
 
@@ -736,7 +744,9 @@ static int IfCheckOTypeInventory(std::shared_ptr<Character> mob, const std::stri
     return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
 }
 
-static int IfCheckIsAffected(std::shared_ptr<Character> mob, const std::string &rval, std::shared_ptr<Character> chkchar)
+static int IfCheckIsAffected(std::shared_ptr<Character> mob,
+                             std::string cvar, std::string opr,
+                             std::string rval, std::shared_ptr<Character> chkchar)
 {
     int value = GetAffectFlag(rval);
 
@@ -749,7 +759,9 @@ static int IfCheckIsAffected(std::shared_ptr<Character> mob, const std::string &
     return IsAffectedBy(chkchar, 1 << value);
 }
 
-static int IfCheckIsCarrying(std::shared_ptr<Character> mob, const std::string &opr, const std::string &rval, std::shared_ptr<Character> chkchar)
+static int IfCheckIsCarrying(std::shared_ptr<Character> mob, std::string cvar,
+                             std::string opr, std::string rval,
+                             std::shared_ptr<Character> chkchar)
 {
     int vnum = atoi(rval.c_str());
 
@@ -772,8 +784,12 @@ static int IfCheckIsCarrying(std::shared_ptr<Character> mob, const std::string &
     return false;
 }
 
-static int IfCheckIsWearing(std::shared_ptr<Character> mob, const std::string &opr, std::shared_ptr<Character> chkchar, vnum_t vnum)
+static int IfCheckIsWearing(std::shared_ptr<Character> mob, std::string cvar,
+                            std::string opr, std::string rval,
+                            std::shared_ptr<Character> chkchar)
 {
+    vnum_t vnum = atoi(rval.c_str());
+    
     if(vnum < 1 || vnum > 2097152000)
     {
         ProgBug("iswearing: bad vnum", mob);
@@ -1092,7 +1108,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         }
         else if(!StrCmp(chck, "isaffected"))
         {
-            return IfCheckIsAffected(mob, rval, chkchar) == boolCheck;
+            return IfCheckIsAffected(mob, cvar, opr, rval, chkchar) == boolCheck;
         }
         else if(!StrCmp(chck, "hitprcnt"))
         {
@@ -1176,7 +1192,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
             return MudProgCompareStrings(RaceTable[chkchar->Race].Name, opr,
                                          rval, mob);
         }
-        else if(StrCmp(chck, "droid") == 0 || StrCmp(chck, "isdroid") == 0)
+        else if(StrCmp(chck, "isdroid") == 0)
         {
             return IsDroid(chkchar) == boolCheck;
         }
@@ -1269,12 +1285,11 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         }
         else if(!StrCmp(chck, "iscarrying"))
         {
-            return IfCheckIsCarrying(mob, opr, rval, chkchar);
+            return IfCheckIsCarrying(mob, cvar, opr, rval, chkchar);
         }
         else if(!StrCmp(chck, "iswearing"))
         {
-            int vnum = atoi(rval);
-            return IfCheckIsWearing(mob, opr, chkchar, vnum);
+            return IfCheckIsWearing(mob, cvar, opr, rval, chkchar);
         }
     }
 
@@ -1369,8 +1384,10 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
   *
   *  Added char_died and obj_extracted checks    -Thoric
   */
-static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
-                             std::shared_ptr<Object> obj, const Vo &vo, std::shared_ptr<Character> rndm)
+static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob,
+                             std::shared_ptr<Character> actor,
+                             std::shared_ptr<Object> obj,
+                             const Vo &vo, std::shared_ptr<Character> rndm)
 {
     std::shared_ptr<Character> vict = vo.Ch;
     std::shared_ptr<Object> v_obj = vo.Obj;
@@ -1851,6 +1868,55 @@ static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob, s
     }
 }
 
+// Translate script extensions so that we end up with a
+// legacy script that can be run by the driver.
+static void PreprocessScript(std::string &com_list)
+{
+    auto script = SplitIntoLines(com_list);
+    DiscardComments(script);
+    RewriteElIfs(script);
+    //RewriteIfAnd(script);
+    com_list = JoinAsString(script);
+}
+
+
+/*
+ * get a random visible player who is in the room with the mob.
+ *
+ *  If there isn't a random player in the room, rndm stays NULL.
+ *  If you do a $r, $R, $j, or $k with rndm = NULL, you'll crash
+ *  in MudProgTranslate.
+ *
+ *  Adding appropriate error checking in MudProgTranslate.
+ *    -Haus
+ *
+ * This used to ignore players MAX_LEVEL - 3 and higher (standard
+ * Merc has 4 immlevels).  Thought about changing it to ignore all
+ * imms, but decided to just take it out.  If the mob can see you,
+ * you may be chosen as the random player. -Narn
+ *
+ */
+std::shared_ptr<Character> GetRandomVisiblePlayerInRoom(const std::shared_ptr<Room> room)
+{
+    int count = 0;
+    std::shared_ptr<Character> rndm;
+    
+    for(auto vch : room->Characters())
+    {
+        if(!IsNpc(vch))
+        {
+            if(GetRandomNumberFromRange(0, count) == 0)
+            {
+                rndm = vch;
+            }
+
+            count++;
+        }
+    }
+
+    return rndm;
+}
+
 /*  The main focus of the MOBprograms.  This routine is called
  *  whenever a trigger is successful.  It is responsible for parsing
  *  the command list and figuring out what to do. However, like all
@@ -1866,7 +1932,6 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob,
     char tmpcmndlst[MAX_STRING_LENGTH];
     char *command_list = nullptr;
     char *cmnd = nullptr;
-    std::shared_ptr<Character> rndm = nullptr;
     int ignorelevel = 0;
     int result = 0;
     bool ifstate[MAX_IFS][DO_ELSE + 1];
@@ -1901,43 +1966,9 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob,
         }
     }
 
-    /*
-     * get a random visible player who is in the room with the mob.
-     *
-     *  If there isn't a random player in the room, rndm stays NULL.
-     *  If you do a $r, $R, $j, or $k with rndm = NULL, you'll crash
-     *  in MudProgTranslate.
-     *
-     *  Adding appropriate error checking in MudProgTranslate.
-     *    -Haus
-     *
-     * This used to ignore players MAX_LEVEL - 3 and higher (standard
-     * Merc has 4 immlevels).  Thought about changing it to ignore all
-     * imms, but decided to just take it out.  If the mob can see you,
-     * you may be chosen as the random player. -Narn
-     *
-     */
+    auto rndm = GetRandomVisiblePlayerInRoom(mob->InRoom);
 
-    int count = 0;
-
-    for(auto vch : mob->InRoom->Characters())
-    {
-        if(!IsNpc(vch))
-        {
-            if(GetRandomNumberFromRange(0, count) == 0)
-            {
-                rndm = vch;
-            }
-
-            count++;
-        }
-    }
-
-    auto script = SplitIntoLines(com_list);
-    DiscardComments(script);
-    RewriteElIfs(script);
-    //RewriteIfAnd(script);
-    com_list = JoinAsString(script);
+    PreprocessScript(com_list);
     
     strcpy(tmpcmndlst, com_list.c_str());
     command_list = tmpcmndlst;
