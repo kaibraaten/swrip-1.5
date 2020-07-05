@@ -32,6 +32,7 @@
  *  Full support for nested ifs is in.                                      *
  ****************************************************************************/
 
+#include <numeric>
 #include <unordered_map>
 #include <cstring>
 #include <cctype>
