@@ -225,7 +225,7 @@ TEST_F(MudProgTests, JoinAsString_Works)
     EXPECT_EQ(expected, actual);
 }
 
-std::unordered_map<std::string, std::string> macros =
+const std::unordered_map<std::string, std::string> macros =
 {
     {
         "singelline",
@@ -286,13 +286,13 @@ std::unordered_map<std::string, std::string> macros =
     {
         "macrowithcirculardependency1",
         "def macrowithcirculardependency1\n"
-        "    macrowithcirculardependency2\n"
+        "    macro macrowithcirculardependency2\n"
         "enddef\n"
     },
     {
         "macrowithcirculardependency2",
         "def macrowithcirculardependency2\n"
-        "    macrowithcirculardependency1\n"
+        "    macro macrowithcirculardependency1\n"
         "enddef\n"
     }
 };
@@ -336,13 +336,62 @@ static bool ScriptCallsMacros(const ContainerT &script)
     return false;
 }
 
+std::vector<std::string> GetMacroBody(const std::string &macroname)
+{
+    auto macro = SplitIntoLines(GetMacro(macroname));
+    std::vector<std::string> body(macro.begin(), macro.end());
+    body.erase(body.begin());
+    body.erase(body.end() - 1);
+    return body;
+}
+
+static std::map<std::string, std::string> BindArguments(std::string args)
+{
+    std::map<std::string, std::string> arguments;
+    int counter = 0;
+    
+    while(!args.empty())
+    {
+        ++counter;
+        std::string current;
+        args = OneArgument(args, current);
+
+        arguments.insert(std::make_pair(FormatString("$%d", counter), current));
+    }
+
+    return arguments;
+}
+
+static void SubstituteArguments(std::vector<std::string> &script, const std::string &args)
+{
+    auto arguments = BindArguments(args);
+    
+    for(auto i = script.begin(); i != script.end(); ++i)
+    {
+        std::string current = *i;
+
+        for(auto tuple : arguments)
+        {
+            size_t posOfArg;
+
+            while((posOfArg = current.find(tuple.first)) != std::string::npos)
+            {
+                current.replace(posOfArg, tuple.first.size(), tuple.second);
+            }
+        }
+
+        *i = current;
+    }
+}
+
 void ExpandMacros(std::list<std::string> &script)
 {
-    int EXPANSION_THRESHOLD = 100;
+    constexpr int MAX_EXPANSIONS = 100;
+    int expansionCount = 0;
     
     while(ScriptCallsMacros(script))
     {
-        if(EXPANSION_THRESHOLD-- == 0)
+        if(++expansionCount == MAX_EXPANSIONS)
         {
             throw MudProgException("Too many macro expansions. Circular dependency likely.");
         }
@@ -354,44 +403,13 @@ void ExpandMacros(std::list<std::string> &script)
 
             if(StringPrefix("macro ", line) == 0)
             {
-                std::map<std::string, std::string> arguments;
                 std::string args = line.substr(strlen("macro "));
                 std::string macroname;
                 args = OneArgument(args, macroname);
-                int counter = 0;
 
-                while(!args.empty())
-                {
-                    ++counter;
-                    std::string current;
-                    args = OneArgument(args, current);
+                auto linesToInsert = GetMacroBody(macroname);
 
-                    arguments.insert(std::make_pair(FormatString("$%d", counter), current));
-                }
-
-                auto macro = SplitIntoLines(GetMacro(macroname));
-                std::vector<std::string> linesToInsert(macro.begin(), macro.end());
-                linesToInsert.erase(linesToInsert.begin());
-                linesToInsert.erase(linesToInsert.end() - 1);
-
-                for(auto lineIter = linesToInsert.begin();
-                    lineIter != linesToInsert.end();
-                    ++lineIter)
-                {
-                    std::string current = *lineIter;
-
-                    for(auto tuple : arguments)
-                    {
-                        size_t posOfArg;
-
-                        while((posOfArg = current.find(tuple.first)) != std::string::npos)
-                        {
-                            current.replace(posOfArg, tuple.first.size(), tuple.second);
-                        }
-                    }
-
-                    *lineIter = current;
-                }
+                SubstituteArguments(linesToInsert, args);
 
                 i = script.insert(i, linesToInsert.begin(), linesToInsert.end());
                 std::advance(i, std::distance(linesToInsert.begin(), linesToInsert.end()) - 1);
@@ -484,7 +502,8 @@ TEST_F(MudProgTests, ExpandMacros_ThrowsExceptionOnInvalidMacroname)
             "endif"
         };
 
-    EXPECT_THROW({
+    EXPECT_THROW(
+        {
             try
             {
                 auto actual = script;
@@ -560,7 +579,8 @@ TEST_F(MudProgTests, ExpandMacros_CircularDependencyThrowsException)
             "endif"
         };
 
-    EXPECT_THROW({
+    EXPECT_THROW(
+        {
             try
             {
                 auto actual = script;
