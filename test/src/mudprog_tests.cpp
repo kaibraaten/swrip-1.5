@@ -76,13 +76,13 @@ TEST_F(MudProgTests, SplitIntoLines_HandlesCaseWhereNoNewlineAtEnd)
         "-- It's another comment\r\n"
         "endif";
     const std::list<std::string> expected =
-        {
-            "-- Comments are discarded",
-            "if isimmort($n)",
-            "mpecho $n You're immortal.",
-            "-- It's another comment",
-            "endif"
-        };
+    {
+        "-- Comments are discarded",
+        "if isimmort($n)",
+        "mpecho $n You're immortal.",
+        "-- It's another comment",
+        "endif"
+    };
     auto actual = SplitIntoLines(original);
 
     EXPECT_EQ(expected, actual);
@@ -107,19 +107,19 @@ TEST_F(MudProgTests, RewriteElIfs_Works)
         "  yetsomethingelse\r\n"
         "endif";
     const std::list<std::string> expected =
-        {
-            "if isimmort($n)",
-            "something",
-            "else",
-            "if class($n) == combat",
-            "somethingelse",
-            "else",
-            "if foo($n)",
-            "yetsomethingelse",
-            "endif",
-            "endif",
-            "endif"
-        };
+    {
+        "if isimmort($n)",
+        "something",
+        "else",
+        "if class($n) == combat",
+        "somethingelse",
+        "else",
+        "if foo($n)",
+        "yetsomethingelse",
+        "endif",
+        "endif",
+        "endif"
+    };
     auto actual = SplitIntoLines(original);
     RewriteElIfs(actual);
 
@@ -137,17 +137,17 @@ TEST_F(MudProgTests, RewriteIfAnd_Works)
         "    somethingelse\n"
         "endif\n";
     const std::list<std::string> expected =
-        {
-            "if isimmort($n)",
-            "if level($n) > 10",
-            "if race($n) != wookiee",
-            "something",
-            "endif",
-            "endif",
-            "else",
-            "somethingelse",
-            "endif"
-        };
+    {
+        "if isimmort($n)",
+        "if level($n) > 10",
+        "if race($n) != wookiee",
+        "something",
+        "endif",
+        "endif",
+        "else",
+        "somethingelse",
+        "endif"
+    };
     auto actual = SplitIntoLines(original);
     RewriteIfAnd(actual);
 
@@ -169,24 +169,24 @@ TEST_F(MudProgTests, ComplexExample_Works)
         "    yetsomethingelse\n"
         "endif\n";
     const std::list<std::string> expected =
-        {
-            "if isimmort($n)",
-            "if level($n) > 10",
-            "if race($n) != wookiee",
-            "something",
-            "endif",
-            "endif",
-            "else",
-            "if class($n) == combat",
-            "somethingelse",
-            "else",
-            "if foo($n)",
-            "or bar($n)",
-            "yetsomethingelse",
-            "endif",
-            "endif",
-            "endif"
-        };
+    {
+        "if isimmort($n)",
+        "if level($n) > 10",
+        "if race($n) != wookiee",
+        "something",
+        "endif",
+        "endif",
+        "else",
+        "if class($n) == combat",
+        "somethingelse",
+        "else",
+        "if foo($n)",
+        "or bar($n)",
+        "yetsomethingelse",
+        "endif",
+        "endif",
+        "endif"
+    };
     auto actual = SplitIntoLines(original);
     DiscardComments(actual);
     RewriteElIfs(actual);
@@ -208,93 +208,72 @@ TEST_F(MudProgTests, JoinAsString_Works)
         "somethingelse\r\n"
         "endif\r\n";
     const std::list<std::string> original =
-        {
-            "if isimmort($n)",
-            "if level($n) > 10",
-            "if race($n) != wookiee",
-            "something",
-            "endif",
-            "endif",
-            "else",
-            "somethingelse",
-            "endif"
-        };
+    {
+        "if isimmort($n)",
+        "if level($n) > 10",
+        "if race($n) != wookiee",
+        "something",
+        "endif",
+        "endif",
+        "else",
+        "somethingelse",
+        "endif"
+    };
 
     auto actual = JoinAsString(original);
 
     EXPECT_EQ(expected, actual);
 }
 
-const std::unordered_map<std::string, std::string> macros =
+const std::vector<std::string> macros =
 {
-    {
-        "singelline",
-        "def macro singelline\n"
+        "def singelline\n"
         "    mpecho Foo bar baz.\n"
-        "enddef\n"
-    },
-    {
-        "multiline",
-        "def macro multiline\n"
+        "enddef\n",
+
+        "def multiline\n"
         "    mpecho Foo bar baz.\n"
         "    say Hey you.\n"
         "    -- Comment here\n"
-        "enddef\n"
-    },
-    {
-        "witharguments",
-        "def macro witharguments\n"
+        "enddef\n",
+
+        "def witharguments\n"
         "    mpecho One: $1. Two: $2. Three: $3.\n"
-        "endef\n"
-    },
-    {
-        "inner1",
-        "def macro inner1\n"
+        "enddef\n",
+
+        "def inner1\n"
         "    mpecho This is inner 1\n"
-        "enddef\n"
-    },
-    {
-        "inner2",
-        "def macro inner2\n"
+        "enddef\n",
+
+        "def inner2\n"
         "    mpecho This is inner 2\n"
         "    macro inner1\n"
-        "enddef\n"
-    },
-    {
-        "nestedmacro",
+        "enddef\n",
+
         "def nestedmacro\n"
         "    macro inner2\n"
         "    mpecho This is outer macro.\n"
-        "enddef\n"
-    },
-    {
-        "innerwithargs",
+        "enddef\n",
+
         "def innerwithargs\n"
         "    mpecho This is inner with arg $1.\n"
-        "enddef\n"
-    },
-    {
-        "nestedmacrowithargs",
+        "enddef\n",
+
         "def nestedmacrowithargs\n"
         "    macro innerwithargs $1\n"
         "    macro innerwithargs $2\n"
         "    macro innerwithargs $3\n"
         "    macro innerwithargs $4\n"
         "    mpecho This is outer macro.\n"
-        "enddef\n"
-    },
-    {
-        "macrowithcirculardependency1",
+        "enddef\n",
+
         "def macrowithcirculardependency1\n"
         "    macro macrowithcirculardependency2\n"
-        "enddef\n"
-    },
-    {
-        "macrowithcirculardependency2",
+        "enddef\n",
+
         "def macrowithcirculardependency2\n"
         "    macro macrowithcirculardependency1\n"
         "enddef\n"
-    }
 };
 
 class MudProgException : public std::runtime_error
@@ -307,139 +286,210 @@ public:
     }
 };
 
-static std::string GetMacro(const std::string &key)
+class MudProgEnvironment
 {
-    auto i = macros.find(key);
+public:
+    void ExpandMacros(std::list<std::string> &script)
+    {
+        constexpr int MAX_EXPANSIONS = 100;
+        int expansionCount = 0;
 
-    if(i != macros.end())
-    {
-        return i->second;
+        while(ScriptCallsMacros(script))
+        {
+            if(++expansionCount == MAX_EXPANSIONS)
+            {
+                throw MudProgException("Too many macro expansions. Circular dependency likely.");
+            }
+
+            for(std::list<std::string>::iterator i = script.begin();
+                i != script.end(); ++i)
+            {
+                std::string line = *i;
+
+                if(StringPrefix("macro ", line) == 0)
+                {
+                    std::string args = line.substr(strlen("macro "));
+                    std::string macroname;
+                    args = OneArgument(args, macroname);
+
+                    auto linesToInsert = GetMacroBody(macroname);
+
+                    SubstituteArguments(linesToInsert, args);
+
+                    i = script.insert(i, linesToInsert.begin(), linesToInsert.end());
+                    std::advance(i, std::distance(linesToInsert.begin(), linesToInsert.end()) - 1);
+                    auto eraseAt = i;
+                    ++eraseAt;
+                    script.erase(eraseAt);
+                }
+            }
+        }
     }
-    else
+
+    std::string GetMacro(const std::string &name)
     {
-        std::string message = FormatString("Unknown macro '%s'", key.c_str());
+        for(auto i : macros)
+        {
+            auto entry = SplitIntoLines(i);
+            auto start = std::find(entry.begin(), entry.end(), "def " + name);
+
+            if(start != entry.end())
+            {
+                auto end = std::find(start, entry.end(), "enddef");
+
+                if(end != entry.end())
+                {
+                    ++end;
+                    return JoinAsString(start, end);
+                }
+                else
+                {
+                    throw MudProgException("def macro lacks matching enddef");
+                }
+            }
+        }
+
+        std::string message = FormatString("Unknown macro '%s'", name.c_str());
         throw MudProgException(message);
     }
-}
 
-template<typename ContainerT>
-static bool ScriptCallsMacros(const ContainerT &script)
-{
-    for(auto line : script)
+    void AddMacro(std::string code)
     {
-        if(StringPrefix("macro ", line) == 0)
-        {
-            return true;
-        }
+        code = StripCarriageReturn(code);
+        _localMacros.push_back(code);
     }
 
-    return false;
-}
-
-std::vector<std::string> GetMacroBody(const std::string &macroname)
-{
-    auto macro = SplitIntoLines(GetMacro(macroname));
-    std::vector<std::string> body(macro.begin(), macro.end());
-    body.erase(body.begin());
-    body.erase(body.end() - 1);
-    return body;
-}
-
-static std::map<std::string, std::string> BindArguments(std::string args)
-{
-    std::map<std::string, std::string> arguments;
-    int counter = 0;
-    
-    while(!args.empty())
+private:
+    template<typename Iter1, typename Iter2>
+    std::string JoinAsString(Iter1 begin,  Iter2 end)
     {
-        ++counter;
-        std::string current;
-        args = OneArgument(args, current);
+        std::ostringstream buf;
 
-        arguments.insert(std::make_pair(FormatString("$%d", counter), current));
+        std::for_each(begin, end, [&buf](const auto &i)
+                      {
+                          buf << i << "\r\n";
+                      });
+
+        return buf.str();
     }
 
-    return arguments;
-}
-
-static void SubstituteArguments(std::vector<std::string> &script, const std::string &args)
-{
-    auto arguments = BindArguments(args);
-    
-    for(auto i = script.begin(); i != script.end(); ++i)
+    template<typename ContainerT>
+    bool ScriptCallsMacros(const ContainerT &script)
     {
-        std::string current = *i;
-
-        for(auto tuple : arguments)
+        for(auto line : script)
         {
-            size_t posOfArg;
-
-            while((posOfArg = current.find(tuple.first)) != std::string::npos)
-            {
-                current.replace(posOfArg, tuple.first.size(), tuple.second);
-            }
-        }
-
-        *i = current;
-    }
-}
-
-void ExpandMacros(std::list<std::string> &script)
-{
-    constexpr int MAX_EXPANSIONS = 100;
-    int expansionCount = 0;
-    
-    while(ScriptCallsMacros(script))
-    {
-        if(++expansionCount == MAX_EXPANSIONS)
-        {
-            throw MudProgException("Too many macro expansions. Circular dependency likely.");
-        }
-        
-        for(std::list<std::string>::iterator i = script.begin();
-            i != script.end(); ++i)
-        {
-            std::string line = *i;
-
             if(StringPrefix("macro ", line) == 0)
             {
-                std::string args = line.substr(strlen("macro "));
-                std::string macroname;
-                args = OneArgument(args, macroname);
-
-                auto linesToInsert = GetMacroBody(macroname);
-
-                SubstituteArguments(linesToInsert, args);
-
-                i = script.insert(i, linesToInsert.begin(), linesToInsert.end());
-                std::advance(i, std::distance(linesToInsert.begin(), linesToInsert.end()) - 1);
-                auto eraseAt = i;
-                ++eraseAt;
-                script.erase(eraseAt);
+                return true;
             }
         }
+
+        return false;
     }
-}
+
+    std::vector<std::string> GetMacroBody(const std::string &macroname)
+    {
+        auto macro = SplitIntoLines(GetMacro(macroname));
+        std::vector<std::string> body(macro.begin(), macro.end());
+        body.erase(body.begin());
+        body.erase(body.end() - 1);
+        return body;
+    }
+
+    std::map<std::string, std::string> BindArguments(std::string args)
+    {
+        std::map<std::string, std::string> arguments;
+        int counter = 0;
+
+        while(!args.empty())
+        {
+            ++counter;
+            std::string current;
+            args = OneArgument(args, current);
+
+            arguments.insert(std::make_pair(FormatString("$%d", counter), current));
+        }
+
+        return arguments;
+    }
+
+    void SubstituteArguments(std::vector<std::string> &script, const std::string &args)
+    {
+        auto arguments = BindArguments(args);
+
+        for(auto i = script.begin(); i != script.end(); ++i)
+        {
+            std::string current = *i;
+
+            for(auto tuple : arguments)
+            {
+                size_t posOfArg;
+
+                while((posOfArg = current.find(tuple.first)) != std::string::npos)
+                {
+                    current.replace(posOfArg, tuple.first.size(), tuple.second);
+                }
+            }
+
+            *i = current;
+        }
+    }
+
+    std::vector<std::string> SplitIntoLines(std::string input)
+    {
+        std::vector<std::string> output;
+
+        if(!input.empty())
+        {
+            input = StripCarriageReturn(input);
+
+            if(input[input.size() - 1] != '\n')
+            {
+                input += '\n';
+            }
+
+            size_t start = 0;
+            size_t end = 0;
+
+            while((end = input.find('\n', start)) != std::string::npos)
+            {
+                std::string line = TrimString(input.substr(start, end - start));
+
+                if(!line.empty())
+                {
+                    output.push_back(line);
+                }
+
+                start = end + 1;
+            }
+        }
+
+        return output;
+    }
+
+    std::list<std::string> _localMacros;
+};
 
 TEST_F(MudProgTests, ExpandMacros_SingleLineMacroExpanded)
 {
     const std::list<std::string> script =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "macro singelline",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "macro singelline",
+        "endif"
+    };
     const std::list<std::string> expected =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "mpecho Foo bar baz.",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "mpecho Foo bar baz.",
+        "endif"
+    };
 
     auto actual = script;
-    ExpandMacros(actual);
+    MudProgEnvironment env;
+    env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -447,24 +497,25 @@ TEST_F(MudProgTests, ExpandMacros_SingleLineMacroExpanded)
 TEST_F(MudProgTests, ExpandMacros_MultiLineMacroExpanded)
 {
     const std::list<std::string> script =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "macro multiline",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "macro multiline",
+        "endif"
+    };
     const std::list<std::string> expected =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "mpecho Foo bar baz.",
-            "say Hey you.",
-            "-- Comment here",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "mpecho Foo bar baz.",
+        "say Hey you.",
+        "-- Comment here",
+        "endif"
+    };
 
     auto actual = script;
-    ExpandMacros(actual);
+    MudProgEnvironment env;
+    env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -472,22 +523,23 @@ TEST_F(MudProgTests, ExpandMacros_MultiLineMacroExpanded)
 TEST_F(MudProgTests, ExpandMacros_ArgumentsSubstituted)
 {
     const std::list<std::string> script =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "macro witharguments Foo Bar Baz",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "macro witharguments Foo Bar Baz",
+        "endif"
+    };
     const std::list<std::string> expected =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "mpecho One: Foo. Two: Bar. Three: Baz.",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "mpecho One: Foo. Two: Bar. Three: Baz.",
+        "endif"
+    };
 
     auto actual = script;
-    ExpandMacros(actual);
+    MudProgEnvironment env;
+    env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -495,19 +547,20 @@ TEST_F(MudProgTests, ExpandMacros_ArgumentsSubstituted)
 TEST_F(MudProgTests, ExpandMacros_ThrowsExceptionOnInvalidMacroname)
 {
     const std::list<std::string> script =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "macro nosuchmacro",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "macro nosuchmacro",
+        "endif"
+    };
 
     EXPECT_THROW(
         {
             try
             {
                 auto actual = script;
-                ExpandMacros(actual);
+                MudProgEnvironment env;
+                env.ExpandMacros(actual);
             }
             catch(const MudProgException &ex)
             {
@@ -520,24 +573,25 @@ TEST_F(MudProgTests, ExpandMacros_ThrowsExceptionOnInvalidMacroname)
 TEST_F(MudProgTests, ExpandMacros_NestedMacros)
 {
     const std::list<std::string> script =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "macro nestedmacro",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "macro nestedmacro",
+        "endif"
+    };
     const std::list<std::string> expected =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "mpecho This is inner 2",
-            "mpecho This is inner 1",
-            "mpecho This is outer macro.",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "mpecho This is inner 2",
+        "mpecho This is inner 1",
+        "mpecho This is outer macro.",
+        "endif"
+    };
 
     auto actual = script;
-    ExpandMacros(actual);
+    MudProgEnvironment env;
+    env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -545,26 +599,27 @@ TEST_F(MudProgTests, ExpandMacros_NestedMacros)
 TEST_F(MudProgTests, ExpandMacros_NestedMacrosWithArguments)
 {
     const std::list<std::string> script =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "macro nestedmacrowithargs one two 3 four",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "macro nestedmacrowithargs one two 3 four",
+        "endif"
+    };
     const std::list<std::string> expected =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "mpecho This is inner with arg one.",
-            "mpecho This is inner with arg two.",
-            "mpecho This is inner with arg 3.",
-            "mpecho This is inner with arg four.",
-            "mpecho This is outer macro.",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "mpecho This is inner with arg one.",
+        "mpecho This is inner with arg two.",
+        "mpecho This is inner with arg 3.",
+        "mpecho This is inner with arg four.",
+        "mpecho This is outer macro.",
+        "endif"
+    };
 
     auto actual = script;
-    ExpandMacros(actual);
+    MudProgEnvironment env;
+    env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -572,19 +627,20 @@ TEST_F(MudProgTests, ExpandMacros_NestedMacrosWithArguments)
 TEST_F(MudProgTests, ExpandMacros_CircularDependencyThrowsException)
 {
     const std::list<std::string> script =
-        {
-            "if test(1)",
-            "mpecho lol",
-            "macro macrowithcirculardependency1",
-            "endif"
-        };
+    {
+        "if test(1)",
+        "mpecho lol",
+        "macro macrowithcirculardependency1",
+        "endif"
+    };
 
     EXPECT_THROW(
         {
             try
             {
                 auto actual = script;
-                ExpandMacros(actual);
+                MudProgEnvironment env;
+                env.ExpandMacros(actual);
             }
             catch(const MudProgException &ex)
             {
