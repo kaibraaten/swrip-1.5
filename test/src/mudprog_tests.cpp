@@ -273,7 +273,14 @@ const std::vector<std::string> macros =
 
         "def macrowithcirculardependency2\n"
         "    macro macrowithcirculardependency1\n"
-        "enddef\n"
+        "enddef\n",
+
+    "def firstingroup\n"
+    "    mpecho first\n"
+    "enddef\n"
+    "def secondingroup\n"
+    "    mpecho second\n"
+    "enddef\n"
 };
 
 class MudProgException : public std::runtime_error
@@ -293,6 +300,8 @@ public:
     {
         constexpr int MAX_EXPANSIONS = 100;
         int expansionCount = 0;
+
+        RegisterLocalMacros(script);
 
         while(ScriptCallsMacros(script))
         {
@@ -326,9 +335,62 @@ public:
         }
     }
 
+private:
+    void RegisterLocalMacros(std::list<std::string> &script)
+    {
+        for(std::list<std::string>::iterator i = script.begin();
+            i != script.end(); ++i)
+        {
+            std::string line = *i;
+
+            if(StringPrefix("def ", line) == 0)
+            {
+                auto end = find(i, script.end(), "enddef");
+
+                if(end != script.end())
+                {
+                    auto eraseAt = i;
+                    --i;
+                    ++end;
+                    AddMacro(JoinAsString(eraseAt, end));
+                    script.erase(eraseAt, end);
+                }
+                else
+                {
+                    std::string macroname;
+                    std::string def;
+                    line = OneArgument(line, def);
+                    line = OneArgument(line, macroname);
+                    throw MudProgException(FormatString("Local macro '%s' missing enddef", macroname.c_str()));
+                }
+            }
+        }
+    }
+
     std::string GetMacro(const std::string &name)
     {
         for(auto i : macros)
+        {
+            auto entry = SplitIntoLines(i);
+            auto start = std::find(entry.begin(), entry.end(), "def " + name);
+
+            if(start != entry.end())
+            {
+                auto end = std::find(start, entry.end(), "enddef");
+
+                if(end != entry.end())
+                {
+                    ++end;
+                    return JoinAsString(start, end);
+                }
+                else
+                {
+                    throw MudProgException("def macro lacks matching enddef");
+                }
+            }
+        }
+
+        for(auto i : _localMacros)
         {
             auto entry = SplitIntoLines(i);
             auto start = std::find(entry.begin(), entry.end(), "def " + name);
@@ -359,7 +421,6 @@ public:
         _localMacros.push_back(code);
     }
 
-private:
     template<typename Iter1, typename Iter2>
     std::string JoinAsString(Iter1 begin,  Iter2 end)
     {
@@ -649,3 +710,85 @@ TEST_F(MudProgTests, ExpandMacros_CircularDependencyThrowsException)
             }
         }, MudProgException);
 }
+
+TEST_F(MudProgTests, ExpandMacros_GroupedMacros)
+{
+    const std::list<std::string> script =
+    {
+        "if test(1)",
+        "mpecho lol",
+        "macro firstingroup",
+        "macro secondingroup",
+        "endif"
+    };
+    const std::list<std::string> expected =
+    {
+        "if test(1)",
+        "mpecho lol",
+        "mpecho first",
+        "mpecho second",
+        "endif"
+    };
+
+    auto actual = script;
+    MudProgEnvironment env;
+    env.ExpandMacros(actual);
+
+    EXPECT_EQ(expected, actual);
+}
+
+TEST_F(MudProgTests, ExpandMacros_LocalMacros)
+{
+    const std::list<std::string> script =
+    {
+        "if test(1)",
+        "mpecho lol",
+        "macro local",
+        "endif",
+        "def local",
+        "  mpecho local",
+        "enddef"
+    };
+    const std::list<std::string> expected =
+    {
+        "if test(1)",
+        "mpecho lol",
+        "mpecho local",
+        "endif"
+    };
+
+    auto actual = script;
+    MudProgEnvironment env;
+    env.ExpandMacros(actual);
+
+    EXPECT_EQ(expected, actual);
+}
+
+/*
+TEST_F(MudProgTests, ExpandMacros_LocalMacrosAtStartOfScript)
+{
+    const std::list<std::string> script =
+    {
+        "def local",
+        "  mpecho local",
+        "enddef",
+        "if test(1)",
+        "mpecho lol",
+        "macro local",
+        "endif"
+    };
+    const std::list<std::string> expected =
+    {
+        "if test(1)",
+        "mpecho lol",
+        "mpecho local",
+        "endif"
+    };
+
+    auto actual = script;
+    MudProgEnvironment env;
+    env.ExpandMacros(actual);
+
+    EXPECT_EQ(expected, actual);
+}
+*/
