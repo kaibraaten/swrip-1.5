@@ -558,6 +558,9 @@ void BootDatabase(bool fCopyOver)
     ASSIGN_GSN(gsn_sullustan, "sullustese");
     ASSIGN_GSN(gsn_shipdocking, "ship docking");
 
+    Log->Boot("Loading mudprog macros");
+    Macros->Load();
+
     /*
      * Read in all the area files.
      */

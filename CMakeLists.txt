@@ -55,6 +55,7 @@ src/mapper.cpp
 src/misc.cpp
 src/missile.cpp
 src/mprog.cpp
+src/mprog_ext.cpp
 src/mud_prog.cpp
 src/nanny.cpp
 src/object.cpp

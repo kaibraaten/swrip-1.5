@@ -37,6 +37,7 @@
 #include <cstring>
 #include <cctype>
 #include <stdexcept>
+#include <map>
 #include <utility/algorithms.hpp>
 #include <utility/random.hpp>
 #include "mud.hpp"
@@ -51,6 +52,7 @@
 #include "protomob.hpp"
 #include "race.hpp"
 #include "skill.hpp"
+#include "mprog_ext.hpp"
 
  /* Defines by Narn for new mudprog parsing, used as
     return values from mprog_do_command. */
@@ -454,7 +456,7 @@ static int IfCheckOVnumInObject(std::shared_ptr<Object> inobj, std::string cvar,
         ProgBug("Ovnuminobj: only works with objprogs", supermob);
         return BERR;
     }
-    
+
     int vnum = atoi(cvar.c_str());
 
     if(vnum < MIN_VNUM || vnum > MAX_VNUM)
@@ -474,7 +476,7 @@ static int IfCheckOVnumInObject(std::shared_ptr<Object> inobj, std::string cvar,
 
                                return sumSoFar;
                            });
-    
+
     int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
@@ -664,7 +666,7 @@ static int IfCheckOTypeInObject(std::shared_ptr<Object> obj, std::string cvar,
         ProgBug("otypeinobj: only works with objprogs", supermob);
         return BERR;
     }
-    
+
     ItemTypes type = ITEM_NONE;
 
     if(IsNumber(cvar))
@@ -693,7 +695,7 @@ static int IfCheckOTypeInObject(std::shared_ptr<Object> obj, std::string cvar,
 
                                return sumSoFar;
                            });
-                           
+
     int rhsvl = IsNumber(rval) ? atoi(rval.c_str()) : -1;
 
     if(rhsvl < 1)
@@ -790,7 +792,7 @@ static int IfCheckIsWearing(std::shared_ptr<Character> mob, std::string cvar,
                             std::shared_ptr<Character> chkchar)
 {
     vnum_t vnum = atoi(rval.c_str());
-    
+
     if(vnum < 1 || vnum > 2097152000)
     {
         ProgBug("iswearing: bad vnum", mob);
@@ -844,7 +846,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
     std::shared_ptr<Character> chkchar = nullptr;
     std::shared_ptr<Object> chkobj;
     bool boolCheck = true;
-    
+
     if(!*point)
     {
         ProgBug("Null ifcheck", mob);
@@ -1054,7 +1056,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
     {
         IfCheckOVnumInObject(obj, cvar, opr, rval);
     }
-    
+
     if(chkchar)
     {
         if(!StrCmp(chck, "ismobinvis"))
@@ -1150,7 +1152,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
         else if(!StrCmp(chck, "position"))
         {
             int pos = -1;
-            
+
             if(IsNumber(rval))
             {
                 pos = atoi(rval);
@@ -1873,15 +1875,15 @@ static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob,
 // legacy script that can be run by the driver.
 static void PreprocessScript(std::string &com_list)
 {
-    /*
-    auto script = SplitIntoLines(com_list);
-    DiscardComments(script);
-    RewriteElIfs(script);
-    //RewriteIfAnd(script);
-    com_list = JoinAsString(script);
-    */
+    MudProgEnvironment env(
+        {
+            std::make_shared<RewriteElIfs>(),
+            std::make_shared<RewriteIfAnd>(),
+            std::make_shared<DiscardComments>(),
+            std::make_shared<ExpandMacros>(Macros)
+        });
+    env.PreprocessScript(com_list);
 }
-
 
 /*
  * get a random visible player who is in the room with the mob.
@@ -1903,7 +1905,7 @@ std::shared_ptr<Character> GetRandomVisiblePlayerInRoom(const std::shared_ptr<Ro
 {
     int count = 0;
     std::shared_ptr<Character> rndm;
-    
+
     for(auto vch : room->Characters())
     {
         if(!IsNpc(vch))
@@ -1972,7 +1974,7 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob,
     auto rndm = GetRandomVisiblePlayerInRoom(mob->InRoom);
 
     PreprocessScript(com_list);
-    
+
     strcpy(tmpcmndlst, com_list.c_str());
     command_list = tmpcmndlst;
 
@@ -2841,7 +2843,7 @@ void MudProgSetSupermob(std::shared_ptr<Object> obj)
        of the object, and not just supermob's vnum */
     supermob->Description = FormatString("Object #%ld", obj->Prototype->Vnum);
     supermob->ActingAsObject = obj;
-    
+
     if(room != nullptr)
     {
         CharacterFromRoom(supermob);
@@ -3733,44 +3735,6 @@ std::shared_ptr<Character> GetCharacterInRoomMudProg(std::shared_ptr<Character> 
     }
 
     return nullptr;
-}
-
-std::list<std::string> SplitIntoList(std::string input)
-{
-    std::list<std::string> output;
-
-    if(!input.empty())
-    {
-        input = StripCarriageReturn(input);
-
-        if(input[input.size() - 1] != '\n')
-        {
-            input += '\n';
-        }
-
-        size_t start = 0;
-        size_t end = 0;
-
-        while((end = input.find('\n', start)) != std::string::npos)
-        {
-            std::string line = TrimString(input.substr(start, end - start));
-
-            if(!line.empty())
-            {
-                output.push_back(line);
-            }
-
-            start = end + 1;
-        }
-    }
-
-    return output;
-}
-
-std::vector<std::string> SplitIntoVector(std::string input)
-{
-    auto asList = SplitIntoList(input);
-    return { asList.begin(), asList.end() };
 }
 
 std::shared_ptr<Object> GetObjectFromSupermob(const std::shared_ptr<Character> mob)

@@ -4,6 +4,9 @@
 #include <memory>
 #include <list>
 #include <sstream>
+#include <vector>
+#include <initializer_list>
+#include <string>
 #include "types.hpp"
 #include "vo.hpp"
 
@@ -114,38 +117,6 @@ void ObjProgActTrigger(const std::string &buf, std::shared_ptr<Object> mobj, std
 void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, std::shared_ptr<Character> ch,
                         std::shared_ptr<Object> obj, const Vo &vo);
 
-
-std::list<std::string> SplitIntoList(std::string input);
-std::vector<std::string> SplitIntoVector(std::string input);
-
 std::shared_ptr<Object> GetObjectFromSupermob(const std::shared_ptr<Character> supermob);
-
-template<typename ContainerT>
-std::string JoinAsString(const ContainerT &container, const std::string &separator = "\r\n")
-{
-    return JoinAsString(std::cbegin(container), std::cend(container), separator);
-}
-
-template<typename Iter>
-std::string JoinAsString(Iter begin, Iter end, const std::string &separator = "\r\n")
-{
-    std::ostringstream buf;
-
-    std::for_each(begin, end, [&buf, separator](const auto &i)
-                  {
-                      buf << i << separator;
-                  });
-
-    return buf.str();
-}
-
-class MudProgMacroCode
-{
-public:
-    MudProgMacroCode(const std::string &code) : Text(code)
-    {
-    }
-    std::string Text;
-};
 
 #endif
