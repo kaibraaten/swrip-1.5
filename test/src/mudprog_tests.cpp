@@ -8,6 +8,64 @@
 #include <utility/utility.hpp>
 #include "mprog.hpp"
 
+static const std::vector<std::string> GlobalMacros =
+{
+        "def singelline\n"
+        "    mpecho Foo bar baz.\n"
+        "enddef\n",
+
+        "def multiline\n"
+        "    mpecho Foo bar baz.\n"
+        "    say Hey you.\n"
+        "    -- Comment here\n"
+        "enddef\n",
+
+        "def witharguments\n"
+        "    mpecho One: $1. Two: $2. Three: $3.\n"
+        "enddef\n",
+
+        "def inner1\n"
+        "    mpecho This is inner 1\n"
+        "enddef\n",
+
+        "def inner2\n"
+        "    mpecho This is inner 2\n"
+        "    macro inner1\n"
+        "enddef\n",
+
+        "def nestedmacro\n"
+        "    macro inner2\n"
+        "    mpecho This is outer macro.\n"
+        "enddef\n",
+
+        "def innerwithargs\n"
+        "    mpecho This is inner with arg $1.\n"
+        "enddef\n",
+
+        "def nestedmacrowithargs\n"
+        "    macro innerwithargs $1\n"
+        "    macro innerwithargs $2\n"
+        "    macro innerwithargs $3\n"
+        "    macro innerwithargs $4\n"
+        "    mpecho This is outer macro.\n"
+        "enddef\n",
+
+        "def macrowithcirculardependency1\n"
+        "    macro macrowithcirculardependency2\n"
+        "enddef\n",
+
+        "def macrowithcirculardependency2\n"
+        "    macro macrowithcirculardependency1\n"
+        "enddef\n",
+
+    "def firstingroup\n"
+    "    mpecho first\n"
+    "enddef\n"
+    "def secondingroup\n"
+    "    mpecho second\n"
+    "enddef\n"
+};
+
 class MudProgException : public std::runtime_error
 {
 public:
@@ -134,7 +192,7 @@ public:
         }
     }
 
-private:
+//private:
     void RegisterLocalMacros(std::list<std::string> &script)
     {
         for(std::list<std::string>::iterator i = script.begin();
@@ -339,6 +397,13 @@ private:
 
 class MudProgTests : public ::testing::Test
 {
+public:
+    MudProgTests()
+        : _env(GlobalMacros)
+    {
+
+    }
+
 protected:
     void SetUp() override
     {
@@ -372,27 +437,31 @@ protected:
         "mpecho $n You're immortal.",
         "endif"
     };
+
+    MudProgEnvironment _env;
 };
 
 TEST_F(MudProgTests, SplitIntoLines_LineCountIsCorrect)
 {
-    auto actual = SplitIntoLines(_original);
+    auto actual = _env.SplitIntoLines(_original);
 
     EXPECT_EQ(_expected.size(), actual.size());
 }
 
 TEST_F(MudProgTests, SplitIntoLines_FirstLineIsCorrect)
 {
-    auto actual = SplitIntoLines(_original);
+    auto actual = _env.SplitIntoLines(_original);
 
-    EXPECT_EQ(_expected.front(), actual.front());
+    std::list<std::string> actualAsList(actual.begin(), actual.end());
+    EXPECT_EQ(_expected.front(), actualAsList.front());
 }
 
 TEST_F(MudProgTests, SplitIntoLines_EverythingIsCorrect)
 {
-    auto actual = SplitIntoLines(_original);
+    auto actual = _env.SplitIntoLines(_original);
 
-    EXPECT_EQ(_expected, actual);
+    std::list<std::string> actualAsList(actual.begin(), actual.end());
+    EXPECT_EQ(_expected, actualAsList);
 }
 
 TEST_F(MudProgTests, SplitIntoLines_HandlesCaseWhereNoNewlineAtEnd)
@@ -412,17 +481,19 @@ TEST_F(MudProgTests, SplitIntoLines_HandlesCaseWhereNoNewlineAtEnd)
         "-- It's another comment",
         "endif"
     };
-    auto actual = SplitIntoLines(original);
+    auto actual = _env.SplitIntoLines(original);
 
-    EXPECT_EQ(expected, actual);
+    std::list<std::string> actualAsList(actual.begin(), actual.end());
+    EXPECT_EQ(expected, actualAsList);
 }
 
 TEST_F(MudProgTests, DiscardComments_Works)
 {
-    auto actual = SplitIntoLines(_original);
-    DiscardComments(actual);
+    auto actual = _env.SplitIntoLines(_original);
+    _env.DiscardComments(actual);
 
-    EXPECT_EQ(_expectedWithoutComments, actual);
+    std::list<std::string> actualAsList(actual.begin(), actual.end());
+    EXPECT_EQ(_expectedWithoutComments, actualAsList);
 }
 
 TEST_F(MudProgTests, RewriteElIfs_Works)
@@ -554,64 +625,6 @@ TEST_F(MudProgTests, JoinAsString_Works)
     EXPECT_EQ(expected, actual);
 }
 
-const std::vector<std::string> macros =
-{
-        "def singelline\n"
-        "    mpecho Foo bar baz.\n"
-        "enddef\n",
-
-        "def multiline\n"
-        "    mpecho Foo bar baz.\n"
-        "    say Hey you.\n"
-        "    -- Comment here\n"
-        "enddef\n",
-
-        "def witharguments\n"
-        "    mpecho One: $1. Two: $2. Three: $3.\n"
-        "enddef\n",
-
-        "def inner1\n"
-        "    mpecho This is inner 1\n"
-        "enddef\n",
-
-        "def inner2\n"
-        "    mpecho This is inner 2\n"
-        "    macro inner1\n"
-        "enddef\n",
-
-        "def nestedmacro\n"
-        "    macro inner2\n"
-        "    mpecho This is outer macro.\n"
-        "enddef\n",
-
-        "def innerwithargs\n"
-        "    mpecho This is inner with arg $1.\n"
-        "enddef\n",
-
-        "def nestedmacrowithargs\n"
-        "    macro innerwithargs $1\n"
-        "    macro innerwithargs $2\n"
-        "    macro innerwithargs $3\n"
-        "    macro innerwithargs $4\n"
-        "    mpecho This is outer macro.\n"
-        "enddef\n",
-
-        "def macrowithcirculardependency1\n"
-        "    macro macrowithcirculardependency2\n"
-        "enddef\n",
-
-        "def macrowithcirculardependency2\n"
-        "    macro macrowithcirculardependency1\n"
-        "enddef\n",
-
-    "def firstingroup\n"
-    "    mpecho first\n"
-    "enddef\n"
-    "def secondingroup\n"
-    "    mpecho second\n"
-    "enddef\n"
-};
-
 TEST_F(MudProgTests, ExpandMacros_SingleLineMacroExpanded)
 {
     const std::list<std::string> script =
@@ -630,8 +643,7 @@ TEST_F(MudProgTests, ExpandMacros_SingleLineMacroExpanded)
     };
 
     auto actual = script;
-    MudProgEnvironment env(macros);
-    env.ExpandMacros(actual);
+    _env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -656,8 +668,7 @@ TEST_F(MudProgTests, ExpandMacros_MultiLineMacroExpanded)
     };
 
     auto actual = script;
-    MudProgEnvironment env(macros);
-    env.ExpandMacros(actual);
+    _env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -680,8 +691,7 @@ TEST_F(MudProgTests, ExpandMacros_ArgumentsSubstituted)
     };
 
     auto actual = script;
-    MudProgEnvironment env(macros);
-    env.ExpandMacros(actual);
+    _env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -701,8 +711,7 @@ TEST_F(MudProgTests, ExpandMacros_ThrowsExceptionOnInvalidMacroname)
             try
             {
                 auto actual = script;
-                MudProgEnvironment env(macros);
-                env.ExpandMacros(actual);
+                _env.ExpandMacros(actual);
             }
             catch(const MudProgException &ex)
             {
@@ -732,8 +741,7 @@ TEST_F(MudProgTests, ExpandMacros_NestedMacros)
     };
 
     auto actual = script;
-    MudProgEnvironment env(macros);
-    env.ExpandMacros(actual);
+    _env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -760,8 +768,7 @@ TEST_F(MudProgTests, ExpandMacros_NestedMacrosWithArguments)
     };
 
     auto actual = script;
-    MudProgEnvironment env(macros);
-    env.ExpandMacros(actual);
+    _env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -781,8 +788,7 @@ TEST_F(MudProgTests, ExpandMacros_CircularDependencyThrowsException)
             try
             {
                 auto actual = script;
-                MudProgEnvironment env(macros);
-                env.ExpandMacros(actual);
+                _env.ExpandMacros(actual);
             }
             catch(const MudProgException &ex)
             {
@@ -812,8 +818,7 @@ TEST_F(MudProgTests, ExpandMacros_GroupedMacros)
     };
 
     auto actual = script;
-    MudProgEnvironment env(macros);
-    env.ExpandMacros(actual);
+    _env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
@@ -839,8 +844,7 @@ TEST_F(MudProgTests, ExpandMacros_LocalMacros)
     };
 
     auto actual = script;
-    MudProgEnvironment env(macros);
-    env.ExpandMacros(actual);
+    _env.ExpandMacros(actual);
 
     EXPECT_EQ(expected, actual);
 }
