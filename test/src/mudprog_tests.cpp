@@ -178,22 +178,26 @@ public:
 
     void RewriteIfAnd(std::vector<std::string> &document)
     {
-        for(auto i = document.begin(); i != document.end(); ++i)
+        std::list<std::string> docAsList(document.begin(), document.end());
+        
+        for(auto i = docAsList.begin(); i != docAsList.end(); ++i)
         {
             if(StringPrefix("and ", *i) == 0)
             {
                 *i = "if" + (*i).substr(3);
 
-                for(auto endblockIter = i; endblockIter != document.end(); ++endblockIter)
+                for(auto endblockIter = i; endblockIter != docAsList.end(); ++endblockIter)
                 {
                     if(*endblockIter == "endif" || *endblockIter == "else" || *endblockIter == "elif")
                     {
-                        document.insert(endblockIter, "endif");
+                        docAsList.insert(endblockIter, "endif");
                         break;
                     }
                 }
             }
         }
+
+        document.assign(docAsList.begin(), docAsList.end());
     }
 
 //private:
