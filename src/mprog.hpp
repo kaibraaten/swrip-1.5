@@ -122,14 +122,20 @@ void RewriteIfAnd(std::list<std::string> &document);
 std::shared_ptr<Object> GetObjectFromSupermob(const std::shared_ptr<Character> supermob);
 
 template<typename ContainerT>
-std::string JoinAsString(const ContainerT &container)
+std::string JoinAsString(const ContainerT &container, const std::string &separator = "\r\n")
+{
+    return JoinAsString(std::cbegin(container), std::cend(container), separator);
+}
+
+template<typename Iter1, typename Iter2>
+std::string JoinAsString(Iter1 begin, Iter2 end, const std::string &separator = "\r\n")
 {
     std::ostringstream buf;
 
-    for(const auto &i : container)
-    {
-        buf << i << "\r\n";
-    }
+    std::for_each(begin, end, [&buf, separator](const auto &i)
+                  {
+                      buf << i << separator;
+                  });
 
     return buf.str();
 }

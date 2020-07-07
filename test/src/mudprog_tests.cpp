@@ -79,329 +79,325 @@ public:
 class MudProgEnvironment
 {
 public:
-    MudProgEnvironment(const std::vector<std::string> &macros)
-        : _globalMacros(macros)
+    MudProgEnvironment(const std::vector<std::string> &macros);
+    void PreprocessScript(std::string &com_list);
+    void ExpandMacros(std::list<std::string> &script);
+    void DiscardComments(std::vector<std::string> &document);
+    void RewriteElIfs(std::vector<std::string> &document);
+    void RewriteIfAnd(std::vector<std::string> &document);
+    std::vector<std::string> SplitIntoLines(std::string input);
+
+private:
+    void SubstituteArguments(std::vector<std::string> &script, const std::string &args);
+    std::map<std::string, std::string> BindArguments(std::string args);
+    std::vector<std::string> GetMacroBody(const std::string &macroname);
+    bool ScriptCallsMacros(std::list<std::string> &script);
+    void AddMacro(std::string code);
+    std::string GetMacro(const std::string &name);
+    void RegisterLocalMacros(std::list<std::string> &script);
+
+    std::vector<std::string> _globalMacros;
+    std::vector<std::string> _localMacros;
+};
+
+MudProgEnvironment::MudProgEnvironment(const std::vector<std::string> &macros)
+    : _globalMacros(macros)
+{
+
+}
+
+void MudProgEnvironment::PreprocessScript(std::string &com_list)
+{
+    auto script = SplitIntoLines(com_list);
+    DiscardComments(script);
+    RewriteElIfs(script);
+    //RewriteIfAnd(script);
+    com_list = JoinAsString(script);
+}
+
+void MudProgEnvironment::ExpandMacros(std::list<std::string> &script)
+{
+    constexpr int MAX_EXPANSIONS = 100;
+    int expansionCount = 0;
+
+    RegisterLocalMacros(script);
+
+    while(ScriptCallsMacros(script))
     {
-
-    }
-
-    void PreprocessScript(std::string &com_list)
-    {
-        auto script = SplitIntoLines(com_list);
-        DiscardComments(script);
-        RewriteElIfs(script);
-        //RewriteIfAnd(script);
-        com_list = JoinAsString(script);
-    }
-
-    void ExpandMacros(std::list<std::string> &script)
-    {
-        constexpr int MAX_EXPANSIONS = 100;
-        int expansionCount = 0;
-
-        RegisterLocalMacros(script);
-
-        while(ScriptCallsMacros(script))
+        if(++expansionCount == MAX_EXPANSIONS)
         {
-            if(++expansionCount == MAX_EXPANSIONS)
-            {
-                throw MudProgException("Too many macro expansions. Circular dependency likely.");
-            }
-
-            for(std::list<std::string>::iterator i = script.begin();
-                i != script.end(); ++i)
-            {
-                std::string line = *i;
-
-                if(StringPrefix("macro ", line) == 0)
-                {
-                    std::string args = line.substr(strlen("macro "));
-                    std::string macroname;
-                    args = OneArgument(args, macroname);
-
-                    auto linesToInsert = GetMacroBody(macroname);
-
-                    SubstituteArguments(linesToInsert, args);
-
-                    i = script.insert(i, linesToInsert.begin(), linesToInsert.end());
-                    std::advance(i, std::distance(linesToInsert.begin(), linesToInsert.end()) - 1);
-                    auto eraseAt = i;
-                    ++eraseAt;
-                    script.erase(eraseAt);
-                }
-            }
-        }
-    }
-
-    void DiscardComments(std::vector<std::string> &document)
-    {
-        for(auto it = document.begin(); it != document.end(); )
-        {
-            if(StringPrefix("--", *it) == 0)
-            {
-                it = document.erase(it);
-            }
-            else
-            {
-                ++it;
-            }
-        }
-    }
-
-    void RewriteElIfs(std::vector<std::string> &document)
-    {
-        std::list<std::string> docAsList(document.begin(), document.end());
-
-        for(auto i = docAsList.begin(); i != docAsList.end(); ++i)
-        {
-            if(StringPrefix("elif ", *i) == 0)
-            {
-                std::string ifcheck = (*i).substr(2);
-                *i = "else";
-
-                for(auto endifIter = i; endifIter != docAsList.end(); ++endifIter)
-                {
-                    if(*endifIter == "endif")
-                    {
-                        docAsList.insert(endifIter, "endif");
-                        break;
-                    }
-                }
-
-                ++i;
-                docAsList.insert(i, ifcheck);
-            }
+            throw MudProgException("Too many macro expansions. Circular dependency likely.");
         }
 
-        document.assign(docAsList.begin(), docAsList.end());
-    }
-
-    void RewriteIfAnd(std::vector<std::string> &document)
-    {
-        std::list<std::string> docAsList(document.begin(), document.end());
-        
-        for(auto i = docAsList.begin(); i != docAsList.end(); ++i)
-        {
-            if(StringPrefix("and ", *i) == 0)
-            {
-                *i = "if" + (*i).substr(3);
-
-                for(auto endblockIter = i; endblockIter != docAsList.end(); ++endblockIter)
-                {
-                    if(*endblockIter == "endif" || *endblockIter == "else" || *endblockIter == "elif")
-                    {
-                        docAsList.insert(endblockIter, "endif");
-                        break;
-                    }
-                }
-            }
-        }
-
-        document.assign(docAsList.begin(), docAsList.end());
-    }
-
-//private:
-    void RegisterLocalMacros(std::list<std::string> &script)
-    {
         for(std::list<std::string>::iterator i = script.begin();
             i != script.end(); ++i)
         {
             std::string line = *i;
 
-            if(StringPrefix("def ", line) == 0)
-            {
-                auto end = find(i, script.end(), "enddef");
-
-                if(end != script.end())
-                {
-                    auto eraseAt = i;
-                    --i;
-                    ++end;
-                    AddMacro(JoinAsString(eraseAt, end));
-                    script.erase(eraseAt, end);
-                }
-                else
-                {
-                    std::string macroname;
-                    std::string def;
-                    line = OneArgument(line, def);
-                    line = OneArgument(line, macroname);
-                    throw MudProgException(FormatString("Local macro '%s' missing enddef", macroname.c_str()));
-                }
-            }
-        }
-    }
-
-    std::string GetMacro(const std::string &name)
-    {
-        for(auto i : _globalMacros)
-        {
-            auto entry = SplitIntoLines(i);
-            auto start = std::find(entry.begin(), entry.end(), "def " + name);
-
-            if(start != entry.end())
-            {
-                auto end = std::find(start, entry.end(), "enddef");
-
-                if(end != entry.end())
-                {
-                    ++end;
-                    return JoinAsString(start, end);
-                }
-                else
-                {
-                    throw MudProgException("def macro lacks matching enddef");
-                }
-            }
-        }
-
-        for(auto i : _localMacros)
-        {
-            auto entry = SplitIntoLines(i);
-            auto start = std::find(entry.begin(), entry.end(), "def " + name);
-
-            if(start != entry.end())
-            {
-                auto end = std::find(start, entry.end(), "enddef");
-
-                if(end != entry.end())
-                {
-                    ++end;
-                    return JoinAsString(start, end);
-                }
-                else
-                {
-                    throw MudProgException("def macro lacks matching enddef");
-                }
-            }
-        }
-
-        std::string message = FormatString("Unknown macro '%s'", name.c_str());
-        throw MudProgException(message);
-    }
-
-    void AddMacro(std::string code)
-    {
-        code = StripCarriageReturn(code);
-        _localMacros.push_back(code);
-    }
-
-    template<typename ContainerT>
-    std::string JoinAsString(const ContainerT &container)
-    {
-        return JoinAsString(std::cbegin(container), std::cend(container));
-    }
-
-    template<typename Iter1, typename Iter2>
-    std::string JoinAsString(Iter1 begin, Iter2 end)
-    {
-        std::ostringstream buf;
-
-        std::for_each(begin, end, [&buf](const auto &i)
-                      {
-                          buf << i << "\r\n";
-                      });
-
-        return buf.str();
-    }
-
-    template<typename ContainerT>
-    bool ScriptCallsMacros(const ContainerT &script)
-    {
-        for(auto line : script)
-        {
             if(StringPrefix("macro ", line) == 0)
             {
-                return true;
+                std::string args = line.substr(strlen("macro "));
+                std::string macroname;
+                args = OneArgument(args, macroname);
+
+                auto linesToInsert = GetMacroBody(macroname);
+
+                SubstituteArguments(linesToInsert, args);
+
+                i = script.insert(i, linesToInsert.begin(), linesToInsert.end());
+                std::advance(i, std::distance(linesToInsert.begin(), linesToInsert.end()) - 1);
+                auto eraseAt = i;
+                ++eraseAt;
+                script.erase(eraseAt);
             }
         }
-
-        return false;
     }
+}
 
-    std::vector<std::string> GetMacroBody(const std::string &macroname)
+void MudProgEnvironment::DiscardComments(std::vector<std::string> &document)
+{
+    for(auto it = document.begin(); it != document.end(); )
     {
-        auto macro = SplitIntoLines(GetMacro(macroname));
-        std::vector<std::string> body(macro.begin(), macro.end());
-        body.erase(body.begin());
-        body.erase(body.end() - 1);
-        return body;
-    }
-
-    std::map<std::string, std::string> BindArguments(std::string args)
-    {
-        std::map<std::string, std::string> arguments;
-        int counter = 0;
-
-        while(!args.empty())
+        if(StringPrefix("--", *it) == 0)
         {
-            ++counter;
-            std::string current;
-            args = OneArgument(args, current);
-
-            arguments.insert(std::make_pair(FormatString("$%d", counter), current));
+            it = document.erase(it);
         }
-
-        return arguments;
-    }
-
-    void SubstituteArguments(std::vector<std::string> &script, const std::string &args)
-    {
-        auto arguments = BindArguments(args);
-
-        for(auto i = script.begin(); i != script.end(); ++i)
+        else
         {
-            std::string current = *i;
+            ++it;
+        }
+    }
+}
 
-            for(auto tuple : arguments)
+void MudProgEnvironment::RewriteElIfs(std::vector<std::string> &document)
+{
+    std::list<std::string> docAsList(document.begin(), document.end());
+
+    for(auto i = docAsList.begin(); i != docAsList.end(); ++i)
+    {
+        if(StringPrefix("elif ", *i) == 0)
+        {
+            std::string ifcheck = (*i).substr(2);
+            *i = "else";
+
+            for(auto endifIter = i; endifIter != docAsList.end(); ++endifIter)
             {
-                size_t posOfArg;
-
-                while((posOfArg = current.find(tuple.first)) != std::string::npos)
+                if(*endifIter == "endif")
                 {
-                    current.replace(posOfArg, tuple.first.size(), tuple.second);
+                    docAsList.insert(endifIter, "endif");
+                    break;
                 }
             }
 
-            *i = current;
+            ++i;
+            docAsList.insert(i, ifcheck);
         }
     }
 
-    std::vector<std::string> SplitIntoLines(std::string input)
+    document.assign(docAsList.begin(), docAsList.end());
+}
+
+void MudProgEnvironment::RewriteIfAnd(std::vector<std::string> &document)
+{
+    std::list<std::string> docAsList(document.begin(), document.end());
+
+    for(auto i = docAsList.begin(); i != docAsList.end(); ++i)
     {
-        std::vector<std::string> output;
-
-        if(!input.empty())
+        if(StringPrefix("and ", *i) == 0)
         {
-            input = StripCarriageReturn(input);
+            *i = "if" + (*i).substr(3);
 
-            if(input[input.size() - 1] != '\n')
+            for(auto endblockIter = i; endblockIter != docAsList.end(); ++endblockIter)
             {
-                input += '\n';
-            }
-
-            size_t start = 0;
-            size_t end = 0;
-
-            while((end = input.find('\n', start)) != std::string::npos)
-            {
-                std::string line = TrimString(input.substr(start, end - start));
-
-                if(!line.empty())
+                if(*endblockIter == "endif" || *endblockIter == "else" || *endblockIter == "elif")
                 {
-                    output.push_back(line);
+                    docAsList.insert(endblockIter, "endif");
+                    break;
                 }
+            }
+        }
+    }
 
-                start = end + 1;
+    document.assign(docAsList.begin(), docAsList.end());
+}
+
+void MudProgEnvironment::RegisterLocalMacros(std::list<std::string> &script)
+{
+    for(std::list<std::string>::iterator i = script.begin();
+        i != script.end(); ++i)
+    {
+        std::string line = *i;
+
+        if(StringPrefix("def ", line) == 0)
+        {
+            auto end = find(i, script.end(), "enddef");
+
+            if(end != script.end())
+            {
+                auto eraseAt = i;
+                --i;
+                ++end;
+                AddMacro(JoinAsString(eraseAt, end));
+                script.erase(eraseAt, end);
+            }
+            else
+            {
+                std::string macroname;
+                std::string def;
+                line = OneArgument(line, def);
+                line = OneArgument(line, macroname);
+                throw MudProgException(FormatString("Local macro '%s' missing enddef", macroname.c_str()));
+            }
+        }
+    }
+}
+
+std::string MudProgEnvironment::GetMacro(const std::string &name)
+{
+    for(auto i : _globalMacros)
+    {
+        auto entry = SplitIntoLines(i);
+        auto start = std::find(entry.begin(), entry.end(), "def " + name);
+
+        if(start != entry.end())
+        {
+            auto end = std::find(start, entry.end(), "enddef");
+
+            if(end != entry.end())
+            {
+                ++end;
+                return JoinAsString(start, end);
+            }
+            else
+            {
+                throw MudProgException("def macro lacks matching enddef");
+            }
+        }
+    }
+
+    for(auto i : _localMacros)
+    {
+        auto entry = SplitIntoLines(i);
+        auto start = std::find(entry.begin(), entry.end(), "def " + name);
+
+        if(start != entry.end())
+        {
+            auto end = std::find(start, entry.end(), "enddef");
+
+            if(end != entry.end())
+            {
+                ++end;
+                return JoinAsString(start, end);
+            }
+            else
+            {
+                throw MudProgException("def macro lacks matching enddef");
+            }
+        }
+    }
+
+    std::string message = FormatString("Unknown macro '%s'", name.c_str());
+    throw MudProgException(message);
+}
+
+void MudProgEnvironment::AddMacro(std::string code)
+{
+    code = StripCarriageReturn(code);
+    _localMacros.push_back(code);
+}
+
+bool MudProgEnvironment::ScriptCallsMacros(std::list<std::string> &script)
+{
+    for(auto line : script)
+    {
+        if(StringPrefix("macro ", line) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+std::vector<std::string> MudProgEnvironment::GetMacroBody(const std::string &macroname)
+{
+    auto macro = SplitIntoLines(GetMacro(macroname));
+    std::vector<std::string> body(macro.begin(), macro.end());
+    body.erase(body.begin());
+    body.erase(body.end() - 1);
+    return body;
+}
+
+std::map<std::string, std::string> MudProgEnvironment::BindArguments(std::string args)
+{
+    std::map<std::string, std::string> arguments;
+    int counter = 0;
+
+    while(!args.empty())
+    {
+        ++counter;
+        std::string current;
+        args = OneArgument(args, current);
+
+        arguments.insert(std::make_pair(FormatString("$%d", counter), current));
+    }
+
+    return arguments;
+}
+
+void MudProgEnvironment::SubstituteArguments(std::vector<std::string> &script, const std::string &args)
+{
+    auto arguments = BindArguments(args);
+
+    for(auto i = script.begin(); i != script.end(); ++i)
+    {
+        std::string current = *i;
+
+        for(auto tuple : arguments)
+        {
+            size_t posOfArg;
+
+            while((posOfArg = current.find(tuple.first)) != std::string::npos)
+            {
+                current.replace(posOfArg, tuple.first.size(), tuple.second);
             }
         }
 
-        return output;
+        *i = current;
+    }
+}
+
+std::vector<std::string> MudProgEnvironment::SplitIntoLines(std::string input)
+{
+    std::vector<std::string> output;
+
+    if(!input.empty())
+    {
+        input = StripCarriageReturn(input);
+
+        if(input[input.size() - 1] != '\n')
+        {
+            input += '\n';
+        }
+
+        size_t start = 0;
+        size_t end = 0;
+
+        while((end = input.find('\n', start)) != std::string::npos)
+        {
+            std::string line = TrimString(input.substr(start, end - start));
+
+            if(!line.empty())
+            {
+                output.push_back(line);
+            }
+
+            start = end + 1;
+        }
     }
 
-    std::vector<std::string> _globalMacros;
-    std::vector<std::string> _localMacros;
-};
+    return output;
+}
 
 class MudProgTests : public ::testing::Test
 {
@@ -631,7 +627,7 @@ TEST_F(MudProgTests, JoinAsString_Works)
         "endif"
     };
 
-    auto actual = _env.JoinAsString(original);
+    auto actual = JoinAsString(original);
 
     EXPECT_EQ(expected, actual);
 }
