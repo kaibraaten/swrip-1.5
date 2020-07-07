@@ -317,7 +317,7 @@ void BootDatabase(bool fCopyOver)
     Log->Boot("Allocating repositories");
     AllocateRepositories();
 
-    Log->Boot("Loading SysData.configuration...");
+    Log->Boot("Loading SysData configuration");
 
     SysData.Load();
 
@@ -565,7 +565,7 @@ void BootDatabase(bool fCopyOver)
      * Read in all the area files.
      */
 
-    Log->Boot("Reading in area files...");
+    Log->Boot("Loading areas");
     Areas->Load();
 
     /*
@@ -590,10 +590,10 @@ void BootDatabase(bool fCopyOver)
     InitializeEconomy();
 
     /*loads vendors on each reboot -Legonas*/
-    Log->Boot("Reading in Vendors");
+    Log->Boot("Loading vendors");
     LoadVendors();
 
-    Log->Boot("Reading in Storerooms");
+    Log->Boot("Loading storerooms");
     LoadStorerooms();
 
     Log->Boot("Loading boards");
