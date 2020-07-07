@@ -150,26 +150,30 @@ public:
 
     void RewriteElIfs(std::vector<std::string> &document)
     {
-        for(auto i = document.begin(); i != document.end(); ++i)
+        std::list<std::string> docAsList(document.begin(), document.end());
+
+        for(auto i = docAsList.begin(); i != docAsList.end(); ++i)
         {
             if(StringPrefix("elif ", *i) == 0)
             {
                 std::string ifcheck = (*i).substr(2);
                 *i = "else";
 
-                for(auto endifIter = i; endifIter != document.end(); ++endifIter)
+                for(auto endifIter = i; endifIter != docAsList.end(); ++endifIter)
                 {
                     if(*endifIter == "endif")
                     {
-                        document.insert(endifIter, "endif");
+                        docAsList.insert(endifIter, "endif");
                         break;
                     }
                 }
 
                 ++i;
-                document.insert(i, ifcheck);
+                docAsList.insert(i, ifcheck);
             }
         }
+
+        document.assign(docAsList.begin(), docAsList.end());
     }
 
     void RewriteIfAnd(std::vector<std::string> &document)
@@ -520,10 +524,11 @@ TEST_F(MudProgTests, RewriteElIfs_Works)
         "endif",
         "endif"
     };
-    auto actual = SplitIntoLines(original);
-    RewriteElIfs(actual);
+    auto actual = _env.SplitIntoLines(original);
+    _env.RewriteElIfs(actual);
 
-    EXPECT_EQ(expected, actual);
+    std::list<std::string> actualAsList(actual.begin(), actual.end());
+    EXPECT_EQ(expected, actualAsList);
 }
 
 TEST_F(MudProgTests, RewriteIfAnd_Works)
@@ -548,10 +553,11 @@ TEST_F(MudProgTests, RewriteIfAnd_Works)
         "somethingelse",
         "endif"
     };
-    auto actual = SplitIntoLines(original);
-    RewriteIfAnd(actual);
+    auto actual = _env.SplitIntoLines(original);
+    _env.RewriteIfAnd(actual);
 
-    EXPECT_EQ(expected, actual);
+    std::list<std::string> actualAsList(actual.begin(), actual.end());
+    EXPECT_EQ(expected, actualAsList);
 }
 
 TEST_F(MudProgTests, ComplexExample_Works)
@@ -587,12 +593,13 @@ TEST_F(MudProgTests, ComplexExample_Works)
         "endif",
         "endif"
     };
-    auto actual = SplitIntoLines(original);
-    DiscardComments(actual);
-    RewriteElIfs(actual);
-    RewriteIfAnd(actual);
+    auto actual = _env.SplitIntoLines(original);
+    _env.DiscardComments(actual);
+    _env.RewriteElIfs(actual);
+    _env.RewriteIfAnd(actual);
 
-    EXPECT_EQ(expected, actual);
+    std::list<std::string> actualAsList(actual.begin(), actual.end());
+    EXPECT_EQ(expected, actualAsList);
 }
 
 TEST_F(MudProgTests, JoinAsString_Works)
@@ -620,7 +627,7 @@ TEST_F(MudProgTests, JoinAsString_Works)
         "endif"
     };
 
-    auto actual = JoinAsString(original);
+    auto actual = _env.JoinAsString(original);
 
     EXPECT_EQ(expected, actual);
 }
