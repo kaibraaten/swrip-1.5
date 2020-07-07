@@ -9,20 +9,16 @@
 #include <sstream>
 #include <stdexcept>
 #include <algorithm>
+#include <cstring>
 
 #include "repos/macrorepository.hpp"
 
 std::list<std::string> SplitIntoList(std::string input);
 std::vector<std::string> SplitIntoVector(std::string input);
 
-template<typename ContainerT>
-std::string JoinAsString(const ContainerT &container, const std::string &separator = "\r\n")
-{
-    return JoinAsString(std::cbegin(container), std::cend(container), separator);
-}
-
 template<typename Iter>
-std::string JoinAsString(Iter begin, Iter end, const std::string &separator = "\r\n")
+std::string JoinAsString(const Iter &begin, const Iter &end,
+                         const std::string &separator = "\r\n")
 {
     std::ostringstream buf;
 

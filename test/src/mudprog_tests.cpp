@@ -328,7 +328,7 @@ TEST_F(MudProgTests, JoinAsString_Works)
         "endif"
     };
 
-    auto actual = JoinAsString(original);
+    auto actual = JoinAsString(std::cbegin(original), std::cend(original));
 
     EXPECT_EQ(expected, actual);
 }
@@ -533,7 +533,7 @@ TEST_F(MudProgTests, ExpandMacros_GroupedMacros)
         "endif"
     };
 
-    auto text = JoinAsString(script);
+    auto text = JoinAsString(std::cbegin(script), std::cend(script));
     _env.PreprocessScript(text);
     auto actual = SplitIntoVector(text);
 

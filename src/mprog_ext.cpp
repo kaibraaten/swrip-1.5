@@ -350,5 +350,5 @@ void MudProgEnvironment::PreprocessScript(std::string &com_list)
         pp->Process(script);
     }
 
-    com_list = JoinAsString(script);
+    com_list = JoinAsString(std::cbegin(script), std::cend(script));
 }
