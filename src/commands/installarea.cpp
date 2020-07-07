@@ -57,7 +57,6 @@ void do_installarea(std::shared_ptr<Character> ch, std::string argument)
             }
         }
 
-        top_area++;
         ch->Echo("Resetting new area.\r\n");
         auto num = tarea->NumberOfPlayers;
         tarea->NumberOfPlayers = 0;

@@ -1240,11 +1240,6 @@ int LuaAreaRepository::L_AreaEntry(lua_State *L)
     LoadResets(L, area);
     Areas->Add(area);
 
-    if(!area->Flags.test(Flag::Area::Prototype))
-    {
-        top_area++;
-    }
-
     fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
             area->Filename.c_str(),
             area->VnumRanges.Room.First, area->VnumRanges.Room.Last,

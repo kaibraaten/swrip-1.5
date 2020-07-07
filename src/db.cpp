@@ -266,15 +266,10 @@ std::unordered_map<vnum_t, std::shared_ptr<ProtoObject>> ProtoObjects;
 std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 
 int top_affect = 0;
-int top_area = 0;
 int top_ed = 0;
 int top_exit = 0;
-int top_mob_index = 0;
-int top_obj_index = 0;
 int top_reset = 0;
 int top_room = 0;
-int top_shop = 0;
-int top_repair = 0;
 int top_vroom = 0;
 
 /*

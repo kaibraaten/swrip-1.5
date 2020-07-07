@@ -1973,7 +1973,15 @@ static void MudProgDriver(std::string com_list, std::shared_ptr<Character> mob,
 
     auto rndm = GetRandomVisiblePlayerInRoom(mob->InRoom);
 
-    PreprocessScript(com_list);
+    try
+    {
+        PreprocessScript(com_list);
+    }
+    catch(const MudProgException &ex)
+    {
+        ProgBug(ex.what(), mob);
+        return;
+    }
 
     strcpy(tmpcmndlst, com_list.c_str());
     command_list = tmpcmndlst;
