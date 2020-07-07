@@ -115,10 +115,9 @@ void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, std:
                         std::shared_ptr<Object> obj, const Vo &vo);
 
 
-std::list<std::string> SplitIntoLines(std::string input);
-void DiscardComments(std::list<std::string> &document);
-void RewriteElIfs(std::list<std::string> &document);
-void RewriteIfAnd(std::list<std::string> &document);
+std::list<std::string> SplitIntoList(std::string input);
+std::vector<std::string> SplitIntoVector(std::string input);
+
 std::shared_ptr<Object> GetObjectFromSupermob(const std::shared_ptr<Character> supermob);
 
 template<typename ContainerT>
@@ -127,8 +126,8 @@ std::string JoinAsString(const ContainerT &container, const std::string &separat
     return JoinAsString(std::cbegin(container), std::cend(container), separator);
 }
 
-template<typename Iter1, typename Iter2>
-std::string JoinAsString(Iter1 begin, Iter2 end, const std::string &separator = "\r\n")
+template<typename Iter>
+std::string JoinAsString(Iter begin, Iter end, const std::string &separator = "\r\n")
 {
     std::ostringstream buf;
 
@@ -139,5 +138,14 @@ std::string JoinAsString(Iter1 begin, Iter2 end, const std::string &separator = 
 
     return buf.str();
 }
+
+class MudProgMacroCode
+{
+public:
+    MudProgMacroCode(const std::string &code) : Text(code)
+    {
+    }
+    std::string Text;
+};
 
 #endif

@@ -1873,11 +1873,13 @@ static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob,
 // legacy script that can be run by the driver.
 static void PreprocessScript(std::string &com_list)
 {
+    /*
     auto script = SplitIntoLines(com_list);
     DiscardComments(script);
     RewriteElIfs(script);
     //RewriteIfAnd(script);
     com_list = JoinAsString(script);
+    */
 }
 
 
@@ -3733,7 +3735,7 @@ std::shared_ptr<Character> GetCharacterInRoomMudProg(std::shared_ptr<Character> 
     return nullptr;
 }
 
-std::list<std::string> SplitIntoLines(std::string input)
+std::list<std::string> SplitIntoList(std::string input)
 {
     std::list<std::string> output;
 
@@ -3765,63 +3767,10 @@ std::list<std::string> SplitIntoLines(std::string input)
     return output;
 }
 
-void DiscardComments(std::list<std::string> &document)
+std::vector<std::string> SplitIntoVector(std::string input)
 {
-    for(auto it = document.begin(); it != document.end(); )
-    {
-        if(StringPrefix("--", *it) == 0)
-        {
-            it = document.erase(it);
-        }
-        else
-        {
-            ++it;
-        }
-    }
-}
-
-void RewriteElIfs(std::list<std::string> &document)
-{
-    for(auto i = document.begin(); i != document.end(); ++i)
-    {
-        if(StringPrefix("elif ", *i) == 0)
-        {
-            std::string ifcheck = (*i).substr(2);
-            *i = "else";
-
-            for(auto endifIter = i; endifIter != document.end(); ++endifIter)
-            {
-                if(*endifIter == "endif")
-                {
-                    document.insert(endifIter, "endif");
-                    break;
-                }
-            }
-
-            ++i;
-            document.insert(i, ifcheck);
-        }
-    }
-}
-
-void RewriteIfAnd(std::list<std::string> &document)
-{
-    for(auto i = document.begin(); i != document.end(); ++i)
-    {
-        if(StringPrefix("and ", *i) == 0)
-        {
-            *i = "if" + (*i).substr(3);
-
-            for(auto endblockIter = i; endblockIter != document.end(); ++endblockIter)
-            {
-                if(*endblockIter == "endif" || *endblockIter == "else" || *endblockIter == "elif")
-                {
-                    document.insert(endblockIter, "endif");
-                    break;
-                }
-            }
-        }
-    }
+    auto asList = SplitIntoList(input);
+    return { asList.begin(), asList.end() };
 }
 
 std::shared_ptr<Object> GetObjectFromSupermob(const std::shared_ptr<Character> mob)

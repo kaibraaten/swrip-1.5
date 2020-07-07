@@ -595,6 +595,7 @@ src/repos/dirty.cpp
 src/repos/helprepository.cpp
 src/repos/lua_arearepository.cpp
 src/repos/lua_homerepository.cpp
+src/repos/lua_macrorepository.cpp
 src/repos/lua_storeroomrepository.cpp
 src/repos/lua_vendorrepository.cpp
 src/repos/objectrepository.cpp

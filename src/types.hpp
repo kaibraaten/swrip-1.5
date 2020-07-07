@@ -88,6 +88,7 @@ class Stats;
 class SaveVs;
 class Home;
 struct Vo;
+class MudProgMacroCode;
 
 /*
  * Function types.
