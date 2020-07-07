@@ -8,6 +8,8 @@
 class MacroRepository : public Ceris::Repository<std::shared_ptr<MudProgMacroCode>>
 {
 public:
+    virtual std::shared_ptr<MudProgMacroCode> FindEntry(const std::string &macroname) = 0;
+    virtual std::list<std::string> MacroNameList() const = 0;
     virtual void Load() = 0;
     virtual void Save() const = 0;
 };

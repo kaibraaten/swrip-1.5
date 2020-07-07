@@ -7,226 +7,225 @@
  */
 void do_cedit( std::shared_ptr<Character> ch, std::string argument )
 {
-  Command *command;
-  std::string commandName;
-  std::string arg2;
+    Command *command = nullptr;
+    std::string commandName;
+    std::string arg2;
 
-  SmashTilde( argument );
-  argument = OneArgument( argument, commandName );
-  argument = OneArgument( argument, arg2 );
+    SmashTilde( argument );
+    argument = OneArgument( argument, commandName );
+    argument = OneArgument( argument, arg2 );
 
-  SetCharacterColor( AT_IMMORT, ch );
+    SetCharacterColor( AT_IMMORT, ch );
 
-  if ( commandName.empty() )
+    if ( commandName.empty() )
     {
-      ch->Echo( "Syntax: cedit save\r\n" );
+        ch->Echo( "Syntax: cedit save\r\n" );
 
-      if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM )
+        if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM )
         {
-          ch->Echo( "Syntax: cedit <command> create [code]\r\n" );
-          ch->Echo( "Syntax: cedit <command> delete\r\n" );
-          ch->Echo( "Syntax: cedit <command> show\r\n" );
-          ch->Echo( "Syntax: cedit <command> [field]\r\n" );
-          ch->Echo( "\r\nField being one of:\r\n" );
-          ch->Echo( "  level position log code\r\n" );
+            ch->Echo( "Syntax: cedit <command> create [code]\r\n" );
+            ch->Echo( "Syntax: cedit <command> delete\r\n" );
+            ch->Echo( "Syntax: cedit <command> show\r\n" );
+            ch->Echo( "Syntax: cedit <command> [field]\r\n" );
+            ch->Echo( "\r\nField being one of:\r\n" );
+            ch->Echo( "  level position log code\r\n" );
         }
 
-      return;
+        return;
     }
 
-  if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( commandName, "save" ) )
+    if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( commandName, "save" ) )
     {
-      SaveCommands();
-      ch->Echo( "Saved.\r\n" );
-      return;
+        SaveCommands();
+        ch->Echo( "Saved.\r\n" );
+        return;
     }
 
-  command = GetCommand(commandName, false);
+    command = GetCommand(commandName, false);
 
-  if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM && !StrCmp( arg2, "create" ) )
+    if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM && !StrCmp( arg2, "create" ) )
     {
-      if ( command )
+        if ( command )
         {
-          ch->Echo( "That command already exists!\r\n" );
-          return;
+            ch->Echo( "That command already exists!\r\n" );
+            return;
         }
 
-      command = AllocateCommand();
-      command->Name = commandName;
-      command->Level = GetTrustLevel(ch);
+        command = AllocateCommand();
+        command->Name = commandName;
+        command->Level = GetTrustLevel(ch);
 
-      if ( !argument.empty() )
-        OneArgument(argument, arg2);
-      else
-        arg2 = "do_" + ToLower(commandName);
+        if ( !argument.empty() )
+            OneArgument(argument, arg2);
+        else
+            arg2 = "do_" + ToLower(commandName);
 
-      command->Function = GetSkillFunction( arg2 );
-      AddCommand( command );
-      ch->Echo( "Command added.\r\n" );
+        command->Function = GetSkillFunction( arg2 );
+        AddCommand( command );
+        ch->Echo( "Command added.\r\n" );
 
-      if ( command->Function == skill_notfound )
+        if ( command->Function == skill_notfound )
         {
-          ch->Echo( "Code %s not found. Set to no code.\r\n", arg2.c_str() );
-          command->FunctionName.erase();
+            ch->Echo( "Code %s not found. Set to no code.\r\n", arg2.c_str() );
+            command->FunctionName.erase();
         }
-      else
+        else
         {
-          command->FunctionName = arg2;
-        }
-
-      return;
-    }
-
-  if ( !command )
-    {
-      ch->Echo( "Command not found.\r\n" );
-      return;
-    }
-  else if ( command->Level > GetTrustLevel(ch) )
-    {
-      ch->Echo( "You cannot touch this command.\r\n" );
-      return;
-    }
-
-  if ( arg2.empty() || !StrCmp( arg2, "show" ) )
-    {
-      ch->Echo( "Command:  %s\r\nLevel:    %d\r\nPosition: %s\r\nLog:      %s\r\nCode:     %s\r\n",
-                command->Name.c_str(), command->Level,
-                PositionName[command->Position], CmdLogName[command->Log],
-                command->FunctionName.c_str());
-
-      if ( command->UseRec->NumberOfTimesUsed )
-        SendTimer(command->UseRec, ch);
-
-      return;
-    }
-
-  if ( GetTrustLevel(ch) <= LEVEL_SUB_IMPLEM )
-    {
-      do_cedit( ch, "" );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "delete" ) )
-    {
-      RemoveCommand( command );
-      FreeCommand( command );
-      ch->Echo( "Deleted.\r\n" );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "code" ) )
-    {
-      CmdFun *fun = GetSkillFunction( argument );
-
-      if ( StringPrefix( "do_", argument ) || fun == skill_notfound )
-        {
-	  ch->Echo( "Code not found.\r\n" );
-          return;
+            command->FunctionName = arg2;
         }
 
-      command->Function = fun;
-      command->FunctionName = argument;
-      ch->Echo( "Done.\r\n" );
-      return;
+        return;
     }
 
-  if ( !StrCmp( arg2, "level" ) )
+    if ( !command )
     {
-      int level = strtol( argument.c_str(), nullptr, 10 );
+        ch->Echo( "Command not found.\r\n" );
+        return;
+    }
+    else if ( command->Level > GetTrustLevel(ch) )
+    {
+        ch->Echo( "You cannot touch this command.\r\n" );
+        return;
+    }
 
-      if ( level < 0 || level > GetTrustLevel(ch) )
+    if ( arg2.empty() || !StrCmp( arg2, "show" ) )
+    {
+        ch->Echo( "Command:  %s\r\nLevel:    %d\r\nPosition: %s\r\nLog:      %s\r\nCode:     %s\r\n",
+                  command->Name.c_str(), command->Level,
+                  PositionName[command->Position], CmdLogName[command->Log],
+                  command->FunctionName.c_str());
+
+        if ( command->UseRec->NumberOfTimesUsed )
+            SendTimer(command->UseRec, ch);
+
+        return;
+    }
+
+    if ( GetTrustLevel(ch) <= LEVEL_SUB_IMPLEM )
+    {
+        do_cedit( ch, "" );
+        return;
+    }
+
+    if ( !StrCmp( arg2, "delete" ) )
+    {
+        RemoveCommand( command );
+        FreeCommand( command );
+        ch->Echo( "Deleted.\r\n" );
+        return;
+    }
+
+    if ( !StrCmp( arg2, "code" ) )
+    {
+        CmdFun *fun = GetSkillFunction( argument );
+
+        if ( StringPrefix( "do_", argument ) || fun == skill_notfound )
         {
-          ch->Echo( "Level out of range.\r\n" );
-          return;
+            ch->Echo( "Code not found.\r\n" );
+            return;
         }
 
-      command->Level = level;
-      ch->Echo( "Done.\r\n" );
-      return;
+        command->Function = fun;
+        command->FunctionName = argument;
+        ch->Echo( "Done.\r\n" );
+        return;
     }
 
-  if ( !StrCmp( arg2, "log" ) )
+    if ( !StrCmp( arg2, "level" ) )
     {
-      int log_type = 0;
+        int level = strtol( argument.c_str(), nullptr, 10 );
 
-      if( argument.empty() )
-	{
-	  ch->Echo( "Supply a log type from the following list:\r\n" );
-
-	  for( size_t i = 0; i < MAX_LOG; ++i )
-	    {
-	      ch->Echo( "  %s\r\n", CmdLogName[i] );
-	    }
-
-	  return;
-	}
-
-      log_type = GetCmdLog( argument );
-
-      if ( log_type < 0 )
+        if ( level < 0 || level > GetTrustLevel(ch) )
         {
-          ch->Echo( "Unknown log type.\r\n" );
-          return;
+            ch->Echo( "Level out of range.\r\n" );
+            return;
         }
 
-      ch->Echo( "Log type for %s changed from %s",
-                command->Name.c_str(), CmdLogName[command->Log] );
-      command->Log = log_type;
-      ch->Echo( " to %s.\r\n", CmdLogName[command->Log] );
-      ch->Echo( "Done.\r\n" );
-      return;
+        command->Level = level;
+        ch->Echo( "Done.\r\n" );
+        return;
     }
 
-  if ( !StrCmp( arg2, "position" ) )
+    if ( !StrCmp( arg2, "log" ) )
     {
-      PositionType position = 0;
+        int log_type = 0;
 
-      if( argument.empty() )
+        if( argument.empty() )
         {
-          ch->Echo( "Supply a position from the following list:\r\n" );
+            ch->Echo( "Supply a log type from the following list:\r\n" );
 
-          for( int i = 0; i < MAX_POSITION; ++i )
+            for( size_t i = 0; i < MAX_LOG; ++i )
             {
-              ch->Echo( "  %s\r\n", PositionName[i] );
+                ch->Echo( "  %s\r\n", CmdLogName[i] );
             }
 
-          return;
+            return;
         }
 
-      position = GetPosition( argument );
+        log_type = GetCmdLog( argument );
 
-      if ( position < 0 )
+        if ( log_type < 0 )
         {
-          ch->Echo( "Unknown position.\r\n" );
-          return;
+            ch->Echo( "Unknown log type.\r\n" );
+            return;
         }
 
-      ch->Echo( "Minimum position for %s changed from %s",
-                command->Name.c_str(), PositionName[command->Position] );
-      command->Position = position;
-      ch->Echo( " to %s.\r\n", PositionName[command->Position] );
-      ch->Echo( "Done.\r\n" );
-      return;
+        ch->Echo( "Log type for %s changed from %s",
+                  command->Name.c_str(), CmdLogName[command->Log] );
+        command->Log = log_type;
+        ch->Echo( " to %s.\r\n", CmdLogName[command->Log] );
+        ch->Echo( "Done.\r\n" );
+        return;
     }
 
-  if ( !StrCmp( arg2, "name" ) )
+    if ( !StrCmp( arg2, "position" ) )
     {
-      OneArgument( argument, commandName );
+        PositionType position = 0;
 
-      if ( commandName.empty() )
+        if( argument.empty() )
         {
-          ch->Echo( "Cannot clear name field!\r\n" );
-          return;
+            ch->Echo( "Supply a position from the following list:\r\n" );
+
+            for( int i = 0; i < MAX_POSITION; ++i )
+            {
+                ch->Echo( "  %s\r\n", PositionName[i] );
+            }
+
+            return;
         }
 
-      command->Name = commandName;
+        position = GetPosition( argument );
 
-      ch->Echo( "Done.\r\n" );
-      return;
+        if ( position < 0 )
+        {
+            ch->Echo( "Unknown position.\r\n" );
+            return;
+        }
+
+        ch->Echo( "Minimum position for %s changed from %s",
+                  command->Name.c_str(), PositionName[command->Position] );
+        command->Position = position;
+        ch->Echo( " to %s.\r\n", PositionName[command->Position] );
+        ch->Echo( "Done.\r\n" );
+        return;
     }
 
-  /* display usage message */
-  do_cedit( ch, "" );
-}
+    if ( !StrCmp( arg2, "name" ) )
+    {
+        OneArgument( argument, commandName );
 
+        if ( commandName.empty() )
+        {
+            ch->Echo( "Cannot clear name field!\r\n" );
+            return;
+        }
+
+        command->Name = commandName;
+
+        ch->Echo( "Done.\r\n" );
+        return;
+    }
+
+    /* display usage message */
+    do_cedit( ch, "" );
+}

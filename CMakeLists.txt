@@ -294,6 +294,7 @@ src/commands/lock.cpp
 src/commands/log.cpp
 src/commands/look.cpp
 src/commands/low_purge.cpp
+src/commands/macro.cpp
 src/commands/mailroom.cpp
 src/commands/makearmor.cpp
 src/commands/makeblade.cpp

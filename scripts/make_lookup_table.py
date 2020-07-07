@@ -59,7 +59,7 @@ CmdFun *GetSkillFunction(const std::string &name)
     }
     else
     {
-        return nullptr;
+        return skill_notfound;
     }
 }
 
@@ -73,7 +73,7 @@ SpellFun *GetSpellFunction(const std::string &name)
     }
     else
     {
-        return nullptr;
+        return spell_notfound;
     }
 }
 

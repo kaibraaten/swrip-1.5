@@ -847,6 +847,7 @@ DECLARE_CMD_FUN(do_zones);
 DECLARE_CMD_FUN(do_dock);
 
 /* mob prog stuff */
+DECLARE_CMD_FUN(do_macro);
 DECLARE_CMD_FUN(do_mp_close_passage);
 DECLARE_CMD_FUN(do_mp_damage);
 DECLARE_CMD_FUN(do_mp_restore);

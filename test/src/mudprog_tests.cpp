@@ -90,6 +90,16 @@ public:
         }
     }
 
+    std::shared_ptr<MudProgMacroCode> FindEntry(const std::string &macroname) override
+    {
+        return nullptr;
+    }
+
+    std::list<std::string> MacroNameList() const override
+    {
+        return {};
+    }
+    
     void Load() override
     {
 

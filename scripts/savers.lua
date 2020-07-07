@@ -101,6 +101,10 @@ function savers.savebounties(bounties, filename)
    multisave(bounties, filename, "-- Bounties\n", "\nBountyEntry")
 end
 
+function savers.savemacros(macros, filename)
+   multisave(macros, filename, "-- MudProg macros\n", "\nMacroEntry")
+end
+
 function savers.savehalloffame(halloffame, filename)
    multisave(halloffame, filename, "-- Hall of Fame\n", "\nHallOfFameEntry")
 end
