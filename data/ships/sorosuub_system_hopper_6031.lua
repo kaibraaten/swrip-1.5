@@ -1,12 +1,18 @@
 -- Sorosuub System Hopper
--- Last saved Thursday 02-Jul-2020 14:04:34
+-- Last saved Wednesday 08-Jul-2020 10:37:51
 
 ShipEntry
 {
+   State = 0, 
+   Home = "Adari", 
    PersonalName = "6031", 
-   Description = "", 
-   Pilot = "", 
+   Guard = false, 
+   Location = 32050, 
    Name = "Sorosuub System Hopper", 
+   Alarm = false, 
+   Shipyard = 32050, 
+   Pilot = "", 
+   Description = "", 
    Defenses = 
    {
       Hull = 
@@ -26,7 +32,13 @@ ShipEntry
       }, 
    }, 
    Class = "Starfighter", 
-   Home = "Adari", 
+   Owner = "public", 
+   CoPilot = "", 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   Type = "Civilian", 
    Thrusters = 
    {
       Speed = 
@@ -34,29 +46,61 @@ ShipEntry
          Max = 65, 
          Current = 0, 
       }, 
+      Maneuver = 35, 
       Energy = 
       {
          Max = 2000, 
          Current = 2000, 
       }, 
-      Maneuver = 35, 
    }, 
-   Alarm = false, 
-   Hyperdrive = 
+   Instruments = 
    {
-      Speed = 100, 
+      Sensor = 0, 
+      Comm = 0, 
+      AstroArray = 0, 
    }, 
+   Position = 
+   {
+      X = -276002, 
+      Y = -1032456, 
+      Z = -31794, 
+   }, 
+   LastDock = 32050, 
    WeaponSystems = 
    {
-      Laser = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
       TractorBeam = 
       {
-         Strength = 0, 
          State = 1, 
+         Strength = 0, 
+      }, 
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      Tube = 
+      {
+         State = 0, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
       }, 
       Turrets = 
       {
@@ -111,63 +155,19 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      IonCannon = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
-      Tube = 
-      {
-         Missiles = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         State = 0, 
-      }, 
-   }, 
-   Guard = false, 
-   CoPilot = "", 
-   Rooms = 
-   {
-      Pilotseat = 32156, 
-      Hangar = 0, 
-      Gunseat = 32156, 
-      First = 32156, 
-      Coseat = 32156, 
-      Cockpit = 32156, 
-      Last = 32156, 
-      Engine = 0, 
-      Entrance = 32156, 
-      Navseat = 32156, 
-   }, 
-   State = 0, 
-   Type = "Civilian", 
-   LastDock = 32050, 
-   Shipyard = 32050, 
-   Instruments = 
-   {
-      AstroArray = 0, 
-      Comm = 0, 
-      Sensor = 0, 
-   }, 
-   Location = 32050, 
-   Position = 
-   {
-      X = -276002, 
-      Z = -31794, 
-      Y = -1032456, 
    }, 
    DockingPorts = 0, 
-   Owner = "public", 
+   Rooms = 
+   {
+      Hangar = 0, 
+      Gunseat = 32156, 
+      Pilotseat = 32156, 
+      First = 32156, 
+      Navseat = 32156, 
+      Cockpit = 32156, 
+      Entrance = 32156, 
+      Coseat = 32156, 
+      Engine = 0, 
+      Last = 32156, 
+   }, 
 }

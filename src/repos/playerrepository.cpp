@@ -45,8 +45,8 @@ public:
     time_t LastOnline(const std::string &name) const override;
     
 protected:
-    void OnAdded(std::shared_ptr<Character> &entity) override;
-    void OnRemoved(std::shared_ptr<Character> &entity) override;
+    void OnAdded(const std::shared_ptr<Character> &entity) override;
+    void OnRemoved(const std::shared_ptr<Character> &entity) override;
 
 private:
     static constexpr int SAVE_VERSION = 1;
@@ -1018,12 +1018,12 @@ void InMemoryPlayerRepository::Save(std::shared_ptr<Character> pc) const
     saving_char.reset();
 }
 
-void InMemoryPlayerRepository::OnAdded(std::shared_ptr<Character> &entity)
+void InMemoryPlayerRepository::OnAdded(const std::shared_ptr<Character> &entity)
 {
     assert(!IsNpc(entity));
 }
 
-void InMemoryPlayerRepository::OnRemoved(std::shared_ptr<Character> &entity)
+void InMemoryPlayerRepository::OnRemoved(const std::shared_ptr<Character> &entity)
 {
 
 }

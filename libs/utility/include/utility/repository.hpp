@@ -68,7 +68,7 @@ namespace Ceris
          *
          * \param entity The object to add.
          */
-        void Add(T &entity);
+        void Add(const T &entity);
 
         /**
          * Remove an object from the repository. This will NOT automatically
@@ -76,7 +76,7 @@ namespace Ceris
          *
          * \param entity The object to remove.
          */
-        void Remove(T &entity);
+        void Remove(const T &entity);
 
         /**
          * Get the number of objects stored in the repository.
@@ -144,7 +144,7 @@ namespace Ceris
          * \param entity The object that was added, which in turn is the
          *               same one that was passed to Add().
          */
-        virtual void OnAdded(T &entity);
+        virtual void OnAdded(const T &entity);
 
         /**
          * Called by Remove() after the object is removed.
@@ -152,7 +152,7 @@ namespace Ceris
          * \param entity The object that was removed, which in turn is the
          *               same one that was passed to Remove().
          */
-        virtual void OnRemoved(T &entity);
+        virtual void OnRemoved(const T &entity);
 
     private:
         std::set<T, Compare> _entities;
@@ -209,7 +209,7 @@ namespace Ceris
     }
 
     template<typename T, typename Compare>
-    void Repository<T, Compare>::Add(T &entity)
+    void Repository<T, Compare>::Add(const T &entity)
     {
         _entities.insert(entity);
         _containerChanged = true;
@@ -217,7 +217,7 @@ namespace Ceris
     }
 
     template<typename T, typename Compare>
-    void Repository<T, Compare>::Remove(T &entity)
+    void Repository<T, Compare>::Remove(const T &entity)
     {
         _entities.erase(entity);
         _containerChanged = true;
@@ -225,13 +225,13 @@ namespace Ceris
     }
 
     template<typename T, typename Compare>
-    void Repository<T, Compare>::OnAdded(T &entity)
+    void Repository<T, Compare>::OnAdded(const T &entity)
     {
         // Default implementation no-op
     }
 
     template<typename T, typename Compare>
-    void Repository<T, Compare>::OnRemoved(T &entity)
+    void Repository<T, Compare>::OnRemoved(const T &entity)
     {
         // Default implementation no-op
     }

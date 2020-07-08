@@ -125,8 +125,7 @@ static void EditCommand(std::shared_ptr<Character> ch, std::shared_ptr<MudProgMa
 
                          if(scriptAsList.empty())
                          {
-                             auto macroToRemove = macro;
-                             Macros->Remove(macroToRemove);
+                             Macros->Remove(macro);
                              ch->Echo("Macro entry removed.\r\n");
                          }
                      });

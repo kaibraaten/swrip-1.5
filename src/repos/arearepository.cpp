@@ -25,7 +25,7 @@ const std::list<std::shared_ptr<Area>> &AreaRepository::AreasInProgress() const 
     return pImpl->AreasInProgress;
 }
 
-void AreaRepository::OnAdded(std::shared_ptr<Area> &area)
+void AreaRepository::OnAdded(const std::shared_ptr<Area> &area)
 {
     if(area->Flags.test(Flag::Area::Prototype))
     {
@@ -39,7 +39,7 @@ void AreaRepository::OnAdded(std::shared_ptr<Area> &area)
     }
 }
 
-void AreaRepository::OnRemoved(std::shared_ptr<Area> &area)
+void AreaRepository::OnRemoved(const std::shared_ptr<Area> &area)
 {
     pImpl->AreasInProgress.remove(area);
 }

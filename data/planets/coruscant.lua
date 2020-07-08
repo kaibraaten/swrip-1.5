@@ -1,20 +1,20 @@
 -- Coruscant
--- Last saved Thursday 02-Jul-2020 13:53:33
+-- Last saved Wednesday 08-Jul-2020 09:56:57
 
 PlanetEntry
 {
-   GovernedBy = "The Empire", 
    Spaceobject = "Coruscant", 
+   Flags = 
+   {
+      [0] = "NoCapture", 
+   }, 
+   GovernedBy = "The Empire", 
+   PopulationSupport = 0, 
    Name = "Coruscant", 
    Areas = 
    {
       [1] = "coruscant_streets.lua", 
       [2] = "manarai_spaceport.lua", 
-   }, 
-   PopulationSupport = 0, 
-   Flags = 
-   {
-      [0] = "NoCapture", 
    }, 
    BaseValue = 0, 
 }

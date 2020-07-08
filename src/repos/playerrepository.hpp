@@ -22,8 +22,8 @@ public:
     virtual time_t LastOnline(const std::string &name) const = 0;
     
 protected:
-    virtual void OnAdded(std::shared_ptr<Character> &entity) = 0;
-    virtual void OnRemoved(std::shared_ptr<Character> &entity) = 0;
+    virtual void OnAdded(const std::shared_ptr<Character> &entity) = 0;
+    virtual void OnRemoved(const std::shared_ptr<Character> &entity) = 0;
 };
 
 extern std::shared_ptr<PlayerRepository> PlayerCharacters;

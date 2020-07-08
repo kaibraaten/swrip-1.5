@@ -29,8 +29,8 @@ public:
     std::shared_ptr<Area> FindProtoArea(const std::string &name) const;
     
 protected:
-    void OnAdded(std::shared_ptr<Area> &area) override;
-    void OnRemoved(std::shared_ptr<Area> &area) override;
+    void OnAdded(const std::shared_ptr<Area> &area) override;
+    void OnRemoved(const std::shared_ptr<Area> &area) override;
 
 private:
     struct Impl;

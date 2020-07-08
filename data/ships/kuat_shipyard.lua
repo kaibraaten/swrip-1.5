@@ -1,12 +1,18 @@
 -- Kuat Shipyard
--- Last saved Thursday 02-Jul-2020 14:04:34
+-- Last saved Wednesday 08-Jul-2020 10:37:51
 
 ShipEntry
 {
+   State = 1, 
+   Home = "Kuat", 
    PersonalName = "Kuat Shipyard", 
-   Description = "", 
-   Pilot = "Kai", 
+   Guard = false, 
+   Location = 0, 
    Name = "Kuat Shipyard", 
+   Alarm = false, 
+   Shipyard = 32050, 
+   Pilot = "Kai", 
+   Description = "", 
    Defenses = 
    {
       Hull = 
@@ -26,7 +32,13 @@ ShipEntry
       }, 
    }, 
    Class = "Platform", 
-   Home = "Kuat", 
+   Owner = "The Empire", 
+   CoPilot = "", 
+   Hyperdrive = 
+   {
+      Speed = 255, 
+   }, 
+   Type = "Mob", 
    Thrusters = 
    {
       Speed = 
@@ -34,29 +46,61 @@ ShipEntry
          Max = 0, 
          Current = 0, 
       }, 
+      Maneuver = 0, 
       Energy = 
       {
          Max = 30000, 
          Current = 30000, 
       }, 
-      Maneuver = 0, 
    }, 
-   Alarm = false, 
-   Hyperdrive = 
+   Instruments = 
    {
-      Speed = 255, 
+      Sensor = 255, 
+      Comm = 0, 
+      AstroArray = 0, 
    }, 
+   Position = 
+   {
+      X = 4215, 
+      Y = 1345, 
+      Z = 1803, 
+   }, 
+   LastDock = 32050, 
    WeaponSystems = 
    {
-      Laser = 
-      {
-         State = 0, 
-         Count = 10, 
-      }, 
       TractorBeam = 
       {
-         Strength = 0, 
          State = 1, 
+         Strength = 0, 
+      }, 
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 10, 
+         State = 0, 
+      }, 
+      Tube = 
+      {
+         State = 0, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Missiles = 
+         {
+            Max = 100, 
+            Current = 100, 
+         }, 
       }, 
       Turrets = 
       {
@@ -111,63 +155,19 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      IonCannon = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
-      Tube = 
-      {
-         Missiles = 
-         {
-            Max = 100, 
-            Current = 100, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         State = 0, 
-      }, 
-   }, 
-   Guard = false, 
-   CoPilot = "", 
-   Rooms = 
-   {
-      Pilotseat = 32099, 
-      Hangar = 32050, 
-      Gunseat = 32099, 
-      First = 32050, 
-      Coseat = 32099, 
-      Cockpit = 32099, 
-      Last = 32099, 
-      Engine = 0, 
-      Entrance = 32099, 
-      Navseat = 32099, 
-   }, 
-   State = 1, 
-   Type = "Mob", 
-   LastDock = 32050, 
-   Shipyard = 32050, 
-   Instruments = 
-   {
-      AstroArray = 0, 
-      Comm = 0, 
-      Sensor = 255, 
-   }, 
-   Location = 0, 
-   Position = 
-   {
-      X = 4215, 
-      Z = 1803, 
-      Y = 1345, 
    }, 
    DockingPorts = 0, 
-   Owner = "The Empire", 
+   Rooms = 
+   {
+      Hangar = 32050, 
+      Gunseat = 32099, 
+      Pilotseat = 32099, 
+      First = 32050, 
+      Navseat = 32099, 
+      Cockpit = 32099, 
+      Entrance = 32099, 
+      Coseat = 32099, 
+      Engine = 0, 
+      Last = 32099, 
+   }, 
 }
