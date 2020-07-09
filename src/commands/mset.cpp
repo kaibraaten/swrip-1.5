@@ -1604,46 +1604,66 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
     if(!StrCmp(arg2, "speaks"))
     {
         if(!CanModifyCharacter(ch, victim))
+        {
             return;
+        }
 
+        const int validLangs = LANG_COMMON | LANG_WOOKIEE | LANG_TWI_LEK | LANG_RODIAN
+            | LANG_HUTT | LANG_MON_CALAMARI | LANG_NOGHRI | LANG_SHISTAVANEN
+            | LANG_EWOK | LANG_ITHORIAN | LANG_GOTAL | LANG_DEVARONIAN | LANG_BARABEL
+            | LANG_FIRRERREO | LANG_BOTHAN | LANG_GAMORREAN | LANG_TOGORIAN
+            | LANG_KUBAZ | LANG_JAWA | LANG_ADARIAN | LANG_VERPINE
+            | LANG_DEFEL | LANG_TRANDOSHAN | LANG_CHADRA_FAN | LANG_QUARREN
+            | LANG_SULLUSTAN | LANG_FALLEEN | LANG_BINARY | LANG_YEVETHAN
+            | LANG_GAND | LANG_DUROS | LANG_COYNITE;
+        
         if(argument.empty())
         {
             ch->Echo("Usage: mset <victim> speaks <language> [language] ...\r\n");
             return;
         }
-
-        while(!argument.empty())
+        else if(StrCmp(argument, "all") == 0)
         {
-            argument = OneArgument(argument, arg3);
-            value = GetLanguage(arg3);
-            if(value == LANG_UNKNOWN)
-                ch->Echo("Unknown language: %s\r\n", arg3.c_str());
-            else
-                if(!IsNpc(victim))
+            victim->Speaks = validLangs;
+        }
+        else
+        {
+            while(!argument.empty())
+            {
+                argument = OneArgument(argument, arg3);
+                value = GetLanguage(arg3);
+            
+                if(value == LANG_UNKNOWN)
                 {
-                    int valid_langs = LANG_COMMON | LANG_WOOKIEE | LANG_TWI_LEK | LANG_RODIAN
-                        | LANG_HUTT | LANG_MON_CALAMARI | LANG_NOGHRI | LANG_GAMORREAN
-                        | LANG_JAWA | LANG_ADARIAN | LANG_EWOK | LANG_VERPINE | LANG_DEFEL
-                        | LANG_TRANDOSHAN | LANG_CHADRA_FAN | LANG_QUARREN | LANG_SULLUSTAN
-                        | LANG_FALLEEN | LANG_DEVARONIAN | LANG_GOTAL | LANG_ITHORIAN | LANG_BINARY;
-
-                    if(!(value &= valid_langs))
+                    ch->Echo("Unknown language: %s\r\n", arg3.c_str());
+                }
+                else if(!IsNpc(victim))
+                {
+                    if(!(value &= validLangs))
                     {
                         ch->Echo("Players may not know %s.\r\n", arg3.c_str());
                         continue;
                     }
                 }
-            ToggleBit(victim->Speaks, value);
+            
+                ToggleBit(victim->Speaks, value);
+            }
         }
+        
         if(!IsNpc(victim))
         {
             RemoveBit(victim->Speaks, RaceTable[victim->Race].Language);
+            
             if(!CharacterKnowsLanguage(victim, victim->Speaking, victim))
+            {
                 victim->Speaking = RaceTable[victim->Race].Language;
+            }
         }
-        else
-            if(victim->Flags.test(Flag::Mob::Prototype))
-                victim->Prototype->Speaks = victim->Speaks;
+        else if(victim->Flags.test(Flag::Mob::Prototype))
+        {
+            victim->Prototype->Speaks = victim->Speaks;
+        }
+        
         ch->Echo("Done.\r\n");
         return;
     }

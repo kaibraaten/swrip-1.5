@@ -29,7 +29,7 @@ namespace Flag
             _11,
             PetShop,
             Arena,
-            Donation,
+            _14, // Donation
             NoDropAll,
             Silence,
             LogSpeech,
@@ -42,7 +42,7 @@ namespace Flag
             NoFloor,
             Refinery,
             Factory,
-            Recruit,
+            _27, //Recruit
             PlayerShop,
             Spacecraft,
             Prototype,

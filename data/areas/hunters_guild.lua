@@ -1,14 +1,351 @@
 -- Hunters Guild
--- Last saved Monday 29-Jun-2020 11:15:46
+-- Last saved Thursday 09-Jul-2020 21:56:48
 
 AreaEntry
 {
-   HighEconomy = 0, 
-   LowEconomy = 14557142, 
+   LowEconomy = 14555642, 
+   Name = "Hunters Guild", 
+   ResetFrequency = 0, 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         First = 6600, 
+         Last = 6605, 
+      }, 
+      Room = 
+      {
+         First = 6600, 
+         Last = 6650, 
+      }, 
+      Object = 
+      {
+         First = 6600, 
+         Last = 6637, 
+      }, 
+   }, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg3 = 6627, 
+         Command = "M", 
+         Arg2 = 1, 
+         Arg1 = 32050, 
+         MiscData = 1, 
+      }, 
+      [2] = 
+      {
+         Arg3 = 16, 
+         Command = "E", 
+         Arg2 = 1, 
+         Arg1 = 32275, 
+         MiscData = 1, 
+      }, 
+      [3] = 
+      {
+         Arg3 = 6614, 
+         Command = "O", 
+         Arg2 = 2, 
+         Arg1 = 6603, 
+         MiscData = 0, 
+      }, 
+      [4] = 
+      {
+         Arg3 = 6613, 
+         Command = "O", 
+         Arg2 = 2, 
+         Arg1 = 6603, 
+         MiscData = 0, 
+      }, 
+      [5] = 
+      {
+         Arg3 = 6613, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 6605, 
+         MiscData = 0, 
+      }, 
+      [6] = 
+      {
+         Arg3 = 6613, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 6606, 
+         MiscData = 0, 
+      }, 
+      [7] = 
+      {
+         Arg3 = 6616, 
+         Command = "M", 
+         Arg2 = 1, 
+         Arg1 = 6600, 
+         MiscData = 0, 
+      }, 
+      [8] = 
+      {
+         Arg3 = 6615, 
+         Command = "M", 
+         Arg2 = 1, 
+         Arg1 = 6601, 
+         MiscData = 0, 
+      }, 
+      [9] = 
+      {
+         Arg3 = 2, 
+         Command = "D", 
+         Arg2 = 2, 
+         Arg1 = 6637, 
+         MiscData = 0, 
+      }, 
+      [10] = 
+      {
+         Arg3 = 6635, 
+         Command = "M", 
+         Arg2 = 60, 
+         Arg1 = 204, 
+         MiscData = 1, 
+      }, 
+      [11] = 
+      {
+         Arg3 = 6635, 
+         Command = "M", 
+         Arg2 = 60, 
+         Arg1 = 204, 
+         MiscData = 1, 
+      }, 
+      [12] = 
+      {
+         Arg3 = 6635, 
+         Command = "M", 
+         Arg2 = 60, 
+         Arg1 = 204, 
+         MiscData = 1, 
+      }, 
+      [13] = 
+      {
+         Arg3 = 6635, 
+         Command = "M", 
+         Arg2 = 60, 
+         Arg1 = 204, 
+         MiscData = 1, 
+      }, 
+      [14] = 
+      {
+         Arg3 = 6612, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 6601, 
+         MiscData = 1, 
+      }, 
+      [15] = 
+      {
+         Arg3 = 6612, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 6602, 
+         MiscData = 1, 
+      }, 
+      [16] = 
+      {
+         Arg3 = 6612, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 6603, 
+         MiscData = 1, 
+      }, 
+      [17] = 
+      {
+         Arg3 = 6612, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 38, 
+         MiscData = 1, 
+      }, 
+      [18] = 
+      {
+         Arg3 = 6603, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 32201, 
+         MiscData = 1, 
+      }, 
+      [19] = 
+      {
+         Arg3 = 6624, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 6615, 
+         MiscData = 1, 
+      }, 
+      [20] = 
+      {
+         Arg3 = 1, 
+         Command = "D", 
+         Arg2 = 0, 
+         Arg1 = 6624, 
+         MiscData = 0, 
+      }, 
+      [21] = 
+      {
+         Arg3 = 2, 
+         Command = "D", 
+         Arg2 = 0, 
+         Arg1 = 6638, 
+         MiscData = 0, 
+      }, 
+      [22] = 
+      {
+         Arg3 = 1, 
+         Command = "D", 
+         Arg2 = 0, 
+         Arg1 = 6639, 
+         MiscData = 0, 
+      }, 
+      [23] = 
+      {
+         Arg3 = 1, 
+         Command = "D", 
+         Arg2 = 1, 
+         Arg1 = 6639, 
+         MiscData = 0, 
+      }, 
+      [24] = 
+      {
+         Arg3 = 2, 
+         Command = "D", 
+         Arg2 = 2, 
+         Arg1 = 6639, 
+         MiscData = 0, 
+      }, 
+      [25] = 
+      {
+         Arg3 = 1, 
+         Command = "D", 
+         Arg2 = 3, 
+         Arg1 = 6639, 
+         MiscData = 0, 
+      }, 
+      [26] = 
+      {
+         Arg3 = 6629, 
+         Command = "M", 
+         Arg2 = 2, 
+         Arg1 = 6603, 
+         MiscData = 1, 
+      }, 
+      [27] = 
+      {
+         Command = "G", 
+         Arg1 = 10313, 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [28] = 
+      {
+         Command = "G", 
+         Arg1 = 10314, 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [29] = 
+      {
+         Command = "G", 
+         Arg1 = 32254, 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [30] = 
+      {
+         Command = "G", 
+         Arg1 = 6610, 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [31] = 
+      {
+         Command = "G", 
+         Arg1 = 6612, 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [32] = 
+      {
+         Command = "G", 
+         Arg1 = 33, 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [33] = 
+      {
+         Command = "G", 
+         Arg1 = 6637, 
+         MiscData = 1, 
+         Arg2 = 1, 
+      }, 
+      [34] = 
+      {
+         Arg3 = 6629, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 6616, 
+         MiscData = 1, 
+      }, 
+      [35] = 
+      {
+         Arg3 = 6604, 
+         Command = "M", 
+         Arg2 = 1, 
+         Arg1 = 6602, 
+         MiscData = 1, 
+      }, 
+      [36] = 
+      {
+         Arg3 = 6604, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 6617, 
+         MiscData = 1, 
+      }, 
+      [37] = 
+      {
+         Arg3 = 6631, 
+         Command = "M", 
+         Arg2 = 1, 
+         Arg1 = 6604, 
+         MiscData = 1, 
+      }, 
+      [38] = 
+      {
+         Arg3 = 6626, 
+         Command = "O", 
+         Arg2 = 1, 
+         Arg1 = 38, 
+         MiscData = 1, 
+      }, 
+      [39] = 
+      {
+         Arg3 = 6628, 
+         Command = "M", 
+         Arg2 = 1, 
+         Arg1 = 6605, 
+         MiscData = 1, 
+      }, 
+   }, 
    Objects = 
    {
       [6600] = 
       {
+         Weight = 1, 
+         Layers = 0, 
+         Name = "terminal board message", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Description = "A galactic net message terminal is installed on the wall here.", 
+         Vnum = 6600, 
+         ItemType = "furniture", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -18,11 +355,6 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "terminal board message", 
-         ShortDescr = "a terminal", 
-         Vnum = 6600, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -34,17 +366,22 @@ AreaEntry
 \13", 
             }, 
          }, 
-         ItemType = "furniture", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "a terminal", 
+      }, 
+      [6601] = 
+      {
+         Weight = 1, 
+         Layers = 0, 
+         Name = "guildmasters desk", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A galactic net message terminal is installed on the wall here.", 
-      }, 
-      [6601] = 
-      {
+         Description = "A giant wooden desk.", 
+         Vnum = 6601, 
+         ItemType = "trash", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -54,11 +391,6 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "guildmasters desk", 
-         ShortDescr = "guildmasters desk", 
-         Vnum = 6601, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -70,17 +402,19 @@ AreaEntry
 \13", 
             }, 
          }, 
-         ItemType = "trash", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A giant wooden desk.", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "guildmasters desk", 
       }, 
       [6602] = 
       {
+         Weight = 1, 
+         Layers = 0, 
+         Name = "guildmasters chair", 
+         Cost = 0, 
+         Description = "A giant managers chair.", 
+         Vnum = 6602, 
+         ItemType = "trash", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -90,11 +424,7 @@ AreaEntry
             [5] = 0, 
             [0] = 2, 
          }, 
-         Cost = 0, 
          ActionDescription = "", 
-         Name = "guildmasters chair", 
-         ShortDescr = "guildmasters  chair", 
-         Vnum = 6602, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -104,13 +434,17 @@ AreaEntry
 \13", 
             }, 
          }, 
-         ItemType = "trash", 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A giant managers chair.", 
+         ShortDescr = "guildmasters  chair", 
       }, 
       [6603] = 
       {
+         Weight = 1, 
+         Layers = 0, 
+         Name = "Guest chair", 
+         Cost = 0, 
+         Description = "A uncomfortable guests chair.", 
+         Vnum = 6603, 
+         ItemType = "furniture", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -120,11 +454,7 @@ AreaEntry
             [5] = 0, 
             [0] = 2, 
          }, 
-         Cost = 0, 
          ActionDescription = "", 
-         Name = "Guest chair", 
-         ShortDescr = "guest chair", 
-         Vnum = 6603, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -134,13 +464,20 @@ AreaEntry
 \13", 
             }, 
          }, 
-         ItemType = "furniture", 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A uncomfortable guests chair.", 
+         ShortDescr = "guest chair", 
       }, 
       [6604] = 
       {
+         Weight = 100, 
+         Layers = 0, 
+         Name = "small table", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Description = "A small table is here acting as a desk.", 
+         Vnum = 6604, 
+         ItemType = "furniture", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -150,11 +487,6 @@ AreaEntry
             [5] = 0, 
             [0] = 3, 
          }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "small table", 
-         ShortDescr = "small table", 
-         Vnum = 6604, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -165,17 +497,22 @@ AreaEntry
 \13", 
             }, 
          }, 
-         ItemType = "furniture", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "small table", 
+      }, 
+      [6605] = 
+      {
+         Weight = 1, 
+         Layers = 0, 
+         Name = "Small Desk", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Weight = 100, 
-         Layers = 0, 
-         Description = "A small table is here acting as a desk.", 
-      }, 
-      [6605] = 
-      {
+         Description = "A small desk sits here.", 
+         Vnum = 6605, 
+         ItemType = "furniture", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -185,38 +522,35 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "Small Desk", 
-         ShortDescr = "small desk", 
-         Vnum = 6605, 
          ExtraDescriptions = 
          {
             [1] = 
-            {
-               Keyword = "Paper", 
-               Description = "This paper says a single word: Labria : wonder what it means\
-\13", 
-            }, 
-            [2] = 
             {
                Keyword = "Small Desk", 
                Description = "A small desk is here covered in paperwork , some of it looks like it might\
 \13be important. \
 \13", 
             }, 
+            [2] = 
+            {
+               Keyword = "Paper", 
+               Description = "This paper says a single word: Labria : wonder what it means\
+\13", 
+            }, 
          }, 
-         ItemType = "furniture", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A small desk sits here.", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "small desk", 
       }, 
       [6606] = 
       {
+         Weight = 100, 
+         Layers = 0, 
+         Name = "Managers chair", 
+         Cost = 0, 
+         Description = "A small managers chair.", 
+         Vnum = 6606, 
+         ItemType = "furniture", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -226,11 +560,7 @@ AreaEntry
             [5] = 0, 
             [0] = 2, 
          }, 
-         Cost = 0, 
          ActionDescription = "", 
-         Name = "Managers chair", 
-         ShortDescr = "managers chair", 
-         Vnum = 6606, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -240,18 +570,17 @@ AreaEntry
 \13", 
             }, 
          }, 
-         ItemType = "furniture", 
-         Weight = 100, 
-         Layers = 0, 
-         Description = "A small managers chair.", 
+         ShortDescr = "managers chair", 
       }, 
       [6607] = 
       {
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "thermal detonator", 
+         Cost = 900000, 
+         Description = "A small silver ball lies here.", 
+         Vnum = 6607, 
+         ShortDescr = "thermal detonator", 
          ObjectValues = 
          {
             [1] = 3000, 
@@ -261,11 +590,12 @@ AreaEntry
             [5] = 0, 
             [0] = 2000, 
          }, 
-         Cost = 900000, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
          ActionDescription = "", 
-         Name = "thermal detonator", 
-         ShortDescr = "thermal detonator", 
-         Vnum = 6607, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -276,17 +606,29 @@ AreaEntry
             }, 
          }, 
          ItemType = "grenade", 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A small silver ball lies here.", 
       }, 
       [6608] = 
       {
-         WearFlags = 
+         Weight = 15, 
+         Layers = 0, 
+         Name = "Riot gun", 
+         Cost = 3000, 
+         Description = "A riot gun is lying here", 
+         Vnum = 6608, 
+         Affects = 
          {
-            [0] = "Take", 
-            [13] = "Wield", 
+            [1] = 
+            {
+               Location = 18, 
+               Modifier = 1, 
+            }, 
+            [2] = 
+            {
+               Location = 19, 
+               Modifier = 1, 
+            }, 
          }, 
+         ShortDescr = "a Riot Gun.", 
          ObjectValues = 
          {
             [1] = 10, 
@@ -296,38 +638,26 @@ AreaEntry
             [5] = 2000, 
             [0] = 0, 
          }, 
-         Cost = 3000, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [13] = "Wield", 
+         }, 
          ActionDescription = "", 
-         Name = "Riot gun", 
-         ShortDescr = "a Riot Gun.", 
-         Vnum = 6608, 
          ExtraDescriptions = 
          {
          }, 
          ItemType = "weapon", 
-         Layers = 0, 
-         Weight = 15, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 1, 
-               Location = 19, 
-            }, 
-            [2] = 
-            {
-               Modifier = 1, 
-               Location = 18, 
-            }, 
-         }, 
-         Description = "A riot gun is lying here", 
       }, 
       [6609] = 
       {
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "advanced ammunition cell", 
+         Cost = 100, 
+         Description = "An advanced ammunition cell was dropped here.", 
+         Vnum = 6609, 
+         ShortDescr = "an advanced ammunition cell", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -337,26 +667,33 @@ AreaEntry
             [5] = 0, 
             [0] = 2000, 
          }, 
-         Cost = 100, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
          ActionDescription = "", 
-         Name = "advanced ammunition cell", 
-         ShortDescr = "an advanced ammunition cell", 
-         Vnum = 6609, 
          ExtraDescriptions = 
          {
          }, 
          ItemType = "ammo", 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "An advanced ammunition cell was dropped here.", 
       }, 
       [6610] = 
       {
-         WearFlags = 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "Creshaldyne Heavy Combat Helmet", 
+         Cost = 2000, 
+         Description = "A pale grey helmet lies here.", 
+         Vnum = 6610, 
+         Affects = 
          {
-            [0] = "Take", 
-            [4] = "Head", 
+            [1] = 
+            {
+               Location = 26, 
+               Modifier = 16777216, 
+            }, 
          }, 
+         ShortDescr = "Creshaldyne Heavy Combat Helmet", 
          ObjectValues = 
          {
             [1] = 9, 
@@ -366,51 +703,36 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
-         Cost = 2000, 
-         ActionDescription = "", 
-         Name = "Creshaldyne Heavy Combat Helmet", 
-         ShortDescr = "Creshaldyne Heavy Combat Helmet", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "mpechoat $n &YYou feel as if your eyes can see further.\
 ", 
-               Arguments = "100", 
                MudProgType = "use_prog", 
             }, 
          }, 
-         Layers = 0, 
-         Vnum = 6610, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [4] = "Head", 
+         }, 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          ItemType = "armor", 
-         Flags = 
-         {
-            [24] = "_24", 
-            [17] = "_17", 
-            [22] = "_22", 
-            [15] = "_15", 
-         }, 
-         Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 16777216, 
-               Location = 26, 
-            }, 
-         }, 
-         Description = "A pale grey helmet lies here.", 
       }, 
       [6611] = 
       {
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [14] = "Hold", 
-         }, 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "Smugglers ear", 
+         Cost = 1, 
+         Description = "A bloodied ear lies in the dust here.", 
+         Vnum = 6611, 
+         ShortDescr = "smugglers ear", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -420,26 +742,39 @@ AreaEntry
             [5] = 0, 
             [0] = 10, 
          }, 
-         Cost = 1, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [14] = "Hold", 
+         }, 
          ActionDescription = "", 
-         Name = "Smugglers ear", 
-         ShortDescr = "smugglers ear", 
-         Vnum = 6611, 
          ExtraDescriptions = 
          {
          }, 
          ItemType = "trash", 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A bloodied ear lies in the dust here.", 
       }, 
       [6612] = 
       {
-         WearFlags = 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "Locris ppl-3 wrist laser", 
+         Cost = 3000, 
+         Description = "A wrist blaster lies here on the ground.", 
+         Vnum = 6612, 
+         Affects = 
          {
-            [0] = "Take", 
-            [12] = "Wrist", 
+            [1] = 
+            {
+               Location = 18, 
+               Modifier = 3, 
+            }, 
+            [2] = 
+            {
+               Location = 19, 
+               Modifier = 3, 
+            }, 
          }, 
+         ShortDescr = "Locris PPL-3 Wrist Laser", 
          ObjectValues = 
          {
             [1] = 2, 
@@ -449,60 +784,47 @@ AreaEntry
             [5] = 0, 
             [0] = 0, 
          }, 
-         Cost = 3000, 
-         ActionDescription = "", 
-         Name = "Locris ppl-3 wrist laser", 
-         ShortDescr = "Locris PPL-3 Wrist Laser", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "mpechoat $n &YThe laser seems perfect for your wrist.\
 ", 
-               Arguments = "100", 
                MudProgType = "use_prog", 
             }, 
          }, 
-         Vnum = 6612, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [12] = "Wrist", 
+         }, 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
             [1] = 
             {
                Keyword = "Locris ppl-3 wrist laser", 
-               Description = "", 
+               Description = "A small blaster that fits around your wrist.\
+\13", 
             }, 
             [2] = 
             {
                Keyword = "Locris ppl-3 wrist laser", 
-               Description = "A small blaster that fits around your wrist.\
-\13", 
+               Description = "", 
             }, 
          }, 
          ItemType = "armor", 
-         Layers = 0, 
-         Weight = 1, 
-         Affects = 
-         {
-            [1] = 
-            {
-               Modifier = 3, 
-               Location = 19, 
-            }, 
-            [2] = 
-            {
-               Modifier = 3, 
-               Location = 18, 
-            }, 
-         }, 
-         Description = "A wrist blaster lies here on the ground.", 
       }, 
       [6613] = 
       {
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [3] = "Body", 
-         }, 
+         Weight = 1, 
+         Layers = 96, 
+         Name = "Third Body", 
+         Cost = 0, 
+         Description = "A &Y Third Body&R&W is here.", 
+         Vnum = 6613, 
+         ShortDescr = "&YThird Body&R&W", 
          ObjectValues = 
          {
             [1] = 10, 
@@ -512,32 +834,40 @@ AreaEntry
             [5] = 0, 
             [0] = 10, 
          }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "Third Body", 
-         ShortDescr = "&YThird Body&R&W", 
-         Vnum = 6613, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ItemType = "armor", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "feel good $n\
 mpechoat $n &YYou feel stronger.\
 ", 
-               Arguments = "100", 
                MudProgType = "use_prog", 
             }, 
          }, 
-         Weight = 1, 
-         Layers = 96, 
-         Description = "A &Y Third Body&R&W is here.", 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [3] = "Body", 
+         }, 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         ItemType = "armor", 
       }, 
       [6614] = 
       {
+         Weight = 1, 
+         Layers = 0, 
+         Name = "a plaque", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Description = "A plaque is tacked to the wall.", 
+         Vnum = 6614, 
+         ItemType = "furniture", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -547,11 +877,6 @@ mpechoat $n &YYou feel stronger.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "a plaque", 
-         ShortDescr = "a plaque", 
-         Vnum = 6614, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -563,45 +888,22 @@ mpechoat $n &YYou feel stronger.\
 \13", 
             }, 
          }, 
-         ItemType = "furniture", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A plaque is tacked to the wall.", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "a plaque", 
       }, 
       [6615] = 
       {
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         Cost = 0, 
-         ActionDescription = "", 
+         Weight = 1000, 
+         Layers = 0, 
          Name = "Assassins Guild Board", 
-         ShortDescr = "a Hunter's Guild Board", 
-         Vnum = 6615, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ItemType = "furniture", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Weight = 1000, 
-         Layers = 0, 
          Description = "The Assassins Guild Board", 
-      }, 
-      [6616] = 
-      {
+         Vnum = 6615, 
+         ItemType = "furniture", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -611,11 +913,34 @@ mpechoat $n &YYou feel stronger.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Cost = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "a Hunter's Guild Board", 
+      }, 
+      [6616] = 
+      {
+         Weight = 1, 
+         Layers = 0, 
          Name = "list", 
-         ShortDescr = "a list", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Description = "&z:|: A list of goods :|:", 
          Vnum = 6616, 
+         ItemType = "trash", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -632,17 +957,22 @@ mpechoat $n &YYou feel stronger.\
 \13", 
             }, 
          }, 
-         ItemType = "trash", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "a list", 
+      }, 
+      [6617] = 
+      {
+         Weight = 1, 
+         Layers = 0, 
+         Name = "list", 
          Flags = 
          {
             [30] = "Prototype", 
          }, 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "&z:|: A list of goods :|:", 
-      }, 
-      [6617] = 
-      {
+         Description = "A list of bounties", 
+         Vnum = 6617, 
+         ItemType = "trash", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -652,14 +982,11 @@ mpechoat $n &YYou feel stronger.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Cost = 0, 
-         ActionDescription = "", 
-         Name = "list", 
-         ShortDescr = "a list", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if clan($n) == the hunters guild\
 mpecho The list clicks as it checks your ID\
 mpechoat $n &rPermission granted&w\
@@ -671,11 +998,9 @@ mpforce rece 'You must be a Hunter.\
 mpforce rece punch $n\
 endif\
 ", 
-               Arguments = "100", 
                MudProgType = "exa_prog", 
             }, 
          }, 
-         Vnum = 6617, 
          ExtraDescriptions = 
          {
             [1] = 
@@ -694,22 +1019,19 @@ endif\
 \13", 
             }, 
          }, 
-         ItemType = "trash", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A list of bounties", 
+         ActionDescription = "", 
+         Cost = 0, 
+         ShortDescr = "a list", 
       }, 
       [6637] = 
       {
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
+         Weight = 1, 
+         Layers = 0, 
+         Name = "a small key", 
+         Cost = 1, 
+         Description = "A small key was dropped here", 
+         Vnum = 6637, 
+         ShortDescr = "a small key", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -719,25 +1041,53 @@ endif\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Cost = 1, 
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
          ActionDescription = "", 
-         Name = "a small key", 
-         ShortDescr = "a small key", 
-         Vnum = 6637, 
          ExtraDescriptions = 
          {
          }, 
          ItemType = "trash", 
-         Weight = 1, 
-         Layers = 0, 
-         Description = "A small key was dropped here", 
       }, 
    }, 
-   Name = "Hunters Guild", 
    Rooms = 
    {
       [6600] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6601, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 31881, 
+            }, 
+         }, 
+         Name = "Security Door", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Description = "&pA great entryway looms over one corner of the small pathway, it's twin\
 doors carved in strange tongues, or seemingly so. Designs seem to flow\
 through the text like a sea around a continent.  The designs all seem to\
@@ -749,66 +1099,58 @@ that makes the entire grotesque doorway all the more striking against it's\
 obsidian dark surface. The door itself appears to be exuding the sharp\
 stench of some unidentifiable spice.     \
 ", 
-         Name = "Security Door", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Sector = "city", 
          Vnum = 6600, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6601] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6602, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6601, 
-               Direction = "north", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 31881, 
-               Direction = "south", 
-               Distance = 0, 
+               DestinationVnum = 6600, 
             }, 
          }, 
-      }, 
-      [6601] = 
-      {
+         Name = "Security Checkpoint", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          Description = "&pTwo standard weapon/biological scanners are implanted into the walls,\
 scanning what few sentients and non-sentients decide to pass through this\
 hall.  The ceiling and floor are lined with lime colored glow panels, some\
 occassionally flickering. \
 ", 
-         Name = "Security Checkpoint", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Sector = "city", 
          Vnum = 6601, 
-         ExtraDescriptions = 
-         {
-         }, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if class($n) != bounty hunting\
   mpechoaround $n $n is ushered back outside.\
   mptransfer $n 6600\
@@ -816,99 +1158,90 @@ occassionally flickering. \
   mpat $n mpechoat $n &ROnly bounty hunters are allowed access. You are ushered back outside.&d\
 endif\
 ", 
-               Arguments = "100", 
                MudProgType = "entry_prog", 
             }, 
          }, 
-         TeleDelay = 0, 
          Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6602] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6602, 
-               Direction = "north", 
-               Distance = 0, 
+               DestinationVnum = 6606, 
             }, 
             [2] = 
             {
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6600, 
+               DestinationVnum = 6604, 
+            }, 
+            [3] = 
+            {
                Direction = "south", 
+               Keyword = "", 
                Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6601, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6603, 
             }, 
          }, 
-      }, 
-      [6602] = 
-      {
-         Description = "&pThe room sprawls around in silence, pictures and plants scattered through\
-the room as if a small tornado was allowed to decorate the room. \
-", 
          Name = "First Floor Hallway", 
+         TeleDelay = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Description = "&pThe room sprawls around in silence, pictures and plants scattered through\
+the room as if a small tornado was allowed to decorate the room. \
+", 
          Vnum = 6602, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6603] = 
+      {
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6606, 
-               Direction = "north", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6604, 
                Direction = "east", 
+               Keyword = "", 
                Distance = 0, 
-            }, 
-            [3] = 
-            {
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6601, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6603, 
-               Direction = "west", 
-               Distance = 0, 
+               DestinationVnum = 6602, 
             }, 
          }, 
-      }, 
-      [6603] = 
-      {
+         Name = "Lounge", 
+         TeleDelay = 0, 
          Description = "&pThe lounge of the Guild is lavishly furnished, no expenses spared. Large\
 mosaics and statues surround the room, and soothing music in the way of\
 some unidentifiable pipe plays lowly in the backround.  It seems obvious\
@@ -916,878 +1249,935 @@ that the casual observer would guess this a relaxation pit for the rich\
 and famous of the galaxy rather than a place to put an ignoble end to some\
 sapient member of the galactic community. \
 ", 
-         TeleDelay = 0, 
-         Sector = "city", 
          Vnum = 6603, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Lounge", 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6604] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6602, 
-               Direction = "east", 
-               Distance = 0, 
             }, 
          }, 
-      }, 
-      [6604] = 
-      {
-         Description = "&pIt is in this office that all bounty's must be placed. A small line up of\
-all races is here each with a personal grudge against someone.  Hope you\
-brought enough credit to get you bounty noticed.  \
-", 
          Name = "Bounty Placement Office", 
+         TeleDelay = 0, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Description = "&pIt is in this office that all bounty's must be placed. A small line up of\
+all races is here each with a personal grudge against someone.  Hope you\
+brought enough credit to get you bounty noticed.  \
+", 
          Vnum = 6604, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6602, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "city", 
       }, 
       [6605] = 
       {
-         Description = "", 
+         Exits = 
+         {
+         }, 
          Name = "Floating in a void", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Sector = "city", 
+         Description = "", 
          Vnum = 6605, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-         }, 
+         Sector = "city", 
       }, 
       [6606] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "somewhere", 
+               Keyword = "1st Floor", 
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6602, 
+            }, 
+            [2] = 
+            {
+               Direction = "somewhere", 
+               Keyword = "2nd Floor", 
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6607, 
+            }, 
+            [3] = 
+            {
+               Direction = "somewhere", 
+               Keyword = "3rd Floor", 
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6610, 
+            }, 
+            [4] = 
+            {
+               Direction = "somewhere", 
+               Keyword = "Prison", 
+               Flags = 
+               {
+                  [19] = "Auto", 
+                  [11] = "Hidden", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6638, 
+            }, 
+            [5] = 
+            {
+               Direction = "somewhere", 
+               Keyword = "Roof", 
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6634, 
+            }, 
+            [6] = 
+            {
+               Direction = "somewhere", 
+               Keyword = "sanctuary", 
+               Flags = 
+               {
+                  [19] = "Auto", 
+                  [11] = "Hidden", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6624, 
+            }, 
+         }, 
+         Name = "&W&zCentral Turbolift&W", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          Description = "&cThis turbolift is rediculously state-of-the-art. You can see that it's\
 internal frame work is carved from zhicera wood: an expensive luxury\
 woodwork job from the backwater world of Yharos most likely. The controls\
 present you with four options, the ground floor, the Guild compound\
 quarters on the second floor, the upper hallway, and the roof entrance.\
 ", 
-         Name = "&W&zCentral Turbolift&W", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Sector = "city", 
          Vnum = 6606, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "1st Floor", 
-               DestinationVnum = 6602, 
-               Direction = "somewhere", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "2nd Floor", 
-               DestinationVnum = 6607, 
-               Direction = "somewhere", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "3rd Floor", 
-               DestinationVnum = 6610, 
-               Direction = "somewhere", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Flags = 
-               {
-                  [19] = "Auto", 
-                  [11] = "Hidden", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "Prison", 
-               DestinationVnum = 6638, 
-               Direction = "somewhere", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "Roof", 
-               DestinationVnum = 6634, 
-               Direction = "somewhere", 
-               Distance = 0, 
-            }, 
-            [6] = 
-            {
-               Flags = 
-               {
-                  [19] = "Auto", 
-                  [11] = "Hidden", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "sanctuary", 
-               DestinationVnum = 6624, 
-               Direction = "somewhere", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "city", 
       }, 
       [6607] = 
       {
-         Description = "All the rooms along this hall are owned by various Hunters. being caught\
-here and not being a hunter could be dangerous to your health\
-", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6608, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6622, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6606, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6621, 
+            }, 
+         }, 
          Name = "Quarter's Hallway", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Description = "All the rooms along this hall are owned by various Hunters. being caught\
+here and not being a hunter could be dangerous to your health\
+", 
          Vnum = 6607, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6608, 
-               Direction = "north", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6622, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6606, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6621, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "city", 
       }, 
       [6608] = 
       {
-         Description = "All the rooms along this hall are owned by various Hunters. being caught\
-here and not being a hunter could be dangerous to your health\
-", 
-         Name = "Quarter's Hallway", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Sector = "city", 
-         Vnum = 6608, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6609, 
-               Direction = "north", 
-               Distance = 0, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6619, 
-               Direction = "east", 
-               Distance = 0, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6607, 
-               Direction = "south", 
-               Distance = 0, 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6620, 
-               Direction = "west", 
-               Distance = 0, 
             }, 
          }, 
+         Name = "Quarter's Hallway", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
+         Description = "All the rooms along this hall are owned by various Hunters. being caught\
+here and not being a hunter could be dangerous to your health\
+", 
+         Vnum = 6608, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [6609] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6617, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6608, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6618, 
+            }, 
+         }, 
+         Name = "Quarter's Hallway", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Description = "All the rooms along this hall are owned by various Hunters. being caught\
 here and not being a hunter could be dangerous to your health\
 ", 
-         Name = "Quarter's Hallway", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Sector = "city", 
          Vnum = 6609, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6617, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6608, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6618, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "city", 
       }, 
       [6610] = 
       {
-         Description = "The upper hall of this building is all offices, it is somewhere on this\
-hall that all bounty hunters must register.  As well the offices of the\
-leader,first and second are on this floor. \
-", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6611, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6616, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6606, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6615, 
+            }, 
+         }, 
          Name = "Upper Hallway", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Description = "The upper hall of this building is all offices, it is somewhere on this\
+hall that all bounty hunters must register.  As well the offices of the\
+leader,first and second are on this floor. \
+", 
          Vnum = 6610, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6611, 
-               Direction = "north", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6616, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6606, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6615, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "city", 
       }, 
       [6611] = 
       {
-         Description = "The upper hall of this building is all offices, it is somewhere on this\
-hall that all bounty hunters must register.  As well the offices of the\
-leader,first and second are on this floor. \
-", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6612, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6614, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6610, 
+            }, 
+            [4] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6613, 
+            }, 
+         }, 
          Name = "Upper Hallway", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Description = "The upper hall of this building is all offices, it is somewhere on this\
+hall that all bounty hunters must register.  As well the offices of the\
+leader,first and second are on this floor. \
+", 
          Vnum = 6611, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6612] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6612, 
-               Direction = "north", 
-               Distance = 0, 
+               DestinationVnum = 6611, 
             }, 
             [2] = 
             {
+               Direction = "down", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6614, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6610, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6613, 
-               Direction = "west", 
-               Distance = 0, 
+               DestinationVnum = 6621, 
             }, 
          }, 
-      }, 
-      [6612] = 
-      {
+         Name = "Master Hunter's Office", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          Description = "This luxerious office is dominated by a large oak desk. A plush carpet\
 lines the floor and  a giant window behind the desk offers a wonderfull\
 view of tatooine. teo chairs sit before the desk and it is obvious by\
 there placement that they are intended for guest of the guildmaster.\
 ", 
-         Name = "Master Hunter's Office", 
+         Vnum = 6612, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6613] = 
+      {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6611, 
+            }, 
+         }, 
+         Name = "Hunter Varssk's Office", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         Vnum = 6612, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6611, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6621, 
-               Direction = "down", 
-               Distance = 0, 
-            }, 
-         }, 
-      }, 
-      [6613] = 
-      {
          Description = "The office of the first is moderate in size, from the in and out box on his\
 desk you see that he is always kept bust with day to day life of the\
 guild.  A small interview chair sits to   one side of the desk so he may\
 preform peliminary interviews for the guildmaster.\
 ", 
-         Name = "Hunter Varssk's Office", 
+         Vnum = 6613, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6614] = 
+      {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6611, 
+            }, 
+         }, 
+         Name = "Hunter Zaver's Office", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         Vnum = 6613, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6611, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-         }, 
-      }, 
-      [6614] = 
-      {
          Description = "/ l This somewhat cramped office is carpeted and has a small desk along the\
 east wall. The desc is coverd in a pile of paper work that looks as if it\
 hasn't been touched in months.  best to leave here before you disturb\
 anything. \
 ", 
-         Name = "Hunter Zaver's Office", 
+         Vnum = 6614, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6615] = 
+      {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6610, 
+            }, 
+         }, 
+         Name = "Hall of Records", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         Vnum = 6614, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6611, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
-      }, 
-      [6615] = 
-      {
          Description = "this large room houses a complete listing of all the guilds curent and past\
 hunters aswell as each of there acusitions. A young apprentice hunter is\
 here running for each file that is requested as part of his training to\
 undersand each hunters tecnique and abilties.\
 ", 
-         Name = "Hall of Records", 
+         Vnum = 6615, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6616] = 
+      {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6610, 
+            }, 
+         }, 
+         Name = "Registration Office", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         Vnum = 6615, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6610, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-         }, 
-      }, 
-      [6616] = 
-      {
          Description = "All hunters must be registerd with the guild to not be registerd makes you\
 an outlaw of the guild aswell as a common murderer. Anyone hunting\
 outsides the guild will be hunted and punished unless it was done with one\
 of the guild leaders approval. \
 ", 
-         Name = "Registration Office", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Sector = "city", 
          Vnum = 6616, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6610, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "city", 
       }, 
       [6617] = 
       {
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6609, 
+            }, 
+         }, 
          Name = "An Empty Home", 
+         TeleDelay = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Sector = "inside", 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 6617, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6609, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "inside", 
       }, 
       [6618] = 
       {
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6609, 
+            }, 
+         }, 
          Name = "An Empty Home", 
+         TeleDelay = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Sector = "inside", 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 6618, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6609, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "inside", 
       }, 
       [6619] = 
       {
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6608, 
+            }, 
+         }, 
          Name = "An Empty Home", 
+         TeleDelay = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Sector = "inside", 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 6619, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6608, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "inside", 
       }, 
       [6620] = 
       {
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6608, 
+            }, 
+         }, 
          Name = "An Empty Home", 
+         TeleDelay = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Sector = "inside", 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
          Vnum = 6620, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6608, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "inside", 
       }, 
       [6621] = 
       {
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         Name = "An Empty Home", 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Sector = "inside", 
-         Vnum = 6621, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
-         TeleVnum = 0, 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6607, 
-               Direction = "east", 
-               Distance = 0, 
             }, 
             [2] = 
             {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6612, 
-               Direction = "up", 
-               Distance = 0, 
             }, 
          }, 
-      }, 
-      [6622] = 
-      {
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
          Name = "An Empty Home", 
+         TeleDelay = 0, 
          Flags = 
          {
             [20] = "PlayerHome", 
             [3] = "Indoors", 
          }, 
-         Sector = "inside", 
-         Vnum = 6622, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Vnum = 6621, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "inside", 
+      }, 
+      [6622] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6607, 
-               Direction = "west", 
-               Distance = 0, 
             }, 
          }, 
+         Name = "An Empty Home", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         Vnum = 6622, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "inside", 
       }, 
       [6623] = 
       {
+         Exits = 
+         {
+         }, 
+         Name = "Deep Below Tatooine's Surface", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Description = "This hallway is know of only to the hunters guild members to tell anyone of\
 this hall is to bring all the hunters down on your head. Remeber this and\
 Hunt Well.\
 ", 
-         Name = "Deep Below Tatooine's Surface", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Sector = "city", 
          Vnum = 6623, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-         }, 
+         Sector = "city", 
       }, 
       [6624] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+                  [11] = "Hidden", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6625, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6630, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6606, 
+            }, 
+            [4] = 
+            {
+               Direction = "somewhere", 
+               Keyword = "Burn", 
+               Flags = 
+               {
+                  [19] = "Auto", 
+                  [11] = "Hidden", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6629, 
+            }, 
+            [5] = 
+            {
+               Direction = "somewhere", 
+               Keyword = "Freezer", 
+               Flags = 
+               {
+                  [19] = "Auto", 
+                  [11] = "Hidden", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6627, 
+            }, 
+         }, 
+         Name = "Secret Hallway", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          Description = "&pThe main hallway of the guild, normally occassioned only to seasoned\
 assassins and unpredictable apprentice assassins, this is one of the few\
 places in the galaxy where one can wander near such creatures. This is the\
@@ -1795,466 +2185,380 @@ hallowed ground of the guild, where only the blood of traitors may fall to\
 the ground. Bright glowpanels, doors, and numerous electronics line the\
 walls of the hall. \
 ", 
-         Name = "Secret Hallway", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Sector = "city", 
          Vnum = 6624, 
-         ExtraDescriptions = 
-         {
-         }, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if clan($n) == The Assassins Guild\
 else\
 mpecho Someone yells, 'You don't belong here!'\
 mpforce $n s\
 endif\
 ", 
-               Arguments = "100", 
                MudProgType = "entry_prog", 
             }, 
          }, 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-                  [11] = "Hidden", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6625, 
-               Direction = "north", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6630, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6606, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Flags = 
-               {
-                  [19] = "Auto", 
-                  [11] = "Hidden", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "Burn", 
-               DestinationVnum = 6629, 
-               Direction = "somewhere", 
-               Distance = 0, 
-            }, 
-            [5] = 
-            {
-               Flags = 
-               {
-                  [19] = "Auto", 
-                  [11] = "Hidden", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "Freezer", 
-               DestinationVnum = 6627, 
-               Direction = "somewhere", 
-               Distance = 0, 
-            }, 
-         }, 
-      }, 
-      [6625] = 
-      {
-         Description = "&pThe hidden hall is known to few of the assassins, although for those that\
-do know of it, it is a place of celebration. Both life and death are\
-common jokes to those assassins that gather here, and lining the walls\
-under light purple glowlining, are multiple skins and trophies, preserved\
-for the amusement and awe of later assassins. \
-", 
-         Name = "&cThe Hidden Hall&R&W", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Sector = "city", 
-         Vnum = 6625, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6625] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6628, 
-               Direction = "east", 
-               Distance = 0, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Keyword = "door", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                   [3] = "Secret", 
                }, 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "door", 
                DestinationVnum = 6624, 
-               Direction = "south", 
-               Distance = 0, 
             }, 
             [3] = 
             {
+               Direction = "somewhere", 
+               Keyword = "Relay", 
                Flags = 
                {
                   [19] = "Auto", 
                   [11] = "Hidden", 
                }, 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "Relay", 
                DestinationVnum = 6626, 
-               Direction = "somewhere", 
-               Distance = 0, 
             }, 
          }, 
-      }, 
-      [6626] = 
-      {
-         Description = "", 
-         Name = "Communications Relay", 
+         Name = "&cThe Hidden Hall&R&W", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
-         Vnum = 6626, 
+         Description = "&pThe hidden hall is known to few of the assassins, although for those that\
+do know of it, it is a place of celebration. Both life and death are\
+common jokes to those assassins that gather here, and lining the walls\
+under light purple glowlining, are multiple skins and trophies, preserved\
+for the amusement and awe of later assassins. \
+", 
+         Vnum = 6625, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6626] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6625, 
-               Direction = "south", 
-               Distance = 0, 
             }, 
          }, 
+         Name = "Communications Relay", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+         Description = "", 
+         Vnum = 6626, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [6627] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "southeast", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6624, 
+            }, 
+         }, 
+         Name = "Hall of Training", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          Description = "A large hall is here for the training of all hunters in both skill level\
 and physical attributes. Various machines line the walls and all traing is\
 regulated by an expirienced hunter. \
 ", 
-         Name = "Hall of Training", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Sector = "city", 
          Vnum = 6627, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6628] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6624, 
-               Direction = "southeast", 
-               Distance = 0, 
+               DestinationVnum = 6625, 
             }, 
          }, 
-      }, 
-      [6628] = 
-      {
+         Name = "Ghesinn's Bar", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [3] = "Indoors", 
+         }, 
          Description = "&OYou stand in a well sized and lit, unorthodoxly clean, bar. This is the\
 gathering place of Hunters without a target, or are merely taking some\
 time off. Armist Ghesinn, a former Imperial Commando Captain, stands\
 behind the bar, his usual idiot grin evident on his face as he cleans mugs\
 and swaps both brew and story with the few customers. \
 ", 
-         Name = "Ghesinn's Bar", 
-         Flags = 
-         {
-            [3] = "Indoors", 
-         }, 
-         Sector = "city", 
          Vnum = 6628, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6629] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6625, 
-               Direction = "west", 
-               Distance = 0, 
+               DestinationVnum = 6624, 
             }, 
          }, 
-      }, 
-      [6629] = 
-      {
-         Description = "Although nothing is for sale now , we hope in the future to possess hunter\
-speacial equipment. \
-", 
          Name = "Bounty Hunter Equipmet", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Description = "Although nothing is for sale now , we hope in the future to possess hunter\
+speacial equipment. \
+", 
          Vnum = 6629, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6630] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6624, 
-               Direction = "east", 
+               DestinationVnum = 6631, 
+            }, 
+            [2] = 
+            {
+               Direction = "west", 
+               Keyword = "west", 
+               Flags = 
+               {
+                  [19] = "Auto", 
+               }, 
                Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6624, 
             }, 
          }, 
-      }, 
-      [6630] = 
-      {
+         Name = "Medical Wing", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+         }, 
          Description = "&G&WThe medical wing is brightly lit, featuring numerous medical droids and\
 a sparse number of biological assistants. However, the staff of the\
 medical wing of the guild is easily explanable; Most wounded guild members\
 don't make it home. \
 ", 
-         Name = "Medical Wing", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         Sector = "city", 
          Vnum = 6630, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6631] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6631, 
-               Direction = "east", 
-               Distance = 0, 
+               DestinationVnum = 6632, 
             }, 
             [2] = 
             {
-               Flags = 
-               {
-                  [19] = "Auto", 
-               }, 
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "west", 
-               DestinationVnum = 6624, 
-               Direction = "west", 
-               Distance = 0, 
+               DestinationVnum = 6630, 
             }, 
          }, 
-      }, 
-      [6631] = 
-      {
+         Name = "Head Nurse's Office", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
          Description = "&G&WThe head nurse's office is typically bland, smelling of solvents and\
 bacta from the tank just to the east of it.  The room is dimly lit, in\
 almost soothing blue tones. Obviously someone likes to do their business,\
 whether it be in mind or body, here. \
 ", 
-         Name = "Head Nurse's Office", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Sector = "city", 
          Vnum = 6631, 
-         ExtraDescriptions = 
-         {
-         }, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "mpecho &bThe lights in the room snap on abruptly...\
 mpecho &OThere is a flurry of motion behind the desk as the chair turns..\
 ", 
-               Arguments = "100", 
                MudProgType = "entry_prog", 
             }, 
          }, 
-         TeleDelay = 0, 
          Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6632] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Keyword = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6632, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6630, 
-               Direction = "west", 
-               Distance = 0, 
+               DestinationVnum = 6631, 
             }, 
          }, 
-      }, 
-      [6632] = 
-      {
-         Description = "", 
          Name = "Bacta Tank", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         Sector = "city", 
+         Description = "", 
          Vnum = 6632, 
-         ExtraDescriptions = 
-         {
-         }, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "feel heal $n\
 feel heal $n\
 feel refresh $n\
 feel refresh $n\
 ", 
-               Arguments = "100", 
                MudProgType = "rand_prog", 
             }, 
          }, 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6631, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
-      }, 
-      [6633] = 
-      {
-         Description = "This room monitor's the landing pad and those that walk through\
-it.\
-", 
-         Name = "Security box", 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [30] = "Prototype", 
-         }, 
-         Sector = "city", 
-         Vnum = 6633, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6633] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
                Flags = 
                {
                   [1] = "Closed", 
@@ -2262,36 +2566,84 @@ it.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
+               Distance = 0, 
                Key = 6637, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6637, 
-               Direction = "north", 
-               Distance = 0, 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Keyword = "", 
                Flags = 
                {
                   [25] = "Window", 
                }, 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6635, 
-               Direction = "east", 
-               Distance = 0, 
             }, 
          }, 
+         Name = "Security box", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [30] = "Prototype", 
+         }, 
+         Description = "This room monitor's the landing pad and those that walk through\
+it.\
+", 
+         Vnum = 6633, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [6634] = 
       {
-         Description = "", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6606, 
+            }, 
+            [2] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6635, 
+            }, 
+            [3] = 
+            {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6637, 
+            }, 
+         }, 
+         Name = "Large Roof", 
          TeleDelay = 0, 
+         Description = "", 
+         Vnum = 6634, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if clan($n) == The Hunters Guild\
 mpat 6636 mpecho Hunter $n just entered the landing pad area. \
 else\
@@ -2306,67 +2658,48 @@ endif\
 endif\
 endif\
 ", 
-               Arguments = "100", 
                MudProgType = "entry_prog", 
             }, 
          }, 
-         Sector = "city", 
-         Vnum = 6634, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Large Roof", 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6635] = 
+      {
          Exits = 
          {
             [1] = 
             {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6606, 
                Direction = "north", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [24] = "NoMob", 
+               }, 
                Distance = 0, 
-            }, 
-            [2] = 
-            {
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6635, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6637, 
-               Direction = "west", 
-               Distance = 0, 
+               DestinationVnum = 6634, 
             }, 
          }, 
-      }, 
-      [6635] = 
-      {
-         Description = "", 
          Name = "Guild Private Landing Pad", 
+         TeleDelay = 0, 
          Flags = 
          {
             [4] = "CanLand", 
             [5] = "CanFly", 
          }, 
-         Sector = "city", 
+         Description = "", 
          Vnum = 6635, 
-         ExtraDescriptions = 
-         {
-         }, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "100", 
                Code = "if clan($n) == The Hunters Guild\
 mpat 6633 mpecho Hunter $n just entered the landing pad\
 area.\
@@ -2381,106 +2714,125 @@ endif\
 endif\
 endif\
 ", 
-               Arguments = "100", 
                MudProgType = "entry_prog", 
             }, 
          }, 
-         TeleDelay = 0, 
          Tunnel = 0, 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [24] = "NoMob", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6634, 
-               Direction = "north", 
-               Distance = 0, 
-            }, 
-         }, 
-      }, 
-      [6636] = 
-      {
-         Description = "This room monitor's the landing pad and those that walk through it.\
-", 
-         Name = "Security Box", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Sector = "city", 
-         Vnum = 6636, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6636] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
                Flags = 
                {
                   [25] = "Window", 
                }, 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6635, 
-               Direction = "east", 
-               Distance = 0, 
             }, 
          }, 
-      }, 
-      [6637] = 
-      {
-         Description = "", 
+         Name = "Security Box", 
          TeleDelay = 0, 
-         Sector = "city", 
-         Vnum = 6637, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         Description = "This room monitor's the landing pad and those that walk through it.\
+", 
+         Vnum = 6636, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         Name = "Large Roof", 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6637] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6634, 
-               Direction = "east", 
-               Distance = 0, 
             }, 
             [2] = 
             {
+               Direction = "south", 
+               Keyword = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
+               Distance = 0, 
                Key = 6637, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6633, 
-               Direction = "south", 
-               Distance = 0, 
             }, 
          }, 
+         Name = "Large Roof", 
+         TeleDelay = 0, 
+         Description = "", 
+         Vnum = 6637, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
+         TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [6638] = 
       {
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "north", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [2] = "Locked", 
+                  [0] = "IsDoor", 
+               }, 
+               Distance = 0, 
+               Key = 6637, 
+               Description = "", 
+               DestinationVnum = 6639, 
+            }, 
+            [2] = 
+            {
+               Direction = "up", 
+               Keyword = "", 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6606, 
+            }, 
+         }, 
+         Name = "A dark hallway", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
          Description = "Pitted durasteel forms the walls and ceiling above.  Rough stone  is\
 chiseled to make the floor, leaving the possibility of tripping  sentients\
 unfamiliar with the hallway.  The corridor ends to the north  at 3 doors.\
@@ -2489,20 +2841,12 @@ chiseled to make the floor, leaving the possibility of tripping  sentients\
 unfamiliar with the hallway.  A steel door leads north,  with a control\
 pad to the right.\
 ", 
-         Name = "A dark hallway", 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         Sector = "city", 
          Vnum = 6638, 
-         ExtraDescriptions = 
-         {
-         }, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "5", 
                Code = "if clan($n) == The Hunters Guild\
 else\
 mpechoat $n You trip on the uneven ground.\
@@ -2513,62 +2857,95 @@ mpforce $n rest\
 endif\
 endif\
 ", 
-               Arguments = "5", 
                MudProgType = "entry_prog", 
             }, 
          }, 
-         TeleDelay = 0, 
          Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6639] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6642, 
+            }, 
+            [2] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6640, 
+            }, 
+            [3] = 
+            {
+               Direction = "south", 
+               Keyword = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
+               Distance = 0, 
                Key = 6637, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6639, 
-               Direction = "north", 
-               Distance = 0, 
+               DestinationVnum = 6638, 
             }, 
-            [2] = 
+            [4] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+               }, 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6606, 
-               Direction = "up", 
-               Distance = 0, 
+               DestinationVnum = 6641, 
             }, 
          }, 
-      }, 
-      [6639] = 
-      {
-         Description = "Pitted durasteel forms the walls and ceiling above.  Rough stone  is\
-chiseled to make the floor, leaving the possibility of tripping  sentients\
-unfamiliar with the hallway.  The corridor ends to the north  at 3 doors.\
-", 
          Name = "A dark hallway", 
+         TeleDelay = 0, 
          Flags = 
          {
             [30] = "Prototype", 
             [7] = "NoMagic", 
          }, 
-         Sector = "city", 
+         Description = "Pitted durasteel forms the walls and ceiling above.  Rough stone  is\
+chiseled to make the floor, leaving the possibility of tripping  sentients\
+unfamiliar with the hallway.  The corridor ends to the north  at 3 doors.\
+", 
          Vnum = 6639, 
-         ExtraDescriptions = 
-         {
-         }, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "20", 
                Code = "if clan($n) == The Hunters Guild\
 else\
 mpechoat $n You trip on the uneven ground.\
@@ -2579,76 +2956,45 @@ mpforce $n rest\
 endif\
 endif\
 ", 
-               Arguments = "20", 
                MudProgType = "entry_prog", 
             }, 
          }, 
-         TeleDelay = 0, 
          Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6640] = 
+      {
          Exits = 
          {
             [1] = 
             {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6642, 
-               Direction = "north", 
-               Distance = 0, 
-            }, 
-            [2] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6640, 
-               Direction = "east", 
-               Distance = 0, 
-            }, 
-            [3] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [2] = "Locked", 
-                  [0] = "IsDoor", 
-               }, 
-               Key = 6637, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6638, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-            [4] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6641, 
                Direction = "west", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+               }, 
                Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6639, 
             }, 
          }, 
-      }, 
-      [6640] = 
-      {
+         Name = "A dark cell", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [23] = "Hotel", 
+            [30] = "Prototype", 
+            [7] = "NoMagic", 
+         }, 
          Description = "The dark cell was carved out of the stone forming the foundation of  the\
 building above.  A ledge carved to form a stone bed lines one wall,  while\
 a quarter metre hole, a hand deep, forms the privy. The dark cell was\
@@ -2656,45 +3002,36 @@ carved out of the stone forming the foundation of  the building above.  A\
 ledge carved to form a stone bed lines one wall,  while a quarter metre\
 hole, a hand deep, forms the privy. \
 ", 
-         Name = "A dark cell", 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [23] = "Hotel", 
-            [30] = "Prototype", 
-            [7] = "NoMagic", 
-         }, 
-         Sector = "city", 
          Vnum = 6640, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6639, 
-               Direction = "west", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "city", 
       }, 
       [6641] = 
       {
-         Description = "", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Direction = "east", 
+               Keyword = "", 
+               Flags = 
+               {
+                  [1] = "Closed", 
+                  [0] = "IsDoor", 
+                  [5] = "PickProof", 
+               }, 
+               Distance = 0, 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 6639, 
+            }, 
+         }, 
          Name = "A dark cell", 
+         TeleDelay = 0, 
          Flags = 
          {
             [0] = "Dark", 
@@ -2702,482 +3039,147 @@ hole, a hand deep, forms the privy. \
             [30] = "Prototype", 
             [7] = "NoMagic", 
          }, 
-         Sector = "city", 
+         Description = "", 
          Vnum = 6641, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [6642] = 
+      {
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Keyword = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [0] = "IsDoor", 
                   [5] = "PickProof", 
                }, 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
-               Keyword = "", 
                DestinationVnum = 6639, 
-               Direction = "east", 
-               Distance = 0, 
             }, 
          }, 
-      }, 
-      [6642] = 
-      {
+         Name = "A dark cell", 
+         TeleDelay = 0, 
+         Flags = 
+         {
+            [0] = "Dark", 
+            [23] = "Hotel", 
+            [30] = "Prototype", 
+            [7] = "NoMagic", 
+         }, 
          Description = "The dark cell was carved out of the stone forming the foundation of  the\
 building above.  A ledge carved to form a stone bed lines one wall,  while\
 a quarter metre hole, a hand deep, forms the privy.   \
 ", 
-         Name = "A dark cell", 
-         Flags = 
-         {
-            [0] = "Dark", 
-            [23] = "Hotel", 
-            [30] = "Prototype", 
-            [7] = "NoMagic", 
-         }, 
-         Sector = "city", 
          Vnum = 6642, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Flags = 
-               {
-                  [1] = "Closed", 
-                  [0] = "IsDoor", 
-                  [5] = "PickProof", 
-               }, 
-               Key = -1, 
-               Description = "", 
-               Keyword = "", 
-               DestinationVnum = 6639, 
-               Direction = "south", 
-               Distance = 0, 
-            }, 
-         }, 
+         Sector = "city", 
       }, 
       [6643] = 
       {
-         Description = "", 
+         Exits = 
+         {
+         }, 
          Name = "Floating in a void", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Sector = "city", 
+         Description = "", 
          Vnum = 6643, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-         }, 
+         Sector = "city", 
       }, 
       [6650] = 
       {
-         Description = "", 
+         Exits = 
+         {
+         }, 
          Name = "Floating in a void", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
-         Sector = "city", 
+         Description = "", 
          Vnum = 6650, 
+         Tunnel = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Tunnel = 0, 
          TeleVnum = 0, 
-         Exits = 
-         {
-         }, 
+         Sector = "city", 
       }, 
    }, 
-   Filename = "hunters_guild.lua", 
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg3 = 6627, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32050, 
-         Command = "M", 
-      }, 
-      [2] = 
-      {
-         Arg3 = 16, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32275, 
-         Command = "E", 
-      }, 
-      [3] = 
-      {
-         Arg3 = 6614, 
-         Arg2 = 2, 
-         MiscData = 0, 
-         Arg1 = 6603, 
-         Command = "O", 
-      }, 
-      [4] = 
-      {
-         Arg3 = 6613, 
-         Arg2 = 2, 
-         MiscData = 0, 
-         Arg1 = 6603, 
-         Command = "O", 
-      }, 
-      [5] = 
-      {
-         Arg3 = 6613, 
-         Arg2 = 1, 
-         MiscData = 0, 
-         Arg1 = 6605, 
-         Command = "O", 
-      }, 
-      [6] = 
-      {
-         Arg3 = 6613, 
-         Arg2 = 1, 
-         MiscData = 0, 
-         Arg1 = 6606, 
-         Command = "O", 
-      }, 
-      [7] = 
-      {
-         Arg3 = 6616, 
-         Arg2 = 1, 
-         MiscData = 0, 
-         Arg1 = 6600, 
-         Command = "M", 
-      }, 
-      [8] = 
-      {
-         Arg3 = 6615, 
-         Arg2 = 1, 
-         MiscData = 0, 
-         Arg1 = 6601, 
-         Command = "M", 
-      }, 
-      [9] = 
-      {
-         Arg3 = 2, 
-         Arg2 = 2, 
-         MiscData = 0, 
-         Arg1 = 6637, 
-         Command = "D", 
-      }, 
-      [10] = 
-      {
-         Arg3 = 6635, 
-         Arg2 = 60, 
-         MiscData = 1, 
-         Arg1 = 204, 
-         Command = "M", 
-      }, 
-      [11] = 
-      {
-         Arg3 = 6635, 
-         Arg2 = 60, 
-         MiscData = 1, 
-         Arg1 = 204, 
-         Command = "M", 
-      }, 
-      [12] = 
-      {
-         Arg3 = 6635, 
-         Arg2 = 60, 
-         MiscData = 1, 
-         Arg1 = 204, 
-         Command = "M", 
-      }, 
-      [13] = 
-      {
-         Arg3 = 6635, 
-         Arg2 = 60, 
-         MiscData = 1, 
-         Arg1 = 204, 
-         Command = "M", 
-      }, 
-      [14] = 
-      {
-         Arg3 = 6612, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 6601, 
-         Command = "O", 
-      }, 
-      [15] = 
-      {
-         Arg3 = 6612, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 6602, 
-         Command = "O", 
-      }, 
-      [16] = 
-      {
-         Arg3 = 6612, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 6603, 
-         Command = "O", 
-      }, 
-      [17] = 
-      {
-         Arg3 = 6612, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 38, 
-         Command = "O", 
-      }, 
-      [18] = 
-      {
-         Arg3 = 6603, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 32201, 
-         Command = "O", 
-      }, 
-      [19] = 
-      {
-         Arg3 = 6624, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 6615, 
-         Command = "O", 
-      }, 
-      [20] = 
-      {
-         Arg3 = 1, 
-         Arg2 = 0, 
-         MiscData = 0, 
-         Arg1 = 6624, 
-         Command = "D", 
-      }, 
-      [21] = 
-      {
-         Arg3 = 2, 
-         Arg2 = 0, 
-         MiscData = 0, 
-         Arg1 = 6638, 
-         Command = "D", 
-      }, 
-      [22] = 
-      {
-         Arg3 = 1, 
-         Arg2 = 0, 
-         MiscData = 0, 
-         Arg1 = 6639, 
-         Command = "D", 
-      }, 
-      [23] = 
-      {
-         Arg3 = 1, 
-         Arg2 = 1, 
-         MiscData = 0, 
-         Arg1 = 6639, 
-         Command = "D", 
-      }, 
-      [24] = 
-      {
-         Arg3 = 2, 
-         Arg2 = 2, 
-         MiscData = 0, 
-         Arg1 = 6639, 
-         Command = "D", 
-      }, 
-      [25] = 
-      {
-         Arg3 = 1, 
-         Arg2 = 3, 
-         MiscData = 0, 
-         Arg1 = 6639, 
-         Command = "D", 
-      }, 
-      [26] = 
-      {
-         Arg3 = 6629, 
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg1 = 6603, 
-         Command = "M", 
-      }, 
-      [27] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10313, 
-         Command = "G", 
-      }, 
-      [28] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 10314, 
-         Command = "G", 
-      }, 
-      [29] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 32254, 
-         Command = "G", 
-      }, 
-      [30] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 6610, 
-         Command = "G", 
-      }, 
-      [31] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 6612, 
-         Command = "G", 
-      }, 
-      [32] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 33, 
-         Command = "G", 
-      }, 
-      [33] = 
-      {
-         MiscData = 1, 
-         Arg2 = 1, 
-         Arg1 = 6637, 
-         Command = "G", 
-      }, 
-      [34] = 
-      {
-         Arg3 = 6629, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 6616, 
-         Command = "O", 
-      }, 
-      [35] = 
-      {
-         Arg3 = 6604, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 6602, 
-         Command = "M", 
-      }, 
-      [36] = 
-      {
-         Arg3 = 6604, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 6617, 
-         Command = "O", 
-      }, 
-      [37] = 
-      {
-         Arg3 = 6631, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 6604, 
-         Command = "M", 
-      }, 
-      [38] = 
-      {
-         Arg3 = 6626, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 38, 
-         Command = "O", 
-      }, 
-      [39] = 
-      {
-         Arg3 = 6628, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg1 = 6605, 
-         Command = "M", 
-      }, 
-   }, 
-   ResetMessage = "A cleaning droid sweeps by, narrowly missing you.", 
-   FileFormatVersion = 1, 
-   ResetFrequency = 0, 
-   LevelRanges = 
-   {
-      Soft = 
-      {
-         Low = 0, 
-         High = 105, 
-      }, 
-      Hard = 
-      {
-         Low = 0, 
-         High = 105, 
-      }, 
-   }, 
-   Author = "Bleeds", 
    Mobiles = 
    {
       [6600] = 
       {
-         NumberOfAttacks = 0, 
-         HitChance = 
+         Weight = 0, 
+         Credits = 0, 
+         Name = "guild registerer", 
+         Damage = 
          {
-            HitPlus = 300, 
-            HitSizeDice = 10, 
-            HitNoDice = 6, 
+            DamPlus = 2, 
+            DamNoDice = 3, 
+            DamSizeDice = 9, 
          }, 
          Description = "This bounty hunter is fairly young and doing his part to get into guild\
 management. Offering to take care of the registraiton of new members.\
 ", 
-         Alignment = 0, 
-         Flags = 
+         SaveVs = 
          {
-            [0] = "Npc", 
-            [30] = "Prototype", 
+            SpellStaff = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
          }, 
-         DefaultPosition = "standing", 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 6, 
+            HitPlus = 300, 
+         }, 
          LongDescr = "A young bounty hunter stands here taking your applications.\
 ", 
-         Level = 30, 
-         DamRoll = 6, 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "work", 
                Code = "' your looking for work eh.\
 peer $n\
 ' well you might have the makings of a hunter \
 ' lets see what jobs we have available right now.\
 ", 
-               Arguments = "work", 
                MudProgType = "speech_prog", 
             }, 
             [2] = 
             {
+               Arguments = "jobs", 
                Code = ", gets a list from under the counter.\
 ' hmm right now we have the following contracts.\
 , looks at list.\
@@ -3185,29 +3187,29 @@ peer $n\
 ' Hmm got a bounty for some old guy thats been oggling girls on adari\
 too.\
 ", 
-               Arguments = "jobs", 
                MudProgType = "speech_prog", 
             }, 
             [3] = 
             {
+               Arguments = "smuggler", 
                Code = "' yup he's wanted dead by someone. \
 ' payment is 2000 credits upon proof of disinigration\
 smile $n\
 ' interested?\
 ", 
-               Arguments = "smuggler", 
                MudProgType = "speech_prog", 
             }, 
             [4] = 
             {
+               Arguments = "yes", 
                Code = "' great , just bring me back proof of disinegration to collect your\
 bounty.\
 ", 
-               Arguments = "yes", 
                MudProgType = "speech_prog", 
             }, 
             [5] = 
             {
+               Arguments = "smugglers ear", 
                Code = "if ovnuminv(6611) >= 1\
 ' ahh great, our employer will be happy\
 smile $n\
@@ -3223,11 +3225,11 @@ endif\
 mpat 10299 drop all\
 mpat 10299 mppurge\
 ", 
-               Arguments = "smugglers ear", 
                MudProgType = "give_prog", 
             }, 
             [6] = 
             {
+               Arguments = "old", 
                Code = "' yeah some dirty old man been looking up the wrong skirt.\
 snicker $n\
 ' but hes worth 5k , and that almost buys my time too\
@@ -3235,11 +3237,11 @@ smile $n \
 ' need to bring back his \"privates\" as proof\
 evil\
 ", 
-               Arguments = "old", 
                MudProgType = "speech_prog", 
             }, 
             [7] = 
             {
+               Arguments = "privates", 
                Code = "if ovnuminv(7316) >= 1\
 'ewww , either way here's yer cash'\
 chuckle\
@@ -3257,13 +3259,13 @@ endif\
 mpat 10299 drop all\
 mpat 10299 mppurge\
 ", 
-               Arguments = "privates", 
                MudProgType = "give_prog", 
             }, 
          }, 
+         Alignment = 0, 
          Languages = 
          {
-            Speaking = 
+            Speaks = 
             {
                [1] = "shyriiwook", 
                [2] = "twileki", 
@@ -3292,7 +3294,7 @@ mpat 10299 mppurge\
                [25] = "sullustese", 
                [0] = "basic", 
             }, 
-            Speaks = 
+            Speaking = 
             {
                [1] = "shyriiwook", 
                [2] = "twileki", 
@@ -3325,95 +3327,35 @@ mpat 10299 mppurge\
          Height = 0, 
          Stats = 
          {
-            Strength = 0, 
             Force = 0, 
             Intelligence = 0, 
             Charisma = 0, 
             Wisdom = 0, 
-            Dexterity = 0, 
-            Constitution = 0, 
+            Strength = 0, 
             Luck = 0, 
+            Constitution = 0, 
+            Dexterity = 0, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         ShortDescr = "Registerer", 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
-         Name = "guild registerer", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamNoDice = 3, 
-            DamSizeDice = 9, 
-         }, 
-         Vnum = 6600, 
-         Race = "Human", 
-         HitRoll = 6, 
-         Weight = 0, 
-         ArmorClass = 25, 
-         Sex = "undistinguished", 
-      }, 
-      [6601] = 
-      {
-         NumberOfAttacks = 0, 
-         HitChance = 
-         {
-            HitPlus = 200, 
-            HitSizeDice = 10, 
-            HitNoDice = 4, 
-         }, 
-         Description = "", 
-         Alignment = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
+         Level = 30, 
+         Vnum = 6600, 
+         DamRoll = 6, 
+         HitRoll = 6, 
+         NumberOfAttacks = 0, 
+         Race = "Human", 
+         ArmorClass = 25, 
          DefaultPosition = "standing", 
-         LongDescr = "A plebe is here running for records\
-", 
-         Level = 20, 
-         DamRoll = 4, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Height = 0, 
-         Stats = 
-         {
-            Strength = 0, 
-            Force = 0, 
-            Intelligence = 0, 
-            Charisma = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Constitution = 0, 
-            Luck = 0, 
-         }, 
+         Sex = "undistinguished", 
+         ShortDescr = "Registerer", 
+      }, 
+      [6601] = 
+      {
+         Weight = 0, 
          Credits = 0, 
-         Position = "standing", 
-         ShortDescr = "record runner", 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
          Name = "Record runner", 
          Damage = 
          {
@@ -3421,36 +3363,100 @@ mpat 10299 mppurge\
             DamNoDice = 2, 
             DamSizeDice = 4, 
          }, 
-         Vnum = 6601, 
-         Race = "Human", 
-         HitRoll = 4, 
-         Weight = 0, 
-         ArmorClass = 50, 
-         Sex = "undistinguished", 
-      }, 
-      [6602] = 
-      {
-         NumberOfAttacks = 0, 
+         Description = "", 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Position = "standing", 
          HitChance = 
          {
-            HitPlus = 900, 
             HitSizeDice = 10, 
-            HitNoDice = 18, 
+            HitNoDice = 4, 
+            HitPlus = 200, 
          }, 
-         Description = "She looks as tough as nails but what do you expect she works here after\
-all.\
+         LongDescr = "A plebe is here running for records\
 ", 
          Alignment = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         Height = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Intelligence = 0, 
+            Charisma = 0, 
+            Wisdom = 0, 
+            Strength = 0, 
+            Luck = 0, 
+            Constitution = 0, 
+            Dexterity = 0, 
+         }, 
          Flags = 
          {
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
+         Level = 20, 
+         Vnum = 6601, 
+         DamRoll = 4, 
+         HitRoll = 4, 
+         NumberOfAttacks = 0, 
+         Race = "Human", 
+         ArmorClass = 50, 
          DefaultPosition = "standing", 
+         Sex = "undistinguished", 
+         ShortDescr = "record runner", 
+      }, 
+      [6602] = 
+      {
+         Weight = 0, 
+         Credits = 0, 
+         Name = "receptionist", 
+         Damage = 
+         {
+            DamPlus = 2, 
+            DamNoDice = 9, 
+            DamSizeDice = 10, 
+         }, 
+         Description = "She looks as tough as nails but what do you expect she works here after\
+all.\
+", 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         ShortDescr = "the receptionist", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 18, 
+            HitPlus = 900, 
+         }, 
+         LongDescr = "A receptionist is here accepting your bounty's.\
+", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "gives", 
                Code = "if ovnuminv(11101) >= 1\
 Say Great! I've been waiting for this package for ages!\
 mpwithdraw 2500\
@@ -3460,11 +3466,11 @@ mpat 10299 drop all\
 mpat 10299 mppurge\
 endif\
 ", 
-               Arguments = "gives", 
                MudProgType = "act_prog", 
             }, 
             [2] = 
             {
+               Arguments = "Willard", 
                Code = "if ovnuminv(11113) >= 1\
 nod $n\
 say This one has eluded us for a while now.  Thank you. \
@@ -3478,11 +3484,11 @@ endif\
 mpat 10299 drop all\
 mpat 10299 mppurge\
 ", 
-               Arguments = "Willard", 
                MudProgType = "act_prog", 
             }, 
             [3] = 
             {
+               Arguments = "Zuggs", 
                Code = "if ovnuminv(21812) >= 1\
 nod $n\
 say This one has eluded us for a while now.  Thank you. \
@@ -3496,17 +3502,17 @@ endif\
 mpat 10299 drop all\
 mpat 10299 mppurge\
 ", 
-               Arguments = "Zuggs", 
                MudProgType = "act_prog", 
             }, 
             [4] = 
             {
-               Code = "", 
                Arguments = "Hasti", 
+               Code = "", 
                MudProgType = "act_prog", 
             }, 
             [5] = 
             {
+               Arguments = "Willard", 
                Code = "if name($n) == Willard\
 mpwithdraw 15000\
 give $n 15000 credits\
@@ -3518,11 +3524,11 @@ mpgain $r 3 15000\
 mppurge willard\
 endif\
 ", 
-               Arguments = "Willard", 
                MudProgType = "act_prog", 
             }, 
             [6] = 
             {
+               Arguments = "sleejat", 
                Code = "if name($n) == Sleejat\
 mpwithdraw 40000\
 give $n 40000 credits\
@@ -3532,11 +3538,11 @@ mpgain $r 3 40000\
 mppurge sleejat\
 endif\
 ", 
-               Arguments = "sleejat", 
                MudProgType = "act_prog", 
             }, 
             [7] = 
             {
+               Arguments = "gives", 
                Code = "if ovnuminv(23150) >= 1\
 nod $n\
 say We are most pleased with\
@@ -3573,108 +3579,105 @@ mpat 10299 drop all\
 mpat 10299 purge\
 drop 100000000 credits\
 ", 
-               Arguments = "gives", 
                MudProgType = "act_prog", 
             }, 
          }, 
-         LongDescr = "A receptionist is here accepting your bounty's.\
-", 
-         Level = 90, 
-         DamRoll = 18, 
          Languages = 
          {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
             Speaks = 
             {
                [0] = "basic", 
             }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         AffectedBy = 
-         {
-            [5] = "DetectHidden", 
-         }, 
-         Height = 0, 
+         Alignment = 0, 
          Stats = 
          {
-            Strength = 0, 
             Force = 0, 
             Intelligence = 0, 
             Charisma = 0, 
             Wisdom = 0, 
-            Dexterity = 0, 
-            Constitution = 0, 
+            Strength = 0, 
             Luck = 0, 
+            Constitution = 0, 
+            Dexterity = 0, 
          }, 
-         Credits = 0, 
-         Name = "receptionist", 
-         ShortDescr = "the receptionist", 
-         SaveVs = 
+         Height = 0, 
+         DamRoll = 18, 
+         Flags = 
          {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
+            [0] = "Npc", 
+            [30] = "Prototype", 
          }, 
-         Position = "standing", 
-         Damage = 
-         {
-            DamPlus = 2, 
-            DamNoDice = 9, 
-            DamSizeDice = 10, 
-         }, 
-         Vnum = 6602, 
-         Race = "Human", 
-         HitRoll = 18, 
-         Weight = 0, 
          ArmorClass = -125, 
+         AffectedBy = 
+         {
+            [5] = "DetectHidden", 
+         }, 
+         HitRoll = 18, 
+         NumberOfAttacks = 0, 
+         Race = "Human", 
+         Level = 90, 
+         Vnum = 6602, 
+         DefaultPosition = "standing", 
          Sex = "undistinguished", 
+         Position = "standing", 
       }, 
       [6603] = 
       {
-         NumberOfAttacks = 0, 
-         HitChance = 
+         Weight = 0, 
+         Credits = 0, 
+         Name = "Salesman", 
+         Damage = 
          {
-            HitPlus = 1000, 
-            HitSizeDice = 10, 
-            HitNoDice = 20, 
+            DamPlus = 2, 
+            DamNoDice = 10, 
+            DamSizeDice = 4, 
          }, 
          Description = "As fast as new products become available to Bounty Hunters, this salesman\
 somehow gets them. Of course they can be a little pricy. But that what you\
 pay to get the best i guess. \
 ", 
-         Alignment = 0, 
-         Flags = 
+         SaveVs = 
          {
-            [0] = "Npc", 
-            [25] = "NoKill", 
-            [30] = "Prototype", 
+            SpellStaff = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
          }, 
-         DefaultPosition = "standing", 
-         Immune = 
+         RepairShop = 
          {
-            [20] = "magic", 
-            [21] = "paralysis", 
-            [10] = "sleep", 
-            [11] = "charm", 
-         }, 
-         ArmorClass = -150, 
-         LongDescr = "A Salesman is here selling his latest wares.\
-", 
-         Level = 100, 
-         DamRoll = 20, 
-         Shop = 
-         {
+            ShopType = 1, 
+            FixTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [0] = "none", 
+            }, 
+            ProfitFix = 100, 
+            KeeperShortDescr = "salesman", 
             BusinessHours = 
             {
-               Open = 0, 
                Close = 23, 
+               Open = 0, 
             }, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 20, 
+            HitPlus = 1000, 
+         }, 
+         LongDescr = "A Salesman is here selling his latest wares.\
+", 
+         Shop = 
+         {
             KeeperShortDescr = "salesman", 
-            ProfitBuy = 100, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -3683,147 +3686,68 @@ pay to get the best i guess. \
                [4] = "none", 
                [0] = "none", 
             }, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
             ProfitSell = 90, 
+            ProfitBuy = 100, 
          }, 
          Languages = 
          {
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [0] = "basic", 
-            }, 
             Speaks = 
             {
                [0] = "basic", 
                [20] = "verpine", 
             }, 
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [0] = "basic", 
+            }, 
          }, 
-         Height = 0, 
+         Alignment = 0, 
          Stats = 
          {
-            Strength = 0, 
             Force = 0, 
             Intelligence = 0, 
             Charisma = 0, 
             Wisdom = 0, 
-            Dexterity = 0, 
-            Constitution = 0, 
+            Strength = 0, 
             Luck = 0, 
+            Constitution = 0, 
+            Dexterity = 0, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         ShortDescr = "salesman", 
-         SaveVs = 
+         Height = 0, 
+         Immune = 
          {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
+            [20] = "magic", 
+            [21] = "paralysis", 
+            [10] = "sleep", 
+            [11] = "charm", 
          }, 
-         Name = "Salesman", 
-         Damage = 
+         Flags = 
          {
-            DamPlus = 2, 
-            DamNoDice = 10, 
-            DamSizeDice = 4, 
+            [0] = "Npc", 
+            [25] = "NoKill", 
+            [30] = "Prototype", 
          }, 
+         Level = 100, 
          Vnum = 6603, 
-         Race = "Human", 
+         DamRoll = 20, 
          HitRoll = 20, 
-         Weight = 0, 
-         RepairShop = 
-         {
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
-            ProfitFix = 100, 
-            ShopType = 1, 
-            KeeperShortDescr = "salesman", 
-            FixTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [0] = "none", 
-            }, 
-         }, 
+         NumberOfAttacks = 0, 
+         Race = "Human", 
+         ArmorClass = -150, 
+         DefaultPosition = "standing", 
          Sex = "undistinguished", 
+         ShortDescr = "salesman", 
       }, 
       [6604] = 
       {
-         NumberOfAttacks = 0, 
-         HitChance = 
-         {
-            HitPlus = 250, 
-            HitSizeDice = 10, 
-            HitNoDice = 5, 
-         }, 
-         Description = "This alien is glancing around watching his back. Obviously he is wanted by\
-someone for something , just if you could figure out by who and for what,\
-", 
-         Alignment = 0, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         DefaultPosition = "standing", 
-         LongDescr = "A slender nurse in a head nurse's slicks\
-", 
-         Level = 25, 
-         DamRoll = 5, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Code = "emote blushes furiously and stammers for a moment... \
-say H-hello there, $n. Nice to see you. \
-emote smiles like there's no tomorrow. \
-say Can I do something for you, dear? \
-emote stands up, brushing out her dress. \
-emote crosses the room to stand before you, looking you over. \
-", 
-               Arguments = "p arrives", 
-               MudProgType = "act_prog", 
-            }, 
-         }, 
-         Languages = 
-         {
-            Speaking = 
-            {
-               [5] = "mon calamarian", 
-            }, 
-            Speaks = 
-            {
-               [0] = "basic", 
-               [5] = "mon calamarian", 
-            }, 
-         }, 
-         Height = 0, 
-         Stats = 
-         {
-            Strength = 0, 
-            Force = 0, 
-            Intelligence = 0, 
-            Charisma = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Constitution = 0, 
-            Luck = 0, 
-         }, 
+         Weight = 0, 
          Credits = 0, 
-         Position = "standing", 
-         ShortDescr = "Head Nurse Ophelia", 
-         SaveVs = 
-         {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
-         }, 
          Name = "ophelia head nurse woman human", 
          Damage = 
          {
@@ -3831,21 +3755,92 @@ emote crosses the room to stand before you, looking you over. \
             DamNoDice = 2, 
             DamSizeDice = 4, 
          }, 
+         Description = "This alien is glancing around watching his back. Obviously he is wanted by\
+someone for something , just if you could figure out by who and for what,\
+", 
+         SaveVs = 
+         {
+            SpellStaff = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
+         }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitSizeDice = 10, 
+            HitNoDice = 5, 
+            HitPlus = 250, 
+         }, 
+         LongDescr = "A slender nurse in a head nurse's slicks\
+", 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Arguments = "p arrives", 
+               Code = "emote blushes furiously and stammers for a moment... \
+say H-hello there, $n. Nice to see you. \
+emote smiles like there's no tomorrow. \
+say Can I do something for you, dear? \
+emote stands up, brushing out her dress. \
+emote crosses the room to stand before you, looking you over. \
+", 
+               MudProgType = "act_prog", 
+            }, 
+         }, 
+         Alignment = 0, 
+         Languages = 
+         {
+            Speaks = 
+            {
+               [0] = "basic", 
+               [5] = "mon calamarian", 
+            }, 
+            Speaking = 
+            {
+               [5] = "mon calamarian", 
+            }, 
+         }, 
+         Height = 0, 
+         Stats = 
+         {
+            Force = 0, 
+            Intelligence = 0, 
+            Charisma = 0, 
+            Wisdom = 0, 
+            Strength = 0, 
+            Luck = 0, 
+            Constitution = 0, 
+            Dexterity = 0, 
+         }, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+         Level = 25, 
          Vnum = 6604, 
-         Race = "Mon Calamari", 
+         DamRoll = 5, 
          HitRoll = 5, 
-         Weight = 0, 
+         NumberOfAttacks = 0, 
+         Race = "Mon Calamari", 
          ArmorClass = 37, 
+         DefaultPosition = "standing", 
          Sex = "undistinguished", 
+         ShortDescr = "Head Nurse Ophelia", 
       }, 
       [6605] = 
       {
-         NumberOfAttacks = 0, 
-         HitChance = 
+         Weight = 0, 
+         Credits = 0, 
+         Name = "Armist Ghesinn barkeep", 
+         Damage = 
          {
-            HitPlus = 0, 
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
+            DamPlus = 0, 
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
          }, 
          Description = "Standing nearly two meters in height, and brawny as a gundark, Ghesinn is\
 an imposing figure. Or, he would be, if he could keep the self-contented\
@@ -3856,34 +3851,26 @@ between the often egotistical hunters. Armist was once a reknowned\
 Imperial Commando leader, having more than a hundred successful missions\
 under his belt, and only a handful of failures.\
 ", 
-         Alignment = 0, 
-         Flags = 
+         SaveVs = 
          {
-            [0] = "Npc", 
-            [30] = "Prototype", 
+            SpellStaff = 0, 
+            Breath = 0, 
+            Wand = 0, 
+            PoisonDeath = 0, 
+            ParaPetri = 0, 
          }, 
-         DefaultPosition = "standing", 
-         Immune = 
+         Position = "standing", 
+         HitChance = 
          {
-            [8] = "poison", 
-            [3] = "energy", 
-            [20] = "magic", 
-            [13] = "nonmagic", 
-            [11] = "charm", 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
          }, 
          LongDescr = "The barkeep, Armist Ghesinn.\
 ", 
-         Level = 1, 
-         DamRoll = 0, 
          Shop = 
          {
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
             KeeperShortDescr = "Armist", 
-            ProfitBuy = 120, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -3892,14 +3879,16 @@ under his belt, and only a handful of failures.\
                [4] = "none", 
                [0] = "none", 
             }, 
+            BusinessHours = 
+            {
+               Close = 23, 
+               Open = 0, 
+            }, 
             ProfitSell = 0, 
+            ProfitBuy = 120, 
          }, 
          Languages = 
          {
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
             Speaks = 
             {
                [1] = "shyriiwook", 
@@ -3934,61 +3923,65 @@ under his belt, and only a handful of failures.\
                [31] = "coyn", 
                [0] = "basic", 
             }, 
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         Height = 0, 
+         Alignment = 0, 
          Stats = 
          {
-            Strength = 0, 
             Force = 0, 
             Intelligence = 0, 
             Charisma = 0, 
             Wisdom = 0, 
-            Dexterity = 0, 
-            Constitution = 0, 
+            Strength = 0, 
             Luck = 0, 
+            Constitution = 0, 
+            Dexterity = 0, 
          }, 
-         Credits = 0, 
-         Position = "standing", 
-         ShortDescr = "Armist", 
-         SaveVs = 
+         Height = 0, 
+         Immune = 
          {
-            SpellStaff = 0, 
-            Breath = 0, 
-            PoisonDeath = 0, 
-            ParaPetri = 0, 
-            Wand = 0, 
+            [8] = "poison", 
+            [3] = "energy", 
+            [20] = "magic", 
+            [13] = "nonmagic", 
+            [11] = "charm", 
          }, 
-         Name = "Armist Ghesinn barkeep", 
-         Damage = 
+         Flags = 
          {
-            DamPlus = 0, 
-            DamNoDice = 0, 
-            DamSizeDice = 0, 
+            [0] = "Npc", 
+            [30] = "Prototype", 
          }, 
+         Level = 1, 
          Vnum = 6605, 
-         Race = "Human", 
+         DamRoll = 0, 
          HitRoll = 0, 
-         Weight = 0, 
+         NumberOfAttacks = 0, 
+         Race = "Human", 
          ArmorClass = 0, 
+         DefaultPosition = "standing", 
          Sex = "undistinguished", 
+         ShortDescr = "Armist", 
       }, 
    }, 
-   VnumRanges = 
+   Filename = "hunters_guild.lua", 
+   Author = "Bleeds", 
+   FileFormatVersion = 1, 
+   LevelRanges = 
    {
-      Room = 
+      Soft = 
       {
-         Last = 6650, 
-         First = 6600, 
+         Low = 0, 
+         High = 105, 
       }, 
-      Mob = 
+      Hard = 
       {
-         Last = 6605, 
-         First = 6600, 
-      }, 
-      Object = 
-      {
-         Last = 6637, 
-         First = 6600, 
+         Low = 0, 
+         High = 105, 
       }, 
    }, 
+   ResetMessage = "A cleaning droid sweeps by, narrowly missing you.", 
+   HighEconomy = 0, 
 }

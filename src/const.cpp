@@ -2117,7 +2117,7 @@ const std::array<const char * const, Flag::MAX> RoomFlags =
     "_11",
     "PetShop",
     "Arena",
-    "Donation",
+    "_14", // Donation
     "NoDropAll",
     "Silence",
     "LogSpeech",
@@ -2130,7 +2130,7 @@ const std::array<const char * const, Flag::MAX> RoomFlags =
     "NoFloor",
     "Refinery",
     "Factory",
-    "Recruit",
+    "_27", // Recruit
     "PlayerShop",
     "Spacecraft",
     "Prototype",
@@ -2430,12 +2430,12 @@ const std::array<const char * const, Flag::MAX> MobFlags =
     "Train",
     "Practice",
     "Immortal",
-    "Deadly",
-    "PolySelf",
-    "MetaAggr",
-    "Guardian",
+    "_12", // Deadly
+    "_13", // PolySelf
+    "_14", // MetaAggr
+    "_15", // Guardian
     "Running",
-    "NoWander",
+    "_17", // NoWander
     "Mountable",
     "Mounted",
     "Scholar",

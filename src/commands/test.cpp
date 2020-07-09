@@ -1,6 +1,8 @@
+#include <array>
 #include <cstring>
 #include <cstdlib>
 #include <cstdarg>
+#include <map>
 #ifdef HAVE_UNAME
 #include <sys/utsname.h>
 #endif
@@ -17,6 +19,8 @@
 #include "arena.hpp"
 #include "room.hpp"
 #include "area.hpp"
+#include "protomob.hpp"
+#include "protoobject.hpp"
 #include "protoobject.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/badnamerepository.hpp"
@@ -173,6 +177,112 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
                          obj->ShortDescr.c_str(),
                          area->Filename.c_str());
             }
+        }
+    }
+    else if(StrCmp(argument, "oldmobflags") == 0)
+    {
+        const std::array<size_t, 10> oldFlags
+        {
+            Flag::Mob::_03,
+                Flag::Mob::_04,
+                Flag::Mob::_12,
+                Flag::Mob::_13,
+                Flag::Mob::_14,
+                Flag::Mob::_15,
+                Flag::Mob::_17,
+                Flag::Mob::_28,
+                Flag::Mob::_29,
+                Flag::Mob::_31
+        };
+        std::map<size_t, int> stats;
+
+        for(auto mob : ProtoMobs)
+        {
+            for(auto flag : oldFlags)
+            {
+                if(mob.second->Flags.test(flag))
+                {
+                    mob.second->Flags.reset(flag);
+                    stats[flag] += 1;
+                }
+            }
+        }
+
+        ch->Echo("Report:\r\n");
+        for(const auto &tuple : stats)
+        {
+            ch->Echo("  Flag %s: %d removals.\r\n",
+                     MobFlags[tuple.first], tuple.second);
+        }
+    }
+    else if(StrCmp(argument, "oldobjectflags") == 0)
+    {
+        const std::array<size_t, 9> oldFlags
+        {
+            Flag::Obj::_02,
+                Flag::Obj::_14,
+                Flag::Obj::_15,
+                Flag::Obj::_16,
+                Flag::Obj::_17,
+                Flag::Obj::_20,
+                Flag::Obj::_22,
+                Flag::Obj::_23,
+                Flag::Obj::_24
+        };
+        std::map<size_t, int> stats;
+
+        for(const auto &tuple : ProtoObjects)
+        {
+            for(auto flag : oldFlags)
+            {
+                if(tuple.second->Flags.test(flag))
+                {
+                    tuple.second->Flags.reset(flag);
+                    stats[flag] += 1;
+                }
+            }
+        }
+
+        ch->Echo("Report:\r\n");
+        for(const auto &tuple : stats)
+        {
+            ch->Echo("  Flag %s: %d removals.\r\n",
+                     ObjectFlags[tuple.first], tuple.second);
+        }
+    }
+    else if(StrCmp(argument, "oldroomflags") == 0)
+    {
+        const std::array<size_t, 4> oldFlags
+        {
+            Flag::Room::_11,
+                Flag::Room::_14,
+                Flag::Room::_21,
+                Flag::Room::_27
+        };
+        std::map<size_t, int> stats;
+
+        for(int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
+        {
+            for(auto room = RoomIndexHash[iHash];
+                room;
+                room = room->Next)
+            {
+                for(auto flag : oldFlags)
+                {
+                    if(room->Flags.test(flag))
+                    {
+                        room->Flags.reset(flag);
+                        stats[flag] += 1;
+                    }
+                }
+            }
+        }
+
+        ch->Echo("Report:\r\n");
+        for(const auto &tuple : stats)
+        {
+            ch->Echo("  Flag %s: %d removals.\r\n",
+                     RoomFlags[tuple.first], tuple.second);
         }
     }
     else

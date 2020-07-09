@@ -1,178 +1,194 @@
 -- Suites at Grand Towers
--- Last saved Monday 01-Jun-2020 11:08:46
+-- Last saved Thursday 09-Jul-2020 21:56:48
 
 AreaEntry
 {
+   LowEconomy = 6286000, 
+   Name = "Suites at Grand Towers", 
+   ResetFrequency = 0, 
+   VnumRanges = 
+   {
+      Mob = 
+      {
+         First = 5190, 
+         Last = 5190, 
+      }, 
+      Room = 
+      {
+         First = 5100, 
+         Last = 5149, 
+      }, 
+      Object = 
+      {
+         First = 0, 
+         Last = 0, 
+      }, 
+   }, 
    Resets = 
    {
       [1] = 
       {
-         Arg1 = 5099, 
-         MiscData = 1, 
+         Arg3 = 5113, 
          Command = "O", 
          Arg2 = 1, 
-         Arg3 = 5113, 
+         Arg1 = 5099, 
+         MiscData = 1, 
       }, 
       [2] = 
       {
-         Arg1 = 5099, 
-         MiscData = 1, 
+         Arg3 = 5108, 
          Command = "O", 
          Arg2 = 1, 
-         Arg3 = 5108, 
+         Arg1 = 5099, 
+         MiscData = 1, 
       }, 
       [3] = 
       {
-         Arg1 = 5190, 
-         MiscData = 1, 
+         Arg3 = 5103, 
          Command = "M", 
          Arg2 = 2, 
-         Arg3 = 5103, 
+         Arg1 = 5190, 
+         MiscData = 1, 
       }, 
       [4] = 
       {
-         MiscData = 1, 
          Command = "G", 
-         Arg2 = 1, 
          Arg1 = 10314, 
+         MiscData = 1, 
+         Arg2 = 1, 
       }, 
       [5] = 
       {
-         MiscData = 1, 
          Command = "G", 
-         Arg2 = 1, 
          Arg1 = 10313, 
+         MiscData = 1, 
+         Arg2 = 1, 
       }, 
       [6] = 
       {
-         Arg1 = 5190, 
-         MiscData = 1, 
+         Arg3 = 5106, 
          Command = "M", 
          Arg2 = 3, 
-         Arg3 = 5106, 
+         Arg1 = 5190, 
+         MiscData = 1, 
       }, 
       [7] = 
       {
-         MiscData = 1, 
          Command = "G", 
-         Arg2 = 1, 
          Arg1 = 10313, 
+         MiscData = 1, 
+         Arg2 = 1, 
       }, 
       [8] = 
       {
-         MiscData = 1, 
          Command = "G", 
-         Arg2 = 1, 
          Arg1 = 10314, 
+         MiscData = 1, 
+         Arg2 = 1, 
       }, 
       [9] = 
       {
-         Arg1 = 5190, 
-         MiscData = 1, 
+         Arg3 = 5111, 
          Command = "M", 
          Arg2 = 4, 
-         Arg3 = 5111, 
+         Arg1 = 5190, 
+         MiscData = 1, 
       }, 
       [10] = 
       {
-         MiscData = 1, 
          Command = "G", 
-         Arg2 = 1, 
          Arg1 = 10313, 
+         MiscData = 1, 
+         Arg2 = 1, 
       }, 
       [11] = 
       {
-         MiscData = 1, 
          Command = "G", 
-         Arg2 = 1, 
          Arg1 = 10314, 
+         MiscData = 1, 
+         Arg2 = 1, 
       }, 
       [12] = 
       {
-         Arg1 = 10315, 
-         MiscData = 1, 
+         Arg3 = 5104, 
          Command = "O", 
          Arg2 = 1, 
-         Arg3 = 5104, 
+         Arg1 = 10315, 
+         MiscData = 1, 
       }, 
       [13] = 
       {
-         Arg1 = 21, 
-         MiscData = 1, 
+         Arg3 = 5109, 
          Command = "O", 
          Arg2 = 1, 
-         Arg3 = 5109, 
+         Arg1 = 21, 
+         MiscData = 1, 
       }, 
       [14] = 
       {
-         Arg1 = 5109, 
-         MiscData = 0, 
+         Arg3 = 2, 
          Command = "D", 
          Arg2 = 1, 
-         Arg3 = 2, 
+         Arg1 = 5109, 
+         MiscData = 0, 
       }, 
       [15] = 
       {
-         Arg1 = 5109, 
-         MiscData = 0, 
+         Arg3 = 0, 
          Command = "D", 
          Arg2 = 3, 
-         Arg3 = 0, 
+         Arg1 = 5109, 
+         MiscData = 0, 
       }, 
    }, 
-   ResetMessage = "", 
-   LowEconomy = 6286000, 
+   Objects = 
+   {
+   }, 
    Rooms = 
    {
       [5100] = 
       {
-         Vnum = 5100, 
-         Sector = "inside", 
-         Tunnel = 0, 
-         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5101, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "north", 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5102, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5009, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5103, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
             }, 
          }, 
+         Name = "An Empty Home", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -181,30 +197,30 @@ AreaEntry
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
+         Vnum = 5100, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "inside", 
       }, 
       [5101] = 
       {
-         Vnum = 5101, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Workshop", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5100, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
             }, 
          }, 
+         Name = "Workshop", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [26] = "Factory", 
@@ -213,30 +229,30 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5101, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5102] = 
       {
-         Vnum = 5102, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Bedroom", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5100, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
             }, 
          }, 
+         Name = "Bedroom", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [23] = "Hotel", 
@@ -244,87 +260,87 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5102, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5103] = 
       {
-         Vnum = 5103, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Kitchen", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5100, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
             }, 
          }, 
+         Name = "Kitchen", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5103, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5104] = 
       {
-         Vnum = 5104, 
-         Sector = "inside", 
-         Tunnel = 0, 
-         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5009, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "north", 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5105, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5107, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5106, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
             }, 
          }, 
+         Name = "An Empty Home", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -333,30 +349,30 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
+         Vnum = 5104, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "inside", 
       }, 
       [5105] = 
       {
-         Vnum = 5105, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Bedroom", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5104, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
             }, 
          }, 
+         Name = "Bedroom", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [23] = "Hotel", 
@@ -364,59 +380,59 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5105, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5106] = 
       {
-         Vnum = 5106, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Kitchen", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5104, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
             }, 
          }, 
+         Name = "Kitchen", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5106, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5107] = 
       {
-         Vnum = 5107, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Workshop", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5104, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "north", 
             }, 
          }, 
+         Name = "Workshop", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [26] = "Factory", 
@@ -425,30 +441,31 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5107, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5108] = 
       {
-         Vnum = 5108, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Suite Hallway", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5009, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
             }, 
             [2] = 
             {
-               Key = 777, 
-               Description = "", 
-               DestinationVnum = 5109, 
+               Direction = "west", 
+               Keyword = "", 
                Flags = 
                {
                   [1] = "Closed", 
@@ -457,81 +474,80 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
                   [5] = "PickProof", 
                   [23] = "BashProof", 
                }, 
-               Keyword = "", 
                Distance = 0, 
-               Direction = "west", 
+               Key = 777, 
+               Description = "", 
+               DestinationVnum = 5109, 
             }, 
          }, 
+         Name = "Suite Hallway", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5108, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5109] = 
       {
-         Vnum = 5109, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "The Garden Foyer", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5111, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "north", 
             }, 
             [2] = 
             {
-               Key = 777, 
-               Description = "", 
-               DestinationVnum = 5108, 
+               Direction = "east", 
+               Keyword = "", 
                Flags = 
                {
                   [1] = "Closed", 
                   [2] = "Locked", 
                   [0] = "IsDoor", 
                }, 
-               Keyword = "", 
                Distance = 0, 
-               Direction = "east", 
+               Key = 777, 
+               Description = "", 
+               DestinationVnum = 5108, 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5110, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
             }, 
             [4] = 
             {
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 5112, 
+               Direction = "west", 
+               Keyword = "", 
                Flags = 
                {
                   [0] = "IsDoor", 
                }, 
-               Keyword = "", 
                Distance = 0, 
-               Direction = "west", 
+               Key = -1, 
+               Description = "", 
+               DestinationVnum = 5112, 
             }, 
          }, 
+         Name = "The Garden Foyer", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [23] = "Hotel", 
@@ -543,30 +559,30 @@ up to a courtyard garden that teems with lush and exotic plants from all\
 corners of the universe. To the back of the room, a pair of wooden benches\
 rest; their seats covered with plush dark green cushions.\
 ", 
+         Vnum = 5109, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5110] = 
       {
-         Vnum = 5110, 
-         Sector = "inside", 
-         Tunnel = 0, 
-         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5109, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "north", 
             }, 
          }, 
+         Name = "An Empty Home", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -575,60 +591,60 @@ rest; their seats covered with plush dark green cushions.\
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
+         Vnum = 5110, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "inside", 
       }, 
       [5111] = 
       {
-         Vnum = 5111, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Kitchen", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5109, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
             }, 
          }, 
+         Name = "Kitchen", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5111, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5112] = 
       {
-         Vnum = 5112, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "A Tranquil Workroom", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5109, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
             }, 
          }, 
+         Name = "A Tranquil Workroom", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [16] = "Silence", 
@@ -638,95 +654,95 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
             [26] = "Factory", 
          }, 
          Description = "", 
+         Vnum = 5112, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5113] = 
       {
-         Vnum = 5113, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Suite Hallway", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5114, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
             }, 
             [2] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5009, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
             }, 
          }, 
+         Name = "Suite Hallway", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5113, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5114] = 
       {
-         Vnum = 5114, 
-         Sector = "inside", 
-         Tunnel = 0, 
-         Name = "An Empty Home", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5115, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "north", 
             }, 
             [2] = 
             {
+               Direction = "east", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5117, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
             }, 
             [3] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5116, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
             }, 
             [4] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5113, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
             }, 
          }, 
+         Name = "An Empty Home", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [20] = "PlayerHome", 
@@ -735,30 +751,30 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
          Description = "This is a small apartment with the bare essentials required to live here.\
 Apart from the cramped bathroom, the rest of the apartment is a single room.\
 ", 
+         Vnum = 5114, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "inside", 
       }, 
       [5115] = 
       {
-         Vnum = 5115, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Bedroom", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "south", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5114, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
             }, 
          }, 
+         Name = "Bedroom", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [23] = "Hotel", 
@@ -766,60 +782,60 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5115, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5116] = 
       {
-         Vnum = 5116, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Kitchen", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "north", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5114, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "north", 
             }, 
          }, 
+         Name = "Kitchen", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [10] = "Safe", 
             [3] = "Indoors", 
          }, 
          Description = "", 
+         Vnum = 5116, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
       [5117] = 
       {
-         Vnum = 5117, 
-         Sector = "city", 
-         Tunnel = 0, 
-         Name = "Workshop", 
          Exits = 
          {
             [1] = 
             {
+               Direction = "west", 
+               Keyword = "", 
+               Distance = 0, 
                Key = -1, 
                Description = "", 
                DestinationVnum = 5114, 
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
             }, 
          }, 
+         Name = "Workshop", 
          TeleDelay = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
          Flags = 
          {
             [26] = "Factory", 
@@ -828,74 +844,92 @@ Apart from the cramped bathroom, the rest of the apartment is a single room.\
             [3] = "Indoors", 
          }, 
          Description = "", 
-         TeleVnum = 0, 
-      }, 
-      [5149] = 
-      {
-         Vnum = 5149, 
-         Sector = "city", 
+         Vnum = 5117, 
          Tunnel = 0, 
-         Name = "Floating in a void", 
-         Exits = 
-         {
-         }, 
-         TeleDelay = 0, 
          ExtraDescriptions = 
          {
          }, 
+         TeleVnum = 0, 
+         Sector = "city", 
+      }, 
+      [5149] = 
+      {
+         Exits = 
+         {
+         }, 
+         Name = "Floating in a void", 
+         TeleDelay = 0, 
          Flags = 
          {
             [2] = "NoMob", 
             [30] = "Prototype", 
          }, 
          Description = "", 
+         Vnum = 5149, 
+         Tunnel = 0, 
+         ExtraDescriptions = 
+         {
+         }, 
          TeleVnum = 0, 
+         Sector = "city", 
       }, 
    }, 
-   Name = "Suites at Grand Towers", 
-   Filename = "grand_towers_suites.lua", 
-   Author = "Darrik", 
    Mobiles = 
    {
       [5190] = 
       {
-         Level = 1, 
+         Weight = 0, 
          Credits = 0, 
          Name = "a food despenser", 
+         Damage = 
+         {
+            DamPlus = 0, 
+            DamNoDice = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Description = "", 
          SaveVs = 
          {
-            Breath = 0, 
-            ParaPetri = 0, 
             SpellStaff = 0, 
+            Breath = 0, 
             Wand = 0, 
             PoisonDeath = 0, 
+            ParaPetri = 0, 
          }, 
+         Position = "standing", 
+         HitChance = 
+         {
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+            HitPlus = 0, 
+         }, 
+         LongDescr = "A food dispensor sits in the corner here.\
+", 
          MudProgs = 
          {
             [1] = 
             {
+               Arguments = "water canteen", 
+               Code = "mpmload 329\
+mpforce mobslave mpoload 31506\
+mpforce mobslave drop canteen\
+mppurge mobslave\
+", 
+               MudProgType = "speech_prog", 
+            }, 
+            [2] = 
+            {
+               Arguments = "food ration", 
                Code = "mpmload 329\
 mpforce mobslave mpoload 32252\
 mpforce mobslave drop ration\
 mpecho The food dispensor spits out a ration. \
 mppurge mobslave\
 ", 
-               Arguments = "food ration", 
-               MudProgType = "speech_prog", 
-            }, 
-            [2] = 
-            {
-               Code = "mpmload 329\
-mpforce mobslave mpoload 31506\
-mpforce mobslave drop canteen\
-mppurge mobslave\
-", 
-               Arguments = "water canteen", 
                MudProgType = "speech_prog", 
             }, 
          }, 
-         ShortDescr = "a food dispensor", 
-         Race = "Human", 
+         Alignment = 0, 
          Languages = 
          {
             Speaks = 
@@ -907,39 +941,17 @@ mppurge mobslave\
                [0] = "basic", 
             }, 
          }, 
-         Weight = 0, 
-         LongDescr = "A food dispensor sits in the corner here.\
-", 
-         Sex = "undistinguished", 
-         Position = "standing", 
-         DamRoll = 0, 
-         Alignment = 0, 
-         ArmorClass = 0, 
-         HitRoll = 0, 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         HitChance = 
-         {
-            HitNoDice = 0, 
-            HitSizeDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Description = "", 
          Height = 0, 
          Stats = 
          {
-            Dexterity = 0, 
-            Wisdom = 0, 
-            Constitution = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Luck = 0, 
             Force = 0, 
+            Intelligence = 0, 
+            Charisma = 0, 
+            Wisdom = 0, 
+            Strength = 0, 
+            Luck = 0, 
+            Constitution = 0, 
+            Dexterity = 0, 
          }, 
          Flags = 
          {
@@ -948,46 +960,34 @@ mppurge mobslave\
             [25] = "NoKill", 
             [30] = "Prototype", 
          }, 
-         DefaultPosition = "standing", 
-         NumberOfAttacks = 0, 
+         Level = 1, 
          Vnum = 5190, 
+         DamRoll = 0, 
+         HitRoll = 0, 
+         NumberOfAttacks = 0, 
+         Race = "Human", 
+         ArmorClass = 0, 
+         DefaultPosition = "standing", 
+         Sex = "undistinguished", 
+         ShortDescr = "a food dispensor", 
       }, 
    }, 
-   Objects = 
-   {
-   }, 
-   VnumRanges = 
-   {
-      Room = 
-      {
-         First = 5100, 
-         Last = 5149, 
-      }, 
-      Mob = 
-      {
-         First = 5190, 
-         Last = 5190, 
-      }, 
-      Object = 
-      {
-         First = 0, 
-         Last = 0, 
-      }, 
-   }, 
-   ResetFrequency = 0, 
+   Filename = "grand_towers_suites.lua", 
+   Author = "Darrik", 
    FileFormatVersion = 1, 
    LevelRanges = 
    {
       Soft = 
       {
-         High = 105, 
          Low = 0, 
+         High = 105, 
       }, 
       Hard = 
       {
-         High = 105, 
          Low = 0, 
+         High = 105, 
       }, 
    }, 
+   ResetMessage = "", 
    HighEconomy = 0, 
 }
