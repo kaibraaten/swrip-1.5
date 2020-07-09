@@ -264,7 +264,7 @@ void Act(short AType, const std::string &format, std::shared_ptr<Character> ch, 
            || !IsAwake(to))
             continue;
 
-        if(!CanSeeCharacter(to, ch) && type != ActTarget::Vict)
+        if(!CanSeeCharacter(to, ch) && type != ActTarget::Vict && ch != supermob)
             continue;
 
         if(type == ActTarget::Char && to != ch)
@@ -277,9 +277,6 @@ void Act(short AType, const std::string &format, std::shared_ptr<Character> ch, 
             continue;
 
         if(type == ActTarget::NotVict && (to == ch || to == vch))
-            continue;
-
-        if(!CanSeeCharacter(to, ch) && type != ActTarget::Vict)
             continue;
 
         txt = ActString(format, to, ch, arg1, arg2);
