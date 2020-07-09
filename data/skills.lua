@@ -84,7 +84,11 @@ SkillEntry
    Target = "ignore", 
    Position = "standing", 
    Type = "Skill", 
-   Function = "do_bribe", 
+   Function = "do_bribe",
+   Teachers =
+      {
+         [31537] = "Mayor Mikdanyell Guh'rantt",
+      },
 }
 
 SkillEntry
@@ -773,7 +777,8 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [10509] = "An instructor", 
       [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
+      [32011] = "new repulic training officer",
+      [31535] = "retired merc",
    }, 
    Position = "fighting", 
    Type = "Skill", 
@@ -911,7 +916,8 @@ SkillEntry
    Teachers = 
    {
       [10340] = "Domick Dom teacher", 
-      [32006] = "old teacher master man human scholar", 
+      [32006] = "old teacher master man human scholar",
+      [31537] = "Mayor Mikdanyell Guh'rantt",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -1567,7 +1573,8 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [10509] = "An instructor", 
       [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
+      [32011] = "new repulic training officer",
+      [31535] = "retired merc",
    }, 
    Position = "fighting", 
    Type = "Skill", 
@@ -1935,7 +1942,8 @@ SkillEntry
    Teachers = 
    {
       [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
+      [206] = "technician",
+      [31536] = "experienced zabrak engineer",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -1981,7 +1989,8 @@ SkillEntry
    {
       [10340] = "Domick Dom teacher", 
       [206] = "technician", 
-      [32010] = "Twilek craftswoman woman", 
+      [32010] = "Twilek craftswoman woman",
+      [31536] = "experienced zabrak engineer",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -2026,7 +2035,8 @@ SkillEntry
    Teachers = 
    {
       [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
+      [206] = "technician",
+      [31536] = "experienced zabrak engineer",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -2450,7 +2460,8 @@ SkillEntry
    Teachers = 
    {
       [412] = "Self Defence Trainer", 
-      [10509] = "An instructor", 
+      [10509] = "An instructor",
+      [31535] = "retired merc",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -2951,7 +2962,8 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [10509] = "An instructor", 
       [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
+      [32011] = "new repulic training officer",
+      [31535] = "retired merc",
    }, 
    Position = "fighting", 
    Type = "Skill", 
@@ -3046,7 +3058,8 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [10509] = "An instructor", 
       [10340] = "Domick Dom teacher", 
-      [320] = "human citizen", 
+      [320] = "human citizen",
+      [31535] = "retired merc",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -3329,7 +3342,8 @@ SkillEntry
    Teachers = 
    {
       [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
+      [206] = "technician",
+      [31536] = "experienced zabrak engineer",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -3516,7 +3530,11 @@ SkillEntry
    Target = "ignore", 
    Position = "standing", 
    Type = "Skill", 
-   Function = "do_smalltalk", 
+   Function = "do_smalltalk",
+   Teachers =
+      {
+         [31537] = "Mayor Mikdanyell Guh'rantt",
+      },
 }
 
 SkillEntry
@@ -3615,7 +3633,8 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [10509] = "An instructor", 
       [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
+      [32011] = "new repulic training officer",
+      [31535] = "retired merc",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -4228,7 +4247,8 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [10509] = "An instructor", 
       [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
+      [32011] = "new repulic training officer",
+      [31535] = "retired merc",
    }, 
    Position = "sitting", 
    Type = "Skill", 
@@ -4517,7 +4537,8 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [10509] = "An instructor", 
       [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
+      [32011] = "new repulic training officer",
+      [31535] = "retired merc",
    }, 
    Position = "fighting", 
    Type = "Weapon", 
@@ -4604,7 +4625,8 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [10509] = "An instructor", 
       [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
+      [32011] = "new repulic training officer",
+      [31535] = "retired merc",
    }, 
    Position = "fighting", 
    Type = "Weapon", 
@@ -4691,7 +4713,8 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [10509] = "An instructor", 
       [412] = "Self Defence Trainer", 
-      [32011] = "new repulic training officer", 
+      [32011] = "new repulic training officer",
+      [31535] = "retired merc",
    }, 
    Position = "dead", 
    Type = "Weapon", 
@@ -4825,7 +4848,8 @@ SkillEntry
       [10340] = "Domick Dom teacher", 
       [10509] = "An instructor", 
       [412] = "Self Defence Trainer", 
-      [32012] = "imperial trooper drill seargent", 
+      [32012] = "imperial trooper drill seargent",
+      [31535] = "retired merc",
    }, 
    Position = "fighting", 
    Type = "Weapon", 
@@ -10224,7 +10248,8 @@ SkillEntry
    Teachers = 
    {
       [10340] = "Domick Dom teacher", 
-      [32006] = "old teacher master man human scholar", 
+      [32006] = "old teacher master man human scholar",
+      [31537] = "Mayor Mikdanyell Guh'rantt",
    }, 
    Position = "standing", 
    Type = "Skill", 

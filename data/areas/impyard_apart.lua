@@ -1,28 +1,1389 @@
 -- Imperial Shipyard Apartments
--- Last saved Thursday 09-Jul-2020 21:56:48
+-- Last saved Thursday 09-Jul-2020 23:19:12
 
 AreaEntry
 {
-   Name = "Imperial Shipyard Apartments", 
-   Filename = "impyard_apart.lua", 
-   VnumRanges = 
+   Rooms = 
    {
-      Mob = 
+      [11650] = 
       {
-         Last = 11694, 
-         First = 11650, 
+         TeleDelay = 0, 
+         Vnum = 11650, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11651, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Flags = 
+               {
+                  [2] = "Locked", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 32035, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
       }, 
-      Room = 
+      [11651] = 
       {
-         Last = 11694, 
-         First = 11650, 
+         TeleDelay = 0, 
+         Vnum = 11651, 
+         Name = "Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11650, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
       }, 
-      Object = 
+      [11652] = 
       {
-         Last = 11694, 
-         First = 11650, 
+         TeleDelay = 0, 
+         Vnum = 11652, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11653, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 32035, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11653] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11653, 
+         Name = "Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11652, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [11654] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11654, 
+         Name = "Residential North Wing", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 11655, 
+               Key = 11691, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 32035, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
+         Description = "The residential level is one of its more pleaseant areas. The halls are\
+wide with high ceilings and plush carpets. White glowpanels are spaced\
+strategicly around the walls and ceilings giving the halls a sunlit\
+apearance. Plants from varios planets are placed throughout the area -\
+resting on the floor or hanging from the ceiling. There are many numbered\
+doors allong the walls leading you would assume to private appartments.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+      }, 
+      [11655] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11655, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11656, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11654, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11657, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11656] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11656, 
+         Name = "Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [2] = "Locked", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 11655, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [11657] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11657, 
+         Name = "Kitchen", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11655, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [29] = "Spacecraft", 
+         }, 
+      }, 
+      [11658] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11658, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11659, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 32038, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11659] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11659, 
+         Name = "An Empty Apartment", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11658, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [11660] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11660, 
+         Name = "Apartment 54", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 32038, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11661, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [11661] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11661, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11660, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11662] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11662, 
+         Name = "Residential East Wing", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11663, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 32038, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "The residential level is one of its more pleaseant areas. The halls are\
+wide with high ceilings and plush carpets. White glowpanels are spaced\
+strategicly around the walls and ceilings giving the halls a sunlit\
+apearance. Plants from varios planets are placed throughout the area -\
+resting on the floor or hanging from the ceiling. There are many numbered\
+doors allong the walls leading you would assume to private appartments.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+      }, 
+      [11663] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11663, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11664, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11666, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11665, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11662, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11664] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11664, 
+         Name = "A Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11663, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [2] = "NoMob", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11665] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11665, 
+         Name = "Kitchen", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11663, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+      }, 
+      [11666] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11666, 
+         Name = "Workroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11663, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [25] = "Refinery", 
+            [26] = "Factory", 
+            [19] = "ClanStoreroom", 
+         }, 
+      }, 
+      [11667] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11667, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [2] = "Locked", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 32036, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11668, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11668] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11668, 
+         Name = "Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11667, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [11669] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11669, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11670, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+            [2] = 
+            {
+               Flags = 
+               {
+                  [2] = "Locked", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 32036, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11670] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11670, 
+         Name = "Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11669, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [11671] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11671, 
+         Name = "Residential South Wing", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 32036, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 11672, 
+               Key = 11693, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
+         Description = "The residential level is one of its more pleaseant areas. The halls are\
+wide with high ceilings and plush carpets. White glowpanels are spaced\
+strategicly around the walls and ceilings giving the halls a sunlit\
+apearance. Plants from varios planets are placed throughout the area -\
+resting on the floor or hanging from the ceiling. There are many numbered\
+doors allong the walls leading you would assume to private appartments.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+      }, 
+      [11672] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11672, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11671, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11673, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11674, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11673] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11673, 
+         Name = "Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [2] = "Locked", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 11672, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [23] = "Hotel", 
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [19] = "ClanStoreroom", 
+         }, 
+      }, 
+      [11674] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11674, 
+         Name = "Kitchen", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11672, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [19] = "ClanStoreroom", 
+         }, 
+      }, 
+      [11675] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11675, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [2] = "Locked", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 32037, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11676, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11676] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11676, 
+         Name = "Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11675, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [11677] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11677, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [2] = "Locked", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 32037, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11678, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11678] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11678, 
+         Name = "Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11677, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [11679] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11679, 
+         Name = "Residental West Wing", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 32037, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [2] = 
+            {
+               Flags = 
+               {
+                  [0] = "IsDoor", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 11680, 
+               Key = 11694, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "The residential level is one of its more pleaseant areas. The halls are\
+wide with high ceilings and plush carpets. White glowpanels are spaced\
+strategicly around the walls and ceilings giving the halls a sunlit\
+apearance. Plants from varios planets are placed throughout the area -\
+resting on the floor or hanging from the ceiling. There are many numbered\
+doors allong the walls leading you would assume to private appartments.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+         }, 
+      }, 
+      [11680] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11680, 
+         Name = "An Empty Home", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11682, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11679, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11681, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11683, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+         }, 
+         Description = "This is a small apartment with the bare essentials required to live here.\
+Apart from the cramped bathroom, the rest of the apartment is a single room.\
+", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "inside", 
+         Flags = 
+         {
+            [20] = "PlayerHome", 
+            [3] = "Indoors", 
+         }, 
+      }, 
+      [11681] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11681, 
+         Name = "Bedroom", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Flags = 
+               {
+                  [2] = "Locked", 
+               }, 
+               Distance = 0, 
+               DestinationVnum = 11680, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [23] = "Hotel", 
+         }, 
+      }, 
+      [11682] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11682, 
+         Name = "Kitchen", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11680, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [10] = "Safe", 
+            [29] = "Spacecraft", 
+         }, 
+      }, 
+      [11683] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11683, 
+         Name = "Workshop", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 11680, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [25] = "Refinery", 
+            [10] = "Safe", 
+            [26] = "Factory", 
+         }, 
+      }, 
+      [11684] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11684, 
+         Name = "Imperial Shipyard Housing", 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 32034, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "southeast", 
+            }, 
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [29] = "Spacecraft", 
+            [10] = "Safe", 
+            [2] = "NoMob", 
+         }, 
+      }, 
+      [11694] = 
+      {
+         TeleDelay = 0, 
+         Vnum = 11694, 
+         Name = "Floating in a void", 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
+         {
+            [2] = "NoMob", 
+            [29] = "Spacecraft", 
+         }, 
       }, 
    }, 
+   Author = "Darrik", 
+   ResetFrequency = 0, 
+   Name = "Imperial Shipyard Apartments", 
    LevelRanges = 
    {
       Hard = 
@@ -36,88 +1397,816 @@ AreaEntry
          High = 105, 
       }, 
    }, 
+   HighEconomy = 0, 
+   FileFormatVersion = 1, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg1 = 11650, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 11684, 
+      }, 
+      [2] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 11684, 
+      }, 
+      [3] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [4] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 11684, 
+      }, 
+      [5] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [6] = 
+      {
+         Arg1 = 32037, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 11654, 
+      }, 
+      [7] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 3, 
+         Arg3 = 11654, 
+      }, 
+      [8] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [9] = 
+      {
+         Arg1 = 11654, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 0, 
+         Arg3 = 0, 
+      }, 
+      [10] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg3 = 32035, 
+      }, 
+      [11] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [12] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg3 = 32038, 
+      }, 
+      [13] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [14] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 7, 
+         Arg3 = 32036, 
+      }, 
+      [15] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [16] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 8, 
+         Arg3 = 11671, 
+      }, 
+      [17] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [18] = 
+      {
+         Arg1 = 11671, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 2, 
+         Arg3 = 0, 
+      }, 
+      [19] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 9, 
+         Arg3 = 32037, 
+      }, 
+      [20] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [21] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 10, 
+         Arg3 = 11679, 
+      }, 
+      [22] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [23] = 
+      {
+         Arg1 = 11679, 
+         Command = "D", 
+         MiscData = 0, 
+         Arg2 = 3, 
+         Arg3 = 0, 
+      }, 
+      [24] = 
+      {
+         Arg1 = 11694, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 10, 
+         Arg3 = 11662, 
+      }, 
+      [25] = 
+      {
+         Arg1 = 53, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 16, 
+      }, 
+      [26] = 
+      {
+         MiscData = 1, 
+         Arg1 = 10313, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [27] = 
+      {
+         MiscData = 1, 
+         Arg1 = 10314, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [28] = 
+      {
+         Arg1 = 11690, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 11657, 
+      }, 
+      [29] = 
+      {
+         MiscData = 1, 
+         Arg1 = 10313, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [30] = 
+      {
+         MiscData = 1, 
+         Arg1 = 10314, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [31] = 
+      {
+         Arg1 = 5190, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 20, 
+         Arg3 = 11665, 
+      }, 
+      [32] = 
+      {
+         Arg1 = 11690, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 5, 
+         Arg3 = 11674, 
+      }, 
+      [33] = 
+      {
+         MiscData = 1, 
+         Arg1 = 10313, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [34] = 
+      {
+         MiscData = 1, 
+         Arg1 = 10314, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+   }, 
+   Filename = "impyard_apart.lua", 
+   Objects = 
+   {
+      [11650] = 
+      {
+         Vnum = 11650, 
+         Weight = 1, 
+         Name = "a shuttle", 
+         Cost = 0, 
+         Description = "A a shuttle is here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "trash", 
+         ShortDescr = "a a shuttle", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11651] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11651, 
+         Weight = 1, 
+         Name = "Apartment 51 key", 
+         Cost = 0, 
+         Description = "An apartment key lies on the ground here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "an apartment key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11652] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11652, 
+         Weight = 1, 
+         Name = "Apartment 52 key", 
+         Cost = 0, 
+         Description = "An apartment key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "an apartment key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11653] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11653, 
+         Weight = 1, 
+         Name = "Apartment 53 key", 
+         Cost = 0, 
+         Description = "An apartment key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "an apartment key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11654] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11654, 
+         Weight = 1, 
+         Name = "Apartment 54 key", 
+         Cost = 0, 
+         Description = "An apartment key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "an apartment key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11655] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11655, 
+         Weight = 1, 
+         Name = "Apartment 55 key", 
+         Cost = 0, 
+         Description = "An apartment key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "an apartment key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11656] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11656, 
+         Weight = 1, 
+         Name = "Apartment 56 key", 
+         Cost = 0, 
+         Description = "An apartment key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "an apartment key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11657] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11657, 
+         Weight = 1, 
+         Name = "Apartment 57 key", 
+         Cost = 0, 
+         Description = "An apartment key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "an apartment key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11658] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11658, 
+         Weight = 1, 
+         Name = "Apartment 58 key", 
+         Cost = 0, 
+         Description = "An apartment key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "an apartment key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11691] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11691, 
+         Weight = 1, 
+         Name = "Suite key 91", 
+         Cost = 0, 
+         Description = "A suite key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "a suite key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11692] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11692, 
+         Weight = 1, 
+         Name = "Suite key 92", 
+         Cost = 0, 
+         Description = "A suite key was dropped here", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "a suite key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11693] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11693, 
+         Weight = 1, 
+         Name = "Suite key 93", 
+         Cost = 0, 
+         Description = "A suite key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "a suite key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11694] = 
+      {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [2] = "Neck", 
+         }, 
+         Vnum = 11694, 
+         Weight = 1, 
+         Name = "Suite key 94", 
+         Cost = 0, 
+         Description = "A suite key was dropped here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "key", 
+         ShortDescr = "a suite key", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [11690] = 
+      {
+         Vnum = 11690, 
+         Weight = 1, 
+         Name = "A food dispenser", 
+         Cost = 0, 
+         Description = "A food dispensor has been installed on the wall here.", 
+         Flags = 
+         {
+            [30] = "Prototype", 
+         }, 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "furniture", 
+         ShortDescr = "a food dispensor", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+   }, 
    Mobiles = 
    {
       [11694] = 
       {
+         Weight = 0, 
          Name = "Complex Guard", 
+         ArmorClass = -25, 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         SpecFuns = 
+         {
+            [0] = "spec_police", 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         LongDescr = "A Complex guard watches the streets here.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 50, 
+         HitRoll = 10, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "", 
          Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 11694, 
+         ShortDescr = "a complex guard", 
+         Sex = "undistinguished", 
+         DamRoll = 10, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
-         Height = 0, 
-         Description = "", 
+      }, 
+      [11690] = 
+      {
+         Weight = 0, 
+         Name = "A food dispensor", 
+         ArmorClass = 0, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "emote beeps as it processes the request.\
+mpoload 24609\
+give ration $n\
+drop ration \
+Say Enjoy.\
+", 
+               MudProgType = "speech_prog", 
+               Arguments = "food ration hungry", 
+            }, 
+         }, 
          Damage = 
          {
-            DamSizeDice = 4, 
-            DamPlus = 2, 
-            DamNoDice = 5, 
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
          }, 
-         Race = "Human", 
-         SpecFuns = 
+         LongDescr = "A food dispensor sits in the corner here.\
+", 
+         NumberOfAttacks = 0, 
+         Immune = 
          {
-            [0] = "spec_police", 
+            [20] = "magic", 
+            [11] = "charm", 
          }, 
-         DamRoll = 10, 
-         ArmorClass = -25, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Wisdom = 0, 
-            Constitution = 0, 
-            Intelligence = 0, 
-            Luck = 0, 
-            Strength = 0, 
-         }, 
-         Alignment = 0, 
-         HitRoll = 10, 
-         Sex = "undistinguished", 
-         Weight = 0, 
-         Vnum = 11694, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
          }, 
-         NumberOfAttacks = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 10, 
-            HitPlus = 500, 
-         }, 
-         LongDescr = "A Complex guard watches the streets here.\
-", 
-         Level = 50, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "a complex guard", 
-         Position = "standing", 
-      }, 
-      [11690] = 
-      {
-         Name = "A food dispensor", 
-         Credits = 0, 
          Shop = 
          {
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
             BuyTypes = 
             {
                [1] = "none", 
@@ -126,2224 +2215,135 @@ AreaEntry
                [4] = "none", 
                [0] = "none", 
             }, 
-            ProfitSell = 90, 
-            ProfitBuy = 120, 
             KeeperShortDescr = "a food dispensor", 
-            BusinessHours = 
-            {
-               Open = 0, 
-               Close = 23, 
-            }, 
          }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 1, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 11690, 
+         ShortDescr = "a food dispensor", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
          Flags = 
          {
             [1] = "Sentinel", 
             [0] = "Npc", 
             [25] = "NoKill", 
          }, 
-         NumberOfAttacks = 0, 
-         Height = 0, 
-         Description = "", 
+      }, 
+      [11650] = 
+      {
+         Weight = 0, 
+         Name = "Complex Landlord", 
+         ArmorClass = 0, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
          Damage = 
          {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
             DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
          }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         Sex = "undistinguished", 
-         ArmorClass = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Wisdom = 0, 
-            Constitution = 0, 
-            Intelligence = 0, 
-            Luck = 0, 
-            Strength = 0, 
-         }, 
-         Alignment = 0, 
-         HitRoll = 0, 
-         Immune = 
-         {
-            [20] = "magic", 
-            [11] = "charm", 
-         }, 
-         Weight = 0, 
-         Vnum = 11690, 
+         LongDescr = "The Complex Landlord works on a mound of paperwork here.\
+", 
+         NumberOfAttacks = 0, 
          Languages = 
          {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
             Speaking = 
             {
                [0] = "basic", 
             }, 
-         }, 
-         MudProgs = 
-         {
-            [1] = 
+            Speaks = 
             {
-               MudProgType = "speech_prog", 
-               Code = "emote beeps as it processes the request.\
-mpoload 24609\
-give ration $n\
-drop ration \
-Say Enjoy.\
-", 
-               Arguments = "food ration hungry", 
+               [0] = "basic", 
             }, 
          }, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         LongDescr = "A food dispensor sits in the corner here.\
-", 
-         Level = 1, 
          SaveVs = 
          {
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
             PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "a food dispensor", 
          Position = "standing", 
-      }, 
-      [11650] = 
-      {
-         Name = "Complex Landlord", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 1, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "", 
          Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 11650, 
+         ShortDescr = "the complex landlord", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
          Flags = 
          {
             [0] = "Npc", 
             [30] = "Prototype", 
          }, 
-         Height = 0, 
-         Description = "", 
-         Damage = 
-         {
-            DamSizeDice = 0, 
-            DamPlus = 0, 
-            DamNoDice = 0, 
-         }, 
-         Race = "Human", 
-         DamRoll = 0, 
-         ArmorClass = 0, 
-         Stats = 
-         {
-            Force = 0, 
-            Dexterity = 0, 
-            Charisma = 0, 
-            Wisdom = 0, 
-            Constitution = 0, 
-            Intelligence = 0, 
-            Luck = 0, 
-            Strength = 0, 
-         }, 
-         Alignment = 0, 
-         HitRoll = 0, 
-         Sex = "undistinguished", 
-         Weight = 0, 
-         Vnum = 11650, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         NumberOfAttacks = 0, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         LongDescr = "The Complex Landlord works on a mound of paperwork here.\
-", 
-         Level = 1, 
-         SaveVs = 
-         {
-            Breath = 0, 
-            Wand = 0, 
-            SpellStaff = 0, 
-            ParaPetri = 0, 
-            PoisonDeath = 0, 
-         }, 
-         DefaultPosition = "standing", 
-         ShortDescr = "the complex landlord", 
-         Position = "standing", 
-      }, 
-   }, 
-   Author = "Darrik", 
-   HighEconomy = 0, 
-   Objects = 
-   {
-      [11650] = 
-      {
-         Name = "a shuttle", 
-         Weight = 1, 
-         Vnum = 11650, 
-         Layers = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "trash", 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ShortDescr = "a a shuttle", 
-         Description = "A a shuttle is here.", 
-      }, 
-      [11651] = 
-      {
-         Name = "Apartment 51 key", 
-         Weight = 1, 
-         Vnum = 11651, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "an apartment key", 
-         Description = "An apartment key lies on the ground here.", 
-      }, 
-      [11652] = 
-      {
-         Name = "Apartment 52 key", 
-         Weight = 1, 
-         Vnum = 11652, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "an apartment key", 
-         Description = "An apartment key was dropped here.", 
-      }, 
-      [11653] = 
-      {
-         Name = "Apartment 53 key", 
-         Weight = 1, 
-         Vnum = 11653, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "an apartment key", 
-         Description = "An apartment key was dropped here.", 
-      }, 
-      [11654] = 
-      {
-         Name = "Apartment 54 key", 
-         Weight = 1, 
-         Vnum = 11654, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "an apartment key", 
-         Description = "An apartment key was dropped here.", 
-      }, 
-      [11655] = 
-      {
-         Name = "Apartment 55 key", 
-         Weight = 1, 
-         Vnum = 11655, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "an apartment key", 
-         Description = "An apartment key was dropped here.", 
-      }, 
-      [11656] = 
-      {
-         Name = "Apartment 56 key", 
-         Weight = 1, 
-         Vnum = 11656, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "an apartment key", 
-         Description = "An apartment key was dropped here.", 
-      }, 
-      [11657] = 
-      {
-         Name = "Apartment 57 key", 
-         Weight = 1, 
-         Vnum = 11657, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "an apartment key", 
-         Description = "An apartment key was dropped here.", 
-      }, 
-      [11658] = 
-      {
-         Name = "Apartment 58 key", 
-         Weight = 1, 
-         Vnum = 11658, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "an apartment key", 
-         Description = "An apartment key was dropped here.", 
-      }, 
-      [11691] = 
-      {
-         Name = "Suite key 91", 
-         Weight = 1, 
-         Vnum = 11691, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "a suite key", 
-         Description = "A suite key was dropped here.", 
-      }, 
-      [11692] = 
-      {
-         Name = "Suite key 92", 
-         Weight = 1, 
-         Vnum = 11692, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "a suite key", 
-         Description = "A suite key was dropped here", 
-      }, 
-      [11693] = 
-      {
-         Name = "Suite key 93", 
-         Weight = 1, 
-         Vnum = 11693, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "a suite key", 
-         Description = "A suite key was dropped here.", 
-      }, 
-      [11694] = 
-      {
-         Name = "Suite key 94", 
-         Weight = 1, 
-         Vnum = 11694, 
-         Layers = 0, 
-         Cost = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "key", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [2] = "Neck", 
-         }, 
-         ShortDescr = "a suite key", 
-         Description = "A suite key was dropped here.", 
-      }, 
-      [11690] = 
-      {
-         Name = "A food dispenser", 
-         Weight = 1, 
-         Vnum = 11690, 
-         Layers = 0, 
-         Flags = 
-         {
-            [30] = "Prototype", 
-         }, 
-         ExtraDescriptions = 
-         {
-         }, 
-         ActionDescription = "", 
-         ItemType = "furniture", 
-         Cost = 0, 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-         ShortDescr = "a food dispensor", 
-         Description = "A food dispensor has been installed on the wall here.", 
-      }, 
-   }, 
-   FileFormatVersion = 1, 
-   Resets = 
-   {
-      [1] = 
-      {
-         Command = "M", 
-         Arg1 = 11650, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 11684, 
-      }, 
-      [2] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg3 = 11684, 
-      }, 
-      [3] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [4] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg3 = 11684, 
-      }, 
-      [5] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [6] = 
-      {
-         Command = "M", 
-         Arg1 = 32037, 
-         Arg2 = 2, 
-         MiscData = 1, 
-         Arg3 = 11654, 
-      }, 
-      [7] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 3, 
-         MiscData = 1, 
-         Arg3 = 11654, 
-      }, 
-      [8] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [9] = 
-      {
-         Command = "D", 
-         Arg1 = 11654, 
-         Arg2 = 0, 
-         MiscData = 0, 
-         Arg3 = 0, 
-      }, 
-      [10] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 32035, 
-      }, 
-      [11] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [12] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 32038, 
-      }, 
-      [13] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [14] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 7, 
-         MiscData = 1, 
-         Arg3 = 32036, 
-      }, 
-      [15] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [16] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 8, 
-         MiscData = 1, 
-         Arg3 = 11671, 
-      }, 
-      [17] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [18] = 
-      {
-         Command = "D", 
-         Arg1 = 11671, 
-         Arg2 = 2, 
-         MiscData = 0, 
-         Arg3 = 0, 
-      }, 
-      [19] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 9, 
-         MiscData = 1, 
-         Arg3 = 32037, 
-      }, 
-      [20] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [21] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 10, 
-         MiscData = 1, 
-         Arg3 = 11679, 
-      }, 
-      [22] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [23] = 
-      {
-         Command = "D", 
-         Arg1 = 11679, 
-         Arg2 = 3, 
-         MiscData = 0, 
-         Arg3 = 0, 
-      }, 
-      [24] = 
-      {
-         Command = "M", 
-         Arg1 = 11694, 
-         Arg2 = 10, 
-         MiscData = 1, 
-         Arg3 = 11662, 
-      }, 
-      [25] = 
-      {
-         Command = "E", 
-         Arg1 = 53, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 16, 
-      }, 
-      [26] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg1 = 10313, 
-      }, 
-      [27] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg1 = 10314, 
-      }, 
-      [28] = 
-      {
-         Command = "M", 
-         Arg1 = 11690, 
-         Arg2 = 1, 
-         MiscData = 1, 
-         Arg3 = 11657, 
-      }, 
-      [29] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg1 = 10313, 
-      }, 
-      [30] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg1 = 10314, 
-      }, 
-      [31] = 
-      {
-         Command = "M", 
-         Arg1 = 5190, 
-         Arg2 = 20, 
-         MiscData = 1, 
-         Arg3 = 11665, 
-      }, 
-      [32] = 
-      {
-         Command = "M", 
-         Arg1 = 11690, 
-         Arg2 = 5, 
-         MiscData = 1, 
-         Arg3 = 11674, 
-      }, 
-      [33] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg1 = 10313, 
-      }, 
-      [34] = 
-      {
-         Arg2 = 1, 
-         MiscData = 1, 
-         Command = "G", 
-         Arg1 = 10314, 
       }, 
    }, 
    LowEconomy = 1003526, 
    ResetMessage = "", 
-   Rooms = 
+   VnumRanges = 
    {
-      [11650] = 
+      Object = 
       {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 11651, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Flags = 
-               {
-                  [2] = "Locked", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 32035, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11650, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
+         First = 11650, 
+         Last = 11694, 
       }, 
-      [11651] = 
+      Mob = 
       {
-         Name = "Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 11650, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11651, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         First = 11650, 
+         Last = 11694, 
       }, 
-      [11652] = 
+      Room = 
       {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 11653, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 32035, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11652, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11653] = 
-      {
-         Name = "Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 11652, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11653, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11654] = 
-      {
-         Name = "Residential North Wing", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = 11691, 
-               Keyword = "", 
-               Direction = "north", 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 11655, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 32035, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11654, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         Description = "The residential level is one of its more pleaseant areas. The halls are\
-wide with high ceilings and plush carpets. White glowpanels are spaced\
-strategicly around the walls and ceilings giving the halls a sunlit\
-apearance. Plants from varios planets are placed throughout the area -\
-resting on the floor or hanging from the ceiling. There are many numbered\
-doors allong the walls leading you would assume to private appartments.\
-", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11655] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11656, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 11654, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 11657, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11655, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11656] = 
-      {
-         Name = "Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Flags = 
-               {
-                  [2] = "Locked", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 11655, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11656, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11657] = 
-      {
-         Name = "Kitchen", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11655, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11657, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11658] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11659, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 32038, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11658, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11659] = 
-      {
-         Name = "An Empty Apartment", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 11658, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11659, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11660] = 
-      {
-         Name = "Apartment 54", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 32038, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11661, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11660, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [2] = "NoMob", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11661] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 11660, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11661, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11662] = 
-      {
-         Name = "Residential East Wing", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11663, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 32038, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11662, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         Description = "The residential level is one of its more pleaseant areas. The halls are\
-wide with high ceilings and plush carpets. White glowpanels are spaced\
-strategicly around the walls and ceilings giving the halls a sunlit\
-apearance. Plants from varios planets are placed throughout the area -\
-resting on the floor or hanging from the ceiling. There are many numbered\
-doors allong the walls leading you would assume to private appartments.\
-", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11663] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 11664, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11666, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 11665, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 11662, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11663, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11664] = 
-      {
-         Name = "A Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 11663, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11664, 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [2] = "NoMob", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11665] = 
-      {
-         Name = "Kitchen", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 11663, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11665, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11666] = 
-      {
-         Name = "Workroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 11663, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11666, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [25] = "Refinery", 
-            [26] = "Factory", 
-            [19] = "ClanStoreroom", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11667] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Flags = 
-               {
-                  [2] = "Locked", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 32036, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 11668, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11667, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11668] = 
-      {
-         Name = "Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 11667, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11668, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11669] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 11670, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Flags = 
-               {
-                  [2] = "Locked", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 32036, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11669, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11670] = 
-      {
-         Name = "Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 11669, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11670, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11671] = 
-      {
-         Name = "Residential South Wing", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 32036, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = 11693, 
-               Keyword = "", 
-               Direction = "south", 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 11672, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11671, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         Description = "The residential level is one of its more pleaseant areas. The halls are\
-wide with high ceilings and plush carpets. White glowpanels are spaced\
-strategicly around the walls and ceilings giving the halls a sunlit\
-apearance. Plants from varios planets are placed throughout the area -\
-resting on the floor or hanging from the ceiling. There are many numbered\
-doors allong the walls leading you would assume to private appartments.\
-", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11672] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 11671, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11673, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 11674, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11672, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11673] = 
-      {
-         Name = "Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Flags = 
-               {
-                  [2] = "Locked", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 11672, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11673, 
-         Flags = 
-         {
-            [23] = "Hotel", 
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [19] = "ClanStoreroom", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11674] = 
-      {
-         Name = "Kitchen", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11672, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11674, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [19] = "ClanStoreroom", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11675] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Flags = 
-               {
-                  [2] = "Locked", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 32037, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 11676, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11675, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11676] = 
-      {
-         Name = "Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11675, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11676, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11677] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Flags = 
-               {
-                  [2] = "Locked", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 32037, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 11678, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11677, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11678] = 
-      {
-         Name = "Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11677, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11678, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11679] = 
-      {
-         Name = "Residental West Wing", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 32037, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = 11694, 
-               Keyword = "", 
-               Direction = "west", 
-               Flags = 
-               {
-                  [0] = "IsDoor", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 11680, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11679, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         Description = "The residential level is one of its more pleaseant areas. The halls are\
-wide with high ceilings and plush carpets. White glowpanels are spaced\
-strategicly around the walls and ceilings giving the halls a sunlit\
-apearance. Plants from varios planets are placed throughout the area -\
-resting on the floor or hanging from the ceiling. There are many numbered\
-doors allong the walls leading you would assume to private appartments.\
-", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11680] = 
-      {
-         Name = "An Empty Home", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Distance = 0, 
-               DestinationVnum = 11682, 
-               Description = "", 
-            }, 
-            [2] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11679, 
-               Description = "", 
-            }, 
-            [3] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 11681, 
-               Description = "", 
-            }, 
-            [4] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "west", 
-               Distance = 0, 
-               DestinationVnum = 11683, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11680, 
-         Flags = 
-         {
-            [20] = "PlayerHome", 
-            [3] = "Indoors", 
-         }, 
-         Tunnel = 0, 
-         Description = "This is a small apartment with the bare essentials required to live here.\
-Apart from the cramped bathroom, the rest of the apartment is a single room.\
-", 
-         TeleDelay = 0, 
-         Sector = "inside", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11681] = 
-      {
-         Name = "Bedroom", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "north", 
-               Flags = 
-               {
-                  [2] = "Locked", 
-               }, 
-               Distance = 0, 
-               DestinationVnum = 11680, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11681, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [23] = "Hotel", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11682] = 
-      {
-         Name = "Kitchen", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "south", 
-               Distance = 0, 
-               DestinationVnum = 11680, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11682, 
-         Flags = 
-         {
-            [10] = "Safe", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11683] = 
-      {
-         Name = "Workshop", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "east", 
-               Distance = 0, 
-               DestinationVnum = 11680, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11683, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [25] = "Refinery", 
-            [10] = "Safe", 
-            [26] = "Factory", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11684] = 
-      {
-         Name = "Imperial Shipyard Housing", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Key = -1, 
-               Keyword = "", 
-               Direction = "southeast", 
-               Distance = 0, 
-               DestinationVnum = 32034, 
-               Description = "", 
-            }, 
-         }, 
-         Vnum = 11684, 
-         Flags = 
-         {
-            [29] = "Spacecraft", 
-            [10] = "Safe", 
-            [2] = "NoMob", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
-      }, 
-      [11694] = 
-      {
-         Name = "Floating in a void", 
-         TeleVnum = 0, 
-         Exits = 
-         {
-         }, 
-         Vnum = 11694, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-            [29] = "Spacecraft", 
-         }, 
-         Tunnel = 0, 
-         Description = "", 
-         TeleDelay = 0, 
-         Sector = "city", 
-         ExtraDescriptions = 
-         {
-         }, 
+         First = 11650, 
+         Last = 11694, 
       }, 
    }, 
-   ResetFrequency = 0, 
 }

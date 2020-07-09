@@ -971,13 +971,13 @@ void LuaPushStats(lua_State *L, const Stats *stats, const std::string &key)
     lua_pushstring(L, key.c_str());
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "Strength", stats->Str);
-    LuaSetfieldNumber(L, "Intelligence", stats->Int);
-    LuaSetfieldNumber(L, "Wisdom", stats->Wis);
-    LuaSetfieldNumber(L, "Dexterity", stats->Dex);
-    LuaSetfieldNumber(L, "Constitution", stats->Con);
-    LuaSetfieldNumber(L, "Charisma", stats->Cha);
-    LuaSetfieldNumber(L, "Luck", stats->Lck);
+    LuaSetfieldNumber(L, "Strength", stats->Str > 0 ? stats->Str : 10);
+    LuaSetfieldNumber(L, "Intelligence", stats->Int > 0 ? stats->Int : 10);
+    LuaSetfieldNumber(L, "Wisdom", stats->Wis > 0 ? stats->Wis : 10);
+    LuaSetfieldNumber(L, "Dexterity", stats->Dex > 0 ? stats->Dex : 10);
+    LuaSetfieldNumber(L, "Constitution", stats->Con > 0 ? stats->Con : 10);
+    LuaSetfieldNumber(L, "Charisma", stats->Cha > 0 ? stats->Cha : 10);
+    LuaSetfieldNumber(L, "Luck", stats->Lck > 0 ? stats->Lck : 10);
     LuaSetfieldNumber(L, "Force", stats->Frc);
 
     lua_settable(L, -3);

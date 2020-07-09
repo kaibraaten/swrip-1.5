@@ -1,170 +1,178 @@
 -- Byss Prison
--- Last saved Thursday 09-Jul-2020 21:56:48
+-- Last saved Thursday 09-Jul-2020 23:19:12
 
 AreaEntry
 {
-   HighEconomy = 0, 
-   Objects = 
-   {
-      [9099] = 
-      {
-         Weight = 1, 
-         ItemType = "trash", 
-         ShortDescr = "a dud", 
-         Name = "dud", 
-         Layers = 0, 
-         Vnum = 9099, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A dud is here.", 
-         Cost = 0, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-      }, 
-      [9050] = 
-      {
-         Weight = 1, 
-         ItemType = "trash", 
-         ShortDescr = "a dud", 
-         Name = "dud", 
-         Layers = 0, 
-         Vnum = 9050, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A dud is here.", 
-         Cost = 0, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-      }, 
-      [9051] = 
-      {
-         Weight = 1, 
-         ItemType = "trash", 
-         ShortDescr = "a dud", 
-         Name = "dud", 
-         Layers = 0, 
-         Vnum = 9051, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "A dud is here.", 
-         Cost = 0, 
-         ActionDescription = "", 
-         ObjectValues = 
-         {
-            [1] = 0, 
-            [2] = 0, 
-            [3] = 0, 
-            [4] = 0, 
-            [5] = 0, 
-            [0] = 0, 
-         }, 
-      }, 
-   }, 
    Rooms = 
    {
       [9050] = 
       {
+         TeleDelay = 0, 
+         Vnum = 9050, 
+         Name = "Floating in a void", 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         TeleDelay = 0, 
-         Name = "Floating in a void", 
-         Vnum = 9050, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Sector = "city", 
       }, 
       [9099] = 
       {
+         TeleDelay = 0, 
+         Vnum = 9099, 
+         Name = "Floating in a void", 
+         Exits = 
+         {
+         }, 
+         Description = "", 
+         ExtraDescriptions = 
+         {
+         }, 
          Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         TeleDelay = 0, 
-         Name = "Floating in a void", 
-         Vnum = 9099, 
-         ExtraDescriptions = 
-         {
-         }, 
-         Description = "", 
-         Exits = 
-         {
-         }, 
-         TeleVnum = 0, 
-         Sector = "city", 
       }, 
    }, 
    Author = "Durga", 
-   ResetMessage = "", 
+   ResetFrequency = 0, 
    Name = "Byss Prison", 
+   LevelRanges = 
+   {
+      Hard = 
+      {
+         Low = 0, 
+         High = 105, 
+      }, 
+      Soft = 
+      {
+         Low = 0, 
+         High = 105, 
+      }, 
+   }, 
+   HighEconomy = 0, 
+   FileFormatVersion = 1, 
    Resets = 
    {
       [1] = 
       {
-         Arg3 = 9099, 
-         Command = "M", 
-         Arg2 = 1, 
          Arg1 = 9099, 
+         Command = "M", 
          MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 9099, 
       }, 
    }, 
-   LowEconomy = 6250000, 
+   Filename = "byss_jail.lua", 
+   Objects = 
+   {
+      [9099] = 
+      {
+         Vnum = 9099, 
+         Weight = 1, 
+         Name = "dud", 
+         Cost = 0, 
+         Description = "A dud is here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "trash", 
+         ShortDescr = "a dud", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [9050] = 
+      {
+         Vnum = 9050, 
+         Weight = 1, 
+         Name = "dud", 
+         Cost = 0, 
+         Description = "A dud is here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "trash", 
+         ShortDescr = "a dud", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+      [9051] = 
+      {
+         Vnum = 9051, 
+         Weight = 1, 
+         Name = "dud", 
+         Cost = 0, 
+         Description = "A dud is here.", 
+         ObjectValues = 
+         {
+            [1] = 0, 
+            [2] = 0, 
+            [3] = 0, 
+            [4] = 0, 
+            [5] = 0, 
+            [0] = 0, 
+         }, 
+         ItemType = "trash", 
+         ShortDescr = "a dud", 
+         ActionDescription = "", 
+         ExtraDescriptions = 
+         {
+         }, 
+         Layers = 0, 
+      }, 
+   }, 
    Mobiles = 
    {
       [9050] = 
       {
-         Race = "Human", 
-         Stats = 
-         {
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Intelligence = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Force = 0, 
-         }, 
+         Weight = 0, 
+         Name = "dude", 
+         ArmorClass = 0, 
          HitChance = 
          {
+            HitPlus = 0, 
             HitSizeDice = 0, 
             HitNoDice = 0, 
-            HitPlus = 0, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
          }, 
          LongDescr = "Some god abandoned a newly created dude here.\
 ", 
-         Level = 1, 
-         Position = "standing", 
-         Vnum = 9050, 
-         Alignment = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -178,61 +186,61 @@ AreaEntry
          }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
             PoisonDeath = 0, 
-            Breath = 0, 
+            Wand = 0, 
             ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         Damage = 
+         Position = "standing", 
+         Stats = 
          {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
          }, 
-         ShortDescr = "a newly created dude", 
-         Weight = 0, 
-         Name = "dude", 
+         Level = 1, 
+         HitRoll = 0, 
          Height = 0, 
-         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         Description = "", 
          Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 9050, 
+         ShortDescr = "a newly created dude", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
       }, 
       [9099] = 
       {
-         Race = "Human", 
-         Stats = 
-         {
-            Constitution = 0, 
-            Wisdom = 0, 
-            Dexterity = 0, 
-            Intelligence = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Force = 0, 
-         }, 
+         Weight = 0, 
+         Name = "dude", 
+         ArmorClass = 0, 
          HitChance = 
          {
+            HitPlus = 0, 
             HitSizeDice = 0, 
             HitNoDice = 0, 
-            HitPlus = 0, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
          }, 
          LongDescr = "Some god abandoned a newly created dude here.\
 ", 
-         Level = 1, 
-         Position = "standing", 
-         Vnum = 9099, 
-         Alignment = 0, 
+         NumberOfAttacks = 0, 
          Languages = 
          {
             Speaking = 
@@ -246,44 +254,52 @@ AreaEntry
          }, 
          SaveVs = 
          {
-            SpellStaff = 0, 
-            Wand = 0, 
             PoisonDeath = 0, 
-            Breath = 0, 
+            Wand = 0, 
             ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
          }, 
-         DamRoll = 0, 
-         HitRoll = 0, 
-         Damage = 
+         Position = "standing", 
+         Stats = 
          {
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-            DamNoDice = 0, 
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
          }, 
-         ShortDescr = "a newly created dude", 
-         Weight = 0, 
-         Name = "dude", 
+         Level = 1, 
+         HitRoll = 0, 
          Height = 0, 
-         Sex = "undistinguished", 
+         DefaultPosition = "standing", 
+         Description = "", 
          Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 9099, 
+         ShortDescr = "a newly created dude", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
          Flags = 
          {
             [0] = "Npc", 
          }, 
-         ArmorClass = 0, 
-         DefaultPosition = "standing", 
-         NumberOfAttacks = 0, 
-         Description = "", 
       }, 
    }, 
+   LowEconomy = 6250000, 
+   ResetMessage = "", 
    VnumRanges = 
    {
-      Mob = 
+      Object = 
       {
          First = 9050, 
          Last = 9099, 
       }, 
-      Object = 
+      Mob = 
       {
          First = 9050, 
          Last = 9099, 
@@ -294,20 +310,4 @@ AreaEntry
          Last = 9099, 
       }, 
    }, 
-   LevelRanges = 
-   {
-      Soft = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-      Hard = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
-   }, 
-   FileFormatVersion = 1, 
-   ResetFrequency = 0, 
-   Filename = "byss_jail.lua", 
 }

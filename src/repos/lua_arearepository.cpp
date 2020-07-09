@@ -923,6 +923,8 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     LuaLoadTable(L, "Damage", LoadDamage, mob);
     LuaLoadTable(L, "Languages", LoadLanguages, mob);
 
+    LuaLoadStats(L, &mob->Stats, "Stats");
+    
     // Load progs
     LuaLoadArray(L, "MudProgs", LoadMudProg, &mob->mprog);
 

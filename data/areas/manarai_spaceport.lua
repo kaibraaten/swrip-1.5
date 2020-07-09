@@ -1,409 +1,161 @@
 -- Coruscant - Manarai Spaceport
--- Last saved Thursday 09-Jul-2020 21:56:48
+-- Last saved Thursday 09-Jul-2020 23:19:12
 
 AreaEntry
 {
-   Author = "Durga", 
-   Name = "Coruscant - Manarai Spaceport", 
-   FileFormatVersion = 1, 
-   ResetFrequency = 0, 
-   Resets = 
-   {
-      [1] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 210, 
-         Command = "O", 
-         Arg3 = 208, 
-         MiscData = 1, 
-      }, 
-      [2] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 200, 
-         Command = "M", 
-         Arg3 = 214, 
-         MiscData = 1, 
-      }, 
-      [3] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 38, 
-         Command = "O", 
-         Arg3 = 211, 
-         MiscData = 1, 
-      }, 
-      [4] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 32201, 
-         Command = "O", 
-         Arg3 = 209, 
-         MiscData = 1, 
-      }, 
-      [5] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 202, 
-         Command = "M", 
-         Arg3 = 207, 
-         MiscData = 1, 
-      }, 
-      [6] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 305, 
-      }, 
-      [7] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 304, 
-      }, 
-      [8] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 32207, 
-      }, 
-      [9] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 201, 
-      }, 
-      [10] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 203, 
-         Command = "M", 
-         Arg3 = 210, 
-         MiscData = 1, 
-      }, 
-      [11] = 
-      {
-         Arg2 = 2, 
-         Arg1 = 204, 
-         Command = "M", 
-         Arg3 = 204, 
-         MiscData = 1, 
-      }, 
-      [12] = 
-      {
-         Arg2 = 2, 
-         Arg1 = 204, 
-         Command = "M", 
-         Arg3 = 204, 
-         MiscData = 1, 
-      }, 
-      [13] = 
-      {
-         Arg2 = 2, 
-         Arg1 = 206, 
-         Command = "M", 
-         Arg3 = 203, 
-         MiscData = 1, 
-      }, 
-      [14] = 
-      {
-         Arg2 = 2, 
-         Arg1 = 206, 
-         Command = "M", 
-         Arg3 = 203, 
-         MiscData = 1, 
-      }, 
-      [15] = 
-      {
-         Arg2 = 2, 
-         Arg1 = 207, 
-         Command = "M", 
-         Arg3 = 206, 
-         MiscData = 1, 
-      }, 
-      [16] = 
-      {
-         Arg2 = 2, 
-         Arg1 = 207, 
-         Command = "M", 
-         Arg3 = 206, 
-         MiscData = 1, 
-      }, 
-      [17] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 10315, 
-         Command = "O", 
-         Arg3 = 206, 
-         MiscData = 1, 
-      }, 
-      [18] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 209, 
-         Command = "M", 
-         Arg3 = 201, 
-         MiscData = 1, 
-      }, 
-      [19] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 208, 
-         Command = "M", 
-         Arg3 = 202, 
-         MiscData = 1, 
-      }, 
-      [20] = 
-      {
-         Arg2 = 2, 
-         Arg1 = 210, 
-         Command = "M", 
-         Arg3 = 205, 
-         MiscData = 1, 
-      }, 
-      [21] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 332, 
-         Command = "E", 
-         Arg3 = 5, 
-         MiscData = 1, 
-      }, 
-      [22] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 3, 
-      }, 
-      [23] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 202, 
-         Command = "E", 
-         Arg3 = 8, 
-         MiscData = 1, 
-      }, 
-      [24] = 
-      {
-         Arg2 = 2, 
-         Arg1 = 210, 
-         Command = "M", 
-         Arg3 = 205, 
-         MiscData = 1, 
-      }, 
-      [25] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 332, 
-         Command = "E", 
-         Arg3 = 5, 
-         MiscData = 1, 
-      }, 
-      [26] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 202, 
-         Command = "E", 
-         Arg3 = 8, 
-         MiscData = 1, 
-      }, 
-      [27] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 201, 
-         Command = "M", 
-         Arg3 = 212, 
-         MiscData = 1, 
-      }, 
-      [28] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 32270, 
-      }, 
-      [29] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 32261, 
-      }, 
-      [30] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 32253, 
-      }, 
-      [31] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 10424, 
-      }, 
-      [32] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 10311, 
-      }, 
-      [33] = 
-      {
-         Arg2 = 1, 
-         Command = "G", 
-         MiscData = 1, 
-         Arg1 = 329, 
-      }, 
-   }, 
    Rooms = 
    {
       [224] = 
       {
+         TeleDelay = 0, 
+         Vnum = 224, 
          Name = "Turbocar Platform - Plaza Station", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 447, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+         }, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extreemly high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 224, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "north", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 447, 
-            }, 
-         }, 
       }, 
       [225] = 
       {
+         TeleDelay = 0, 
+         Vnum = 225, 
          Name = "A Turbocar", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
          Description = "The turbocar is long and narrow. There are benches along both sides of\
 the car but they are almost always filled. Most passengers are forced\
 to grab onto one of the many handholds that extend from the ceiling\
 and lock into position once the car starts moving.\
 ", 
-         Vnum = 225, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-         }, 
       }, 
       [226] = 
       {
+         TeleDelay = 0, 
+         Vnum = 226, 
          Name = "&RDO NOT FLY THIS SHIP&w", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
          Description = "Do not fly this ship it is controlled automaticly by the code. Do not\
 fly this ship it is controlled automaticly by the code. Do not fly\
 this ship it is controlled automaticly by the code. Do not fly this\
 ship it is controlled automaticly by the code.\
 ", 
-         Vnum = 226, 
-         Flags = 
-         {
-            [2] = "NoMob", 
-         }, 
-         TeleVnum = 0, 
          ExtraDescriptions = 
          {
          }, 
-         TeleDelay = 0, 
-         Exits = 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
+         Flags = 
          {
+            [2] = "NoMob", 
          }, 
       }, 
       [199] = 
       {
+         TeleDelay = 0, 
+         Vnum = 199, 
          Name = "&RDO NOT FLY THIS SHIP", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
          Description = "Do not fly this ship it is controlled automaticly by the code. Do not\
 fly this ship it is controlled automaticly by the code. Do not fly\
 this ship it is controlled automaticly by the code. Do not fly this\
 ship it is controlled automaticly by the code.\
 ", 
-         Vnum = 199, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-         }, 
       }, 
       [200] = 
       {
+         TeleDelay = 0, 
+         Vnum = 200, 
          Name = "A Small Shuttle", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+         }, 
          Description = "You stand inside a small shuttlecraft that flies between Coruscant's\
 Manarai Spaceport and An Orbitting Shipyard. There are several plastic\
 covered seats along the walls but passengers are mostly expected to\
 stand for the brief journey.\
 Type LEAVE to exit after the ship lands.\
 ", 
-         Vnum = 200, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-         }, 
       }, 
       [201] = 
       {
+         TeleDelay = 0, 
+         Vnum = 201, 
          Name = "Serin Pluogus Tourbus Platform", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 204, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
          Description = "This platform is reserved for the publicly funded tour shuttle, the\
 Serin Pluogus. The rest of the Manarai spaceport is to the west and\
 north of here. Around the rest of the platform you can view the\
@@ -412,34 +164,34 @@ Mountains.\
 \
 When the pluogus lands type BOARD PLUOGUS to enter.\
 ", 
-         Vnum = 201, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [202] = 
+      {
          TeleDelay = 0, 
+         Vnum = 202, 
+         Name = "Shuttle Platform", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "east", 
+               DestinationVnum = 204, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 204, 
+               Keyword = "", 
+               Direction = "west", 
             }, 
          }, 
-      }, 
-      [202] = 
-      {
-         Name = "Shuttle Platform", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "This platform is reserved for shuttles flying between Manarai spaceport\
 and orbitting space stations. The rest of the Manarai spaceport is to\
 the south-east and  north of here.  Around the rest of the platform\
@@ -449,69 +201,96 @@ the Manarai Mountains.\
 Wait here for the shipyard ferry. When it lands BOARD FERRY.\
  \
 ", 
-         Vnum = 202, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [203] = 
+      {
          TeleDelay = 0, 
+         Vnum = 203, 
+         Name = "Main Platform", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "west", 
+               DestinationVnum = 204, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 204, 
+               Keyword = "", 
+               Direction = "north", 
             }, 
          }, 
-      }, 
-      [203] = 
-      {
-         Name = "Main Platform", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "This is the main platform in the Manarai Spaceport. All kinds of ships\
 are docked here. There are even a few that can be rented. The rest of\
 the spaceport is to the north. Around it is the southern end of\
 Imperial City which covers a good portion of the planet. To the south\
 s a beautiful view of the Manarai Mountain Range. \
 ", 
-         Vnum = 203, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [4] = "CanLand", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [204] = 
+      {
          TeleDelay = 0, 
+         Vnum = 204, 
+         Name = "Platform Area", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "north", 
+               DestinationVnum = 205, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 204, 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 202, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 203, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 201, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
             }, 
          }, 
-      }, 
-      [204] = 
-      {
-         Name = "Platform Area", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "From the platform area of the spaceport you have an excellent view of\
 the Manarai Mountains to the south. This large mountain range marks\
 the southern limit of Government city. The air is cool here and\
@@ -520,348 +299,321 @@ quite peaceful here watching spaceships take off against the\
 backgound of the snow capped mountains. The main platform is to the\
 south of here. A walkway leads north into the spaceport.\
 ", 
-         Vnum = 204, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [205] = 
+      {
          TeleDelay = 0, 
+         Vnum = 205, 
+         Name = "Walkway", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "north", 
+               DestinationVnum = 206, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 205, 
+               Keyword = "", 
+               Direction = "north", 
             }, 
             [2] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "east", 
+               DestinationVnum = 204, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 202, 
-            }, 
-            [3] = 
-            {
                Keyword = "", 
-               Distance = 0, 
                Direction = "south", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 203, 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 201, 
             }, 
          }, 
-      }, 
-      [205] = 
-      {
-         Name = "Walkway", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "The walkway is a long corridor enclosed in transpariplast windows.\
 Through the windows you can see that the spaceport is surrounded by\
 mountains to the south and a seemongly endless city that stretches\
 out in all other directions.\
 ", 
-         Vnum = 205, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [206] = 
+      {
          TeleDelay = 0, 
+         Vnum = 206, 
+         Name = "Waiting Room", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "north", 
+               DestinationVnum = 209, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 206, 
+               Keyword = "", 
+               Direction = "north", 
             }, 
             [2] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "south", 
+               DestinationVnum = 208, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 204, 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 205, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 207, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
             }, 
          }, 
-      }, 
-      [206] = 
-      {
-         Name = "Waiting Room", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "This large room is filled with benches and chairs. Most are arranged\
 in rows or around small islands of plants. Some however are arranged\
 in small groups  facing each other. Scattered amidst the seats are\
 many tables housing abandoned magazines. There is a holovid showing\
 an old movie in one corner of the room. \
 ", 
-         Vnum = 206, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [207] = 
+      {
          TeleDelay = 0, 
+         Vnum = 207, 
+         Name = "Spaceport Cafe", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "north", 
+               DestinationVnum = 206, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 209, 
-            }, 
-            [2] = 
-            {
                Keyword = "", 
-               Distance = 0, 
                Direction = "east", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 208, 
-            }, 
-            [3] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 205, 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 207, 
             }, 
          }, 
-      }, 
-      [207] = 
-      {
-         Name = "Spaceport Cafe", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "The spaceport cafe is a good sized self-serve cafeteria. There is a\
 long counter with many snack type foods and small instant meals. A\
 drink dispenser is at one end and at the other a droid teller handles\
 the credit transactions. There are a many tables along the walls and\
 a several in the center of the room.\
 ", 
-         Vnum = 207, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [208] = 
+      {
          TeleDelay = 0, 
+         Vnum = 208, 
+         Name = "Lost and Found", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "east", 
+               DestinationVnum = 206, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 206, 
+               Keyword = "", 
+               Direction = "west", 
             }, 
          }, 
-      }, 
-      [208] = 
-      {
-         Name = "Lost and Found", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "The lost and found is a small plain room. There is a bin of clothing,\
 a table with several small boxes, a couple of large boxes and several\
 suitcases lined up against the wall. Some of the stuff has been\
 collecting dust for quite some time.\
 ", 
-         Vnum = 208, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [209] = 
+      {
          TeleDelay = 0, 
+         Vnum = 209, 
+         Name = "Spaceport Lobby", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "west", 
+               DestinationVnum = 210, 
                Key = -1, 
                Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 212, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [3] = 
+            {
+               Distance = 0, 
                DestinationVnum = 206, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+            [4] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 211, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+            [5] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 213, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "down", 
             }, 
          }, 
-      }, 
-      [209] = 
-      {
-         Name = "Spaceport Lobby", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "The Manarai Spaceport lobby is a large open room with a transparisteel\
 ceiling. The floor is a polished white with a black fractal pattern.\
 There is a ticket booth in one corner of the room. An escalater in\
 the opposite corner leads down.\
 ", 
-         Vnum = 209, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [210] = 
+      {
          TeleDelay = 0, 
+         Vnum = 210, 
+         Name = "Spaceport Entrance", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "north", 
+               DestinationVnum = 301, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 210, 
+               Keyword = "", 
+               Direction = "north", 
             }, 
             [2] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "east", 
+               DestinationVnum = 209, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 212, 
-            }, 
-            [3] = 
-            {
                Keyword = "", 
-               Distance = 0, 
                Direction = "south", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 206, 
-            }, 
-            [4] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 211, 
-            }, 
-            [5] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "down", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 213, 
             }, 
          }, 
-      }, 
-      [210] = 
-      {
-         Name = "Spaceport Entrance", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "The entranceway of the Manarai Mountains Spaceport is a large wide\
 staicase  leading from the walkway outside down to the spaceport\
 lobby. A large set of double doors opens and closes automaticly as\
 people approach.\
 ", 
-         Vnum = 210, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [211] = 
+      {
          TeleDelay = 0, 
+         Vnum = 211, 
+         Name = "Spaceport Hotel", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "north", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 301, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
-               Key = -1, 
-               Description = "", 
                DestinationVnum = 209, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
             }, 
          }, 
-      }, 
-      [211] = 
-      {
-         Name = "Spaceport Hotel", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "The Manarai Spaceport Hotel is attached directly to the lobby of\
 spaceport allowing travelers to find quick lodgings after a long\
 journey. The rooms here are well kept although a bit pricy. It would\
@@ -870,7 +622,12 @@ be a good safe place to rest for a while.\
 You may safely leave and reenter the game from here.\
  \
 ", 
-         Vnum = 211, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [23] = "Hotel", 
@@ -878,1503 +635,735 @@ You may safely leave and reenter the game from here.\
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [212] = 
+      {
          TeleDelay = 0, 
+         Vnum = 212, 
+         Name = "Spaceport Store", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "east", 
+               DestinationVnum = 209, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 209, 
+               Keyword = "", 
+               Direction = "west", 
             }, 
          }, 
-      }, 
-      [212] = 
-      {
-         Name = "Spaceport Store", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "The spaceport store seems to carry mostly only useless souveniers.\
 There are however a few nice garments for sale and one or two of the\
 things on display could come in handy if the prices weren't so high.\
 ", 
-         Vnum = 212, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [213] = 
+      {
          TeleDelay = 0, 
+         Vnum = 213, 
+         Name = "Transit Station", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "west", 
+               DestinationVnum = 214, 
                Key = -1, 
                Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
                DestinationVnum = 209, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "up", 
             }, 
          }, 
-      }, 
-      [213] = 
-      {
-         Name = "Transit Station", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "The Manarai Spaceport Transit Station is one of many interconnected\
 turbocar stations running through Imperial City. Its probably the\
 easiest fasted and cheapest way to get around the enormous city and\
 thus is a favoured means  of transportation.\
 ", 
-         Vnum = 213, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [214] = 
+      {
          TeleDelay = 0, 
+         Vnum = 214, 
+         Name = "Toll Booth", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "east", 
+               DestinationVnum = 213, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 214, 
-            }, 
-            [2] = 
-            {
                Keyword = "", 
-               Distance = 0, 
-               Direction = "up", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 209, 
+               Direction = "west", 
             }, 
          }, 
-      }, 
-      [214] = 
-      {
-         Name = "Toll Booth", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "For one small fee you can ride the turbocar transit system to almost\
 anywhere throught Imperial City. The turnstile allows one person\
 through at a time as they pay the droid on duty. The cost is 5\
 credits.\
 ", 
-         Vnum = 214, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
+      }, 
+      [215] = 
+      {
          TeleDelay = 0, 
+         Vnum = 215, 
+         Name = "Manarai Spaceport Station", 
          Exits = 
          {
             [1] = 
             {
-               Keyword = "", 
                Distance = 0, 
-               Direction = "west", 
+               DestinationVnum = 213, 
                Key = -1, 
                Description = "", 
-               DestinationVnum = 213, 
+               Keyword = "", 
+               Direction = "west", 
             }, 
          }, 
-      }, 
-      [215] = 
-      {
-         Name = "Manarai Spaceport Station", 
-         Sector = "city", 
-         Tunnel = 0, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extremely high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 215, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
-         }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 213, 
-            }, 
          }, 
       }, 
       [216] = 
       {
+         TeleDelay = 0, 
+         Vnum = 216, 
          Name = "Turbocar Platform - Skydome Station", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 431, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extreemly high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 216, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
-         }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 431, 
-            }, 
          }, 
       }, 
       [217] = 
       {
+         TeleDelay = 0, 
+         Vnum = 217, 
          Name = "Turbocar Platform - Grand Towers Station", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 433, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "southwest", 
+            }, 
+         }, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extreemly high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 217, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
-         }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "southwest", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 433, 
-            }, 
          }, 
       }, 
       [218] = 
       {
+         TeleDelay = 0, 
+         Vnum = 218, 
          Name = "Turbocar Platform - Grandis Mon Station", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 436, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 435, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "southwest", 
+            }, 
+         }, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extreemly high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 218, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
-         }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 436, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "southwest", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 435, 
-            }, 
          }, 
       }, 
       [219] = 
       {
+         TeleDelay = 0, 
+         Vnum = 219, 
          Name = "Turbocar Platform - Palace Station", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 438, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "west", 
+            }, 
+            [2] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 437, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "southwest", 
+            }, 
+         }, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extreemly high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 219, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
-         }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "west", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 438, 
-            }, 
-            [2] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "southwest", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 437, 
-            }, 
          }, 
       }, 
       [220] = 
       {
+         TeleDelay = 0, 
+         Vnum = 220, 
          Name = "Turbocar Platform - Museum Station", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 439, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extreemly high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 220, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
-         }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 439, 
-            }, 
          }, 
       }, 
       [221] = 
       {
+         TeleDelay = 0, 
+         Vnum = 221, 
          Name = "Turbocar Platform - College Station", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 441, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "north", 
+            }, 
+         }, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extreemly high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 221, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
-         }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "north", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 441, 
-            }, 
          }, 
       }, 
       [222] = 
       {
+         TeleDelay = 0, 
+         Vnum = 222, 
          Name = "Turbocar Platform - Zoo Station ", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 443, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "east", 
+            }, 
+         }, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extreemly high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 222, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
-         }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "east", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 443, 
-            }, 
          }, 
       }, 
       [223] = 
       {
+         TeleDelay = 0, 
+         Vnum = 223, 
          Name = "Turbocar Platform - Dometown Station", 
-         Sector = "city", 
-         Tunnel = 0, 
+         Exits = 
+         {
+            [1] = 
+            {
+               Distance = 0, 
+               DestinationVnum = 445, 
+               Key = -1, 
+               Description = "", 
+               Keyword = "", 
+               Direction = "south", 
+            }, 
+         }, 
          Description = "This long narrow room is devided down the middle by a wide turbocar\
 track. The turbocars move at extreemly high speeds and as they\
 aproach a gust of wind tugs at you threatening to knock you off\
 ballance. When the turbocar comes to a complete stop you may \"board\"\
 it and look for a seat.\
 ", 
-         Vnum = 223, 
+         ExtraDescriptions = 
+         {
+         }, 
+         Tunnel = 0, 
+         TeleVnum = 0, 
+         Sector = "city", 
          Flags = 
          {
             [2] = "NoMob", 
             [3] = "Indoors", 
          }, 
-         TeleVnum = 0, 
-         ExtraDescriptions = 
-         {
-         }, 
-         TeleDelay = 0, 
-         Exits = 
-         {
-            [1] = 
-            {
-               Keyword = "", 
-               Distance = 0, 
-               Direction = "south", 
-               Key = -1, 
-               Description = "", 
-               DestinationVnum = 445, 
-            }, 
-         }, 
       }, 
    }, 
-   VnumRanges = 
-   {
-      Mob = 
-      {
-         Last = 226, 
-         First = 199, 
-      }, 
-      Room = 
-      {
-         Last = 226, 
-         First = 199, 
-      }, 
-      Object = 
-      {
-         Last = 226, 
-         First = 199, 
-      }, 
-   }, 
-   LowEconomy = 31260309, 
-   HighEconomy = 0, 
-   Filename = "manarai_spaceport.lua", 
-   Mobiles = 
-   {
-      [208] = 
-      {
-         LongDescr = "Astromech droid wheels around the floor.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 208, 
-         Level = 5, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamPlus = 0, 
-            DamSizeDice = 4, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         ArmorClass = 88, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         Race = "Human", 
-         Name = "astromech droid r2", 
-         ShortDescr = "an astromech droid", 
-         DefaultPosition = "standing", 
-         Description = "This common make of astromech droid is also known as an R2 unit. It is\
-a small wheeled droid designed primarily for ship maintenence and\
-repair. It has an interface apendage to plug into a ships computer as\
-well as several other tools hidden within its domed frame that it\
-uses to preform various functions.\
-", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [7] = "Wimpy", 
-         }, 
-      }, 
-      [209] = 
-      {
-         LongDescr = "Astromech droid wheels around the floor.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 209, 
-         Level = 5, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamPlus = 0, 
-            DamSizeDice = 4, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         ArmorClass = 88, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         Race = "Human", 
-         Name = "astromech droid r2", 
-         ShortDescr = "an astromech droid", 
-         DefaultPosition = "standing", 
-         Description = "This common make of astromech droid is also known as an R2 unit. It is\
-a small wheeled droid designed primarily for ship maintenence and\
-repair. It has an interface apendage to plug into a ships computer as\
-well as several other tools hidden within its domed frame that it\
-uses to preform various functions.\
-", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-            [26] = "Droid", 
-            [7] = "Wimpy", 
-         }, 
-      }, 
-      [210] = 
-      {
-         LongDescr = "A small child begs for money.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 210, 
-         Level = 2, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "50", 
-               Code = "say Spare some change?\
-", 
-               MudProgType = "entry_prog", 
-            }, 
-            [2] = 
-            {
-               Arguments = "50", 
-               Code = "look $n\
-say Spare some change?\
-", 
-               MudProgType = "all_greet_prog", 
-            }, 
-            [3] = 
-            {
-               Arguments = "1", 
-               Code = "say thank you.\
-bow $n\
-", 
-               MudProgType = "bribe_prog", 
-            }, 
-         }, 
-         ArmorClass = 95, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         Race = "Human", 
-         Name = "begger", 
-         ShortDescr = "a begger", 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 0, 
-            HitPlus = 20, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [10] = "Practice", 
-         }, 
-      }, 
-      [225] = 
-      {
-         LongDescr = "Some god abandoned a newly created mobmarker here.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 225, 
-         Level = 1, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         ArmorClass = 0, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         Race = "Human", 
-         Name = "mobmarker", 
-         ShortDescr = "a newly created mobmarker", 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-      }, 
-      [200] = 
-      {
-         LongDescr = "A droid is here collecting turbocar tokens.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 200, 
-         Level = 1, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         MudProgs = 
-         {
-            [1] = 
-            {
-               Arguments = "5", 
-               Code = "mpechoat $n The droid scans your credits and allows you to pass.\
-mpechoaround $n $n passes through the turnstile.\
-mptransfer $n 215\
-", 
-               MudProgType = "bribe_prog", 
-            }, 
-         }, 
-         ArmorClass = 0, 
-         Race = "Human", 
-         ShortDescr = "a ticket droid", 
-         DefaultPosition = "standing", 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-         Name = "toll droid ticket token", 
-         Description = "This is a plain looking droid whos only purpose day in and day out is to\
-collect credits and tokens for entrance into the transit system. It\
-doesn't apear that it would be useful in any other capacity.\
-", 
-         Sex = "undistinguished", 
-         AffectedBy = 
-         {
-            [3] = "DetectInvis", 
-         }, 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-      }, 
-      [201] = 
-      {
-         LongDescr = "A droid is here scanning your purchaces.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 201, 
-         Level = 50, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [10] = "devaronese", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [1] = "shyriiwook", 
-               [2] = "twileki", 
-               [3] = "rodese", 
-               [4] = "huttese", 
-               [5] = "mon calamarian", 
-               [6] = "shistavanen", 
-               [7] = "ewokese", 
-               [8] = "ithorese", 
-               [10] = "devaronese", 
-               [11] = "barabel", 
-               [12] = "firrerreo", 
-               [13] = "bothese", 
-               [14] = "gamorrese", 
-               [15] = "togorian", 
-               [16] = "kubazian", 
-               [17] = "jawaese", 
-               [19] = "adarese", 
-               [20] = "verpine", 
-               [21] = "defel", 
-               [22] = "dosh", 
-               [23] = "chadra-fan", 
-               [24] = "quarrenese", 
-               [25] = "sullustese", 
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         ArmorClass = -25, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Shop = 
-         {
-            ProfitSell = 90, 
-            KeeperShortDescr = "a shopkeeper droid", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-         }, 
-         Name = "storekeeper hopkeeper droid", 
-         ShortDescr = "a shopkeeper droid", 
-         DefaultPosition = "standing", 
-         Description = "This droid is a very rudimentry humanoid shape. Its voice synthesyser is\
-worn out and makes a slight hissing sound when it speaks.\
-", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [26] = "Droid", 
-         }, 
-      }, 
-      [202] = 
-      {
-         LongDescr = "A retail droid is here to assist you with your purchaces.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 202, 
-         Level = 10, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         Race = "Human", 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         ArmorClass = 0, 
-         VipFlags = 
-         {
-            [0] = "Coruscant", 
-         }, 
-         Shop = 
-         {
-            ProfitSell = 90, 
-            KeeperShortDescr = "a retail droid", 
-            BusinessHours = 
-            {
-               Close = 23, 
-               Open = 0, 
-            }, 
-            ProfitBuy = 120, 
-            BuyTypes = 
-            {
-               [1] = "none", 
-               [2] = "none", 
-               [3] = "none", 
-               [4] = "none", 
-               [0] = "none", 
-            }, 
-         }, 
-         Name = "retail droid", 
-         ShortDescr = "a retail droid", 
-         DefaultPosition = "standing", 
-         Description = "The retail droid is similar in apearance to a standard proticol droid.\
-It is fittened however with a crdit exchange terminal in its hip and\
-is programmed to be an expert salesperson.\
-", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [26] = "Droid", 
-         }, 
-      }, 
-      [203] = 
-      {
-         LongDescr = "A spaceport security guard looks around the entrance.\
-", 
-         HitRoll = 10, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 203, 
-         Level = 50, 
-         Damage = 
-         {
-            DamNoDice = 5, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         DamRoll = 10, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         ArmorClass = -25, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         Race = "Human", 
-         Name = "spaceport security guard", 
-         ShortDescr = "a spaceport security guard", 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 10, 
-            HitPlus = 500, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-      }, 
-      [204] = 
-      {
-         LongDescr = "A spaceport security guard watches the docking bays.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 204, 
-         Level = 50, 
-         Damage = 
-         {
-            DamNoDice = 5, 
-            DamPlus = 2, 
-            DamSizeDice = 4, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         ArmorClass = -25, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         Race = "Human", 
-         Name = "spaceport security guard", 
-         ShortDescr = "a spaceport security guard", 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 10, 
-            HitPlus = 500, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-         }, 
-      }, 
-      [205] = 
-      {
-         LongDescr = "Some god abandoned a newly created technician here.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 205, 
-         Level = 1, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         ArmorClass = 0, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         Race = "Human", 
-         Name = "technician", 
-         ShortDescr = "a newly created technician", 
-         DefaultPosition = "standing", 
-         Description = "", 
-         Sex = "undistinguished", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-         }, 
-      }, 
-      [206] = 
-      {
-         LongDescr = "A technician is readying ships for launch.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 0, 
-         Weight = 0, 
-         Vnum = 206, 
-         Level = 9, 
-         Damage = 
-         {
-            DamNoDice = 0, 
-            DamPlus = 0, 
-            DamSizeDice = 0, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         ArmorClass = 80, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         Race = "Human", 
-         Name = "technician", 
-         ShortDescr = "a technician", 
-         DefaultPosition = "standing", 
-         Description = "This is a young human tecnician. He is dressed in a grey worksuit that\
-is smuged with greasea. Several tools hang from a belt around his\
-waist.\
-", 
-         Sex = "male", 
-         HitChance = 
-         {
-            HitSizeDice = 0, 
-            HitNoDice = 0, 
-            HitPlus = 0, 
-         }, 
-         Flags = 
-         {
-            [0] = "Npc", 
-            [10] = "Practice", 
-            [24] = "NoAssist", 
-         }, 
-      }, 
-      [207] = 
-      {
-         LongDescr = "A human is sitting here waiting for his shuttle to arrive.\
-", 
-         HitRoll = 0, 
-         Position = "standing", 
-         Credits = 10, 
-         Weight = 0, 
-         Vnum = 207, 
-         Level = 10, 
-         Damage = 
-         {
-            DamNoDice = 1, 
-            DamPlus = 0, 
-            DamSizeDice = 4, 
-         }, 
-         DamRoll = 0, 
-         NumberOfAttacks = 0, 
-         Languages = 
-         {
-            Speaks = 
-            {
-               [0] = "basic", 
-            }, 
-            Speaking = 
-            {
-               [0] = "basic", 
-            }, 
-         }, 
-         Alignment = 0, 
-         Height = 0, 
-         SaveVs = 
-         {
-            ParaPetri = 0, 
-            Wand = 0, 
-            PoisonDeath = 0, 
-            Breath = 0, 
-            SpellStaff = 0, 
-         }, 
-         ArmorClass = 75, 
-         Stats = 
-         {
-            Wisdom = 0, 
-            Constitution = 0, 
-            Dexterity = 0, 
-            Luck = 0, 
-            Strength = 0, 
-            Charisma = 0, 
-            Intelligence = 0, 
-            Force = 0, 
-         }, 
-         Race = "Human", 
-         Name = "human", 
-         ShortDescr = "a human", 
-         DefaultPosition = "standing", 
-         Description = "This young human man is in his early twenties. He is dressed in the latest\
-fashions and is clean cut. He is probably a student at the university.\
-", 
-         Sex = "male", 
-         HitChance = 
-         {
-            HitSizeDice = 10, 
-            HitNoDice = 2, 
-            HitPlus = 100, 
-         }, 
-         Flags = 
-         {
-            [1] = "Sentinel", 
-            [0] = "Npc", 
-            [24] = "NoAssist", 
-         }, 
-      }, 
-   }, 
+   Author = "Durga", 
+   ResetFrequency = 0, 
+   Name = "Coruscant - Manarai Spaceport", 
    LevelRanges = 
    {
-      Soft = 
-      {
-         High = 105, 
-         Low = 0, 
-      }, 
       Hard = 
       {
-         High = 105, 
          Low = 0, 
+         High = 105, 
+      }, 
+      Soft = 
+      {
+         Low = 0, 
+         High = 105, 
       }, 
    }, 
-   ResetMessage = "", 
+   HighEconomy = 0, 
+   FileFormatVersion = 1, 
+   Resets = 
+   {
+      [1] = 
+      {
+         Arg1 = 210, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 208, 
+      }, 
+      [2] = 
+      {
+         Arg1 = 200, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 214, 
+      }, 
+      [3] = 
+      {
+         Arg1 = 38, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 211, 
+      }, 
+      [4] = 
+      {
+         Arg1 = 32201, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 209, 
+      }, 
+      [5] = 
+      {
+         Arg1 = 202, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 207, 
+      }, 
+      [6] = 
+      {
+         MiscData = 1, 
+         Arg1 = 305, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [7] = 
+      {
+         MiscData = 1, 
+         Arg1 = 304, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [8] = 
+      {
+         MiscData = 1, 
+         Arg1 = 32207, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [9] = 
+      {
+         MiscData = 1, 
+         Arg1 = 201, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [10] = 
+      {
+         Arg1 = 203, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 210, 
+      }, 
+      [11] = 
+      {
+         Arg1 = 204, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 204, 
+      }, 
+      [12] = 
+      {
+         Arg1 = 204, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 204, 
+      }, 
+      [13] = 
+      {
+         Arg1 = 206, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 203, 
+      }, 
+      [14] = 
+      {
+         Arg1 = 206, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 203, 
+      }, 
+      [15] = 
+      {
+         Arg1 = 207, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 206, 
+      }, 
+      [16] = 
+      {
+         Arg1 = 207, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 206, 
+      }, 
+      [17] = 
+      {
+         Arg1 = 10315, 
+         Command = "O", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 206, 
+      }, 
+      [18] = 
+      {
+         Arg1 = 209, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 201, 
+      }, 
+      [19] = 
+      {
+         Arg1 = 208, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 202, 
+      }, 
+      [20] = 
+      {
+         Arg1 = 210, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 205, 
+      }, 
+      [21] = 
+      {
+         Arg1 = 332, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 5, 
+      }, 
+      [22] = 
+      {
+         MiscData = 1, 
+         Arg1 = 3, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [23] = 
+      {
+         Arg1 = 202, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 8, 
+      }, 
+      [24] = 
+      {
+         Arg1 = 210, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 2, 
+         Arg3 = 205, 
+      }, 
+      [25] = 
+      {
+         Arg1 = 332, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 5, 
+      }, 
+      [26] = 
+      {
+         Arg1 = 202, 
+         Command = "E", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 8, 
+      }, 
+      [27] = 
+      {
+         Arg1 = 201, 
+         Command = "M", 
+         MiscData = 1, 
+         Arg2 = 1, 
+         Arg3 = 212, 
+      }, 
+      [28] = 
+      {
+         MiscData = 1, 
+         Arg1 = 32270, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [29] = 
+      {
+         MiscData = 1, 
+         Arg1 = 32261, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [30] = 
+      {
+         MiscData = 1, 
+         Arg1 = 32253, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [31] = 
+      {
+         MiscData = 1, 
+         Arg1 = 10424, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [32] = 
+      {
+         MiscData = 1, 
+         Arg1 = 10311, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+      [33] = 
+      {
+         MiscData = 1, 
+         Arg1 = 329, 
+         Arg2 = 1, 
+         Command = "G", 
+      }, 
+   }, 
+   Filename = "manarai_spaceport.lua", 
    Objects = 
    {
       [200] = 
       {
+         Vnum = 200, 
+         Weight = 1, 
          Name = "ferry shuttle", 
+         Cost = 0, 
+         Description = "The shipyard ferry travels back and forth between coruscant and the shipyard.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -2384,21 +1373,29 @@ fashions and is clean cut. He is probably a student at the university.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Description = "The shipyard ferry travels back and forth between coruscant and the shipyard.", 
-         ActionDescription = "", 
-         Vnum = 200, 
+         ItemType = "trash", 
          ShortDescr = "the Shipyard Ferry", 
-         Cost = 0, 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          Layers = 0, 
-         Weight = 1, 
-         ItemType = "trash", 
       }, 
       [201] = 
       {
+         WearFlags = 
+         {
+            [0] = "Take", 
+         }, 
+         Vnum = 201, 
+         Weight = 1, 
          Name = "sandwich ", 
+         Cost = 2, 
+         Description = "Don't step on that sandwich...", 
+         Flags = 
+         {
+            [13] = "Inventory", 
+         }, 
          ObjectValues = 
          {
             [1] = 0, 
@@ -2408,29 +1405,21 @@ fashions and is clean cut. He is probably a student at the university.\
             [5] = 0, 
             [0] = 5, 
          }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-         }, 
-         Description = "Don't step on that sandwich...", 
-         ActionDescription = "", 
-         Vnum = 201, 
-         Cost = 2, 
+         ItemType = "food", 
          ShortDescr = "a sandwich", 
-         Weight = 1, 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          Layers = 0, 
-         Flags = 
-         {
-            [13] = "Inventory", 
-         }, 
-         ItemType = "food", 
       }, 
       [210] = 
       {
+         Vnum = 210, 
+         Weight = 1, 
          Name = "box", 
+         Cost = 0, 
+         Description = "A large box is on the floor here.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -2440,21 +1429,21 @@ fashions and is clean cut. He is probably a student at the university.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Description = "A large box is on the floor here.", 
-         ActionDescription = "", 
-         Vnum = 210, 
+         ItemType = "trash", 
          ShortDescr = "a box", 
-         Cost = 0, 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          Layers = 0, 
-         Weight = 1, 
-         ItemType = "trash", 
       }, 
       [225] = 
       {
+         Vnum = 225, 
+         Weight = 1, 
          Name = "turbocar subway car transit", 
+         Cost = 0, 
+         Description = "A turbocar is here, board it quickly before it leaves.", 
          ObjectValues = 
          {
             [1] = 0, 
@@ -2464,21 +1453,30 @@ fashions and is clean cut. He is probably a student at the university.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         Description = "A turbocar is here, board it quickly before it leaves.", 
-         ActionDescription = "", 
-         Vnum = 225, 
+         ItemType = "trash", 
          ShortDescr = "a turbocar", 
-         Cost = 0, 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          Layers = 0, 
-         Weight = 1, 
-         ItemType = "trash", 
       }, 
       [202] = 
       {
+         WearFlags = 
+         {
+            [0] = "Take", 
+            [6] = "Feet", 
+         }, 
+         Vnum = 202, 
+         Weight = 1, 
          Name = "some beat up sneakers", 
+         Cost = 2, 
+         Description = "Some beat up sneakers really stink.", 
+         Flags = 
+         {
+            [31] = "HumanSize", 
+         }, 
          ObjectValues = 
          {
             [1] = 3, 
@@ -2488,26 +1486,1028 @@ fashions and is clean cut. He is probably a student at the university.\
             [5] = 0, 
             [0] = 0, 
          }, 
-         WearFlags = 
-         {
-            [0] = "Take", 
-            [6] = "Feet", 
-         }, 
-         Description = "Some beat up sneakers really stink.", 
-         ActionDescription = "", 
-         Vnum = 202, 
-         Cost = 2, 
+         ItemType = "armor", 
          ShortDescr = "some beat up sneakers", 
-         Weight = 1, 
+         ActionDescription = "", 
          ExtraDescriptions = 
          {
          }, 
          Layers = 0, 
+      }, 
+   }, 
+   Mobiles = 
+   {
+      [208] = 
+      {
+         Weight = 0, 
+         Name = "astromech droid r2", 
+         ArmorClass = 88, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 0, 
+            DamSizeDice = 4, 
+         }, 
+         LongDescr = "Astromech droid wheels around the floor.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 5, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "This common make of astromech droid is also known as an R2 unit. It is\
+a small wheeled droid designed primarily for ship maintenence and\
+repair. It has an interface apendage to plug into a ships computer as\
+well as several other tools hidden within its domed frame that it\
+uses to preform various functions.\
+", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 208, 
+         ShortDescr = "an astromech droid", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
          Flags = 
          {
-            [31] = "HumanSize", 
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [7] = "Wimpy", 
          }, 
-         ItemType = "armor", 
+      }, 
+      [209] = 
+      {
+         Weight = 0, 
+         Name = "astromech droid r2", 
+         ArmorClass = 88, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 0, 
+            DamSizeDice = 4, 
+         }, 
+         LongDescr = "Astromech droid wheels around the floor.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 5, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "This common make of astromech droid is also known as an R2 unit. It is\
+a small wheeled droid designed primarily for ship maintenence and\
+repair. It has an interface apendage to plug into a ships computer as\
+well as several other tools hidden within its domed frame that it\
+uses to preform various functions.\
+", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 209, 
+         ShortDescr = "an astromech droid", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+            [26] = "Droid", 
+            [7] = "Wimpy", 
+         }, 
+      }, 
+      [210] = 
+      {
+         Weight = 0, 
+         Name = "begger", 
+         ArmorClass = 95, 
+         HitChance = 
+         {
+            HitPlus = 20, 
+            HitSizeDice = 10, 
+            HitNoDice = 0, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "say Spare some change?\
+", 
+               MudProgType = "entry_prog", 
+               Arguments = "50", 
+            }, 
+            [2] = 
+            {
+               Code = "look $n\
+say Spare some change?\
+", 
+               MudProgType = "all_greet_prog", 
+               Arguments = "50", 
+            }, 
+            [3] = 
+            {
+               Code = "say thank you.\
+bow $n\
+", 
+               MudProgType = "bribe_prog", 
+               Arguments = "1", 
+            }, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         LongDescr = "A small child begs for money.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 2, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 210, 
+         ShortDescr = "a begger", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [10] = "Practice", 
+         }, 
+      }, 
+      [225] = 
+      {
+         Weight = 0, 
+         Name = "mobmarker", 
+         ArmorClass = 0, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         LongDescr = "Some god abandoned a newly created mobmarker here.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 1, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 225, 
+         ShortDescr = "a newly created mobmarker", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+      }, 
+      [200] = 
+      {
+         Weight = 0, 
+         Name = "toll droid ticket token", 
+         ArmorClass = 0, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         MudProgs = 
+         {
+            [1] = 
+            {
+               Code = "mpechoat $n The droid scans your credits and allows you to pass.\
+mpechoaround $n $n passes through the turnstile.\
+mptransfer $n 215\
+", 
+               MudProgType = "bribe_prog", 
+               Arguments = "5", 
+            }, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         Level = 1, 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Position = "standing", 
+         LongDescr = "A droid is here collecting turbocar tokens.\
+", 
+         HitRoll = 0, 
+         Race = "Human", 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "This is a plain looking droid whos only purpose day in and day out is to\
+collect credits and tokens for entrance into the transit system. It\
+doesn't apear that it would be useful in any other capacity.\
+", 
+         Credits = 0, 
+         Vnum = 200, 
+         Alignment = 0, 
+         AffectedBy = 
+         {
+            [3] = "DetectInvis", 
+         }, 
+         ShortDescr = "a ticket droid", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+      }, 
+      [201] = 
+      {
+         Weight = 0, 
+         Name = "storekeeper hopkeeper droid", 
+         ArmorClass = -25, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         LongDescr = "A droid is here scanning your purchaces.\
+", 
+         NumberOfAttacks = 0, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            KeeperShortDescr = "a shopkeeper droid", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [10] = "devaronese", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [1] = "shyriiwook", 
+               [2] = "twileki", 
+               [3] = "rodese", 
+               [4] = "huttese", 
+               [5] = "mon calamarian", 
+               [6] = "shistavanen", 
+               [7] = "ewokese", 
+               [8] = "ithorese", 
+               [10] = "devaronese", 
+               [11] = "barabel", 
+               [12] = "firrerreo", 
+               [13] = "bothese", 
+               [14] = "gamorrese", 
+               [15] = "togorian", 
+               [16] = "kubazian", 
+               [17] = "jawaese", 
+               [19] = "adarese", 
+               [20] = "verpine", 
+               [21] = "defel", 
+               [22] = "dosh", 
+               [23] = "chadra-fan", 
+               [24] = "quarrenese", 
+               [25] = "sullustese", 
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Position = "standing", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Level = 50, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "This droid is a very rudimentry humanoid shape. Its voice synthesyser is\
+worn out and makes a slight hissing sound when it speaks.\
+", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 201, 
+         ShortDescr = "a shopkeeper droid", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [26] = "Droid", 
+         }, 
+      }, 
+      [202] = 
+      {
+         Weight = 0, 
+         Name = "retail droid", 
+         ArmorClass = 0, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         LongDescr = "A retail droid is here to assist you with your purchaces.\
+", 
+         NumberOfAttacks = 0, 
+         Shop = 
+         {
+            BusinessHours = 
+            {
+               Open = 0, 
+               Close = 23, 
+            }, 
+            ProfitBuy = 120, 
+            ProfitSell = 90, 
+            BuyTypes = 
+            {
+               [1] = "none", 
+               [2] = "none", 
+               [3] = "none", 
+               [4] = "none", 
+               [0] = "none", 
+            }, 
+            KeeperShortDescr = "a retail droid", 
+         }, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Position = "standing", 
+         VipFlags = 
+         {
+            [0] = "Coruscant", 
+         }, 
+         Level = 10, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "The retail droid is similar in apearance to a standard proticol droid.\
+It is fittened however with a crdit exchange terminal in its hip and\
+is programmed to be an expert salesperson.\
+", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 202, 
+         ShortDescr = "a retail droid", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [26] = "Droid", 
+         }, 
+      }, 
+      [203] = 
+      {
+         Weight = 0, 
+         Name = "spaceport security guard", 
+         ArmorClass = -25, 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         LongDescr = "A spaceport security guard looks around the entrance.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 50, 
+         HitRoll = 10, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 203, 
+         ShortDescr = "a spaceport security guard", 
+         Sex = "undistinguished", 
+         DamRoll = 10, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+      }, 
+      [204] = 
+      {
+         Weight = 0, 
+         Name = "spaceport security guard", 
+         ArmorClass = -25, 
+         HitChance = 
+         {
+            HitPlus = 500, 
+            HitSizeDice = 10, 
+            HitNoDice = 10, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 5, 
+            DamPlus = 2, 
+            DamSizeDice = 4, 
+         }, 
+         LongDescr = "A spaceport security guard watches the docking bays.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 50, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 204, 
+         ShortDescr = "a spaceport security guard", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+         }, 
+      }, 
+      [205] = 
+      {
+         Weight = 0, 
+         Name = "technician", 
+         ArmorClass = 0, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         LongDescr = "Some god abandoned a newly created technician here.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 1, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 205, 
+         ShortDescr = "a newly created technician", 
+         Sex = "undistinguished", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+         }, 
+      }, 
+      [206] = 
+      {
+         Weight = 0, 
+         Name = "technician", 
+         ArmorClass = 80, 
+         HitChance = 
+         {
+            HitPlus = 0, 
+            HitSizeDice = 0, 
+            HitNoDice = 0, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 0, 
+            DamPlus = 0, 
+            DamSizeDice = 0, 
+         }, 
+         LongDescr = "A technician is readying ships for launch.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 9, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "This is a young human tecnician. He is dressed in a grey worksuit that\
+is smuged with greasea. Several tools hang from a belt around his\
+waist.\
+", 
+         Credits = 0, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 206, 
+         ShortDescr = "a technician", 
+         Sex = "male", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [0] = "Npc", 
+            [10] = "Practice", 
+            [24] = "NoAssist", 
+         }, 
+      }, 
+      [207] = 
+      {
+         Weight = 0, 
+         Name = "human", 
+         ArmorClass = 75, 
+         HitChance = 
+         {
+            HitPlus = 100, 
+            HitSizeDice = 10, 
+            HitNoDice = 2, 
+         }, 
+         Damage = 
+         {
+            DamNoDice = 1, 
+            DamPlus = 0, 
+            DamSizeDice = 4, 
+         }, 
+         LongDescr = "A human is sitting here waiting for his shuttle to arrive.\
+", 
+         NumberOfAttacks = 0, 
+         Languages = 
+         {
+            Speaking = 
+            {
+               [0] = "basic", 
+            }, 
+            Speaks = 
+            {
+               [0] = "basic", 
+            }, 
+         }, 
+         SaveVs = 
+         {
+            PoisonDeath = 0, 
+            Wand = 0, 
+            ParaPetri = 0, 
+            SpellStaff = 0, 
+            Breath = 0, 
+         }, 
+         Position = "standing", 
+         Stats = 
+         {
+            Wisdom = 10, 
+            Force = 0, 
+            Constitution = 10, 
+            Charisma = 10, 
+            Intelligence = 10, 
+            Dexterity = 10, 
+            Luck = 10, 
+            Strength = 10, 
+         }, 
+         Level = 10, 
+         HitRoll = 0, 
+         Height = 0, 
+         DefaultPosition = "standing", 
+         Description = "This young human man is in his early twenties. He is dressed in the latest\
+fashions and is clean cut. He is probably a student at the university.\
+", 
+         Credits = 10, 
+         Race = "Human", 
+         Alignment = 0, 
+         Vnum = 207, 
+         ShortDescr = "a human", 
+         Sex = "male", 
+         DamRoll = 0, 
+         Flags = 
+         {
+            [1] = "Sentinel", 
+            [0] = "Npc", 
+            [24] = "NoAssist", 
+         }, 
+      }, 
+   }, 
+   LowEconomy = 31260289, 
+   ResetMessage = "", 
+   VnumRanges = 
+   {
+      Object = 
+      {
+         First = 199, 
+         Last = 226, 
+      }, 
+      Mob = 
+      {
+         First = 199, 
+         Last = 226, 
+      }, 
+      Room = 
+      {
+         First = 199, 
+         Last = 226, 
       }, 
    }, 
 }
