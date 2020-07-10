@@ -221,7 +221,8 @@ SkillEntry
    Teachers = 
    {
       [410] = "old wookiee woman", 
-      [32009] = "suspicious fellow", 
+      [32009] = "suspicious fellow",
+      [31538] = "Bothan smuggler",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -402,7 +403,8 @@ SkillEntry
    {
       [6805] = "mine foreman Krauota", 
       [206] = "technician", 
-      [6819] = "boss Hityii", 
+      [6819] = "boss Hityii",
+      [31538] = "Bothan smuggler",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -1619,7 +1621,8 @@ SkillEntry
    Target = "ignore", 
    Teachers = 
    {
-      [32009] = "suspicious fellow", 
+         [32009] = "suspicious fellow",
+         [31538] = "Bothan smuggler",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -2598,7 +2601,8 @@ SkillEntry
    Teachers = 
    {
       [410] = "old wookiee woman", 
-      [32009] = "suspicious fellow", 
+      [32009] = "suspicious fellow",
+      [31538] = "Bothan smuggler",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -3105,7 +3109,8 @@ SkillEntry
    Teachers = 
    {
       [410] = "old wookiee woman", 
-      [32009] = "suspicious fellow", 
+      [32009] = "suspicious fellow",
+      [31538] = "Bothan smuggler",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -3585,7 +3590,8 @@ SkillEntry
    Teachers = 
    {
       [410] = "old wookiee woman", 
-      [32009] = "suspicious fellow", 
+      [32009] = "suspicious fellow",
+      [31538] = "Bothan smuggler",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -10436,7 +10442,8 @@ SkillEntry
    Target = "ignore", 
    Teachers = 
    {
-      [210] = "begger", 
+         [210] = "begger",
+         [31538] = "Bothan smuggler",
    }, 
    Position = "standing", 
    Type = "Skill", 
