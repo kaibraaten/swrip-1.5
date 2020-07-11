@@ -147,7 +147,8 @@ void do_tractorbeam(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("&GTracking target.\r\n");
             Act(AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                 nullptr, nullptr, ActTarget::Room);
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_tractorbeam, SUB_PAUSE);
+            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_tractorbeam,
+                                CharacterSubState::SUB_PAUSE);
             ch->dest_buf = arg;
             return;
         }
@@ -156,7 +157,7 @@ void do_tractorbeam(std::shared_ptr<Character> ch, std::string arg)
         LearnFromFailure(ch, gsn_tractorbeams);
         return;
 
-    case SUB_PAUSE:
+    case CharacterSubState::SUB_PAUSE:
         if(ch->dest_buf.empty())
             return;
 
@@ -164,9 +165,9 @@ void do_tractorbeam(std::shared_ptr<Character> ch, std::string arg)
         ch->dest_buf.erase();
         break;
 
-    case SUB_TIMER_DO_ABORT:
+    case CharacterSubState::SUB_TIMER_DO_ABORT:
         ch->dest_buf.erase();
-        ch->SubState = SUB_NONE;
+        ch->SubState = CharacterSubState::SUB_NONE;
 
         if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
             return;
@@ -175,7 +176,7 @@ void do_tractorbeam(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    ch->SubState = SUB_NONE;
+    ch->SubState = CharacterSubState::SUB_NONE;
 
     if((ship = GetShipFromCoSeat(ch->InRoom->Vnum)) == NULL)
     {

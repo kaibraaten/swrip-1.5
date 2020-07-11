@@ -167,7 +167,7 @@ class Timer
 {
 public:
     CmdFun *DoFun = nullptr;
-    int     Value = 0;
+    CharacterSubState SubState = CharacterSubState::SUB_NONE;
     short   Type = 0;
     short   Count = 0;
 };
@@ -246,16 +246,6 @@ public:
     short      Pulse = 0;  /* how many pulses (.25 sec) until another call-out ? */
     int        Starting = 0;
 };
-
-#define CHECK_SUBRESTRICTED(ch)                                         \
-  do                                                                    \
-    {                                                                   \
-      if ( (ch)->SubState == SUB_RESTRICTED )                           \
-        {                                                               \
-          ch->Echo( "You cannot use this command from within another command.\r\n" ); \
-          return;                                                       \
-        }                                                               \
-    } while(0)
 
 /*
  * Global constants.
@@ -1257,7 +1247,8 @@ void SetCurrentGlobalCharacter(std::shared_ptr<Character> ch);
 bool CharacterDiedRecently(std::shared_ptr<Character> ch);
 void QueueExtractedCharacter(std::shared_ptr<Character> ch, bool extract);
 void CleanCharacterQueue(void);
-void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count, CmdFun *fun, int value);
+void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count, CmdFun *fun,
+                         CharacterSubState substate);
 std::shared_ptr<Timer> GetTimerPointer(std::shared_ptr<Character> ch, short type);
 short GetTimer(std::shared_ptr<Character> ch, short type);
 void ExtractTimer(std::shared_ptr<Character> ch, std::shared_ptr<Timer> timer);

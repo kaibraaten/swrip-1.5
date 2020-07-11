@@ -414,8 +414,6 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        CHECK_SUBRESTRICTED(ch);
-
         StartEditing(ch, obj->Description,
                      [ch, obj](const auto &txt)
                      {
@@ -578,8 +576,6 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        CHECK_SUBRESTRICTED(ch);
-
         if(obj->Timer)
         {
             ch->Echo("It's not safe to edit an extra description on an object with a timer.\r\nTurn it off first.\r\n");
@@ -609,8 +605,6 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
 
     if(!StrCmp(arg2, "desc"))
     {
-        CHECK_SUBRESTRICTED(ch);
-
         if(obj->Timer)
         {
             ch->Echo("It's not safe to edit a description on an object with a timer.\r\nTurn it off first.\r\n");

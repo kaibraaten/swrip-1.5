@@ -366,24 +366,15 @@ void Interpret(std::shared_ptr<Character> ch, std::string argument)
     {
         CharacterSubState tempsub = ch->SubState;
 
-        ch->SubState = SUB_TIMER_DO_ABORT;
+        ch->SubState = CharacterSubState::SUB_TIMER_DO_ABORT;
         timer->DoFun(ch, "");
 
-        if(CharacterDiedRecently(ch))
+        if(!CharacterDiedRecently(ch))
         {
-            return;
+            ch->SubState = tempsub;
         }
 
-        if(ch->SubState != SUB_TIMER_CANT_ABORT)
-        {
-            ch->SubState = tempsub;
-            ExtractTimer(ch, timer);
-        }
-        else
-        {
-            ch->SubState = tempsub;
-            return;
-        }
+        return;
     }
 
     /*

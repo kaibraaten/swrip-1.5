@@ -262,14 +262,13 @@ enum
 /*
  * Character substates
  */
-enum
+enum class CharacterSubState
 {
     SUB_NONE,
     SUB_PAUSE,
-    SUB_RESTRICTED,
 
     /* timer types ONLY below this point */
-    SUB_TIMER_DO_ABORT = 128, SUB_TIMER_CANT_ABORT
+    SUB_TIMER_DO_ABORT
 };
 
 /* ability classes */

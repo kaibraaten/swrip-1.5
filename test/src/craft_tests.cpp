@@ -583,7 +583,7 @@ TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
     auto session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
-    _engineer->SubState = timer->Value;
+    _engineer->SubState = timer->SubState;
 
     timer->DoFun(_engineer, "");
 
@@ -607,7 +607,7 @@ TEST_F(CraftTests, AfterCallback_CharacterReceivedObject)
     auto session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
-    _engineer->SubState = timer->Value;
+    _engineer->SubState = timer->SubState;
 
     timer->DoFun(_engineer, "");
 
@@ -624,7 +624,7 @@ TEST_F(CraftTests, AfterCallback_SetObjectStatsEventHandler_IsCalledExactlyOnce)
     session->OnSetObjectStats.Add(&callCounter, Counting_EventHandler<std::shared_ptr<SetObjectStatsEventArgs>>);
     StartCrafting(session);
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
-    _engineer->SubState = timer->Value;
+    _engineer->SubState = timer->SubState;
 
     timer->DoFun(_engineer, "");
 
@@ -642,7 +642,7 @@ TEST_F(CraftTests, AfterCallback_FinishedCraftingEventHandler_IsCalledExactlyOnc
 
     StartCrafting(session);
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
-    _engineer->SubState = timer->Value;
+    _engineer->SubState = timer->SubState;
 
     timer->DoFun(_engineer, "");
 

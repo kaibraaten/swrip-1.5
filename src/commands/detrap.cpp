@@ -79,10 +79,10 @@ void do_detrap(std::shared_ptr<Character> ch, std::string argument)
         Act(AT_ACTION, "$n carefully attempts to remove a trap from $p...",
             ch, obj, NULL, ActTarget::Room);
         ch->dest_buf = obj->Name;
-        AddTimerToCharacter(ch, TIMER_CMD_FUN, 3, do_detrap, SUB_PAUSE);
+        AddTimerToCharacter(ch, TIMER_CMD_FUN, 3, do_detrap, CharacterSubState::SUB_PAUSE);
         return;
 
-    case SUB_PAUSE:
+    case CharacterSubState::SUB_PAUSE:
         if(ch->dest_buf.empty())
         {
             ch->Echo("Your detrapping was interrupted!\r\n");
@@ -92,12 +92,12 @@ void do_detrap(std::shared_ptr<Character> ch, std::string argument)
 
         arg = ch->dest_buf;
         ch->dest_buf.erase();
-        ch->SubState = SUB_NONE;
+        ch->SubState = CharacterSubState::SUB_NONE;
         break;
 
-    case SUB_TIMER_DO_ABORT:
+    case CharacterSubState::SUB_TIMER_DO_ABORT:
         ch->dest_buf.erase();
-        ch->SubState = SUB_NONE;
+        ch->SubState = CharacterSubState::SUB_NONE;
         ch->Echo("You carefully stop what you were doing.\r\n");
         return;
     }

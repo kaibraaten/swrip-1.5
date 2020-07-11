@@ -772,7 +772,7 @@ void CharacterToRoom(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoomI
     if(!IsNpc(ch)
        && ch->InRoom->Flags.test(Flag::Room::Safe)
        && GetTimer(ch, TIMER_SHOVEDRAG) <= 0)
-        AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, SUB_NONE);  /*-30 Seconds-*/
+        AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, CharacterSubState::SUB_NONE);  /*-30 Seconds-*/
 
       /*
        * Delayed Teleport rooms                                     -Thoric
@@ -2372,7 +2372,8 @@ void CleanCharacterQueue()
  * Add a timer to ch                                            -Thoric
  * Support for "call back" time delayed commands
  */
-void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count, CmdFun *fun, int value)
+void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count, CmdFun *fun,
+                         CharacterSubState substate)
 {
     auto timer = GetTimerPointer(ch, type);
 
@@ -2385,7 +2386,7 @@ void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count,
     timer->Count = count;
     timer->Type = type;
     timer->DoFun = fun;
-    timer->Value = value;
+    timer->SubState = substate;
 }
 
 std::shared_ptr<Timer> GetTimerPointer(std::shared_ptr<Character> ch, short type)

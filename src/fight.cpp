@@ -200,7 +200,7 @@ static void ExpireCommandCallbackTimers(std::shared_ptr<Character> ch)
             {
                 CharacterSubState tempsub = ch->SubState;
 
-                ch->SubState = (CharacterSubState)timer->Value;
+                ch->SubState = timer->SubState;
                 timer->DoFun(ch, "");
 
                 if(CharacterDiedRecently(ch))
@@ -517,7 +517,7 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
     /* add timer if player is attacking another player */
     if(!IsNpc(ch) && !IsNpc(victim))
     {
-        AddTimerToCharacter(ch, TIMER_RECENTFIGHT, 20, NULL, SUB_NONE);
+        AddTimerToCharacter(ch, TIMER_RECENTFIGHT, 20, nullptr, CharacterSubState::SUB_NONE);
     }
 
     if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Nice) && !IsNpc(victim))
@@ -2093,7 +2093,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
             victim->Echo("You lose %ld experience.\r\n", xp_actually_lost);
         }
 
-        AddTimerToCharacter(victim, TIMER_RECENTFIGHT, 100, nullptr, SUB_NONE);
+        AddTimerToCharacter(victim, TIMER_RECENTFIGHT, 100, nullptr, CharacterSubState::SUB_NONE);
     }
 
     /*

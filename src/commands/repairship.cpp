@@ -31,7 +31,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
            && StrCmp(argument, "docking")
            && StrCmp(argument, "tractor"))
         {
-            ch->Echo("&RYou need to spceify something to repair:\r\n");
+            ch->Echo("&RYou need to specify something to repair:\r\n");
             ch->Echo("&rTry: hull, drive, launcher, laser, docking, tractor or turret <1 - %d>\r\n",
                      MAX_NUMBER_OF_TURRETS_IN_SHIP);
             return;
@@ -44,11 +44,15 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("&GYou begin your repairs\r\n");
             Act(AT_PLAIN, "$n begins repairing the ships $T.", ch,
                 nullptr, argument, ActTarget::Room);
-
+            int timeToRepair = 0;
+            
             if(!StrCmp(argument, "hull"))
-                AddTimerToCharacter(ch, TIMER_CMD_FUN, 15, do_repairship, SUB_PAUSE);
+                timeToRepair = 15;
             else
-                AddTimerToCharacter(ch, TIMER_CMD_FUN, 5, do_repairship, SUB_PAUSE);
+                timeToRepair = 5;
+                
+            AddTimerToCharacter(ch, TIMER_CMD_FUN, timeToRepair,
+                                do_repairship, CharacterSubState::SUB_PAUSE);
 
             ch->dest_buf = argument;
             return;
@@ -58,7 +62,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
         LearnFromFailure(ch, gsn_shipmaintenance);
         return;
 
-    case SUB_PAUSE:
+    case CharacterSubState::SUB_PAUSE:
         if(ch->dest_buf.empty())
             return;
 
@@ -66,9 +70,9 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
         ch->dest_buf.erase();
         break;
 
-    case SUB_TIMER_DO_ABORT:
+    case CharacterSubState::SUB_TIMER_DO_ABORT:
         ch->dest_buf.erase();
-        ch->SubState = SUB_NONE;
+        ch->SubState = CharacterSubState::SUB_NONE;
 
         if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
             return;
@@ -77,7 +81,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    ch->SubState = SUB_NONE;
+    ch->SubState = CharacterSubState::SUB_NONE;
 
     if((ship = GetShipFromEngine(ch->InRoom->Vnum)) == NULL)
     {

@@ -73,13 +73,13 @@ void do_dig(std::shared_ptr<Character> ch, std::string arg)
         }
 
         AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(SkillTable[gsn_dig]->Beats / 10, 3),
-                            do_dig, SUB_PAUSE);
+                            do_dig, CharacterSubState::SUB_PAUSE);
         ch->dest_buf = arg;
         ch->Echo("You begin digging...\r\n");
         Act(AT_PLAIN, "$n begins digging...", ch, NULL, NULL, ActTarget::Room);
         return;
 
-    case SUB_PAUSE:
+    case CharacterSubState::SUB_PAUSE:
         if(ch->dest_buf.empty())
         {
             ch->Echo("Your digging was interrupted!\r\n");
@@ -92,15 +92,15 @@ void do_dig(std::shared_ptr<Character> ch, std::string arg)
         ch->dest_buf.erase();
         break;
 
-    case SUB_TIMER_DO_ABORT:
+    case CharacterSubState::SUB_TIMER_DO_ABORT:
         ch->dest_buf.erase();
-        ch->SubState = SUB_NONE;
+        ch->SubState = CharacterSubState::SUB_NONE;
         ch->Echo("You stop digging...\r\n");
         Act(AT_PLAIN, "$n stops digging...", ch, NULL, NULL, ActTarget::Room);
         return;
     }
 
-    ch->SubState = SUB_NONE;
+    ch->SubState = CharacterSubState::SUB_NONE;
 
     /* not having a shovel makes it harder to succeed */
     bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL) != nullptr;

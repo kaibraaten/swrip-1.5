@@ -609,12 +609,6 @@ void OperateOnNote(std::shared_ptr<Character> ch, std::string arg_passed, bool I
     {
         auto quill = FindQuill(ch);
 
-        if(ch->SubState == SUB_RESTRICTED)
-        {
-            ch->Echo("You cannot write a note from within another command.\r\n");
-            return;
-        }
-
         if(GetTrustLevel(ch) < SysData.WriteMailFree)
         {
             if(!quill)

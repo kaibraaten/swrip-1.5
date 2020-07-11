@@ -157,7 +157,7 @@ public:
     int NumFighting = 0;
     std::string dest_buf;
     int tempnum = 0;
-    CharacterSubState SubState = SUB_NONE;
+    CharacterSubState SubState = CharacterSubState::SUB_NONE;
     int Trust = 0;
     int IdleTimer = 0;
     int Wait = 0;

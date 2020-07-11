@@ -173,15 +173,17 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
             break;
 
         /* multi-participant spells                       -Thoric */
-        AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(skill->Beats / 10, 3), do_cast, SUB_PAUSE);
+        AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(skill->Beats / 10, 3),
+                            do_cast, CharacterSubState::SUB_PAUSE);
         Act(AT_MAGIC, "You begin to feel the force in yourself and those around you...",
             ch, NULL, NULL, ActTarget::Char);
-        Act(AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, ActTarget::Room);
+        Act(AT_MAGIC, "$n reaches out with the force to those around...",
+            ch, NULL, NULL, ActTarget::Room);
         ch->dest_buf = targetName + " " + spell_target_name;
         ch->tempnum = sn;
         return;
 
-    case SUB_TIMER_DO_ABORT:
+    case CharacterSubState::SUB_TIMER_DO_ABORT:
         ch->dest_buf.erase();
 
         if(IS_VALID_SN((sn = ch->tempnum)))
@@ -204,7 +206,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
         /* should add chance of backfire here */
         return;
 
-    case SUB_PAUSE:
+    case CharacterSubState::SUB_PAUSE:
         sn = ch->tempnum;
 
         if((skill = GetSkill(sn)) == NULL)
@@ -225,7 +227,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
         std::string buf = ch->dest_buf;
         ch->dest_buf.erase();
         spell_target_name = OneArgument(buf, targetName);
-        ch->SubState = SUB_NONE;
+        ch->SubState = CharacterSubState::SUB_NONE;
 
         if(skill->Participants > 1)
         {
@@ -262,7 +264,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
                         LearnFromSuccess(tmp, sn);
 
                         tmp->Mana.Current -= mana;
-                        tmp->SubState = SUB_NONE;
+                        tmp->SubState = CharacterSubState::SUB_NONE;
                         tmp->tempnum = -1;
                         tmp->dest_buf.erase();
                     }

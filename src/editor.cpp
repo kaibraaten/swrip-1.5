@@ -379,7 +379,7 @@ void StopEditing(std::shared_ptr<Character> ch)
     Editor::Discard(ch->PCData->TextEditor);
     ch->PCData->TextEditor = NULL;
     ch->Echo("Done.\r\n");
-    ch->SubState = SUB_NONE;
+    ch->SubState = CharacterSubState::SUB_NONE;
     ch->Desc->ConnectionState = CON_PLAYING;
 }
 
@@ -408,7 +408,7 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("You can't do that!\r\n");
         Log->Bug("%s: null editor", __FUNCTION__);
         d->ConnectionState = CON_PLAYING;
-        ch->SubState = SUB_NONE;
+        ch->SubState = CharacterSubState::SUB_NONE;
         return;
     }
 

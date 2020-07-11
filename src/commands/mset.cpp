@@ -809,7 +809,6 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             }
             return;
         }
-        CHECK_SUBRESTRICTED(ch);
 
         StartEditing(ch, victim->Description,
                      [ch, victim](const auto &txt)

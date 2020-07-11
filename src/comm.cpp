@@ -878,7 +878,9 @@ void DisplayPrompt(Descriptor *d)
 
     assert(ch != nullptr);
 
-    if(!IsNpc(ch) && ch->SubState != SUB_NONE && !ch->PCData->SubPrompt.empty())
+    if(!IsNpc(ch)
+       && ch->SubState != CharacterSubState::SUB_NONE
+       && !ch->PCData->SubPrompt.empty())
     {
         prompt = ch->PCData->SubPrompt.c_str();
     }

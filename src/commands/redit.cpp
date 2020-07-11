@@ -113,7 +113,6 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        CHECK_SUBRESTRICTED(ch);
         auto extraDescription = SetRExtra(location, argument);
 
         StartEditing(ch, extraDescription->Description,

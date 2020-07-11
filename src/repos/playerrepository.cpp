@@ -362,7 +362,8 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, std::shared_ptr<Char
                    {
                        if (pkilledTimer < 0)
                        {
-                           AddTimerToCharacter(ch, TIMER_PKILLED, pkilledTimer, nullptr, SUB_NONE);
+                           AddTimerToCharacter(ch, TIMER_PKILLED, pkilledTimer,
+                                               nullptr, CharacterSubState::SUB_NONE);
                        }
                    });
     LuaGetfieldInt(L, "Alignment", &ch->Alignment);
