@@ -188,7 +188,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
             {
                 auto victim = d->Original ? d->Original : d->Char;
 
-                if(d->ConnectionState != CON_PLAYING)
+                if(d->ConnectionState != ConState::Playing)
                     continue;
 
                 if(!CheckPilot(victim, ship))
@@ -212,7 +212,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
                     continue;
                 }
 
-                if(d->ConnectionState == CON_EDITING)
+                if(d->ConnectionState == ConState::Editing)
                 {
                     continue;
                 }
@@ -243,7 +243,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
             {
                 auto victim = d->Original ? d->Original : d->Char;
 
-                if(d->ConnectionState != CON_PLAYING)
+                if(d->ConnectionState != ConState::Playing)
                     continue;
 
                 if(!CheckPilot(victim, ship))
@@ -265,7 +265,7 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
                    || victim->InRoom->Flags.test(Flag::Room::Silence))
                     continue;
 
-                if(d->ConnectionState == CON_EDITING)
+                if(d->ConnectionState == ConState::Editing)
                     continue;
 
                 victim->Echo("&R[Alarm] %s has been picked!\r\n",

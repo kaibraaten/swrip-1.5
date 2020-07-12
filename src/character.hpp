@@ -157,7 +157,7 @@ public:
     int NumFighting = 0;
     std::string dest_buf;
     int tempnum = 0;
-    CharacterSubState SubState = CharacterSubState::SUB_NONE;
+    CharacterSubState SubState = CharacterSubState::None;
     int Trust = 0;
     int IdleTimer = 0;
     int Wait = 0;
@@ -445,5 +445,9 @@ bool IS_OUTSIDE(std::shared_ptr<Character> ch);
 void SetAbilityLevel(std::shared_ptr<Character> ch, short ability, int newlevel);
 
 bool IsNpc(std::shared_ptr<Character> ch);
+
+bool IsInEditor(std::shared_ptr<Character> ch);
+
+bool IsPlaying(std::shared_ptr<Character> ch);
 
 #endif

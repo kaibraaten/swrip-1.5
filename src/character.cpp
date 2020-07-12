@@ -1746,3 +1746,13 @@ bool IS_OUTSIDE(std::shared_ptr<Character> ch)
         && !ch->InRoom->Flags.test(Flag::Room::Spacecraft)
         && ch->InRoom->Sector != SECT_UNDERGROUND;
 }
+
+bool IsInEditor(std::shared_ptr<Character> ch)
+{
+    return IsNpc(ch) ? false : ch->Desc->ConnectionState == ConState::Editing;
+}
+
+bool IsPlaying(std::shared_ptr<Character> ch)
+{
+    return IsNpc(ch) ? true : ch->Desc->ConnectionState == ConState::Playing;
+}

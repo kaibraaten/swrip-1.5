@@ -942,8 +942,8 @@ static std::shared_ptr<Character> imc_find_user(const char *name)
                          auto vch = d->Char ? d->Char : d->Original;
 
                          return vch != nullptr
-                             && !StrCmp(CH_IMCNAME(vch), name)
-                             && d->ConnectionState == CON_PLAYING;
+                         && !StrCmp(CH_IMCNAME(vch), name)
+                         && d->ConnectionState == ConState::Playing;
                      });
 
     auto ch = desc->Char ? desc->Char : desc->Original;
@@ -1795,7 +1795,7 @@ PFUN(imc_recv_emote)
     {
         std::shared_ptr<Character> ch;
 
-        if(d->ConnectionState == CON_PLAYING
+        if(d->ConnectionState == ConState::Playing
            && (ch = d->Original ? d->Original : d->Char) != NULL
            && IMCPERM(ch) >= level)
         {
@@ -1906,7 +1906,7 @@ static void imc_display_channel(IMC_CHANNEL *c, const char *from, char *txt, int
     {
         auto ch = d->Original ? d->Original : d->Char;
 
-        if(!ch || d->ConnectionState != CON_PLAYING)
+        if(!ch || d->ConnectionState != ConState::Playing)
             continue;
 
         /*
@@ -2323,7 +2323,7 @@ static char *imc_assemble_who(void)
     {
         auto person = d->Original ? d->Original : d->Char;
 
-        if(person && d->ConnectionState == CON_PLAYING)
+        if(person && d->ConnectionState == ConState::Playing)
         {
             if(IMCPERM(person) <= IMCPERM_NONE || IMCPERM(person) >= IMCPERM_IMM)
                 continue;
@@ -2359,7 +2359,7 @@ static char *imc_assemble_who(void)
     {
         auto person = d->Original ? d->Original : d->Char;
 
-        if(person && d->ConnectionState == CON_PLAYING)
+        if(person && d->ConnectionState == ConState::Playing)
         {
             if(IMCPERM(person) <= IMCPERM_NONE || IMCPERM(person) < IMCPERM_IMM)
                 continue;

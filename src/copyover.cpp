@@ -73,7 +73,7 @@ void do_copyover(std::shared_ptr<Character> ch, std::string argument)
     {
         std::shared_ptr<Character> och = d->Original ? d->Original : d->Char;
 
-        if(!d->Char || d->ConnectionState != CON_PLAYING)  /* drop those logging on */
+        if(!d->Char || d->ConnectionState != ConState::Playing)  /* drop those logging on */
         {
             WriteToDescriptor(d.get(), "\r\nSorry, we are rebooting."
                               " Come back in a few minutes.\r\n", 0);
@@ -165,7 +165,7 @@ void RecoverFromCopyover()
         }
 
         Descriptors->Add(d);
-        d->ConnectionState = CON_COPYOVER_RECOVER; /* negative so CloseDescriptor will cut them off */
+        d->ConnectionState = ConState::CopyoverRecover;
 
         /* Now, find the pfile */
         bool fOld = PlayerCharacters->Load(d, name, false);
@@ -201,7 +201,7 @@ void RecoverFromCopyover()
 
             Act(AT_ACTION, "$n materializes!", d->Char, nullptr, nullptr,
                 ActTarget::Room);
-            d->ConnectionState = CON_PLAYING;
+            d->ConnectionState = ConState::Playing;
 
             if(++num_descriptors > SysData.MaxPlayersEver)
             {

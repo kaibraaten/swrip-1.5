@@ -241,22 +241,22 @@ enum
 /*
  * Connected state for a channel.
  */
-enum
+enum class ConState
 {
-    CON_PLAYING,
-    CON_GET_NAME,
-    CON_GET_OLD_PASSWORD,
-    CON_CONFIRM_NEW_NAME,
-    CON_GET_NEW_PASSWORD,
-    CON_CONFIRM_NEW_PASSWORD,
-    CON_GET_NEW_SEX,
-    CON_READ_MOTD,
-    CON_GET_NEW_RACE,
-    CON_EDITING,
-    CON_PRESS_ENTER,
-    CON_GET_NEW_CLASS,
-    CON_STATS_OK,
-    CON_COPYOVER_RECOVER
+    Playing,
+    GetName,
+    GetOldPassword,
+    ConfirmNewName,
+    GetNewPassword,
+    ConfirmNewPassword,
+    GetNewSex,
+    ReadMOTD,
+    GetNewRace,
+    Editing,
+    PressEnter,
+    GetNewClass,
+    StatsOk,
+    CopyoverRecover
 };
 
 /*
@@ -264,11 +264,11 @@ enum
  */
 enum class CharacterSubState
 {
-    SUB_NONE,
-    SUB_PAUSE,
+    None,
+    Pause,
 
     /* timer types ONLY below this point */
-    SUB_TIMER_DO_ABORT
+    TimerDoAbort
 };
 
 /* ability classes */

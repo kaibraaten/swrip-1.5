@@ -58,12 +58,12 @@ void do_search(std::shared_ptr<Character> ch, std::string arg)
         }
 
         AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(SkillTable[gsn_search]->Beats / 10, 3),
-                            do_search, CharacterSubState::SUB_PAUSE);
+                            do_search, CharacterSubState::Pause);
         ch->Echo("You begin your search...\r\n");
         ch->dest_buf = arg;
         return;
 
-    case CharacterSubState::SUB_PAUSE:
+    case CharacterSubState::Pause:
         if(ch->dest_buf.empty())
         {
             ch->Echo("Your search was interrupted!\r\n");
@@ -75,14 +75,14 @@ void do_search(std::shared_ptr<Character> ch, std::string arg)
         ch->dest_buf.erase();
         break;
 
-    case CharacterSubState::SUB_TIMER_DO_ABORT:
+    case CharacterSubState::TimerDoAbort:
         ch->dest_buf.erase();
-        ch->SubState = CharacterSubState::SUB_NONE;
+        ch->SubState = CharacterSubState::None;
         ch->Echo("You stop your search...\r\n");
         return;
     }
 
-    ch->SubState = CharacterSubState::SUB_NONE;
+    ch->SubState = CharacterSubState::None;
 
     if(arg.empty())
     {

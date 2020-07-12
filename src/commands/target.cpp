@@ -120,7 +120,7 @@ void do_target(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("&GTracking target.\r\n");
             Act(AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                 nullptr, nullptr, ActTarget::Room);
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_target, CharacterSubState::SUB_PAUSE);
+            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_target, CharacterSubState::Pause);
             ch->dest_buf = arg;
             return;
         }
@@ -129,7 +129,7 @@ void do_target(std::shared_ptr<Character> ch, std::string arg)
         LearnFromFailure(ch, gsn_weaponsystems);
         return;
 
-    case CharacterSubState::SUB_PAUSE:
+    case CharacterSubState::Pause:
         if(ch->dest_buf.empty())
             return;
 
@@ -137,9 +137,9 @@ void do_target(std::shared_ptr<Character> ch, std::string arg)
         ch->dest_buf.erase();
         break;
 
-    case CharacterSubState::SUB_TIMER_DO_ABORT:
+    case CharacterSubState::TimerDoAbort:
         ch->dest_buf.erase();
-        ch->SubState = CharacterSubState::SUB_NONE;
+        ch->SubState = CharacterSubState::None;
 
         if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
             return;
@@ -148,7 +148,7 @@ void do_target(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    ch->SubState = CharacterSubState::SUB_NONE;
+    ch->SubState = CharacterSubState::None;
 
     if((ship = GetShipFromTurret(ch->InRoom->Vnum)) == NULL)
     {

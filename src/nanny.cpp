@@ -87,51 +87,51 @@ void Nanny(std::shared_ptr<Descriptor> d, std::string argument)
     switch(d->ConnectionState)
     {
     default:
-        Log->Bug("Nanny: bad d->ConnectionState %d.", d->ConnectionState);
+        Log->Bug("Nanny: bad d->ConnectionState %d.", (int)d->ConnectionState);
         CloseDescriptor(d, true);
         return;
 
-    case CON_GET_NAME:
+    case ConState::GetName:
         nannyFun = NannyGetName;
         break;
 
-    case CON_GET_OLD_PASSWORD:
+    case ConState::GetOldPassword:
         nannyFun = NannyGetOldPassword;
         break;
 
-    case CON_CONFIRM_NEW_NAME:
+    case ConState::ConfirmNewName:
         nannyFun = NannyConfirmNewName;
         break;
 
-    case CON_GET_NEW_PASSWORD:
+    case ConState::GetNewPassword:
         nannyFun = NannyGetNewPassword;
         break;
 
-    case CON_CONFIRM_NEW_PASSWORD:
+    case ConState::ConfirmNewPassword:
         nannyFun = NannyConfirmNewPassword;
         break;
 
-    case CON_GET_NEW_SEX:
+    case ConState::GetNewSex:
         nannyFun = NannyGetNewSex;
         break;
 
-    case CON_GET_NEW_RACE:
+    case ConState::GetNewRace:
         nannyFun = NannyGetNewRace;
         break;
 
-    case CON_GET_NEW_CLASS:
+    case ConState::GetNewClass:
         nannyFun = NannyGetNewClass;
         break;
 
-    case CON_STATS_OK:
+    case ConState::StatsOk:
         nannyFun = NannyStatsOk;
         break;
 
-    case CON_PRESS_ENTER:
+    case ConState::PressEnter:
         nannyFun = NannyPressEnter;
         break;
 
-    case CON_READ_MOTD:
+    case ConState::ReadMOTD:
         nannyFun = NannyReadMotd;
         break;
     }
@@ -230,7 +230,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
         /* Old player */
         d->WriteToBuffer("Password: ", 0);
         d->WriteToBuffer(echo_off_str, 0);
-        d->ConnectionState = CON_GET_OLD_PASSWORD;
+        d->ConnectionState = ConState::GetOldPassword;
         return;
     }
     else
@@ -239,14 +239,14 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
         {
             d->WriteToBuffer("\r\nThat name is unacceptable, please choose another.\r\n", 0);
             d->WriteToBuffer("Name: ", 0);
-            d->ConnectionState = CON_GET_NAME;
+            d->ConnectionState = ConState::GetName;
             return;
         }
 
         d->WriteToBuffer("\r\nI don't recognize your name, you must be new here.\r\n\r\n", 0);
         sprintf(buf, "Did I get that right, %s (Y/N)? ", argument.c_str());
         d->WriteToBuffer(buf, 0);
-        d->ConnectionState = CON_CONFIRM_NEW_NAME;
+        d->ConnectionState = ConState::ConfirmNewName;
         return;
     }
 }
@@ -317,7 +317,7 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
     }
 
     d->WriteToBuffer("Press enter...\r\n", 0);
-    d->ConnectionState = CON_PRESS_ENTER;
+    d->ConnectionState = ConState::PressEnter;
 
     if(ch->PCData->Build.Area)
     {
@@ -337,7 +337,7 @@ static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argum
                 "\r\nPick a good password for %s: %s",
                 ch->Name.c_str(), echo_off_str);
         d->WriteToBuffer(buf, 0);
-        d->ConnectionState = CON_GET_NEW_PASSWORD;
+        d->ConnectionState = ConState::GetNewPassword;
         break;
 
     case 'n': case 'N':
@@ -346,7 +346,7 @@ static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argum
         d->Char->Desc = NULL;
         FreeCharacter(d->Char);
         d->Char = NULL;
-        d->ConnectionState = CON_GET_NAME;
+        d->ConnectionState = ConState::GetName;
         break;
 
     default:
@@ -378,7 +378,7 @@ static void NannyGetNewPassword(std::shared_ptr<Descriptor> d, std::string argum
 
     ch->PCData->Password = pwdnew;
     d->WriteToBuffer("\r\nPlease retype the password to confirm: ", 0);
-    d->ConnectionState = CON_CONFIRM_NEW_PASSWORD;
+    d->ConnectionState = ConState::ConfirmNewPassword;
 }
 
 static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string argument)
@@ -390,13 +390,13 @@ static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string a
     if(StrCmp(EncodeString(argument), ch->PCData->Password))
     {
         d->WriteToBuffer("Passwords don't match.\r\nRetype password: ", 0);
-        d->ConnectionState = CON_GET_NEW_PASSWORD;
+        d->ConnectionState = ConState::GetNewPassword;
         return;
     }
 
     d->WriteToBuffer(echo_on_str, 0);
     AskForRace(d);
-    d->ConnectionState = CON_GET_NEW_RACE;
+    d->ConnectionState = ConState::GetNewRace;
 }
 
 static void NannyGetNewSex(std::shared_ptr<Descriptor> d, std::string argument)
@@ -422,7 +422,7 @@ static void NannyGetNewSex(std::shared_ptr<Descriptor> d, std::string argument)
     }
 
     AskForClass(d);
-    d->ConnectionState = CON_GET_NEW_CLASS;
+    d->ConnectionState = ConState::GetNewClass;
 }
 
 static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument)
@@ -472,12 +472,12 @@ static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument)
     {
         ch->Sex = SEX_NEUTRAL;
         AskForClass(d);
-        d->ConnectionState = CON_GET_NEW_CLASS;
+        d->ConnectionState = ConState::GetNewClass;
     }
     else
     {
         AskForGender(d);
-        d->ConnectionState = CON_GET_NEW_SEX;
+        d->ConnectionState = ConState::GetNewSex;
     }
 }
 
@@ -517,7 +517,7 @@ static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument
 
     d->WriteToBuffer("\r\nRolling stats....\r\n", 0);
     AskForStats(d);
-    d->ConnectionState = CON_STATS_OK;
+    d->ConnectionState = ConState::StatsOk;
 }
 
 static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument)
@@ -541,7 +541,7 @@ static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument)
 
     ch->Flags.set(Flag::Plr::Ansi);
     FinalizeCharacter(d);
-    d->ConnectionState = CON_PRESS_ENTER;
+    d->ConnectionState = ConState::PressEnter;
 }
 
 static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
@@ -581,7 +581,7 @@ static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
     }
 
     ch->Echo("\r\n&WPress [ENTER] &Y");
-    d->ConnectionState = CON_READ_MOTD;
+    d->ConnectionState = ConState::ReadMOTD;
 }
 
 static bool PutCharacterInCorrectShip(std::shared_ptr<Ship> ship, const Vo &vo)
@@ -608,7 +608,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 
     d->WriteToBuffer("\r\n&YWelcome to SWRiP 1.5&d\r\n\r\n");
     AddCharacter(ch);
-    d->ConnectionState = CON_PLAYING;
+    d->ConnectionState = ConState::Playing;
 
     if(ch->TopLevel == 0)
     {

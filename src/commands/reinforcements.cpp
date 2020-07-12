@@ -44,7 +44,7 @@ void do_reinforcements(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
             Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                 nullptr, arg, ActTarget::Room);
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_reinforcements, CharacterSubState::SUB_PAUSE);
+            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_reinforcements, CharacterSubState::Pause);
             return;
         }
 
@@ -52,16 +52,16 @@ void do_reinforcements(std::shared_ptr<Character> ch, std::string arg)
         LearnFromFailure(ch, gsn_reinforcements);
         return;
 
-    case CharacterSubState::SUB_PAUSE:
+    case CharacterSubState::Pause:
         break;
 
-    case CharacterSubState::SUB_TIMER_DO_ABORT:
-        ch->SubState = CharacterSubState::SUB_NONE;
+    case CharacterSubState::TimerDoAbort:
+        ch->SubState = CharacterSubState::None;
         ch->Echo("&RYou are interrupted before you can finish your call.\r\n");
         return;
     }
 
-    ch->SubState = CharacterSubState::SUB_NONE;
+    ch->SubState = CharacterSubState::None;
 
     ch->Echo("&GYour reinforcements are on the way.\r\n");
     credits = GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 50;

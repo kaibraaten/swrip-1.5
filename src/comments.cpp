@@ -79,7 +79,7 @@ void do_comment(std::shared_ptr<Character> ch, std::string argument)
 
     /* Put in to prevent crashing when someone issues a comment command
        from within the editor. -Narn */
-    if(ch->Desc->ConnectionState == CON_EDITING)
+    if(IsInEditor(ch))
     {
         ch->Echo("You can't use the comment command from within the editor.\r\n");
         return;

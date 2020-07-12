@@ -25,7 +25,7 @@ void do_transfer(std::shared_ptr<Character> ch, std::string argument)
     {
         for(auto d : Descriptors)
         {
-            if(d->ConnectionState == CON_PLAYING
+            if(d->ConnectionState == ConState::Playing
                && d->Char != ch
                && d->Char->InRoom
                && CanSeeCharacter(ch, d->Char))

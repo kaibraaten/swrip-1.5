@@ -43,7 +43,7 @@ void do_postguard(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
             Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                 nullptr, argument, ActTarget::Room);
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_postguard, CharacterSubState::SUB_PAUSE);
+            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_postguard, CharacterSubState::Pause);
             return;
         }
 
@@ -51,16 +51,16 @@ void do_postguard(std::shared_ptr<Character> ch, std::string argument)
         LearnFromFailure(ch, gsn_postguard);
         return;
 
-    case CharacterSubState::SUB_PAUSE:
+    case CharacterSubState::Pause:
         break;
 
-    case CharacterSubState::SUB_TIMER_DO_ABORT:
-        ch->SubState = CharacterSubState::SUB_NONE;
+    case CharacterSubState::TimerDoAbort:
+        ch->SubState = CharacterSubState::None;
         ch->Echo("&RYou are interupted before you can finish your call.\r\n");
         return;
     }
 
-    ch->SubState = CharacterSubState::SUB_NONE;
+    ch->SubState = CharacterSubState::None;
 
     ch->Echo("&GYour guard is on the way.\r\n");
 

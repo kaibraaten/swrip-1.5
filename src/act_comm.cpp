@@ -202,6 +202,23 @@ std::string DrunkSpeech(const std::string &argument, std::shared_ptr<Character> 
     return buf;
 }
 
+static int ChannelRequiresComlink(int channel)
+{
+    return channel != CHANNEL_SHOUT
+        && channel != CHANNEL_YELL
+        && channel != CHANNEL_IMMTALK
+        && channel != CHANNEL_OOC
+        && channel != CHANNEL_ASK
+        && channel != CHANNEL_NEWBIE
+        && channel != CHANNEL_AVTALK
+        && channel != CHANNEL_SHIP
+        && channel != CHANNEL_SYSTEM
+        && channel != CHANNEL_SPACE
+        && channel != CHANNEL_103
+        && channel != CHANNEL_104
+        && channel != CHANNEL_105;
+}
+
 /*
  * Generic channel function.
  */
@@ -210,10 +227,8 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
     PositionType position = 0;
     std::shared_ptr<Clan> clan;
 
-    if(channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
-       && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
-       && channel != CHANNEL_SHIP && channel != CHANNEL_SYSTEM && channel != CHANNEL_SPACE
-       && channel != CHANNEL_103 && channel != CHANNEL_104 && channel != CHANNEL_105)
+    if(ChannelRequiresComlink(channel)
+       && !HasComlink(ch))
     {
         if(!HasComlink(ch))
         {
@@ -393,34 +408,33 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
         std::shared_ptr<Character> och = d->Original ? d->Original : d->Char;
         std::shared_ptr<Character> vch = d->Char;
 
-        if(d->ConnectionState == CON_PLAYING
+        if(IsPlaying(vch)
            && vch != ch
            && !IsBitSet(och->Deaf, channel))
         {
             std::string sbuf = text;
 
-            if(channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
-               && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
-               && channel != CHANNEL_SHIP && channel != CHANNEL_SYSTEM && channel != CHANNEL_SPACE
-               && channel != CHANNEL_103 && channel != CHANNEL_104 && channel != CHANNEL_105
-               )
+            if(ChannelRequiresComlink(channel)
+               && !HasComlink(vch))
             {
-                if(!HasComlink(ch))
-                {
-                    continue;
-                }
+                continue;
             }
-
+            
             if(channel == CHANNEL_IMMTALK && !IsImmortal(och))
                 continue;
+            
             if(channel == CHANNEL_103 && och->TopLevel < 103)
                 continue;
+            
             if(channel == CHANNEL_104 && och->TopLevel < 104)
                 continue;
+            
             if(channel == CHANNEL_105 && och->TopLevel < 105)
                 continue;
+            
             if(channel == CHANNEL_WARTALK && !IsAuthed(och))
                 continue;
+            
             if(channel == CHANNEL_AVTALK && !IsAvatar(och))
                 continue;
 
@@ -551,7 +565,7 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
             continue;
         }
 
-        if(d->ConnectionState == CON_PLAYING
+        if(IsPlaying(vch)
            && !IsBitSet(och->Deaf, channel)
            && vch->TopLevel >= level)
         {
@@ -683,7 +697,7 @@ void TalkAuction(const std::string &argument)
     {
         std::shared_ptr<Character> original = d->Original ? d->Original : d->Char; /* if switched */
 
-        if((d->ConnectionState == CON_PLAYING)
+        if(IsPlaying(d->Char)
            && !IsBitSet(original->Deaf, CHANNEL_AUCTION)
            && !original->InRoom->Flags.test(Flag::Room::Silence)
            && IsAuthed(original))

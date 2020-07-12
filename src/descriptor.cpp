@@ -23,7 +23,7 @@ Descriptor::Descriptor(socket_t desc)
 {
     Socket = desc;
     ParseColors = ColorParser::Smaug2Ansi;
-    ConnectionState = CON_GET_NAME;
+    ConnectionState = ConState::GetName;
     PreviousColor = 0x07;
 }
 
@@ -51,7 +51,7 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & 
             if(fConn && ch->Switched)
             {
                 d->WriteToBuffer("Already playing.\r\nName: ", 0);
-                d->ConnectionState = CON_GET_NAME;
+                d->ConnectionState = ConState::GetName;
 
                 if(d->Char != nullptr)
                 {
@@ -81,7 +81,7 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & 
                 auto logBuf = FormatString("%s@%s reconnected.",
                                            ch->Name.c_str(), d->Remote.Hostname.c_str());
                 Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
-                d->ConnectionState = CON_PLAYING;
+                d->ConnectionState = ConState::Playing;
             }
 
             return 1;
@@ -132,11 +132,11 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
            && !StrCmp(name, dold->Original
                       ? dold->Original->Name : dold->Char->Name))
         {
-            const int cstate = dold->ConnectionState;
+            const ConState cstate = dold->ConnectionState;
             auto ch = dold->Original ? dold->Original : dold->Char;
 
             if(ch->Name.empty()
-               || (cstate != CON_PLAYING && cstate != CON_EDITING))
+               || (cstate != ConState::Playing && cstate != ConState::Editing))
             {
                 d->WriteToBuffer("Already connected - try again.\r\n", 0);
                 auto logBuf = FormatString("%s already connected.", ch->Name.c_str());
@@ -191,7 +191,7 @@ bool Descriptor::FlushBuffer(bool fPrompt)
     /*
      * Bust a prompt.
      */
-    if(fPrompt && !mud_down && ConnectionState == CON_PLAYING)
+    if(fPrompt && !mud_down && ConnectionState == ConState::Playing)
     {
         ch = Original ? Original : Char;
 

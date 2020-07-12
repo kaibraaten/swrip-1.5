@@ -52,7 +52,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
                 timeToRepair = 5;
                 
             AddTimerToCharacter(ch, TIMER_CMD_FUN, timeToRepair,
-                                do_repairship, CharacterSubState::SUB_PAUSE);
+                                do_repairship, CharacterSubState::Pause);
 
             ch->dest_buf = argument;
             return;
@@ -62,7 +62,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
         LearnFromFailure(ch, gsn_shipmaintenance);
         return;
 
-    case CharacterSubState::SUB_PAUSE:
+    case CharacterSubState::Pause:
         if(ch->dest_buf.empty())
             return;
 
@@ -70,9 +70,9 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
         ch->dest_buf.erase();
         break;
 
-    case CharacterSubState::SUB_TIMER_DO_ABORT:
+    case CharacterSubState::TimerDoAbort:
         ch->dest_buf.erase();
-        ch->SubState = CharacterSubState::SUB_NONE;
+        ch->SubState = CharacterSubState::None;
 
         if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
             return;
@@ -81,7 +81,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    ch->SubState = CharacterSubState::SUB_NONE;
+    ch->SubState = CharacterSubState::None;
 
     if((ship = GetShipFromEngine(ch->InRoom->Vnum)) == NULL)
     {

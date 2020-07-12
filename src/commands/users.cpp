@@ -26,13 +26,13 @@ void do_users(std::shared_ptr<Character> ch, std::string arg)
             {
                 count++;
                 ch->Echo(" %3d| %2d|%4d|%6d| %s@%s ",
-                    d->Socket,
-                    d->ConnectionState,
-                    d->Idle / 4,
-                    d->Remote.Port,
-                    d->Original ? d->Original->Name.c_str() :
-                    d->Char ? d->Char->Name.c_str() : "(none)",
-                    d->Remote.HostIP.c_str());
+                         d->Socket,
+                         (int)d->ConnectionState,
+                         d->Idle / 4,
+                         d->Remote.Port,
+                         d->Original ? d->Original->Name.c_str() :
+                         d->Char ? d->Char->Name.c_str() : "(none)",
+                         d->Remote.HostIP.c_str());
 
                 if (ch->TopLevel >= LEVEL_GREATER
                     && (!d->Char || d->Char->TopLevel <= LEVEL_GREATER))
@@ -44,20 +44,20 @@ void do_users(std::shared_ptr<Character> ch, std::string arg)
         else
         {
             if ((GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
-                || (d->Char && CanSeeCharacter(ch, d->Char)))
+                 || (d->Char && CanSeeCharacter(ch, d->Char)))
                 && (!StringPrefix(arg, d->Remote.Hostname)
                     || (d->Char && !StringPrefix(arg, d->Char->Name))))
             {
                 count++;
                 ch->Echo(" %3d| %2d|%4d|%6d| %-12s@%-16s ",
-                    d->Socket,
-                    d->ConnectionState,
-                    d->Idle / 4,
-                    d->Remote.Port,
-                    d->Original ? d->Original->Name.c_str() :
-                    d->Char ? d->Char->Name.c_str() : "(none)",
-                    d->Remote.Hostname.c_str()
-                );
+                         d->Socket,
+                         (int)d->ConnectionState,
+                         d->Idle / 4,
+                         d->Remote.Port,
+                         d->Original ? d->Original->Name.c_str() :
+                         d->Char ? d->Char->Name.c_str() : "(none)",
+                         d->Remote.Hostname.c_str()
+                    );
 
                 ch->Echo("\r\n");
             }

@@ -286,6 +286,6 @@ void do_shove(std::shared_ptr<Character> ch, std::string argument)
     if(ch->InRoom->Flags.test(Flag::Room::Safe)
        && GetTimer(ch, TIMER_SHOVEDRAG) <= 0)
     {
-        AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, CharacterSubState::SUB_PAUSE);
+        AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, CharacterSubState::Pause);
     }
 }

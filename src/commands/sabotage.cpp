@@ -40,7 +40,7 @@ void do_sabotage(std::shared_ptr<Character> ch, std::string arg)
             Act(AT_PLAIN, "$n begins working on the ship's $T.", ch,
                 nullptr, arg, ActTarget::Room);
 
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 15, do_sabotage, CharacterSubState::SUB_PAUSE);
+            AddTimerToCharacter(ch, TIMER_CMD_FUN, 15, do_sabotage, CharacterSubState::Pause);
             ch->dest_buf = arg;
             return;
         }
@@ -49,7 +49,7 @@ void do_sabotage(std::shared_ptr<Character> ch, std::string arg)
         LearnFromFailure(ch, gsn_sabotage);
         return;
 
-    case CharacterSubState::SUB_PAUSE:
+    case CharacterSubState::Pause:
         if(ch->dest_buf.empty())
             return;
 
@@ -57,9 +57,9 @@ void do_sabotage(std::shared_ptr<Character> ch, std::string arg)
         ch->dest_buf.erase();
         break;
 
-    case CharacterSubState::SUB_TIMER_DO_ABORT:
+    case CharacterSubState::TimerDoAbort:
         ch->dest_buf.erase();
-        ch->SubState = CharacterSubState::SUB_NONE;
+        ch->SubState = CharacterSubState::None;
 
         if((ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL)
             return;
@@ -68,7 +68,7 @@ void do_sabotage(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    ch->SubState = CharacterSubState::SUB_NONE;
+    ch->SubState = CharacterSubState::None;
 
     if((ship = GetShipFromEngine(ch->InRoom->Vnum)) == NULL)
     {

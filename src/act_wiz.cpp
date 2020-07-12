@@ -46,7 +46,7 @@ void EchoToAll(short AT_COLOR, const std::string &argument, short tar)
     {
         /* Added showing echoes to players who are editing, so they won't
            miss out on important info like upcoming reboots. --Narn */
-        if(d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING)
+        if(IsPlaying(d->Char) || IsInEditor(d->Char))
         {
             /* This one is kinda useless except for switched.. */
             if((tar == ECHOTAR_PC && IsNpc(d->Char))

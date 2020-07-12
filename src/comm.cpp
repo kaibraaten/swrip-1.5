@@ -389,8 +389,8 @@ static void HandleSocketInput()
             FD_CLR(d->Socket, &out_set);
 
             if(d->Char
-               && (d->ConnectionState == CON_PLAYING
-                   || d->ConnectionState == CON_EDITING))
+               && (IsPlaying(d->Char)
+                   || IsInEditor(d->Char)))
             {
                 PlayerCharacters->Save(d->Char);
             }
@@ -413,7 +413,7 @@ static void HandleSocketInput()
         }
         else if((d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
                 && ((!d->Char && d->Idle > 360)              /* 2 mins */
-                    || (d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
+                    || (d->ConnectionState != ConState::Playing && d->Idle > 1200) /* 5 mins */
                     || d->Idle > 28800))                             /* 2 hrs  */
         {
             if(d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
@@ -443,8 +443,8 @@ static void HandleSocketInput()
                     FD_CLR(d->Socket, &out_set);
 
                     if(d->Char
-                       && (d->ConnectionState == CON_PLAYING
-                           || d->ConnectionState == CON_EDITING))
+                       && (IsPlaying(d->Char)
+                           || IsInEditor(d->Char)))
                     {
                         PlayerCharacters->Save(d->Char);
                     }
@@ -482,12 +482,12 @@ static void HandleSocketInput()
                     Nanny(d, cmdline);
                     break;
 
-                case CON_PLAYING:
+                case ConState::Playing:
                     d->Char->CmdRecurse = 0;
                     Interpret(d->Char, cmdline);
                     break;
 
-                case CON_EDITING:
+                case ConState::Editing:
                     EditBuffer(d->Char, cmdline);
                     break;
                 }
@@ -511,8 +511,8 @@ static void HandleSocketOutput()
             if(!d->FlushBuffer(true))
             {
                 if(d->Char
-                   && (d->ConnectionState == CON_PLAYING
-                       || d->ConnectionState == CON_EDITING))
+                   && (IsPlaying(d->Char)
+                       || IsInEditor(d->Char)))
                 {
                     PlayerCharacters->Save(d->Char);
                 }
@@ -749,8 +749,7 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
         Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
         PlayerCharacters->Remove(dclose->Char);
 
-        if(dclose->ConnectionState == CON_PLAYING
-           || dclose->ConnectionState == CON_EDITING)
+        if(IsPlaying(ch) || IsInEditor(ch))
         {
             Act(AT_ACTION, "$n has lost $s link.", ch, nullptr, nullptr, ActTarget::Room);
             ch->Desc = nullptr;
@@ -810,7 +809,7 @@ static void StopIdling(std::shared_ptr<Character> ch)
 {
     if(!ch
        || !ch->Desc
-       || ch->Desc->ConnectionState != CON_PLAYING
+       || !IsPlaying(ch)
        || !ch->WasInRoom
        || ch->InRoom != GetRoom(ROOM_VNUM_LIMBO))
         return;
@@ -879,7 +878,7 @@ void DisplayPrompt(Descriptor *d)
     assert(ch != nullptr);
 
     if(!IsNpc(ch)
-       && ch->SubState != CharacterSubState::SUB_NONE
+       && ch->SubState != CharacterSubState::None
        && !ch->PCData->SubPrompt.empty())
     {
         prompt = ch->PCData->SubPrompt.c_str();

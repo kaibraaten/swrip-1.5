@@ -169,7 +169,7 @@ void FileSystemLogger::LogStringPlus(const std::string &str, short log_type, sho
                 continue;
             }
 
-            if(d->ConnectionState == CON_PLAYING
+            if(d->ConnectionState == ConState::Playing
                && !IsBitSet(och->Deaf, CHANNEL_LOG)
                && vch->TopLevel >= level)
             {

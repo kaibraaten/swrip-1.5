@@ -167,7 +167,7 @@ class Timer
 {
 public:
     CmdFun *DoFun = nullptr;
-    CharacterSubState SubState = CharacterSubState::SUB_NONE;
+    CharacterSubState SubState = CharacterSubState::None;
     short   Type = 0;
     short   Count = 0;
 };

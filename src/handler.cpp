@@ -772,7 +772,7 @@ void CharacterToRoom(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoomI
     if(!IsNpc(ch)
        && ch->InRoom->Flags.test(Flag::Room::Safe)
        && GetTimer(ch, TIMER_SHOVEDRAG) <= 0)
-        AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, CharacterSubState::SUB_NONE);  /*-30 Seconds-*/
+        AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, CharacterSubState::None);
 
       /*
        * Delayed Teleport rooms                                     -Thoric

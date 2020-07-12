@@ -30,7 +30,8 @@ void do_where(std::shared_ptr<Character> ch, std::string arg)
 
         for(auto d : Descriptors)
         {
-            if((d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING)
+            if((d->ConnectionState == ConState::Playing
+                || d->ConnectionState == ConState::Editing)
                && (victim = d->Char) != NULL
                && !IsNpc(victim)
                && victim->InRoom

@@ -140,11 +140,11 @@ void do_train(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("&GYou begin lessons in maners and ettiquite.\r\n");
         }
 
-        AddTimerToCharacter(ch, TIMER_CMD_FUN, 10, do_train, CharacterSubState::SUB_PAUSE);
+        AddTimerToCharacter(ch, TIMER_CMD_FUN, 10, do_train, CharacterSubState::Pause);
         ch->dest_buf = arg;
         return;
 
-    case CharacterSubState::SUB_PAUSE:
+    case CharacterSubState::Pause:
         if(ch->dest_buf.empty())
             return;
 
@@ -152,14 +152,14 @@ void do_train(std::shared_ptr<Character> ch, std::string arg)
         ch->dest_buf.erase();
         break;
 
-    case CharacterSubState::SUB_TIMER_DO_ABORT:
+    case CharacterSubState::TimerDoAbort:
         ch->dest_buf.erase();
-        ch->SubState = CharacterSubState::SUB_NONE;
+        ch->SubState = CharacterSubState::None;
         ch->Echo("&RYou fail to complete your training.\r\n");
         return;
     }
 
-    ch->SubState = CharacterSubState::SUB_NONE;
+    ch->SubState = CharacterSubState::None;
 
     if(NumberBits(2) == 0)
     {

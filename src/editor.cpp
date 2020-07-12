@@ -352,7 +352,7 @@ void StartEditing(std::shared_ptr<Character> ch, const std::string &old_text,
 
     ch->PCData->TextEditor = str_to_editdata(old_text, MAX_STRING_LENGTH * 4);
     ch->PCData->TextEditor->desc = "Unknown buffer";
-    ch->Desc->ConnectionState = CON_EDITING;
+    ch->Desc->ConnectionState = ConState::Editing;
     ch->PCData->TextEditor->OnSave = onSave;
     ch->Echo("&G> &d");
 }
@@ -377,10 +377,10 @@ static std::string CopyEditBuffer(std::shared_ptr<Character> ch)
 void StopEditing(std::shared_ptr<Character> ch)
 {
     Editor::Discard(ch->PCData->TextEditor);
-    ch->PCData->TextEditor = NULL;
+    ch->PCData->TextEditor = nullptr;
     ch->Echo("Done.\r\n");
-    ch->SubState = CharacterSubState::SUB_NONE;
-    ch->Desc->ConnectionState = CON_PLAYING;
+    ch->SubState = CharacterSubState::None;
+    ch->Desc->ConnectionState = ConState::Playing;
 }
 
 void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
@@ -391,24 +391,24 @@ void EditBuffer(std::shared_ptr<Character> ch, std::string argument)
     int linelen = 0;
     bool cont_line = false;
 
-    if(!d)
+    if(d == nullptr)
     {
         return;
     }
 
-    if(d->ConnectionState != CON_EDITING)
+    if(!IsInEditor(ch))
     {
         ch->Echo("You can't do that!\r\n");
         Log->Bug("%s: d->ConnectionState != CON_EDITING", __FUNCTION__);
         return;
     }
 
-    if(!ch->PCData->TextEditor)
+    if(ch->PCData->TextEditor == nullptr)
     {
         ch->Echo("You can't do that!\r\n");
         Log->Bug("%s: null editor", __FUNCTION__);
-        d->ConnectionState = CON_PLAYING;
-        ch->SubState = CharacterSubState::SUB_NONE;
+        d->ConnectionState = ConState::Playing;
+        ch->SubState = CharacterSubState::None;
         return;
     }
 
@@ -983,7 +983,7 @@ void Editor::Abort(std::shared_ptr<Character> ch) const
 
 void Editor::Save(std::shared_ptr<Character> ch) const
 {
-    ch->Desc->ConnectionState = CON_PLAYING;
+    ch->Desc->ConnectionState = ConState::Playing;
     OnSave(CopyEditBuffer(ch));
     StopEditing(ch);
 }

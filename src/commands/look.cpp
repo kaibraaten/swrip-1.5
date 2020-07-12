@@ -297,7 +297,7 @@ static void show_char_to_char_0(std::shared_ptr<Character> victim, std::shared_p
        && victim->Flags.test(Flag::Mob::Prototype))
         strcat(buf, "(PROTO) ");
 
-    if(victim->Desc && victim->Desc->ConnectionState == CON_EDITING)
+    if(victim->Desc && IsInEditor(victim))
         strcat(buf, "(Writing) ");
 
     SetCharacterColor(AT_PERSON, ch);

@@ -137,21 +137,16 @@ static void StartGame()
 {
     for(auto d : Descriptors)
     {
-        if(!d->ConnectionState)
+        auto ch = d->Char;
+        
+        if(ch != nullptr && IsPlaying(ch))
         {
-            auto i = d->Char;
-
-            if(i == NULL)
+            if(IsInArena(ch))
             {
-                continue;
-            }
-
-            if(IsInArena(i))
-            {
-                i->Echo("\r\nThe floor falls out from below, dropping you in the arena.\r\n");
-                CharacterFromRoom(i);
-                CharacterToRoom(i, GetRoom(ARENA_START));
-                do_look(i, "auto");
+                ch->Echo("\r\nThe floor falls out from below, dropping you in the arena.\r\n");
+                CharacterFromRoom(ch);
+                CharacterToRoom(ch, GetRoom(ARENA_START));
+                do_look(ch, "auto");
             }
         }
     }
@@ -293,15 +288,10 @@ static void DoEndGame()
 {
     for(auto d : Descriptors)
     {
-        if(!d->ConnectionState)
+        auto ch = d->Char;
+        
+        if(ch != nullptr && IsPlaying(ch))
         {
-            auto ch = d->Char;
-
-            if(ch == NULL)
-            {
-                continue;
-            }
-
             if(IsInArena(ch))
             {
                 ch->HitPoints.Current = ch->HitPoints.Max;
@@ -406,7 +396,7 @@ static void FindBetWinners(std::shared_ptr<Character> winner)
 {
     for(auto d : Descriptors)
     {
-        if(!d->ConnectionState)
+        if(d->Char != nullptr && IsPlaying(d->Char))
         {
             auto wch = d->Original ? d->Original : d->Char;
 

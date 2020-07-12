@@ -110,18 +110,19 @@ void do_craftingengine(std::shared_ptr<Character> ch, std::string argument)
     auto session = ch->PCData->CraftingSession;
 
     assert(session != nullptr);
-    assert(ch->SubState == CharacterSubState::SUB_PAUSE || ch->SubState == CharacterSubState::SUB_TIMER_DO_ABORT);
+    assert(ch->SubState == CharacterSubState::Pause
+           || ch->SubState == CharacterSubState::TimerDoAbort);
 
     switch(ch->SubState)
     {
     default:
         break;
 
-    case CharacterSubState::SUB_PAUSE:
+    case CharacterSubState::Pause:
         AfterDelay(session);
         break;
 
-    case CharacterSubState::SUB_TIMER_DO_ABORT:
+    case CharacterSubState::TimerDoAbort:
         AbortSession(session);
         break;
     }
@@ -137,7 +138,7 @@ static void AfterDelay(std::shared_ptr<CraftingSession> session)
     auto proto = recipe->Prototype;
     std::string itemType = GetItemTypeNameExtended(proto->ItemType, proto->Value[OVAL_WEAPON_TYPE]);
 
-    ch->SubState = CharacterSubState::SUB_NONE;
+    ch->SubState = CharacterSubState::None;
 
     if(GetRandomPercent() > the_chance * 2 || !hasMaterials)
     {
@@ -210,7 +211,7 @@ static void CheckRequirementsHandler(std::shared_ptr<CheckRequirementsEventArgs>
 static void AbortSession(std::shared_ptr<CraftingSession> session)
 {
     auto ch = GetEngineer(session);
-    ch->SubState = CharacterSubState::SUB_NONE;
+    ch->SubState = CharacterSubState::None;
     ch->Echo("&RYou are interrupted and fail to finish your work.&d\r\n");
 
     auto abortEventArgs = std::make_shared<AbortCraftingEventArgs>();
@@ -341,7 +342,7 @@ void StartCrafting(std::shared_ptr<CraftingSession> session)
 
     Act(AT_PLAIN, "$n takes $s tools and some material and begins to work.",
         ch, nullptr, nullptr, ActTarget::Room);
-    AddTimerToCharacter(ch, TIMER_CMD_FUN, session->pImpl->Recipe->Duration, do_craftingengine, CharacterSubState::SUB_PAUSE);
+    AddTimerToCharacter(ch, TIMER_CMD_FUN, session->pImpl->Recipe->Duration, do_craftingengine, CharacterSubState::Pause);
 }
 
 static bool CheckMaterials(std::shared_ptr<CraftingSession> session, bool extract)

@@ -32,7 +32,7 @@ public:
     } Remote;
 
     socket_t Socket = INVALID_SOCKET;
-    short ConnectionState = 0;
+    ConState ConnectionState = ConState::Playing;
     short Idle = 0;
     bool fCommand = false;
     char InComm[MAX_INPUT_LENGTH] = { '\0' };

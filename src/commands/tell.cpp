@@ -127,7 +127,7 @@ void do_tell(std::shared_ptr<Character> ch, std::string argument)
     }
 
     if(victim->Desc
-       && victim->Desc->ConnectionState == CON_EDITING
+       && IsInEditor(victim)
        && GetTrustLevel(ch) < LEVEL_GREATER)
     {
         Act(AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.",

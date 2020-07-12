@@ -225,7 +225,8 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
         std::string race;
         char force_char = ' ';
 
-        if ((d->ConnectionState != CON_PLAYING && d->ConnectionState != CON_EDITING)
+        if ((d->ConnectionState != ConState::Playing
+             && d->ConnectionState != ConState::Editing)
             || (!CanSeeCharacter(ch, d->Char) && IsImmortal(d->Char))
             || d->Original)
         {

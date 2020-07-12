@@ -53,13 +53,13 @@ void do_mpapplyb(std::shared_ptr<Character> ch, std::string argument)
                               RaceTable[victim->Race].Name);
         Log->Info("%s", logBuf.c_str());
         ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
-        AddTimerToCharacter(victim, TIMER_APPLIED, 10, NULL, CharacterSubState::SUB_NONE);
+        AddTimerToCharacter(victim, TIMER_APPLIED, 10, nullptr, CharacterSubState::None);
         victim->PCData->AuthState = 1;
         break;
 
     case 2:
         victim->Echo("Your name has been deemed unsuitable by the gods. Please choose a more apropriate name with the 'name' command.\r\n");
-        AddTimerToCharacter(victim, TIMER_APPLIED, 10, NULL, CharacterSubState::SUB_NONE);
+        AddTimerToCharacter(victim, TIMER_APPLIED, 10, nullptr, CharacterSubState::None);
         break;
 
     case 3:
