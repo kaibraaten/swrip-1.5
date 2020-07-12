@@ -238,11 +238,16 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
             {
                 if(tmp != ch
                    && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
-                   && t->Count >= 1 && t->DoFun == do_cast
+                   && t->Count >= 1
                    && tmp->tempnum == sn && !tmp->dest_buf.empty()
                    && StrCmp(tmp->dest_buf, buf) == 0)
                 {
-                    ++cnt;
+                    const auto ptr = t->Callback.target<void(*)(std::shared_ptr<Character>, std::string)>();
+
+                    if(ptr && *ptr == do_cast)
+                    {
+                        ++cnt;
+                    }
                 }
             }
 
@@ -252,21 +257,26 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
                 {
                     if(tmp != ch
                        && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
-                       && t->Count >= 1 && t->DoFun == do_cast
+                       && t->Count >= 1
                        && tmp->tempnum == sn && !tmp->dest_buf.empty()
                        && StrCmp(tmp->dest_buf, buf) == 0)
                     {
-                        ExtractTimer(tmp, t);
-                        Act(AT_MAGIC, "Channeling your energy into $n, you help direct the force",
-                            ch, NULL, tmp, ActTarget::Vict);
-                        Act(AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, ActTarget::Char);
-                        Act(AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, ActTarget::NotVict);
-                        LearnFromSuccess(tmp, sn);
+                        const auto ptr = t->Callback.target<void(*)(std::shared_ptr<Character>, std::string)>();
 
-                        tmp->Mana.Current -= mana;
-                        tmp->SubState = CharacterSubState::None;
-                        tmp->tempnum = -1;
-                        tmp->dest_buf.erase();
+                        if(ptr && *ptr == do_cast)
+                        {
+                            ExtractTimer(tmp, t);
+                            Act(AT_MAGIC, "Channeling your energy into $n, you help direct the force",
+                                ch, NULL, tmp, ActTarget::Vict);
+                            Act(AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, ActTarget::Char);
+                            Act(AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, ActTarget::NotVict);
+                            LearnFromSuccess(tmp, sn);
+
+                            tmp->Mana.Current -= mana;
+                            tmp->SubState = CharacterSubState::None;
+                            tmp->tempnum = -1;
+                            tmp->dest_buf.erase();
+                        }
                     }
                 }
 

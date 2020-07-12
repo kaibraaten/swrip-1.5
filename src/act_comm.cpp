@@ -408,7 +408,7 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
         std::shared_ptr<Character> och = d->Original ? d->Original : d->Char;
         std::shared_ptr<Character> vch = d->Char;
 
-        if(IsPlaying(vch)
+        if(IsPlaying(d->Char)
            && vch != ch
            && !IsBitSet(och->Deaf, channel))
         {
@@ -565,7 +565,7 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
             continue;
         }
 
-        if(IsPlaying(vch)
+        if(IsPlaying(d->Char)
            && !IsBitSet(och->Deaf, channel)
            && vch->TopLevel >= level)
         {

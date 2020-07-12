@@ -559,7 +559,10 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
 
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
 
-    EXPECT_EQ(timer->DoFun, &do_craftingengine);
+    const auto ptr = timer->Callback.target<void(*)(std::shared_ptr<Character>, std::string)>();
+
+    EXPECT_NE(ptr, nullptr);
+    EXPECT_EQ(*ptr, do_craftingengine);
 }
 #endif
 
@@ -584,7 +587,7 @@ TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
     _engineer->SubState = timer->SubState;
 
-    timer->DoFun(_engineer, "");
+    timer->Callback(_engineer, "");
 
     EXPECT_FALSE(IsCrafting(_engineer));
 }
@@ -608,7 +611,7 @@ TEST_F(CraftTests, AfterCallback_CharacterReceivedObject)
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
     _engineer->SubState = timer->SubState;
 
-    timer->DoFun(_engineer, "");
+    timer->Callback(_engineer, "");
 
     EXPECT_TRUE(HasObjectInstanceOf(_engineer, _resultantObject));
 }
@@ -625,7 +628,7 @@ TEST_F(CraftTests, AfterCallback_SetObjectStatsEventHandler_IsCalledExactlyOnce)
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
     _engineer->SubState = timer->SubState;
 
-    timer->DoFun(_engineer, "");
+    timer->Callback(_engineer, "");
 
     EXPECT_EQ(callCounter, 1);
 }
@@ -643,7 +646,7 @@ TEST_F(CraftTests, AfterCallback_FinishedCraftingEventHandler_IsCalledExactlyOnc
     auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
     _engineer->SubState = timer->SubState;
 
-    timer->DoFun(_engineer, "");
+    timer->Callback(_engineer, "");
 
     EXPECT_EQ(callCounter, 1);
 }

@@ -201,7 +201,7 @@ static void ExpireCommandCallbackTimers(std::shared_ptr<Character> ch)
                 CharacterSubState tempsub = ch->SubState;
 
                 ch->SubState = timer->SubState;
-                timer->DoFun(ch, "");
+                timer->Callback(ch, "");
 
                 if(CharacterDiedRecently(ch))
                 {

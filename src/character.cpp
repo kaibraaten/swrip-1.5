@@ -1752,5 +1752,16 @@ bool IsInEditor(std::shared_ptr<Character> ch)
 
 bool IsPlaying(std::shared_ptr<Character> ch)
 {
-    return IsNpc(ch) ? true : ch->Desc->ConnectionState == ConState::Playing;
+    if(ch->Desc == nullptr)
+    {
+        return false;
+    }
+    else if(IsNpc(ch))
+    {
+        return true;
+    }
+    else
+    {
+        return ch->Desc->ConnectionState == ConState::Playing;
+    }
 }

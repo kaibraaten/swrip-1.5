@@ -2372,7 +2372,8 @@ void CleanCharacterQueue()
  * Add a timer to ch                                            -Thoric
  * Support for "call back" time delayed commands
  */
-void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count, CmdFun *fun,
+void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count,
+                         std::function<void(std::shared_ptr<Character>, std::string)> callback,
                          CharacterSubState substate)
 {
     auto timer = GetTimerPointer(ch, type);
@@ -2385,7 +2386,7 @@ void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count,
 
     timer->Count = count;
     timer->Type = type;
-    timer->DoFun = fun;
+    timer->Callback = callback;
     timer->SubState = substate;
 }
 
