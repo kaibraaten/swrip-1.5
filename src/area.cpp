@@ -413,7 +413,7 @@ void AssignAreaTo(std::shared_ptr<Character> ch)
         if(tarea == nullptr)
         {
             auto logBuf = FormatString("Creating area entry for %s", ch->Name.c_str());
-            Log->LogStringPlus(logBuf, LOG_NORMAL, ch->TopLevel);
+            Log->LogStringPlus(logBuf, LogType::Normal, ch->TopLevel);
             tarea = std::make_shared<Area>();
             CopyVnumRanges(ch->PCData->Build.VnumRanges, tarea->VnumRanges);
             tarea->Flags.set(Flag::Area::Prototype);
@@ -425,7 +425,7 @@ void AssignAreaTo(std::shared_ptr<Character> ch)
         else
         {
             auto logBuf = FormatString("Updating area entry for %s", ch->Name.c_str());
-            Log->LogStringPlus(logBuf, LOG_NORMAL, ch->TopLevel);
+            Log->LogStringPlus(logBuf, LogType::Normal, ch->TopLevel);
         }
 
         ch->PCData->Build.Area = tarea;

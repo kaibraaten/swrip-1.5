@@ -161,16 +161,16 @@ constexpr auto MAX_OVAL = 6;
 /*
  * Command logging types.
  */
-enum
+enum class LogType
 {
-    LOG_NORMAL,
-    LOG_ALWAYS,
-    LOG_NEVER,
-    LOG_BUILD,
-    LOG_HIGH,
-    LOG_COMM,
-    LOG_ALL,
-    MAX_LOG
+    Normal,
+    Always,
+    Never,
+    Build,
+    High,
+    Comm,
+    All,
+    Max
 };
 
 /*

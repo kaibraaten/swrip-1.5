@@ -9,7 +9,6 @@
 #include <cstring>
 #include <cctype>
 #include "utility.hpp"
-#include "logger.hpp"
 
 namespace fs = std::filesystem;
 
@@ -27,7 +26,7 @@ namespace fs = std::filesystem;
  /*
   * Read a letter from a file.
   */
-char ReadChar(FILE *fp, Logger *log, bool fBootDb)
+char ReadChar(FILE *fp, bool fBootDb)
 {
     char c = '\0';
 
@@ -35,7 +34,7 @@ char ReadChar(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("ReadChar: EOF encountered on read.\r\n");
+            std::cerr << "ReadChar: EOF encountered on read." << std::endl;
 
             if(fBootDb)
                 exit(EXIT_FAILURE);
@@ -52,7 +51,7 @@ char ReadChar(FILE *fp, Logger *log, bool fBootDb)
 /*
  * Read a float number from a file. Turn the result into a float value.
  */
-float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
+float ReadFloat(FILE *fp, bool fBootDb)
 {
     char c = '\0';
 
@@ -60,7 +59,7 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("%s: EOF encountered on read.", __FUNCTION__);
+            std::cerr << __FUNCTION__ << ": EOF encountered on read." << std::endl;
 
             if(fBootDb)
             {
@@ -87,7 +86,7 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
 
     if(!isdigit((int)c))
     {
-        log->Bug("%s: bad format. (%c)", __FUNCTION__, c);
+        std::cerr << __FUNCTION__ << ": bad format. (" << c << ")" << std::endl;
 
         if(fBootDb)
             exit(EXIT_FAILURE);
@@ -110,7 +109,7 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
 
             if(feof(fp))
             {
-                log->Bug("%s: EOF encountered on read.", __FUNCTION__);
+                std::cerr << __FUNCTION__ << ": EOF encountered on read." << std::endl;
 
                 if(fBootDb)
                 {
@@ -145,13 +144,13 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
 
     if(c == '|')
     {
-        number += ReadFloat(fp, log, fBootDb);
+        number += ReadFloat(fp, fBootDb);
     }
     else if(c != ' ')
     {
         if(ungetc(c, fp) == EOF)
         {
-            log->Bug("ReadFloat: EOF encountered on ungetc.\r\n");
+            std::cerr << "ReadFloat: EOF encountered on ungetc." << std::endl;
 
             if(fBootDb)
             {
@@ -166,7 +165,7 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
 /*
  * Read a number from a file.
  */
-int ReadInt(FILE *fp, Logger *log, bool fBootDb)
+int ReadInt(FILE *fp, bool fBootDb)
 {
     char c = 0;
 
@@ -174,7 +173,7 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("ReadInt: EOF encountered on read.\r\n");
+            std::cerr << "ReadInt: EOF encountered on read." << std::endl;
 
             if(fBootDb)
             {
@@ -200,7 +199,7 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
 
     if(!isdigit((int)c))
     {
-        log->Bug("ReadInt: bad format. (%c)", c);
+        std::cerr << __FUNCTION__ << ": bad format. (" << c << ")" << std::endl;
 
         if(fBootDb)
         {
@@ -216,7 +215,7 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("ReadInt: EOF encountered on read.\r\n");
+            std::cerr << "ReadInt: EOF encountered on read." << std::endl;
 
             if(fBootDb)
             {
@@ -237,13 +236,13 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
 
     if(c == '|')
     {
-        number += ReadInt(fp, log, fBootDb);
+        number += ReadInt(fp, fBootDb);
     }
     else if(c != ' ')
     {
         if(ungetc(c, fp) == EOF)
         {
-            log->Bug("ReadInt: EOF encountered on ungetc.\r\n");
+            std::cerr << "ReadInt: EOF encountered on ungetc." << std::endl;
 
             if(fBootDb)
             {
@@ -258,7 +257,7 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
 /*
  * Read a string from file fp
  */
-std::string ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
+std::string ReadStringToTilde(FILE *fp, bool fBootDb)
 {
     char c = 0;
 
@@ -270,7 +269,7 @@ std::string ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("ReadStringToTilde: EOF encountered on read.\r\n");
+            std::cerr << "ReadStringToTilde: EOF encountered on read." << std::endl;
 
             if(fBootDb)
             {
@@ -296,7 +295,7 @@ std::string ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
     {
         if(ln >= (MAX_STRING_LENGTH - 1))
         {
-            log->Bug("ReadStringToTilde: string too long");
+            std::cerr << "ReadStringToTilde: string too long." << std::endl;
             *plast = '\0';
             return buf;
         }
@@ -304,7 +303,7 @@ std::string ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
         switch((int)(*plast = fgetc(fp)))
         {
         case EOF:
-            log->Bug("ReadStringToTilde: EOF");
+            std::cerr << "ReadStringToTilde: EOF." << std::endl;
 
             if(fBootDb)
             {
@@ -339,7 +338,7 @@ std::string ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
 /*
  * Read to end of line (for comments).
  */
-void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb)
+void ReadToEndOfLine(FILE *fp, bool fBootDb)
 {
     char c = 0;
 
@@ -347,7 +346,7 @@ void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("ReadToEndOfLine: EOF encountered on read.\r\n");
+            std::cerr << "ReadToEndOfLine: EOF encountered on read." << std::endl;
 
             if(fBootDb)
             {
@@ -366,7 +365,7 @@ void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb)
 
     if(ungetc(c, fp) == EOF)
     {
-        log->Bug("ReadToEndOfLine: EOF encountered on ungetc.\r\n");
+        std::cerr << "ReadToEndOfLine: EOF encountered on ungetc." << std::endl;
 
         if(fBootDb)
         {
@@ -378,7 +377,7 @@ void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb)
 /*
  * Read to end of line into static buffer                       -Thoric
  */
-std::string ReadLine(FILE *fp, Logger *log, bool fBootDb)
+std::string ReadLine(FILE *fp, bool fBootDb)
 {
     
     char c = 0;
@@ -391,7 +390,7 @@ std::string ReadLine(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("ReadLine: EOF encountered on read.\r\n");
+            std::cerr << "ReadLine: EOF encountered on read." << std::endl;
 
             if(fBootDb)
             {
@@ -405,7 +404,7 @@ std::string ReadLine(FILE *fp, Logger *log, bool fBootDb)
 
     if(ungetc(c, fp) == EOF)
     {
-        log->Bug("ReadLine: EOF encountered on ungetc.\r\n");
+        std::cerr << "ReadLine: EOF encountered on ungetc." << std::endl;
 
         if(fBootDb)
         {
@@ -421,7 +420,7 @@ std::string ReadLine(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("ReadLine: EOF encountered on read.\r\n");
+            std::cerr << "ReadLine: EOF encountered on read." << std::endl;
 
             if(fBootDb)
             {
@@ -438,7 +437,7 @@ std::string ReadLine(FILE *fp, Logger *log, bool fBootDb)
 
         if(ln >= (MAX_STRING_LENGTH - 1))
         {
-            log->Bug("ReadLine: line too long");
+            std::cerr << "ReadLine: line too long." << std::endl;
             break;
         }
     } while(c != '\n' && c != '\r');
@@ -450,7 +449,7 @@ std::string ReadLine(FILE *fp, Logger *log, bool fBootDb)
 
     if(ungetc(c, fp) == EOF)
     {
-        log->Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
+        std::cerr << __FUNCTION__ << ": EOF encountered on ungetc." << std::endl;
 
         if(fBootDb)
         {
@@ -465,7 +464,7 @@ std::string ReadLine(FILE *fp, Logger *log, bool fBootDb)
 /*
  * Read one word (into static buffer).
  */
-std::string ReadWord(FILE *fp, Logger *log, bool fBootDb)
+std::string ReadWord(FILE *fp, bool fBootDb)
 {
     char cEnd = '\0';
 
@@ -473,7 +472,7 @@ std::string ReadWord(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("ReadWord: EOF encountered on read.\r\n");
+            std::cerr << "ReadWord: EOF encountered on read." << std::endl;
 
             if(fBootDb)
             {
@@ -503,7 +502,7 @@ std::string ReadWord(FILE *fp, Logger *log, bool fBootDb)
     {
         if(feof(fp))
         {
-            log->Bug("ReadWord: EOF encountered on read.\r\n");
+            std::cerr << "ReadWord: EOF encountered on read." << std::endl;
 
             if(fBootDb)
             {
@@ -522,7 +521,7 @@ std::string ReadWord(FILE *fp, Logger *log, bool fBootDb)
             {
                 if(ungetc(*pword, fp) == EOF)
                 {
-                    log->Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
+                    std::cerr << __FUNCTION__ << ": EOF encountered on ungetc." << std::endl;
 
                     if(fBootDb)
                     {
@@ -536,7 +535,7 @@ std::string ReadWord(FILE *fp, Logger *log, bool fBootDb)
         }
     }
 
-    log->Bug("ReadWord: word too long");
+    std::cerr << "ReadWord: word too long." << std::endl;
     exit(EXIT_FAILURE);
     return "";
 }

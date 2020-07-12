@@ -3416,7 +3416,7 @@ PositionType GetPosition(const std::string &posName)
     return (PositionType)GetInArray(posName, PositionName, StrCmp);
 }
 
-const std::array<const char * const, MAX_LOG> CmdLogName =
+const std::array<const char * const, (unsigned long)LogType::Max> CmdLogName =
 {
     "normal",
     "always",
@@ -3427,9 +3427,18 @@ const std::array<const char * const, MAX_LOG> CmdLogName =
     "all"
 };
 
-int GetCmdLog(const std::string &logName)
+LogType GetCmdLog(const std::string &logName)
 {
-    return GetInArray(logName, CmdLogName, StrCmp);
+    int retVal = GetInArray(logName, CmdLogName, StrCmp);
+
+    if(retVal != -1)
+    {
+        return LogType(retVal);
+    }
+    else
+    {
+        return LogType::Max;
+    }
 }
 
 const std::array<const char * const, MAX_SHIP_CLASS> ShipClasses =

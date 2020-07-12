@@ -94,5 +94,5 @@ void do_quit(std::shared_ptr<Character> ch, std::string argument)
         }
     }
 
-    Log->LogStringPlus(logBuf, LOG_COMM, level);
+    Log->LogStringPlus(logBuf, LogType::Comm, level);
 }

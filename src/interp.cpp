@@ -219,7 +219,7 @@ void Interpret(std::shared_ptr<Character> ch, std::string argument)
     char logline[MAX_INPUT_LENGTH];
     std::shared_ptr<Timer> timer;
     Command *cmd = NULL;
-    int loglvl = 0;
+    LogType loglvl = LogType::Normal;
     bool found = false;
     struct timeval time_used;
     long tmptime = 0;
@@ -314,18 +314,18 @@ void Interpret(std::shared_ptr<Character> ch, std::string argument)
     /*
      * Log and snoop.
      */
-    if(found && cmd->Log == LOG_NEVER)
+    if(found && cmd->Log == LogType::Never)
     {
         strcpy(logline, "XXXXXXXX XXXXXXXX XXXXXXXX");
     }
 
-    loglvl = found ? cmd->Log : LOG_NORMAL;
+    loglvl = found ? cmd->Log : LogType::Normal;
 
     if((!IsNpc(ch) && ch->Flags.test(Flag::Plr::Log))
        || fLogAll
-       || loglvl == LOG_BUILD
-       || loglvl == LOG_HIGH
-       || loglvl == LOG_ALWAYS)
+       || loglvl == LogType::Build
+       || loglvl == LogType::High
+       || loglvl == LogType::Always)
     {
         std::string logBuf;
 
@@ -345,10 +345,10 @@ void Interpret(std::shared_ptr<Character> ch, std::string argument)
          * Make it so a 'log all' will send most output to the log
          * file only, and not spam the log channel to death       -Thoric
          */
-        if(fLogAll && loglvl == LOG_NORMAL
+        if(fLogAll && loglvl == LogType::Normal
            && (IsNpc(ch) || !ch->Flags.test(Flag::Plr::Log)))
         {
-            loglvl = LOG_ALL;
+            loglvl = LogType::All;
         }
 
         Log->LogStringPlus(logBuf, loglvl, ch->TopLevel);
@@ -458,11 +458,11 @@ void Interpret(std::shared_ptr<Character> ch, std::string argument)
         auto logBuf = FormatString("[*****] LAG: %s: %s %s (R:%ld S:%d.%06d)",
                                    ch->Name.c_str(),
                                    cmd->Name.c_str(),
-                                   (cmd->Log == LOG_NEVER ? "XXX" : argument.c_str()),
+                                   (cmd->Log == LogType::Never ? "XXX" : argument.c_str()),
                                    ch->InRoom ? ch->InRoom->Vnum : 0,
                                    (int)(time_used.tv_sec),
                                    (int)(time_used.tv_usec));
-        Log->LogStringPlus(logBuf, LOG_NORMAL, GetTrustLevel(ch));
+        Log->LogStringPlus(logBuf, LogType::Normal, GetTrustLevel(ch));
     }
 }
 

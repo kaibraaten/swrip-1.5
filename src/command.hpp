@@ -15,7 +15,7 @@ public:
     std::string FunctionName;
     PositionType Position = 0;
     int Level = 0;
-    int Log = 0;
+    LogType Log = LogType::Normal;
     std::shared_ptr<timerset> UseRec;
 };
 

@@ -281,7 +281,7 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
             sprintf(buf, "%s player data for: %s (%dK)",
                     preload ? "Preloading" : "Loading", Capitalize(name).c_str(),
                     (int)fst.st_size / 1024);
-            Log->LogStringPlus(buf, LOG_COMM, LEVEL_GREATER);
+            Log->LogStringPlus(buf, LogType::Comm, LEVEL_GREATER);
         }
     }
     else

@@ -98,7 +98,6 @@ using SpecFun = bool(std::shared_ptr<Character> ch);
 using SpellFun = ch_ret(int sn, int level, std::shared_ptr<Character> ch, const Vo &vo);
 
 using vnum_t = long;
-using LogType = int;
 
 using ClanType = int;
 using ShipType = int;

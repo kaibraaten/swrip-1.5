@@ -1,10 +1,10 @@
 #ifndef _SWRIP_LOG_HPP_
 #define _SWRIP_LOG_HPP_
 
-#include <utility/logger.hpp>
+#include "logger.hpp"
 
-extern Logger *Log;
+extern std::shared_ptr<Logger> Log;
 
-Logger *NewLogger();
+std::shared_ptr<Logger> NewLogger();
 
 #endif

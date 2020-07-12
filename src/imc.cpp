@@ -3561,17 +3561,17 @@ bool ImcLoadCharacter(std::shared_ptr<Character> ch, FILE *fp, const std::string
     switch(word[0])
     {
     case 'I':
-        KEY("IMCPerm", IMCPERM(ch), ReadInt(fp, Log, fBootDb));
+        KEY("IMCPerm", IMCPERM(ch), ReadInt(fp, fBootDb));
         KEY("IMCEmail", IMC_EMAIL(ch), imcReadLine(fp));
         KEY("IMCAIM", IMC_AIM(ch), imcReadLine(fp));
-        KEY("IMCICQ", IMC_ICQ(ch), ReadInt(fp, Log, fBootDb));
+        KEY("IMCICQ", IMC_ICQ(ch), ReadInt(fp, fBootDb));
         KEY("IMCYahoo", IMC_YAHOO(ch), imcReadLine(fp));
         KEY("IMCMSN", IMC_MSN(ch), imcReadLine(fp));
         KEY("IMCHomepage", IMC_HOMEPAGE(ch), imcReadLine(fp));
         KEY("IMCComment", IMC_COMMENT(ch), imcReadLine(fp));
         if(!StrCmp(word, "IMCFlags"))
         {
-            IMCFLAG(ch) = ReadInt(fp, Log, fBootDb);
+            IMCFLAG(ch) = ReadInt(fp, fBootDb);
             imc_char_login(ch);
             fMatch = true;
             break;
@@ -4021,14 +4021,14 @@ static void imc_readchannel(IMC_CHANNEL *channel, FILE *fp)
 {
     for(;; )
     {
-        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        std::string word = feof(fp) ? "End" : ReadWord(fp, fBootDb);
         bool fMatch = false;
 
         switch(word[0])
         {
         case '*':
             fMatch = true;
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             break;
 
         case 'C':
@@ -4037,7 +4037,7 @@ static void imc_readchannel(IMC_CHANNEL *channel, FILE *fp)
             KEY("ChanRegF", channel->regformat, imcReadLine(fp));
             KEY("ChanEmoF", channel->emoteformat, imcReadLine(fp));
             KEY("ChanSocF", channel->socformat, imcReadLine(fp));
-            KEY("ChanLevel", channel->level, ReadInt(fp, Log, fBootDb));
+            KEY("ChanLevel", channel->level, ReadInt(fp, fBootDb));
             break;
 
         case 'E':
@@ -4092,11 +4092,11 @@ static void imc_loadchannels()
 
     for(;; )
     {
-        char letter = ReadChar(fp, Log, fBootDb);
+        char letter = ReadChar(fp, fBootDb);
 
         if(letter == '*')
         {
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             continue;
         }
 
@@ -4106,7 +4106,7 @@ static void imc_loadchannels()
             break;
         }
 
-        std::string word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, fBootDb);
 
         if(!StrCmp(word, "IMCCHAN"))
         {
@@ -4166,7 +4166,7 @@ static void imc_readbans()
         return;
     }
 
-    std::string word = ReadWord(inf, Log, fBootDb);
+    std::string word = ReadWord(inf, fBootDb);
 
     if(StrCmp(word, "#IGNORES"))
     {
@@ -4177,7 +4177,7 @@ static void imc_readbans()
 
     while(!feof(inf) && !ferror(inf))
     {
-        std::string temp = ReadWord(inf, Log, fBootDb);
+        std::string temp = ReadWord(inf, fBootDb);
 
         if(!StrCmp(temp, "#END"))
         {
@@ -4202,14 +4202,14 @@ static void imc_readcolor(IMC_COLOR *color, FILE *fp)
 {
     for(;; )
     {
-        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        std::string word = feof(fp) ? "End" : ReadWord(fp, fBootDb);
         bool fMatch = false;
 
         switch(word[0])
         {
         case '*':
             fMatch = true;
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             break;
 
         case 'E':
@@ -4251,11 +4251,11 @@ static void imc_load_color_table()
 
     for(;; )
     {
-        char letter = ReadChar(fp, Log, fBootDb);
+        char letter = ReadChar(fp, fBootDb);
 
         if(letter == '*')
         {
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             continue;
         }
 
@@ -4265,7 +4265,7 @@ static void imc_load_color_table()
             break;
         }
 
-        std::string word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, fBootDb);
 
         if(!StrCmp(word, "COLOR"))
         {
@@ -4311,14 +4311,14 @@ static void imc_readhelp(IMC_HelpFile *help, FILE *fp)
 {
     for(;; )
     {
-        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        std::string word = feof(fp) ? "End" : ReadWord(fp, fBootDb);
         bool fMatch = false;
 
         switch(word[0])
         {
         case '*':
             fMatch = true;
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             break;
 
         case 'E':
@@ -4333,7 +4333,7 @@ static void imc_readhelp(IMC_HelpFile *help, FILE *fp)
         case 'P':
             if(!StrCmp(word, "Perm"))
             {
-                word = ReadWord(fp, Log, fBootDb);
+                word = ReadWord(fp, fBootDb);
                 int permvalue = get_imcpermvalue(word.c_str());
 
                 if(permvalue < 0 || permvalue > IMCPERM_IMP)
@@ -4388,11 +4388,11 @@ static void imc_LoadHelpFiles()
 
     for(;; )
     {
-        char letter = ReadChar(fp, Log, fBootDb);
+        char letter = ReadChar(fp, fBootDb);
 
         if(letter == '*')
         {
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             continue;
         }
 
@@ -4402,7 +4402,7 @@ static void imc_LoadHelpFiles()
             break;
         }
 
-        std::string word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, fBootDb);
 
         if(!StrCmp(word, "HELP"))
         {
@@ -4457,14 +4457,14 @@ static void imc_readcommand(IMC_CMD_DATA *cmd, FILE *fp)
 {
     for(;; )
     {
-        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        std::string word = feof(fp) ? "End" : ReadWord(fp, fBootDb);
         bool fMatch = false;
 
         switch(word[0])
         {
         case '*':
             fMatch = true;
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             break;
 
         case 'E':
@@ -4485,11 +4485,11 @@ static void imc_readcommand(IMC_CMD_DATA *cmd, FILE *fp)
             break;
 
         case 'C':
-            KEY("Connected", cmd->connected, ReadInt(fp, Log, fBootDb));
+            KEY("Connected", cmd->connected, ReadInt(fp, fBootDb));
 
             if(!StrCmp(word, "Code"))
             {
-                word = ReadWord(fp, Log, fBootDb);
+                word = ReadWord(fp, fBootDb);
                 cmd->function = imc_function(word.c_str());
 
                 if(cmd->function == NULL)
@@ -4507,7 +4507,7 @@ static void imc_readcommand(IMC_CMD_DATA *cmd, FILE *fp)
         case 'P':
             if(!StrCmp(word, "Perm"))
             {
-                word = ReadWord(fp, Log, fBootDb);
+                word = ReadWord(fp, fBootDb);
                 int permvalue = get_imcpermvalue(word.c_str());
 
                 if(permvalue < 0 || permvalue > IMCPERM_IMP)
@@ -4548,11 +4548,11 @@ static bool imc_LoadCommands(void)
 
     for(;; )
     {
-        char letter = ReadChar(fp, Log, fBootDb);
+        char letter = ReadChar(fp, fBootDb);
 
         if(letter == '*')
         {
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             continue;
         }
 
@@ -4562,7 +4562,7 @@ static bool imc_LoadCommands(void)
             break;
         }
 
-        std::string word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, fBootDb);
 
         if(!StrCmp(word, "COMMAND"))
         {
@@ -4587,14 +4587,14 @@ static void imc_readucache(IMCUCACHE_DATA *user, FILE *fp)
 {
     for(;; )
     {
-        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        std::string word = feof(fp) ? "End" : ReadWord(fp, fBootDb);
         bool fMatch = false;
 
         switch(word[0])
         {
         case '*':
             fMatch = true;
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             break;
 
         case 'N':
@@ -4602,11 +4602,11 @@ static void imc_readucache(IMCUCACHE_DATA *user, FILE *fp)
             break;
 
         case 'S':
-            KEY("Sex", user->gender, ReadInt(fp, Log, fBootDb));
+            KEY("Sex", user->gender, ReadInt(fp, fBootDb));
             break;
 
         case 'T':
-            KEY("Time", user->time, ReadInt(fp, Log, fBootDb));
+            KEY("Time", user->time, ReadInt(fp, fBootDb));
             break;
 
         case 'E':
@@ -4635,11 +4635,11 @@ static void imc_load_ucache()
 
     for(;; )
     {
-        char letter = ReadChar(fp, Log, fBootDb);
+        char letter = ReadChar(fp, fBootDb);
 
         if(letter == '*')
         {
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             continue;
         }
 
@@ -4649,7 +4649,7 @@ static void imc_load_ucache()
             break;
         }
 
-        std::string word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, fBootDb);
 
         if(!StrCmp(word, "UCACHE"))
         {
@@ -4723,19 +4723,19 @@ static void imcfread_config_file(FILE *fin)
 {
     for(;; )
     {
-        std::string word = feof(fin) ? "end" : ReadWord(fin, Log, fBootDb);
+        std::string word = feof(fin) ? "end" : ReadWord(fin, fBootDb);
         bool fMatch = false;
 
         switch(word[0])
         {
         case '#':
             fMatch = true;
-            ReadToEndOfLine(fin, Log, fBootDb);
+            ReadToEndOfLine(fin, fBootDb);
             break;
 
         case 'A':
-            KEY("Autoconnect", this_imcmud->autoconnect, ReadInt(fin, Log, fBootDb));
-            KEY("AdminLevel", this_imcmud->adminlevel, ReadInt(fin, Log, fBootDb));
+            KEY("Autoconnect", this_imcmud->autoconnect, ReadInt(fin, fBootDb));
+            KEY("AdminLevel", this_imcmud->adminlevel, ReadInt(fin, fBootDb));
             break;
 
         case 'C':
@@ -4761,10 +4761,10 @@ static void imcfread_config_file(FILE *fin)
             break;
 
         case 'I':
-            KEY("Implevel", this_imcmud->implevel, ReadInt(fin, Log, fBootDb));
+            KEY("Implevel", this_imcmud->implevel, ReadInt(fin, fBootDb));
             KEY("InfoName", this_imcmud->fullname, imcReadLine(fin));
             KEY("InfoHost", this_imcmud->ihost, imcReadLine(fin));
-            KEY("InfoPort", this_imcmud->iport, ReadInt(fin, Log, fBootDb));
+            KEY("InfoPort", this_imcmud->iport, ReadInt(fin, fBootDb));
             KEY("InfoEmail", this_imcmud->email, imcReadLine(fin));
             KEY("InfoWWW", this_imcmud->www, imcReadLine(fin));
             KEY("InfoBase", this_imcmud->base, imcReadLine(fin));
@@ -4776,21 +4776,21 @@ static void imcfread_config_file(FILE *fin)
             break;
 
         case 'M':
-            KEY("MinImmLevel", this_imcmud->immlevel, ReadInt(fin, Log, fBootDb));
-            KEY("MinPlayerLevel", this_imcmud->minlevel, ReadInt(fin, Log, fBootDb));
+            KEY("MinImmLevel", this_imcmud->immlevel, ReadInt(fin, fBootDb));
+            KEY("MinPlayerLevel", this_imcmud->minlevel, ReadInt(fin, fBootDb));
             break;
 
         case 'R':
             KEY("RouterAddr", this_imcmud->rhost, imcReadLine(fin));
-            KEY("RouterPort", this_imcmud->rport, ReadInt(fin, Log, fBootDb));
+            KEY("RouterPort", this_imcmud->rport, ReadInt(fin, fBootDb));
             break;
 
         case 'S':
             KEY("ServerPwd", this_imcmud->serverpw, imcReadLine(fin));
             KEY("ServerAddr", this_imcmud->rhost, imcReadLine(fin));
-            KEY("ServerPort", this_imcmud->rport, ReadInt(fin, Log, fBootDb));
-            KEY("SHA256", this_imcmud->sha256, ReadInt(fin, Log, fBootDb));
-            KEY("SHA256Pwd", this_imcmud->sha256pass, ReadInt(fin, Log, fBootDb));
+            KEY("ServerPort", this_imcmud->rport, ReadInt(fin, fBootDb));
+            KEY("SHA256", this_imcmud->sha256, ReadInt(fin, fBootDb));
+            KEY("SHA256Pwd", this_imcmud->sha256pass, ReadInt(fin, fBootDb));
             break;
         }
 
@@ -4820,11 +4820,11 @@ static bool imc_read_config(socket_t desc)
 
     for(;; )
     {
-        char letter = ReadChar(fin, Log, fBootDb);
+        char letter = ReadChar(fin, fBootDb);
 
         if(letter == '#')
         {
-            ReadToEndOfLine(fin, Log, fBootDb);
+            ReadToEndOfLine(fin, fBootDb);
             continue;
         }
 
@@ -4834,7 +4834,7 @@ static bool imc_read_config(socket_t desc)
             break;
         }
 
-        std::string word = ReadWord(fin, Log, fBootDb);
+        std::string word = ReadWord(fin, fBootDb);
 
         if(!StrCmp(word, "IMCCONFIG") && this_imcmud == NULL)
         {
@@ -4986,7 +4986,7 @@ static void imc_load_who_template()
 
     do
     {
-        std::string word = ReadWord(fp, Log, fBootDb);
+        std::string word = ReadWord(fp, fBootDb);
         char hbuf[LGST] = { '\0' };
         int num = 0;
 

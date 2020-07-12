@@ -14,14 +14,14 @@
 extern FILE *fpArea;
 extern std::string strArea;
 
-Logger *Log = nullptr;
+std::shared_ptr<Logger> Log;
 
 class FileSystemLogger : public Logger
 {
 public:
     void Bug(const char *str, ...) override;
     void Boot(const char *str, ...) override;
-    void LogStringPlus(const std::string &str, short log_type, short level) override;
+    void LogStringPlus(const std::string &str, LogType log_type, short level) override;
     void Info(const char *fmt, ...) override;
 };
 
@@ -105,7 +105,7 @@ void FileSystemLogger::Boot(const char *str, ...)
     }
 }
 
-void FileSystemLogger::LogStringPlus(const std::string &str, short log_type, short level)
+void FileSystemLogger::LogStringPlus(const std::string &str, LogType log_type, short level)
 {
     char *strtime = ctime(&current_time);
     int offset = 0;
@@ -134,15 +134,15 @@ void FileSystemLogger::LogStringPlus(const std::string &str, short log_type, sho
 
     switch(log_type)
     {
-    case LOG_BUILD:
+    case LogType::Build:
         ToChannel(buf, CHANNEL_BUILD, "Build", level);
         break;
 
-    case LOG_COMM:
+    case LogType::Comm:
         ToChannel(buf, CHANNEL_COMM, "Comm", level);
         break;
 
-    case LOG_ALL:
+    case LogType::All:
         break;
 
     default:
@@ -188,10 +188,10 @@ void FileSystemLogger::Info(const char *fmt, ...)
     vsprintf(buf, fmt, args);
     va_end(args);
 
-    LogStringPlus(buf, LOG_NORMAL, LEVEL_LOG);
+    LogStringPlus(buf, LogType::Normal, LEVEL_LOG);
 }
 
-Logger *NewLogger()
+std::shared_ptr<Logger> NewLogger()
 {
-    return new FileSystemLogger();
+    return std::make_shared<FileSystemLogger>();
 }

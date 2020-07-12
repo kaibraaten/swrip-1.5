@@ -92,7 +92,7 @@ void do_cedit( std::shared_ptr<Character> ch, std::string argument )
     {
         ch->Echo( "Command:  %s\r\nLevel:    %d\r\nPosition: %s\r\nLog:      %s\r\nCode:     %s\r\n",
                   command->Name.c_str(), command->Level,
-                  PositionName[command->Position], CmdLogName[command->Log],
+                  PositionName[command->Position], CmdLogName[(int)command->Log],
                   command->FunctionName.c_str());
 
         if ( command->UseRec->NumberOfTimesUsed )
@@ -148,13 +148,13 @@ void do_cedit( std::shared_ptr<Character> ch, std::string argument )
 
     if ( !StrCmp( arg2, "log" ) )
     {
-        int log_type = 0;
+        LogType log_type = LogType::Normal;
 
         if( argument.empty() )
         {
             ch->Echo( "Supply a log type from the following list:\r\n" );
 
-            for( size_t i = 0; i < MAX_LOG; ++i )
+            for(int i = 0; i < (int)LogType::Max; ++i)
             {
                 ch->Echo( "  %s\r\n", CmdLogName[i] );
             }
@@ -164,16 +164,16 @@ void do_cedit( std::shared_ptr<Character> ch, std::string argument )
 
         log_type = GetCmdLog( argument );
 
-        if ( log_type < 0 )
+        if ( log_type == LogType::Max)
         {
             ch->Echo( "Unknown log type.\r\n" );
             return;
         }
 
         ch->Echo( "Log type for %s changed from %s",
-                  command->Name.c_str(), CmdLogName[command->Log] );
+                  command->Name.c_str(), CmdLogName[(int)command->Log] );
         command->Log = log_type;
-        ch->Echo( " to %s.\r\n", CmdLogName[command->Log] );
+        ch->Echo( " to %s.\r\n", CmdLogName[(int)command->Log] );
         ch->Echo( "Done.\r\n" );
         return;
     }

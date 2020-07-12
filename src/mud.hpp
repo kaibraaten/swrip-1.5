@@ -304,7 +304,7 @@ extern const std::array<int, LANG_MAX + 1> LanguageArray;
 extern const std::array<const char *const, LANG_MAX + 1> LanguageNames;
 
 extern const std::array<const char *const, MAX_POSITION> PositionName;
-extern const std::array<const char *const, MAX_LOG> CmdLogName;
+extern const std::array<const char *const, (unsigned long)LogType::Max> CmdLogName;
 extern const std::array<const char *const, MAX_SHIP_TYPE> ShipTypes;
 extern const std::array<const char *const, MAX_SHIP_CLASS> ShipClasses;
 extern const std::array<const char *const, Flag::MAX> ChannelNames;
@@ -1070,7 +1070,7 @@ int GetSpellSave(const std::string &txt);
 SkillTargetType GetSpellTarget(const std::string &txt);
 PositionType GetPosition(const std::string &txt);
 SexType GetSex(const std::string &txt);
-int GetCmdLog(const std::string &txt);
+LogType GetCmdLog(const std::string &txt);
 ShipClass GetShipClass(const std::string &txt);
 ShipType GetShipType(const std::string &txt);
 int GetShipFlag(const std::string &txt);

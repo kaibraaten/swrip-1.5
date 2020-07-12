@@ -76,7 +76,7 @@ ch_ret spell_sleep(int sn, int level, std::shared_ptr<Character> ch, const Vo &v
     {
         auto logBuf = FormatString("%s has cast sleep on %s.",
                                    ch->Name.c_str(), victim->Name.c_str());
-        Log->LogStringPlus(logBuf, LOG_NORMAL, ch->TopLevel);
+        Log->LogStringPlus(logBuf, LogType::Normal, ch->TopLevel);
         ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", umax(LEVEL_IMMORTAL, ch->TopLevel));
     }
 

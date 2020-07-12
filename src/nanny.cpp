@@ -196,7 +196,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
     {
         auto logBuf = FormatString("Denying access to %s@%s.",
                                    argument.c_str(), d->Remote.Hostname.c_str());
-        Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
+        Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
 
         d->WriteToBuffer("You are denied access.\r\n", 0);
         CloseDescriptor(d, false);
@@ -309,11 +309,11 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
 
     if(ch->TopLevel < LEVEL_CREATOR)
     {
-        Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
+        Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
     }
     else
     {
-        Log->LogStringPlus(logBuf, LOG_COMM, ch->TopLevel);
+        Log->LogStringPlus(logBuf, LogType::Comm, ch->TopLevel);
     }
 
     d->WriteToBuffer("Press enter...\r\n", 0);
@@ -972,7 +972,7 @@ static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
     auto logBuf = FormatString("%s@%s new %s.",
                                ch->Name.c_str(), d->Remote.Hostname.c_str(),
                                RaceTable[ch->Race].Name);
-    Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
+    Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
     ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
     d->WriteToBuffer("Press [ENTER] ", 0);
     d->WriteToBuffer("Press enter...\r\n", 0);

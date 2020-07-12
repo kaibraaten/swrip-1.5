@@ -80,7 +80,7 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & 
                 Act(AT_ACTION, "$n has reconnected.", ch, nullptr, nullptr, ActTarget::Room);
                 auto logBuf = FormatString("%s@%s reconnected.",
                                            ch->Name.c_str(), d->Remote.Hostname.c_str());
-                Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
+                Log->LogStringPlus(logBuf, LogType::Comm, umax(SysData.LevelOfLogChannel, ch->TopLevel));
                 d->ConnectionState = ConState::Playing;
             }
 
@@ -113,7 +113,7 @@ bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string & name)
                                        ? dold->Original->Name.c_str()
                                        : dold->Char->Name.c_str(),
                                        d->Char->Name.c_str());
-            Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
+            Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
             FreeCharacter(d->Char);
             d->Char = nullptr;
             return true;
@@ -140,7 +140,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
             {
                 d->WriteToBuffer("Already connected - try again.\r\n", 0);
                 auto logBuf = FormatString("%s already connected.", ch->Name.c_str());
-                Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
+                Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
                 return BERR;
             }
 
@@ -170,7 +170,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
                 ch, nullptr, nullptr, ActTarget::Room);
             auto logBuf = FormatString("%s@%s reconnected, kicking off old link.",
                                        ch->Name.c_str(), d->Remote.Hostname.c_str());
-            Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
+            Log->LogStringPlus(logBuf, LogType::Comm, umax(SysData.LevelOfLogChannel, ch->TopLevel));
 
             d->ConnectionState = cstate;
             return true;
@@ -271,7 +271,7 @@ bool Descriptor::Read()
 
         if(nRead == 0)
         {
-            Log->LogStringPlus("EOF encountered on read.", LOG_COMM, SysData.LevelOfLogChannel);
+            Log->LogStringPlus("EOF encountered on read.", LogType::Comm, SysData.LevelOfLogChannel);
             return false;
         }
 
@@ -283,7 +283,7 @@ bool Descriptor::Read()
             }
             else
             {
-                Log->LogStringPlus(strerror(GETERROR), LOG_COMM, SysData.LevelOfLogChannel);
+                Log->LogStringPlus(strerror(GETERROR), LogType::Comm, SysData.LevelOfLogChannel);
                 return false;
             }
         }

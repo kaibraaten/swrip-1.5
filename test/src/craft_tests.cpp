@@ -135,7 +135,7 @@ class CraftTests : public ::testing::Test
 protected:
     void SetUp() override
     {
-        Log = new FakeLogger();
+        Log = std::make_shared<FakeLogger>();
         Objects = new FakeObjectRepository();
         Skills = new FakeSkillRepository();
         Homes = std::make_shared<FakeHomeRepository>();
@@ -173,7 +173,6 @@ protected:
         delete Objects;
         Objects = nullptr;
 
-        delete Log;
         Log = nullptr;
     }
 

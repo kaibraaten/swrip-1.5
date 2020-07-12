@@ -14,7 +14,7 @@ class FollowTests : public ::testing::Test
 protected:
     void SetUp() override
     {
-        Log = new FakeLogger();
+        Log = std::make_shared<FakeLogger>();
         _protomob = MakeMobile(1, INVALID_VNUM, "Foo");
         _follower = std::make_shared<Character>(_protomob);
         _follower->Name = "Follower";
@@ -39,7 +39,6 @@ protected:
         _sourceExit = nullptr;
         _destinationExit = nullptr;
 
-        delete Log;
         Log = nullptr;
     }
 

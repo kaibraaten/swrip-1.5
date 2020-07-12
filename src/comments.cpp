@@ -420,30 +420,30 @@ void ReadComment(std::shared_ptr<Character> ch, FILE *fp)
 
         std::shared_ptr<Note> pnote = std::make_shared<Note>();
 
-        if(StrCmp(ReadWord(fp, Log, fBootDb), "sender"))
+        if(StrCmp(ReadWord(fp, fBootDb), "sender"))
             break;
 
-        pnote->Sender = ReadStringToTilde(fp, Log, fBootDb);
+        pnote->Sender = ReadStringToTilde(fp, fBootDb);
 
-        if(StrCmp(ReadWord(fp, Log, fBootDb), "date"))
+        if(StrCmp(ReadWord(fp, fBootDb), "date"))
             break;
 
-        pnote->Date = ReadStringToTilde(fp, Log, fBootDb);
+        pnote->Date = ReadStringToTilde(fp, fBootDb);
 
-        if(StrCmp(ReadWord(fp, Log, fBootDb), "to"))
+        if(StrCmp(ReadWord(fp, fBootDb), "to"))
             break;
 
-        pnote->ToList = ReadStringToTilde(fp, Log, fBootDb);
+        pnote->ToList = ReadStringToTilde(fp, fBootDb);
 
-        if(StrCmp(ReadWord(fp, Log, fBootDb), "subject"))
+        if(StrCmp(ReadWord(fp, fBootDb), "subject"))
             break;
 
-        pnote->Subject = ReadStringToTilde(fp, Log, fBootDb);
+        pnote->Subject = ReadStringToTilde(fp, fBootDb);
 
-        if(StrCmp(ReadWord(fp, Log, fBootDb), "text"))
+        if(StrCmp(ReadWord(fp, fBootDb), "text"))
             break;
 
-        pnote->Text = ReadStringToTilde(fp, Log, fBootDb);
+        pnote->Text = ReadStringToTilde(fp, fBootDb);
 
         ch->PCData->Add(pnote);
         return;

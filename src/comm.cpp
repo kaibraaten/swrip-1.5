@@ -631,7 +631,7 @@ static void NewDescriptor(socket_t new_desc)
     std::string buf = inet_ntoa(sock.sin_addr);
     auto logBuf = FormatString("Sock.sinaddr:  %s, port %hd.",
                                buf.c_str(), dnew->Remote.Port);
-    Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
+    Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
 
     dnew->Remote.HostIP = buf;
 
@@ -686,7 +686,7 @@ static void NewDescriptor(socket_t new_desc)
         SysData.MaxPlayersEver = SysData.MaxPlayersThisBoot;
         logBuf = FormatString("Broke all-time maximum player record: %d",
                               SysData.MaxPlayersEver);
-        Log->LogStringPlus(logBuf, LOG_COMM, SysData.LevelOfLogChannel);
+        Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
         ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
         SysData.Save();
     }
@@ -746,7 +746,7 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
     if(ch != nullptr)
     {
         auto logBuf = FormatString("Closing link to %s.", ch->Name.c_str());
-        Log->LogStringPlus(logBuf, LOG_COMM, umax(SysData.LevelOfLogChannel, ch->TopLevel));
+        Log->LogStringPlus(logBuf, LogType::Comm, umax(SysData.LevelOfLogChannel, ch->TopLevel));
         PlayerCharacters->Remove(dclose->Char);
 
         if(IsPlaying(ch) || IsInEditor(ch))

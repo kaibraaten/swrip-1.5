@@ -466,14 +466,14 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
 
     for (; ; )
     {
-        std::string word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        std::string word = feof(fp) ? "End" : ReadWord(fp, fBootDb);
         bool fMatch = false;
 
         switch (CharToUppercase(word[0]))
         {
         case '*':
             fMatch = true;
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
             break;
 
         case 'A':
@@ -484,11 +484,11 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
 
                 if (!StrCmp(word, "Affect"))
                 {
-                    paf->Type = ReadInt(fp, Log, fBootDb);
+                    paf->Type = ReadInt(fp, fBootDb);
                 }
                 else
                 {
-                    int sn = LookupSkill(ReadWord(fp, Log, fBootDb));
+                    int sn = LookupSkill(ReadWord(fp, fBootDb));
 
                     if (sn < 0)
                     {
@@ -501,10 +501,10 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
                     }
                 }
 
-                paf->Duration = ReadInt(fp, Log, fBootDb);
-                pafmod = ReadInt(fp, Log, fBootDb);
-                paf->Location = ReadInt(fp, Log, fBootDb);
-                paf->AffectedBy = ReadInt(fp, Log, fBootDb);
+                paf->Duration = ReadInt(fp, fBootDb);
+                pafmod = ReadInt(fp, fBootDb);
+                paf->Location = ReadInt(fp, fBootDb);
+                paf->AffectedBy = ReadInt(fp, fBootDb);
 
                 if (paf->Location == APPLY_WEAPONSPELL
                     || paf->Location == APPLY_WEARSPELL
@@ -522,27 +522,27 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
                 break;
             }
 
-            KEY("Actiondesc", obj->ActionDescription, ReadStringToTilde(fp, Log, fBootDb));
+            KEY("Actiondesc", obj->ActionDescription, ReadStringToTilde(fp, fBootDb));
             break;
 
         case 'C':
-            KEY("Cost", obj->Cost, ReadInt(fp, Log, fBootDb));
-            KEY("Count", obj->Count, ReadInt(fp, Log, fBootDb));
+            KEY("Cost", obj->Cost, ReadInt(fp, fBootDb));
+            KEY("Count", obj->Count, ReadInt(fp, fBootDb));
             break;
 
         case 'D':
-            KEY("Description", obj->Description, ReadStringToTilde(fp, Log, fBootDb));
+            KEY("Description", obj->Description, ReadStringToTilde(fp, fBootDb));
             break;
 
         case 'E':
-            KEY("ExtraFlags", obj->Flags, ReadInt(fp, Log, fBootDb));
+            KEY("ExtraFlags", obj->Flags, ReadInt(fp, fBootDb));
 
             if (!StrCmp(word, "ExtraDescr"))
             {
                 auto ed = std::make_shared<ExtraDescription>();
 
-                ed->Keyword = ReadStringToTilde(fp, Log, fBootDb);
-                ed->Description = ReadStringToTilde(fp, Log, fBootDb);
+                ed->Keyword = ReadStringToTilde(fp, fBootDb);
+                ed->Description = ReadStringToTilde(fp, fBootDb);
                 obj->Add(ed);
                 fMatch = true;
             }
@@ -661,19 +661,19 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
             break;
 
         case 'I':
-            KEY("ItemType", obj->ItemType, (ItemTypes)ReadInt(fp, Log, fBootDb));
+            KEY("ItemType", obj->ItemType, (ItemTypes)ReadInt(fp, fBootDb));
             break;
 
         case 'L':
-            KEY("Level", obj->Level, ReadInt(fp, Log, fBootDb));
+            KEY("Level", obj->Level, ReadInt(fp, fBootDb));
             break;
 
         case 'N':
-            KEY("Name", obj->Name, ReadStringToTilde(fp, Log, fBootDb));
+            KEY("Name", obj->Name, ReadStringToTilde(fp, fBootDb));
 
             if (!StrCmp(word, "Nest"))
             {
-                iNest = ReadInt(fp, Log, fBootDb);
+                iNest = ReadInt(fp, fBootDb);
 
                 if (iNest < 0 || iNest >= MAX_NEST)
                 {
@@ -687,15 +687,15 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
             break;
 
         case 'R':
-            KEY("Room", room, GetRoom(ReadInt(fp, Log, fBootDb)));
+            KEY("Room", room, GetRoom(ReadInt(fp, fBootDb)));
 
         case 'S':
-            KEY("ShortDescr", obj->ShortDescr, ReadStringToTilde(fp, Log, fBootDb));
+            KEY("ShortDescr", obj->ShortDescr, ReadStringToTilde(fp, fBootDb));
 
             if (!StrCmp(word, "Spell"))
             {
-                int iValue = ReadInt(fp, Log, fBootDb);
-                int sn = LookupSkill(ReadWord(fp, Log, fBootDb));
+                int iValue = ReadInt(fp, fBootDb);
+                int sn = LookupSkill(ReadWord(fp, fBootDb));
 
                 if (iValue < 0 || iValue > 5)
                 {
@@ -718,14 +718,14 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
             break;
 
         case 'T':
-            KEY("Timer", obj->Timer, ReadInt(fp, Log, fBootDb));
+            KEY("Timer", obj->Timer, ReadInt(fp, fBootDb));
             break;
 
         case 'V':
             if (!StrCmp(word, "Values"))
             {
                 int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0;
-                std::string ln = ReadLine(fp, Log, fBootDb);
+                std::string ln = ReadLine(fp, fBootDb);
 
                 sscanf(ln.c_str(), "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6);
 
@@ -741,7 +741,7 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
 
             if (!StrCmp(word, "Vnum"))
             {
-                vnum_t vnum = ReadInt(fp, Log, fBootDb);
+                vnum_t vnum = ReadInt(fp, fBootDb);
 
                 if ((obj->Prototype = GetProtoObject(vnum)) == NULL)
                 {
@@ -764,9 +764,9 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
             break;
 
         case 'W':
-            KEY("WearFlags", obj->WearFlags, ReadInt(fp, Log, fBootDb));
-            KEY("WearLoc", obj->WearLoc, (WearLocation)ReadInt(fp, Log, fBootDb));
-            KEY("Weight", obj->Weight, ReadInt(fp, Log, fBootDb));
+            KEY("WearFlags", obj->WearFlags, ReadInt(fp, fBootDb));
+            KEY("WearLoc", obj->WearLoc, (WearLocation)ReadInt(fp, fBootDb));
+            KEY("Weight", obj->Weight, ReadInt(fp, fBootDb));
             break;
 
         }
@@ -775,7 +775,7 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
         {
             Log->Bug("Fread_obj: no match.");
             Log->Bug("%s", word.c_str());
-            ReadToEndOfLine(fp, Log, fBootDb);
+            ReadToEndOfLine(fp, fBootDb);
 
             while (!obj->ExtraDescriptions().empty())
             {
@@ -881,11 +881,11 @@ void LoadCorpses()
 
                 for (; ; )
                 {
-                    const char letter = ReadChar(fpArea, Log, fBootDb);
+                    const char letter = ReadChar(fpArea, fBootDb);
 
                     if (letter == '*')
                     {
-                        ReadToEndOfLine(fpArea, Log, fBootDb);
+                        ReadToEndOfLine(fpArea, fBootDb);
                         continue;
                     }
 
@@ -895,7 +895,7 @@ void LoadCorpses()
                         break;
                     }
 
-                    std::string word = ReadWord(fpArea, Log, fBootDb);
+                    std::string word = ReadWord(fpArea, fBootDb);
 
                     if (!StrCmp(word, "CORPSE"))
                     {

@@ -18,7 +18,6 @@
 #include <utility/os.hpp>
 #include <utility/linkedlist.hpp>
 #include <utility/oldrepository.hpp>
-#include <utility/logger.hpp>
 
 /*
  * String and memory management parameters.
@@ -286,13 +285,13 @@ std::vector<char> StringToVector(const std::string &);
 bool StringEndsWith(const std::string &str, const std::string &ending);
 
 /* file_io.c */
-char ReadChar(FILE *fp, Logger *log, bool fBootDb);
-float ReadFloat(FILE *fp, Logger *log, bool fBootDb);
-int ReadInt(FILE *fp, Logger *log, bool fBootDb);
-std::string ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb);
-void ReadToEndOfLine(FILE *fp, Logger *log, bool fBootDb);
-std::string ReadWord(FILE *fp, Logger *log, bool fBootDb);
-std::string ReadLine(FILE *fp, Logger *log, bool fBootDb);
+char ReadChar(FILE *fp, bool fBootDb);
+float ReadFloat(FILE *fp, bool fBootDb);
+int ReadInt(FILE *fp, bool fBootDb);
+std::string ReadStringToTilde(FILE *fp, bool fBootDb);
+void ReadToEndOfLine(FILE *fp, bool fBootDb);
+std::string ReadWord(FILE *fp, bool fBootDb);
+std::string ReadLine(FILE *fp, bool fBootDb);
 std::string ConvertToLuaFilename(const std::string &name);
 
 /* misc stuff */

@@ -97,7 +97,7 @@ static void PushCommand(void *cmd, void *state)
     LuaSetfieldString(L, "Function", command->FunctionName);
     LuaSetfieldString(L, "Position", PositionName[command->Position]);
     LuaSetfieldNumber(L, "Level", command->Level);
-    LuaSetfieldString(L, "Log", CmdLogName[command->Log]);
+    LuaSetfieldString(L, "Log", CmdLogName[(int)command->Log]);
 
     lua_settable(L, -3);
 }
@@ -160,11 +160,11 @@ static int L_CommandEntry(lua_State *L)
     LuaGetfieldString(L, "Log",
                       [newCommand](const std::string &logTypeName)
                       {
-                          int logType = GetCmdLog(logTypeName);
+                          LogType logType = GetCmdLog(logTypeName);
 
-                          if(logType == -1)
+                          if(logType == LogType::Max)
                           {
-                              logType = LOG_NORMAL;
+                              logType = LogType::Normal;
                           }
 
                           newCommand->Log = logType;
