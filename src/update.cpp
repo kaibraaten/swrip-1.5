@@ -117,7 +117,7 @@ const char *const d_corpse_descs[] =
 /*
  * Advancement stuff.
  */
-int GetMaxAbilityLevel(std::shared_ptr<Character> ch, int ability)
+int GetMaxAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability)
 {
     int level = 0;
 
@@ -133,36 +133,40 @@ int GetMaxAbilityLevel(std::shared_ptr<Character> ch, int ability)
 
     switch(ability)
     {
-    case COMBAT_ABILITY:
+    case AbilityClass::Combat:
         level = GetMaxCombatLevel(ch);
         break;
 
-    case PILOTING_ABILITY:
+    case AbilityClass::Piloting:
         level = GetMaxPilotingLevel(ch);
         break;
 
-    case ENGINEERING_ABILITY:
+    case AbilityClass::Engineering:
         level = GetMaxEngineeringLevel(ch);
         break;
 
-    case HUNTING_ABILITY:
+    case AbilityClass::Hunting:
         level = GetMaxBountyHuntingLevel(ch);
         break;
 
-    case SMUGGLING_ABILITY:
+    case AbilityClass::Smuggling:
         level = GetMaxSmugglingLevel(ch);
         break;
 
-    case LEADERSHIP_ABILITY:
+    case AbilityClass::Leadership:
         level = GetMaxLeadershipLevel(ch);
         break;
 
-    case DIPLOMACY_ABILITY:
+    case AbilityClass::Diplomacy:
         level = GetMaxDiplomacyLevel(ch);
         break;
 
-    case FORCE_ABILITY:
+    case AbilityClass::Force:
         level = GetMaxForceLevel(ch);
+        break;
+
+    default:
+        level = 0;
         break;
     }
 
@@ -176,19 +180,19 @@ static int GetMaxCombatLevel(std::shared_ptr<Character> ch)
 
     switch(ch->Ability.Main)
     {
-    case COMBAT_ABILITY:
+    case AbilityClass::Combat:
         level = 100;
         break;
 
-    case FORCE_ABILITY:
+    case AbilityClass::Force:
         level = 25;
         break;
 
-    case HUNTING_ABILITY:
+    case AbilityClass::Hunting:
         level = 25;
         break;
 
-    case COMMANDO_ABILITY:
+    case AbilityClass::Commando:
         level = 50;
         break;
 
@@ -197,7 +201,7 @@ static int GetMaxCombatLevel(std::shared_ptr<Character> ch)
         break;
     }
 
-    level += RaceTable[ch->Race].AbilityMod[COMBAT_ABILITY];
+    level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Combat];
     level += statbonus;
 
     return urange(1, level, MAX_ABILITY_LEVEL);
@@ -207,25 +211,25 @@ static int GetMaxPilotingLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
-    if(ch->Ability.Main == PILOTING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Piloting)
         level = 100;
 
-    if(ch->Ability.Main == ENGINEERING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Engineering)
         level = 25;
 
-    if(ch->Ability.Main == HUNTING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Hunting)
         level = 25;
 
-    if(ch->Ability.Main == SMUGGLING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Smuggling)
         level = 50;
 
-    if(ch->Ability.Main == FORCE_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Force)
         level = 25;
 
-    if(ch->Ability.Main == COMMANDO_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Commando)
         level = 25;
 
-    level += RaceTable[ch->Race].AbilityMod[PILOTING_ABILITY];
+    level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Piloting];
     level += ch->PermStats.Dex * 2;
 
     return urange(1, level, MAX_ABILITY_LEVEL);
@@ -235,13 +239,13 @@ static int GetMaxEngineeringLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
-    if(ch->Ability.Main == ENGINEERING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Engineering)
         level = 100;
 
-    if(ch->Ability.Main == PILOTING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Piloting)
         level = 20;
 
-    level += RaceTable[ch->Race].AbilityMod[ENGINEERING_ABILITY];
+    level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Engineering];
     level += ch->PermStats.Int * 2;
 
     return urange(1, level, MAX_ABILITY_LEVEL);
@@ -251,10 +255,10 @@ static int GetMaxBountyHuntingLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
-    if(ch->Ability.Main == HUNTING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Hunting)
         level = 100;
 
-    level += RaceTable[ch->Race].AbilityMod[HUNTING_ABILITY];
+    level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Hunting];
 
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
@@ -263,19 +267,19 @@ static int GetMaxSmugglingLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
-    if(ch->Ability.Main == SMUGGLING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Smuggling)
         level = 100;
 
-    if(ch->Ability.Main == PILOTING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Piloting)
         level = 20;
 
-    if(ch->Ability.Main == ENGINEERING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Engineering)
         level = 25;
 
-    if(ch->Ability.Main == COMMANDO_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Commando)
         level = 50;
 
-    level += RaceTable[ch->Race].AbilityMod[SMUGGLING_ABILITY];
+    level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Smuggling];
     level += ch->PermStats.Lck * 2;
 
     return urange(1, level, MAX_ABILITY_LEVEL);
@@ -285,16 +289,16 @@ static int GetMaxLeadershipLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
-    if(ch->Ability.Main == LEADERSHIP_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Leadership)
         level = 100;
 
-    if(ch->Ability.Main == COMBAT_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Combat)
         level = 50;
 
-    if(ch->Ability.Main == DIPLOMACY_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Leadership)
         level = 50;
 
-    level += RaceTable[ch->Race].AbilityMod[LEADERSHIP_ABILITY];
+    level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Leadership];
     level += ch->PermStats.Wis + ch->PermStats.Cha + ch->PermStats.Int;
 
     return urange(1, level, MAX_ABILITY_LEVEL);
@@ -304,16 +308,16 @@ static int GetMaxDiplomacyLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
-    if(ch->Ability.Main == DIPLOMACY_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Leadership)
         level = 100;
 
-    if(ch->Ability.Main == PILOTING_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Piloting)
         level = 10;
 
-    if(ch->Ability.Main == LEADERSHIP_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Leadership)
         level = 50;
 
-    level += RaceTable[ch->Race].AbilityMod[DIPLOMACY_ABILITY];
+    level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Leadership];
     level += ch->PermStats.Cha * 3;
 
     return urange(1, level, MAX_ABILITY_LEVEL);
@@ -323,7 +327,7 @@ static int GetMaxForceLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
-    if(ch->Ability.Main == FORCE_ABILITY)
+    if(ch->Ability.Main == AbilityClass::Force)
     {
         level = 20;
     }
@@ -333,14 +337,14 @@ static int GetMaxForceLevel(std::shared_ptr<Character> ch)
     return level;
 }
 
-void AdvanceLevel(std::shared_ptr<Character> ch, int ability)
+void AdvanceLevel(std::shared_ptr<Character> ch, AbilityClass ability)
 {
     if(ch->TopLevel < GetAbilityLevel(ch, ability) && ch->TopLevel < 100)
     {
         ch->TopLevel = urange(1, GetAbilityLevel(ch, ability), 100);
     }
 
-    if(IsJedi(ch) && ability == FORCE_ABILITY)
+    if(IsJedi(ch) && ability == AbilityClass::Force)
     {
         ch->Mana.Max += 20;
     }
@@ -351,7 +355,7 @@ void AdvanceLevel(std::shared_ptr<Character> ch, int ability)
     }
 }
 
-void GainXP(std::shared_ptr<Character> ch, short ability, long gain)
+void GainXP(std::shared_ptr<Character> ch, AbilityClass ability, long gain)
 {
     if(IsNpc(ch))
     {
@@ -384,14 +388,14 @@ void GainXP(std::shared_ptr<Character> ch, short ability, long gain)
         SetAbilityLevel(ch, ability, new_level);
 
         ch->Echo("You have now obtained %s level %d!\r\n",
-                 AbilityName[ability], GetAbilityLevel(ch, ability));
+                 AbilityName[(int)ability], GetAbilityLevel(ch, ability));
         AdvanceLevel(ch, ability);
     }
 
     UpdateClanMember(ch);
 }
 
-long LoseXP(std::shared_ptr<Character> ch, short ability, long loss)
+long LoseXP(std::shared_ptr<Character> ch, AbilityClass ability, long loss)
 {
     if(IsNpc(ch))
     {
@@ -487,7 +491,7 @@ static int GainMana(std::shared_ptr<Character> ch)
             return 0 - ch->Mana.Current;
         }
 
-        gain = umin(5, GetAbilityLevel(ch, FORCE_ABILITY) / 2);
+        gain = umin(5, GetAbilityLevel(ch, AbilityClass::Force) / 2);
 
         if(ch->Position < POS_SLEEPING)
         {
@@ -1355,31 +1359,31 @@ static void WeatherUpdate()
     switch(++time_info.Hour)
     {
     case 5:
-        weather_info.Sunlight = SUN_LIGHT;
+        weather_info.Sunlight = SunPosition::Light;
         strcat(buf, "The day has begun.");
         AT_TEMP = AT_YELLOW;
         break;
 
     case 6:
-        weather_info.Sunlight = SUN_RISE;
+        weather_info.Sunlight = SunPosition::Rise;
         strcat(buf, "The sun rises in the east.");
         AT_TEMP = AT_ORANGE;
         break;
 
     case 12:
-        weather_info.Sunlight = SUN_LIGHT;
+        weather_info.Sunlight = SunPosition::Light;
         strcat(buf, "It's noon.");
         AT_TEMP = AT_YELLOW;
         break;
 
     case 19:
-        weather_info.Sunlight = SUN_SET;
+        weather_info.Sunlight = SunPosition::Set;
         strcat(buf, "The sun slowly disappears in the west.");
         AT_TEMP = AT_BLOOD;
         break;
 
     case 20:
-        weather_info.Sunlight = SUN_DARK;
+        weather_info.Sunlight = SunPosition::Dark;
         strcat(buf, "The night has begun.");
         AT_TEMP = AT_DGREY;
         break;
@@ -1445,42 +1449,42 @@ static void WeatherUpdate()
     switch(weather_info.Sky)
     {
     default:
-        Log->Bug("%s: bad sky %d.", __FUNCTION__, weather_info.Sky);
-        weather_info.Sky = SKY_CLOUDLESS;
+        Log->Bug("%s: bad sky %d.", __FUNCTION__, (int)weather_info.Sky);
+        weather_info.Sky = SkyCondition::Cloudless;
         break;
 
-    case SKY_CLOUDLESS:
+    case SkyCondition::Cloudless:
         if(weather_info.Mmhg < 990
            || (weather_info.Mmhg < 1010 && NumberBits(2) == 0))
         {
             strcat(buf, "The sky is getting cloudy.");
-            weather_info.Sky = SKY_CLOUDY;
+            weather_info.Sky = SkyCondition::Cloudy;
             AT_TEMP = AT_GREY;
         }
         break;
 
-    case SKY_CLOUDY:
+    case SkyCondition::Cloudy:
         if(weather_info.Mmhg < 970
            || (weather_info.Mmhg < 990 && NumberBits(2) == 0))
         {
             strcat(buf, "It starts to rain.");
-            weather_info.Sky = SKY_RAINING;
+            weather_info.Sky = SkyCondition::Raining;
             AT_TEMP = AT_BLUE;
         }
 
         if(weather_info.Mmhg > 1030 && NumberBits(2) == 0)
         {
             strcat(buf, "The clouds disappear.");
-            weather_info.Sky = SKY_CLOUDLESS;
+            weather_info.Sky = SkyCondition::Cloudless;
             AT_TEMP = AT_WHITE;
         }
         break;
 
-    case SKY_RAINING:
+    case SkyCondition::Raining:
         if(weather_info.Mmhg < 970 && NumberBits(2) == 0)
         {
             strcat(buf, "Lightning flashes in the sky.");
-            weather_info.Sky = SKY_LIGHTNING;
+            weather_info.Sky = SkyCondition::Lightning;
             AT_TEMP = AT_YELLOW;
         }
 
@@ -1488,17 +1492,17 @@ static void WeatherUpdate()
            || (weather_info.Mmhg > 1010 && NumberBits(2) == 0))
         {
             strcat(buf, "The rain stopped.");
-            weather_info.Sky = SKY_CLOUDY;
+            weather_info.Sky = SkyCondition::Cloudy;
             AT_TEMP = AT_WHITE;
         }
         break;
 
-    case SKY_LIGHTNING:
+    case SkyCondition::Lightning:
         if(weather_info.Mmhg > 1010
            || (weather_info.Mmhg > 990 && NumberBits(2) == 0))
         {
             strcat(buf, "The lightning has stopped.");
-            weather_info.Sky = SKY_RAINING;
+            weather_info.Sky = SkyCondition::Raining;
             AT_TEMP = AT_GREY;
             break;
         }

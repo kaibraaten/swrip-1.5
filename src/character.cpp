@@ -100,9 +100,9 @@ Character::Character(std::shared_ptr<ProtoMobile> protoMob)
     Ability.Level.fill(0);
     Ability.Experience.fill(0);
 
-    for(int ability = 0; ability < MAX_ABILITY; ability++)
+    for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
     {
-        SetAbilityLevel(ability, TopLevel);
+        SetAbilityLevel(AbilityClass(ability), TopLevel);
     }
 
     if(protoMob->ArmorClass != 0)
@@ -224,23 +224,23 @@ bool IsWizVis(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 /*
  * Return how much exp a char has for a specified ability.
  */
-long GetAbilityXP(std::shared_ptr<Character> ch, short ability)
+long GetAbilityXP(std::shared_ptr<Character> ch, AbilityClass ability)
 {
-    if(ability >= MAX_ABILITY || ability < 0)
+    if(ability == AbilityClass::Max || ability == AbilityClass::None)
     {
         return 0;
     }
     else
     {
-        return ch->Ability.Experience[ability];
+        return ch->Ability.Experience[(int)ability];
     }
 }
 
-void SetAbilityXP(std::shared_ptr<Character> ch, short ability, long xp)
+void SetAbilityXP(std::shared_ptr<Character> ch, AbilityClass ability, long xp)
 {
-    if(ability >= MAX_ABILITY || ability < 0)
+    if(ability == AbilityClass::Max || ability == AbilityClass::None)
     {
-        Log->Bug("%s: ability out of range: %d", __FUNCTION__, ability);
+        Log->Bug("%s: ability out of range: %d", __FUNCTION__, (int)ability);
         return;
     }
 
@@ -250,7 +250,7 @@ void SetAbilityXP(std::shared_ptr<Character> ch, short ability, long xp)
         return;
     }
 
-    ch->Ability.Experience[ability] = xp;
+    ch->Ability.Experience[(int)ability] = xp;
 }
 
 /*
@@ -258,7 +258,7 @@ void SetAbilityXP(std::shared_ptr<Character> ch, short ability, long xp)
  */
 int GetXPWorth(std::shared_ptr<Character> ch)
 {
-    int xp = GetAbilityLevel(ch, COMBAT_ABILITY) * ch->TopLevel * 50;
+    int xp = GetAbilityLevel(ch, AbilityClass::Combat) * ch->TopLevel * 50;
     xp += ch->HitPoints.Max * 2;
     xp -= (ch->ArmorClass - 50) * 2;
     xp += (ch->BareNumDie * ch->BareSizeDie + GetDamageRoll(ch)) * 50;
@@ -479,18 +479,18 @@ bool HasDiploma(std::shared_ptr<Character> ch)
                 }) != nullptr;
 }
 
-short GetAbilityLevel(std::shared_ptr<Character> ch, short ability)
+short GetAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability)
 {
-    return ch->Ability.Level[ability];
+    return ch->Ability.Level[(int)ability];
 }
 
-void Character::SetAbilityLevel(short ability, int newlevel)
+void Character::SetAbilityLevel(AbilityClass ability, int newlevel)
 {
     int maxlevel = IsImmortal() ? 200 : MAX_ABILITY_LEVEL;
 
     if(newlevel >= 0 && newlevel <= maxlevel)
     {
-        Ability.Level[ability] = newlevel;
+        Ability.Level[(int)ability] = newlevel;
     }
     else
     {
@@ -498,7 +498,7 @@ void Character::SetAbilityLevel(short ability, int newlevel)
     }
 }
 
-void SetAbilityLevel(std::shared_ptr<Character> ch, short ability, int newlevel)
+void SetAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability, int newlevel)
 {
     ch->SetAbilityLevel(ability, newlevel);
 }
@@ -1238,7 +1238,9 @@ bool IsAwake(std::shared_ptr<Character> ch)
 int GetArmorClass(std::shared_ptr<Character> ch)
 {
     int dexterity_modifier = IsAwake(ch) ? DexterityBonus[GetCurrentDexterity(ch)].Defensive : 0;
-    int combat_level_modifier = ch->Race == RACE_DEFEL ? GetAbilityLevel(ch, COMBAT_ABILITY) * 2 + 5 : GetAbilityLevel(ch, COMBAT_ABILITY) / 2;
+    int combat_level_modifier = ch->Race == RACE_DEFEL
+        ? GetAbilityLevel(ch, AbilityClass::Combat) * 2 + 5
+        : GetAbilityLevel(ch, AbilityClass::Combat) / 2;
 
     return ch->ArmorClass + dexterity_modifier - combat_level_modifier;
 }
@@ -1313,7 +1315,7 @@ void SetWaitState(std::shared_ptr<Character> ch, short number_of_pulses)
 
 bool IsJedi(std::shared_ptr<Character> ch)
 {
-    return GetAbilityLevel(ch, FORCE_ABILITY) > 1;
+    return GetAbilityLevel(ch, AbilityClass::Force) > 1;
 }
 
 bool IsDroid(std::shared_ptr<Character> ch)
@@ -1598,16 +1600,14 @@ void AddReinforcements(std::shared_ptr<Character> ch)
 
         for(int mob_cnt = 0; mob_cnt < 3; mob_cnt++)
         {
-            int ability = 0;
-
             mob[mob_cnt] = CreateMobile(pMobIndex);
             CharacterToRoom(mob[mob_cnt], ch->InRoom);
             Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], ActTarget::Room);
-            mob[mob_cnt]->TopLevel = multiplier / 1.4 * GetAbilityLevel(ch, LEADERSHIP_ABILITY) / 3;
+            mob[mob_cnt]->TopLevel = multiplier / 1.4 * GetAbilityLevel(ch, AbilityClass::Leadership) / 3;
 
-            for(ability = 0; ability < MAX_ABILITY; ability++)
+            for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
             {
-                SetAbilityLevel(mob[mob_cnt], ability, mob[mob_cnt]->TopLevel);
+                SetAbilityLevel(mob[mob_cnt], AbilityClass(ability), mob[mob_cnt]->TopLevel);
             }
 
             mob[mob_cnt]->HitPoints.Current = mob[mob_cnt]->TopLevel * 15;
@@ -1636,8 +1636,6 @@ void AddReinforcements(std::shared_ptr<Character> ch)
     }
     else
     {
-        int ability = 0;
-
         if(ch->BackupMob == MOB_VNUM_IMP_ELITE ||
            ch->BackupMob == MOB_VNUM_NR_ELITE ||
            ch->BackupMob == MOB_VNUM_MERC_ELITE)
@@ -1658,11 +1656,11 @@ void AddReinforcements(std::shared_ptr<Character> ch)
 
         Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob, ActTarget::Room);
         ch->Echo("Your guard has arrived.\r\n");
-        mob->TopLevel = multiplier * GetAbilityLevel(ch, LEADERSHIP_ABILITY) / 2;
+        mob->TopLevel = multiplier * GetAbilityLevel(ch, AbilityClass::Leadership) / 2;
 
-        for(ability = 0; ability < MAX_ABILITY; ability++)
+        for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
         {
-            SetAbilityLevel(mob, ability, mob->TopLevel);
+            SetAbilityLevel(mob, AbilityClass(ability), mob->TopLevel);
         }
 
         mob->HitPoints.Current = mob->TopLevel * 10;
@@ -1728,7 +1726,7 @@ bool HasPermanentSneak(std::shared_ptr<Character> ch)
 
 unsigned int GetKillTrackCount(std::shared_ptr<Character> ch)
 {
-    return urange(2, ((GetAbilityLevel(ch, COMBAT_ABILITY) + 3) * MAX_KILLTRACK) / LEVEL_AVATAR, MAX_KILLTRACK);
+    return urange(2, ((GetAbilityLevel(ch, AbilityClass::Combat) + 3) * MAX_KILLTRACK) / LEVEL_AVATAR, MAX_KILLTRACK);
 }
 
 std::shared_ptr<Object> GetFirstObjectOfType(std::shared_ptr<Character> ch, ItemTypes type)

@@ -9,7 +9,7 @@
 
 void do_showstatistic(std::shared_ptr<Character> ch, std::string argument)
 {
-    int pclass = -1, iR = 0, iC = 0, iC2 = 0;
+    auto pclass = AbilityClass::None;
     const Race *race = NULL;
     bool chk_race = false;
     char buf[MAX_INPUT_LENGTH];
@@ -31,7 +31,7 @@ void do_showstatistic(std::shared_ptr<Character> ch, std::string argument)
         }
     }
 
-    if(!race && pclass < 0)
+    if(!race && pclass == AbilityClass::None)
     {
         ch->Echo("No such race or class.\r\n");
         return;
@@ -81,28 +81,28 @@ void do_showstatistic(std::shared_ptr<Character> ch, std::string argument)
                  raceCh->PermStats.Dex, raceCh->PermStats.Con, raceCh->PermStats.Cha);
         ch->Echo("                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|");
 
-        for(iC = 0; iC < MAX_ABILITY; iC++)
+        for(int iC = 0; iC < (int)AbilityClass::Max; iC++)
         {
-            if(iC == FORCE_ABILITY && !SysData.CanChooseJedi)
+            if(AbilityClass(iC) == AbilityClass::Force && !SysData.CanChooseJedi)
             {
                 continue;
             }
 
-            raceCh->Ability.Main = iC;
+            raceCh->Ability.Main = AbilityClass(iC);
             sprintf(buf, "\r\n&c%-20s &B| &C", Capitalize(AbilityName[iC]).c_str());
 
-            for(iC2 = 0; iC2 < MAX_ABILITY; iC2++)
+            for(int iC2 = 0; iC2 < (int)AbilityClass::Max; iC2++)
             {
-                if(iC2 == FORCE_ABILITY)
+                auto ability = AbilityClass(iC2);
+                
+                if(ability == AbilityClass::Force
+                   || ability == AbilityClass::Commando)
                     continue;
 
-                if(iC2 == COMMANDO_ABILITY)
-                    continue;
-
-                if(iC2 == SMUGGLING_ABILITY)
-                    sprintf(buf2, "%-3d+ &B| &C", GetMaxAbilityLevel(raceCh, iC2));
+                if(ability == AbilityClass::Smuggling)
+                    sprintf(buf2, "%-3d+ &B| &C", GetMaxAbilityLevel(raceCh, ability));
                 else
-                    sprintf(buf2, "%-3d &B| &C", GetMaxAbilityLevel(raceCh, iC2));
+                    sprintf(buf2, "%-3d &B| &C", GetMaxAbilityLevel(raceCh, ability));
 
                 strcat(buf, buf2);
             }
@@ -112,12 +112,12 @@ void do_showstatistic(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
-        sprintf(buf, "&R%s Statistics\r\n", Capitalize(AbilityName[pclass]).c_str());
+        sprintf(buf, "&R%s Statistics\r\n", Capitalize(AbilityName[(int)pclass]).c_str());
         ch->Echo("%s", buf);
 
         ch->Echo("                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|");
 
-        for(iR = 0; iR < MAX_RACE; iR++)
+        for(int iR = 0; iR < MAX_RACE; iR++)
         {
             if(!RaceIsAvailableToPlayers(&RaceTable[iR]))
             {
@@ -133,12 +133,12 @@ void do_showstatistic(std::shared_ptr<Character> ch, std::string argument)
             raceCh->PermStats.Cha = 20 + RaceTable[raceCh->Race].Stats.ModCha;
             sprintf(buf, "\r\n&c%-20s &B| &C", RaceTable[iR].Name);
 
-            for(iC2 = 0; iC2 < FORCE_ABILITY; iC2++)
+            for(int iC2 = 0; iC2 < (int)AbilityClass::Force; iC2++)
             {
-                if(iC2 == SMUGGLING_ABILITY)
-                    sprintf(buf2, "%-3d+ &B| &C", GetMaxAbilityLevel(raceCh, iC2));
+                if(AbilityClass(iC2) == AbilityClass::Smuggling)
+                    sprintf(buf2, "%-3d+ &B| &C", GetMaxAbilityLevel(raceCh, AbilityClass(iC2)));
                 else
-                    sprintf(buf2, "%-3d &B| &C", GetMaxAbilityLevel(raceCh, iC2));
+                    sprintf(buf2, "%-3d &B| &C", GetMaxAbilityLevel(raceCh, AbilityClass(iC2)));
 
                 strcat(buf, buf2);
             }

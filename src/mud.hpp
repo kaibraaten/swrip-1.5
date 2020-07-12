@@ -67,8 +67,8 @@ class Weather
 public:
     int Mmhg = 0;
     int Change = 0;
-    int Sky = 0;
-    int Sunlight = 0;
+    SkyCondition Sky = SkyCondition::Cloudless;
+    SunPosition Sunlight = SunPosition::Light;
 };
 
 /*
@@ -267,7 +267,7 @@ extern const std::array<const ForceBonusType, MAX_STAT + 1> ForceBonus;
 
 extern const std::array<const LiquidType, LIQ_MAX> LiquidTable;
 
-extern const std::array<const char *const, MAX_ABILITY> AbilityName;
+extern const std::array<const char *const, (int)AbilityClass::Max> AbilityName;
 extern const std::array<const char *const, MAX_SPACEOBJECT_TYPE> SpaceobjectTypeName;
 extern const std::array<const short, SECT_MAX> MovementLoss;
 extern const std::array<const char *const, MAX_WEAR> WhereName;
@@ -971,7 +971,7 @@ int CountLanguages(int languages);
 /* act_info.c */
 bool RaceIsAvailableToPlayers(const Race *race);
 int GetRaceFromName(const std::string &arg);
-int GetClassFromName(const std::string &arg);
+AbilityClass GetClassFromName(const std::string &arg);
 void ShowCharacterCondition(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 std::string FormatObjectToCharacter(std::shared_ptr<Object> obj, std::shared_ptr<Character> ch, bool fShort);
 void ShowObjectListToCharacter(const std::list<std::shared_ptr<Object>> &list, std::shared_ptr<Character> ch,
@@ -1014,7 +1014,7 @@ const char *GetDirectionName(DirectionType dir);
 DirectionType GetReverseDirection(DirectionType dir);
 SpaceobjectType GetSpaceobjectType(const std::string &name);
 SectorType GetSectorType(const std::string &type);
-int GetAbility(const std::string &name);
+AbilityClass GetAbility(const std::string &name);
 size_t GetSpiceTableSize(void);
 const char *GetSpiceTypeName(size_t spicetype);
 size_t GetCrystalTableSize(void);
@@ -1319,14 +1319,14 @@ SpellFun *GetSpellFunction(const std::string &name);
 CmdFun *GetSkillFunction(const std::string &name);
 
 /* update.c */
-void AdvanceLevel(std::shared_ptr<Character> ch, int ability);
-void GainXP(std::shared_ptr<Character> ch, short ability, long gain);
-long LoseXP(std::shared_ptr<Character> ch, short ability, long loss);
+void AdvanceLevel(std::shared_ptr<Character> ch, AbilityClass ability);
+void GainXP(std::shared_ptr<Character> ch, AbilityClass ability, long gain);
+long LoseXP(std::shared_ptr<Character> ch, AbilityClass ability, long loss);
 void GainCondition(std::shared_ptr<Character> ch, int iCond, int value);
-void UpdateHandler(void);
+void UpdateHandler();
 void RebootCheck(time_t reset);
 void RemovePortal(std::shared_ptr<Object> portal);
-int GetMaxAbilityLevel(std::shared_ptr<Character> ch, int ability);
+int GetMaxAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability);
 
 /* newscore.c */
 const char *GetCharacterRace(std::shared_ptr<Character> ch);

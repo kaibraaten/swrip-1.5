@@ -88,7 +88,7 @@ void do_smalltalk(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_smalltalk]->Beats);
 
-    if(percent - GetAbilityLevel(ch, DIPLOMACY_ABILITY) + victim->TopLevel > GetSkillLevel(ch, gsn_smalltalk))
+    if(percent - GetAbilityLevel(ch, AbilityClass::Diplomacy) + victim->TopLevel > GetSkillLevel(ch, gsn_smalltalk))
     {
         /*
          * Failure.
@@ -125,7 +125,7 @@ void do_smalltalk(std::shared_ptr<Character> ch, std::string argument)
     planet->PopularSupport += 0.2;
     ch->Echo("Popular support for your organization increases slightly.\r\n");
 
-    GainXP(ch, DIPLOMACY_ABILITY, victim->TopLevel * 10);
+    GainXP(ch, AbilityClass::Diplomacy, victim->TopLevel * 10);
     ch->Echo("You gain %d diplomacy experience.\r\n", victim->TopLevel * 10);
 
     LearnFromSuccess(ch, gsn_smalltalk);

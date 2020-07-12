@@ -232,11 +232,12 @@ void do_slookup(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("Immroom   : %s\r\n",
                      skill->Messages.VictimImmune.ToRoom.c_str());
 
-        if(skill->Type != SKILL_HERB && skill->Guild >= 0 && skill->Guild < MAX_ABILITY)
+        if(skill->Type != SKILL_HERB
+           && skill->Class > AbilityClass::None && skill->Class < AbilityClass::Max)
         {
-            sprintf(buf, "Ability: %s (%d)   Align: %4d   lvl: %3d\r\n",
-                    AbilityName[skill->Guild], skill->Guild, skill->Alignment, skill->Level);
-            ch->Echo("%s", buf);
+            ch->Echo("Ability: %s (%d)   Align: %4d   lvl: %3d\r\n",
+                     AbilityName[(int)skill->Class], (int)skill->Class,
+                     skill->Alignment, skill->Level);
         }
 
         ch->Echo("\r\n");

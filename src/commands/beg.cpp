@@ -83,7 +83,7 @@ void do_beg(std::shared_ptr<Character> ch, std::string argument)
     }
 
     SetWaitState(ch, SkillTable[gsn_beg]->Beats);
-    percent = GetRandomPercent() + GetAbilityLevel(ch, SMUGGLING_ABILITY) + victim->TopLevel;
+    percent = GetRandomPercent() + GetAbilityLevel(ch, AbilityClass::Smuggling) + victim->TopLevel;
 
     if(percent > GetSkillLevel(ch, gsn_beg))
     {
@@ -124,9 +124,9 @@ void do_beg(std::shared_ptr<Character> ch, std::string argument)
     victim->Gold -= amount;
     ch->Echo("%s gives you %d credits.\r\n", victim->ShortDescr.c_str(), amount);
     LearnFromSuccess(ch, gsn_beg);
-    xp = umin(amount * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, SMUGGLING_ABILITY))));
+    xp = umin(amount * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Smuggling) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Smuggling))));
     xp = umin(xp, ComputeXP(ch, victim));
-    GainXP(ch, SMUGGLING_ABILITY, xp);
+    GainXP(ch, AbilityClass::Smuggling, xp);
     ch->Echo("&WYou gain %d smuggling experience points!\r\n", xp);
     Act(AT_ACTION, "$N gives $n some money.", ch, NULL, victim, ActTarget::NotVict);
     Act(AT_ACTION, "You give $n some money.", ch, NULL, victim, ActTarget::Vict);

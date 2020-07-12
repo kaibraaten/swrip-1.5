@@ -28,7 +28,7 @@ public:
     int Slot = 0;                   /* Slot for #OBJECT loading     */
     int Mana = 0;               /* Minimum mana used            */
     int Beats = 0;                  /* Rounds required to use skill */
-    int Guild = 0;                  /* Which guild the skill belongs to */
+    AbilityClass Class = AbilityClass::None; /* Which guild the skill belongs to */
     int Level = 0;              /* Minimum level to be able to cast */
     SkillType Type = 0;                   /* Spell/Skill/Weapon/Tongue    */
     std::bitset<Flag::MAX> Flags;                  /* extra stuff                  */

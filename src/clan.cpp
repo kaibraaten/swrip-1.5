@@ -179,7 +179,7 @@ void ShowClanMembers(std::shared_ptr<Character> ch, const std::shared_ptr<Clan> 
                 ch->Echo("%3d  %-15s %-17s %9d %9d %19s\r\n",
                          member->Level,
                          Capitalize(member->Name).c_str(),
-                         AbilityName[member->Ability],
+                         AbilityName[(int)member->Ability],
                          member->Kills,
                          member->Deaths,
                          FormatDate(&member->Since).c_str());
@@ -195,7 +195,7 @@ void ShowClanMembers(std::shared_ptr<Character> ch, const std::shared_ptr<Clan> 
                     ch->Echo("%3d  %-15s %-17s %9d %9d %19s\r\n",
                              member->Level,
                              Capitalize(member->Name).c_str(),
-                             AbilityName[member->Ability],
+                             AbilityName[(int)member->Ability],
                              member->Kills,
                              member->Deaths,
                              FormatDate(&member->Since).c_str());
@@ -211,7 +211,7 @@ void ShowClanMembers(std::shared_ptr<Character> ch, const std::shared_ptr<Clan> 
             ch->Echo("%3d  %-15s %-17s %9d %9d %19s\r\n",
                      member->Level,
                      Capitalize(member->Name).c_str(),
-                     AbilityName[member->Ability],
+                     AbilityName[(int)member->Ability],
                      member->Kills,
                      member->Deaths,
                      FormatDate(&member->Since).c_str());

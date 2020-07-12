@@ -52,14 +52,15 @@ void do_teach(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(SkillTable[sn]->Guild < 0 || SkillTable[sn]->Guild >= MAX_ABILITY)
+        if(SkillTable[sn]->Class == AbilityClass::None
+           || SkillTable[sn]->Class == AbilityClass::Max)
         {
             Act(AT_TELL, "Thats just not going to happen.",
                 victim, NULL, ch, ActTarget::Vict);
             return;
         }
 
-        if(GetAbilityLevel(victim, SkillTable[sn]->Guild) < SkillTable[sn]->Level)
+        if(GetAbilityLevel(victim, SkillTable[sn]->Class) < SkillTable[sn]->Level)
         {
             Act(AT_TELL, "$n isn't ready to learn that yet.",
                 victim, NULL, ch, ActTarget::Vict);

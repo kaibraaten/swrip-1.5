@@ -42,8 +42,9 @@ void do_disarm(std::shared_ptr<Character> ch, std::string argument)
     }
 
     SetWaitState(ch, SkillTable[gsn_disarm]->Beats);
-    percent = GetRandomPercent() + GetAbilityLevel(victim, COMBAT_ABILITY)
-        - GetAbilityLevel(ch, COMBAT_ABILITY)
+    percent = GetRandomPercent()
+        + GetAbilityLevel(victim, AbilityClass::Combat)
+        - GetAbilityLevel(ch, AbilityClass::Combat)
         - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 15);
 
     if(!CanSeeObject(ch, obj))

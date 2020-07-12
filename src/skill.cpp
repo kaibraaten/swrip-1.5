@@ -301,21 +301,22 @@ void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
     if(sn == Skills->LookupSkill("meditate") && !IsJedi(ch))
     {
         if(GetSkillLevel(ch, sn) < 50
-           || (GetAbilityLevel(ch, FORCE_ABILITY) == 1
+           || (GetAbilityLevel(ch, AbilityClass::Force) == 1
                && ch->PermStats.Frc > 0))
         {
-            GainXP(ch, FORCE_ABILITY, 25);
+            GainXP(ch, AbilityClass::Force, 25);
         }
     }
 
     sklvl = SkillTable[sn]->Level;
 
-    if(SkillTable[sn]->Guild < 0 || SkillTable[sn]->Guild >= MAX_ABILITY)
+    if(SkillTable[sn]->Class == AbilityClass::None
+       || SkillTable[sn]->Class == AbilityClass::Max)
     {
         return;
     }
 
-    adept = (GetAbilityLevel(ch, SkillTable[sn]->Guild) - SkillTable[sn]->Level) * 5 + 50;
+    adept = (GetAbilityLevel(ch, SkillTable[sn]->Class) - SkillTable[sn]->Level) * 5 + 50;
     adept = umin(adept, 100);
 
     if(GetSkillLevel(ch, sn) >= adept)
@@ -323,9 +324,9 @@ void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
         return;
     }
 
-    if(sklvl == 0 || sklvl > GetAbilityLevel(ch, SkillTable[sn]->Guild))
+    if(sklvl == 0 || sklvl > GetAbilityLevel(ch, SkillTable[sn]->Class))
     {
-        sklvl = GetAbilityLevel(ch, SkillTable[sn]->Guild);
+        sklvl = GetAbilityLevel(ch, SkillTable[sn]->Class);
     }
 
     if(GetSkillLevel(ch, sn) < 100)
@@ -366,7 +367,7 @@ void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
             }
         }
 
-        GainXP(ch, SkillTable[sn]->Guild, gain);
+        GainXP(ch, SkillTable[sn]->Class, gain);
     }
 }
 
@@ -756,8 +757,8 @@ static void PushSkill(lua_State *L, std::shared_ptr<Skill> skill)
 
     LuaSetfieldString(L, "Name", skill->Name);
     LuaSetfieldString(L, "Ability",
-                      skill->Guild > ABILITY_NONE && skill->Guild < MAX_ABILITY
-                      ? AbilityName[skill->Guild] : "none");
+                      skill->Class > AbilityClass::None && skill->Class < AbilityClass::Max
+                      ? AbilityName[static_cast<int>(skill->Class)] : "none");
     LuaSetfieldString(L, "Position", PositionName[skill->Position]);
     LuaSetfieldString(L, "Type", SkillTypeName[skill->Type]);
 
@@ -1005,11 +1006,11 @@ static std::shared_ptr<Skill> LoadSkillOrHerb(lua_State *L)
     LuaGetfieldString(L, "Ability",
                       [skill](const std::string &abilityName)
                       {
-                          skill->Guild = GetAbility(abilityName);
+                          skill->Class = GetAbility(abilityName);
 
-                          if(skill->Guild >= MAX_ABILITY)
+                          if(skill->Class >= AbilityClass::Max)
                           {
-                              skill->Guild = ABILITY_NONE;
+                              skill->Class = AbilityClass::None;
                           }
                       });
     LuaGetfieldString(L, "Position",

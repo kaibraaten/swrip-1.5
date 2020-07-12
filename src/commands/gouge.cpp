@@ -39,7 +39,7 @@ void do_gouge(std::shared_ptr<Character> ch, std::string argument)
 
     if(IsNpc(ch) || percent < GetSkillLevel(ch, gsn_gouge))
     {
-        dam = GetRandomNumberFromRange(1, GetAbilityLevel(ch, COMBAT_ABILITY));
+        dam = GetRandomNumberFromRange(1, GetAbilityLevel(ch, AbilityClass::Combat));
         global_retcode = InflictDamage(ch, victim, dam, gsn_gouge);
 
         if(global_retcode == rNONE)
@@ -50,7 +50,7 @@ void do_gouge(std::shared_ptr<Character> ch, std::string argument)
                 af->Type = gsn_blindness;
                 af->Location = APPLY_HITROLL;
                 af->Modifier = -6;
-                af->Duration = 3 + (GetAbilityLevel(ch, COMBAT_ABILITY) / 20);
+                af->Duration = 3 + (GetAbilityLevel(ch, AbilityClass::Combat) / 20);
                 af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Blind });
                 AffectToCharacter(victim, af);
                 Act(AT_SKILL, "You can't see a thing!", victim, NULL, NULL, ActTarget::Char);

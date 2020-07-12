@@ -398,7 +398,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
         else
         {
             StartTimer(&time_used);
-            retcode = skill->SpellFunction(sn, GetAbilityLevel(ch, FORCE_ABILITY), ch, vo);
+            retcode = skill->SpellFunction(sn, GetAbilityLevel(ch, AbilityClass::Force), ch, vo);
             StopTimer(&time_used);
             UpdateNumberOfTimesUsed(&time_used, skill->UseRec);
         }
@@ -410,14 +410,14 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
     if(retcode != rSPELL_FAILED)
     {
         int force_exp = skill->Level * skill->Level * 10;
-        force_exp = urange(0, force_exp, (GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY))) / 35);
+        force_exp = urange(0, force_exp, (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Force) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Force))) / 35);
 
         if(!IsFighting(ch))
         {
             ch->Echo("You gain %d force experience.\r\n", force_exp);
         }
 
-        GainXP(ch, FORCE_ABILITY, force_exp);
+        GainXP(ch, AbilityClass::Force, force_exp);
         LearnFromSuccess(ch, sn);
     }
     else

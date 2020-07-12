@@ -162,7 +162,7 @@ bool CheckParry(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim
 
     if(IsNpc(victim))
     {
-        chances = umin(60, GetAbilityLevel(victim, COMBAT_ABILITY));
+        chances = umin(60, GetAbilityLevel(victim, AbilityClass::Combat));
     }
     else
     {

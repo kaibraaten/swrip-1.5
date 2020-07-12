@@ -32,7 +32,7 @@ void do_kick(std::shared_ptr<Character> ch, std::string argument)
     if(IsNpc(ch) || GetRandomPercent() < GetSkillLevel(ch, gsn_kick))
     {
         LearnFromSuccess(ch, gsn_kick);
-        global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, COMBAT_ABILITY)), gsn_kick);
+        global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, AbilityClass::Combat)), gsn_kick);
     }
     else
     {

@@ -119,7 +119,7 @@ void do_mass_propaganda(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Popular support for the current government decreases.\r\n");
     }
 
-    GainXP(ch, DIPLOMACY_ABILITY, victim->TopLevel * 100);
+    GainXP(ch, AbilityClass::Diplomacy, victim->TopLevel * 100);
     ch->Echo("You gain %d diplomacy experience.\r\n", victim->TopLevel * 100);
 
     LearnFromSuccess(ch, gsn_masspropaganda);

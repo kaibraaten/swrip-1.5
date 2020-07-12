@@ -114,47 +114,47 @@ void do_gather_intelligence(std::shared_ptr<Character> ch, std::string argument)
         {
             switch(victim->Ability.Main)
             {
-            case COMBAT_ABILITY:
+            case AbilityClass::Combat:
                 sprintf(buf, "%s appears to have centered training on combat.",
                         victim->Name.c_str());
                 break;
 
-            case PILOTING_ABILITY:
+            case AbilityClass::Piloting:
                 sprintf(buf, "%s appears to have centered training on piloting ships.",
                         victim->Name.c_str());
                 break;
 
-            case ENGINEERING_ABILITY:
+            case AbilityClass::Engineering:
                 sprintf(buf, "%s appears to have centered training on engineering.",
                         victim->Name.c_str());
                 break;
 
-            case HUNTING_ABILITY:
+            case AbilityClass::Hunting:
                 sprintf(buf, "%s appears to have centered training on bounty hunting.",
                         victim->Name.c_str());
                 break;
 
-            case SMUGGLING_ABILITY:
+            case AbilityClass::Smuggling:
                 sprintf(buf, "%s appears to have centered training on smuggling.",
                         victim->Name.c_str());
                 break;
 
-            case DIPLOMACY_ABILITY:
+            case AbilityClass::Diplomacy:
                 sprintf(buf, "%s appears to have centered training on diplomacy.",
                         victim->Name.c_str());
                 break;
 
-            case LEADERSHIP_ABILITY:
+            case AbilityClass::Leadership:
                 sprintf(buf, "%s appears to have centered training on leadership.",
                         victim->Name.c_str());
                 break;
 
-            case FORCE_ABILITY:
+            case AbilityClass::Force:
                 sprintf(buf, "%s appears to have centered attention on studying the Force.",
                         victim->Name.c_str());
                 break;
 
-            case COMMANDO_ABILITY:
+            case AbilityClass::Commando:
                 sprintf(buf, "%s has not centered training on anything, but seems to mix smuggling with piloting abilities.", victim->Name.c_str());
                 break;
 

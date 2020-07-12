@@ -15,8 +15,8 @@ void do_clone(std::shared_ptr<Character> ch, std::string argument)
     long played = 0, frc_experience = 0;
     std::string clanname;
     std::string bestowments;
-    std::array<int, MAX_ABILITY> experience;
-    std::array<int, MAX_ABILITY> skill_level;
+    std::array<int, (int)AbilityClass::Max> experience;
+    std::array<int, (int)AbilityClass::Max> skill_level;
     short frc = 0, change = 0, change2 = 0, frc_level = 0, low_frc = 0, mana = 0;
 
     experience.fill(0);
@@ -70,7 +70,7 @@ void do_clone(std::shared_ptr<Character> ch, std::string argument)
        well as a slight chance of gaining force, also depending on
        the magnitude of the character's force */
 
-        if (ch->Ability.Main == FORCE_ABILITY)
+        if (ch->Ability.Main == AbilityClass::Force)
             low_frc = 1;
 
         if (ch->PermStats.Frc > 0)
@@ -90,12 +90,12 @@ void do_clone(std::shared_ptr<Character> ch, std::string argument)
             ch->PermStats.Frc = urange(low_frc, ch->PermStats.Frc + change, 20);
         }
 
-        frc_level = GetAbilityLevel(ch, FORCE_ABILITY);
-        frc_experience = GetAbilityXP(ch, FORCE_ABILITY);
+        frc_level = GetAbilityLevel(ch, AbilityClass::Force);
+        frc_experience = GetAbilityXP(ch, AbilityClass::Force);
 
         /* Droids and hunters dont get force. DV */
 
-        if (ch->Ability.Main == HUNTING_ABILITY)
+        if (ch->Ability.Main == AbilityClass::Hunting)
             ch->PermStats.Frc = low_frc;
 
         if (IsDroid(ch))
@@ -105,14 +105,14 @@ void do_clone(std::shared_ptr<Character> ch, std::string argument)
         {
             if (ch->PermStats.Frc > 0)
             {
-                SetAbilityXP(ch, FORCE_ABILITY, 500);
-                SetAbilityLevel(ch, FORCE_ABILITY, 2);
+                SetAbilityXP(ch, AbilityClass::Force, 500);
+                SetAbilityLevel(ch, AbilityClass::Force, 2);
             }
         }
         else
         {
-            SetAbilityXP(ch, FORCE_ABILITY, 0);
-            SetAbilityLevel(ch, FORCE_ABILITY, 1);
+            SetAbilityXP(ch, AbilityClass::Force, 0);
+            SetAbilityLevel(ch, AbilityClass::Force, 1);
         }
 
         ch->Mana.Current = 100 + 100 * ch->PermStats.Frc;
@@ -143,16 +143,16 @@ void do_clone(std::shared_ptr<Character> ch, std::string argument)
         {
             ch->Echo("The medical droids tell you your genetic material has degraded significantly.\r\n");
 
-            for (short ability = 0; ability < MAX_ABILITY; ability++)
+            for (short ability = 0; ability < (int)AbilityClass::Max; ability++)
             {
-                experience[ability] = GetAbilityXP(ch, ability);
-                skill_level[ability] = GetAbilityLevel(ch, ability);
-                SetAbilityXP(ch, ability, 0);
-                SetAbilityLevel(ch, ability, 1);
+                experience[ability] = GetAbilityXP(ch, AbilityClass(ability));
+                skill_level[ability] = GetAbilityLevel(ch, AbilityClass(ability));
+                SetAbilityXP(ch, AbilityClass(ability), 0);
+                SetAbilityLevel(ch, AbilityClass(ability), 1);
             }
 
-            experience[FORCE_ABILITY] = frc_experience;
-            skill_level[FORCE_ABILITY] = frc_level;
+            experience[(int)AbilityClass::Force] = frc_experience;
+            skill_level[(int)AbilityClass::Force] = frc_level;
         }
 
         ch->Mana.Current = 100 + (ch->PermStats.Frc * 100);
@@ -177,16 +177,16 @@ void do_clone(std::shared_ptr<Character> ch, std::string argument)
 
         ch->PermStats.Frc = frc;
 
-        SetAbilityLevel(ch, FORCE_ABILITY, frc_level);
-        SetAbilityXP(ch, FORCE_ABILITY, frc_experience);
+        SetAbilityLevel(ch, AbilityClass::Force, frc_level);
+        SetAbilityXP(ch, AbilityClass::Force, frc_experience);
         ch->Mana.Current = mana;
 
         if (ch->PCData->Clones == 2)
         {
-            for (int ability = 0; ability < MAX_ABILITY; ability++)
+            for (int ability = 0; ability < (int)AbilityClass::Max; ability++)
             {
-                SetAbilityXP(ch, ability, experience[ability]);
-                SetAbilityLevel(ch, ability, skill_level[ability]);
+                SetAbilityXP(ch, AbilityClass(ability), experience[ability]);
+                SetAbilityLevel(ch, AbilityClass(ability), skill_level[ability]);
             }
         }
 

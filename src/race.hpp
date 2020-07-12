@@ -22,7 +22,7 @@ public:
         short ModFrc = 0;               /* Frc      "                   */
     } Stats;
 
-    std::array<int, MAX_ABILITY> AbilityMod;
+    std::array<int, (int)AbilityClass::Max> AbilityMod;
 
     short Hit = 0;
     short Mana = 0;

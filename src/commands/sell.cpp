@@ -85,9 +85,10 @@ void do_sell(std::shared_ptr<Character> ch, std::string arg)
     }
     else if(obj->Flags.test(Flag::Obj::Contraband))
     {
-        long ch_exp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, SMUGGLING_ABILITY))) / 10);
+        auto ability = AbilityClass::Smuggling;
+        long ch_exp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))) / 10);
         ch->Echo("You receive %ld smuggling experience for unloading your contraband.\r\n ", ch_exp);
-        GainXP(ch, SMUGGLING_ABILITY, ch_exp);
+        GainXP(ch, ability, ch_exp);
 
         if(obj->ItemType == ITEM_SPICE || obj->ItemType == ITEM_RAWSPICE)
             ExtractObject(obj);

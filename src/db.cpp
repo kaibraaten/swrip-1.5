@@ -378,15 +378,15 @@ void BootDatabase(bool fCopyOver)
     time_info.Year = lmonth / 17;
 
     if(time_info.Hour < 5)
-        weather_info.Sunlight = SUN_DARK;
+        weather_info.Sunlight = SunPosition::Dark;
     else if(time_info.Hour < 6)
-        weather_info.Sunlight = SUN_RISE;
+        weather_info.Sunlight = SunPosition::Rise;
     else if(time_info.Hour < 19)
-        weather_info.Sunlight = SUN_LIGHT;
+        weather_info.Sunlight = SunPosition::Light;
     else if(time_info.Hour < 20)
-        weather_info.Sunlight = SUN_SET;
+        weather_info.Sunlight = SunPosition::Set;
     else
-        weather_info.Sunlight = SUN_DARK;
+        weather_info.Sunlight = SunPosition::Dark;
 
     weather_info.Change = 0;
     weather_info.Mmhg = 960;
@@ -397,13 +397,13 @@ void BootDatabase(bool fCopyOver)
         weather_info.Mmhg += GetRandomNumberFromRange(1, 80);
 
     if(weather_info.Mmhg <= 980)
-        weather_info.Sky = SKY_LIGHTNING;
+        weather_info.Sky = SkyCondition::Lightning;
     else if(weather_info.Mmhg <= 1000)
-        weather_info.Sky = SKY_RAINING;
+        weather_info.Sky = SkyCondition::Raining;
     else if(weather_info.Mmhg <= 1020)
-        weather_info.Sky = SKY_CLOUDY;
+        weather_info.Sky = SkyCondition::Cloudy;
     else
-        weather_info.Sky = SKY_CLOUDLESS;
+        weather_info.Sky = SkyCondition::Cloudless;
 
     /*
      * Assign gsn's for skills which need them.

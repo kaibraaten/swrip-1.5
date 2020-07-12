@@ -1389,15 +1389,15 @@ const std::array<const char * const, MAX_NPC_RACE> NpcRace =
 };
 
 
-const std::array<const char * const, MAX_ABILITY> AbilityName =
+const std::array<const char * const, (int)AbilityClass::Max> AbilityName =
 {
     "combat", "piloting", "engineering", "bounty hunting", "smuggling",
     "diplomacy", "leadership", "force", "commando"
 };
 
-int GetAbility(const std::string &type)
+AbilityClass GetAbility(const std::string &type)
 {
-    return GetInArray(type, AbilityName, StrCmp);
+    return (AbilityClass) GetInArray(type, AbilityName, StrCmp);
 }
 
 /*

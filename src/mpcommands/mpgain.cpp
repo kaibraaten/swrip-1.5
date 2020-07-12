@@ -7,8 +7,6 @@ void do_mpgain(std::shared_ptr<Character> ch, std::string argument)
     std::string arg2;
     std::string arg3;
     std::shared_ptr<Character> victim;
-    long xp = 0;
-    int  ability = 0;
 
     if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
@@ -51,16 +49,19 @@ void do_mpgain(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    ability = ToLong(arg2);
-    xp = ToLong(arg3);
+    int numberArg = ToLong(arg2);
+    long xp = ToLong(arg3);
 
-    if(ability < 0 || ability >= MAX_ABILITY)
+    if(numberArg <= (int)AbilityClass::None
+       || numberArg >= (int)AbilityClass::Max)
     {
         ch->Echo("Mpgain which ability?\r\n");
         ProgBug("Mpgain: ability out of range", ch);
         return;
     }
 
+    auto ability = AbilityClass(numberArg);
+    
     if((xp < 1))
     {
         ch->Echo("Mpgain how much?\r\n");
@@ -70,6 +71,6 @@ void do_mpgain(std::shared_ptr<Character> ch, std::string argument)
 
     xp = urange(1, xp, (GetRequiredXpForLevel(GetAbilityLevel(victim, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, ability))));
 
-    victim->Echo("You gain %ld %s experience.\r\n", xp, AbilityName[ability]);
+    victim->Echo("You gain %ld %s experience.\r\n", xp, AbilityName[(int)ability]);
     GainXP(victim, ability, xp);
 }

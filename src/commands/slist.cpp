@@ -5,13 +5,12 @@
 
 void do_slist(std::shared_ptr<Character> ch, std::string argument)
 {
-    int sn = 0, i = 0;
+    int sn = 0;
     char skn[MAX_INPUT_LENGTH];
     char skn2[MAX_INPUT_LENGTH / 2];
     int lowlev = 1, hilev = MAX_ABILITY_LEVEL;
     int col = 0;
-    int ability = 0;
-    int filter_ability = GetAbility(argument);
+    auto filter_ability = GetAbility(argument);
 
     if(IsNpc(ch))
     {
@@ -22,26 +21,28 @@ void do_slist(std::shared_ptr<Character> ch, std::string argument)
     ch->Echo("SKILL LIST\r\n");
     ch->Echo("------------------\r\n");
 
-    for(ability = -1; ability < MAX_ABILITY; ability++)
+    for(int i = (int)AbilityClass::None; i < (int)AbilityClass::Max; ++i)
     {
-        if(ability == FORCE_ABILITY && !IsImmortal(ch))
+        auto ability = AbilityClass(i);
+        
+        if(ability == AbilityClass::Force && !IsImmortal(ch))
         {
             continue;
         }
 
-        if(ability == COMMANDO_ABILITY)
+        if(ability == AbilityClass::Commando)
         {
             continue;
         }
 
-        if(filter_ability != -1 && filter_ability != ability)
+        if(filter_ability != AbilityClass::None && filter_ability != ability)
         {
             continue;
         }
 
-        if(ability >= 0)
+        if(ability != AbilityClass::None)
         {
-            sprintf(skn2, "** %s **", Capitalize(AbilityName[ability]).c_str());
+            sprintf(skn2, "** %s **", Capitalize(AbilityName[(int)ability]).c_str());
             sprintf(skn, "\r\n\t\t\t  %s \r\n", skn2);
         }
         else
@@ -63,7 +64,7 @@ void do_slist(std::shared_ptr<Character> ch, std::string argument)
                     break;
                 }
 
-                if(skill->Guild != ability)
+                if(skill->Class != ability)
                 {
                     continue;
                 }

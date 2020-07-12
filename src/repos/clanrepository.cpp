@@ -59,7 +59,7 @@ void LuaClanRepository::PushMember(lua_State *L,
 
     LuaSetfieldString(L, "Name", member->Name);
     LuaSetfieldNumber(L, "MemberSince", member->Since);
-    LuaSetfieldString(L, "Ability", AbilityName[member->Ability]);
+    LuaSetfieldString(L, "Ability", AbilityName[(int)member->Ability]);
     LuaSetfieldNumber(L, "Level", member->Level);
     LuaSetfieldNumber(L, "Deaths", member->Deaths);
     LuaSetfieldNumber(L, "Kills", member->Kills);

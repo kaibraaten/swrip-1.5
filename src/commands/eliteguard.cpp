@@ -30,7 +30,7 @@ void do_elite_guard(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        if(ch->Gold < GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 200)
+        if(ch->Gold < GetAbilityLevel(ch, AbilityClass::Leadership) * 200)
         {
             ch->Echo("&RYou don't have enough credits.\r\n");
             return;
@@ -64,7 +64,7 @@ void do_elite_guard(std::shared_ptr<Character> ch, std::string arg)
 
     ch->Echo("&GYour guard is on the way.\r\n");
 
-    credits = GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 200;
+    credits = GetAbilityLevel(ch, AbilityClass::Leadership) * 200;
     ch->Echo("It cost you %d credits.\r\n", credits);
     ch->Gold -= umin(credits, ch->Gold);
 

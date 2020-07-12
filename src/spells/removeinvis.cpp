@@ -63,7 +63,7 @@ ch_ret spell_remove_invis(int sn, int level, std::shared_ptr<Character> ch, cons
             }
             if(!IsNpc(victim))
             {
-                if(Chance(ch, 50) && GetAbilityLevel(ch, FORCE_ABILITY) < victim->TopLevel)
+                if(Chance(ch, 50) && GetAbilityLevel(ch, AbilityClass::Force) < victim->TopLevel)
                 {
                     FailedCasting(skill, ch, victim, NULL);
                     return rSPELL_FAILED;
@@ -72,7 +72,7 @@ ch_ret spell_remove_invis(int sn, int level, std::shared_ptr<Character> ch, cons
             }
             else
             {
-                if(Chance(ch, 50) && GetAbilityLevel(ch, FORCE_ABILITY) + 15 < victim->TopLevel)
+                if(Chance(ch, 50) && GetAbilityLevel(ch, AbilityClass::Force) + 15 < victim->TopLevel)
                 {
                     FailedCasting(skill, ch, victim, NULL);
                     return rSPELL_FAILED;

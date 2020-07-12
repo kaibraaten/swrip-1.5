@@ -106,8 +106,8 @@ void ClaimBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victi
     {
         if(victim->Flags.test(Flag::Plr::Killer) && !IsNpc(ch))
         {
-            long xp = urange(1, ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY))));
-            GainXP(ch, HUNTING_ABILITY, xp);
+            long xp = urange(1, ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Hunting) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Hunting))));
+            GainXP(ch, AbilityClass::Hunting, xp);
             SetCharacterColor(AT_BLOOD, ch);
             ch->Echo("You receive %ld hunting experience for executing a wanted killer.\r\n", xp);
         }
@@ -121,8 +121,8 @@ void ClaimBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victi
     {
         ch->Gold += bounty->Reward;
 
-        long xp = urange(1, bounty->Reward + ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, HUNTING_ABILITY))));
-        GainXP(ch, HUNTING_ABILITY, xp);
+        long xp = urange(1, bounty->Reward + ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Hunting) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Hunting))));
+        GainXP(ch, AbilityClass::Hunting, xp);
 
         SetCharacterColor(AT_BLOOD, ch);
         ch->Echo("You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n",

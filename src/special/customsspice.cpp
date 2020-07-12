@@ -38,17 +38,17 @@ bool spec_customs_spice(std::shared_ptr<Character> ch)
                     Act(AT_ACTION, "$n takes $p from you.", ch, obj, victim, ActTarget::Vict);
                     obj = ObjectToCharacter(obj, ch);
                     obj->Flags.set(Flag::Obj::Contraband);
-                    long ch_exp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY))));
+                    long ch_exp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass::Smuggling) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass::Smuggling))));
                     victim->Echo("You lose %ld experience. \r\n", ch_exp);
-                    GainXP(victim, SMUGGLING_ABILITY, 0 - ch_exp);
+                    GainXP(victim, AbilityClass::Smuggling, 0 - ch_exp);
                     return true;
                 }
                 else if(CanSeeCharacter(ch, victim)
                         && !obj->Flags.test(Flag::Obj::Contraband))
                 {
-                    long ch_exp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY))));
+                    long ch_exp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass::Smuggling) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass::Smuggling))));
                     victim->Echo("You receive %ld experience for smuggling %s. \r\n", ch_exp, obj->ShortDescr.c_str());
-                    GainXP(victim, SMUGGLING_ABILITY, ch_exp);
+                    GainXP(victim, AbilityClass::Smuggling, ch_exp);
 
                     Act(AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, ActTarget::NotVict);
                     Act(AT_ACTION, "$n look at you suspiciously.", ch, NULL, victim, ActTarget::Vict);
@@ -57,9 +57,9 @@ bool spec_customs_spice(std::shared_ptr<Character> ch)
                 }
                 else if(!obj->Flags.test(Flag::Obj::Contraband))
                 {
-                    long ch_exp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY))));
+                    long ch_exp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass::Smuggling) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass::Smuggling))));
                     victim->Echo("You receive %ld experience for smuggling %s. \r\n", ch_exp, obj->ShortDescr.c_str());
-                    GainXP(victim, SMUGGLING_ABILITY, ch_exp);
+                    GainXP(victim, AbilityClass::Smuggling, ch_exp);
                     obj->Flags.set(Flag::Obj::Contraband);
                     return true;
                 }
@@ -72,9 +72,9 @@ bool spec_customs_spice(std::shared_ptr<Character> ch)
                         || content->ItemType == ITEM_RAWSPICE)
                        && !content->Flags.test(Flag::Obj::Contraband))
                     {
-                        long ch_exp = umin(content->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, SMUGGLING_ABILITY))));
+                        long ch_exp = umin(content->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass::Smuggling) + 1) - GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass::Smuggling))));
                         victim->Echo("You receive %ld experience for smuggling %s.\r\n ", ch_exp, content->ShortDescr.c_str());
-                        GainXP(victim, SMUGGLING_ABILITY, ch_exp);
+                        GainXP(victim, AbilityClass::Smuggling, ch_exp);
                         content->Flags.set(Flag::Obj::Contraband);
                         return true;
                     }

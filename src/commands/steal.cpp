@@ -122,16 +122,17 @@ void do_steal(std::shared_ptr<Character> ch, std::string argument)
 
         ch->Gold += amount;
         victim->Gold -= amount;
-        ch->Echo("Aha!  You got %d credits.\r\n", amount);
+        ch->Echo("Aha! You got %d credits.\r\n", amount);
 
         if(!IsNpc(victim) || GetSkillLevel(ch, gsn_steal) < 50)
             LearnFromSuccess(ch, gsn_steal);
 
         if(IsNpc(victim))
         {
-            xp = umin(amount * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, SMUGGLING_ABILITY))) / 35);
+            auto ability = AbilityClass::Smuggling;
+            xp = umin(amount * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))) / 35);
             xp = umin(xp, ComputeXP(ch, victim));
-            GainXP(ch, SMUGGLING_ABILITY, xp);
+            GainXP(ch, ability, xp);
             ch->Echo("&WYou gain %d smuggling experience!\r\n", xp);
         }
 
@@ -192,9 +193,10 @@ void do_steal(std::shared_ptr<Character> ch, std::string argument)
 
     if(IsNpc(victim))
     {
-        xp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, SMUGGLING_ABILITY))) / 10);
+        auto ability = AbilityClass::Smuggling;
+        xp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))) / 10);
         xp = umin(xp, ComputeXP(ch, victim));
-        GainXP(ch, SMUGGLING_ABILITY, xp);
+        GainXP(ch, ability, xp);
         ch->Echo("&WYou gain %d smuggling experience!\r\n", xp);
     }
 

@@ -69,7 +69,7 @@ ch_ret spell_possess(int sn, int level, std::shared_ptr<Character> ch, const Vo 
     ApplySithPenalty(ch);
 
     af->Type = sn;
-    af->Duration = 20 + (GetAbilityLevel(ch, FORCE_ABILITY) - victim->TopLevel) / 2;
+    af->Duration = 20 + (GetAbilityLevel(ch, AbilityClass::Force) - victim->TopLevel) / 2;
     af->Location = 0;
     af->Modifier = 0;
     af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Possess });

@@ -56,7 +56,7 @@ class ClanMember
 public:
     std::string Name;  /* Name of member */
     time_t Since = 0; /* Member since */
-    int Ability = 0; /* class of member */
+    AbilityClass Ability = AbilityClass::None; /* class of member */
     int Level = 0;  /* level of member */
     int Deaths = 0; /* Pdeaths for clans, mdeaths for guilds/orders */
     int Kills = 0;  /* Pkills for clans, mkills for guilds/orders */

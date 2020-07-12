@@ -504,7 +504,7 @@ void ModifyAffect(std::shared_ptr<Character> ch, std::shared_ptr<Affect> paf, bo
            && (skill = SkillTable[mod]) != NULL
            && skill->Type == SKILL_SPELL)
         {
-            if((retcode = skill->SpellFunction(mod, GetAbilityLevel(ch, FORCE_ABILITY), ch, ch))
+            if((retcode = skill->SpellFunction(mod, GetAbilityLevel(ch, AbilityClass::Force), ch, ch))
                == rCHAR_DIED || CharacterDiedRecently(ch))
             {
                 return;
@@ -1747,8 +1747,8 @@ bool IsRoomDark(std::shared_ptr<Room> pRoomIndex)
        || pRoomIndex->Sector == SECT_CITY)
         return false;
 
-    if(weather_info.Sunlight == SUN_SET
-       || weather_info.Sunlight == SUN_DARK)
+    if(weather_info.Sunlight == SunPosition::Set
+       || weather_info.Sunlight == SunPosition::Dark)
         return true;
 
     return false;

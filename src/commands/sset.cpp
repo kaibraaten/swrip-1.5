@@ -339,7 +339,26 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
 
         if(!StrCmp(arg2, "guild"))
         {
-            skill->Guild = ToLong(argument);
+            AbilityClass ability;
+            
+            if(IsNumber(argument))
+            {
+                int a = ToLong(argument);
+
+                if(a < (int)AbilityClass::None
+                   || a >= (int)AbilityClass::Max)
+                {
+                    a = (int)AbilityClass::None;
+                }
+
+                ability = AbilityClass(a);
+            }
+            else
+            {
+                ability = GetAbility(argument);
+            }
+            
+            skill->Class = ability;
             ch->Echo("Ok.\r\n");
             return;
         }
@@ -692,11 +711,12 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
         for(sn = 0; sn < TopSN; sn++)
         {
             /* Fix by Narn to prevent ssetting skills the player shouldn't have. */
-            if(SkillTable[sn]->Guild < 0 || SkillTable[sn]->Guild >= MAX_ABILITY)
+            if(SkillTable[sn]->Class == AbilityClass::None
+               || SkillTable[sn]->Class == AbilityClass::Max)
                 continue;
 
             if(!SkillTable[sn]->Name.empty()
-               && (GetAbilityLevel(victim, SkillTable[sn]->Guild) >= SkillTable[sn]->Level
+               && (GetAbilityLevel(victim, SkillTable[sn]->Class) >= SkillTable[sn]->Level
                    || value == 0))
                 victim->PCData->Learned[sn] = value;
         }

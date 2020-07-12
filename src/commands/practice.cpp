@@ -26,7 +26,7 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
             if(skill->Name.empty())
                 break;
 
-            if(skill->Guild < 0 || skill->Guild >= MAX_ABILITY)
+            if(skill->Class == AbilityClass::None || skill->Class == AbilityClass::Max)
                 continue;
 
             if((skill->Type == SKILL_UNKNOWN
@@ -59,11 +59,11 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
 
             lasttype = skill->Type;
 
-            if(skill->Guild < 0 || skill->Guild >= MAX_ABILITY)
+            if(skill->Class == AbilityClass::None || skill->Class == AbilityClass::Max)
                 continue;
 
             if(GetSkillLevel(ch, sn) <= 0
-               && GetAbilityLevel(ch, skill->Guild) < skill->Level)
+               && GetAbilityLevel(ch, skill->Class) < skill->Level)
                 continue;
 
             if(GetSkillLevel(ch, sn) == 0
@@ -132,7 +132,7 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
             skill = SkillTable[sn];
         }
 
-        if(skill->Guild < 0 || skill->Guild >= MAX_ABILITY)
+        if(skill->Class == AbilityClass::None || skill->Class == AbilityClass::Max)
         {
             Act(AT_TELL, "$n tells you 'I cannot teach you that...'",
                 mob, NULL, ch, ActTarget::Vict);
@@ -140,7 +140,7 @@ void do_practice(std::shared_ptr<Character> ch, std::string argument)
         }
 
         if(can_prac && !IsNpc(ch)
-           && GetAbilityLevel(ch, skill->Guild) < skill->Level)
+           && GetAbilityLevel(ch, skill->Class) < skill->Level)
         {
             Act(AT_TELL, "$n tells you 'You're not ready to learn that yet...'",
                 mob, NULL, ch, ActTarget::Vict);

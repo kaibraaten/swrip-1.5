@@ -123,12 +123,13 @@ void do_bribe(std::shared_ptr<Character> ch, std::string argument)
 
     if(clan == planet->GovernedBy)
     {
+        AbilityClass ability = AbilityClass::Diplomacy;
         planet->PopularSupport += urange(0.1, amount / 1000, 2);
         ch->Echo("Popular support for your organization increases slightly.\r\n");
 
-        amount = umin(amount, (GetRequiredXpForLevel(GetAbilityLevel(ch, DIPLOMACY_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, DIPLOMACY_ABILITY))));
+        amount = umin(amount, (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))));
 
-        GainXP(ch, DIPLOMACY_ABILITY, amount);
+        GainXP(ch, ability, amount);
         ch->Echo("You gain %d diplomacy experience.\r\n", amount);
 
         LearnFromSuccess(ch, gsn_bribe);

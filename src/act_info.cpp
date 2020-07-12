@@ -67,13 +67,13 @@ bool RaceIsAvailableToPlayers(const Race *race)
     }
 }
 
-int GetClassFromName(const std::string &arg)
+AbilityClass GetClassFromName(const std::string &arg)
 {
     int iClass = 0;
 
-    for(iClass = 0; iClass < MAX_ABILITY; iClass++)
+    for(iClass = 0; iClass < (int)AbilityClass::Max; iClass++)
     {
-        if(iClass == FORCE_ABILITY
+        if(iClass == (int) AbilityClass::Force
            && (StrCmp(arg, "jedi") == 0 || StrCmp(arg, "sith") == 0))
         {
             break;
@@ -86,12 +86,12 @@ int GetClassFromName(const std::string &arg)
         }
     }
 
-    if(iClass == MAX_ABILITY)
+    if(iClass == (int)AbilityClass::Max)
     {
-        return -1;
+        return AbilityClass::None;
     }
 
-    return iClass;
+    return AbilityClass(iClass);
 }
 
 std::string FormatObjectToCharacter(std::shared_ptr<Object> obj, std::shared_ptr<Character> ch, bool fShort)

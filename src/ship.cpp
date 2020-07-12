@@ -418,9 +418,9 @@ static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
         long xp = 0;
 
         ch = ship->Ch;
-        xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, PILOTING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, PILOTING_ABILITY)));
+        xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting)));
         xp = umin(GetShipValue(ship), xp);
-        GainXP(ch, PILOTING_ABILITY, xp);
+        GainXP(ch, AbilityClass::Piloting, xp);
         ch->Echo("&WYou gain %ld points of flight experience!\r\n",
                  umin(GetShipValue(ship), xp));
         ship->Ch = NULL;
@@ -2694,9 +2694,9 @@ void DamageShip(std::shared_ptr<Ship> ship, int min, int max,
 
     if(ch)
     {
-        xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, PILOTING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, PILOTING_ABILITY))) / 25;
+        xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting))) / 25;
         xp = umin(GetShipValue(ship) / 100, xp);
-        GainXP(ch, PILOTING_ABILITY, xp);
+        GainXP(ch, AbilityClass::Piloting, xp);
     }
 
     if(ship->Defenses.Shield.Current > 0)
@@ -2766,9 +2766,9 @@ void DamageShip(std::shared_ptr<Ship> ship, int min, int max,
             Log->Info("%s(%s) was just destroyed by %s.",
                       ship->Name.c_str(), ship->PersonalName.c_str(), ch->Name.c_str());
 
-            xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, PILOTING_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, PILOTING_ABILITY)));
+            xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting)));
             xp = umin(GetShipValue(ship), xp);
-            GainXP(ch, PILOTING_ABILITY, xp);
+            GainXP(ch, AbilityClass::Piloting, xp);
             ch->Echo("&WYou gain %ld piloting experience!\r\n", xp);
         }
         else

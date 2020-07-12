@@ -61,7 +61,7 @@ public:
 
     bool IsNpc() const;
     bool IsImmortal() const;
-    void SetAbilityLevel(short ability, int newlevel);
+    void SetAbilityLevel(AbilityClass ability, int newlevel);
     short GetTrustLevel() const;
     bool IsRetiredImmortal() const;
 
@@ -193,9 +193,9 @@ public:
 
     struct
     {
-        int Main = 0;
-        std::array<short, MAX_ABILITY> Level;
-        std::array<long, MAX_ABILITY> Experience;
+        AbilityClass Main = AbilityClass::None;
+        std::array<short, static_cast<int>(AbilityClass::Max)> Level;
+        std::array<long, static_cast<int>(AbilityClass::Max)> Experience;
     } Ability;
 
 private:
@@ -208,9 +208,9 @@ bool IsWizVis(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim);
 /*
  * Return how much exp a char has for a specified ability.
  */
-long GetAbilityXP(std::shared_ptr<Character> ch, short ability);
+long GetAbilityXP(std::shared_ptr<Character> ch, AbilityClass ability);
 
-void SetAbilityXP(std::shared_ptr<Character> ch, short ability, long xp);
+void SetAbilityXP(std::shared_ptr<Character> ch, AbilityClass, long xp);
 
 /*
  * Calculate roughly how much experience a character is worth
@@ -282,7 +282,7 @@ bool HasDiploma(std::shared_ptr<Character> ch);
 
 std::shared_ptr<Object> GetFirstObjectOfType(std::shared_ptr<Character> ch, ItemTypes type);
 
-short GetAbilityLevel(std::shared_ptr<Character> ch, short ability);
+short GetAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability);
 
 /*
  * Return true if a char is affected by a spell.
@@ -442,7 +442,7 @@ unsigned int GetKillTrackCount(std::shared_ptr<Character> ch);
 
 bool IS_OUTSIDE(std::shared_ptr<Character> ch);
 
-void SetAbilityLevel(std::shared_ptr<Character> ch, short ability, int newlevel);
+void SetAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability, int newlevel);
 
 bool IsNpc(std::shared_ptr<Character> ch);
 

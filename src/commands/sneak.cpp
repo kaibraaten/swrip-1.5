@@ -25,7 +25,7 @@ void do_sneak(std::shared_ptr<Character> ch, std::string argument)
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
         af->Type = gsn_sneak;
-        af->Duration = GetAbilityLevel(ch, SMUGGLING_ABILITY) * DUR_CONV;
+        af->Duration = GetAbilityLevel(ch, AbilityClass::Smuggling) * DUR_CONV;
         af->Location = APPLY_NONE;
         af->Modifier = 0;
         af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Sneak });

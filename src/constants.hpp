@@ -118,7 +118,6 @@ constexpr auto MIN_EXP_WORTH = 25;
 
 constexpr auto MAX_REXITS = 20;   /* Maximum exits allowed in 1 room */
 constexpr auto MAX_SKILL = 276;
-constexpr auto MAX_RL_ABILITY = 8;
 constexpr auto MAX_NPC_RACE = 91;
 constexpr auto MAX_LEVEL = 105;
 constexpr auto MAX_ABILITY_LEVEL = 150;
@@ -221,21 +220,21 @@ constexpr auto OS_CORPSE = 1;
  * Time and weather stuff.
  */
 /* Sun position */
-enum
+enum class SunPosition
 {
-    SUN_DARK,
-    SUN_RISE,
-    SUN_LIGHT,
-    SUN_SET
+    Dark,
+    Rise,
+    Light,
+    Set
 };
 
 /* Sky condition */
-enum
+enum class SkyCondition
 {
-    SKY_CLOUDLESS,
-    SKY_CLOUDY,
-    SKY_RAINING,
-    SKY_LIGHTNING
+    Cloudless,
+    Cloudy,
+    Raining,
+    Lightning
 };
 
 /*
@@ -273,19 +272,19 @@ enum class CharacterSubState
 
 /* ability classes */
 
-enum
+enum class AbilityClass
 {
-    ABILITY_NONE = -1,
-    COMBAT_ABILITY = 0,
-    PILOTING_ABILITY,
-    ENGINEERING_ABILITY,
-    HUNTING_ABILITY,
-    SMUGGLING_ABILITY,
-    DIPLOMACY_ABILITY,
-    LEADERSHIP_ABILITY,
-    FORCE_ABILITY,
-    COMMANDO_ABILITY,
-    MAX_ABILITY
+    None = -1,
+    Combat = 0,
+    Piloting,
+    Engineering,
+    Hunting,
+    Smuggling,
+    Diplomacy,
+    Leadership,
+    Force,
+    Commando,
+    Max
 };
 
 /* the races */

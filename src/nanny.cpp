@@ -496,18 +496,18 @@ static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument
         return;
     }
 
-    for(iClass = 0; iClass < MAX_ABILITY; iClass++)
+    for(iClass = 0; iClass < (int)AbilityClass::Max; iClass++)
     {
         if(toupper(arg[0]) == toupper(AbilityName[iClass][0])
            && !StringPrefix(arg, AbilityName[iClass]))
         {
-            ch->Ability.Main = iClass;
+            ch->Ability.Main = AbilityClass(iClass);
             break;
         }
     }
 
-    if(iClass == MAX_ABILITY
-       || (iClass == FORCE_ABILITY && !SysData.CanChooseJedi)
+    if(iClass == (int)AbilityClass::Max
+       || (iClass == (int)AbilityClass::Force && !SysData.CanChooseJedi)
        || IsNullOrEmpty(AbilityName[iClass]))
     {
         d->WriteToBuffer("That's not a skill class.\r\n", 0);
@@ -620,30 +620,32 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
         ch->PermStats.Lck += RaceTable[ch->Race].Stats.ModLck;
         ch->PermStats.Frc += RaceTable[ch->Race].Stats.ModFrc;
 
-        if(ch->Ability.Main == FORCE_ABILITY)
+        if(ch->Ability.Main == AbilityClass::Force)
         {
             // People who pick Jedi will always have max Frc stat.
-            ch->PermStats.Frc = 20;
+            ch->PermStats.Frc = umax(20, ch->PermStats.Frc);
         }
         else
         {
             ch->PermStats.Frc = urange(0, ch->PermStats.Frc, 20);
         }
 
-        /* Hunters do not recieve force */
-
-        if(ch->Ability.Main == HUNTING_ABILITY)
+        if(ch->Ability.Main == AbilityClass::Hunting)
         {
             ch->PermStats.Frc = 0;
         }
-
-        /* Droids do not recieve force */
 
         if(IsDroid(ch))
         {
             ch->PermStats.Frc = 0;
         }
 
+        // Smugglers get max Lck stat.
+        if(ch->Ability.Main == AbilityClass::Smuggling)
+        {
+            ch->PermStats.Lck = umax(20, ch->PermStats.Lck);
+        }
+        
         for(iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++)
         {
             if(LanguageArray[iLang] == RaceTable[ch->Race].Language)
@@ -685,14 +687,10 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
         ch->Resistant |= RaceTable[ch->Race].Resistant;
         ch->Susceptible |= RaceTable[ch->Race].Susceptible;
 
+        for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
         {
-            int ability;
-
-            for(ability = 0; ability < MAX_ABILITY; ability++)
-            {
-                SetAbilityLevel(ch, ability, 1);
-                SetAbilityXP(ch, ability, 0);
-            }
+            SetAbilityLevel(ch, AbilityClass(ability), 1);
+            SetAbilityXP(ch, AbilityClass(ability), 0);
         }
 
         ch->TopLevel = 1;
@@ -901,14 +899,13 @@ static void AskForClass(std::shared_ptr<Descriptor> d)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char buf2[MAX_STRING_LENGTH];
-    int iClass = 0;
     int columns = 0;
 
     d->WriteToBuffer("\r\nPlease choose a main ability from the following classes:\r\n", 0);
 
-    for(iClass = 0; iClass < MAX_ABILITY; iClass++)
+    for(int iClass = 0; iClass < (int)AbilityClass::Max; iClass++)
     {
-        if(iClass == FORCE_ABILITY && !SysData.CanChooseJedi)
+        if(iClass == (int)AbilityClass::Force && !SysData.CanChooseJedi)
         {
             continue;
         }
@@ -967,8 +964,6 @@ static void AskForStats(std::shared_ptr<Descriptor> d)
 static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
 {
     std::shared_ptr<Character> ch = d->Char;
-    int ability = 0;
-
     auto logBuf = FormatString("%s@%s new %s.",
                                ch->Name.c_str(), d->Remote.Hostname.c_str(),
                                RaceTable[ch->Race].Name);
@@ -977,9 +972,9 @@ static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
     d->WriteToBuffer("Press [ENTER] ", 0);
     d->WriteToBuffer("Press enter...\r\n", 0);
 
-    for(ability = 0; ability < MAX_ABILITY; ability++)
+    for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
     {
-        SetAbilityLevel(ch, ability, 0);
+        SetAbilityLevel(ch, AbilityClass(ability), 0);
     }
 
     ch->TopLevel = 0;

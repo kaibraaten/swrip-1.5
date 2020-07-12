@@ -409,13 +409,10 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Level range is 0 to %d.\r\n", LEVEL_AVATAR + 5);
             return;
         }
-        {
-            int ability;
 
-            for(ability = 0; ability < MAX_ABILITY; ability++)
-            {
-                SetAbilityLevel(victim, ability, value);
-            }
+        for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
+        {
+            SetAbilityLevel(victim, AbilityClass(ability), value);
         }
 
         victim->TopLevel = value;

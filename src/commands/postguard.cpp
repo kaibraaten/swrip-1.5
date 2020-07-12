@@ -30,7 +30,7 @@ void do_postguard(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(ch->Gold < GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 30)
+        if(ch->Gold < GetAbilityLevel(ch, AbilityClass::Leadership) * 30)
         {
             ch->Echo("&RYou dont have enough credits.\r\n");
             return;
@@ -64,7 +64,7 @@ void do_postguard(std::shared_ptr<Character> ch, std::string argument)
 
     ch->Echo("&GYour guard is on the way.\r\n");
 
-    credits = GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 30;
+    credits = GetAbilityLevel(ch, AbilityClass::Leadership) * 30;
     ch->Echo("It cost you %d credits.\r\n", credits);
     ch->Gold -= umin(credits, ch->Gold);
 

@@ -30,7 +30,7 @@ void do_special_forces(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(ch->Gold < GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 350)
+        if(ch->Gold < GetAbilityLevel(ch, AbilityClass::Leadership) * 350)
         {
             ch->Echo("&RYou dont have enough credits to send for reinforcements.\r\n");
             return;
@@ -63,7 +63,7 @@ void do_special_forces(std::shared_ptr<Character> ch, std::string argument)
     ch->SubState = CharacterSubState::None;
 
     ch->Echo("&GYour reinforcements are on the way.\r\n");
-    credits = GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 350;
+    credits = GetAbilityLevel(ch, AbilityClass::Leadership) * 350;
     ch->Echo("It cost you %d credits.\r\n", credits);
     ch->Gold -= umin(credits, ch->Gold);
 

@@ -44,10 +44,10 @@ void do_balzhur(std::shared_ptr<Character> ch, std::string arg)
     victim->TopLevel = 1;
     victim->Trust = 0;
 
-    for(int ability = 0; ability < MAX_ABILITY; ability++)
+    for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
     {
-        SetAbilityXP(victim, ability, 1);
-        SetAbilityLevel(victim, ability, 1);
+        SetAbilityXP(victim, AbilityClass(ability), 1);
+        SetAbilityLevel(victim, AbilityClass(ability), 1);
     }
 
     victim->HitPoints.Max = 500;

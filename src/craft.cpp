@@ -181,10 +181,10 @@ static void FinishedCraftingHandler(std::shared_ptr<FinishedCraftingUserData> da
     Act(AT_PLAIN, actBuf, ch, nullptr, nullptr, ActTarget::Room);
 
     xpgain = umin(eventArgs->Object->Cost * 100,
-                  GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild) + 1)
-                  - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild)));
-    GainXP(ch, skill->Guild, xpgain);
-    ch->Echo("You gain %ld %s experience.", xpgain, AbilityName[skill->Guild]);
+                  GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Class) + 1)
+                  - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Class)));
+    GainXP(ch, skill->Class, xpgain);
+    ch->Echo("You gain %ld %s experience.", xpgain, AbilityName[(int)skill->Class]);
 
     LearnFromSuccess(ch, data->Recipe->Skill);
 }

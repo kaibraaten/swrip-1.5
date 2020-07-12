@@ -1010,15 +1010,15 @@ static void LuaPushCharacterAbilities(lua_State *L, std::shared_ptr<Character> c
         lua_pushstring(L, "Abilities");
         lua_newtable(L);
 
-        for(size_t ability = 0; ability < MAX_ABILITY; ++ability)
+        for(int ability = 0; ability < (int)AbilityClass::Max; ++ability)
         {
             lua_pushinteger(L, ability);
             lua_newtable(L);
 
             LuaSetfieldString(L, "Name", AbilityName[ability]);
-            LuaSetfieldNumber(L, "Level", GetAbilityLevel(ch, ability));
-            LuaSetfieldNumber(L, "Experience", GetAbilityXP(ch, ability));
-            LuaSetfieldBoolean(L, "IsMain", static_cast<int>(ability) == ch->Ability.Main);
+            LuaSetfieldNumber(L, "Level", GetAbilityLevel(ch, AbilityClass(ability)));
+            LuaSetfieldNumber(L, "Experience", GetAbilityXP(ch, AbilityClass(ability)));
+            LuaSetfieldBoolean(L, "IsMain", AbilityClass(ability) == ch->Ability.Main);
             lua_settable(L, -3);
         }
 
@@ -1178,13 +1178,13 @@ static void LoadAbility(lua_State *L, std::shared_ptr<Character> ch, size_t abil
     LuaGetfieldInt(L, "Level",
                    [ch, ability](const int level)
                    {
-                       SetAbilityLevel(ch, ability, level);
+                       SetAbilityLevel(ch, AbilityClass(ability), level);
                    });
 
     LuaGetfieldInt(L, "Experience",
                    [ch, ability](const int xp)
                    {
-                       SetAbilityXP(ch, ability, xp);
+                       SetAbilityXP(ch, AbilityClass(ability), xp);
                    });
 
     LuaGetfieldBool(L, "IsMain",
@@ -1192,7 +1192,7 @@ static void LoadAbility(lua_State *L, std::shared_ptr<Character> ch, size_t abil
                     {
                         if(isMain)
                         {
-                            ch->Ability.Main = ability;
+                            ch->Ability.Main = AbilityClass(ability);
                         }
                     });
 }
@@ -1208,15 +1208,15 @@ static void LuaLoadCharacterAbilities(lua_State *L, std::shared_ptr<Character> c
 
         while(lua_next(L, -2))
         {
-            size_t ability = lua_tointeger(L, -2);
+            int ability = lua_tointeger(L, -2);
 
-            if(ability < MAX_ABILITY)
+            if(AbilityClass(ability) < AbilityClass::Max)
             {
                 LoadAbility(L, ch, ability);
             }
             else
             {
-                Log->Bug("%s:%d : %s() : Error loading %s: Ability %lu out of range.",
+                Log->Bug("%s:%d : %s() : Error loading %s: Ability %d out of range.",
                          __FILE__, __LINE__, __FUNCTION__,
                          ch->Name.c_str(), ability);
             }

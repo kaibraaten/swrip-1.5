@@ -43,7 +43,7 @@ ch_ret spell_obj_inv(int sn, int level, std::shared_ptr<Character> ch, const Vo 
             }
 
             water = umin((!skill->Dice.empty() ? ParseDice(ch, level, skill->Dice) : level)
-                         * (weather_info.Sky >= SKY_RAINING ? 2 : 1),
+                         * (weather_info.Sky >= SkyCondition::Raining ? 2 : 1),
                          obj->Value[OVAL_DRINK_CON_CAPACITY] - obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT]);
 
             if(water > 0)
@@ -112,31 +112,31 @@ ch_ret spell_obj_inv(int sn, int level, std::shared_ptr<Character> ch, const Vo 
         {
         default:
         case SP_NONE:
-            if(obj->Cost > GetAbilityLevel(ch, FORCE_ABILITY) * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch))
+            if(obj->Cost > GetAbilityLevel(ch, AbilityClass::Force) * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch))
             {
                 FailedCasting(skill, ch, NULL, obj);
                 return rNONE;
             }
             break;
         case SP_MINOR:
-            if(GetAbilityLevel(ch, FORCE_ABILITY) - obj->Level < 20
-               || obj->Cost > GetAbilityLevel(ch, FORCE_ABILITY) * GetCurrentIntelligence(ch) / 5)
+            if(GetAbilityLevel(ch, AbilityClass::Force) - obj->Level < 20
+               || obj->Cost > GetAbilityLevel(ch, AbilityClass::Force) * GetCurrentIntelligence(ch) / 5)
             {
                 FailedCasting(skill, ch, NULL, obj);
                 return rNONE;
             }
             break;
         case SP_GREATER:
-            if(GetAbilityLevel(ch, FORCE_ABILITY) - obj->Level < 5
-               || obj->Cost > GetAbilityLevel(ch, FORCE_ABILITY) * 10 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch))
+            if(GetAbilityLevel(ch, AbilityClass::Force) - obj->Level < 5
+               || obj->Cost > GetAbilityLevel(ch, AbilityClass::Force) * 10 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch))
             {
                 FailedCasting(skill, ch, NULL, obj);
                 return rNONE;
             }
             break;
         case SP_MAJOR:
-            if(GetAbilityLevel(ch, FORCE_ABILITY) - obj->Level < 0
-               || obj->Cost > GetAbilityLevel(ch, FORCE_ABILITY) * 50 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch))
+            if(GetAbilityLevel(ch, AbilityClass::Force) - obj->Level < 0
+               || obj->Cost > GetAbilityLevel(ch, AbilityClass::Force) * 50 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch))
             {
                 FailedCasting(skill, ch, NULL, obj);
                 return rNONE;

@@ -131,7 +131,7 @@ void do_detrap(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    percent = GetRandomPercent() - (GetAbilityLevel(ch, SMUGGLING_ABILITY) / 20)
+    percent = GetRandomPercent() - (GetAbilityLevel(ch, AbilityClass::Smuggling) / 20)
         - (GetCurrentLuck(ch) - 16);
 
     SeparateOneObjectFromGroup(obj);

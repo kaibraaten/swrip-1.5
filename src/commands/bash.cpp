@@ -46,7 +46,7 @@ void do_bash(std::shared_ptr<Character> ch, std::string argument)
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
         SetWaitState(victim, 2 * PULSE_VIOLENCE);
         victim->Position = POS_SITTING;
-        global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, COMBAT_ABILITY)), gsn_bash);
+        global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, AbilityClass::Combat)), gsn_bash);
     }
     else
     {

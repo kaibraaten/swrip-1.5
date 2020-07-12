@@ -1210,7 +1210,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
                 return false;
             }
 
-            std::string abilityName = AbilityName[chkchar->Ability.Main];
+            std::string abilityName = AbilityName[(int)chkchar->Ability.Main];
 
             return MudProgCompareStrings(abilityName, opr, rval, mob);
         }

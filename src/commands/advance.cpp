@@ -7,7 +7,7 @@ void do_advance(std::shared_ptr<Character> ch, std::string argument)
     std::string arg2;
     std::string arg3;
     std::shared_ptr<Character> victim;
-    int ability = -1;
+    AbilityClass ability = AbilityClass::None;
 
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg3);
@@ -25,16 +25,16 @@ void do_advance(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    for(int iAbility = 0; iAbility < MAX_ABILITY; iAbility++)
+    for(int iAbility = 0; iAbility < (int)AbilityClass::Max; iAbility++)
     {
         if(!StringPrefix(arg3, AbilityName[iAbility]))
         {
-            ability = iAbility;
+            ability = AbilityClass(iAbility);
             break;
         }
     }
 
-    if(ability == -1)
+    if(ability == AbilityClass::None)
     {
         ch->Echo("No such ability.\r\n");
         do_advance(ch, "");
@@ -77,10 +77,10 @@ void do_advance(std::shared_ptr<Character> ch, std::string argument)
         SetAbilityXP(victim, ability, 0);
         SetAbilityLevel(victim, ability, 1);
 
-        if(ability == COMBAT_ABILITY)
+        if(ability == AbilityClass::Combat)
             victim->HitPoints.Max = 500;
 
-        if(ability == FORCE_ABILITY)
+        if(ability == AbilityClass::Force)
             victim->Mana.Max = 0;
     }
     else

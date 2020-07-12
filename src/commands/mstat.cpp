@@ -83,13 +83,13 @@ void do_mstat(std::shared_ptr<Character> ch, std::string arg)
 
     if(!IsNpc(victim))
     {
-        for(int ability = 0; ability < MAX_ABILITY; ability++)
+        for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
         {
             ch->Echo("%-15s   Level: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
-                     AbilityName[ability], GetAbilityLevel(victim, ability),
-                     GetMaxAbilityLevel(victim, ability),
-                     GetAbilityXP(victim, ability),
-                     GetRequiredXpForLevel(GetAbilityLevel(victim, ability) + 1));
+                     AbilityName[ability], GetAbilityLevel(victim, AbilityClass(ability)),
+                     GetMaxAbilityLevel(victim, AbilityClass(ability)),
+                     GetAbilityXP(victim, AbilityClass(ability)),
+                     GetRequiredXpForLevel(GetAbilityLevel(victim, AbilityClass(ability)) + 1));
         }
     }
 

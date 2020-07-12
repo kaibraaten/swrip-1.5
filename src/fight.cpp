@@ -567,7 +567,7 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
 
     if(GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD))
     {
-        dual_bonus = IsNpc(ch) ? (GetAbilityLevel(ch, COMBAT_ABILITY) / 10) : (GetSkillLevel(ch, gsn_dual_wield) / 10);
+        dual_bonus = IsNpc(ch) ? (GetAbilityLevel(ch, AbilityClass::Combat) / 10) : (GetSkillLevel(ch, gsn_dual_wield) / 10);
 
         retcode = PerformNthAttack(ch, victim, dt, gsn_dual_wield,
                                    [ch]()
@@ -780,9 +780,9 @@ static short GetOffensiveShieldLevelModifier(std::shared_ptr<Character> ch, std:
 {
     if(!IsNpc(ch))            /* players get much less effect */
     {
-        short lvl = umax(1, (GetAbilityLevel(ch, FORCE_ABILITY)));
+        short lvl = umax(1, (GetAbilityLevel(ch, AbilityClass::Force)));
 
-        if(GetRandomPercent() + (GetAbilityLevel(victim, COMBAT_ABILITY) - lvl) < 35)
+        if(GetRandomPercent() + (GetAbilityLevel(victim, AbilityClass::Combat) - lvl) < 35)
         {
             return lvl;
         }
@@ -795,7 +795,7 @@ static short GetOffensiveShieldLevelModifier(std::shared_ptr<Character> ch, std:
     {
         short lvl = ch->TopLevel;
 
-        if(GetRandomPercent() + (GetAbilityLevel(victim, COMBAT_ABILITY) - lvl) < 70)
+        if(GetRandomPercent() + (GetAbilityLevel(victim, AbilityClass::Combat) - lvl) < 70)
         {
             return lvl;
         }
@@ -808,12 +808,12 @@ static short GetOffensiveShieldLevelModifier(std::shared_ptr<Character> ch, std:
 
 static int GetBackstabDamageMultiplier(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    return 2 + urange(2, GetAbilityLevel(ch, HUNTING_ABILITY) - (GetAbilityLevel(victim, COMBAT_ABILITY) / 4), 30) / 8;
+    return 2 + urange(2, GetAbilityLevel(ch, AbilityClass::Hunting) - (GetAbilityLevel(victim, AbilityClass::Combat) / 4), 30) / 8;
 }
 
 static int GetCircleDamageMultiplier(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 {
-    return 2 + urange(2, GetAbilityLevel(ch, HUNTING_ABILITY) - (GetAbilityLevel(victim, COMBAT_ABILITY) / 2), 30) / 40;
+    return 2 + urange(2, GetAbilityLevel(ch, AbilityClass::Hunting) - (GetAbilityLevel(victim, AbilityClass::Combat) / 2), 30) / 40;
 }
 
 static int GetEnhancedDamageModifier(std::shared_ptr<Character> ch, int dam)
@@ -950,7 +950,7 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
      */
     int thac0_00 = 20;
     int thac0_32 = 10;
-    int thac0 = Interpolate(GetAbilityLevel(ch, COMBAT_ABILITY), thac0_00, thac0_32) - GetHitRoll(ch);
+    int thac0 = Interpolate(GetAbilityLevel(ch, AbilityClass::Combat), thac0_00, thac0_32) - GetHitRoll(ch);
     int victim_ac = (int)(GetArmorClass(victim) / 10);
 
     /* if you can't see what's coming... */
@@ -1165,7 +1165,7 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
         {
             dam /= 10;
             wield->Value[OVAL_WEAPON_CHARGE] -= 3;
-            int hit_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, COMBAT_ABILITY), Flag::Ris::Paralysis);
+            int hit_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, AbilityClass::Combat), Flag::Ris::Paralysis);
             bool fail = false;
 
             if(hit_chance == 1000)
@@ -1183,7 +1183,7 @@ ch_ret HitOnce(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim,
                 victim->WasStunned--;
             }
 
-            hit_chance = 100 - GetCurrentConstitution(victim) - GetAbilityLevel(victim, COMBAT_ABILITY) / 2;
+            hit_chance = 100 - GetCurrentConstitution(victim) - GetAbilityLevel(victim, AbilityClass::Combat) / 2;
             /* harder for player to stun another player */
             if(!IsNpc(ch) && !IsNpc(victim))
             {
@@ -1748,14 +1748,14 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         {
             if(IsNpc(ch)
                && ch->AttackFlags.test(Flag::Defense::Disarm)
-               && GetRandomPercent() < GetAbilityLevel(ch, COMBAT_ABILITY) / 2)
+               && GetRandomPercent() < GetAbilityLevel(ch, AbilityClass::Combat) / 2)
             {
                 Disarm(ch, victim);
             }
 
             if(IsNpc(ch)
                && ch->AttackFlags.test(Flag::Attack::Trip)
-               && GetRandomPercent() < GetAbilityLevel(ch, COMBAT_ABILITY))
+               && GetRandomPercent() < GetAbilityLevel(ch, AbilityClass::Combat))
             {
                 Trip(ch, victim);
             }
@@ -1848,7 +1848,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
        && !IsNpc(ch) && IsFighting(ch) && ch->Fighting->Xp)
     {
         long xp_gain = (long)(ComputeXP(ch, victim) * 0.1 * dam) / victim->HitPoints.Max;
-        GainXP(ch, COMBAT_ABILITY, xp_gain);
+        GainXP(ch, AbilityClass::Combat, xp_gain);
     }
 
     if(!IsNpc(victim)
@@ -1890,7 +1890,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
        && !IsAffectedBy(victim, Flag::Affect::Poison)
        && IsWieldingPoisonedWeapon(ch)
        && !victim->Immune.test(Flag::Ris::Poison)
-       && !SaveVsPoisonDeath(GetAbilityLevel(ch, COMBAT_ABILITY), victim))
+       && !SaveVsPoisonDeath(GetAbilityLevel(ch, AbilityClass::Combat), victim))
     {
         std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
@@ -2087,8 +2087,8 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
 
         if(IsNpc(ch) && !IsNpc(victim))
         {
-            long xp_to_lose = umax(GetAbilityXP(victim, COMBAT_ABILITY) - GetRequiredXpForLevel(GetAbilityLevel(ch, COMBAT_ABILITY)), 0);
-            long xp_actually_lost = LoseXP(victim, COMBAT_ABILITY, xp_to_lose);
+            long xp_to_lose = umax(GetAbilityXP(victim, AbilityClass::Combat) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Combat)), 0);
+            long xp_actually_lost = LoseXP(victim, AbilityClass::Combat, xp_to_lose);
 
             victim->Echo("You lose %ld experience.\r\n", xp_actually_lost);
         }
@@ -2812,13 +2812,13 @@ static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character
             gch->Echo("You receive %ld combat experience.\r\n", xp);
         }
 
-        GainXP(gch, COMBAT_ABILITY, xp);
+        GainXP(gch, AbilityClass::Combat, xp);
 
         if(lch == gch && members > 1)
         {
-            xp = urange(members, xp * members, (GetRequiredXpForLevel(GetAbilityLevel(gch, LEADERSHIP_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(gch, LEADERSHIP_ABILITY)) / 10));
+            xp = urange(members, xp * members, (GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Leadership) + 1) - GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Leadership)) / 10));
             gch->Echo("You get %ld leadership experience for leading your group to victory.\r\n", xp);
-            GainXP(gch, LEADERSHIP_ABILITY, xp);
+            GainXP(gch, AbilityClass::Leadership, xp);
         }
 
         CheckObjectAlignmentZapping(ch);
@@ -2840,7 +2840,7 @@ static int ComputeNewAlignment(std::shared_ptr<Character> gch, std::shared_ptr<C
 long ComputeXP(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim)
 {
     long xp = (GetXPWorth(victim)
-               * urange(1, (GetAbilityLevel(victim, COMBAT_ABILITY) - GetAbilityLevel(gch, COMBAT_ABILITY)) + 10, 20)) / 10;
+               * urange(1, (GetAbilityLevel(victim, AbilityClass::Combat) - GetAbilityLevel(gch, AbilityClass::Combat)) + 10, 20)) / 10;
     int align = gch->Alignment - victim->Alignment;
 
     /* bonus for attacking opposite alignment */
@@ -2873,7 +2873,7 @@ long ComputeXP(std::shared_ptr<Character> gch, std::shared_ptr<Character> victim
 
     /* new xp cap for swreality */
 
-    return urange(1, xp, (GetRequiredXpForLevel(GetAbilityLevel(gch, COMBAT_ABILITY) + 1) - GetRequiredXpForLevel(GetAbilityLevel(gch, COMBAT_ABILITY))));
+    return urange(1, xp, (GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Combat) + 1) - GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Combat))));
 }
 
 /*
@@ -3113,7 +3113,7 @@ static void SendDamageMessages(std::shared_ptr<Character> ch, std::shared_ptr<Ch
         sprintf(buf3, "$n's %s %s you%c", attack, vp, punct);
     }
 
-    if(GetAbilityLevel(ch, COMBAT_ABILITY) >= 50)
+    if(GetAbilityLevel(ch, AbilityClass::Combat) >= 50)
     {
         char damageAmountMsg[100];
         sprintf(damageAmountMsg, " You do %d points of damage.", dam);

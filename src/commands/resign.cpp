@@ -52,8 +52,8 @@ void do_resign(std::shared_ptr<Character> ch, std::string argument)
     Act(AT_MAGIC, "You resign your position in $t",
         ch, clan->Name, nullptr, ActTarget::Char);
 
-    xp_to_lose = umax(GetAbilityXP(ch, DIPLOMACY_ABILITY) - GetRequiredXpForLevel(GetAbilityLevel(ch, DIPLOMACY_ABILITY)), 0);
-    xp_actually_lost = LoseXP(ch, DIPLOMACY_ABILITY, xp_to_lose);
+    xp_to_lose = umax(GetAbilityXP(ch, AbilityClass::Diplomacy) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Diplomacy)), 0);
+    xp_actually_lost = LoseXP(ch, AbilityClass::Diplomacy, xp_to_lose);
     ch->Echo("You lose %ld diplomacy experience.\r\n", xp_actually_lost);
 
     ch->PCData->Bestowments.erase();
