@@ -103,7 +103,7 @@ void LuaClanRepository::PushClan(lua_State *L, const std::shared_ptr<Clan> &clan
     LuaSetfieldNumber(L, "PlayerDeaths", clan->PlayerDeaths);
     LuaSetfieldNumber(L, "MobKills", clan->MobKills);
     LuaSetfieldNumber(L, "MobDeaths", clan->MobDeaths);
-    LuaSetfieldNumber(L, "Type", clan->Type);
+    LuaSetfieldNumber(L, "Type", (int)clan->Type);
 
     if (clan->Board != INVALID_VNUM)
     {
@@ -211,7 +211,11 @@ int LuaClanRepository::L_ClanEntry(lua_State *L)
     LuaGetfieldInt(L, "PlayerDeaths", &clan->PlayerDeaths);
     LuaGetfieldInt(L, "MobKills", &clan->MobKills);
     LuaGetfieldInt(L, "MobDeaths", &clan->MobDeaths);
-    LuaGetfieldInt(L, "Type", &clan->Type);
+    LuaGetfieldInt(L, "Type",
+                   [clan](const auto &type)
+                   {
+                       clan->Type = ClanType(type);
+                   });
     LuaGetfieldLong(L, "BoardVnum", &clan->Board);
     LuaGetfieldLong(L, "StoreroomVnum", &clan->Storeroom);
     LuaGetfieldLong(L, "Funds", &clan->Funds);

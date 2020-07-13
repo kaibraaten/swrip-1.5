@@ -99,7 +99,6 @@ using SpellFun = ch_ret(int sn, int level, std::shared_ptr<Character> ch, const 
 
 using vnum_t = long;
 
-using ClanType = int;
 using ShipType = int;
 using ShipState = int;
 using MissileState = int;

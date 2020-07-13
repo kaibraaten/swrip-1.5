@@ -50,7 +50,7 @@ void Clan::Add(const std::shared_ptr<Clan> &guild)
 {
     pImpl->Subclans.push_back(guild);
 
-    guild->Type = CLAN_GUILD;
+    guild->Type = ClanType::Guild;
     guild->MainClan = GetClan(this->Name);
 }
 

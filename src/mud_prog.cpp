@@ -1251,8 +1251,8 @@ static int MudProgDoIfCheck(const std::string &ifcheck, std::shared_ptr<Characte
                 return false;
             }
 
-            return MudProgCompareNumbers(chkchar->PCData->ClanInfo.Clan->Type, opr, atoi(rval),
-                                         mob);
+            return MudProgCompareNumbers((int)chkchar->PCData->ClanInfo.Clan->Type,
+                                         opr, atoi(rval), mob);
         }
         else if(!StrCmp(chck, "str"))
         {

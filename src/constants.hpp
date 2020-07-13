@@ -462,10 +462,10 @@ constexpr auto BADGUY_CLAN = "The Empire";
 constexpr auto INDEPENDENT_CLAN = "Independent Faction";
 
 /* Clan type */
-enum
+enum class ClanType
 {
-    CLAN_MAIN,
-    CLAN_GUILD
+    Main,
+    Guild
 };
 
 /* ShipType */

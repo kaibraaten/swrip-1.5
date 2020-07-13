@@ -27,7 +27,7 @@ public:
     int PlayerDeaths = 0;        /* Number of pkills against clan        */
     int MobKills = 0;         /* Number of mkills on behalf of clan   */
     int MobDeaths = 0;        /* Number of clan deaths due to mobs    */
-    ClanType Type = CLAN_GUILD;      /* See clan type defines                */
+    ClanType Type = ClanType::Guild;      /* See clan type defines                */
     vnum_t Board = INVALID_VNUM;          /* Vnum of clan board                   */
     vnum_t Storeroom = INVALID_VNUM;      /* Vnum of clan's store room            */
     long Funds = 0;

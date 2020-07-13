@@ -64,7 +64,7 @@ void do_whois(std::shared_ptr<Character> ch, std::string argument)
             && ch->PCData->ClanInfo.Clan == victim->PCData->ClanInfo.Clan)
            || IsImmortal(ch)))
     {
-        if(victim->PCData->ClanInfo.Clan->Type == CLAN_GUILD)
+        if(victim->PCData->ClanInfo.Clan->Type == ClanType::Guild)
             ch->Echo(", and belongs to the guild ");
         else
             ch->Echo(", and belongs to organization ");

@@ -57,7 +57,7 @@ void do_induct(std::shared_ptr<Character> ch, std::string argument)
     {
         std::shared_ptr<Clan> victimClan = victim->PCData->ClanInfo.Clan;
 
-        if(victimClan->Type == CLAN_GUILD)
+        if(victimClan->Type == ClanType::Guild)
         {
             if(victimClan == clan)
             {

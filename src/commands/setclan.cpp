@@ -84,7 +84,7 @@ void do_setclan(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(guild->Type == CLAN_GUILD || guild->MainClan)
+        if(guild->Type == ClanType::Guild || guild->MainClan)
         {
             ch->Echo("Guild is already part of another faction.\r\n");
             return;
