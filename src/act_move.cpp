@@ -442,8 +442,17 @@ ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit,
 
     if(IsRoomPrivate(ch, to_room))
     {
-        ch->Echo("That room is private right now.\r\n");
-        return rNONE;
+        if(ch->Master != nullptr
+           && !IsNpc(ch->Master)
+           && ch->Master->PCData->Pet == ch)
+        {
+            // Pets can follow master into private rooms.
+        }
+        else
+        {
+            ch->Echo("That room is private right now.\r\n");
+            return rNONE;
+        }
     }
 
     if(!IsImmortal(ch)
