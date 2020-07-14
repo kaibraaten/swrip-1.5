@@ -740,6 +740,8 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
 {
     assert(!IsNpc(pc));
 
+    DeEquipCharacter(pc);
+    
     LuaSetfieldNumber(L, "SaveVersion", SAVE_VERSION);
     LuaSetfieldString(L, "CharacterType", "PlayerCharacter");
     LuaSetfieldNumber(L, "Played", pc->PCData->Played + (int)(current_time - pc->PCData->Logon));
@@ -780,11 +782,6 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
     LuaPushFlags(L, pc->PCData->Flags, PcFlags, "PcFlags");
     LuaPushFlags(L, pc->PCData->WantedOn, WantedFlags, "Wanted");
 
-    if (pc->PCData->Pet != nullptr)
-    {
-        LuaPushMobiles(L, { pc->PCData->Pet }, "Pets");
-    }
-
     PushGuildData(L, pc);
     PushImcData(L, pc);
     PushKilledData(L, pc);
@@ -795,6 +792,13 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
     PushDrugLevels(L, pc);
     PushAddictions(L, pc);
     PushAliases(L, pc);
+
+    ReEquipCharacter(pc);
+    
+    if (pc->PCData->Pet != nullptr)
+    {
+        LuaPushMobiles(L, { pc->PCData->Pet }, "Pets");
+    }
 }
 
 void InMemoryPlayerRepository::PushAliases(lua_State *L, std::shared_ptr<Character> pc)

@@ -880,6 +880,8 @@ static void LuaPushMobile(lua_State *L, std::shared_ptr<Character> mob)
     LuaSetfieldNumber(L, "Vnum", proto->Vnum);
     LuaSetfieldString(L, "CharacterType", "Mobile");
 
+    DeEquipCharacter(mob);
+    
     auto mobflags = mob->Flags;
     mobflags.reset(Flag::Mob::Mounted);
     LuaPushFlags(L, mobflags, MobFlags, "Flags");
@@ -932,6 +934,8 @@ static void LuaPushMobile(lua_State *L, std::shared_ptr<Character> mob)
     {
         LuaSetfieldNumber(L, "ArmorClass", mob->ArmorClass);
     }
+
+    ReEquipCharacter(mob);
 }
 
 void LuaPushMobiles(lua_State *L, const std::list<std::shared_ptr<Character>> &mobiles,
@@ -1040,8 +1044,6 @@ static void LuaPushCharacterStats(lua_State *L, std::shared_ptr<Character> ch)
 void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
                       std::function<void(lua_State *, std::shared_ptr<Character>)> pushExtra)
 {
-    pushExtra(L, ch);
-    
     DeEquipCharacter(ch);
 
     LuaSetfieldString(L, "Name", ch->Name);
@@ -1081,6 +1083,8 @@ void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
     LuaPushObjects(L, ch->Objects(), "Inventory");
 
     ReEquipCharacter(ch);
+
+    pushExtra(L, ch);
 }
 
 void LuaGetfieldBool(lua_State *L, const std::string &key,
