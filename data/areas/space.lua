@@ -7356,14 +7356,6 @@ endif\
          MiscData = 1, 
          Arg3 = 32141, 
       }, 
-      [176] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 10321, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg3 = 32141, 
-      }, 
       [177] = 
       {
          Arg2 = 1, 
@@ -7776,14 +7768,6 @@ endif\
          Command = "O", 
          MiscData = 1, 
          Arg3 = 32439, 
-      }, 
-      [231] = 
-      {
-         Arg2 = 1, 
-         Arg1 = 10321, 
-         Command = "O", 
-         MiscData = 1, 
-         Arg3 = 32465, 
       }, 
       [232] = 
       {
