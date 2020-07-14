@@ -1040,6 +1040,8 @@ static void LuaPushCharacterStats(lua_State *L, std::shared_ptr<Character> ch)
 void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
                       std::function<void(lua_State *, std::shared_ptr<Character>)> pushExtra)
 {
+    pushExtra(L, ch);
+    
     DeEquipCharacter(ch);
 
     LuaSetfieldString(L, "Name", ch->Name);
@@ -1077,8 +1079,6 @@ void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
 
     LuaPushCharacterAffects(L, ch->Affects());
     LuaPushObjects(L, ch->Objects(), "Inventory");
-
-    pushExtra(L, ch);
 
     ReEquipCharacter(ch);
 }
