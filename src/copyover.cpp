@@ -157,7 +157,7 @@ void RecoverFromCopyover()
         d->Remote.HostIP = ip;
 
         /* Write something, and check if it goes error-free */
-        if(!WriteToDescriptor(d.get(), "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0))
+        if(!WriteToDescriptor(d.get(), "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew.\r\n", 0))
         {
             Log->Bug("RecoverFromCopyover: couldn't write to socket %d", desc);
             FreeDescriptor(d);

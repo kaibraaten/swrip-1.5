@@ -62,7 +62,7 @@ namespace fs = std::filesystem;
 /*
  * Array to keep track of equipment temporarily.                -Thoric
  */
-std::weak_ptr<Object> save_equipment[MAX_WEAR][8];
+std::weak_ptr<Object> save_equipment[MAX_WEAR][MAX_LAYERS];
 std::weak_ptr<Character> quitting_char;
 std::weak_ptr<Character> loading_char;
 std::weak_ptr<Character> saving_char;
@@ -89,30 +89,24 @@ static bool HasAnyOvalues(std::shared_ptr<Object> obj);
  */
 void DeEquipCharacter(std::shared_ptr<Character> ch)
 {
-    for (int x = 0; x < MAX_WEAR; x++)
-    {
-        for (int y = 0; y < MAX_LAYERS; y++)
-        {
-            save_equipment[x][y].reset();
-        }
-    }
+    ResetSaveEquipmentMatrix();
 
-    for (auto obj : ch->Objects())
+    for(auto obj : ch->Objects())
     {
-        if (obj->WearLoc > WEAR_NONE && obj->WearLoc < MAX_WEAR)
+        if(obj->WearLoc > WEAR_NONE && obj->WearLoc < MAX_WEAR)
         {
-            int x = 0;
+            int layer = 0;
 
-            for (x = 0; x < MAX_LAYERS; x++)
+            for(layer = 0; layer < MAX_LAYERS; ++layer)
             {
-                if (save_equipment[obj->WearLoc][x].expired())
+                if(save_equipment[obj->WearLoc][layer].expired())
                 {
-                    save_equipment[obj->WearLoc][x] = obj;
+                    save_equipment[obj->WearLoc][layer] = obj;
                     break;
                 }
             }
 
-            if (x == MAX_LAYERS)
+            if(layer == MAX_LAYERS)
             {
                 Log->Bug("%s had on more than %d layers of clothing in one location (%d): %s",
                          ch->Name.c_str(), MAX_LAYERS, obj->WearLoc, obj->Name.c_str());
@@ -128,21 +122,18 @@ void DeEquipCharacter(std::shared_ptr<Character> ch)
  */
 void ReEquipCharacter(std::shared_ptr<Character> ch)
 {
-    int x = 0;
-    int y = 0;
-
-    for (x = 0; x < MAX_WEAR; x++)
+    for(int wearLoc = 0; wearLoc < MAX_WEAR; ++wearLoc)
     {
-        for (y = 0; y < MAX_LAYERS; y++)
+        for(int layer = 0; layer < MAX_LAYERS; ++layer)
         {
-            if (!save_equipment[x][y].expired())
+            if(!save_equipment[wearLoc][layer].expired())
             {
                 if (quitting_char.lock() != ch)
                 {
-                    EquipCharacter(ch, save_equipment[x][y].lock(), (WearLocation)x);
+                    EquipCharacter(ch, save_equipment[wearLoc][layer].lock(), (WearLocation)wearLoc);
                 }
 
-                save_equipment[x][y].reset();
+                save_equipment[wearLoc][layer].reset();
             }
             else
             {
@@ -944,4 +935,15 @@ void SaveStoreroom(std::shared_ptr<Room> room)
 void LoadVendors()
 {
     Vendors->Load();
+}
+
+void ResetSaveEquipmentMatrix()
+{
+    for(size_t wearLoc = 0; wearLoc < MAX_WEAR; ++wearLoc)
+    {
+        for(size_t layer = 0; layer < MAX_LAYERS; ++layer)
+        {
+            save_equipment[wearLoc][layer].reset();
+        }
+    }
 }

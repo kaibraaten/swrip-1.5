@@ -259,13 +259,7 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
     struct stat fst;
     char buf[MAX_INPUT_LENGTH];
 
-    for (int x = 0; x < MAX_WEAR; x++)
-    {
-        for (int i = 0; i < MAX_LAYERS; i++)
-        {
-            save_equipment[x][i].reset();
-        }
-    }
+    ResetSaveEquipmentMatrix();
 
     std::string filename = GetPlayerFilename(name);
 
@@ -723,9 +717,9 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
         AssignAreaTo(ch);
     }
 
-    for (int i = 0; i < MAX_WEAR; i++)
+    for (size_t i = 0; i < MAX_WEAR; i++)
     {
-        for (int x = 0; x < MAX_LAYERS; x++)
+        for (size_t x = 0; x < MAX_LAYERS; x++)
         {
             if (!save_equipment[i][x].expired())
             {

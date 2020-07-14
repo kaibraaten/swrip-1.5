@@ -2703,13 +2703,7 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
             saving_char.reset();
             ExtractCharacter(victim, true);
 
-            for(int x = 0; x < MAX_WEAR; x++)
-            {
-                for(int y = 0; y < MAX_LAYERS; y++)
-                {
-                    save_equipment[x][y].reset();
-                }
-            }
+            ResetSaveEquipmentMatrix();
         }
 
         PlayerCharacters->RestoreClone(victim);

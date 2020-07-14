@@ -360,9 +360,7 @@ void BootDatabase(bool fCopyOver)
     saving_char.reset();
     OngoingAuction = std::make_unique<Auction>();
 
-    for(int wear = 0; wear < MAX_WEAR; wear++)
-        for(int x = 0; x < MAX_LAYERS; x++)
-            save_equipment[wear][x].reset();
+    ResetSaveEquipmentMatrix();
 
     /*
      * Set time and weather.

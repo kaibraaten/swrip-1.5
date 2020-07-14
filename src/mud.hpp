@@ -1297,7 +1297,7 @@ bool SaveVsSpellStaff(int level, std::shared_ptr<Character> victim);
 ch_ret CastSpellWithObject(int sn, int level, std::shared_ptr<Character> ch, std::shared_ptr<Character> victim, std::shared_ptr<Object> obj);
 int ParseDice(std::shared_ptr<Character> ch, int level, const std::string &exp);
 
-/* save.c */
+/* save.cpp */
 void SaveClone(std::shared_ptr<Character> ch);
 void SetAlarm(long seconds);
 void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FILE *fp,
@@ -1310,6 +1310,7 @@ void LoadStorerooms();
 void LoadCorpses();
 void WriteCorpses(std::shared_ptr<Character> ch, std::string name);
 void SaveHome(std::shared_ptr<Character> ch);
+void ResetSaveEquipmentMatrix();
 
 /* special.c */
 SpecFun *SpecialLookup(const std::string &name);

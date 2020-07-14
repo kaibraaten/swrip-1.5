@@ -85,14 +85,7 @@ void do_quit(std::shared_ptr<Character> ch, std::string argument)
     saving_char.reset();
     level = GetTrustLevel(ch);
     ExtractCharacter(ch, true);
-
-    for(int x = 0; x < MAX_WEAR; x++)
-    {
-        for(int y = 0; y < MAX_LAYERS; y++)
-        {
-            save_equipment[x][y].reset();
-        }
-    }
+    ResetSaveEquipmentMatrix();
 
     Log->LogStringPlus(logBuf, LogType::Comm, level);
 }
