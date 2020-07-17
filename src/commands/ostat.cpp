@@ -1,33 +1,48 @@
 #include <sstream>
 #include <cstring>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
 
+static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
+                             std::ostringstream &outbuf);
+static void ShowItemTypeReport(std::shared_ptr<Object> obj, std::ostringstream &outbuf);
+
 void do_ostat(std::shared_ptr<Character> ch, std::string arg)
 {
-    std::shared_ptr<Object> obj;
-    std::string pdesc;
-
     if(arg.empty())
     {
         ch->Echo("Ostat what?\r\n");
         return;
     }
 
-    if((obj = GetObjectAnywhere(ch, arg)) == NULL)
+    auto obj = GetObjectAnywhere(ch, arg);
+    
+    if(obj == nullptr)
     {
         ch->Echo("Nothing like that in hell, earth, or heaven.\r\n");
         return;
     }
 
-    ch->Echo("Name: %s.\r\n", obj->Name.c_str());
-    const auto objExtraDescriptions(obj->ExtraDescriptions());
-    const auto protoExtraDescriptions(obj->Prototype->ExtraDescriptions());
+    std::ostringstream outbuf;
 
-    pdesc = GetExtraDescription(arg, objExtraDescriptions);
+    ShowGeneralStats(obj, arg, outbuf);
+    ShowItemTypeReport(obj, outbuf);
+    
+    ch->Echo(outbuf.str());
+}
+
+static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
+                             std::ostringstream &outbuf)
+{
+    outbuf << "&gName: &G" << obj->Name << "&d\r\n";
+    const auto objExtraDescriptions = obj->ExtraDescriptions();
+    const auto protoExtraDescriptions = obj->Prototype->ExtraDescriptions();
+
+    std::string pdesc = GetExtraDescription(arg, objExtraDescriptions);
 
     if(pdesc.empty())
         pdesc = GetExtraDescription(arg, protoExtraDescriptions);
@@ -39,79 +54,163 @@ void do_ostat(std::shared_ptr<Character> ch, std::string arg)
         pdesc = GetExtraDescription(obj->Name, protoExtraDescriptions);
 
     if(!pdesc.empty())
-        ch->Echo(pdesc);
+        outbuf << "&G" << pdesc << "&d";
 
-    ch->Echo("Vnum: %ld.  Type: %s.  Count: %d  Gcount: %d\r\n",
-             obj->Prototype->Vnum, GetItemTypeName(obj), obj->Prototype->Count,
-             obj->Count);
+    outbuf << "&gVnum: &G" << obj->Prototype->Vnum
+           << "  &gType: &G" << GetItemTypeName(obj)
+           << "  &gCount: &G" << obj->Prototype->Count
+           << "  &gGroupcount: &G" << obj->Count
+           << "&d\r\n";
 
-    ch->Echo("Serial#: %d  TopIdxSerial#: %d  TopSerial#: %d\r\n",
-             obj->Serial, obj->Prototype->Serial, cur_obj_serial);
+    outbuf << "&gSerial#: &G" << obj->Serial
+           << "  &gTopIdxSerial#: &G" << obj->Prototype->Serial
+           << "  &gTopSerial#: &G" << cur_obj_serial
+           << "&d\r\n";
 
-    ch->Echo("Short description: %s.\r\nLong description: %s\r\n",
-             obj->ShortDescr.c_str(), obj->Description.c_str());
+    outbuf << "&gShort description: &G" << obj->ShortDescr << "&d\r\n";
+    
+    outbuf << "&gLong description: &G" << obj->Description << "&d\r\n";
 
     if(!obj->ActionDescription.empty())
-        ch->Echo("Action description: %s.\r\n", obj->ActionDescription.c_str());
+        outbuf << "&gAction description: &G" << obj->ActionDescription << "&d\r\n";
 
-    ch->Echo("Wear flags : %s\r\n", FlagString(obj->WearFlags, WearFlags).c_str());
-    ch->Echo("Extra flags: %s\r\n", FlagString(obj->Flags, ObjectFlags).c_str());
+    outbuf << "&gWear flags: &G" << FlagString(obj->WearFlags, WearFlags) << "&d\r\n";
 
-    ch->Echo("Number: %d/%d.  Weight: %d/%d.  Layers: %d\r\n",
-             1, GetObjectCount(obj),
-             obj->Weight, GetObjectWeight(obj), obj->Prototype->Layers);
+    outbuf << "&gExtra flags: &G" << FlagString(obj->Flags, ObjectFlags) << "&d\r\n";
 
-    ch->Echo("Cost: %d.  Timer: %d.  Level: %d.\r\n",
-             obj->Cost, obj->Timer, obj->Level);
+    outbuf << "&gNumber: &G" << 1 << "&g/&G" << GetObjectCount(obj)
+           << "  &gWeight: &G" << obj->Weight << "&g/&G" <<  GetObjectWeight(obj)
+           << "  &gLayers: &G" << obj->Prototype->Layers
+           << "&d\r\n";
 
-    ch->Echo("In room: %ld.  In object: %s.  Carried by: %s.  Wear_loc: %d.\r\n",
-             obj->InRoom == NULL ? 0 : obj->InRoom->Vnum,
-             obj->InObject == NULL ? "(none)" : obj->InObject->ShortDescr.c_str(),
-             obj->CarriedBy == NULL ? "(none)" : obj->CarriedBy->Name.c_str(),
-             obj->WearLoc);
+    outbuf << "&gCost: &G" << obj->Cost
+           << "  &gTimer: &G" << obj->Timer
+           << "  &gLevel: &G" << obj->Level
+           << "&d\r\n";
 
-    ch->Echo("Index Values : %d %d %d %d %d %d.\r\n",
-             obj->Prototype->Value[0], obj->Prototype->Value[1],
-             obj->Prototype->Value[2], obj->Prototype->Value[3],
-             obj->Prototype->Value[4], obj->Prototype->Value[5]);
-    ch->Echo("Object Values: %d %d %d %d %d %d.\r\n",
-             obj->Value[0], obj->Value[1], obj->Value[2], obj->Value[3], obj->Value[4], obj->Value[5]);
+    outbuf << "&gIn room: &G" << (obj->InRoom == nullptr ? 0 : obj->InRoom->Vnum)
+           << "  &gIn object: &G" << (obj->InObject == nullptr ? "(none)" : obj->InObject->ShortDescr)
+           << "  &gCarried by: &G" << (obj->CarriedBy == nullptr ? "(none)" : obj->CarriedBy->Name)
+           << "  &gWear_loc: &G" << obj->WearLoc
+           << "&d\r\n";
+
+    outbuf << "&gIndex Values : &G"
+           << obj->Prototype->Value[0] << " "
+           << obj->Prototype->Value[1] << " "
+           << obj->Prototype->Value[2] << " "
+           << obj->Prototype->Value[3] << " "
+           << obj->Prototype->Value[4] << " "
+           << obj->Prototype->Value[5] << " "
+           << "&d\r\n";
+
+    outbuf << "&gObject Values: &G"
+           << obj->Value[0] << " "
+           << obj->Value[1] << " "
+           << obj->Value[2] << " "
+           << obj->Value[3] << " "
+           << obj->Value[4] << " "
+           << obj->Value[5] << " "
+           << "&d\r\n";
 
     if(!obj->Prototype->ExtraDescriptions().empty())
     {
         std::ostringstream buf;
-        ch->Echo("Primary description keywords:   '");
+        buf << "&gPrimary description keywords:   '&G";
 
         for(auto ed : obj->Prototype->ExtraDescriptions())
         {
             buf << ed->Keyword << " ";
         }
 
-        std::string output = TrimString(buf.str());
-        ch->Echo("%s'.\r\n", output.c_str());
+        outbuf << TrimString(buf.str()) << "&g'&d\r\n";
     }
 
     if(!obj->ExtraDescriptions().empty())
     {
         std::ostringstream buf;
-
-        ch->Echo("Secondary description keywords: '");
+        buf << "&gSecondary description keywords: '&G";
 
         for(auto ed : obj->ExtraDescriptions())
         {
             buf << ed->Keyword << " ";
         }
 
-        std::string output = TrimString(buf.str());
-        ch->Echo("%s'.\r\n", output.c_str());
+        outbuf << TrimString(buf.str()) << "&g'&d\r\n";
     }
 
     for(auto paf : obj->Affects())
-        ch->Echo("Affects %s by %d. (extra)\r\n",
-                 GetAffectLocationName(paf->Location), paf->Modifier);
+        outbuf << "&gAffects &G" << GetAffectLocationName(paf->Location)
+               << " &gby &G" << paf->Modifier << " &g(extra)&d\r\n";
 
     for(auto paf : obj->Prototype->Affects())
-        ch->Echo("Affects %s by %d.\r\n",
-                 GetAffectLocationName(paf->Location), paf->Modifier);
+        outbuf << "&gAffects &G" << GetAffectLocationName(paf->Location)
+               << " &gby &G" << paf->Modifier << "&d\r\n";
 }
 
+static void ShowFabricStats(std::shared_ptr<Object> obj, std::ostringstream &buf)
+{
+    const int strength = obj->Value[OVAL_FABRIC_STRENGTH];
+    const int head = strength * 2;
+    const int body = strength * 3;
+    const int legs = strength * 2;
+    const int feet = strength * 1;
+    const int arms = strength * 1;
+    const int about = strength * 2;
+    const int waist = strength * 1;
+    const int over = strength * 0;
+    
+    buf << "&gFabric strength: &G" << strength << "&d\r\n";
+    buf << "&gResulting AC when used for crafting armor:\r\n"
+        << "  &gHead:  &G" << head << "&d\r\n"
+        << "  &gBody:  &G" << body << "&d\r\n"
+        << "  &gLegs:  &G" << legs << "&d\r\n"
+        << "  &gFeet:  &G" << feet << "&d\r\n"
+        << "  &gArms:  &G" << arms << "&d\r\n"
+        << "  &gAbout: &G" << about << "&d\r\n"
+        << "  &gWaist: &G" << waist << "&d\r\n"
+        << "  &gOver:  &G" << over << "&d\r\n"
+        << "  &gTOTAL: &G" << head + body + legs + feet + arms + about + waist + over << "&d\r\n";
+
+    bool isBest = true;
+    
+    ForEach(ProtoObjects,
+            [&isBest, obj](const auto &tuple)
+            {
+                auto objToCheck = tuple.second;
+                
+                if(objToCheck->ItemType == obj->ItemType
+                   && objToCheck->Value[OVAL_FABRIC_STRENGTH] >= obj->Value[OVAL_FABRIC_STRENGTH]
+                   && objToCheck->Vnum != obj->Prototype->Vnum)
+                {
+                    isBest = false;
+                }
+            });
+
+    if(isBest)
+    {
+        buf << "&gNote: &GThis is the best fabric in the game!&d\r\n";
+    }
+}
+
+static void ShowItemTypeReport(std::shared_ptr<Object> obj, std::ostringstream &outbuf)
+{
+    std::ostringstream tmp;
+
+    tmp << "\r\n"
+        << "&g=================================================&d\r\n"
+        << "&gReport for item type &G" << ObjectTypes[obj->ItemType] << "&d\r\n"
+        << "&g-------------------------------------------------&d\r\n";
+    
+    switch(obj->ItemType)
+    {
+    case ITEM_FABRIC:
+        ShowFabricStats(obj, tmp);
+        break;
+        
+    default:
+        tmp.str("");
+        break;
+    }
+
+    outbuf << tmp.str();
+}
