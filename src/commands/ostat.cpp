@@ -1,5 +1,6 @@
 #include <sstream>
 #include <cstring>
+#include <utility/random.hpp>
 #include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
@@ -38,7 +39,7 @@ void do_ostat(std::shared_ptr<Character> ch, std::string arg)
 static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
                              std::ostringstream &outbuf)
 {
-    outbuf << "&gName: &G" << obj->Name << "&d\r\n";
+    outbuf << "&cName: &C" << obj->Name << "&d\r\n";
     const auto objExtraDescriptions = obj->ExtraDescriptions();
     const auto protoExtraDescriptions = obj->Prototype->ExtraDescriptions();
 
@@ -54,47 +55,47 @@ static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
         pdesc = GetExtraDescription(obj->Name, protoExtraDescriptions);
 
     if(!pdesc.empty())
-        outbuf << "&G" << pdesc << "&d";
+        outbuf << "&C" << pdesc << "&d";
 
-    outbuf << "&gVnum: &G" << obj->Prototype->Vnum
-           << "  &gType: &G" << GetItemTypeName(obj)
-           << "  &gCount: &G" << obj->Prototype->Count
-           << "  &gGroupcount: &G" << obj->Count
+    outbuf << "&cVnum: &C" << obj->Prototype->Vnum
+           << "  &cType: &C" << GetItemTypeName(obj)
+           << "  &cCount: &C" << obj->Prototype->Count
+           << "  &cGroupcount: &C" << obj->Count
            << "&d\r\n";
 
-    outbuf << "&gSerial#: &G" << obj->Serial
-           << "  &gTopIdxSerial#: &G" << obj->Prototype->Serial
-           << "  &gTopSerial#: &G" << cur_obj_serial
+    outbuf << "&cSerial#: &C" << obj->Serial
+           << "  &cTopIdxSerial#: &C" << obj->Prototype->Serial
+           << "  &cTopSerial#: &C" << cur_obj_serial
            << "&d\r\n";
 
-    outbuf << "&gShort description: &G" << obj->ShortDescr << "&d\r\n";
+    outbuf << "&cShort description: &C" << obj->ShortDescr << "&d\r\n";
     
-    outbuf << "&gLong description: &G" << obj->Description << "&d\r\n";
+    outbuf << "&cLong description: &C" << obj->Description << "&d\r\n";
 
     if(!obj->ActionDescription.empty())
-        outbuf << "&gAction description: &G" << obj->ActionDescription << "&d\r\n";
+        outbuf << "&cAction description: &C" << obj->ActionDescription << "&d\r\n";
 
-    outbuf << "&gWear flags: &G" << FlagString(obj->WearFlags, WearFlags) << "&d\r\n";
+    outbuf << "&cWear flags: &C" << FlagString(obj->WearFlags, WearFlags) << "&d\r\n";
 
-    outbuf << "&gExtra flags: &G" << FlagString(obj->Flags, ObjectFlags) << "&d\r\n";
+    outbuf << "&cExtra flags: &C" << FlagString(obj->Flags, ObjectFlags) << "&d\r\n";
 
-    outbuf << "&gNumber: &G" << 1 << "&g/&G" << GetObjectCount(obj)
-           << "  &gWeight: &G" << obj->Weight << "&g/&G" <<  GetObjectWeight(obj)
-           << "  &gLayers: &G" << obj->Prototype->Layers
+    outbuf << "&cNumber: &C" << 1 << "&c/&C" << GetObjectCount(obj)
+           << "  &cWeight: &C" << obj->Weight << "&c/&C" <<  GetObjectWeight(obj)
+           << "  &cLayers: &C" << obj->Prototype->Layers
            << "&d\r\n";
 
-    outbuf << "&gCost: &G" << obj->Cost
-           << "  &gTimer: &G" << obj->Timer
-           << "  &gLevel: &G" << obj->Level
+    outbuf << "&cCost: &C" << obj->Cost
+           << "  &cTimer: &C" << obj->Timer
+           << "  &cLevel: &C" << obj->Level
            << "&d\r\n";
 
-    outbuf << "&gIn room: &G" << (obj->InRoom == nullptr ? 0 : obj->InRoom->Vnum)
-           << "  &gIn object: &G" << (obj->InObject == nullptr ? "(none)" : obj->InObject->ShortDescr)
-           << "  &gCarried by: &G" << (obj->CarriedBy == nullptr ? "(none)" : obj->CarriedBy->Name)
-           << "  &gWear_loc: &G" << obj->WearLoc
+    outbuf << "&cIn room: &C" << (obj->InRoom == nullptr ? 0 : obj->InRoom->Vnum)
+           << "  &cIn object: &C" << (obj->InObject == nullptr ? "(none)" : obj->InObject->ShortDescr)
+           << "  &cCarried by: &C" << (obj->CarriedBy == nullptr ? "(none)" : obj->CarriedBy->Name)
+           << "  &cWear_loc: &C" << obj->WearLoc
            << "&d\r\n";
 
-    outbuf << "&gIndex Values : &G"
+    outbuf << "&cIndex Values : &C"
            << obj->Prototype->Value[0] << " "
            << obj->Prototype->Value[1] << " "
            << obj->Prototype->Value[2] << " "
@@ -103,7 +104,7 @@ static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
            << obj->Prototype->Value[5] << " "
            << "&d\r\n";
 
-    outbuf << "&gObject Values: &G"
+    outbuf << "&cObject Values: &C"
            << obj->Value[0] << " "
            << obj->Value[1] << " "
            << obj->Value[2] << " "
@@ -115,36 +116,36 @@ static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
     if(!obj->Prototype->ExtraDescriptions().empty())
     {
         std::ostringstream buf;
-        buf << "&gPrimary description keywords:   '&G";
+        buf << "&cPrimary description keywords:   '&C";
 
         for(auto ed : obj->Prototype->ExtraDescriptions())
         {
             buf << ed->Keyword << " ";
         }
 
-        outbuf << TrimString(buf.str()) << "&g'&d\r\n";
+        outbuf << TrimString(buf.str()) << "&c'&d\r\n";
     }
 
     if(!obj->ExtraDescriptions().empty())
     {
         std::ostringstream buf;
-        buf << "&gSecondary description keywords: '&G";
+        buf << "&cSecondary description keywords: '&C";
 
         for(auto ed : obj->ExtraDescriptions())
         {
             buf << ed->Keyword << " ";
         }
 
-        outbuf << TrimString(buf.str()) << "&g'&d\r\n";
+        outbuf << TrimString(buf.str()) << "&c'&d\r\n";
     }
 
     for(auto paf : obj->Affects())
-        outbuf << "&gAffects &G" << GetAffectLocationName(paf->Location)
-               << " &gby &G" << paf->Modifier << " &g(extra)&d\r\n";
+        outbuf << "&cAffects &C" << GetAffectLocationName(paf->Location)
+               << " &cby &C" << paf->Modifier << " &c(extra)&d\r\n";
 
     for(auto paf : obj->Prototype->Affects())
-        outbuf << "&gAffects &G" << GetAffectLocationName(paf->Location)
-               << " &gby &G" << paf->Modifier << "&d\r\n";
+        outbuf << "&cAffects &C" << GetAffectLocationName(paf->Location)
+               << " &cby &C" << paf->Modifier << "&d\r\n";
 }
 
 static void ShowFabricStats(std::shared_ptr<Object> obj, std::ostringstream &buf)
@@ -159,17 +160,17 @@ static void ShowFabricStats(std::shared_ptr<Object> obj, std::ostringstream &buf
     const int waist = strength * 1;
     const int over = strength * 0;
     
-    buf << "&gFabric strength: &G" << strength << "&d\r\n";
-    buf << "&gResulting AC when used for crafting armor:\r\n"
-        << "  &gHead:  &G" << head << "&d\r\n"
-        << "  &gBody:  &G" << body << "&d\r\n"
-        << "  &gLegs:  &G" << legs << "&d\r\n"
-        << "  &gFeet:  &G" << feet << "&d\r\n"
-        << "  &gArms:  &G" << arms << "&d\r\n"
-        << "  &gAbout: &G" << about << "&d\r\n"
-        << "  &gWaist: &G" << waist << "&d\r\n"
-        << "  &gOver:  &G" << over << "&d\r\n"
-        << "  &gTOTAL: &G" << head + body + legs + feet + arms + about + waist + over << "&d\r\n";
+    buf << "&cFabric strength: &C" << strength << "&d\r\n";
+    buf << "&cResulting AC when used for crafting armor:\r\n"
+        << "  &cHead:  &C" << head << "&d\r\n"
+        << "  &cBody:  &C" << body << "&d\r\n"
+        << "  &cLegs:  &C" << legs << "&d\r\n"
+        << "  &cFeet:  &C" << feet << "&d\r\n"
+        << "  &cArms:  &C" << arms << "&d\r\n"
+        << "  &cAbout: &C" << about << "&d\r\n"
+        << "  &cWaist: &C" << waist << "&d\r\n"
+        << "  &cOver:  &C" << over << "&d\r\n"
+        << "  &cTOTAL: &C" << head + body + legs + feet + arms + about + waist + over << "&d\r\n";
 
     bool isBest = true;
     
@@ -188,8 +189,34 @@ static void ShowFabricStats(std::shared_ptr<Object> obj, std::ostringstream &buf
 
     if(isBest)
     {
-        buf << "&gNote: &GThis is the best fabric in the game!&d\r\n";
+        buf << "&cNote: &CThis is the best fabric in the game!&d\r\n";
     }
+}
+
+static void ShowWeaponStats(std::shared_ptr<Object> obj, std::ostringstream &buf)
+{
+    int minDam = obj->Prototype->Value[OVAL_WEAPON_NUM_DAM_DIE];
+    int maxDam = obj->Prototype->Value[OVAL_WEAPON_SIZE_DAM_DIE];
+
+    if (minDam > 0 && maxDam > 0)
+    {
+        maxDam *= minDam;
+    }
+    else
+    {
+        minDam = NumberFuzzy(NumberFuzzy(101 / 20));
+        maxDam = NumberFuzzy(NumberFuzzy(110 / 10));
+    }
+
+    if(minDam > maxDam)
+    {
+        minDam = maxDam / 3;
+    }
+    
+    buf << "&cWeapon type: &C" << Capitalize(GetWeaponTypeName(obj->Prototype->Value[OVAL_WEAPON_TYPE])) << "&d\r\n";
+    buf << "&cDamage:      &C" << minDam << " - " << maxDam
+        << " (avg " << ((minDam + maxDam) / 2) << ")&d\r\n";
+    buf << "&cCharges:     &C" << obj->Prototype->Value[OVAL_WEAPON_MAX_CHARGE] << "&d\r\n";
 }
 
 static void ShowItemTypeReport(std::shared_ptr<Object> obj, std::ostringstream &outbuf)
@@ -197,14 +224,18 @@ static void ShowItemTypeReport(std::shared_ptr<Object> obj, std::ostringstream &
     std::ostringstream tmp;
 
     tmp << "\r\n"
-        << "&g=================================================&d\r\n"
-        << "&gReport for item type &G" << ObjectTypes[obj->ItemType] << "&d\r\n"
-        << "&g-------------------------------------------------&d\r\n";
+        << "&C=================================================&d\r\n"
+        << "&cReport for item type &C" << ObjectTypes[obj->ItemType] << "&d\r\n"
+        << "&C-------------------------------------------------&d\r\n";
     
     switch(obj->ItemType)
     {
     case ITEM_FABRIC:
         ShowFabricStats(obj, tmp);
+        break;
+
+    case ITEM_WEAPON:
+        ShowWeaponStats(obj, tmp);
         break;
         
     default:
