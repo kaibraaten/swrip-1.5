@@ -639,7 +639,8 @@ SkillEntry
    Target = "ignore", 
    Teachers = 
    {
-      [32050] = "rodian hunter bounty mercenary", 
+         [32050] = "rodian hunter bounty mercenary",
+         [6606] = "grizzled bounty hunter",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -2511,7 +2512,8 @@ SkillEntry
       [10340] = "Domick Dom teacher", 
       [32040] = "imperial flight lieutenant", 
       [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
+      [32007] = "imperial flight officer",
+      [31539] = "facility manager",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -3395,7 +3397,8 @@ SkillEntry
       [10340] = "Domick Dom teacher", 
       [32040] = "imperial flight lieutenant", 
       [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
+      [32007] = "imperial flight officer",
+      [31539] = "facility manager",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -3440,7 +3443,7 @@ SkillEntry
    Target = "ignore", 
    Teachers = 
    {
-      [328] = "Sleejat", 
+         [6606] = "grizzled bounty hunter",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -3686,7 +3689,8 @@ SkillEntry
    {
       [32040] = "imperial flight lieutenant", 
       [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
+      [32007] = "imperial flight officer",
+      [31539] = "facility manager",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -4007,7 +4011,8 @@ SkillEntry
       [10340] = "Domick Dom teacher", 
       [32040] = "imperial flight lieutenant", 
       [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
+      [32007] = "imperial flight officer",
+      [31539] = "facility manager",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -4345,7 +4350,8 @@ SkillEntry
    Target = "ignore", 
    Teachers = 
    {
-      [32050] = "rodian hunter bounty mercenary", 
+         [32050] = "rodian hunter bounty mercenary",
+         [6606] = "grizzled bounty hunter",
    }, 
    Position = "standing", 
    Type = "Skill", 
@@ -4496,7 +4502,8 @@ SkillEntry
    {
       [32040] = "imperial flight lieutenant", 
       [32008] = "Rebel Alliance flight instructor", 
-      [32007] = "imperial flight officer", 
+      [32007] = "imperial flight officer",
+      [31539] = "facility manager",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -10349,7 +10356,8 @@ SkillEntry
    Target = "ignore", 
    Teachers = 
    {
-      [32050] = "rodian hunter bounty mercenary", 
+         [32050] = "rodian hunter bounty mercenary",
+         [6606] = "grizzled bounty hunter",
    }, 
    Position = "standing", 
    Type = "Skill", 
