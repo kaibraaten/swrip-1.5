@@ -6581,7 +6581,8 @@ SkillEntry
    Name = "armor", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 5, 
    Target = "defensive", 
@@ -6639,7 +6640,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 6, 
    Target = "defensive", 
@@ -7061,7 +7063,8 @@ SkillEntry
    Name = "detect darkness", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 5, 
    Target = "self", 
@@ -7117,7 +7120,8 @@ SkillEntry
    Name = "detect force", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 5, 
    Target = "self", 
@@ -9028,7 +9032,8 @@ SkillEntry
    {
       [605] = "ancient sith spirit teacher sith9870", 
       [7310] = "jedi salesman", 
-      [50] = "Master Yoda", 
+      [50] = "Master Yoda",
+      [31900] = "zim failed jedi",
    }, 
    Level = 5, 
    Target = "ignore", 
