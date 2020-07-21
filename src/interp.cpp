@@ -441,8 +441,6 @@ void Interpret(std::shared_ptr<Character> ch, std::string argument)
     /*
      * Dispatch the command.
      */
-    ch->PreviousCommand = ch->LastCommand;    /* haus, for automapping */
-    ch->LastCommand = cmd->Function;
     StartTimer(&time_used);
     cmd->Function(ch, argument);
     StopTimer(&time_used);

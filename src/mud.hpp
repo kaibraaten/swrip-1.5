@@ -332,7 +332,6 @@ extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
 extern std::shared_ptr<Character> cur_char;
-extern std::shared_ptr<Room> cur_room;
 extern bool             cur_char_died;
 extern ch_ret           global_retcode;
 

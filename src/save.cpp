@@ -63,7 +63,7 @@ namespace fs = std::filesystem;
 /*
  * Array to keep track of equipment temporarily.                -Thoric
  */
-std::unordered_map<std::shared_ptr<Character>, std::vector<std::vector<std::shared_ptr<Object>>>> SaveEquipment;
+static std::unordered_map<std::shared_ptr<Character>, std::vector<std::vector<std::shared_ptr<Object>>>> SaveEquipment;
 
 std::weak_ptr<Character> quitting_char;
 std::weak_ptr<Character> loading_char;

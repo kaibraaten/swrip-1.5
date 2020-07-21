@@ -30,6 +30,7 @@
 #include <bitset>
 #include <list>
 #include <array>
+#include <functional>
 #include "types.hpp"
 #include "constants.hpp"
 #include "mprog.hpp"
@@ -152,8 +153,6 @@ public:
     std::shared_ptr<Room> InRoom;
     std::shared_ptr<Room> WasInRoom;
     std::shared_ptr<Room> WasSentinel;
-    CmdFun *LastCommand = NULL;
-    CmdFun *PreviousCommand = NULL;   /* mapping */
     int NumFighting = 0;
     std::string dest_buf;
     int tempnum = 0;

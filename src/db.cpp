@@ -354,7 +354,6 @@ void BootDatabase(bool fCopyOver)
     cur_obj_serial = 0;
     cur_char_died = false;
     cur_obj_extracted = false;
-    cur_room = NULL;
     quitting_char.reset();
     loading_char.reset();
     saving_char.reset();

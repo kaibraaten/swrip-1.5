@@ -269,8 +269,6 @@ bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const
         ch->Mana.Current -= mana;
     }
 
-    ch->PreviousCommand = ch->LastCommand;    /* haus, for automapping */
-    ch->LastCommand = skill->SkillFunction;
     StartTimer(&time_used);
     skill->SkillFunction(ch, argument);
     StopTimer(&time_used);

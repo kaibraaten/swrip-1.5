@@ -45,7 +45,6 @@
 extern std::shared_ptr<Character> gch_prev;
 
 std::shared_ptr<Character> cur_char;
-std::shared_ptr<Room>  cur_room;
 bool cur_char_died = false;
 ch_ret global_retcode = rNONE;
 
@@ -2312,7 +2311,6 @@ void SetCurrentGlobalCharacter(std::shared_ptr<Character> ch)
 {
     cur_char = ch;
     cur_char_died = false;
-    cur_room = ch->InRoom;
     global_retcode = rNONE;
 }
 
