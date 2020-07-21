@@ -16,8 +16,8 @@ public:
     virtual ~ProtoMobile();
 
     std::shared_ptr<ProtoMobile> NextSort;
-    SpecFun *spec_fun = nullptr;
-    SpecFun *spec_2 = nullptr;
+    std::function<bool(std::shared_ptr<Character>)> spec_fun;
+    std::function<bool(std::shared_ptr<Character>)> spec_2;
     std::shared_ptr<class Shop> Shop;
     std::shared_ptr<class RepairShop> RepairShop;
     std::string Name;

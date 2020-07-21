@@ -133,12 +133,16 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(skill->SpellFunction == spell_null)
         {
-            ch->Echo("That's not a spell!\r\n");
-            return;
-        }
+            const auto spellfunptr = skill->SpellFunction.target<ch_ret(*)(int, int, std::shared_ptr<Character>, const Vo&)>();
 
+            if(spellfunptr == nullptr || *spellfunptr == spell_null)
+            {
+                ch->Echo("That's not a spell!\r\n");
+                return;
+            }
+        }
+        
         if(!skill->SpellFunction)
         {
             ch->Echo("You cannot cast that... yet.\r\n");

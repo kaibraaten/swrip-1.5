@@ -67,8 +67,8 @@ public:
     bool IsRetiredImmortal() const;
 
     // Player AND mob
-    SpecFun *spec_fun = NULL;
-    SpecFun *spec_2 = NULL;
+    std::function<bool(std::shared_ptr<Character>)> spec_fun;
+    std::function<bool(std::shared_ptr<Character>)> spec_2;
     std::shared_ptr<ProtoMobile> Prototype;
     std::shared_ptr<Descriptor> Desc;
     std::unique_ptr<class PCData> PCData;

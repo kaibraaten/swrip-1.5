@@ -206,11 +206,14 @@ void LuaLoadCharacter(lua_State *L, std::shared_ptr<Character> ch,
 #define PushCurrentAndMax( L, key, structure ) LuaPushCurrentAndMax( (L), (key), (structure.Current), (structure.Max) )
 #define LoadCurrentAndMax( L, key, structure ) LuaLoadCurrentAndMax( (L), (key), (&structure.Current), (&structure.Max) )
 void LuaPushMudProgs(lua_State *L, const MProg *mprog);
-void LuaPushSpecFun(lua_State *L, size_t idx, SpecFun *specfun);
-void LuaLoadSpecFun(lua_State *L, size_t idx, std::vector<SpecFun *> *specfuns);
+void LuaPushSpecFun(lua_State *L, size_t idx,
+                    std::function<bool(std::shared_ptr<Character>)> specfun);
+void LuaLoadSpecFun(lua_State *L, size_t idx,
+                    std::vector<std::function<bool(std::shared_ptr<Character>)>> *specfuns);
 
 template<typename EntityT>
-void AssignSpecFuns(const EntityT &mob, const std::vector<SpecFun *> &specfuns)
+void AssignSpecFuns(const EntityT &mob,
+                    const std::vector<std::function<bool(std::shared_ptr<Character>)>> &specfuns)
 {
     if(!specfuns.empty())
     {

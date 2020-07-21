@@ -137,8 +137,9 @@ static int L_CommandEntry(lua_State *L)
                       [newCommand](const std::string &symbolName)
                       {
                           newCommand->Function = GetSkillFunction(symbolName);
-
-                          if(newCommand->Function != skill_notfound)
+                          const auto funptr = newCommand->Function.target<void(*)(std::shared_ptr<Character>, std::string)>();
+                          
+                          if(funptr != nullptr && *funptr != skill_notfound)
                           {
                               newCommand->FunctionName = symbolName;
                           }

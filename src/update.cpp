@@ -2413,7 +2413,7 @@ static void CharacterCheck()
 
                 if(ch->spec_2)
                 {
-                    if((*ch->spec_2) (ch))
+                    if(ch->spec_2(ch))
                     {
                         continue;
                     }

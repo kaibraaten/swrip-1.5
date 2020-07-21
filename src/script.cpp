@@ -870,7 +870,8 @@ void LuaPushObjects(lua_State *L, const std::list<std::shared_ptr<Object>> &obje
     lua_settable(L, -3);
 }
 
-void LuaPushSpecFun(lua_State *L, size_t idx, SpecFun *specfun)
+void LuaPushSpecFun(lua_State *L, size_t idx,
+                    std::function<bool(std::shared_ptr<Character>)> specfun)
 {
     lua_pushinteger(L, idx);
     lua_pushstring(L, LookupSpecial(specfun).c_str());
@@ -899,18 +900,28 @@ static void LuaPushMobile(lua_State *L, std::shared_ptr<Character> mob)
         LuaSetfieldString(L, "LongDescription", mob->LongDescr);
     }
 
-    std::vector<SpecFun *> specfuns;
+    std::vector<std::function<bool(std::shared_ptr<Character>)>> specfuns;
 
-    if(mob->spec_fun != nullptr && mob->spec_fun != proto->spec_fun)
+    const auto mobspec1ptr = mob->spec_fun.target<bool(*)(std::shared_ptr<Character>)>();
+    const auto protospec1ptr = proto->spec_fun.target<bool(*)(std::shared_ptr<Character>)>();
+    
+    if(mobspec1ptr != nullptr
+       && protospec1ptr != nullptr
+       && *mobspec1ptr != *protospec1ptr)
     {
         specfuns.push_back(mob->spec_fun);
     }
 
-    if(mob->spec_2 != nullptr && mob->spec_2 != proto->spec_2)
+    const auto mobspec2ptr = mob->spec_2.target<bool(*)(std::shared_ptr<Character>)>();
+    const auto protospec2ptr = proto->spec_2.target<bool(*)(std::shared_ptr<Character>)>();
+
+    if(mobspec2ptr != nullptr
+       && protospec2ptr != nullptr
+       && *mobspec2ptr != *protospec2ptr)
     {
         specfuns.push_back(mob->spec_2);
     }
-
+    
     LuaPushCollection(L, specfuns, "SpecFuns", LuaPushSpecFun);
 
     if(mob->NumberOfAttacks != proto->NumberOfAttacks)
@@ -976,13 +987,13 @@ void LuaPushStats(lua_State *L, const Stats *stats, const std::string &key)
     lua_pushstring(L, key.c_str());
     lua_newtable(L);
 
-    LuaSetfieldNumber(L, "Strength", stats->Str > 0 ? stats->Str : 10);
-    LuaSetfieldNumber(L, "Intelligence", stats->Int > 0 ? stats->Int : 10);
-    LuaSetfieldNumber(L, "Wisdom", stats->Wis > 0 ? stats->Wis : 10);
-    LuaSetfieldNumber(L, "Dexterity", stats->Dex > 0 ? stats->Dex : 10);
-    LuaSetfieldNumber(L, "Constitution", stats->Con > 0 ? stats->Con : 10);
-    LuaSetfieldNumber(L, "Charisma", stats->Cha > 0 ? stats->Cha : 10);
-    LuaSetfieldNumber(L, "Luck", stats->Lck > 0 ? stats->Lck : 10);
+    LuaSetfieldNumber(L, "Strength", stats->Str);
+    LuaSetfieldNumber(L, "Intelligence", stats->Int);
+    LuaSetfieldNumber(L, "Wisdom", stats->Wis);
+    LuaSetfieldNumber(L, "Dexterity", stats->Dex);
+    LuaSetfieldNumber(L, "Constitution", stats->Con);
+    LuaSetfieldNumber(L, "Charisma", stats->Cha);
+    LuaSetfieldNumber(L, "Luck", stats->Lck);
     LuaSetfieldNumber(L, "Force", stats->Frc);
 
     lua_settable(L, -3);
@@ -1556,7 +1567,8 @@ std::list<std::shared_ptr<Object>> LuaLoadObjects(lua_State *L, const std::strin
     return objects;
 }
 
-void LuaLoadSpecFun(lua_State *L, size_t idx, std::vector<SpecFun *> *specfuns)
+void LuaLoadSpecFun(lua_State *L, size_t idx,
+                    std::vector<std::function<bool(std::shared_ptr<Character>)>> *specfuns)
 {
     std::string specname = lua_tostring(L, -1);
     auto specfun = SpecialLookup(specname);
@@ -1574,7 +1586,7 @@ static void LoadMobileData(lua_State *L, std::shared_ptr<Character> mob)
     LuaGetfieldString(L, "ShortDescription", &mob->ShortDescr);
     LuaGetfieldString(L, "LongDescription", &mob->LongDescr);
 
-    std::vector<SpecFun *> specfuns;
+    std::vector<std::function<bool(std::shared_ptr<Character>)>> specfuns;
     LuaLoadArray(L, "SpecFuns", LuaLoadSpecFun, &specfuns);
     AssignSpecFuns(mob, specfuns);
 

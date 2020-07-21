@@ -6,6 +6,7 @@
 #include <string>
 #include <array>
 #include <bitset>
+#include <functional>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -20,8 +21,8 @@ class Skill
 public:
     Skill();
     std::string Name;                   /* Name of skill                */
-    SpellFun *SpellFunction = nullptr;              /* Spell pointer (for spells)   */
-    CmdFun *SkillFunction = nullptr;              /* Skill pointer (for skills)   */
+    std::function<ch_ret(int, int, std::shared_ptr<Character>, const Vo&)> SpellFunction;
+    std::function<void(std::shared_ptr<Character>, std::string)> SkillFunction;
     std::string FunctionName;
     SkillTargetType Target = 0;                 /* Legal targets                */
     PositionType Position = 0;       /* Position for caster / user   */

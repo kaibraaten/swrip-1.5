@@ -64,7 +64,9 @@ void do_cedit( std::shared_ptr<Character> ch, std::string argument )
         AddCommand( command );
         ch->Echo( "Command added.\r\n" );
 
-        if ( command->Function == skill_notfound )
+        const auto funptr = command->Function.target<void(*)(std::shared_ptr<Character>, std::string)>();
+        
+        if (funptr == nullptr || *funptr == skill_notfound )
         {
             ch->Echo( "Code %s not found. Set to no code.\r\n", arg2.c_str() );
             command->FunctionName.erase();
@@ -117,9 +119,11 @@ void do_cedit( std::shared_ptr<Character> ch, std::string argument )
 
     if ( !StrCmp( arg2, "code" ) )
     {
-        CmdFun *fun = GetSkillFunction( argument );
-
-        if ( StringPrefix( "do_", argument ) || fun == skill_notfound )
+        auto fun = GetSkillFunction( argument );
+        const auto funptr = fun.target<void(*)(std::shared_ptr<Character>, std::string)>();
+        
+        if ( StringPrefix( "do_", argument )
+             || funptr == nullptr || *funptr == skill_notfound )
         {
             ch->Echo( "Code not found.\r\n" );
             return;

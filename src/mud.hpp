@@ -1312,12 +1312,12 @@ void WriteCorpses(std::shared_ptr<Character> ch, std::string name);
 void SaveHome(std::shared_ptr<Character> ch);
 
 /* special.c */
-SpecFun *SpecialLookup(const std::string &name);
-std::string LookupSpecial(SpecFun *special);
+std::function<bool(std::shared_ptr<Character>)> SpecialLookup(const std::string &name);
+std::string LookupSpecial(std::function<bool(std::shared_ptr<Character>)> special);
 
 /* tables.c */
-SpellFun *GetSpellFunction(const std::string &name);
-CmdFun *GetSkillFunction(const std::string &name);
+std::function<ch_ret(int, int, std::shared_ptr<Character>, const Vo&)> GetSpellFunction(const std::string &name);
+std::function<void(std::shared_ptr<Character>, std::string)> GetSkillFunction(const std::string &name);
 
 /* update.c */
 void AdvanceLevel(std::shared_ptr<Character> ch, AbilityClass ability);

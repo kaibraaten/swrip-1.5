@@ -261,21 +261,21 @@ void do_sset(std::shared_ptr<Character> ch, std::string argument)
 
         if(!StrCmp(arg2, "code"))
         {
-            SpellFun *spellfun = nullptr;
-            CmdFun *dofun = nullptr;
+            std::function<ch_ret(int, int, std::shared_ptr<Character>, const Vo&)> spellfun = GetSpellFunction(argument);
+            std::function<void(std::shared_ptr<Character>, std::string)> dofun = GetSkillFunction(argument);
+            const auto spellfunptr = spellfun.target<ch_ret(*)(int, int, std::shared_ptr<Character>, const Vo&)>();
+            const auto dofunptr = dofun.target<void(*)(std::shared_ptr<Character>, std::string)>();
 
             if(!StringPrefix("spell_", argument)
-               && (spellfun = GetSpellFunction(argument)) != spell_notfound)
+               && spellfunptr != nullptr && *spellfunptr != spell_notfound)
             {
                 skill->SpellFunction = spellfun;
-                skill->SkillFunction = NULL;
                 skill->FunctionName = argument;
             }
             else if(!StringPrefix("do_", argument)
-                    && (dofun = GetSkillFunction(argument)) != skill_notfound)
+                    && dofunptr != nullptr && *dofunptr != skill_notfound)
             {
                 skill->SkillFunction = dofun;
-                skill->SpellFunction = NULL;
                 skill->FunctionName = argument;
             }
             else

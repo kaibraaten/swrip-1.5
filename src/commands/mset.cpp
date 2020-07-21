@@ -859,7 +859,10 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if((victim->spec_fun = SpecialLookup(arg3)) == 0)
+        victim->spec_fun = SpecialLookup(arg3);
+        const auto specptr = victim->spec_fun.target<bool(*)(std::shared_ptr<Character>)>();
+        
+        if(specptr == nullptr)
         {
             ch->Echo("No such spec fun.\r\n");
             return;
@@ -888,7 +891,10 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if((victim->spec_2 = SpecialLookup(arg3)) == 0)
+        victim->spec_2 = SpecialLookup(arg3);
+        const auto specptr = victim->spec_2.target<bool(*)(std::shared_ptr<Character>)>();
+        
+        if(specptr == nullptr)
         {
             ch->Echo("No such spec fun.\r\n");
             return;

@@ -691,7 +691,7 @@ void LuaAreaRepository::PushRepairShop(lua_State *L, const std::shared_ptr<Proto
 
 void LuaAreaRepository::PushSpecials(lua_State *L, const std::shared_ptr<ProtoMobile> mob) const
 {
-    std::vector<SpecFun *> specfuns;
+    std::vector<std::function<bool(std::shared_ptr<Character>)>> specfuns;
 
     if(mob->spec_fun != nullptr)
     {
@@ -935,7 +935,7 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     LuaLoadTable(L, "RepairShop", LoadRepairShop, mob);
 
     // Load specials
-    std::vector<SpecFun *> specfuns;
+    std::vector<std::function<bool(std::shared_ptr<Character>)>> specfuns;
     LuaLoadArray(L, "SpecFuns", LuaLoadSpecFun, &specfuns);
     AssignSpecFuns(mob, specfuns);
 }

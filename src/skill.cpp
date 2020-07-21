@@ -57,11 +57,13 @@ bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const
     {
         sn = (first + top) >> 1;
         skill = SkillTable[sn];
-
+        //const auto dofunptr = skill->SkillFunction.target<void(*)(std::shared_ptr<Character>, std::string)>();
+        const auto spellfunptr = skill->SpellFunction.target<ch_ret(*)(int, int, std::shared_ptr<Character>, const Vo&)>();
+        
         if(CharToLowercase(command[0]) == CharToLowercase(skill->Name[0])
            && !StringPrefix(command, skill->Name)
            && (skill->SkillFunction != nullptr
-               || skill->SpellFunction != spell_null)
+               || (spellfunptr != nullptr && *spellfunptr != spell_null))
            && GetSkillLevel(ch, sn) > 0)
         {
             break;
@@ -1035,16 +1037,18 @@ static std::shared_ptr<Skill> LoadSkillOrHerb(lua_State *L)
     LuaGetfieldString(L, "Function",
                       [skill](const std::string &funName)
                       {
-                          SpellFun *spellfun = GetSpellFunction(funName);
-                          CmdFun *dofun = GetSkillFunction(funName);
-
-                          if(spellfun != spell_notfound
+                          auto spellfun = GetSpellFunction(funName);
+                          const auto spellfunptr = spellfun.target<ch_ret(*)(int, int, std::shared_ptr<Character>, const Vo&)>();
+                          auto dofun = GetSkillFunction(funName);
+                          const auto dofunptr = dofun.target<void(*)(std::shared_ptr<Character>, std::string)>();
+                          
+                          if(spellfunptr != nullptr && *spellfunptr != spell_notfound
                              && !StringPrefix("spell_", funName))
                           {
                               skill->SpellFunction = spellfun;
                               skill->FunctionName = funName;
                           }
-                          else if(dofun != skill_notfound
+                          else if(dofunptr != nullptr && *dofunptr != skill_notfound
                                   && !StringPrefix("do_", funName))
                           {
                               skill->SkillFunction = dofun;

@@ -30,26 +30,26 @@ if __name__ == '__main__':
 #include <string>
 #include "mud.hpp"
 
-static std::unordered_map<std::string, CmdFun*> strToCmdFun = {
+static std::unordered_map<std::string, std::function<void(std::shared_ptr<Character>, std::string)>> strToCmdFun = {
 """)
     for line in commands:
         code.append('    { "' + line + '", ' + line + ' },\n')
     
     code.append("""};
-static std::unordered_map<std::string, SpellFun*> strToSpellFun = {
+static std::unordered_map<std::string, std::function<ch_ret(int, int, std::shared_ptr<Character>, const Vo&)>> strToSpellFun = {
 """)
     for line in spells:
         code.append('    { "' + line + '", ' + line + ' },\n')
 
     code.append("""};    
-static std::unordered_map<std::string, SpecFun*> strToSpecFun = {
+static std::unordered_map<std::string, std::function<bool(std::shared_ptr<Character>)>> strToSpecFun = {
 """)
     for line in specfuns:
         code.append('    { "' + line + '", ' + line + ' },\n')
 
     code.append("""};
 
-CmdFun *GetSkillFunction(const std::string &name)
+std::function<void(std::shared_ptr<Character>, std::string)> GetSkillFunction(const std::string &name)
 {
     const auto &i = strToCmdFun.find(name);
 
@@ -63,7 +63,7 @@ CmdFun *GetSkillFunction(const std::string &name)
     }
 }
 
-SpellFun *GetSpellFunction(const std::string &name)
+std::function<ch_ret(int, int, std::shared_ptr<Character>, const Vo&)> GetSpellFunction(const std::string &name)
 {
     const auto &i = strToSpellFun.find(name);
 
@@ -77,7 +77,7 @@ SpellFun *GetSpellFunction(const std::string &name)
     }
 }
 
-SpecFun *SpecialLookup(const std::string &name)
+std::function<bool(std::shared_ptr<Character>)> SpecialLookup(const std::string &name)
 {
     const auto &i = strToSpecFun.find(name);
 
@@ -91,11 +91,14 @@ SpecFun *SpecialLookup(const std::string &name)
     }
 }
 
-std::string LookupSpecial(SpecFun *special)
+std::string LookupSpecial(std::function<bool(std::shared_ptr<Character>)> special)
 {
     for(const auto &i : strToSpecFun)
     {
-        if(special == i.second)
+        const auto specptr = special.target<bool(*)(std::shared_ptr<Character>)>();
+        const auto iptr = i.second.target<bool(*)(std::shared_ptr<Character>)>();
+
+        if(specptr != nullptr && iptr != nullptr && *specptr == *iptr)
         {
             return i.first;
         }

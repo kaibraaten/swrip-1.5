@@ -311,7 +311,8 @@ SkillEntry
    Target = "ignore", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Position = "dead", 
    Type = "Skill", 
@@ -1668,7 +1669,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Position = "resting", 
    Type = "Skill", 
@@ -2558,7 +2560,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Position = "fighting", 
    Type = "Skill", 
@@ -6789,7 +6792,8 @@ SkillEntry
    Name = "cure blindness", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 8, 
    Target = "defensive", 
@@ -6845,7 +6849,8 @@ SkillEntry
    Name = "cure critical", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 18, 
    Target = "defensive", 
@@ -6950,7 +6955,8 @@ SkillEntry
    Name = "cure poison", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 16, 
    Target = "defensive", 
@@ -7006,7 +7012,8 @@ SkillEntry
    Name = "cure serious", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 10, 
    Target = "defensive", 
@@ -7169,7 +7176,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 8, 
    Target = "defensive", 
@@ -7276,7 +7284,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 9, 
    Target = "objinv", 
@@ -7333,7 +7342,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 13, 
    Target = "self", 
@@ -7381,7 +7391,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 20, 
    Target = "offensive", 
@@ -7857,7 +7868,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 10, 
    Target = "defensive", 
@@ -8395,7 +8407,8 @@ SkillEntry
    Name = "good fortune", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 11, 
    Target = "defensive", 
@@ -8749,7 +8762,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 15, 
    Target = "defensive", 
@@ -8921,7 +8935,6 @@ SkillEntry
    }, 
    Flags = 
    {
-      [2] = "_02", 
    }, 
    Name = "invade essence", 
    Teachers = 
@@ -8974,7 +8987,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 20, 
    Target = "ignore", 
@@ -9190,7 +9204,8 @@ SkillEntry
    Name = "protection from darkness", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 12, 
    Target = "defensive", 
@@ -9246,7 +9261,8 @@ SkillEntry
    Name = "refresh", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 6, 
    Target = "defensive", 
@@ -9294,7 +9310,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 8, 
    Target = "ignore", 
@@ -9841,7 +9858,8 @@ SkillEntry
    Name = "slink", 
    Teachers = 
    {
-      [50] = "Master Yoda", 
+         [50] = "Master Yoda",
+         [31900] = "zim failed jedi",
    }, 
    Level = 18, 
    Target = "defensive", 
@@ -10015,7 +10033,8 @@ SkillEntry
    Teachers = 
    {
       [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
+      [605] = "ancient sith spirit teacher sith9870",
+      [31900] = "zim failed jedi",
    }, 
    Level = 9, 
    Target = "ignore", 

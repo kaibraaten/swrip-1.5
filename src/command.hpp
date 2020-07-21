@@ -2,6 +2,7 @@
 #define _SWRIP_COMMAND_HPP_
 
 #include <memory>
+#include <functional>
 #include <utility/oldrepository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
@@ -11,7 +12,7 @@ class Command
 public:
     Command();
     std::string Name;
-    CmdFun *Function = nullptr;
+    std::function<void(std::shared_ptr<Character>, std::string)> Function;
     std::string FunctionName;
     PositionType Position = 0;
     int Level = 0;
