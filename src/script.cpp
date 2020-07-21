@@ -773,22 +773,27 @@ static void LuaPushObject(lua_State *L, std::shared_ptr<Object> obj, size_t idx)
 
     int wear_loc = -1;
 
-    for(size_t wear = 0; wear < MAX_WEAR; wear++)
+    if(obj->CarriedBy != nullptr)
     {
-        for(size_t x = 0; x < MAX_LAYERS; x++)
+        auto &save_equipment = GetSaveEquipment(obj->CarriedBy);
+        
+        for(size_t wear = 0; wear < MAX_WEAR; wear++)
         {
-            if(obj == save_equipment[wear][x].lock())
+            for(size_t x = 0; x < MAX_LAYERS; x++)
             {
-                wear_loc = wear;
-                break;
-            }
-            else if(save_equipment[wear][x].expired())
-            {
-                break;
+                if(obj == save_equipment[wear][x])
+                {
+                    wear_loc = wear;
+                    break;
+                }
+                else if(save_equipment[wear][x] == nullptr)
+                {
+                    break;
+                }
             }
         }
     }
-
+    
     if(wear_loc != -1)
     {
         LuaSetfieldNumber(L, "WearLocation", wear_loc);
@@ -880,8 +885,6 @@ static void LuaPushMobile(lua_State *L, std::shared_ptr<Character> mob)
     LuaSetfieldNumber(L, "Vnum", proto->Vnum);
     LuaSetfieldString(L, "CharacterType", "Mobile");
 
-    DeEquipCharacter(mob);
-    
     auto mobflags = mob->Flags;
     mobflags.reset(Flag::Mob::Mounted);
     LuaPushFlags(L, mobflags, MobFlags, "Flags");
@@ -934,8 +937,6 @@ static void LuaPushMobile(lua_State *L, std::shared_ptr<Character> mob)
     {
         LuaSetfieldNumber(L, "ArmorClass", mob->ArmorClass);
     }
-
-    ReEquipCharacter(mob);
 }
 
 void LuaPushMobiles(lua_State *L, const std::list<std::shared_ptr<Character>> &mobiles,
@@ -1076,15 +1077,15 @@ void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
     LuaPushFlags(L, ch->Susceptible, RisFlags, "Susceptible");
 
     LuaPushCharacterAbilities(L, ch);
-    LuaPushCharacterSaves(L, ch); // ch->Saving.PoisonDeath etc
+    LuaPushCharacterSaves(L, ch);
     LuaPushCharacterStats(L, ch);
 
     LuaPushCharacterAffects(L, ch->Affects());
     LuaPushObjects(L, ch->Objects(), "Inventory");
 
-    ReEquipCharacter(ch);
-
     pushExtra(L, ch);
+    
+    ReEquipCharacter(ch);
 }
 
 void LuaGetfieldBool(lua_State *L, const std::string &key,

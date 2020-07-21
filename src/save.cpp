@@ -35,6 +35,7 @@
 #include <filesystem>
 namespace fs = std::filesystem;
 
+#include <unordered_map>
 #include <cassert>
 #include <cstring>
 #include <cctype>
@@ -62,7 +63,8 @@ namespace fs = std::filesystem;
 /*
  * Array to keep track of equipment temporarily.                -Thoric
  */
-std::weak_ptr<Object> save_equipment[MAX_WEAR][MAX_LAYERS];
+std::unordered_map<std::shared_ptr<Character>, std::vector<std::vector<std::shared_ptr<Object>>>> SaveEquipment;
+
 std::weak_ptr<Character> quitting_char;
 std::weak_ptr<Character> loading_char;
 std::weak_ptr<Character> saving_char;
@@ -83,13 +85,27 @@ static std::shared_ptr<Object> rgObjNest[MAX_NEST];
  */
 static bool HasAnyOvalues(std::shared_ptr<Object> obj);
 
+std::vector<std::vector<std::shared_ptr<Object>>> &GetSaveEquipment(std::shared_ptr<Character> ch)
+{
+    auto i = SaveEquipment.find(ch);
+
+    if(i == SaveEquipment.end())
+    {
+        SaveEquipment[ch] = std::vector<std::vector<std::shared_ptr<Object>>>(MAX_WEAR, std::vector<std::shared_ptr<Object>>(MAX_LAYERS));
+        return GetSaveEquipment(ch);
+    }
+
+    return i->second;
+}
+
 /*
  * Un-equip character before saving to ensure proper    -Thoric
  * stats are saved in case of changes to or removal of EQ
  */
 void DeEquipCharacter(std::shared_ptr<Character> ch)
 {
-    ResetSaveEquipmentMatrix();
+    SaveEquipment.erase(ch);
+    auto &save_equipment = GetSaveEquipment(ch);
 
     for(auto obj : ch->Objects())
     {
@@ -99,7 +115,7 @@ void DeEquipCharacter(std::shared_ptr<Character> ch)
 
             for(layer = 0; layer < MAX_LAYERS; ++layer)
             {
-                if(save_equipment[obj->WearLoc][layer].expired())
+                if(save_equipment[obj->WearLoc][layer] == nullptr)
                 {
                     save_equipment[obj->WearLoc][layer] = obj;
                     break;
@@ -122,15 +138,17 @@ void DeEquipCharacter(std::shared_ptr<Character> ch)
  */
 void ReEquipCharacter(std::shared_ptr<Character> ch)
 {
+    auto &save_equipment = GetSaveEquipment(ch);
+    
     for(int wearLoc = 0; wearLoc < MAX_WEAR; ++wearLoc)
     {
         for(int layer = 0; layer < MAX_LAYERS; ++layer)
         {
-            if(!save_equipment[wearLoc][layer].expired())
+            if(save_equipment[wearLoc][layer] != nullptr)
             {
                 if (quitting_char.lock() != ch)
                 {
-                    EquipCharacter(ch, save_equipment[wearLoc][layer].lock(), (WearLocation)wearLoc);
+                    EquipCharacter(ch, save_equipment[wearLoc][layer], (WearLocation)wearLoc);
                 }
 
                 save_equipment[wearLoc][layer].reset();
@@ -141,6 +159,8 @@ void ReEquipCharacter(std::shared_ptr<Character> ch)
             }
         }
     }
+
+    SaveEquipment.erase(ch);
 }
 
 void SaveHome(std::shared_ptr<Character> ch)
@@ -293,16 +313,18 @@ void WriteObject(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, FIL
 
     wear_loc = -1;
 
+    auto &save_equipment = GetSaveEquipment(ch);
+    
     for (wear = 0; wear < MAX_WEAR; wear++)
     {
         for (x = 0; x < MAX_LAYERS; x++)
         {
-            if (obj == save_equipment[wear][x].lock())
+            if (obj == save_equipment[wear][x])
             {
                 wear_loc = wear;
                 break;
             }
-            else if (save_equipment[wear][x].expired())
+            else if (save_equipment[wear][x] == nullptr)
             {
                 break;
             }
@@ -597,7 +619,8 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
                     {
                         int slot = 0;
                         bool reslot = false;
-
+                        auto &save_equipment = GetSaveEquipment(ch);
+                        
                         if (file_ver > 1
                             && wear_loc > -1
                             && wear_loc < MAX_WEAR)
@@ -606,7 +629,7 @@ void ReadObject(std::shared_ptr<Character> ch, FILE *fp, short os_type)
 
                             for (x = 0; x < MAX_LAYERS; x++)
                             {
-                                if (save_equipment[wear_loc][x].expired())
+                                if (save_equipment[wear_loc][x] == nullptr)
                                 {
                                     save_equipment[wear_loc][x] = obj;
                                     slot = x;
@@ -935,15 +958,4 @@ void SaveStoreroom(std::shared_ptr<Room> room)
 void LoadVendors()
 {
     Vendors->Load();
-}
-
-void ResetSaveEquipmentMatrix()
-{
-    for(size_t wearLoc = 0; wearLoc < MAX_WEAR; ++wearLoc)
-    {
-        for(size_t layer = 0; layer < MAX_LAYERS; ++layer)
-        {
-            save_equipment[wearLoc][layer].reset();
-        }
-    }
 }

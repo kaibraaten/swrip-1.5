@@ -814,11 +814,13 @@ std::shared_ptr<Object> ObjectToCharacter(std::shared_ptr<Object> obj, std::shar
 
     if(loading_char.lock() == ch)
     {
+        auto &save_equipment = GetSaveEquipment(ch);
+        
         for(int x = 0; x < MAX_WEAR; x++)
         {
             for(int y = 0; y < MAX_LAYERS; y++)
             {
-                if(save_equipment[x][y].lock() == obj)
+                if(save_equipment[x][y] == obj)
                 {
                     skipgroup = true;
                     break;

@@ -135,7 +135,6 @@ static void ExtractVictim(std::shared_ptr<Character> victim)
     PlayerCharacters->Save(victim);
     saving_char.reset();
     ExtractCharacter(victim, true);
-    ResetSaveEquipmentMatrix();
 }
 
 static std::shared_ptr<Character> GetVictimInWorld(const std::string &name)

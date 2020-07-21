@@ -85,7 +85,6 @@ void do_quit(std::shared_ptr<Character> ch, std::string argument)
     saving_char.reset();
     level = GetTrustLevel(ch);
     ExtractCharacter(ch, true);
-    ResetSaveEquipmentMatrix();
 
     Log->LogStringPlus(logBuf, LogType::Comm, level);
 }

@@ -332,7 +332,7 @@ extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
 extern std::shared_ptr<Character> cur_char;
-extern std::shared_ptr<Room>             cur_room;
+extern std::shared_ptr<Room> cur_room;
 extern bool             cur_char_died;
 extern ch_ret           global_retcode;
 
@@ -346,7 +346,6 @@ extern std::shared_ptr<Character> LastCharacter;
 
 extern std::shared_ptr<TeleportData> FirstTeleport;
 extern std::shared_ptr<TeleportData> LastTeleport;
-extern std::weak_ptr<Object> save_equipment[MAX_WEAR][MAX_LAYERS];
 extern std::weak_ptr<Character> quitting_char;
 extern std::weak_ptr<Character> loading_char;
 extern std::weak_ptr<Character> saving_char;
@@ -358,6 +357,8 @@ extern std::unique_ptr<Auction> OngoingAuction;
 extern std::unordered_map<vnum_t, std::shared_ptr<ProtoMobile>> ProtoMobs;
 extern std::unordered_map<vnum_t, std::shared_ptr<ProtoObject>> ProtoObjects;
 extern std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
+
+std::vector<std::vector<std::shared_ptr<Object>>> &GetSaveEquipment(std::shared_ptr<Character> ch);
 
 /*
  * Command functions.
@@ -1310,7 +1311,6 @@ void LoadStorerooms();
 void LoadCorpses();
 void WriteCorpses(std::shared_ptr<Character> ch, std::string name);
 void SaveHome(std::shared_ptr<Character> ch);
-void ResetSaveEquipmentMatrix();
 
 /* special.c */
 SpecFun *SpecialLookup(const std::string &name);

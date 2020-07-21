@@ -2702,8 +2702,6 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
             PlayerCharacters->Save(victim);
             saving_char.reset();
             ExtractCharacter(victim, true);
-
-            ResetSaveEquipmentMatrix();
         }
 
         PlayerCharacters->RestoreClone(victim);

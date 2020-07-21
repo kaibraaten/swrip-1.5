@@ -257,9 +257,6 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
 {
     bool found = false;
     struct stat fst;
-    char buf[MAX_INPUT_LENGTH];
-
-    ResetSaveEquipmentMatrix();
 
     std::string filename = GetPlayerFilename(name);
 
@@ -272,9 +269,10 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
         }
         else
         {
-            sprintf(buf, "%s player data for: %s (%dK)",
-                    preload ? "Preloading" : "Loading", Capitalize(name).c_str(),
-                    (int)fst.st_size / 1024);
+            std::string buf = FormatString("%s player data for: %s (%dK)",
+                                           preload ? "Preloading" : "Loading",
+                                           Capitalize(name).c_str(),
+                                           (int)fst.st_size / 1024);
             Log->LogStringPlus(buf, LogType::Comm, LEVEL_GREATER);
         }
     }
@@ -717,13 +715,15 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
         AssignAreaTo(ch);
     }
 
+    auto &save_equipment = GetSaveEquipment(ch);
+    
     for (size_t i = 0; i < MAX_WEAR; i++)
     {
         for (size_t x = 0; x < MAX_LAYERS; x++)
         {
-            if (!save_equipment[i][x].expired())
+            if (save_equipment[i][x] != nullptr)
             {
-                EquipCharacter(ch, save_equipment[i][x].lock(), (WearLocation)i);
+                EquipCharacter(ch, save_equipment[i][x], (WearLocation)i);
                 save_equipment[i][x].reset();
             }
             else
@@ -740,8 +740,6 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
 {
     assert(!IsNpc(pc));
 
-    DeEquipCharacter(pc);
-    
     LuaSetfieldNumber(L, "SaveVersion", SAVE_VERSION);
     LuaSetfieldString(L, "CharacterType", "PlayerCharacter");
     LuaSetfieldNumber(L, "Played", pc->PCData->Played + (int)(current_time - pc->PCData->Logon));
@@ -793,8 +791,6 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
     PushAddictions(L, pc);
     PushAliases(L, pc);
 
-    ReEquipCharacter(pc);
-    
     if (pc->PCData->Pet != nullptr)
     {
         LuaPushMobiles(L, { pc->PCData->Pet }, "Pets");
