@@ -9,6 +9,7 @@
 #include "object.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_dig(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -72,8 +73,7 @@ void do_dig(std::shared_ptr<Character> ch, std::string arg)
             }
         }
 
-        AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(SkillTable[gsn_dig]->Beats / 10, 3),
-                            do_dig, CharacterSubState::Pause);
+        AddTimer(ch, TimerType::Command, umin(SkillTable[gsn_dig]->Beats / 10, 3), do_dig);
         ch->dest_buf = arg;
         ch->Echo("You begin digging...\r\n");
         Act(AT_PLAIN, "$n begins digging...", ch, NULL, NULL, ActTarget::Room);

@@ -17,6 +17,7 @@
 #include "board.hpp"
 #include "skill.hpp"
 #include "area.hpp"
+#include "timer.hpp"
 
 #define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
 #define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
@@ -349,15 +350,6 @@ void InMemoryPlayerRepository::LoadPlayerData(lua_State *L, std::shared_ptr<Char
     LuaGetfieldInt(L, "MobKills", &ch->PCData->MKills);
     LuaGetfieldInt(L, "MobDeaths", &ch->PCData->MDeaths);
     LuaGetfieldInt(L, "IllegalPk", &ch->PCData->IllegalPk);
-    LuaGetfieldInt(L, "PKilledTimer",
-                   [ch](const int pkilledTimer)
-                   {
-                       if (pkilledTimer < 0)
-                       {
-                           AddTimerToCharacter(ch, TIMER_PKILLED, pkilledTimer,
-                                               nullptr, CharacterSubState::None);
-                       }
-                   });
     LuaGetfieldInt(L, "Alignment", &ch->Alignment);
     LuaGetfieldInt(L, "ArmorClass", &ch->ArmorClass);
     
@@ -766,7 +758,6 @@ void InMemoryPlayerRepository::PushPlayerData(lua_State *L, std::shared_ptr<Char
     LuaSetfieldNumber(L, "MobKills", pc->PCData->MKills);
     LuaSetfieldNumber(L, "MobDeaths", pc->PCData->MDeaths);
     LuaSetfieldNumber(L, "IllegalPk", pc->PCData->IllegalPk);
-    LuaSetfieldNumber(L, "PKilledTimer", GetTimer(pc, TIMER_PKILLED));
     LuaSetfieldNumber(L, "Alignment", pc->Alignment);
     LuaSetfieldNumber(L, "ArmorClass", pc->ArmorClass);
     

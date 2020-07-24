@@ -7,6 +7,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "skill.hpp"
 
 static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
                              std::ostringstream &outbuf);
@@ -219,6 +220,42 @@ static void ShowWeaponStats(std::shared_ptr<Object> obj, std::ostringstream &buf
     buf << "&cCharges:     &C" << obj->Prototype->Value[OVAL_WEAPON_MAX_CHARGE] << "&d\r\n";
 }
 
+static void ShowBookStats(std::shared_ptr<Object> obj, std::ostringstream &buf)
+{
+    bool teachesSkills = false;
+    
+    for(int i = OVAL_BOOK_SKILL1; i <= OVAL_BOOK_SKILL3; ++i)
+    {
+        if(obj->Prototype->Value[i] >= 0)
+        {
+            int sn = obj->Prototype->Value[i];
+            buf << "&cSkill " << i << ": &C";
+            
+            if(sn >= 0 && sn < MAX_SKILL && SkillTable[sn] != nullptr)
+            {
+                const auto &skill = SkillTable[sn];
+                buf << skill->Name;
+            }
+            else
+            {
+                buf << "&R*** invalid skill number ***";
+            }
+
+            buf << "&d\r\n";
+            teachesSkills = true;
+        }
+    }
+
+    if(!teachesSkills)
+    {
+        buf << "&cThis book doesn't teach any skills.&d\r\n"
+            << "&cAssign skill numbers to "
+            << "value" << OVAL_BOOK_SKILL1 << ", "
+            << "value" << OVAL_BOOK_SKILL1 << ", and "
+            << "value" << OVAL_BOOK_SKILL1 << "&d\r\n";
+    }
+}
+
 static void ShowItemTypeReport(std::shared_ptr<Object> obj, std::ostringstream &outbuf)
 {
     std::ostringstream tmp;
@@ -236,6 +273,11 @@ static void ShowItemTypeReport(std::shared_ptr<Object> obj, std::ostringstream &
 
     case ITEM_WEAPON:
         ShowWeaponStats(obj, tmp);
+        break;
+
+    case ITEM_BOOK:
+    case ITEM_SCROLL:
+        ShowBookStats(obj, tmp);
         break;
         
     default:

@@ -3,6 +3,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "timer.hpp"
 
 bool spec_clan_guard(std::shared_ptr<Character> ch)
 {
@@ -17,7 +18,7 @@ bool spec_clan_guard(std::shared_ptr<Character> ch)
         if(!CanSeeCharacter(ch, victim))
             continue;
 
-        if(GetTimer(victim, TIMER_RECENTFIGHT) > 0)
+        if(HasTimer(victim, TimerType::RecentFight))
             continue;
 
         if(!IsNpc(victim)

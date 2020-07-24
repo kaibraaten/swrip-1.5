@@ -34,6 +34,7 @@
 #include "protoobject.hpp"
 #include "repos/skillrepository.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 class CraftRecipe
 {
@@ -342,7 +343,7 @@ void StartCrafting(std::shared_ptr<CraftingSession> session)
 
     Act(AT_PLAIN, "$n takes $s tools and some material and begins to work.",
         ch, nullptr, nullptr, ActTarget::Room);
-    AddTimerToCharacter(ch, TIMER_CMD_FUN, session->pImpl->Recipe->Duration, do_craftingengine, CharacterSubState::Pause);
+    AddTimer(ch, TimerType::Command, session->pImpl->Recipe->Duration, do_craftingengine);
 }
 
 static bool CheckMaterials(std::shared_ptr<CraftingSession> session, bool extract)

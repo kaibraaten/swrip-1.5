@@ -8,6 +8,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_tractorbeam(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -147,8 +148,7 @@ void do_tractorbeam(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("&GTracking target.\r\n");
             Act(AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                 nullptr, nullptr, ActTarget::Room);
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_tractorbeam,
-                                CharacterSubState::Pause);
+            AddTimer(ch, TimerType::Command, 1, do_tractorbeam);
             ch->dest_buf = arg;
             return;
         }

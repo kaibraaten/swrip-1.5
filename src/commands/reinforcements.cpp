@@ -6,6 +6,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_reinforcements(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -44,7 +45,7 @@ void do_reinforcements(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
             Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                 nullptr, arg, ActTarget::Room);
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_reinforcements, CharacterSubState::Pause);
+            AddTimer(ch, TimerType::Command, 1, do_reinforcements);
             return;
         }
 

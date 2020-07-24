@@ -41,6 +41,7 @@
 #include "home.hpp"
 #include "repos/homerepository.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 extern std::shared_ptr<Character> gch_prev;
 
@@ -743,8 +744,10 @@ void CharacterFromRoom(std::shared_ptr<Character> ch)
     ch->InRoom = nullptr;
 
     if(!IsNpc(ch)
-       && GetTimer(ch, TIMER_SHOVEDRAG) > 0)
-        RemoveTimer(ch, TIMER_SHOVEDRAG);
+       && HasTimer(ch, TimerType::ShoveDrag))
+    {
+        RemoveTimer(ch, TimerType::ShoveDrag);
+    }
 }
 
 /*
@@ -760,23 +763,31 @@ void CharacterToRoom(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoomI
     ch->InRoom = pRoomIndex;
 
     if(!IsNpc(ch))
+    {
         if(++ch->InRoom->Area->NumberOfPlayers > ch->InRoom->Area->MaxPlayers)
+        {
             ch->InRoom->Area->MaxPlayers = ch->InRoom->Area->NumberOfPlayers;
-
+        }
+    }
+    
     if((obj = GetEquipmentOnCharacter(ch, WEAR_LIGHT)) != NULL
        && obj->ItemType == ITEM_LIGHT
        && obj->Value[OVAL_LIGHT_POWER] != 0)
+    {
         ++ch->InRoom->Light;
-
+    }
+    
     if(!IsNpc(ch)
        && ch->InRoom->Flags.test(Flag::Room::Safe)
-       && GetTimer(ch, TIMER_SHOVEDRAG) <= 0)
-        AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, CharacterSubState::None);
-
-      /*
-       * Delayed Teleport rooms                                     -Thoric
-       * Should be the last thing checked in this function
-       */
+       && !HasTimer(ch, TimerType::ShoveDrag))
+    {
+        AddTimer(ch, TimerType::ShoveDrag, 10);
+    }
+    
+    /*
+     * Delayed Teleport rooms                                     -Thoric
+     * Should be the last thing checked in this function
+     */
     if(ch->InRoom->Flags.test(Flag::Room::Teleport)
        && ch->InRoom->TeleDelay > 0)
     {
@@ -2366,62 +2377,6 @@ void CleanCharacterQueue()
     }
 
     ExtractedCharacterQueue.clear();
-}
-
-/*
- * Add a timer to ch                                            -Thoric
- * Support for "call back" time delayed commands
- */
-void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count,
-                         std::function<void(std::shared_ptr<Character>, std::string)> callback,
-                         CharacterSubState substate)
-{
-    auto timer = GetTimerPointer(ch, type);
-
-    if(!timer)
-    {
-        timer = std::make_shared<Timer>();
-        ch->Add(timer);
-    }
-
-    timer->Count = count;
-    timer->Type = type;
-    timer->Callback = callback;
-    timer->SubState = substate;
-}
-
-std::shared_ptr<Timer> GetTimerPointer(std::shared_ptr<Character> ch, short type)
-{
-    return Find(ch->Timers(),
-                [type](auto timer)
-                {
-                    return timer->Type == type;
-                });
-}
-
-short GetTimer(std::shared_ptr<Character> ch, short type)
-{
-    std::shared_ptr<Timer> timer = GetTimerPointer(ch, type);
-
-    return timer != nullptr ? timer->Count : 0;
-}
-
-void ExtractTimer(std::shared_ptr<Character> ch, std::shared_ptr<Timer> timer)
-{
-    assert(ch != nullptr);
-    assert(timer != nullptr);
-
-    ch->Remove(timer);
-}
-
-void RemoveTimer(std::shared_ptr<Character> ch, short type)
-{
-    std::shared_ptr<Timer> timer = GetTimerPointer(ch, type);
-
-    if(timer != nullptr)
-    {
-        ExtractTimer(ch, timer);
-    }
 }
 
 bool InSoftRange(std::shared_ptr<Character> ch, std::shared_ptr<Area> tarea)

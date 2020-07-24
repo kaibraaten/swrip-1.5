@@ -1670,7 +1670,6 @@ SkillEntry
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870",
-      [31900] = "zim failed jedi",
    }, 
    Position = "resting", 
    Type = "Skill", 

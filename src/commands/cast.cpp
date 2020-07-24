@@ -7,6 +7,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 extern std::string spell_target_name;
 extern int pAbort;
@@ -177,8 +178,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
             break;
 
         /* multi-participant spells                       -Thoric */
-        AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(skill->Beats / 10, 3),
-                            do_cast, CharacterSubState::Pause);
+        AddTimer(ch, TimerType::Command, umin(skill->Beats / 10, 3), do_cast);
         Act(AT_MAGIC, "You begin to feel the force in yourself and those around you...",
             ch, NULL, NULL, ActTarget::Char);
         Act(AT_MAGIC, "$n reaches out with the force to those around...",
@@ -195,7 +195,8 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
             if((skill = GetSkill(sn)) == NULL)
             {
                 ch->Echo("Something went wrong...\r\n");
-                Log->Bug("do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn);
+                Log->Bug("%s: CharacterSubState::TimerDoAbort: bad sn %d",
+                         __FUNCTION__, sn);
                 return;
             }
 
@@ -241,7 +242,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
             for(auto tmp : ch->InRoom->Characters())
             {
                 if(tmp != ch
-                   && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
+                   && (t = GetTimerPointer(tmp, TimerType::Command)) != nullptr
                    && t->Count >= 1
                    && tmp->tempnum == sn && !tmp->dest_buf.empty()
                    && StrCmp(tmp->dest_buf, buf) == 0)
@@ -260,7 +261,7 @@ void do_cast(std::shared_ptr<Character> ch, std::string argument)
                 for(auto tmp : ch->InRoom->Characters())
                 {
                     if(tmp != ch
-                       && (t = GetTimerPointer(tmp, TIMER_CMD_FUN)) != NULL
+                       && (t = GetTimerPointer(tmp, TimerType::Command)) != nullptr
                        && t->Count >= 1
                        && tmp->tempnum == sn && !tmp->dest_buf.empty()
                        && StrCmp(tmp->dest_buf, buf) == 0)

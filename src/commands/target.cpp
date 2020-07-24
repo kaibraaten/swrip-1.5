@@ -9,6 +9,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 static void SynchronizeTargetWithDockedShips(std::shared_ptr<Ship> ship,
                                              std::shared_ptr<Ship> target);
@@ -120,7 +121,7 @@ void do_target(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("&GTracking target.\r\n");
             Act(AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                 nullptr, nullptr, ActTarget::Room);
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_target, CharacterSubState::Pause);
+            AddTimer(ch, TimerType::Command, 1, do_target);
             ch->dest_buf = arg;
             return;
         }

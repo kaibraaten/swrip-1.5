@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "arena.hpp"
 #include "character.hpp"
+#include "timer.hpp"
 
 void do_challenge(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -44,21 +45,9 @@ void do_challenge(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(GetTimer(victim, TIMER_PKILLED) > 0)
-    {
-        ch->Echo("&WThat player has died within the last 5 minutes and cannot be challenged!\r\n");
-        return;
-    }
-
     if(ch->TopLevel < 5)
     {
         ch->Echo("You are too young to die.\r\n");
-        return;
-    }
-
-    if(GetTimer(ch, TIMER_PKILLED) > 0)
-    {
-        ch->Echo("&WYou have died within the last 5 minutes and cannot challenge anyone.\r\n");
         return;
     }
 

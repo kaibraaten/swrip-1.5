@@ -32,6 +32,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 int pAbort = 0;
 
@@ -686,21 +687,6 @@ Vo LocateSpellTargets(std::shared_ptr<Character> ch, const std::string &arg,
 
         if(!IsNpc(ch))
         {
-            if(!IsNpc(*victim))
-            {
-                if(GetTimer(ch, TIMER_PKILLED) > 0)
-                {
-                    ch->Echo("You have been killed in the last 5 minutes.\r\n");
-                    return &pAbort;
-                }
-
-                if(GetTimer(*victim, TIMER_PKILLED) > 0)
-                {
-                    ch->Echo("This player has been killed in the last 5 minutes.\r\n");
-                    return &pAbort;
-                }
-            }
-
             if(IsAffectedBy(ch, Flag::Affect::Charm) && ch->Master == *victim)
             {
                 ch->Echo("You can't do that on your own follower.\r\n");

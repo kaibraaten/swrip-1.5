@@ -5,6 +5,7 @@
 #include "room.hpp"
 #include "race.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_train(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -140,7 +141,7 @@ void do_train(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("&GYou begin lessons in maners and ettiquite.\r\n");
         }
 
-        AddTimerToCharacter(ch, TIMER_CMD_FUN, 10, do_train, CharacterSubState::Pause);
+        AddTimer(ch, TimerType::Command, 10, do_train);
         ch->dest_buf = arg;
         return;
 

@@ -5,6 +5,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "timer.hpp"
 
 bool spec_stormtrooper(std::shared_ptr<Character> ch)
 {
@@ -18,16 +19,16 @@ bool spec_stormtrooper(std::shared_ptr<Character> ch)
                     [ch](auto victim)
                     {
                         return CanSeeCharacter(ch, victim)
-                            && GetTimer(victim, TIMER_RECENTFIGHT) == 0
-                            && ((IsNpc(victim)
-                                 && (NiftyIsName("rebel", victim->Name)
-                                     || NiftyIsName("republic", victim->Name))
-                                 && IsFighting(victim)
-                                 && WhoFighting(victim) != ch)
-                                || (!IsNpc(victim) && IsClanned(victim)
-                                    && IsAwake(victim)
-                                    && (NiftyIsName("rebel", victim->PCData->ClanInfo.Clan->Name)
-                                        || NiftyIsName("republic", victim->PCData->ClanInfo.Clan->Name))));
+                        && !HasTimer(victim, TimerType::RecentFight)
+                        && ((IsNpc(victim)
+                             && (NiftyIsName("rebel", victim->Name)
+                                 || NiftyIsName("republic", victim->Name))
+                             && IsFighting(victim)
+                             && WhoFighting(victim) != ch)
+                            || (!IsNpc(victim) && IsClanned(victim)
+                                && IsAwake(victim)
+                                && (NiftyIsName("rebel", victim->PCData->ClanInfo.Clan->Name)
+                                    || NiftyIsName("republic", victim->PCData->ClanInfo.Clan->Name))));
                     });
 
     for(auto victim : RandomizeOrder(rebels))
@@ -39,4 +40,3 @@ bool spec_stormtrooper(std::shared_ptr<Character> ch)
 
     return false;
 }
-

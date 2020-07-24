@@ -8,6 +8,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_sabotage(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -40,7 +41,7 @@ void do_sabotage(std::shared_ptr<Character> ch, std::string arg)
             Act(AT_PLAIN, "$n begins working on the ship's $T.", ch,
                 nullptr, arg, ActTarget::Room);
 
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 15, do_sabotage, CharacterSubState::Pause);
+            AddTimer(ch, TimerType::Command, 15, do_sabotage);
             ch->dest_buf = arg;
             return;
         }

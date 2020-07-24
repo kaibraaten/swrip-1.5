@@ -163,15 +163,6 @@ public:
     std::bitset<Flag::MAX> AffectedBy;
 };
 
-class Timer
-{
-public:
-    std::function<void(std::shared_ptr<Character>, std::string)> Callback;
-    CharacterSubState SubState = CharacterSubState::None;
-    short Type = 0;
-    short Count = 0;
-};
-
 class HuntHateFear
 {
 public:
@@ -1247,13 +1238,6 @@ void SetCurrentGlobalCharacter(std::shared_ptr<Character> ch);
 bool CharacterDiedRecently(std::shared_ptr<Character> ch);
 void QueueExtractedCharacter(std::shared_ptr<Character> ch, bool extract);
 void CleanCharacterQueue(void);
-void AddTimerToCharacter(std::shared_ptr<Character> ch, short type, short count,
-                         std::function<void(std::shared_ptr<Character>, std::string)> callback,
-                         CharacterSubState substate);
-std::shared_ptr<Timer> GetTimerPointer(std::shared_ptr<Character> ch, short type);
-short GetTimer(std::shared_ptr<Character> ch, short type);
-void ExtractTimer(std::shared_ptr<Character> ch, std::shared_ptr<Timer> timer);
-void RemoveTimer(std::shared_ptr<Character> ch, short type);
 bool InSoftRange(std::shared_ptr<Character> ch, std::shared_ptr<Area> tarea);
 bool InHardRange(std::shared_ptr<Character> ch, std::shared_ptr<Area> tarea);
 bool Chance(std::shared_ptr<Character> ch, short percent);

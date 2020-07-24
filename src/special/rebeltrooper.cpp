@@ -5,6 +5,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "timer.hpp"
 
 bool spec_rebel_trooper(std::shared_ptr<Character> ch)
 {
@@ -18,11 +19,11 @@ bool spec_rebel_trooper(std::shared_ptr<Character> ch)
                        [ch](auto victim)
                        {
                            return CanSeeCharacter(ch, victim)
-                               && GetTimer(victim, TIMER_RECENTFIGHT) == 0
-                               && ((IsNpc(victim) && NiftyIsName("imperial", victim->Name)
-                                    && IsFighting(victim) && WhoFighting(victim) != ch)
-                                   || (!IsNpc(victim) && IsClanned(victim) && IsAwake(victim)
-                                       && NiftyIsName("empire", victim->PCData->ClanInfo.Clan->Name)));
+                           &&!HasTimer(victim, TimerType::RecentFight)
+                           && ((IsNpc(victim) && NiftyIsName("imperial", victim->Name)
+                                && IsFighting(victim) && WhoFighting(victim) != ch)
+                               || (!IsNpc(victim) && IsClanned(victim) && IsAwake(victim)
+                                   && NiftyIsName("empire", victim->PCData->ClanInfo.Clan->Name)));
                        });
 
     for(auto victim : RandomizeOrder(imperials))
@@ -34,4 +35,3 @@ bool spec_rebel_trooper(std::shared_ptr<Character> ch)
 
     return false;
 }
-

@@ -11,7 +11,7 @@
 void do_study(std::shared_ptr<Character> ch, std::string argument) /* study by Absalom */
 {
     std::shared_ptr<Object> obj;
-    int sn = 0, bookskills = 0, book;
+    int bookskills = 0;
 
     if(argument.empty())
     {
@@ -35,25 +35,34 @@ void do_study(std::shared_ptr<Character> ch, std::string argument) /* study by A
     Act(AT_MAGIC, "$n studies $p.", ch, obj, NULL, ActTarget::Room);
     Act(AT_MAGIC, "You study $p.", ch, obj, NULL, ActTarget::Char);
 
-    if(obj->Value[1] >= 0)
-        bookskills++;
+    for(int i = OVAL_BOOK_SKILL1; i <= OVAL_BOOK_SKILL3; ++i)
+    {
+        if(obj->Value[i] >= 0 && obj->Value[i] < MAX_SKILL)
+        {
+            bookskills++;
+        }
+    }
 
-    if(obj->Value[2] >= 0)
-        bookskills++;
+    int book = GetRandomNumberFromRange(1, bookskills);
+    int sn = obj->Value[book];
 
-    if(obj->Value[3] >= 0)
-        bookskills++;
-
-    book = GetRandomNumberFromRange(1, bookskills);
-    sn = obj->Value[book];
-
-    if(sn < 0 || sn >= MAX_SKILL)
+    if(sn < 0 || sn >= MAX_SKILL || SkillTable[sn] == nullptr)
     {
         Log->Bug("Do_study: bad sn %d.", sn);
         return;
     }
 
-    SetWaitState(ch, SkillTable[gsn_study]->Beats);
+    const auto &skill = SkillTable[sn];
+    int characterLevel = GetAbilityLevel(ch, skill->Class);
+
+    if(characterLevel < skill->Level)
+    {
+        ch->Echo("&RYou're not high enough level in %s to learn %s.&d\r\n",
+                 AbilityName[(int)skill->Class], skill->Name.c_str());
+        return;
+    }
+    
+    SetWaitState(ch, skill->Beats);
 
     if(GetRandomPercent() >= 55 + GetSkillLevel(ch, gsn_study) * 4 / 5)
     {
@@ -63,15 +72,21 @@ void do_study(std::shared_ptr<Character> ch, std::string argument) /* study by A
     }
 
     if(GetSkillLevel(ch, sn) <= 0)
+    {
         Act(AT_MAGIC, "You have begun learning the ability to $t!",
-            ch, SkillTable[sn]->Name, nullptr, ActTarget::Char);
+            ch, skill->Name, nullptr, ActTarget::Char);
+    }
     else if(GetSkillLevel(ch, sn) < 15)
+    {
         Act(AT_MAGIC, "You have learned a bit more of the ability to $t!",
-            ch, SkillTable[sn]->Name, nullptr, ActTarget::Char);
+            ch, skill->Name, nullptr, ActTarget::Char);
+    }
     else
+    {
         Act(AT_MAGIC, "You have absorbed everything the book teaches you on the ability to $t!",
-            ch, SkillTable[sn]->Name, nullptr, ActTarget::Char);
-
+            ch, skill->Name, nullptr, ActTarget::Char);
+    }
+    
     ch->PCData->Learned[sn] += urange(0, 20 - ch->PCData->Learned[sn], 5);
     ch->PCData->Learned[sn] += 5;
     LearnFromSuccess(ch, gsn_study);

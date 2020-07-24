@@ -8,6 +8,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_repairship(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -51,8 +52,7 @@ void do_repairship(std::shared_ptr<Character> ch, std::string argument)
             else
                 timeToRepair = 5;
                 
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, timeToRepair,
-                                do_repairship, CharacterSubState::Pause);
+            AddTimer(ch, TimerType::Command, timeToRepair, do_repairship);
 
             ch->dest_buf = argument;
             return;

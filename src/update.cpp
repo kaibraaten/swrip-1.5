@@ -57,6 +57,7 @@
 #include "repos/playerrepository.hpp"
 #include "repos/homerepository.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
  /*
   * Local functions.
@@ -2623,7 +2624,7 @@ static void AggroUpdate()
 
             std::shared_ptr<Character> victim = wch;
 
-            if(GetTimer(victim, TIMER_RECENTFIGHT) > 0)
+            if(HasTimer(victim, TimerType::RecentFight))
             {
                 continue;
             }

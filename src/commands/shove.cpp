@@ -5,6 +5,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_shove(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -52,7 +53,7 @@ void do_shove(std::shared_ptr<Character> ch, std::string argument)
     exit_dir = GetDirection(arg2);
 
     if(victim->InRoom->Flags.test(Flag::Room::Safe)
-       && GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
+       && !HasTimer(victim, TimerType::ShoveDrag))
     {
         ch->Echo("That character cannot be shoved right now.\r\n");
         return;
@@ -284,8 +285,8 @@ void do_shove(std::shared_ptr<Character> ch, std::string argument)
     SetWaitState(ch, 12);
 
     if(ch->InRoom->Flags.test(Flag::Room::Safe)
-       && GetTimer(ch, TIMER_SHOVEDRAG) <= 0)
+       && !HasTimer(ch, TimerType::ShoveDrag))
     {
-        AddTimerToCharacter(ch, TIMER_SHOVEDRAG, 10, NULL, CharacterSubState::Pause);
+        AddTimer(ch, TimerType::ShoveDrag, 10);
     }
 }

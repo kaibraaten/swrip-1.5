@@ -21,12 +21,13 @@
 #include "repos/skillrepository.hpp"
 #include "repos/homerepository.hpp"
 #include "skill.hpp"
+#include "timer.hpp"
 
 constexpr short gsn_mycraftingskill = 0;
 
 static void CleanupCharacter(std::shared_ptr<Character> ch)
 {
-    auto timer = GetTimerPointer(ch, TIMER_CMD_FUN);
+    auto timer = GetTimerPointer(ch, TimerType::Command);
 
     if(timer != nullptr)
     {
@@ -543,7 +544,7 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_DoFunTimer)
     auto session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
 
-    auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
+    auto timer = GetTimerPointer(_engineer, TimerType::Command);
 
     EXPECT_NE(timer, nullptr);
 }
@@ -557,7 +558,7 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
     auto session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
 
-    auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
+    auto timer = GetTimerPointer(_engineer, TimerType::Command);
 
     const auto ptr = timer->Callback.target<void(*)(std::shared_ptr<Character>, std::string)>();
 
@@ -584,7 +585,7 @@ TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
                                       _resultantObject, {});
     auto session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
-    auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
+    auto timer = GetTimerPointer(_engineer, TimerType::Command);
     _engineer->SubState = timer->SubState;
 
     timer->Callback(_engineer, "");
@@ -608,7 +609,7 @@ TEST_F(CraftTests, AfterCallback_CharacterReceivedObject)
                                       _resultantObject, {});
     auto session = AllocateCraftingSession(recipe, _engineer, "");
     StartCrafting(session);
-    auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
+    auto timer = GetTimerPointer(_engineer, TimerType::Command);
     _engineer->SubState = timer->SubState;
 
     timer->Callback(_engineer, "");
@@ -625,7 +626,7 @@ TEST_F(CraftTests, AfterCallback_SetObjectStatsEventHandler_IsCalledExactlyOnce)
     auto session = AllocateCraftingSession(recipe, _engineer, "");
     session->OnSetObjectStats.Add(&callCounter, Counting_EventHandler<std::shared_ptr<SetObjectStatsEventArgs>>);
     StartCrafting(session);
-    auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
+    auto timer = GetTimerPointer(_engineer, TimerType::Command);
     _engineer->SubState = timer->SubState;
 
     timer->Callback(_engineer, "");
@@ -643,7 +644,7 @@ TEST_F(CraftTests, AfterCallback_FinishedCraftingEventHandler_IsCalledExactlyOnc
     session->OnFinishedCrafting.Add(&callCounter, Counting_EventHandler<std::shared_ptr<FinishedCraftingEventArgs>>);
 
     StartCrafting(session);
-    auto timer = GetTimerPointer(_engineer, TIMER_CMD_FUN);
+    auto timer = GetTimerPointer(_engineer, TimerType::Command);
     _engineer->SubState = timer->SubState;
 
     timer->Callback(_engineer, "");

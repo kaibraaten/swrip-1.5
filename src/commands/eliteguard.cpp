@@ -6,6 +6,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_elite_guard(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -43,7 +44,7 @@ void do_elite_guard(std::shared_ptr<Character> ch, std::string arg)
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
             Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                 NULL, arg, ActTarget::Room);
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_elite_guard, CharacterSubState::Pause);
+            AddTimer(ch, TimerType::Command, 1, do_elite_guard);
             return;
         }
 

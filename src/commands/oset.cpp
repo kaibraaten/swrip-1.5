@@ -208,9 +208,35 @@ void do_oset(std::shared_ptr<Character> ch, std::string argument)
 
         obj->ItemType = (ItemTypes)value;
 
+        switch(obj->ItemType)
+        {
+        case ITEM_BOOK:
+        case ITEM_SCROLL:
+            obj->Value[OVAL_BOOK_SKILL1] = -1;
+            obj->Value[OVAL_BOOK_SKILL2] = -1;
+            obj->Value[OVAL_BOOK_SKILL3] = -1;
+            break;
+
+        default:
+            break;
+        }
+        
         if(obj->Flags.test(Flag::Obj::Prototype))
+        {
             obj->Prototype->ItemType = obj->ItemType;
 
+            switch(obj->ItemType)
+            {
+            case ITEM_BOOK:
+            case ITEM_SCROLL:
+                obj->Prototype->Value = obj->Value;
+                break;
+
+            default:
+                break;
+            }
+        }
+        
         return;
     }
 

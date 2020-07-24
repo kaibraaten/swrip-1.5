@@ -6,6 +6,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_add_patrol(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -43,7 +44,7 @@ void do_add_patrol(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("&GYou begin making the call for reinforcements.\r\n");
             Act(AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                 nullptr, argument, ActTarget::Room);
-            AddTimerToCharacter(ch, TIMER_CMD_FUN, 1, do_add_patrol, CharacterSubState::Pause);
+            AddTimer(ch, TimerType::Command, 1, do_add_patrol);
             return;
         }
 

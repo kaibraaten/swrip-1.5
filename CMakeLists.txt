@@ -76,6 +76,7 @@ src/social.cpp
 src/spaceobject.cpp
 src/systemdata.cpp
 src/tables.cpp
+src/timer.cpp
 src/track.cpp
 src/turret.cpp
 src/update.cpp

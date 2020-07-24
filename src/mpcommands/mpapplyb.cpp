@@ -5,6 +5,7 @@
 #include "descriptor.hpp"
 #include "race.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_mpapplyb(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -37,7 +38,7 @@ void do_mpapplyb(std::shared_ptr<Character> ch, std::string argument)
     if(IsAuthed(victim))
         return;
 
-    if(GetTimer(victim, TIMER_APPLIED) >= 1)
+    if(HasTimer(victim, TimerType::Applied))
         return;
 
     std::string logBuf;
@@ -53,13 +54,13 @@ void do_mpapplyb(std::shared_ptr<Character> ch, std::string argument)
                               RaceTable[victim->Race].Name);
         Log->Info("%s", logBuf.c_str());
         ToChannel(logBuf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL);
-        AddTimerToCharacter(victim, TIMER_APPLIED, 10, nullptr, CharacterSubState::None);
+        AddTimer(victim, TimerType::Applied, 10);
         victim->PCData->AuthState = 1;
         break;
 
     case 2:
         victim->Echo("Your name has been deemed unsuitable by the gods. Please choose a more apropriate name with the 'name' command.\r\n");
-        AddTimerToCharacter(victim, TIMER_APPLIED, 10, nullptr, CharacterSubState::None);
+        AddTimer(victim, TimerType::Applied, 10);
         break;
 
     case 3:

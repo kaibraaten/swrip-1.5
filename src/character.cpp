@@ -42,6 +42,7 @@
 #include "repos/homerepository.hpp"
 #include "home.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 struct Character::Impl
 {
@@ -52,9 +53,9 @@ struct Character::Impl
 
 Character::Character(std::unique_ptr<class PCData> pcdata)
     : PCData(std::move(pcdata)),
-    Flags(CreateBitSet<Flag::MAX>({ Flag::Plr::Blank, Flag::Plr::Combine, Flag::Plr::Prompt })),
-    PermStats(10),
-    pImpl(std::make_unique<Impl>())
+      Flags(CreateBitSet<Flag::MAX>({ Flag::Plr::Blank, Flag::Plr::Combine, Flag::Plr::Prompt })),
+      PermStats(10),
+      pImpl(std::make_unique<Impl>())
 {
     Ability.Level.fill(0);
     Ability.Experience.fill(0);
@@ -62,40 +63,40 @@ Character::Character(std::unique_ptr<class PCData> pcdata)
 
 Character::Character(std::shared_ptr<ProtoMobile> protoMob)
     : spec_fun(protoMob->spec_fun),
-    spec_2(protoMob->spec_2),
-    Prototype(protoMob),
-    Name(protoMob->Name),
-    ShortDescr(protoMob->ShortDescr),
-    LongDescr(protoMob->LongDescr),
-    Description(protoMob->Description),
-    Sex(protoMob->Sex),
-    Race(protoMob->Race),
-    TopLevel(NumberFuzzy(protoMob->Level)),
-    NumberOfAttacks(protoMob->NumberOfAttacks),
-    Gold(protoMob->Gold),
-    Flags(protoMob->Flags),
-    AffectedBy(protoMob->AffectedBy),
-    Resistant(protoMob->Resistant),
-    Immune(protoMob->Immune),
-    Susceptible(protoMob->Susceptible),
-    AttackFlags(protoMob->AttackFlags),
-    DefenseFlags(protoMob->DefenseFlags),
-    Speaks(protoMob->Speaks),
-    Speaking(protoMob->Speaking),
-    Alignment(protoMob->Alignment),
-    BareNumDie(protoMob->DamNoDice),
-    BareSizeDie(protoMob->DamSizeDice),
-    HitRoll(protoMob->HitRoll),
-    DamRoll(protoMob->DamRoll),
-    HitPlus(protoMob->HitPlus),
-    DamPlus(protoMob->DamPlus),
-    Position(protoMob->Position),
-    DefaultPosition(protoMob->DefaultPosition),
-    Height(protoMob->Height),
-    Weight(protoMob->Weight),
-    VipFlags(protoMob->VipFlags),
-    PermStats(protoMob->Stats),
-    pImpl(std::make_unique<Impl>())
+      spec_2(protoMob->spec_2),
+      Prototype(protoMob),
+      Name(protoMob->Name),
+      ShortDescr(protoMob->ShortDescr),
+      LongDescr(protoMob->LongDescr),
+      Description(protoMob->Description),
+      Sex(protoMob->Sex),
+      Race(protoMob->Race),
+      TopLevel(NumberFuzzy(protoMob->Level)),
+      NumberOfAttacks(protoMob->NumberOfAttacks),
+      Gold(protoMob->Gold),
+      Flags(protoMob->Flags),
+      AffectedBy(protoMob->AffectedBy),
+      Resistant(protoMob->Resistant),
+      Immune(protoMob->Immune),
+      Susceptible(protoMob->Susceptible),
+      AttackFlags(protoMob->AttackFlags),
+      DefenseFlags(protoMob->DefenseFlags),
+      Speaks(protoMob->Speaks),
+      Speaking(protoMob->Speaking),
+      Alignment(protoMob->Alignment),
+      BareNumDie(protoMob->DamNoDice),
+      BareSizeDie(protoMob->DamSizeDice),
+      HitRoll(protoMob->HitRoll),
+      DamRoll(protoMob->DamRoll),
+      HitPlus(protoMob->HitPlus),
+      DamPlus(protoMob->DamPlus),
+      Position(protoMob->Position),
+      DefaultPosition(protoMob->DefaultPosition),
+      Height(protoMob->Height),
+      Weight(protoMob->Weight),
+      VipFlags(protoMob->VipFlags),
+      PermStats(protoMob->Stats),
+      pImpl(std::make_unique<Impl>())
 {
     Ability.Level.fill(0);
     Ability.Experience.fill(0);
@@ -962,20 +963,20 @@ bool CanSeeCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
     if(ch == victim)
         return true;
     else if(!IsNpc(victim)
-       && victim->Flags.test(Flag::Plr::WizInvis)
-       && GetTrustLevel(ch) < victim->PCData->WizInvis)
+            && victim->Flags.test(Flag::Plr::WizInvis)
+            && GetTrustLevel(ch) < victim->PCData->WizInvis)
         return false;
     else if(victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
         return true;
     else if(victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING)
         return true;
     else if(IsNpc(victim)
-       && victim->Flags.test(Flag::Mob::MobInvis)
-       && GetTrustLevel(ch) < victim->MobInvis)
+            && victim->Flags.test(Flag::Mob::MobInvis)
+            && GetTrustLevel(ch) < victim->MobInvis)
         return false;
     else if(!IsImmortal(ch) && !IsNpc(victim) && !victim->Desc
-       && GetTimer(victim, TIMER_RECENTFIGHT) > 0
-       && (!victim->Switched || !IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
+            && HasTimer(victim, TimerType::RecentFight)
+            && (!victim->Switched || !IsAffectedBy(victim->Switched, Flag::Affect::Possess)))
         return false;
     else if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Holylight))
         return true;
@@ -988,8 +989,8 @@ bool CanSeeCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
         else if(IsRoomDark(ch->InRoom) && !IsAffectedBy(ch, Flag::Affect::Infrared))
             return false;
         else if(IsAffectedBy(victim, Flag::Affect::Hide)
-           && !IsAffectedBy(ch, Flag::Affect::DetectHidden)
-           && !IsFighting(victim))
+                && !IsAffectedBy(ch, Flag::Affect::DetectHidden)
+                && !IsFighting(victim))
         {
             if(ch->Race == RACE_DEFEL && victim->Race == RACE_DEFEL)
                 return true;

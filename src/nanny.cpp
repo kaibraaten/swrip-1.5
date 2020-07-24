@@ -47,6 +47,7 @@
 #include "repos/playerrepository.hpp"
 #include "repos/homerepository.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 using NannyFun = std::function<void(std::shared_ptr<Descriptor>, std::string)>;
 
@@ -784,11 +785,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 
     ch->Flags.reset(Flag::Mob::Polymorphed);
 
-    if(GetTimer(ch, TIMER_SHOVEDRAG) > 0)
-        RemoveTimer(ch, TIMER_SHOVEDRAG);
-
-    if(GetTimer(ch, TIMER_PKILLED) > 0)
-        RemoveTimer(ch, TIMER_PKILLED);
+    RemoveTimer(ch, TimerType::ShoveDrag);
 
     for(auto home : Homes->FindHomesForResident(ch->Name))
     {

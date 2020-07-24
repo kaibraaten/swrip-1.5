@@ -5,6 +5,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_drag(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -61,7 +62,7 @@ void do_drag(std::shared_ptr<Character> ch, std::string argument)
     exit_dir = GetDirection(arg2);
 
     if(victim->InRoom->Flags.test(Flag::Room::Safe)
-       && GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
+       && !HasTimer(victim, TimerType::ShoveDrag))
     {
         ch->Echo("That character cannot be dragged right now.\r\n");
         return;
@@ -276,8 +277,15 @@ void do_drag(std::shared_ptr<Character> ch, std::string argument)
         /* Move ch to the room too.. they are doing dragging - Scryn */
         MoveCharacter(ch, GetExit(ch->InRoom, exit_dir));
         SetWaitState(ch, 12);
-        return;
-    }
 
-    ch->Echo("You cannot do that to someone who is standing.\r\n");
+        if(ch->InRoom->Flags.test(Flag::Room::Safe)
+           && !HasTimer(ch, TimerType::ShoveDrag))
+        {
+            AddTimer(ch, TimerType::ShoveDrag, 10);
+        }
+    }
+    else
+    {
+        ch->Echo("You cannot do that to someone who is standing.\r\n");
+    }
 }

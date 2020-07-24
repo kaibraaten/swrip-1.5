@@ -1205,6 +1205,10 @@ constexpr auto OVAL_PILL_SPELL2 = 2;
 constexpr auto OVAL_PILL_SPELL3 = 3;
 constexpr auto OVAL_PILL_SATISFACTION = 4;
 
+constexpr auto OVAL_BOOK_SKILL1 = 1;
+constexpr auto OVAL_BOOK_SKILL2 = 2;
+constexpr auto OVAL_BOOK_SKILL3 = 3;
+
 constexpr auto OVAL_DEVICE_LEVEL = 0;
 constexpr auto OVAL_DEVICE_MAX_CHARGES = 1;
 constexpr auto OVAL_DEVICE_CHARGES = 2;
@@ -1752,17 +1756,6 @@ namespace Flag
                 };
     }
 }
-
-/* TimerType */
-enum
-{
-    TIMER_NONE,
-    TIMER_RECENTFIGHT,
-    TIMER_SHOVEDRAG,
-    TIMER_CMD_FUN,
-    TIMER_APPLIED,
-    TIMER_PKILLED
-};
 
 /*
  * Channel bits.

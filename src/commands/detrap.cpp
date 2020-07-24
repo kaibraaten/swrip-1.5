@@ -8,6 +8,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_detrap(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -79,7 +80,7 @@ void do_detrap(std::shared_ptr<Character> ch, std::string argument)
         Act(AT_ACTION, "$n carefully attempts to remove a trap from $p...",
             ch, obj, NULL, ActTarget::Room);
         ch->dest_buf = obj->Name;
-        AddTimerToCharacter(ch, TIMER_CMD_FUN, 3, do_detrap, CharacterSubState::Pause);
+        AddTimer(ch, TimerType::Command, 3, do_detrap);
         return;
 
     case CharacterSubState::Pause:

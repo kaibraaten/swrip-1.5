@@ -37,6 +37,7 @@
 #include "alias.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
  /*
   * Log-all switch.
@@ -241,7 +242,7 @@ void Interpret(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    timer = GetTimerPointer(ch, TIMER_CMD_FUN);
+    timer = GetTimerPointer(ch, TimerType::Command);
 
     /*
      * Implement freeze command.

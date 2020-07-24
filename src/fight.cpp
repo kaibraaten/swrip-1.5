@@ -51,6 +51,7 @@
 #include "repos/arearepository.hpp"
 #include "repos/homerepository.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 extern std::shared_ptr<Character> gch_prev;
 
@@ -188,34 +189,6 @@ void StartFearing(std::shared_ptr<Character> ch, std::shared_ptr<Character> vict
     ch->HHF.Fearing->Who = victim;
 }
 
-static void ExpireCommandCallbackTimers(std::shared_ptr<Character> ch)
-{
-    auto characterTimers = ch->Timers();
-
-    for(const auto &timer : characterTimers)
-    {
-        if(--timer->Count <= 0)
-        {
-            if(timer->Type == TIMER_CMD_FUN)
-            {
-                CharacterSubState tempsub = ch->SubState;
-
-                ch->SubState = timer->SubState;
-                timer->Callback(ch, "");
-
-                if(CharacterDiedRecently(ch))
-                {
-                    break;
-                }
-
-                ch->SubState = tempsub;
-            }
-
-            ExtractTimer(ch, timer);
-        }
-    }
-}
-
 static void RemoveExpiredAffects(std::shared_ptr<Character> ch)
 {
     auto affects = ch->Affects();
@@ -309,7 +282,9 @@ void ViolenceUpdate()
             }
         }
 
-        ExpireCommandCallbackTimers(ch);
+        // TODO: This function REALLY doesn't belong here, but moving
+        //       it may have side effects that must be investigated first.
+        DispatchExpiredCommandCallbackTimers(ch);
 
         if(CharacterDiedRecently(ch))
         {
@@ -517,7 +492,7 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
     /* add timer if player is attacking another player */
     if(!IsNpc(ch) && !IsNpc(victim))
     {
-        AddTimerToCharacter(ch, TIMER_RECENTFIGHT, 20, nullptr, CharacterSubState::None);
+        AddTimer(ch, TimerType::RecentFight, 20);
     }
 
     if(!IsNpc(ch) && ch->Flags.test(Flag::Plr::Nice) && !IsNpc(victim))
@@ -2093,7 +2068,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
             victim->Echo("You lose %ld experience.\r\n", xp_actually_lost);
         }
 
-        AddTimerToCharacter(victim, TIMER_RECENTFIGHT, 100, nullptr, CharacterSubState::None);
+        AddTimer(victim, TimerType::RecentFight, 100);
     }
 
     /*

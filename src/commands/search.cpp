@@ -9,6 +9,7 @@
 #include "object.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "timer.hpp"
 
 void do_search(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -57,8 +58,7 @@ void do_search(std::shared_ptr<Character> ch, std::string arg)
             }
         }
 
-        AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(SkillTable[gsn_search]->Beats / 10, 3),
-                            do_search, CharacterSubState::Pause);
+        AddTimer(ch, TimerType::Command, umin(SkillTable[gsn_search]->Beats / 10, 3), do_search);
         ch->Echo("You begin your search...\r\n");
         ch->dest_buf = arg;
         return;
