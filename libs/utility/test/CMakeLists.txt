@@ -10,7 +10,6 @@ add_executable(utility_tests
   src/learning_tests.cpp
   src/main.cpp
   src/misc_tests.cpp
-  src/oldevent_tests.cpp
   src/repository_tests.cpp
   src/string_handling_tests.cpp
   )
