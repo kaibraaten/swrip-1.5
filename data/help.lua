@@ -2935,6 +2935,7 @@ Fields: save - saves the control panel settings\
         guild_overseer - name of the Overseer of Guilds\
         guild_advisor - name of the Advisor to Guilds\
         permadeath - toggle permadeath\
+        drop_on_defeat - drop equipment on defeat\
         can_choose_jedi - can pick jedi at chargen\
         disable_hunger - toggle hunger/thirst system\
         extended_race_selection - enable huge selection of races\

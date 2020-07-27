@@ -33,6 +33,7 @@ void do_cset(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("Hunger and thirst: %s\r\n", SysData.DisableHunger ? "Disabled" : "Enabled");
         ch->Echo("Can choose Jedi: %s\r\n", SysData.CanChooseJedi ? "Yes" : "No");
         ch->Echo("Death is permanent: %s\r\n", SysData.PermaDeath ? "Yes" : "No");
+        ch->Echo("Drop equipment on defeat: %s\r\n", SysData.DropOnDefeat ? "Yes" : "No");
         ch->Echo("Extended race selection: %s\r\n", SysData.ExtendedRaceSelection ? "Yes" : "No");
         ch->Echo("Multiplaying allowed: %s\r\n", SysData.AllowMultiplaying ? "Yes" : "No");
         return;
@@ -60,6 +61,14 @@ void do_cset(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+    if(!StrCmp(arg, "drop_on_defeat"))
+    {
+        SysData.DropOnDefeat = !SysData.DropOnDefeat;
+        ch->Echo("Drop equipment on defeat is %s.\r\n",
+                 SysData.DropOnDefeat ? "ENABLED" : "DISABLED");
+        return;
+    }
+    
     if(!StrCmp(arg, "can_choose_jedi"))
     {
         SysData.CanChooseJedi = !SysData.CanChooseJedi;

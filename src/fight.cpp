@@ -1998,65 +1998,49 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
 
     if(victim->HitPoints.Current <= 0 && !IsNpc(victim))
     {
-        int cnt = 0;
-        std::shared_ptr<Object> equippedObject;
-
         StopFighting(victim, true);
+        const auto wearLocsToUnequip = { WEAR_DUAL_WIELD, WEAR_WIELD, WEAR_HOLD, WEAR_MISSILE_WIELD, WEAR_LIGHT };
 
-        if((equippedObject = GetEquipmentOnCharacter(victim, WEAR_DUAL_WIELD)) != nullptr)
+        for(const auto wearLoc : wearLocsToUnequip)
         {
-            UnequipCharacter(victim, equippedObject);
-        }
+            auto equippedObject = GetEquipmentOnCharacter(victim, wearLoc);
 
-        if((equippedObject = GetEquipmentOnCharacter(victim, WEAR_WIELD)) != nullptr)
-        {
-            UnequipCharacter(victim, equippedObject);
-        }
-
-        if((equippedObject = GetEquipmentOnCharacter(victim, WEAR_HOLD)) != nullptr)
-        {
-            UnequipCharacter(victim, equippedObject);
-        }
-
-        if((equippedObject = GetEquipmentOnCharacter(victim, WEAR_MISSILE_WIELD)) != nullptr)
-        {
-            UnequipCharacter(victim, equippedObject);
-        }
-
-        if((equippedObject = GetEquipmentOnCharacter(victim, WEAR_LIGHT)) != nullptr)
-        {
-            UnequipCharacter(victim, equippedObject);
-        }
-
-        for(auto i = std::begin(victim->Objects()), i_next = std::end(victim->Objects());
-            i != std::end(victim->Objects());
-            i = i_next)
-        {
-            auto obj = *i;
-            i_next = ++i;
-
-            if(obj->WearLoc == WEAR_NONE)
+            if(equippedObject != nullptr)
             {
-                if(obj->Prototype->mprog.progtypes & DROP_PROG && obj->Count > 1)
-                {
-                    ++cnt;
-                    SeparateOneObjectFromGroup(obj);
-                    ObjectFromCharacter(obj);
+                UnequipCharacter(victim, equippedObject);
+            }
+        }
 
-                    if(i_next == std::end(victim->Objects()))
+        if(SysData.DropOnDefeat)
+        {
+            for(auto i = std::begin(victim->Objects()), i_next = std::end(victim->Objects());
+                i != std::end(victim->Objects());
+                i = i_next)
+            {
+                auto obj = *i;
+                i_next = ++i;
+
+                if(obj->WearLoc == WEAR_NONE)
+                {
+                    if(obj->Prototype->mprog.progtypes & DROP_PROG && obj->Count > 1)
                     {
-                        i_next = std::begin(victim->Objects());
-                    }
-                }
-                else
-                {
-                    cnt += obj->Count;
-                    ObjectFromCharacter(obj);
-                }
+                        SeparateOneObjectFromGroup(obj);
+                        ObjectFromCharacter(obj);
 
-                Act(AT_ACTION, "$n drops $p.", victim, obj, nullptr, ActTarget::Room);
-                Act(AT_ACTION, "You drop $p.", victim, obj, nullptr, ActTarget::Char);
-                obj = ObjectToRoom(obj, victim->InRoom);
+                        if(i_next == std::end(victim->Objects()))
+                        {
+                            i_next = std::begin(victim->Objects());
+                        }
+                    }
+                    else
+                    {
+                        ObjectFromCharacter(obj);
+                    }
+
+                    Act(AT_ACTION, "$n drops $p.", victim, obj, nullptr, ActTarget::Room);
+                    Act(AT_ACTION, "You drop $p.", victim, obj, nullptr, ActTarget::Char);
+                    obj = ObjectToRoom(obj, victim->InRoom);
+                }
             }
         }
 
@@ -2545,9 +2529,6 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
 
     std::string arg = victim->Name;
 
-    if(!IsNpc(victim) && victim->PCData->ClanInfo.Clan)
-        RemoveClanMember(victim);
-
     StopFighting(victim, true);
 
     if(killer && !IsNpc(killer) && !IsNpc(victim))
@@ -2606,7 +2587,6 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
     {
         victim->Prototype->Killed++;
         ExtractCharacter(victim, true);
-        victim = NULL;
         return;
     }
 
@@ -2617,9 +2597,11 @@ void RawKill(std::shared_ptr<Character> killer, std::shared_ptr<Character> victi
     {
         ForEachShip(RemoveShipOwner, victim);
         ForEach(Homes->FindHomesForResident(victim->Name), RemoveResident(victim->Name));
-
+        
         if(victim->PCData && victim->PCData->ClanInfo.Clan)
         {
+            RemoveClanMember(victim);
+            
             if(!StrCmp(victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Leader))
             {
                 if(!victim->PCData->ClanInfo.Clan->Leadership.Number1.empty())

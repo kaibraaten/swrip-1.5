@@ -66,6 +66,7 @@ public:
     bool PermaDeath = false;
     bool ExtendedRaceSelection = false;
     bool AllowMultiplaying = false;
+    bool DropOnDefeat = true;
     unsigned char *MCCP_Buffer = nullptr;
 };
 
