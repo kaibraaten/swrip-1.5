@@ -482,6 +482,8 @@ bool HasDiploma(std::shared_ptr<Character> ch)
 
 short GetAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability)
 {
+    assert(ability != AbilityClass::None);
+    assert(ability != AbilityClass::Max);
     return ch->Ability.Level[(int)ability];
 }
 

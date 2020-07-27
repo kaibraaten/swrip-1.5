@@ -73,6 +73,7 @@ public:
     FakeSkillRepository()
     {
         _myCraftingSkill->Name = "makesomething";
+        _myCraftingSkill->Class = AbilityClass::Combat;
         SkillTable[gsn_mycraftingskill] = _myCraftingSkill;
     }
 
