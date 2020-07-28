@@ -133,13 +133,26 @@ void do_showstatistic(std::shared_ptr<Character> ch, std::string argument)
             raceCh->PermStats.Cha = 20 + RaceTable[raceCh->Race].Stats.ModCha;
             sprintf(buf, "\r\n&c%-20s &B| &C", RaceTable[iR].Name);
 
-            for(int iC2 = 0; iC2 < (int)AbilityClass::Force; iC2++)
+            for(int iC2 = 0; iC2 < (int)AbilityClass::Force; ++iC2)
             {
                 if(AbilityClass(iC2) == AbilityClass::Smuggling)
-                    sprintf(buf2, "%-3d+ &B| &C", GetMaxAbilityLevel(raceCh, AbilityClass(iC2)));
+                {
+                    if(pclass == AbilityClass::Smuggling)
+                    {
+                        raceCh->PermStats.Lck = 20;
+                        sprintf(buf2, "%-3d  &B| &C", GetMaxAbilityLevel(raceCh, AbilityClass(iC2)));
+                        raceCh->PermStats.Lck = 3;
+                    }
+                    else
+                    {
+                        sprintf(buf2, "%-3d+ &B| &C", GetMaxAbilityLevel(raceCh, AbilityClass(iC2)));
+                    }
+                }
                 else
+                {
                     sprintf(buf2, "%-3d &B| &C", GetMaxAbilityLevel(raceCh, AbilityClass(iC2)));
-
+                }
+                
                 strcat(buf, buf2);
             }
 

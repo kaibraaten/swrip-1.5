@@ -296,7 +296,7 @@ static int GetMaxLeadershipLevel(std::shared_ptr<Character> ch)
     if(ch->Ability.Main == AbilityClass::Combat)
         level = 50;
 
-    if(ch->Ability.Main == AbilityClass::Leadership)
+    if(ch->Ability.Main == AbilityClass::Diplomacy)
         level = 50;
 
     level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Leadership];
@@ -309,7 +309,7 @@ static int GetMaxDiplomacyLevel(std::shared_ptr<Character> ch)
 {
     int level = 0;
 
-    if(ch->Ability.Main == AbilityClass::Leadership)
+    if(ch->Ability.Main == AbilityClass::Diplomacy)
         level = 100;
 
     if(ch->Ability.Main == AbilityClass::Piloting)
@@ -318,7 +318,7 @@ static int GetMaxDiplomacyLevel(std::shared_ptr<Character> ch)
     if(ch->Ability.Main == AbilityClass::Leadership)
         level = 50;
 
-    level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Leadership];
+    level += RaceTable[ch->Race].AbilityMod[(int)AbilityClass::Diplomacy];
     level += ch->PermStats.Cha * 3;
 
     return urange(1, level, MAX_ABILITY_LEVEL);
