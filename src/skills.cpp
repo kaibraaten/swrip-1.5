@@ -34,6 +34,7 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 #include "act.hpp"
+#include "systemdata.hpp"
 
  /*
   * Dummy function
@@ -222,7 +223,7 @@ bool CheckDodge(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim
 
     if(IsNpc(victim))
     {
-        chances = umin(60, victim->TopLevel);
+        chances = umin(60, victim->TopLevel());
     }
     else
     {
@@ -269,7 +270,7 @@ bool CheckGrip(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
 
     if(IsNpc(victim))
     {
-        grip_chance = umin(60, 2 * victim->TopLevel);
+        grip_chance = umin(60, 2 * victim->TopLevel());
     }
     else
     {
@@ -279,7 +280,23 @@ bool CheckGrip(std::shared_ptr<Character> ch, std::shared_ptr<Character> victim)
     /* Consider luck as a factor */
     grip_chance += (2 * (GetCurrentLuck(victim) - 13));
 
-    if(GetRandomPercent() >= grip_chance + victim->TopLevel - ch->TopLevel)
+    int victimLevel = 0;
+    int charLevel = 0;
+
+    if(!IsNpc(ch) && SysData.TopLevelFromAbility)
+    {
+        auto gripAbility = SkillTable[gsn_grip]->Class;
+        auto disarmAbility = SkillTable[gsn_disarm]->Class;
+        victimLevel = GetAbilityLevel(victim, gripAbility);
+        charLevel = GetAbilityLevel(ch, disarmAbility);
+    }
+    else
+    {
+        victimLevel = victim->TopLevel();
+        charLevel = ch->TopLevel();
+    }
+    
+    if(GetRandomPercent() >= grip_chance + victimLevel - charLevel)
     {
         LearnFromFailure(victim, gsn_grip);
         return false;

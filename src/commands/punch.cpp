@@ -66,8 +66,10 @@ void do_punch(std::shared_ptr<Character> ch, std::string arg)
 
     if(IsNpc(ch) || GetRandomPercent() < GetSkillLevel(ch, gsn_punch))
     {
+        auto ability = SkillTable[gsn_punch]->Class;
+        
         LearnFromSuccess(ch, gsn_punch);
-        global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, AbilityClass::Combat)), gsn_punch);
+        global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, ability)), gsn_punch);
     }
     else
     {

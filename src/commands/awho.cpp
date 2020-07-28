@@ -36,7 +36,7 @@ void do_awho(std::shared_ptr<Character> ch, std::string argument)
     for(auto tch = FirstCharacter; tch; tch = tch->Next)
     {
         if(IsInArena(tch)
-           && tch->TopLevel < LEVEL_IMMORTAL)
+           && tch->TopLevel() < LEVEL_IMMORTAL)
         {
             tch->Echo("&W%s\r\n", tch->Name.c_str());
         }

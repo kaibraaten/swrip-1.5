@@ -34,7 +34,7 @@ bool spec_auth(std::shared_ptr<Character> ch)
         char buf[MAX_STRING_LENGTH];
         sprintf(buf, "%s authorized %s", ch->Name.c_str(),
             victim->Name.c_str());
-        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel);
+        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel());
     }
 
     return false;

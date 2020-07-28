@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "systemdata.hpp"
 
 void do_berserk(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -35,7 +36,19 @@ void do_berserk(std::shared_ptr<Character> ch, std::string argument)
     /* Hmmm.. 10-20 combat rounds at level 50.. good enough for most mobs,
        and if not they can always go berserk again.. shrug.. maybe even
        too high. -- Altrag */
-    af->Duration = GetRandomNumberFromRange(ch->TopLevel / 5, ch->TopLevel * 2 / 5);
+    int level = 0;
+
+    if(SysData.TopLevelFromAbility)
+    {
+        level = umin(GetAbilityLevel(ch, SkillTable[gsn_berserk]->Class), 100);
+    }
+    else
+    {
+        level = ch->TopLevel();
+    }
+    
+    af->Duration = GetRandomNumberFromRange(level / 5, level * 2 / 5);
+    
     /* Hmm.. you get stronger when yer really enraged.. mind over matter
        type thing.. */
     af->Location = APPLY_STR;

@@ -416,13 +416,14 @@ static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
     if(ship->Ch && ship->Ch->Desc)
     {
         long xp = 0;
-
+        auto ability = AbilityClass::Piloting;
         ch = ship->Ch;
-        xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting)));
+        xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability)));
         xp = umin(GetShipValue(ship), xp);
-        GainXP(ch, AbilityClass::Piloting, xp);
-        ch->Echo("&WYou gain %ld points of flight experience!\r\n",
-                 umin(GetShipValue(ship), xp));
+        GainXP(ch, ability, xp);
+        ch->Echo("&WYou gain %ld points of %s experience!\r\n",
+                 umin(GetShipValue(ship), xp),
+                 AbilityName[(int)ability]);
         ship->Ch = NULL;
     }
 
@@ -941,11 +942,11 @@ ch_ret DriveShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship, std:
        && !IsNpc(ch)
        && ch->InRoom->Area != to_room->Area)
     {
-        if(ch->TopLevel < to_room->Area->LevelRanges.Hard.Low)
+        if(ch->TopLevel() < to_room->Area->LevelRanges.Hard.Low)
         {
             SetCharacterColor(AT_TELL, ch);
 
-            switch(to_room->Area->LevelRanges.Hard.Low - ch->TopLevel)
+            switch(to_room->Area->LevelRanges.Hard.Low - ch->TopLevel())
             {
             case 1:
                 ch->Echo("A voice in your mind says, 'You are nearly ready to go that way...'");
@@ -965,7 +966,7 @@ ch_ret DriveShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship, std:
 
             return rNONE;
         }
-        else if(ch->TopLevel > to_room->Area->LevelRanges.Hard.High)
+        else if(ch->TopLevel() > to_room->Area->LevelRanges.Hard.High)
         {
             SetCharacterColor(AT_TELL, ch);
             ch->Echo("A voice in your mind says, 'There is nothing more for you down that path.'");
@@ -2765,11 +2766,12 @@ void DamageShip(std::shared_ptr<Ship> ship, int min, int max,
         {
             Log->Info("%s(%s) was just destroyed by %s.",
                       ship->Name.c_str(), ship->PersonalName.c_str(), ch->Name.c_str());
-
-            xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Piloting)));
+            auto ability = AbilityClass::Piloting;
+            xp = (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability)));
             xp = umin(GetShipValue(ship), xp);
-            GainXP(ch, AbilityClass::Piloting, xp);
-            ch->Echo("&WYou gain %ld piloting experience!\r\n", xp);
+            GainXP(ch, ability, xp);
+            ch->Echo("&WYou gain %ld %s experience!\r\n", xp,
+                     AbilityName[(int)ability]);
         }
         else
         {

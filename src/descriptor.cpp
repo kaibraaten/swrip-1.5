@@ -80,7 +80,7 @@ unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string & 
                 Act(AT_ACTION, "$n has reconnected.", ch, nullptr, nullptr, ActTarget::Room);
                 auto logBuf = FormatString("%s@%s reconnected.",
                                            ch->Name.c_str(), d->Remote.Hostname.c_str());
-                Log->LogStringPlus(logBuf, LogType::Comm, umax(SysData.LevelOfLogChannel, ch->TopLevel));
+                Log->LogStringPlus(logBuf, LogType::Comm, umax(SysData.LevelOfLogChannel, ch->TopLevel()));
                 d->ConnectionState = ConState::Playing;
             }
 
@@ -101,8 +101,8 @@ bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string & name)
                      ? dold->Original->Name : dold->Char->Name)
            && !StrCmp(dold->Remote.Hostname, d->Remote.Hostname))
         {
-            if(d->Char->TopLevel >= LEVEL_CREATOR
-               || (dold->Original ? dold->Original : dold->Char)->TopLevel >= LEVEL_CREATOR)
+            if(d->Char->TopLevel() >= LEVEL_CREATOR
+               || (dold->Original ? dold->Original : dold->Char)->TopLevel() >= LEVEL_CREATOR)
             {
                 return false;
             }
@@ -170,7 +170,7 @@ unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string & na
                 ch, nullptr, nullptr, ActTarget::Room);
             auto logBuf = FormatString("%s@%s reconnected, kicking off old link.",
                                        ch->Name.c_str(), d->Remote.Hostname.c_str());
-            Log->LogStringPlus(logBuf, LogType::Comm, umax(SysData.LevelOfLogChannel, ch->TopLevel));
+            Log->LogStringPlus(logBuf, LogType::Comm, umax(SysData.LevelOfLogChannel, ch->TopLevel()));
 
             d->ConnectionState = cstate;
             return true;

@@ -449,7 +449,7 @@ static ch_ret Perform2ndAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
     return PerformNthAttack(ch, victim, dt, gsn_second_attack,
                             [ch, dual_bonus]()
                             {
-                                return IsNpc(ch) ? ch->TopLevel
+                                return IsNpc(ch) ? ch->TopLevel()
                                     : (int)((GetSkillLevel(ch, gsn_second_attack) + dual_bonus) / 1.5);
                             });
 }
@@ -459,7 +459,7 @@ static ch_ret Perform3rdAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
     return PerformNthAttack(ch, victim, dt, gsn_third_attack,
                             [ch, dual_bonus]()
                             {
-                                return IsNpc(ch) ? ch->TopLevel
+                                return IsNpc(ch) ? ch->TopLevel()
                                     : (int)((GetSkillLevel(ch, gsn_third_attack) + (dual_bonus * 1.5)) / 2);
                             });
 }
@@ -469,7 +469,7 @@ static ch_ret Perform4thAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
     return PerformNthAttack(ch, victim, dt, gsn_fourth_attack,
                             [ch, dual_bonus]()
                             {
-                                return IsNpc(ch) ? ch->TopLevel
+                                return IsNpc(ch) ? ch->TopLevel()
                                     : (int)((GetSkillLevel(ch, gsn_fourth_attack) + (dual_bonus * 1.5)) / 2);
                             });
 }
@@ -479,7 +479,7 @@ static ch_ret Perform5thAttack(std::shared_ptr<Character> ch, std::shared_ptr<Ch
     return PerformNthAttack(ch, victim, dt, gsn_fifth_attack,
                             [ch, dual_bonus]()
                             {
-                                return IsNpc(ch) ? ch->TopLevel
+                                return IsNpc(ch) ? ch->TopLevel()
                                     : (int)((GetSkillLevel(ch, gsn_fifth_attack) + (dual_bonus * 1.5)) / 2);
                             });
 }
@@ -618,7 +618,7 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
     retcode = rNONE;
 
     // Extra 25% chance bonus attack for NPCs.
-    hit_chance = IsNpc(ch) ? (int)(ch->TopLevel / 4) : 0;
+    hit_chance = IsNpc(ch) ? (int)(ch->TopLevel() / 4) : 0;
 
     if(GetRandomPercent() < hit_chance)
     {
@@ -768,7 +768,7 @@ static short GetOffensiveShieldLevelModifier(std::shared_ptr<Character> ch, std:
     }
     else
     {
-        short lvl = ch->TopLevel;
+        short lvl = ch->TopLevel();
 
         if(GetRandomPercent() + (GetAbilityLevel(victim, AbilityClass::Combat) - lvl) < 70)
         {
@@ -1827,7 +1827,7 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
     }
 
     if(!IsNpc(victim)
-       && (victim->TopLevel >= LEVEL_IMMORTAL
+       && (victim->TopLevel() >= LEVEL_IMMORTAL
            || IsInArena(victim))
        && victim->HitPoints.Current < 1)
     {
@@ -2046,10 +2046,13 @@ ch_ret InflictDamage(std::shared_ptr<Character> ch, std::shared_ptr<Character> v
 
         if(IsNpc(ch) && !IsNpc(victim))
         {
-            long xp_to_lose = umax(GetAbilityXP(victim, AbilityClass::Combat) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Combat)), 0);
-            long xp_actually_lost = LoseXP(victim, AbilityClass::Combat, xp_to_lose);
+            auto ability = AbilityClass::Combat;
+            long xp_to_lose = umax(GetAbilityXP(victim, ability) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability)), 0);
+            long xp_actually_lost = LoseXP(victim, ability, xp_to_lose);
 
-            victim->Echo("You lose %ld experience.\r\n", xp_actually_lost);
+            victim->Echo("You lose %ld %s experience.\r\n",
+                         xp_actually_lost,
+                         AbilityName[(int)ability]);
         }
 
         AddTimer(victim, TimerType::RecentFight, 100);
@@ -2758,7 +2761,8 @@ static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character
         }
         else
         {
-            gch->Echo("You receive %ld combat experience.\r\n", xp);
+            gch->Echo("You receive %ld %s experience.\r\n", xp,
+                      AbilityName[(int)AbilityClass::Combat]);
         }
 
         GainXP(gch, AbilityClass::Combat, xp);
@@ -2766,7 +2770,8 @@ static void GainGroupXP(std::shared_ptr<Character> ch, std::shared_ptr<Character
         if(lch == gch && members > 1)
         {
             xp = urange(members, xp * members, (GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Leadership) + 1) - GetRequiredXpForLevel(GetAbilityLevel(gch, AbilityClass::Leadership)) / 10));
-            gch->Echo("You get %ld leadership experience for leading your group to victory.\r\n", xp);
+            gch->Echo("You get %ld %s experience for leading your group to victory.\r\n",
+                      xp, AbilityName[(int)AbilityClass::Leadership]);
             GainXP(gch, AbilityClass::Leadership, xp);
         }
 

@@ -38,7 +38,7 @@ void do_buyvendor (std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if (ch->TopLevel < LEVEL_BUY_VENDOR)
+    if (ch->TopLevel() < LEVEL_BUY_VENDOR)
     {
         ch->Echo("You must be at least level %d.\r\n", LEVEL_BUY_VENDOR);
         return;

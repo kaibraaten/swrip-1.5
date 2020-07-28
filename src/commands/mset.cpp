@@ -415,7 +415,7 @@ void do_mset(std::shared_ptr<Character> ch, std::string argument)
             SetAbilityLevel(victim, AbilityClass(ability), value);
         }
 
-        victim->TopLevel = value;
+        victim->TopLevel(value);
         victim->ArmorClass = 100 - value * 2.5;
         victim->HitRoll = value / 5;
         victim->DamRoll = value / 5;

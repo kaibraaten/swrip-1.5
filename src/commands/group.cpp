@@ -21,7 +21,7 @@ void do_group(std::shared_ptr<Character> ch, std::string arg)
 
                 if(IsAffectedBy(gch, Flag::Affect::Possess))
                     ch->Echo("[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
-                             gch->TopLevel,
+                             gch->TopLevel(),
                              IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,
                              Capitalize(PERS(gch, ch)).c_str(),
                              "????",
@@ -32,7 +32,7 @@ void do_group(std::shared_ptr<Character> ch, std::string arg)
 
                 else
                     ch->Echo("[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
-                             gch->TopLevel,
+                             gch->TopLevel(),
                              IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,
                              Capitalize(PERS(gch, ch)).c_str(),
                              gch->HitPoints.Current,

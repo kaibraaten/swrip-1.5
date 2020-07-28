@@ -32,7 +32,7 @@ void do_hitall( std::shared_ptr<Character> ch, std::string argument )
              || !CanSeeCharacter(ch, vch) || IsSafe(ch, vch) )
             continue;
 
-        if ( ++nvict > GetAbilityLevel(ch, AbilityClass::Combat) / 5 )
+        if ( ++nvict > GetAbilityLevel(ch, SkillTable[gsn_hitall]->Class) / 5 )
             break;
 
         if (vch->Flags.test(Flag::Plr::Afk))

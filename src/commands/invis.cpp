@@ -17,7 +17,7 @@ void do_invis(std::shared_ptr<Character> ch, std::string arg)
 
         level = ToLong(arg);
 
-        if(level < 2 || level > ch->TopLevel)
+        if(level < 2 || level > ch->TopLevel())
         {
             ch->Echo("Invalid level.\r\n");
             return;
@@ -40,13 +40,13 @@ void do_invis(std::shared_ptr<Character> ch, std::string arg)
     if(!IsNpc(ch))
     {
         if(ch->PCData->WizInvis < 2)
-            ch->PCData->WizInvis = ch->TopLevel;
+            ch->PCData->WizInvis = ch->TopLevel();
     }
 
     if(IsNpc(ch))
     {
         if(ch->MobInvis < 2)
-            ch->MobInvis = ch->TopLevel;
+            ch->MobInvis = ch->TopLevel();
     }
 
     if(ch->Flags.test(Flag::Plr::WizInvis))

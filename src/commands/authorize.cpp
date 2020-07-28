@@ -50,7 +50,7 @@ void do_authorize(std::shared_ptr<Character> ch, std::string argument)
         victim->PCData->AuthedBy = ch->Name;
         sprintf(buf, "%s authorized %s", ch->Name.c_str(),
                 victim->Name.c_str());
-        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel);
+        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel());
         ch->Echo("You have authorized %s.\r\n", victim->Name.c_str());
 
         victim->Echo("The MUD Administrators have accepted the name %s.\r\n"
@@ -62,7 +62,7 @@ void do_authorize(std::shared_ptr<Character> ch, std::string argument)
         victim->Echo("You have been denied access.\r\n");
         sprintf(buf, "%s denied authorization to %s", ch->Name.c_str(),
                 victim->Name.c_str());
-        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel);
+        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel());
         ch->Echo("You have denied %s.\r\n", victim->Name.c_str());
         do_quit(victim, "");
     }
@@ -70,7 +70,7 @@ void do_authorize(std::shared_ptr<Character> ch, std::string argument)
     {
         sprintf(buf, "%s has denied %s's name", ch->Name.c_str(),
                 victim->Name.c_str());
-        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel);
+        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel());
         victim->Echo("The MUD Administrators have found the name %s "
                      "to be unacceptable.\r\n"
                      "Use 'name' to change it to something more apropriate.\r\n",

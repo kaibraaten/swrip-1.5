@@ -85,6 +85,16 @@ void do_cset(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+    if(!StrCmp(arg, "toplevel"))
+    {
+        SysData.TopLevelFromAbility = !SysData.TopLevelFromAbility;
+        ch->Echo("TopLevel now comes from %s.\r\n",
+                 SysData.TopLevelFromAbility
+                 ? "ABILITY LEVEL"
+                 : "LEGACY ATTRIBUTE");
+        return;
+    }
+    
     if(!StrCmp(arg, "extended_race_selection"))
     {
         SysData.ExtendedRaceSelection = !SysData.ExtendedRaceSelection;

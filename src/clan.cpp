@@ -279,7 +279,7 @@ void UpdateClanMember(std::shared_ptr<Character> ch)
         member->Kills = ch->PCData->PKills;
         member->Deaths = ch->PCData->Clones;
         member->Ability = ch->Ability.Main;
-        member->Level = ch->TopLevel;
+        member->Level = ch->TopLevel();
         member->LastActivity = current_time;
 
         Clans->Save(ch->PCData->ClanInfo.Clan);

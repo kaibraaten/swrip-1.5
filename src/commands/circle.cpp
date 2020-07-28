@@ -79,8 +79,9 @@ void do_circle(std::shared_ptr<Character> ch, std::string argument)
         + (GetCurrentLuck(victim) - 13);
 
     SetWaitState(ch, SkillTable[gsn_circle]->Beats);
-
-    if(percent < (IsNpc(ch) ? (GetAbilityLevel(ch, AbilityClass::Hunting) * 1.5) : GetSkillLevel(ch, gsn_circle)))
+    auto ability = SkillTable[gsn_circle]->Class;
+    
+    if(percent < (IsNpc(ch) ? (GetAbilityLevel(ch, ability) * 1.5) : GetSkillLevel(ch, gsn_circle)))
     {
         LearnFromSuccess(ch, gsn_circle);
         global_retcode = HitMultipleTimes(ch, victim, gsn_circle);

@@ -156,6 +156,7 @@ extern short gsn_fourth_attack;
 extern short gsn_fifth_attack;
 extern short gsn_dual_wield;
 extern short gsn_aid;
+extern short gsn_shove;
 
 /* spells */
 extern short gsn_blindness;

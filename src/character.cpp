@@ -46,6 +46,7 @@
 
 struct Character::Impl
 {
+    int TopLevel = 0;
     std::list<std::shared_ptr<Affect>> Affects;
     std::list<std::shared_ptr<Object>> Objects;
     std::list<std::shared_ptr<Timer>> Timers;
@@ -71,7 +72,6 @@ Character::Character(std::shared_ptr<ProtoMobile> protoMob)
       Description(protoMob->Description),
       Sex(protoMob->Sex),
       Race(protoMob->Race),
-      TopLevel(NumberFuzzy(protoMob->Level)),
       NumberOfAttacks(protoMob->NumberOfAttacks),
       Gold(protoMob->Gold),
       Flags(protoMob->Flags),
@@ -98,12 +98,14 @@ Character::Character(std::shared_ptr<ProtoMobile> protoMob)
       PermStats(protoMob->Stats),
       pImpl(std::make_unique<Impl>())
 {
+    pImpl->TopLevel = NumberFuzzy(protoMob->Level);
+        
     Ability.Level.fill(0);
     Ability.Experience.fill(0);
 
     for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
     {
-        SetAbilityLevel(AbilityClass(ability), TopLevel);
+        SetAbilityLevel(AbilityClass(ability), TopLevel());
     }
 
     if(protoMob->ArmorClass != 0)
@@ -112,7 +114,7 @@ Character::Character(std::shared_ptr<ProtoMobile> protoMob)
     }
     else
     {
-        ArmorClass = 100 - TopLevel * 2.5;
+        ArmorClass = 100 - TopLevel() * 2.5;
     }
 
     if(protoMob->HitNoDice != 0)
@@ -121,7 +123,7 @@ Character::Character(std::shared_ptr<ProtoMobile> protoMob)
     }
     else
     {
-        HitPoints.Max = TopLevel * 10 + GetRandomNumberFromRange(TopLevel, TopLevel * 10);
+        HitPoints.Max = TopLevel() * 10 + GetRandomNumberFromRange(TopLevel(), TopLevel() * 10);
     }
 
     HitPoints.Current = HitPoints.Max;
@@ -136,6 +138,25 @@ Character::Character(std::shared_ptr<ProtoMobile> protoMob)
 Character::~Character()
 {
 
+}
+
+int Character::TopLevel() const
+{
+    if(!IsNpc()
+       && pImpl->TopLevel < LEVEL_IMMORTAL
+       && SysData.TopLevelFromAbility)
+    {
+        return umin(Ability.Level[(int)Ability.Main], 100);
+    }
+    else
+    {
+        return pImpl->TopLevel;
+    }
+}
+
+void Character::TopLevel(int newLevel)
+{
+    pImpl->TopLevel = newLevel;
 }
 
 void Character::Echo(const std::string &txt) const
@@ -259,11 +280,11 @@ void SetAbilityXP(std::shared_ptr<Character> ch, AbilityClass ability, long xp)
  */
 int GetXPWorth(std::shared_ptr<Character> ch)
 {
-    int xp = GetAbilityLevel(ch, AbilityClass::Combat) * ch->TopLevel * 50;
+    int xp = GetAbilityLevel(ch, AbilityClass::Combat) * ch->TopLevel() * 50;
     xp += ch->HitPoints.Max * 2;
     xp -= (ch->ArmorClass - 50) * 2;
     xp += (ch->BareNumDie * ch->BareSizeDie + GetDamageRoll(ch)) * 50;
-    xp += GetHitRoll(ch) * ch->TopLevel * 10;
+    xp += GetHitRoll(ch) * ch->TopLevel() * 10;
 
     if(IsAffectedBy(ch, Flag::Affect::Sanctuary))
         xp += xp * 1.5;
@@ -287,13 +308,13 @@ short Character::GetTrustLevel() const
     if(Trust != 0)
         return Trust;
 
-    if(IsNpc() && TopLevel >= LEVEL_AVATAR)
+    if(IsNpc() && TopLevel() >= LEVEL_AVATAR)
         return LEVEL_AVATAR;
 
-    if(TopLevel >= LEVEL_IMMORTAL && IsRetiredImmortal())
+    if(TopLevel() >= LEVEL_IMMORTAL && IsRetiredImmortal())
         return LEVEL_IMMORTAL;
 
-    return TopLevel;
+    return TopLevel();
 }
 
 short GetTrustLevel(std::shared_ptr<Character> ch)
@@ -484,7 +505,7 @@ short GetAbilityLevel(std::shared_ptr<Character> ch, AbilityClass ability)
 {
     assert(ability != AbilityClass::None);
     assert(ability != AbilityClass::Max);
-    return ch->Ability.Level[(int)ability];
+    return IsNpc(ch) ? ch->TopLevel() : ch->Ability.Level[(int)ability];
 }
 
 void Character::SetAbilityLevel(AbilityClass ability, int newlevel)
@@ -1171,7 +1192,7 @@ int GetCarryCapacityNumber(std::shared_ptr<Character> ch)
     if(GetEquipmentOnCharacter(ch, WEAR_SHIELD))
         ++penalty;
 
-    return urange(5, (ch->TopLevel + 15) / 5 + GetCurrentDexterity(ch) - 13 - penalty, 20);
+    return urange(5, (ch->TopLevel() + 15) / 5 + GetCurrentDexterity(ch) - 13 - penalty, 20);
 }
 
 /*
@@ -1606,23 +1627,23 @@ void AddReinforcements(std::shared_ptr<Character> ch)
             mob[mob_cnt] = CreateMobile(pMobIndex);
             CharacterToRoom(mob[mob_cnt], ch->InRoom);
             Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], ActTarget::Room);
-            mob[mob_cnt]->TopLevel = multiplier / 1.4 * GetAbilityLevel(ch, AbilityClass::Leadership) / 3;
+            mob[mob_cnt]->TopLevel(multiplier / 1.4 * GetAbilityLevel(ch, AbilityClass::Leadership) / 3);
 
             for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
             {
-                SetAbilityLevel(mob[mob_cnt], AbilityClass(ability), mob[mob_cnt]->TopLevel);
+                SetAbilityLevel(mob[mob_cnt], AbilityClass(ability), mob[mob_cnt]->TopLevel());
             }
 
-            mob[mob_cnt]->HitPoints.Current = mob[mob_cnt]->TopLevel * 15;
+            mob[mob_cnt]->HitPoints.Current = mob[mob_cnt]->TopLevel() * 15;
             mob[mob_cnt]->HitPoints.Max = mob[mob_cnt]->HitPoints.Current;
-            mob[mob_cnt]->ArmorClass = 100 - mob[mob_cnt]->TopLevel * 2.5;
-            mob[mob_cnt]->DamRoll = mob[mob_cnt]->TopLevel / 5;
-            mob[mob_cnt]->HitRoll = mob[mob_cnt]->TopLevel / 5;
+            mob[mob_cnt]->ArmorClass = 100 - mob[mob_cnt]->TopLevel() * 2.5;
+            mob[mob_cnt]->DamRoll = mob[mob_cnt]->TopLevel() / 5;
+            mob[mob_cnt]->HitRoll = mob[mob_cnt]->TopLevel() / 5;
             std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11);
 
             if(pObjIndex != nullptr)
             {
-                std::shared_ptr<Object> blaster = CreateObject(pObjIndex, mob[mob_cnt]->TopLevel);
+                std::shared_ptr<Object> blaster = CreateObject(pObjIndex, mob[mob_cnt]->TopLevel());
                 ObjectToCharacter(blaster, mob[mob_cnt]);
                 EquipCharacter(mob[mob_cnt], blaster, WEAR_WIELD);
             }
@@ -1659,24 +1680,24 @@ void AddReinforcements(std::shared_ptr<Character> ch)
 
         Act(AT_IMMORT, "$N has arrived.", ch, NULL, mob, ActTarget::Room);
         ch->Echo("Your guard has arrived.\r\n");
-        mob->TopLevel = multiplier * GetAbilityLevel(ch, AbilityClass::Leadership) / 2;
+        mob->TopLevel(multiplier * GetAbilityLevel(ch, AbilityClass::Leadership) / 2);
 
         for(int ability = 0; ability < (int)AbilityClass::Max; ability++)
         {
-            SetAbilityLevel(mob, AbilityClass(ability), mob->TopLevel);
+            SetAbilityLevel(mob, AbilityClass(ability), mob->TopLevel());
         }
 
-        mob->HitPoints.Current = mob->TopLevel * 10;
+        mob->HitPoints.Current = mob->TopLevel() * 10;
         mob->HitPoints.Max = mob->HitPoints.Current;
-        mob->ArmorClass = 100 - mob->TopLevel * 2.5;
-        mob->DamRoll = mob->TopLevel / 5;
-        mob->HitRoll = mob->TopLevel / 5;
+        mob->ArmorClass = 100 - mob->TopLevel() * 2.5;
+        mob->DamRoll = mob->TopLevel() / 5;
+        mob->HitRoll = mob->TopLevel() / 5;
 
         std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(OBJ_VNUM_BLASTECH_E11);
 
         if(pObjIndex != nullptr)
         {
-            std::shared_ptr<Object> blaster = CreateObject(pObjIndex, mob->TopLevel);
+            std::shared_ptr<Object> blaster = CreateObject(pObjIndex, mob->TopLevel());
             ObjectToCharacter(blaster, mob);
             EquipCharacter(mob, blaster, WEAR_WIELD);
         }

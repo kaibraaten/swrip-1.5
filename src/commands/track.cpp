@@ -31,7 +31,7 @@ void do_track(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    maxdist = 100 + ch->TopLevel * 30;
+    maxdist = 100 + ch->TopLevel() * 30;
 
     if(!IsNpc(ch))
         maxdist = (maxdist * GetSkillLevel(ch, gsn_track)) / 100;

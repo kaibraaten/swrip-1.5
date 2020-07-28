@@ -20,7 +20,7 @@ void do_fquit(std::shared_ptr<Character> ch, std::string arg1)
         return;
     }
 
-    if(victim->TopLevel != 1)
+    if(victim->TopLevel() != 1)
     {
         ch->Echo("They are not level one!\r\n");
         return;

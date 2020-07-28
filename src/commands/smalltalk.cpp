@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "act.hpp"
+#include "systemdata.hpp"
 
 void do_smalltalk(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -87,8 +88,9 @@ void do_smalltalk(std::shared_ptr<Character> ch, std::string argument)
     }
 
     SetWaitState(ch, SkillTable[gsn_smalltalk]->Beats);
-
-    if(percent - GetAbilityLevel(ch, AbilityClass::Diplomacy) + victim->TopLevel > GetSkillLevel(ch, gsn_smalltalk))
+    auto ability = SkillTable[gsn_smalltalk]->Class;
+    
+    if(percent - GetAbilityLevel(ch, ability) + victim->TopLevel() > GetSkillLevel(ch, gsn_smalltalk))
     {
         /*
          * Failure.
@@ -97,7 +99,18 @@ void do_smalltalk(std::shared_ptr<Character> ch, std::string argument)
         Act(AT_ACTION, "$n is really getting on your nerves with all this chatter!\r\n", ch, NULL, victim, ActTarget::Vict);
         Act(AT_ACTION, "$n asks $N about the weather but is ignored.\r\n", ch, NULL, victim, ActTarget::NotVict);
 
-        if(victim->Alignment < -500 && victim->TopLevel >= ch->TopLevel + 5)
+        int charLevel = 0;
+
+        if(SysData.TopLevelFromAbility)
+        {
+            charLevel = GetAbilityLevel(ch, SkillTable[gsn_smalltalk]->Class);
+        }
+        else
+        {
+            charLevel = ch->TopLevel();
+        }
+        
+        if(victim->Alignment < -500 && victim->TopLevel() >= charLevel + 5)
         {
             sprintf(buf, "SHUT UP %s!", ch->Name.c_str());
             do_yell(victim, buf);
@@ -125,8 +138,9 @@ void do_smalltalk(std::shared_ptr<Character> ch, std::string argument)
     planet->PopularSupport += 0.2;
     ch->Echo("Popular support for your organization increases slightly.\r\n");
 
-    GainXP(ch, AbilityClass::Diplomacy, victim->TopLevel * 10);
-    ch->Echo("You gain %d diplomacy experience.\r\n", victim->TopLevel * 10);
+    GainXP(ch, ability, victim->TopLevel() * 10);
+    ch->Echo("You gain %d %s experience.\r\n",
+             victim->TopLevel() * 10, AbilityName[(int)ability]);
 
     LearnFromSuccess(ch, gsn_smalltalk);
 

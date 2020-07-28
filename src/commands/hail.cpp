@@ -116,11 +116,11 @@ void do_hail(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(ch->TopLevel < 6)
+    if(ch->TopLevel() < 6)
         gold = 0;
 
     if(gold)
-        gold = 500 * ch->TopLevel / 50;
+        gold = 500 * ch->TopLevel() / 50;
 
     if(ch->Gold < gold)
     {

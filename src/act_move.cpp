@@ -459,11 +459,11 @@ ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit,
        && !IsNpc(ch)
        && ch->InRoom->Area != to_room->Area)
     {
-        if(ch->TopLevel < to_room->Area->LevelRanges.Hard.Low)
+        if(ch->TopLevel() < to_room->Area->LevelRanges.Hard.Low)
         {
             SetCharacterColor(AT_TELL, ch);
 
-            switch(to_room->Area->LevelRanges.Hard.Low - ch->TopLevel)
+            switch(to_room->Area->LevelRanges.Hard.Low - ch->TopLevel())
             {
             case 1:
                 ch->Echo("A voice in your mind says, 'You are nearly ready to go that way...'");
@@ -484,7 +484,7 @@ ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit,
 
             return rNONE;
         }
-        else if(ch->TopLevel > to_room->Area->LevelRanges.Hard.High)
+        else if(ch->TopLevel() > to_room->Area->LevelRanges.Hard.High)
         {
             SetCharacterColor(AT_TELL, ch);
             ch->Echo("A voice in your mind says, 'There is nothing more for you down that path.'");
@@ -921,12 +921,12 @@ ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit,
        && !IsNpc(ch)
        && ch->InRoom->Area != to_room->Area)
     {
-        if(ch->TopLevel < to_room->Area->LevelRanges.Soft.Low)
+        if(ch->TopLevel() < to_room->Area->LevelRanges.Soft.Low)
         {
             SetCharacterColor(AT_MAGIC, ch);
             ch->Echo("You feel uncomfortable being in this strange land...\r\n");
         }
-        else if(ch->TopLevel > to_room->Area->LevelRanges.Soft.High)
+        else if(ch->TopLevel() > to_room->Area->LevelRanges.Soft.High)
         {
             SetCharacterColor(AT_MAGIC, ch);
             ch->Echo("You feel there is not much to gain visiting this place...\r\n");

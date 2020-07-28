@@ -23,9 +23,9 @@ void do_sneak(std::shared_ptr<Character> ch, std::string argument)
 
     if(IsNpc(ch) || GetRandomPercent() < GetSkillLevel(ch, gsn_sneak))
     {
-        std::shared_ptr<Affect> af = std::make_shared<Affect>();
+        auto af = std::make_shared<Affect>();
         af->Type = gsn_sneak;
-        af->Duration = GetAbilityLevel(ch, AbilityClass::Smuggling) * DUR_CONV;
+        af->Duration = GetAbilityLevel(ch, SkillTable[gsn_sneak]->Class) * DUR_CONV;
         af->Location = APPLY_NONE;
         af->Modifier = 0;
         af->AffectedBy = CreateBitSet<Flag::MAX>({ Flag::Affect::Sneak });

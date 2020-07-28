@@ -193,10 +193,10 @@ void do_channels( std::shared_ptr<Character> ch, std::string arg )
             RemoveBit(ch->Deaf, CHANNEL_YELL);
             RemoveBit(ch->Deaf, CHANNEL_ARENA);
 
-            if (ch->TopLevel >= LEVEL_IMMORTAL)
+            if (ch->TopLevel() >= LEVEL_IMMORTAL)
                 RemoveBit(ch->Deaf, CHANNEL_AVTALK);
 
-            if (ch->TopLevel >= SysData.LevelOfLogChannel )
+            if (ch->TopLevel() >= SysData.LevelOfLogChannel )
                 RemoveBit(ch->Deaf, CHANNEL_COMM);
 
         }
@@ -211,10 +211,10 @@ void do_channels( std::shared_ptr<Character> ch, std::string arg )
             SetBit(ch->Deaf, CHANNEL_YELL);
             SetBit(ch->Deaf, CHANNEL_ARENA);
 
-            if (ch->TopLevel >= LEVEL_IMMORTAL)
+            if (ch->TopLevel() >= LEVEL_IMMORTAL)
                 SetBit(ch->Deaf, CHANNEL_AVTALK);
 
-            if (ch->TopLevel >= SysData.LevelOfLogChannel )
+            if (ch->TopLevel() >= SysData.LevelOfLogChannel )
                 SetBit(ch->Deaf, CHANNEL_COMM);
         }
         else if (fClear)

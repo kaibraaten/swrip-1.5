@@ -2385,7 +2385,7 @@ bool InSoftRange(std::shared_ptr<Character> ch, std::shared_ptr<Area> tarea)
         return true;
     else if(IsNpc(ch))
         return true;
-    else if(ch->TopLevel >= tarea->LevelRanges.Soft.Low || ch->TopLevel <= tarea->LevelRanges.Soft.High)
+    else if(ch->TopLevel() >= tarea->LevelRanges.Soft.Low || ch->TopLevel() <= tarea->LevelRanges.Soft.High)
         return true;
     else
         return false;
@@ -2397,7 +2397,7 @@ bool InHardRange(std::shared_ptr<Character> ch, std::shared_ptr<Area> tarea)
         return true;
     else if(IsNpc(ch))
         return true;
-    else if(ch->TopLevel >= tarea->LevelRanges.Hard.Low && ch->TopLevel <= tarea->LevelRanges.Hard.High)
+    else if(ch->TopLevel() >= tarea->LevelRanges.Hard.Low && ch->TopLevel() <= tarea->LevelRanges.Hard.High)
         return true;
     else
         return false;
@@ -2723,7 +2723,7 @@ void EconomizeMobileGold(std::shared_ptr<Character> mob)
     assert(mob->InRoom != nullptr);
 
     /* make sure it isn't way too much */
-    mob->Gold = umin(mob->Gold, mob->TopLevel * mob->TopLevel * 400);
+    mob->Gold = umin(mob->Gold, mob->TopLevel() * mob->TopLevel() * 400);
 
     auto tarea = mob->InRoom->Area;
     long gold = ((tarea->HighEconomy > 0) ? 1 : 0) * 1000000000 + tarea->LowEconomy;

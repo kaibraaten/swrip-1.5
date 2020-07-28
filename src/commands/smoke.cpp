@@ -59,7 +59,7 @@ void do_smoke(std::shared_ptr<Character> ch, std::string arg)
             SetWaitState(ch, skill->Beats);
 
             if(skill->SpellFunction)
-                CastSpellWithObject(sn, umin(skill->Level, ch->TopLevel),
+                CastSpellWithObject(sn, umin(skill->Level, ch->TopLevel()),
                                     ch, ch, NULL);
 
             if(IsObjectExtracted(pipe_obj))

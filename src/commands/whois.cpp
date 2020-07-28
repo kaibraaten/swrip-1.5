@@ -39,7 +39,7 @@ void do_whois(std::shared_ptr<Character> ch, std::string argument)
 
     if(victim->PCData
        && victim->PCData->WhoCloak
-       && ch->TopLevel < LEVEL_IMMORTAL)
+       && ch->TopLevel() < LEVEL_IMMORTAL)
     {
         ch->Echo("No such player online.\r\n");
         return;

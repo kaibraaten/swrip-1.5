@@ -34,8 +34,8 @@ void do_users(std::shared_ptr<Character> ch, std::string arg)
                          d->Char ? d->Char->Name.c_str() : "(none)",
                          d->Remote.HostIP.c_str());
 
-                if (ch->TopLevel >= LEVEL_GREATER
-                    && (!d->Char || d->Char->TopLevel <= LEVEL_GREATER))
+                if (ch->TopLevel() >= LEVEL_GREATER
+                    && (!d->Char || d->Char->TopLevel() <= LEVEL_GREATER))
                     ch->Echo(" (%s)", d->Remote.Hostname.c_str());
 
                 ch->Echo("\r\n");

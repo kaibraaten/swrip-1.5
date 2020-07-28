@@ -24,7 +24,7 @@ void do_newbieset(std::shared_ptr<Character> ch, std::string arg1)
         return;
     }
 
-    if((victim->TopLevel < 1) || (victim->TopLevel > 5))
+    if((victim->TopLevel() < 1) || (victim->TopLevel() > 5))
     {
         ch->Echo("Level of victim must be 1 to 5.\r\n");
         return;

@@ -12,7 +12,8 @@ void do_add_patrol(std::shared_ptr<Character> ch, std::string argument)
 {
     int the_chance, credits;
     std::shared_ptr<Clan> clan;
-
+    auto ability = SkillTable[gsn_addpatrol]->Class;
+    
     if(IsNpc(ch) || !ch->PCData)
         return;
 
@@ -31,7 +32,7 @@ void do_add_patrol(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(ch->Gold < GetAbilityLevel(ch, AbilityClass::Leadership) * 30)
+        if(ch->Gold < GetAbilityLevel(ch, ability) * 30)
         {
             ch->Echo("&RYou dont have enough credits.\r\n");
             return;
@@ -65,7 +66,7 @@ void do_add_patrol(std::shared_ptr<Character> ch, std::string argument)
 
     ch->Echo("&GYour guard is on the way.\r\n");
 
-    credits = GetAbilityLevel(ch, AbilityClass::Leadership) * 30;
+    credits = GetAbilityLevel(ch, ability) * 30;
     ch->Echo("It costs you %d credits.\r\n", credits);
     ch->Gold -= umin(credits, ch->Gold);
 

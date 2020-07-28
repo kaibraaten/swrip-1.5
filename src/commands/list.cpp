@@ -31,8 +31,8 @@ void do_list(std::shared_ptr<Character> ch, std::string argument)
                 }
 
                 ch->Echo("[%2d] %8d - %s\r\n",
-                         pet->TopLevel,
-                         10 * pet->TopLevel * pet->TopLevel,
+                         pet->TopLevel(),
+                         10 * pet->TopLevel() * pet->TopLevel(),
                          pet->ShortDescr.c_str());
             }
         }

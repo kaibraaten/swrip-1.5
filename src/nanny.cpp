@@ -183,7 +183,7 @@ static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
                            {
                                return (StringPrefix(b->Site, d->Remote.Hostname) == 0
                                        || StringSuffix(b->Site, d->Remote.Hostname) == 0)
-                                   && b->Level >= ch->TopLevel;
+                               && b->Level >= ch->TopLevel();
                            });
 
     if(pban != nullptr)
@@ -308,13 +308,13 @@ static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argum
                                ch->Name.c_str(),
                                d->Remote.Hostname.c_str());
 
-    if(ch->TopLevel < LEVEL_CREATOR)
+    if(ch->TopLevel() < LEVEL_CREATOR)
     {
         Log->LogStringPlus(logBuf, LogType::Comm, SysData.LevelOfLogChannel);
     }
     else
     {
-        Log->LogStringPlus(logBuf, LogType::Comm, ch->TopLevel);
+        Log->LogStringPlus(logBuf, LogType::Comm, ch->TopLevel());
     }
 
     d->WriteToBuffer("Press enter...\r\n", 0);
@@ -564,19 +564,19 @@ static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
         do_help(ch, "imotd");
     }
 
-    if(ch->TopLevel > 0)
+    if(ch->TopLevel() > 0)
     {
         ch->Echo("\r\n&WMessage of the Day&w\r\n");
         do_help(ch, "motd");
     }
 
-    if(ch->TopLevel >= 100)
+    if(ch->TopLevel() >= 100)
     {
         ch->Echo("\r\n&WAvatar Message of the Day&w\r\n");
         do_help(ch, "amotd");
     }
 
-    if(ch->TopLevel == 0)
+    if(ch->TopLevel() == 0)
     {
         do_help(ch, "nmotd");
     }
@@ -611,7 +611,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
     AddCharacter(ch);
     d->ConnectionState = ConState::Playing;
 
-    if(ch->TopLevel == 0)
+    if(ch->TopLevel() == 0)
     {
         int iLang = 0;
 
@@ -694,7 +694,7 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
             SetAbilityXP(ch, AbilityClass(ability), 0);
         }
 
-        ch->TopLevel = 1;
+        ch->TopLevel(1);
 
         ch->HitPoints.Current = ch->HitPoints.Max;
         ch->HitPoints.Current += RaceTable[ch->Race].Hit;
@@ -974,6 +974,6 @@ static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
         SetAbilityLevel(ch, AbilityClass(ability), 0);
     }
 
-    ch->TopLevel = 0;
+    ch->TopLevel(0);
     ch->Position = POS_STANDING;
 }

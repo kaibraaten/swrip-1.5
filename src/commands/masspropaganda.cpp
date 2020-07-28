@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "act.hpp"
+#include "systemdata.hpp"
 
 void do_mass_propaganda(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -96,7 +97,7 @@ void do_mass_propaganda(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_masspropaganda]->Beats);
 
-    if(percent - GetCurrentCharisma(ch) + victim->TopLevel > GetSkillLevel(ch, gsn_masspropaganda))
+    if(percent - GetCurrentCharisma(ch) + victim->TopLevel() > GetSkillLevel(ch, gsn_masspropaganda))
     {
         if(planet->GovernedBy != clan)
         {
@@ -108,19 +109,34 @@ void do_mass_propaganda(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+    auto ability = SkillTable[gsn_masspropaganda]->Class;
+    int charLevel = 0;
+
+    if(SysData.TopLevelFromAbility)
+    {
+        charLevel = umin(GetAbilityLevel(ch, ability), 100);
+    }
+    else
+    {
+        charLevel = ch->TopLevel();
+    }
+    
     if(planet->GovernedBy == clan)
     {
-        planet->PopularSupport += (.5 + ch->TopLevel / 50) * ((planet->Population) / 2);
+        planet->PopularSupport += (.5 + charLevel / 50) * ((planet->Population) / 2);
         ch->Echo("Popular support for your organization increases.\r\n");
     }
     else
     {
-        planet->PopularSupport -= (ch->TopLevel / 50) * ((planet->Population) / 2);
+        planet->PopularSupport -= (charLevel / 50) * ((planet->Population) / 2);
         ch->Echo("Popular support for the current government decreases.\r\n");
     }
 
-    GainXP(ch, AbilityClass::Diplomacy, victim->TopLevel * 100);
-    ch->Echo("You gain %d diplomacy experience.\r\n", victim->TopLevel * 100);
+    
+    GainXP(ch, ability, victim->TopLevel() * 100);
+    ch->Echo("You gain %d %s experience.\r\n",
+             victim->TopLevel() * 100,
+             AbilityName[(int)ability]);
 
     LearnFromSuccess(ch, gsn_masspropaganda);
 

@@ -82,8 +82,9 @@ void do_beg(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+    auto ability = SkillTable[gsn_beg]->Class;
     SetWaitState(ch, SkillTable[gsn_beg]->Beats);
-    percent = GetRandomPercent() + GetAbilityLevel(ch, AbilityClass::Smuggling) + victim->TopLevel;
+    percent = GetRandomPercent() + GetAbilityLevel(ch, ability) + victim->TopLevel();
 
     if(percent > GetSkillLevel(ch, gsn_beg))
     {
@@ -94,7 +95,7 @@ void do_beg(std::shared_ptr<Character> ch, std::string argument)
         Act(AT_ACTION, "$n is really getting on your nerves with all this begging!", ch, NULL, victim, ActTarget::Vict);
         Act(AT_ACTION, "$n begs $N for money.", ch, NULL, victim, ActTarget::NotVict);
 
-        if(victim->Alignment < 0 && victim->TopLevel >= ch->TopLevel + 5)
+        if(victim->Alignment < 0 && victim->TopLevel() >= GetAbilityLevel(ch, ability) + 5)
         {
             sprintf(buf, "%s is an annoying beggar and needs to be taught a lesson!",
                     ch->Name.c_str());
@@ -124,10 +125,10 @@ void do_beg(std::shared_ptr<Character> ch, std::string argument)
     victim->Gold -= amount;
     ch->Echo("%s gives you %d credits.\r\n", victim->ShortDescr.c_str(), amount);
     LearnFromSuccess(ch, gsn_beg);
-    xp = umin(amount * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Smuggling) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Smuggling))));
+    xp = umin(amount * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))));
     xp = umin(xp, ComputeXP(ch, victim));
-    GainXP(ch, AbilityClass::Smuggling, xp);
-    ch->Echo("&WYou gain %d smuggling experience points!\r\n", xp);
+    GainXP(ch, ability, xp);
+    ch->Echo("&WYou gain %d %s experience points!\r\n", xp, AbilityName[(int)ability]);
     Act(AT_ACTION, "$N gives $n some money.", ch, NULL, victim, ActTarget::NotVict);
     Act(AT_ACTION, "You give $n some money.", ch, NULL, victim, ActTarget::Vict);
 }

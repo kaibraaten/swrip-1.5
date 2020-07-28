@@ -41,7 +41,7 @@ void do_balzhur(std::shared_ptr<Character> ch, std::string arg)
     victim->Echo("You hear an ungodly sound in the distance that makes your blood run cold!\r\n");
     sprintf(buf, "Balzhur screams, 'You are MINE %s!!!'", victim->Name.c_str());
     EchoToAll(AT_IMMORT, buf, ECHOTAR_ALL);
-    victim->TopLevel = 1;
+    victim->TopLevel(1);
     victim->Trust = 0;
 
     for(int ability = 0; ability < (int)AbilityClass::Max; ability++)

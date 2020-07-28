@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "act.hpp"
+#include "systemdata.hpp"
 
 void do_consider(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -20,7 +21,21 @@ void do_consider(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    diff = (victim->TopLevel - ch->TopLevel) * 10;
+    int charLevel = 0;
+    int victimLevel = 0;
+
+    if(SysData.TopLevelFromAbility)
+    {
+        charLevel = GetAbilityLevel(ch, AbilityClass::Combat);
+        victimLevel = GetAbilityLevel(victim, AbilityClass::Combat);
+    }
+    else
+    {
+        charLevel = ch->TopLevel();
+        victimLevel = victim->TopLevel();
+    }
+    
+    diff = (victimLevel - charLevel) * 10;
     diff += (int)(victim->HitPoints.Max - ch->HitPoints.Max) / 10;
 
     if(diff <= -200)

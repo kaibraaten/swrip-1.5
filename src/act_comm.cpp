@@ -423,13 +423,13 @@ void TalkChannel(std::shared_ptr<Character> ch, const std::string &text, int cha
             if(channel == CHANNEL_IMMTALK && !IsImmortal(och))
                 continue;
             
-            if(channel == CHANNEL_103 && och->TopLevel < 103)
+            if(channel == CHANNEL_103 && och->TopLevel() < 103)
                 continue;
             
-            if(channel == CHANNEL_104 && och->TopLevel < 104)
+            if(channel == CHANNEL_104 && och->TopLevel() < 104)
                 continue;
             
-            if(channel == CHANNEL_105 && och->TopLevel < 105)
+            if(channel == CHANNEL_105 && och->TopLevel() < 105)
                 continue;
             
             if(channel == CHANNEL_WARTALK && !IsAuthed(och))
@@ -558,8 +558,8 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
             continue;
 
         if((!IsImmortal(vch) && channel != CHANNEL_ARENA)
-           || (vch->TopLevel < SysData.LevelOfBuildChannel && channel == CHANNEL_BUILD)
-           || (vch->TopLevel < SysData.LevelOfLogChannel
+           || (vch->TopLevel() < SysData.LevelOfBuildChannel && channel == CHANNEL_BUILD)
+           || (vch->TopLevel() < SysData.LevelOfLogChannel
                && (channel == CHANNEL_LOG || channel == CHANNEL_COMM)))
         {
             continue;
@@ -567,7 +567,7 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
 
         if(IsPlaying(d->Char)
            && !IsBitSet(och->Deaf, channel)
-           && vch->TopLevel >= level)
+           && vch->TopLevel() >= level)
         {
             SetCharacterColor(AT_LOG, vch);
             vch->Echo(buf);

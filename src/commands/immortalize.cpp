@@ -24,7 +24,7 @@ void do_immortalize(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    if(victim->TopLevel != LEVEL_AVATAR)
+    if(victim->TopLevel() != LEVEL_AVATAR)
     {
         ch->Echo("This player is not worthy of immortality yet.\r\n");
         return;
@@ -47,7 +47,7 @@ void do_immortalize(std::shared_ptr<Character> ch, std::string arg)
         ExtractObject(victim->Objects().front());
     }
 
-    victim->TopLevel = LEVEL_IMMORTAL;
+    victim->TopLevel(LEVEL_IMMORTAL);
     victim->Trust = 0;
 }
 

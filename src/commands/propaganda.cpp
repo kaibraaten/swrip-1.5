@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "act.hpp"
+#include "systemdata.hpp"
 
 void do_propaganda(std::shared_ptr<Character> ch, std::string arg1)
 {
@@ -113,7 +114,7 @@ void do_propaganda(std::shared_ptr<Character> ch, std::string arg1)
 
     SetWaitState(ch, SkillTable[gsn_propaganda]->Beats);
 
-    if(victim->TopLevel - GetCurrentCharisma(ch) > GetSkillLevel(ch, gsn_propaganda))
+    if(victim->TopLevel() - GetCurrentCharisma(ch) > GetSkillLevel(ch, gsn_propaganda))
     {
         if(IsClanned(ch) ? planet->GovernedBy != clan : true)
         {
@@ -125,19 +126,32 @@ void do_propaganda(std::shared_ptr<Character> ch, std::string arg1)
         return;
     }
 
+    int charLevel = 0;
+
+    if(SysData.TopLevelFromAbility)
+    {
+        charLevel = GetAbilityLevel(ch, SkillTable[gsn_propaganda]->Class);
+    }
+    else
+    {
+        charLevel = ch->TopLevel();
+    }
+    
     if(planet->GovernedBy == clan)
     {
-        planet->PopularSupport += .5 + ch->TopLevel / 50;
+        planet->PopularSupport += .5 + charLevel / 50;
         ch->Echo("Popular support for your organization increases.\r\n");
     }
     else
     {
-        planet->PopularSupport -= ch->TopLevel / 50;
+        planet->PopularSupport -= charLevel / 50;
         ch->Echo("Popular support for the current government decreases.\r\n");
     }
 
-    GainXP(ch, AbilityClass::Diplomacy, victim->TopLevel * 100);
-    ch->Echo("You gain %d diplomacy experience.\r\n", victim->TopLevel * 100);
+    auto ability = SkillTable[gsn_propaganda]->Class;
+    GainXP(ch, ability, victim->TopLevel() * 100);
+    ch->Echo("You gain %d %s experience.\r\n",
+             victim->TopLevel() * 100, AbilityName[(int)ability]);
 
     LearnFromSuccess(ch, gsn_propaganda);
 

@@ -40,17 +40,17 @@ void do_clone(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if (ch->Gold < ch->TopLevel * 200 && SysData.PermaDeath)
+    if (ch->Gold < ch->TopLevel() * 200 && SysData.PermaDeath)
     {
-        ch->Echo("You don't have enough credits... You need %d.\r\n", ch->TopLevel * 200);
+        ch->Echo("You don't have enough credits... You need %d.\r\n", ch->TopLevel() * 200);
         return;
     }
     else
     {
         if (SysData.PermaDeath)
         {
-            ch->Gold -= ch->TopLevel * 200;
-            ch->Echo("You pay %d credits for cloning.\r\n", ch->TopLevel * 200);
+            ch->Gold -= ch->TopLevel() * 200;
+            ch->Echo("You pay %d credits for cloning.\r\n", ch->TopLevel() * 200);
         }
 
         ch->Echo("You are escorted into a small room.\r\n\r\n");

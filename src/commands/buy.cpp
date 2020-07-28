@@ -52,19 +52,19 @@ void do_buy(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(ch->Gold < 10 * pet->TopLevel * pet->TopLevel)
+        if(ch->Gold < 10 * pet->TopLevel() * pet->TopLevel())
         {
             ch->Echo("You can't afford it.\r\n");
             return;
         }
 
-        if(ch->TopLevel < pet->TopLevel)
+        if(ch->TopLevel() < pet->TopLevel())
         {
             ch->Echo("You're not ready for this pet.\r\n");
             return;
         }
 
-        int maxgold = 10 * pet->TopLevel * pet->TopLevel;
+        int maxgold = 10 * pet->TopLevel() * pet->TopLevel();
         ch->Gold -= maxgold;
         BoostEconomy(ch->InRoom->Area, maxgold);
         pet = CreateMobile(pet->Prototype);
@@ -101,7 +101,7 @@ void do_buy(std::shared_ptr<Character> ch, std::string argument)
         if(keeper == nullptr)
             return;
 
-        int maxgold = keeper->TopLevel * 10;
+        int maxgold = keeper->TopLevel() * 10;
 
         if(IsNumber(arg))
         {

@@ -318,7 +318,11 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
 void InMemoryPlayerRepository::PreloadCharacter(lua_State *L, std::shared_ptr<Character> ch)
 {
     LuaGetfieldString(L, "Name", &ch->Name);
-    LuaGetfieldInt(L, "Level", &ch->TopLevel);
+    LuaGetfieldInt(L, "Level",
+                   [ch](const auto &level)
+                   {
+                       ch->TopLevel(level);
+                   });
     LuaGetfieldString(L, "Password", &ch->PCData->Password);
     ch->Flags = LuaLoadFlags(L, "Flags").to_ulong();
 }
@@ -701,7 +705,7 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
     {
         if (ch->PCData->WizInvis < 2)
         {
-            ch->PCData->WizInvis = ch->TopLevel;
+            ch->PCData->WizInvis = ch->TopLevel();
         }
 
         AssignAreaTo(ch);

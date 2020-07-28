@@ -916,7 +916,7 @@ void do_setship(std::shared_ptr<Character> ch, std::string argument)
 
     if (!StrCmp(arg2, "lasers"))
     {
-        if (ch->TopLevel == LEVEL_IMPLEMENTOR)
+        if (ch->TopLevel() == LEVEL_IMPLEMENTOR)
             ship->WeaponSystems.Laser.Count = urange(0, ToLong(argument), 20);
         else
             ship->WeaponSystems.Laser.Count = urange(0, ToLong(argument), 10);
@@ -928,7 +928,7 @@ void do_setship(std::shared_ptr<Character> ch, std::string argument)
 
     if (!StrCmp(arg2, "ions"))
     {
-        if (ch->TopLevel == LEVEL_IMPLEMENTOR)
+        if (ch->TopLevel() == LEVEL_IMPLEMENTOR)
             ship->WeaponSystems.IonCannon.Count = urange(0, ToLong(argument), 20);
         else
             ship->WeaponSystems.IonCannon.Count = urange(0, ToLong(argument), 10);
@@ -972,7 +972,7 @@ void do_setship(std::shared_ptr<Character> ch, std::string argument)
 
     if (!StrCmp(arg2, "speed"))
     {
-        if (ch->TopLevel == LEVEL_IMPLEMENTOR)
+        if (ch->TopLevel() == LEVEL_IMPLEMENTOR)
             ship->Thrusters.Speed.Max = urange(0, ToLong(argument), 255);
         else
             ship->Thrusters.Speed.Max = urange(0, ToLong(argument), 150);
@@ -1000,7 +1000,7 @@ void do_setship(std::shared_ptr<Character> ch, std::string argument)
 
     if (!StrCmp(arg2, "shield"))
     {
-        if (ch->TopLevel == LEVEL_IMPLEMENTOR)
+        if (ch->TopLevel() == LEVEL_IMPLEMENTOR)
             ship->Defenses.Shield.Max = urange(0, ToLong(argument), SHRT_MAX);
         else
             ship->Defenses.Shield.Max = urange(0, ToLong(argument), 1000);
@@ -1012,7 +1012,7 @@ void do_setship(std::shared_ptr<Character> ch, std::string argument)
 
     if (!StrCmp(arg2, "hull"))
     {
-        if (ch->TopLevel == LEVEL_IMPLEMENTOR)
+        if (ch->TopLevel() == LEVEL_IMPLEMENTOR)
         {
             ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange(1, ToLong(argument), SHRT_MAX);
         }
@@ -1060,7 +1060,7 @@ void do_setship(std::shared_ptr<Character> ch, std::string argument)
 
     if (!StrCmp(arg2, "chaff"))
     {
-        if (ch->TopLevel == LEVEL_IMPLEMENTOR)
+        if (ch->TopLevel() == LEVEL_IMPLEMENTOR)
         {
             ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange(0, ToLong(argument), 255);
         }

@@ -10,6 +10,8 @@
 
 void do_poison_weapon(std::shared_ptr<Character> ch, std::string arg)
 {
+    auto ability = SkillTable[gsn_poison_weapon]->Class;
+    
     if(!IsNpc(ch)
        && GetSkillLevel(ch, gsn_poison_weapon) <= 0)
     {
@@ -108,7 +110,7 @@ void do_poison_weapon(std::shared_ptr<Character> ch, std::string arg)
         SetCharacterColor(AT_RED, ch);
         ch->Echo("You failed and spill some on yourself. Ouch!\r\n");
         SetCharacterColor(AT_GREY, ch);
-        InflictDamage(ch, ch, GetAbilityLevel(ch, AbilityClass::Hunting), gsn_poison_weapon);
+        InflictDamage(ch, ch, GetAbilityLevel(ch, ability), gsn_poison_weapon);
         Act(AT_RED, "$n spills the poison all over!", ch, NULL, NULL, ActTarget::Room);
         ExtractObject(pobj);
         ExtractObject(wobj);
@@ -123,9 +125,9 @@ void do_poison_weapon(std::shared_ptr<Character> ch, std::string arg)
     Act(AT_GREEN, "You pour the poison over $p, which glistens wickedly!", ch, obj, NULL, ActTarget::Char);
     Act(AT_GREEN, "$n pours the poison over $p, which glistens wickedly!", ch, obj, NULL, ActTarget::Room);
     obj->Flags.set(Flag::Obj::Poisoned);
-    obj->Cost *= GetAbilityLevel(ch, AbilityClass::Hunting) / 2;
+    obj->Cost *= GetAbilityLevel(ch, ability) / 2;
     /* Set an object timer.  Don't want proliferation of poisoned weapons */
-    obj->Timer = 10 + GetAbilityLevel(ch, AbilityClass::Hunting);
+    obj->Timer = 10 + GetAbilityLevel(ch, ability);
 
     if(obj->Flags.test(Flag::Obj::Bless))
         obj->Timer *= 2;

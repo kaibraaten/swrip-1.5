@@ -35,7 +35,7 @@ void do_mpinvis(std::shared_ptr<Character> ch, std::string arg)
     }
 
     if(ch->MobInvis < 2)
-        ch->MobInvis = ch->TopLevel;
+        ch->MobInvis = ch->TopLevel();
 
     if(ch->Flags.test(Flag::Mob::MobInvis))
     {

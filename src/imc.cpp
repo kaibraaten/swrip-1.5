@@ -135,7 +135,7 @@ typedef enum
 #define IMCAFK(ch)            ( IsBitSet( IMCFLAG((ch)), IMC_AFK ) )
 
 #define CH_IMCDATA(ch)           ((ch)->PCData->imcchardata)
-#define CH_IMCLEVEL(ch)          ((ch)->TopLevel)
+#define CH_IMCLEVEL(ch)          ((ch)->TopLevel())
 #define CH_IMCNAME(ch)           ((ch)->Name)
 #define CH_IMCSEX(ch)            ((ch)->Sex)
 #define CH_IMCTITLE(ch)          ((ch)->PCData->Title)

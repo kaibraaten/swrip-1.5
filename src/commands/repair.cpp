@@ -23,7 +23,7 @@ void do_repair(std::shared_ptr<Character> ch, std::string argument)
     if(keeper == nullptr)
         return;
 
-    long maxgold = keeper->TopLevel * 10;
+    long maxgold = keeper->TopLevel() * 10;
     std::string fixstr;
     std::string fixstr2;
 

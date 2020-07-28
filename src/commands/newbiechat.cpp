@@ -1,14 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_newbiechat( std::shared_ptr<Character> ch, std::string argument )
+void do_newbiechat(std::shared_ptr<Character> ch, std::string argument)
 {
-  if ( ch->TopLevel > 5 )
+    if(ch->TopLevel() > 5)
     {
-      ch->Echo("Aren't you a little old for the newbie channel?\r\n");
-      return;
+        ch->Echo("Aren't you a little old for the newbie channel?\r\n");
+        return;
     }
 
-  TalkChannel( ch, argument, CHANNEL_NEWBIE, "newbiechat" );
+    TalkChannel(ch, argument, CHANNEL_NEWBIE, "newbiechat");
 }
-

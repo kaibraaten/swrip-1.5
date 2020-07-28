@@ -6,6 +6,8 @@
 #include "exit.hpp"
 #include "act.hpp"
 #include "timer.hpp"
+#include "systemdata.hpp"
+#include "skill.hpp"
 
 void do_shove(std::shared_ptr<Character> ch, std::string argument)
 {
@@ -262,9 +264,20 @@ void do_shove(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+    int charLevel = 0;
+
+    if(SysData.TopLevelFromAbility)
+    {
+        charLevel = GetAbilityLevel(ch, SkillTable[gsn_shove]->Class);
+    }
+    else
+    {
+        charLevel = ch->TopLevel();
+    }
+    
     shove_chance = 50;
     shove_chance += ((GetCurrentStrength(ch) - 15) * 3);
-    shove_chance += (ch->TopLevel - victim->TopLevel);
+    shove_chance += (charLevel - victim->TopLevel());
 
     if(shove_chance < GetRandomPercent())
     {

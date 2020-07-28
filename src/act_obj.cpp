@@ -218,7 +218,7 @@ void ObjectFallIfNoFloor(std::shared_ptr<Object> obj, bool through)
 
                 Act(AT_WHITE, "$p falls on $n!", vch, obj, NULL, ActTarget::Room);
                 Act(AT_WHITE, "$p falls on you!", vch, obj, NULL, ActTarget::Char);
-                InflictDamage(vch, vch, dam * vch->TopLevel, TYPE_UNDEFINED);
+                InflictDamage(vch, vch, dam * vch->TopLevel(), TYPE_UNDEFINED);
             }
             /* Damage objects */
             switch(obj->ItemType)

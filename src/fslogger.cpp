@@ -163,15 +163,15 @@ void FileSystemLogger::LogStringPlus(const std::string &str, LogType log_type, s
                 continue;
             }
 
-            if((vch->TopLevel < SysData.LevelOfLogChannel)
-               || (vch->TopLevel < level))
+            if((vch->TopLevel() < SysData.LevelOfLogChannel)
+               || (vch->TopLevel() < level))
             {
                 continue;
             }
 
             if(d->ConnectionState == ConState::Playing
                && !IsBitSet(och->Deaf, CHANNEL_LOG)
-               && vch->TopLevel >= level)
+               && vch->TopLevel() >= level)
             {
                 SetCharacterColor(AT_LOG, vch);
                 vch->Echo("Log: %s&R&w\r\n", str.c_str() + offset);

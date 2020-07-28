@@ -381,7 +381,7 @@ static void get_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, 
     int weight = 0;
 
     if(!obj->WearFlags.test(Flag::Wear::Take)
-       && (ch->TopLevel < SysData.LevelToGetObjectsWithoutTakeFlag))
+       && (ch->TopLevel() < SysData.LevelToGetObjectsWithoutTakeFlag))
     {
         ch->Echo("You can't take that.\r\n");
         return;

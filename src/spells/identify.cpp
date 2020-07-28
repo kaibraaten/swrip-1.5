@@ -162,19 +162,19 @@ ch_ret spell_identify(int sn, int level, std::shared_ptr<Character> ch, const Vo
         {
             ch->Echo("%s appears to be between level %d and %d.\r\n",
                      victim->Name.c_str(),
-                     victim->TopLevel - (victim->TopLevel % 5),
-                     victim->TopLevel - (victim->TopLevel % 5) + 5);
+                     victim->TopLevel() - (victim->TopLevel() % 5),
+                     victim->TopLevel() - (victim->TopLevel() % 5) + 5);
         }
         else
         {
             ch->Echo("%s appears to be level %d.\r\n",
-                     victim->Name.c_str(), victim->TopLevel);
+                     victim->Name.c_str(), victim->TopLevel());
         }
 
         ch->Echo("%s looks like %s.\r\n",
                  victim->Name.c_str(), AOrAn(GetCharacterRace(victim)).c_str());
 
-        if((Chance(ch, 50) && ch->TopLevel >= victim->TopLevel + 10)
+        if((Chance(ch, 50) && ch->TopLevel() >= victim->TopLevel() + 10)
            || IsImmortal(ch))
         {
             ch->Echo("%s appears to be affected by: ", victim->Name.c_str());

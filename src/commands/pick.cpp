@@ -43,7 +43,9 @@ void do_pick(std::shared_ptr<Character> ch, std::string arg)
     /* look for guards */
     for(auto gch : ch->InRoom->Characters())
     {
-        if(IsNpc(gch) && IsAwake(gch) && GetAbilityLevel(ch, AbilityClass::Smuggling) < gch->TopLevel)
+        if(IsNpc(gch)
+           && IsAwake(gch)
+           && GetAbilityLevel(ch, SkillTable[gsn_pick_lock]->Class) < gch->TopLevel())
         {
             Act(AT_PLAIN, "$N is standing too close to the lock.",
                 ch, NULL, gch, ActTarget::Char);

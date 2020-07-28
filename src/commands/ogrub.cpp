@@ -764,7 +764,7 @@ static bool go_read_names(const std::shared_ptr<Character> ch, std::shared_ptr<O
 
     if(po->CarriedBy)                  /* it's being carried by a char */
     {
-        if(GetTrustLevel(ch) < po->CarriedBy->TopLevel) return false;
+        if(GetTrustLevel(ch) < po->CarriedBy->TopLevel()) return false;
         if(nm_sw && IsNpc(po->CarriedBy)) return false;
         if(np_sw && !IsNpc(po->CarriedBy)) return false;
         r->s[CNAME] = po->CarriedBy->Name.c_str();
@@ -774,7 +774,7 @@ static bool go_read_names(const std::shared_ptr<Character> ch, std::shared_ptr<O
         pt = po;
         while(pt->InObject)
             pt = pt->InObject;
-        if(pt->CarriedBy && GetTrustLevel(ch) < pt->CarriedBy->TopLevel)
+        if(pt->CarriedBy && GetTrustLevel(ch) < pt->CarriedBy->TopLevel())
             return false;
         if(pt->CarriedBy && nm_sw && IsNpc(pt->CarriedBy))
             return false;

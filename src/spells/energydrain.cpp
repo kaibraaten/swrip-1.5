@@ -12,7 +12,7 @@ ch_ret spell_energy_drain(int sn, int level, std::shared_ptr<Character> ch, cons
     std::shared_ptr<Character> victim = vo.Ch;
     int dam = 0;
     int drain_chance = 0;
-    std::shared_ptr<Skill> skill = GetSkill(sn);
+    auto skill = GetSkill(sn);
 
     if(victim->Immune.test(Flag::Ris::Magic))
     {
@@ -25,7 +25,7 @@ ch_ret spell_energy_drain(int sn, int level, std::shared_ptr<Character> ch, cons
     ch->Alignment = urange(-1000, ch->Alignment, 1000);
     ApplySithPenalty(ch);
 
-    drain_chance = ModifySavingThrowBasedOnResistance(victim, victim->TopLevel, Flag::Ris::Drain);
+    drain_chance = ModifySavingThrowBasedOnResistance(victim, victim->TopLevel(), Flag::Ris::Drain);
 
     if(drain_chance == 1000 || SaveVsSpellStaff(drain_chance, victim))
     {
@@ -33,7 +33,7 @@ ch_ret spell_energy_drain(int sn, int level, std::shared_ptr<Character> ch, cons
         return rSPELL_FAILED;
     }
 
-    if(victim->TopLevel <= 2)
+    if(victim->TopLevel() <= 2)
         dam = ch->HitPoints.Current + 1;
     else
     {

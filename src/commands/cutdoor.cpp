@@ -7,6 +7,7 @@
 #include "object.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "systemdata.hpp"
 
 void do_cutdoor(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -127,12 +128,26 @@ void do_cutdoor(std::shared_ptr<Character> ch, std::string arg)
     {
         for(auto gch : ch->InRoom->Characters())
         {
+            int charLevel = 0;
+            int victimLevel = gch->TopLevel();
+
+            if(SysData.TopLevelFromAbility)
+            {
+                charLevel = umin(GetAbilityLevel(ch, SkillTable[gsn_cutdoor]->Class), 100);
+            }
+            else
+            {
+                charLevel = ch->TopLevel();
+            }
+            
             if(IsAwake(gch)
                && !IsFighting(gch)
                && (IsNpc(gch) && !IsAffectedBy(gch, Flag::Affect::Charm))
-               && (ch->TopLevel - gch->TopLevel <= 4)
+               && (charLevel - victimLevel <= 4)
                && NumberBits(2) == 0)
+            {
                 HitMultipleTimes(gch, ch, TYPE_UNDEFINED);
+            }
         }
     }
 }

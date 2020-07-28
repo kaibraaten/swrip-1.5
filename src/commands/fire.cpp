@@ -51,7 +51,7 @@ void do_fire(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    the_chance = IsNpc(ch) ? ch->TopLevel
+    the_chance = IsNpc(ch) ? ch->TopLevel()
         : (int)(ch->PermStats.Dex * 2 + GetSkillLevel(ch, gsn_spacecombat) / 3
                 + GetSkillLevel(ch, gsn_spacecombat2) / 3 + GetSkillLevel(ch, gsn_spacecombat3) / 3);
     origthe_chance = the_chance;

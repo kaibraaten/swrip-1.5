@@ -12,7 +12,8 @@ void do_elite_guard(std::shared_ptr<Character> ch, std::string arg)
 {
     int the_chance = 0, credits = 0;
     std::shared_ptr<Clan> clan;
-
+    auto ability = SkillTable[gsn_eliteguard]->Class;
+    
     if(IsNpc(ch))
         return;
 
@@ -31,7 +32,7 @@ void do_elite_guard(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        if(ch->Gold < GetAbilityLevel(ch, AbilityClass::Leadership) * 200)
+        if(ch->Gold < GetAbilityLevel(ch, ability) * 200)
         {
             ch->Echo("&RYou don't have enough credits.\r\n");
             return;
@@ -65,7 +66,7 @@ void do_elite_guard(std::shared_ptr<Character> ch, std::string arg)
 
     ch->Echo("&GYour guard is on the way.\r\n");
 
-    credits = GetAbilityLevel(ch, AbilityClass::Leadership) * 200;
+    credits = GetAbilityLevel(ch, ability) * 200;
     ch->Echo("It cost you %d credits.\r\n", credits);
     ch->Gold -= umin(credits, ch->Gold);
 

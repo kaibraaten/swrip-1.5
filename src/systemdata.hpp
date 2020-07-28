@@ -67,6 +67,7 @@ public:
     bool ExtendedRaceSelection = false;
     bool AllowMultiplaying = false;
     bool DropOnDefeat = true;
+    bool TopLevelFromAbility = false;
     unsigned char *MCCP_Buffer = nullptr;
 };
 

@@ -71,7 +71,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
         auto desc = std::make_shared<NullDescriptor>();
         ch = std::make_shared<Character>(std::make_unique<PCData>());
         MapCharacterAndDescriptor(ch, desc);
-        ch->TopLevel = 1;
+        ch->TopLevel(1);
         ch->InRoom = GetRoom(ROOM_VNUM_LIMBO);
     }
 
@@ -88,7 +88,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
 
         if (IsNumber(arg))
         {
-            if (ch->TopLevel >= LEVEL_IMMORTAL)
+            if (ch->TopLevel() >= LEVEL_IMMORTAL)
             {
                 switch (++nNumber)
                 {
@@ -167,7 +167,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
 
                     if ((pClan = GetClan(arg)) && (fClanMatch != true))
                     {
-                        if ((ch->TopLevel >= LEVEL_IMMORTAL)
+                        if ((ch->TopLevel() >= LEVEL_IMMORTAL)
                             || (IsClanned(ch)
                                 && !StrCmp(ch->PCData->ClanInfo.Clan->Name, pClan->Name)))
                         {
@@ -235,9 +235,9 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
 
         auto wch = d->Original ? d->Original : d->Char;
 
-        if (wch->TopLevel < iLevelLower
-            || wch->TopLevel > iLevelUpper
-            || (fImmortalOnly  && wch->TopLevel < LEVEL_IMMORTAL)
+        if (wch->TopLevel() < iLevelLower
+            || wch->TopLevel() > iLevelUpper
+            || (fImmortalOnly  && wch->TopLevel() < LEVEL_IMMORTAL)
             || (fRaceRestrict && !rgfRace[wch->Race])
             || (fClanMatch && (pClan != wch->PCData->ClanInfo.Clan))  /* SB */)
         {
@@ -248,7 +248,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
         /* added optional invisibility on the who list to players who want it.
            Darrik Vequir */
 
-        if ((wch->PCData->WhoCloak == true) && (ch->TopLevel < LEVEL_GREATER))
+        if ((wch->PCData->WhoCloak == true) && (ch->TopLevel() < LEVEL_GREATER))
         {
             continue;
         }
@@ -276,7 +276,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
 
         race = race_text;
 
-        if (wch->PermStats.Frc > 0 && (ch->TopLevel >= LEVEL_GREATER) && !IsImmortal(wch))
+        if (wch->PermStats.Frc > 0 && (ch->TopLevel() >= LEVEL_GREATER) && !IsImmortal(wch))
         {
             if (IsJedi(wch))
                 force_char = '*';
@@ -284,7 +284,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
                 force_char = '+';
         }
 
-        switch (wch->TopLevel)
+        switch (wch->TopLevel())
         {
         default:
             break;
@@ -310,7 +310,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
             break;
         }
 
-        if (!NiftyIsName(wch->Name, wch->PCData->Title) && ch->TopLevel > wch->TopLevel)
+        if (!NiftyIsName(wch->Name, wch->PCData->Title) && ch->TopLevel() > wch->TopLevel())
             extra_title = FormatString(" [%s]", wch->Name.c_str());
         else
             extra_title.erase();
@@ -359,7 +359,7 @@ void do_who(std::shared_ptr<Character> ch, std::string argument)
                 extra_title.c_str(), wch->PCData->WhoCloak ? "<WC>" : "",
                 clan_name.c_str(),
                 wch->Flags.test(Flag::Plr::Killer)
-                && (ch->TopLevel >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W");
+                && (ch->TopLevel() >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W");
 
 
         /*

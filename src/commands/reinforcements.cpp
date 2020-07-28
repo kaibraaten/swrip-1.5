@@ -13,7 +13,8 @@ void do_reinforcements(std::shared_ptr<Character> ch, std::string arg)
     int the_chance = 0;
     long credits = 0;
     std::shared_ptr<Clan> clan;
-
+    auto ability = SkillTable[gsn_reinforcements]->Class;
+    
     if(IsNpc(ch))
         return;
 
@@ -32,7 +33,7 @@ void do_reinforcements(std::shared_ptr<Character> ch, std::string arg)
             return;
         }
 
-        if(ch->Gold < GetAbilityLevel(ch, AbilityClass::Leadership) * 50)
+        if(ch->Gold < GetAbilityLevel(ch, ability) * 50)
         {
             ch->Echo("&RYou dont have enough credits to send for reinforcements.\r\n");
             return;
@@ -65,7 +66,7 @@ void do_reinforcements(std::shared_ptr<Character> ch, std::string arg)
     ch->SubState = CharacterSubState::None;
 
     ch->Echo("&GYour reinforcements are on the way.\r\n");
-    credits = GetAbilityLevel(ch, AbilityClass::Leadership) * 50;
+    credits = GetAbilityLevel(ch, ability) * 50;
     ch->Echo("It cost you %ld credits.\r\n", credits);
     ch->Gold -= umin(credits, ch->Gold);
 

@@ -15,6 +15,7 @@
 #include "protomob.hpp"
 #include "repos/skillrepository.hpp"
 #include "act.hpp"
+#include "systemdata.hpp"
 
 int TopSN = 0;
 int TopHerb = 0;
@@ -223,7 +224,18 @@ bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const
         }
 
         StartTimer(&time_used);
-        retcode = skill->SpellFunction(sn, ch->TopLevel, ch, vo);
+
+        if(!IsNpc(ch) && SysData.TopLevelFromAbility)
+        {
+            auto ability = SkillTable[sn]->Class;
+            auto charLevel = GetAbilityLevel(ch, ability);
+            retcode = skill->SpellFunction(sn, charLevel, ch, vo);
+        }
+        else
+        {
+            retcode = skill->SpellFunction(sn, ch->TopLevel(), ch, vo);
+        }
+        
         StopTimer(&time_used);
         UpdateNumberOfTimesUsed(&time_used, skill->UseRec);
 
@@ -281,7 +293,7 @@ bool CheckSkill(std::shared_ptr<Character> ch, const std::string &command, const
 
 int GetSkillLevel(std::shared_ptr<Character> ch, short gsn)
 {
-    return IsNpc(ch) ? ch->TopLevel : ch->PCData->Learned[gsn];
+    return IsNpc(ch) ? ch->TopLevel() : ch->PCData->Learned[gsn];
 }
 
 void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
@@ -363,7 +375,8 @@ void LearnFromSuccess(std::shared_ptr<Character> ch, int sn)
             if(!IsFighting(ch) && sn != gsn_hide && sn != gsn_sneak)
             {
                 SetCharacterColor(AT_WHITE, ch);
-                ch->Echo("You gain %d experience points from your success!\r\n", gain);
+                ch->Echo("You gain %d %s experience from your success!\r\n",
+                         gain, AbilityName[(int)SkillTable[sn]->Class]);
             }
         }
 

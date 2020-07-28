@@ -399,10 +399,10 @@ static void HandleSocketInput()
             CloseDescriptor(d, true);
             continue;
         }
-        else if((d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : false)
+        else if((d->Char ? d->Char->TopLevel() <= LEVEL_IMMORTAL : false)
                 && d->Idle > 7200 && !d->Char->Flags.test(Flag::Plr::Afk)) /* 30 minutes  */
         {
-            if((d->Char && d->Char->InRoom) ? d->Char->TopLevel <= LEVEL_IMMORTAL : false)
+            if((d->Char && d->Char->InRoom) ? d->Char->TopLevel() <= LEVEL_IMMORTAL : false)
             {
                 WriteToDescriptor(d.get(),
                                   "Idle 30 minutes. Activating AFK flag.\r\n", 0);
@@ -411,12 +411,12 @@ static void HandleSocketInput()
                 continue;
             }
         }
-        else if((d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
+        else if((d->Char ? d->Char->TopLevel() <= LEVEL_IMMORTAL : true)
                 && ((!d->Char && d->Idle > 360)              /* 2 mins */
                     || (d->ConnectionState != ConState::Playing && d->Idle > 1200) /* 5 mins */
                     || d->Idle > 28800))                             /* 2 hrs  */
         {
-            if(d->Char ? d->Char->TopLevel <= LEVEL_IMMORTAL : true)
+            if(d->Char ? d->Char->TopLevel() <= LEVEL_IMMORTAL : true)
             {
                 WriteToDescriptor(d.get(),
                                   "Idle timeout... disconnecting.\r\n", 0);
@@ -746,7 +746,7 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
     if(ch != nullptr)
     {
         auto logBuf = FormatString("Closing link to %s.", ch->Name.c_str());
-        Log->LogStringPlus(logBuf, LogType::Comm, umax(SysData.LevelOfLogChannel, ch->TopLevel));
+        Log->LogStringPlus(logBuf, LogType::Comm, umax(SysData.LevelOfLogChannel, ch->TopLevel()));
         PlayerCharacters->Remove(dclose->Char);
 
         if(IsPlaying(ch) || IsInEditor(ch))
@@ -943,7 +943,7 @@ void DisplayPrompt(Descriptor *d)
                 break;
 
             case 'a':
-                if(ch->TopLevel >= 10)
+                if(ch->TopLevel() >= 10)
                     the_stat = ch->Alignment;
                 else if(IsGood(ch))
                     strcpy(pbuf, "good");

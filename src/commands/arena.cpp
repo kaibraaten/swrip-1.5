@@ -20,14 +20,14 @@ void do_arena(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(ch->TopLevel < arena.MinLevel)
+    if(ch->TopLevel() < arena.MinLevel)
     {
         ch->Echo("Sorry but you must be at least level %d to enter this arena.\r\n",
                  arena.MinLevel);
         return;
     }
 
-    if(ch->TopLevel > arena.MaxLevel)
+    if(ch->TopLevel() > arena.MaxLevel)
     {
         ch->Echo("This arena is for lower level characters.\r\n");
         return;

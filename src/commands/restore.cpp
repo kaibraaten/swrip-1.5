@@ -51,7 +51,7 @@ void do_restore(std::shared_ptr<Character> ch, std::string arg)
                 vch->HitPoints.Current = vch->HitPoints.Max;
                 vch->Mana.Current = vch->Mana.Max;
                 vch->Fatigue.Current = vch->Fatigue.Max;
-                vch->PCData->Condition[COND_BLOODTHIRST] = (10 + vch->TopLevel);
+                vch->PCData->Condition[COND_BLOODTHIRST] = (10 + vch->TopLevel());
                 UpdatePosition(vch);
                 Act(AT_IMMORT, "$n has restored you.", ch, NULL, vch, ActTarget::Vict);
             }
@@ -80,7 +80,7 @@ void do_restore(std::shared_ptr<Character> ch, std::string arg)
         victim->Mana.Current = victim->Mana.Max;
 
         if(victim->PCData)
-            victim->PCData->Condition[COND_BLOODTHIRST] = (10 + victim->TopLevel);
+            victim->PCData->Condition[COND_BLOODTHIRST] = (10 + victim->TopLevel());
 
         UpdatePosition(victim);
 

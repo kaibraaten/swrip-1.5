@@ -48,7 +48,7 @@ void do_mpstat(std::shared_ptr<Character> ch, std::string arg)
              victim->Fatigue.Current, victim->Fatigue.Max);
 
     ch->Echo("Lv: %d.  Align: %d.  AC: %d.  Credits: %d.\r\n",
-             victim->TopLevel, victim->Alignment,
+             victim->TopLevel(), victim->Alignment,
              GetArmorClass(victim), victim->Gold);
 
     for(auto mprg : victim->Prototype->mprog.MudProgs())

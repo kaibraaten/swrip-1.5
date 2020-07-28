@@ -15,9 +15,9 @@ void do_oldscore(std::shared_ptr<Character> ch, std::string argument)
     ch->Echo("You are %s%s, level %d.\r\n",
              ch->Name.c_str(),
              IsNpc(ch) ? "" : ch->PCData->Title.c_str(),
-             ch->TopLevel);
+             ch->TopLevel());
 
-    if(GetTrustLevel(ch) != ch->TopLevel)
+    if(GetTrustLevel(ch) != ch->TopLevel())
         ch->Echo("You are trusted at level %d.\r\n",
                  GetTrustLevel(ch));
 
@@ -201,7 +201,7 @@ void do_oldscore(std::shared_ptr<Character> ch, std::string argument)
         break;
     }
 
-    if(ch->TopLevel >= 25)
+    if(ch->TopLevel() >= 25)
         ch->Echo("AC: %d.  ", GetArmorClass(ch));
 
     ch->Echo("You are ");
@@ -231,11 +231,11 @@ void do_oldscore(std::shared_ptr<Character> ch, std::string argument)
     else
         ch->Echo("invincible!\r\n");
 
-    if(ch->TopLevel >= 15)
+    if(ch->TopLevel() >= 15)
         ch->Echo("Hitroll: %d  Damroll: %d.\r\n",
                  GetHitRoll(ch), GetDamageRoll(ch));
 
-    if(ch->TopLevel >= 10)
+    if(ch->TopLevel() >= 10)
         ch->Echo("Alignment: %d.  ", ch->Alignment);
 
     ch->Echo("You are ");
@@ -271,7 +271,7 @@ void do_oldscore(std::shared_ptr<Character> ch, std::string argument)
             {
                 ch->Echo("Spell: '%s'", skill->Name.c_str());
 
-                if(ch->TopLevel >= 20)
+                if(ch->TopLevel() >= 20)
                 {
                     ch->Echo(" modifies %s by %d for %d rounds",
                              GetAffectLocationName(paf->Location),

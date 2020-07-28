@@ -94,7 +94,7 @@ void do_mstat(std::shared_ptr<Character> ch, std::string arg)
     }
 
     ch->Echo("Top Level: %d     Race: %d  Align: %d  AC: %d  Credits: %d\r\n",
-             victim->TopLevel, victim->Race, victim->Alignment,
+             victim->TopLevel(), victim->Race, victim->Alignment,
              GetArmorClass(victim), victim->Gold);
 
     if(victim->Race < MAX_NPC_RACE && victim->Race >= 0)

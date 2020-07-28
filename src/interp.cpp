@@ -352,7 +352,7 @@ void Interpret(std::shared_ptr<Character> ch, std::string argument)
             loglvl = LogType::All;
         }
 
-        Log->LogStringPlus(logBuf, loglvl, ch->TopLevel);
+        Log->LogStringPlus(logBuf, loglvl, ch->TopLevel());
     }
 
     if(ch->Desc && ch->Desc->SnoopBy)

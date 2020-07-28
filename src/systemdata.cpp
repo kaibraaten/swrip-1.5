@@ -41,6 +41,7 @@ static void PushSystemData(lua_State *L)
     LuaSetfieldBoolean(L, "PermaDeath", SysData.PermaDeath);
     LuaSetfieldBoolean(L, "AllowMultiplaying", SysData.AllowMultiplaying);
     LuaSetfieldBoolean(L, "DropOnDefeat", SysData.DropOnDefeat);
+    LuaSetfieldBoolean(L, "TopLevelFromAbility", SysData.TopLevelFromAbility);
     LuaPushFlags(L, SysData.SaveFlags, SaveFlags, "SaveFlags");
     lua_setglobal(L, "systemdata");
 }
@@ -74,6 +75,7 @@ static int L_SystemDataEntry(lua_State *L)
     LuaGetfieldBool(L, "ExtendedRaceSelection", &SysData.ExtendedRaceSelection);
     LuaGetfieldBool(L, "AllowMultiplaying", &SysData.AllowMultiplaying);
     LuaGetfieldBool(L, "DropOnDefeat", &SysData.DropOnDefeat);
+    LuaGetfieldBool(L, "TopLevelFromAbility", &SysData.TopLevelFromAbility);
     
     if (FieldExists(L, "SaveFlags"))
     {

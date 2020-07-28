@@ -340,9 +340,9 @@ static int GetMaxForceLevel(std::shared_ptr<Character> ch)
 
 void AdvanceLevel(std::shared_ptr<Character> ch, AbilityClass ability)
 {
-    if(ch->TopLevel < GetAbilityLevel(ch, ability) && ch->TopLevel < 100)
+    if(ch->TopLevel() < GetAbilityLevel(ch, ability) && ch->TopLevel() < 100)
     {
-        ch->TopLevel = urange(1, GetAbilityLevel(ch, ability), 100);
+        ch->TopLevel(urange(1, GetAbilityLevel(ch, ability), 100));
     }
 
     if(IsJedi(ch) && ability == AbilityClass::Force)
@@ -421,11 +421,11 @@ static int GainHitPoints(std::shared_ptr<Character> ch)
 
     if(IsNpc(ch))
     {
-        gain = ch->TopLevel;
+        gain = ch->TopLevel();
     }
     else
     {
-        gain = umin(5, ch->TopLevel);
+        gain = umin(5, ch->TopLevel());
 
         switch(ch->Position)
         {
@@ -483,7 +483,7 @@ static int GainMana(std::shared_ptr<Character> ch)
 
     if(IsNpc(ch))
     {
-        gain = ch->TopLevel;
+        gain = ch->TopLevel();
     }
     else
     {
@@ -538,11 +538,11 @@ static int GainMove(std::shared_ptr<Character> ch)
 
     if(IsNpc(ch))
     {
-        gain = ch->TopLevel;
+        gain = ch->TopLevel();
     }
     else
     {
-        gain = umax(15, 2 * ch->TopLevel);
+        gain = umax(15, 2 * ch->TopLevel());
 
         switch(ch->Position)
         {
@@ -749,7 +749,7 @@ void GainCondition(std::shared_ptr<Character> ch, int iCond, int value)
         switch(iCond)
         {
         case COND_FULL:
-            if(ch->TopLevel <= LEVEL_AVATAR)
+            if(ch->TopLevel() <= LEVEL_AVATAR)
             {
                 SetCharacterColor(AT_HUNGRY, ch);
                 ch->Echo("You are STARVING!\r\n");
@@ -759,7 +759,7 @@ void GainCondition(std::shared_ptr<Character> ch, int iCond, int value)
             break;
 
         case COND_THIRST:
-            if(ch->TopLevel <= LEVEL_AVATAR)
+            if(ch->TopLevel() <= LEVEL_AVATAR)
             {
                 SetCharacterColor(AT_THIRSTY, ch);
                 ch->Echo("You are DYING of THIRST!\r\n");
@@ -795,7 +795,7 @@ void GainCondition(std::shared_ptr<Character> ch, int iCond, int value)
         switch(iCond)
         {
         case COND_FULL:
-            if(ch->TopLevel <= LEVEL_AVATAR)
+            if(ch->TopLevel() <= LEVEL_AVATAR)
             {
                 SetCharacterColor(AT_HUNGRY, ch);
                 ch->Echo("You are really hungry.\r\n");
@@ -808,7 +808,7 @@ void GainCondition(std::shared_ptr<Character> ch, int iCond, int value)
             break;
 
         case COND_THIRST:
-            if(ch->TopLevel <= LEVEL_AVATAR)
+            if(ch->TopLevel() <= LEVEL_AVATAR)
             {
                 SetCharacterColor(AT_THIRSTY, ch);
                 ch->Echo("You are really thirsty.\r\n");
@@ -832,7 +832,7 @@ void GainCondition(std::shared_ptr<Character> ch, int iCond, int value)
         switch(iCond)
         {
         case COND_FULL:
-            if(ch->TopLevel <= LEVEL_AVATAR)
+            if(ch->TopLevel() <= LEVEL_AVATAR)
             {
                 SetCharacterColor(AT_HUNGRY, ch);
                 ch->Echo("You are hungry.\r\n");
@@ -841,7 +841,7 @@ void GainCondition(std::shared_ptr<Character> ch, int iCond, int value)
             break;
 
         case COND_THIRST:
-            if(ch->TopLevel <= LEVEL_AVATAR)
+            if(ch->TopLevel() <= LEVEL_AVATAR)
             {
                 SetCharacterColor(AT_THIRSTY, ch);
                 ch->Echo("You are thirsty.\r\n");
@@ -856,7 +856,7 @@ void GainCondition(std::shared_ptr<Character> ch, int iCond, int value)
         switch(iCond)
         {
         case COND_FULL:
-            if(ch->TopLevel <= LEVEL_AVATAR)
+            if(ch->TopLevel() <= LEVEL_AVATAR)
             {
                 SetCharacterColor(AT_HUNGRY, ch);
                 ch->Echo("You are a mite peckish.\r\n");
@@ -864,7 +864,7 @@ void GainCondition(std::shared_ptr<Character> ch, int iCond, int value)
             break;
 
         case COND_THIRST:
-            if(ch->TopLevel <= LEVEL_AVATAR)
+            if(ch->TopLevel() <= LEVEL_AVATAR)
             {
                 SetCharacterColor(AT_THIRSTY, ch);
                 ch->Echo("You could use a sip of something refreshing.\r\n");
@@ -918,23 +918,23 @@ static void UpdateHunt(std::shared_ptr<Character> ch)
 {
     assert(IsHunting(ch));
 
-    if(ch->TopLevel < 20)
+    if(ch->TopLevel() < 20)
     {
         SetWaitState(ch, 6 * PULSE_PER_SECOND);
     }
-    else if(ch->TopLevel < 40)
+    else if(ch->TopLevel() < 40)
     {
         SetWaitState(ch, 5 * PULSE_PER_SECOND);
     }
-    else if(ch->TopLevel < 60)
+    else if(ch->TopLevel() < 60)
     {
         SetWaitState(ch, 4 * PULSE_PER_SECOND);
     }
-    else if(ch->TopLevel < 80)
+    else if(ch->TopLevel() < 80)
     {
         SetWaitState(ch, 3 * PULSE_PER_SECOND);
     }
-    else if(ch->TopLevel < 100)
+    else if(ch->TopLevel() < 100)
     {
         SetWaitState(ch, 2 * PULSE_PER_SECOND);
     }
@@ -1656,7 +1656,7 @@ static void WorsenMentalStateForPlayerCharacters()
 {
     for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
-        if(ch->TopLevel < LEVEL_IMMORTAL && ch->PCData->Condition[COND_DRUNK] > 8)
+        if(ch->TopLevel() < LEVEL_IMMORTAL && ch->PCData->Condition[COND_DRUNK] > 8)
         {
             WorsenMentalState(ch, ch->PCData->Condition[COND_DRUNK] / 8);
         }
@@ -1746,7 +1746,7 @@ static void TickdownLightSources()
 {
     for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
-        if(ch->TopLevel < LEVEL_IMMORTAL)
+        if(ch->TopLevel() < LEVEL_IMMORTAL)
         {
             auto obj = GetEquipmentOnCharacter(ch, WEAR_LIGHT);
 
@@ -1784,7 +1784,7 @@ static void IncreaseHunger()
 {
     for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
-        if(ch->TopLevel < LEVEL_IMMORTAL)
+        if(ch->TopLevel() < LEVEL_IMMORTAL)
         {
             GainCondition(ch, COND_FULL, -1);
         }
@@ -1795,7 +1795,7 @@ static void IncreaseThirst()
 {
     for(std::shared_ptr<Character> ch : PlayerCharacters)
     {
-        if(ch->TopLevel < LEVEL_IMMORTAL
+        if(ch->TopLevel() < LEVEL_IMMORTAL
            && ch->InRoom != nullptr)
         {
             switch(ch->InRoom->Sector)
@@ -2557,7 +2557,7 @@ static bool PerformBackstab(std::shared_ptr<Character> ch, std::shared_ptr<Chara
         SetWaitState(ch, SkillTable[gsn_backstab]->Beats);
 
         if(!IsAwake(victim)
-           || GetRandomPercent() + 5 < ch->TopLevel)
+           || GetRandomPercent() + 5 < ch->TopLevel())
         {
             global_retcode = HitMultipleTimes(ch, victim, gsn_backstab);
             return true;
@@ -2610,7 +2610,7 @@ static void AggroUpdate()
             }
 
             if(CharacterDiedRecently(wch)
-               || wch->TopLevel >= LEVEL_IMMORTAL
+               || wch->TopLevel() >= LEVEL_IMMORTAL
                || !wch->InRoom
                || !CanSeeCharacter(ch, wch))
             {

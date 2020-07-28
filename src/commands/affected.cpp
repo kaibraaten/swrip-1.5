@@ -14,7 +14,7 @@ void do_affected(std::shared_ptr<Character> ch, std::string argument)
         SetCharacterColor(AT_SCORE, ch);
         ch->Echo("%s\r\n", FlagString(ch->AffectedBy, AffectFlags).c_str());
 
-        if(ch->TopLevel >= 20)
+        if(ch->TopLevel() >= 20)
         {
             ch->Echo("\r\n");
 
@@ -65,7 +65,7 @@ void do_affected(std::shared_ptr<Character> ch, std::string argument)
                 ch->Echo("Affected:  ");
                 SetCharacterColor(AT_SCORE, ch);
 
-                if(ch->TopLevel >= 20)
+                if(ch->TopLevel() >= 20)
                 {
                     if(paf->Duration < 25)
                     {

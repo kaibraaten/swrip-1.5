@@ -25,7 +25,7 @@ void do_score(std::shared_ptr<Character> ch, std::string argument)
     ch->Echo("\r\n&CScore for %s.\r\n", ch->PCData->Title.c_str());
     SetCharacterColor(AT_SCORE, ch);
 
-    if ( GetTrustLevel( ch ) != ch->TopLevel )
+    if ( GetTrustLevel( ch ) != ch->TopLevel() )
         ch->Echo("&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
 
     ch->Echo("&C----------------------------------------------------------------------------\r\n");
@@ -291,7 +291,7 @@ void do_score(std::shared_ptr<Character> ch, std::string argument)
             if ( sktmp == nullptr )
                 continue;
 
-            if (ch->TopLevel < 20)
+            if (ch->TopLevel() < 20)
             {
                 ch->Echo("&c[&C%-34.34s&c]    ", Capitalize(sktmp->Name).c_str());
 

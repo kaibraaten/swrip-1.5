@@ -40,7 +40,8 @@ void do_stun(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_stun]->Beats);
     fail = false;
-    stun_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, AbilityClass::Combat), Flag::Ris::Paralysis);
+    auto ability = SkillTable[gsn_stun]->Class;
+    stun_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, ability), Flag::Ris::Paralysis);
 
     if(stun_chance == 1000)
         fail = true;

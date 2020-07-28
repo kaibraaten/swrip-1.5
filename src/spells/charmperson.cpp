@@ -38,7 +38,7 @@ ch_ret spell_charm_person(int sn, int level, std::shared_ptr<Character> ch, cons
     if(IsAffectedBy(victim, Flag::Affect::Charm)
        || charm_chance == 1000
        || IsAffectedBy(ch, Flag::Affect::Charm)
-       || level < victim->TopLevel
+       || level < victim->TopLevel()
        || IsFollowingInCircle(victim, ch)
        || SaveVsSpellStaff(charm_chance, victim))
     {
@@ -63,7 +63,7 @@ ch_ret spell_charm_person(int sn, int level, std::shared_ptr<Character> ch, cons
         ch->Echo("Ok.\r\n");
 
     sprintf(buf, "%s has charmed %s.", ch->Name.c_str(), victim->Name.c_str());
-    Log->LogStringPlus(buf, LogType::Normal, ch->TopLevel);
+    Log->LogStringPlus(buf, LogType::Normal, ch->TopLevel());
 
     return rNONE;
 }

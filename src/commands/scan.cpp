@@ -6,6 +6,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "systemdata.hpp"
 
 void show_char_to_char(const std::list<std::shared_ptr<Character>> &list, std::shared_ptr<Character> ch);
 
@@ -50,10 +51,21 @@ void do_scan(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(ch->TopLevel < 50)
+    int charLevel = 0;
+
+    if(SysData.TopLevelFromAbility)
+    {
+        charLevel = GetAbilityLevel(ch, SkillTable[gsn_scan]->Class);
+    }
+    else
+    {
+        charLevel = ch->TopLevel();
+    }
+    
+    if(charLevel < 50)
         max_dist--;
 
-    if(ch->TopLevel < 20)
+    if(charLevel < 20)
         max_dist--;
 
     for(dist = 1; dist <= max_dist; )

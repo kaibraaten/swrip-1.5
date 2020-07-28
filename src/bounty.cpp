@@ -106,10 +106,12 @@ void ClaimBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victi
     {
         if(victim->Flags.test(Flag::Plr::Killer) && !IsNpc(ch))
         {
-            long xp = urange(1, ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Hunting) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Hunting))));
-            GainXP(ch, AbilityClass::Hunting, xp);
+            auto ability = AbilityClass::Hunting;
+            long xp = urange(1, ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))));
+            GainXP(ch, ability, xp);
             SetCharacterColor(AT_BLOOD, ch);
-            ch->Echo("You receive %ld hunting experience for executing a wanted killer.\r\n", xp);
+            ch->Echo("You receive %ld %s experience for executing a wanted killer.\r\n",
+                     xp, AbilityName[(int)ability]);
         }
         else if(!IsNpc(ch))
         {
@@ -120,13 +122,16 @@ void ClaimBounty(std::shared_ptr<Character> ch, std::shared_ptr<Character> victi
     else
     {
         ch->Gold += bounty->Reward;
-
-        long xp = urange(1, bounty->Reward + ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Hunting) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, AbilityClass::Hunting))));
-        GainXP(ch, AbilityClass::Hunting, xp);
+        auto ability = AbilityClass::Hunting;
+        long xp = urange(1, bounty->Reward + ComputeXP(ch, victim), (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))));
+        GainXP(ch, ability, xp);
 
         SetCharacterColor(AT_BLOOD, ch);
-        ch->Echo("You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n",
-                 xp, bounty->Reward, bounty->Target.c_str());
+        ch->Echo("You receive %ld %s experience and %ld credits,\r\n from the bounty on %s.\r\n",
+                 xp,
+                 AbilityName[(int)ability],
+                 bounty->Reward,
+                 bounty->Target.c_str());
 
         std::string buf = FormatString("The disintegration bounty on %s has been claimed!", victim->Name.c_str());
         EchoToAll(AT_RED, buf, 0);

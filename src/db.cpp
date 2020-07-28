@@ -104,6 +104,7 @@ short gsn_grenades;
 short gsn_first_aid;
 short gsn_snipe;
 short gsn_throw;
+short gsn_shove;
 
 short gsn_addpatrol;
 short gsn_eliteguard;
@@ -404,6 +405,7 @@ void BootDatabase(bool fCopyOver)
      * Assign gsn's for skills which need them.
      */
     Log->Boot("Assigning gsn's");
+    ASSIGN_GSN(gsn_shove, "shove");
     ASSIGN_GSN(gsn_cloak, "cloak");
     ASSIGN_GSN(gsn_cutdoor, "cutdoor");
     ASSIGN_GSN(gsn_bind, "bind");

@@ -32,20 +32,20 @@ void do_challenge(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(victim->TopLevel < 5)
+    if(victim->TopLevel() < 5)
     {
         ch->Echo("&WThat character is too young.\r\n");
         return;
     }
 
-    if((!(ch->TopLevel - 15 < victim->TopLevel))
-       || (!(ch->TopLevel + 15 > victim->TopLevel)))
+    if((!(ch->TopLevel() - 15 < victim->TopLevel()))
+       || (!(ch->TopLevel() + 15 > victim->TopLevel())))
     {
         ch->Echo("&WThat character is out of your level range.\r\n");
         return;
     }
 
-    if(ch->TopLevel < 5)
+    if(ch->TopLevel() < 5)
     {
         ch->Echo("You are too young to die.\r\n");
         return;

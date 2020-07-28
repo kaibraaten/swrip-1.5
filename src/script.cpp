@@ -1065,7 +1065,7 @@ void LuaPushCharacter(lua_State *L, std::shared_ptr<Character> ch,
     LuaSetfieldString(L, "Race", RaceTable[ch->Race].Name);
     LuaSetfieldNumber(L, "Speaks", ch->Speaks);
     LuaSetfieldNumber(L, "Speaking", ch->Speaking);
-    LuaSetfieldNumber(L, "Level", ch->TopLevel);
+    LuaSetfieldNumber(L, "Level", ch->TopLevel());
     LuaSetfieldNumber(L, "Trust", ch->Trust);
     LuaSetfieldNumber(L, "InRoom",
                       ch->InRoom == GetRoom(ROOM_VNUM_LIMBO) && ch->WasInRoom
@@ -1659,7 +1659,11 @@ void LuaLoadCharacter(lua_State *L, std::shared_ptr<Character> ch,
                       });
     LuaGetfieldInt(L, "Speaks", &ch->Speaks);
     LuaGetfieldInt(L, "Speaking", &ch->Speaking);
-    LuaGetfieldInt(L, "Level", &ch->TopLevel);
+    LuaGetfieldInt(L, "Level",
+                   [ch](const auto &lvl)
+                   {
+                       ch->TopLevel(lvl);
+                   });
     LuaGetfieldInt(L, "Trust", &ch->Trust);
     LuaGetfieldInt(L, "InRoom",
                    [&ch](const int vnum)

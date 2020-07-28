@@ -132,7 +132,8 @@ void do_detrap(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    percent = GetRandomPercent() - (GetAbilityLevel(ch, AbilityClass::Smuggling) / 20)
+    auto ability = SkillTable[gsn_detrap]->Class;
+    percent = GetRandomPercent() - (GetAbilityLevel(ch, ability) / 20)
         - (GetCurrentLuck(ch) - 16);
 
     SeparateOneObjectFromGroup(obj);

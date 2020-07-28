@@ -33,6 +33,7 @@
 #include "object.hpp"
 #include "act.hpp"
 #include "timer.hpp"
+#include "systemdata.hpp"
 
 int pAbort = 0;
 
@@ -558,7 +559,7 @@ int ParseDice(std::shared_ptr<Character> ch, int level, const std::string &expr)
  */
 bool SaveVsPoisonDeath(int level, std::shared_ptr<Character> victim)
 {
-    int save = 50 + (victim->TopLevel - level - victim->Saving.PoisonDeath) * 2;
+    int save = 50 + (victim->TopLevel() - level - victim->Saving.PoisonDeath) * 2;
 
     if(IsDroid(victim))
     {
@@ -579,7 +580,7 @@ bool SaveVsWands(int level, std::shared_ptr<Character> victim)
         return true;
     }
 
-    save = 50 + (victim->TopLevel - level - victim->Saving.Wand) * 2;
+    save = 50 + (victim->TopLevel() - level - victim->Saving.Wand) * 2;
     save = urange(5, save, 95);
 
     return Chance(victim, save);
@@ -587,7 +588,7 @@ bool SaveVsWands(int level, std::shared_ptr<Character> victim)
 
 bool SaveVsParalyze(int level, std::shared_ptr<Character> victim)
 {
-    int save = 50 + (victim->TopLevel - level - victim->Saving.ParaPetri) * 2;
+    int save = 50 + (victim->TopLevel() - level - victim->Saving.ParaPetri) * 2;
 
     if(IsDroid(victim))
     {
@@ -600,7 +601,7 @@ bool SaveVsParalyze(int level, std::shared_ptr<Character> victim)
 
 bool SaveVsBreath(int level, std::shared_ptr<Character> victim)
 {
-    int save = 50 + (victim->TopLevel - level - victim->Saving.Breath) * 2;
+    int save = 50 + (victim->TopLevel() - level - victim->Saving.Breath) * 2;
 
     save = urange(5, save, 95);
 
@@ -621,7 +622,7 @@ bool SaveVsSpellStaff(int level, std::shared_ptr<Character> victim)
         level -= 5;
     }
 
-    save = 50 + (victim->TopLevel - level - victim->Saving.SpellStaff) * 2;
+    save = 50 + (victim->TopLevel() - level - victim->Saving.SpellStaff) * 2;
 
     if(IsDroid(victim))
     {
@@ -755,7 +756,7 @@ ch_ret CastSpellWithObject(int sn, int level, std::shared_ptr<Character> ch, std
 {
     Vo vo;
     ch_ret retcode = rNONE;
-    int levdiff = ch->TopLevel - level;
+    int levdiff = 0;
     std::shared_ptr<Skill> skill = GetSkill(sn);
     struct timeval time_used;
 
@@ -770,6 +771,17 @@ ch_ret CastSpellWithObject(int sn, int level, std::shared_ptr<Character> ch, std
         return rERROR;
     }
 
+    if(!IsNpc(ch) && SysData.TopLevelFromAbility)
+    {
+        levdiff = GetAbilityLevel(ch, skill->Class);
+    }
+    else
+    {
+        levdiff = ch->TopLevel();
+    }
+
+    levdiff -= level;
+    
     if(ch->InRoom->Flags.test(Flag::Room::NoMagic))
     {
         SetCharacterColor(AT_MAGIC, ch);

@@ -70,7 +70,7 @@ bool spec_dark_jedi(std::shared_ptr<Character> ch)
             return false;
         }
 
-        if(ch->TopLevel >= min_level)
+        if(ch->TopLevel() >= min_level)
         {
             break;
         }
@@ -81,7 +81,7 @@ bool spec_dark_jedi(std::shared_ptr<Character> ch)
         return false;
     }
 
-    SkillTable[sn]->SpellFunction(sn, ch->TopLevel, ch, victim);
+    SkillTable[sn]->SpellFunction(sn, ch->TopLevel(), ch, victim);
 
     return true;
 }

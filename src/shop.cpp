@@ -196,12 +196,12 @@ int GetObjectCost(std::shared_ptr<Character> ch, std::shared_ptr<Character> keep
         return 0;
     }
 
-    bool richcustomer = ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->Bank) > ch->TopLevel * 1000;
+    bool richcustomer = ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->Bank) > ch->TopLevel() * 1000;
 
     if(fBuy)
     {
         int profitmod = 13 - GetCurrentCharisma(ch) + (richcustomer ? 15 : 0)
-            + ((urange(5, ch->TopLevel, LEVEL_AVATAR) - 20) / 2);
+            + ((urange(5, ch->TopLevel(), LEVEL_AVATAR) - 20) / 2);
         cost = (int)(obj->Cost
                      * umax((pShop->ProfitSell + 1), pShop->ProfitBuy + profitmod))
             / 100;

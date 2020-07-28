@@ -17,7 +17,7 @@ bool spec_thief(std::shared_ptr<Character> ch)
            || !CanSeeCharacter(ch, victim))        /* Thx Glop */
             continue;
 
-        if(IsAwake(victim) && GetRandomNumberFromRange(0, ch->TopLevel) == 0)
+        if(IsAwake(victim) && GetRandomNumberFromRange(0, ch->TopLevel()) == 0)
         {
             Act(AT_ACTION, "You discover $n's hands in your wallet!",
                 ch, NULL, victim, ActTarget::Vict);
@@ -28,7 +28,7 @@ bool spec_thief(std::shared_ptr<Character> ch)
         else
         {
             long maxgold = 1000;
-            long gold = victim->Gold * GetRandomNumberFromRange(1, urange(2, ch->TopLevel / 4, 10)) / 100;
+            long gold = victim->Gold * GetRandomNumberFromRange(1, urange(2, ch->TopLevel() / 4, 10)) / 100;
             ch->Gold += 9 * gold / 10;
             victim->Gold -= gold;
 

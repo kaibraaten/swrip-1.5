@@ -30,7 +30,7 @@ void do_retire(std::shared_ptr<Character> ch, std::string arg)
         return;
     }
 
-    if(victim->TopLevel < LEVEL_CREATOR)
+    if(victim->TopLevel() < LEVEL_CREATOR)
     {
         ch->Echo("The minimum level for retirement is savior.\r\n");
         return;

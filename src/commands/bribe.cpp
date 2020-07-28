@@ -113,7 +113,7 @@ void do_bribe(std::shared_ptr<Character> ch, std::string argument)
 
     SetWaitState(ch, SkillTable[gsn_bribe]->Beats);
 
-    if(percent - amount + victim->TopLevel > GetSkillLevel(ch, gsn_bribe))
+    if(percent - amount + victim->TopLevel() > GetSkillLevel(ch, gsn_bribe))
         return;
 
     if((clan = ch->PCData->ClanInfo.Clan->MainClan) == NULL)
@@ -123,14 +123,15 @@ void do_bribe(std::shared_ptr<Character> ch, std::string argument)
 
     if(clan == planet->GovernedBy)
     {
-        AbilityClass ability = AbilityClass::Diplomacy;
+        AbilityClass ability = SkillTable[gsn_bribe]->Class;
         planet->PopularSupport += urange(0.1, amount / 1000, 2);
         ch->Echo("Popular support for your organization increases slightly.\r\n");
 
         amount = umin(amount, (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))));
 
         GainXP(ch, ability, amount);
-        ch->Echo("You gain %d diplomacy experience.\r\n", amount);
+        ch->Echo("You gain %d %s experience.\r\n",
+                 amount, AbilityName[(int)ability]);
 
         LearnFromSuccess(ch, gsn_bribe);
     }

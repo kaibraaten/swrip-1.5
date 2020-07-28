@@ -70,7 +70,8 @@ void do_torture(std::shared_ptr<Character> ch, std::string arg)
     SetWaitState(ch, SkillTable[gsn_torture]->Beats);
 
     fail = false;
-    the_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, AbilityClass::Leadership) / 10, Flag::Ris::Paralysis);
+    auto ability = SkillTable[gsn_torture]->Class;
+    the_chance = ModifySavingThrowBasedOnResistance(victim, GetAbilityLevel(ch, ability) / 10, Flag::Ris::Paralysis);
 
     if(the_chance == 1000)
         fail = true;
@@ -96,7 +97,7 @@ void do_torture(std::shared_ptr<Character> ch, std::string arg)
         Act(AT_SKILL, "$n tortures $N, leaving $M screaming in agony!",
             ch, NULL, victim, ActTarget::NotVict);
 
-        dam = RollDice(GetAbilityLevel(ch, AbilityClass::Leadership) / 80, 4);
+        dam = RollDice(GetAbilityLevel(ch, ability) / 80, 4);
         dam = urange(0, victim->HitPoints.Max - 10, dam);
         victim->HitPoints.Current -= dam;
         victim->HitPoints.Max -= dam;

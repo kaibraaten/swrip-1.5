@@ -66,6 +66,9 @@ public:
     short GetTrustLevel() const;
     bool IsRetiredImmortal() const;
 
+    int TopLevel() const;
+    void TopLevel(int newLevel);
+    
     // Player AND mob
     std::function<bool(std::shared_ptr<Character>)> spec_fun;
     std::function<bool(std::shared_ptr<Character>)> spec_2;
@@ -78,7 +81,6 @@ public:
     std::string Description;
     SexType Sex = 0;
     int Race = 0;
-    int TopLevel = 0;
 
     struct
     {

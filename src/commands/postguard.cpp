@@ -12,7 +12,8 @@ void do_postguard(std::shared_ptr<Character> ch, std::string argument)
 {
     int the_chance = 0, credits = 0;
     std::shared_ptr<Clan> clan;
-
+    auto ability = SkillTable[gsn_postguard]->Class;
+    
     if(IsNpc(ch))
         return;
 
@@ -31,7 +32,7 @@ void do_postguard(std::shared_ptr<Character> ch, std::string argument)
             return;
         }
 
-        if(ch->Gold < GetAbilityLevel(ch, AbilityClass::Leadership) * 30)
+        if(ch->Gold < GetAbilityLevel(ch, ability) * 30)
         {
             ch->Echo("&RYou dont have enough credits.\r\n");
             return;
@@ -65,7 +66,7 @@ void do_postguard(std::shared_ptr<Character> ch, std::string argument)
 
     ch->Echo("&GYour guard is on the way.\r\n");
 
-    credits = GetAbilityLevel(ch, AbilityClass::Leadership) * 30;
+    credits = GetAbilityLevel(ch, ability) * 30;
     ch->Echo("It cost you %d credits.\r\n", credits);
     ch->Gold -= umin(credits, ch->Gold);
 

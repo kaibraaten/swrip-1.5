@@ -31,18 +31,18 @@ void do_toplevel(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(level > ch->TopLevel)
+    if(level > ch->TopLevel())
     {
         ch->Echo("Limited to your own top level.\r\n");
         return;
     }
 
-    if(ch->TopLevel < LEVEL_IMPLEMENTOR && victim->TopLevel >= ch->TopLevel)
+    if(ch->TopLevel() < LEVEL_IMPLEMENTOR && victim->TopLevel() >= ch->TopLevel())
     {
         ch->Echo("You can't do that.\r\n");
         return;
     }
 
-    victim->TopLevel = level;
+    victim->TopLevel(level);
     ch->Echo("Ok.\r\n");
 }

@@ -129,11 +129,11 @@ void do_steal(std::shared_ptr<Character> ch, std::string argument)
 
         if(IsNpc(victim))
         {
-            auto ability = AbilityClass::Smuggling;
+            auto ability = SkillTable[gsn_steal]->Class;
             xp = umin(amount * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))) / 35);
             xp = umin(xp, ComputeXP(ch, victim));
             GainXP(ch, ability, xp);
-            ch->Echo("&WYou gain %d smuggling experience!\r\n", xp);
+            ch->Echo("&WYou gain %d %s experience!\r\n", xp, AbilityName[(int)ability]);
         }
 
         return;
@@ -193,11 +193,11 @@ void do_steal(std::shared_ptr<Character> ch, std::string argument)
 
     if(IsNpc(victim))
     {
-        auto ability = AbilityClass::Smuggling;
+        auto ability = SkillTable[gsn_steal]->Class;
         xp = umin(obj->Cost * 10, (GetRequiredXpForLevel(GetAbilityLevel(ch, ability) + 1) - GetRequiredXpForLevel(GetAbilityLevel(ch, ability))) / 10);
         xp = umin(xp, ComputeXP(ch, victim));
         GainXP(ch, ability, xp);
-        ch->Echo("&WYou gain %d smuggling experience!\r\n", xp);
+        ch->Echo("&WYou gain %d %s experience!\r\n", xp, AbilityName[(int)ability]);
     }
 
     SeparateOneObjectFromGroup(obj);

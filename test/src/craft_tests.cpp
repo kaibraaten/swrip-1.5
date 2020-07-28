@@ -155,7 +155,7 @@ protected:
         _engineer = std::make_shared<Character>(std::make_unique<PCData>());
         MapCharacterAndDescriptor(_engineer, std::make_shared<NullDescriptor>());
         _engineer->PCData->Learned[gsn_mycraftingskill] = 100;
-
+        _engineer->Ability.Main = AbilityClass::Engineering;
         CharacterToRoom(_engineer, _location);
     }
 

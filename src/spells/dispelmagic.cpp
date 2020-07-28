@@ -29,7 +29,7 @@ ch_ret spell_dispel_magic(int sn, int level, std::shared_ptr<Character> ch, cons
         return rNONE;
     }
     else if(victim->AffectedBy.to_ulong() == RaceTable[victim->Race].Affected
-            || level < victim->TopLevel
+            || level < victim->TopLevel()
             || SaveVsSpellStaff(level, victim))
     {
         FailedCasting(skill, ch, victim, NULL);

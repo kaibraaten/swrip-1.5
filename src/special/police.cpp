@@ -35,7 +35,7 @@ bool spec_police(std::shared_ptr<Character> ch)
                 do_say(ch, buf);
                 victim->PCData->WantedOn.reset(vip);
 
-                if(ch->TopLevel >= victim->TopLevel)
+                if(ch->TopLevel() >= victim->TopLevel())
                 {
                     HitMultipleTimes(ch, victim, TYPE_UNDEFINED);
                 }

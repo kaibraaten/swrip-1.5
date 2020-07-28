@@ -7,7 +7,8 @@
 void do_bash(std::shared_ptr<Character> ch, std::string argument)
 {
     std::shared_ptr<Character> victim;
-
+    auto ability = SkillTable[gsn_bash]->Class;
+    
     if(IsNpc(ch) && IsAffectedBy(ch, Flag::Affect::Charm))
     {
         ch->Echo("You can't concentrate enough for that.\r\n");
@@ -46,7 +47,7 @@ void do_bash(std::shared_ptr<Character> ch, std::string argument)
         SetWaitState(ch, 2 * PULSE_VIOLENCE);
         SetWaitState(victim, 2 * PULSE_VIOLENCE);
         victim->Position = POS_SITTING;
-        global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, AbilityClass::Combat)), gsn_bash);
+        global_retcode = InflictDamage(ch, victim, GetRandomNumberFromRange(1, GetAbilityLevel(ch, ability)), gsn_bash);
     }
     else
     {

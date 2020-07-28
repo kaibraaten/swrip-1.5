@@ -1577,7 +1577,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
 
             CharacterToRoom(mob, pRoomIndex);
             EconomizeMobileGold(mob);
-            level = urange(0, mob->TopLevel - 2, LEVEL_AVATAR);
+            level = urange(0, mob->TopLevel() - 2, LEVEL_AVATAR);
 
             if(mob->VipFlags != 0 && pArea->Planet)
             {
