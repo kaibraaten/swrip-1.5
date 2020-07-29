@@ -426,7 +426,7 @@ void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room,
     LuaSetfieldString(L, "Name", room->Name);
     LuaSetfieldString(L, "Description", StripCarriageReturn(room->Description));
     LuaPushFlags(L, room->Flags, RoomFlags, "Flags");
-    LuaSetfieldString(L, "Sector", SectorNames[room->Sector][1]);
+    LuaSetfieldString(L, "Sector", SectorNames[(int)room->Sector][1]);
     LuaSetfieldNumber(L, "TeleDelay", room->TeleDelay);
     LuaSetfieldNumber(L, "TeleVnum", room->TeleVnum);
     LuaSetfieldNumber(L, "Tunnel", room->Tunnel);
@@ -1090,8 +1090,7 @@ void LuaAreaRepository::LoadRoomsCallback(lua_State *L, vnum_t vnum, std::shared
     }
 #endif
 
-    auto room = std::make_shared<Room>();
-    room->Vnum = vnum;
+    auto room = std::make_shared<Room>(vnum);
     room->Area = area;
     LoadRoom(L, room);
 
@@ -1158,13 +1157,13 @@ void LuaAreaRepository::LoadRoom(lua_State *L, std::shared_ptr<Room> room)
                       {
                           room->Sector = GetSectorType(sector);
 
-                          if(room->Sector <= SECT_INVALID
-                             || room->Sector >= SECT_MAX)
+                          if(room->Sector <= SectorType::Invalid
+                             || room->Sector >= SectorType::Max)
                           {
                               Log->Bug("%s: vnum %ld has bad sector_type %d.",
                                        __FUNCTION__, room->Vnum,
-                                       room->Sector);
-                              room->Sector = SECT_CITY;
+                                       (int)room->Sector);
+                              room->Sector = SectorType::Inside;
                           }
                       });
     LuaGetfieldInt(L, "TeleDelay", &room->TeleDelay);

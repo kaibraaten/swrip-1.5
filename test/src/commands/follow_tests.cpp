@@ -20,8 +20,8 @@ protected:
         _follower->Name = "Follower";
         _leader = std::make_shared<Character>(_protomob);
         _leader->Name = "Leader";
-        _fromRoom = std::make_shared<Room>();
-        _toRoom = std::make_shared<Room>();
+        _fromRoom = std::make_shared<Room>(1);
+        _toRoom = std::make_shared<Room>(2);
         _sourceExit = MakeExit(_fromRoom, _toRoom, DIR_NORTH);
         _destinationExit = MakeExit(_toRoom, _fromRoom, DIR_SOUTH);
 

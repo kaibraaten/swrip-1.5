@@ -1414,11 +1414,11 @@ static void WeatherUpdate()
             if(IS_OUTSIDE(ch)
                && IsAwake(ch)
                && ch->InRoom != nullptr
-               && ch->InRoom->Sector != SECT_UNDERWATER
-               && ch->InRoom->Sector != SECT_OCEANFLOOR
-               && ch->InRoom->Sector != SECT_UNDERGROUND)
+               && ch->InRoom->Sector != SectorType::Underwater
+               && ch->InRoom->Sector != SectorType::Oceanfloor
+               && ch->InRoom->Sector != SectorType::Underground)
             {
-                Act(AT_TEMP, buf, ch, 0, 0, ActTarget::Char);
+                Act(AT_TEMP, buf, ch, nullptr, nullptr, ActTarget::Char);
             }
         }
 
@@ -1517,9 +1517,9 @@ static void WeatherUpdate()
             if(IS_OUTSIDE(ch)
                && IsAwake(ch)
                && ch->InRoom != nullptr
-               && ch->InRoom->Sector != SECT_UNDERWATER
-               && ch->InRoom->Sector != SECT_OCEANFLOOR
-               && ch->InRoom->Sector != SECT_UNDERGROUND)
+               && ch->InRoom->Sector != SectorType::Underwater
+               && ch->InRoom->Sector != SectorType::Oceanfloor
+               && ch->InRoom->Sector != SectorType::Underground)
             {
                 Act(AT_TEMP, buf, ch, nullptr, nullptr, ActTarget::Char);
             }
@@ -1804,12 +1804,12 @@ static void IncreaseThirst()
                 GainCondition(ch, COND_THIRST, -1);
                 break;
 
-            case SECT_DESERT:
+            case SectorType::Desert:
                 GainCondition(ch, COND_THIRST, -2);
                 break;
 
-            case SECT_UNDERWATER:
-            case SECT_OCEANFLOOR:
+            case SectorType::Underwater:
+            case SectorType::Oceanfloor:
                 if(NumberBits(1) == 0)
                 {
                     GainCondition(ch, COND_THIRST, -1);
@@ -2230,7 +2230,7 @@ static void ObjectUpdate()
         if((obj->Timer <= 0 || --obj->Timer > 0))
         {
             if(obj->InRoom
-               && obj->InRoom->Sector == SECT_AIR
+               && obj->InRoom->Sector == SectorType::Air
                && obj->WearFlags.test(Flag::Wear::Take))
             {
                 const auto &xit = Find(obj->InRoom->Exits(),
@@ -2467,8 +2467,8 @@ static void CharacterCheck()
                 ch->Echo("No longer upon your mount, you fall to the ground...\r\nOUCH!\r\n");
             }
 
-            if((ch->InRoom && ch->InRoom->Sector == SECT_UNDERWATER)
-               || (ch->InRoom && ch->InRoom->Sector == SECT_OCEANFLOOR))
+            if((ch->InRoom && ch->InRoom->Sector == SectorType::Underwater)
+               || (ch->InRoom && ch->InRoom->Sector == SectorType::Oceanfloor))
             {
                 if(!IsAffectedBy(ch, Flag::Affect::AquaBreath))
                 {
@@ -2499,8 +2499,8 @@ static void CharacterCheck()
             }
 
             if(ch->InRoom
-               && ((ch->InRoom->Sector == SECT_WATER_NOSWIM)
-                   || (ch->InRoom->Sector == SECT_WATER_SWIM)))
+               && (ch->InRoom->Sector == SectorType::WaterNotSwimmable
+                   || ch->InRoom->Sector == SectorType::WaterSwimmable))
             {
                 if(!IsAffectedBy(ch, Flag::Affect::Flying)
                    && !IsAffectedBy(ch, Flag::Affect::Floating)

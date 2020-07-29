@@ -53,18 +53,18 @@ void do_dig(std::shared_ptr<Character> ch, std::string arg)
         {
             switch(ch->InRoom->Sector)
             {
-            case SECT_CITY:
-            case SECT_INSIDE:
+            case SectorType::City:
+            case SectorType::Inside:
                 ch->Echo("The floor is too hard to dig through.\r\n");
                 return;
 
-            case SECT_WATER_SWIM:
-            case SECT_WATER_NOSWIM:
-            case SECT_UNDERWATER:
+            case SectorType::WaterSwimmable:
+            case SectorType::WaterNotSwimmable:
+            case SectorType::Underwater:
                 ch->Echo("You cannot dig here.\r\n");
                 return;
 
-            case SECT_AIR:
+            case SectorType::Air:
                 ch->Echo("What? In the air?!\r\n");
                 return;
 

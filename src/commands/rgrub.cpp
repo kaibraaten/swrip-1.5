@@ -47,7 +47,7 @@ void do_rgrub(std::shared_ptr<Character> ch, std::string argument)
                 {
                     if (pRoom->Vnum >= lo && pRoom->Vnum <= hi)
                     {
-                        if (match == pRoom->Sector && hit_cou < RGRUB_ST_MAX_SIZE)
+                        if (match == (int)pRoom->Sector && hit_cou < RGRUB_ST_MAX_SIZE)
                             vnum[hit_cou++] = pRoom->Vnum;
                     }
                 }

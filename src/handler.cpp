@@ -1755,8 +1755,8 @@ bool IsRoomDark(std::shared_ptr<Room> pRoomIndex)
     if(pRoomIndex->Flags.test(Flag::Room::Dark))
         return true;
 
-    if(pRoomIndex->Sector == SECT_INSIDE
-       || pRoomIndex->Sector == SECT_CITY)
+    if(pRoomIndex->Sector == SectorType::Inside
+       || pRoomIndex->Sector == SectorType::City)
         return false;
 
     if(weather_info.Sunlight == SunPosition::Set
@@ -2127,7 +2127,7 @@ void CleanRoom(std::shared_ptr<Room> room)
     }
 
     room->Flags.reset();
-    room->Sector = SECT_CITY;
+    room->Sector = SectorType::City;
     room->Light = 0;
 }
 

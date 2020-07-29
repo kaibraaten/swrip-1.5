@@ -147,7 +147,7 @@ protected:
         _resultantObject = std::make_shared<ProtoObject>(1);
         _resultantObject->Name = "crafted thingy";
 
-        _location = std::make_shared<Room>();
+        _location = std::make_shared<Room>(INVALID_VNUM);
         _area = std::make_shared<Area>();
         _location->Area = _area;
         _location->Flags = CreateBitSet<Flag::MAX>({ Flag::Room::Factory, Flag::Room::Refinery });

@@ -25,6 +25,7 @@
 #include "skill.hpp"
 #include "race.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 static int GetInArray(const std::string &name, const char * const * array,
                       size_t sz, const std::function<int(const std::string&, const std::string&)> &compare_string)
@@ -1949,7 +1950,7 @@ const std::array<int, MAX_DIR + 1> TrapDoor =
     TRAP_NE, TRAP_NW, TRAP_SE, TRAP_SW
 };
 
-const char * const SectorNames[SECT_MAX][2] =
+const char * const SectorNames[(int)SectorType::Max][2] =
 {
     { "In A Room",      "inside"      }, /* SECT_INSIDE       */
     { "A City Street",  "city"      }, /* SECT_CITY         */
@@ -1969,20 +1970,20 @@ const char * const SectorNames[SECT_MAX][2] =
 
 SectorType GetSectorType(const std::string &type)
 {
-    SectorType sector = SECT_INSIDE;
-
-    for (sector = SECT_INSIDE; sector < SECT_MAX; sector = (SectorType)(sector + 1))
+    for (SectorType sector = SectorType::Inside;
+         sector < SectorType::Max;
+         sector = static_cast<SectorType>((int)sector + 1))
     {
-        if (!StrCmp(type, SectorNames[sector][1]))
+        if (!StrCmp(type, SectorNames[(int)sector][1]))
         {
             return sector;
         }
     }
 
-    return SECT_INVALID;
+    return SectorType::Invalid;
 }
 
-const std::array<const short, SECT_MAX> MovementLoss =
+const std::array<const short, (int)SectorType::Max> MovementLoss =
 {
     1,  /* SECT_INSIDE */
     2,  /* SECT_CITY */
@@ -2000,12 +2001,12 @@ const std::array<const short, SECT_MAX> MovementLoss =
     4   /* SECT_UNDERGROUND */
 };
 
-const int SentTotal[SECT_MAX] =
+const int SentTotal[(int)SectorType::Max] =
 {
     4, 24, 4, 4, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1
 };
 
-const char * const RoomSents[SECT_MAX][25] =
+const char * const RoomSents[(int)SectorType::Max][25] =
 {
     {
         "The smooth walls are made of durasteel.",
@@ -2098,7 +2099,6 @@ const char * const RoomSents[SECT_MAX][25] =
     {
         "You stand in a lengthy tunnel of rock."
     }
-
 };
 
 const std::array<const char * const, Flag::MAX> RoomFlags =

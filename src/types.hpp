@@ -108,7 +108,6 @@ using SpaceobjectType = int;
 using SexType = int;
 using ItemTypes = int;
 using DirectionType = int;
-using SectorType = int;
 using WearLocation = int;
 using PositionType = int;
 using SkillTargetType = int;

@@ -51,10 +51,30 @@ namespace Flag
     }
 }
 
+enum class SectorType
+{
+    Invalid = -1,
+    Inside,
+    City,
+    Field,
+    Forest,
+    Hills,
+    Mountain,
+    WaterSwimmable,
+    WaterNotSwimmable,
+    Underwater,
+    Air,
+    Desert,
+    Dunno,
+    Oceanfloor,
+    Underground,
+    Max
+};
+
 class Room
 {
 public:
-    Room();
+    Room(vnum_t vnum);
     virtual ~Room();
 
     void Add(std::shared_ptr<Ship> ship);
@@ -84,12 +104,12 @@ public:
     std::shared_ptr<Room> Next;
     std::shared_ptr<Room> NextSort;
     std::shared_ptr<class Area> Area;
-    std::string Name;
+    std::string Name = "Floating in a void";
     std::string Description;
     vnum_t Vnum = INVALID_VNUM;
     std::bitset<Flag::MAX> Flags;
     int Light = 0;
-    SectorType Sector = 0;
+    SectorType Sector = SectorType::Inside;
     vnum_t TeleVnum = INVALID_VNUM;
     int TeleDelay = 0;
     int Tunnel = 0;              /* max people that will fit */
@@ -100,5 +120,12 @@ private:
     struct Impl;
     std::unique_ptr<Impl> pImpl;
 };
+
+extern const char * const SectorNames[(int)SectorType::Max][2];
+extern const std::array<const short, (int)SectorType::Max> MovementLoss;
+extern const int SentTotal[(int)SectorType::Max];
+extern const char * const RoomSents[(int)SectorType::Max][25];
+
+SectorType GetSectorType(const std::string &type);
 
 #endif

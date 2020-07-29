@@ -124,7 +124,7 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
                     room->Flags.reset();
                     room->Flags.set(Flag::Room::PlayerHome);
                     room->Flags.set(Flag::Room::Indoors);
-                    room->Sector = SECT_INSIDE;
+                    room->Sector = SectorType::Inside;
                     room->Name = "An Empty Home";
                     room->Description = "This is a small apartment with the bare essentials required to live here.\r\n"
                         "Apart from the cramped bathroom, the rest of the apartment is a single room.\r\n";

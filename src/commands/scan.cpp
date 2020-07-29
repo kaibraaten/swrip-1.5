@@ -111,31 +111,31 @@ void do_scan(std::shared_ptr<Character> ch, std::string argument)
             dist++;
             break;
 
-        case SECT_AIR:
+        case SectorType::Air:
             if(GetRandomPercent() < 80) dist++;
             break;
 
-        case SECT_INSIDE:
-        case SECT_FIELD:
-        case SECT_UNDERGROUND:
+        case SectorType::Inside:
+        case SectorType::Field:
+        case SectorType::Underground:
             dist++;
             break;
 
-        case SECT_FOREST:
-        case SECT_CITY:
-        case SECT_DESERT:
-        case SECT_HILLS:
+        case SectorType::Forest:
+        case SectorType::City:
+        case SectorType::Desert:
+        case SectorType::Hills:
             dist += 2;
             break;
 
-        case SECT_WATER_SWIM:
-        case SECT_WATER_NOSWIM:
+        case SectorType::WaterSwimmable:
+        case SectorType::WaterNotSwimmable:
             dist += 3;
             break;
 
-        case SECT_MOUNTAIN:
-        case SECT_UNDERWATER:
-        case SECT_OCEANFLOOR:
+        case SectorType::Mountain:
+        case SectorType::Underwater:
+        case SectorType::Oceanfloor:
             dist += 4;
             break;
         }

@@ -476,26 +476,21 @@ static void show_char_to_char_0(std::shared_ptr<Character> victim, std::shared_p
     case POS_STANDING:
         if(IsImmortal(victim))
             strcat(buf, " is here before you.");
+        else if((victim->InRoom->Sector == SectorType::Underwater)
+                && !IsAffectedBy(victim, Flag::Affect::AquaBreath) && !IsNpc(victim))
+            strcat(buf, " is drowning here.");
+        else if(victim->InRoom->Sector == SectorType::Underwater)
+            strcat(buf, " is here in the water.");
+        else if((victim->InRoom->Sector == SectorType::Oceanfloor)
+                && !IsAffectedBy(victim, Flag::Affect::AquaBreath) && !IsNpc(victim))
+            strcat(buf, " is drowning here.");
+        else if(victim->InRoom->Sector == SectorType::Oceanfloor)
+            strcat(buf, " is standing here in the water.");
+        else if(IsAffectedBy(victim, Flag::Affect::Floating)
+                || IsAffectedBy(victim, Flag::Affect::Flying))
+            strcat(buf, " is hovering here.");
         else
-            if((victim->InRoom->Sector == SECT_UNDERWATER)
-               && !IsAffectedBy(victim, Flag::Affect::AquaBreath) && !IsNpc(victim))
-                strcat(buf, " is drowning here.");
-            else
-                if(victim->InRoom->Sector == SECT_UNDERWATER)
-                    strcat(buf, " is here in the water.");
-                else
-                    if((victim->InRoom->Sector == SECT_OCEANFLOOR)
-                       && !IsAffectedBy(victim, Flag::Affect::AquaBreath) && !IsNpc(victim))
-                        strcat(buf, " is drowning here.");
-                    else
-                        if(victim->InRoom->Sector == SECT_OCEANFLOOR)
-                            strcat(buf, " is standing here in the water.");
-                        else
-                            if(IsAffectedBy(victim, Flag::Affect::Floating)
-                               || IsAffectedBy(victim, Flag::Affect::Flying))
-                                strcat(buf, " is hovering here.");
-                            else
-                                strcat(buf, " is standing here.");
+            strcat(buf, " is standing here.");
         break;
 
     case POS_SHOVE:    strcat(buf, " is being shoved around.");       break;
@@ -997,7 +992,7 @@ static void show_no_arg(std::shared_ptr<Character> ch, bool is_auto)
             ch->Echo("[%s]", FlagString(ch->InRoom->Flags, RoomFlags).c_str());
 
             SetCharacterColor(AT_DGREEN, ch);
-            ch->Echo("(%s)", SectorNames[ch->InRoom->Sector][1]);
+            ch->Echo("(%s)", SectorNames[(int)ch->InRoom->Sector][1]);
         }
     }
 

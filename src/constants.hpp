@@ -1601,31 +1601,6 @@ enum
 };
 
 /*
- * Sector types.
- * Used in #ROOMS.
- */
-/* SectorType */
-enum
-{
-    SECT_INVALID = -1,
-    SECT_INSIDE = 0,
-    SECT_CITY,
-    SECT_FIELD,
-    SECT_FOREST,
-    SECT_HILLS,
-    SECT_MOUNTAIN,
-    SECT_WATER_SWIM,
-    SECT_WATER_NOSWIM,
-    SECT_UNDERWATER,
-    SECT_AIR,
-    SECT_DESERT,
-    SECT_DUNNO,
-    SECT_OCEANFLOOR,
-    SECT_UNDERGROUND,
-    SECT_MAX
-};
-
-/*
  * Equpiment wear locations.
  * Used in #RESETS.
  */

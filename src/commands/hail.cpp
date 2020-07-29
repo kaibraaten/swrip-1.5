@@ -104,7 +104,7 @@ void do_hail(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if(ch->InRoom->Sector != SECT_CITY)
+    if(ch->InRoom->Sector != SectorType::City)
     {
         ch->Echo("There does not seem to be any speeders out here.\r\n");
         return;

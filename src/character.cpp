@@ -43,6 +43,7 @@
 #include "home.hpp"
 #include "act.hpp"
 #include "timer.hpp"
+#include "room.hpp"
 
 struct Character::Impl
 {
@@ -1766,7 +1767,7 @@ bool IS_OUTSIDE(std::shared_ptr<Character> ch)
 {
     return !ch->InRoom->Flags.test(Flag::Room::Indoors)
         && !ch->InRoom->Flags.test(Flag::Room::Spacecraft)
-        && ch->InRoom->Sector != SECT_UNDERGROUND;
+        && ch->InRoom->Sector != SectorType::Underground;
 }
 
 bool IsInEditor(std::shared_ptr<Character> ch)

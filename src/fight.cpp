@@ -633,7 +633,7 @@ ch_ret HitMultipleTimes(std::shared_ptr<Character> ch, std::shared_ptr<Character
         if(!IsAffectedBy(ch, Flag::Affect::Flying)
            && !IsAffectedBy(ch, Flag::Affect::Floating))
         {
-            move = GetCarryEncumbrance(ch, MovementLoss[umin(SECT_MAX - 1, ch->InRoom->Sector)]);
+            move = GetCarryEncumbrance(ch, MovementLoss[umin((int)SectorType::Max - 1, (int)ch->InRoom->Sector)]);
         }
         else
         {

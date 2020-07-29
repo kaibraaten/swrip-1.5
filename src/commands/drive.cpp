@@ -65,7 +65,7 @@ void do_drive(std::shared_ptr<Character> ch, std::string argument)
         }
 
         if(target->InRoom->Flags.test(Flag::Room::Indoors)
-           || target->InRoom->Sector == SECT_INSIDE)
+           || target->InRoom->Sector == SectorType::Inside)
         {
             ch->Echo("You can't drive indoors!\r\n");
             return;
@@ -107,7 +107,7 @@ void do_drive(std::shared_ptr<Character> ch, std::string argument)
         }
 
         if(target->InRoom->Flags.test(Flag::Room::Indoors)
-           || target->InRoom->Sector == SECT_INSIDE)
+           || target->InRoom->Sector == SectorType::Inside)
         {
             ch->Echo("You can't drive indoors!\r\n");
             return;

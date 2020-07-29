@@ -16,8 +16,9 @@ struct Room::Impl
     std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
 };
 
-Room::Room()
-    : pImpl(std::make_unique<Impl>())
+Room::Room(vnum_t vnum)
+    : Vnum(vnum),
+      pImpl(std::make_unique<Impl>())
 {
 
 }

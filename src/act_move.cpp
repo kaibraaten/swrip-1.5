@@ -45,8 +45,8 @@ static void DecorateVirtualRoom(std::shared_ptr<Room> room)
     int previous[8];
     const SectorType sector = room->Sector;
 
-    room->Name = SectorNames[sector][0];
-    const size_t nRand = GetRandomNumberFromRange(1, umin(8, SentTotal[sector]));
+    room->Name = SectorNames[(int)sector][0];
+    const size_t nRand = GetRandomNumberFromRange(1, umin(8, SentTotal[(int)sector]));
 
     for(size_t iRand = 0; iRand < nRand; iRand++)
     {
@@ -58,7 +58,7 @@ static void DecorateVirtualRoom(std::shared_ptr<Room> room)
         while(previous[iRand] == -1)
         {
             int z = 0;
-            int x = GetRandomNumberFromRange(0, SentTotal[sector] - 1);
+            int x = GetRandomNumberFromRange(0, SentTotal[(int)sector] - 1);
 
             for(z = 0; z < iRand; z++)
                 if(previous[z] == x)
@@ -70,7 +70,7 @@ static void DecorateVirtualRoom(std::shared_ptr<Room> room)
             previous[iRand] = x;
 
             size_t len = buf.str().size();
-            std::string buf2 = FormatString("%s", RoomSents[sector][x]);
+            std::string buf2 = FormatString("%s", RoomSents[(int)sector][x]);
 
             if(len > 5 && buf.str()[len - 1] == '.')
             {
@@ -279,9 +279,8 @@ std::shared_ptr<Room> GenerateExit(std::shared_ptr<Room> in_room, std::shared_pt
 
     if(!found)
     {
-        room = std::make_shared<Room>();
+        room = std::make_shared<Room>(serial);
         room->Area = in_room->Area;
-        room->Vnum = serial;
         room->TeleVnum = roomnum;
         room->Sector = in_room->Sector;
         room->Flags = in_room->Flags;
@@ -498,8 +497,8 @@ ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit,
     {
         int move = 0;
 
-        if(in_room->Sector == SECT_AIR
-           || to_room->Sector == SECT_AIR
+        if(in_room->Sector == SectorType::Air
+           || to_room->Sector == SectorType::Air
            || pexit->Flags.test(Flag::Exit::Fly))
         {
             if(ch->Mount && !IsAffectedBy(ch->Mount, Flag::Affect::Flying))
@@ -515,8 +514,8 @@ ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit,
             }
         }
 
-        if(in_room->Sector == SECT_WATER_NOSWIM
-           || to_room->Sector == SECT_WATER_NOSWIM)
+        if(in_room->Sector == SectorType::WaterNotSwimmable
+           || to_room->Sector == SectorType::WaterNotSwimmable)
         {
             bool found = false;
 
@@ -652,7 +651,7 @@ ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit,
 
             if(!IsAffectedBy(ch->Mount, Flag::Affect::Flying)
                && !IsAffectedBy(ch->Mount, Flag::Affect::Floating))
-                move = MovementLoss[umin(SECT_MAX - 1, in_room->Sector)];
+                move = MovementLoss[umin((int)SectorType::Max - 1, (int)in_room->Sector)];
             else
                 move = 1;
 
@@ -668,7 +667,7 @@ ch_ret MoveCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Exit> pexit,
 
             if(!IsAffectedBy(ch, Flag::Affect::Flying)
                && !IsAffectedBy(ch, Flag::Affect::Floating))
-                move = hpmove * GetCarryEncumbrance(ch, MovementLoss[umin(SECT_MAX - 1, in_room->Sector)]);
+                move = hpmove * GetCarryEncumbrance(ch, MovementLoss[umin((int)SectorType::Max - 1, (int)in_room->Sector)]);
             else
                 move = 1;
 

@@ -1074,12 +1074,8 @@ bool DeleteMobile(std::shared_ptr<ProtoMobile> mob)
  */
 std::shared_ptr<Room> MakeRoom(vnum_t vnum)
 {
-    std::shared_ptr<Room> pRoomIndex = std::make_shared<Room>();
-
-    pRoomIndex->Vnum = vnum;
-    pRoomIndex->Name = "Floating in a void";
+    std::shared_ptr<Room> pRoomIndex = std::make_shared<Room>(vnum);
     pRoomIndex->Flags = CreateBitSet<Flag::MAX>({ Flag::Room::Prototype });
-    pRoomIndex->Sector = SECT_INSIDE;
 
     int iHash = vnum % MAX_KEY_HASH;
     pRoomIndex->Next = RoomIndexHash[iHash];

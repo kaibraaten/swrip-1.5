@@ -978,7 +978,7 @@ ch_ret DriveShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship, std:
     {
         if(to_room->Flags.test(Flag::Room::Indoors)
            || to_room->Flags.test(Flag::Room::Spacecraft)
-           || to_room->Sector == SECT_INSIDE)
+           || to_room->Sector == SectorType::Inside)
         {
             ch->Echo("You can't drive indoors!\r\n");
             return rNONE;
@@ -990,8 +990,8 @@ ch_ret DriveShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship, std:
             return rNONE;
         }
 
-        if(in_room->Sector == SECT_AIR
-           || to_room->Sector == SECT_AIR
+        if(in_room->Sector == SectorType::Air
+           || to_room->Sector == SectorType::Air
            || pexit->Flags.test(Flag::Exit::Fly))
         {
             if(ship->Class > CLOUD_CAR)
@@ -1001,11 +1001,11 @@ ch_ret DriveShip(std::shared_ptr<Character> ch, std::shared_ptr<Ship> ship, std:
             }
         }
 
-        if(in_room->Sector == SECT_WATER_NOSWIM
-           || to_room->Sector == SECT_WATER_NOSWIM
-           || to_room->Sector == SECT_WATER_SWIM
-           || to_room->Sector == SECT_UNDERWATER
-           || to_room->Sector == SECT_OCEANFLOOR)
+        if(in_room->Sector == SectorType::WaterNotSwimmable
+           || to_room->Sector == SectorType::WaterNotSwimmable
+           || to_room->Sector == SectorType::WaterSwimmable
+           || to_room->Sector == SectorType::Underwater
+           || to_room->Sector == SectorType::Oceanfloor)
         {
             if(ship->Class != OCEAN_SHIP)
             {

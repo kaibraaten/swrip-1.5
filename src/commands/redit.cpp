@@ -260,14 +260,15 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
     {
         if(argument.empty())
         {
-            SectorType sector = SECT_INSIDE;
             ch->Echo("Set the sector type.\r\n");
             ch->Echo("Usage: redit sector <value>\r\n");
             ch->Echo("\r\nSector Values:\r\n");
 
-            for(sector = SECT_INSIDE; sector < SECT_MAX; sector = (SectorType)(sector + 1))
+            for(SectorType sector = SectorType::Inside;
+                sector < SectorType::Max;
+                sector = (SectorType)((int)sector + 1))
             {
-                ch->Echo("  %s\r\n", SectorNames[sector][1]);
+                ch->Echo("  %s\r\n", SectorNames[(int)sector][1]);
             }
 
             return;
@@ -275,9 +276,9 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
 
         location->Sector = GetSectorType(argument);
 
-        if(location->Sector == SECT_INVALID)
+        if(location->Sector == SectorType::Invalid)
         {
-            location->Sector = SECT_CITY;
+            location->Sector = SectorType::City;
             ch->Echo("Out of range\r\n.");
         }
         else
