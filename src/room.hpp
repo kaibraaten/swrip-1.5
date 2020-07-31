@@ -101,6 +101,9 @@ public:
     void Remove(std::shared_ptr<ExtraDescription> extraDescription);
     const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
 
+    std::string Tag() const;
+    void Tag(const std::string &tag);
+    
     std::shared_ptr<Room> Next;
     std::shared_ptr<Room> NextSort;
     std::shared_ptr<class Area> Area;
@@ -127,5 +130,8 @@ extern const int SentTotal[(int)SectorType::Max];
 extern const char * const RoomSents[(int)SectorType::Max][25];
 
 SectorType GetSectorType(const std::string &type);
+
+std::shared_ptr<Room> GetRoomFromTag(const std::string &tag);
+std::list<std::string> GetTags();
 
 #endif

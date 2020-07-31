@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "exit.hpp"
+#include "room.hpp"
 
 /*
  * Syntax mp_close_passage x y
@@ -36,12 +37,22 @@ void do_mp_close_passage(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+    if(arg1[0] == '#')
+    {
+        auto sourceRoom = GetRoomFromTag(arg1.substr(1));
+
+        if(sourceRoom != nullptr)
+        {
+            arg1 = std::to_string(sourceRoom->Vnum);
+        }
+    }
+
     if (!IsNumber(arg1))
     {
         ProgBug("MpClosePassage - Bad syntax", ch);
         return;
     }
-
+    
     fromRoomVnum = ToLong(arg1);
 
     if ((fromRoom = GetRoom(fromRoomVnum)) == NULL)

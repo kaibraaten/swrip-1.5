@@ -1,3 +1,4 @@
+#include <utility/algorithms.hpp>
 #include "room.hpp"
 #include "ship.hpp"
 #include "shuttle.hpp"
@@ -14,6 +15,7 @@ struct Room::Impl
     std::list<std::shared_ptr<Character>> Characters;
     std::list<std::shared_ptr<Object>> Objects;
     std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
+    std::string Tag;
 };
 
 Room::Room(vnum_t vnum)
@@ -26,6 +28,16 @@ Room::Room(vnum_t vnum)
 Room::~Room()
 {
 
+}
+
+std::string Room::Tag() const
+{
+    return pImpl->Tag;
+}
+
+void Room::Tag(const std::string &tag)
+{
+    pImpl->Tag = tag;
 }
 
 void Room::Add(std::shared_ptr<Ship> ship)
@@ -127,4 +139,41 @@ void Room::Remove(std::shared_ptr<ExtraDescription> extraDescription)
 const std::list<std::shared_ptr<ExtraDescription>> &Room::ExtraDescriptions() const
 {
     return pImpl->ExtraDescriptions;
+}
+
+///////////////////////////////////////////////////////////////////
+// Free functions.
+
+std::shared_ptr<Room> GetRoomFromTag(const std::string &tag)
+{
+    for(int key = 0; key < MAX_KEY_HASH; ++key)
+    {
+        for(auto room = RoomIndexHash[key]; room != nullptr; room = room->Next)
+        {
+            if(StrCmp(room->Tag(), tag) == 0)
+            {
+                return room;
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+std::list<std::string> GetTags()
+{
+    std::list<std::string> output;
+
+    for(int key = 0; key < MAX_KEY_HASH; ++key)
+    {
+        for(auto room = RoomIndexHash[key]; room != nullptr; room = room->Next)
+        {
+            if(!room->Tag().empty())
+            {
+                output.push_back(room->Tag());
+            }
+        }
+    }
+
+    return output;
 }

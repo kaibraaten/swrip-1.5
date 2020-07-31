@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "exit.hpp"
+#include "room.hpp"
 
 /*
  * Syntax mp_open_passage x y z
@@ -40,6 +41,16 @@ void do_mp_open_passage(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+    if(arg1[0] == '#')
+    {
+        auto sourceRoom = GetRoomFromTag(arg1.substr(1));
+
+        if(sourceRoom != nullptr)
+        {
+            arg1 = std::to_string(sourceRoom->Vnum);
+        }
+    }
+    
     if (!IsNumber(arg1))
     {
         ProgBug("MpOpenPassage - Bad syntax", ch);

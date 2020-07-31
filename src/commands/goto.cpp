@@ -29,6 +29,11 @@ void do_goto(std::shared_ptr<Character> ch, std::string argument)
         location = nullptr;
         arg = std::to_string(GetNextVnum(ch->PCData->Build.Area));
     }
+
+    if(arg[0] == '#')
+    {
+        location = GetRoomFromTag(arg.substr(1));
+    }
     
     if(location == nullptr)
     {

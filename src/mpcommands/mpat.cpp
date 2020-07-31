@@ -1,12 +1,12 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 /* lets the mobile do a command at another location. Very useful */
 
 void do_mpat(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
-    std::shared_ptr<Room> location;
     std::shared_ptr<Room> original;
 
     if(IsAffectedBy(ch, Flag::Affect::Charm))
@@ -26,7 +26,18 @@ void do_mpat(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if((location = FindLocation(ch, arg)) == NULL)
+    std::shared_ptr<Room> location;
+
+    if(arg[0] == '#')
+    {
+        location = GetRoomFromTag(arg.substr(1));
+    }
+    else
+    {
+        location = FindLocation(ch, arg);
+    }
+    
+    if(location == nullptr)
     {
         ProgBug("Mpat - No such location", ch);
         return;

@@ -1,12 +1,12 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 /* lets the mobile goto any location it wishes that is not private */
 
 void do_mpgoto(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string arg;
-    std::shared_ptr<Room> location;
 
     if(IsAffectedBy(ch, Flag::Affect::Charm))
         return;
@@ -25,7 +25,18 @@ void do_mpgoto(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
-    if((location = FindLocation(ch, arg)) == NULL)
+    std::shared_ptr<Room> location;
+
+    if(arg[0] == '#')
+    {
+        location = GetRoomFromTag(arg.substr(1));
+    }
+    else
+    {
+        location = FindLocation(ch, arg);
+    }
+    
+    if(location == nullptr)
     {
         ProgBug("Mpgoto - No such location", ch);
         return;

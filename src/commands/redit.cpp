@@ -44,7 +44,7 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
         ch->Echo("  name desc wordwrap ed rmed\r\n");
         ch->Echo("  exit bexit exdesc exflags exname exkey\r\n");
         ch->Echo("  flags sector teledelay televnum tunnel\r\n");
-        ch->Echo("  rlist exdistance\r\n");
+        ch->Echo("  rlist exdistance tag\r\n");
         return;
     }
 
@@ -61,10 +61,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
         }
 
         location->Name = argument;
-        return;
     }
-
-    if(!StrCmp(arg, "wordwrap"))
+    else if(!StrCmp(arg, "wordwrap"))
     {
         size_t lineWidth = strtol(argument.c_str(), nullptr, 10);
 
@@ -75,10 +73,32 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
 
         location->Description = WordWrap(location->Description, lineWidth);
         ch->Echo("Ok.\r\n");
-        return;
     }
-
-    if(!StrCmp(arg, "desc"))
+    else if(StrCmp(arg, "tag") == 0)
+    {
+        if(argument.empty())
+        {
+            ch->Echo("Add a tag to a room to be used by the GOTO (and mpgoto) command.\r\n");
+            ch->Echo("Usage: redit tag <tag-name>\r\n");
+            ch->Echo("       redit tag none\r\n");
+        }
+        else if(GetRoomFromTag(argument))
+        {
+            ch->Echo("That tag is already in use.\r\n");
+        }
+        else if(StrCmp(argument, "none") == 0
+           || StrCmp(argument, "clear") == 0)
+        {
+            location->Tag("");
+            ch->Echo("Tag cleared.\r\n");
+        }
+        else
+        {
+            location->Tag(argument);
+            ch->Echo("Tag set to: %s\r\n", argument.c_str());
+        }
+    }
+    else if(!StrCmp(arg, "desc"))
     {
         StartEditing(ch, location->Description,
                      [location](const auto &txt)
@@ -87,10 +107,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
                      });
         SetEditorDesc(ch, "Room %ld (%s) description",
                       location->Vnum, location->Name.c_str());
-        return;
     }
-
-    if(!StrCmp(arg, "tunnel"))
+    else if(!StrCmp(arg, "tunnel"))
     {
         if(argument.empty())
         {
@@ -101,10 +119,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
 
         location->Tunnel = urange(0, ToLong(argument), 1000);
         ch->Echo("Done.\r\n");
-        return;
     }
-
-    if(!StrCmp(arg, "ed"))
+    else if(!StrCmp(arg, "ed"))
     {
         if(argument.empty())
         {
@@ -122,10 +138,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
                      });
         SetEditorDesc(ch, "Room %ld (%s) extra description: %s",
                       location->Vnum, location->Name.c_str(), argument.c_str());
-        return;
     }
-
-    if(!StrCmp(arg, "rmed"))
+    else if(!StrCmp(arg, "rmed"))
     {
         if(argument.empty())
         {
@@ -138,11 +152,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("Deleted.\r\n");
         else
             ch->Echo("Not found.\r\n");
-
-        return;
     }
-
-    if(!StrCmp(arg, "rlist"))
+    else if(!StrCmp(arg, "rlist"))
     {
         auto tarea = location->Area;
         short num = 0;
@@ -166,11 +177,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
 
             ch->Echo(bptr);
         }
-
-        return;
     }
-
-    if(!StrCmp(arg, "flags"))
+    else if(!StrCmp(arg, "flags"))
     {
         if(argument.empty())
         {
@@ -211,25 +219,21 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
                 location->Flags.flip(bit);
             }
         }
-
-        return;
     }
-
-    if(!StrCmp(arg, "teledelay"))
+    else if(!StrCmp(arg, "teledelay"))
     {
         if(argument.empty())
         {
             ch->Echo("Set the delay of the teleport. (0 = off).\r\n");
             ch->Echo("Usage: redit teledelay <value>\r\n");
-            return;
         }
-
-        location->TeleDelay = ToLong(argument);
-        ch->Echo("Done.\r\n");
-        return;
+        else
+        {
+            location->TeleDelay = ToLong(argument);
+            ch->Echo("Done.\r\n");
+        }
     }
-
-    if(!StrCmp(arg, "televnum"))
+    else if(!StrCmp(arg, "televnum"))
     {
         vnum_t televnum = INVALID_VNUM;
 
@@ -252,11 +256,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
             location->TeleVnum = televnum;
             ch->Echo("Done.\r\n");
         }
-
-        return;
     }
-
-    if(!StrCmp(arg, "sector"))
+    else if(!StrCmp(arg, "sector"))
     {
         if(argument.empty())
         {
@@ -285,11 +286,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
         {
             ch->Echo("Done.\r\n");
         }
-
-        return;
     }
-
-    if(!StrCmp(arg, "exkey"))
+    else if(!StrCmp(arg, "exkey"))
     {
         vnum_t keyvnum = INVALID_VNUM;
 
@@ -318,15 +316,14 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
         if(!xit)
         {
             ch->Echo("No exit in that direction. Use 'redit exit ...' first.\r\n");
-            return;
         }
-
-        xit->Key = keyvnum;
-        ch->Echo("Done.\r\n");
-        return;
+        else
+        {
+            xit->Key = keyvnum;
+            ch->Echo("Done.\r\n");
+        }
     }
-
-    if(!StrCmp(arg, "exname"))
+    else if(!StrCmp(arg, "exname"))
     {
         argument = OneArgument(argument, arg2);
 
@@ -351,15 +348,14 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
         if(!xit)
         {
             ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
-            return;
         }
-
-        xit->Keyword = argument;
-        ch->Echo("Done.\r\n");
-        return;
+        else
+        {
+            xit->Keyword = argument;
+            ch->Echo("Done.\r\n");
+        }
     }
-
-    if(!StrCmp(arg, "exflags"))
+    else if(!StrCmp(arg, "exflags"))
     {
         if(argument.empty())
         {
@@ -420,11 +416,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
             else
                 xit->Flags.flip(value);
         }
-
-        return;
     }
-
-    if(!StrCmp(arg, "exit"))
+    else if(!StrCmp(arg, "exit"))
     {
         bool addexit = false;
         bool numnotdir = false;
@@ -565,16 +558,10 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
                 xit->Keyword = argument;
             }
         }
-
+        
         ch->Echo("Done.\r\n");
-        return;
     }
-
-    /*
-     * Twisted and evil, but works                                -Thoric
-     * Makes an exit, and the reverse in one shot.
-     */
-    if(!StrCmp(arg, "bexit"))
+    else if(!StrCmp(arg, "bexit"))
     {
         std::shared_ptr<Exit> this_exit, rxit;
         std::string tmpcmd;
@@ -666,11 +653,8 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
                                   rvnum.c_str(), argument.c_str());
             do_at(ch, tmpcmd);
         }
-
-        return;
     }
-
-    if(!StrCmp(arg, "exdistance"))
+    else if(!StrCmp(arg, "exdistance"))
     {
         argument = OneArgument(argument, arg2);
 
@@ -696,14 +680,13 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
         {
             xit->Distance = urange(1, ToLong(argument), 50);
             ch->Echo("Done.\r\n");
-            return;
         }
-
-        ch->Echo("No exit in that direction. Use 'redit exit ...' first.\r\n");
-        return;
+        else
+        {
+            ch->Echo("No exit in that direction. Use 'redit exit ...' first.\r\n");
+        }
     }
-
-    if(!StrCmp(arg, "exdesc"))
+    else if(!StrCmp(arg, "exdesc"))
     {
         argument = OneArgument(argument, arg2);
 
@@ -737,15 +720,14 @@ void do_redit(std::shared_ptr<Character> ch, std::string argument)
             }
 
             ch->Echo("Done.\r\n");
-            return;
         }
-
-        ch->Echo("No exit in that direction. Use 'redit exit ...' first.\r\n");
-        return;
+        else
+        {
+            ch->Echo("No exit in that direction. Use 'redit exit ...' first.\r\n");
+        }
     }
-
-    /*
-     * Generate usage message.
-     */
-    do_redit(ch, "");
+    else
+    {
+        do_redit(ch, "");
+    }
 }

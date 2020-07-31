@@ -87,6 +87,11 @@ void do_rstat(std::shared_ptr<Character> ch, std::string argument)
              location->Area ? location->Area->Name.c_str() : "None????",
              location->Area ? location->Area->Filename.c_str() : "None????");
 
+    if(!location->Tag().empty())
+    {
+        ch->Echo("Tag: %s\r\n", location->Tag().c_str());
+    }
+    
     ch->Echo("Vnum: %ld  Sector: %s  Light: %d  TeleDelay: %d  TeleVnum: %ld  Tunnel: %d\r\n",
              location->Vnum,
              SectorNames[(int)location->Sector][1],

@@ -23,14 +23,21 @@ void do_rlist(std::shared_ptr<Character> ch, std::string argument)
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);
 
+    bool showTags = false;
+
+    if(StrCmp(arg1, "tags") == 0)
+    {
+        showTags = true;
+    }
+    
     if (tarea)
     {
-        if (arg1.empty())
+        if (arg1.empty() || showTags)
             lrange = tarea->VnumRanges.Room.First;     /* here.            -Thoric */
         else
             lrange = ToLong(arg1);
 
-        if (arg2.empty())
+        if (arg2.empty() || showTags)
             trange = tarea->VnumRanges.Room.Last;
         else
             trange = ToLong(arg2);
@@ -60,8 +67,26 @@ void do_rlist(std::shared_ptr<Character> ch, std::string argument)
         auto room = GetRoom(vnum);
 
         if (room == nullptr)
+        {
             continue;
+        }
+        
+        if(showTags && room->Tag().empty())
+        {
+            continue;
+        }
 
-        ch->Echo("&w%5ld) %s\r\n", vnum, GetRoomName(room).c_str());
+        ch->Echo("&w%5ld) ", vnum);
+
+        if(showTags)
+        {
+            ch->Echo(room->Tag());
+        }
+        else
+        {
+            ch->Echo(GetRoomName(room));
+        }
+
+        ch->Echo("\r\n");
     }
 }

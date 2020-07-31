@@ -61,6 +61,16 @@ void do_mptransfer(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
+        if(arg2[0] == '#')
+        {
+            auto destination = GetRoomFromTag(arg2.substr(1));
+
+            if(destination != nullptr)
+            {
+                arg2 = std::to_string(destination->Vnum);
+            }
+        }
+        
         if((location = FindLocation(ch, arg2)) == NULL)
         {
             ProgBug("Mptransfer - No such location", ch);

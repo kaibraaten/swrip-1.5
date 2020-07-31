@@ -424,6 +424,7 @@ void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room,
 
     LuaSetfieldNumber(L, "Vnum", room->Vnum);
     LuaSetfieldString(L, "Name", room->Name);
+    LuaSetfieldString(L, "Tag", room->Tag());
     LuaSetfieldString(L, "Description", StripCarriageReturn(room->Description));
     LuaPushFlags(L, room->Flags, RoomFlags, "Flags");
     LuaSetfieldString(L, "Sector", SectorNames[(int)room->Sector][1]);
@@ -1169,7 +1170,11 @@ void LuaAreaRepository::LoadRoom(lua_State *L, std::shared_ptr<Room> room)
     LuaGetfieldInt(L, "TeleDelay", &room->TeleDelay);
     LuaGetfieldLong(L, "TeleVnum", &room->TeleVnum);
     LuaGetfieldInt(L, "Tunnel", &room->Tunnel);
-
+    LuaGetfieldString(L, "Tag",
+                      [room](const auto &tag)
+                      {
+                          room->Tag(tag);
+                      });
     room->Flags = LuaLoadFlags(L, "Flags");
     LoadExtraDescriptions(L, room);
     LuaLoadArray(L, "MudProgs", LoadMudProg, &room->mprog);
