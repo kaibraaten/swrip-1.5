@@ -48,6 +48,12 @@ void do_rlist(std::shared_ptr<Character> ch, std::string argument)
             ch->Echo("This area has no rooms.\r\n");
             return;
         }
+
+        if(lrange == INVALID_VNUM || trange == INVALID_VNUM)
+        {
+            ch->Echo("Invalid vnum range.\r\n");
+            return;
+        }
         
         if ((lrange < tarea->VnumRanges.Room.First || trange > tarea->VnumRanges.Room.Last)
             && GetTrustLevel(ch) < LEVEL_GREATER)

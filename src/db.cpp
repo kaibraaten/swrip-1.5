@@ -1357,3 +1357,87 @@ void MakeWizlist()
     fs::remove(WIZLIST_FILE, ec);
     AppendToFile(WIZLIST_FILE, wizlist);
 }
+
+////////////////////////////////////////////
+
+#include <stdexcept>
+
+RoomRepository Rooms;
+
+RoomRepository::iterator::iterator()
+{
+
+}
+
+RoomRepository::iterator::iterator(const iterator &rhv)
+    : currentKey(rhv.currentKey),
+      currentRoom(rhv.currentRoom)
+{
+
+}
+
+RoomRepository::iterator::~iterator()
+{
+
+}
+
+RoomRepository::iterator &RoomRepository::iterator::operator=(const iterator &rhv)
+{
+    currentKey = rhv.currentKey;
+    currentRoom = rhv.currentRoom;
+    return *this;
+}
+
+RoomRepository::iterator &RoomRepository::iterator::operator++()
+{
+    if(currentRoom == nullptr)
+    {
+        throw std::out_of_range("Iterator out of range.");
+    }
+    
+    currentRoom = currentRoom->Next;
+
+    while(currentRoom == nullptr)
+    {
+        ++currentKey;
+
+        if(currentKey == MAX_KEY_HASH)
+        {
+            break;
+        }
+
+        currentRoom = RoomIndexHash[currentKey];
+    }
+
+    return *this;
+}
+
+std::shared_ptr<Room> RoomRepository::iterator::operator*() const
+{
+    if(currentRoom == nullptr)
+    {
+        throw std::out_of_range("Iterator out of range.");
+    }
+
+    return currentRoom;
+}
+
+bool RoomRepository::iterator::operator!=(const iterator &rhv) const
+{
+    return currentRoom != rhv.currentRoom;
+}
+
+RoomRepository::iterator RoomRepository::begin()
+{
+    iterator i;
+    i.currentRoom = RoomIndexHash[0];
+    return i;
+}
+
+RoomRepository::iterator RoomRepository::end()
+{
+    iterator i;
+    i.currentRoom = nullptr;
+    i.currentKey = MAX_KEY_HASH;
+    return i;
+}

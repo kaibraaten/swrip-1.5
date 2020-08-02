@@ -132,6 +132,5 @@ extern const char * const RoomSents[(int)SectorType::Max][25];
 SectorType GetSectorType(const std::string &type);
 
 std::shared_ptr<Room> GetRoomFromTag(const std::string &tag);
-std::list<std::string> GetTags();
 
 #endif

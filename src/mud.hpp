@@ -344,6 +344,35 @@ extern std::unordered_map<vnum_t, std::shared_ptr<ProtoMobile>> ProtoMobs;
 extern std::unordered_map<vnum_t, std::shared_ptr<ProtoObject>> ProtoObjects;
 extern std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 
+class RoomRepository
+{
+public:
+    class iterator
+    {
+    public:
+        iterator();
+        iterator(const iterator &rhv);
+        ~iterator();
+        iterator &operator=(const iterator &rhv);
+        iterator &operator++();
+        bool operator!=(const iterator &rhv) const;
+        std::shared_ptr<Room> operator*() const;
+        
+    private:
+        friend class RoomRepository;
+        int currentKey = 0;
+        std::shared_ptr<Room> currentRoom;
+    };
+
+    iterator begin();
+    iterator end();
+    
+private:
+    
+};
+
+extern RoomRepository Rooms;
+
 std::vector<std::vector<std::shared_ptr<Object>>> &GetSaveEquipment(std::shared_ptr<Character> ch);
 
 /*

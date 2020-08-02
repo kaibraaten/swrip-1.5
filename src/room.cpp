@@ -146,6 +146,26 @@ const std::list<std::shared_ptr<ExtraDescription>> &Room::ExtraDescriptions() co
 
 std::shared_ptr<Room> GetRoomFromTag(const std::string &tag)
 {
+#if 1
+    /*
+    for(auto room : Rooms)
+    {
+        if(StrCmp(room->Tag(), tag) == 0)
+        {
+            return room;
+        }
+    }
+    */
+    for(auto i = Rooms.begin(); i != Rooms.end(); ++i)
+    {
+        auto room = *i;
+        
+        if(StrCmp(room->Tag(), tag) == 0)
+        {
+            return room;
+        }
+    }
+#else
     for(int key = 0; key < MAX_KEY_HASH; ++key)
     {
         for(auto room = RoomIndexHash[key]; room != nullptr; room = room->Next)
@@ -156,24 +176,7 @@ std::shared_ptr<Room> GetRoomFromTag(const std::string &tag)
             }
         }
     }
-
+#endif
+    
     return nullptr;
-}
-
-std::list<std::string> GetTags()
-{
-    std::list<std::string> output;
-
-    for(int key = 0; key < MAX_KEY_HASH; ++key)
-    {
-        for(auto room = RoomIndexHash[key]; room != nullptr; room = room->Next)
-        {
-            if(!room->Tag().empty())
-            {
-                output.push_back(room->Tag());
-            }
-        }
-    }
-
-    return output;
 }

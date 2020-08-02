@@ -1,3 +1,4 @@
+#include "room.hpp"
 #include "mud.hpp"
 #include "character.hpp"
 
@@ -14,6 +15,16 @@ void do_at(std::shared_ptr<Character> ch, std::string argument)
         return;
     }
 
+    if(arg[0] == '#')
+    {
+        auto room = GetRoomFromTag(arg.substr(1));
+
+        if(room != nullptr)
+        {
+            arg = std::to_string(room->Vnum);
+        }
+    }
+    
     if ((location = FindLocation(ch, arg)) == NULL)
     {
         ch->Echo("No such location.\r\n");

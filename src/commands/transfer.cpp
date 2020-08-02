@@ -48,6 +48,16 @@ void do_transfer(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
+        if(arg2[0] == '#')
+        {
+            auto room = GetRoomFromTag(arg2.substr(1));
+
+            if(room != nullptr)
+            {
+                arg2 = std::to_string(room->Vnum);
+            }
+        }
+        
         if((location = FindLocation(ch, arg2)) == NULL)
         {
             ch->Echo("No such location.\r\n");
