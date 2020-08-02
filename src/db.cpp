@@ -693,65 +693,55 @@ static void InitializeEconomy()
  */
 static void FixExits()
 {
-    for(int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
+    for(auto pRoomIndex : Rooms)
     {
-        for(auto pRoomIndex = RoomIndexHash[iHash];
-            pRoomIndex;
-            pRoomIndex = pRoomIndex->Next)
+        bool fexit = false;
+        auto copyOfExitList = pRoomIndex->Exits();
+
+        for(auto pexit : copyOfExitList)
         {
-            bool fexit = false;
-            auto copyOfExitList(pRoomIndex->Exits());
+            pexit->ReverseVnum = pRoomIndex->Vnum;
 
-            for(auto pexit : copyOfExitList)
+            if(pexit->Vnum <= 0
+               || (pexit->ToRoom = GetRoom(pexit->Vnum)) == NULL)
             {
-                pexit->ReverseVnum = pRoomIndex->Vnum;
-
-                if(pexit->Vnum <= 0
-                   || (pexit->ToRoom = GetRoom(pexit->Vnum)) == NULL)
+                if(fBootDb)
                 {
-                    if(fBootDb)
-                    {
-                        Log->Boot("%s: room %ld, exit %s leads to bad vnum (%ld)",
-                                  __FUNCTION__,
-                                  pRoomIndex->Vnum, GetDirectionName(pexit->Direction),
-                                  pexit->Vnum);
-                    }
+                    Log->Boot("%s: room %ld, exit %s leads to bad vnum (%ld)",
+                              __FUNCTION__,
+                              pRoomIndex->Vnum, GetDirectionName(pexit->Direction),
+                              pexit->Vnum);
+                }
 
-                    Log->Bug("Deleting %s exit in room %ld",
-                             GetDirectionName(pexit->Direction), pRoomIndex->Vnum);
-                    ExtractExit(pRoomIndex, pexit);
-                }
-                else
-                {
-                    fexit = true;
-                }
+                Log->Bug("Deleting %s exit in room %ld",
+                         GetDirectionName(pexit->Direction), pRoomIndex->Vnum);
+                ExtractExit(pRoomIndex, pexit);
             }
-
-            if(!fexit)
+            else
             {
-                pRoomIndex->Flags.set(Flag::Room::NoMob);
+                fexit = true;
             }
+        }
+
+        if(!fexit)
+        {
+            pRoomIndex->Flags.set(Flag::Room::NoMob);
         }
     }
 
     /* Set all the rexit pointers         -Thoric */
-    for(int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
+    for(auto pRoomIndex : Rooms)
     {
-        for(auto pRoomIndex = RoomIndexHash[iHash];
-            pRoomIndex;
-            pRoomIndex = pRoomIndex->Next)
+        for(auto pexit : pRoomIndex->Exits())
         {
-            for(auto pexit : pRoomIndex->Exits())
+            if(pexit->ToRoom && !pexit->ReverseExit)
             {
-                if(pexit->ToRoom && !pexit->ReverseExit)
-                {
-                    auto rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
+                auto rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
 
-                    if(rev_exit)
-                    {
-                        pexit->ReverseExit = rev_exit;
-                        rev_exit->ReverseExit = pexit;
-                    }
+                if(rev_exit)
+                {
+                    pexit->ReverseExit = rev_exit;
+                    rev_exit->ReverseExit = pexit;
                 }
             }
         }
@@ -1394,7 +1384,7 @@ RoomRepository::iterator &RoomRepository::iterator::operator++()
     {
         throw std::out_of_range("Iterator out of range.");
     }
-    
+
     currentRoom = currentRoom->Next;
 
     while(currentRoom == nullptr)

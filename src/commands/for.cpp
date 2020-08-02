@@ -1,37 +1,37 @@
 /*
-Super-AT command:
+  Super-AT command:
 
-FOR ALL <action>
-FOR MORTALS <action>
-FOR GODS <action>
-FOR MOBS <action>
-FOR EVERYWHERE <action>
+  FOR ALL <action>
+  FOR MORTALS <action>
+  FOR GODS <action>
+  FOR MOBS <action>
+  FOR EVERYWHERE <action>
 
 
-Executes action several times, either on ALL players (not including yourself),
-MORTALS (including trusted characters), GODS (characters with level higher than
-L_HERO), MOBS (Not recommended) or every room (not recommended either!)
+  Executes action several times, either on ALL players (not including yourself),
+  MORTALS (including trusted characters), GODS (characters with level higher than
+  L_HERO), MOBS (Not recommended) or every room (not recommended either!)
 
-If you insert a # in the action, it will be replaced by the name of the target.
+  If you insert a # in the action, it will be replaced by the name of the target.
 
-If # is a part of the action, the action will be executed for every target
-in game. If there is no #, the action will be executed for every room containg
-at least one target, but only once per room. # cannot be used with FOR EVERY-
-WHERE. # can be anywhere in the action.
+  If # is a part of the action, the action will be executed for every target
+  in game. If there is no #, the action will be executed for every room containg
+  at least one target, but only once per room. # cannot be used with FOR EVERY-
+  WHERE. # can be anywhere in the action.
 
-Example:
+  Example:
 
-FOR ALL SMILE -> you will only smile once in a room with 2 players.
-FOR ALL TWIDDLE # -> In a room with A and B, you will twiddle A then B.
+  FOR ALL SMILE -> you will only smile once in a room with 2 players.
+  FOR ALL TWIDDLE # -> In a room with A and B, you will twiddle A then B.
 
-Destroying the characters this command acts upon MAY cause it to fail. Try to
-avoid something like FOR MOBS PURGE (although it actually works at my MUD).
+  Destroying the characters this command acts upon MAY cause it to fail. Try to
+  avoid something like FOR MOBS PURGE (although it actually works at my MUD).
 
-FOR MOBS TRANS 3054 (transfer ALL the mobs to Midgaard temple) does NOT work
-though :)
+  FOR MOBS TRANS 3054 (transfer ALL the mobs to Midgaard temple) does NOT work
+  though :)
 
-The command works by transporting the character to each of the rooms with
-target in them. Private rooms are not violated.
+  The command works by transporting the character to each of the rooms with
+  target in them. Private rooms are not violated.
 
 */
 
@@ -46,9 +46,8 @@ void do_for(std::shared_ptr<Character> ch, std::string argument)
 {
     std::string range;
     bool fGods = false, fMortals = false, fMobs = false, fEverywhere = false, found = false;
-    std::shared_ptr<Room> room, old_room;
+    std::shared_ptr<Room> old_room;
     std::shared_ptr<Character> p, p_prev;
-    int i = 0;
 
     argument = OneArgument(argument, range);
 
@@ -80,7 +79,7 @@ void do_for(std::shared_ptr<Character> ch, std::string argument)
     else
         do_help(ch, "for"); /* show syntax */
 
-      /* do not allow # to make it easier */
+    /* do not allow # to make it easier */
     if(fEverywhere && strchr(argument.c_str(), '#'))
     {
         ch->Echo("Cannot use FOR EVERYWHERE with the # thingy.\r\n");
@@ -150,53 +149,52 @@ void do_for(std::shared_ptr<Character> ch, std::string argument)
     }
     else /* just for every room with the appropriate people in it */
     {
-        for(i = 0; i < MAX_KEY_HASH; i++) /* run through all the buckets */
-            for(room = RoomIndexHash[i]; room; room = room->Next)
+        for(auto room : Rooms)
+        {
+            found = false;
+
+            /* Anyone in here at all? */
+            if(fEverywhere) /* Everywhere executes always */
+                found = true;
+            else if(room->Characters().empty()) /* Skip it if room is empty */
+                continue;
+            /* ->people changed to first_person -- TRI */
+
+            /* Check if there is anyone here of the requried type */
+            /* Stop as soon as a match is found or there are no more ppl in room */
+            /* ->people to ->first_person -- TRI */
+            for(auto tmp : room->Characters())
             {
-                found = false;
-
-                /* Anyone in here at all? */
-                if(fEverywhere) /* Everywhere executes always */
-                    found = true;
-                else if(room->Characters().empty()) /* Skip it if room is empty */
-                    continue;
-                /* ->people changed to first_person -- TRI */
-
-                /* Check if there is anyone here of the requried type */
-                /* Stop as soon as a match is found or there are no more ppl in room */
-                /* ->people to ->first_person -- TRI */
-                for(auto tmp : room->Characters())
+                if(tmp == ch)
                 {
-                    if(tmp == ch)
-                    {
-                        continue;
-                    }
-
-                    if((IsNpc(p) && fMobs)
-                       || (!IsNpc(p) && (GetTrustLevel(p) >= LEVEL_IMMORTAL) && fGods)
-                       || (!IsNpc(p) && (GetTrustLevel(p) <= LEVEL_IMMORTAL) && fMortals))
-                    {
-                        p = tmp;
-                        found = true;
-                        break;
-                    }
+                    continue;
                 }
 
-                if(found && !IsRoomPrivate(p, room)) /* Any of the required type here AND room not private? */
+                if((IsNpc(p) && fMobs)
+                   || (!IsNpc(p) && (GetTrustLevel(p) >= LEVEL_IMMORTAL) && fGods)
+                   || (!IsNpc(p) && (GetTrustLevel(p) <= LEVEL_IMMORTAL) && fMortals))
                 {
-                    /* This may be ineffective. Consider moving character out of old_room
-                       once at beginning of command then moving back at the end.
-                       This however, is more safe?
-            */
+                    p = tmp;
+                    found = true;
+                    break;
+                }
+            }
 
-                    old_room = ch->InRoom;
-                    CharacterFromRoom(ch);
-                    CharacterToRoom(ch, room);
-                    Interpret(ch, argument);
-                    CharacterFromRoom(ch);
-                    CharacterToRoom(ch, old_room);
-                } /* if found */
-            } /* for every room in a bucket */
+            if(found && !IsRoomPrivate(p, room)) /* Any of the required type here AND room not private? */
+            {
+                /* This may be ineffective. Consider moving character out of old_room
+                   once at beginning of command then moving back at the end.
+                   This however, is more safe?
+                */
+
+                old_room = ch->InRoom;
+                CharacterFromRoom(ch);
+                CharacterToRoom(ch, room);
+                Interpret(ch, argument);
+                CharacterFromRoom(ch);
+                CharacterToRoom(ch, old_room);
+            } /* if found */
+        } /* for every room in a bucket */
     } /* if strchr */
 }
 
@@ -233,4 +231,3 @@ static std::string name_expand(const std::shared_ptr<Character> ch)
 
     return FormatString("%d.%s", count, name.c_str());
 }
-

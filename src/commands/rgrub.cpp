@@ -39,18 +39,12 @@ void do_rgrub(std::shared_ptr<Character> ch, std::string argument)
 
         ch->Echo("\r\nRoom Vnums\r\n");
 
-        for (cou = 0; cou < MAX_KEY_HASH; cou++)
+        for(auto pRoom : Rooms)
         {
-            if (RoomIndexHash[cou])
+            if (pRoom->Vnum >= lo && pRoom->Vnum <= hi)
             {
-                for (auto pRoom = RoomIndexHash[cou]; pRoom; pRoom = pRoom->Next)
-                {
-                    if (pRoom->Vnum >= lo && pRoom->Vnum <= hi)
-                    {
-                        if (match == (int)pRoom->Sector && hit_cou < RGRUB_ST_MAX_SIZE)
-                            vnum[hit_cou++] = pRoom->Vnum;
-                    }
-                }
+                if (match == (int)pRoom->Sector && hit_cou < RGRUB_ST_MAX_SIZE)
+                    vnum[hit_cou++] = pRoom->Vnum;
             }
         }
 

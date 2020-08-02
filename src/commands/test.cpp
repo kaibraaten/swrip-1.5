@@ -112,25 +112,20 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
     else if(StrCmp(argument, "resethomes") == 0)
     {
         int homeCount = 0;
-        
-        for (int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
-        {
-            for (auto room = RoomIndexHash[iHash];
-                 room;
-                 room = room->Next)
-            {
-                if(room->Flags.test(Flag::Room::PlayerHome))
-                {
-                    room->Flags.reset();
-                    room->Flags.set(Flag::Room::PlayerHome);
-                    room->Flags.set(Flag::Room::Indoors);
-                    room->Sector = SectorType::Inside;
-                    room->Name = "An Empty Home";
-                    room->Description = "This is a small apartment with the bare essentials required to live here.\r\n"
-                        "Apart from the cramped bathroom, the rest of the apartment is a single room.\r\n";
 
-                    ++homeCount;
-                }
+        for (auto room : Rooms)
+        {
+            if(room->Flags.test(Flag::Room::PlayerHome))
+            {
+                room->Flags.reset();
+                room->Flags.set(Flag::Room::PlayerHome);
+                room->Flags.set(Flag::Room::Indoors);
+                room->Sector = SectorType::Inside;
+                room->Name = "An Empty Home";
+                room->Description = "This is a small apartment with the bare essentials required to live here.\r\n"
+                    "Apart from the cramped bathroom, the rest of the apartment is a single room.\r\n";
+
+                ++homeCount;
             }
         }
 
@@ -139,20 +134,15 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
     else if(StrCmp(argument, "findhomes") == 0)
     {
         std::set<std::string> homes;
-        
-        for (int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
+
+        for(auto room : Rooms)
         {
-            for (auto room = RoomIndexHash[iHash];
-                 room;
-                 room = room->Next)
+            if(room->Flags.test(Flag::Room::PlayerHome))
             {
-                if(room->Flags.test(Flag::Room::PlayerHome))
-                {
-                    std::string entry = FormatString("%5ld) %s",
-                                                     room->Vnum,
-                                                     room->Area->Filename.c_str());
-                    homes.insert(entry);
-                }
+                std::string entry = FormatString("%5ld) %s",
+                                                 room->Vnum,
+                                                 room->Area->Filename.c_str());
+                homes.insert(entry);
             }
         }
 
@@ -170,7 +160,7 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
             if(obj->ItemType == ITEM_FABRIC)
             {
                 auto area = GetAreaFromObjVnum(obj->Vnum);
-                
+
                 ch->Echo("%5ld) Strength %d  (%s) (%s)\r\n",
                          obj->Vnum,
                          obj->Value[OVAL_FABRIC_STRENGTH],
@@ -193,7 +183,7 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
                 Flag::Mob::_28,
                 Flag::Mob::_29,
                 Flag::Mob::_31
-        };
+                };
         std::map<size_t, int> stats;
 
         for(auto mob : ProtoMobs)
@@ -228,7 +218,7 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
                 Flag::Obj::_22,
                 Flag::Obj::_23,
                 Flag::Obj::_24
-        };
+                };
         std::map<size_t, int> stats;
 
         for(const auto &tuple : ProtoObjects)
@@ -258,22 +248,17 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
                 Flag::Room::_14,
                 Flag::Room::_21,
                 Flag::Room::_27
-        };
+                };
         std::map<size_t, int> stats;
 
-        for(int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
+        for(auto room : Rooms)
         {
-            for(auto room = RoomIndexHash[iHash];
-                room;
-                room = room->Next)
+            for(auto flag : oldFlags)
             {
-                for(auto flag : oldFlags)
+                if(room->Flags.test(flag))
                 {
-                    if(room->Flags.test(flag))
-                    {
-                        room->Flags.reset(flag);
-                        stats[flag] += 1;
-                    }
+                    room->Flags.reset(flag);
+                    stats[flag] += 1;
                 }
             }
         }
