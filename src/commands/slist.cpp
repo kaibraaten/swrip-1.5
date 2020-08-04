@@ -5,7 +5,6 @@
 
 void do_slist(std::shared_ptr<Character> ch, std::string argument)
 {
-    int sn = 0;
     char skn[MAX_INPUT_LENGTH];
     char skn2[MAX_INPUT_LENGTH / 2];
     int lowlev = 1, hilev = MAX_ABILITY_LEVEL;
@@ -21,9 +20,9 @@ void do_slist(std::shared_ptr<Character> ch, std::string argument)
     ch->Echo("SKILL LIST\r\n");
     ch->Echo("------------------\r\n");
 
-    for(int i = (int)AbilityClass::None; i < (int)AbilityClass::Max; ++i)
+    for(int a = (int)AbilityClass::None; a < (int)AbilityClass::Max; ++a)
     {
-        auto ability = AbilityClass(i);
+        auto ability = AbilityClass(a);
         
         if(ability == AbilityClass::Force && !IsImmortal(ch))
         {
@@ -53,9 +52,9 @@ void do_slist(std::shared_ptr<Character> ch, std::string argument)
         SetCharacterColor(AT_CYAN, ch);
         ch->Echo("%s", skn);
 
-        for(i = lowlev; i <= hilev; i++)
+        for(int i = lowlev; i <= hilev; i++)
         {
-            for(sn = 0; sn < TopSN; sn++)
+            for(int sn = 0; sn < TopSN; sn++)
             {
                 std::shared_ptr<Skill> skill = SkillTable[sn];
 
