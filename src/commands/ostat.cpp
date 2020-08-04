@@ -8,6 +8,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "skill.hpp"
+#include "area.hpp"
 
 static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
                              std::ostringstream &outbuf);
@@ -59,6 +60,7 @@ static void ShowGeneralStats(std::shared_ptr<Object> obj, const std::string arg,
         outbuf << "&C" << pdesc << "&d";
 
     outbuf << "&cVnum: &C" << obj->Prototype->Vnum
+           << " (" << GetAreaOf(obj->Prototype)->Filename << ")"
            << "  &cType: &C" << GetItemTypeName(obj)
            << "  &cCount: &C" << obj->Prototype->Count
            << "  &cGroupcount: &C" << obj->Count

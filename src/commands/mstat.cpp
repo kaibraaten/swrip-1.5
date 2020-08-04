@@ -8,6 +8,7 @@
 #include "room.hpp"
 #include "protomob.hpp"
 #include "descriptor.hpp"
+#include "area.hpp"
 
 void do_mstat(std::shared_ptr<Character> ch, std::string arg)
 {
@@ -55,7 +56,10 @@ void do_mstat(std::shared_ptr<Character> ch, std::string arg)
 
     if(IsNpc(victim))
     {
-        ch->Echo("Vnum: %ld   ", victim->Prototype->Vnum);
+        auto area = GetAreaOf(victim->Prototype);        
+        ch->Echo("Vnum: %ld (%s)  ",
+                 victim->Prototype->Vnum,
+                 area->Filename.c_str());
     }
 
     ch->Echo("Sex: %s   Room: %ld   Count: %d  Killed: %d\r\n",

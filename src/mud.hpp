@@ -1131,6 +1131,9 @@ void RandomizeExits(std::shared_ptr<Room> room, short maxdir);
 bool DeleteRoom(std::shared_ptr<Room> room);
 bool DeleteObject(std::shared_ptr<ProtoObject> obj);
 bool DeleteMobile(std::shared_ptr<ProtoMobile> mob);
+std::shared_ptr<Area> GetAreaOf(std::shared_ptr<ProtoObject> obj);
+std::shared_ptr<Area> GetAreaOf(std::shared_ptr<ProtoMobile> mob);
+std::shared_ptr<Area> GetAreaOf(std::shared_ptr<Room> room);
 
 /* build.c */
 void EditMobProg(std::shared_ptr<Character> ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);

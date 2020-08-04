@@ -1618,7 +1618,7 @@ static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob,
         }
         else
         {
-            strcpy(t, "its'");
+            strcpy(t, "its");
         }
         break;
 
@@ -1672,7 +1672,7 @@ static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob,
         }
         else
         {
-            strcpy(t, "its'");
+            strcpy(t, "its");
         }
         break;
 
@@ -1741,7 +1741,7 @@ static void MudProgTranslate(char ch, char *t, std::shared_ptr<Character> mob,
         }
         else
         {
-            strcpy(t, "its'");
+            strcpy(t, "its");
         }
         break;
 
