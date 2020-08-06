@@ -71,9 +71,7 @@ namespace fs = std::filesystem;
 
 time_t last_restore_all_time = 0;
 
-std::shared_ptr<TeleportData> FirstTeleport;
-std::shared_ptr<TeleportData> LastTeleport;
-
+std::list<std::shared_ptr<TeleportData>> Teleports;
 std::shared_ptr<Character> FirstCharacter;
 std::shared_ptr<Character> LastCharacter;
 

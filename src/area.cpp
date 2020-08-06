@@ -35,7 +35,7 @@ void FixAreaExits(std::shared_ptr<Area> tarea)
 
 static void LinkReverseExits(const std::shared_ptr<Area> &tarea)
 {
-    for(vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++)
+    for(vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; ++rnum)
     {
         auto pRoomIndex = GetRoom(rnum);
 
@@ -45,7 +45,9 @@ static void LinkReverseExits(const std::shared_ptr<Area> &tarea)
             {
                 if(pexit->ToRoom && !pexit->ReverseExit)
                 {
-                    std::shared_ptr<Exit> rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
+                    std::shared_ptr<Exit> rev_exit = GetExitTo(pexit->ToRoom,
+                                                               GetReverseDirection(pexit->Direction),
+                                                               pRoomIndex->Vnum);
 
                     if(rev_exit != nullptr)
                     {
@@ -60,25 +62,29 @@ static void LinkReverseExits(const std::shared_ptr<Area> &tarea)
 
 static void LinkForwardExits(const std::shared_ptr<Area> &tarea)
 {
-    for(vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++)
+    for(vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; ++rnum)
     {
         auto pRoomIndex = GetRoom(rnum);
 
         if(pRoomIndex != nullptr)
         {
-            bool fexit = false;
-            for(auto pexit : pRoomIndex->Exits())
+            if(!pRoomIndex->Exits().empty())
             {
-                fexit = true;
-                pexit->ReverseVnum = pRoomIndex->Vnum;
+                for(auto pexit : pRoomIndex->Exits())
+                {
+                    pexit->ReverseVnum = pRoomIndex->Vnum;
 
-                if(pexit->Vnum <= 0)
-                    pexit->ToRoom = nullptr;
-                else
-                    pexit->ToRoom = GetRoom(pexit->Vnum);
+                    if(pexit->Vnum <= 0)
+                    {
+                        pexit->ToRoom = nullptr;
+                    }
+                    else
+                    {
+                        pexit->ToRoom = GetRoom(pexit->Vnum);
+                    }
+                }
             }
-
-            if(!fexit)
+            else
             {
                 pRoomIndex->Flags.set(Flag::Room::NoMob);
             }
@@ -99,21 +105,27 @@ void AreaUpdate()
 
         if((reset_age == -1 && area->Age == -1)
            || ++area->Age < (reset_age - 1))
+        {
             return;
-
+        }
+        
         /*
          * Check for PC's.
          */
         if(area->NumberOfPlayers > 0 && area->Age == (reset_age - 1))
         {
-            char buf[MAX_STRING_LENGTH];
+            std::string buf;
 
             /* Rennard */
             if(!area->ResetMessage.empty())
-                sprintf(buf, "%s\r\n", area->ResetMessage.c_str());
+            {
+                buf = area->ResetMessage + "\r\n";
+            }
             else
-                strcpy(buf, "You hear some squeaking sounds...\r\n");
-
+            {
+                buf = "You hear some squeaking sounds...\r\n";
+            }
+            
             for(auto pch = FirstCharacter; pch; pch = pch->Next)
             {
                 if(!IsNpc(pch)
@@ -122,7 +134,7 @@ void AreaUpdate()
                    && pch->InRoom->Area == area)
                 {
                     SetCharacterColor(AT_RESET, pch);
-                    pch->Echo("%s", buf);
+                    pch->Echo(buf);
                 }
             }
         }
@@ -137,16 +149,22 @@ void AreaUpdate()
             ResetArea(area);
 
             if(reset_age == -1)
+            {
                 area->Age = -1;
+            }
             else
+            {
                 area->Age = GetRandomNumberFromRange(0, reset_age / 5);
-
+            }
+            
             auto pRoomIndex = GetRoom(ROOM_VNUM_SCHOOL);
 
             if(pRoomIndex != nullptr
                && area == pRoomIndex->Area
                && area->ResetFrequency == 0)
+            {
                 area->Age = DEFAULT_RESET_FREQUENCY - 3;
+            }
         }
     }
 }
@@ -177,8 +195,10 @@ static void EraseProtoMobs(const std::shared_ptr<Area> &pArea)
 
         if(mid->Vnum < pArea->VnumRanges.Mob.First
            || mid->Vnum > pArea->VnumRanges.Mob.Last)
+        {
             continue;
-
+        }
+        
         if(mid->Shop)
         {
             Shops->Remove(mid->Shop);
@@ -189,7 +209,7 @@ static void EraseProtoMobs(const std::shared_ptr<Area> &pArea)
             RepairShops->Remove(mid->RepairShop);
         }
 
-        auto mobProgs(mid->mprog.MudProgs());
+        auto mobProgs = mid->mprog.MudProgs();
 
         for(auto mprog : mobProgs)
         {
@@ -205,29 +225,30 @@ static void EraseProtoObjects(const std::shared_ptr<Area> &pArea)
     auto protoObjects = ProtoObjects;
 
     for(const auto &i : protoObjects)
-
     {
         auto oid = i.second;
 
         if(oid->Vnum < pArea->VnumRanges.Object.First
            || oid->Vnum > pArea->VnumRanges.Object.Last)
+        {
             continue;
-
-        std::list<std::shared_ptr<ExtraDescription>> extraDescrs(oid->ExtraDescriptions());
+        }
+        
+        auto extraDescrs = oid->ExtraDescriptions();
 
         for(auto eed : extraDescrs)
         {
             oid->Remove(eed);
         }
 
-        auto affects(oid->Affects());
+        auto affects = oid->Affects();
 
         for(auto paf : affects)
         {
             oid->Remove(paf);
         }
 
-        auto objProgs(oid->mprog.MudProgs());
+        auto objProgs = oid->mprog.MudProgs();
 
         for(auto mprog : objProgs)
         {
@@ -256,8 +277,10 @@ static void EraseRooms(const std::shared_ptr<Area> &pArea)
             }
 
             if(rid->Area != pArea)
+            {
                 continue;
-
+            }
+            
             if(!rid->Characters().empty())
             {
                 Log->Bug("CloseArea: room with people #%ld", rid->Vnum);
@@ -267,12 +290,18 @@ static void EraseRooms(const std::shared_ptr<Area> &pArea)
                 for(auto ech : copyOfCharacterList)
                 {
                     if(IsFighting(ech))
+                    {
                         StopFighting(ech, true);
-
+                    }
+                    
                     if(IsNpc(ech))
+                    {
                         ExtractCharacter(ech, true);
+                    }
                     else
+                    {
                         do_recall(ech, "");
+                    }
                 }
             }
 
@@ -288,21 +317,21 @@ static void EraseRooms(const std::shared_ptr<Area> &pArea)
                 }
             }
 
-            std::list<std::shared_ptr<ExtraDescription>> extrasInRoom(rid->ExtraDescriptions());
+            auto extrasInRoom = rid->ExtraDescriptions();
 
             for(auto eed : extrasInRoom)
             {
                 rid->Remove(eed);
             }
 
-            auto mprogActLists(rid->mprog.ActLists());
+            auto mprogActLists = rid->mprog.ActLists();
 
             for(auto mpact : mprogActLists)
             {
                 rid->mprog.Remove(mpact);
             }
 
-            auto roomProgs(rid->mprog.MudProgs());
+            auto roomProgs = rid->mprog.MudProgs();
 
             for(auto mprog : roomProgs)
             {
@@ -318,13 +347,21 @@ static void EraseRooms(const std::shared_ptr<Area> &pArea)
                 std::shared_ptr<Room> trid;
 
                 for(trid = RoomIndexHash[icnt]; trid; trid = trid->Next)
+                {
                     if(trid->Next == rid)
+                    {
                         break;
-
+                    }
+                }
+                
                 if(!trid)
+                {
                     Log->Bug("Close_area: room not in hash list %ld", rid->Vnum);
+                }
                 else
+                {
                     trid->Next = rid->Next;
+                }
             }
         }
     }
@@ -356,27 +393,36 @@ static void ExtractCharactersFromArea(const std::shared_ptr<Area> &pArea)
         ech_next = ech->Next;
 
         if(IsFighting(ech))
+        {
             StopFighting(ech, true);
-
+        }
+        
         if(IsNpc(ech))
         {
             /* if mob is in area, or part of area. */
             if(urange(pArea->VnumRanges.Mob.First, ech->Prototype->Vnum,
                       pArea->VnumRanges.Mob.Last) == ech->Prototype->Vnum ||
                (ech->InRoom && ech->InRoom->Area == pArea))
+            {
                 ExtractCharacter(ech, true);
+            }
+            
             continue;
         }
 
         if(ech->InRoom && ech->InRoom->Area == pArea)
+        {
             do_recall(ech, "");
+        }
     }
 }
 
 void FreeArea(std::shared_ptr<Area> are)
 {
     while(are->FirstReset)
+    {
         FreeReset(are, are->FirstReset);
+    }
 }
 
 template<typename SourceT, typename TargetT>
@@ -401,8 +447,7 @@ void AssignAreaTo(std::shared_ptr<Character> ch)
        && ch->PCData->Build.VnumRanges.Room.First != INVALID_VNUM
        && ch->PCData->Build.VnumRanges.Room.Last != INVALID_VNUM)
     {
-        std::shared_ptr<Area> tarea = ch->PCData->Build.Area;
-
+        auto tarea = ch->PCData->Build.Area;
         auto filename = ConvertToLuaFilename(ch->Name);
 
         if(tarea == nullptr)

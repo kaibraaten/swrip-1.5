@@ -2804,19 +2804,20 @@ static void SufferHallucinations(std::shared_ptr<Character> ch)
 
 static void TeleportUpdate()
 {
-    for(std::shared_ptr<TeleportData> tele = FirstTeleport, tele_next; tele; tele = tele_next)
+    auto teleports = Teleports;
+    
+    for(auto teleport : teleports)
     {
-        tele_next = tele->Next;
-
-        if(--tele->TeleportTimer <= 0)
+        if(--teleport->TeleportTimer <= 0)
         {
-            if(!tele->FromRoom->Characters().empty())
+            if(!teleport->FromRoom->Characters().empty())
             {
-                Teleport(tele->FromRoom->Characters().front(), tele->FromRoom->TeleVnum,
+                Teleport(teleport->FromRoom->Characters().front(),
+                         teleport->FromRoom->TeleVnum,
                          TELE_TRANSALL);
             }
 
-            UNLINK(tele, FirstTeleport, LastTeleport, Next, Previous);
+            Teleports.remove(teleport);
         }
     }
 }

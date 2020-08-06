@@ -1139,15 +1139,19 @@ void RemoveBExitFlag(std::shared_ptr<Exit> pexit, size_t flag)
 static void TeleportCharacter(std::shared_ptr<Character> ch, std::shared_ptr<Room> room, bool show)
 {
     if(IsRoomPrivate(ch, room))
+    {
         return;
-
+    }
+    
     Act(AT_ACTION, "$n disappears suddenly!", ch, NULL, NULL, ActTarget::Room);
     CharacterFromRoom(ch);
     CharacterToRoom(ch, room);
     Act(AT_ACTION, "$n arrives suddenly!", ch, NULL, NULL, ActTarget::Room);
 
     if(show)
+    {
         do_look(ch, "auto");
+    }
 }
 
 void Teleport(std::shared_ptr<Character> ch, vnum_t room, int flags)
@@ -1165,14 +1169,15 @@ void Teleport(std::shared_ptr<Character> ch, vnum_t room, int flags)
     if(!IsBitSet(flags, TELE_TRANSALL))
     {
         TeleportCharacter(ch, pRoomIndex, show);
-        return;
     }
-
-    auto charactersInRoom = ch->InRoom->Characters();
-
-    for(auto nch : charactersInRoom)
+    else
     {
-        TeleportCharacter(nch, pRoomIndex, show);
+        auto charactersInRoom = ch->InRoom->Characters();
+
+        for(auto nch : charactersInRoom)
+        {
+            TeleportCharacter(nch, pRoomIndex, show);
+        }
     }
 }
 

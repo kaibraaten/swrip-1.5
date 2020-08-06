@@ -791,14 +791,19 @@ void CharacterToRoom(std::shared_ptr<Character> ch, std::shared_ptr<Room> pRoomI
     if(ch->InRoom->Flags.test(Flag::Room::Teleport)
        && ch->InRoom->TeleDelay > 0)
     {
-        for(auto tele = FirstTeleport; tele; tele = tele->Next)
-            if(tele->FromRoom == pRoomIndex)
-                return;
+        bool roomAlreadyInList = Find(Teleports,
+                                      [pRoomIndex](const auto &teleport)
+                                      {
+                                          return teleport->FromRoom == pRoomIndex;
+                                      }) != nullptr;
 
-        std::shared_ptr<TeleportData> tele = std::make_shared<TeleportData>();
-        LINK(tele, FirstTeleport, LastTeleport, Next, Previous);
-        tele->FromRoom = pRoomIndex;
-        tele->TeleportTimer = pRoomIndex->TeleDelay;
+        if(!roomAlreadyInList)
+        {
+            auto teleport = std::make_shared<TeleportData>();
+            Teleports.push_back(teleport);
+            teleport->FromRoom = pRoomIndex;
+            teleport->TeleportTimer = pRoomIndex->TeleDelay;
+        }
     }
 }
 

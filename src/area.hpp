@@ -29,8 +29,6 @@ public:
     std::shared_ptr<Reset> LastMobReset;
     std::shared_ptr<Reset> LastObjectReset;
     std::shared_ptr<class Planet> Planet;
-    std::shared_ptr<Area> NextOnPlanet;
-    std::shared_ptr<Area> PreviousOnPlanet;
     std::string Name;
     std::string Filename;
     std::bitset<Flag::MAX> Flags;

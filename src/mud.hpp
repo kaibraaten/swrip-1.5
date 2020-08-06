@@ -330,8 +330,7 @@ extern obj_ret          global_objcode;
 extern std::shared_ptr<Character> FirstCharacter;
 extern std::shared_ptr<Character> LastCharacter;
 
-extern std::shared_ptr<TeleportData> FirstTeleport;
-extern std::shared_ptr<TeleportData> LastTeleport;
+extern std::list<std::shared_ptr<TeleportData>> Teleports;
 extern std::weak_ptr<Character> quitting_char;
 extern std::weak_ptr<Character> loading_char;
 extern std::weak_ptr<Character> saving_char;
