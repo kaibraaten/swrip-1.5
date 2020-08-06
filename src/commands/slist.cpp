@@ -5,10 +5,7 @@
 
 void do_slist(std::shared_ptr<Character> ch, std::string argument)
 {
-    char skn[MAX_INPUT_LENGTH];
-    char skn2[MAX_INPUT_LENGTH / 2];
-    int lowlev = 1, hilev = MAX_ABILITY_LEVEL;
-    int col = 0;
+    constexpr int lowlev = 1, hilev = MAX_ABILITY_LEVEL;
     auto filter_ability = GetAbility(argument);
 
     if(IsNpc(ch))
@@ -22,7 +19,7 @@ void do_slist(std::shared_ptr<Character> ch, std::string argument)
 
     for(int a = (int)AbilityClass::None; a < (int)AbilityClass::Max; ++a)
     {
-        auto ability = AbilityClass(a);
+        const auto ability = AbilityClass(a);
         
         if(ability == AbilityClass::Force && !IsImmortal(ch))
         {
@@ -39,24 +36,26 @@ void do_slist(std::shared_ptr<Character> ch, std::string argument)
             continue;
         }
 
+        std::string skn;
+        
         if(ability != AbilityClass::None)
         {
-            sprintf(skn2, "** %s **", Capitalize(AbilityName[(int)ability]).c_str());
-            sprintf(skn, "\r\n\t\t\t  %s \r\n", skn2);
+            skn = "\r\n\t\t\t  ** " + Capitalize(AbilityName[(int)ability]) + " **\r\n";
         }
         else
         {
-            sprintf(skn, "\r\n\t\t\t** General Skills **\r\n");
+            skn = "\r\n\t\t\t** General Skills **\r\n";
         }
 
         SetCharacterColor(AT_CYAN, ch);
-        ch->Echo("%s", skn);
-
-        for(int i = lowlev; i <= hilev; i++)
+        ch->Echo(skn);
+        int col = 0;
+        
+        for(int i = lowlev; i <= hilev; ++i)
         {
-            for(int sn = 0; sn < TopSN; sn++)
+            for(int sn = 0; sn < TopSN; ++sn)
             {
-                std::shared_ptr<Skill> skill = SkillTable[sn];
+                const std::shared_ptr<Skill> skill = SkillTable[sn];
 
                 if(skill->Name.empty())
                 {
@@ -80,19 +79,17 @@ void do_slist(std::shared_ptr<Character> ch, std::string argument)
                     ch->Echo("(%3d) %-18.18s  ",
                              i, Capitalize(skill->Name).c_str());
 
-                    if(++col == 3)
+                    if((++col % 3) == 0)
                     {
                         ch->Echo("\r\n");
-                        col = 0;
                     }
                 }
             }
         }
 
-        if(col != 0)
+        if(col % 3 != 0)
         {
             ch->Echo("\r\n");
-            col = 0;
         }
     }
 }
