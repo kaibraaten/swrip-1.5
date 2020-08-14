@@ -2459,21 +2459,6 @@ std::shared_ptr<Object> CopyObject(std::shared_ptr<Object> obj)
     return clone;
 }
 
-static bool HasSameOvalues(std::shared_ptr<Object> a, std::shared_ptr<Object> b)
-{
-    int oval = 0;
-
-    for(oval = 0; oval < MAX_OVAL; ++oval)
-    {
-        if(a->Value[oval] != b->Value[oval])
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 static bool IsEquivalent(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2)
 {
     if(obj1->Prototype == obj2->Prototype
@@ -2489,7 +2474,7 @@ static bool IsEquivalent(std::shared_ptr<Object> obj1, std::shared_ptr<Object> o
        && obj1->Cost == obj2->Cost
        && obj1->Level == obj2->Level
        && obj1->Timer == obj2->Timer
-       && HasSameOvalues(obj1, obj2)
+       && obj1->Value == obj2->Value
        && obj1->ExtraDescriptions().empty()
        && obj2->ExtraDescriptions().empty()
        && obj1->Affects().empty()
