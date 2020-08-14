@@ -2448,11 +2448,7 @@ std::shared_ptr<Object> CopyObject(std::shared_ptr<Object> obj)
     clone->Weight = obj->Weight;
     clone->Cost = obj->Cost;
     clone->Timer = obj->Timer;
-
-    for(size_t oval = 0; oval < MAX_OVAL; ++oval)
-    {
-        clone->Value[oval] = obj->Value[oval];
-    }
+    clone->Value = obj->Value;
 
     ++obj->Prototype->Count;
     ++numobjsloaded;
@@ -2478,22 +2474,8 @@ static bool HasSameOvalues(std::shared_ptr<Object> a, std::shared_ptr<Object> b)
     return true;
 }
 
-/*
- * If possible group obj2 into obj1                             -Thoric
- * This code, along with CopyObject, obj->Count, and special support
- * for it implemented throughout handler.c and save.c should show improved
- * performance on MUDs with players that hoard tons of potions and scrolls
- * as this will allow them to be grouped together both in memory, and in
- * the player files.
- */
-static std::shared_ptr<Object> GroupObject(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2)
+static bool IsEquivalent(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2)
 {
-    assert(obj1 != nullptr);
-    assert(obj2 != nullptr);
-
-    if(obj1 == obj2)
-        return obj1;
-
     if(obj1->Prototype == obj2->Prototype
        && !StrCmp(obj1->Name, obj2->Name)
        && !StrCmp(obj1->ShortDescr, obj2->ShortDescr)
@@ -2515,14 +2497,43 @@ static std::shared_ptr<Object> GroupObject(std::shared_ptr<Object> obj1, std::sh
        && obj1->Objects().empty()
        && obj2->Objects().empty())
     {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/*
+ * If possible group obj2 into obj1                             -Thoric
+ * This code, along with CopyObject, obj->Count, and special support
+ * for it implemented throughout handler.c and save.c should show improved
+ * performance on MUDs with players that hoard tons of potions and scrolls
+ * as this will allow them to be grouped together both in memory, and in
+ * the player files.
+ */
+static std::shared_ptr<Object> GroupObject(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2)
+{
+    assert(obj1 != nullptr);
+    assert(obj2 != nullptr);
+
+    if(obj1 == obj2)
+    {
+        return obj1;
+    }
+    else if(IsEquivalent(obj1, obj2))
+    {
         obj1->Count += obj2->Count;
         obj1->Prototype->Count += obj2->Count;   /* to be decremented in */
         numobjsloaded += obj2->Count;             /* ExtractObject */
         ExtractObject(obj2);
         return obj1;
     }
-
-    return obj2;
+    else
+    {
+        return obj2;
+    }
 }
 
 /*
