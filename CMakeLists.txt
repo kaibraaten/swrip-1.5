@@ -714,6 +714,7 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
 add_subdirectory(libs/colorparser)
 add_subdirectory(libs/utility)
 add_subdirectory(libs/3rdparty/lua)
+add_subdirectory(libs/imp)
 add_subdirectory(test)
 
 # Generate src/tables.cpp file.
