@@ -3,7 +3,7 @@ include_directories(include)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(imp SHARED
-   "src/scanner/scanner.cpp" "src/scanner/tokenkind.cpp" "include/imp/except/impexception.hpp" "src/except/impexception.cpp" "include/imp/except/scannerexception.hpp" "src/except/scannerexception.cpp" "include/imp/scanner/token.hpp" "src/scanner/token.cpp")
+   "src/scanner/scanner.cpp" "src/scanner/tokenkind.cpp" "include/imp/except/impexception.hpp" "src/except/impexception.cpp" "include/imp/except/scannerexception.hpp" "src/except/scannerexception.cpp" "include/imp/scanner/token.hpp" "src/scanner/token.cpp" "src/parser/impsyntax.cpp" "include/imp/parser/impsyntax.hpp" "include/imp/except/parserexception.hpp" "src/except/parserexception.cpp" "include/imp/parser/andtest.hpp" "src/parser/andtest.cpp" "src/parser/nottest.cpp" "include/imp/parser/nottest.hpp")
 target_compile_features(imp PUBLIC cxx_std_17)
 target_compile_options(imp
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
