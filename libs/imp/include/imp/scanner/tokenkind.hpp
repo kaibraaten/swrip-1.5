@@ -65,6 +65,7 @@ namespace Imp
 
     std::string TokenName(TokenKind kind);
     TokenKind TokenFromName(const std::string &name);
+    TokenKind &operator++(TokenKind &kind);
 }
 
 #endif

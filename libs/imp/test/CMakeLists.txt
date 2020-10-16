@@ -5,7 +5,7 @@ include(GoogleTest)
 enable_testing()
 add_executable(imp_tests
     src/scanner/tokenkind_tests.cpp
-   "src/main.cpp")
+   "src/main.cpp" "src/scanner/scanner_tests.cpp")
 target_compile_features(imp_tests PRIVATE cxx_std_17)
 target_compile_options(imp_tests
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>

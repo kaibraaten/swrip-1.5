@@ -41,7 +41,7 @@ namespace Imp
         { "!=", TokenKind::NotEqualToken },
         { "%", TokenKind::PercentToken },
         { "+", TokenKind::PlusToken },
-        { "-", TokenKind::SlashToken },
+        { "/", TokenKind::SlashToken },
 
         // Delimiters:
         { ":", TokenKind::ColonToken },
@@ -62,7 +62,7 @@ namespace Imp
         { "E-o-f", TokenKind::EofToken }
     };
 
-    static TokenKind &operator++(TokenKind &kind)
+    TokenKind &operator++(TokenKind &kind)
     {
         if(kind > TokenKind::EofToken)
         {
@@ -83,7 +83,7 @@ namespace Imp
             }
         }
 
-        throw std::logic_error("Invalid TokenKind!");
+        throw std::logic_error("Invalid TokenKind: " + std::to_string((int)kind));
     }
 
     TokenKind TokenFromName(const std::string &name)
