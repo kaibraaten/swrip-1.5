@@ -470,18 +470,12 @@ namespace Imp
         std::string numberAsString = line.substr(cursor, lastChar - cursor);
         std::shared_ptr<Token> token;
 
-        try
+        if(numberAsString.size() > 1 && numberAsString[0] == '0' && numberAsString[1] != '.')
         {
-            if(numberAsString.size() > 1 && numberAsString[0] == '0' && numberAsString[1] != '.')
-            {
-                ScannerError("Integer literals cannot begin with zero.");
-            }
-
-            long value = std::stol(numberAsString);
-            token = std::make_shared<Token>(TokenKind::IntegerToken, CurLineNum());
-            token->IntegerLit(value);
+            ScannerError("Integer literals cannot begin with zero.");
         }
-        catch(const std::invalid_argument &ex)
+
+        if(numberAsString.find('.') != std::string::npos)
         {
             if(!IsValidFloatLiteral(numberAsString))
             {
@@ -491,6 +485,12 @@ namespace Imp
             double value = std::stod(numberAsString);
             token = std::make_shared<Token>(TokenKind::FloatToken, CurLineNum());
             token->FloatLit(value);
+        }
+        else
+        {
+            long value = std::stol(numberAsString);
+            token = std::make_shared<Token>(TokenKind::IntegerToken, CurLineNum());
+            token->IntegerLit(value);
         }
 
         CurLineTokens.push_back(token);

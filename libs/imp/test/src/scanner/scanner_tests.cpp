@@ -203,3 +203,34 @@ TEST(ScannerTests, Expressions)
         ++iter;
     } while(s.CurToken()->Kind() != TokenKind::EofToken);
 }
+
+
+TEST(ScannerTests, Numbers)
+{
+    std::list<std::string> source =
+    {
+        "10 5.4 0 0.5 123 0.0"
+    };
+
+    std::list<Imp::TokenKind> expected =
+    {
+        TokenKind::IntegerToken,
+        TokenKind::FloatToken,
+        TokenKind::IntegerToken,
+        TokenKind::FloatToken,
+        TokenKind::IntegerToken,
+        TokenKind::FloatToken,
+        TokenKind::NewLineToken,
+        TokenKind::EofToken
+    };
+
+    Scanner s(source);
+    auto iter = expected.begin();
+
+    do
+    {
+        s.ReadNextToken();
+        EXPECT_EQ(TokenName(*iter), TokenName(s.CurToken()->Kind()));
+        ++iter;
+    } while(s.CurToken()->Kind() != TokenKind::EofToken);
+}
