@@ -10,15 +10,176 @@ namespace Imp
     constexpr auto TABDIST = 4;
     constexpr auto INVALID_INDEX = -1;
 
+    static bool LineIsBlank(const std::string &line)
+    {
+        for(char c : line)
+        {
+            if(c != ' ' && c != '\t' && c != '\n')
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    static int FindIndent(const std::string &s)
+    {
+        int indent = 0;
+
+        while(indent < s.size() && s[indent] == ' ')
+        {
+            indent++;
+        }
+
+        return indent;
+    }
+
+    static std::string ExpandLeadingTabs(const std::string &s)
+    {
+        std::string newS;
+
+        for(int i = 0; i < s.size(); i++)
+        {
+            char c = s[i];
+
+            if(c == '\t')
+            {
+                do
+                {
+                    newS += " ";
+                } while(newS.size() % TABDIST > 0);
+            }
+            else if(c == ' ')
+            {
+                newS += " ";
+            }
+            else
+            {
+                newS += s.substr(i);
+                break;
+            }
+        }
+
+        return newS;
+    }
+
+    static bool IsLetterAZ(char c)
+    {
+        return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || (c == '_');
+    }
+
+    static bool IsDigit(char c)
+    {
+        return '0' <= c && c <= '9';
+    }
+
+    static bool IsStartOfString(char currentChar)
+    {
+        return currentChar == '"' || currentChar == '\'';
+    }
+
+    static bool IsReservedSpecialCharacter(char currentChar)
+    {
+        return currentChar == '!'
+            || currentChar == '='
+            || currentChar == '|'
+            || currentChar == '&'
+            || currentChar == '+'
+            || currentChar == '-'
+            || currentChar == ')'
+            || currentChar == '('
+            || currentChar == '<'
+            || currentChar == '>'
+            || currentChar == '*'
+            || currentChar == '/'
+            || currentChar == '^'
+            || currentChar == '%'
+            || currentChar == ':'
+            || currentChar == ';'
+            || currentChar == ','
+            || currentChar == '['
+            || currentChar == ']'
+            || currentChar == '{'
+            || currentChar == '}';
+    }
+
+    static bool IsIllegalCharacter(char currentChar)
+    {
+        return !IsLetterAZ(currentChar)
+            && !IsDigit(currentChar)
+            && !IsReservedSpecialCharacter(currentChar)
+            && currentChar != '\''
+            && currentChar != '"'
+            && currentChar != '#';
+    }
+
+    static bool MarksEndOfNameOrKeyword(std::string line, int cursor)
+    {
+        return line[cursor] == ' '
+            || IsReservedSpecialCharacter(line[cursor]);
+    }
+
+    static bool ContainsOnlyOnePunctuation(std::string numberAsString)
+    {
+        return numberAsString.find('.') == numberAsString.rfind('.');
+    }
+
+    static bool IsValidFloatLiteral(std::string numberAsString)
+    {
+        auto idxOfPunct = numberAsString.find('.');
+        return idxOfPunct < numberAsString.size() - 1
+            && IsDigit(numberAsString[idxOfPunct + 1])
+            && ContainsOnlyOnePunctuation(numberAsString);
+    }
+
+    static int IndexOfStringEnd(std::string line, int beginIndex)
+    {
+        const char endMarker = line[beginIndex];
+        int endIndex = beginIndex + 1;
+
+        while(line[endIndex] != endMarker)
+        {
+            ++endIndex;
+
+            if(endIndex == line.size())
+            {
+                return INVALID_INDEX;
+            }
+        }
+
+        return endIndex;
+    }
+
+    static int IndexOfFirstNonWhitespace(std::string line, int beginIndex)
+    {
+        while(line[beginIndex] == ' ' || line[beginIndex] == '\t')
+        {
+            ++beginIndex;
+
+            if(beginIndex == line.size())
+            {
+                return INVALID_INDEX;
+            }
+        }
+
+        return beginIndex;
+    }
+
+    bool LineIsComment(std::string line)
+    {
+        int firstNonWhitespace = IndexOfFirstNonWhitespace(line, 0);
+        return line[firstNonWhitespace] == '#';
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    // Scanner::Impl
+
     struct Scanner::Impl
     {
         Impl(const std::list<std::string> &sourceCode);
         void ScannerError(const std::string &message);
         int CurLineNum() const;
-        int FindIndent(std::string s) const;
-        std::string ExpandLeadingTabs(std::string s) const;
-        bool IsLetterAZ(char c) const;
-        bool IsDigit(char c) const;
         bool IsCompOpr();
         bool IsFactorPrefix();
         bool IsFactorOpr();
@@ -27,21 +188,11 @@ namespace Imp
         std::shared_ptr<Token> CurToken();
         void ReadNextLine();
         void ScanLine(std::string line);
-        bool IsStartOfString(char currentChar);
-        bool IsIllegalCharacter(char currentChar);
         int ExtractNameOrKeyword(std::string line, int cursor);
-        bool MarksEndOfNameOrKeyword(std::string line, int cursor);
-        bool IsReservedSpecialCharacter(char currentChar);
         int ExtractSpecialSymbol(std::string line, int cursor);
         int ExtractNumericValue(std::string line, int cursor);
-        bool IsValidFloatLiteral(std::string numberAsString);
-        bool ContainsOnlyOnePunctuation(std::string numberAsString);
         int ExtractStringValue(std::string line, int cursor);
-        int IndexOfStringEnd(std::string line, int beginIndex);
-        int IndexOfFirstNonWhitespace(std::string line, int beginIndex);
         void CalculateIndent(std::string line);
-        bool LineIsComment(std::string line);
-        bool LineIsBlank(std::string line);
         void ReadNextToken();
 
         std::deque<std::shared_ptr<Token>> CurLineTokens;
@@ -72,59 +223,7 @@ namespace Imp
 
     int Scanner::Impl::CurLineNum() const
     {
-        //return !SourceCode.empty() ? SourceCode.front().first : 0;
         return lineNum;
-    }
-
-    int Scanner::Impl::FindIndent(std::string s) const
-    {
-        int indent = 0;
-
-        while(indent < s.size() && s[indent] == ' ')
-        {
-            indent++;
-        }
-
-        return indent;
-    }
-
-    std::string Scanner::Impl::ExpandLeadingTabs(std::string s) const
-    {
-        std::string newS;
-
-        for(int i = 0; i < s.size(); i++)
-        {
-            char c = s[i];
-
-            if(c == '\t')
-            {
-                do
-                {
-                    newS += " ";
-                } while(newS.size() % TABDIST > 0);
-            }
-            else if(c == ' ')
-            {
-                newS += " ";
-            }
-            else
-            {
-                newS += s.substr(i);
-                break;
-            }
-        }
-
-        return newS;
-    }
-
-    bool Scanner::Impl::IsLetterAZ(char c) const
-    {
-        return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || (c == '_');
-    }
-
-    bool Scanner::Impl::IsDigit(char c) const
-    {
-        return '0' <= c && c <= '9';
     }
 
     bool Scanner::Impl::IsCompOpr()
@@ -288,21 +387,6 @@ namespace Imp
         }
     }
 
-    bool Scanner::Impl::IsStartOfString(char currentChar)
-    {
-        return currentChar == '"' || currentChar == '\'';
-    }
-
-    bool Scanner::Impl::IsIllegalCharacter(char currentChar)
-    {
-        return !IsLetterAZ(currentChar)
-            && !IsDigit(currentChar)
-            && !IsReservedSpecialCharacter(currentChar)
-            && currentChar != '\''
-            && currentChar != '"'
-            && currentChar != '#';
-    }
-
     // Extract a 'name' or reserved keyword token.
     // Return the index of the first character after the symbol.
     int Scanner::Impl::ExtractNameOrKeyword(std::string line, int cursor)
@@ -331,36 +415,6 @@ namespace Imp
         return INVALID_INDEX;
     }
 
-    bool Scanner::Impl::MarksEndOfNameOrKeyword(std::string line, int cursor)
-    {
-        return line[cursor] == ' '
-            || IsReservedSpecialCharacter(line[cursor]);
-    }
-
-    bool Scanner::Impl::IsReservedSpecialCharacter(char currentChar)
-    {
-        return currentChar == '!'
-            || currentChar == '='
-            || currentChar == '|'
-            || currentChar == '&'
-            || currentChar == '+'
-            || currentChar == '-'
-            || currentChar == ')'
-            || currentChar == '('
-            || currentChar == '<'
-            || currentChar == '>'
-            || currentChar == '*'
-            || currentChar == '/'
-            || currentChar == '^'
-            || currentChar == '%'
-            || currentChar == ':'
-            || currentChar == ';'
-            || currentChar == ','
-            || currentChar == '['
-            || currentChar == ']'
-            || currentChar == '{'
-            || currentChar == '}';
-    }
 
     // Extract special symbol token, including operators.
     // Return the index of the first character after the symbol.
@@ -448,19 +502,6 @@ namespace Imp
         return lastChar;
     }
 
-    bool Scanner::Impl::IsValidFloatLiteral(std::string numberAsString)
-    {
-        auto idxOfPunct = numberAsString.find('.');
-        return idxOfPunct < numberAsString.size() - 1
-            && IsDigit(numberAsString[idxOfPunct + 1])
-            && ContainsOnlyOnePunctuation(numberAsString);
-    }
-
-    bool Scanner::Impl::ContainsOnlyOnePunctuation(std::string numberAsString)
-    {
-        return numberAsString.find('.') == numberAsString.rfind('.');
-    }
-
     // Extract a String literal, but ditch the surrounding single/double quotes.
     // Return the index of the first character after the symbol.
     int Scanner::Impl::ExtractStringValue(std::string line, int cursor)
@@ -476,39 +517,6 @@ namespace Imp
         token->StringLit(line.substr(cursor + 1, idxAfterToken - cursor - 1));
         CurLineTokens.push_back(token);
         return idxAfterToken + 1; // +1 to skip past last single/double quote.
-    }
-
-    int Scanner::Impl::IndexOfStringEnd(std::string line, int beginIndex)
-    {
-        const char endMarker = line[beginIndex];
-        int endIndex = beginIndex + 1;
-
-        while(line[endIndex] != endMarker)
-        {
-            ++endIndex;
-
-            if(endIndex == line.size())
-            {
-                return INVALID_INDEX;
-            }
-        }
-
-        return endIndex;
-    }
-
-    int Scanner::Impl::IndexOfFirstNonWhitespace(std::string line, int beginIndex)
-    {
-        while(line[beginIndex] == ' ' || line[beginIndex] == '\t')
-        {
-            ++beginIndex;
-
-            if(beginIndex == line.size())
-            {
-                return INVALID_INDEX;
-            }
-        }
-
-        return beginIndex;
     }
 
     void Scanner::Impl::CalculateIndent(std::string line)
@@ -533,25 +541,6 @@ namespace Imp
         {
             ScannerError("Indentation error.");
         }
-    }
-
-    bool Scanner::Impl::LineIsComment(std::string line)
-    {
-        int firstNonWhitespace = IndexOfFirstNonWhitespace(line, 0);
-        return line[firstNonWhitespace] == '#';
-    }
-
-    bool Scanner::Impl::LineIsBlank(std::string line)
-    {
-        for(char c : line)
-        {
-            if(c != ' ' && c != '\t' && c != '\n')
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     // Scanner class
