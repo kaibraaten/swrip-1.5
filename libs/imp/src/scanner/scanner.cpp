@@ -329,11 +329,6 @@ namespace Imp
 
             CurLineTokens.push_back(std::make_shared<Token>(TokenKind::EofToken, CurLineNum()));
         }
-
-        //for(auto t : CurLineTokens)
-        //{
-            //Main.log.noteToken(t);
-        //}
     }
 
     void Scanner::Impl::ScanLine(std::string line)

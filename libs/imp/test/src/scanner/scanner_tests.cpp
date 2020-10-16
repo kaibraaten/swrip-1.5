@@ -37,15 +37,15 @@ TEST(ScannerTests, TestSmallProgram)
         TokenKind::EofToken
     };
 
-    Scanner scanner(source);
+    Scanner s(source);
     auto iter = expected.begin();
 
     do
     {
-        scanner.ReadNextToken();
-        EXPECT_EQ(*iter, scanner.CurToken()->Kind());
+        s.ReadNextToken();
+        EXPECT_EQ(*iter, s.CurToken()->Kind());
         ++iter;
-    } while(scanner.CurToken()->Kind() != TokenKind::EofToken);
+    } while(s.CurToken()->Kind() != TokenKind::EofToken);
 }
 
 TEST(ScannerTests, TestStringLiteral)
@@ -135,13 +135,71 @@ TEST(ScannerTests, ForLoop)
         TokenKind::EofToken
     };
 
-    Scanner scanner(source);
+    Scanner s(source);
     auto iter = expected.begin();
 
     do
     {
-        scanner.ReadNextToken();
-        EXPECT_EQ(TokenName(*iter), TokenName(scanner.CurToken()->Kind()));
+        s.ReadNextToken();
+        EXPECT_EQ(TokenName(*iter), TokenName(s.CurToken()->Kind()));
         ++iter;
-    } while(scanner.CurToken()->Kind() != TokenKind::EofToken);
+    } while(s.CurToken()->Kind() != TokenKind::EofToken);
+}
+
+TEST(ScannerTests, Expressions)
+{
+    std::list<std::string> source =
+    {
+        "def myfun(a, b):",
+        "    x = -(-2); print('Yo!');",
+        "    x <= 5.4 and foo or bar"
+    };
+
+    std::list<Imp::TokenKind> expected =
+    {
+        TokenKind::DefToken,
+        TokenKind::NameToken,
+        TokenKind::LeftParToken,
+        TokenKind::NameToken,
+        TokenKind::CommaToken,
+        TokenKind::NameToken,
+        TokenKind::RightParToken,
+        TokenKind::ColonToken,
+        TokenKind::NewLineToken,
+        TokenKind::IndentToken,
+        TokenKind::NameToken,
+        TokenKind::EqualToken,
+        TokenKind::MinusToken,
+        TokenKind::LeftParToken,
+        TokenKind::MinusToken,
+        TokenKind::IntegerToken,
+        TokenKind::RightParToken,
+        TokenKind::SemicolonToken,
+        TokenKind::NameToken,
+        TokenKind::LeftParToken,
+        TokenKind::StringToken,
+        TokenKind::RightParToken,
+        TokenKind::SemicolonToken,
+        TokenKind::NewLineToken,
+        TokenKind::NameToken,
+        TokenKind::LessEqualToken,
+        TokenKind::FloatToken,
+        TokenKind::AndToken,
+        TokenKind::NameToken,
+        TokenKind::OrToken,
+        TokenKind::NameToken,
+        TokenKind::NewLineToken,
+        TokenKind::DedentToken,
+        TokenKind::EofToken
+    };
+
+    Scanner s(source);
+    auto iter = expected.begin();
+
+    do
+    {
+        s.ReadNextToken();
+        EXPECT_EQ(TokenName(*iter), TokenName(s.CurToken()->Kind()));
+        ++iter;
+    } while(s.CurToken()->Kind() != TokenKind::EofToken);
 }
