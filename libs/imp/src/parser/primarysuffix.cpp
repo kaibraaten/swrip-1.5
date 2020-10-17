@@ -1,0 +1,36 @@
+#include "imp/parser/primarysuffix.hpp"
+#include "imp/scanner/scanner.hpp"
+#include "imp/scanner/tokenkind.hpp"
+
+namespace Imp
+{
+    PrimarySuffix::PrimarySuffix(int n)
+        : ImpSyntax(n)
+    {
+
+    }
+
+    std::shared_ptr<PrimarySuffix> PrimarySuffix::Parse(std::shared_ptr<Scanner> s)
+    {
+        std::shared_ptr<PrimarySuffix> suffix;
+        TokenKind bracketKind = s->CurToken()->Kind();
+
+        switch(bracketKind)
+        {
+        case TokenKind::LeftBracketToken:
+            suffix = Subscription::Parse(s);
+            break;
+
+        case TokenKind::LeftParToken:
+            suffix = Arguments::Parse(s);
+            break;
+
+        default:
+            ParserError("Expected a primary suffix but found a " + s->CurToken()->Kind() + "!", s->CurLineNum());
+            break;
+        }
+
+        suffix->bracketKind = bracketKind;
+        return suffix;
+    }
+}

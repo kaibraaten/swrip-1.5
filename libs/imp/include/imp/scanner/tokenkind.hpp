@@ -22,7 +22,7 @@ namespace Imp
         IfToken,
         InToken,
         LambdaToken,
-        None,
+        NoneToken,
         NotToken,
         OrToken,
         PassToken,

@@ -1,13 +1,37 @@
-#ifndef _IMP_PARSER_PRIMARY_HPP_
-#define _IMP_PARSER_PRIMARY_HPP_
-
-#include <memory>
-#include <iostream>
-#include <imp/parser/impsyntax.hpp>
+#include "imp/parser/primary.hpp"
+#include "imp/scanner/scanner.hpp"
+#include "imp/scanner/tokenkind.hpp"
+#include "imp/parser/primarysuffix.hpp"
 
 namespace Imp
 {
+    Primary::Primary(int n)
+        : ImpSyntax(n)
+    {
 
+    }
+
+    void Primary::PrettyPrint(std::ostream &out)
+    {
+        atom->PrettyPrint(out);
+
+        for(auto suffix : suffices)
+        {
+            suffix->PrettyPrint(out);
+        }
+    }
+
+    std::shared_ptr<Primary> Primary::Parse(std::shared_ptr<Scanner> s)
+    {
+        auto aspPrimary = std::make_shared<Primary>(s->CurLineNum());
+        aspPrimary->atom = Atom::Parse(s);
+
+        while(s->CurToken()->Kind() == TokenKind::LeftBracketToken
+              || s->CurToken()->Kind() == TokenKind::LeftParToken)
+        {
+            aspPrimary->suffices.push_back(PrimarySuffix::Parse(s));
+        }
+
+        return aspPrimary;
+    }
 }
-
-#endif
