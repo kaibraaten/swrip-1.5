@@ -1,6 +1,7 @@
 #include "imp/parser/comparison.hpp"
 #include "imp/scanner/scanner.hpp"
 #include "imp/parser/compopr.hpp"
+#include "imp/parser/term.hpp"
 
 namespace Imp
 {

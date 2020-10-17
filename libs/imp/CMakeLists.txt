@@ -13,7 +13,7 @@ add_library(imp SHARED
    "src/parser/andtest.cpp"
    "src/parser/nottest.cpp"
    "src/parser/comparison.cpp"
-   "src/parser/compopr.cpp" "include/imp/parser/termopr.hpp" "src/parser/termopr.cpp" "include/imp/parser/term.hpp" "src/parser/term.cpp")
+   "src/parser/compopr.cpp" "include/imp/parser/termopr.hpp" "src/parser/termopr.cpp" "include/imp/parser/term.hpp" "src/parser/term.cpp" "include/imp/parser/factor.hpp" "src/parser/factor.cpp" "include/imp/parser/factorprefix.hpp" "src/parser/factorprefix.cpp" "include/imp/parser/factoropr.hpp" "src/parser/factoropr.cpp" "include/imp/parser/primary.hpp" "src/parser/primary.cpp")
 target_compile_features(imp PUBLIC cxx_std_17)
 target_compile_options(imp
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>

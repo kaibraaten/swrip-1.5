@@ -1,6 +1,7 @@
 #include "imp/parser/nottest.hpp"
 #include "imp/scanner/scanner.hpp"
 #include "imp/scanner/tokenkind.hpp"
+#include "imp/parser/comparison.hpp"
 
 namespace Imp
 {
