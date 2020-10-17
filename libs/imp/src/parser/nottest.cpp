@@ -11,6 +11,12 @@ namespace Imp
 
     void NotTest::PrettyPrint(std::ostream &out)
     {
+        if(not)
+        {
+            out << "not ";
+        }
+
+        _Comparison->PrettyPrint(out);
     }
 
     std::shared_ptr<NotTest> NotTest::Parse(std::shared_ptr<Scanner> s)

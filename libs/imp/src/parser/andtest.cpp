@@ -1,6 +1,7 @@
 #include "imp/parser/andtest.hpp"
 #include "imp/scanner/scanner.hpp"
 #include "imp/scanner/tokenkind.hpp"
+
 namespace Imp
 {
     AndTest::AndTest(int n)
@@ -10,7 +11,16 @@ namespace Imp
 
     void AndTest::PrettyPrint(std::ostream &out)
     {
+        int nPrinted = 0;
 
+        for(auto ant : NotTests)
+        {
+            if(nPrinted > 0)
+                out << " and ";
+
+            ant->PrettyPrint(out);
+            ++nPrinted;
+        }
     }
 
     std::shared_ptr<AndTest> AndTest::Parse(std::shared_ptr<Scanner> s)
