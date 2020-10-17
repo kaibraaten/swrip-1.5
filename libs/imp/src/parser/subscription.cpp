@@ -1,6 +1,7 @@
 #include "imp/scanner/scanner.hpp"
 #include "imp/scanner/tokenkind.hpp"
 #include "imp/parser/subscription.hpp"
+#include "imp/parser/expr.hpp"
 
 namespace Imp
 {
@@ -25,5 +26,10 @@ namespace Imp
         Skip(s, TokenKind::RightBracketToken);
 
         return sub;
+    }
+
+    std::shared_ptr<RuntimeValue> Subscription::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
     }
 }

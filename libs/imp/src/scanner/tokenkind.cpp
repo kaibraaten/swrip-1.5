@@ -21,7 +21,7 @@ namespace Imp
         { "if", TokenKind::IfToken },
         { "in", TokenKind::InToken },
         { "lambda", TokenKind::LambdaToken },
-        { "None", TokenKind::None },
+        { "None", TokenKind::NoneToken },
         { "not", TokenKind::NotToken },
         { "or", TokenKind::OrToken },
         { "pass", TokenKind::PassToken },

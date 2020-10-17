@@ -16,6 +16,7 @@ namespace Imp
     public:
         ListDisplay(int n);
         void PrettyPrint(std::ostream &out) override;
+        std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<ListDisplay> Parse(std::shared_ptr<Scanner> s);
 
     private:

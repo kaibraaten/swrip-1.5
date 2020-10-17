@@ -51,4 +51,9 @@ namespace Imp
         Skip(s, TokenKind::RightBracketToken);
         return listDisplay;
     }
+
+    std::shared_ptr<RuntimeValue> ListDisplay::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

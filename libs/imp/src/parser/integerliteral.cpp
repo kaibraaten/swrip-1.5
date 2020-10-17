@@ -22,4 +22,9 @@ namespace Imp
         Skip(s, TokenKind::IntegerToken);
         return integerLiteral;
     }
+
+    std::shared_ptr<RuntimeValue> IntegerLiteral::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

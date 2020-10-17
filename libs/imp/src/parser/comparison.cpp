@@ -34,7 +34,7 @@ namespace Imp
 
         while(s->IsCompOpr())
         {
-            auto compOpr = std::make_shared<CompOpr>(CompOpr::Parse(s));
+            auto compOpr = CompOpr::Parse(s);
             term = CompTerm(Term::Parse(s));
             term.compOpr = compOpr;
 
@@ -42,5 +42,10 @@ namespace Imp
         }
 
         return comp;
+    }
+
+    std::shared_ptr<RuntimeValue> Comparison::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
     }
 }

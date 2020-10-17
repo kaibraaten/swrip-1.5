@@ -5,16 +5,17 @@
 
 namespace Imp
 {
+    class Comparison;
+
     class NotTest : public ImpSyntax
     {
     public:
         NotTest(int n);
         void PrettyPrint(std::ostream &out) override;
-
+        std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<NotTest> Parse(std::shared_ptr<Scanner> s);
 
-    private:
-        class Comparison;
+    private:        
         std::shared_ptr<Comparison> _Comparison;
         bool not = false;
     };

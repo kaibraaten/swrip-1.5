@@ -38,4 +38,9 @@ namespace Imp
 
         return compOpr;
     }
+
+    std::shared_ptr<RuntimeValue> CompOpr::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

@@ -36,4 +36,9 @@ namespace Imp
         Skip(s, factorPrefix->opr);
         return factorPrefix;
     }
+
+    std::shared_ptr<RuntimeValue> FactorPrefix::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

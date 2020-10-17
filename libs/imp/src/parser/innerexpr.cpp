@@ -26,4 +26,9 @@ namespace Imp
         Skip(s, TokenKind::RightParToken);
         return innerExpr;
     }
+
+    std::shared_ptr<RuntimeValue> InnerExpr::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

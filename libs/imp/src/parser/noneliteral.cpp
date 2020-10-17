@@ -21,4 +21,9 @@ namespace Imp
         Skip(s, TokenKind::NoneToken);
         return noneLiteral;
     }
+
+    std::shared_ptr<RuntimeValue> NoneLiteral::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

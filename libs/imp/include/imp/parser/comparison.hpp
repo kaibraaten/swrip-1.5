@@ -9,19 +9,18 @@
 namespace Imp
 {
     class Scanner;
+    class Term;
+    class CompOpr;
 
     class Comparison : public ImpSyntax
     {
     public:
         Comparison(int n);
-        void PrettyPrint(std::ostream &out);
-
+        void PrettyPrint(std::ostream &out) override;
+        std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Comparison> Parse(std::shared_ptr<Scanner> s);
 
     private:
-        class Term;
-        class CompOpr;
-
         struct CompTerm
         {
             std::shared_ptr<Term> term;

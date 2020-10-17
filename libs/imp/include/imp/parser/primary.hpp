@@ -17,11 +17,12 @@ namespace Imp
     public:
         Primary(int n);
         void PrettyPrint(std::ostream &out) override;
+        std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Primary> Parse(std::shared_ptr<Scanner> s);
 
     private:
         std::shared_ptr<Atom> atom;
-        std::vector<PrimarySuffix> suffices;
+        std::vector<std::shared_ptr<PrimarySuffix>> suffices;
     };
 }
 

@@ -15,8 +15,9 @@ namespace Imp
     public:
         CompOpr(int n);
         void PrettyPrint(std::ostream &out) override;
+        std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
 
-        std::shared_ptr<CompOpr> Parse(std::shared_ptr<Scanner> s);
+        static std::shared_ptr<CompOpr> Parse(std::shared_ptr<Scanner> s);
 
         TokenKind opr;
 

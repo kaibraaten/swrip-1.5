@@ -11,8 +11,10 @@ namespace Imp
     class Atom : public ImpSyntax
     {
     public:
-        Atom(int n);
         static std::shared_ptr<Atom> Parse(std::shared_ptr<Scanner> s);
+
+    protected:
+        Atom(int n);
     };
 }
 

@@ -1,4 +1,5 @@
 #include "imp/parser/term.hpp"
+#include "imp/parser/factor.hpp"
 #include "imp/scanner/scanner.hpp"
 #include "imp/parser/termopr.hpp"
 
@@ -39,5 +40,10 @@ namespace Imp
         }
 
         return term;
+    }
+
+    std::shared_ptr<RuntimeValue> Term::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
     }
 }

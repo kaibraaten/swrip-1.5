@@ -2,6 +2,7 @@
 #include "imp/scanner/scanner.hpp"
 #include "imp/parser/factorprefix.hpp"
 #include "imp/parser/factoropr.hpp"
+#include "imp/parser/primary.hpp"
 
 namespace Imp
 {
@@ -59,5 +60,10 @@ namespace Imp
         }
 
         return factor;
+    }
+
+    std::shared_ptr<RuntimeValue> Factor::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
     }
 }

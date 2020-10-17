@@ -22,4 +22,9 @@ namespace Imp
         Skip(s, TokenKind::FloatToken);
         return floatLiteral;
     }
+
+    std::shared_ptr<RuntimeValue> FloatLiteral::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

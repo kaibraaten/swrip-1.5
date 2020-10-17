@@ -62,4 +62,9 @@ namespace Imp
 
         return lambdaExpr;
     }
+
+    std::shared_ptr<RuntimeValue> Lambda::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

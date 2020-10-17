@@ -1,6 +1,7 @@
 #include "imp/scanner/scanner.hpp"
 #include "imp/scanner/tokenkind.hpp"
 #include "imp/parser/arguments.hpp"
+#include "imp/parser/expr.hpp"
 
 namespace Imp
 {
@@ -51,5 +52,10 @@ namespace Imp
 
         Skip(s, TokenKind::RightParToken);
         return args;
+    }
+
+    std::shared_ptr<RuntimeValue> Arguments::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
     }
 }

@@ -59,4 +59,9 @@ namespace Imp
         Skip(s, TokenKind::RightBraceToken);
         return dictDisplay;
     }
+
+    std::shared_ptr<RuntimeValue> DictDisplay::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

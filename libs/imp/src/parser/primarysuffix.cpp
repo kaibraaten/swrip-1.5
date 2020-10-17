@@ -1,6 +1,8 @@
 #include "imp/parser/primarysuffix.hpp"
 #include "imp/scanner/scanner.hpp"
 #include "imp/scanner/tokenkind.hpp"
+#include "imp/parser/arguments.hpp"
+#include "imp/parser/subscription.hpp"
 
 namespace Imp
 {
@@ -26,7 +28,7 @@ namespace Imp
             break;
 
         default:
-            ParserError("Expected a primary suffix but found a " + s->CurToken()->Kind() + "!", s->CurLineNum());
+            ParserError("Expected a primary suffix but found a " + TokenName(s->CurToken()->Kind()) + "!", s->CurLineNum());
             break;
         }
 

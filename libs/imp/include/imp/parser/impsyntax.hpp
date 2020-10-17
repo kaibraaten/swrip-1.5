@@ -20,7 +20,7 @@ namespace Imp
         int LineNum() const;
 
         virtual void PrettyPrint(std::ostream &out) = 0;
-        virtual RuntimeValue Eval(RuntimeScope curScope) = 0;
+        virtual std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) = 0;
 
     private:
         struct Impl;

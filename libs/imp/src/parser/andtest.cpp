@@ -1,4 +1,5 @@
 #include "imp/parser/andtest.hpp"
+#include "imp/parser/nottest.hpp"
 #include "imp/scanner/scanner.hpp"
 #include "imp/scanner/tokenkind.hpp"
 
@@ -38,5 +39,12 @@ namespace Imp
 
             Skip(s, TokenKind::AndToken);
         }
+
+        return at;
+    }
+
+    std::shared_ptr<RuntimeValue> AndTest::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
     }
 }

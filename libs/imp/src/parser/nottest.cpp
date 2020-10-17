@@ -33,4 +33,9 @@ namespace Imp
         notTest->_Comparison = Comparison::Parse(s);
         return notTest;
     }
+
+    std::shared_ptr<RuntimeValue> NotTest::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

@@ -22,4 +22,9 @@ namespace Imp
         Skip(s, s->CurToken()->Kind());
         return booleanLiteral;
     }
+
+    std::shared_ptr<RuntimeValue> BooleanLiteral::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

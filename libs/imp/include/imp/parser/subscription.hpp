@@ -15,6 +15,7 @@ namespace Imp
     public:
         Subscription(int n);
         void PrettyPrint(std::ostream &out) override;
+        std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Subscription> Parse(std::shared_ptr<Scanner> s);
 
     private:

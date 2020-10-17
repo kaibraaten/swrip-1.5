@@ -18,6 +18,7 @@ namespace Imp
     public:
         DictDisplay(int n);
         void PrettyPrint(std::ostream &out) override;
+        std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<DictDisplay> Parse(std::shared_ptr<Scanner> s);
 
     private:

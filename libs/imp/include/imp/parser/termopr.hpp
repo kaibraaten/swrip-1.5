@@ -15,6 +15,7 @@ namespace Imp
     public:
         TermOpr(int n);
         void PrettyPrint(std::ostream &out) override;
+        std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<TermOpr> Parse(std::shared_ptr<Scanner> s);
 
         TokenKind opr;

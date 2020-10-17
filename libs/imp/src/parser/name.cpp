@@ -21,4 +21,9 @@ namespace Imp
         s->ReadNextToken();
         return n;
     }
+
+    std::shared_ptr<RuntimeValue> Name::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

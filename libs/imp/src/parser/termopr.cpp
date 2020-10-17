@@ -34,4 +34,9 @@ namespace Imp
 
         return termOpr;
     }
+
+    std::shared_ptr<RuntimeValue> TermOpr::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
+    }
 }

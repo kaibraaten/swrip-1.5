@@ -2,6 +2,7 @@
 #include "imp/scanner/scanner.hpp"
 #include "imp/scanner/tokenkind.hpp"
 #include "imp/parser/primarysuffix.hpp"
+#include "imp/parser/atom.hpp"
 
 namespace Imp
 {
@@ -33,5 +34,10 @@ namespace Imp
         }
 
         return aspPrimary;
+    }
+
+    std::shared_ptr<RuntimeValue> Primary::Eval(std::shared_ptr<RuntimeScope> curScope)
+    {
+        return nullptr;
     }
 }
