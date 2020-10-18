@@ -11,11 +11,10 @@ namespace Imp
     class Statement : public ImpSyntax
     {
     public:
-        Statement(int n);
         static std::shared_ptr<Statement> Parse(std::shared_ptr<Scanner> s);
 
-    private:
-
+    protected:
+        Statement(int n);
     };
 }
 

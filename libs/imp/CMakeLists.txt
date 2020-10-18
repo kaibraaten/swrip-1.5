@@ -13,7 +13,29 @@ add_library(imp SHARED
    "src/parser/andtest.cpp"
    "src/parser/nottest.cpp"
    "src/parser/comparison.cpp"
-   "src/parser/compopr.cpp" "include/imp/parser/termopr.hpp" "src/parser/termopr.cpp" "include/imp/parser/term.hpp" "src/parser/term.cpp" "include/imp/parser/factor.hpp" "src/parser/factor.cpp" "include/imp/parser/factorprefix.hpp" "src/parser/factorprefix.cpp" "include/imp/parser/factoropr.hpp" "src/parser/factoropr.cpp" "include/imp/parser/primary.hpp" "src/parser/primary.cpp" "src/parser/primarysuffix.cpp" "include/imp/parser/primarysuffix.hpp" "include/imp/parser/subscription.hpp" "src/parser/subscription.cpp" "include/imp/parser/arguments.hpp" "src/parser/arguments.cpp" "include/imp/parser/expr.hpp" "src/parser/expr.cpp" "include/imp/parser/atom.hpp" "src/parser/atom.cpp" "include/imp/parser/booleanliteral.hpp" "src/parser/booleanliteral.cpp" "src/parser/floatliteral.cpp" "include/imp/parser/floatliteral.hpp" "include/imp/parser/integerliteral.hpp" "src/parser/integerliteral.cpp" "include/imp/parser/stringliteral.hpp" "src/parser/stringliteral.cpp" "src/parser/noneliteral.cpp" "include/imp/parser/noneliteral.hpp" "include/imp/parser/innerexpr.hpp" "src/parser/innerexpr.cpp" "include/imp/parser/name.hpp" "src/parser/name.cpp" "src/parser/dictdisplay.cpp" "include/imp/parser/dictdisplay.hpp" "include/imp/parser/listdisplay.hpp" "src/parser/listdisplay.cpp" "src/parser/lambda.cpp" "include/imp/parser/lambda.hpp" "include/imp/parser/statement.hpp" "src/parser/statement.cpp" "include/imp/parser/compoundstmt.hpp")
+   "src/parser/compopr.cpp"
+   "src/parser/termopr.cpp"
+   "src/parser/term.cpp"
+   "src/parser/factor.cpp"
+   "src/parser/factorprefix.cpp"
+   "src/parser/factoropr.cpp"
+   "src/parser/primary.cpp"
+   "src/parser/primarysuffix.cpp"
+   "src/parser/subscription.cpp"
+   "src/parser/arguments.cpp"
+   "src/parser/expr.cpp"
+   "src/parser/atom.cpp"
+   "src/parser/booleanliteral.cpp"
+   "src/parser/floatliteral.cpp"
+   "src/parser/integerliteral.cpp"
+   "src/parser/stringliteral.cpp"
+   "src/parser/noneliteral.cpp"
+   "src/parser/innerexpr.cpp"
+   "src/parser/name.cpp"
+   "src/parser/dictdisplay.cpp"
+   "src/parser/listdisplay.cpp"
+   "src/parser/lambda.cpp"
+   "src/parser/statement.cpp" "src/parser/compoundstmt.cpp" "include/imp/parser/forstmt.hpp" "src/parser/forstmt.cpp" "include/imp/parser/ifstmt.hpp" "src/parser/ifstmt.cpp" "src/parser/whilestmt.cpp" "include/imp/parser/whilestmt.hpp" "include/imp/parser/funcdef.hpp" "src/parser/funcdef.cpp" "include/imp/parser/smallstmtlist.hpp" "src/parser/smallstmtlist.cpp" "src/parser/smallstmt.cpp" "include/imp/parser/smallstmt.hpp")
 target_compile_features(imp PUBLIC cxx_std_17)
 target_compile_options(imp
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
