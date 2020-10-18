@@ -35,13 +35,13 @@ namespace Imp
             }
             else
             {
-                smallStmt = AspExprStmt::Parse(s);
+                smallStmt = ExprStmt::Parse(s);
             }
 
             break;
 
         default:
-            smallStmt = AspExprStmt::Parse(s);
+            smallStmt = ExprStmt::Parse(s);
         }
 
         return smallStmt;

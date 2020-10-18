@@ -35,7 +35,7 @@ add_library(imp SHARED
    "src/parser/dictdisplay.cpp"
    "src/parser/listdisplay.cpp"
    "src/parser/lambda.cpp"
-   "src/parser/statement.cpp" "src/parser/compoundstmt.cpp" "include/imp/parser/forstmt.hpp" "src/parser/forstmt.cpp" "include/imp/parser/ifstmt.hpp" "src/parser/ifstmt.cpp" "src/parser/whilestmt.cpp" "include/imp/parser/whilestmt.hpp" "include/imp/parser/funcdef.hpp" "src/parser/funcdef.cpp" "include/imp/parser/smallstmtlist.hpp" "src/parser/smallstmtlist.cpp" "src/parser/smallstmt.cpp" "include/imp/parser/smallstmt.hpp")
+   "src/parser/statement.cpp" "src/parser/compoundstmt.cpp" "include/imp/parser/forstmt.hpp" "src/parser/forstmt.cpp" "include/imp/parser/ifstmt.hpp" "src/parser/ifstmt.cpp" "src/parser/whilestmt.cpp" "include/imp/parser/whilestmt.hpp" "include/imp/parser/funcdef.hpp" "src/parser/funcdef.cpp" "include/imp/parser/smallstmtlist.hpp" "src/parser/smallstmtlist.cpp" "src/parser/smallstmt.cpp" "include/imp/parser/smallstmt.hpp" "include/imp/parser/passstmt.hpp" "src/parser/passstmt.cpp" "src/parser/returnstmt.cpp" "include/imp/parser/returnstmt.hpp" "include/imp/parser/exprstmt.hpp" "src/parser/exprstmt.cpp")
 target_compile_features(imp PUBLIC cxx_std_17)
 target_compile_options(imp
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
