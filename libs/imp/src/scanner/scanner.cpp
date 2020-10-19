@@ -1,8 +1,7 @@
 #include <stack>
 #include <deque>
 
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/except/scannerexception.hpp"
 
 namespace Imp

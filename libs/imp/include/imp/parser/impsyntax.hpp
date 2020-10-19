@@ -2,7 +2,6 @@
 #define _IMP_PARSER_IMPSYNTAX_HPP_
 
 #include <memory>
-#include <iostream>
 #include <string>
 
 namespace Imp
@@ -19,7 +18,6 @@ namespace Imp
         virtual ~ImpSyntax();
         int LineNum() const;
 
-        virtual void PrettyPrint(std::ostream &out) = 0;
         virtual std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) = 0;
 
     private:

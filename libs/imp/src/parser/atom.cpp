@@ -1,6 +1,5 @@
 #include "imp/parser/atom.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/booleanliteral.hpp"
 #include "imp/parser/floatliteral.hpp"
 #include "imp/parser/integerliteral.hpp"

@@ -1,6 +1,5 @@
 #include "imp/parser/primarysuffix.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/arguments.hpp"
 #include "imp/parser/subscription.hpp"
 

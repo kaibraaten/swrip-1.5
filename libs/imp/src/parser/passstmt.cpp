@@ -1,6 +1,5 @@
 #include "imp/parser/passstmt.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -8,11 +7,6 @@ namespace Imp
         : SmallStmt(n)
     {
 
-    }
-
-    void PassStmt::PrettyPrint(std::ostream &out)
-    {
-        out << TokenName(TokenKind::PassToken);
     }
 
     std::shared_ptr<RuntimeValue> PassStmt::Eval(std::shared_ptr<RuntimeScope> curScope)

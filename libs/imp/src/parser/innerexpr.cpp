@@ -1,7 +1,6 @@
 #include "imp/parser/innerexpr.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/expr.hpp"
-#include "imp/scanner/scanner.hpp"
 
 namespace Imp
 {
@@ -9,13 +8,6 @@ namespace Imp
         : Atom(n)
     {
 
-    }
-
-    void InnerExpr::PrettyPrint(std::ostream &out)
-    {
-        out << TokenName(TokenKind::LeftParToken);
-        expr->PrettyPrint(out);
-        out << TokenName(TokenKind::RightParToken);
     }
 
     std::shared_ptr<InnerExpr> InnerExpr::Parse(std::shared_ptr<Scanner> s)

@@ -1,6 +1,5 @@
 #include "imp/parser/factoropr.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -9,11 +8,6 @@ namespace Imp
         opr(TokenKind::AstToken)
     {
 
-    }
-
-    void FactorOpr::PrettyPrint(std::ostream &out)
-    {
-        out << TokenName(opr);
     }
 
     std::shared_ptr<FactorOpr> FactorOpr::Parse(std::shared_ptr<Scanner> s)

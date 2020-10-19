@@ -2,7 +2,6 @@
 #define _IMP_PARSE_SUBSCRIPTION_HPP_
 
 #include <memory>
-#include <iostream>
 #include <imp/parser/primarysuffix.hpp>
 
 namespace Imp
@@ -14,7 +13,6 @@ namespace Imp
     {
     public:
         Subscription(int n);
-        void PrettyPrint(std::ostream &out) override;
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Subscription> Parse(std::shared_ptr<Scanner> s);
 

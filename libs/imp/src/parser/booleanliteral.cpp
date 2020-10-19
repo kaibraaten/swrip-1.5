@@ -1,6 +1,5 @@
 #include "imp/parser/booleanliteral.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -8,11 +7,6 @@ namespace Imp
         : Atom(n)
     {
 
-    }
-
-    void BooleanLiteral::PrettyPrint(std::ostream &out)
-    {
-        out << (boolValue ? "True" : "False");
     }
 
     std::shared_ptr<BooleanLiteral> BooleanLiteral::Parse(std::shared_ptr<Scanner> s)

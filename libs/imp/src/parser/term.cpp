@@ -1,6 +1,6 @@
 #include "imp/parser/term.hpp"
 #include "imp/parser/factor.hpp"
-#include "imp/scanner/scanner.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/termopr.hpp"
 
 namespace Imp
@@ -9,21 +9,6 @@ namespace Imp
         : ImpSyntax(n)
     {
 
-    }
-
-    void Term::PrettyPrint(std::ostream &out)
-    {
-        for(const auto &f : factors)
-        {
-            if(f.termOpr != nullptr)
-            {
-                out << " ";
-                f.termOpr->PrettyPrint(out);
-                out << " ";
-            }
-
-            f.factor->PrettyPrint(out);
-        }
     }
 
     std::shared_ptr<Term> Term::Parse(std::shared_ptr<Scanner> s)

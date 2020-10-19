@@ -1,27 +1,12 @@
 #include "imp/parser/andtest.hpp"
 #include "imp/parser/nottest.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
     AndTest::AndTest(int n)
         : ImpSyntax(n)
     {
-    }
-
-    void AndTest::PrettyPrint(std::ostream &out)
-    {
-        int nPrinted = 0;
-
-        for(auto ant : NotTests)
-        {
-            if(nPrinted > 0)
-                out << " and ";
-
-            ant->PrettyPrint(out);
-            ++nPrinted;
-        }
     }
 
     std::shared_ptr<AndTest> AndTest::Parse(std::shared_ptr<Scanner> s)

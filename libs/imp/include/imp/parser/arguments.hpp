@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <memory>
-#include <iostream>
 #include <imp/parser/primarysuffix.hpp>
 
 namespace Imp
@@ -15,7 +14,6 @@ namespace Imp
     {
     public:
         Arguments(int n);
-        void PrettyPrint(std::ostream &out) override;
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Arguments> Parse(std::shared_ptr<Scanner> s);
 

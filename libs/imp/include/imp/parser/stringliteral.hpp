@@ -1,7 +1,6 @@
 #ifndef _IMP_PARSER_STRINGLITERAL_HPP_
 #define _IMP_PARSER_STRINGLITERAL_HPP_
 
-#include <iostream>
 #include <memory>
 #include <string>
 #include <imp/parser/atom.hpp>
@@ -14,7 +13,6 @@ namespace Imp
     {
     public:
         StringLiteral(int n);
-        void PrettyPrint(std::ostream &out) override;
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<StringLiteral> Parse(std::shared_ptr<Scanner> s);
 

@@ -5,10 +5,11 @@
 #include <string>
 #include <list>
 #include <utility>
-#include <imp/scanner/token.hpp>
 
 namespace Imp
 {
+    class Token;
+
     class Scanner
     {
     public:

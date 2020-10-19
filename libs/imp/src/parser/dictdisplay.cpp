@@ -1,8 +1,7 @@
 #include "imp/parser/dictdisplay.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/parser/stringliteral.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -10,27 +9,6 @@ namespace Imp
         : Atom(n)
     {
 
-    }
-
-    void DictDisplay::PrettyPrint(std::ostream &out)
-    {
-        out << TokenName(TokenKind::LeftBraceToken);
-        int nPrinted = 0;
-
-        for(const auto pair : elements)
-        {
-            if(nPrinted > 0)
-            {
-                out << ", ";
-            }
-
-            pair.first->PrettyPrint(out);
-            out << ": ";
-            pair.second->PrettyPrint(out);
-            ++nPrinted;
-        }
-
-        out << TokenName(TokenKind::RightBraceToken);
     }
 
     std::shared_ptr<DictDisplay> DictDisplay::Parse(std::shared_ptr<Scanner> s)

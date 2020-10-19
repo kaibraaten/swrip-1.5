@@ -1,6 +1,5 @@
 #include "imp/parser/primary.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/primarysuffix.hpp"
 #include "imp/parser/atom.hpp"
 
@@ -10,16 +9,6 @@ namespace Imp
         : ImpSyntax(n)
     {
 
-    }
-
-    void Primary::PrettyPrint(std::ostream &out)
-    {
-        atom->PrettyPrint(out);
-
-        for(auto suffix : suffices)
-        {
-            suffix->PrettyPrint(out);
-        }
     }
 
     std::shared_ptr<Primary> Primary::Parse(std::shared_ptr<Scanner> s)

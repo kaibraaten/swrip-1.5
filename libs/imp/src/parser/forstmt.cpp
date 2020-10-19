@@ -1,6 +1,5 @@
 #include "imp/parser/forstmt.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/name.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/parser/suite.hpp"
@@ -11,16 +10,6 @@ namespace Imp
         : CompoundStmt(n)
     {
 
-    }
-
-    void ForStmt::PrettyPrint(std::ostream &out)
-    {
-        out << "for ";
-        name->PrettyPrint(out);
-        out << " in ";
-        expr->PrettyPrint(out);
-        out << ":";
-        body->PrettyPrint(out);
     }
 
     std::shared_ptr<ForStmt> ForStmt::Parse(std::shared_ptr<Scanner> s)

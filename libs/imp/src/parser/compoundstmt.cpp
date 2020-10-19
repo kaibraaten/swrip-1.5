@@ -1,6 +1,5 @@
 #include "imp/parser/compoundstmt.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/forstmt.hpp"
 #include "imp/parser/ifstmt.hpp"
 #include "imp/parser/whilestmt.hpp"

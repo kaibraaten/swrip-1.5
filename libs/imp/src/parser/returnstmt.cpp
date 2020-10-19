@@ -1,7 +1,6 @@
 #include "imp/parser/returnstmt.hpp"
 #include "imp/parser/expr.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -9,17 +8,6 @@ namespace Imp
         : SmallStmt(n)
     {
 
-    }
-
-    void ReturnStmt::PrettyPrint(std::ostream &out)
-    {
-        out << TokenName(TokenKind::ReturnToken);
-
-        if(returnExpr != nullptr)
-        {
-            out << " ";
-            returnExpr->PrettyPrint(out);
-        }
     }
 
     std::shared_ptr<RuntimeValue> ReturnStmt::Eval(std::shared_ptr<RuntimeScope> curScope)

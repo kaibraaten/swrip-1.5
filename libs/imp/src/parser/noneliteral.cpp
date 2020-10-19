@@ -1,6 +1,5 @@
 #include "imp/parser/noneliteral.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -8,11 +7,6 @@ namespace Imp
         : Atom(n)
     {
 
-    }
-
-    void NoneLiteral::PrettyPrint(std::ostream &out)
-    {
-        out << "None";
     }
 
     std::shared_ptr<NoneLiteral> NoneLiteral::Parse(std::shared_ptr<Scanner> s)

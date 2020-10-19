@@ -1,7 +1,6 @@
 #include "imp/parser/impsyntax.hpp"
 #include "imp/except/parserexception.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {

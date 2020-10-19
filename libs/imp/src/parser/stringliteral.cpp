@@ -1,6 +1,5 @@
 #include "imp/parser/stringliteral.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -8,11 +7,6 @@ namespace Imp
         : Atom(n)
     {
 
-    }
-
-    void StringLiteral::PrettyPrint(std::ostream &out)
-    {
-        out << strValue;
     }
 
     std::shared_ptr<StringLiteral> StringLiteral::Parse(std::shared_ptr<Scanner> s)

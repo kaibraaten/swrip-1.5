@@ -1,7 +1,6 @@
 #include "imp/parser/listdisplay.hpp"
 #include "imp/parser/expr.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -9,23 +8,6 @@ namespace Imp
         : Atom(n)
     {
 
-    }
-
-    void ListDisplay::PrettyPrint(std::ostream &out)
-    {
-        out << TokenName(TokenKind::LeftBracketToken);
-        int nPrinted = 0;
-
-        for(auto expr : exprs)
-        {
-            if(nPrinted > 0)
-                out << ", ";
-
-            expr->PrettyPrint(out);
-            ++nPrinted;
-        }
-
-        out << TokenName(TokenKind::RightBracketToken);
     }
 
     std::shared_ptr<ListDisplay> ListDisplay::Parse(std::shared_ptr<Scanner> s)

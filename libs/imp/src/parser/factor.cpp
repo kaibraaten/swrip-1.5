@@ -1,5 +1,5 @@
 #include "imp/parser/factor.hpp"
-#include "imp/scanner/scanner.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/factorprefix.hpp"
 #include "imp/parser/factoropr.hpp"
 #include "imp/parser/primary.hpp"
@@ -10,26 +10,6 @@ namespace Imp
         : ImpSyntax(n)
     {
 
-    }
-
-    void Factor::PrettyPrint(std::ostream &out)
-    {
-        for(const auto &p : primaries)
-        {
-            if(p.opr != nullptr)
-            {
-                out << " ";
-                p.opr->PrettyPrint(out);
-                out << " ";
-            }
-
-            if(p.prefix != nullptr)
-            {
-                p.prefix->PrettyPrint(out);
-            }
-
-            p.primary->PrettyPrint(out);
-        }
     }
 
     std::shared_ptr<Factor> Factor::Parse(std::shared_ptr<Scanner> s)

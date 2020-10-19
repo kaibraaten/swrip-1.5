@@ -1,5 +1,5 @@
 #include "imp/parser/comparison.hpp"
-#include "imp/scanner/scanner.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/compopr.hpp"
 #include "imp/parser/term.hpp"
 
@@ -9,21 +9,6 @@ namespace Imp
         : ImpSyntax(n)
     {
 
-    }
-
-    void Comparison::PrettyPrint(std::ostream &out)
-    {
-        for(const auto &term : terms)
-        {
-            if(term.compOpr != nullptr)
-            {
-                out << " ";
-                term.compOpr->PrettyPrint(out);
-                out << " ";
-            }
-
-            term.term->PrettyPrint(out);
-        }
     }
 
     std::shared_ptr<Comparison> Comparison::Parse(std::shared_ptr<Scanner> s)

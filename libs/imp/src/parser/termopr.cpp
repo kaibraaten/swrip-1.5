@@ -1,6 +1,5 @@
 #include "imp/parser/termopr.hpp"
-#include "imp/scanner/tokenkind.hpp"
-#include "imp/scanner/scanner.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -9,11 +8,6 @@ namespace Imp
         opr(TokenKind::PlusToken)
     {
 
-    }
-
-    void TermOpr::PrettyPrint(std::ostream &out)
-    {
-        out << TokenName(opr);
     }
 
     std::shared_ptr<TermOpr> TermOpr::Parse(std::shared_ptr<Scanner> s)

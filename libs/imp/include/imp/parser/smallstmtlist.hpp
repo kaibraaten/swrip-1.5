@@ -3,7 +3,6 @@
 
 #include <list>
 #include <memory>
-#include <iostream>
 #include <imp/parser/statement.hpp>
 
 namespace Imp
@@ -17,7 +16,6 @@ namespace Imp
     {
     public:
         SmallStmtList(int n);
-        void PrettyPrint(std::ostream &out) override;
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<SmallStmtList> Parse(std::shared_ptr<Scanner> s);
 

@@ -1,5 +1,4 @@
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/arguments.hpp"
 #include "imp/parser/expr.hpp"
 
@@ -9,25 +8,6 @@ namespace Imp
         : PrimarySuffix(n)
     {
 
-    }
-
-    void Arguments::PrettyPrint(std::ostream &out)
-    {
-        out << TokenName(TokenKind::LeftParToken);
-        int nPrinted = 0;
-
-        for(auto expr : exprs)
-        {
-            if(nPrinted > 0)
-            {
-                out << ", ";
-            }
-
-            expr->PrettyPrint(out);
-            ++nPrinted;
-        }
-
-        out << TokenName(TokenKind::RightParToken);
     }
 
     std::shared_ptr<Arguments> Arguments::Parse(std::shared_ptr<Scanner> s)

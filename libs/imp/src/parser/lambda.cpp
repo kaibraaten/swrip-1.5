@@ -1,8 +1,7 @@
 #include "imp/parser/lambda.hpp"
 #include "imp/parser/name.hpp"
 #include "imp/parser/expr.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -10,31 +9,6 @@ namespace Imp
         : Atom(n)
     {
 
-    }
-
-    void Lambda::PrettyPrint(std::ostream &out)
-    {
-        out << "lambda";
-
-        bool isFirst = true;
-
-        for(auto param : formalParams)
-        {
-            if(isFirst)
-            {
-                out << " ";
-            }
-            else
-            {
-                out << ", ";
-            }
-
-            param->PrettyPrint(out);
-            isFirst = false;
-        }
-
-        out << ": ";
-        body->PrettyPrint(out);
     }
 
     std::shared_ptr<Lambda> Lambda::Parse(std::shared_ptr<Scanner> s)

@@ -2,7 +2,6 @@
 #define _IMP_PARSER_PRIMARYSUFFIX_HPP_
 
 #include <memory>
-#include <iostream>
 #include <imp/parser/impsyntax.hpp>
 
 namespace Imp

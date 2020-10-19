@@ -1,7 +1,6 @@
 #ifndef _IMP_PARSER_FACTORPREFIX_HPP_
 #define _IMP_PARSER_FACTORPREFIX_HPP_
 
-#include <iostream>
 #include <memory>
 #include <imp/parser/impsyntax.hpp>
 
@@ -14,7 +13,6 @@ namespace Imp
     {
     public:
         FactorPrefix(int n);
-        void PrettyPrint(std::ostream &out) override;
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<FactorPrefix> Parse(std::shared_ptr<Scanner> s);
 

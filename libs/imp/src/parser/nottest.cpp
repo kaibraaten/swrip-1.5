@@ -1,6 +1,5 @@
 #include "imp/parser/nottest.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/comparison.hpp"
 
 namespace Imp
@@ -8,16 +7,7 @@ namespace Imp
     NotTest::NotTest(int n)
         : ImpSyntax(n)
     {
-    }
 
-    void NotTest::PrettyPrint(std::ostream &out)
-    {
-        if(not)
-        {
-            out << "not ";
-        }
-
-        _Comparison->PrettyPrint(out);
     }
 
     std::shared_ptr<NotTest> NotTest::Parse(std::shared_ptr<Scanner> s)

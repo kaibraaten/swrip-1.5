@@ -1,7 +1,6 @@
 #include "imp/parser/smallstmtlist.hpp"
 #include "imp/parser/smallstmt.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -11,25 +10,9 @@ namespace Imp
 
     }
 
-    void SmallStmtList::PrettyPrint(std::ostream &out)
-    {
-        int nPrinted = 0;
-
-        for(auto stmt : smallStatements)
-        {
-            if(nPrinted > 0)
-                out << "; ";
-
-            stmt->PrettyPrint(out);
-            ++nPrinted;
-        }
-
-        out << "\r\n";
-    }
-
     std::shared_ptr<RuntimeValue> SmallStmtList::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-
+        return nullptr;
     }
 
     std::shared_ptr<SmallStmtList> SmallStmtList::Parse(std::shared_ptr<Scanner> s)

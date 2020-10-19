@@ -1,5 +1,4 @@
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 #include "imp/parser/andtest.hpp"
 #include "imp/parser/expr.hpp"
 
@@ -9,20 +8,6 @@ namespace Imp
         : ImpSyntax(n)
     {
 
-    }
-
-    void Expr::PrettyPrint(std::ostream &out)
-    {
-        int nPrinted = 0;
-
-        for(auto aat : andTests)
-        {
-            if(nPrinted > 0)
-                out << " or ";
-
-            aat->PrettyPrint(out);
-            ++nPrinted;
-        }
     }
 
     std::shared_ptr<Expr> Expr::Parse(std::shared_ptr<Scanner> s)

@@ -3,8 +3,7 @@
 #include "imp/parser/returnstmt.hpp"
 #include "imp/parser/assignment.hpp"
 #include "imp/parser/exprstmt.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {

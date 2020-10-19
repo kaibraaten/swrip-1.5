@@ -1,5 +1,5 @@
 #include "imp/parser/name.hpp"
-#include "imp/scanner/scanner.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -7,11 +7,6 @@ namespace Imp
         : Atom(n)
     {
 
-    }
-
-    void Name::PrettyPrint(std::ostream &out)
-    {
-        out << name;
     }
 
     std::shared_ptr<Name> Name::Parse(std::shared_ptr<Scanner> s)

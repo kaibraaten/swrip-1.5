@@ -1,6 +1,5 @@
 #include "imp/parser/floatliteral.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -8,11 +7,6 @@ namespace Imp
         : Atom(n)
     {
 
-    }
-
-    void FloatLiteral::PrettyPrint(std::ostream &out)
-    {
-        out << floatValue;
     }
 
     std::shared_ptr<FloatLiteral> FloatLiteral::Parse(std::shared_ptr<Scanner> s)

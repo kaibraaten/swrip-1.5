@@ -1,8 +1,7 @@
 #include "imp/parser/whilestmt.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/parser/suite.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -10,14 +9,6 @@ namespace Imp
         : CompoundStmt(n)
     {
 
-    }
-
-    void WhileStmt::PrettyPrint(std::ostream &out)
-    {
-        out << "while ";
-        test->PrettyPrint(out);
-        out << ":";
-        body->PrettyPrint(out);
     }
 
     std::shared_ptr<RuntimeValue> WhileStmt::Eval(std::shared_ptr<RuntimeScope> curScope)

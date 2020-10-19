@@ -1,7 +1,6 @@
 #include "imp/parser/exprstmt.hpp"
 #include "imp/parser/expr.hpp"
-#include "imp/scanner/scanner.hpp"
-#include "imp/scanner/tokenkind.hpp"
+#include "imp/scanner/all.hpp"
 
 namespace Imp
 {
@@ -11,12 +10,7 @@ namespace Imp
 
     }
 
-    void ExprStmt::PrettyPrint(std::ostream &out)
-    {
-        expr->PrettyPrint(out);
-    }
-
-    std::shared_ptr<RuntimeValue> ExprStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
+     std::shared_ptr<RuntimeValue> ExprStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
         return nullptr;
     }
