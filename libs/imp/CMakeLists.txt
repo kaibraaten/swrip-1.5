@@ -46,7 +46,9 @@ add_library(imp SHARED
   "src/parser/passstmt.cpp"
   "src/parser/returnstmt.cpp"
   "src/parser/exprstmt.cpp"
-  "src/parser/assignment.cpp" "src/parser/suite.cpp" "include/imp/parser/suite.hpp" "include/imp/scanner/all.hpp" "src/parser/program.cpp" "include/imp/parser/program.hpp")
+  "src/parser/assignment.cpp"
+  "src/parser/suite.cpp"
+  "src/parser/program.cpp" "include/imp/runtime/runtimevalue.hpp" "src/runtime/runtimevalue.cpp" "include/imp/except/runtimeexception.hpp" "src/except/runtimeexception.cpp" "include/imp/runtime/returnvalue.hpp" "src/runtime/returnvalue.cpp" "include/imp/runtime/boolvalue.hpp" "src/runtime/boolvalue.cpp" "include/imp/runtime/dictvalue.hpp" "src/runtime/dictvalue.cpp")
 target_compile_features(imp PUBLIC cxx_std_17)
 target_compile_options(imp
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
