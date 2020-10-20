@@ -83,6 +83,9 @@ namespace Imp
             }
 
             break;
+
+        default:
+            break;
         }
 
         return t;

@@ -115,7 +115,6 @@ namespace Imp
 
             if(dynamic_cast<StringValue *>(param.get()))
             {
-                long value = 0;
                 std::string asStr = param->GetStringValue("int() param", where);
 
                 if(InvalidInt(asStr))
@@ -142,7 +141,6 @@ namespace Imp
         bool InvalidInt(const std::string &n) const
         {
             int start = 0;
-            bool hasInvalidChars = false;
 
             if(n[0] == '+' || n[0] == '-')
             {
@@ -178,7 +176,6 @@ namespace Imp
 
             if(dynamic_cast<StringValue *>(param.get()))
             {
-                long value = 0;
                 std::string asStr = param->GetStringValue("float() param", where);
 
                 if(InvalidFloat(asStr))
@@ -205,7 +202,6 @@ namespace Imp
         bool InvalidFloat(const std::string &n) const
         {
             int start = 0;
-            bool hasInvalidChars = false;
             int puncts = 0;
 
             if(n[0] == '+' || n[0] == '-')

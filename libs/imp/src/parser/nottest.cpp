@@ -17,7 +17,7 @@ namespace Imp
 
         if(s->CurToken()->Kind() == TokenKind::NotToken)
         {
-            notTest->not = true;
+            notTest->_Not = true;
             Skip(s, TokenKind::NotToken);
         }
 
@@ -29,7 +29,7 @@ namespace Imp
     {
         auto v = _Comparison->Eval(curScope);
 
-        if(not)
+        if(_Not)
         {
             v = v->EvalNot(this);
         }

@@ -19,7 +19,7 @@ namespace Imp
 
     private:        
         std::shared_ptr<Comparison> _Comparison;
-        bool not = false;
+        bool _Not = false;
     };
 }
 
