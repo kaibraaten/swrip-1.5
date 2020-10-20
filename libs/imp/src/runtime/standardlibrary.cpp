@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream>
+#include <cstdlib>
 #include "imp/runtime/standardlibrary.hpp"
 #include "imp/runtime/functionvalue.hpp"
 #include "imp/runtime/intvalue.hpp"
@@ -7,6 +9,7 @@
 #include "imp/runtime/floatvalue.hpp"
 #include "imp/runtime/dictvalue.hpp"
 #include "imp/runtime/listvalue.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -112,14 +115,15 @@ namespace Imp
 
             if(dynamic_cast<StringValue *>(param.get()))
             {
-                long value = 0; // param.getStringValue("int() param", where)
+                long value = 0;
+                std::string asStr = param->GetStringValue("int() param", where);
 
-                if(cantConvert)
+                if(InvalidInt(asStr))
                 {
                     RuntimeValue::RuntimeError("Could not convert value to int: " + param->ShowInfo(), where);
                 }
 
-                retVal = std::make_shared<IntValue>(value);
+                retVal = std::make_shared<IntValue>(std::stol(asStr));
             }
             else if(dynamic_cast<IntValue *>(param.get())
                     || dynamic_cast<FloatValue *>(param.get()))
@@ -133,6 +137,172 @@ namespace Imp
 
             return retVal;
         }
+
+    private:
+        bool InvalidInt(const std::string &n) const
+        {
+            int start = 0;
+            bool hasInvalidChars = false;
+
+            if(n[0] == '+' || n[0] == '-')
+            {
+                ++start;
+            }
+
+            for(int i = start; i < n.size(); ++i)
+            {
+                if(n[i] < '0' || n[i] > '9')
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    };
+
+    class FloatFunc : public FunctionValue
+    {
+    public:
+        FloatFunc()
+            : FunctionValue("float")
+        {
+
+        }
+
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        {
+            CheckNumParams(actualParams, 1, "float", where);
+            auto param = actualParams[0];
+            std::shared_ptr<FloatValue> retVal;
+
+            if(dynamic_cast<StringValue *>(param.get()))
+            {
+                long value = 0;
+                std::string asStr = param->GetStringValue("float() param", where);
+
+                if(InvalidFloat(asStr))
+                {
+                    RuntimeValue::RuntimeError("Could not convert value to float: " + param->ShowInfo(), where);
+                }
+
+                retVal = std::make_shared<FloatValue>(std::stod(asStr));
+            }
+            else if(dynamic_cast<IntValue *>(param.get())
+                    || dynamic_cast<FloatValue *>(param.get()))
+            {
+                retVal = std::make_shared<FloatValue>(param->GetFloatValue("float() param", where));
+            }
+            else
+            {
+                RuntimeValue::RuntimeError("Type error for float().", where);
+            }
+
+            return retVal;
+        }
+
+    private:
+        bool InvalidFloat(const std::string &n) const
+        {
+            int start = 0;
+            bool hasInvalidChars = false;
+            int puncts = 0;
+
+            if(n[0] == '+' || n[0] == '-')
+            {
+                ++start;
+            }
+
+            for(int i = start; i < n.size(); ++i)
+            {
+                if(n[i] == '.')
+                {
+                    ++puncts;
+
+                    if(puncts > 1)
+                    {
+                        return true;
+                    }
+                }
+                else if(n[i] < '0' || n[i] > '9')
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    };
+
+    class PrintFunc : public FunctionValue
+    {
+    public:
+        PrintFunc()
+            : FunctionValue("print")
+        {
+
+        }
+
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        {
+            std::ostringstream output;
+            bool isFirst = true;
+
+            for(auto param : actualParams)
+            {
+                if(!isFirst)
+                {
+                    std::cout << " ";
+                }
+
+                output << param->EvalStr(where);
+                isFirst = false;
+            }
+
+            std::cout << output.str() << std::endl;
+            return std::make_shared<NoneValue>();
+        }
+    };
+
+    class LenFunc : public FunctionValue
+    {
+    public:
+        LenFunc()
+            : FunctionValue("len")
+        {
+
+        }
+
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        {
+            CheckNumParams(actualParams, 1, "len", where);
+            auto v1 = actualParams[0];
+            return v1->EvalLen(where);
+        }
+    };
+
+    class ExitFunc : public FunctionValue
+    {
+    public:
+        ExitFunc()
+            : FunctionValue("exit")
+        {
+
+        }
+
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        {
+            CheckNumParams(actualParams, 1, "exit", where);
+            auto v1 = actualParams[0];
+            
+            if((dynamic_cast<IntValue *>(v1.get())) == nullptr)
+            {
+                RuntimeValue::RuntimeError("Type error for exit().", where);
+            }
+
+            exit(v1->GetIntValue("exit() param", where));
+            return std::make_shared<ExitFunc>();
+        }
     };
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -143,5 +313,10 @@ namespace Imp
         Assign("range", std::make_shared<RangeFunc>());
         Assign("input", std::make_shared<InputFunc>());
         Assign("str", std::make_shared<StrFunc>());
+        Assign("int", std::make_shared<IntFunc>());
+        Assign("float", std::make_shared<FloatFunc>());
+        Assign("print", std::make_shared<PrintFunc>());
+        Assign("len", std::make_shared<LenFunc>());
+        Assign("exit", std::make_shared<ExitFunc>());
     }
 }
