@@ -1,6 +1,7 @@
 #include "imp/parser/listdisplay.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/listvalue.hpp"
 
 namespace Imp
 {
@@ -36,6 +37,13 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> ListDisplay::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        std::deque<std::shared_ptr<RuntimeValue>> values;
+
+        for(auto e : exprs)
+        {
+            values.push_back(e->Eval(curScope));
+        }
+
+        return std::make_shared<ListValue>(values);
     }
 }

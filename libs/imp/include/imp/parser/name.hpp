@@ -15,9 +15,10 @@ namespace Imp
         Name(int n);
         std::shared_ptr<RuntimeValue> Eval(std::shared_ptr<RuntimeScope> curScope) override;
         static std::shared_ptr<Name> Parse(std::shared_ptr<Scanner> s);
+        std::string GetName() const;
 
     private:
-        std::string name;
+        std::string _Name;
     };
 }
 

@@ -3,6 +3,9 @@
 #include "imp/parser/name.hpp"
 #include "imp/parser/subscription.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/runtimescope.hpp"
+#include "imp/runtime/runtimevalue.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -14,7 +17,28 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Assignment::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        auto result = expr->Eval(curScope); // New value to store
+
+        if(subscriptions.empty())
+        {
+            std::string id = name->GetName();
+            curScope->Assign(id, result);
+        }
+        else
+        {
+            auto whereToAssign = name->Eval(curScope); // The object to store in
+            auto index = subscriptions[0]->Eval(curScope); // Index in above object
+
+            for(int i = 1; i < subscriptions.size(); ++i)
+            {
+                whereToAssign = whereToAssign->EvalSubscription(index, this);
+                index = subscriptions[i]->Eval(curScope);
+            }
+
+            whereToAssign->EvalAssignElem(index, result, this); // Assign the new value
+        }
+
+        return std::make_shared<NoneValue>();
     }
 
     std::shared_ptr<Assignment> Assignment::Parse(std::shared_ptr<Scanner> s)

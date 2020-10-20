@@ -1,5 +1,6 @@
 #include "imp/parser/factorprefix.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -33,6 +34,6 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> FactorPrefix::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        return std::make_shared<NoneValue>();
     }
 }

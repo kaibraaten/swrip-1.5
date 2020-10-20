@@ -15,7 +15,7 @@ namespace Imp
     }
 
     std::shared_ptr<RuntimeValue> RuntimeScope::Find(const std::string &id,
-                                                     std::shared_ptr<ImpSyntax> where)
+                                                     ImpSyntax *where)
     {
         auto iter = decls.find(id);
 

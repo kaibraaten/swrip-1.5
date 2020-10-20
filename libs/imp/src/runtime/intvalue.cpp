@@ -22,32 +22,32 @@ namespace Imp
         return std::to_string(_Value);
     }
 
-    bool IntValue::GetBoolValue(const std::string &what, std::shared_ptr<ImpSyntax> where)
+    bool IntValue::GetBoolValue(const std::string &what, ImpSyntax *where)
     {
         return _Value != 0;
     }
 
-    long IntValue::GetIntValue(const std::string &what, std::shared_ptr<ImpSyntax> where)
+    long IntValue::GetIntValue(const std::string &what, ImpSyntax *where)
     {
         return _Value;
     }
 
-    double IntValue::GetFloatValue(const std::string &what, std::shared_ptr<ImpSyntax> where)
+    double IntValue::GetFloatValue(const std::string &what, ImpSyntax *where)
     {
         return _Value;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalNegate(std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalNegate(ImpSyntax *where)
     {
         return std::make_shared<IntValue>(-_Value);
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalPositive(std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalPositive(ImpSyntax *where)
     {
         return std::make_shared<IntValue>(_Value);
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalAdd(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalAdd(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<IntValue*>(v.get()))
         {
@@ -62,7 +62,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalSubtract(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalSubtract(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<IntValue*>(v.get()))
         {
@@ -77,7 +77,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalMultiply(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalMultiply(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<IntValue*>(v.get()))
         {
@@ -92,7 +92,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalDivide(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalDivide(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<FloatValue*>(v.get())
            || dynamic_cast<IntValue*>(v.get()))
@@ -111,7 +111,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalIntDivide(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalIntDivide(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<IntValue*>(v.get()))
         {
@@ -140,7 +140,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalModulo(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalModulo(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<IntValue*>(v.get()))
         {
@@ -169,7 +169,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalEqual(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue*>(v.get()))
         {
@@ -186,7 +186,7 @@ namespace Imp
     }
 
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -202,7 +202,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalLess(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalLess(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
@@ -214,7 +214,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalLessEqual(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalLessEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
@@ -226,7 +226,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalGreater(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalGreater(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
@@ -238,7 +238,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalGreaterEqual(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalGreaterEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
@@ -250,12 +250,12 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalNot(std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalNot(ImpSyntax *where)
     {
         return std::make_shared<BoolValue>(_Value == 0);
     }
 
-    std::shared_ptr<RuntimeValue> IntValue::EvalStr(std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> IntValue::EvalStr(ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
     }

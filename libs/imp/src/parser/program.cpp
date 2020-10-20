@@ -1,6 +1,7 @@
 #include "imp/parser/program.hpp"
 #include "imp/scanner/all.hpp"
 #include "imp/parser/statement.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -12,7 +13,12 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Program::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        for(auto statement : stmts)
+        {
+            statement->Eval(curScope);
+        }
+
+        return std::make_shared<NoneValue>();
     }
 
     std::shared_ptr<Program> Program::Parse(std::shared_ptr<Scanner> s)

@@ -1,5 +1,6 @@
 #include "imp/parser/passstmt.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -11,7 +12,7 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> PassStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        return std::make_shared<NoneValue>();
     }
 
     std::shared_ptr<PassStmt> PassStmt::Parse(std::shared_ptr<Scanner> s)

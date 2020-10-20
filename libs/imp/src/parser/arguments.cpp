@@ -1,6 +1,7 @@
 #include "imp/scanner/all.hpp"
 #include "imp/parser/arguments.hpp"
 #include "imp/parser/expr.hpp"
+#include "imp/runtime/listvalue.hpp"
 
 namespace Imp
 {
@@ -36,6 +37,13 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Arguments::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        std::deque<std::shared_ptr<RuntimeValue>> args;
+
+        for(auto e : exprs)
+        {
+            args.push_back(e->Eval(curScope));
+        }
+
+        return std::make_shared<ListValue>(args);
     }
 }

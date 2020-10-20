@@ -2,6 +2,7 @@
 #include "imp/parser/expr.hpp"
 #include "imp/parser/suite.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -13,7 +14,12 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> WhileStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        while(test->Eval(curScope)->GetBoolValue("while expression", this))
+        {
+            body->Eval(curScope);
+        }
+
+        return std::make_shared<NoneValue>();
     }
 
     std::shared_ptr<WhileStmt> WhileStmt::Parse(std::shared_ptr<Scanner> s)

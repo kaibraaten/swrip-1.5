@@ -2,6 +2,8 @@
 #include "imp/parser/factor.hpp"
 #include "imp/scanner/all.hpp"
 #include "imp/parser/termopr.hpp"
+#include "imp/runtime/runtimevalue.hpp"
+#include "imp/except/runtimeexception.hpp"
 
 namespace Imp
 {
@@ -29,6 +31,28 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Term::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        auto v = factors[0].factor->Eval(curScope);
+
+        for(int i = 1; i < factors.size(); ++i)
+        {
+            TokenKind k = factors[i].termOpr->opr;
+            auto rhv = factors[i].factor->Eval(curScope);
+
+            switch(k)
+            {
+            case TokenKind::MinusToken:
+                v = v->EvalSubtract(rhv, this);
+                break;
+
+            case TokenKind::PlusToken:
+                v = v->EvalAdd(rhv, this);
+                break;
+
+            default:
+                throw RuntimeException("Illegal term operator: " + TokenName(k) + "!");
+            }
+        }
+
+        return v;
     }
 }

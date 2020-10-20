@@ -1,6 +1,9 @@
 #include "imp/parser/returnstmt.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/runtimevalue.hpp"
+#include "imp/runtime/nonevalue.hpp"
+#include "imp/runtime/returnvalue.hpp"
 
 namespace Imp
 {
@@ -12,7 +15,18 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> ReturnStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        std::shared_ptr<RuntimeValue> value;
+
+        if(returnExpr != nullptr)
+        {
+            value = returnExpr->Eval(curScope);
+        }
+        else
+        {
+            value = std::make_shared<NoneValue>();
+        }
+
+        throw ReturnValue(value, 0);
     }
 
     std::shared_ptr<ReturnStmt> ReturnStmt::Parse(std::shared_ptr<Scanner> s)

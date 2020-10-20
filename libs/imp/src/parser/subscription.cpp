@@ -22,6 +22,6 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Subscription::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        return expr->Eval(curScope);
     }
 }

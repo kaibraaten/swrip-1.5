@@ -2,6 +2,10 @@
 #include "imp/scanner/all.hpp"
 #include "imp/parser/primarysuffix.hpp"
 #include "imp/parser/atom.hpp"
+#include "imp/runtime/runtimevalue.hpp"
+#include "imp/runtime/functionvalue.hpp"
+#include "imp/runtime/lambdavalue.hpp"
+#include "imp/runtime/listvalue.hpp"
 
 namespace Imp
 {
@@ -27,6 +31,38 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Primary::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        auto valueOfLastSubscript = atom->Eval(curScope);
+
+        for(auto suffix : suffices)
+        {
+            if(suffix->BracketKind() == TokenKind::LeftBracketToken)
+            {
+                auto subscriptValue = suffix->Eval(curScope);
+                valueOfLastSubscript = valueOfLastSubscript->EvalSubscription(subscriptValue, this);
+            }
+            else
+            {
+                auto actualParams = std::dynamic_pointer_cast<ListValue>(suffix->Eval(curScope));
+                std::string funcName;
+
+                if(dynamic_cast<FunctionValue*>(valueOfLastSubscript.get()))
+                {
+                    funcName = ((FunctionValue*)valueOfLastSubscript.get())->GetName();
+                }
+                else if(dynamic_cast<LambdaValue*>(valueOfLastSubscript.get()))
+                {
+                    funcName = "<anonymous lambda>";
+                }
+                else
+                {
+                    RuntimeValue::RuntimeError("Cannot call " + valueOfLastSubscript->ShowInfo() + " as a function.", this);
+                }
+
+                std::vector<std::shared_ptr<RuntimeValue>> params(actualParams->Value().begin(), actualParams->Value().end());
+                valueOfLastSubscript = valueOfLastSubscript->EvalFuncCall(params, this);
+            }
+        }
+
+        return valueOfLastSubscript;
     }
 }

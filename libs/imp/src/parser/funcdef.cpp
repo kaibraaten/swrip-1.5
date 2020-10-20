@@ -3,6 +3,9 @@
 #include "imp/parser/suite.hpp"
 #include "imp/scanner/all.hpp"
 #include "imp/parser/name.hpp"
+#include "imp/runtime/functionvalue.hpp"
+#include "imp/runtime/runtimescope.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -14,7 +17,16 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> FuncDef::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        std::vector<std::string> formalArgs;
+
+        for(auto n : arguments)
+        {
+            formalArgs.push_back(n->GetName());
+        }
+
+        auto func = std::make_shared<FunctionValue>(name->GetName(), formalArgs, curScope, body);
+        curScope->Assign(name->GetName(), func);
+        return std::make_shared<NoneValue>();
     }
 
     std::shared_ptr<FuncDef> FuncDef::Parse(std::shared_ptr<Scanner> s)

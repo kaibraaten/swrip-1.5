@@ -21,6 +21,6 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> InnerExpr::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        return expr->Eval(curScope);
     }
 }

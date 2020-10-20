@@ -1,6 +1,7 @@
 #include "imp/parser/smallstmtlist.hpp"
 #include "imp/parser/smallstmt.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -12,7 +13,12 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> SmallStmtList::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        for(auto statement : smallStatements)
+        {
+            statement->Eval(curScope);
+        }
+
+        return std::make_shared<NoneValue>();
     }
 
     std::shared_ptr<SmallStmtList> SmallStmtList::Parse(std::shared_ptr<Scanner> s)

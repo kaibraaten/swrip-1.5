@@ -3,6 +3,9 @@
 #include "imp/parser/name.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/parser/suite.hpp"
+#include "imp/runtime/listvalue.hpp"
+#include "imp/runtime/nonevalue.hpp"
+#include "imp/runtime/runtimescope.hpp"
 
 namespace Imp
 {
@@ -26,6 +29,23 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> ForStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        auto controlExpression = expr->Eval(curScope);
+
+        if(dynamic_cast<ListValue*>(controlExpression.get()))
+        {
+            auto values = ((ListValue *)controlExpression.get())->Value();
+
+            for(int i = 0; i < values.size(); ++i)
+            {
+                curScope->Assign(name->GetName(), values[i]);
+                body->Eval(curScope);
+            }
+        }
+        else
+        {
+            RuntimeValue::RuntimeError("Control expression must be a list in for statement.", this);
+        }
+
+        return std::make_shared<NoneValue>();
     }
 }

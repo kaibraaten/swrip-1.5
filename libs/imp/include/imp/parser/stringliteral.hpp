@@ -17,7 +17,7 @@ namespace Imp
         static std::shared_ptr<StringLiteral> Parse(std::shared_ptr<Scanner> s);
 
     private:
-        std::string strValue;
+        std::string _Value;
     };
 }
 

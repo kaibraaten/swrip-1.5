@@ -12,7 +12,7 @@ namespace Imp
 
      std::shared_ptr<RuntimeValue> ExprStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+         return expr->Eval(curScope);
     }
 
     std::shared_ptr<ExprStmt> ExprStmt::Parse(std::shared_ptr<Scanner> s)

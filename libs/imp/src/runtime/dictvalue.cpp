@@ -42,17 +42,17 @@ namespace Imp
         return output.str();
     }
 
-    bool DictValue::GetBoolValue(const std::string &what, std::shared_ptr<ImpSyntax> where)
+    bool DictValue::GetBoolValue(const std::string &what, ImpSyntax *where)
     {
         return !_Value.empty();
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalNot(std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalNot(ImpSyntax *where)
     {
         return std::make_shared<BoolValue>(!GetBoolValue("not operator", where));
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalSubscription(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalSubscription(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<StringValue *>(v.get()))
         {
@@ -72,7 +72,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalEqual(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -83,7 +83,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -94,7 +94,7 @@ namespace Imp
         return nullptr;
     }
 
-    void DictValue::EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, std::shared_ptr<ImpSyntax> where)
+    void DictValue::EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, ImpSyntax *where)
     {
         if(dynamic_cast<StringValue *>(inx.get()))
         {
@@ -105,12 +105,12 @@ namespace Imp
         RuntimeError("Type error for [...]", where);
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalLen(std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalLen(ImpSyntax *where)
     {
         return std::make_shared<IntValue>(_Value.size());
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalStr(std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalStr(ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
     }

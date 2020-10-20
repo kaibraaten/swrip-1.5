@@ -1,5 +1,6 @@
 #include "imp/parser/termopr.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -31,6 +32,6 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> TermOpr::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        return std::make_shared<NoneValue>();
     }
 }

@@ -2,6 +2,7 @@
 #include "imp/parser/name.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/lambdavalue.hpp"
 
 namespace Imp
 {
@@ -39,6 +40,13 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Lambda::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        std::vector<std::string> args;
+
+        for(auto e : formalParams)
+        {
+            args.push_back(e->GetName());
+        }
+
+        return std::make_shared<LambdaValue>(args, body, curScope);
     }
 }

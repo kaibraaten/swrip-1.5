@@ -1,7 +1,9 @@
+#include <unordered_map>
 #include "imp/parser/dictdisplay.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/parser/stringliteral.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/dictvalue.hpp"
 
 namespace Imp
 {
@@ -40,6 +42,15 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> DictDisplay::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> values;
+
+        for(const auto &pair : elements)
+        {
+            auto key = pair.first->Eval(curScope)->GetStringValue("dict key", this);
+            auto value = pair.second->Eval(curScope);
+            values.insert({ key, value });
+        }
+
+        return std::make_shared<DictValue>(values);
     }
 }

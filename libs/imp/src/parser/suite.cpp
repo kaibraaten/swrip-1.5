@@ -3,6 +3,7 @@
 #include "imp/parser/smallstmt.hpp"
 #include "imp/parser/statement.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -14,7 +15,19 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Suite::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        if(smallStmtList != nullptr)
+        {
+            smallStmtList->Eval(curScope);
+        }
+        else
+        {
+            for(auto stmt : statements)
+            {
+                stmt->Eval(curScope);
+            }
+        }
+
+        return std::make_shared<NoneValue>();
     }
 
     std::shared_ptr<Suite> Suite::Parse(std::shared_ptr<Scanner> s)

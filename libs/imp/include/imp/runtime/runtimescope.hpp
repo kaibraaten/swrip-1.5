@@ -15,7 +15,7 @@ namespace Imp
     public:
         RuntimeScope(std::shared_ptr<RuntimeScope> outer = nullptr);
         void Assign(const std::string &id, std::shared_ptr<RuntimeValue> value);
-        std::shared_ptr<RuntimeValue> Find(const std::string &id, std::shared_ptr<ImpSyntax> where);
+        std::shared_ptr<RuntimeValue> Find(const std::string &id, ImpSyntax *where);
 
     private:
         std::shared_ptr<RuntimeScope> _Outer;

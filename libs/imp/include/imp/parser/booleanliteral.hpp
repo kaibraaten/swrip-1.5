@@ -16,7 +16,7 @@ namespace Imp
         static std::shared_ptr<BooleanLiteral> Parse(std::shared_ptr<Scanner> s);
 
     private:
-        bool boolValue = false;
+        bool _Value = false;
     };
 }
 

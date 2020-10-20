@@ -28,7 +28,7 @@ namespace Imp
     }
 
     std::shared_ptr<RuntimeValue> LambdaValue::EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
-                                                            std::shared_ptr<ImpSyntax> where)
+                                                            ImpSyntax *where)
     {
         if(actualParams.size() != _FormalParams.size())
         {
@@ -56,7 +56,7 @@ namespace Imp
         return result;
     }
 
-    std::shared_ptr<RuntimeValue> LambdaValue::EvalStr(std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> LambdaValue::EvalStr(ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
     }

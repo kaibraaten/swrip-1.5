@@ -1,5 +1,6 @@
 #include "imp/parser/noneliteral.hpp"
 #include "imp/scanner/all.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -18,6 +19,6 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> NoneLiteral::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        return std::make_shared<NoneValue>();
     }
 }

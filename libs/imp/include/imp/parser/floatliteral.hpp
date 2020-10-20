@@ -16,7 +16,7 @@ namespace Imp
         static std::shared_ptr<FloatLiteral> Parse(std::shared_ptr<Scanner> s);
 
     private:
-        double floatValue = 0.0;
+        double _Value = 0.0;
     };
 }
 

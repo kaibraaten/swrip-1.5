@@ -34,4 +34,9 @@ namespace Imp
         suffix->bracketKind = bracketKind;
         return suffix;
     }
+
+    TokenKind PrimarySuffix::BracketKind() const
+    {
+        return bracketKind;
+    }
 }

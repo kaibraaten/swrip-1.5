@@ -1,6 +1,7 @@
 #include "imp/scanner/all.hpp"
 #include "imp/parser/andtest.hpp"
 #include "imp/parser/expr.hpp"
+#include "imp/runtime/runtimevalue.hpp"
 
 namespace Imp
 {
@@ -29,6 +30,18 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Expr::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return nullptr;
+        auto v = andTests[0]->Eval(curScope);
+
+        for(int i = 1; i < andTests.size(); ++i)
+        {
+            if(v->GetBoolValue("or operand", this))
+            {
+                return v;
+            }
+
+            v = andTests[i]->Eval(curScope);
+        }
+
+        return v;
     }
 }

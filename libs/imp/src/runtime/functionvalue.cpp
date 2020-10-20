@@ -52,7 +52,7 @@ namespace Imp
         return output.str();
     }
 
-    std::shared_ptr<RuntimeValue> FunctionValue::EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> FunctionValue::EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where)
     {
         if(actualParams.size() != _FormalParams.size())
         {
@@ -78,8 +78,13 @@ namespace Imp
         return std::make_shared<NoneValue>();
     }
 
-    std::shared_ptr<RuntimeValue> FunctionValue::EvalStr(std::shared_ptr<ImpSyntax> where)
+    std::shared_ptr<RuntimeValue> FunctionValue::EvalStr(ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
+    }
+
+    std::string FunctionValue::GetName() const
+    {
+        return _Name;
     }
 }

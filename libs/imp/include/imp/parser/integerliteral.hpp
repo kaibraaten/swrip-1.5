@@ -16,7 +16,7 @@ namespace Imp
         static std::shared_ptr<IntegerLiteral> Parse(std::shared_ptr<Scanner> s);
 
     private:
-        long intValue = 0;
+        long _Value = 0;
     };
 }
 
