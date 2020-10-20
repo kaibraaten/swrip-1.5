@@ -56,7 +56,7 @@ namespace Imp
     {
         if(dynamic_cast<StringValue *>(v.get()))
         {
-            const auto &iter = _Value.find(v.GetStringValue("[...] operand", where));
+            const auto &iter = _Value.find(v->GetStringValue("[...] operand", where));
 
             if(iter != _Value.end())
             {
@@ -98,7 +98,7 @@ namespace Imp
     {
         if(dynamic_cast<StringValue *>(inx.get()))
         {
-            std::string subscript = inx.GetStringValue("[...] index", where);
+            std::string subscript = inx->GetStringValue("[...] index", where);
             _Value[subscript] = val;
         }
 
@@ -108,5 +108,10 @@ namespace Imp
     std::shared_ptr<RuntimeValue> DictValue::EvalLen(std::shared_ptr<ImpSyntax> where)
     {
         return std::make_shared<IntValue>(_Value.size());
+    }
+
+    std::shared_ptr<RuntimeValue> DictValue::EvalStr(std::shared_ptr<ImpSyntax> where)
+    {
+        return std::make_shared<StringValue>(ShowInfo());
     }
 }

@@ -3,6 +3,7 @@
 #include "imp/parser/impsyntax.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/runtime/runtimescope.hpp"
+#include "imp/runtime/stringvalue.hpp"
 
 namespace Imp
 {
@@ -53,5 +54,10 @@ namespace Imp
         }
 
         return result;
+    }
+
+    std::shared_ptr<RuntimeValue> LambdaValue::EvalStr(std::shared_ptr<ImpSyntax> where)
+    {
+        return std::make_shared<StringValue>(ShowInfo());
     }
 }

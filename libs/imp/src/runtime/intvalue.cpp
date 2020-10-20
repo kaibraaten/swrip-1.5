@@ -3,6 +3,7 @@
 #include "imp/runtime/boolvalue.hpp"
 #include "imp/runtime/floatvalue.hpp"
 #include "imp/runtime/nonevalue.hpp"
+#include "imp/runtime/stringvalue.hpp"
 
 namespace Imp
 {
@@ -252,5 +253,10 @@ namespace Imp
     std::shared_ptr<RuntimeValue> IntValue::EvalNot(std::shared_ptr<ImpSyntax> where)
     {
         return std::make_shared<BoolValue>(_Value == 0);
+    }
+
+    std::shared_ptr<RuntimeValue> IntValue::EvalStr(std::shared_ptr<ImpSyntax> where)
+    {
+        return std::make_shared<StringValue>(ShowInfo());
     }
 }

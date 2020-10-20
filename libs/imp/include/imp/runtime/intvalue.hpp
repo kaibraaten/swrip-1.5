@@ -33,6 +33,7 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalGreater(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where) override;
         std::shared_ptr<RuntimeValue> EvalGreaterEqual(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where) override;
         std::shared_ptr<RuntimeValue> EvalNot(std::shared_ptr<ImpSyntax> where) override;
+        std::shared_ptr<RuntimeValue> EvalStr(std::shared_ptr<ImpSyntax> where) override;
 
     private:
         double _Value;

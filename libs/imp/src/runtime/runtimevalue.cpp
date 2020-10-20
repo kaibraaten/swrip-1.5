@@ -151,4 +151,10 @@ namespace Imp
         RuntimeError("'Function call (...)' undefined for " + TypeName() + "!", where);
         return nullptr;
     }
+
+    std::shared_ptr<RuntimeValue> RuntimeValue::EvalStr(std::shared_ptr<ImpSyntax> where)
+    {
+        RuntimeError("str operator undefined for " + TypeName() + "!", where);
+        return nullptr;
+    }
 }

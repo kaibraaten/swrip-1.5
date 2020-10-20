@@ -1,17 +1,20 @@
-#ifndef _IMP_RUNTIME_DICTVALUE_HPP_
-#define _IMP_RUNTIME_DICTVALUE_HPP_
+#ifndef _IMP_RUNTIME_LISTVALUE_HPP_
+#define _IMP_RUNTIME_LISTVALUE_HPP_
 
-#include <string>
-#include <unordered_map>
+#include <deque>
 #include <memory>
+#include <string>
 #include <imp/runtime/runtimevalue.hpp>
 
 namespace Imp
 {
-    class DictValue : public RuntimeValue
+    class ImpSyntax;
+
+    class ListValue : public RuntimeValue
     {
     public:
-        DictValue(const std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> &dict);
+        ListValue(const std::deque<std::shared_ptr<RuntimeValue>> &value);
+        const std::deque<std::shared_ptr<RuntimeValue>> &Value() const;
         std::string TypeName() override;
         std::string ShowInfo() override;
         bool GetBoolValue(const std::string &what, std::shared_ptr<ImpSyntax> where) override;
@@ -19,12 +22,13 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalSubscription(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where) override;
         std::shared_ptr<RuntimeValue> EvalEqual(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where) override;
         std::shared_ptr<RuntimeValue> EvalNotEqual(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where) override;
-        void EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, std::shared_ptr<ImpSyntax> where) override;
+        std::shared_ptr<RuntimeValue> EvalMultiply(std::shared_ptr<RuntimeValue> v, std::shared_ptr<ImpSyntax> where) override;
         std::shared_ptr<RuntimeValue> EvalLen(std::shared_ptr<ImpSyntax> where) override;
+        void EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, std::shared_ptr<ImpSyntax> where) override;
         std::shared_ptr<RuntimeValue> EvalStr(std::shared_ptr<ImpSyntax> where) override;
 
     private:
-        std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> _Value;
+        std::deque<std::shared_ptr<RuntimeValue>> _Value;
     };
 }
 

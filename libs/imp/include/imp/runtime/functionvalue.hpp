@@ -1,20 +1,24 @@
-#ifndef _IMP_RUNTIME_LAMBDAVALUE_HPP_
-#define _IMP_RUNTIME_LAMBDAVALUE_HPP_
+#ifndef _IMP_RUNTIME_FUNCTIONVALUE_HPP_
+#define _IMP_RUNTIME_FUNCTIONVALUE_HPP_
 
+#include <string>
 #include <vector>
 #include <imp/runtime/runtimevalue.hpp>
 
 namespace Imp
 {
-    class Expr;
+    class ImpSyntax;
+    class Suite;
     class RuntimeScope;
 
-    class LambdaValue : public RuntimeValue
+    class FunctionValue : public RuntimeValue
     {
     public:
-        LambdaValue(const std::vector<std::string> &args,
-                    std::shared_ptr<Expr> body,
-                    std::shared_ptr<RuntimeScope> scope);
+        FunctionValue(const std::string &name);
+        FunctionValue(const std::string &name,
+                      const std::vector<std::string> &formalParams,
+                      std::shared_ptr<RuntimeScope> scopeDeclared,
+                      std::shared_ptr<Suite> body);
         std::string TypeName() override;
         std::string ShowInfo() override;
         std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
@@ -22,9 +26,10 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalStr(std::shared_ptr<ImpSyntax> where) override;
 
     private:
+        std::string _Name;
         std::vector<std::string> _FormalParams;
-        std::shared_ptr<Expr> _Body;
         std::shared_ptr<RuntimeScope> _ScopeDeclared;
+        std::shared_ptr<Suite> _Body;
     };
 }
 

@@ -1,4 +1,5 @@
 #include "imp/runtime/boolvalue.hpp"
+#include "imp/runtime/stringvalue.hpp"
 
 namespace Imp
 {
@@ -48,5 +49,10 @@ namespace Imp
     std::shared_ptr<RuntimeValue> BoolValue::EvalNot(std::shared_ptr<ImpSyntax> where)
     {
         return std::make_shared<BoolValue>(!_Value);
+    }
+
+    std::shared_ptr<RuntimeValue> BoolValue::EvalStr(std::shared_ptr<ImpSyntax> where)
+    {
+        return std::make_shared<StringValue>(ShowInfo());
     }
 }
