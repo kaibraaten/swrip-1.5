@@ -69,7 +69,7 @@ namespace Imp
             CheckNumParams(actualParams, 1, "input", where);
             auto v1 = actualParams[0];
 
-            if((dynamic_cast<IntValue *>(v1.get())) == nullptr)
+            if((dynamic_cast<StringValue *>(v1.get())) == nullptr)
             {
                 RuntimeValue::RuntimeError("Type error in input().", where);
             }
@@ -248,7 +248,7 @@ namespace Imp
             {
                 if(!isFirst)
                 {
-                    std::cout << " ";
+                    output << " ";
                 }
 
                 output << param->EvalStr(where)->GetStringValue("print() param", where);
