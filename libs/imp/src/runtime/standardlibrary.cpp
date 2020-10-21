@@ -297,7 +297,7 @@ namespace Imp
             }
 
             exit(v1->GetIntValue("exit() param", where));
-            return std::make_shared<ExitFunc>();
+            return std::make_shared<NoneValue>();
         }
     };
 

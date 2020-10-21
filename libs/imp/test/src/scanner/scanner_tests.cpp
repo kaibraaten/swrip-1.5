@@ -235,6 +235,51 @@ TEST(ScannerTests, Numbers)
     } while(s.CurToken()->Kind() != TokenKind::EofToken);
 }
 
+TEST(ScannerTests, Indents)
+{
+    std::list<std::string> source =
+    {
+        "True",
+        "    True",
+        "        True",
+        "    True",
+        "True",
+        "True",
+        "    True",
+        "        True",
+        "True",
+        "    True"
+    };
+
+    std::list<Imp::TokenKind> expected =
+    {
+        TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::IndentToken, TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::IndentToken, TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::DedentToken, TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::DedentToken, TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::IndentToken, TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::IndentToken, TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::DedentToken, TokenKind::DedentToken, TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::IndentToken, TokenKind::TrueToken, TokenKind::NewLineToken,
+        TokenKind::DedentToken,
+        TokenKind::EofToken
+    };
+
+    Scanner s(source);
+    auto iter = expected.begin();
+
+    do
+    {
+        s.ReadNextToken();
+        auto expected = TokenName(*iter);
+        auto actual = TokenName(s.CurToken()->Kind());
+        EXPECT_EQ(expected, actual);
+        ++iter;
+    } while(s.CurToken()->Kind() != TokenKind::EofToken);
+}
+
 TEST(ScannerTests, Defs)
 {
     std::list<std::string> source =
@@ -285,168 +330,6 @@ TEST(ScannerTests, Defs)
         auto expected = TokenName(*iter);
         auto actual = TokenName(s.CurToken()->Kind());
         EXPECT_EQ(expected, actual);
-        ++iter;
-    } while(s.CurToken()->Kind() != TokenKind::EofToken);
-}
-
-TEST(ScannerTests, DefAndIf)
-{
-    std::list<std::string> source =
-    {
-        "def a1(b):",
-        "    return True",
-        "",
-        "if a2(b):",
-        "    return True",
-        ""
-    };
-
-    std::list<Imp::TokenKind> expected =
-    {
-        TokenKind::DefToken,
-        TokenKind::NameToken,
-        TokenKind::LeftParToken,
-        TokenKind::NameToken,
-        TokenKind::RightParToken,
-        TokenKind::ColonToken,
-        TokenKind::NewLineToken,
-        TokenKind::IndentToken,
-        TokenKind::ReturnToken,
-        TokenKind::TrueToken,
-        TokenKind::NewLineToken,
-        TokenKind::DedentToken,
-        
-        TokenKind::IfToken,
-        TokenKind::NameToken,
-        TokenKind::LeftParToken,
-        TokenKind::NameToken,
-        TokenKind::RightParToken,
-        TokenKind::ColonToken,
-        TokenKind::NewLineToken,
-        TokenKind::IndentToken,
-        TokenKind::ReturnToken,
-        TokenKind::TrueToken,
-        TokenKind::NewLineToken,
-        TokenKind::DedentToken,
-
-        TokenKind::EofToken
-    };
-
-    Scanner s(source);
-    auto iter = expected.begin();
-
-    do
-    {
-        s.ReadNextToken();
-        EXPECT_EQ(TokenName(*iter), TokenName(s.CurToken()->Kind()));
-        ++iter;
-    } while(s.CurToken()->Kind() != TokenKind::EofToken);
-}
-
-TEST(ScannerTests, IfAndIf)
-{
-    std::list<std::string> source =
-    {
-        "if a1(b):",
-        "    return True",
-        "",
-        "if a2(b):",
-        "    return True",
-        ""
-    };
-
-    std::list<Imp::TokenKind> expected =
-    {
-        TokenKind::IfToken,
-        TokenKind::NameToken,
-        TokenKind::LeftParToken,
-        TokenKind::NameToken,
-        TokenKind::RightParToken,
-        TokenKind::ColonToken,
-        TokenKind::NewLineToken,
-        TokenKind::IndentToken,
-        TokenKind::ReturnToken,
-        TokenKind::TrueToken,
-        TokenKind::NewLineToken,
-        TokenKind::DedentToken,
-
-        TokenKind::IfToken,
-        TokenKind::NameToken,
-        TokenKind::LeftParToken,
-        TokenKind::NameToken,
-        TokenKind::RightParToken,
-        TokenKind::ColonToken,
-        TokenKind::NewLineToken,
-        TokenKind::IndentToken,
-        TokenKind::ReturnToken,
-        TokenKind::TrueToken,
-        TokenKind::NewLineToken,
-        TokenKind::DedentToken,
-
-        TokenKind::EofToken
-    };
-
-    Scanner s(source);
-    auto iter = expected.begin();
-
-    do
-    {
-        s.ReadNextToken();
-        EXPECT_EQ(TokenName(*iter), TokenName(s.CurToken()->Kind()));
-        ++iter;
-    } while(s.CurToken()->Kind() != TokenKind::EofToken);
-}
-
-TEST(ScannerTests, WhileAndWhile)
-{
-    std::list<std::string> source =
-    {
-        "while a1(b):",
-        "    return True",
-        "",
-        "while a2(b):",
-        "    return True",
-        ""
-    };
-
-    std::list<Imp::TokenKind> expected =
-    {
-        TokenKind::WhileToken,
-        TokenKind::NameToken,
-        TokenKind::LeftParToken,
-        TokenKind::NameToken,
-        TokenKind::RightParToken,
-        TokenKind::ColonToken,
-        TokenKind::NewLineToken,
-        TokenKind::IndentToken,
-        TokenKind::ReturnToken,
-        TokenKind::TrueToken,
-        TokenKind::NewLineToken,
-        TokenKind::DedentToken,
-
-        TokenKind::WhileToken,
-        TokenKind::NameToken,
-        TokenKind::LeftParToken,
-        TokenKind::NameToken,
-        TokenKind::RightParToken,
-        TokenKind::ColonToken,
-        TokenKind::NewLineToken,
-        TokenKind::IndentToken,
-        TokenKind::ReturnToken,
-        TokenKind::TrueToken,
-        TokenKind::NewLineToken,
-        TokenKind::DedentToken,
-
-        TokenKind::EofToken
-    };
-
-    Scanner s(source);
-    auto iter = expected.begin();
-
-    do
-    {
-        s.ReadNextToken();
-        EXPECT_EQ(TokenName(*iter), TokenName(s.CurToken()->Kind()));
         ++iter;
     } while(s.CurToken()->Kind() != TokenKind::EofToken);
 }

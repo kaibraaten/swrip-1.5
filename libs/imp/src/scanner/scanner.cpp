@@ -303,7 +303,7 @@ namespace Imp
         if(!SourceCode.empty())
         {
             std::string line = SourceCode.front();
-            SourceCode.remove(line);
+            SourceCode.erase(SourceCode.begin());
             line = ExpandLeadingTabs(line);
 
             if(LineIsBlank(line)
