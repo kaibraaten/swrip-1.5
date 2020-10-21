@@ -282,7 +282,9 @@ TEST(ScannerTests, Defs)
     do
     {
         s.ReadNextToken();
-        EXPECT_EQ(TokenName(*iter), TokenName(s.CurToken()->Kind()));
+        auto expected = TokenName(*iter);
+        auto actual = TokenName(s.CurToken()->Kind());
+        EXPECT_EQ(expected, actual);
         ++iter;
     } while(s.CurToken()->Kind() != TokenKind::EofToken);
 }
