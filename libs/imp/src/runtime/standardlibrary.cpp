@@ -251,7 +251,7 @@ namespace Imp
                     std::cout << " ";
                 }
 
-                output << param->EvalStr(where);
+                output << param->EvalStr(where)->GetStringValue("print() param", where);
                 isFirst = false;
             }
 

@@ -35,7 +35,7 @@ namespace Imp
     std::shared_ptr<RuntimeValue> Comparison::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
         std::shared_ptr<RuntimeValue> lhv = terms[0].term->Eval(curScope);
-        std::shared_ptr<RuntimeValue> result;
+        std::shared_ptr<RuntimeValue> result = lhv;
 
         for(int i = 1; i < terms.size(); ++i)
         {
