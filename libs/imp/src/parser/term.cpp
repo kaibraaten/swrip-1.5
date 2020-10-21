@@ -21,9 +21,9 @@ namespace Imp
         while(s->IsTermOpr())
         {
             FactorData f;
-            term->factors.push_back(f);
             f.termOpr = TermOpr::Parse(s);
             f.factor = Factor::Parse(s);
+            term->factors.push_back(f);
         }
 
         return term;
