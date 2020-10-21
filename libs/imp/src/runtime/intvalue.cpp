@@ -190,7 +190,7 @@ namespace Imp
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(false);
+            return std::make_shared<BoolValue>(true);
         }
         else if(dynamic_cast<FloatValue *>(v.get())
                 || dynamic_cast<IntValue *>(v.get()))

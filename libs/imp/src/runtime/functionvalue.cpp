@@ -3,6 +3,7 @@
 #include "imp/runtime/returnvalue.hpp"
 #include "imp/runtime/runtimescope.hpp"
 #include "imp/runtime/nonevalue.hpp"
+#include "imp/runtime/boolvalue.hpp"
 #include "imp/parser/suite.hpp"
 #include "imp/runtime/stringvalue.hpp"
 
@@ -81,6 +82,28 @@ namespace Imp
     std::shared_ptr<RuntimeValue> FunctionValue::EvalStr(ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
+    }
+
+    std::shared_ptr<RuntimeValue> FunctionValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    {
+        if(dynamic_cast<NoneValue *>(v.get()))
+        {
+            return std::make_shared<BoolValue>(false);
+        }
+
+        RuntimeError("Type error for ==.", where);
+        return nullptr;
+    }
+
+    std::shared_ptr<RuntimeValue> FunctionValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    {
+        if(dynamic_cast<NoneValue *>(v.get()))
+        {
+            return std::make_shared<BoolValue>(true);
+        }
+
+        RuntimeError("Type error for !=.", where);
+        return nullptr;
     }
 
     std::string FunctionValue::GetName() const

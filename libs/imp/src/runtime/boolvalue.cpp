@@ -1,5 +1,6 @@
 #include "imp/runtime/boolvalue.hpp"
 #include "imp/runtime/stringvalue.hpp"
+#include "imp/runtime/nonevalue.hpp"
 
 namespace Imp
 {
@@ -26,9 +27,9 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> BoolValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
-        if(dynamic_cast<BoolValue *>(v.get()))
+        if(dynamic_cast<NoneValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value);
+            return std::make_shared<BoolValue>(false);
         }
 
         RuntimeError("Type error for ==.", where);
@@ -37,7 +38,7 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> BoolValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
-        if(dynamic_cast<BoolValue *>(v.get()))
+        if(dynamic_cast<NoneValue *>(v.get()))
         {
             return std::make_shared<BoolValue>(true);
         }

@@ -113,6 +113,22 @@ namespace Imp
         return nullptr;
     }
 
+    std::shared_ptr<RuntimeValue> ListValue::EvalAdd(std::shared_ptr<RuntimeValue> rhv, ImpSyntax *where)
+    {
+        if(dynamic_cast<ListValue *>(rhv.get()))
+        {
+            auto asList = std::dynamic_pointer_cast<ListValue>(rhv);
+            std::deque<std::shared_ptr<RuntimeValue>> newList;
+            newList.assign(_Value.begin(), _Value.end());
+            newList.insert(newList.end(), asList->_Value.begin(), asList->_Value.end());
+
+            return std::make_shared<ListValue>(newList);
+        }
+
+        RuntimeError("Type error for +.", where);
+        return nullptr;
+    }
+
     std::shared_ptr<RuntimeValue> ListValue::EvalLen(ImpSyntax *where)
     {
         return std::make_shared<IntValue>(_Value.size());

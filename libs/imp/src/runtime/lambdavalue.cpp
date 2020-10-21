@@ -4,6 +4,8 @@
 #include "imp/parser/expr.hpp"
 #include "imp/runtime/runtimescope.hpp"
 #include "imp/runtime/stringvalue.hpp"
+#include "imp/runtime/nonevalue.hpp"
+#include "imp/runtime/boolvalue.hpp"
 
 namespace Imp
 {
@@ -54,6 +56,28 @@ namespace Imp
         }
 
         return result;
+    }
+
+    std::shared_ptr<RuntimeValue> LambdaValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    {
+        if(dynamic_cast<NoneValue *>(v.get()))
+        {
+            return std::make_shared<BoolValue>(false);
+        }
+
+        RuntimeError("Type error for ==.", where);
+        return nullptr;
+    }
+
+    std::shared_ptr<RuntimeValue> LambdaValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    {
+        if(dynamic_cast<NoneValue *>(v.get()))
+        {
+            return std::make_shared<BoolValue>(true);
+        }
+
+        RuntimeError("Type error for !=.", where);
+        return nullptr;
     }
 
     std::shared_ptr<RuntimeValue> LambdaValue::EvalStr(ImpSyntax *where)
