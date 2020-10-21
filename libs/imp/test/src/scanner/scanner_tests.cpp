@@ -273,9 +273,9 @@ TEST(ScannerTests, Indents)
     do
     {
         s.ReadNextToken();
-        auto expected = TokenName(*iter);
-        auto actual = TokenName(s.CurToken()->Kind());
-        EXPECT_EQ(expected, actual);
+        auto expectedToken = TokenName(*iter);
+        auto actualToken = TokenName(s.CurToken()->Kind());
+        EXPECT_EQ(expectedToken, actualToken);
         ++iter;
     } while(s.CurToken()->Kind() != TokenKind::EofToken);
 }
@@ -327,9 +327,9 @@ TEST(ScannerTests, Defs)
     do
     {
         s.ReadNextToken();
-        auto expected = TokenName(*iter);
-        auto actual = TokenName(s.CurToken()->Kind());
-        EXPECT_EQ(expected, actual);
+        auto expectedToken = TokenName(*iter);
+        auto actualToken = TokenName(s.CurToken()->Kind());
+        EXPECT_EQ(expectedToken, actualToken);
         ++iter;
     } while(s.CurToken()->Kind() != TokenKind::EofToken);
 }
