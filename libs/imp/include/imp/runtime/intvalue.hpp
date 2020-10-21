@@ -36,7 +36,7 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalStr(ImpSyntax *where) override;
 
     private:
-        double _Value;
+        long _Value;
     };
 }
 
