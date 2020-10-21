@@ -1,24 +1,41 @@
 #include <iostream>
 #include <fstream>
+#include <cstring>
 #include <imp/scanner/scanner.hpp>
 #include <imp/runtime/standardlibrary.hpp>
 #include <imp/parser/program.hpp>
 
 static std::list<std::string> LoadScript(const std::string &filename);
+static void ShowUsage();
 
 int main(int argc, char *argv[])
 {
     std::cout << "Imp interpreter version 1.0" << std::endl;
     
-    if(argc < 2)
+    if(argc < 3)
     {
-        std::cout << "Usage: runimp <filename.py>" << std::endl;
+        ShowUsage();
         return 0;
     }
 
     try
     {
-        auto code = LoadScript(argv[1]);
+        std::list<std::string> code;
+        
+        if(strcmp(argv[1], "-s") == 0)
+        {
+            code.push_back(argv[2]);
+        }
+        else if(strcmp(argv[1], "-f") == 0)
+        {
+            code = LoadScript(argv[2]);
+        }
+        else
+        {
+            ShowUsage();
+            return 0;
+        }
+        
         auto scanner = std::make_shared<Imp::Scanner>(code);
         auto lib = std::make_shared<Imp::StandardLibrary>();
         auto globalScope = std::make_shared<Imp::RuntimeScope>(lib);
@@ -31,6 +48,12 @@ int main(int argc, char *argv[])
     {
         std::cerr << ex.what() << std::endl;
     }
+}
+
+static void ShowUsage()
+{
+    std::cout << "Usage: runimp -s <small statement list>" << std::endl;
+    std::cout << "       runimp -f <filename.py>" << std::endl;
 }
 
 static std::list<std::string> LoadScript(const std::string &filename)
