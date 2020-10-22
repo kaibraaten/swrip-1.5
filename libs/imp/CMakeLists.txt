@@ -55,15 +55,13 @@ add_library(imp SHARED
    "src/runtime/boolvalue.cpp" 
    "src/runtime/dictvalue.cpp"
    "src/runtime/floatvalue.cpp" "include/imp/runtime/intvalue.hpp" "src/runtime/intvalue.cpp" "src/runtime/lambdavalue.cpp" "include/imp/runtime/lambdavalue.hpp" "include/imp/runtime/runtimescope.hpp" "src/runtime/runtimescope.cpp" "include/imp/runtime/nonevalue.hpp" "src/runtime/nonevalue.cpp" "include/imp/runtime/functionvalue.hpp" "src/runtime/functionvalue.cpp" "include/imp/runtime/stringvalue.hpp" "src/runtime/stringvalue.cpp" "include/imp/runtime/listvalue.hpp" "src/runtime/listvalue.cpp" "include/imp/runtime/standardlibrary.hpp" "src/runtime/standardlibrary.cpp")
-target_compile_features(imp PUBLIC cxx_std_17)
+target_compile_features(imp PUBLIC cxx_std_20)
 target_compile_options(imp
-  PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
-  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4244 /wd4267>
+  PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation -std=c++20>
+  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4244 /wd4267 /std:c++latest>
 )
 if(WIN32)
   target_link_libraries(imp WS2_32)
-#else()
-#  target_link_libraries(utility stdc++fs)
 endif()
 add_subdirectory(test)
 add_subdirectory(interpreter)
