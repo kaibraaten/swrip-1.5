@@ -1,3 +1,4 @@
+#include <list>
 #include "imp/parser/listdisplay.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/scanner/all.hpp"
@@ -5,8 +6,19 @@
 
 namespace Imp
 {
+    struct ListDisplay::Impl
+    {
+        std::list<std::shared_ptr<Expr>> exprs;
+    };
+
     ListDisplay::ListDisplay(int n)
-        : Atom(n)
+        : Atom(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    ListDisplay::~ListDisplay()
     {
 
     }
@@ -20,7 +32,7 @@ namespace Imp
         {
             while(true)
             {
-                listDisplay->exprs.push_back(Expr::Parse(s));
+                listDisplay->pImpl->exprs.push_back(Expr::Parse(s));
 
                 if(s->CurToken()->Kind() != TokenKind::CommaToken)
                 {
@@ -39,7 +51,7 @@ namespace Imp
     {
         std::deque<std::shared_ptr<RuntimeValue>> values;
 
-        for(auto e : exprs)
+        for(auto e : pImpl->exprs)
         {
             values.push_back(e->Eval(curScope));
         }

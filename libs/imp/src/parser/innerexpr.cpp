@@ -4,8 +4,19 @@
 
 namespace Imp
 {
+    struct InnerExpr::Impl
+    {
+        std::shared_ptr<Expr> expr;
+    };
+
     InnerExpr::InnerExpr(int n)
-        : Atom(n)
+        : Atom(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    InnerExpr::~InnerExpr()
     {
 
     }
@@ -14,13 +25,13 @@ namespace Imp
     {
         auto innerExpr = std::make_shared<InnerExpr>(s->CurLineNum());
         Skip(s, TokenKind::LeftParToken);
-        innerExpr->expr = Expr::Parse(s);
+        innerExpr->pImpl->expr = Expr::Parse(s);
         Skip(s, TokenKind::RightParToken);
         return innerExpr;
     }
 
     std::shared_ptr<RuntimeValue> InnerExpr::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return expr->Eval(curScope);
+        return pImpl->expr->Eval(curScope);
     }
 }

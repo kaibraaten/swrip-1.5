@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/parser/smallstmtlist.hpp"
 #include "imp/parser/smallstmt.hpp"
 #include "imp/scanner/all.hpp"
@@ -5,15 +6,26 @@
 
 namespace Imp
 {
+    struct SmallStmtList::Impl
+    {
+        std::list<std::shared_ptr<SmallStmt>> smallStatements;
+    };
+
     SmallStmtList::SmallStmtList(int n)
-        : Statement(n)
+        : Statement(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    SmallStmtList::~SmallStmtList()
     {
 
     }
 
     std::shared_ptr<RuntimeValue> SmallStmtList::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        for(auto statement : smallStatements)
+        for(auto statement : pImpl->smallStatements)
         {
             statement->Eval(curScope);
         }
@@ -27,7 +39,7 @@ namespace Imp
 
         while(s->CurToken()->Kind() != TokenKind::NewLineToken)
         {
-            smallStmtList->smallStatements.push_back(SmallStmt::Parse(s));
+            smallStmtList->pImpl->smallStatements.push_back(SmallStmt::Parse(s));
 
             if(s->CurToken()->Kind() != TokenKind::SemicolonToken)
                 break;

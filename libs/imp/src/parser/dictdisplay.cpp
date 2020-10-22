@@ -7,8 +7,19 @@
 
 namespace Imp
 {
+    struct DictDisplay::Impl
+    {
+        std::list<std::pair<std::shared_ptr<StringLiteral>, std::shared_ptr<Expr>>> elements;
+    };
+
     DictDisplay::DictDisplay(int n)
-        : Atom(n)
+        : Atom(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    DictDisplay::~DictDisplay()
     {
 
     }
@@ -25,7 +36,7 @@ namespace Imp
                 auto key = StringLiteral::Parse(s);
                 Skip(s, TokenKind::ColonToken);
                 auto value = Expr::Parse(s);
-                dictDisplay->elements.push_back({ key, value });
+                dictDisplay->pImpl->elements.push_back({ key, value });
 
                 if(s->CurToken()->Kind() != TokenKind::CommaToken)
                 {
@@ -44,7 +55,7 @@ namespace Imp
     {
         std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> values;
 
-        for(const auto &pair : elements)
+        for(const auto &pair : pImpl->elements)
         {
             auto key = pair.first->Eval(curScope)->GetStringValue("dict key", this);
             auto value = pair.second->Eval(curScope);

@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/parser/assignment.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/parser/name.hpp"
@@ -9,30 +10,43 @@
 
 namespace Imp
 {
+    struct Assignment::Impl
+    {
+        std::shared_ptr<Name> name;
+        std::shared_ptr<Expr> expr;
+        std::vector<std::shared_ptr<Subscription>> subscriptions;
+    };
+
     Assignment::Assignment(int n)
-        : SmallStmt(n)
+        : SmallStmt(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Assignment::~Assignment()
     {
 
     }
 
     std::shared_ptr<RuntimeValue> Assignment::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        auto result = expr->Eval(curScope); // New value to store
+        auto result = pImpl->expr->Eval(curScope); // New value to store
 
-        if(subscriptions.empty())
+        if(pImpl->subscriptions.empty())
         {
-            std::string id = name->GetName();
+            std::string id = pImpl->name->GetName();
             curScope->Assign(id, result);
         }
         else
         {
-            auto whereToAssign = name->Eval(curScope); // The object to store in
-            auto index = subscriptions[0]->Eval(curScope); // Index in above object
+            auto whereToAssign = pImpl->name->Eval(curScope); // The object to store in
+            auto index = pImpl->subscriptions[0]->Eval(curScope); // Index in above object
 
-            for(int i = 1; i < subscriptions.size(); ++i)
+            for(int i = 1; i < pImpl->subscriptions.size(); ++i)
             {
                 whereToAssign = whereToAssign->EvalSubscription(index, this);
-                index = subscriptions[i]->Eval(curScope);
+                index = pImpl->subscriptions[i]->Eval(curScope);
             }
 
             whereToAssign->EvalAssignElem(index, result, this); // Assign the new value
@@ -45,15 +59,15 @@ namespace Imp
     {
         auto assignment = std::make_shared<Assignment>(s->CurLineNum());
 
-        assignment->name = Name::Parse(s);
+        assignment->pImpl->name = Name::Parse(s);
 
         while(s->CurToken()->Kind() == TokenKind::LeftBracketToken)
         {
-            assignment->subscriptions.push_back(Subscription::Parse(s));
+            assignment->pImpl->subscriptions.push_back(Subscription::Parse(s));
         }
 
         Skip(s, TokenKind::EqualToken);
-        assignment->expr = Expr::Parse(s);
+        assignment->pImpl->expr = Expr::Parse(s);
 
         return assignment;
     }

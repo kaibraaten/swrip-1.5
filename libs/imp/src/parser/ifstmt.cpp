@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/parser/ifstmt.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/parser/suite.hpp"
@@ -7,17 +8,35 @@
 
 namespace Imp
 {
+    struct IfCheck
+    {
+        std::shared_ptr<Expr> test;
+        std::shared_ptr<Suite> body;
+    };
+
+    struct IfStmt::Impl
+    {
+        std::vector<IfCheck> ifChecks;
+        std::shared_ptr<Suite> elseBlock;
+    };
+
     IfStmt::IfStmt(int n)
-        : CompoundStmt(n)
+        : CompoundStmt(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    IfStmt::~IfStmt()
     {
 
     }
 
     std::shared_ptr<RuntimeValue> IfStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        for(int i = 0; i < ifChecks.size(); ++i)
+        for(int i = 0; i < pImpl->ifChecks.size(); ++i)
         {
-            const auto &ifCheck = ifChecks[i];
+            const auto &ifCheck = pImpl->ifChecks[i];
             auto ifValue = ifCheck.test->Eval(curScope);
             bool expressionIsTrue = ifValue->GetBoolValue("if check", this);
 
@@ -28,9 +47,9 @@ namespace Imp
             }
         }
 
-        if(elseBlock != nullptr)
+        if(pImpl->elseBlock != nullptr)
         {
-            elseBlock->Eval(curScope);
+            pImpl->elseBlock->Eval(curScope);
         }
 
         return std::make_shared<NoneValue>();
@@ -52,14 +71,14 @@ namespace Imp
             ifCheck.test = Expr::Parse(s);
             Skip(s, TokenKind::ColonToken);
             ifCheck.body = Suite::Parse(s);
-            ifStmt->ifChecks.push_back(ifCheck);
+            ifStmt->pImpl->ifChecks.push_back(ifCheck);
         } while(s->CurToken()->Kind() == TokenKind::ElifToken);
 
         if(s->CurToken()->Kind() == TokenKind::ElseToken)
         {
             Skip(s, TokenKind::ElseToken);
             Skip(s, TokenKind::ColonToken);
-            ifStmt->elseBlock = Suite::Parse(s);
+            ifStmt->pImpl->elseBlock = Suite::Parse(s);
         }
 
 

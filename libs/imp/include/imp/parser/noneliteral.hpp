@@ -1,13 +1,10 @@
 #ifndef _IMP_PARSER_NONELITERAL_HPP_
 #define _IMP_PARSER_NONELITERAL_HPP_
 
-#include <memory>
 #include <imp/parser/atom.hpp>
 
 namespace Imp
 {
-    class Scanner;
-
     class NoneLiteral : public Atom
     {
     public:

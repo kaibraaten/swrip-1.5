@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/parser/funcdef.hpp"
 #include "imp/parser/expr.hpp"
 #include "imp/parser/suite.hpp"
@@ -9,8 +10,21 @@
 
 namespace Imp
 {
+    struct FuncDef::Impl
+    {
+        std::shared_ptr<Name> name;
+        std::shared_ptr<Suite> body;
+        std::vector<std::shared_ptr<Name>> arguments;
+    };
+
     FuncDef::FuncDef(int n)
-        : CompoundStmt(n)
+        : CompoundStmt(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    FuncDef::~FuncDef()
     {
 
     }
@@ -19,13 +33,13 @@ namespace Imp
     {
         std::vector<std::string> formalArgs;
 
-        for(auto n : arguments)
+        for(auto n : pImpl->arguments)
         {
             formalArgs.push_back(n->GetName());
         }
 
-        auto func = std::make_shared<FunctionValue>(name->GetName(), formalArgs, curScope, body);
-        curScope->Assign(name->GetName(), func);
+        auto func = std::make_shared<FunctionValue>(pImpl->name->GetName(), formalArgs, curScope, pImpl->body);
+        curScope->Assign(pImpl->name->GetName(), func);
         return std::make_shared<NoneValue>();
     }
 
@@ -33,14 +47,14 @@ namespace Imp
     {
         auto funcDef = std::make_shared<FuncDef>(s->CurLineNum());
         Skip(s, TokenKind::DefToken);
-        funcDef->name = Name::Parse(s);
+        funcDef->pImpl->name = Name::Parse(s);
         Skip(s, TokenKind::LeftParToken);
 
         if(s->CurToken()->Kind() != TokenKind::RightParToken)
         {
             while(true)
             {
-                funcDef->arguments.push_back(Name::Parse(s));
+                funcDef->pImpl->arguments.push_back(Name::Parse(s));
 
                 if(s->CurToken()->Kind() != TokenKind::CommaToken)
                 {
@@ -53,7 +67,7 @@ namespace Imp
 
         Skip(s, TokenKind::RightParToken);
         Skip(s, TokenKind::ColonToken);
-        funcDef->body = Suite::Parse(s);
+        funcDef->pImpl->body = Suite::Parse(s);
 
         return funcDef;
     }

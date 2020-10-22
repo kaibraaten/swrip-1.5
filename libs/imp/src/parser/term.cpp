@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/parser/term.hpp"
 #include "imp/parser/factor.hpp"
 #include "imp/scanner/all.hpp"
@@ -7,8 +8,35 @@
 
 namespace Imp
 {
+    struct FactorData
+    {
+        std::shared_ptr<Factor> factor;
+        std::shared_ptr<TermOpr> termOpr;
+
+        FactorData(std::shared_ptr<Factor> f)
+        {
+            factor = f;
+        }
+
+        FactorData()
+        {
+
+        }
+    };
+
+    struct Term::Impl
+    {
+        std::vector<FactorData> factors;
+    };
+
     Term::Term(int n)
-        : ImpSyntax(n)
+        : ImpSyntax(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Term::~Term()
     {
 
     }
@@ -16,14 +44,14 @@ namespace Imp
     std::shared_ptr<Term> Term::Parse(std::shared_ptr<Scanner> s)
     {
         auto term = std::make_shared<Term>(s->CurLineNum());
-        term->factors.push_back(FactorData(Factor::Parse(s)));
+        term->pImpl->factors.push_back(FactorData(Factor::Parse(s)));
 
         while(s->IsTermOpr())
         {
             FactorData f;
             f.termOpr = TermOpr::Parse(s);
             f.factor = Factor::Parse(s);
-            term->factors.push_back(f);
+            term->pImpl->factors.push_back(f);
         }
 
         return term;
@@ -31,12 +59,12 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Term::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        auto v = factors[0].factor->Eval(curScope);
+        auto v = pImpl->factors[0].factor->Eval(curScope);
 
-        for(int i = 1; i < factors.size(); ++i)
+        for(int i = 1; i < pImpl->factors.size(); ++i)
         {
-            TokenKind k = factors[i].termOpr->opr;
-            auto rhv = factors[i].factor->Eval(curScope);
+            TokenKind k = pImpl->factors[i].termOpr->opr;
+            auto rhv = pImpl->factors[i].factor->Eval(curScope);
 
             switch(k)
             {

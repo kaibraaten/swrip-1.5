@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/scanner/all.hpp"
 #include "imp/parser/andtest.hpp"
 #include "imp/parser/expr.hpp"
@@ -5,8 +6,19 @@
 
 namespace Imp
 {
+    struct Expr::Impl
+    {
+        std::vector<std::shared_ptr<AndTest>> AndTests;
+    };
+
     Expr::Expr(int n)
-        : ImpSyntax(n)
+        : ImpSyntax(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Expr::~Expr()
     {
 
     }
@@ -17,7 +29,7 @@ namespace Imp
 
         while(true)
         {
-            ae->andTests.push_back(AndTest::Parse(s));
+            ae->pImpl->AndTests.push_back(AndTest::Parse(s));
 
             if(s->CurToken()->Kind() != TokenKind::OrToken)
                 break;
@@ -30,16 +42,16 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Expr::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        auto v = andTests[0]->Eval(curScope);
+        auto v = pImpl->AndTests[0]->Eval(curScope);
 
-        for(int i = 1; i < andTests.size(); ++i)
+        for(int i = 1; i < pImpl->AndTests.size(); ++i)
         {
             if(v->GetBoolValue("or operand", this))
             {
                 return v;
             }
 
-            v = andTests[i]->Eval(curScope);
+            v = pImpl->AndTests[i]->Eval(curScope);
         }
 
         return v;

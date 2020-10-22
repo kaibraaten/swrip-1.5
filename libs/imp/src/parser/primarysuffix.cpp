@@ -5,8 +5,19 @@
 
 namespace Imp
 {
+    struct PrimarySuffix::Impl
+    {
+        TokenKind bracketKind;
+    };
+
     PrimarySuffix::PrimarySuffix(int n)
-        : ImpSyntax(n)
+        : ImpSyntax(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    PrimarySuffix::~PrimarySuffix()
     {
 
     }
@@ -31,12 +42,12 @@ namespace Imp
             break;
         }
 
-        suffix->bracketKind = bracketKind;
+        suffix->pImpl->bracketKind = bracketKind;
         return suffix;
     }
 
     TokenKind PrimarySuffix::BracketKind() const
     {
-        return bracketKind;
+        return pImpl->bracketKind;
     }
 }

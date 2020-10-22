@@ -5,8 +5,20 @@
 
 namespace Imp
 {
+    struct NotTest::Impl
+    {
+        std::shared_ptr<Comparison> _Comparison;
+        bool _Not = false;
+    };
+
     NotTest::NotTest(int n)
-        : ImpSyntax(n)
+        : ImpSyntax(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    NotTest::~NotTest()
     {
 
     }
@@ -17,19 +29,19 @@ namespace Imp
 
         if(s->CurToken()->Kind() == TokenKind::NotToken)
         {
-            notTest->_Not = true;
+            notTest->pImpl->_Not = true;
             Skip(s, TokenKind::NotToken);
         }
 
-        notTest->_Comparison = Comparison::Parse(s);
+        notTest->pImpl->_Comparison = Comparison::Parse(s);
         return notTest;
     }
 
     std::shared_ptr<RuntimeValue> NotTest::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        auto v = _Comparison->Eval(curScope);
+        auto v = pImpl->_Comparison->Eval(curScope);
 
-        if(_Not)
+        if(pImpl->_Not)
         {
             v = v->EvalNot(this);
         }

@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/scanner/all.hpp"
 #include "imp/parser/arguments.hpp"
 #include "imp/parser/expr.hpp"
@@ -5,8 +6,19 @@
 
 namespace Imp
 {
+    struct Arguments::Impl
+    {
+        std::vector<std::shared_ptr<Expr>> exprs;
+    };
+
     Arguments::Arguments(int n)
-        : PrimarySuffix(n)
+        : PrimarySuffix(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Arguments::~Arguments()
     {
 
     }
@@ -20,7 +32,7 @@ namespace Imp
         {
             while(true)
             {
-                args->exprs.push_back(Expr::Parse(s));
+                args->pImpl->exprs.push_back(Expr::Parse(s));
 
                 if(s->CurToken()->Kind() != TokenKind::CommaToken)
                 {
@@ -39,7 +51,7 @@ namespace Imp
     {
         std::deque<std::shared_ptr<RuntimeValue>> args;
 
-        for(auto e : exprs)
+        for(auto e : pImpl->exprs)
         {
             args.push_back(e->Eval(curScope));
         }

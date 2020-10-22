@@ -1,3 +1,4 @@
+#include <list>
 #include "imp/parser/lambda.hpp"
 #include "imp/parser/name.hpp"
 #include "imp/parser/expr.hpp"
@@ -6,8 +7,20 @@
 
 namespace Imp
 {
+    struct Lambda::Impl
+    {
+        std::list<std::shared_ptr<Name>> formalParams;
+        std::shared_ptr<Expr> body;
+    };
+
     Lambda::Lambda(int n)
-        : Atom(n)
+        : Atom(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Lambda::~Lambda()
     {
 
     }
@@ -21,7 +34,7 @@ namespace Imp
         {
             while(true)
             {
-                lambdaExpr->formalParams.push_back(Name::Parse(s));
+                lambdaExpr->pImpl->formalParams.push_back(Name::Parse(s));
 
                 if(s->CurToken()->Kind() != TokenKind::CommaToken)
                 {
@@ -33,7 +46,7 @@ namespace Imp
         }
 
         Skip(s, TokenKind::ColonToken);
-        lambdaExpr->body = Expr::Parse(s);
+        lambdaExpr->pImpl->body = Expr::Parse(s);
 
         return lambdaExpr;
     }
@@ -42,11 +55,11 @@ namespace Imp
     {
         std::vector<std::string> args;
 
-        for(auto e : formalParams)
+        for(auto e : pImpl->formalParams)
         {
             args.push_back(e->GetName());
         }
 
-        return std::make_shared<LambdaValue>(args, body, curScope);
+        return std::make_shared<LambdaValue>(args, pImpl->body, curScope);
     }
 }

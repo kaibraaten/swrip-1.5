@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/parser/primary.hpp"
 #include "imp/scanner/all.hpp"
 #include "imp/parser/primarysuffix.hpp"
@@ -9,8 +10,20 @@
 
 namespace Imp
 {
+    struct Primary::Impl
+    {
+        std::shared_ptr<Atom> atom;
+        std::vector<std::shared_ptr<PrimarySuffix>> suffices;
+    };
+
     Primary::Primary(int n)
-        : ImpSyntax(n)
+        : ImpSyntax(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Primary::~Primary()
     {
 
     }
@@ -18,12 +31,12 @@ namespace Imp
     std::shared_ptr<Primary> Primary::Parse(std::shared_ptr<Scanner> s)
     {
         auto aspPrimary = std::make_shared<Primary>(s->CurLineNum());
-        aspPrimary->atom = Atom::Parse(s);
+        aspPrimary->pImpl->atom = Atom::Parse(s);
 
         while(s->CurToken()->Kind() == TokenKind::LeftBracketToken
               || s->CurToken()->Kind() == TokenKind::LeftParToken)
         {
-            aspPrimary->suffices.push_back(PrimarySuffix::Parse(s));
+            aspPrimary->pImpl->suffices.push_back(PrimarySuffix::Parse(s));
         }
 
         return aspPrimary;
@@ -31,9 +44,9 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Primary::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        auto valueOfLastSubscript = atom->Eval(curScope);
+        auto valueOfLastSubscript = pImpl->atom->Eval(curScope);
 
-        for(auto suffix : suffices)
+        for(auto suffix : pImpl->suffices)
         {
             if(suffix->BracketKind() == TokenKind::LeftBracketToken)
             {

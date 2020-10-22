@@ -8,8 +8,30 @@
 
 namespace Imp
 {
+    struct CompTerm
+    {
+        std::shared_ptr<Term> term;
+        std::shared_ptr<CompOpr> compOpr;
+
+        CompTerm(std::shared_ptr<Term> t)
+        {
+            term = t;
+        }
+    };
+
+    struct Comparison::Impl
+    {
+        std::vector<CompTerm> terms;
+    };
+
     Comparison::Comparison(int n)
-        : ImpSyntax(n)
+        : ImpSyntax(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Comparison::~Comparison()
     {
 
     }
@@ -18,7 +40,7 @@ namespace Imp
     {
         auto comp = std::make_shared<Comparison>(s->CurLineNum());
         CompTerm term(Term::Parse(s));
-        comp->terms.push_back(term);
+        comp->pImpl->terms.push_back(term);
 
         while(s->IsCompOpr())
         {
@@ -26,7 +48,7 @@ namespace Imp
             term = CompTerm(Term::Parse(s));
             term.compOpr = compOpr;
 
-            comp->terms.push_back(term);
+            comp->pImpl->terms.push_back(term);
         }
 
         return comp;
@@ -34,13 +56,13 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Comparison::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        std::shared_ptr<RuntimeValue> lhv = terms[0].term->Eval(curScope);
+        std::shared_ptr<RuntimeValue> lhv = pImpl->terms[0].term->Eval(curScope);
         std::shared_ptr<RuntimeValue> result = lhv;
 
-        for(int i = 1; i < terms.size(); ++i)
+        for(int i = 1; i < pImpl->terms.size(); ++i)
         {
-            TokenKind kind = terms[i].compOpr->opr;
-            auto rhv = terms[i].term->Eval(curScope);
+            TokenKind kind = pImpl->terms[i].compOpr->opr;
+            auto rhv = pImpl->terms[i].term->Eval(curScope);
 
             switch(kind)
             {

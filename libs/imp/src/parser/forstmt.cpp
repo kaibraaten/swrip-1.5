@@ -9,8 +9,21 @@
 
 namespace Imp
 {
+    struct ForStmt::Impl
+    {
+        std::shared_ptr<Name> name;
+        std::shared_ptr<Expr> expr;
+        std::shared_ptr<Suite> body;
+    };
+
     ForStmt::ForStmt(int n)
-        : CompoundStmt(n)
+        : CompoundStmt(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    ForStmt::~ForStmt()
     {
 
     }
@@ -19,17 +32,17 @@ namespace Imp
     {
         auto forStmt = std::make_shared<ForStmt>(s->CurLineNum());
         Skip(s, TokenKind::ForToken);
-        forStmt->name = Name::Parse(s);
+        forStmt->pImpl->name = Name::Parse(s);
         Skip(s, TokenKind::InToken);
-        forStmt->expr = Expr::Parse(s);
+        forStmt->pImpl->expr = Expr::Parse(s);
         Skip(s, TokenKind::ColonToken);
-        forStmt->body = Suite::Parse(s);
+        forStmt->pImpl->body = Suite::Parse(s);
         return forStmt;
     }
 
     std::shared_ptr<RuntimeValue> ForStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        auto controlExpression = expr->Eval(curScope);
+        auto controlExpression = pImpl->expr->Eval(curScope);
 
         if(dynamic_cast<ListValue*>(controlExpression.get()))
         {
@@ -37,8 +50,8 @@ namespace Imp
 
             for(int i = 0; i < values.size(); ++i)
             {
-                curScope->Assign(name->GetName(), values[i]);
-                body->Eval(curScope);
+                curScope->Assign(pImpl->name->GetName(), values[i]);
+                pImpl->body->Eval(curScope);
             }
         }
         else

@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/parser/andtest.hpp"
 #include "imp/parser/nottest.hpp"
 #include "imp/scanner/all.hpp"
@@ -5,9 +6,21 @@
 
 namespace Imp
 {
-    AndTest::AndTest(int n)
-        : ImpSyntax(n)
+    struct AndTest::Impl
     {
+        std::vector<std::shared_ptr<NotTest>> NotTests;
+    };
+
+    AndTest::AndTest(int n)
+        : ImpSyntax(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    AndTest::~AndTest()
+    {
+
     }
 
     std::shared_ptr<AndTest> AndTest::Parse(std::shared_ptr<Scanner> s)
@@ -16,7 +29,7 @@ namespace Imp
 
         while(true)
         {
-            at->NotTests.push_back(NotTest::Parse(s));
+            at->pImpl->NotTests.push_back(NotTest::Parse(s));
 
             if(s->CurToken()->Kind() != TokenKind::AndToken)
             {
@@ -31,16 +44,16 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> AndTest::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        auto v = NotTests[0]->Eval(curScope);
+        auto v = pImpl->NotTests[0]->Eval(curScope);
 
-        for(int i = 1; i < NotTests.size(); ++i)
+        for(int i = 1; i < pImpl->NotTests.size(); ++i)
         {
             if(!v->GetBoolValue("and operand", this))
             {
                 return v;
             }
 
-            v = NotTests[i]->Eval(curScope);
+            v = pImpl->NotTests[i]->Eval(curScope);
         }
 
         return v;

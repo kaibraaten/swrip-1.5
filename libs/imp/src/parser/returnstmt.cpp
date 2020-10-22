@@ -7,8 +7,19 @@
 
 namespace Imp
 {
+    struct ReturnStmt::Impl
+    {
+        std::shared_ptr<Expr> returnExpr;
+    };
+
     ReturnStmt::ReturnStmt(int n)
-        : SmallStmt(n)
+        : SmallStmt(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    ReturnStmt::~ReturnStmt()
     {
 
     }
@@ -17,9 +28,9 @@ namespace Imp
     {
         std::shared_ptr<RuntimeValue> value;
 
-        if(returnExpr != nullptr)
+        if(pImpl->returnExpr != nullptr)
         {
-            value = returnExpr->Eval(curScope);
+            value = pImpl->returnExpr->Eval(curScope);
         }
         else
         {
@@ -36,7 +47,7 @@ namespace Imp
 
         if(s->CurToken()->Kind() != TokenKind::NewLineToken)
         {
-            returnStmt->returnExpr = Expr::Parse(s);
+            returnStmt->pImpl->returnExpr = Expr::Parse(s);
         }
 
         return returnStmt;

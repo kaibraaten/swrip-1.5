@@ -6,17 +6,29 @@
 
 namespace Imp
 {
+    struct WhileStmt::Impl
+    {
+        std::shared_ptr<Expr> test;
+        std::shared_ptr<Suite> body;
+    };
+
     WhileStmt::WhileStmt(int n)
-        : CompoundStmt(n)
+        : CompoundStmt(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    WhileStmt::~WhileStmt()
     {
 
     }
 
     std::shared_ptr<RuntimeValue> WhileStmt::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        while(test->Eval(curScope)->GetBoolValue("while expression", this))
+        while(pImpl->test->Eval(curScope)->GetBoolValue("while expression", this))
         {
-            body->Eval(curScope);
+            pImpl->body->Eval(curScope);
         }
 
         return std::make_shared<NoneValue>();
@@ -26,9 +38,9 @@ namespace Imp
     {
         auto aws = std::make_shared<WhileStmt>(s->CurLineNum());
         Skip(s, TokenKind::WhileToken);
-        aws->test = Expr::Parse(s);
+        aws->pImpl->test = Expr::Parse(s);
         Skip(s, TokenKind::ColonToken);
-        aws->body = Suite::Parse(s);
+        aws->pImpl->body = Suite::Parse(s);
         return aws;
     }
 }

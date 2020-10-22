@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/parser/factor.hpp"
 #include "imp/scanner/all.hpp"
 #include "imp/parser/factorprefix.hpp"
@@ -8,8 +9,26 @@
 
 namespace Imp
 {
+    struct PrimaryData
+    {
+        std::shared_ptr<Primary> primary;
+        std::shared_ptr<FactorPrefix> prefix;
+        std::shared_ptr<FactorOpr> opr;
+    };
+
+    struct Factor::Impl
+    {
+        std::vector<PrimaryData> primaries;
+    };
+
     Factor::Factor(int n)
-        : ImpSyntax(n)
+        : ImpSyntax(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Factor::~Factor()
     {
 
     }
@@ -25,7 +44,7 @@ namespace Imp
         }
 
         p.primary = Primary::Parse(s);
-        factor->primaries.push_back(p);
+        factor->pImpl->primaries.push_back(p);
 
         while(s->IsFactorOpr())
         {
@@ -38,7 +57,7 @@ namespace Imp
             }
 
             p.primary = Primary::Parse(s);
-            factor->primaries.push_back(p);
+            factor->pImpl->primaries.push_back(p);
         }
 
         return factor;
@@ -46,16 +65,17 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Factor::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        auto v = primaries[0].primary->Eval(curScope);
+        auto v = pImpl->primaries[0].primary->Eval(curScope);
 
-        if(primaries[0].prefix != nullptr && primaries[0].prefix->opr == TokenKind::MinusToken)
+        if(pImpl->primaries[0].prefix != nullptr
+           && pImpl->primaries[0].prefix->opr == TokenKind::MinusToken)
         {
-            v = v->EvalNegate(primaries[0].primary.get());
+            v = v->EvalNegate(pImpl->primaries[0].primary.get());
         }
 
-        for(int i = 1; i < primaries.size(); ++i)
+        for(int i = 1; i < pImpl->primaries.size(); ++i)
         {
-            auto p = primaries[i];
+            auto p = pImpl->primaries[i];
             TokenKind k = p.opr->opr;
             auto rhv = p.primary->Eval(curScope);
 

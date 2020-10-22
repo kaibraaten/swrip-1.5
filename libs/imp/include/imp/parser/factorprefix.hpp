@@ -1,14 +1,10 @@
 #ifndef _IMP_PARSER_FACTORPREFIX_HPP_
 #define _IMP_PARSER_FACTORPREFIX_HPP_
 
-#include <memory>
 #include <imp/parser/impsyntax.hpp>
 
 namespace Imp
 {
-    enum class TokenKind;
-    class Scanner;
-
     class FactorPrefix : public ImpSyntax
     {
     public:

@@ -1,3 +1,4 @@
+#include <list>
 #include "imp/parser/suite.hpp"
 #include "imp/parser/smallstmtlist.hpp"
 #include "imp/parser/smallstmt.hpp"
@@ -7,21 +8,33 @@
 
 namespace Imp
 {
+    struct Suite::Impl
+    {
+        std::shared_ptr<SmallStmtList> smallStmtList;
+        std::list<std::shared_ptr<Statement>> statements;
+    };
+
     Suite::Suite(int n)
-        : ImpSyntax(n)
+        : ImpSyntax(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Suite::~Suite()
     {
 
     }
 
     std::shared_ptr<RuntimeValue> Suite::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        if(smallStmtList != nullptr)
+        if(pImpl->smallStmtList != nullptr)
         {
-            smallStmtList->Eval(curScope);
+            pImpl->smallStmtList->Eval(curScope);
         }
         else
         {
-            for(auto stmt : statements)
+            for(auto stmt : pImpl->statements)
             {
                 stmt->Eval(curScope);
             }
@@ -41,14 +54,14 @@ namespace Imp
 
             do
             {
-                suite->statements.push_back(Statement::Parse(s));
+                suite->pImpl->statements.push_back(Statement::Parse(s));
             } while(s->CurToken()->Kind() != TokenKind::DedentToken);
 
             Skip(s, TokenKind::DedentToken);
         }
         else
         {
-            suite->smallStmtList = SmallStmtList::Parse(s);
+            suite->pImpl->smallStmtList = SmallStmtList::Parse(s);
         }
 
         return suite;

@@ -1,15 +1,10 @@
 #ifndef _IMP_PARSER_PASSSTMT_HPP_
 #define _IMP_PARSER_PASSSTMT_HPP_
 
-#include <memory>
 #include <imp/parser/smallstmt.hpp>
 
 namespace Imp
 {
-    class Scanner;
-    class RuntimeValue;
-    class RuntimeScope;
-
     class PassStmt : public SmallStmt
     {
     public:

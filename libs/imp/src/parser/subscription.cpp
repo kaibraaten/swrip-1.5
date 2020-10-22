@@ -4,8 +4,19 @@
 
 namespace Imp
 {
+    struct Subscription::Impl
+    {
+        std::shared_ptr<Expr> expr;
+    };
+
     Subscription::Subscription(int n)
-        : PrimarySuffix(n)
+        : PrimarySuffix(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    Subscription::~Subscription()
     {
 
     }
@@ -14,7 +25,7 @@ namespace Imp
     {
         auto sub = std::make_shared<Subscription>(s->CurLineNum());
         Skip(s, TokenKind::LeftBracketToken);
-        sub->expr = Expr::Parse(s);
+        sub->pImpl->expr = Expr::Parse(s);
         Skip(s, TokenKind::RightBracketToken);
 
         return sub;
@@ -22,6 +33,6 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> Subscription::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return expr->Eval(curScope);
+        return pImpl->expr->Eval(curScope);
     }
 }

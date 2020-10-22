@@ -4,8 +4,19 @@
 
 namespace Imp
 {
+    struct BooleanLiteral::Impl
+    {
+        bool Value = false;
+    };
+
     BooleanLiteral::BooleanLiteral(int n)
-        : Atom(n)
+        : Atom(n),
+        pImpl(std::make_unique<Impl>())
+    {
+
+    }
+
+    BooleanLiteral::~BooleanLiteral()
     {
 
     }
@@ -13,13 +24,13 @@ namespace Imp
     std::shared_ptr<BooleanLiteral> BooleanLiteral::Parse(std::shared_ptr<Scanner> s)
     {
         auto booleanLiteral = std::make_shared<BooleanLiteral>(s->CurLineNum());
-        booleanLiteral->_Value = s->CurToken()->Kind() == TokenKind::TrueToken;
+        booleanLiteral->pImpl->Value = s->CurToken()->Kind() == TokenKind::TrueToken;
         Skip(s, s->CurToken()->Kind());
         return booleanLiteral;
     }
 
     std::shared_ptr<RuntimeValue> BooleanLiteral::Eval(std::shared_ptr<RuntimeScope> curScope)
     {
-        return std::make_shared<BoolValue>(_Value);
+        return std::make_shared<BoolValue>(pImpl->Value);
     }
 }
