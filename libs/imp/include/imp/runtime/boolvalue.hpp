@@ -9,6 +9,7 @@ namespace Imp
     {
     public:
         BoolValue(bool value);
+        ~BoolValue();
         std::string TypeName() override;
         std::string ShowInfo() override;
         bool GetBoolValue(const std::string &what, ImpSyntax *where) override;
@@ -18,7 +19,8 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalStr(ImpSyntax *where) override;
 
     private:
-        bool _Value;
+        struct Impl;
+        std::unique_ptr<Impl> pImpl;
     };
 }
 

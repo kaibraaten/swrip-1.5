@@ -1,9 +1,7 @@
 #ifndef _IMP_RUNTIME_DICTVALUE_HPP_
 #define _IMP_RUNTIME_DICTVALUE_HPP_
 
-#include <string>
 #include <unordered_map>
-#include <memory>
 #include <imp/runtime/runtimevalue.hpp>
 
 namespace Imp
@@ -12,6 +10,7 @@ namespace Imp
     {
     public:
         DictValue(const std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> &dict);
+        ~DictValue();
         std::string TypeName() override;
         std::string ShowInfo() override;
         bool GetBoolValue(const std::string &what, ImpSyntax *where) override;
@@ -24,7 +23,8 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalStr(ImpSyntax *where) override;
 
     private:
-        std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> _Value;
+        struct Impl;
+        std::unique_ptr<Impl> pImpl;
     };
 }
 

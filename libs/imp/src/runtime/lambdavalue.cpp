@@ -1,3 +1,4 @@
+#include <vector>
 #include "imp/runtime/lambdavalue.hpp"
 #include "imp/runtime/returnvalue.hpp"
 #include "imp/parser/impsyntax.hpp"
@@ -9,12 +10,32 @@
 
 namespace Imp
 {
+    struct LambdaValue::Impl
+    {
+        Impl(const std::vector<std::string> &args,
+             std::shared_ptr<Expr> body,
+             std::shared_ptr<RuntimeScope> scope)
+            : FormalParams(args),
+            Body(body),
+            ScopeDeclared(scope)
+        {
+
+        }
+
+        std::vector<std::string> FormalParams;
+        std::shared_ptr<Expr> Body;
+        std::shared_ptr<RuntimeScope> ScopeDeclared;
+    };
+
     LambdaValue::LambdaValue(const std::vector<std::string> &args,
                              std::shared_ptr<Expr> body,
                              std::shared_ptr<RuntimeScope> scope)
-        : _FormalParams(args),
-        _Body(body),
-        _ScopeDeclared(scope)
+        : pImpl(std::make_unique<Impl>(args, body, scope))
+    {
+
+    }
+
+    LambdaValue::~LambdaValue()
     {
 
     }
@@ -32,23 +53,23 @@ namespace Imp
     std::shared_ptr<RuntimeValue> LambdaValue::EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
                                                             ImpSyntax *where)
     {
-        if(actualParams.size() != _FormalParams.size())
+        if(actualParams.size() != pImpl->FormalParams.size())
         {
             RuntimeError("Wrong number of parameters.", where);
         }
 
-        auto scope = std::make_shared<RuntimeScope>(_ScopeDeclared);
+        auto scope = std::make_shared<RuntimeScope>(pImpl->ScopeDeclared);
 
         for(int i = 0; i < actualParams.size(); ++i)
         {
-            scope->Assign(_FormalParams[i], actualParams[i]);
+            scope->Assign(pImpl->FormalParams[i], actualParams[i]);
         }
 
         std::shared_ptr<RuntimeValue> result;
 
         try
         {
-            result = _Body->Eval(scope);
+            result = pImpl->Body->Eval(scope);
         }
         catch(const ReturnValue &e)
         {

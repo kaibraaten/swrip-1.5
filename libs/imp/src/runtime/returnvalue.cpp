@@ -2,20 +2,37 @@
 
 namespace Imp
 {
+    struct ReturnValue::Impl
+    {
+        Impl(std::shared_ptr<RuntimeValue> value, int lineNum)
+            : Value(value),
+            LineNum(lineNum)
+        {
+
+        }
+
+        std::shared_ptr<RuntimeValue> Value;
+        int LineNum = 0;
+    };
+
     ReturnValue::ReturnValue(std::shared_ptr<RuntimeValue> value, int lineNum)
-        : _Value(value),
-        _LineNum(lineNum)
+        : pImpl(std::make_unique<Impl>(value, lineNum))
+    {
+
+    }
+
+    ReturnValue::~ReturnValue()
     {
 
     }
 
     std::shared_ptr<RuntimeValue> ReturnValue::Value() const
     {
-        return _Value;
+        return pImpl->Value;
     }
 
     int ReturnValue::LineNum() const
     {
-        return _LineNum;
+        return pImpl->LineNum;
     }
 }

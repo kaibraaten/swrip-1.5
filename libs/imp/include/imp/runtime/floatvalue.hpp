@@ -1,18 +1,15 @@
 #ifndef _IMP_RUNTIME_FLOATVALUE_HPP_
 #define _IMP_RUNTIME_FLOATVALUE_HPP_
 
-#include <string>
-#include <memory>
 #include <imp/runtime/runtimevalue.hpp>
 
 namespace Imp
 {
-    class ImpSyntax;
-
     class FloatValue : public RuntimeValue
     {
     public:
         FloatValue(double v);
+        ~FloatValue();
         std::string TypeName() override;
         std::string ShowInfo() override;
         bool GetBoolValue(const std::string &what, ImpSyntax *where) override;
@@ -35,7 +32,8 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalStr(ImpSyntax *where) override;
 
     private:
-        double _Value;
+        struct Impl;
+        std::unique_ptr<Impl> pImpl;
     };
 }
 

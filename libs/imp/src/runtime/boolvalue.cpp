@@ -4,8 +4,24 @@
 
 namespace Imp
 {
+    struct BoolValue::Impl
+    {
+        Impl(bool v)
+            : Value(v)
+        {
+
+        }
+
+        bool Value;
+    };
+
     BoolValue::BoolValue(bool value)
-        : _Value(value)
+        : pImpl(std::make_unique<Impl>(value))
+    {
+
+    }
+
+    BoolValue::~BoolValue()
     {
 
     }
@@ -17,12 +33,12 @@ namespace Imp
 
     std::string BoolValue::ShowInfo()
     {
-        return _Value ? "True" : "False";
+        return pImpl->Value ? "True" : "False";
     }
 
     bool BoolValue::GetBoolValue(const std::string &what, ImpSyntax *where)
     {
-        return _Value;
+        return pImpl->Value;
     }
 
     std::shared_ptr<RuntimeValue> BoolValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
@@ -49,7 +65,7 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> BoolValue::EvalNot(ImpSyntax *where)
     {
-        return std::make_shared<BoolValue>(!_Value);
+        return std::make_shared<BoolValue>(!pImpl->Value);
     }
 
     std::shared_ptr<RuntimeValue> BoolValue::EvalStr(ImpSyntax *where)

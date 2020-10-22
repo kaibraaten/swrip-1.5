@@ -1,19 +1,15 @@
 #ifndef _IMP_RUNTIME_STRINGVALUE_HPP_
 #define _IMP_RUNTIME_STRINGVALUE_HPP_
 
-#include <memory>
-#include <string>
 #include <imp/runtime/runtimevalue.hpp>
 
 namespace Imp
 {
-    class ImpSyntax;
-    class RuntimeScope;
-
     class StringValue : public RuntimeValue
     {
     public:
         StringValue(const std::string &value);
+        ~StringValue();
         std::string TypeName() override;
         std::string ShowInfo() override;
         bool GetBoolValue(const std::string &what, ImpSyntax *where) override;
@@ -32,7 +28,8 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalStr(ImpSyntax *where) override;
 
     private:
-        std::string _Value;
+        struct Impl;
+        std::unique_ptr<Impl> pImpl;
     };
 }
 

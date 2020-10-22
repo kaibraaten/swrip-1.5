@@ -11,12 +11,13 @@ namespace Imp
     {
     public:
         ReturnValue(std::shared_ptr<RuntimeValue> value, int lineNum);
+        ~ReturnValue();
         std::shared_ptr<RuntimeValue> Value() const;
         int LineNum() const;
 
     private:
-        std::shared_ptr<RuntimeValue> _Value;
-        int _LineNum = 0;
+        struct Impl;
+        std::unique_ptr<Impl> pImpl;
     };
 }
 

@@ -1,5 +1,5 @@
 #include <sstream>
-
+#include <unordered_map>
 #include "imp/runtime/dictvalue.hpp"
 #include "imp/runtime/boolvalue.hpp"
 #include "imp/runtime/intvalue.hpp"
@@ -8,12 +8,28 @@
 
 namespace Imp
 {
+    struct DictValue::Impl
+    {
+        Impl(const std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> &dict)
+            : Value(dict)
+        {
+
+        }
+
+        std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> Value;
+    };
+
     DictValue::DictValue(const std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> &dict)
-        : _Value(dict)
+        : pImpl(std::make_unique<Impl>(dict))
     {
 
     }
     
+    DictValue::~DictValue()
+    {
+
+    }
+
     std::string DictValue::TypeName()
     {
         return "dict";
@@ -26,7 +42,7 @@ namespace Imp
 
         bool firstElement = true;
 
-        for(const auto &pair : _Value)
+        for(const auto &pair : pImpl->Value)
         {
             if(!firstElement)
             {
@@ -44,7 +60,7 @@ namespace Imp
 
     bool DictValue::GetBoolValue(const std::string &what, ImpSyntax *where)
     {
-        return !_Value.empty();
+        return !pImpl->Value.empty();
     }
 
     std::shared_ptr<RuntimeValue> DictValue::EvalNot(ImpSyntax *where)
@@ -56,9 +72,9 @@ namespace Imp
     {
         if(dynamic_cast<StringValue *>(v.get()))
         {
-            const auto &iter = _Value.find(v->GetStringValue("[...] operand", where));
+            const auto &iter = pImpl->Value.find(v->GetStringValue("[...] operand", where));
 
-            if(iter != _Value.end())
+            if(iter != pImpl->Value.end())
             {
                 return iter->second;
             }
@@ -99,7 +115,7 @@ namespace Imp
         if(dynamic_cast<StringValue *>(inx.get()))
         {
             std::string subscript = inx->GetStringValue("[...] index", where);
-            _Value[subscript] = val;
+            pImpl->Value[subscript] = val;
         }
 
         RuntimeError("Type error for [...]", where);
@@ -107,7 +123,7 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> DictValue::EvalLen(ImpSyntax *where)
     {
-        return std::make_shared<IntValue>(_Value.size());
+        return std::make_shared<IntValue>(pImpl->Value.size());
     }
 
     std::shared_ptr<RuntimeValue> DictValue::EvalStr(ImpSyntax *where)

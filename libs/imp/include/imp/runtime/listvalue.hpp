@@ -2,18 +2,15 @@
 #define _IMP_RUNTIME_LISTVALUE_HPP_
 
 #include <deque>
-#include <memory>
-#include <string>
 #include <imp/runtime/runtimevalue.hpp>
 
 namespace Imp
 {
-    class ImpSyntax;
-
     class ListValue : public RuntimeValue
     {
     public:
         ListValue(const std::deque<std::shared_ptr<RuntimeValue>> &value);
+        ~ListValue();
         const std::deque<std::shared_ptr<RuntimeValue>> &Value() const;
         std::string TypeName() override;
         std::string ShowInfo() override;
@@ -29,7 +26,8 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalStr(ImpSyntax *where) override;
 
     private:
-        std::deque<std::shared_ptr<RuntimeValue>> _Value;
+        struct Impl;
+        std::unique_ptr<Impl> pImpl;
     };
 }
 

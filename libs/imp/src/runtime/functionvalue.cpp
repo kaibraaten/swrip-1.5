@@ -1,3 +1,4 @@
+#include <vector>
 #include <sstream>
 #include "imp/runtime/functionvalue.hpp"
 #include "imp/runtime/returnvalue.hpp"
@@ -9,8 +10,34 @@
 
 namespace Imp
 {
+    struct FunctionValue::Impl
+    {
+        Impl(const std::string &name)
+            : Name(name)
+        {
+
+        }
+
+        Impl(const std::string &name,
+                      const std::vector<std::string> &formalParams,
+                      std::shared_ptr<RuntimeScope> scopeDeclared,
+                      std::shared_ptr<Suite> body)
+            : Name(name),
+            FormalParams(formalParams),
+            ScopeDeclared(scopeDeclared),
+            Body(body)
+        {
+
+        }
+
+        std::string Name;
+        std::vector<std::string> FormalParams;
+        std::shared_ptr<RuntimeScope> ScopeDeclared;
+        std::shared_ptr<Suite> Body;
+    };
+
     FunctionValue::FunctionValue(const std::string &name)
-        : _Name(name)
+        : pImpl(std::make_unique<Impl>(name))
     {
 
     }
@@ -19,10 +46,12 @@ namespace Imp
                                  const std::vector<std::string> &formalParams,
                                  std::shared_ptr<RuntimeScope> scopeDeclared,
                                  std::shared_ptr<Suite> body)
-        : _Name(name),
-        _FormalParams(formalParams),
-        _ScopeDeclared(scopeDeclared),
-        _Body(body)
+        : pImpl(std::make_unique<Impl>(name, formalParams, scopeDeclared, body))
+    {
+
+    }
+
+    FunctionValue::~FunctionValue()
     {
 
     }
@@ -35,10 +64,10 @@ namespace Imp
     std::string FunctionValue::ShowInfo()
     {
         std::ostringstream output;
-        output << _Name << "(";
+        output << pImpl->Name << "(";
         bool isFirst = true;
 
-        for(auto p : _FormalParams)
+        for(auto p : pImpl->FormalParams)
         {
             if(!isFirst)
             {
@@ -55,21 +84,21 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> FunctionValue::EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where)
     {
-        if(actualParams.size() != _FormalParams.size())
+        if(actualParams.size() != pImpl->FormalParams.size())
         {
             RuntimeError("Wrong number of parameters.", where);
         }
 
-        auto scope = std::make_shared<RuntimeScope>(_ScopeDeclared);
+        auto scope = std::make_shared<RuntimeScope>(pImpl->ScopeDeclared);
 
         for(int i = 0; i < actualParams.size(); ++i)
         {
-            scope->Assign(_FormalParams[i], actualParams[i]);
+            scope->Assign(pImpl->FormalParams[i], actualParams[i]);
         }
 
         try
         {
-            _Body->Eval(scope);
+            pImpl->Body->Eval(scope);
         }
         catch(const ReturnValue &ret)
         {
@@ -108,6 +137,6 @@ namespace Imp
 
     std::string FunctionValue::GetName() const
     {
-        return _Name;
+        return pImpl->Name;
     }
 }

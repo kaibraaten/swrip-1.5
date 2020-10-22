@@ -3,7 +3,6 @@
 
 #include <string>
 #include <memory>
-#include <unordered_map>
 
 namespace Imp
 {
@@ -14,12 +13,13 @@ namespace Imp
     {
     public:
         RuntimeScope(std::shared_ptr<RuntimeScope> outer = nullptr);
+        ~RuntimeScope();
         void Assign(const std::string &id, std::shared_ptr<RuntimeValue> value);
         std::shared_ptr<RuntimeValue> Find(const std::string &id, ImpSyntax *where);
 
     private:
-        std::shared_ptr<RuntimeScope> _Outer;
-        std::unordered_map<std::string, std::shared_ptr<RuntimeValue>> decls;
+        struct Impl;
+        std::unique_ptr<Impl> pImpl;
     };
 }
 

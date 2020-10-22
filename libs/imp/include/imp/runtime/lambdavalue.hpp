@@ -1,7 +1,6 @@
 #ifndef _IMP_RUNTIME_LAMBDAVALUE_HPP_
 #define _IMP_RUNTIME_LAMBDAVALUE_HPP_
 
-#include <vector>
 #include <imp/runtime/runtimevalue.hpp>
 
 namespace Imp
@@ -15,6 +14,7 @@ namespace Imp
         LambdaValue(const std::vector<std::string> &args,
                     std::shared_ptr<Expr> body,
                     std::shared_ptr<RuntimeScope> scope);
+        ~LambdaValue();
         std::string TypeName() override;
         std::string ShowInfo() override;
         std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
@@ -24,9 +24,8 @@ namespace Imp
         std::shared_ptr<RuntimeValue> EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where) override;
 
     private:
-        std::vector<std::string> _FormalParams;
-        std::shared_ptr<Expr> _Body;
-        std::shared_ptr<RuntimeScope> _ScopeDeclared;
+        struct Impl;
+        std::unique_ptr<Impl> pImpl;
     };
 }
 

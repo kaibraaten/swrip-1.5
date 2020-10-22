@@ -7,15 +7,31 @@
 
 namespace Imp
 {
+    struct ListValue::Impl
+    {
+        Impl(const std::deque<std::shared_ptr<RuntimeValue>> &value)
+            : Value(value)
+        {
+
+        }
+
+        std::deque<std::shared_ptr<RuntimeValue>> Value;
+    };
+
     ListValue::ListValue(const std::deque<std::shared_ptr<RuntimeValue>> &value)
-        : _Value(value)
+        : pImpl(std::make_unique<Impl>(value))
+    {
+
+    }
+
+    ListValue::~ListValue()
     {
 
     }
 
     const std::deque<std::shared_ptr<RuntimeValue>> &ListValue::Value() const
     {
-        return _Value;
+        return pImpl->Value;
     }
 
     std::string ListValue::TypeName()
@@ -29,7 +45,7 @@ namespace Imp
         output << "[";
         bool firstElement = true;
 
-        for(auto v : _Value)
+        for(auto v : pImpl->Value)
         {
             if(!firstElement)
             {
@@ -46,12 +62,12 @@ namespace Imp
 
     bool ListValue::GetBoolValue(const std::string &what, ImpSyntax *where)
     {
-        return !_Value.empty();
+        return !pImpl->Value.empty();
     }
 
     std::shared_ptr<RuntimeValue> ListValue::EvalNot(ImpSyntax *where)
     {
-        return std::make_shared<BoolValue>(_Value.empty());
+        return std::make_shared<BoolValue>(pImpl->Value.empty());
     }
 
     std::shared_ptr<RuntimeValue> ListValue::EvalSubscription(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
@@ -60,12 +76,12 @@ namespace Imp
         {
             int idx = v->GetIntValue("[...] operand", where);
 
-            if(idx < 0 || idx >= _Value.size())
+            if(idx < 0 || idx >= pImpl->Value.size())
             {
                 RuntimeError("list index out of range.", where);
             }
 
-            return _Value[idx];
+            return pImpl->Value[idx];
         }
 
         RuntimeError("Type error for [...].", where);
@@ -103,7 +119,7 @@ namespace Imp
 
             for(int i = 0; i < times; ++i)
             {
-                newList.insert(newList.end(), _Value.begin(), _Value.end());
+                newList.insert(newList.end(), pImpl->Value.begin(), pImpl->Value.end());
             }
 
             return std::make_shared<ListValue>(newList);
@@ -119,8 +135,8 @@ namespace Imp
         {
             auto asList = std::dynamic_pointer_cast<ListValue>(rhv);
             std::deque<std::shared_ptr<RuntimeValue>> newList;
-            newList.assign(_Value.begin(), _Value.end());
-            newList.insert(newList.end(), asList->_Value.begin(), asList->_Value.end());
+            newList.assign(pImpl->Value.begin(), pImpl->Value.end());
+            newList.insert(newList.end(), asList->pImpl->Value.begin(), asList->pImpl->Value.end());
 
             return std::make_shared<ListValue>(newList);
         }
@@ -131,7 +147,7 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> ListValue::EvalLen(ImpSyntax *where)
     {
-        return std::make_shared<IntValue>(_Value.size());
+        return std::make_shared<IntValue>(pImpl->Value.size());
     }
 
     void ListValue::EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, ImpSyntax *where)
@@ -140,16 +156,17 @@ namespace Imp
         {
             int subscript = inx->GetIntValue("[...] write operand", where);
 
-            if(subscript < 0 || subscript >= _Value.size())
+            if(subscript < 0 || subscript >= pImpl->Value.size())
             {
                 RuntimeError("list index out of range.", where);
             }
 
-            _Value[subscript] = val;
-            return;
+            pImpl->Value[subscript] = val;
         }
-
-        RuntimeError("Type error for [...]", where);
+        else
+        {
+            RuntimeError("Type error for [...]", where);
+        }
     }
 
     std::shared_ptr<RuntimeValue> ListValue::EvalStr(ImpSyntax *where)

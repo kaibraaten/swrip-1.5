@@ -5,8 +5,24 @@
 
 namespace Imp
 {
+    struct StringValue::Impl
+    {
+        Impl(const std::string &value)
+            : Value(value)
+        {
+
+        }
+
+        std::string Value;
+    };
+
     StringValue::StringValue(const std::string &value)
-        : _Value(value)
+        : pImpl(std::make_unique<Impl>(value))
+    {
+
+    }
+
+    StringValue::~StringValue()
     {
 
     }
@@ -18,29 +34,29 @@ namespace Imp
 
     std::string StringValue::ShowInfo()
     {
-        if(_Value.find('\'') != std::string::npos)
-            return '"' + _Value + '"';
+        if(pImpl->Value.find('\'') != std::string::npos)
+            return '"' + pImpl->Value + '"';
         else
-            return "'" + _Value + "'";
+            return "'" + pImpl->Value + "'";
     }
 
     bool StringValue::GetBoolValue(const std::string &what, ImpSyntax *where)
     {
-        return !_Value.empty();
+        return !pImpl->Value.empty();
     }
 
     std::string StringValue::GetStringValue(const std::string &what, ImpSyntax *where)
     {
-        return _Value;
+        return pImpl->Value;
     }
 
     std::shared_ptr<RuntimeValue> StringValue::EvalSubscription(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
     {
         int subscript = v->GetIntValue("[...] index", where);
 
-        if(subscript < _Value.size() && subscript >= 0)
+        if(subscript < pImpl->Value.size() && subscript >= 0)
         {
-            return std::make_shared<StringValue>(std::string(1, _Value[subscript]));
+            return std::make_shared<StringValue>(std::string(1, pImpl->Value[subscript]));
         }
         else
         {
@@ -54,7 +70,7 @@ namespace Imp
     {
         if(dynamic_cast<StringValue*>(v.get()))
         {
-            return std::make_shared<StringValue>(_Value + v->GetStringValue("+ operand", where));
+            return std::make_shared<StringValue>(pImpl->Value + v->GetStringValue("+ operand", where));
         }
 
         RuntimeError("Type error for +.", where);
@@ -70,7 +86,7 @@ namespace Imp
 
             for(int i = 0; i < times; ++i)
             {
-                output += _Value;
+                output += pImpl->Value;
             }
             return std::make_shared<StringValue>(output);
         }
@@ -87,7 +103,7 @@ namespace Imp
         }
         else if(dynamic_cast<StringValue*>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value == v->GetStringValue("== operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value == v->GetStringValue("== operand", where));
         }
 
         RuntimeError("Type error for ==.", where);
@@ -102,7 +118,7 @@ namespace Imp
         }
         else if(dynamic_cast<StringValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value != v->GetStringValue("!= operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value != v->GetStringValue("!= operand", where));
         }
 
         RuntimeError("Type error for !=.", where);
@@ -113,7 +129,7 @@ namespace Imp
     {
         if(dynamic_cast<StringValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value < v->GetStringValue("< operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value < v->GetStringValue("< operand", where));
         }
 
         RuntimeError("Type error for <.", where);
@@ -124,7 +140,7 @@ namespace Imp
     {
         if(dynamic_cast<StringValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value > v->GetStringValue("> operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value > v->GetStringValue("> operand", where));
         }
 
         RuntimeError("Type error for >.", where);
@@ -135,7 +151,7 @@ namespace Imp
     {
         if(dynamic_cast<StringValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value <= v->GetStringValue("<= operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value <= v->GetStringValue("<= operand", where));
         }
 
         RuntimeError("Type error for <=.", where);
@@ -146,7 +162,7 @@ namespace Imp
     {
         if(dynamic_cast<StringValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value >= v->GetStringValue(">= operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value >= v->GetStringValue(">= operand", where));
         }
 
         RuntimeError("Type error for >=.", where);
@@ -155,16 +171,16 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> StringValue::EvalNot(ImpSyntax *where)
     {
-        return std::make_shared<BoolValue>(_Value.empty());
+        return std::make_shared<BoolValue>(pImpl->Value.empty());
     }
 
     std::shared_ptr<RuntimeValue> StringValue::EvalLen(ImpSyntax *where)
     {
-        return std::make_shared<IntValue>(_Value.size());
+        return std::make_shared<IntValue>(pImpl->Value.size());
     }
 
     std::shared_ptr<RuntimeValue> StringValue::EvalStr(ImpSyntax *where)
     {
-        return std::make_shared<StringValue>(_Value);
+        return std::make_shared<StringValue>(pImpl->Value);
     }
 }

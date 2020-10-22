@@ -1,14 +1,10 @@
 #ifndef _IMP_RUNTIME_NONEVALUE_HPP_
 #define _IMP_RUNTIME_NONEVALUE_HPP_
 
-#include <string>
-#include <memory>
 #include <imp/runtime/runtimevalue.hpp>
 
 namespace Imp
 {
-    class ImpSyntax;
-
     class NoneValue : public RuntimeValue
     {
     public:

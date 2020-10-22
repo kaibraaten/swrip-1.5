@@ -1,13 +1,10 @@
 #ifndef _IMP_RUNTIME_FUNCTIONVALUE_HPP_
 #define _IMP_RUNTIME_FUNCTIONVALUE_HPP_
 
-#include <string>
-#include <vector>
 #include <imp/runtime/runtimevalue.hpp>
 
 namespace Imp
 {
-    class ImpSyntax;
     class Suite;
     class RuntimeScope;
 
@@ -19,6 +16,7 @@ namespace Imp
                       const std::vector<std::string> &formalParams,
                       std::shared_ptr<RuntimeScope> scopeDeclared,
                       std::shared_ptr<Suite> body);
+        ~FunctionValue();
         std::string TypeName() override;
         std::string ShowInfo() override;
         std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
@@ -29,10 +27,8 @@ namespace Imp
         std::string GetName() const;
 
     private:
-        std::string _Name;
-        std::vector<std::string> _FormalParams;
-        std::shared_ptr<RuntimeScope> _ScopeDeclared;
-        std::shared_ptr<Suite> _Body;
+        struct Impl;
+        std::unique_ptr<Impl> pImpl;
     };
 }
 

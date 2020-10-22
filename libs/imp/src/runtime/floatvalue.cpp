@@ -7,9 +7,26 @@
 
 namespace Imp
 {
-    FloatValue::FloatValue(double v)
+    struct FloatValue::Impl
     {
-        _Value = v;
+        Impl(double v)
+            : Value(v)
+        {
+
+        }
+
+        double Value;
+    };
+
+    FloatValue::FloatValue(double v)
+        : pImpl(std::make_unique<Impl>(v))
+    {
+        
+    }
+
+    FloatValue::~FloatValue()
+    {
+
     }
 
     std::string FloatValue::TypeName()
@@ -19,27 +36,27 @@ namespace Imp
 
     std::string FloatValue::ShowInfo()
     {
-        return std::to_string(_Value);
+        return std::to_string(pImpl->Value);
     }
 
     bool FloatValue::GetBoolValue(const std::string &what, ImpSyntax *where)
     {
-        return _Value != 0.0;
+        return pImpl->Value != 0.0;
     }
 
     double FloatValue::GetFloatValue(const std::string &what, ImpSyntax *where)
     {
-        return _Value;
+        return pImpl->Value;
     }
 
     std::shared_ptr<RuntimeValue> FloatValue::EvalNegate(ImpSyntax *where)
     {
-        return std::make_shared<FloatValue>(-_Value);
+        return std::make_shared<FloatValue>(-pImpl->Value);
     }
 
     std::shared_ptr<RuntimeValue> FloatValue::EvalPositive(ImpSyntax *where)
     {
-        return std::make_shared<FloatValue>(_Value);
+        return std::make_shared<FloatValue>(pImpl->Value);
     }
 
     std::shared_ptr<RuntimeValue> FloatValue::EvalAdd(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
@@ -47,7 +64,7 @@ namespace Imp
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
         {
-            return std::make_shared<FloatValue>(_Value + v->GetFloatValue("+ operand", where));
+            return std::make_shared<FloatValue>(pImpl->Value + v->GetFloatValue("+ operand", where));
         }
 
         RuntimeError("Type error for +.", where);
@@ -59,7 +76,7 @@ namespace Imp
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
         {
-            return std::make_shared<FloatValue>(_Value - v->GetFloatValue("- operand", where));
+            return std::make_shared<FloatValue>(pImpl->Value - v->GetFloatValue("- operand", where));
         }
 
         RuntimeError("Type error for -.", where);
@@ -71,7 +88,7 @@ namespace Imp
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
         {
-            return std::make_shared<FloatValue>(_Value * v->GetFloatValue("* operand", where));
+            return std::make_shared<FloatValue>(pImpl->Value * v->GetFloatValue("* operand", where));
         }
 
         RuntimeError("Type error for *.", where);
@@ -90,7 +107,7 @@ namespace Imp
                 RuntimeError("Division by zero for /.", where);
             }
 
-            return std::make_shared<FloatValue>(_Value / divisor);
+            return std::make_shared<FloatValue>(pImpl->Value / divisor);
         }
 
         RuntimeError("Type error for /.", where);
@@ -109,7 +126,7 @@ namespace Imp
                 RuntimeError("Division by zero for /.", where);
             }
 
-            return std::make_shared<FloatValue>(floor(_Value / divisor));
+            return std::make_shared<FloatValue>(floor(pImpl->Value / divisor));
         }
 
         RuntimeError("Type error for //.", where);
@@ -128,7 +145,7 @@ namespace Imp
                 RuntimeError("Division by zero for %.", where);
             }
 
-            return std::make_shared<FloatValue>(_Value - divisor * floor(_Value / divisor));
+            return std::make_shared<FloatValue>(pImpl->Value - divisor * floor(pImpl->Value / divisor));
         }
 
         RuntimeError("Type error for %.", where);
@@ -144,7 +161,7 @@ namespace Imp
         else if(dynamic_cast<FloatValue *>(v.get())
                 || dynamic_cast<IntValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value == v->GetFloatValue("== operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value == v->GetFloatValue("== operand", where));
         }
 
         RuntimeError("Type error for ==.", where);
@@ -160,7 +177,7 @@ namespace Imp
         else if(dynamic_cast<FloatValue *>(v.get())
                 || dynamic_cast<IntValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value != v->GetFloatValue("!= operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value != v->GetFloatValue("!= operand", where));
         }
 
         RuntimeError("Type error for !=.", where);
@@ -172,7 +189,7 @@ namespace Imp
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value < v->GetFloatValue("< operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value < v->GetFloatValue("< operand", where));
         }
 
         RuntimeError("Type error for <.", where);
@@ -184,7 +201,7 @@ namespace Imp
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value <= v->GetFloatValue("<= operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value <= v->GetFloatValue("<= operand", where));
         }
 
         RuntimeError("Type error for <=.", where);
@@ -196,7 +213,7 @@ namespace Imp
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value > v->GetFloatValue("> operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value > v->GetFloatValue("> operand", where));
         }
 
         RuntimeError("Type error for >.", where);
@@ -208,7 +225,7 @@ namespace Imp
         if(dynamic_cast<FloatValue *>(v.get())
            || dynamic_cast<IntValue *>(v.get()))
         {
-            return std::make_shared<BoolValue>(_Value >= v->GetFloatValue(">= operand", where));
+            return std::make_shared<BoolValue>(pImpl->Value >= v->GetFloatValue(">= operand", where));
         }
 
         RuntimeError("Type error for >=.", where);
@@ -217,7 +234,7 @@ namespace Imp
 
     std::shared_ptr<RuntimeValue> FloatValue::EvalNot(ImpSyntax *where)
     {
-        return std::make_shared<BoolValue>(_Value == 0.0);
+        return std::make_shared<BoolValue>(pImpl->Value == 0.0);
     }
 
     std::shared_ptr<RuntimeValue> FloatValue::EvalStr(ImpSyntax *where)
