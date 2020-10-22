@@ -9,7 +9,7 @@
 #include "repos/descriptorrepository.hpp"
 #include "act.hpp"
 
-static const char go_ahead_str[] = { (const char)IAC, (const char)GA, '\0' };
+static const char go_ahead_str[] = { static_cast<char>(IAC), static_cast<char>(GA), '\0' };
 
 struct Descriptor::Impl
 {

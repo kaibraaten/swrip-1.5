@@ -51,8 +51,14 @@
 
 using NannyFun = std::function<void(std::shared_ptr<Descriptor>, std::string)>;
 
-static const char echo_off_str[] = { (const char)IAC, (const char)WILL, TELOPT_ECHO, '\0' };
-static const char echo_on_str[] = { (const char)IAC, (const char)WONT, TELOPT_ECHO, '\0' };
+static const char echo_off_str[] = { static_cast<char>(IAC),
+                                     static_cast<char>(WILL),
+                                     TELOPT_ECHO,
+                                     '\0' };
+static const char echo_on_str[] = { static_cast<char>(IAC),
+                                    static_cast<char>(WONT),
+                                    TELOPT_ECHO,
+                                    '\0' };
 extern bool wizlock;
 
 /*
