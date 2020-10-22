@@ -34,7 +34,7 @@ this is a hobby project after all. I will make a release when
 I feel I have something that is worth using.
 
 ## Requirements
-* A compiler supporting C++17. Clang, GCC 9, and Visual Studio 2019 are known to work.
+* A compiler supporting C++20. Clang, GCC 10, and Visual Studio 2019 are known to work.
 * Lua 5.3 (included in libs/3rdparty directory)
 * Google Test and Google Mock (downloaded automatically)
 * cmake 3.10 or higher.
@@ -61,8 +61,6 @@ successfully saving, quit the game. Enter the
 `data/players/first_letter_of_your_character_name` directory and open the save
 file. Locate the `Level = 1` variable, and change to `Level = 105`. Save and
 exit editor. You can now enter the game, and you will be top level admin. Yay.
-
-I'll probably simplify this process at some point.
 
 ## Credits
 Below is the history of SWRiP.

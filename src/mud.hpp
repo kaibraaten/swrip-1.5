@@ -959,11 +959,6 @@ DECLARE_SPEC_FUN(spec_police);
 DECLARE_SPEC_FUN(spec_clan_guard);
 DECLARE_SPEC_FUN(spec_newbie_pilot);
 
-/*
- * Our function prototypes.
- * One big lump ... this is every function in Merc.
- */
-
  /* copyover.c */
 void RecoverFromCopyover();
 

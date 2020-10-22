@@ -96,7 +96,6 @@ void ObjProgDropTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> o
 void ObjProgZapTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 void ObjProgGreetTrigger(std::shared_ptr<Character> ch);
 void ObjProgGetTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
-char *ObjProgTypeToName(int type);
 void ObjProgPullTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 void ObjProgPushTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 
@@ -110,7 +109,6 @@ void RoomProgSpeechTrigger(const std::string &txt, std::shared_ptr<Character> ch
 void RoomProgRandomTrigger(std::shared_ptr<Character> ch);
 void RoomProgTimeTrigger(std::shared_ptr<Character> ch);
 void RoomProgHourTrigger(std::shared_ptr<Character> ch);
-char *RoomProgTypeToName(int type);
 
 void ObjProgActTrigger(const std::string &buf, std::shared_ptr<Object> mobj, std::shared_ptr<Character> ch,
                        std::shared_ptr<Object> obj, const Vo &vo);
