@@ -22,6 +22,7 @@
 #include "protomob.hpp"
 #include "protoobject.hpp"
 #include "protoobject.hpp"
+#include "log.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/badnamerepository.hpp"
 #include "repos/banrepository.hpp"
@@ -32,8 +33,16 @@
 #include "repos/shuttlerepository.hpp"
 #include "repos/arearepository.hpp"
 
-static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
+#include <imp/scanner/scanner.hpp>
+#include <imp/runtime/standardlibrary.hpp>
+#include <imp/parser/program.hpp>
+#include <imp/except/impexception.hpp>
+#include "impscript/impcharacter.hpp"
+#include "impscript/mudlibrary.hpp"
 
+static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
+static std::shared_ptr<Imp::RuntimeScope> MakeImpScope();
+static std::shared_ptr<Imp::Program> MakeImpProgram(const std::list<std::string> &code);
 void do_test( std::shared_ptr<Character> ch, std::string argument )
 {
 #ifdef HAVE_UNAME
@@ -270,6 +279,27 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
                      RoomFlags[tuple.first], tuple.second);
         }
     }
+    else if(StrCmp(argument, "imp") == 0)
+    {
+        try
+        {
+            std::list<std::string> code =
+                {
+                    "for n in range(1, 6):",
+                    "    echo(actor, 'Hey yo ' + str(n) + '!')"
+                };
+
+            auto globalScope = MakeImpScope();
+            globalScope->Assign("actor", std::make_shared<ImpCharacter>(ch));
+            
+            auto prog = MakeImpProgram(code);
+            prog->Eval(globalScope);
+        }
+        catch(const Imp::ImpException &ex)
+        {
+            Log->Bug("%s\r\n", ex.what());
+        }
+    }
     else
     {
         ch->Echo("Unknown argument.\r\n");
@@ -288,4 +318,20 @@ static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum)
     }
 
     return nullptr;
+}
+
+static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
+{
+    auto standardLib = std::make_shared<Imp::StandardLibrary>();
+    auto mudLib = std::make_shared<MudLibrary>(standardLib);
+    auto globalScope = std::make_shared<Imp::RuntimeScope>(mudLib);
+    return globalScope;
+}
+
+static std::shared_ptr<Imp::Program> MakeImpProgram(const std::list<std::string> &code)
+{
+    auto scanner = std::make_shared<Imp::Scanner>(code);
+    auto prog = Imp::Program::Parse(scanner);
+
+    return prog;
 }

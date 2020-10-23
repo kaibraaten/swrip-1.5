@@ -19,9 +19,9 @@ target_compile_options(mud_tests
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/DDEACTIVATE_FAILING_TESTS /D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /DGTEST_LINKED_AS_SHARED_LIBRARY=1 /wd4996 /wd6262 /wd26451 /wd4267 /wd4244 /wd4018 /we4805 /we4305 /std:c++latest>)
 
 if(WIN32)
-  target_link_libraries(mud_tests gtest_main gmock utility colorparser lua WS2_32)
+  target_link_libraries(mud_tests gtest_main gmock utility colorparser lua WS2_32 imp)
 else()
-  target_link_libraries(mud_tests gtest_main gmock utility colorparser lua stdc++fs dl)
+  target_link_libraries(mud_tests gtest_main gmock utility colorparser lua stdc++fs dl imp)
 endif()
 target_include_directories(mud_tests PRIVATE src)
 gtest_discover_tests(mud_tests)

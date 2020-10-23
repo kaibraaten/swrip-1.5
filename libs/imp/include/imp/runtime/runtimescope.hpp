@@ -13,7 +13,7 @@ namespace Imp
     {
     public:
         RuntimeScope(std::shared_ptr<RuntimeScope> outer = nullptr);
-        ~RuntimeScope();
+        virtual ~RuntimeScope();
         void Assign(const std::string &id, std::shared_ptr<RuntimeValue> value);
         std::shared_ptr<RuntimeValue> Find(const std::string &id, const ImpSyntax *where);
 

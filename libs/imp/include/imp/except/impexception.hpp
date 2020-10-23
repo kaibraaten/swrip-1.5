@@ -8,7 +8,7 @@ namespace Imp
     class ImpException : public std::runtime_error
     {
     public:
-        virtual ~ImpException() = default;
+        virtual ~ImpException();
 
     protected:
         ImpException(const std::string &msg);

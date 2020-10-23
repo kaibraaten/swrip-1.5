@@ -1,7 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
 project(swrip)
-include_directories(src libs/colorparser/include libs/utility/include libs/3rdparty/lua)
-link_directories(src libs/colorparser libs/utility libs/3rdparty/lua)
+include_directories(src
+  libs/colorparser/include
+  libs/utility/include
+  libs/3rdparty/lua
+  libs/imp/include
+  )
+link_directories(src libs/colorparser libs/utility libs/3rdparty/lua libs/imp)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -560,6 +565,9 @@ src/commands/wizlock.cpp
 src/commands/yell.cpp
 src/commands/zap.cpp
 src/commands/zones.cpp
+src/impscript/mudlibrary.cpp
+src/impscript/impcharacter.cpp
+src/impscript/echo_func.cpp
 src/mpcommands/mpapplyb.cpp
 src/mpcommands/mpapply.cpp
 src/mpcommands/mpasound.cpp
@@ -677,10 +685,10 @@ src/spells/weaken.cpp)
 set(COMMANDTABLE_FILE ${CMAKE_CURRENT_SOURCE_DIR}/src/tables.cpp)
 
 if(WIN32)
-  target_link_libraries(swrip utility colorparser lua WS2_32)
+  target_link_libraries(swrip utility colorparser lua WS2_32 imp)
   set(BUILD_SHARED_LIBS ON)
 else()
-  target_link_libraries(swrip utility colorparser lua stdc++fs dl)
+  target_link_libraries(swrip utility colorparser lua stdc++fs dl imp)
 endif()
 
 set(PYTHON python3)

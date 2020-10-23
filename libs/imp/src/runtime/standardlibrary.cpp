@@ -10,17 +10,10 @@
 #include "imp/runtime/dictvalue.hpp"
 #include "imp/runtime/listvalue.hpp"
 #include "imp/runtime/nonevalue.hpp"
+#include "imp/utility.hpp"
 
 namespace Imp
 {
-    static void CheckNumParams(const std::vector<std::shared_ptr<RuntimeValue>> &actArgs, int nCorrect, const std::string &id, const ImpSyntax *where)
-    {
-        if(actArgs.size() != nCorrect)
-        {
-            RuntimeValue::RuntimeError("Wrong number of parameters to " + id + "!", where);
-        }
-    }
-
     class RangeFunc : public FunctionValue
     {
     public:

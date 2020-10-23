@@ -14,6 +14,11 @@ namespace Imp
         RuntimeError(msg, where->LineNum());
     }
 
+    RuntimeValue::~RuntimeValue()
+    {
+
+    }
+    
     bool RuntimeValue::GetBoolValue(const std::string &what, const ImpSyntax *where)
     {
         RuntimeError("Type error: " + what + " is not a Boolean!", where);

@@ -7,4 +7,9 @@ namespace Imp
     {
 
     }
+
+    ImpException::~ImpException()
+    {
+
+    }
 }

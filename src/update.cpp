@@ -704,8 +704,8 @@ static void GainAddiction(std::shared_ptr<Character> ch)
         }
         else if(ch->PCData->Addiction[drug] < ch->PCData->DrugLevel[drug] - 50)
         {
-            Act(AT_POISON, "$n bends over and vomits.\r\n", ch, NULL, NULL, ActTarget::Room);
-            Act(AT_POISON, "You vomit.\r\n", ch, NULL, NULL, ActTarget::Char);
+            Act(AT_POISON, "$n bends over and vomits.", ch, NULL, NULL, ActTarget::Room);
+            Act(AT_POISON, "You vomit.", ch, NULL, NULL, ActTarget::Char);
             ch->PCData->DrugLevel[drug] -= 10;
         }
 

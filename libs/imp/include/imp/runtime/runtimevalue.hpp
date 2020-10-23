@@ -15,6 +15,7 @@ namespace Imp
         static void RuntimeError(const std::string &msg, int lineNum);
         static void RuntimeError(const std::string &msg, const ImpSyntax *where);
 
+        virtual ~RuntimeValue();
         virtual std::string TypeName() = 0;
         virtual std::string ShowInfo() = 0;
 
