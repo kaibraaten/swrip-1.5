@@ -63,7 +63,7 @@ add_library(imp SHARED
    "src/runtime/functionvalue.cpp"
    "src/runtime/stringvalue.cpp"
    "src/runtime/listvalue.cpp"
-   "src/runtime/standardlibrary.cpp")
+   "src/runtime/standardlibrary.cpp" "include/imp/parser/fromstmt.hpp" "src/parser/fromstmt.cpp")
 target_compile_features(imp PUBLIC cxx_std_20)
 target_compile_options(imp
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation -std=c++20>

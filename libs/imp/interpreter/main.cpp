@@ -4,6 +4,7 @@
 #include <imp/scanner/scanner.hpp>
 #include <imp/runtime/standardlibrary.hpp>
 #include <imp/parser/program.hpp>
+#include <imp/runtime/stringvalue.hpp>
 
 static std::list<std::string> LoadScript(const std::string &filename);
 static void ShowUsage();
@@ -39,7 +40,7 @@ int main(int argc, char *argv[])
         auto scanner = std::make_shared<Imp::Scanner>(code);
         auto lib = std::make_shared<Imp::StandardLibrary>();
         auto globalScope = std::make_shared<Imp::RuntimeScope>(lib);
-
+        globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("scripts"));
         auto prog = Imp::Program::Parse(scanner);
 
         prog->Eval(globalScope);

@@ -1,6 +1,7 @@
 #include <unordered_map>
 #include "imp/runtime/runtimescope.hpp"
 #include "imp/runtime/runtimevalue.hpp"
+#include "imp/runtime/stringvalue.hpp"
 
 namespace Imp
 {
@@ -19,7 +20,7 @@ namespace Imp
     RuntimeScope::RuntimeScope(std::shared_ptr<RuntimeScope> outer)
         : pImpl(std::make_unique<Impl>(outer))
     {
-
+        Assign("SCRIPT_PATH", std::make_shared<StringValue>(""));
     }
 
     RuntimeScope::~RuntimeScope()

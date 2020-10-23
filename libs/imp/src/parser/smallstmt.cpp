@@ -3,6 +3,7 @@
 #include "imp/parser/returnstmt.hpp"
 #include "imp/parser/assignment.hpp"
 #include "imp/parser/exprstmt.hpp"
+#include "imp/parser/fromstmt.hpp"
 #include "imp/scanner/all.hpp"
 
 namespace Imp
@@ -25,6 +26,10 @@ namespace Imp
 
         case TokenKind::ReturnToken:
             smallStmt = ReturnStmt::Parse(s);
+            break;
+
+        case TokenKind::FromToken:
+            smallStmt = FromStmt::Parse(s);
             break;
 
         case TokenKind::NameToken:
