@@ -12,7 +12,7 @@ struct ImpCharacter::Impl
 
     }
 
-    std::shared_ptr<Character> Char;
+    std::weak_ptr<Character> Char;
 };
 
 ImpCharacter::ImpCharacter(std::shared_ptr<Character> ch)
@@ -33,12 +33,20 @@ std::string ImpCharacter::TypeName()
 
 std::string ImpCharacter::ShowInfo()
 {
-    return IsNpc(pImpl->Char) ? pImpl->Char->ShortDescr : pImpl->Char->Name;
+    if(!pImpl->Char.expired())
+    {
+        auto ch = pImpl->Char.lock();
+        return IsNpc(ch) ? ch->ShortDescr : ch->Name;
+    }
+    else
+    {
+        return "";
+    }
 }
 
 std::shared_ptr<Character> ImpCharacter::Char() const
 {
-    return pImpl->Char;
+    return pImpl->Char.lock();
 }
 
 std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalEqual(std::shared_ptr<Imp::RuntimeValue> v,
@@ -51,7 +59,16 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalEqual(std::shared_ptr<Imp::
     else if(dynamic_cast<ImpCharacter*>(v.get()))
     {
         auto other = std::dynamic_pointer_cast<ImpCharacter>(v);
-        return std::make_shared<Imp::BoolValue>(pImpl->Char == other->Char());
+
+        if(!pImpl->Char.expired() && !other->pImpl->Char.expired())
+        {
+            return std::make_shared<Imp::BoolValue>(Char() == other->Char());
+        }
+        else
+        {
+            RuntimeError("Character reference expired.", where);
+            return nullptr;
+        }
     }
 
     RuntimeError("Type error for ==.", where);
@@ -68,7 +85,16 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalNotEqual(std::shared_ptr<Im
     else if(dynamic_cast<ImpCharacter*>(v.get()))
     {
         auto other = std::dynamic_pointer_cast<ImpCharacter>(v);
-        return std::make_shared<Imp::BoolValue>(pImpl->Char != other->Char());
+
+        if(!pImpl->Char.expired() && !other->pImpl->Char.expired())
+        {
+            return std::make_shared<Imp::BoolValue>(pImpl->Char.lock() != other->Char());
+        }
+        else
+        {
+            RuntimeError("Character reference expired.", where);
+            return nullptr;
+        }
     }
 
     RuntimeError("Type error for !=.", where);
@@ -77,5 +103,15 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalNotEqual(std::shared_ptr<Im
 
 std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalStr(const Imp::ImpSyntax *where)
 {
-    return std::make_shared<Imp::StringValue>(ShowInfo());
+    if(!pImpl->Char.expired())
+    {
+        auto ch = pImpl->Char.lock();
+        auto str = IsNpc(ch) ? ch->ShortDescr : ch->Name;
+        return std::make_shared<Imp::StringValue>(str);
+    }
+    else
+    {
+        RuntimeError("Character reference expired.", where);
+        return nullptr;
+    }
 }
