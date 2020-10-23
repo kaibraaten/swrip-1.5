@@ -286,9 +286,9 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
         {
             std::list<std::string> code =
                 {
-                    "# lol",
+                    //"# lol",
                     "from test import *",
-                    "yo(actor)"
+                    "main()"
                 };
 
             auto globalScope = MakeImpScope();
