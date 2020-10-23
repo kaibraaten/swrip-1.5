@@ -37,6 +37,7 @@
 #include <imp/runtime/standardlibrary.hpp>
 #include <imp/parser/program.hpp>
 #include <imp/except/impexception.hpp>
+#include <imp/runtime/stringvalue.hpp>
 #include "impscript/impcharacter.hpp"
 #include "impscript/mudlibrary.hpp"
 
@@ -285,8 +286,9 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
         {
             std::list<std::string> code =
                 {
-                    "for n in range(1, 6):",
-                    "    echo(actor, 'Hey yo ' + str(n) + '!')"
+                    "# lol",
+                    "from test import *",
+                    "yo(actor)"
                 };
 
             auto globalScope = MakeImpScope();
@@ -325,6 +327,7 @@ static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
     auto standardLib = std::make_shared<Imp::StandardLibrary>();
     auto mudLib = std::make_shared<MudLibrary>(standardLib);
     auto globalScope = std::make_shared<Imp::RuntimeScope>(mudLib);
+    globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("data/scripts"));
     return globalScope;
 }
 
