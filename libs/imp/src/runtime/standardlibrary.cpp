@@ -13,7 +13,7 @@
 
 namespace Imp
 {
-    static void CheckNumParams(const std::vector<std::shared_ptr<RuntimeValue>> &actArgs, int nCorrect, const std::string &id, ImpSyntax *where)
+    static void CheckNumParams(const std::vector<std::shared_ptr<RuntimeValue>> &actArgs, int nCorrect, const std::string &id, const ImpSyntax *where)
     {
         if(actArgs.size() != nCorrect)
         {
@@ -30,7 +30,7 @@ namespace Imp
 
         }
 
-        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
         {
             CheckNumParams(actualParams, 2, "range", where);
             auto v1 = actualParams[0];
@@ -64,7 +64,7 @@ namespace Imp
 
         }
 
-        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
         {
             CheckNumParams(actualParams, 1, "input", where);
             auto v1 = actualParams[0];
@@ -90,7 +90,7 @@ namespace Imp
 
         }
 
-        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
         {
             CheckNumParams(actualParams, 1, "str", where);
             auto v1 = actualParams[0];
@@ -107,7 +107,7 @@ namespace Imp
 
         }
 
-        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
         {
             CheckNumParams(actualParams, 1, "int", where);
             auto param = actualParams[0];
@@ -168,7 +168,7 @@ namespace Imp
 
         }
 
-        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
         {
             CheckNumParams(actualParams, 1, "float", where);
             auto param = actualParams[0];
@@ -239,7 +239,7 @@ namespace Imp
 
         }
 
-        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
         {
             std::ostringstream output;
             bool isFirst = true;
@@ -269,7 +269,7 @@ namespace Imp
 
         }
 
-        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
         {
             CheckNumParams(actualParams, 1, "len", where);
             auto v1 = actualParams[0];
@@ -286,7 +286,7 @@ namespace Imp
 
         }
 
-        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where) override
+        std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where) override
         {
             CheckNumParams(actualParams, 1, "exit", where);
             auto v1 = actualParams[0];

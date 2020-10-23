@@ -36,12 +36,12 @@ namespace Imp
         return pImpl->Value ? "True" : "False";
     }
 
-    bool BoolValue::GetBoolValue(const std::string &what, ImpSyntax *where)
+    bool BoolValue::GetBoolValue(const std::string &what, const ImpSyntax *where)
     {
         return pImpl->Value;
     }
 
-    std::shared_ptr<RuntimeValue> BoolValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> BoolValue::EvalEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -52,7 +52,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> BoolValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> BoolValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -63,12 +63,12 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> BoolValue::EvalNot(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> BoolValue::EvalNot(const ImpSyntax *where)
     {
         return std::make_shared<BoolValue>(!pImpl->Value);
     }
 
-    std::shared_ptr<RuntimeValue> BoolValue::EvalStr(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> BoolValue::EvalStr(const ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
     }

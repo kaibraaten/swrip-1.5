@@ -12,11 +12,11 @@ namespace Imp
         ~BoolValue();
         std::string TypeName() override;
         std::string ShowInfo() override;
-        bool GetBoolValue(const std::string &what, ImpSyntax *where) override;
-        std::shared_ptr<RuntimeValue> EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where) override;
-        std::shared_ptr<RuntimeValue> EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where) override;
-        std::shared_ptr<RuntimeValue> EvalNot(ImpSyntax *where) override;
-        std::shared_ptr<RuntimeValue> EvalStr(ImpSyntax *where) override;
+        bool GetBoolValue(const std::string &what, const ImpSyntax *where) override;
+        std::shared_ptr<RuntimeValue> EvalEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where) override;
+        std::shared_ptr<RuntimeValue> EvalNotEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where) override;
+        std::shared_ptr<RuntimeValue> EvalNot(const ImpSyntax *where) override;
+        std::shared_ptr<RuntimeValue> EvalStr(const ImpSyntax *where) override;
 
     private:
         struct Impl;

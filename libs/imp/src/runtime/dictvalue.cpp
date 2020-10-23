@@ -58,17 +58,17 @@ namespace Imp
         return output.str();
     }
 
-    bool DictValue::GetBoolValue(const std::string &what, ImpSyntax *where)
+    bool DictValue::GetBoolValue(const std::string &what, const ImpSyntax *where)
     {
         return !pImpl->Value.empty();
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalNot(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalNot(const ImpSyntax *where)
     {
         return std::make_shared<BoolValue>(!GetBoolValue("not operator", where));
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalSubscription(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalSubscription(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<StringValue *>(v.get()))
         {
@@ -88,7 +88,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -99,7 +99,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -110,7 +110,7 @@ namespace Imp
         return nullptr;
     }
 
-    void DictValue::EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, ImpSyntax *where)
+    void DictValue::EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, const ImpSyntax *where)
     {
         if(dynamic_cast<StringValue *>(inx.get()))
         {
@@ -121,12 +121,12 @@ namespace Imp
         RuntimeError("Type error for [...]", where);
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalLen(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalLen(const ImpSyntax *where)
     {
         return std::make_shared<IntValue>(pImpl->Value.size());
     }
 
-    std::shared_ptr<RuntimeValue> DictValue::EvalStr(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> DictValue::EvalStr(const ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
     }

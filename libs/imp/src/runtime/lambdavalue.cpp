@@ -51,7 +51,7 @@ namespace Imp
     }
 
     std::shared_ptr<RuntimeValue> LambdaValue::EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
-                                                            ImpSyntax *where)
+                                                            const ImpSyntax *where)
     {
         if(actualParams.size() != pImpl->FormalParams.size())
         {
@@ -79,7 +79,7 @@ namespace Imp
         return result;
     }
 
-    std::shared_ptr<RuntimeValue> LambdaValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> LambdaValue::EvalEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -90,7 +90,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> LambdaValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> LambdaValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -101,7 +101,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> LambdaValue::EvalStr(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> LambdaValue::EvalStr(const ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
     }

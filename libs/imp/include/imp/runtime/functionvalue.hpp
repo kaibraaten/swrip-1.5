@@ -20,10 +20,10 @@ namespace Imp
         std::string TypeName() override;
         std::string ShowInfo() override;
         std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
-                                                   ImpSyntax *where) override;
-        std::shared_ptr<RuntimeValue> EvalStr(ImpSyntax *where) override;
-        std::shared_ptr<RuntimeValue> EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where) override;
-        std::shared_ptr<RuntimeValue> EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where) override;
+                                                   const ImpSyntax *where) override;
+        std::shared_ptr<RuntimeValue> EvalStr(const ImpSyntax *where) override;
+        std::shared_ptr<RuntimeValue> EvalEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where) override;
+        std::shared_ptr<RuntimeValue> EvalNotEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where) override;
         std::string GetName() const;
 
     private:

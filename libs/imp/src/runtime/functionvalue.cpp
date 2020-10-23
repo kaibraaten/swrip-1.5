@@ -82,7 +82,7 @@ namespace Imp
         return output.str();
     }
 
-    std::shared_ptr<RuntimeValue> FunctionValue::EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> FunctionValue::EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where)
     {
         if(actualParams.size() != pImpl->FormalParams.size())
         {
@@ -108,12 +108,12 @@ namespace Imp
         return std::make_shared<NoneValue>();
     }
 
-    std::shared_ptr<RuntimeValue> FunctionValue::EvalStr(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> FunctionValue::EvalStr(const ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
     }
 
-    std::shared_ptr<RuntimeValue> FunctionValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> FunctionValue::EvalEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -124,7 +124,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> FunctionValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> FunctionValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {

@@ -60,17 +60,17 @@ namespace Imp
         return output.str();
     }
 
-    bool ListValue::GetBoolValue(const std::string &what, ImpSyntax *where)
+    bool ListValue::GetBoolValue(const std::string &what, const ImpSyntax *where)
     {
         return !pImpl->Value.empty();
     }
 
-    std::shared_ptr<RuntimeValue> ListValue::EvalNot(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> ListValue::EvalNot(const ImpSyntax *where)
     {
         return std::make_shared<BoolValue>(pImpl->Value.empty());
     }
 
-    std::shared_ptr<RuntimeValue> ListValue::EvalSubscription(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> ListValue::EvalSubscription(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<IntValue *>(v.get()))
         {
@@ -88,7 +88,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> ListValue::EvalEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> ListValue::EvalEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue*>(v.get()))
         {
@@ -99,7 +99,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> ListValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> ListValue::EvalNotEqual(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<NoneValue *>(v.get()))
         {
@@ -110,7 +110,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> ListValue::EvalMultiply(std::shared_ptr<RuntimeValue> v, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> ListValue::EvalMultiply(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where)
     {
         if(dynamic_cast<IntValue*>(v.get()))
         {
@@ -129,7 +129,7 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> ListValue::EvalAdd(std::shared_ptr<RuntimeValue> rhv, ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> ListValue::EvalAdd(std::shared_ptr<RuntimeValue> rhv, const ImpSyntax *where)
     {
         if(dynamic_cast<ListValue *>(rhv.get()))
         {
@@ -145,12 +145,12 @@ namespace Imp
         return nullptr;
     }
 
-    std::shared_ptr<RuntimeValue> ListValue::EvalLen(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> ListValue::EvalLen(const ImpSyntax *where)
     {
         return std::make_shared<IntValue>(pImpl->Value.size());
     }
 
-    void ListValue::EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, ImpSyntax *where)
+    void ListValue::EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, const ImpSyntax *where)
     {
         if(dynamic_cast<IntValue*>(inx.get()))
         {
@@ -169,7 +169,7 @@ namespace Imp
         }
     }
 
-    std::shared_ptr<RuntimeValue> ListValue::EvalStr(ImpSyntax *where)
+    std::shared_ptr<RuntimeValue> ListValue::EvalStr(const ImpSyntax *where)
     {
         return std::make_shared<StringValue>(ShowInfo());
     }
