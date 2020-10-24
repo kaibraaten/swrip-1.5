@@ -1,4 +1,9 @@
 # Huh?
 def main():
-    for n in range(1, 6):
-        echo(actor, "Yo " + str(n) + "!")
+    if isnpc(actor):
+        echo(actor, "You're a mob!")
+    else:
+        echo(actor, "You're a player!")
+
+def ispc(ch):
+    return not isnpc(ch)

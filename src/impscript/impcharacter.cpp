@@ -44,8 +44,13 @@ std::string ImpCharacter::ShowInfo()
     }
 }
 
-std::shared_ptr<Character> ImpCharacter::Char() const
+std::shared_ptr<Character> ImpCharacter::Char(const Imp::ImpSyntax *where) const
 {
+    if(pImpl->Char.expired())
+    {
+        RuntimeError("Character reference expired.", where);
+    }
+    
     return pImpl->Char.lock();
 }
 
@@ -59,16 +64,7 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalEqual(std::shared_ptr<Imp::
     else if(dynamic_cast<ImpCharacter*>(v.get()))
     {
         auto other = std::dynamic_pointer_cast<ImpCharacter>(v);
-
-        if(!pImpl->Char.expired() && !other->pImpl->Char.expired())
-        {
-            return std::make_shared<Imp::BoolValue>(Char() == other->Char());
-        }
-        else
-        {
-            RuntimeError("Character reference expired.", where);
-            return nullptr;
-        }
+        return std::make_shared<Imp::BoolValue>(Char(where) == other->Char(where));
     }
 
     RuntimeError("Type error for ==.", where);
@@ -85,16 +81,7 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalNotEqual(std::shared_ptr<Im
     else if(dynamic_cast<ImpCharacter*>(v.get()))
     {
         auto other = std::dynamic_pointer_cast<ImpCharacter>(v);
-
-        if(!pImpl->Char.expired() && !other->pImpl->Char.expired())
-        {
-            return std::make_shared<Imp::BoolValue>(pImpl->Char.lock() != other->Char());
-        }
-        else
-        {
-            RuntimeError("Character reference expired.", where);
-            return nullptr;
-        }
+        return std::make_shared<Imp::BoolValue>(Char(where) != other->Char(where));
     }
 
     RuntimeError("Type error for !=.", where);
@@ -103,15 +90,7 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalNotEqual(std::shared_ptr<Im
 
 std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalStr(const Imp::ImpSyntax *where)
 {
-    if(!pImpl->Char.expired())
-    {
-        auto ch = pImpl->Char.lock();
-        auto str = IsNpc(ch) ? ch->ShortDescr : ch->Name;
-        return std::make_shared<Imp::StringValue>(str);
-    }
-    else
-    {
-        RuntimeError("Character reference expired.", where);
-        return nullptr;
-    }
+    auto ch = Char(where);
+    auto str = IsNpc(ch) ? ch->ShortDescr : ch->Name;
+    return std::make_shared<Imp::StringValue>(str);
 }

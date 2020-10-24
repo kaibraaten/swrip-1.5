@@ -31,7 +31,7 @@ std::shared_ptr<Imp::RuntimeValue> EchoFunc::EvalFuncCall(const std::vector<std:
     if((dynamic_cast<ImpCharacter*>(recipient.get())))
     {
         auto ch = std::dynamic_pointer_cast<ImpCharacter>(recipient);
-        Act(AT_PLAIN, message, ch->Char(), nullptr, nullptr, ActTarget::Char);
+        Act(AT_PLAIN, message, ch->Char(where), nullptr, nullptr, ActTarget::Char);
         return std::make_shared<Imp::NoneValue>();
     }
     

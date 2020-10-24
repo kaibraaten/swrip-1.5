@@ -17,7 +17,7 @@ public:
     std::shared_ptr<Imp::RuntimeValue> EvalNotEqual(std::shared_ptr<Imp::RuntimeValue> v,
                                                     const Imp::ImpSyntax *where) override;
     std::shared_ptr<Imp::RuntimeValue> EvalStr(const Imp::ImpSyntax *where) override;
-    std::shared_ptr<Character> Char() const;
+    std::shared_ptr<Character> Char(const Imp::ImpSyntax *where) const;
     
 private:
     struct Impl;
