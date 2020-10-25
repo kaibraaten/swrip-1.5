@@ -568,6 +568,7 @@ src/commands/zones.cpp
 src/impscript/mudlibrary.cpp
 src/impscript/impcharacter.cpp
 src/impscript/echo_func.cpp
+src/impscript/isnpc_func.cpp
 src/mpcommands/mpapplyb.cpp
 src/mpcommands/mpapply.cpp
 src/mpcommands/mpasound.cpp
