@@ -2,9 +2,11 @@
 #include <imp/runtime/nonevalue.hpp>
 #include <imp/runtime/stringvalue.hpp>
 #include "impscript/impcharacter.hpp"
+#include "impscript/improom.hpp"
 #include "impscript/echo_func.hpp"
 #include "constants.hpp"
 #include "act.hpp"
+#include "mud.hpp"
 
 EchoFunc::EchoFunc()
     : Imp::FunctionValue("echo")
@@ -31,10 +33,17 @@ std::shared_ptr<Imp::RuntimeValue> EchoFunc::EvalFuncCall(const std::vector<std:
     if((dynamic_cast<ImpCharacter*>(recipient.get())))
     {
         auto ch = std::dynamic_pointer_cast<ImpCharacter>(recipient);
-        Act(AT_PLAIN, message, ch->Char(where), nullptr, nullptr, ActTarget::Char);
-        return std::make_shared<Imp::NoneValue>();
+        Act(AT_PLAIN, message, ch->Entity(where), nullptr, nullptr, ActTarget::Char);
+    }
+    else if((dynamic_cast<ImpRoom*>(recipient.get())))
+    {
+        auto room = std::dynamic_pointer_cast<ImpRoom>(recipient);
+        EchoToRoom(AT_PLAIN, room->Entity(where), message);
+    }
+    else
+    {
+        Imp::RuntimeValue::RuntimeError("Type error in echo() param 1.", where);
     }
     
-    Imp::RuntimeValue::RuntimeError("Type error in echo() param 1.", where);
-    return nullptr;
+    return std::make_shared<Imp::NoneValue>();
 }

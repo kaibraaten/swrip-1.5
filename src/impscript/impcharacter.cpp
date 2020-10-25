@@ -7,12 +7,12 @@
 struct ImpCharacter::Impl
 {
     Impl(std::shared_ptr<Character> ch)
-        : Char(ch)
+        : Entity(ch)
     {
 
     }
 
-    std::weak_ptr<Character> Char;
+    std::weak_ptr<Character> Entity;
 };
 
 ImpCharacter::ImpCharacter(std::shared_ptr<Character> ch)
@@ -33,9 +33,9 @@ std::string ImpCharacter::TypeName()
 
 std::string ImpCharacter::ShowInfo()
 {
-    if(!pImpl->Char.expired())
+    if(!pImpl->Entity.expired())
     {
-        auto ch = pImpl->Char.lock();
+        auto ch = pImpl->Entity.lock();
         return IsNpc(ch) ? ch->ShortDescr : ch->Name;
     }
     else
@@ -44,14 +44,14 @@ std::string ImpCharacter::ShowInfo()
     }
 }
 
-std::shared_ptr<Character> ImpCharacter::Char(const Imp::ImpSyntax *where) const
+std::shared_ptr<Character> ImpCharacter::Entity(const Imp::ImpSyntax *where) const
 {
-    if(pImpl->Char.expired())
+    if(pImpl->Entity.expired())
     {
         RuntimeError("Character reference expired.", where);
     }
     
-    return pImpl->Char.lock();
+    return pImpl->Entity.lock();
 }
 
 std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalEqual(std::shared_ptr<Imp::RuntimeValue> v,
@@ -64,7 +64,7 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalEqual(std::shared_ptr<Imp::
     else if(dynamic_cast<ImpCharacter*>(v.get()))
     {
         auto other = std::dynamic_pointer_cast<ImpCharacter>(v);
-        return std::make_shared<Imp::BoolValue>(Char(where) == other->Char(where));
+        return std::make_shared<Imp::BoolValue>(Entity(where) == other->Entity(where));
     }
 
     RuntimeError("Type error for ==.", where);
@@ -81,7 +81,7 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalNotEqual(std::shared_ptr<Im
     else if(dynamic_cast<ImpCharacter*>(v.get()))
     {
         auto other = std::dynamic_pointer_cast<ImpCharacter>(v);
-        return std::make_shared<Imp::BoolValue>(Char(where) != other->Char(where));
+        return std::make_shared<Imp::BoolValue>(Entity(where) != other->Entity(where));
     }
 
     RuntimeError("Type error for !=.", where);
@@ -90,7 +90,7 @@ std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalNotEqual(std::shared_ptr<Im
 
 std::shared_ptr<Imp::RuntimeValue> ImpCharacter::EvalStr(const Imp::ImpSyntax *where)
 {
-    auto ch = Char(where);
+    auto ch = Entity(where);
     auto str = IsNpc(ch) ? ch->ShortDescr : ch->Name;
     return std::make_shared<Imp::StringValue>(str);
 }

@@ -21,7 +21,7 @@ std::shared_ptr<Imp::RuntimeValue> IsNpcFunc::EvalFuncCall(const std::vector<std
     if((dynamic_cast<ImpCharacter*>(ch.get())))
     {
         auto npc = std::dynamic_pointer_cast<ImpCharacter>(ch);
-        return std::make_shared<Imp::BoolValue>(npc->Char(where)->IsNpc());
+        return std::make_shared<Imp::BoolValue>(npc->Entity(where)->IsNpc());
     }
     
     Imp::RuntimeValue::RuntimeError("Type error in isnpc().", where);

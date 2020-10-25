@@ -1,15 +1,15 @@
-#ifndef _SWRIP_IMPSCRIPT_CHARACTER_HPP_
-#define _SWRIP_IMPSCRIPT_CHARACTER_HPP_
+#ifndef _SWRIP_IMPSCRIPT_ROOM_HPP_
+#define _SWRIP_IMPSCRIPT_ROOM_HPP_
 
 #include <imp/runtime/runtimevalue.hpp>
 
-class Character;
+class Room;
 
-class ImpCharacter : public Imp::RuntimeValue
+class ImpRoom : public Imp::RuntimeValue
 {
 public:
-    ImpCharacter(std::shared_ptr<Character> ch);
-    ~ImpCharacter();
+    ImpRoom(std::shared_ptr<Room> room);
+    ~ImpRoom();
     std::string TypeName() override;
     std::string ShowInfo() override;
     std::shared_ptr<Imp::RuntimeValue> EvalEqual(std::shared_ptr<Imp::RuntimeValue> v,
@@ -17,7 +17,7 @@ public:
     std::shared_ptr<Imp::RuntimeValue> EvalNotEqual(std::shared_ptr<Imp::RuntimeValue> v,
                                                     const Imp::ImpSyntax *where) override;
     std::shared_ptr<Imp::RuntimeValue> EvalStr(const Imp::ImpSyntax *where) override;
-    std::shared_ptr<Character> Entity(const Imp::ImpSyntax *where) const;
+    std::shared_ptr<Room> Entity(const Imp::ImpSyntax *where) const;
     
 private:
     struct Impl;

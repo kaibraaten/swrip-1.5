@@ -38,8 +38,11 @@
 #include <imp/parser/program.hpp>
 #include <imp/except/impexception.hpp>
 #include <imp/runtime/stringvalue.hpp>
+#include <imp/runtime/functionvalue.hpp>
 #include "impscript/impcharacter.hpp"
 #include "impscript/mudlibrary.hpp"
+#include "impscript/improom.hpp"
+#include "impscript/impobject.hpp"
 
 static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
 static std::shared_ptr<Imp::RuntimeScope> MakeImpScope();
@@ -286,20 +289,33 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
         {
             std::list<std::string> code =
                 {
-                    //"# lol",
-                    "from test import *",
-                    "main()"
+                    "from test import *"
                 };
 
             auto globalScope = MakeImpScope();
-            globalScope->Assign("actor", std::make_shared<ImpCharacter>(ch));
-            
             auto prog = ParseImpProgram(code);
             prog->Eval(globalScope);
+
+            auto func = globalScope->Find("on_test", prog.get());
+
+            if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+            {
+                auto on_test = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                    {
+                        std::make_shared<ImpRoom>(ch->InRoom),
+                        std::make_shared<ImpCharacter>(ch)
+                    };
+                on_test->EvalFuncCall(params, prog.get());
+            }
+            else
+            {
+                Log->Bug("on_test isn't a function!");
+            }
         }
         catch(const Imp::ImpException &ex)
         {
-            Log->Bug("%s\r\n", ex.what());
+            Log->Bug("%s", ex.what());
         }
     }
     else
