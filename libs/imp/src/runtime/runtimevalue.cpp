@@ -157,6 +157,13 @@ namespace Imp
         return nullptr;
     }
 
+    std::shared_ptr<RuntimeValue> RuntimeValue::EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
+                                                             const ImpSyntax *where,
+                                                             std::shared_ptr<RuntimeScope> curScope)
+    {
+        return EvalFuncCall(actualParams, where);
+    }
+
     std::shared_ptr<RuntimeValue> RuntimeValue::EvalStr(const ImpSyntax *where)
     {
         RuntimeError("str operator undefined for " + TypeName() + "!", where);

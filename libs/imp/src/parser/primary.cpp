@@ -72,7 +72,7 @@ namespace Imp
                 }
 
                 std::vector<std::shared_ptr<RuntimeValue>> params(actualParams->Value().begin(), actualParams->Value().end());
-                valueOfLastSubscript = valueOfLastSubscript->EvalFuncCall(params, this);
+                valueOfLastSubscript = valueOfLastSubscript->EvalFuncCall(params, this, curScope);
             }
         }
 

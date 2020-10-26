@@ -1,10 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <queue>
+#include <thread>
 #include <imp/scanner/scanner.hpp>
 #include <imp/runtime/standardlibrary.hpp>
 #include <imp/parser/program.hpp>
 #include <imp/runtime/stringvalue.hpp>
+#include "experimentallibrary.hpp"
 
 static std::list<std::string> LoadScript(const std::string &filename);
 static void ShowUsage();
@@ -39,11 +42,29 @@ int main(int argc, char *argv[])
         
         auto scanner = std::make_shared<Imp::Scanner>(code);
         auto lib = std::make_shared<Imp::StandardLibrary>();
-        auto globalScope = std::make_shared<Imp::RuntimeScope>(lib);
+        auto exprLib = std::make_shared<ExperimentalLibrary>(lib);
+        auto globalScope = std::make_shared<Imp::RuntimeScope>(exprLib);
         globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("scripts"));
         auto prog = Imp::Program::Parse(scanner);
 
-        prog->Eval(globalScope);
+        //prog->Eval(globalScope);
+        std::queue<std::shared_ptr<ScriptRunner>> pendingScripts;
+
+        auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope);
+        pendingScripts.push(scriptRunner);
+
+        while(!pendingScripts.empty())
+        {
+            auto script = pendingScripts.front();
+            pendingScripts.pop();
+            double waitDuration = script->Resume();
+
+            if(waitDuration > 0)
+            {
+                std::this_thread::sleep_for(std::chrono::milliseconds((int)(waitDuration * 1000.0)));
+                pendingScripts.push(script);
+            }
+        }
     }
     catch(const std::exception &ex)
     {

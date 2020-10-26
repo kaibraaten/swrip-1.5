@@ -8,6 +8,7 @@
 namespace Imp
 {
     class ImpSyntax;
+    class RuntimeScope;
 
     class RuntimeValue
     {
@@ -43,7 +44,11 @@ namespace Imp
         virtual std::shared_ptr<RuntimeValue> EvalSubscription(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where);
         virtual std::shared_ptr<RuntimeValue> EvalSubtract(std::shared_ptr<RuntimeValue> v, const ImpSyntax *where);
         virtual void EvalAssignElem(std::shared_ptr<RuntimeValue> inx, std::shared_ptr<RuntimeValue> val, const ImpSyntax *where);
-        virtual std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams, const ImpSyntax *where);
+        virtual std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
+                                                           const ImpSyntax *where);
+        virtual std::shared_ptr<RuntimeValue> EvalFuncCall(const std::vector<std::shared_ptr<RuntimeValue>> &actualParams,
+                                                           const ImpSyntax *where,
+                                                           std::shared_ptr<RuntimeScope> curScope);
     };
 }
 
