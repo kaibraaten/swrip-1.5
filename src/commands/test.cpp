@@ -43,6 +43,8 @@
 #include "impscript/mudlibrary.hpp"
 #include "impscript/improom.hpp"
 #include "impscript/impobject.hpp"
+#include "impscript/scriptrunner.hpp"
+#include "impscript/scriptscheduler.hpp"
 
 static std::shared_ptr<Area> GetAreaFromObjVnum(vnum_t vnum);
 static std::shared_ptr<Imp::RuntimeScope> MakeImpScope();
@@ -285,38 +287,34 @@ void do_test( std::shared_ptr<Character> ch, std::string argument )
     }
     else if(StrCmp(argument, "imp") == 0)
     {
-        try
-        {
-            std::list<std::string> code =
-                {
-                    "from test import *"
-                };
-
-            auto globalScope = MakeImpScope();
-            auto prog = ParseImpProgram(code);
-            prog->Eval(globalScope);
-
-            auto func = globalScope->Find("on_test", prog.get());
-
-            if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+        std::list<std::string> code =
             {
-                auto on_test = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-                std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
-                    {
-                        std::make_shared<ImpRoom>(ch->InRoom),
-                        std::make_shared<ImpCharacter>(ch)
-                    };
-                on_test->EvalFuncCall(params, prog.get());
-            }
-            else
-            {
-                Log->Bug("on_test isn't a function!");
-            }
-        }
-        catch(const Imp::ImpException &ex)
-        {
-            Log->Bug("%s", ex.what());
-        }
+                "from test import *"
+            };
+
+        auto globalScope = MakeImpScope();
+        auto prog = ParseImpProgram(code);
+        auto doAfterEval = [ch](std::shared_ptr<Imp::Program> program, std::shared_ptr<Imp::RuntimeScope> scope)
+                           {
+                               auto func = scope->Find("on_test", program.get());
+
+                               if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                               {
+                                   auto on_test = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                                   std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                                       {
+                                           std::make_shared<ImpRoom>(ch->InRoom),
+                                           std::make_shared<ImpCharacter>(ch)
+                                       };
+                                   on_test->EvalFuncCall(params, program.get());
+                               }
+                               else
+                               {
+                                   Imp::RuntimeValue::RuntimeError("on_test isn't a function!", program.get());
+                               }
+                           };
+        auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
+        Schedule(scriptRunner);
     }
     else
     {

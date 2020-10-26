@@ -569,11 +569,15 @@ src/impscript/mudlibrary.cpp
 src/impscript/impcharacter.cpp
 src/impscript/impobject.cpp
 src/impscript/improom.cpp
+src/impscript/scriptrunner.cpp
+src/impscript/scriptscheduler.cpp
+src/impscript/threaddatavalue.cpp
 src/impscript/characters_func.cpp
 src/impscript/echo_func.cpp
 src/impscript/isnpc_func.cpp
 src/impscript/objects_func.cpp
 src/impscript/vnum_func.cpp
+src/impscript/wait_func.cpp
 src/mpcommands/mpapplyb.cpp
 src/mpcommands/mpapply.cpp
 src/mpcommands/mpasound.cpp
@@ -694,7 +698,7 @@ if(WIN32)
   target_link_libraries(swrip utility colorparser lua WS2_32 imp)
   set(BUILD_SHARED_LIBS ON)
 else()
-  target_link_libraries(swrip utility colorparser lua stdc++fs dl imp)
+  target_link_libraries(swrip utility colorparser lua stdc++fs dl imp pthread)
 endif()
 
 set(PYTHON python3)

@@ -58,6 +58,7 @@
 #include "repos/homerepository.hpp"
 #include "act.hpp"
 #include "timer.hpp"
+#include "impscript/scriptscheduler.hpp"
 
  /*
   * Local functions.
@@ -2968,6 +2969,7 @@ void UpdateHandler()
     AggroUpdate();
     ObjectActUpdate();
     RoomActUpdate();
+    DispatchScripts();
     CleanObjectQueue();            /* dispose of extracted objects */
     CleanCharacterQueue();           /* dispose of dead mobs/quitting chars */
 

@@ -1,4 +1,4 @@
-def on_test(room, actor):
+def on_test2(room, actor):
     echo(actor, "Characters in " + str(room) + " (vnum " + str(vnum(room)) + "):")
 
     for ch in characters(room):
@@ -19,3 +19,10 @@ def on_test(room, actor):
             echo(actor, "     - " + str(obj) + " (vnum " + str(vnum(obj)) + ")")
     else:
         echo(actor, "  No objects.")
+
+def on_test(room, actor):
+    for n in range(0, 10):
+        echo(actor, "T minus " + str(10 - n) + " and counting.")
+        wait(1.5)
+        
+    echo(actor, "Ignition!")
