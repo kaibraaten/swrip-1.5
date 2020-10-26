@@ -11,6 +11,7 @@
 
 static std::list<std::string> LoadScript(const std::string &filename);
 static void ShowUsage();
+static std::shared_ptr<ScriptRunner> MakeScriptRunner(const std::list<std::string> &code);
 
 int main(int argc, char *argv[])
 {
@@ -39,18 +40,10 @@ int main(int argc, char *argv[])
             ShowUsage();
             return 0;
         }
-        
-        auto scanner = std::make_shared<Imp::Scanner>(code);
-        auto lib = std::make_shared<Imp::StandardLibrary>();
-        auto exprLib = std::make_shared<ExperimentalLibrary>(lib);
-        auto globalScope = std::make_shared<Imp::RuntimeScope>(exprLib);
-        globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("scripts"));
-        auto prog = Imp::Program::Parse(scanner);
 
-        //prog->Eval(globalScope);
         std::queue<std::shared_ptr<ScriptRunner>> pendingScripts;
 
-        auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope);
+        auto scriptRunner = MakeScriptRunner(code);
         pendingScripts.push(scriptRunner);
 
         while(!pendingScripts.empty())
@@ -76,6 +69,17 @@ static void ShowUsage()
 {
     std::cout << "Usage: runimp -s <small statement list>" << std::endl;
     std::cout << "       runimp -f <filename.py>" << std::endl;
+}
+
+static std::shared_ptr<ScriptRunner> MakeScriptRunner(const std::list<std::string> &code)
+{
+    auto scanner = std::make_shared<Imp::Scanner>(code);
+    auto lib = std::make_shared<Imp::StandardLibrary>();
+    auto exprLib = std::make_shared<ExperimentalLibrary>(lib);
+    auto globalScope = std::make_shared<Imp::RuntimeScope>(exprLib);
+    globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("scripts"));
+    auto prog = Imp::Program::Parse(scanner);
+    return std::make_shared<ScriptRunner>(prog, globalScope);
 }
 
 static std::list<std::string> LoadScript(const std::string &filename)

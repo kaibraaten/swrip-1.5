@@ -162,12 +162,13 @@ public:
             {
                 Imp::RuntimeValue::RuntimeError("1st param in wait() must be positive.", where);
             }
-
-            return std::make_shared<Imp::NoneValue>();
+        }
+        else
+        {
+            Imp::RuntimeValue::RuntimeError("Type error in wait().", where);
         }
 
-        Imp::RuntimeValue::RuntimeError("Type error in wait().", where);
-        return nullptr;
+        return std::make_shared<Imp::NoneValue>();
     }
 };
 
