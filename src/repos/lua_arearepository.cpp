@@ -8,7 +8,7 @@
 #include "lua_arearepository.hpp"
 #include "shoprepository.hpp"
 #include "area.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "protomob.hpp"
 #include "protoobject.hpp"
 #include "room.hpp"

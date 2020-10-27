@@ -38,7 +38,7 @@ void do_brandish(std::shared_ptr<Character> ch, std::string argument)
 
     if(staff->Value[OVAL_STAFF_CHARGES] > 0)
     {
-        if(!ObjProgUseTrigger(ch, staff, nullptr, nullptr, nullptr))
+        if(!ObjProgUseTrigger(ch, staff))
         {
             Act(AT_MAGIC, "$n brandishes $p.", ch, staff, NULL, ActTarget::Room);
             Act(AT_MAGIC, "You brandish $p.", ch, staff, NULL, ActTarget::Char);

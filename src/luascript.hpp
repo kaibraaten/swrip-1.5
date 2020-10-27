@@ -1,5 +1,5 @@
-#ifndef _SWRIP_SCRIPT_HPP_
-#define _SWRIP_SCRIPT_HPP_
+#ifndef _SWRIP_LUASCRIPT_HPP_
+#define _SWRIP_LUASCRIPT_HPP_
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,9 +1,8 @@
 #include <utility/algorithms.hpp>
 #include "socialrepository.hpp"
 #include "social.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "log.hpp"
-#include "social.hpp"
 
 #define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 

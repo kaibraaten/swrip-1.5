@@ -58,7 +58,7 @@ void do_zap(std::shared_ptr<Character> ch, std::string arg)
     {
         if(victim)
         {
-            if(!ObjProgUseTrigger(ch, wand, victim, NULL, nullptr))
+            if(!ObjProgUseTrigger(ch, wand, victim))
             {
                 Act(AT_MAGIC, "$n aims $p at $N.", ch, wand, victim, ActTarget::Room);
                 Act(AT_MAGIC, "You aim $p at $N.", ch, wand, victim, ActTarget::Char);
@@ -66,7 +66,7 @@ void do_zap(std::shared_ptr<Character> ch, std::string arg)
         }
         else
         {
-            if(!ObjProgUseTrigger(ch, wand, NULL, obj, nullptr))
+            if(!ObjProgUseTrigger(ch, wand, obj))
             {
                 Act(AT_MAGIC, "$n aims $p at $P.", ch, wand, obj, ActTarget::Room);
                 Act(AT_MAGIC, "You aim $p at $P.", ch, wand, obj, ActTarget::Char);

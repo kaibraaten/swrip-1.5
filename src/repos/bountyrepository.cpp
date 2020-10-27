@@ -1,6 +1,6 @@
 #include "bountyrepository.hpp"
 #include "bounty.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 
 #define BOUNTY_LIST DATA_DIR "bounties.lua"
 

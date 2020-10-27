@@ -1,6 +1,6 @@
 #include "mud.hpp"
 #include "systemdata.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #define SYSTEMDATA_FILE DATA_DIR "sysdata.lua"
 
 SystemData SysData;

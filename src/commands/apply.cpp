@@ -38,7 +38,7 @@ void do_apply(std::shared_ptr<Character> ch, std::string argument)
 
     --obj->Value[OVAL_SALVE_DOSES];
 
-    if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+    if(!ObjProgUseTrigger(ch, obj))
     {
         if(obj->ActionDescription.empty())
         {

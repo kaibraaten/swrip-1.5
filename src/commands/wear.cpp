@@ -232,7 +232,8 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
     {
         if(!RemoveObject(ch, WEAR_LIGHT, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+        
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -274,7 +275,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
 
         if(!GetEquipmentOnCharacter(ch, WEAR_FINGER_L))
         {
-            if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+            if(!ObjProgUseTrigger(ch, obj))
             {
                 if(obj->ActionDescription.empty())
                 {
@@ -291,7 +292,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
 
         if(!GetEquipmentOnCharacter(ch, WEAR_FINGER_R))
         {
-            if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+            if(!ObjProgUseTrigger(ch, obj))
             {
                 if(obj->ActionDescription.empty())
                 {
@@ -320,7 +321,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
 
         if(!GetEquipmentOnCharacter(ch, WEAR_NECK_1))
         {
-            if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+            if(!ObjProgUseTrigger(ch, obj))
             {
                 if(obj->ActionDescription.empty())
                 {
@@ -337,7 +338,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
 
         if(!GetEquipmentOnCharacter(ch, WEAR_NECK_2))
         {
-            if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+            if(!ObjProgUseTrigger(ch, obj))
             {
                 if(obj->ActionDescription.empty())
                 {
@@ -362,7 +363,8 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+        
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -384,7 +386,8 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
         }
         if(!RemoveObject(ch, WEAR_HEAD, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+        
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -401,7 +404,8 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
     case Flag::Wear::Eyes:
         if(!RemoveObject(ch, WEAR_EYES, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -423,7 +427,8 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
         }
         if(!RemoveObject(ch, WEAR_EARS, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -449,7 +454,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -474,7 +479,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -494,7 +499,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -514,7 +519,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -535,7 +540,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
             return;
         }
 
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -555,7 +560,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -578,7 +583,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
 
         if(!GetEquipmentOnCharacter(ch, WEAR_WRIST_L))
         {
-            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+            if(!ObjProgUseTrigger(ch, obj))
             {
                 if(obj->ActionDescription.empty())
                 {
@@ -597,7 +602,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
 
         if(!GetEquipmentOnCharacter(ch, WEAR_WRIST_R))
         {
-            if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+            if(!ObjProgUseTrigger(ch, obj))
             {
                 if(obj->ActionDescription.empty())
                 {
@@ -621,7 +626,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
     case Flag::Wear::Shield:
         if(!RemoveObject(ch, WEAR_SHIELD, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -659,7 +664,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
                     return;
                 }
 
-                if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+                if(!ObjProgUseTrigger(ch, obj))
                 {
                     if(obj->ActionDescription.empty())
                     {
@@ -684,7 +689,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
             return;
         }
 
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -714,7 +719,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
            || obj->ItemType == ITEM_DRINK_CON
            || obj->ItemType == ITEM_SALVE
            || obj->ItemType == ITEM_KEY
-           || !ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+           || !ObjProgUseTrigger(ch, obj))
         {
             Act(AT_ACTION, "$n holds $p in $s hands.", ch, obj, NULL, ActTarget::Room);
             Act(AT_ACTION, "You hold $p in your hands.", ch, obj, NULL, ActTarget::Char);
@@ -729,7 +734,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
             ch->Echo("It won't fit overtop of what you're already wearing.\r\n");
             return;
         }
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {
@@ -745,7 +750,7 @@ static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
     case Flag::Wear::Over:
         if(!RemoveObject(ch, WEAR_OVER, fReplace))
             return;
-        if(!ObjProgUseTrigger(ch, obj, NULL, NULL, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             if(obj->ActionDescription.empty())
             {

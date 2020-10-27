@@ -83,7 +83,7 @@ void do_use(std::shared_ptr<Character> ch, std::string argument)
 
         if(victim)
         {
-            if(!ObjProgUseTrigger(ch, device, victim, nullptr, nullptr))
+            if(!ObjProgUseTrigger(ch, device, victim))
             {
                 Act(AT_MAGIC, "$n uses $p on $N.", ch, device, victim, ActTarget::Room);
                 Act(AT_MAGIC, "You use $p on $N.", ch, device, victim, ActTarget::Char);
@@ -91,7 +91,7 @@ void do_use(std::shared_ptr<Character> ch, std::string argument)
         }
         else
         {
-            if(!ObjProgUseTrigger(ch, device, nullptr, obj, nullptr))
+            if(!ObjProgUseTrigger(ch, device, obj))
             {
                 Act(AT_MAGIC, "$n uses $p on $P.", ch, device, obj, ActTarget::Room);
                 Act(AT_MAGIC, "You use $p on $P.", ch, device, obj, ActTarget::Char);

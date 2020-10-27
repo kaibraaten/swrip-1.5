@@ -1,6 +1,6 @@
 #include "boardrepository.hpp"
 #include "board.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "constants.hpp"
 
 #define BOARD_DIR DATA_DIR "boards/"

@@ -36,7 +36,7 @@ namespace fs = std::filesystem;
 #include "shop.hpp"
 #include "command.hpp"
 #include "skill.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "area.hpp"
 #include "log.hpp"
 #include "pcdata.hpp"

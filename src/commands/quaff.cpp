@@ -69,7 +69,7 @@ void do_quaff(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
-        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             Act(AT_ACTION, "$n quaffs $p.", ch, obj, NULL, ActTarget::Room);
             Act(AT_ACTION, "You quaff $p.", ch, obj, NULL, ActTarget::Char);

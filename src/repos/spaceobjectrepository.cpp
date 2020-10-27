@@ -1,6 +1,6 @@
 #include "spaceobjectrepository.hpp"
 #include "spaceobject.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "log.hpp"
 #include "repos/planetrepository.hpp"
 #include "mud.hpp"

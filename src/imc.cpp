@@ -55,7 +55,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "descriptor.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "protomob.hpp"
 
 #include <ctime>

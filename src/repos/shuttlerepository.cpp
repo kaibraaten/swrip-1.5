@@ -1,6 +1,6 @@
 #include "shuttlerepository.hpp"
 #include "shuttle.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "mud.hpp"
 #include "log.hpp"
 

@@ -3,7 +3,7 @@
 #include "social.hpp"
 #include "mud.hpp"
 #include "character.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "room.hpp"
 #include "protomob.hpp"
 #include "repos/socialrepository.hpp"

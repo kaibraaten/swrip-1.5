@@ -36,7 +36,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "arena.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "log.hpp"
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"

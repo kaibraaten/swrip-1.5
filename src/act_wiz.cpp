@@ -25,7 +25,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "descriptor.hpp"

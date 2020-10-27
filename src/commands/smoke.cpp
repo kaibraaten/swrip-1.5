@@ -43,7 +43,7 @@ void do_smoke(std::shared_ptr<Character> ch, std::string arg)
 
     if(pipe_obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] > 0)
     {
-        if(!ObjProgUseTrigger(ch, pipe_obj, nullptr, nullptr, nullptr))
+        if(!ObjProgUseTrigger(ch, pipe_obj))
         {
             Act(AT_ACTION, "You draw thoughtfully from $p.",
                 ch, pipe_obj, nullptr, ActTarget::Char);

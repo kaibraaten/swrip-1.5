@@ -12,6 +12,7 @@
 //////////////////////////////////////////////////////
 #include <imp/scanner/scanner.hpp>
 #include <imp/runtime/functionvalue.hpp>
+#include <imp/runtime/nonevalue.hpp>
 #include <imp/runtime/stringvalue.hpp>
 #include <imp/runtime/runtimescope.hpp>
 #include <imp/runtime/standardlibrary.hpp>
@@ -358,30 +359,14 @@ void ObjProgWearTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> o
 }
 
 bool ObjProgUseTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
-                       std::shared_ptr<Character> vict, std::shared_ptr<Object> targ, const Vo &vo)
+                       const Vo &vo)
 {
     bool executed = false;
 
     if(obj->Prototype->mprog.progtypes & USE_PROG)
     {
         MudProgSetSupermob(obj);
-
-        if(obj->ItemType == ITEM_STAFF)
-        {
-            if(vict)
-            {
-                executed = ObjProgPercentCheck(supermob, ch, obj, vict, USE_PROG);
-            }
-            else
-            {
-                executed = ObjProgPercentCheck(supermob, ch, obj, targ, USE_PROG);
-            }
-        }
-        else
-        {
-            executed = ObjProgPercentCheck(supermob, ch, obj, nullptr, USE_PROG);
-        }
-
+        executed = ObjProgPercentCheck(supermob, ch, obj, vo, USE_PROG);
         ReleaseSupermob();
     }
 
@@ -778,6 +763,7 @@ static std::shared_ptr<Imp::Program> ParseImpProgram(const std::list<std::string
 static void ImpDispatchPercentCheck(const std::string &comlist,
                                     std::shared_ptr<Object> obj,
                                     std::shared_ptr<Character> actor,
+                                    const Vo &vo,
                                     int type)
 {
     std::istringstream inbuf(comlist);
@@ -825,17 +811,72 @@ static void ImpDispatchPercentCheck(const std::string &comlist,
 
                           if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
                           {
-                              auto on_rand = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              auto on_wear = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
                               std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
                                   {
                                       std::make_shared<ImpObject>(obj),
                                       std::make_shared<ImpCharacter>(actor)
                                   };
-                              on_rand->EvalFuncCall(params, program.get());
+                              on_wear->EvalFuncCall(params, program.get());
                           }
                           else
                           {
                               Imp::RuntimeValue::RuntimeError("on_wear isn't a function!",
+                                                              program.get());
+                          }
+                      };
+    }
+    else if(type == REMOVE_PROG)
+    {
+        doAfterEval = [obj, actor](std::shared_ptr<Imp::Program> program,
+                                   std::shared_ptr<Imp::RuntimeScope> scope)
+                      {
+                          auto func = scope->Find("on_remove", program.get());
+
+                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                          {
+                              auto on_remove = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                              {
+                                  std::make_shared<ImpObject>(obj),
+                                  std::make_shared<ImpCharacter>(actor)
+                              };
+                              on_remove->EvalFuncCall(params, program.get());
+                          }
+                          else
+                          {
+                              Imp::RuntimeValue::RuntimeError("on_remove isn't a function!",
+                                                              program.get());
+                          }
+                      };
+    }
+    else if(type == USE_PROG)
+    {
+        auto victim = vo.Ch;
+        auto otherobj = vo.Obj;
+        
+        doAfterEval = [obj, actor, victim, otherobj](std::shared_ptr<Imp::Program> program,
+                                                     std::shared_ptr<Imp::RuntimeScope> scope)
+                      {
+                          auto func = scope->Find("on_use", program.get());
+
+                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                          {
+                              auto on_use = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              std::shared_ptr<Imp::RuntimeValue> arg3 = victim ? std::dynamic_pointer_cast<Imp::RuntimeValue>(std::make_shared<ImpCharacter>(victim)) : std::dynamic_pointer_cast<Imp::RuntimeValue>(std::make_shared<Imp::NoneValue>());
+                              std::shared_ptr<Imp::RuntimeValue> arg4 = otherobj ? std::dynamic_pointer_cast<Imp::RuntimeValue>(std::make_shared<ImpObject>(otherobj)) : std::dynamic_pointer_cast<Imp::RuntimeValue>(std::make_shared<Imp::NoneValue>());
+                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                              {
+                                  std::make_shared<ImpObject>(obj),
+                                  std::make_shared<ImpCharacter>(actor),
+                                  arg3,
+                                  arg4
+                              };
+                              on_use->EvalFuncCall(params, program.get());
+                          }
+                          else
+                          {
+                              Imp::RuntimeValue::RuntimeError("on_use isn't a function!",
                                                               program.get());
                           }
                       };
@@ -864,7 +905,7 @@ static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<
 
             if(mprg->SType == ScriptType::Imp)
             {
-                ImpDispatchPercentCheck(mprg->comlist, obj, actor, type);
+                ImpDispatchPercentCheck(mprg->comlist, obj, actor, vo, type);
             }
             else
             {

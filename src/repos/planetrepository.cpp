@@ -1,6 +1,6 @@
 #include "planetrepository.hpp"
 #include "planet.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "area.hpp"
 #include "mud.hpp"
 #include "clan.hpp"

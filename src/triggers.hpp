@@ -24,7 +24,7 @@ void ObjProgSpeechTrigger(const std::string &txt, std::shared_ptr<Character> ch)
 void ObjProgRandomTrigger(std::shared_ptr<Object> obj);
 void ObjProgWearTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 bool ObjProgUseTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj,
-                       std::shared_ptr<Character> vict, std::shared_ptr<Object> targ, const Vo &vo);
+                       const Vo &vo = nullptr);
 void ObjProgRemoveTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 void ObjProgExamineTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);
 void ObjProgSacTrigger(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj);

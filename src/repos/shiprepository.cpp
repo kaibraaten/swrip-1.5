@@ -5,7 +5,7 @@
 #include "clan.hpp"
 #include "spaceobject.hpp"
 #include "room.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "turret.hpp"
 
 #define SHIP_DIR DATA_DIR "ships/"

@@ -54,6 +54,7 @@ src/help.cpp
 src/home.cpp
 src/imc.cpp
 src/interp.cpp
+src/luascript.cpp
 src/magic.cpp
 src/makeobjs.cpp
 src/mapper.cpp
@@ -71,7 +72,6 @@ src/protoobject.cpp
 src/reset.cpp
 src/room.cpp
 src/save.cpp
-src/script.cpp
 src/ship.cpp
 src/shop.cpp
 src/shuttle.cpp

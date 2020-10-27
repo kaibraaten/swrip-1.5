@@ -75,7 +75,7 @@ void do_drink(std::shared_ptr<Character> ch, std::string argument)
         break;
 
     case ITEM_FOUNTAIN:
-        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             Act(AT_ACTION, "$n drinks from the fountain.", ch, NULL, NULL, ActTarget::Room);
             ch->Echo("You take a long thirst quenching drink.\r\n");
@@ -98,7 +98,7 @@ void do_drink(std::shared_ptr<Character> ch, std::string argument)
             liquid = obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
         }
 
-        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             Act(AT_ACTION, "$n drinks $T from $p.",
                 ch, obj, std::string(LiquidTable[liquid].Name), ActTarget::Room);

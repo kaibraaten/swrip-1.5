@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "lua_storeroomrepository.hpp"
 #include "room.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 
 #define STOREROOM_DIR   DATA_DIR "storeroom/"
 

@@ -1,7 +1,7 @@
 #include "lua_macrorepository.hpp"
 #include "mprog_ext.hpp"
 #include "constants.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 
 #define MACRO_DATA_FILE DATA_DIR "macros.lua"
 

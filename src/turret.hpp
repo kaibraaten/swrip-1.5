@@ -25,7 +25,7 @@
 
 #include <memory>
 #include "types.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 
 class Turret;
 

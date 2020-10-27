@@ -4,7 +4,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "lua_vendorrepository.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "object.hpp"
 #include "protomob.hpp"
 #include "room.hpp"

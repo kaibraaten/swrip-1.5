@@ -92,7 +92,7 @@ void PullOrPush(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, bool
         return;
     }
 
-    if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+    if(!ObjProgUseTrigger(ch, obj))
     {
         sprintf(buf, "$n %s $p.", pull ? "pulls" : "pushes");
         Act(AT_ACTION, buf, ch, obj, nullptr, ActTarget::Room);

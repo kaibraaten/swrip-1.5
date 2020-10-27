@@ -54,7 +54,7 @@ void do_eat(std::shared_ptr<Character> ch, std::string argument)
         Act(AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, ActTarget::Room);
     }
 
-    if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+    if(!ObjProgUseTrigger(ch, obj))
     {
         if(obj->ActionDescription.empty())
         {

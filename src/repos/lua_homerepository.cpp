@@ -1,7 +1,7 @@
 #include <filesystem>
 #include <utility/algorithms.hpp>
 #include "lua_homerepository.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "room.hpp"
 #include "mud.hpp"
 #include "home.hpp"

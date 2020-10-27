@@ -4,7 +4,7 @@
 #include <set>
 #include "playerrepository.hpp"
 #include "character.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "race.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"

@@ -1,6 +1,6 @@
 #include "helprepository.hpp"
 #include "help.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 

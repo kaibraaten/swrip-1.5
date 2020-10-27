@@ -3,7 +3,7 @@
 #include <map>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "script.hpp"
+#include "luascript.hpp"
 
 static std::string ErrorText;
 static std::map<int, std::string> ArrayData;

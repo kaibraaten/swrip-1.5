@@ -183,7 +183,7 @@ void do_takedrug(std::shared_ptr<Character> ch, std::string argument)
     }
     else
     {
-        if(!ObjProgUseTrigger(ch, obj, nullptr, nullptr, nullptr))
+        if(!ObjProgUseTrigger(ch, obj))
         {
             Act(AT_ACTION, "$n takes $p.", ch, obj, nullptr, ActTarget::Room);
             Act(AT_ACTION, "You take $p.", ch, obj, nullptr, ActTarget::Char);

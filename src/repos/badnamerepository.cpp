@@ -1,6 +1,6 @@
 #include "badnamerepository.hpp"
 #include "badname.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 
 std::shared_ptr<BadNameRepository> BadNames;
 

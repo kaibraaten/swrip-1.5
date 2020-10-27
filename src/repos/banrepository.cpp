@@ -2,7 +2,7 @@
 #include <utility/algorithms.hpp>
 #include "banrepository.hpp"
 #include "ban.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "constants.hpp"
 
 #define BAN_LIST DATA_DIR "banned.lua"

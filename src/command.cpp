@@ -1,7 +1,7 @@
 #include <cassert>
 #include "command.hpp"
 #include "mud.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 
 #define COMMAND_DATA_FILE    DATA_DIR "commands.lua"
 

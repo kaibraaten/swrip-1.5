@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <cassert>
 #include "mud.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "log.hpp"
 #include "stats.hpp"
 #include "object.hpp"

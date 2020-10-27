@@ -1,6 +1,6 @@
 #include "clanrepository.hpp"
 #include "clan.hpp"
-#include "script.hpp"
+#include "luascript.hpp"
 #include "constants.hpp"
 #include "mud.hpp"
 #include "log.hpp"
