@@ -3,6 +3,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 void do_rest(std::shared_ptr<Character> ch, std::string argument)
 {

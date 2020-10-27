@@ -27,6 +27,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
  /*
   * how resistant an object is to damage                         -Thoric

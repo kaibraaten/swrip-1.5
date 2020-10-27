@@ -30,6 +30,7 @@
 #include "protoobject.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
  /*
   * Function to handle the state changing of a triggerobject (lever)  -Thoric

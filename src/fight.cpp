@@ -52,6 +52,7 @@
 #include "repos/homerepository.hpp"
 #include "act.hpp"
 #include "timer.hpp"
+#include "triggers.hpp"
 
 extern std::shared_ptr<Character> gch_prev;
 

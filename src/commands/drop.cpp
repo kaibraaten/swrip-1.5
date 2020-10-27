@@ -9,6 +9,7 @@
 #include "repos/playerrepository.hpp"
 #include "repos/storeroomrepository.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, std::shared_ptr<Character> ch);
 

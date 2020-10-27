@@ -3,6 +3,7 @@
 #include "board.hpp"
 #include "character.hpp"
 #include "object.hpp"
+#include "triggers.hpp"
 
 void do_examine(std::shared_ptr<Character> ch, std::string arg)
 {

@@ -59,6 +59,7 @@
 #include "act.hpp"
 #include "timer.hpp"
 #include "impscript/scriptscheduler.hpp"
+#include "triggers.hpp"
 
  /*
   * Local functions.

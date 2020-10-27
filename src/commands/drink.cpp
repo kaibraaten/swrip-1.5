@@ -7,6 +7,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 static std::shared_ptr<Object> FindFountain(std::shared_ptr<Room> location);
 

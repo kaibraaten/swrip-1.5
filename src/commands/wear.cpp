@@ -7,6 +7,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 static void wear_obj(std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, bool fReplace, int wear_bit);
 static bool can_layer(const std::shared_ptr<Character> ch, std::shared_ptr<Object> obj, int wear_loc);

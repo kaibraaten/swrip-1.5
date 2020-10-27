@@ -20,6 +20,7 @@
 #include "exit.hpp"
 #include "repos/spaceobjectrepository.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 struct UserData
 {

@@ -9,6 +9,7 @@
 #include "mprog.hpp"
 #include "protomob.hpp"
 #include "protoobject.hpp"
+#include "triggers.hpp"
 
 /*
  * The primary output interface for formatted output.

@@ -7,6 +7,7 @@
 #include "repos/playerrepository.hpp"
 #include "repos/vendorrepository.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 static bool IsPlayerVendor(std::shared_ptr<Character> keeper)
 {

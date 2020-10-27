@@ -5,6 +5,7 @@
 #include "object.hpp"
 #include "systemdata.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 void do_quaff(std::shared_ptr<Character> ch, std::string argument)
 {

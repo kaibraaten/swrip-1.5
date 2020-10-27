@@ -3,6 +3,7 @@
 #include "log.hpp"
 #include "object.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 void do_zap(std::shared_ptr<Character> ch, std::string arg)
 {

@@ -3,6 +3,7 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 void do_tell(std::shared_ptr<Character> ch, std::string argument)
 {

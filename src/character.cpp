@@ -44,6 +44,7 @@
 #include "act.hpp"
 #include "timer.hpp"
 #include "room.hpp"
+#include "triggers.hpp"
 
 struct Character::Impl
 {

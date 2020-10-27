@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 void do_say(std::shared_ptr<Character> ch, std::string argument)
 {

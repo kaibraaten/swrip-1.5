@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "object.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 /*
  * Apply a salve/ointment                                       -Thoric

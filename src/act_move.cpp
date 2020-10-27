@@ -33,6 +33,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 static std::shared_ptr<Room> vroom_hash[64];
 

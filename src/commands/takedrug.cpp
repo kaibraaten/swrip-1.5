@@ -5,6 +5,7 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 static bool HasTakenOverdose(const std::shared_ptr<Character> ch, int drug)
 {

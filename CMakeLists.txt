@@ -83,6 +83,7 @@ src/systemdata.cpp
 src/tables.cpp
 src/timer.cpp
 src/track.cpp
+src/triggers.cpp
 src/turret.cpp
 src/update.cpp
 src/vector3_aux.cpp

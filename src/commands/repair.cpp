@@ -5,8 +5,10 @@
 #include "object.hpp"
 #include "protomob.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
-static void repair_one_obj(std::shared_ptr<Character> ch, std::shared_ptr<Character> keeper, std::shared_ptr<Object> obj,
+static void repair_one_obj(std::shared_ptr<Character> ch, std::shared_ptr<Character> keeper,
+                           std::shared_ptr<Object> obj,
                            std::string arg, int maxgold,
                            const std::string &fixstr, const std::string &fixstr2);
 

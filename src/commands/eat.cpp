@@ -5,6 +5,7 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 #include "act.hpp"
+#include "triggers.hpp"
 
 void do_eat(std::shared_ptr<Character> ch, std::string argument)
 {
