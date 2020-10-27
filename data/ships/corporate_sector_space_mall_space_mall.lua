@@ -1,67 +1,29 @@
 -- Corporate Sector Space Mall
--- Last saved Tuesday 27-Oct-2020 14:53:26
+-- Last saved Tuesday 27-Oct-2020 18:52:36
 
 ShipEntry
 {
-   Guard = false, 
+   PersonalName = "Space Mall", 
+   LastDock = 45, 
    Position = 
    {
-      Y = -122862, 
-      X = -99277, 
-      Z = -240660, 
+      Z = -237517, 
+      Y = -109173, 
+      X = -78452, 
    }, 
-   Pilot = "", 
-   LastDock = 45, 
-   Instruments = 
-   {
-      Comm = 0, 
-      Sensor = 0, 
-      AstroArray = 0, 
-   }, 
-   State = 1, 
    Location = 0, 
-   Shipyard = 45, 
-   Name = "Corporate Sector Space Mall", 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Max = 0, 
-         Current = 0, 
-      }, 
-      Maneuver = 0, 
-      Energy = 
-      {
-         Max = 20000, 
-         Current = 20000, 
-      }, 
-   }, 
-   Type = "Civilian", 
-   Owner = "Corporate Sector", 
-   Rooms = 
-   {
-      Entrance = 7350, 
-      Gunseat = 7350, 
-      Cockpit = 7350, 
-      First = 7300, 
-      Engine = 0, 
-      Hangar = 7300, 
-      Coseat = 7350, 
-      Last = 7350, 
-      Pilotseat = 7350, 
-      Navseat = 7350, 
-   }, 
+   DockingPorts = 0, 
    Defenses = 
    {
-      Hull = 
-      {
-         Max = 20000, 
-         Current = 20000, 
-      }, 
       Shield = 
       {
          Max = 1000, 
          Current = 1000, 
+      }, 
+      Hull = 
+      {
+         Max = 20000, 
+         Current = 20000, 
       }, 
       Chaff = 
       {
@@ -69,105 +31,143 @@ ShipEntry
          Current = 0, 
       }, 
    }, 
-   Description = "", 
-   Home = "corperate", 
-   Hyperdrive = 
-   {
-      Speed = 255, 
-   }, 
-   Class = "Capital Ship", 
+   Name = "Corporate Sector Space Mall", 
    CoPilot = "", 
-   Alarm = false, 
-   PersonalName = "Space Mall", 
-   DockingPorts = 0, 
+   Home = "corperate", 
+   Type = "Civilian", 
+   Class = "Capital Ship", 
+   Rooms = 
+   {
+      Entrance = 7350, 
+      Engine = 0, 
+      Navseat = 7350, 
+      First = 7300, 
+      Pilotseat = 7350, 
+      Cockpit = 7350, 
+      Last = 7350, 
+      Hangar = 7300, 
+      Coseat = 7350, 
+      Gunseat = 7350, 
+   }, 
    WeaponSystems = 
    {
       IonCannon = 
       {
-         State = 0, 
          Count = 0, 
-      }, 
-      TractorBeam = 
-      {
-         Strength = 0, 
          State = 0, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [2] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [3] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [4] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [5] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [6] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [7] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [8] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [9] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [0] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
-      }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 10, 
       }, 
       Tube = 
       {
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 2, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 4, 
-         }, 
          Missiles = 
          {
             Max = 10, 
             Current = 10, 
          }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 2, 
+         }, 
+         State = 0, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 4, 
+         }, 
+      }, 
+      TractorBeam = 
+      {
+         State = 0, 
+         Strength = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 10, 
          State = 0, 
       }, 
    }, 
+   Alarm = false, 
+   Guard = false, 
+   Hyperdrive = 
+   {
+      Speed = 255, 
+   }, 
+   Thrusters = 
+   {
+      Speed = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Energy = 
+      {
+         Max = 20000, 
+         Current = 20000, 
+      }, 
+      Maneuver = 0, 
+   }, 
+   State = 1, 
+   Instruments = 
+   {
+      Sensor = 0, 
+      Comm = 0, 
+      AstroArray = 0, 
+   }, 
+   Description = "", 
+   Pilot = "", 
+   Owner = "Corporate Sector", 
+   Shipyard = 45, 
 }

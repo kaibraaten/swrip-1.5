@@ -35,3 +35,24 @@ def test_greet(mob, actor):
         e = random(emotes)
         echo(room, str(mob) + " " + e)
         wait(float(random(range(1, 11))))
+
+def test_fight(mob, actor):
+    whines = ["Help! " + str(actor) + " is trying to kill me!", "I'm too young to die!"]
+    say(mob, random(whines))
+
+def test_death(mob, killer):
+    if not inroom(mob):
+        echo(killer, "Your victim is gone...")
+    else:
+        say(mob, "Alas! " + str(killer) + " got the better of me...")
+
+def test_rand(mob):
+    say(mob, "Rand!")
+
+def test_obj_rand(obj):
+    if inroom(obj):
+        echo(inroom(obj), str(obj) + " sheds a leaf.")
+
+def test_wear(obj, actor):
+    wait(1.0)
+    echo(actor, str(obj) + " feels great against your skin.")

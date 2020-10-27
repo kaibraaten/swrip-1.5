@@ -2510,6 +2510,81 @@ static void ImpDispatchPercentCheck(const std::string &comlist,
                           }
                       };
     }
+    else if(type == FIGHT_PROG)
+    {
+        doAfterEval = [mob, actor](std::shared_ptr<Imp::Program> program,
+                            std::shared_ptr<Imp::RuntimeScope> scope)
+                      {
+                          auto func = scope->Find("on_fight", program.get());
+
+                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                          {
+                              auto on_entry = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                                  {
+                                      std::make_shared<ImpCharacter>(mob),
+                                      std::make_shared<ImpCharacter>(actor)
+                                  };
+                              on_entry->EvalFuncCall(params, program.get());
+                          }
+                          else
+                          {
+                              Imp::RuntimeValue::RuntimeError("on_fight isn't a function!",
+                                                              program.get());
+                          }
+                      };
+    }
+    else if(type == DEATH_PROG)
+    {
+        doAfterEval = [mob, actor](std::shared_ptr<Imp::Program> program,
+                            std::shared_ptr<Imp::RuntimeScope> scope)
+                      {
+                          auto func = scope->Find("on_death", program.get());
+
+                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                          {
+                              auto on_death = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                                  {
+                                      std::make_shared<ImpCharacter>(mob),
+                                      std::make_shared<ImpCharacter>(actor)
+                                  };
+                              on_death->EvalFuncCall(params, program.get());
+                          }
+                          else
+                          {
+                              Imp::RuntimeValue::RuntimeError("on_death isn't a function!",
+                                                              program.get());
+                          }
+                      };
+    }
+    else if(type == RAND_PROG)
+    {
+        doAfterEval = [mob](std::shared_ptr<Imp::Program> program,
+                            std::shared_ptr<Imp::RuntimeScope> scope)
+                      {
+                          auto func = scope->Find("on_rand", program.get());
+
+                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                          {
+                              auto on_rand = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                                  {
+                                      std::make_shared<ImpCharacter>(mob)
+                                  };
+                              on_rand->EvalFuncCall(params, program.get());
+                          }
+                          else
+                          {
+                              Imp::RuntimeValue::RuntimeError("on_rand isn't a function!",
+                                                              program.get());
+                          }
+                      };
+    }
+    else
+    {
+        return;
+    }
     
     auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
     Schedule(scriptRunner);

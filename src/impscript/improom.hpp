@@ -12,11 +12,13 @@ public:
     ~ImpRoom();
     std::string TypeName() override;
     std::string ShowInfo() override;
+    bool GetBoolValue(const std::string &what, const Imp::ImpSyntax *where);
     std::shared_ptr<Imp::RuntimeValue> EvalEqual(std::shared_ptr<Imp::RuntimeValue> v,
                                                  const Imp::ImpSyntax *where) override;
     std::shared_ptr<Imp::RuntimeValue> EvalNotEqual(std::shared_ptr<Imp::RuntimeValue> v,
                                                     const Imp::ImpSyntax *where) override;
     std::shared_ptr<Imp::RuntimeValue> EvalStr(const Imp::ImpSyntax *where) override;
+    std::shared_ptr<Imp::RuntimeValue> EvalNot(const Imp::ImpSyntax *where) override;
     std::shared_ptr<Room> Entity(const Imp::ImpSyntax *where) const;
     
 private:

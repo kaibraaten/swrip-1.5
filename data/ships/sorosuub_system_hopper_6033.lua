@@ -1,67 +1,29 @@
 -- Sorosuub System Hopper
--- Last saved Tuesday 27-Oct-2020 14:53:26
+-- Last saved Tuesday 27-Oct-2020 18:52:36
 
 ShipEntry
 {
-   Guard = false, 
+   PersonalName = "6033", 
+   LastDock = 203, 
    Position = 
    {
+      Z = 2301203, 
       Y = 907, 
       X = 4299047, 
-      Z = 2301203, 
    }, 
-   Pilot = "", 
-   LastDock = 203, 
-   Instruments = 
-   {
-      Comm = 0, 
-      Sensor = 0, 
-      AstroArray = 0, 
-   }, 
-   State = 0, 
    Location = 203, 
-   Shipyard = 203, 
-   Name = "Sorosuub System Hopper", 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
-      Maneuver = 35, 
-      Energy = 
-      {
-         Max = 2000, 
-         Current = 2000, 
-      }, 
-   }, 
-   Type = "Civilian", 
-   Owner = "public", 
-   Rooms = 
-   {
-      Entrance = 32158, 
-      Gunseat = 32158, 
-      Cockpit = 32158, 
-      First = 32158, 
-      Engine = 0, 
-      Hangar = 0, 
-      Coseat = 32158, 
-      Last = 32158, 
-      Pilotseat = 32158, 
-      Navseat = 32158, 
-   }, 
+   DockingPorts = 0, 
    Defenses = 
    {
-      Hull = 
-      {
-         Max = 100, 
-         Current = 100, 
-      }, 
       Shield = 
       {
          Max = 10, 
          Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
       }, 
       Chaff = 
       {
@@ -69,105 +31,143 @@ ShipEntry
          Current = 0, 
       }, 
    }, 
-   Description = "", 
-   Home = "Corellia", 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
-   Class = "Starfighter", 
+   Name = "Sorosuub System Hopper", 
    CoPilot = "", 
-   Alarm = false, 
-   PersonalName = "6033", 
-   DockingPorts = 0, 
+   Home = "Corellia", 
+   Type = "Civilian", 
+   Class = "Starfighter", 
+   Rooms = 
+   {
+      Entrance = 32158, 
+      Engine = 0, 
+      Navseat = 32158, 
+      First = 32158, 
+      Pilotseat = 32158, 
+      Cockpit = 32158, 
+      Last = 32158, 
+      Hangar = 0, 
+      Coseat = 32158, 
+      Gunseat = 32158, 
+   }, 
    WeaponSystems = 
    {
       IonCannon = 
       {
-         State = 0, 
          Count = 0, 
-      }, 
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 1, 
+         State = 0, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [2] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [3] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [4] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [5] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [6] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [7] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [8] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [9] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [0] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
-      }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 0, 
       }, 
       Tube = 
       {
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
          Missiles = 
          {
             Max = 0, 
             Current = 0, 
          }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         State = 0, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 0, 
          State = 0, 
       }, 
    }, 
+   Alarm = false, 
+   Guard = false, 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   Thrusters = 
+   {
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+      Energy = 
+      {
+         Max = 2000, 
+         Current = 2000, 
+      }, 
+      Maneuver = 35, 
+   }, 
+   State = 0, 
+   Instruments = 
+   {
+      Sensor = 0, 
+      Comm = 0, 
+      AstroArray = 0, 
+   }, 
+   Description = "", 
+   Pilot = "", 
+   Owner = "public", 
+   Shipyard = 203, 
 }

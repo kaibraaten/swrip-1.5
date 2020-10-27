@@ -93,3 +93,13 @@ std::shared_ptr<Imp::RuntimeValue> ImpRoom::EvalStr(const Imp::ImpSyntax *where)
     auto room = Entity(where);
     return std::make_shared<Imp::StringValue>(room->Name);
 }
+
+bool ImpRoom::GetBoolValue(const std::string &what, const Imp::ImpSyntax *where)
+{
+    return !pImpl->Entity.expired();
+}
+
+std::shared_ptr<Imp::RuntimeValue> ImpRoom::EvalNot(const Imp::ImpSyntax *where)
+{
+    return std::make_shared<Imp::BoolValue>(pImpl->Entity.expired());
+}

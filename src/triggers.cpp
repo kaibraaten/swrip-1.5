@@ -9,6 +9,21 @@
 #include "protomob.hpp"
 #include "triggers.hpp"
 
+//////////////////////////////////////////////////////
+#include <imp/scanner/scanner.hpp>
+#include <imp/runtime/functionvalue.hpp>
+#include <imp/runtime/stringvalue.hpp>
+#include <imp/runtime/runtimescope.hpp>
+#include <imp/runtime/standardlibrary.hpp>
+#include <imp/parser/program.hpp>
+#include "impscript/impcharacter.hpp"
+#include "impscript/improom.hpp"
+#include "impscript/impobject.hpp"
+#include "impscript/scriptscheduler.hpp"
+#include "impscript/scriptrunner.hpp"
+#include "impscript/mudlibrary.hpp"
+//////////////////////////////////////////////////////
+
 // Functions from mud_prog.cpp
 void MobileActAdd(std::shared_ptr<Character> mob);
 void ObjectActAdd(std::shared_ptr<Object> obj);
@@ -743,6 +758,97 @@ static bool MudProgKeywordCheck(const std::string &argu, const std::string &argl
     return false;
 }
 
+static std::shared_ptr<Imp::RuntimeScope> MakeImpScope()
+{
+    auto standardLib = std::make_shared<Imp::StandardLibrary>();
+    auto mudLib = std::make_shared<MudLibrary>(standardLib);
+    auto globalScope = std::make_shared<Imp::RuntimeScope>(mudLib);
+    globalScope->Assign("SCRIPT_PATH", std::make_shared<Imp::StringValue>("data/scripts"));
+    return globalScope;
+}
+
+static std::shared_ptr<Imp::Program> ParseImpProgram(const std::list<std::string> &code)
+{
+    auto scanner = std::make_shared<Imp::Scanner>(code);
+    auto prog = Imp::Program::Parse(scanner);
+
+    return prog;
+}
+
+static void ImpDispatchPercentCheck(const std::string &comlist,
+                                    std::shared_ptr<Object> obj,
+                                    std::shared_ptr<Character> actor,
+                                    int type)
+{
+    std::istringstream inbuf(comlist);
+    std::list<std::string> code;
+    std::string line;
+
+    while(std::getline(inbuf, line))
+    {
+        code.push_back(line);
+    }
+
+    auto globalScope = MakeImpScope();
+    auto prog = ParseImpProgram(code);
+    std::function<void(std::shared_ptr<Imp::Program>, std::shared_ptr<Imp::RuntimeScope>)> doAfterEval;
+
+    if(type == RAND_PROG)
+    {
+        doAfterEval = [obj](std::shared_ptr<Imp::Program> program,
+                            std::shared_ptr<Imp::RuntimeScope> scope)
+                      {
+                          auto func = scope->Find("on_rand", program.get());
+
+                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                          {
+                              auto on_rand = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                                  {
+                                      std::make_shared<ImpObject>(obj)
+                                  };
+                              on_rand->EvalFuncCall(params, program.get());
+                          }
+                          else
+                          {
+                              Imp::RuntimeValue::RuntimeError("on_rand isn't a function!",
+                                                              program.get());
+                          }
+                      };
+    }
+    else if(type == WEAR_PROG)
+    {
+        doAfterEval = [obj, actor](std::shared_ptr<Imp::Program> program,
+                            std::shared_ptr<Imp::RuntimeScope> scope)
+                      {
+                          auto func = scope->Find("on_wear", program.get());
+
+                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                          {
+                              auto on_rand = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                                  {
+                                      std::make_shared<ImpObject>(obj),
+                                      std::make_shared<ImpCharacter>(actor)
+                                  };
+                              on_rand->EvalFuncCall(params, program.get());
+                          }
+                          else
+                          {
+                              Imp::RuntimeValue::RuntimeError("on_wear isn't a function!",
+                                                              program.get());
+                          }
+                      };
+    }
+    else
+    {
+        return;
+    }
+
+    auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
+    Schedule(scriptRunner);
+}
+
 static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                                 std::shared_ptr<Object> obj,
                                 const Vo &vo, int type)
@@ -755,8 +861,16 @@ static bool ObjProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<
            && GetRandomPercent() <= atoi(mprg->arglist.c_str()))
         {
             executed = true;
-            MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
 
+            if(mprg->SType == ScriptType::Imp)
+            {
+                ImpDispatchPercentCheck(mprg->comlist, obj, actor, type);
+            }
+            else
+            {
+                MudProgDriver(mprg->comlist, mob, actor, obj, vo, false);
+            }
+            
             if(type != GREET_PROG)
                 break;
         }
