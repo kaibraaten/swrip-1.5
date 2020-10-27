@@ -4,6 +4,7 @@
 #include <imp/except/impexception.hpp>
 #include "scriptrunner.hpp"
 #include "threaddatavalue.hpp"
+#include "exitexception.hpp"
 #include "log.hpp"
 
 struct ScriptRunner::Impl
@@ -82,6 +83,11 @@ void ScriptRunner::Impl::DispatchScript()
     catch(const Imp::ImpException &ex)
     {
         Log->Bug("%s", ex.what());
+    }
+    catch(const ImpExitException &ex)
+    {
+        // Script aborted normally with exit() function,
+        // so do nothing special.
     }
     
     scriptWaiting = false;

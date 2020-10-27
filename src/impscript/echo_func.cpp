@@ -38,7 +38,7 @@ std::shared_ptr<Imp::RuntimeValue> EchoFunc::EvalFuncCall(const std::vector<std:
     else if((dynamic_cast<ImpRoom*>(recipient.get())))
     {
         auto room = std::dynamic_pointer_cast<ImpRoom>(recipient);
-        EchoToRoom(AT_PLAIN, room->Entity(where), message);
+        EchoToRoom(AT_PLAIN, room->Entity(where), Capitalize(message));
     }
     else
     {

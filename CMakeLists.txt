@@ -575,8 +575,11 @@ src/impscript/scriptscheduler.cpp
 src/impscript/threaddatavalue.cpp
 src/impscript/characters_func.cpp
 src/impscript/echo_func.cpp
+src/impscript/exit_func.cpp
+src/impscript/inroom_func.cpp
 src/impscript/isnpc_func.cpp
 src/impscript/objects_func.cpp
+src/impscript/random_func.cpp
 src/impscript/vnum_func.cpp
 src/impscript/wait_func.cpp
 src/mpcommands/mpapplyb.cpp

@@ -315,7 +315,7 @@ static void show_char_to_char_0(std::shared_ptr<Character> victim, std::shared_p
     if(!IsNpc(victim) && !ch->Flags.test(Flag::Plr::Brief))
         strcat(buf, victim->PCData->Title.c_str());
     else
-        strcat(buf, PERS(victim, ch).c_str());
+        strcat(buf, Capitalize(PERS(victim, ch)).c_str());
 
     switch(victim->Position)
     {
@@ -678,7 +678,7 @@ static void show_visible_affects_to_char(std::shared_ptr<Character> victim, std:
        && victim->Switched && IsAffectedBy(victim->Switched, Flag::Affect::Possess))
     {
         SetCharacterColor(AT_MAGIC, ch);
-        strcpy(buf, PERS(victim, ch).c_str());
+        strcpy(buf, Capitalize(PERS(victim, ch)).c_str());
         strcat(buf, " appears to be in a deep trance...\r\n");
     }
 }

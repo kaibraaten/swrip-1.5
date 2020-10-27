@@ -26,3 +26,12 @@ def on_test(room, actor):
         wait(1.5)
         
     echo(actor, "Ignition!")
+
+def test_greet(mob, actor):
+    emotes = ["seems happy.", "farts so loud that the room shakes.", "is thirsty."]
+    room = inroom(mob)
+    
+    for i in range(0, 5):
+        e = random(emotes)
+        echo(room, str(mob) + " " + e)
+        wait(float(random(range(1, 11))))

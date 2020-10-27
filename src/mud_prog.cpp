@@ -2446,6 +2446,7 @@ static std::shared_ptr<Imp::Program> ParseImpProgram(const std::list<std::string
 
 static void ImpDispatchPercentCheck(const std::string &comlist,
                                     std::shared_ptr<Character> mob,
+                                    std::shared_ptr<Character> actor,
                                     int type)
 {
     std::istringstream inbuf(comlist);
@@ -2456,35 +2457,64 @@ static void ImpDispatchPercentCheck(const std::string &comlist,
     {
         code.push_back(line);
     }
+
+    auto globalScope = MakeImpScope();
+    auto prog = ParseImpProgram(code);
+    std::function<void(std::shared_ptr<Imp::Program>, std::shared_ptr<Imp::RuntimeScope>)> doAfterEval;
     
     if(type == ENTRY_PROG)
     {
-        auto globalScope = MakeImpScope();
-        auto prog = ParseImpProgram(code);
-        auto doAfterEval = [mob](std::shared_ptr<Imp::Program> program,
-                                std::shared_ptr<Imp::RuntimeScope> scope)
-                           {
-                               auto func = scope->Find("on_entry", program.get());
+        doAfterEval = [mob](std::shared_ptr<Imp::Program> program,
+                            std::shared_ptr<Imp::RuntimeScope> scope)
+                      {
+                          auto func = scope->Find("on_entry", program.get());
 
-                               if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
-                               {
-                                   auto on_entry = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
-                                   std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
-                                       {
-                                           std::make_shared<ImpCharacter>(mob),
-                                           std::make_shared<ImpRoom>(mob->InRoom)
-                                       };
-                                   on_entry->EvalFuncCall(params, program.get());
-                               }
-                               else
-                               {
-                                   Imp::RuntimeValue::RuntimeError("on_entry isn't a function!", program.get());
-                               }
-                           };
-        auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
-        Schedule(scriptRunner);
+                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                          {
+                              auto on_entry = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                                  {
+                                      std::make_shared<ImpCharacter>(mob),
+                                      std::make_shared<ImpRoom>(mob->InRoom)
+                                  };
+                              on_entry->EvalFuncCall(params, program.get());
+                          }
+                          else
+                          {
+                              Imp::RuntimeValue::RuntimeError("on_entry isn't a function!",
+                                                              program.get());
+                          }
+                      };
     }
+    else if(type == GREET_PROG || type == ALL_GREET_PROG)
+    {
+        doAfterEval = [mob, actor](std::shared_ptr<Imp::Program> program,
+                            std::shared_ptr<Imp::RuntimeScope> scope)
+                      {
+                          auto func = scope->Find("on_greet", program.get());
+
+                          if(dynamic_cast<Imp::FunctionValue*>(func.get()) != nullptr)
+                          {
+                              auto on_entry = std::dynamic_pointer_cast<Imp::FunctionValue>(func);
+                              std::vector<std::shared_ptr<Imp::RuntimeValue>> params =
+                                  {
+                                      std::make_shared<ImpCharacter>(mob),
+                                      std::make_shared<ImpCharacter>(actor)
+                                  };
+                              on_entry->EvalFuncCall(params, program.get());
+                          }
+                          else
+                          {
+                              Imp::RuntimeValue::RuntimeError("on_greet isn't a function!",
+                                                              program.get());
+                          }
+                      };
+    }
+    
+    auto scriptRunner = std::make_shared<ScriptRunner>(prog, globalScope, doAfterEval);
+    Schedule(scriptRunner);
 }
+
 
 void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Character> actor,
                          std::shared_ptr<Object> obj,
@@ -2497,7 +2527,7 @@ void MobProgPercentCheck(std::shared_ptr<Character> mob, std::shared_ptr<Charact
         {
             if(mprg->SType == ScriptType::Imp)
             {
-                ImpDispatchPercentCheck(mprg->comlist, mob, type);
+                ImpDispatchPercentCheck(mprg->comlist, mob, actor, type);
             }
             else
             {
